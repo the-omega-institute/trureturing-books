@@ -639,7 +639,45 @@ $$
 
 第 2 款的下列推论允许任意团大小与团树直径，各团袋均须非空。若 $D\le2$ 且团树最大度数至多为 $3$，可取严格小于 $11/3$ 的系数。若 $D\le1$ 且最大度数至多为 $2$，可取严格小于 $2$ 的系数。若 $D\le2$ 且每条树边满足 $\max\{|K(a)|,|K(b)|\}\le c|S_{ab}|$（$c\ge1$），可取系数 $5-4/c$，在 $c=2$ 时为 $3$，在 $c=4/3$ 时为 $2$。
 
-团大小不受限时，区间 $[2,4]$ 内的最优实 Banach 统一系数、集合 $\{2,3,4\}$ 中的双不变伪度量群最优统一系数，以及是否有 $3$-树的系数超过 $4/3$，均仍待确定。等式 $C_{\mathrm{SU}(2)}(K_4)=c_*$ 的全局 Lean 形式化也仍是开放问题。见 [@prob-appe-round-quaternion-k4-optimal-constant]。
+在 [@thm-appe-weighted-simplicial-and-occurrence-banach] 的加权消去中，旧残差之差可借旧三角形来估计。若一个保留的恒等式还不足以控制误差，再用一个恒等式消去最新前驱的贡献。
+
+::: {.theorem #thm-appe-multi-identity-simplicial-banach title="多个保留恒等式给出的单纯消去 Banach 势界" lean="D5/S3/Combinatorics/Graph/Chordal/MultiIdentitySimplicialBanach.SimpleGraph.IsChordal.exists_regrouped_simplicial_banach_gain_potential, D5/S3/Combinatorics/Graph/Chordal/MultiIdentitySimplicialBanach.SimpleGraph.IsChordal.exists_multiIdentity_cliqueSix_banach_gain_potential, D5/S3/Combinatorics/Graph/Chordal/MultiIdentitySimplicialBanach.SimpleGraph.IsChordal.exists_multiIdentity_cliqueSeven_banach_gain_potential"}
+设 $G$ 是有限顶点集 $V$ 上的简单弦图，$E$ 是实半赋范向量空间。取 $g:V\times V\to E$ 和实数 $\varepsilon\ge0$。假设对所有 $x,y\in V$ 有 $g(y,x)=-g(x,y)$，且每当 $xy,yz,xz$ 都是 $G$ 的边时，有 $\|g(x,y)+g(y,z)-g(x,z)\|\le\varepsilon$。以下各款分别给出一个势 $\varphi:V\to E$，使每对相邻顶点 $(u,v)$ 的残差半范数 $\|g(u,v)-(\varphi(v)-\varphi(u))\|$ 满足所述界。
+
+1. **利用旧三角形重组。** 设 $k\in\mathbb N$，$k\ge2$，且 $G$ 的每个团 $C$ 都满足 $|C|\le k+1$。对任意满足 $\max\{1,k-2\}\le R\le k-1$ 和 $2(k-1)\le R(R+1)$ 的实数 $R$，残差半范数至多为 $R\varepsilon$。
+2. **团大小至多为 $6$。** 若 $G$ 的每个团至多有 $6$ 个顶点，残差半范数至多为 $(2\sqrt3-1)\varepsilon$。
+3. **团大小至多为 $7$。** 若 $G$ 的每个团至多有 $7$ 个顶点，残差半范数至多为 $\frac{3+\sqrt7}{2}\varepsilon$。
+:::
+
+::: {.proof #pf-appe-multi-identity-simplicial-banach}
+将完美消去序逆转，得到逐个插入顶点的顺序（完美消去序由弦图的消去定理给出）。记 $P_v$ 为 $v$ 的前驱，即已经插入且与 $v$ 相邻的顶点。$P_v$ 连同 $v$ 构成团。若 $P_v$ 为空，取 $\varphi(v)=0$。否则取候选值 $\varphi(x)+g(x,v)$ 的加权平均，权重 $w_v(x)\ge0$ 在 $P_v$ 上之和为 $1$。记 $r_{xy}=g(x,y)-(\varphi(y)-\varphi(x))$、$\delta_{xyz}=g(x,y)+g(y,z)-g(x,z)$。平均式给出恒等式 $\sum_{x\in P_v}w_v(x)r_{vx}=0$，以后插入顶点时这条恒等式仍成立。
+
+对 $c\in P_v$，新边残差为 $\sum_{x\in P_v\setminus\{c\}}w_v(x)(r_{cx}-\delta_{cxv})$。其中三角缺陷的加权和至多贡献 $(1-w_v(c))\varepsilon$。已拟合的边满足 $\|r_{xy}\|\le R\varepsilon$。令 $s=1/(R+1)$，当 $w_v(c)\ge s$ 时，直接估计给出 $(1-s)(R+1)\varepsilon=R\varepsilon$。此外，对 $x,y\in P_c$，由 $r_{cx}-r_{cy}=\delta_{cxy}-r_{xy}$ 得 $\|r_{cx}-r_{cy}\|\le (R+1)\varepsilon$，重合时差为零。
+
+**第 1 款。** 前驱不足 $k$ 个时取均匀权重，因 $|P_v|\le k-1\le R+1$，可用直接估计。恰有 $k$ 个前驱时，最新的前驱权重为 $t=1-(k-1)s$，其余为 $s$，且 $0\le t\le s$。只需处理最新前驱 $c$ 的边。其余 $k-1$ 个前驱组成 $A=P_v\setminus\{c\}\subseteq P_c$。若 $P_c=A$，由 $c$ 处的均匀权重恒等式，旧残差之和为零，只余至多 $(1-t)\varepsilon\le R\varepsilon$ 的三角缺陷。若 $P_c=A\cup\{z\}$，记 $b$ 为 $P_c$ 中最新的顶点。减去 $c$ 处的恒等式后，旧残差和化为 $(s-t)(r_{cb}-r_{cz})-t r_{cz}$。旧三角形给出的差界将总误差控制在 $\bigl((s-t)(R+1)+tR+1-t\bigr)\varepsilon$ 以内。括号内等于 $2(k-1)s$，由二次不等式可知它至多为 $R$。
+
+**第 2、3 款。** 此时前驱数上限 $k$ 分别为 $5$ 和 $6$。至多有 $3$ 个前驱时取均匀权重。否则按插入顺序给权 $s,s,s,t,0,\ldots$，其中 $t=1-3s$。这两款的 $R\ge2$，且 $1/4\le s\le1/3$，故 $0\le t\le s$。权重至少为 $s$ 的边可直接估计。其余边的旧残差和仅涉及 $c$ 之前的顶点。将这些顶点的权重延拓到 $Q=P_c$，其余位置补零，记所得权重为 $b_x$。令 $\mu=1-w_v(c)$。减去 $\mu$ 倍的保留恒等式后，旧残差和变为 $\sum_{x\in Q}h_xr_{cx}$，其中 $h_x=b_x-\mu w_c(x)$，且 $\sum_{x\in Q}h_x=0$。将正系数与负系数按质量配对，若总负质量为 $M=\sum_{x\in Q}\max\{-h_x,0\}$，则旧残差和的半范数至多为 $M(R+1)\varepsilon$。例如 $M>0$ 时，每对正负系数 $h_x,h_y$ 分配质量 $h_x(-h_y)/M$，再对残差差取三角不等式。若 $M=0$，和为零。
+
+在例外情形，$Q$ 中最新的顶点 $a$ 有系数 $\lambda=h_a\ge0$，而 $Q\setminus\{a\}\subseteq P_a$。用 $a$ 处的恒等式将 $\lambda r_{ca}$ 写成以 $\lambda w_a(x)$ 加权的 $r_{ca}+r_{ax}$ 之和。对共有前驱 $x\in Q\cap P_a$，换成 $r_{cx}$ 只需付出一项三角缺陷。对额外前驱 $x\in P_a\setminus Q$，保留辅助向量 $r_{ca}+r_{ax}$。它与任一负系数位置 $y$ 的 $r_{cy}$ 之差为 $(r_{ax}-r_{ay})+\delta_{cay}$，比通常的配对界多至多 $\varepsilon$。对共有和额外前驱合计，这些额外代价至多为 $\lambda\varepsilon$，因为 $w_a$ 的和为 $1$。重新配对后，若负质量为 $M$，加入新三角形的代价，归纳所需的不等式为 $M+s(\mu+\lambda)\le1-s$。无需第二个恒等式时取 $\lambda=0$。
+
+这个不等式可直接按位置核算。将 $Q$ 的位置从 $0$ 开始编号，记 $d=|Q|$，$T$ 为保留当前权重的位置集合，即 $P_v$ 中早于 $c$ 的顶点在 $Q$ 中的位置，$j=|T|$。只需检查 $3\le j\le d\le k$、$j<k$。在 $T$ 上依次取 $b_x=s,s,s,t,0,\ldots$。仅在下列情形消去最后一个位置 $d-1$。
+
+- $d=k=5$、$j=3$ 且 $3,4\in T$。
+- $d=k=6$，且 $j=3$、$4,5\in T$，或 $j=4$ 且 $T$ 恰含 $0,1,2$ 中的一个位置。
+
+消去时，$P_a$ 至多比 $Q\setminus\{a\}$ 多一个顶点。因权重随位置不增，估算负质量时可将每个留下的位置按向后移一位计算其获得的权重。即将位置 $i<d-1$ 的系数替换为 $h_i+\lambda w_{i+1}$，其中 $w_{i+1}$ 是 $Q$ 的第 $i+1$ 位权重，再把最后一位系数置零。逐一代入 $T\subseteq\{0,\ldots,d-1\}$，下表给出 $M+s(\mu+\lambda)$ 的上界。各行的值按 $j$ 从小到大排列。
+
+| $k$ | 一次恒等式 | 两次恒等式 |
+| --- | --- | --- |
+| $5$ | $3s-3s^2$, $2s$ | $12s^2-s$ |
+| $6$ | $9s^2$, $1-s$, $2s$ | $3s^2+2s$, $3s-t^2$ |
+
+第 2 款取 $s=1/(2\sqrt3)$，满足 $12s^2=1$。第 3 款取 $s=(5-\sqrt7)/9$，满足 $9s^2-10s+2=0$。代入可得各项均至多为 $1-s$。这样每次插入都保持边残差界，反向边也由反对称性满足同一界。完整证明由 Lean 内核检查。
+:::
+
+记 $\omega(G)$ 为最大团的顶点数。第 1 款在 $\omega(G)\le4$ 时可取 $R=(\sqrt{17}-1)/2\approx1.5616<(1+\sqrt5)/2$，改进了 [@thm-appe-weighted-simplicial-and-occurrence-banach] 对所有 $3$-树的黄金分割界。在 $\omega(G)\le5$ 时可取 $R=2<(3+\sqrt{33})/4$，因而所有 $4$-树都有 $2\varepsilon$ 的统一上界。第 2 款在 $\omega(G)\le6$ 时给出 $2\sqrt3-1\approx2.4641<3$，改进了前述界。第 3 款在 $\omega(G)\le7$ 时给出 $(3+\sqrt7)/2\approx2.8229<3$，因而所有 $6$-树都有严格小于 $3$ 的统一系数。
+
+团大小不受限时，区间 $[2,4]$ 内的最优实 Banach 统一系数和集合 $\{2,3,4\}$ 中的双不变伪度量群最优统一系数仍待确定。$3$-树的更紧统一界（特别是是否能取 $4/3$）及等式 $C_{\mathrm{SU}(2)}(K_4)=c_*$ 的全局 Lean 形式化仍待完成。见 [@prob-appe-round-quaternion-k4-optimal-constant]。
 
 接下来固定非线性目标群，考察完全图上的最优系数。
 

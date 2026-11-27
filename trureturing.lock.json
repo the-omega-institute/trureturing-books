@@ -3,7 +3,7 @@
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
   "commit": "29fe05ce97e1869857dac9c1b1b9d74f50155b7e",
-  "pinned_at": "2026-11-27T01:47:37Z",
+  "pinned_at": "2026-11-27T02:12:04Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1709,6 +1709,45 @@
       "statement_id": "sha256:4469509b9f4ea9d28f4034e5897b58095dafd18fa9782254777f46e800d87446",
       "line": 28,
       "signature": "theorem IsChordal.exists_approximate_gain_potential [Finite V] {G : SimpleGraph V} (hG : G.IsChordal) (g : V → V → H) (ε : ℝ) (hε : 0 ≤ ε) (hrev : ∀ i j, G.Adj i j → g j i = (g i j)⁻¹) (htri : ∀ i j k, G.Adj i j → G.Adj j k → G.Adj i k → Dist.dist (g i j * g j k) (g i k) ≤ ε) : ∃ φ : V → H, ∀ i j, G.Adj i j → Dist.dist (g i j) ((φ i)⁻¹ * φ j) ≤ ((Nat.card V - 2 : ℕ) : ℝ) * ε"
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/MultiIdentitySimplicialBanach.SimpleGraph.IsChordal.exists_multiIdentity_cliqueSeven_banach_gain_potential": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/MultiIdentitySimplicialBanach",
+      "name": "SimpleGraph.IsChordal.exists_multiIdentity_cliqueSeven_banach_gain_potential",
+      "kind": "theorem",
+      "statement_id": "sha256:43e5e833b1586b2807e839e51448f2c6bc15be77ac08de4a6ada0f1d8f5d29d8",
+      "line": 927,
+      "signature": "theorem IsChordal.exists_multiIdentity_cliqueSeven_banach_gain_potential {V : Type*} [Finite V] {G : SimpleGraph V} (hG : G.IsChordal) (hclique : ∀ C : Set V, G.IsClique C → C.ncard ≤ 7) {E : Type*} [SeminormedAddCommGroup E] [NormedSpace ℝ E] (g : V → V → E) (ε : ℝ) (hε : 0 ≤ ε) (hskew : ∀ x y, g y x = -g x y) (htri : ∀ x y z, G.Adj x y → G.Adj y z → G.Adj x z → ‖g x y + g y z - g x z‖ ≤ ε) : ∃ φ : V → E, ∀ u v, G.Adj u v → ‖g u v - (φ v - φ u)‖ ≤ ((3 + Real.sqrt 7) / 2) * ε",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/MultiIdentitySimplicialBanach.SimpleGraph.IsChordal.exists_multiIdentity_cliqueSix_banach_gain_potential": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/MultiIdentitySimplicialBanach",
+      "name": "SimpleGraph.IsChordal.exists_multiIdentity_cliqueSix_banach_gain_potential",
+      "kind": "theorem",
+      "statement_id": "sha256:43e5e833b1586b2807e839e51448f2c6bc15be77ac08de4a6ada0f1d8f5d29d8",
+      "line": 903,
+      "signature": "theorem IsChordal.exists_multiIdentity_cliqueSix_banach_gain_potential {V : Type*} [Finite V] {G : SimpleGraph V} (hG : G.IsChordal) (hclique : ∀ C : Set V, G.IsClique C → C.ncard ≤ 6) {E : Type*} [SeminormedAddCommGroup E] [NormedSpace ℝ E] (g : V → V → E) (ε : ℝ) (hε : 0 ≤ ε) (hskew : ∀ x y, g y x = -g x y) (htri : ∀ x y z, G.Adj x y → G.Adj y z → G.Adj x z → ‖g x y + g y z - g x z‖ ≤ ε) : ∃ φ : V → E, ∀ u v, G.Adj u v → ‖g u v - (φ v - φ u)‖ ≤ (2 * Real.sqrt 3 - 1) * ε",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/MultiIdentitySimplicialBanach.SimpleGraph.IsChordal.exists_regrouped_simplicial_banach_gain_potential": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/MultiIdentitySimplicialBanach",
+      "name": "SimpleGraph.IsChordal.exists_regrouped_simplicial_banach_gain_potential",
+      "kind": "theorem",
+      "statement_id": "sha256:43e5e833b1586b2807e839e51448f2c6bc15be77ac08de4a6ada0f1d8f5d29d8",
+      "line": 889,
+      "signature": "theorem IsChordal.exists_regrouped_simplicial_banach_gain_potential {V : Type*} [Finite V] {G : SimpleGraph V} (hG : G.IsChordal) (k : ℕ) (hk : 2 ≤ k) (hclique : ∀ C : Set V, G.IsClique C → C.ncard ≤ k + 1) (R : ℝ) (hmin : max 1 ((k : ℝ) - 2) ≤ R) (hmax : R ≤ (k : ℝ) - 1) (hquad : 2 * ((k : ℝ) - 1) ≤ R * (R + 1)) {E : Type*} [SeminormedAddCommGroup E] [NormedSpace ℝ E] (g : V → V → E) (ε : ℝ) (hε : 0 ≤ ε) (hskew : ∀ x y, g y x = -g x y) (htri : ∀ x y z, G.Adj x y → G.Adj y z → G.Adj x z → ‖g x y + g y z - g x z‖ ≤ ε) : ∃ φ : V → E, ∀ u v, G.Adj u v → ‖g u v - (φ v - φ u)‖ ≤ R * ε",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Combinatorics/Graph/Chordal/MultiTierAndUniversalCliqueBanach.SimpleGraph.IsChordal.exists_multitier_clique_banach_gain_potential": {
       "module": "D5/S3/Combinatorics/Graph/Chordal/MultiTierAndUniversalCliqueBanach",

@@ -639,7 +639,45 @@ Part 1 gives $R_2=1$ and $R_3=(1+\sqrt5)/2<5/3<2$. Thus all chordal graphs of cl
 
 The following consequences of Part 2 allow any clique size and any diameter of the whole clique tree, with every bag nonempty. For $D\le2$ and maximum tree degree at most $3$, the coefficient can be taken strictly below $11/3$. For $D\le1$ and maximum degree at most $2$, it can be taken strictly below $2$. If $D\le2$ and every tree edge satisfies $\max\{|K(a)|,|K(b)|\}\le c|S_{ab}|$ with $c\ge1$, the coefficient is at most $5-4/c$, giving $c=2$ the coefficient $3$ and $c=4/3$ the coefficient $2$.
 
-With unrestricted clique size, the exact universal real Banach coefficient in $[2,4]$ and the exact universal coefficient for groups with bi-invariant pseudometrics in $\{2,3,4\}$ remain open, as does whether any $3$-tree has a coefficient above $4/3$. The global Lean formalization of $C_{\mathrm{SU}(2)}(K_4)=c_*$ also remains open. See [@prob-appe-round-quaternion-k4-optimal-constant].
+In the weighted elimination of [@thm-appe-weighted-simplicial-and-occurrence-banach], a triangle of already fitted edges controls the difference between two old residuals. When one retained identity leaves too much error, a second identity can eliminate the contribution from the latest predecessor.
+
+::: {.theorem #thm-appe-multi-identity-simplicial-banach title="Banach Potential Bounds from Multiple Retained Identities in Simplicial Elimination" lean="D5/S3/Combinatorics/Graph/Chordal/MultiIdentitySimplicialBanach.SimpleGraph.IsChordal.exists_regrouped_simplicial_banach_gain_potential, D5/S3/Combinatorics/Graph/Chordal/MultiIdentitySimplicialBanach.SimpleGraph.IsChordal.exists_multiIdentity_cliqueSix_banach_gain_potential, D5/S3/Combinatorics/Graph/Chordal/MultiIdentitySimplicialBanach.SimpleGraph.IsChordal.exists_multiIdentity_cliqueSeven_banach_gain_potential"}
+Let $G$ be a simple chordal graph on a finite vertex set $V$ and let $E$ be a real seminormed vector space. Take $g:V\times V\to E$ and a real number $\varepsilon\ge0$. Assume $g(y,x)=-g(x,y)$ for all $x,y\in V$, and $\|g(x,y)+g(y,z)-g(x,z)\|\le\varepsilon$ whenever $xy,yz,xz$ are edges of $G$. Each part gives a potential $\varphi:V\to E$ whose residual seminorm $\|g(u,v)-(\varphi(v)-\varphi(u))\|$ on every ordered adjacent pair $(u,v)$ satisfies the stated bound.
+
+1. **Regrouping by old triangles.** Let $k\in\mathbb N$ with $k\ge2$ and suppose every clique $C$ of $G$ satisfies $|C|\le k+1$. For every real $R$ with $\max\{1,k-2\}\le R\le k-1$ and $2(k-1)\le R(R+1)$, the residual seminorm is at most $R\varepsilon$.
+2. **Clique size at most $6$.** If every clique of $G$ has at most $6$ vertices, the residual seminorm is at most $(2\sqrt3-1)\varepsilon$.
+3. **Clique size at most $7$.** If every clique of $G$ has at most $7$ vertices, the residual seminorm is at most $\frac{3+\sqrt7}{2}\varepsilon$.
+:::
+
+::: {.proof #pf-appe-multi-identity-simplicial-banach}
+Reverse a perfect elimination order, which exists by chordality, and insert the vertices in that order. Let $P_v$ be the predecessors of $v$, namely its neighbors already inserted. The set $P_v$ together with $v$ is a clique. If $P_v$ is empty, set $\varphi(v)=0$. Otherwise take the weighted mean of the candidates $\varphi(x)+g(x,v)$ with weights $w_v(x)\ge0$ summing to $1$ on $P_v$. Write $r_{xy}=g(x,y)-(\varphi(y)-\varphi(x))$ and $\delta_{xyz}=g(x,y)+g(y,z)-g(x,z)$. The mean gives $\sum_{x\in P_v}w_v(x)r_{vx}=0$, an identity retained after every later insertion.
+
+For $c\in P_v$, the new edge residual is $\sum_{x\in P_v\setminus\{c\}}w_v(x)(r_{cx}-\delta_{cxv})$. The weighted defects contribute at most $(1-w_v(c))\varepsilon$. Already fitted edges satisfy $\|r_{xy}\|\le R\varepsilon$. Set $s=1/(R+1)$. When $w_v(c)\ge s$, the direct bound is $(1-s)(R+1)\varepsilon=R\varepsilon$. Also, for $x,y\in P_c$, the identity $r_{cx}-r_{cy}=\delta_{cxy}-r_{xy}$ gives $\|r_{cx}-r_{cy}\|\le(R+1)\varepsilon$. For coincident vertices the difference is zero.
+
+**Part 1.** Use uniform weights below $k$ predecessors. Since $|P_v|\le k-1\le R+1$, the direct bound applies. With exactly $k$ predecessors, give the latest weight $t=1-(k-1)s$ and the others weight $s$, with $0\le t\le s$. Only the edge from the latest predecessor $c$ requires another estimate. The other $k-1$ predecessors form $A=P_v\setminus\{c\}\subseteq P_c$. If $P_c=A$, the uniform identity at $c$ makes the old residual sum zero, leaving at most $(1-t)\varepsilon\le R\varepsilon$ from triangle defects. Otherwise $P_c=A\cup\{z\}$. Let $b$ be the latest vertex in $P_c$. Subtracting the retained identity at $c$ leaves $(s-t)(r_{cb}-r_{cz})-t r_{cz}$. The old triangle bounds the difference, giving a total error of at most $\bigl((s-t)(R+1)+tR+1-t\bigr)\varepsilon$. The coefficient equals $2(k-1)s$, which is at most $R$ by the quadratic inequality.
+
+**Parts 2 and 3.** The predecessor limits $k$ are $5$ and $6$, respectively. Use uniform weights for at most $3$ predecessors. Otherwise use $s,s,s,t,0,\ldots$ in insertion order with $t=1-3s$. Both radii satisfy $R\ge2$ and $1/4\le s\le1/3$, so $0\le t\le s$. The direct bound covers edges of weight at least $s$. On each remaining edge, the old residual sum uses only vertices earlier than $c$. Extend their weights by zero to $Q=P_c$ and call them $b_x$. Put $\mu=1-w_v(c)$. Subtracting $\mu$ times the retained identity gives $\sum_{x\in Q}h_xr_{cx}$ with $h_x=b_x-\mu w_c(x)$ and $\sum_{x\in Q}h_x=0$. Pair positive and negative coefficients by mass. If the total negative mass is $M=\sum_{x\in Q}\max\{-h_x,0\}$, the sum has seminorm at most $M(R+1)\varepsilon$. For $M>0$, assign mass $h_x(-h_y)/M$ to each positive-negative pair $x,y$ and apply the triangle inequality to the residual differences. For $M=0$, the sum is zero.
+
+In the exceptional cases, the latest vertex $a$ of $Q$ has coefficient $\lambda=h_a\ge0$, and $Q\setminus\{a\}\subseteq P_a$. Use the identity at $a$ to replace $\lambda r_{ca}$ by a sum of $r_{ca}+r_{ax}$ with weights $\lambda w_a(x)$. For shared predecessors $x\in Q\cap P_a$, replacing this vector by $r_{cx}$ costs one triangle defect. For extra predecessors $x\in P_a\setminus Q$, keep the auxiliary vector $r_{ca}+r_{ax}$. Its difference from $r_{cy}$ at a negative coefficient $y$ is $(r_{ax}-r_{ay})+\delta_{cay}$, adding at most $\varepsilon$ to the usual pairing bound. Across shared and extra predecessors these costs sum to at most $\lambda\varepsilon$, since the weights $w_a$ sum to $1$. If $M$ is the negative mass after replacement, adding the new triangle defects leaves the condition $M+s(\mu+\lambda)\le1-s$. Use $\lambda=0$ when one identity suffices.
+
+To check this inequality, number the positions in $Q$ from $0$. Put $d=|Q|$ and let $T$ be the positions in $Q$ of the vertices in $P_v$ earlier than $c$, with $j=|T|$. The cases are $3\le j\le d\le k$ and $j<k$. Assign $b_x=s,s,s,t,0,\ldots$ in order on $T$. Eliminate the last position $d-1$ in the following cases.
+
+- $d=k=5$, with $j=3$ and $3,4\in T$.
+- $d=k=6$, with either $j=3$ and $4,5\in T$, or $j=4$ and exactly one of $0,1,2$ in $T$.
+
+In these cases $P_a$ contains at most one vertex beyond $Q\setminus\{a\}$. Since the weights are nonincreasing, a shift of one position to the right gives a lower bound on the weight each remaining position receives. To upper-bound the negative mass, replace the coefficient at $i<d-1$ by $h_i+\lambda w_{i+1}$, where $w_{i+1}$ is the weight at position $i+1$ in $Q$, and set the last coefficient to zero. Substituting the subsets $T\subseteq\{0,\ldots,d-1\}$ gives the following upper bounds on $M+s(\mu+\lambda)$, listed in increasing order of $j$.
+
+| $k$ | One identity | Two identities |
+| --- | --- | --- |
+| $5$ | $3s-3s^2$, $2s$ | $12s^2-s$ |
+| $6$ | $9s^2$, $1-s$, $2s$ | $3s^2+2s$, $3s-t^2$ |
+
+Part 2 uses $s=1/(2\sqrt3)$, which satisfies $12s^2=1$. Part 3 uses $s=(5-\sqrt7)/9$, which satisfies $9s^2-10s+2=0$. Substitution bounds every entry by $1-s$. The residual bound thus holds at each insertion, and skew symmetry gives the bound on the reverse edges. The full proof is checked by the Lean kernel.
+:::
+
+Write $\omega(G)$ for the size of the largest clique. Part 1 allows, for $\omega(G)\le4$, $R=(\sqrt{17}-1)/2\approx1.5616<(1+\sqrt5)/2$, improving the golden-ratio bound of [@thm-appe-weighted-simplicial-and-occurrence-banach] for all $3$-trees. For $\omega(G)\le5$, it allows $R=2<(3+\sqrt{33})/4$, so all $4$-trees have a uniform upper bound of $2\varepsilon$. Part 2 gives, for $\omega(G)\le6$, $2\sqrt3-1\approx2.4641<3$, improving the previous bound. Part 3 gives, for $\omega(G)\le7$, $(3+\sqrt7)/2\approx2.8229<3$, so all $6$-trees have a uniform coefficient strictly below $3$.
+
+With unrestricted clique size, the exact universal real Banach coefficient in $[2,4]$ and the exact universal coefficient for groups with bi-invariant pseudometrics in $\{2,3,4\}$ remain open. A tighter uniform bound for $3$-trees, in particular whether $4/3$ suffices, and the global Lean formalization of $C_{\mathrm{SU}(2)}(K_4)=c_*$ remain open. See [@prob-appe-round-quaternion-k4-optimal-constant].
 
 For a fixed nonlinear target group, the optimal coefficient is already a question on complete graphs.
 
