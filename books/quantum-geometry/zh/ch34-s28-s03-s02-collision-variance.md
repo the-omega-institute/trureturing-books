@@ -619,6 +619,20 @@ $$
 
 这个阈值包含一致的 $G_Y(t)=o(Y\log^2 Y)$ 情形，通常的 Montgomery 对相关猜想会给出这个小阶界。实际 $\zeta$ 零点在整个长频带上的阈值仍是本定理的数论前提。结论覆盖 $\eta_n\log T_n\to a$ 且 $0<a<\infty$ 的情形。对固定有限支撑和固定正方差，本页后面的占据对角项下界给出一个更细的分辨率范围，归一化 Fejér 矩在该范围发散。 在 RH 和猜想 5 的精细渐近下，Ford–Soundararajan–Zaharescu 的定理 1.4 推出相位和的抵消，再由定理 1.3 得出短区间素数结论。引理 1 用中心化对相关和的平移差来估计相位和。 [§1 与定理 1.3–1.4](https://arxiv.org/html/0805.2745v3#S1) · [引理 1](https://arxiv.org/html/0805.2745v3#Thmlemma1)
 
+::: {.theorem #thm-ch34-montgomery-bounded-count-upper title="有界计数误差给出一致的对相关上界" lean="D5/S3/Analytic/Oscillation/MontgomeryCountUpper.pairSum_le_of_bounded_discrepancy"}
+取任意局部有限的正纵坐标谱，各纵坐标带正整数重数。沿用含端点的计数 $N(Y)$ 与有序对和 $G_Y(t)$，令 $c=1/(2\pi)$。若存在常数 $D$，使所有充分大的 $Y$ 满足 $|N(Y)-cY(\log(cY)-1)|\le D$，则对每个 $\varepsilon>0$，所有充分大的 $Y$ 和所有实数 $t$ 都满足
+
+$$
+G_Y(t)\le (2\pi c^2+\varepsilon)Y(\log Y)^2.
+$$
+:::
+
+::: proof
+设计数误差从固定高度 $A\ge1$ 起有界。对任一截断内纵坐标，以它为中心的半径 $r$ 的闭区间内，重数之和至多为 $2cr\log Y+N(A)+2D+c$。低于或等于 $A$ 的部分由 $N(A)$ 控制。其余部分用两个含端点计数之差估计，左截断向左移 $1/\log Y$ 并限制在 $A$ 以上，使闭区间的左端点也被计入。按洛伦兹核的水平集积分，行和至多为 $2\pi c\log Y+N(A)+2D+c$。将每项余弦上界取为一，再按重数对各行求和。由 $N(Y)/(Y\log Y)\to c$ 得到结论。
+:::
+
+计数定理给出的系数可从上方任意接近 $2\pi c^2$。临界碰撞定理还需要在实际 $\zeta$ 零点的长频带上证出一个严格低于 $2\pi c^2$ 的固定系数。
+
 ### 具有同一单位频带轮廓的共格谱
 
 [@thm-ch34-zeta-harmonic-critical-collision-limit] 的上界控制单位频带之外的频率。同一个谱可以在 $O(\log\log H)$ 误差内满足两项计数公式，并满足整个单位频带上的 Lorentz 轮廓，同时在临界分辨率下的归一化碰撞质量最终比高斯极限常数高出一个固定正量。下面的比较在每个实数截断高度使用同一个谱。
