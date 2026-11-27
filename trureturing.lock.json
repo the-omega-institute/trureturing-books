@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "f75bd63d6dc2a2aad304e1220f037d6c26dce0e2",
-  "pinned_at": "2026-11-27T15:31:04Z",
+  "commit": "a647a95581fe0cdf2cded1371dec982c27d5df2d",
+  "pinned_at": "2026-11-27T16:12:47Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -12333,6 +12333,174 @@
         "propext"
       ]
     },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDimensionThreshold.angularSquaredDensity_integrable_iff": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDimensionThreshold",
+      "name": "NullConeGravity.angularSquaredDensity_integrable_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:68e33568c7df0539ddb399de49f011fc992da09c7122b6716dc01eae5496d567",
+      "line": 306,
+      "signature": "theorem angularSquaredDensity_integrable_iff (D : ℕ) (hD : 4 ≤ D) : IntegrableOn (angularSquaredDensity D) (Ioc 0 2) volume ↔ D = 4 ∨ D = 5",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDimensionThreshold.angular_power_sq_integrable_iff": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDimensionThreshold",
+      "name": "NullConeGravity.angular_power_sq_integrable_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:68e33568c7df0539ddb399de49f011fc992da09c7122b6716dc01eae5496d567",
+      "line": 279,
+      "signature": "theorem angular_power_sq_integrable_iff (D : ℕ) (hD : 5 ≤ D) : IntegrableOn (fun t : ℝ => t ^ (((D : ℝ) - 4) / 2) * (t ^ (-(((D : ℝ) - 4) / 2))) ^ 2) (Set.Ioc 0 2) volume ↔ D = 5",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDimensionThreshold.deSitterConformalMassSq_conformal": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDimensionThreshold",
+      "name": "NullConeGravity.deSitterConformalMassSq_conformal",
+      "kind": "theorem",
+      "statement_id": "sha256:68e33568c7df0539ddb399de49f011fc992da09c7122b6716dc01eae5496d567",
+      "line": 342,
+      "signature": "theorem deSitterConformalMassSq_conformal (D : ℕ) (H : ℝ) : deSitterConformalMassSq D 0 (deSitterConformalCoupling D) H = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDimensionThreshold.deSitterConformalMassSq_eq_sub": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDimensionThreshold",
+      "name": "NullConeGravity.deSitterConformalMassSq_eq_sub",
+      "kind": "theorem",
+      "statement_id": "sha256:68e33568c7df0539ddb399de49f011fc992da09c7122b6716dc01eae5496d567",
+      "line": 333,
+      "signature": "theorem deSitterConformalMassSq_eq_sub (D : ℕ) (hD : 4 ≤ D) (m ξ H : ℝ) : m^2 + ξ * deSitterRicciScalar D H - (((D : ℝ) - 2)/2) * ((((D : ℝ) - 2)/2) + 1) * H^2 = deSitterConformalMassSq D m ξ H",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDimensionThreshold.deSitterConformalMassSq_minimal_neg": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDimensionThreshold",
+      "name": "NullConeGravity.deSitterConformalMassSq_minimal_neg",
+      "kind": "theorem",
+      "statement_id": "sha256:68e33568c7df0539ddb399de49f011fc992da09c7122b6716dc01eae5496d567",
+      "line": 346,
+      "signature": "theorem deSitterConformalMassSq_minimal_neg (D : ℕ) (hD : 4 ≤ D) (H : ℝ) (hH : 0 < H) : deSitterConformalMassSq D 0 0 H < 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDimensionThreshold.deSitter_leadingModeWeight_summable_iff": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDimensionThreshold",
+      "name": "NullConeGravity.deSitter_leadingModeWeight_summable_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:68e33568c7df0539ddb399de49f011fc992da09c7122b6716dc01eae5496d567",
+      "line": 354,
+      "signature": "theorem deSitter_leadingModeWeight_summable_iff (D : ℕ) (hD : 4 ≤ D) (m ξ H : ℝ) : Summable (fun ℓ : ℕ => if ℓ = 0 then 0 else deSitterConformalMassSq D m ξ H ^ 2 * leadingModeWeight D ℓ) ↔ deSitterConformalMassSq D m ξ H = 0 ∨ D = 4 ∨ D = 5",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDimensionThreshold.harmonicMult_bounds": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDimensionThreshold",
+      "name": "NullConeGravity.harmonicMult_bounds",
+      "kind": "theorem",
+      "statement_id": "sha256:68e33568c7df0539ddb399de49f011fc992da09c7122b6716dc01eae5496d567",
+      "line": 100,
+      "signature": "theorem harmonicMult_bounds (D : ℕ) (hD : 4 ≤ D) : ∃ a b : ℝ, 0 < a ∧ 0 < b ∧ ∀ ℓ : ℕ, 1 ≤ ℓ → a * (ℓ : ℝ) ^ (D - 3) ≤ (harmonicMult D ℓ : ℝ) ∧ (harmonicMult D ℓ : ℝ) ≤ b * (ℓ : ℝ) ^ (D - 3)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDimensionThreshold.harmonicMult_five": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDimensionThreshold",
+      "name": "NullConeGravity.harmonicMult_five",
+      "kind": "theorem",
+      "statement_id": "sha256:68e33568c7df0539ddb399de49f011fc992da09c7122b6716dc01eae5496d567",
+      "line": 73,
+      "signature": "theorem harmonicMult_five (ℓ : ℕ) : harmonicMult 5 ℓ = (ℓ + 1)^2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDimensionThreshold.harmonicMult_four": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDimensionThreshold",
+      "name": "NullConeGravity.harmonicMult_four",
+      "kind": "theorem",
+      "statement_id": "sha256:68e33568c7df0539ddb399de49f011fc992da09c7122b6716dc01eae5496d567",
+      "line": 52,
+      "signature": "theorem harmonicMult_four (ℓ : ℕ) : harmonicMult 4 ℓ = 2 * ℓ + 1",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDimensionThreshold.harmonicMult_six": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDimensionThreshold",
+      "name": "NullConeGravity.harmonicMult_six",
+      "kind": "theorem",
+      "statement_id": "sha256:68e33568c7df0539ddb399de49f011fc992da09c7122b6716dc01eae5496d567",
+      "line": 84,
+      "signature": "theorem harmonicMult_six (ℓ : ℕ) : harmonicMult 6 ℓ = (ℓ + 1) * (ℓ + 2) * (2 * ℓ + 3) / 6",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDimensionThreshold.leadingModeWeight_sum_ge_seven_bounds": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDimensionThreshold",
+      "name": "NullConeGravity.leadingModeWeight_sum_ge_seven_bounds",
+      "kind": "theorem",
+      "statement_id": "sha256:68e33568c7df0539ddb399de49f011fc992da09c7122b6716dc01eae5496d567",
+      "line": 255,
+      "signature": "theorem leadingModeWeight_sum_ge_seven_bounds (D : ℕ) (hD : 7 ≤ D) : ∃ a b : ℝ, 0 < a ∧ 0 < b ∧ ∀ L : ℕ, 1 ≤ L → a * (L : ℝ) ^ (D - 6) ≤ ∑ n ∈ Finset.range L, leadingModeWeight D (n + 1) ∧ (∑ n ∈ Finset.range L, leadingModeWeight D (n + 1)) ≤ b * (L : ℝ) ^ (D - 6)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDimensionThreshold.leadingModeWeight_sum_six_bounds": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDimensionThreshold",
+      "name": "NullConeGravity.leadingModeWeight_sum_six_bounds",
+      "kind": "theorem",
+      "statement_id": "sha256:68e33568c7df0539ddb399de49f011fc992da09c7122b6716dc01eae5496d567",
+      "line": 206,
+      "signature": "theorem leadingModeWeight_sum_six_bounds : ∃ a b : ℝ, 0 < a ∧ 0 < b ∧ ∀ L : ℕ, 2 ≤ L → a * Real.log L ≤ ∑ n ∈ Finset.range L, leadingModeWeight 6 (n + 1) ∧ (∑ n ∈ Finset.range L, leadingModeWeight 6 (n + 1)) ≤ b * Real.log L",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDimensionThreshold.leadingModeWeight_summable_iff": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDimensionThreshold",
+      "name": "NullConeGravity.leadingModeWeight_summable_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:68e33568c7df0539ddb399de49f011fc992da09c7122b6716dc01eae5496d567",
+      "line": 189,
+      "signature": "theorem leadingModeWeight_summable_iff (D : ℕ) (hD : 4 ≤ D) : Summable (fun ℓ : ℕ => if ℓ = 0 then 0 else leadingModeWeight D ℓ) ↔ D = 4 ∨ D = 5",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
     "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondEq71Trace4D.eq71_trace_eq_hsSq": {
       "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondEq71Trace4D",
       "name": "NullConeGravity.eq71_trace_eq_hsSq",
@@ -12431,6 +12599,240 @@
       "statement_id": "sha256:4430cda5844240c4701a167b019e7beabc1f5a2bd6930fdcfabf31f104003c54",
       "line": 445,
       "signature": "theorem nullDiamond_full_space_excitable_4D (m L : ℝ) (hm : 0 < m) (hL : 0 < L) : NullDiamondConcreteRealization m L hm hL (⊤ : Submodule ℂ H4D) (fun _ _ => Submodule.mem_top)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondExcitability5D.eq71_trace_eq_hsSq_5D": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondExcitability5D",
+      "name": "NullConeGravity.eq71_trace_eq_hsSq_5D",
+      "kind": "theorem",
+      "statement_id": "sha256:bb4d20d57d19e0722c6037a552706c7c7c94bfc17ef5c769c23a2311f63d3339",
+      "line": 327,
+      "signature": "theorem eq71_trace_eq_hsSq_5D (M : ℝ) (hM : 0 < M) : ∃ hd : IsHilbertSchmidt (eq71Delta5D V M hM), ∃ ht : IsTraceClass (eq71Delta5D V M hM * eq71Delta5D V M hM), trace _ ht = (hsSq (eq71Delta5D V M hM) hd : ℂ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondExcitability5D.mumSq5D_le": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondExcitability5D",
+      "name": "NullConeGravity.mumSq5D_le",
+      "kind": "theorem",
+      "statement_id": "sha256:bb4d20d57d19e0722c6037a552706c7c7c94bfc17ef5c769c23a2311f63d3339",
+      "line": 109,
+      "signature": "theorem mumSq5D_le (M : ℝ) (hM : 0 < M) (f : V) : mumSq5D V M hM f ≤ ‖nullN5D M hM‖ * mu0Sq5D V f",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondExcitability5D.nullDiamond_concrete_gaussian_excitable_5D": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondExcitability5D",
+      "name": "NullConeGravity.nullDiamond_concrete_gaussian_excitable_5D",
+      "kind": "theorem",
+      "statement_id": "sha256:bb4d20d57d19e0722c6037a552706c7c7c94bfc17ef5c769c23a2311f63d3339",
+      "line": 476,
+      "signature": "theorem nullDiamond_concrete_gaussian_excitable_5D (m L : ℝ) (hm : 0 < m) (hL : 0 < L) (V : Submodule ℂ H5D) [CompleteSpace V] (hV : ∀ x ∈ V, reflectReal x ∈ V) : NullDiamondConcreteRealization5D m L hm hL V hV",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondExcitability5D.nullDiamond_eq71_5D": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondExcitability5D",
+      "name": "NullConeGravity.nullDiamond_eq71_5D",
+      "kind": "theorem",
+      "statement_id": "sha256:bb4d20d57d19e0722c6037a552706c7c7c94bfc17ef5c769c23a2311f63d3339",
+      "line": 299,
+      "signature": "theorem nullDiamond_eq71_5D (m L : ℝ) (hm : 0 < m) (hL : 0 < L) : let M",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondExcitability5D.nullDiamond_excitable_5D": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondExcitability5D",
+      "name": "NullConeGravity.nullDiamond_excitable_5D",
+      "kind": "theorem",
+      "statement_id": "sha256:bb4d20d57d19e0722c6037a552706c7c7c94bfc17ef5c769c23a2311f63d3339",
+      "line": 451,
+      "signature": "theorem nullDiamond_excitable_5D (m L : ℝ) (hm : 0 < m) (hL : 0 < L) (V : Submodule ℂ H5D) [CompleteSpace V] (hV : ∀ x ∈ V, reflectReal x ∈ V) (W : WeylSystem (A",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondExcitability5D.nullDiamond_full_space_excitable_5D": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondExcitability5D",
+      "name": "NullConeGravity.nullDiamond_full_space_excitable_5D",
+      "kind": "theorem",
+      "statement_id": "sha256:bb4d20d57d19e0722c6037a552706c7c7c94bfc17ef5c769c23a2311f63d3339",
+      "line": 487,
+      "signature": "theorem nullDiamond_full_space_excitable_5D (m L : ℝ) (hm : 0 < m) (hL : 0 < L) : NullDiamondConcreteRealization5D m L hm hL (⊤ : Submodule ℂ H5D) (fun _ _ => Submodule.mem_top)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondExcitability5D.nullN5D_coercive": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondExcitability5D",
+      "name": "NullConeGravity.nullN5D_coercive",
+      "kind": "theorem",
+      "statement_id": "sha256:bb4d20d57d19e0722c6037a552706c7c7c94bfc17ef5c769c23a2311f63d3339",
+      "line": 47,
+      "signature": "theorem nullN5D_coercive (M : ℝ) (hM : 0 < M) : ∃ c : ℝ, 0 < c ∧ c • (1 : H5D →L[ℂ] H5D) ≤ nullN5D M hM",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernel5D.correction5D_mixed_deriv": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernel5D",
+      "name": "NullConeGravity.correction5D_mixed_deriv",
+      "kind": "theorem",
+      "statement_id": "sha256:a88e0e8fd3c2df6a36d02acea119988b69d41104cab103c11a94555740ad2bc0",
+      "line": 123,
+      "signature": "theorem correction5D_mixed_deriv (M : ℝ) {u v x : ℝ} (hu : 0 < u) (hv : 0 < v) (hx : x < 1) : deriv (fun s : ℝ => deriv (fun t : ℝ => (((s * t) ^ (3 / 2 : ℝ) : ℝ) : ℂ) * bulkDiff5D M (↑(2 * s * t * (1 - x)) : ℂ)) v) u = ↑(correction5D M u v x)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernel5D.fourierG5D_bound": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernel5D",
+      "name": "NullConeGravity.fourierG5D_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:a88e0e8fd3c2df6a36d02acea119988b69d41104cab103c11a94555740ad2bc0",
+      "line": 170,
+      "signature": "theorem fourierG5D_bound (M : ℝ) (_hM : 0 < M) : ∃ C > (0 : ℝ), ∀ ν lam x : ℝ, -1 ≤ x → x < 1 → ‖fourierG5D M ν lam x‖ ≤ C * Real.exp (-(3/8) * (|ν| + |lam|)) * (1 / Real.sqrt (1 - x))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernel5D.modularRoot_closedStrip_bound": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernel5D",
+      "name": "NullConeGravity.modularRoot_closedStrip_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:a88e0e8fd3c2df6a36d02acea119988b69d41104cab103c11a94555740ad2bc0",
+      "line": 158,
+      "signature": "theorem modularRoot_closedStrip_bound {z w : ℂ} (hz : z ∈ closedStrip) (hw : w ∈ closedStrip) : let R",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernel5D.nullConj5D_anti_J": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernel5D",
+      "name": "NullConeGravity.nullConj5D_anti_J",
+      "kind": "theorem",
+      "statement_id": "sha256:a88e0e8fd3c2df6a36d02acea119988b69d41104cab103c11a94555740ad2bc0",
+      "line": 587,
+      "signature": "theorem nullConj5D_anti_J (f : H5D) : nullConj5D.toLinearIsometryEquiv (nullJ5D f) = -(nullJ5D (nullConj5D.toLinearIsometryEquiv f))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernel5D.nullConj5D_comm_T": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernel5D",
+      "name": "NullConeGravity.nullConj5D_comm_T",
+      "kind": "theorem",
+      "statement_id": "sha256:a88e0e8fd3c2df6a36d02acea119988b69d41104cab103c11a94555740ad2bc0",
+      "line": 569,
+      "signature": "theorem nullConj5D_comm_T (M : ℝ) (hM : 0 < M) (f : H5D) : nullConj5D.toLinearIsometryEquiv (nullT5D M hM f) = nullT5D M hM (nullConj5D.toLinearIsometryEquiv f)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernel5D.nullJ5D_ker": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernel5D",
+      "name": "NullConeGravity.nullJ5D_ker",
+      "kind": "theorem",
+      "statement_id": "sha256:a88e0e8fd3c2df6a36d02acea119988b69d41104cab103c11a94555740ad2bc0",
+      "line": 469,
+      "signature": "theorem nullJ5D_ker : nullJ5D.ker = ⊥",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernel5D.nullT5D_factor": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernel5D",
+      "name": "NullConeGravity.nullT5D_factor",
+      "kind": "theorem",
+      "statement_id": "sha256:a88e0e8fd3c2df6a36d02acea119988b69d41104cab103c11a94555740ad2bc0",
+      "line": 433,
+      "signature": "theorem nullT5D_factor (M : ℝ) (hM : 0 < M) : nullT5D M hM = quarterRoot nullA5D * nullW5D M hM * quarterRoot nullA5D",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernel5D.nullT5D_hs": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernel5D",
+      "name": "NullConeGravity.nullT5D_hs",
+      "kind": "theorem",
+      "statement_id": "sha256:a88e0e8fd3c2df6a36d02acea119988b69d41104cab103c11a94555740ad2bc0",
+      "line": 393,
+      "signature": "theorem nullT5D_hs (M : ℝ) (hM : 0 < M) : HilbertSchmidt.IsHilbertSchmidt (nullT5D M hM)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernel5D.nullT5D_selfAdjoint": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernel5D",
+      "name": "NullConeGravity.nullT5D_selfAdjoint",
+      "kind": "theorem",
+      "statement_id": "sha256:a88e0e8fd3c2df6a36d02acea119988b69d41104cab103c11a94555740ad2bc0",
+      "line": 487,
+      "signature": "theorem nullT5D_selfAdjoint (M : ℝ) (hM : 0 < M) : IsSelfAdjoint (nullT5D M hM)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernel5D.nullW5D_hs": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernel5D",
+      "name": "NullConeGravity.nullW5D_hs",
+      "kind": "theorem",
+      "statement_id": "sha256:a88e0e8fd3c2df6a36d02acea119988b69d41104cab103c11a94555740ad2bc0",
+      "line": 390,
+      "signature": "theorem nullW5D_hs (M : ℝ) (hM : 0 < M) : HilbertSchmidt.IsHilbertSchmidt (nullW5D M hM)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernel5D.wKernel5D_memLp": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernel5D",
+      "name": "NullConeGravity.wKernel5D_memLp",
+      "kind": "theorem",
+      "statement_id": "sha256:a88e0e8fd3c2df6a36d02acea119988b69d41104cab103c11a94555740ad2bc0",
+      "line": 340,
+      "signature": "theorem wKernel5D_memLp {M : ℝ} (hM : 0 < M) : MemLp (wKernel5D M) 2 (phase5DMeasure.prod phase5DMeasure)",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -12970,6 +13372,227 @@
         "propext"
       ]
     },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondShearObstruction4D.hadamardAnisotropy_average": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondShearObstruction4D",
+      "name": "NullConeGravity.hadamardAnisotropy_average",
+      "kind": "theorem",
+      "statement_id": "sha256:74ad46d6134ef7240c5b08e711128d85bd9d5c76be563efa4ff4fd5b7495e897",
+      "line": 441,
+      "signature": "theorem hadamardAnisotropy_average {α u v : ℝ} (hα : 0 < α) (hu : 0 < u) (huv : u < v) (hV : v < π / α) : (1 / (2 * π)) * (∫ θ in (0 : ℝ)..(2 * π), hadamardAnisotropy α u v θ) = 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondShearObstruction4D.hadamardAnisotropy_eq_poisson": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondShearObstruction4D",
+      "name": "NullConeGravity.hadamardAnisotropy_eq_poisson",
+      "kind": "theorem",
+      "statement_id": "sha256:74ad46d6134ef7240c5b08e711128d85bd9d5c76be563efa4ff4fd5b7495e897",
+      "line": 434,
+      "signature": "theorem hadamardAnisotropy_eq_poisson {α u v : ℝ} (hα : 0 < α) (hu : 0 < u) (huv : u < v) (hV : v < π / α) (θ : ℝ) : hadamardAnisotropy α u v θ = Omega.ScreenAnisotropy.poisson (hadamardPoissonParameter α u v) (2 * θ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondShearObstruction4D.hadamardAnisotropy_inner": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondShearObstruction4D",
+      "name": "NullConeGravity.hadamardAnisotropy_inner",
+      "kind": "theorem",
+      "statement_id": "sha256:74ad46d6134ef7240c5b08e711128d85bd9d5c76be563efa4ff4fd5b7495e897",
+      "line": 447,
+      "signature": "theorem hadamardAnisotropy_inner {α u₁ v₁ u₂ v₂ : ℝ} (hα : 0 < α) (hu₁ : 0 < u₁) (huv₁ : u₁ < v₁) (hv₁ : v₁ < π / α) (hu₂ : 0 < u₂) (huv₂ : u₂ < v₂) (hv₂ : v₂ < π / α) : (∫ θ in (0 : ℝ)..(2 * π), hadamardAnisotropy α u₁ v₁ θ * hadamardAnisotropy α u₂ v₂ θ) = 2 * π * (1 + hadamardPoissonParameter α u₁ v₁ * hadamardPoissonParameter α u₂ v₂) / (1 - hadamardPoissonParameter α u₁ v₁ * hadamardPoissonParameter α u₂ v₂)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondShearObstruction4D.hilbertSchmidt_has_integral_kernel": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondShearObstruction4D",
+      "name": "NullConeGravity.hilbertSchmidt_has_integral_kernel",
+      "kind": "theorem",
+      "statement_id": "sha256:74ad46d6134ef7240c5b08e711128d85bd9d5c76be563efa4ff4fd5b7495e897",
+      "line": 532,
+      "signature": "theorem hilbertSchmidt_has_integral_kernel {X : Type*} [MeasurableSpace X] (μ : Measure X) [SFinite μ] (T : Lp ℂ 2 μ →L[ℂ] Lp ℂ 2 μ) (hT : HilbertSchmidt.IsHilbertSchmidt T) : ∃ (J : X × X → ℂ) (hJ : MemLp J 2 (μ.prod μ)), integralKernelOp μ J hJ = T",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondShearObstruction4D.planeWave_pointCone_shear_not_L2": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondShearObstruction4D",
+      "name": "NullConeGravity.planeWave_pointCone_shear_not_L2",
+      "kind": "theorem",
+      "statement_id": "sha256:74ad46d6134ef7240c5b08e711128d85bd9d5c76be563efa4ff4fd5b7495e897",
+      "line": 522,
+      "signature": "theorem planeWave_pointCone_shear_not_L2 {α u₁ u₂ v₁ v₂ : ℝ} (hα : 0 < α) (hu₁ : 0 < u₁) (hu : u₁ < u₂) (huv : u₂ < v₁) (hv : v₁ < v₂) (hV : v₂ < π / α) (z : ℂ) {R : ℝ} (hR : 0 < R) : ¬ MemLp (planeWavePointConeShearKernel α u₁ u₂ v₁ v₂) 2 ((volume.restrict (Metric.ball z R)).prod (volume.restrict (Metric.ball z R)))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondShearObstruction4D.rectMismatch_annulus_diverges": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondShearObstruction4D",
+      "name": "NullConeGravity.rectMismatch_annulus_diverges",
+      "kind": "theorem",
+      "statement_id": "sha256:74ad46d6134ef7240c5b08e711128d85bd9d5c76be563efa4ff4fd5b7495e897",
+      "line": 508,
+      "signature": "theorem rectMismatch_annulus_diverges {α u₁ u₂ v₁ v₂ ρ : ℝ} (hα : 0 < α) (hu₁ : 0 < u₁) (hu : u₁ < u₂) (huv : u₂ < v₁) (hv : v₁ < v₂) (hV : v₂ < π / α) (hρ : 0 < ρ) : Filter.Tendsto (fun ε : ℝ => ∫ r in ε..ρ, (∫ θ in (0 : ℝ)..(2 * π), (rectMismatch α u₁ u₂ v₁ v₂ θ / r ^ 2) ^ 2) * r) (𝓝[>] 0) Filter.atTop",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondShearObstruction4D.rectMismatch_annulus_squared": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondShearObstruction4D",
+      "name": "NullConeGravity.rectMismatch_annulus_squared",
+      "kind": "theorem",
+      "statement_id": "sha256:74ad46d6134ef7240c5b08e711128d85bd9d5c76be563efa4ff4fd5b7495e897",
+      "line": 500,
+      "signature": "theorem rectMismatch_annulus_squared (α u₁ u₂ v₁ v₂ : ℝ) {ε ρ : ℝ} (hε : 0 < ε) (hερ : ε < ρ) : (∫ r in ε..ρ, (∫ θ in (0 : ℝ)..(2 * π), (rectMismatch α u₁ u₂ v₁ v₂ θ / r ^ 2) ^ 2) * r) = (1 / 2 : ℝ) * (∫ θ in (0 : ℝ)..(2 * π), (rectMismatch α u₁ u₂ v₁ v₂ θ) ^ 2) * ((ε ^ 2)⁻¹ - (ρ ^ 2)⁻¹)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondShearObstruction4D.rectMismatch_integral_sq_pos": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondShearObstruction4D",
+      "name": "NullConeGravity.rectMismatch_integral_sq_pos",
+      "kind": "theorem",
+      "statement_id": "sha256:74ad46d6134ef7240c5b08e711128d85bd9d5c76be563efa4ff4fd5b7495e897",
+      "line": 470,
+      "signature": "theorem rectMismatch_integral_sq_pos {α u₁ u₂ v₁ v₂ : ℝ} (hα : 0 < α) (hu₁ : 0 < u₁) (hu : u₁ < u₂) (huv : u₂ < v₁) (hv : v₁ < v₂) (hV : v₂ < π / α) : 0 < ∫ θ in (0 : ℝ)..(2 * π), (rectMismatch α u₁ u₂ v₁ v₂ θ) ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondShearObstruction4D.rosenP_jacobi": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondShearObstruction4D",
+      "name": "NullConeGravity.rosenP_jacobi",
+      "kind": "theorem",
+      "statement_id": "sha256:74ad46d6134ef7240c5b08e711128d85bd9d5c76be563efa4ff4fd5b7495e897",
+      "line": 44,
+      "signature": "theorem rosenP_jacobi {α : ℝ} (hα : 0 < α) (u : ℝ) : HasDerivAt (rosenP α) (cos (α * u)) u ∧ HasDerivAt (fun w => cos (α * w)) (-(α ^ 2) * rosenP α u) u",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondShearObstruction4D.rosenQ_jacobi": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondShearObstruction4D",
+      "name": "NullConeGravity.rosenQ_jacobi",
+      "kind": "theorem",
+      "statement_id": "sha256:74ad46d6134ef7240c5b08e711128d85bd9d5c76be563efa4ff4fd5b7495e897",
+      "line": 56,
+      "signature": "theorem rosenQ_jacobi {α : ℝ} (hα : 0 < α) (u : ℝ) : HasDerivAt (rosenQ α) (cosh (α * u)) u ∧ HasDerivAt (fun w => cosh (α * w)) (α ^ 2 * rosenQ α u) u",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondShearObstruction4D.rosen_ricci_flat": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondShearObstruction4D",
+      "name": "NullConeGravity.rosen_ricci_flat",
+      "kind": "theorem",
+      "statement_id": "sha256:74ad46d6134ef7240c5b08e711128d85bd9d5c76be563efa4ff4fd5b7495e897",
+      "line": 85,
+      "signature": "theorem rosen_ricci_flat {α u : ℝ} (hα : 0 < α) (hu : 0 < u) (hU : u < π / α) : deriv (deriv (rosenP α)) u / rosenP α u + deriv (deriv (rosenQ α)) u / rosenQ α u = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondShearObstruction4D.rosen_tip_initial_conditions": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondShearObstruction4D",
+      "name": "NullConeGravity.rosen_tip_initial_conditions",
+      "kind": "theorem",
+      "statement_id": "sha256:74ad46d6134ef7240c5b08e711128d85bd9d5c76be563efa4ff4fd5b7495e897",
+      "line": 68,
+      "signature": "theorem rosen_tip_initial_conditions {α : ℝ} (hα : 0 < α) : rosenP α 0 = 0 ∧ rosenQ α 0 = 0 ∧ HasDerivAt (rosenP α) 1 0 ∧ HasDerivAt (rosenQ α) 1 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondShearObstruction4D.screen_zero_shear": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondShearObstruction4D",
+      "name": "NullConeGravity.screen_zero_shear",
+      "kind": "theorem",
+      "statement_id": "sha256:74ad46d6134ef7240c5b08e711128d85bd9d5c76be563efa4ff4fd5b7495e897",
+      "line": 477,
+      "signature": "theorem screen_zero_shear (Qx Qy : ℝ → ℝ → ℝ) (hpos : ∀ u v, 0 < Qx u v) (heq : ∀ u v, Qx u v = Qy u v) : (∀ u v θ, Omega.ScreenAnisotropy.factor (Qx u v) (Qy u v) θ = 1) ∧ (∀ u₁ u₂ v₁ v₂ θ, Omega.ScreenAnisotropy.factor (Qx u₂ v₂) (Qy u₂ v₂) θ - Omega.ScreenAnisotropy.factor (Qx u₂ v₁) (Qy u₂ v₁) θ - Omega.ScreenAnisotropy.factor (Qx u₁ v₂) (Qy u₁ v₂) θ + Omega.ScreenAnisotropy.factor (Qx u₁ v₁) (Qy u₁ v₁) θ = 0)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondShearObstruction4D.shear_obstruction_no_hilbertSchmidt_kernel": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondShearObstruction4D",
+      "name": "NullConeGravity.shear_obstruction_no_hilbertSchmidt_kernel",
+      "kind": "theorem",
+      "statement_id": "sha256:74ad46d6134ef7240c5b08e711128d85bd9d5c76be563efa4ff4fd5b7495e897",
+      "line": 568,
+      "signature": "theorem shear_obstruction_no_hilbertSchmidt_kernel {K : ℂ × ℂ → ℂ} {z : ℂ} {R ρ c a b : ℝ} (hR : 0 < R) (hρ : 0 < ρ) (hc : 0 < c) (ha : -π ≤ a) (hab : a < b) (hb : b ≤ π) (hK : ∀ᵐ p ∂((volume.restrict (Metric.ball z R)).prod (volume.restrict (Metric.ball z R))), 0 < ‖p.1 - p.2‖ → ‖p.1 - p.2‖ < ρ → Complex.arg (p.1 - p.2) ∈ Ioo a b → c / ‖p.1 - p.2‖ ^ 2 ≤ ‖K p‖) : let μ : Measure ℂ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondShearObstruction4D.syngeQx_eq_integral": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondShearObstruction4D",
+      "name": "NullConeGravity.syngeQx_eq_integral",
+      "kind": "theorem",
+      "statement_id": "sha256:74ad46d6134ef7240c5b08e711128d85bd9d5c76be563efa4ff4fd5b7495e897",
+      "line": 179,
+      "signature": "theorem syngeQx_eq_integral {α u v : ℝ} (hα : 0 < α) (hu : 0 < u) (huv : u < v) (hV : v < π / α) : syngeQx α u v = (v - u) / (∫ w in u..v, (rosenP α w)⁻¹ ^ 2)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondShearObstruction4D.syngeQx_lt_syngeQy": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondShearObstruction4D",
+      "name": "NullConeGravity.syngeQx_lt_syngeQy",
+      "kind": "theorem",
+      "statement_id": "sha256:74ad46d6134ef7240c5b08e711128d85bd9d5c76be563efa4ff4fd5b7495e897",
+      "line": 205,
+      "signature": "theorem syngeQx_lt_syngeQy {α u v : ℝ} (hα : 0 < α) (hu : 0 < u) (huv : u < v) (hV : v < π / α) : 0 < syngeQx α u v ∧ syngeQx α u v < syngeQy α u v",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondShearObstruction4D.syngeQy_eq_integral": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondShearObstruction4D",
+      "name": "NullConeGravity.syngeQy_eq_integral",
+      "kind": "theorem",
+      "statement_id": "sha256:74ad46d6134ef7240c5b08e711128d85bd9d5c76be563efa4ff4fd5b7495e897",
+      "line": 191,
+      "signature": "theorem syngeQy_eq_integral {α u v : ℝ} (hα : 0 < α) (hu : 0 < u) (huv : u < v) : syngeQy α u v = (v - u) / (∫ w in u..v, (rosenQ α w)⁻¹ ^ 2)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
     "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondSphere4D.intervalIntegrable_log_sq": {
       "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondSphere4D",
       "name": "NullConeGravity.intervalIntegrable_log_sq",
@@ -13048,6 +13671,71 @@
         "propext"
       ]
     },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondSphere5D.sphere5D_diag_null": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondSphere5D",
+      "name": "NullConeGravity.sphere5D_diag_null",
+      "kind": "theorem",
+      "statement_id": "sha256:bdca08bad3cf0c20644d3bd6450082b30ad71140f4f757c46058172b92948e6a",
+      "line": 419,
+      "signature": "theorem sphere5D_diag_null : (sphere5DMeasure.prod sphere5DMeasure) {p | sphere5DDot p.1 p.2 = 1} = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondSphere5D.sphere5D_dot_pushforward": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondSphere5D",
+      "name": "NullConeGravity.sphere5D_dot_pushforward",
+      "kind": "theorem",
+      "statement_id": "sha256:bdca08bad3cf0c20644d3bd6450082b30ad71140f4f757c46058172b92948e6a",
+      "line": 362,
+      "signature": "theorem sphere5D_dot_pushforward (n : Sphere5D) : Measure.map (sphere5DDot n) sphere5DMeasure = (volume.restrict (Icc (-1 : ℝ) 1)).withDensity (fun x ↦ ENNReal.ofReal (4 * Real.pi * Real.sqrt (1 - x ^ 2)))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondSphere5D.sphere5D_inv_sqrt_sq_integrable": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondSphere5D",
+      "name": "NullConeGravity.sphere5D_inv_sqrt_sq_integrable",
+      "kind": "theorem",
+      "statement_id": "sha256:bdca08bad3cf0c20644d3bd6450082b30ad71140f4f757c46058172b92948e6a",
+      "line": 459,
+      "signature": "theorem sphere5D_inv_sqrt_sq_integrable : Integrable (fun p : Sphere5D × Sphere5D ↦ (1 - sphere5DDot p.1 p.2)⁻¹) (sphere5DMeasure.prod sphere5DMeasure)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondSphere5D.sphere5D_inv_sqrt_sq_integral": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondSphere5D",
+      "name": "NullConeGravity.sphere5D_inv_sqrt_sq_integral",
+      "kind": "theorem",
+      "statement_id": "sha256:bdca08bad3cf0c20644d3bd6450082b30ad71140f4f757c46058172b92948e6a",
+      "line": 471,
+      "signature": "theorem sphere5D_inv_sqrt_sq_integral : (∫ p : Sphere5D × Sphere5D, (1 - sphere5DDot p.1 p.2)⁻¹ ∂(sphere5DMeasure.prod sphere5DMeasure)) = 8 * Real.pi ^ 4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondSphere5D.sphere5D_measure_univ": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondSphere5D",
+      "name": "NullConeGravity.sphere5D_measure_univ",
+      "kind": "theorem",
+      "statement_id": "sha256:bdca08bad3cf0c20644d3bd6450082b30ad71140f4f757c46058172b92948e6a",
+      "line": 58,
+      "signature": "theorem sphere5D_measure_univ : sphere5DMeasure univ = ENNReal.ofReal (2 * Real.pi ^ 2)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
     "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondWeakBoundary4D.bulkU_zero_cap": {
       "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondWeakBoundary4D",
       "name": "NullConeGravity.bulkU_zero_cap",
@@ -13120,6 +13808,123 @@
       "statement_id": "sha256:1857da36f864bf7430bed55ca110dc22bb8b70596c1dad82f0f026270fb59335",
       "line": 48,
       "signature": "theorem regulatedShellQuad_nonneg (M ε : ℝ) (F : ConeProfile) : 0 ≤ regulatedShellQuad M ε F",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondWeakBoundary5D.bulkU5D_difference": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondWeakBoundary5D",
+      "name": "NullConeGravity.bulkU5D_difference",
+      "kind": "theorem",
+      "statement_id": "sha256:c274330bef460af9b982288d588acbdb483a0b0fdc345f39f0c5ee9772a35067",
+      "line": 76,
+      "signature": "theorem bulkU5D_difference {M : ℝ} (hM : 0 ≤ M) {τ : ℂ} (hτ : 0 < τ.re) (r : E4) : bulkU5D M τ r - bulkU5D 0 τ r = bulkDiff5D M (((‖r‖ ^ 2 : ℝ) : ℂ) + τ ^ 2)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondWeakBoundary5D.bulkU5D_zero": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondWeakBoundary5D",
+      "name": "NullConeGravity.bulkU5D_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:c274330bef460af9b982288d588acbdb483a0b0fdc345f39f0c5ee9772a35067",
+      "line": 54,
+      "signature": "theorem bulkU5D_zero {τ : ℂ} (hτ : 0 < τ.re) (r : E4) : bulkU5D 0 τ r = 1 / (8 * (Real.pi : ℂ) ^ 2 * (((‖r‖ ^ 2 : ℝ) : ℂ) + τ ^ 2) ^ (3 / 2 : ℂ))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondWeakBoundary5D.massive_boundary_limit_5D": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondWeakBoundary5D",
+      "name": "NullConeGravity.massive_boundary_limit_5D",
+      "kind": "theorem",
+      "statement_id": "sha256:c274330bef460af9b982288d588acbdb483a0b0fdc345f39f0c5ee9772a35067",
+      "line": 602,
+      "signature": "theorem massive_boundary_limit_5D {M : ℝ} (hM : 0 < M) (F : ConeProfile5D) : Tendsto (fun ε : ℝ => regulatedShellQuad5D M ε F) (𝓝[>] (0 : ℝ)) (𝓝 (⟪profileEmbed5D F, (nullA5D + nullT5D M hM) (profileEmbed5D F)⟫_ℂ).re)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondWeakBoundary5D.massless_boundary_limit_5D": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondWeakBoundary5D",
+      "name": "NullConeGravity.massless_boundary_limit_5D",
+      "kind": "theorem",
+      "statement_id": "sha256:c274330bef460af9b982288d588acbdb483a0b0fdc345f39f0c5ee9772a35067",
+      "line": 323,
+      "signature": "theorem massless_boundary_limit_5D (F : ConeProfile5D) : Tendsto (fun ε : ℝ => regulatedShellQuad5D 0 ε F) (𝓝[>] (0 : ℝ)) (𝓝 (⟪profileEmbed5D F, nullA5D (profileEmbed5D F)⟫_ℂ).re)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondWeakBoundary5D.nullB5D_nonneg": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondWeakBoundary5D",
+      "name": "NullConeGravity.nullB5D_nonneg",
+      "kind": "theorem",
+      "statement_id": "sha256:c274330bef460af9b982288d588acbdb483a0b0fdc345f39f0c5ee9772a35067",
+      "line": 612,
+      "signature": "theorem nullB5D_nonneg {M : ℝ} (hM : 0 < M) : 0 ≤ nullA5D + nullT5D M hM",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondWeakBoundary5D.nullN5D_sub_J_nonneg": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondWeakBoundary5D",
+      "name": "NullConeGravity.nullN5D_sub_J_nonneg",
+      "kind": "theorem",
+      "statement_id": "sha256:c274330bef460af9b982288d588acbdb483a0b0fdc345f39f0c5ee9772a35067",
+      "line": 631,
+      "signature": "theorem nullN5D_sub_J_nonneg {M : ℝ} (hM : 0 < M) : 0 ≤ (1 : H5D →L[ℂ] H5D) + nullT5D M hM - nullJ5D",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondWeakBoundary5D.profileEmbed5D_dense": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondWeakBoundary5D",
+      "name": "NullConeGravity.profileEmbed5D_dense",
+      "kind": "theorem",
+      "statement_id": "sha256:c274330bef460af9b982288d588acbdb483a0b0fdc345f39f0c5ee9772a35067",
+      "line": 45,
+      "signature": "theorem profileEmbed5D_dense : DenseRange profileEmbed5D",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondWeakBoundary5D.regulatedShellQuad5D_eq_bulk": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondWeakBoundary5D",
+      "name": "NullConeGravity.regulatedShellQuad5D_eq_bulk",
+      "kind": "theorem",
+      "statement_id": "sha256:c274330bef460af9b982288d588acbdb483a0b0fdc345f39f0c5ee9772a35067",
+      "line": 115,
+      "signature": "theorem regulatedShellQuad5D_eq_bulk (M : ℝ) {ε : ℝ} (hε : 0 < ε) (F : ConeProfile5D) : regulatedShellQuad5D M ε F = (4 * ∫ z, bulkIntegrand M ε F z ∂(coneMeasure.prod coneMeasure)).re",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondWeakBoundary5D.regulatedShellQuad5D_nonneg": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondWeakBoundary5D",
+      "name": "NullConeGravity.regulatedShellQuad5D_nonneg",
+      "kind": "theorem",
+      "statement_id": "sha256:c274330bef460af9b982288d588acbdb483a0b0fdc345f39f0c5ee9772a35067",
+      "line": 111,
+      "signature": "theorem regulatedShellQuad5D_nonneg (M ε : ℝ) (F : ConeProfile5D) : 0 ≤ regulatedShellQuad5D M ε F",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
