@@ -51,6 +51,10 @@ $$
 
 对于两个不同的质量，只要固定线性反项，再给出一个读数 $V_1'(0)$，上述例外也可消除。记 $\delta_i$ 为两个模型在第 $i$ 层按归一斜率整理的数码分布之差。由留数相等和已知总权，有 $m_1^2\delta_1=-m_2^2\delta_2$，在零斜率处也成立。每层的分布之差来自四个带号权 $+3,+1,-3,-1$。若合并后有三个或四个支撑点，必留有一个未抵消的单位权，所以两个 $\delta_i$ 的非零权绝对值的最小值均为一，与不同质量所需的比例矛盾。因此非零歧义只能支撑在两个不同的斜率上，形如 $\delta_2=a(\delta_x-\delta_y)$，其中 $\delta_x$ 表示 $x$ 处的单位点质量。代入 $G'(m)=2m[\log(m/\mu^2)-1]$，两模型的线性读数之差为 $8m_2^2\log(m_2/m_1)\,a(x-y)\ne0$。这组精确读数因而能恢复带层与物种标记的四个斜率，也容许斜率为零。
 
+当各层质量已知且两两不同时，即使固定反项，仍可由不同的带标签斜率得到完全相同的势，最少需要三层。令质量权 $m_i^2=M_i^4$ 成比 $1:2:4$，选两个不同的正归一斜率 $a,b$。在 $a$ 处，两模型的三层数码分别取 $(4,0,1)$ 与 $(0,4,0)$，其余物种都放在 $b$ 处。两模型在 $a$ 处的加权差为 $4-8+4=0$，在 $b$ 处为其相反数。逐层质量带来的对数项也抵消，因为 $4\log 1-8\log\sqrt2+4\log 2=0$。事实上，$G(m_i(1+\lambda s))$ 分成 $m_i^2$ 乘以 $\lambda s$ 的共同函数，以及正比于 $m_i^2\log(m_i/\mu^2)(1+\lambda s)^2$ 的一项。两部分分别相等，故不调整任何反项，两势就在全部 $s\ge0$ 上逐点相等。前面的两层结论给出层数的最小性。
+
+对三层等比质量权 $(1,r,r^2)$，$r>1$，这种歧义恰在 $r=(1+\sqrt5)/2,\,2,\,3$ 三个公比上出现。要检验固定反项带来的额外条件，按 $i=0,1,2$ 编号各层，记 $\delta_i(\lambda)$ 为归一斜率 $\lambda$ 上的数码差。极点权重相等后，余下差值正比于 $\sum_\lambda(r\delta_1(\lambda)+2r^2\delta_2(\lambda))(1+\lambda s)^2$，其常数、一次和二次系数须全部为零。例如在黄金比上，可取两组有色、无色归一斜率 $(3,7)$ 与 $(5,1)$。两组的零至二阶加权矩都是 $(4,16,76)$。在前两层同向对换两种分配，第三层反向对换。关系 $1+r=r^2$ 抵消极点权重，而三个矩抵消余下多项式。三个例外公比上都有全正斜率的构造。 [三层阈值分类](https://github.com/the-omega-institute/trureturing-experiments/blob/4d589c1d2a4dd74ac8fb695eba260a0471cc8856/experiments/ch39-omega-research/replay/ch39-three-geometric-portal-thresholds.md) · [精确枚举](https://github.com/the-omega-institute/trureturing-experiments/blob/4d589c1d2a4dd74ac8fb695eba260a0471cc8856/experiments/ch39-omega-research/replay/ch39-three-geometric-portal-thresholds.py)
+
 在检验 $8\pi I \pm \mathcal{A} \succ 0$ 是否正定、或从全图刚度矩阵中消去高势外层顶点自由度时，反复出现的决定性工具是复分块厄米矩阵的舒尔补极小值定理，它已在 Lean 4 内核中严格冻结：
 
 ::: {.theorem #thm-ou-ch06-schur-minimum title="分块舒尔补二次型是内部变量的精确最小值" lean="D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"}
