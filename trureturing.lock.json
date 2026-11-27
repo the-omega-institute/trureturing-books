@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "6963eab497fc4256090cef071c5139f1366463b9",
-  "pinned_at": "2026-11-27T19:00:31Z",
+  "commit": "38910d2c96de5f4ed439d8fdc0d31b7f34f0e066",
+  "pinned_at": "2026-11-27T20:16:19Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -11811,6 +11811,377 @@
       "statement_id": "sha256:80b49ddafb9721f2cb75ca3df50f5779c3ac6277331597db4a7116474f088733",
       "line": 97,
       "signature": "theorem finiteDimensional_and_finrank_range_le_of_isTraceClass_lower_bound {p C : H →L[ℂ] H} (hp : IsStarProjection p) (hC_nn : 0 ≤ C) (hC_tc : IsTraceClass C) {c : ℝ} (hc : 0 < c) (hlow : ∀ x : H, x ∈ LinearMap.range p.toLinearMap → c * ‖x‖ ^ 2 ≤ (⟪x, C x⟫_ℂ).re) : FiniteDimensional ℂ (LinearMap.range p.toLinearMap) ∧ (Module.finrank ℂ (LinearMap.range p.toLinearMap) : ℝ) ≤ (trace C hC_tc).re / c",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/ConformalMaxwellSelection4D.maxwell4D_conformal_states_equal": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/ConformalMaxwellSelection4D",
+      "name": "NullConeGravity.maxwell4D_conformal_states_equal",
+      "kind": "theorem",
+      "statement_id": "sha256:c0ab7dddd1dffa096871e0ed4355acb5f153671bd26978a9886aa8c29e6fbf58",
+      "line": 174,
+      "signature": "theorem maxwell4D_conformal_states_equal {X S A : Type*} [MeasurableSpace X] [AddCommGroup S] [Module ℝ S] [CStarAlgebra A] [PartialOrder A] [StarOrderedRing A] {σ : S →ₗ[ℝ] S →ₗ[ℝ] ℝ} (W : WeylSystem (A",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/ConformalMaxwellSelection4D.maxwell4D_conformal_symplectic_invariant": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/ConformalMaxwellSelection4D",
+      "name": "NullConeGravity.maxwell4D_conformal_symplectic_invariant",
+      "kind": "theorem",
+      "statement_id": "sha256:c0ab7dddd1dffa096871e0ed4355acb5f153671bd26978a9886aa8c29e6fbf58",
+      "line": 131,
+      "signature": "theorem maxwell4D_conformal_symplectic_invariant {X : Type*} [MeasurableSpace X] (μ : Measure (ℝ × X)) (Ω : ℝ × X → ℝ) (hΩ : ∀ p, 0 < Ω p) (screen : ℝ × X → Fin 2 → Fin 2 → ℝ) (A B : ℝ → X → Fin 2 → ℝ) : maxwellCharacteristicFlux (D",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/ConformalMaxwellSelection4D.maxwell4D_covariance_defect_zero": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/ConformalMaxwellSelection4D",
+      "name": "NullConeGravity.maxwell4D_covariance_defect_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:c0ab7dddd1dffa096871e0ed4355acb5f153671bd26978a9886aa8c29e6fbf58",
+      "line": 198,
+      "signature": "theorem maxwell4D_covariance_defect_zero {X K : Type*} [MeasurableSpace X] [NormedAddCommGroup K] [InnerProductSpace ℂ K] [CompleteSpace K] (μ : Measure ((ℝ × ℝ) × X)) (Ω : ℝ → X → ℝ) (screen : X → Fin 2 → Fin 2 → ℝ) (profile : K → ℝ → X → Fin 2 → ℝ) (V R : K →L[ℂ] K) (hv : ∀ x y, Tendsto (maxwellRadiativeKernel μ Ω screen (profile x) (profile y)) (𝓝[>] (0 : ℝ)) (𝓝 ⟪x, V y⟫_ℂ)) (hr : ∀ x y, Tendsto (maxwellRadiativeKernel μ (fun _ _ => 1) screen (profile x) (profile y)) (𝓝[>] (0 : ℝ)) (𝓝 ⟪x, R y⟫_ℂ)) : ∃ h : IsHilbertSchmidt (CFC.sqrt V - CFC.sqrt R), hsSq _ h = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/ConformalMaxwellSelection4D.maxwell4D_radiative_kernel_invariant": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/ConformalMaxwellSelection4D",
+      "name": "NullConeGravity.maxwell4D_radiative_kernel_invariant",
+      "kind": "theorem",
+      "statement_id": "sha256:c0ab7dddd1dffa096871e0ed4355acb5f153671bd26978a9886aa8c29e6fbf58",
+      "line": 152,
+      "signature": "theorem maxwell4D_radiative_kernel_invariant {X : Type*} [MeasurableSpace X] (μ : Measure ((ℝ × ℝ) × X)) (Ω : ℝ → X → ℝ) (screen : X → Fin 2 → Fin 2 → ℝ) (f g : ℝ → X → Fin 2 → ℝ) (ε : ℝ) : maxwellRadiativeKernel μ Ω screen f g ε = maxwellRadiativeKernel μ (fun _ _ => 1) screen f g ε",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/ConformalMaxwellSelection4D.maxwell4D_vacuum_equals_reference": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/ConformalMaxwellSelection4D",
+      "name": "NullConeGravity.maxwell4D_vacuum_equals_reference",
+      "kind": "theorem",
+      "statement_id": "sha256:c0ab7dddd1dffa096871e0ed4355acb5f153671bd26978a9886aa8c29e6fbf58",
+      "line": 106,
+      "signature": "theorem maxwell4D_vacuum_equals_reference (Ω : (Fin 4 → ℝ) → ℝ) (raisedF : (Fin 4 → ℝ) → Fin 4 → Fin 4 → ℝ) (x : Fin 4 → ℝ) (hΩ : 0 < Ω x) : (∀ j, maxwellChartDivergence Ω raisedF x j = 0) ↔ ∀ j, (∑ i, deriv (fun t : ℝ => raisedF (Function.update x i (x i + t)) i j) 0) = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/ConformalMaxwellSelection4D.maxwellConformalWeight_eq_one_at_iff": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/ConformalMaxwellSelection4D",
+      "name": "NullConeGravity.maxwellConformalWeight_eq_one_at_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:c0ab7dddd1dffa096871e0ed4355acb5f153671bd26978a9886aa8c29e6fbf58",
+      "line": 38,
+      "signature": "theorem maxwellConformalWeight_eq_one_at_iff (D : ℕ) {Ω : ℝ} (hΩ : 0 < Ω) (h₁ : Ω ≠ 1) : maxwellConformalWeight D Ω = 1 ↔ D = 4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/ConformalMaxwellSelection4D.maxwellConformalWeight_eq_one_iff": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/ConformalMaxwellSelection4D",
+      "name": "NullConeGravity.maxwellConformalWeight_eq_one_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:c0ab7dddd1dffa096871e0ed4355acb5f153671bd26978a9886aa8c29e6fbf58",
+      "line": 43,
+      "signature": "theorem maxwellConformalWeight_eq_one_iff (D : ℕ) : (∀ Ω : ℝ, 0 < Ω → maxwellConformalWeight D Ω = 1) ↔ D = 4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/ConformalMaxwellSelection4D.maxwell_density_scaling": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/ConformalMaxwellSelection4D",
+      "name": "NullConeGravity.maxwell_density_scaling",
+      "kind": "theorem",
+      "statement_id": "sha256:c0ab7dddd1dffa096871e0ed4355acb5f153671bd26978a9886aa8c29e6fbf58",
+      "line": 32,
+      "signature": "theorem maxwell_density_scaling (D : ℕ) {Ω : ℝ} (hΩ : 0 < Ω) : Ω ^ D * Ω ^ (-2 : ℤ) * Ω ^ (-2 : ℤ) = maxwellConformalWeight D Ω",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/ConformalMaxwellSelection4D.maxwell_stress_trace": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/ConformalMaxwellSelection4D",
+      "name": "NullConeGravity.maxwell_stress_trace",
+      "kind": "theorem",
+      "statement_id": "sha256:c0ab7dddd1dffa096871e0ed4355acb5f153671bd26978a9886aa8c29e6fbf58",
+      "line": 60,
+      "signature": "theorem maxwell_stress_trace {D : ℕ} (q : Fin D → ℝ) (F : Fin D → Fin D → ℝ) (hq : ∀ i, q i ≠ 0) : (∑ i, q i * maxwellStress q F i i) = (4 - (D : ℝ)) / 4 * maxwellFieldContraction q F",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/ConformalMaxwellSelection4D.maxwell_stress_trace_eq_zero_iff": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/ConformalMaxwellSelection4D",
+      "name": "NullConeGravity.maxwell_stress_trace_eq_zero_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:c0ab7dddd1dffa096871e0ed4355acb5f153671bd26978a9886aa8c29e6fbf58",
+      "line": 83,
+      "signature": "theorem maxwell_stress_trace_eq_zero_iff {D : ℕ} (q : Fin D → ℝ) (F : Fin D → Fin D → ℝ) (hq : ∀ i, q i ≠ 0) (hF : maxwellFieldContraction q F ≠ 0) : (∑ i, q i * maxwellStress q F i i) = 0 ↔ D = 4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/ConformalMaxwellSelection4D.proca_curvature_potential_eq": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/ConformalMaxwellSelection4D",
+      "name": "NullConeGravity.proca_curvature_potential_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:c0ab7dddd1dffa096871e0ed4355acb5f153671bd26978a9886aa8c29e6fbf58",
+      "line": 224,
+      "signature": "theorem proca_curvature_potential_eq (D : ℕ) : procaCurvaturePotential D = ((D : ℝ) - 4) * ((D : ℝ) - 2) / 4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/ConformalMaxwellSelection4D.proca_curvature_potential_zero_iff": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/ConformalMaxwellSelection4D",
+      "name": "NullConeGravity.proca_curvature_potential_zero_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:c0ab7dddd1dffa096871e0ed4355acb5f153671bd26978a9886aa8c29e6fbf58",
+      "line": 229,
+      "signature": "theorem proca_curvature_potential_zero_iff (D : ℕ) (hD : 3 ≤ D) : procaCurvaturePotential D = 0 ↔ D = 4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/ConformalMaxwellSelection4D.proca_longitudinal_kinetic_weight": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/ConformalMaxwellSelection4D",
+      "name": "NullConeGravity.proca_longitudinal_kinetic_weight",
+      "kind": "theorem",
+      "statement_id": "sha256:c0ab7dddd1dffa096871e0ed4355acb5f153671bd26978a9886aa8c29e6fbf58",
+      "line": 272,
+      "signature": "theorem proca_longitudinal_kinetic_weight (D : ℕ) {Ω k m : ℝ} (hΩ : 0 < Ω) (hk : 0 < k) (hm : 0 < m) (u : ℝ) : let c",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/ConformalMaxwellSelection4D.proca_transverse_rescaled_ode": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/ConformalMaxwellSelection4D",
+      "name": "NullConeGravity.proca_transverse_rescaled_ode",
+      "kind": "theorem",
+      "statement_id": "sha256:c0ab7dddd1dffa096871e0ed4355acb5f153671bd26978a9886aa8c29e6fbf58",
+      "line": 238,
+      "signature": "theorem proca_transverse_rescaled_ode (D : ℕ) {H t : ℝ} (hH : 0 < H) (ht : t < 0) (k m : ℝ) (A : ℝ → ℝ) (hA : ∀ s < 0, DifferentiableAt ℝ A s) (hA' : DifferentiableAt ℝ (deriv A) t) : let Ω",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/DeSitterGravitonModes.ds4_graviton_bd_mode_solves_ode": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/DeSitterGravitonModes",
+      "name": "NullConeGravity.ds4_graviton_bd_mode_solves_ode",
+      "kind": "theorem",
+      "statement_id": "sha256:24dab0f945a66711e805a1ca712b9527876295d4b9da839294c0de85ce7163ba",
+      "line": 91,
+      "signature": "theorem ds4_graviton_bd_mode_solves_ode {k t : ℝ} (hk : 0 < k) (ht : t < 0) : deriv (deriv (ds4GravitonBDMode k)) t + ((k : ℂ) ^ 2 - 2 / (t : ℂ) ^ 2) * ds4GravitonBDMode k t = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/DeSitterGravitonModes.ds4_graviton_bd_power": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/DeSitterGravitonModes",
+      "name": "NullConeGravity.ds4_graviton_bd_power",
+      "kind": "theorem",
+      "statement_id": "sha256:24dab0f945a66711e805a1ca712b9527876295d4b9da839294c0de85ce7163ba",
+      "line": 168,
+      "signature": "theorem ds4_graviton_bd_power {H k t : ℝ} (hH : 0 < H) (hk : 0 < k) (ht : t < 0) : ‖ds4GravitonBDMode k t / (Omega.inverseTimeScale H t : ℂ)‖ ^ 2 = H ^ 2 / (2 * k ^ 3) * (1 + k ^ 2 * t ^ 2)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/DeSitterGravitonModes.ds4_graviton_bd_superhorizon_limit": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/DeSitterGravitonModes",
+      "name": "NullConeGravity.ds4_graviton_bd_superhorizon_limit",
+      "kind": "theorem",
+      "statement_id": "sha256:24dab0f945a66711e805a1ca712b9527876295d4b9da839294c0de85ce7163ba",
+      "line": 194,
+      "signature": "theorem ds4_graviton_bd_superhorizon_limit {H k : ℝ} (hH : 0 < H) (hk : 0 < k) : Tendsto (fun t : ℝ => ‖ds4GravitonBDMode k t / (Omega.inverseTimeScale H t : ℂ)‖ ^ 2) (𝓝[<] (0 : ℝ)) (𝓝 (H ^ 2 / (2 * k ^ 3)))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/DeSitterGravitonModes.ds4_graviton_bd_wronskian": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/DeSitterGravitonModes",
+      "name": "NullConeGravity.ds4_graviton_bd_wronskian",
+      "kind": "theorem",
+      "statement_id": "sha256:24dab0f945a66711e805a1ca712b9527876295d4b9da839294c0de85ce7163ba",
+      "line": 134,
+      "signature": "theorem ds4_graviton_bd_wronskian {k t : ℝ} (hk : 0 < k) (ht : t < 0) : ds4GravitonBDMode k t * conj (deriv (ds4GravitonBDMode k) t) - conj (ds4GravitonBDMode k t) * deriv (ds4GravitonBDMode k) t = Complex.I",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/DeSitterGravitonModes.ds_graviton_tt_rescaled_ode": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/DeSitterGravitonModes",
+      "name": "NullConeGravity.ds_graviton_tt_rescaled_ode",
+      "kind": "theorem",
+      "statement_id": "sha256:24dab0f945a66711e805a1ca712b9527876295d4b9da839294c0de85ce7163ba",
+      "line": 33,
+      "signature": "theorem ds_graviton_tt_rescaled_ode (D : ℕ) (hD : 2 ≤ D) {H t : ℝ} (hH : 0 < H) (ht : t < 0) (k : ℝ) (h : ℝ → ℝ) (hh : ∀ s < 0, DifferentiableAt ℝ h s) (hh' : DifferentiableAt ℝ (deriv h) t) : let Ω",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/DeSitterGravitonModes.ds_graviton_tt_scalar_potential": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/DeSitterGravitonModes",
+      "name": "NullConeGravity.ds_graviton_tt_scalar_potential",
+      "kind": "theorem",
+      "statement_id": "sha256:24dab0f945a66711e805a1ca712b9527876295d4b9da839294c0de85ce7163ba",
+      "line": 59,
+      "signature": "theorem ds_graviton_tt_scalar_potential (D : ℕ) (hD : 4 ≤ D) {H t : ℝ} (hH : 0 < H) (ht : t < 0) (k : ℝ) : k ^ 2 + Omega.inverseTimeScale H t ^ 2 * deSitterConformalMassSq D 0 0 H = k ^ 2 - gravitonKappa D * (gravitonKappa D + 1) / t ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/DeSitterGravitonModes.finrank_gravitonTT": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/DeSitterGravitonModes",
+      "name": "NullConeGravity.finrank_gravitonTT",
+      "kind": "theorem",
+      "statement_id": "sha256:24dab0f945a66711e805a1ca712b9527876295d4b9da839294c0de85ce7163ba",
+      "line": 222,
+      "signature": "theorem finrank_gravitonTT (D : ℕ) (hD : 2 ≤ D) : Module.finrank ℝ (GravitonTT D) = (D - 2) * (D - 1) / 2 - 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/DeSitterGravitonModes.grand_unification_unique_dimension_four": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/DeSitterGravitonModes",
+      "name": "NullConeGravity.grand_unification_unique_dimension_four",
+      "kind": "theorem",
+      "statement_id": "sha256:24dab0f945a66711e805a1ca712b9527876295d4b9da839294c0de85ce7163ba",
+      "line": 281,
+      "signature": "theorem grand_unification_unique_dimension_four (D : ℕ) (hD : 3 ≤ D) : (0 < Module.finrank ℝ (Weyl D) ∧ Summable (leadingModeWeight D) ∧ (∀ Ω : ℝ, 0 < Ω → maxwellConformalWeight D Ω = 1) ∧ D - 2 = 2) ↔ D = 4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/DeSitterGravitonModes.graviton4_weyl_screen_coordinates": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/DeSitterGravitonModes",
+      "name": "NullConeGravity.graviton4_weyl_screen_coordinates",
+      "kind": "theorem",
+      "statement_id": "sha256:24dab0f945a66711e805a1ca712b9527876295d4b9da839294c0de85ce7163ba",
+      "line": 240,
+      "signature": "theorem graviton4_weyl_screen_coordinates (C : WeylNullScreen.Weyl4) (r : WeylNullScreen.FutureNullRay) : let T",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/DeSitterGravitonModes.gravitonPolarization_eq_screenSTF": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/DeSitterGravitonModes",
+      "name": "NullConeGravity.gravitonPolarization_eq_screenSTF",
+      "kind": "theorem",
+      "statement_id": "sha256:24dab0f945a66711e805a1ca712b9527876295d4b9da839294c0de85ce7163ba",
+      "line": 212,
+      "signature": "theorem gravitonPolarization_eq_screenSTF (D : ℕ) : gravitonPolarizationCount D = screenDim D",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/DeSitterGravitonModes.graviton_polarizations_three_four_five": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/DeSitterGravitonModes",
+      "name": "NullConeGravity.graviton_polarizations_three_four_five",
+      "kind": "theorem",
+      "statement_id": "sha256:24dab0f945a66711e805a1ca712b9527876295d4b9da839294c0de85ce7163ba",
+      "line": 235,
+      "signature": "theorem graviton_polarizations_three_four_five : gravitonPolarizationCount 3 = 0 ∧ gravitonPolarizationCount 4 = 2 ∧ gravitonPolarizationCount 5 = 5",
+      "axioms": []
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/DeSitterGravitonModes.graviton_propagating_iff": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/DeSitterGravitonModes",
+      "name": "NullConeGravity.graviton_propagating_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:24dab0f945a66711e805a1ca712b9527876295d4b9da839294c0de85ce7163ba",
+      "line": 250,
+      "signature": "theorem graviton_propagating_iff (D : ℕ) : 0 < gravitonPolarizationCount D ↔ 4 ≤ D",
+      "axioms": [
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/DeSitterGravitonModes.scalar_nullDiamond_and_propagating_gravity_iff": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/DeSitterGravitonModes",
+      "name": "NullConeGravity.scalar_nullDiamond_and_propagating_gravity_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:24dab0f945a66711e805a1ca712b9527876295d4b9da839294c0de85ce7163ba",
+      "line": 253,
+      "signature": "theorem scalar_nullDiamond_and_propagating_gravity_iff (D : ℕ) : (4 ≤ D ∧ Summable (leadingModeWeight D)) ↔ D = 4 ∨ D = 5",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/DeSitterGravitonModes.unique_dimension_four_of_graviton_nullDiamond_and_procaConformal": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/DeSitterGravitonModes",
+      "name": "NullConeGravity.unique_dimension_four_of_graviton_nullDiamond_and_procaConformal",
+      "kind": "theorem",
+      "statement_id": "sha256:24dab0f945a66711e805a1ca712b9527876295d4b9da839294c0de85ce7163ba",
+      "line": 272,
+      "signature": "theorem unique_dimension_four_of_graviton_nullDiamond_and_procaConformal (D : ℕ) : (0 < gravitonPolarizationCount D ∧ Summable (leadingModeWeight D) ∧ procaCurvaturePotential D = 0) ↔ D = 4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/DeSitterGravitonModes.unique_dimension_four_of_nullDiamond_and_conformalMaxwell": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/DeSitterGravitonModes",
+      "name": "NullConeGravity.unique_dimension_four_of_nullDiamond_and_conformalMaxwell",
+      "kind": "theorem",
+      "statement_id": "sha256:24dab0f945a66711e805a1ca712b9527876295d4b9da839294c0de85ce7163ba",
+      "line": 264,
+      "signature": "theorem unique_dimension_four_of_nullDiamond_and_conformalMaxwell (D : ℕ) : (4 ≤ D ∧ Summable (leadingModeWeight D) ∧ (∀ Ω : ℝ, 0 < Ω → maxwellConformalWeight D Ω = 1)) ↔ D = 4",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
