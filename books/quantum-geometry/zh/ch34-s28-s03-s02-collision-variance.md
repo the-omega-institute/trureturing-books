@@ -631,7 +631,25 @@ $$
 设计数误差从固定高度 $A\ge1$ 起有界。以截断内的任一纵坐标为中心，取半径 $r$ 的闭区间。只对区间中同时满足 $0<\gamma\le Y$ 的纵坐标求重数之和，所得质量至多为 $2cr\log Y+N(A)+2D+c$。低于或等于 $A$ 的部分由 $N(A)$ 控制。其余部分用两个含端点计数之差估计，左截断向左移 $1/\log Y$ 并限制在 $A$ 以上，使闭区间的左端点也被计入。按洛伦兹核的水平集积分，行和至多为 $2\pi c\log Y+N(A)+2D+c$。将每项余弦上界取为一，再按重数对各行求和。由 $N(Y)/(Y\log Y)\to c$ 得到结论。 完整证明由 Lean 内核检查。
 :::
 
-计数定理给出的系数可从上方任意接近 $2\pi c^2$。临界碰撞定理还需要在实际 $\zeta$ 零点的长频带上证出一个严格低于 $2\pi c^2$ 的固定系数。
+令 $M(Y)=cY(\log(cY)-1)$。由计数得到的首项系数只需要次对数误差。先把误差条件下的谱估计写清，再核对文献中的计数约定。
+
+::: {.theorem #thm-ch34-montgomery-sublog-count title="次对数计数误差控制配对和" lean="D5/S3/Analytic/Oscillation/MontgomerySublogCount.pairSum_le_of_sublog_discrepancy"}
+沿用上面的谱、含端点计数和有序配对和。若 $(N(Y)-M(Y))/\log Y\to0$，则对每个 $\varepsilon>0$，所有充分大的 $Y$ 和所有实数 $t$ 都满足 $|G_Y(t)|\le(2\pi c^2+\varepsilon)Y(\log Y)^2$。
+:::
+
+::: proof
+任取 $\delta>0$，选定足够大的 $A$，使 $A\le x\le Y$ 时两个端点各自的计数误差都由 $\delta\log Y$ 控制。有限截断的洛伦兹行估计因此只多出 $2\delta\log Y$ 的误差项。用三角不等式取绝对值，再乘以计重数的行数 $N(Y)$。由 $N(Y)/(Y\log Y)\to c$，取足够小的 $\delta$ 即得结论。完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-ch34-inclusive-zeta-count-envelope title="零点高度处的含端点计数界" lean="D5/S3/Weil/ZetaRvm/InclusiveCountLimit.abs_ncount_sub_le_of_goodHeight"}
+设 $N_\zeta(T)$ 计入 $0<\operatorname{Im}\rho\le T$ 的所有非平凡零点及其解析重数。若 $M$ 和 $E$ 在每个 $T\ge T_0$ 处右连续，且 $|N_\zeta(t)-M(t)|\le E(t)$ 对每个非零点高度 $t\ge T_0$ 成立，则同一不等式对所有 $T\ge T_0$ 成立。
+:::
+
+::: proof
+$(T,T+1]$ 中的零点高度只有有限多个。因此从 $T$ 向右有一段开区间，其内没有零点高度，且计数始终等于 $N_\zeta(T)$。取右极限保留误差上界和截止点处的全部重数。完整证明由 Lean 内核检查。
+:::
+
+**手工推导。** 在 RH 下，Carneiro、Chandee 与 Milinovich 的公式 (1) 和定理 2 在非零点高度给出 $|N_\zeta(T)-M(T)|\le C\log T/\log\log T$，其中 $C$ 为某个常数，$T$ 充分大。这个上界函数在充分大的高度连续，可以用右极限定理把它传到每个含端点的截止高度。于是实际 ζ 纵坐标满足次对数条件，上述一致配对和上界适用。临界碰撞定理仍要求在长频带上取得一个严格低于 $2\pi c^2$ 的固定系数。[公式 (1) 与定理 2](https://arxiv.org/abs/1309.1526)
 
 ### 具有同一单位频带轮廓的共格谱
 
