@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "07a0fdf1bb0bb008cd5c9336d414c107c814d2f0",
-  "pinned_at": "2026-11-27T04:53:42Z",
+  "commit": "663cba8bdffc3012487624e29514bad89c657882",
+  "pinned_at": "2026-11-27T05:26:05Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -6509,6 +6509,214 @@
         "propext"
       ]
     },
+    "D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.axial_diamond_volume": {
+      "module": "D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D",
+      "name": "D5.S3.Geometry.Lorentz.PerturbedCausalOrderWeyl4D.axial_diamond_volume",
+      "kind": "theorem",
+      "statement_id": "sha256:23a9b9c36c1416863f576ba5b67d409c040f705134b8d3e6a69339a4767210c2",
+      "line": 628,
+      "signature": "theorem axial_diamond_volume {ω T V : ℝ} (hω : 0 < ω) (hT : 0 < T) (hπ : ω * T < π) (hV : 0 < V) : volume (axialMetricDiamond ω T V) = ENNReal.ofReal (Omega.PPWaveDiamond.exactAxialVolume ω T V) ∧ volume (axialMetricDiamond 0 T V) = ENNReal.ofReal (π * V ^ 2 * T ^ 2 / 6) ∧ volume (axialMetricDiamond 0 T V) < volume (axialMetricDiamond ω T V)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.christoffel_eq": {
+      "module": "D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D",
+      "name": "D5.S3.Geometry.Lorentz.PerturbedCausalOrderWeyl4D.christoffel_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:23a9b9c36c1416863f576ba5b67d409c040f705134b8d3e6a69339a4767210c2",
+      "line": 82,
+      "signature": "theorem christoffel_eq (A : ℝ) (p : Point) (r a b : Fin 4) : christoffel A p r a b = -(delta r 1 * (delta a 0 * gradient A p b + delta b 0 * gradient A p a) + delta a 0 * delta b 0 * gradient A p r) / 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.frame_isometry": {
+      "module": "D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D",
+      "name": "D5.S3.Geometry.Lorentz.PerturbedCausalOrderWeyl4D.frame_isometry",
+      "kind": "theorem",
+      "statement_id": "sha256:23a9b9c36c1416863f576ba5b67d409c040f705134b8d3e6a69339a4767210c2",
+      "line": 154,
+      "signature": "theorem frame_isometry (A : ℝ) (p : Point) : (frame A p)ᵀ * metric A p * frame A p = diagonal ![-1, 1, 1, 1]",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.metric_det": {
+      "module": "D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D",
+      "name": "D5.S3.Geometry.Lorentz.PerturbedCausalOrderWeyl4D.metric_det",
+      "kind": "theorem",
+      "statement_id": "sha256:23a9b9c36c1416863f576ba5b67d409c040f705134b8d3e6a69339a4767210c2",
+      "line": 46,
+      "signature": "theorem metric_det (A : ℝ) (p : Point) : (metric A p).det = -1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.metric_inverse": {
+      "module": "D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D",
+      "name": "D5.S3.Geometry.Lorentz.PerturbedCausalOrderWeyl4D.metric_inverse",
+      "kind": "theorem",
+      "statement_id": "sha256:23a9b9c36c1416863f576ba5b67d409c040f705134b8d3e6a69339a4767210c2",
+      "line": 41,
+      "signature": "theorem metric_inverse (A : ℝ) (p : Point) : metric A p * metricInv A p = 1 ∧ metricInv A p * metric A p = 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.nullGeodesic_spec": {
+      "module": "D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D",
+      "name": "D5.S3.Geometry.Lorentz.PerturbedCausalOrderWeyl4D.nullGeodesic_spec",
+      "kind": "theorem",
+      "statement_id": "sha256:23a9b9c36c1416863f576ba5b67d409c040f705134b8d3e6a69339a4767210c2",
+      "line": 348,
+      "signature": "theorem nullGeodesic_spec {ω : ℝ} (hω : ω ≠ 0) (v x y α β t : ℝ) : let γ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.parallel_first_caustic": {
+      "module": "D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D",
+      "name": "D5.S3.Geometry.Lorentz.PerturbedCausalOrderWeyl4D.parallel_first_caustic",
+      "kind": "theorem",
+      "statement_id": "sha256:23a9b9c36c1416863f576ba5b67d409c040f705134b8d3e6a69339a4767210c2",
+      "line": 456,
+      "signature": "theorem parallel_first_caustic {ω : ℝ} (hω : 0 < ω) : (∀ u, 0 < u → u < π / (2 * ω) → 0 < (parallelJacobian ω u).det) ∧ parallelJacobian ω (π / (2 * ω)) = diagonal ![cosh (π / 2), 0] ∧ 0 < cosh (π / 2)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.ricci_zero": {
+      "module": "D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D",
+      "name": "D5.S3.Geometry.Lorentz.PerturbedCausalOrderWeyl4D.ricci_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:23a9b9c36c1416863f576ba5b67d409c040f705134b8d3e6a69339a4767210c2",
+      "line": 142,
+      "signature": "theorem ricci_zero (A : ℝ) (p : Point) (s b : Fin 4) : ricciTensor A p s b = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.riemann_eq": {
+      "module": "D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D",
+      "name": "D5.S3.Geometry.Lorentz.PerturbedCausalOrderWeyl4D.riemann_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:23a9b9c36c1416863f576ba5b67d409c040f705134b8d3e6a69339a4767210c2",
+      "line": 133,
+      "signature": "theorem riemann_eq (A : ℝ) (p : Point) (r s a b : Fin 4) : riemann A p r s a b = -A * wedgeCoord 2 r s * wedgeCoord 2 a b + A * wedgeCoord 3 r s * wedgeCoord 3 a b",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.screen_area_contracts": {
+      "module": "D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D",
+      "name": "D5.S3.Geometry.Lorentz.PerturbedCausalOrderWeyl4D.screen_area_contracts",
+      "kind": "theorem",
+      "statement_id": "sha256:23a9b9c36c1416863f576ba5b67d409c040f705134b8d3e6a69339a4767210c2",
+      "line": 489,
+      "signature": "theorem screen_area_contracts {ω u : ℝ} (hω : 0 < ω) (hu : 0 < u) : (u < π / (2 * ω) → 0 < (parallelJacobian ω u).det ∧ (parallelJacobian ω u).det < 1) ∧ (u < π / ω → 0 < (vertexJacobian ω u).det ∧ (vertexJacobian ω u).det < u ^ 2)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.transverse_geodesic_unique": {
+      "module": "D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D",
+      "name": "D5.S3.Geometry.Lorentz.PerturbedCausalOrderWeyl4D.transverse_geodesic_unique",
+      "kind": "theorem",
+      "statement_id": "sha256:23a9b9c36c1416863f576ba5b67d409c040f705134b8d3e6a69339a4767210c2",
+      "line": 414,
+      "signature": "theorem transverse_geodesic_unique {ω : ℝ} (hω : ω ≠ 0) (x y x' y' : ℝ → ℝ) (hx : ∀ t, HasDerivAt x (x' t) t) (hy : ∀ t, HasDerivAt y (y' t) t) (hx' : ∀ t, HasDerivAt x' (ω ^ 2 * x t) t) (hy' : ∀ t, HasDerivAt y' (-(ω ^ 2) * y t) t) : x = waveX ω (x 0) (x' 0) ∧ y = waveY ω (y 0) (y' 0)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.vertex_area_asymptotic": {
+      "module": "D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D",
+      "name": "D5.S3.Geometry.Lorentz.PerturbedCausalOrderWeyl4D.vertex_area_asymptotic",
+      "kind": "theorem",
+      "statement_id": "sha256:23a9b9c36c1416863f576ba5b67d409c040f705134b8d3e6a69339a4767210c2",
+      "line": 546,
+      "signature": "theorem vertex_area_asymptotic : (fun t : ℝ => sin t * sinh t / t ^ 2 - (1 - t ^ 4 / 90)) =o[𝓝[≠] (0 : ℝ)] (fun t => t ^ 4)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.vertex_first_caustic": {
+      "module": "D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D",
+      "name": "D5.S3.Geometry.Lorentz.PerturbedCausalOrderWeyl4D.vertex_first_caustic",
+      "kind": "theorem",
+      "statement_id": "sha256:23a9b9c36c1416863f576ba5b67d409c040f705134b8d3e6a69339a4767210c2",
+      "line": 471,
+      "signature": "theorem vertex_first_caustic {ω : ℝ} (hω : 0 < ω) : (∀ u, 0 < u → u < π / ω → 0 < (vertexJacobian ω u).det) ∧ vertexJacobian ω (π / ω) = diagonal ![sinh π / ω, 0] ∧ 0 < sinh π / ω",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.waveWeyl_pairMatrix": {
+      "module": "D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D",
+      "name": "D5.S3.Geometry.Lorentz.PerturbedCausalOrderWeyl4D.waveWeyl_pairMatrix",
+      "kind": "theorem",
+      "statement_id": "sha256:23a9b9c36c1416863f576ba5b67d409c040f705134b8d3e6a69339a4767210c2",
+      "line": 197,
+      "signature": "theorem waveWeyl_pairMatrix (A : ℝ) (p : Point) (i j : PairIndex) : (waveWeyl A).val.val i j = ∑ r, ∑ s, ∑ a, ∑ b, riemann A p r s a b * frame A p r (pairIndices i).1 * frame A p s (pairIndices i).2 * frame A p a (pairIndices j).1 * frame A p b (pairIndices j).2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.wave_quartic": {
+      "module": "D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D",
+      "name": "D5.S3.Geometry.Lorentz.PerturbedCausalOrderWeyl4D.wave_quartic",
+      "kind": "theorem",
+      "statement_id": "sha256:23a9b9c36c1416863f576ba5b67d409c040f705134b8d3e6a69339a4767210c2",
+      "line": 253,
+      "signature": "theorem wave_quartic (A : ℝ) : ((weylQuarticEquiv (waveWeyl A) : WeylQuartic) : ℂ[X]) = C (-4 * (A : ℂ)) * X ^ 4",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.wave_typeN": {
+      "module": "D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D",
+      "name": "D5.S3.Geometry.Lorentz.PerturbedCausalOrderWeyl4D.wave_typeN",
+      "kind": "theorem",
+      "statement_id": "sha256:23a9b9c36c1416863f576ba5b67d409c040f705134b8d3e6a69339a4767210c2",
+      "line": 271,
+      "signature": "theorem wave_typeN (A : ℝ) (hA : A ≠ 0) (p : Point) : (∀ z : ℂ, quarticEval (some z) (weylQuarticEquiv (waveWeyl A)) = 0 ↔ z = 0) ∧ quarticEval none (weylQuarticEquiv (waveWeyl A)) ≠ 0 ∧ (((weylQuarticEquiv (waveWeyl A) : WeylQuartic) : ℂ[X]).rootMultiplicity 0 = 4) ∧ frame A p *ᵥ nullGenerator (some 0) = ![0, √2, 0, 0]",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
     "D5/S3/Geometry/Lorentz/PlebanskiSectors4D.degenerate_simplicity_witnesses": {
       "module": "D5/S3/Geometry/Lorentz/PlebanskiSectors4D",
       "name": "D5.S3.Geometry.Lorentz.PlebanskiSectors4D.degenerate_simplicity_witnesses",
@@ -11131,6 +11339,201 @@
         "propext"
       ]
     },
+    "D5/S3/Quantum/Analysis/NullConeGravity/HyperfiniteTypeII1Factor.algTrace_spec": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/HyperfiniteTypeII1Factor",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.HyperfiniteTypeII1Factor.algTrace_spec",
+      "kind": "theorem",
+      "statement_id": "sha256:e5e03ff3e11055e60182bd2a4c1b0aadc0d3422c77f2a9f6ed9493cd97e4ea54",
+      "line": 332,
+      "signature": "theorem algTrace_spec : algTrace 1 = 1 ∧ (∀ a b, algTrace (a * b) = algTrace (b * a)) ∧ (∀ a, algTrace (star a) = star (algTrace a)) ∧ (∀ a, (algTrace (star a * a)).im = 0 ∧ 0 ≤ (algTrace (star a * a)).re ∧ (algTrace (star a * a) = 0 ↔ a = 0))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/HyperfiniteTypeII1Factor.algTrace_unique": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/HyperfiniteTypeII1Factor",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.HyperfiniteTypeII1Factor.algTrace_unique",
+      "kind": "theorem",
+      "statement_id": "sha256:e5e03ff3e11055e60182bd2a4c1b0aadc0d3422c77f2a9f6ed9493cd97e4ea54",
+      "line": 339,
+      "signature": "theorem algTrace_unique (φ : Ralg →ₗ[ℂ] ℂ) (h₁ : φ 1 = 1) (hφ : ∀ a b, φ (a * b) = φ (b * a)) : φ = algTrace",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/HyperfiniteTypeII1Factor.alg_center_iff": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/HyperfiniteTypeII1Factor",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.HyperfiniteTypeII1Factor.alg_center_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:e5e03ff3e11055e60182bd2a4c1b0aadc0d3422c77f2a9f6ed9493cd97e4ea54",
+      "line": 356,
+      "signature": "theorem alg_center_iff (a : Ralg) : (∀ b, Commute a b) ↔ ∃ c : ℂ, a = c • 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/HyperfiniteTypeII1Factor.alg_projection_trace_iff": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/HyperfiniteTypeII1Factor",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.HyperfiniteTypeII1Factor.alg_projection_trace_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:e5e03ff3e11055e60182bd2a4c1b0aadc0d3422c77f2a9f6ed9493cd97e4ea54",
+      "line": 377,
+      "signature": "theorem alg_projection_trace_iff (t : ℂ) : (∃ p, IsStarProjection p ∧ algTrace p = t) ↔ ∃ n k : ℕ, k ≤ 2 ^ n ∧ t = (k : ℂ) / ((2 ^ n : ℕ) : ℂ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/HyperfiniteTypeII1Factor.completed_center_iff": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/HyperfiniteTypeII1Factor",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.HyperfiniteTypeII1Factor.completed_center_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:e5e03ff3e11055e60182bd2a4c1b0aadc0d3422c77f2a9f6ed9493cd97e4ea54",
+      "line": 509,
+      "signature": "theorem completed_center_iff (z : Hilbert dyadicTraceData →L[ℂ] Hilbert dyadicTraceData) (hz : z ∈ dyadicBicommutant) : (∀ w ∈ dyadicBicommutant, Commute z w) ↔ ∃ c : ℂ, z = c • 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/HyperfiniteTypeII1Factor.completed_projection_trace_range": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/HyperfiniteTypeII1Factor",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.HyperfiniteTypeII1Factor.completed_projection_trace_range",
+      "kind": "theorem",
+      "statement_id": "sha256:e5e03ff3e11055e60182bd2a4c1b0aadc0d3422c77f2a9f6ed9493cd97e4ea54",
+      "line": 553,
+      "signature": "theorem completed_projection_trace_range (s : ℝ) : (∃ p ∈ dyadicBicommutant, IsStarProjection p ∧ vacuumTrace dyadicTraceData p = (s : ℂ)) ↔ s ∈ Set.Icc 0 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/HyperfiniteTypeII1Factor.dyadicTrace_closure": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/HyperfiniteTypeII1Factor",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.HyperfiniteTypeII1Factor.dyadicTrace_closure",
+      "kind": "theorem",
+      "statement_id": "sha256:e5e03ff3e11055e60182bd2a4c1b0aadc0d3422c77f2a9f6ed9493cd97e4ea54",
+      "line": 438,
+      "signature": "theorem dyadicTrace_closure : closure {s : ℝ | ∃ p : Ralg, IsStarProjection p ∧ algTrace p = (s : ℂ)} = Set.Icc 0 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/HyperfiniteTypeII1Factor.dyadicVacuumTrace_normal": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/HyperfiniteTypeII1Factor",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.HyperfiniteTypeII1Factor.dyadicVacuumTrace_normal",
+      "kind": "theorem",
+      "statement_id": "sha256:e5e03ff3e11055e60182bd2a4c1b0aadc0d3422c77f2a9f6ed9493cd97e4ea54",
+      "line": 496,
+      "signature": "theorem dyadicVacuumTrace_normal {ι : Type*} [Preorder ι] [IsDirectedOrder ι] [Nonempty ι] (T : ι → Hilbert dyadicTraceData →L[ℂ] Hilbert dyadicTraceData) (hM : ∀ i, T i ∈ dyadicBicommutant) (hMono : Monotone T) (hPos : ∀ i, 0 ≤ T i) {r : ℝ} (hr : 0 ≤ r) (hBound : ∀ i, T i ≤ algebraMap ℝ (Hilbert dyadicTraceData →L[ℂ] Hilbert dyadicTraceData) r) : ∃ S, S ∈ dyadicBicommutant ∧ IsLUB (Set.range T) S ∧ IsLUB (Set.range fun i => (vacuumTrace dyadicTraceData (T i)).re) (vacuumTrace dyadicTraceData S).re",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/HyperfiniteTypeII1Factor.dyadicVacuumTrace_spec": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/HyperfiniteTypeII1Factor",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.HyperfiniteTypeII1Factor.dyadicVacuumTrace_spec",
+      "kind": "theorem",
+      "statement_id": "sha256:e5e03ff3e11055e60182bd2a4c1b0aadc0d3422c77f2a9f6ed9493cd97e4ea54",
+      "line": 484,
+      "signature": "theorem dyadicVacuumTrace_spec : vacuumTrace dyadicTraceData 1 = 1 ∧ (∀ z ∈ dyadicBicommutant, ∀ w ∈ dyadicBicommutant, vacuumTrace dyadicTraceData (z * w) = vacuumTrace dyadicTraceData (w * z)) ∧ (∀ z ∈ dyadicBicommutant, vacuumTrace dyadicTraceData (star z * z) = (‖z (vacuum dyadicTraceData)‖ ^ 2 : ℝ) ∧ (vacuumTrace dyadicTraceData (star z * z) = 0 ↔ z = 0))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/HyperfiniteTypeII1Factor.matrix_tower_strongly_dense": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/HyperfiniteTypeII1Factor",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.HyperfiniteTypeII1Factor.matrix_tower_strongly_dense",
+      "kind": "theorem",
+      "statement_id": "sha256:e5e03ff3e11055e60182bd2a4c1b0aadc0d3422c77f2a9f6ed9493cd97e4ea54",
+      "line": 540,
+      "signature": "theorem matrix_tower_strongly_dense {ι : Type*} [Fintype ι] {z : Hilbert dyadicTraceData →L[ℂ] Hilbert dyadicTraceData} (hz : z ∈ dyadicBicommutant) (x : ι → Hilbert dyadicTraceData) {ε : ℝ} (hε : 0 < ε) : ∃ (n : ℕ) (a : Stage n), ∀ i, ‖representedStage n a (x i) - z (x i)‖ < ε",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/HyperfiniteTypeII1Factor.minusSidedAction_ae": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/HyperfiniteTypeII1Factor",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.HyperfiniteTypeII1Factor.minusSidedAction_ae",
+      "kind": "theorem",
+      "statement_id": "sha256:e5e03ff3e11055e60182bd2a4c1b0aadc0d3422c77f2a9f6ed9493cd97e4ea54",
+      "line": 617,
+      "signature": "theorem minusSidedAction_ae (s a : ℝ) (f : PositionL2) : ⇑(minusSidedAction ⟨s, a⟩ f) =ᵐ[volume] fun x => (Real.exp (Real.pi * s) : ℂ) * f (Real.exp (2 * Real.pi * s) * (x + a))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/HyperfiniteTypeII1Factor.minusSided_covariance": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/HyperfiniteTypeII1Factor",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.HyperfiniteTypeII1Factor.minusSided_covariance",
+      "kind": "theorem",
+      "statement_id": "sha256:e5e03ff3e11055e60182bd2a4c1b0aadc0d3422c77f2a9f6ed9493cd97e4ea54",
+      "line": 637,
+      "signature": "theorem minusSided_covariance (s a : ℝ) (hs : s ≤ 0) : let c",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/HyperfiniteTypeII1Factor.normalizedTrace_unique": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/HyperfiniteTypeII1Factor",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.HyperfiniteTypeII1Factor.normalizedTrace_unique",
+      "kind": "theorem",
+      "statement_id": "sha256:e5e03ff3e11055e60182bd2a4c1b0aadc0d3422c77f2a9f6ed9493cd97e4ea54",
+      "line": 93,
+      "signature": "theorem normalizedTrace_unique {d : ℕ} (hd : 0 < d) (φ : Mat d →ₗ[ℂ] ℂ) (h₁ : φ 1 = 1) (hφ : ∀ a b, φ (a * b) = φ (b * a)) : φ = normalizedTrace d",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/HyperfiniteTypeII1Factor.projection_equiv_iff_trace": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/HyperfiniteTypeII1Factor",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.HyperfiniteTypeII1Factor.projection_equiv_iff_trace",
+      "kind": "theorem",
+      "statement_id": "sha256:e5e03ff3e11055e60182bd2a4c1b0aadc0d3422c77f2a9f6ed9493cd97e4ea54",
+      "line": 213,
+      "signature": "theorem projection_equiv_iff_trace {d : ℕ} (hd : 0 < d) {p q : Mat d} (hp : IsStarProjection p) (hq : IsStarProjection q) : (∃ u : unitary (Mat d), star (u : Mat d) * p * u = q) ↔ normalizedTrace d p = normalizedTrace d q",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/HyperfiniteTypeII1Factor.projection_mvn_iff_trace": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/HyperfiniteTypeII1Factor",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.HyperfiniteTypeII1Factor.projection_mvn_iff_trace",
+      "kind": "theorem",
+      "statement_id": "sha256:e5e03ff3e11055e60182bd2a4c1b0aadc0d3422c77f2a9f6ed9493cd97e4ea54",
+      "line": 248,
+      "signature": "theorem projection_mvn_iff_trace {d : ℕ} (hd : 0 < d) {p q : Mat d} (hp : IsStarProjection p) (hq : IsStarProjection q) : (∃ v : Mat d, v * star v = p ∧ star v * v = q) ↔ normalizedTrace d p = normalizedTrace d q",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
     "D5/S3/Quantum/Analysis/NullConeGravity/NoncommutingClockSublevel.noncommuting_sum_sublevel_rank_bound": {
       "module": "D5/S3/Quantum/Analysis/NullConeGravity/NoncommutingClockSublevel",
       "name": "D5.S3.Quantum.Analysis.NullConeGravity.NoncommutingClockSublevel.noncommuting_sum_sublevel_rank_bound",
@@ -11268,6 +11671,201 @@
       "statement_id": "sha256:88da614eb788c4ec4b01c0f7450ee043d76815673140bb68122371aa742bd6d0",
       "line": 297,
       "signature": "theorem shear_clock_deficit_and_rigidity (s : Finset ι) (hs : s.Nonempty) (w ρ δ : ι → ℝ) (ε : ℝ) (hw : ∀ i ∈ s, 0 < w i) (hρ : ∀ i ∈ s, 0 < ρ i) (hδ : ∀ i ∈ s, 0 ≤ δ i) (hε : ε < 1) : let M",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernelHS.integralKernelOp_adjoint": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernelHS",
+      "name": "NullConeGravity.integralKernelOp_adjoint",
+      "kind": "theorem",
+      "statement_id": "sha256:1d7dc9b8853ff352f251bcbaa03b62943a59ee57e8e525520df0f6f846eef068",
+      "line": 231,
+      "signature": "theorem integralKernelOp_adjoint (K : X × X → ℂ) (hK : MemLp K 2 (μ.prod μ)) : (integralKernelOp μ K hK).adjoint = integralKernelOp μ (fun p => conj (K (p.2, p.1))) (memLp_conj_swap μ hK)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernelHS.integralKernelOp_ae": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernelHS",
+      "name": "NullConeGravity.integralKernelOp_ae",
+      "kind": "theorem",
+      "statement_id": "sha256:1d7dc9b8853ff352f251bcbaa03b62943a59ee57e8e525520df0f6f846eef068",
+      "line": 139,
+      "signature": "theorem integralKernelOp_ae (K : X × X → ℂ) (hK : MemLp K 2 (μ.prod μ)) (f : Lp ℂ 2 μ) : (integralKernelOp μ K hK f : X → ℂ) =ᵐ[μ] fun x => ∫ y, K (x, y) * f y ∂μ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernelHS.integralKernelOp_congr_ae": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernelHS",
+      "name": "NullConeGravity.integralKernelOp_congr_ae",
+      "kind": "theorem",
+      "statement_id": "sha256:1d7dc9b8853ff352f251bcbaa03b62943a59ee57e8e525520df0f6f846eef068",
+      "line": 217,
+      "signature": "theorem integralKernelOp_congr_ae {K K' : X × X → ℂ} (hK : MemLp K 2 (μ.prod μ)) (hK' : MemLp K' 2 (μ.prod μ)) (he : K =ᵐ[μ.prod μ] K') : integralKernelOp μ K hK = integralKernelOp μ K' hK'",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernelHS.integralKernelOp_hilbertSchmidt": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernelHS",
+      "name": "NullConeGravity.integralKernelOp_hilbertSchmidt",
+      "kind": "theorem",
+      "statement_id": "sha256:1d7dc9b8853ff352f251bcbaa03b62943a59ee57e8e525520df0f6f846eef068",
+      "line": 174,
+      "signature": "theorem integralKernelOp_hilbertSchmidt (K : X × X → ℂ) (hK : MemLp K 2 (μ.prod μ)) : IsHilbertSchmidt (integralKernelOp μ K hK)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernelHS.integralKernelOp_hsSq_le": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernelHS",
+      "name": "NullConeGravity.integralKernelOp_hsSq_le",
+      "kind": "theorem",
+      "statement_id": "sha256:1d7dc9b8853ff352f251bcbaa03b62943a59ee57e8e525520df0f6f846eef068",
+      "line": 180,
+      "signature": "theorem integralKernelOp_hsSq_le (K : X × X → ℂ) (hK : MemLp K 2 (μ.prod μ)) : hsSq (integralKernelOp μ K hK) (integralKernelOp_hilbertSchmidt μ K hK) ≤ ∫ p, ‖K p‖ ^ 2 ∂(μ.prod μ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernelHS.integralKernelOp_inner": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernelHS",
+      "name": "NullConeGravity.integralKernelOp_inner",
+      "kind": "theorem",
+      "statement_id": "sha256:1d7dc9b8853ff352f251bcbaa03b62943a59ee57e8e525520df0f6f846eef068",
+      "line": 202,
+      "signature": "theorem integralKernelOp_inner (K : X × X → ℂ) (hK : MemLp K 2 (μ.prod μ)) (f g : Lp ℂ 2 μ) : ⟪f, integralKernelOp μ K hK g⟫_ℂ = ∫ p, conj (f p.1) * K p * g p.2 ∂(μ.prod μ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernelHS.integralKernelOp_mulOp_both": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernelHS",
+      "name": "NullConeGravity.integralKernelOp_mulOp_both",
+      "kind": "theorem",
+      "statement_id": "sha256:1d7dc9b8853ff352f251bcbaa03b62943a59ee57e8e525520df0f6f846eef068",
+      "line": 283,
+      "signature": "theorem integralKernelOp_mulOp_both (K : X × X → ℂ) (hK : MemLp K 2 (μ.prod μ)) (g h : X → ℂ) (hg : MemLp g ∞ μ) (hh : MemLp h ∞ μ) : mulOp μ g hg ∘L integralKernelOp μ K hK ∘L mulOp μ h hh = integralKernelOp μ (fun p => g p.1 * K p * h p.2) (memLp_weighted_kernel μ hK hg hh)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernelHS.integralKernelOp_norm_le": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernelHS",
+      "name": "NullConeGravity.integralKernelOp_norm_le",
+      "kind": "theorem",
+      "statement_id": "sha256:1d7dc9b8853ff352f251bcbaa03b62943a59ee57e8e525520df0f6f846eef068",
+      "line": 144,
+      "signature": "theorem integralKernelOp_norm_le (K : X × X → ℂ) (hK : MemLp K 2 (μ.prod μ)) : ‖integralKernelOp μ K hK‖ ≤ Real.sqrt (∫ p, ‖K p‖ ^ 2 ∂(μ.prod μ))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernelHS.mulOp_ae": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondKernelHS",
+      "name": "NullConeGravity.mulOp_ae",
+      "kind": "theorem",
+      "statement_id": "sha256:1d7dc9b8853ff352f251bcbaa03b62943a59ee57e8e525520df0f6f846eef068",
+      "line": 257,
+      "signature": "theorem mulOp_ae (g : X → ℂ) (hg : MemLp g ∞ μ) (f : Lp ℂ 2 μ) : (mulOp μ g hg f : X → ℂ) =ᵐ[μ] fun x => g x * f x",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondSphere4D.intervalIntegrable_log_sq": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondSphere4D",
+      "name": "NullConeGravity.intervalIntegrable_log_sq",
+      "kind": "theorem",
+      "statement_id": "sha256:4e273ff007b39306f75524dfc718221820e77c7181b9bd60417b7e9b9f8db8f6",
+      "line": 386,
+      "signature": "theorem intervalIntegrable_log_sq : IntervalIntegrable (fun t : ℝ ↦ (Real.log t) ^ 2) volume 0 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondSphere4D.sphere_diag_null": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondSphere4D",
+      "name": "NullConeGravity.sphere_diag_null",
+      "kind": "theorem",
+      "statement_id": "sha256:4e273ff007b39306f75524dfc718221820e77c7181b9bd60417b7e9b9f8db8f6",
+      "line": 391,
+      "signature": "theorem sphere_diag_null : (sphereMeasure.prod sphereMeasure) {p | sphereDot p.1 p.2 = 1} = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondSphere4D.sphere_dot_pushforward": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondSphere4D",
+      "name": "NullConeGravity.sphere_dot_pushforward",
+      "kind": "theorem",
+      "statement_id": "sha256:4e273ff007b39306f75524dfc718221820e77c7181b9bd60417b7e9b9f8db8f6",
+      "line": 349,
+      "signature": "theorem sphere_dot_pushforward (n : Sphere4D) : Measure.map (sphereDot n) sphereMeasure = ENNReal.ofReal (2 * Real.pi) • volume.restrict (Icc (-1 : ℝ) 1)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondSphere4D.sphere_log_sq_integrable": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondSphere4D",
+      "name": "NullConeGravity.sphere_log_sq_integrable",
+      "kind": "theorem",
+      "statement_id": "sha256:4e273ff007b39306f75524dfc718221820e77c7181b9bd60417b7e9b9f8db8f6",
+      "line": 426,
+      "signature": "theorem sphere_log_sq_integrable : Integrable (fun p : Sphere4D × Sphere4D ↦ (Real.log (1 - sphereDot p.1 p.2)) ^ 2) (sphereMeasure.prod sphereMeasure)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondSphere4D.sphere_log_sq_integral": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondSphere4D",
+      "name": "NullConeGravity.sphere_log_sq_integral",
+      "kind": "theorem",
+      "statement_id": "sha256:4e273ff007b39306f75524dfc718221820e77c7181b9bd60417b7e9b9f8db8f6",
+      "line": 443,
+      "signature": "theorem sphere_log_sq_integral : (∫ p : Sphere4D × Sphere4D, (Real.log (1 - sphereDot p.1 p.2)) ^ 2 ∂(sphereMeasure.prod sphereMeasure)) = 8 * Real.pi ^ 2 * (∫ t : ℝ in (0 : ℝ)..2, (Real.log t) ^ 2)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondSphere4D.sphere_measure_univ": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondSphere4D",
+      "name": "NullConeGravity.sphere_measure_univ",
+      "kind": "theorem",
+      "statement_id": "sha256:4e273ff007b39306f75524dfc718221820e77c7181b9bd60417b7e9b9f8db8f6",
+      "line": 64,
+      "signature": "theorem sphere_measure_univ : sphereMeasure univ = ENNReal.ofReal (4 * Real.pi)",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
