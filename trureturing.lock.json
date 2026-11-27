@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "1a42da73855baf7244c128546dbc0fe6f3cb3b00",
-  "pinned_at": "2026-11-27T18:00:30Z",
+  "commit": "6963eab497fc4256090cef071c5139f1366463b9",
+  "pinned_at": "2026-11-27T19:00:31Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -11310,6 +11310,149 @@
         "propext"
       ]
     },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRFockFactorDisjointness.fockWeyl_bicommutant_top": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRFockFactorDisjointness",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRFockFactorDisjointness.fockWeyl_bicommutant_top",
+      "kind": "theorem",
+      "statement_id": "sha256:5b3919ab44c64797aea16bf838c086a689239b1ce92b0019a438827df7835c8d",
+      "line": 206,
+      "signature": "theorem fockWeyl_bicommutant_top (b : HilbertBasis I ℂ H) : Set.centralizer (Set.centralizer (Set.range (weylMap b))) = Set.univ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRFockFactorDisjointness.fockWeyl_commutant_scalar": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRFockFactorDisjointness",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRFockFactorDisjointness.fockWeyl_commutant_scalar",
+      "kind": "theorem",
+      "statement_id": "sha256:5b3919ab44c64797aea16bf838c086a689239b1ce92b0019a438827df7835c8d",
+      "line": 128,
+      "signature": "theorem fockWeyl_commutant_scalar (b : HilbertBasis I ℂ H) (T : Fock →L[ℂ] Fock) (hcomm : ∀ z x, T (fockWeyl b z x) = fockWeyl b z (T x)) : ∃ c : ℂ, T = c • (1 : Fock →L[ℂ] Fock)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRFockFactorDisjointness.fockWeyl_gaussian_avg_eq_vacuumProj": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRFockFactorDisjointness",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRFockFactorDisjointness.fockWeyl_gaussian_avg_eq_vacuumProj",
+      "kind": "theorem",
+      "statement_id": "sha256:5b3919ab44c64797aea16bf838c086a689239b1ce92b0019a438827df7835c8d",
+      "line": 398,
+      "signature": "theorem fockWeyl_gaussian_avg_eq_vacuumProj (b : HilbertBasis I ℂ H) (F : Finset I) (ψ : Fock) : (Real.pi : ℂ)⁻¹ ^ F.card * (∫ z : F → ℂ, (weight z : ℂ) * ⟪ψ, fockWeyl b (modeEmbed b F z) ψ⟫_ℂ) = (‖vacuumProj F ψ‖ ^ 2 : ℝ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRFockFactorDisjointness.fockWeyl_isFactor": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRFockFactorDisjointness",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRFockFactorDisjointness.fockWeyl_isFactor",
+      "kind": "theorem",
+      "statement_id": "sha256:5b3919ab44c64797aea16bf838c086a689239b1ce92b0019a438827df7835c8d",
+      "line": 218,
+      "signature": "theorem fockWeyl_isFactor (b : HilbertBasis I ℂ H) : Set.centralizer (Set.centralizer (Set.centralizer (Set.range (weylMap b)))) = Set.range (fun c : ℂ => c • (1 : Fock →L[ℂ] Fock))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRFockFactorDisjointness.squeezedChar_gaussian_avg": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRFockFactorDisjointness",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRFockFactorDisjointness.squeezedChar_gaussian_avg",
+      "kind": "theorem",
+      "statement_id": "sha256:5b3919ab44c64797aea16bf838c086a689239b1ce92b0019a438827df7835c8d",
+      "line": 239,
+      "signature": "theorem squeezedChar_gaussian_avg (b : HilbertBasis I ℂ H) (r : I → ℝ) (F : Finset I) : (Real.pi : ℂ)⁻¹ ^ F.card * (∫ z : F → ℂ, (weight z : ℂ) * squeezedChar b r (modeEmbed b F z)) = ∏ i : F, ((Real.cosh (r i))⁻¹ : ℝ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRFockFactorDisjointness.squeezedChar_infiniteSqueeze": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRFockFactorDisjointness",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRFockFactorDisjointness.squeezedChar_infiniteSqueeze",
+      "kind": "theorem",
+      "statement_id": "sha256:5b3919ab44c64797aea16bf838c086a689239b1ce92b0019a438827df7835c8d",
+      "line": 189,
+      "signature": "theorem squeezedChar_infiniteSqueeze (b : HilbertBasis I ℂ H) (r : I → ℝ) (hr : Summable (fun i => (r i) ^ 2)) (z : H) : ⟪infiniteSqueeze r hr, fockWeyl b z (infiniteSqueeze r hr)⟫_ℂ = squeezedChar b r z",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRFockFactorDisjointness.squeezed_excitable_iff_summable_sq": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRFockFactorDisjointness",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRFockFactorDisjointness.squeezed_excitable_iff_summable_sq",
+      "kind": "theorem",
+      "statement_id": "sha256:5b3919ab44c64797aea16bf838c086a689239b1ce92b0019a438827df7835c8d",
+      "line": 526,
+      "signature": "theorem squeezed_excitable_iff_summable_sq (b : HilbertBasis I ℂ H) (r : I → ℝ) : SqueezedInFockFolium b r ↔ Summable (fun i => (r i) ^ 2)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRFockFactorDisjointness.squeezed_gns_disjoint_of_not_summable_sq": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRFockFactorDisjointness",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRFockFactorDisjointness.squeezed_gns_disjoint_of_not_summable_sq",
+      "kind": "theorem",
+      "statement_id": "sha256:5b3919ab44c64797aea16bf838c086a689239b1ce92b0019a438827df7835c8d",
+      "line": 541,
+      "signature": "theorem squeezed_gns_disjoint_of_not_summable_sq {A S Y : Type*} [CStarAlgebra A] [PartialOrder A] [StarOrderedRing A] [AddCommGroup S] [Module ℝ S] [NormedAddCommGroup Y] [InnerProductSpace ℂ Y] [CompleteSpace Y] {σ : S →ₗ[ℝ] S →ₗ[ℝ] ℝ} (W : WeylSystem (A",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRFockFactorDisjointness.squeezed_in_fock_folium_iff": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRFockFactorDisjointness",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRFockFactorDisjointness.squeezed_in_fock_folium_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:5b3919ab44c64797aea16bf838c086a689239b1ce92b0019a438827df7835c8d",
+      "line": 512,
+      "signature": "theorem squeezed_in_fock_folium_iff (b : HilbertBasis I ℂ H) (r : I → ℝ) : SqueezedInFockFolium b r ↔ Summable (fun i => (r i) ^ 2)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRFockFactorDisjointness.squeezed_in_fock_folium_of_summable_sq": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRFockFactorDisjointness",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRFockFactorDisjointness.squeezed_in_fock_folium_of_summable_sq",
+      "kind": "theorem",
+      "statement_id": "sha256:5b3919ab44c64797aea16bf838c086a689239b1ce92b0019a438827df7835c8d",
+      "line": 196,
+      "signature": "theorem squeezed_in_fock_folium_of_summable_sq (b : HilbertBasis I ℂ H) (r : I → ℝ) (hr : Summable (fun i => (r i) ^ 2)) : ∃ ψ : Fock, ‖ψ‖ = 1 ∧ ∀ z : H, ⟪ψ, fockWeyl b z ψ⟫_ℂ = squeezedChar b r z",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/CCRFockFactorDisjointness.squeezed_not_excitable_of_not_summable_sq": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRFockFactorDisjointness",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRFockFactorDisjointness.squeezed_not_excitable_of_not_summable_sq",
+      "kind": "theorem",
+      "statement_id": "sha256:5b3919ab44c64797aea16bf838c086a689239b1ce92b0019a438827df7835c8d",
+      "line": 531,
+      "signature": "theorem squeezed_not_excitable_of_not_summable_sq (b : HilbertBasis I ℂ H) {r : I → ℝ} (h : ¬ Summable (fun i => (r i) ^ 2)) : ¬ SqueezedInFockFolium b r",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
     "D5/S3/Quantum/Analysis/NullConeGravity/CCRFockOccupation.fockExponential_dense_span_of_dense_real": {
       "module": "D5/S3/Quantum/Analysis/NullConeGravity/CCRFockOccupation",
       "name": "D5.S3.Quantum.Analysis.NullConeGravity.CCRFockOccupation.fockExponential_dense_span_of_dense_real",
@@ -13682,6 +13825,97 @@
       "statement_id": "sha256:6f7e82f4148f6fbd35078393c3cfa59cc1ae9392208a6773381db4afa79c8ae3",
       "line": 44,
       "signature": "theorem nullN_sub_J_nonneg {M : ℝ} (hM : 0 < M) : 0 ≤ (1 : H4D →L[ℂ] H4D) + nullT M hM - nullJ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondPowersStormer.isCompactOperator_sqrt_sub_of_isCompactOperator_sub": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondPowersStormer",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.NullDiamondPowersStormer.isCompactOperator_sqrt_sub_of_isCompactOperator_sub",
+      "kind": "theorem",
+      "statement_id": "sha256:5a214da4306b431d9ea7d730d4bfdef25b66838fffcc85a351482ed4f9981148",
+      "line": 67,
+      "signature": "theorem isCompactOperator_sqrt_sub_of_isCompactOperator_sub {A B : Op} (hA : 0 ≤ A) (hB : 0 ≤ B) (h : IsCompactOperator (B - A)) : IsCompactOperator (CFC.sqrt B - CFC.sqrt A)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondPowersStormer.not_hs_sqrt_diff_of_add_traceClass_not_hs": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondPowersStormer",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.NullDiamondPowersStormer.not_hs_sqrt_diff_of_add_traceClass_not_hs",
+      "kind": "theorem",
+      "statement_id": "sha256:5a214da4306b431d9ea7d730d4bfdef25b66838fffcc85a351482ed4f9981148",
+      "line": 430,
+      "signature": "theorem not_hs_sqrt_diff_of_add_traceClass_not_hs {A B T X : Op} {c : ℝ} (hc : 0 < c) (hN : c • (1 : Op) ≤ 1 + T) (hA : 0 ≤ A) (hAupper : A ≤ (2 : ℝ) • (1 : Op)) (hAT : 0 ≤ A + T) (hATupper : 0 ≤ (1 + T) - (A - 1)) (hB : 0 ≤ B) (hB_eq : B = A + T + X) (hX : IsTraceClass X) (hT : ¬ IsHilbertSchmidt T) : let C",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondPowersStormer.powers_stormer_hsSq_le": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondPowersStormer",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.NullDiamondPowersStormer.powers_stormer_hsSq_le",
+      "kind": "theorem",
+      "statement_id": "sha256:5a214da4306b431d9ea7d730d4bfdef25b66838fffcc85a351482ed4f9981148",
+      "line": 161,
+      "signature": "theorem powers_stormer_hsSq_le {A B : Op} (hA : 0 ≤ A) (hB : 0 ≤ B) (h : IsTraceClass (B - A)) : hsSq _ (powers_stormer_isHilbertSchmidt hA hB h) ≤ traceNorm _ h",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondPowersStormer.powers_stormer_isHilbertSchmidt": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondPowersStormer",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.NullDiamondPowersStormer.powers_stormer_isHilbertSchmidt",
+      "kind": "theorem",
+      "statement_id": "sha256:5a214da4306b431d9ea7d730d4bfdef25b66838fffcc85a351482ed4f9981148",
+      "line": 156,
+      "signature": "theorem powers_stormer_isHilbertSchmidt {A B : Op} (hA : 0 ≤ A) (hB : 0 ≤ B) (h : IsTraceClass (B - A)) : IsHilbertSchmidt (CFC.sqrt B - CFC.sqrt A)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondPowersStormer.powers_stormer_sharp": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondPowersStormer",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.NullDiamondPowersStormer.powers_stormer_sharp",
+      "kind": "theorem",
+      "statement_id": "sha256:5a214da4306b431d9ea7d730d4bfdef25b66838fffcc85a351482ed4f9981148",
+      "line": 168,
+      "signature": "theorem powers_stormer_sharp : ∃ h : IsTraceClass ((1 : ℂ →L[ℂ] ℂ) - 0), hsSq _ (powers_stormer_isHilbertSchmidt le_rfl zero_le_one h) = 1 ∧ traceNorm _ h = 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondPowersStormer.quarterPower_add_traceClass_congruence_sqrt_hs": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondPowersStormer",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.NullDiamondPowersStormer.quarterPower_add_traceClass_congruence_sqrt_hs",
+      "kind": "theorem",
+      "statement_id": "sha256:5a214da4306b431d9ea7d730d4bfdef25b66838fffcc85a351482ed4f9981148",
+      "line": 334,
+      "signature": "theorem quarterPower_add_traceClass_congruence_sqrt_hs {A B W X : Op} (hA : 0 ≤ A) (hB : 0 ≤ B) (hW : IsHilbertSchmidt W) (hsa : IsSelfAdjoint X) (hX : IsTraceClass X) (hD : B - A = quarterRoot A * W * quarterRoot A + X) (C : K →L[ℂ] H) : ∃ h : IsHilbertSchmidt (CFC.sqrt (adjointCongr C B) - CFC.sqrt (adjointCongr C A)), hsSq _ h ≤ 3 * ‖C‖ ^ 2 * (hsSq W hW + 3 * traceNorm X hX)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondPowersStormer.quarterPower_add_traceClass_sqrt_hs": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondPowersStormer",
+      "name": "D5.S3.Quantum.Analysis.NullConeGravity.NullDiamondPowersStormer.quarterPower_add_traceClass_sqrt_hs",
+      "kind": "theorem",
+      "statement_id": "sha256:5a214da4306b431d9ea7d730d4bfdef25b66838fffcc85a351482ed4f9981148",
+      "line": 399,
+      "signature": "theorem quarterPower_add_traceClass_sqrt_hs {A B W X : Op} (hA : 0 ≤ A) (hB : 0 ≤ B) (hW : IsHilbertSchmidt W) (hsa : IsSelfAdjoint X) (hX : IsTraceClass X) (hD : B - A = quarterRoot A * W * quarterRoot A + X) : ∃ h : IsHilbertSchmidt (CFC.sqrt B - CFC.sqrt A), hsSq _ h ≤ 3 * (hsSq W hW + 3 * traceNorm X hX)",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
