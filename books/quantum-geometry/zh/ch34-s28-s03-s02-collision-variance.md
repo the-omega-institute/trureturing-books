@@ -590,7 +590,7 @@ $$
 
 ### 对相关上界与临界分辨率
 
-若 Montgomery 对相关和有足够小的一致上界，傅里叶积分就能控制到更长的时间窗。沿用含端点的正纵坐标截断，并记
+若 Montgomery 对相关和有足够小的一致上界，傅里叶积分就能控制到更长的时间窗。沿用含端点的正纵坐标截断。令 $N(Y)=\sum_{0<\gamma\le Y}m_\gamma$，$F_Y(t)=\sum_{0<\gamma\le Y}m_\gamma e^{it\gamma}$，并记
 
 $$
 G_Y(t)=
@@ -599,20 +599,26 @@ m_\gamma m_{\gamma'}\frac{4\cos\bigl(t(\gamma-\gamma')\bigr)}
 {4+(\gamma-\gamma')^2}.
 $$
 
-::: {.theorem #thm-ch34-zeta-harmonic-critical-collision-limit title="临界分辨率下的条件高斯碰撞极限" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHCriticalResolutionCollisionLimit.harmonic_zeta_critical_collision_limit"}
-假设 Mathlib 表述的 RH。对每个固定的 $A>1$，假设 $G_Y(t)=o(Y\log^2 Y)$ 在 $\log Y\le |t|\le A\log Y$ 上一致成立。令 $T_n\to\infty$ 且 $(\log T_n)^2/n\to0$。沿用上文的谐权重、$W(T_n)$ 和 $s_n=\sqrt{nP_2(T_n)/2}$。若 $\eta_n$ 最终为正、$\eta_n/s_n\to0$，且存在 $a>0$ 使得最终 $\eta_n\log T_n\ge a$，则
+::: {.theorem #thm-ch34-zeta-harmonic-critical-collision-limit title="临界分辨率下的条件高斯碰撞极限" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHCriticalPairSumThreshold.harmonic_zeta_critical_collision_limit_of_threshold"}
+假设 Mathlib 表述的 RH。令 $c=1/(2\pi)$，并假设存在固定的 $0<\kappa<2c^2/3$，使得对每个固定的 $A>1$，当 $Y$ 足够大时，$G_Y(t)\le\kappa Y\log^2 Y$ 在 $\log Y\le |t|\le A\log Y$ 上一致成立。令 $T_n\to\infty$ 且 $(\log T_n)^2/n\to0$。沿用上文的谐权重、$W(T_n)$ 和 $s_n=\sqrt{nP_2(T_n)/2}$。若 $\eta_n$ 最终为正、$\eta_n/s_n\to0$，且存在 $a>0$ 使得最终 $\eta_n\log T_n\ge a$，则
 $$
 \frac{s_n E_n(\eta_n)}{\eta_n W(T_n)^{2n}}\longrightarrow\frac1{\sqrt\pi}.
 $$
 :::
 
 ::: proof
-对相关和等于 $\int_{\mathbb R} e^{-2|u|}|F_Y(t-u)|^2\,du$。相位和的 Lipschitz 常数至多为 $YN(Y)$，所以模长为 $b>0$ 的峰值在半径 $b/(2YN(Y))$ 内仍至少为 $b/2$。在该区间积分可得 $|F_Y(t)|^3\le 4eYN(Y)G_Y(t)$。据此，在 $Y=T$ 与 $Y=3T/4$ 两个实际截断处均有一致相消。由两者之差得到 $\log T$ 以外的谐权重相位缺损，较短的时间窗则由 Landau 界控制。
+对相关和等于 $\int_{\mathbb R}e^{-2|u|}|F_Y(t-u)|^2\,du$。取 $b=|F_Y(t)|$、$L=YN(Y)$。模长剖面处处至少为 $\max(b-L|u|,0)$。当 $L>0$ 时，记 $r=b/L$，这个帐篷函数的加权平方积分恰为 $L^2\bigl(r^2-r+(1-e^{-2r})/2\bigr)$。它达到所有非负且满足同一峰值与逐点下界的剖面所能取到的最小值。用支撑区间上的最小指数权重估计该积分，再用 $b\le N(Y)$，可得
 
-对每个固定的 $A>1$，截至 $A\log T_n$ 的归一化积分趋于中央的高斯常数。相对截断把遗漏比例控制在 $64/(aA)$ 以内。先取足够大的 $A$，再令 $n$ 趋于无穷。对分辨率的每个固定正倍数同样成立，故可用两侧割线取回含端点的硬带极限。完整证明由 Lean 内核核验。
+$$
+|F_Y(t)|^3\le \tfrac32 e^{2/Y}YN(Y)\,G_Y(t).
+$$
+
+由于 $N(Y)/(Y\log Y)\to c$，严格的阈值条件保证 $N(Y)-|F_Y(t)|\ge dN(Y)$，其中 $d>0$ 与 $Y,t$ 无关。整个含端点截断内的谐权重至少为 $m_\gamma/(2Y)$。增加非负权重时，总质量减去相位和模长不会减小。由此把整个截断的未加权缺损传给谐权重，再用 $W(Y)\sim(c/2)\log^2 Y$，得到至少为某个正数除以 $\log Y$ 的归一化缺损。较短的时间窗沿用前述倒数高度、周期相位和 Landau 估计。
+
+对每个固定的 $A>1$，截至 $A\log T_n$ 的归一化积分趋于中央的高斯常数。对足够大的 $A$，相对截断把遗漏比例控制在 $64/(aA)$ 以内。分辨率换成任意固定的 $\lambda\eta_n$（$\lambda>0$）时，下界参数变为 $\lambda a$，遗漏比例界相应为 $64/(\lambda aA)$。令 $A$ 足够大，再取 $n$ 的极限，即可在相邻分辨率上用两侧割线取回含端点的硬带极限。完整证明由 Lean 内核检查。
 :::
 
-通常的 Montgomery 对相关猜想可推出这里所需的长频段上界。结论覆盖 $\eta_n\log T_n\to a$ 且 $0<a<\infty$ 的情形。进一步缩小分辨率时，对角项相对于带宽的贡献会增大，下一节给出相应下界。 [Ford–Soundararajan–Zaharescu §1](https://arxiv.org/abs/0805.2745v3)
+正阈值包含一致的 $G_Y(t)=o(Y\log^2 Y)$ 情形，通常的 Montgomery 对相关猜想会给出这个小阶界。实际 $\zeta$ 零点在整个长频带上的阈值仍是本定理的数论前提。结论覆盖 $\eta_n\log T_n\to a$ 且 $0<a<\infty$ 的情形。对固定有限支撑和固定正方差，本页后面的占据对角项下界给出一个更细的分辨率范围，归一化 Fejér 矩在该范围发散。 在 RH 和猜想 5 的精细渐近下，Ford–Soundararajan–Zaharescu 的定理 1.4 推出相位和的抵消，再由定理 1.3 得出短区间素数结论。引理 1 用中心化对相关和的平移差来估计相位和。 [§1 与定理 1.3–1.4](https://arxiv.org/html/0805.2745v3#S1) · [引理 1](https://arxiv.org/html/0805.2745v3#Thmlemma1)
 
 ### 具有同一单位频带轮廓的共格谱
 

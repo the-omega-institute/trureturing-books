@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "3bcb87c71284049db343d04529f5d86c0669f2f8",
-  "pinned_at": "2026-11-27T09:46:02Z",
+  "commit": "2ea9ed33f7ec63078222d50495ed1bed6a0c534a",
+  "pinned_at": "2026-11-27T10:24:31Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -17863,13 +17863,13 @@
       "line": 89,
       "signature": "theorem prime_window_mobius_of_power_prefix (hRH : RiemannHypothesis) {β P ε : ℝ} (hβ : 0 ≤ β) (hβ₁ : β < 1) (hP : 0 < P) (hε : 0 < ε) (hprefix : ∀ k : ℕ, 1 ≤ k → |∑ n ∈ Finset.Icc 1 k, (μ n : ℝ)| ≤ P*(k : ℝ)^β) : ∃ a₀ K : ℝ, 2 ≤ a₀ ∧ 0 < K ∧ ∀ m : ℕ, 2 ≤ m → ∀ a B : ℝ, a₀ ≤ a → a ≤ B → |windowDiscrepancy a B - spectralPrimitive (phaseOrbit (Real.log B)) + spectralPrimitive (phaseOrbit (Real.log a)) - (∑ n ∈ Finset.Icc 3 m, -(μ n : ℝ) * (2 * (n : ℝ)^2 / (((n : ℝ) - 1) * ((n : ℝ) - 2))) * (a ^ ((n : ℝ)⁻¹ - 1 / 2) - B ^ ((n : ℝ)⁻¹ - 1 / 2))) - (∑ n ∈ (Finset.Icc 2 m).filter (fun n => 2 * n < m +"
     },
-    "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHCriticalResolutionCollisionLimit.harmonic_zeta_critical_collision_limit": {
-      "module": "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHCriticalResolutionCollisionLimit",
-      "name": "D5.S3.Weil.Mertens.IntegratedExplicit.PrimePower.SublinearOrder.RHCriticalResolutionCollisionLimit.harmonic_zeta_critical_collision_limit",
+    "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHCriticalPairSumThreshold.harmonic_zeta_critical_collision_limit_of_threshold": {
+      "module": "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHCriticalPairSumThreshold",
+      "name": "D5.S3.Weil.Mertens.IntegratedExplicit.PrimePower.SublinearOrder.RHCriticalPairSumThreshold.harmonic_zeta_critical_collision_limit_of_threshold",
       "kind": "theorem",
-      "statement_id": "sha256:4a69da4af49125cbfc34968f66c47f492fd176ab060130fdbced71b13b23c3f9",
-      "line": 460,
-      "signature": "theorem harmonic_zeta_critical_collision_limit (rh : RiemannHypothesis) (hcorr : MontgomeryUpperBoundOnLogBands (zetaSpectrum rh)) (T η : ℕ → ℝ) (hT : Tendsto T atTop atTop) (hη : ∀ᶠ n : ℕ in atTop, 0 < η n) (hh : Tendsto (fun n : ℕ => (Real.log (T n))^2 / (n : ℝ)) atTop (𝓝 0)) (hresolution : ∃ a > (0 : ℝ), ∀ᶠ n in atTop, a ≤ η n * Real.log (T n)) : let scale (n : ℕ)",
+      "statement_id": "sha256:e3f5a1dd7f85b0eeaf8c328c4f608948a2a79a46f22b57b72e8addc9c21e23f1",
+      "line": 560,
+      "signature": "theorem harmonic_zeta_critical_collision_limit_of_threshold (rh : RiemannHypothesis) (hcorr : MontgomeryThresholdOnLogBands (zetaSpectrum rh)) (T η : ℕ → ℝ) (hT : Tendsto T atTop atTop) (hη : ∀ᶠ n : ℕ in atTop, 0 < η n) (hh : Tendsto (fun n : ℕ => (Real.log (T n))^2 / (n : ℝ)) atTop (𝓝 0)) (hresolution : ∃ a > (0 : ℝ), ∀ᶠ n in atTop, a ≤ η n * Real.log (T n)) : let scale (n : ℕ)",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -17896,7 +17896,7 @@
       "module": "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHLandauWindowTransfer",
       "name": "D5.S3.Weil.Mertens.IntegratedExplicit.PrimePower.SublinearOrder.RHLandauWindowTransfer.harmonic_landau_window_deficit",
       "kind": "theorem",
-      "statement_id": "sha256:62866b523517f9275353ce336ca8dcb71eff4267f2a95e797e370c5fc21e858b",
+      "statement_id": "sha256:18795c4a296ab481351f1027d08f2a332f4363d3d524bd751e212345f12f570d",
       "line": 240,
       "signature": "theorem harmonic_landau_window_deficit (rh : RiemannHypothesis) (b C : ℝ) (hb : 0 < b) (hC : 0 < C) (hLandau : ∀ V t : ℝ, 1 < V → 0 < |t| → ‖∑ j ∈ positiveCutoff rh V, (Zeta23.zeroMult j.val : ℂ)*phase (ordinate j) t‖ ≤ C*(V+Real.exp (|t|/2)*(1+|t|)^2+Real.exp (|t|/2)*(1+Real.log V)+Real.log V/|t|)) : ∃ L : ℝ, 1<L ∧ ∀ T t : ℝ, L≤T → b/Real.log T≤|t| → |t|≤Real.log T → let g : ↥(positiveCutoff rh T) → ℝ"
     },
@@ -17904,8 +17904,8 @@
       "module": "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHLogarithmicCollisionLimit",
       "name": "D5.S3.Weil.Mertens.IntegratedExplicit.PrimePower.SublinearOrder.RHLogarithmicCollisionLimit.harmonic_zeta_collision_limit",
       "kind": "theorem",
-      "statement_id": "sha256:14a512b49924c808fe22d62572c1cec9c716d20c0e79f31f4cc48458782c62ba",
-      "line": 543,
+      "statement_id": "sha256:44623f359c663ff8b11dc219a8dc1ebe3fe1c176998abc2a2612d30289f46a9b",
+      "line": 370,
       "signature": "theorem harmonic_zeta_collision_limit (rh : RiemannHypothesis) (C : ℝ) (hC : 0 < C) (hLandau : ∀ V t : ℝ, 1 < V → 0 < |t| → ‖∑ j ∈ positiveCutoff rh V, (Zeta23.zeroMult j.val : ℂ) * phase (ordinate j) t‖ ≤ C * (V + Real.exp (|t| / 2) * (1 + |t|)^2 + Real.exp (|t| / 2) * (1 + Real.log V) + Real.log V / |t|)) (T η : ℕ → ℝ) (hT : Tendsto T atTop atTop) (hη : ∀ᶠ n : ℕ in atTop, 0 < η n) (hh : Tendsto (fun n : ℕ => (Real.log (T n))^2 / (n : ℝ)) atTop (𝓝 0)) (htrunc : Tendsto (fun n : ℕ => η n * Real.log (T n)) atTop atTop) : let scale (n : ℕ)"
     },
     "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHMobiusEightNinths.prime_window_mobius_eight_ninths_of_rh": {
@@ -18625,14 +18625,9 @@
       "module": "D5/S3/Weil/ZetaExplicit/LandauUniformCutoff",
       "name": "D5.S3.Weil.ZetaExplicit.LandauUniformCutoff.actual_cutoff_landau_envelope",
       "kind": "theorem",
-      "statement_id": "sha256:bcc4893cbb11fdc9ea2758a6d7da413724b3958c4878c3636570a184965db05c",
+      "statement_id": "sha256:9c780899125212184ffb4b36258561f0ff193a6290f347dfc54006ba367e06f6",
       "line": 572,
-      "signature": "theorem actual_cutoff_landau_envelope (rh : RiemannHypothesis) : ∃ C : ℝ, 0 < C ∧ ∀ V t : ℝ, 1 < V → 0 < |t| → ‖∑ j ∈ positiveCutoff rh V, (zeroMult j.val : ℂ) * phase (ordinate j) t‖ ≤ let expFrequency",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ]
+      "signature": "theorem actual_cutoff_landau_envelope (rh : RiemannHypothesis) : ∃ C : ℝ, 0 < C ∧ ∀ V t : ℝ, 1 < V → 0 < |t| → ‖∑ j ∈ positiveCutoff rh V, (zeroMult j.val : ℂ) * phase (ordinate j) t‖ ≤ let expFrequency"
     },
     "D5/S3/Weil/ZetaPntBounds/MobiusEnergyPointwise.unweighted_mobius_prefix_power_bound": {
       "module": "D5/S3/Weil/ZetaPntBounds/MobiusEnergyPointwise",
