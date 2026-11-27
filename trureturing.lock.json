@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "22e5f437f10ec7ae4812731933af43b6ff386809",
-  "pinned_at": "2026-11-27T16:54:48Z",
+  "commit": "27dbcfe75e61c86e48339c7259e71bf4cfd755be",
+  "pinned_at": "2026-11-27T17:22:29Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1945,6 +1945,54 @@
       "statement_id": "sha256:129b0a12736af0c862eba8003e3d178a385c220227201f31c966987be254bcfc",
       "line": 357,
       "signature": "theorem intervalGraph_isChordal_and_two_approximate_gain_potential [Finite V] (ℓ r : V → ℝ) (hI : ∀ v, ℓ v ≤ r v) (hG : ∀ x y, G.Adj x y ↔ x ≠ y ∧ max (ℓ x) (ℓ y) ≤ min (r x) (r y)) (g : V → V → H) (ε : ℝ) (hε : 0 ≤ ε) (hrev : ∀ x y, G.Adj x y → g y x = (g x y)⁻¹) (htri : ∀ x y z, G.Adj x y → G.Adj y z → G.Adj x z → Dist.dist (g x y * g y z) (g x z) ≤ ε) : G.IsChordal ∧ ∃ φ : V → H, ∀ x y, G.Adj x y → Dist.dist (g x y) ((φ x)⁻¹ * φ y) ≤ 2 * ε"
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/ThreeTreeBanachSharpBounds.SimpleGraph.IsChordal.exists_cliqueFour_banach_gain_potential_polygon": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/ThreeTreeBanachSharpBounds",
+      "name": "SimpleGraph.IsChordal.exists_cliqueFour_banach_gain_potential_polygon",
+      "kind": "theorem",
+      "statement_id": "sha256:89227c9daae3a415a7dbf4cb2f72bb26aacf2ccb73f1cff7557065e0ca150d26",
+      "line": 612,
+      "signature": "theorem IsChordal.exists_cliqueFour_banach_gain_potential_polygon [Fintype V] {G : SimpleGraph V} (hG : G.IsChordal) (hclique : ∀ C : Set V, G.IsClique C → C.ncard ≤ 4) (g : V → V → E) (ε : ℝ) (hε : 0 ≤ ε) (hg : ∀ i j, g j i = -g i j) (ht : ∀ i j k, G.Adj i j → G.Adj j k → G.Adj i k → ‖g i j + g j k - g i k‖ ≤ ε) : ∃ φ : V → E, ∀ i j, G.Adj i j → ‖g i j - (φ j - φ i)‖ ≤ (72537/50000 : ℝ) * ε"
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/ThreeTreeBanachSharpBounds.SimpleGraph.cliqueFour_banach_coefficient_bounds": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/ThreeTreeBanachSharpBounds",
+      "name": "SimpleGraph.cliqueFour_banach_coefficient_bounds",
+      "kind": "theorem",
+      "statement_id": "sha256:89227c9daae3a415a7dbf4cb2f72bb26aacf2ccb73f1cff7557065e0ca150d26",
+      "line": 763,
+      "signature": "theorem cliqueFour_banach_coefficient_bounds : (4/3 : ℝ) ≤ cliqueFourBanachCoefficient ∧ cliqueFourBanachCoefficient ≤ (72537/50000 : ℝ) ∧ (72537/50000 : ℝ) < 3/2"
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/ThreeTreeBanachSharpBounds.SimpleGraph.pathPowerThree_banach_lower_four_thirds": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/ThreeTreeBanachSharpBounds",
+      "name": "SimpleGraph.pathPowerThree_banach_lower_four_thirds",
+      "kind": "theorem",
+      "statement_id": "sha256:89227c9daae3a415a7dbf4cb2f72bb26aacf2ccb73f1cff7557065e0ca150d26",
+      "line": 366,
+      "signature": "theorem pathPowerThree_banach_lower_four_thirds (m : ℕ) (hm : 1 ≤ m) : ∃ g : Fin (3*m+3) → Fin (3*m+3) → pathHexagon, (∀ i j, g j i = -g i j) ∧ (∀ i j k, (pathPowerThree (3*m+3)).Adj i j → (pathPowerThree (3*m+3)).Adj j k → (pathPowerThree (3*m+3)).Adj i k → ‖g i j + g j k - g i k‖ ≤ 1) ∧ (∀ φ : Fin (3*m+3) → pathHexagon, ∃ i j, (pathPowerThree (3*m+3)).Adj i j ∧ (4*m : ℝ)/(3*m+4) ≤ ‖g i j - (φ j - φ i)‖)"
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/ThreeTreeBanachSharpBounds.SimpleGraph.pathPowerThree_banach_sup_four_thirds": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/ThreeTreeBanachSharpBounds",
+      "name": "SimpleGraph.pathPowerThree_banach_sup_four_thirds",
+      "kind": "theorem",
+      "statement_id": "sha256:89227c9daae3a415a7dbf4cb2f72bb26aacf2ccb73f1cff7557065e0ca150d26",
+      "line": 708,
+      "signature": "theorem pathPowerThree_banach_sup_four_thirds : (⨆ n : ℕ, BanachPathPower.banachCoefficient n 3) = (4/3 : ℝ)"
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/ThreeTreeBanachSharpBounds.SimpleGraph.pathPowerThree_banach_upper_four_thirds": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/ThreeTreeBanachSharpBounds",
+      "name": "SimpleGraph.pathPowerThree_banach_upper_four_thirds",
+      "kind": "theorem",
+      "statement_id": "sha256:89227c9daae3a415a7dbf4cb2f72bb26aacf2ccb73f1cff7557065e0ca150d26",
+      "line": 157,
+      "signature": "theorem pathPowerThree_banach_upper_four_thirds (n : ℕ) (g : Fin n → Fin n → E) (ε : ℝ) (hε : 0 ≤ ε) (hg : ∀ i j, g j i = -g i j) (ht : ∀ i j k, (pathPowerThree n).Adj i j → (pathPowerThree n).Adj j k → (pathPowerThree n).Adj i k → ‖g i j + g j k - g i k‖ ≤ ε) : ∃ φ : Fin n → E, ∀ i j, (pathPowerThree n).Adj i j → ‖g i j - (φ j - φ i)‖ ≤ (4/3 : ℝ) * ε"
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/ThreeTreeBanachSharpBounds.SimpleGraph.pathPowerThree_causal_potential_error": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/ThreeTreeBanachSharpBounds",
+      "name": "SimpleGraph.pathPowerThree_causal_potential_error",
+      "kind": "theorem",
+      "statement_id": "sha256:89227c9daae3a415a7dbf4cb2f72bb26aacf2ccb73f1cff7557065e0ca150d26",
+      "line": 55,
+      "signature": "theorem pathPowerThree_causal_potential_error (n : ℕ) (g : Fin n → Fin n → E) (ε : ℝ) (hε : 0 ≤ ε) (hg : ∀ i j, g j i = -g i j) (ht : ∀ i j k, (pathPowerThree n).Adj i j → (pathPowerThree n).Adj j k → (pathPowerThree n).Adj i k → ‖g i j + g j k - g i k‖ ≤ ε) : ∀ i j, (pathPowerThree n).Adj i j → ‖g i j - (pathPowerThree_causal_potential n g j - pathPowerThree_causal_potential n g i)‖ ≤ (4/3 : ℝ) * ε"
     },
     "D5/S3/Combinatorics/Graph/Chordal/TwoStepBFSAndBarycenterObstructions.SimpleGraph.pure_predecessor_barycenter_unbounded": {
       "module": "D5/S3/Combinatorics/Graph/Chordal/TwoStepBFSAndBarycenterObstructions",
