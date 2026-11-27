@@ -57,7 +57,7 @@ $$
 | [`inner_oriented_triangle`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ShellProjection.lean#L43) | `rfl`（仅 `Init`） | 对内层三点 $p, q, r$ 与 $z = P_p^{\mathbb{Z}}(v)$，精确验证有向闭路乘积等于 $34(1105 z + 7 z b)$，无误差析出有向面积因子 $7 b$ |
 | [`oriented_axis_from_shell`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ShellProjection.lean#L58) | `rfl`（仅 `Init`） | 精确验证内层三点正逆轮换三重复合之差在全部基向量上恒等于 $714\,x b$，直接由壳层非对易子反演参考有向轴 |
 
-需要明确区分：`ShellProjection.lean` 这份文件属于上游研究仓库的独立计算证书（归入 [附录 B §B.2](appendix-b.md#sec-ou-appb-epistemic-ledger) 的第 4 层 `NUM`），文件本身不计入 §B.4 的 `trureturing@dev` 实时冻结定理统计。它的前两条恒等式是 [@thm-ou-ch01-shell-compression-triangle] 在 $s = 17$、$N(p) = N(b) = 17$ 处的实例；该定理对一切满足 $s^2 = N(p)\,N(b)$ 的整数 $s$ 与纯虚整四元数成立，已冻结在 `the-omega-institute/trureturing` 的 D5 声明库并计入 §B.4。第三条 `oriented_axis_from_shell` 目前只有这份证书。
+需要明确区分：`ShellProjection.lean` 这份文件属于上游研究仓库的独立计算证书（归入 [附录 B §B.2](appendix-b.md#sec-ou-appb-epistemic-ledger) 的第 4 层 `NUM`），文件本身不计入 §B.4 的 `trureturing@dev` 实时冻结定理统计。它的前两条恒等式是 [@thm-ou-ch01-shell-compression-triangle] 在 $s = 17$、$N(p) = N(b) = 17$ 处的实例；该定理对一切满足 $s^2 = N(p)\,N(b)$ 的整数 $s$ 与纯虚整四元数成立，已冻结在 `the-omega-institute/trureturing` 的 D5 声明库并计入 §B.4。第三条 `oriented_axis_from_shell` 是 [@thm-ou-ch01-oriented-axis] 在 $N(b) = 17$、$p \cdot (q r) = 7$ 处的实例；该定理对一切纯虚整四元数成立，不需要范数条件，同样已冻结并计入 §B.4。
 
 ## A.3 分章核心复算脚本与证书总索引 {#sec-ou-appa-script-index}
 
