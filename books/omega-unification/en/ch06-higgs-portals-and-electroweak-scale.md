@@ -32,6 +32,15 @@ $$
 
 Changing $f$ to $-f$ therefore preserves both the one-loop mass and quartic corrections. For example, the species slopes $(0.02,0.06)$ and $(0.04,0)$ both have weighted sum $0.48$ and weighted sum of squares $0.0192$. The derivative of the uncolored minus colored squared mass with respect to $s$ distinguishes them, giving $+0.04$ and $-0.04$, respectively. This degeneracy uses the common $M^2$ and $G$. Split thresholds or species-resolved probes require separate weights.
 
+How much could one recover by knowing the whole one-loop potential near $s=0$? Suppose the number of layers $N$ and their common positive squared mass $M^2>0$ are known. Both squared masses in each layer are affine in $s$, and all real components have the same known normalization. Take the scalar determinant kernel $G(x)=x^2[\log(x/\mu^2)-3/2]$, suppressing the common loop factor. Let $C_t,U_t$ count the layers whose colored or uncolored slope, respectively, takes the real value $t$, and put $w_t=3C_t+U_t$. Since $G'''(x)=2/x$,
+$$
+V_1(s)=4\sum_t w_t G(M^2+ts),\qquad
+V_1'''(s)=8\sum_{t\ne0}\frac{w_t t^2}{s+M^2/t}.
+$$
+Knowing this rational function near the origin determines its poles and residues uniquely. Each pole $p$ gives a slope $t=-M^2/p$, and its residue divided by $8t^2$ gives the weighted count. The zero slope is accounted for by $w_0=4N-\sum_{t\ne0}w_t$. Any counterterm of degree at most two in $s$ drops out on differentiating three times.
+
+For one or two layers, $U_t\le2$, so the remainder and quotient on dividing $w_t$ by three give $U_t$ and $C_t$, respectively. With two layers the colored and uncolored slopes can still be paired differently across layers. With three layers even the species counts can differ. In units of a common positive slope $\epsilon$, take colored slopes $(1,1,1)$ and uncolored slopes $(2,2,2)$ in one model, and colored slopes $(1,1,2)$ and uncolored slopes $(1,1,1)$ in another. Both have exactly $36$ components of slope $\epsilon$ and $12$ of slope $2\epsilon$, giving identical one-loop potentials pointwise. The sums of slopes over colored components are $36\epsilon$ and $48\epsilon$. Three is therefore the smallest number of equal-mass layers for which the complete potential can leave the species counts ambiguous. Mass splitting shifts the poles, and species-weighted readings retain different information.
+
 Whenever we certify positivity of $8\pi I \pm \mathcal{A}$ on coupled Higgs–heavy-radial channels or eliminate high-potential shell vertices into an effective boundary operator, the exact matrix identity at work is the Lean-verified block Schur complement minimum theorem:
 
 ::: {.theorem #thm-ou-ch06-schur-minimum title="Block Schur Complement Quadratic Form as Exact Minimum" lean="D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"}
