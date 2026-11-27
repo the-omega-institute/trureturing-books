@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "4437caa4cb82da228b8ced66e0643ed23dc60ce5",
-  "pinned_at": "2026-11-27T06:50:54Z",
+  "commit": "096c8157da047e40d17d1502e89c2504bd3f27b2",
+  "pinned_at": "2026-11-27T07:23:04Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -12048,6 +12048,240 @@
       "statement_id": "sha256:1d7dc9b8853ff352f251bcbaa03b62943a59ee57e8e525520df0f6f846eef068",
       "line": 257,
       "signature": "theorem mulOp_ae (g : X → ℂ) (hg : MemLp g ∞ μ) (f : Lp ℂ 2 μ) : (mulOp μ g hg f : X → ℂ) =ᵐ[μ] fun x => g x * f x",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondMassShell4D.bulkU_difference": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondMassShell4D",
+      "name": "NullConeGravity.bulkU_difference",
+      "kind": "theorem",
+      "statement_id": "sha256:b73a3e95242c3f56e0ff9022dd76cb4918cdc16c1b04a779f81198658cbab1f0",
+      "line": 468,
+      "signature": "theorem bulkU_difference {M : ℝ} (hM : 0 < M) {τ : ℂ} (hτ : 0 < τ.re) (r : E3) : bulkU M τ r - bulkU 0 τ r = bulkDifference M (((‖r‖^2 : ℝ) : ℂ) + τ^2)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondMassShell4D.bulkU_differentiableOn": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondMassShell4D",
+      "name": "NullConeGravity.bulkU_differentiableOn",
+      "kind": "theorem",
+      "statement_id": "sha256:b73a3e95242c3f56e0ff9022dd76cb4918cdc16c1b04a779f81198658cbab1f0",
+      "line": 128,
+      "signature": "theorem bulkU_differentiableOn (M : ℝ) (r : E3) : DifferentiableOn ℂ (fun τ => bulkU M τ r) {τ : ℂ | 0 < τ.re}",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondMassShell4D.bulkU_integrable": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondMassShell4D",
+      "name": "NullConeGravity.bulkU_integrable",
+      "kind": "theorem",
+      "statement_id": "sha256:b73a3e95242c3f56e0ff9022dd76cb4918cdc16c1b04a779f81198658cbab1f0",
+      "line": 96,
+      "signature": "theorem bulkU_integrable (M : ℝ) {τ : ℂ} (hτ : 0 < τ.re) (r : E3) : Integrable (fun k : E3 => (shellWeight M k : ℂ) * Complex.exp (-τ * (energy M k : ℂ) + I * (⟪k, r⟫_ℝ : ℂ)))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondMassShell4D.bulkU_scale": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondMassShell4D",
+      "name": "NullConeGravity.bulkU_scale",
+      "kind": "theorem",
+      "statement_id": "sha256:b73a3e95242c3f56e0ff9022dd76cb4918cdc16c1b04a779f81198658cbab1f0",
+      "line": 183,
+      "signature": "theorem bulkU_scale (m L : ℝ) (_hm : 0 ≤ m) (hL : 0 < L) {τ : ℂ} (_hτ : 0 < τ.re) (r : E3) : bulkU m ((L : ℂ) * τ) (L • r) = ((L : ℂ)^2)⁻¹ * bulkU (m * L) τ r",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondMassShell4D.bulkU_zero": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondMassShell4D",
+      "name": "NullConeGravity.bulkU_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:b73a3e95242c3f56e0ff9022dd76cb4918cdc16c1b04a779f81198658cbab1f0",
+      "line": 459,
+      "signature": "theorem bulkU_zero {τ : ℂ} (hτ : 0 < τ.re) (r : E3) : bulkU 0 τ r = 1/(4*(Real.pi : ℂ)^2*(((‖r‖^2 : ℝ) : ℂ) + τ^2))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondMultipliers4D.nullA_nonneg": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondMultipliers4D",
+      "name": "NullConeGravity.nullA_nonneg",
+      "kind": "theorem",
+      "statement_id": "sha256:b6f770eb5eee0db7042cda3c8e3acafaabaf8ba5325dca5ecfc3738326754256",
+      "line": 332,
+      "signature": "theorem nullA_nonneg : 0 ≤ nullA",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondMultipliers4D.nullConj_ae": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondMultipliers4D",
+      "name": "NullConeGravity.nullConj_ae",
+      "kind": "theorem",
+      "statement_id": "sha256:b6f770eb5eee0db7042cda3c8e3acafaabaf8ba5325dca5ecfc3738326754256",
+      "line": 550,
+      "signature": "theorem nullConj_ae (f : H4D) : (nullConj f : Phase4D → ℂ) =ᵐ[phaseMeasure] fun p => star (f (-p.1, p.2))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondMultipliers4D.nullConj_anti_J": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondMultipliers4D",
+      "name": "NullConeGravity.nullConj_anti_J",
+      "kind": "theorem",
+      "statement_id": "sha256:b6f770eb5eee0db7042cda3c8e3acafaabaf8ba5325dca5ecfc3738326754256",
+      "line": 588,
+      "signature": "theorem nullConj_anti_J (f : H4D) : nullConj (nullJ f) = -(nullJ (nullConj f))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondMultipliers4D.nullConj_comm_T": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondMultipliers4D",
+      "name": "NullConeGravity.nullConj_comm_T",
+      "kind": "theorem",
+      "statement_id": "sha256:b6f770eb5eee0db7042cda3c8e3acafaabaf8ba5325dca5ecfc3738326754256",
+      "line": 570,
+      "signature": "theorem nullConj_comm_T (M : ℝ) (hM : 0 < M) (f : H4D) : nullConj (nullT M hM f) = nullT M hM (nullConj f)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondMultipliers4D.nullConj_involutive": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondMultipliers4D",
+      "name": "NullConeGravity.nullConj_involutive",
+      "kind": "theorem",
+      "statement_id": "sha256:b6f770eb5eee0db7042cda3c8e3acafaabaf8ba5325dca5ecfc3738326754256",
+      "line": 562,
+      "signature": "theorem nullConj_involutive (f : H4D) : nullConj (nullConj f) = f",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondMultipliers4D.nullConj_smul": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondMultipliers4D",
+      "name": "NullConeGravity.nullConj_smul",
+      "kind": "theorem",
+      "statement_id": "sha256:b6f770eb5eee0db7042cda3c8e3acafaabaf8ba5325dca5ecfc3738326754256",
+      "line": 555,
+      "signature": "theorem nullConj_smul (c : ℂ) (f : H4D) : nullConj (c • f) = star c • nullConj f",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondMultipliers4D.nullJ_ker": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondMultipliers4D",
+      "name": "NullConeGravity.nullJ_ker",
+      "kind": "theorem",
+      "statement_id": "sha256:b6f770eb5eee0db7042cda3c8e3acafaabaf8ba5325dca5ecfc3738326754256",
+      "line": 376,
+      "signature": "theorem nullJ_ker : nullJ.ker = ⊥",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondMultipliers4D.nullT_factor": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondMultipliers4D",
+      "name": "NullConeGravity.nullT_factor",
+      "kind": "theorem",
+      "statement_id": "sha256:b6f770eb5eee0db7042cda3c8e3acafaabaf8ba5325dca5ecfc3738326754256",
+      "line": 340,
+      "signature": "theorem nullT_factor (M : ℝ) (hM : 0 < M) : nullT M hM = quarterRoot nullA * nullW M hM * quarterRoot nullA",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondMultipliers4D.nullT_hs": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondMultipliers4D",
+      "name": "NullConeGravity.nullT_hs",
+      "kind": "theorem",
+      "statement_id": "sha256:b6f770eb5eee0db7042cda3c8e3acafaabaf8ba5325dca5ecfc3738326754256",
+      "line": 300,
+      "signature": "theorem nullT_hs (M : ℝ) (hM : 0 < M) : HilbertSchmidt.IsHilbertSchmidt (nullT M hM)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondMultipliers4D.nullT_selfAdjoint": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondMultipliers4D",
+      "name": "NullConeGravity.nullT_selfAdjoint",
+      "kind": "theorem",
+      "statement_id": "sha256:b6f770eb5eee0db7042cda3c8e3acafaabaf8ba5325dca5ecfc3738326754256",
+      "line": 495,
+      "signature": "theorem nullT_selfAdjoint (M : ℝ) (hM : 0 < M) : IsSelfAdjoint (nullT M hM)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondMultipliers4D.nullW_hs": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondMultipliers4D",
+      "name": "NullConeGravity.nullW_hs",
+      "kind": "theorem",
+      "statement_id": "sha256:b6f770eb5eee0db7042cda3c8e3acafaabaf8ba5325dca5ecfc3738326754256",
+      "line": 297,
+      "signature": "theorem nullW_hs (M : ℝ) (hM : 0 < M) : HilbertSchmidt.IsHilbertSchmidt (nullW M hM)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondMultipliers4D.wKernel_memLp": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondMultipliers4D",
+      "name": "NullConeGravity.wKernel_memLp",
+      "kind": "theorem",
+      "statement_id": "sha256:b6f770eb5eee0db7042cda3c8e3acafaabaf8ba5325dca5ecfc3738326754256",
+      "line": 247,
+      "signature": "theorem wKernel_memLp {M : ℝ} (hM : 0 < M) : MemLp (wKernel M) 2 (phaseMeasure.prod phaseMeasure)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondMultipliers4D.wgt_bounds": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondMultipliers4D",
+      "name": "NullConeGravity.wgt_bounds",
+      "kind": "theorem",
+      "statement_id": "sha256:b6f770eb5eee0db7042cda3c8e3acafaabaf8ba5325dca5ecfc3738326754256",
+      "line": 67,
+      "signature": "theorem wgt_bounds (ν : ℝ) : 2 ≤ wgt ν ∧ |ν| ≤ wgt ν ∧ wgt ν ≤ 2 + |ν|",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
