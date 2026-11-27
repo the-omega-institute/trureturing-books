@@ -125,6 +125,17 @@ On the left-handed Weyl spectrum, the three quark families $(Q, u^c, d^c)$ carry
 Condensing the charge-$9$ scalar breaks $U(1)_X$ to $\mathbb{Z}_9$, assigning phase $e^{2\pi i/9}$ to quarks and $1$ to all leptons; its cube is precisely the $SU(3)_c$ color center, so on color singlets it acts faithfully as $\mathbb{Z}_3$ ($\Delta B \in 3\mathbb{Z}$). Generalizing to $N_g$ generations protecting $\Delta B \in m\mathbb{Z}$ sets $X = 3B - 3m\sum_i n_i L_i$ with a charge-$3m$ condensate, where weak anomaly cancellation is equivalent to $N_g = m\sum_i n_i$—hence **$m \mid N_g$ is both necessary and sufficient**, mirroring the electroweak instanton selection rule $\Delta B = N_g$! Crucially, demanding a generation-universal continuous $U(1)$ with no new chiral weak multiplets forces $3q + l = 0$, leaving $QQQL$ neutral—proving that **UV generation-dependence is unavoidable for an Abelian gauge lift**.
 :::
 
+In the light-field theory, nine units of positive lepton number impose a stronger hypercharge constraint on Higgs insertions. At $(\Delta B,\Delta L)=(-3,+9)$, nine antiquarks and nine leptons already cost dimension $27$ and carry total hypercharge at most $9/3-9/2=-3/2$. Each bosonic unit of dimension can supply at most $+1/2$. A scalar contains an even number of fermions. An extra pair costs three units and supplies at most $+1$ for a quark and antiquark or $+1/2$ for a lepton and antilepton. The dimension is therefore at least $30$, with $(d^c)^9 L^9 H^3$ as the only field content at equality.
+
+Write $\ell_i=\epsilon_{tu}L_i^tH^u$ and $S_i=\epsilon_{rs}(\ell_iL_i^r)L_i^s$. Using the color and spin contractions of $C_{d^c}$ gives
+
+$$
+\mathcal O_{30}=C_{d^c}\epsilon^{abc}
+(d^c_{3a}S_1)(d^c_{3b}S_2)(d^c_{3c}S_3).
+$$
+
+Set $H^1=1$ and $H^0=0$. In each generation keep $L_i^0=(a_i,b_i)$ and $L_i^1=(0,c_i)$, where the $a_i,b_i,c_i$ are distinct Grassmann generators. Then $S_i=(L_i^0L_i^0)L_i^1-(L_i^0L_i^1)L_i^0$, and its spin component $1$ is $3a_i b_i c_i$. Keep all three colors of $d^c$ in spin components $0,1,0$ for the three generations, respectively. The two color contractions give coefficients of magnitude $36$ and $6$, so the selected monomial has coefficient of magnitude $36\cdot6\cdot3^3=5832$. This attains dimension $30$.
+
 ## 9.3 Shell-Triality Algebra Closure, Discrete Anomaly Inflow, and the 25-State Lifted Shell {#sec-ch09-algebra-inflow}
 
 While $U(1)_X$ gives a clean Abelian lift over the Standard Model, installing the Behrend shell's species-dependent triality phase $F$ directly atop full $SU(5)$ vertices unleashes an extraordinary sequence of algebraic and topological demands.
