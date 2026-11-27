@@ -24,6 +24,14 @@ For the Standard Model Higgs potential $V(H) = -m_H^2 H^\dagger H + \lambda(H^\d
 
 :::
 
+A layer with a common mass shows how much information these two portal readings retain. Put $s=H^\dagger H$ and take real portals $b,f$ so that the colored and uncolored squared masses are $M^2+(b-f)s$ and $M^2+(b+3f)s$. If the one-loop potential per real component is the same smooth function $G$, summing the twelve colored and four uncolored contributions gives
+
+$$
+V_1'(0)=16bG'(M^2),\qquad V_1''(0)=(16b^2+48f^2)G''(M^2).
+$$
+
+Changing $f$ to $-f$ therefore preserves both the one-loop mass and quartic corrections. For example, the species slopes $(0.02,0.06)$ and $(0.04,0)$ both have weighted sum $0.48$ and weighted sum of squares $0.0192$. The derivative of the uncolored minus colored squared mass with respect to $s$ distinguishes them, giving $+0.04$ and $-0.04$, respectively. This degeneracy uses the common $M^2$ and $G$. Split thresholds or species-resolved probes require separate weights.
+
 Whenever we certify positivity of $8\pi I \pm \mathcal{A}$ on coupled Higgs–heavy-radial channels or eliminate high-potential shell vertices into an effective boundary operator, the exact matrix identity at work is the Lean-verified block Schur complement minimum theorem:
 
 ::: {.theorem #thm-ou-ch06-schur-minimum title="Block Schur Complement Quadratic Form as Exact Minimum" lean="D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"}
