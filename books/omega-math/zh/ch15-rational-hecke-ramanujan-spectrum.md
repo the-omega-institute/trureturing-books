@@ -326,6 +326,10 @@ $B$ 的 $1091$ 个非平凡平方奇异值均满足 $\sigma_i^2<19$，对应的�
 
 第五卷从有限算术走到自由旋转生成元 $S_5$。这六枚旋子在球面上给出检验混合谱界的有理判据。冻结的标量与低阶矩阵等式、更高的有限壳层计算、有限图的移位证书，各自钉住同一图景中的一处精确读数。
 
+::: {.film src="the-norm-five-gap"}
+**六枚模方为 5 的整四元数，一条平方后的有理不等式，一道用分数就能核验的谱隙（DURZH）。** 青色与品红的六枚旋子 $1\pm2i$、$1\pm2j$、$1\pm2k$ 围绕琥珀色的点 $q$，把拉马努金界平方成 $20-\widehat\lambda^2\ge0$。佐武参数对 $u_1,u_2$ 随 $\widehat\lambda$ 在单位圆上滑动，越过 $2\sqrt5$ 时离开圆周，$2\times2$ 托普利茨行列式 $(20-\widehat\lambda^2)/5$ 随之变号（手工推导）；绿色标签对应一般判据 [@thm-ch15-toeplitz-circle]。边界一幕分出已冻结结论、文献中的全谱界与本书的模型诠释（紫色），以及开放问题（红色），对应 [@rem-ch15-rh-epistemology]。在 $q=(2,1,3,-1)$ 处，六个标量部分 $0,4,-4,8,4,0$ 的平方和为 $112$，得 $\widehat T_5\chi_1(q)=-2/75=-\tfrac25\chi_1(q)$（屏幕计算），绿色标签指向 [@thm-ch15-hecke-t5-chi1-eigenvalue] 与 [@thm-ch15-hecke-t5-ramanujan-margin]。柱状图给出 $E_\ell(1/5)$ 的六个精确分数（[@thm-ch15-lps-hecke-trace-formula]、[@thm-ch15-lps-hecke-traces]），把它们认作壳层迹的一步标为论证；四次矩阵首尾两角的 $64$ 以琥珀色标出，五条本征线与裕度见 [@thm-ch15-lps-ramanujan-margins]、[@thm-ch15-lps-degree-four-eigenbasis]。最后一幕画出 $X^{5,13}$ 半径 $3$ 的树状邻域与一条琥珀色 $8$ 圈（屏幕计算），平方奇异值小于 $19$ 取自 [@ex-ch15-x513-certificate] 的精确证书。
+:::
+
 至此，一个呼之欲出的跃迁已摆在眼前：**既然 $S_5$ 这六枚整四元数旋子既能在空间中自由生成永不碰撞的非阿贝尔词树 $F_3$，又携带着最优有理谱隙，那么当观察者直接把这六枚旋子的有理分式当作计算指令运行时，会发生什么？** 这将直接开启第六卷的[第十六章](ch16-omega-fractran-and-nonabelian-stack.md)——把康威标量 FRACTRAN 升维为三维非阿贝尔旋子机 $\Omega\text{-FRACTRAN}$。读者可先在下方的交互工作台实验卡中同步检视模方 $5$ 赫克谱隙与 $\Omega\text{-FRACTRAN}$ 旋子指令栈之间的无缝衔接。
 
 ::: {.viz src="omega-math-workbench" preset="hecke-p5-and-omega-fractran" height="520"}

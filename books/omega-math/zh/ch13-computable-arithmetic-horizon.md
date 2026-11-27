@@ -306,6 +306,12 @@ $$
 回头纵览本章全部十条冻结定理，一条极其清晰的公理边界跃然纸上：裴蜀恒等式（[@thm-ch13-bezout-identity]）、欧几里得素数逃逸（[@thm-ch13-euclid-prime-escape]）、欧拉—沃利斯渐近行列式（[@thm-ch13-cf-convergent-determinant]）、连分数渐近互素性（[@thm-ch13-cf-convergent-coprime]）以及四分深度预算的整数半部（[@thm-ch13-omega-quarter-depth-integer]），均已在使用 `OmegaInit` 与 `OmegaMath` 的 D5 严格构建中以**字面零公理（`strict_omega.axioms: []`）**完成形式化冻结，全程不触碰经典选择公理、商类型公理或实数完备化。与此同时，[@thm-ch13-reduced-den]、[@thm-ch13-convergents-length-log]、[@thm-ch13-strip-factors-correct] 以及经典层的四分深度对偶（[@thm-ch13-quarter-depth-integer] 与 [@thm-ch13-quarter-depth-real]）构成了面向 `Mathlib` 与经典韦伊—布尔诺尔（Weil–Burnol）实分析的第二层单向阴影接口——这一“零公理有理内核驱动、经典连续统作单向影子”的分层模式，将在[第十八章](ch18-zero-axiom-kernel-and-shadow-bridge.md)升华为全书的终极审计架构。
 :::
 
+下面的讲解视频沿本章的手算算例，把带余除法、素数逃逸、有限连分数与四分深度预算依次串成一条线。
+
+::: {.film src="euclids-escape"}
+**一个只会停下的除法，就足以让素数源源逃逸、让分数自行收束、让误差预算落成整数（2 分 45 秒）。** 青色长条把 $30031$ 切成 $2310$ 段 $13$ 与品红色余数 $1$，琥珀色证书 $1 \cdot 30031 - 2310 \cdot 13 = 1$ 引出绿色的裴蜀恒等式（[@thm-ch13-bezout-identity]）；逃逸账本中前六个见证数 $2, 3, 7, 31, 211, 2311$ 都是素数，到 $30031$ 时有界试除在琥珀色的 $59$ 处停下，$30031 = 59 \times 509$，绿色标签指向 [@thm-ch13-euclid-prime-escape]。辗转相除把 $34/21$ 展开为 $[1; 1, 1, 1, 1, 1, 2]$，欧拉—沃利斯渐近分数 $1/1$ 至 $34/21$ 满足长度界 $7 \le 2 \cdot 4 + 1 = 9$（[@thm-ch13-convergents-length-log]）；单步矩阵行列式 $-1$、$M(1)^6 M(2)$ 的行列式 $(-1)^7$ 与相邻交叉积 $\pm 1$ 对应 [@thm-ch13-cf-convergent-determinant] 与 [@thm-ch13-cf-convergent-coprime]，数轴上从两侧交替逼近的间距 $1/(q_n q_{n+1})$ 为紫色的手工推导。最后主界 $7/2$、容差 $1/10$ 给出 $\lfloor 70/2 \rfloor = 35$ 与深度 $2$，绿色的整数不等式 $70 < 128$（[@thm-ch13-omega-quarter-depth-integer]）与经典阴影 $7/128 < 1/10$（[@thm-ch13-quarter-depth-real]）并列，深度 $1$ 不够。片中算例均为屏幕计算；“严格后端零公理”只标在本章如此记录的五条定理上。
+:::
+
 在迈入阿代尔乘积闭环之前，读者可直接在下方的交互实验卡中逐拍检验这三套有限整数构造：从任意前缀素数表触发 $30031 = 59 \times 509$ 的逃逸搜索，逐步展开 $34/21$ 的欧拉—沃利斯交替行列式，并即时调节有理主界与容差核验 $70 < 128$ 的四分深度门槛。
 
 ::: {.viz src="adelic-arithmetic-observer-lab" preset="euclid-cf-quarter-depth" height="520"}

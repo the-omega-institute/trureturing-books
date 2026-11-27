@@ -368,7 +368,7 @@ SCENES.stir = S => {
   /* the ledger */
   panel(1000, 200, 800, 630, a, C.cyan, 'HECKE · 赫克算子');
   const r0 = a * at(S, 0, 0.6), r1 = a * Q(S, 1, 'six values', 0.6), r2 = a * Q(S, 2, 'Hecke operator', 0.6);
-  const r3 = a * Q(S, 3, 'Square it', 0.6), r4 = a * Q(S, 3, 'never negative', 0.6);
+  const r3 = a * Q(S, 3, 'squared, twenty', 0.6), r4 = a * Q(S, 3, 'never negative', 0.6);
   rich([['S₅ = { 1 ± 2i, 1 ± 2j, 1 ± 2k }', C.white]], 1035, 280, { size: 32, a: r0 });
   rich([['‖π‖² = 5,   π π̄ = 5', C.white]], 1035, 330, { size: 26, a: r0 });
   rich([['(T̂₅ f)(q) = ', C.white], ['Σ', C.cyan], [' f(q · π/√5)', C.white]], 1035, 410, { size: 32, a: r1 });
@@ -472,7 +472,7 @@ SCENES.boundary = S => {
       y += 62;
     });
   });
-  const na = a * Q(S, 0, 'not a theorem', 0.6);
+  const na = a * Q(S, 0, 'not about', 0.6);
   if (na > 0.003) {
     rich([['criterion ≠ zeros of ζ(s)', C.now]], W / 2, 800, { size: 34, align: 'center', a: na });
   }
@@ -633,7 +633,7 @@ SCENES.matrix = S => {
     rich([['20 − λ̂² > 0:', C.lean]], 1090, 590, { size: 26, a: l1 });
     rich([['64/5 · 496/25 · 2176/125 · 9584/625 · 7024/625', C.white]], 1090, 630, { size: 23, a: l1 });
     leanChip(1090, 675, 'margins', l1, { size: 18 });
-    leanChip(1090, 715, 'eigenbasis', a * Q(S, 2, 'five eigenlines', 0.6), { size: 18 });
+    leanChip(1090, 715, 'eigenbasis', a * Q(S, 2, 'eigenlines', 0.6), { size: 18 });
     const na = a * Q(S, 2, 'exact minors', 0.6);
     rich([['V₃ … V₆ (d = 6, 8, 10, 12): leading minors > 0', C.white]], 1090, 765, { size: 22, a: na });
     tierTag(1090, 806, 'NUM · CHAPTER’S EXACT CHECK', C.cyan, na);
@@ -675,7 +675,7 @@ SCENES.graph = S => {
     txt('1 + 6 + 30 + 150 · radius 3 is a tree', 140, 822, { size: 22, fam: F.mono, w: 700, c: C.dim, a: ga });
   }
   /* the highlighted 8-cycle */
-  const ca = a * Q(S, 1, 'witness', 0.8);
+  const ca = a * Q(S, 1, 'five to the eighth', 0.8);
   if (CYCLE && ca > 0.003) {
     const X = (() => { const pa = grPos(CYCLE.left[0]), pb = grPos(CYCLE.right[0]); const ang = Math.atan2(pa[1] + pb[1] - 2 * GR_O[1], pa[0] + pb[0] - 2 * GR_O[0]); return [GR_O[0] + GR_RAD[4] * Math.cos(ang), GR_O[1] + GR_RAD[4] * Math.sin(ang)]; })();
     const path = [...CYCLE.left.slice().reverse().map(grPos), X, ...CYCLE.right.map(grPos)];
@@ -692,7 +692,7 @@ SCENES.graph = S => {
   rich([['squares mod 13: {1, 3, 4, 9, 10, 12} ∌ 5', C.white]], 1030, 360, { size: 24, a: r1 });
   rich([['|PGL₂(𝔽₁₃)| = 13 · 168 = ', C.white], ['2184', C.now], [' = 1092 + 1092', C.white]], 1030, 404, { size: 26, a: r1b });
   rich([['6-regular · bipartite', C.cyan]], 1030, 442, { size: 22, a: r1b });
-  const r2 = a * Q(S, 1, 'No cycle', 0.6), r2b = a * Q(S, 1, 'witness', 0.6);
+  const r2 = a * Q(S, 1, 'No cycle', 0.6), r2b = a * Q(S, 1, 'five to the eighth', 0.6);
   rich([['2k-cycle ⟹ w² + 676(u² + v² + t²) = 5²ᵏ', C.white]], 1030, 498, { size: 23, a: r2 });
   rich([['k = 1, 2:  25, 625 < 676  ✗      k = 3:  w = 44, even  ✗', C.dim]], 1030, 536, { size: 21, a: r2 });
   rich([['k = 4:  ', C.white], ['(287, 416, 364, 52)', C.now], ['  ‖·‖² = 5⁸  ✓', C.white]], 1030, 578, { size: 25, a: r2b });
