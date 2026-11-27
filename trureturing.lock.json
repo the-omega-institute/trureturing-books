@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "a647a95581fe0cdf2cded1371dec982c27d5df2d",
-  "pinned_at": "2026-11-27T16:12:47Z",
+  "commit": "22e5f437f10ec7ae4812731933af43b6ff386809",
+  "pinned_at": "2026-11-27T16:54:48Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -234,7 +234,7 @@
       "name": "D5.S0.Diagonal.RecursivePageTable.recursive_page_table_walk",
       "kind": "theorem",
       "statement_id": "sha256:86b084eb43c574d73ad7b21f9f8d7e96995e705b0e8d03403844ce2ce4263134",
-      "line": 28,
+      "line": 26,
       "signature": "theorem recursive_page_table_walk (lookup : Address -> Fin N -> Address) (root leaf data : Address) (selfSlot i j : Fin N) (hself : lookup root selfSlot = root) (hroot : lookup root i = leaf) (hleaf : lookup leaf j = data) : pageWalk lookup root [i, j] = data /\\ pageWalk lookup root [selfSlot, i] = leaf /\\ forall depth : Nat, pageWalk lookup root (List.replicate depth selfSlot) = root",
       "axioms": [
         "propext"
@@ -253,7 +253,7 @@
       "name": "D5.S0.Diagonal.SelfApplicationFates.BinaryFractionalMap",
       "kind": "inductive",
       "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
-      "line": 12,
+      "line": 16,
       "signature": "structure BinaryFractionalMap where a : Fin 2 b : Fin 2 c : Fin 2 d : Fin 2 deriving DecidableEq, Fintype def determinant (m : BinaryFractionalMap) : Int",
       "axioms": []
     },
@@ -262,7 +262,7 @@
       "name": "D5.S0.Diagonal.SelfApplicationFates.HasFate",
       "kind": "def",
       "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
-      "line": 41,
+      "line": 45,
       "signature": "def HasFate (m : BinaryFractionalMap) : SelfApplicationFate → Prop | .empty => fixedCoefficients m = (0, 0, 0) | .dead => fixedCoefficients m = (0, 0, -1) | .collapse => (discriminant m = 0 ∨ discriminant m = 4) ∧ fixedCoefficients m ≠ (0, 0, 0) ∧ fixedCoefficients m ≠ (0, 0, -1) | .live => discriminant m = 5 instance (m : BinaryFractionalMap) (fate : SelfApplicationFate) : Decidable (HasFate m fate)",
       "axioms": [
         "propext"
@@ -273,7 +273,7 @@
       "name": "D5.S0.Diagonal.SelfApplicationFates.IsPhiFamily",
       "kind": "def",
       "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
-      "line": 53,
+      "line": 57,
       "signature": "def IsPhiFamily (m : BinaryFractionalMap) : Prop",
       "axioms": [
         "propext"
@@ -284,7 +284,7 @@
       "name": "D5.S0.Diagonal.SelfApplicationFates.Nondegenerate",
       "kind": "def",
       "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
-      "line": 22,
+      "line": 26,
       "signature": "def Nondegenerate (m : BinaryFractionalMap) : Prop",
       "axioms": []
     },
@@ -293,7 +293,7 @@
       "name": "D5.S0.Diagonal.SelfApplicationFates.SelfApplicationFate",
       "kind": "inductive",
       "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
-      "line": 34,
+      "line": 38,
       "signature": "inductive SelfApplicationFate | empty | dead | collapse | live deriving DecidableEq, Fintype def HasFate (m : BinaryFractionalMap) : SelfApplicationFate → Prop | .empty => fixedCoefficients m = (0, 0, 0) | .dead => fixedCoefficients m = (0, 0, -1) | .collapse => (discriminant m = 0 ∨ discriminant m = 4) ∧ fixedCoefficients m ≠ (0, 0, 0) ∧ fixedCoefficients m ≠ (0, 0, -1) | .live => discriminant m = 5 instance (m : BinaryFractionalMap) (fate : SelfApplicationFate) : Decidable (HasFate m fate)",
       "axioms": []
     },
@@ -302,7 +302,7 @@
       "name": "D5.S0.Diagonal.SelfApplicationFates.determinant",
       "kind": "def",
       "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
-      "line": 19,
+      "line": 23,
       "signature": "def determinant (m : BinaryFractionalMap) : Int",
       "axioms": []
     },
@@ -311,7 +311,7 @@
       "name": "D5.S0.Diagonal.SelfApplicationFates.discriminant",
       "kind": "def",
       "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
-      "line": 30,
+      "line": 34,
       "signature": "def discriminant (m : BinaryFractionalMap) : Int",
       "axioms": [
         "propext"
@@ -322,7 +322,7 @@
       "name": "D5.S0.Diagonal.SelfApplicationFates.fixedCoefficients",
       "kind": "def",
       "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
-      "line": 27,
+      "line": 31,
       "signature": "def fixedCoefficients (m : BinaryFractionalMap) : Int × Int × Int",
       "axioms": []
     },
@@ -331,7 +331,7 @@
       "name": "D5.S0.Diagonal.SelfApplicationFates.fixedPolynomial",
       "kind": "def",
       "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
-      "line": 24,
+      "line": 28,
       "signature": "def fixedPolynomial (m : BinaryFractionalMap) (x : Rat) : Rat"
     },
     "D5/S0/Diagonal/SelfApplicationFates.self_application_four_fates": {
@@ -339,7 +339,7 @@
       "name": "D5.S0.Diagonal.SelfApplicationFates.self_application_four_fates",
       "kind": "theorem",
       "statement_id": "sha256:c190651c86d391a700607d15e9ef7c3380a9bd16dc6b538e4c6769da0badbe3a",
-      "line": 61,
+      "line": 65,
       "signature": "theorem self_application_four_fates (m : BinaryFractionalMap) (hm : Nondegenerate m) : (∃! fate, HasFate m fate) ∧ (HasFate m .live ↔ IsPhiFamily m) ∧ (HasFate m .live → fixedCoefficients m = (1, -1, -1) ∨ fixedCoefficients m = (1, 1, -1)) ∧ (HasFate m .live → discriminant m = 1 ^ 2 + 4)"
     },
     "D5/S0/Observation/BoundedPowerTraceCRTRecovery.power_trace_unique_of_crt_image": {
@@ -12340,6 +12340,409 @@
       "statement_id": "sha256:e0955e6b450411e622c740369e41e7f29bacf658548ef3e8bf5e674985192dd1",
       "line": 83,
       "signature": "theorem horizontal_shift {f : ℂ → ℂ} {d B : ℝ} (_hB : 0 ≤ B) (hd : 0 < d) (hf : DifferentiableOn ℂ f openStrip) (hdecay : ∀ z ∈ closedStrip, ‖f z‖ ≤ B * Real.exp (-d * |z.re|) * (1+|z.re|)) (y : ℝ) (hy : |y| ≤ stripB) : (∫ r : ℝ, f (r : ℂ)) = ∫ r : ℝ, f ((r : ℂ) + (y : ℂ)*I)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondConverseLowerBound.congruence_diff_eq": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondConverseLowerBound",
+      "name": "NullConeGravity.congruence_diff_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:d9306276d16df058a27941b344b764c0f06f704c02d003d70e6dc761df36e248",
+      "line": 102,
+      "signature": "theorem congruence_diff_eq {N A T : Op} (hA : 0 ≤ A) (hB : 0 ≤ A + T) : let C",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondConverseLowerBound.converse_eq71_diverges_of_D_ge_6": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondConverseLowerBound",
+      "name": "NullConeGravity.converse_eq71_diverges_of_D_ge_6",
+      "kind": "theorem",
+      "statement_id": "sha256:d9306276d16df058a27941b344b764c0f06f704c02d003d70e6dc761df36e248",
+      "line": 413,
+      "signature": "theorem converse_eq71_diverges_of_D_ge_6 {D : ℕ} {A T : ℕ → Op} {c M c₀ : ℝ} (hD : 6 ≤ D) (bounds : ConverseBlockBounds (H",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondConverseLowerBound.converse_partial_trace_bounds_D6": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondConverseLowerBound",
+      "name": "NullConeGravity.converse_partial_trace_bounds_D6",
+      "kind": "theorem",
+      "statement_id": "sha256:d9306276d16df058a27941b344b764c0f06f704c02d003d70e6dc761df36e248",
+      "line": 388,
+      "signature": "theorem converse_partial_trace_bounds_D6 {A T : ℕ → Op} {c M c₀ : ℝ} (bounds : ConverseBlockBounds (H",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondConverseLowerBound.converse_partial_trace_bounds_D_ge_7": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondConverseLowerBound",
+      "name": "NullConeGravity.converse_partial_trace_bounds_D_ge_7",
+      "kind": "theorem",
+      "statement_id": "sha256:d9306276d16df058a27941b344b764c0f06f704c02d003d70e6dc761df36e248",
+      "line": 400,
+      "signature": "theorem converse_partial_trace_bounds_D_ge_7 {D : ℕ} {A T : ℕ → Op} {c M c₀ : ℝ} (hD : 7 ≤ D) (bounds : ConverseBlockBounds (H",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondConverseLowerBound.hs_congruence_lower_bound": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondConverseLowerBound",
+      "name": "NullConeGravity.hs_congruence_lower_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:d9306276d16df058a27941b344b764c0f06f704c02d003d70e6dc761df36e248",
+      "line": 221,
+      "signature": "theorem hs_congruence_lower_bound {A T : Op} {c : ℝ} (hc : 0 < c) (hN : c • (1 : Op) ≤ 1 + T) (hA : 0 ≤ A) (hAupper : A ≤ (2 : ℝ) • (1 : Op)) (hB : 0 ≤ A + T) (hBupper : 0 ≤ (1 + T) - (A - 1)) (hΔ : IsHilbertSchmidt (covarianceRootDiff (1 + T) A T)) : ∃ hT : IsHilbertSchmidt T, Real.sqrt (hsSq T hT) ≤ ‖(1 : Op) + T‖ * (Real.sqrt 2 + Real.sqrt (2 / c)) * Real.sqrt (hsSq _ hΔ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondConverseLowerBound.hs_sum_norm_converse": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondConverseLowerBound",
+      "name": "NullConeGravity.hs_sum_norm_converse",
+      "kind": "theorem",
+      "statement_id": "sha256:d9306276d16df058a27941b344b764c0f06f704c02d003d70e6dc761df36e248",
+      "line": 235,
+      "signature": "theorem hs_sum_norm_converse {A T : Op} {c : ℝ} (hc : 0 < c) (hN : c • (1 : Op) ≤ 1 + T) (hA : 0 ≤ A) (hAupper : A ≤ (2 : ℝ) • (1 : Op)) (hB : 0 ≤ A + T) (hBupper : 0 ≤ (1 + T) - (A - 1)) (hΔ : IsHilbertSchmidt (covarianceRootDiff (1 + (1 + T)) A T)) : ∃ hT : IsHilbertSchmidt T, Real.sqrt (hsSq T hT) ≤ ‖(1 : Op) + (1 + T)‖ * (Real.sqrt 2 + Real.sqrt (2 / (1 + c))) * Real.sqrt (hsSq _ hΔ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondConverseLowerBound.norm_A_prime_le_two_div_c": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondConverseLowerBound",
+      "name": "NullConeGravity.norm_A_prime_le_two_div_c",
+      "kind": "theorem",
+      "statement_id": "sha256:d9306276d16df058a27941b344b764c0f06f704c02d003d70e6dc761df36e248",
+      "line": 93,
+      "signature": "theorem norm_A_prime_le_two_div_c {N A : Op} {c : ℝ} (hc : 0 < c) (hN : c • (1 : Op) ≤ N) (hA : 0 ≤ A) (hAupper : A ≤ (2 : ℝ) • (1 : Op)) : ‖adjointCongr (covarianceNormalizer N) A‖ ≤ 2 / c",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondConverseLowerBound.norm_B_prime_le_two": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondConverseLowerBound",
+      "name": "NullConeGravity.norm_B_prime_le_two",
+      "kind": "theorem",
+      "statement_id": "sha256:d9306276d16df058a27941b344b764c0f06f704c02d003d70e6dc761df36e248",
+      "line": 83,
+      "signature": "theorem norm_B_prime_le_two {A T : Op} {c : ℝ} (hc : 0 < c) (hN : c • (1 : Op) ≤ 1 + T) (hB : 0 ≤ A + T) (hBupper : 0 ≤ (1 + T) - (A - 1)) : ‖adjointCongr (covarianceNormalizer (1 + T)) (A + T)‖ ≤ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondConverseLowerBound.not_hs_eq71_operator_of_D_ge_6": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondConverseLowerBound",
+      "name": "NullConeGravity.not_hs_eq71_operator_of_D_ge_6",
+      "kind": "theorem",
+      "statement_id": "sha256:d9306276d16df058a27941b344b764c0f06f704c02d003d70e6dc761df36e248",
+      "line": 437,
+      "signature": "theorem not_hs_eq71_operator_of_D_ge_6 {D : ℕ} {A T : ℕ → Op} {c M c₀ : ℝ} {K : Type*} [NormedAddCommGroup K] [InnerProductSpace ℂ K] [CompleteSpace K] (hD : 6 ≤ D) (bounds : ConverseBlockBounds (H",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondConverseLowerBound.not_hs_sqrt_diff_of_not_hs_T": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondConverseLowerBound",
+      "name": "NullConeGravity.not_hs_sqrt_diff_of_not_hs_T",
+      "kind": "theorem",
+      "statement_id": "sha256:d9306276d16df058a27941b344b764c0f06f704c02d003d70e6dc761df36e248",
+      "line": 253,
+      "signature": "theorem not_hs_sqrt_diff_of_not_hs_T {A T : Op} {c : ℝ} (hc : 0 < c) (hN : c • (1 : Op) ≤ 1 + T) (hA : 0 ≤ A) (hAupper : A ≤ (2 : ℝ) • (1 : Op)) (hB : 0 ≤ A + T) (hBupper : 0 ≤ (1 + T) - (A - 1)) (hT : ¬ IsHilbertSchmidt T) : ¬ IsHilbertSchmidt (covarianceRootDiff (1 + T) A T)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondConverseLowerBound.quarterPower_block_comparison": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondConverseLowerBound",
+      "name": "NullConeGravity.quarterPower_block_comparison",
+      "kind": "theorem",
+      "statement_id": "sha256:d9306276d16df058a27941b344b764c0f06f704c02d003d70e6dc761df36e248",
+      "line": 260,
+      "signature": "theorem quarterPower_block_comparison {A T W : Op} {c : ℝ} (hc : 0 < c) (hN : c • (1 : Op) ≤ 1 + T) (hA : 0 ≤ A) (hAupper : A ≤ (2 : ℝ) • (1 : Op)) (hB : 0 ≤ A + T) (hBupper : 0 ≤ (1 + T) - (A - 1)) (hW : IsHilbertSchmidt W) (hfactor : T = quarterRoot A * W * quarterRoot A) : ∃ (hΔ : IsHilbertSchmidt (covarianceRootDiff (1 + T) A T)) (hT : IsHilbertSchmidt T), hsSq _ hΔ ≤ ‖covarianceNormalizer (1 + T)‖ ^ 2 * hsSq W hW ∧ Real.sqrt (hsSq T hT) ≤ ‖(1 : Op) + T‖ * (Real.sqrt 2 + Real.sqrt (2 / c)) * Real.sqrt (hsSq _ hΔ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel.allen_folacci_antipodal_obstruction": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel",
+      "name": "NullConeGravity.allen_folacci_antipodal_obstruction",
+      "kind": "theorem",
+      "statement_id": "sha256:471ed4332b6404af36e2ed425ba9dc1946b4fa04326f7e62585bd6fd14ea7988",
+      "line": 418,
+      "signature": "theorem allen_folacci_antipodal_obstruction {D : ℕ} (hD : 4 ≤ D) (W : ℝ → ℝ) (hW : ∀ P ∈ Ioo (-1 : ℝ) 1, DifferentiableAt ℝ W P) (hW' : ∀ P ∈ Ioo (-1 : ℝ) 1, DifferentiableAt ℝ (deriv W) P) (hODE : ∀ P ∈ Ioo (-1 : ℝ) 1, (1 - P ^ 2) * deriv (deriv W) P - (D : ℝ) * P * deriv W P = 0) : ∃ C : ℝ, (∀ P ∈ Ioo (-1 : ℝ) 1, deriv W P = C * (1 - P ^ 2) ^ (-(D : ℝ) / 2)) ∧ (C ≠ 0 → Tendsto (fun P => |deriv W P|) (𝓝[Ioo (-1 : ℝ) 1] (-1)) atTop ∧ ∀ a : ℝ, ¬ Tendsto W (𝓝[Ioo (-1 : ℝ) 1] (-1)) (𝓝 a))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel.bdODE_conformal_constant": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel",
+      "name": "NullConeGravity.bdODE_conformal_constant",
+      "kind": "theorem",
+      "statement_id": "sha256:471ed4332b6404af36e2ed425ba9dc1946b4fa04326f7e62585bd6fd14ea7988",
+      "line": 258,
+      "signature": "theorem bdODE_conformal_constant (κ s : ℝ) : bdODE κ 0 (fun _ => 1) s = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel.bd_conformal_hypergeometric": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel",
+      "name": "NullConeGravity.bd_conformal_hypergeometric",
+      "kind": "theorem",
+      "statement_id": "sha256:471ed4332b6404af36e2ed425ba9dc1946b4fa04326f7e62585bd6fd14ea7988",
+      "line": 385,
+      "signature": "theorem bd_conformal_hypergeometric {κ H s : ℝ} (hκ : 0 < κ) (hs : 0 < s) (hs₁ : s < 1) : H ^ (2 * κ) * Real.Gamma κ * Real.Gamma (κ + 1) / ((4 * Real.pi) ^ (κ + 1) * Real.Gamma (κ + 1)) * ordinaryHypergeometric κ (κ + 1) (κ + 1) (1 - s) = H ^ (2 * κ) * Real.Gamma κ / (4 * Real.pi) ^ (κ + 1) * s ^ (-κ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel.bd_conformal_parameter_eq": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel",
+      "name": "NullConeGravity.bd_conformal_parameter_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:471ed4332b6404af36e2ed425ba9dc1946b4fa04326f7e62585bd6fd14ea7988",
+      "line": 263,
+      "signature": "theorem bd_conformal_parameter_eq (D : ℕ) (hD : 4 ≤ D) {H : ℝ} (hH : 0 < H) (m ξ : ℝ) : let κ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel.bd_first_coefficient": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel",
+      "name": "NullConeGravity.bd_first_coefficient",
+      "kind": "theorem",
+      "statement_id": "sha256:471ed4332b6404af36e2ed425ba9dc1946b4fa04326f7e62585bd6fd14ea7988",
+      "line": 299,
+      "signature": "theorem bd_first_coefficient {κ e : ℝ} {Y : ℝ⟦X⟧} (hκ : κ ≠ 1) (h₀ : coeff 0 Y = 1) (hY : bdFormalODE κ e Y = 0) : coeff 1 Y = e / (1 - κ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel.bd_frobenius_recurrence": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel",
+      "name": "NullConeGravity.bd_frobenius_recurrence",
+      "kind": "theorem",
+      "statement_id": "sha256:471ed4332b6404af36e2ed425ba9dc1946b4fa04326f7e62585bd6fd14ea7988",
+      "line": 281,
+      "signature": "theorem bd_frobenius_recurrence (κ e : ℝ) (Y : ℝ⟦X⟧) : bdFormalODE κ e Y = 0 ↔ ∀ j : ℕ, ((j : ℝ) + 1) * ((j : ℝ) + 1 - κ) * coeff (j + 1) Y = ((j : ℝ) * ((j : ℝ) + 1) + e) * coeff j Y",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel.bd_resonance": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel",
+      "name": "NullConeGravity.bd_resonance",
+      "kind": "theorem",
+      "statement_id": "sha256:471ed4332b6404af36e2ed425ba9dc1946b4fa04326f7e62585bd6fd14ea7988",
+      "line": 306,
+      "signature": "theorem bd_resonance {e : ℝ} {Y : ℝ⟦X⟧} (h₀ : coeff 0 Y = 1) (hY : bdFormalODE 1 e Y = 0) : e = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel.bd_resonant_log_coefficient": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel",
+      "name": "NullConeGravity.bd_resonant_log_coefficient",
+      "kind": "theorem",
+      "statement_id": "sha256:471ed4332b6404af36e2ed425ba9dc1946b4fa04326f7e62585bd6fd14ea7988",
+      "line": 313,
+      "signature": "theorem bd_resonant_log_coefficient {e : ℝ} {Y : ℝ → ℝ} (hY : ∀ s ∈ Ioo (0 : ℝ) 1, DifferentiableAt ℝ Y s) (hY' : ∀ s ∈ Ioo (0 : ℝ) 1, DifferentiableAt ℝ (deriv Y) s) (hODE : ∀ s ∈ Ioo (0 : ℝ) 1, bdODE 1 e Y s = 0) (hnormal : Tendsto Y (𝓝[>] 0) (𝓝 1)) : Tendsto (fun s => (Y s - 1) / (s * Real.log s)) (𝓝[>] 0) (𝓝 e)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel.ds_affine_boundary_log_mixed_weak": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel",
+      "name": "NullConeGravity.ds_affine_boundary_log_mixed_weak",
+      "kind": "theorem",
+      "statement_id": "sha256:471ed4332b6404af36e2ed425ba9dc1946b4fa04326f7e62585bd6fd14ea7988",
+      "line": 171,
+      "signature": "theorem ds_affine_boundary_log_mixed_weak {H T a b : ℝ} {F G : ℝ → ℝ} (hH : 0 < H) (hT : 0 < T) (hab : a ≤ b) (hbT : b < T) (hF : ContDiff ℝ 1 F) (hG : ContDiff ℝ 1 G) (hFa : F a = 0) (hFb : F b = 0) (hGa : G a = 0) (hGb : G b = 0) : let μ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel.ds_affine_hasDerivAt": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel",
+      "name": "NullConeGravity.ds_affine_hasDerivAt",
+      "kind": "theorem",
+      "statement_id": "sha256:471ed4332b6404af36e2ed425ba9dc1946b4fa04326f7e62585bd6fd14ea7988",
+      "line": 52,
+      "signature": "theorem ds_affine_hasDerivAt {H T u : ℝ} (hH : 0 < H) (hT : 0 < T) (hu : u < T) : HasDerivAt (dsAffine H T) (dsOmega H T u ^ 2) u",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel.ds_flux_wronskian_eq": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel",
+      "name": "NullConeGravity.ds_flux_wronskian_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:471ed4332b6404af36e2ed425ba9dc1946b4fa04326f7e62585bd6fd14ea7988",
+      "line": 63,
+      "signature": "theorem ds_flux_wronskian_eq {H T κ u : ℝ} {φ₁ φ₂ : ℝ → ℝ} (hH : 0 < H) (hu : 0 < u) (huT : u < T) (h₁ : DifferentiableAt ℝ φ₁ u) (h₂ : DifferentiableAt ℝ φ₂ u) : let ρ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel.ds_leading_angular_coefficient_eq": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel",
+      "name": "NullConeGravity.ds_leading_angular_coefficient_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:471ed4332b6404af36e2ed425ba9dc1946b4fa04326f7e62585bd6fd14ea7988",
+      "line": 346,
+      "signature": "theorem ds_leading_angular_coefficient_eq (e T u v : ℝ) (ℓ : ℕ) (hℓ : 1 ≤ ℓ) : (∀ κ > 1, -(Real.Gamma κ / (4 * Real.pi ^ (κ + 1)) * e / (4 * (κ - 1))) * deriv (dsMobius T) u * deriv (dsMobius T) v * Omega.sphericalAngularMoment κ ℓ (1 - κ) = dsLeadingCoefficient κ e T u v ℓ) ∧ (Real.Gamma 1 / (4 * Real.pi ^ (2 : ℝ)) * e / 4) * deriv (dsMobius T) u * deriv (dsMobius T) v * deriv (Omega.sphericalAngularMoment 1 ℓ) 0 = dsLeadingCoefficient 1 e T u v ℓ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel.ds_leading_coefficient_sign": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel",
+      "name": "NullConeGravity.ds_leading_coefficient_sign",
+      "kind": "theorem",
+      "statement_id": "sha256:471ed4332b6404af36e2ed425ba9dc1946b4fa04326f7e62585bd6fd14ea7988",
+      "line": 357,
+      "signature": "theorem ds_leading_coefficient_sign {κ e H T u v : ℝ} {ℓ : ℕ} (hκ : 1 ≤ κ) (hℓ : 1 ≤ ℓ) (hH : 0 < H) (hT : 0 < T) (hu : u < T) (hv : v < T) : (dsLeadingCoefficient κ e T u v ℓ = 0 ↔ e * H ^ 2 = 0) ∧ (0 < dsLeadingCoefficient κ e T u v ℓ ↔ e * H ^ 2 < 0) ∧ (dsLeadingCoefficient κ e T u v ℓ < 0 ↔ 0 < e * H ^ 2)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel.ds_mixed_product_rule": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel",
+      "name": "NullConeGravity.ds_mixed_product_rule",
+      "kind": "theorem",
+      "statement_id": "sha256:471ed4332b6404af36e2ed425ba9dc1946b4fa04326f7e62585bd6fd14ea7988",
+      "line": 210,
+      "signature": "theorem ds_mixed_product_rule {H T κ y u v : ℝ} {U : ℝ → ℝ} (hH : 0 < H) (hy : 0 < y) (hu : 0 < u) (hv : 0 < v) (huT : u < T) (hvT : v < T) (hU : ∀ t > 0, DifferentiableAt ℝ U t) (hU' : DifferentiableAt ℝ (deriv U) (dsChord T y u v)) : let s",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel.ds_mobius_hasDerivAt": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel",
+      "name": "NullConeGravity.ds_mobius_hasDerivAt",
+      "kind": "theorem",
+      "statement_id": "sha256:471ed4332b6404af36e2ed425ba9dc1946b4fa04326f7e62585bd6fd14ea7988",
+      "line": 44,
+      "signature": "theorem ds_mobius_hasDerivAt {T u : ℝ} (hu : u < T) : HasDerivAt (dsMobius T) (T / (T - u) ^ 2) u",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel.ds_mobius_log_eq": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel",
+      "name": "NullConeGravity.ds_mobius_log_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:471ed4332b6404af36e2ed425ba9dc1946b4fa04326f7e62585bd6fd14ea7988",
+      "line": 102,
+      "signature": "theorem ds_mobius_log_eq {T u v : ℝ} (hT : 0 < T) (hu : u < T) (hv : v < T) (huv : u ≠ v) : Real.log (dsMobius T u - dsMobius T v) = Real.log T + Real.log (u - v) - Real.log (T - u) - Real.log (T - v)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel.ds_mobius_log_mixed_deriv": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel",
+      "name": "NullConeGravity.ds_mobius_log_mixed_deriv",
+      "kind": "theorem",
+      "statement_id": "sha256:471ed4332b6404af36e2ed425ba9dc1946b4fa04326f7e62585bd6fd14ea7988",
+      "line": 112,
+      "signature": "theorem ds_mobius_log_mixed_deriv {T u v : ℝ} (hT : 0 < T) (hu : u < T) (hv : v < T) (huv : u ≠ v) : deriv (fun x => deriv (fun y => Real.log (dsMobius T x - dsMobius T y)) v) u = deriv (fun x => deriv (fun y => Real.log (x - y)) v) u",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel.ds_unscaled_blowup": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel",
+      "name": "NullConeGravity.ds_unscaled_blowup",
+      "kind": "theorem",
+      "statement_id": "sha256:471ed4332b6404af36e2ed425ba9dc1946b4fa04326f7e62585bd6fd14ea7988",
+      "line": 514,
+      "signature": "theorem ds_unscaled_blowup {κ T u : ℝ} (hκ : 1 < κ) (hT : 0 < T) (hu : 0 < u) (huT : u < T) (hcut : κ * u ≤ (κ - 1) * T / 2) : (κ - 1) / (2 * T) * u ^ (-κ) ≤ -deriv (fun x : ℝ => x ^ (1 - κ) / (T - x)) u",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel.ds_unscaled_bound_counterexample": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel",
+      "name": "NullConeGravity.ds_unscaled_bound_counterexample",
+      "kind": "theorem",
+      "statement_id": "sha256:471ed4332b6404af36e2ed425ba9dc1946b4fa04326f7e62585bd6fd14ea7988",
+      "line": 532,
+      "signature": "theorem ds_unscaled_bound_counterexample {T : ℝ} (hT : 0 < T) : T / 3 ∈ Ioo (0 : ℝ) (T / 2) ∧ |deriv (fun x : ℝ => x ^ (1 - (3 / 2 : ℝ)) / (T - x)) (T / 3)| < ((3 / 2 : ℝ) - 1) * (T / 3) ^ (-(3 / 2 : ℝ)) / T",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel.ds_unscaled_packet_diverges": {
+      "module": "D5/S3/Quantum/Analysis/NullConeGravity/NullDiamondDeSitterKernel",
+      "name": "NullConeGravity.ds_unscaled_packet_diverges",
+      "kind": "theorem",
+      "statement_id": "sha256:471ed4332b6404af36e2ed425ba9dc1946b4fa04326f7e62585bd6fd14ea7988",
+      "line": 589,
+      "signature": "theorem ds_unscaled_packet_diverges {κ T L : ℝ} (hκ : 1 < κ) (hL : 0 < L) (hLT : L < T) {g : ℝ → ℝ} (hg : ContDiff ℝ ⊤ g) (hgc : HasCompactSupport g) (hgn : 0 ≤ g) (hg0 : ∃ x, g x ≠ 0) : Tendsto (fun a : ℝ => ∫ s : ℝ, dsUnscaledModularKernel κ T L s * g (s + a)) atTop atTop ∧ ∀ (w : ℝ → ℝ) (a : ℝ), (∫ ξ : ℝ, w ξ * ‖𝓕 (fun s : ℝ => (g (s + a) : ℂ)) ξ‖ ^ 2) = ∫ ξ : ℝ, w ξ * ‖𝓕 (fun s : ℝ => (g s : ℂ)) ξ‖ ^ 2",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
