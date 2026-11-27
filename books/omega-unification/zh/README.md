@@ -45,7 +45,7 @@
 | **第五层：模型内构造与诠释** | `MODEL` | 十九点贝伦德球壳选取、双时钟相位映射、磁拉普拉斯质量谱、门户投影、格点重叠核与 $529$ 面绕数作用量 | 邻近代数恒等式经 Lean 验证，不自动把物理映射升格为自然律 |
 | **第六层：第一性原理开放前沿** | `OPEN` | 尚未从单一主联络无事后拟合导出的核心物理闭合问题（特定模型假设下的已证定量障碍按其证明载体归入第三或第四层） | 不以条件拟合或单窗命中掩盖缺失的统一作用量与尺度来源 |
 
-阅读和构建该证明，首选基于 Alpöge 原证明改写的 [`lsernau/grh-lean`](https://github.com/lsernau/grh-lean)。可从[可读版导览](https://github.com/lsernau/grh-lean/blob/72fead102f663d5c7a407964a13dc0cf9d977207/grh/GUIDE.md)入手，也可构建[精简版](https://github.com/lsernau/grh-lean/tree/72fead102f663d5c7a407964a13dc0cf9d977207/grh-compact)。
+经典黎曼猜想与狄利克雷广义黎曼猜想的 Lean 形式化主仓库由 Lean 社群维护。[leanprover-community/riemann-hypothesis](https://github.com/leanprover-community/riemann-hypothesis)
 
 **关于经典黎曼猜想（RH）与狄利克雷广义黎曼猜想（Dirichlet GRH）的外部形式化事实说明。** 2026 年 11 月 20 日，Levent Alpöge 公布覆盖经典 RH 与全体狄利克雷 $L$ 函数 GRH 的 Lean 4（`v4.33.1`，共 $175{,}187$ 个模块）形式化证明；2026 年 11 月 21 日，Lean FRO 与 Mathlib Initiative 发表[联合声明](https://leanprover-community.github.io/blog/posts/riemann-hypothesis/)，经独立比对工具 `comparator` 与 `con-leche --compare` 确认其所证命题与纯 Mathlib 中的 `RiemannHypothesis` 完全一致。本组织维护的可复现构建与分片重放仓库为 [`the-omega-institute/riemann-hypothesis`](https://github.com/the-omega-institute/riemann-hypothesis)，源码静态扫描确认零 `sorry`、零 `admit`、零自定义公理，终端五定理仅依赖标准 Lean 公理闭包 $\{\mathrm{propext}, \mathrm{Classical.choice}, \mathrm{Quot.sound}\}$，并已由全球多支独立团队在 `leanchecker`、`lean4lean`、`nanoda` 与 `con-leche` 上完成全量模块核验。
 

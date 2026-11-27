@@ -986,7 +986,7 @@ for (const lang of ['zh', 'en']) {
 check(
   'the RH note links the recommended proof and records for the original release',
   same(await page.locator('#basis .lean.argued a').evaluateAll((els) => els.map((a) => a.getAttribute('href'))), [
-    'https://github.com/lsernau/grh-lean',
+    'https://github.com/leanprover-community/riemann-hypothesis',
     'https://alpo.ge/remark.pdf',
     'https://github.com/the-omega-institute/riemann-hypothesis/blob/b14f2bd19e5e12a4ba6b1d207e3c5fbb06e49ed6/src/Statements.lean',
     'https://github.com/the-omega-institute/riemann-hypothesis/blob/b14f2bd19e5e12a4ba6b1d207e3c5fbb06e49ed6/src/Main.lean',

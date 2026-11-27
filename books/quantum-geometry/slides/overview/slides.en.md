@@ -506,7 +506,7 @@ section: "Part VI · warrant"
     </div>
   </div>
 </div>
-<Source>Ch. 21 Gödel–Tarski literature · Ch. 22 <a href="https://github.com/lsernau/grh-lean">grh-lean</a> and open ERH · Ch. 24 Schanuel's conjecture</Source>
+<Source>Ch. 21 Gödel–Tarski literature · Ch. 22 <a href="https://github.com/leanprover-community/riemann-hypothesis">Lean RH/GRH</a> and open ERH · Ch. 24 Schanuel's conjecture</Source>
 
 ---
 # 29 Part VI · Crossing the Horizon · picture (continued)

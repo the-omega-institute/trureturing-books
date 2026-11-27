@@ -584,7 +584,7 @@ $$
 四阶矩界 $P_4(T)\le T^2P_2(T)$ 允许把中心窗直接取为 $|t|\le1/T_n$。二阶矩下界保证换元后的半宽 $s_n/T_n$ 趋于无穷。中心积分给出 $1/(2\sqrt\pi)$。倒数高度、周期相位和 Landau 估计覆盖 $1/T_n\le|t|\le\log T_n$ 的整个区间，给出统一的得分亏损下界 $c/\log T_n$，其中 $c>0$。得分的 $2n$ 次幂于是至多为 $\exp(-2cn/\log T_n)$，足以抵消归一化积分中的 $T_n\sqrt n\log T_n$ 因子。相对截断把极限传到全线。对 $\eta_n$ 的每个固定正倍数应用同一论证，得到二次斜坡极限，再由两侧割线得到含端点的硬碰撞常数。完整证明由 Lean 内核检查。
 :::
 
-[@thm-ch34-landau-inclusive-cutoff] 给出了冻结碰撞定理所需的 Landau 前提。所以 RH 加上所列的截断与分辨率条件即可推出这个碰撞极限。Alpöge 的外部形式化证明给出了 Mathlib 的 RH 命题。 [外部 RH 定理](https://github.com/lsernau/grh-lean/blob/72fead102f663d5c7a407964a13dc0cf9d977207/grh/src/Main.lean#L5)
+[@thm-ch34-landau-inclusive-cutoff] 给出了冻结碰撞定理所需的 Landau 前提。所以 RH 加上所列的截断与分辨率条件即可推出这个碰撞极限。Alpöge 的外部形式化证明给出了 Mathlib 的 RH 命题。 [外部 RH 定理](https://github.com/leanprover-community/riemann-hypothesis/blob/7c4ccbd64d02774b0a5b40a5f923f5b7a18e8abc/src/Main.lean#L9)
 
 若 $\eta_n\log T_n$ 有界，把积分只截到 $\log T_n$ 时，相对余项界可以停留在常数量级。
 
