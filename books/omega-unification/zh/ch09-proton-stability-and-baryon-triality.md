@@ -74,7 +74,11 @@ $$
 只要取 $h \not\equiv 0 \pmod 3$（两个非零值 $h = 1, 2$ 仅差生成元互换，给出同一选择定则），这条**精确重子三重对称（baryon triality）**立刻展现三重威力：
 
 1. **彻底禁绝 $\Delta B = 1, 2 \pmod 3$**：一切单质子衰变与双核子振荡算符（包括六维 $QQQL$）全部携带非零余荷而被精确禁止；所有标准模型汤川项与温伯格中微子项余荷为零而完整保留；将该离散变换与常数超荷规范变换合成后，电弱希格斯真空精确中性，不带残余破缺相位。
-2. **最低允许算符飙升至维数 $15$（或 $18$）**：在重子三重对称 $\Delta B \in 3\mathbb{Z}$ 下，轻场中首个容许的重子数破坏局域算符不再是六维，而是飙升至**维数 $15$**（九夸克一轻子及以上级联）；若进一步要求同时守恒 $B - L$，最低算符更推高至**维数 $18$**（[`ch39-baryon-triality-operator-floor.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-baryon-triality-operator-floor.py)）！相比之下，仅含守恒双线性的四步威尔逊—汤川调节器反倒拥有过强的连续 $U(1)_B$ 对称，无法直接孕育[第七章](ch07-chiral-three-generations.md)的弱瞬子顶点，而精确 $\mathbb{Z}_3$ 恰好与三代弱瞬子 $\Delta B = 3$ 严丝合缝。
+2. **按轻子数区分的最低算符维数。** 用三代标准模型轻场构造局域规范不变的洛伦兹标量。重子三重对称允许的最小非零 $|\Delta B|$ 是 $3$，至少要用九个夸克场或其共轭。旋转 $2\pi$ 使每个外尔场变号，故标量含偶数个费米场，典范维数至少是 $10\times 3/2=15$。取到 $15$ 时恰有九个同向携带重子数的场和一个轻子场，已没有维数留给导数或玻色场。固定 $\Delta B=-3$，则维数 $15$ 只容得下 $\Delta L=\pm1$。标准模型算符满足 $d\equiv(\Delta B-\Delta L)/2\pmod 2$。因此 $\Delta L=-1$ 允许奇数维，$\Delta L=+1$ 则至少需要维数 $16$。取厄米共轭会同时反转这两个荷。[Kobach，式 (17)–(18)](https://doi.org/10.1016/j.physletb.2016.05.050)
+
+   两个下界都能取到。用括号表示两个左手旋量的反对称缩并，令 $N_i=\epsilon^{abc}(u^c_{ia}d^c_{ib})d^c_{ic}$，并将最后一个 $d^c$ 换成 $u^c$ 得到 $P_i$，其中 $i$ 为代指标。两者都是色单态旋量，超荷分别为 $0$ 和 $-1$。维数 $15$ 的 $(N_1N_2)(P_3 e^c)$ 有 $(\Delta B,\Delta L)=(-3,-1)$。维数 $16$ 的 $(N_1N_2)(N_3\,\epsilon_{rs}L^r H^s)$ 有 $(-3,+1)$，其中希格斯与轻子双重态缩并成超荷为零的旋量。可用一个单项检查每个算符是否非零。固定颜色顺序 $0,1,2$，在 $N_1,N_2$ 分别选旋量分量 $(0,1,0)$ 和 $(1,0,1)$。第三代取 $(0,1,0)$，最后的轻子取分量 $1$，在 $LH$ 中选 $L^0 H^1$。三个色缩并展开后，这两个单项的系数绝对值分别为 $2$ 和 $1$。
+
+   若同时守恒 $B-L$，则 $|\Delta L|=|\Delta B|\ge3$，至少需要九个夸克场和三个轻子场，故 $d\ge18$。取 [@ex-ou-ch09-qqql-grassmann] 中每代各一个 $QQQL$ 相乘，就有 $(\Delta B,\Delta L)=(3,3)$。各代使用独立的格拉斯曼生成元，逐代选取系数为 $4$ 的单项，乘积系数的绝对值便是 $4^3=64$。这也解释了[第七章](ch07-chiral-three-generations.md)三代弱瞬子顶点的荷为何与重子三重对称相容，而仅含守恒双线性的四步威尔逊—汤川调节器具有连续 $U(1)_B$，会排除这一顶点。[维数 15 与 18 的非零单项复算](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-baryon-triality-operator-floor.py)
 3. **无反常规范 $U(1)_X$ 紫外完成与一般整除判据 $m \mid N_g$**：重子三重对称绝非无源之水的全局离散公设，它拥有完全无反常的连续规范紫外完成。增添规范群 $U(1)_X$，令 $X = 3B - 9L_\tau$，在 $\tau$ 代加入荷为 $+9$ 的左手共轭中微子 $\nu^c_\tau$（另两代可选加中性单态），并引入一支标准模型中性、$X$ 荷为 $9$ 的标量凝聚场。
 
 ::: {.remark #rem-ou-ch09-anomaly-ledger title="规范 $U(1)_X$（$X = 3B - 9L_\tau$）的六项手征反常逐项清零表"}
