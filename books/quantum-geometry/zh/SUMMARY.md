@@ -284,6 +284,7 @@
       - [E.8.1.4 曲率从哪里来](appendix-e-s08-s01-s04-curvature.md)
       - [E.8.1.5 弦图 Banach 势重构的精确通用常数](appendix-e-s08-s01-s05-sharp-chordal-banach-four.md)
       - [E.8.1.6 3-树的 Banach 重构界与路径三次幂的精确常数](appendix-e-s08-s01-s06-three-tree-banach-sharp-bounds.md)
+      - [E.8.1.7 $\mathrm{SU}(2)$ 弦图增益的重构界](appendix-e-s08-s01-s07-chordal-su2-sharp-bounds.md)
     - [E.8.2 玻恩权重、动力学与系综](appendix-e-s08-s02-born-dynamics-ensembles.md)
     - [E.8.3 轨道、观察者与复结构](appendix-e-s08-s03-orbits-and-structure.md)
 - [附录 F 排除球、面极性与自旋因子定向分类](appendix-f.md)
