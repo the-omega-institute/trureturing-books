@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "b91a0225becdff105d5d595aaa1b266e1b10691e",
-  "pinned_at": "2026-11-27T02:30:20Z",
+  "commit": "759fabffb023d752ba9bd03074633d79c49e7963",
+  "pinned_at": "2026-11-27T02:54:25Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -6503,6 +6503,188 @@
       "statement_id": "sha256:02f9cbddf9689d1494a45ce0106b9fd36590f907dd2100819830d24fad29873c",
       "line": 139,
       "signature": "theorem schwarzschild_weylQuartic (M r : ℝ) : (weylQuarticEquiv (schwarzschildWeyl M r)).val = Polynomial.monomial 2 ((24 : ℂ) * (M / r ^ 3 : ℝ))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PlebanskiSectors4D.degenerate_simplicity_witnesses": {
+      "module": "D5/S3/Geometry/Lorentz/PlebanskiSectors4D",
+      "name": "D5.S3.Geometry.Lorentz.PlebanskiSectors4D.degenerate_simplicity_witnesses",
+      "kind": "theorem",
+      "statement_id": "sha256:1affa799ff5a40e7c40c6c004dfa2288e1b122a556ab308cad99b298bbf61124",
+      "line": 150,
+      "signature": "theorem degenerate_simplicity_witnesses : wedgeGram (model (0 : K)) = 0 ∧ (urbantke (model (0 : K))).rank = 1 ∧ (spatial : FormTriple K) ≠ 0 ∧ wedgeGram (spatial : FormTriple K) = 0 ∧ urbantke (spatial : FormTriple K) = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PlebanskiSectors4D.euclidean_model_iff": {
+      "module": "D5/S3/Geometry/Lorentz/PlebanskiSectors4D",
+      "name": "D5.S3.Geometry.Lorentz.PlebanskiSectors4D.euclidean_model_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:1affa799ff5a40e7c40c6c004dfa2288e1b122a556ab308cad99b298bbf61124",
+      "line": 317,
+      "signature": "theorem euclidean_model_iff (B : FormTriple ℝ) : (Simple B ∧ (wedgeGram B).det ≠ 0) ↔ ∃ (A : M4 ℝ) (overall sd : Bool), 0 < A.det ∧ B = action A (sectorModel 1 overall sd)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PlebanskiSectors4D.exists_graph_model": {
+      "module": "D5/S3/Geometry/Lorentz/PlebanskiSectors4D",
+      "name": "D5.S3.Geometry.Lorentz.PlebanskiSectors4D.exists_graph_model",
+      "kind": "theorem",
+      "statement_id": "sha256:1affa799ff5a40e7c40c6c004dfa2288e1b122a556ab308cad99b298bbf61124",
+      "line": 248,
+      "signature": "theorem exists_graph_model (B : FormTriple K) : (Simple B ∧ (wedgeGram B).det ≠ 0) ↔ ∃ (A : M4 K) (z : K), A.det ≠ 0 ∧ z ≠ 0 ∧ B = action A (model z)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PlebanskiSectors4D.fixed_metric_sector_orbit_iff": {
+      "module": "D5/S3/Geometry/Lorentz/PlebanskiSectors4D",
+      "name": "D5.S3.Geometry.Lorentz.PlebanskiSectors4D.fixed_metric_sector_orbit_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:1affa799ff5a40e7c40c6c004dfa2288e1b122a556ab308cad99b298bbf61124",
+      "line": 363,
+      "signature": "theorem fixed_metric_sector_orbit_iff {K : Type u} [Field K] [CharZero K] (f : ℝ →+* K) (z : K) (hz : z ≠ 0) (g₀ g A C : M4 ℝ) (hg₀ : f.mapMatrix g₀ = modelMetric z) (hg : g.det ≠ 0) (ha : 0 < A.det) (hc : 0 < C.det) (hA : A * g₀ * Aᵀ = g) (hC : C * g₀ * Cᵀ = g) (τ σ τ' σ' : Bool) : (∃ L : M4 ℝ, orientedIsometry g L ∧ action (f.mapMatrix L) (action (f.mapMatrix A) (sectorModel z τ σ)) = action (f.mapMatrix C) (sectorModel z τ' σ')) ↔ τ = τ' ∧ σ = σ'",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PlebanskiSectors4D.lorentzian_model_iff": {
+      "module": "D5/S3/Geometry/Lorentz/PlebanskiSectors4D",
+      "name": "D5.S3.Geometry.Lorentz.PlebanskiSectors4D.lorentzian_model_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:1affa799ff5a40e7c40c6c004dfa2288e1b122a556ab308cad99b298bbf61124",
+      "line": 566,
+      "signature": "theorem lorentzian_model_iff (B : FormTriple ℂ) : (Simple B ∧ (wedgeGram B).det ≠ 0 ∧ lorentzianReal B) ↔ ∃ (A : M4 ℝ) (overall sd : Bool), 0 < A.det ∧ B = action (realCast.mapMatrix A) (sectorModel Complex.I overall sd)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PlebanskiSectors4D.model_orbit_iff": {
+      "module": "D5/S3/Geometry/Lorentz/PlebanskiSectors4D",
+      "name": "D5.S3.Geometry.Lorentz.PlebanskiSectors4D.model_orbit_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:1affa799ff5a40e7c40c6c004dfa2288e1b122a556ab308cad99b298bbf61124",
+      "line": 276,
+      "signature": "theorem model_orbit_iff (z z' : K) (hz : z ≠ 0) (hz' : z' ≠ 0) : (∃ A : M4 K, A.det ≠ 0 ∧ action A (model z) = model z') ↔ ∃ q : Fin 4 → K, (∑ i, q i ^ 2) = z' / z",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PlebanskiSectors4D.oriented_sector_hodge": {
+      "module": "D5/S3/Geometry/Lorentz/PlebanskiSectors4D",
+      "name": "D5.S3.Geometry.Lorentz.PlebanskiSectors4D.oriented_sector_hodge",
+      "kind": "theorem",
+      "statement_id": "sha256:1affa799ff5a40e7c40c6c004dfa2288e1b122a556ab308cad99b298bbf61124",
+      "line": 598,
+      "signature": "theorem oriented_sector_hodge {K : Type*} [Field K] [CharZero K] (z : K) (hz : z ^ 4 = 1) (A : M4 K) (ha : A.det ≠ 0) (overall sd : Bool) : hodge (A * modelMetric z * Aᵀ) A.det * action A (sectorModel z overall sd) = (z * signValue sd) • action A (sectorModel z overall sd)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PlebanskiSectors4D.simple_iff_five_eq_zero": {
+      "module": "D5/S3/Geometry/Lorentz/PlebanskiSectors4D",
+      "name": "D5.S3.Geometry.Lorentz.PlebanskiSectors4D.simple_iff_five_eq_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:1affa799ff5a40e7c40c6c004dfa2288e1b122a556ab308cad99b298bbf61124",
+      "line": 51,
+      "signature": "theorem simple_iff_five_eq_zero (B : FormTriple K) : Simple B ↔ five (wedgeGram B) = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PlebanskiSectors4D.simplicityDeriv_surjective": {
+      "module": "D5/S3/Geometry/Lorentz/PlebanskiSectors4D",
+      "name": "D5.S3.Geometry.Lorentz.PlebanskiSectors4D.simplicityDeriv_surjective",
+      "kind": "theorem",
+      "statement_id": "sha256:1affa799ff5a40e7c40c6c004dfa2288e1b122a556ab308cad99b298bbf61124",
+      "line": 96,
+      "signature": "theorem simplicityDeriv_surjective (B : FormTriple K) (hB : LinearIndependent K B.col) : Function.Surjective (simplicityDeriv B)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PlebanskiSectors4D.simplicity_expansion": {
+      "module": "D5/S3/Geometry/Lorentz/PlebanskiSectors4D",
+      "name": "D5.S3.Geometry.Lorentz.PlebanskiSectors4D.simplicity_expansion",
+      "kind": "theorem",
+      "statement_id": "sha256:1affa799ff5a40e7c40c6c004dfa2288e1b122a556ab308cad99b298bbf61124",
+      "line": 87,
+      "signature": "theorem simplicity_expansion (B X : FormTriple K) (t : K) : five (wedgeGram (B + t • X)) = five (wedgeGram B) + t • simplicityDeriv B X + t ^ 2 • five (wedgeGram X)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PlebanskiSectors4D.simplicity_jacobian_rank": {
+      "module": "D5/S3/Geometry/Lorentz/PlebanskiSectors4D",
+      "name": "D5.S3.Geometry.Lorentz.PlebanskiSectors4D.simplicity_jacobian_rank",
+      "kind": "theorem",
+      "statement_id": "sha256:1affa799ff5a40e7c40c6c004dfa2288e1b122a556ab308cad99b298bbf61124",
+      "line": 119,
+      "signature": "theorem simplicity_jacobian_rank (B : FormTriple K) (hB : LinearIndependent K B.col) : Module.finrank K (simplicityDeriv B).range = 5 ∧ Module.finrank K (simplicityDeriv B).ker = 13",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PlebanskiSectors4D.simplicity_neg": {
+      "module": "D5/S3/Geometry/Lorentz/PlebanskiSectors4D",
+      "name": "D5.S3.Geometry.Lorentz.PlebanskiSectors4D.simplicity_neg",
+      "kind": "theorem",
+      "statement_id": "sha256:1affa799ff5a40e7c40c6c004dfa2288e1b122a556ab308cad99b298bbf61124",
+      "line": 143,
+      "signature": "theorem simplicity_neg (B : FormTriple K) : wedgeGram (-B) = wedgeGram B ∧ urbantke (-B) = -urbantke B",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PlebanskiSectors4D.urbantke_action": {
+      "module": "D5/S3/Geometry/Lorentz/PlebanskiSectors4D",
+      "name": "D5.S3.Geometry.Lorentz.PlebanskiSectors4D.urbantke_action",
+      "kind": "theorem",
+      "statement_id": "sha256:1affa799ff5a40e7c40c6c004dfa2288e1b122a556ab308cad99b298bbf61124",
+      "line": 136,
+      "signature": "theorem urbantke_action (A : M4 K) (B : FormTriple K) : urbantke (action A B) = A.det • (A * urbantke B * Aᵀ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PlebanskiSectors4D.wedgeGram_action": {
+      "module": "D5/S3/Geometry/Lorentz/PlebanskiSectors4D",
+      "name": "D5.S3.Geometry.Lorentz.PlebanskiSectors4D.wedgeGram_action",
+      "kind": "theorem",
+      "statement_id": "sha256:1affa799ff5a40e7c40c6c004dfa2288e1b122a556ab308cad99b298bbf61124",
+      "line": 129,
+      "signature": "theorem wedgeGram_action (A : M4 K) (B : FormTriple K) : wedgeGram (action A B) = A.det • wedgeGram B",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
