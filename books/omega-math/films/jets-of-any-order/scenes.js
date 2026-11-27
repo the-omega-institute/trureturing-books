@@ -411,11 +411,12 @@ SCENES.unify = S => {
   jetRow(COS.slice(0, UN.n), 215, { x0: UN.x0, w: UN.w, h: UN.h, a: a0, label: 'Cos' });
   jetRow(TWO_ATAN.slice(0, UN.n), 300, { x0: UN.x0, w: UN.w, h: UN.h, a: a * Q(S, 0, 'twice the arctangent', 0.6), label: '2·Atan' });
   /* the composed row, settling from noise into integers */
-  const cp = Q(S, 0, 'Compose', 0.6), settle = Q(S, 1, 'only plus and minus two survive', 1.2);
+  const cp = Q(S, 0, 'Compose', 0.6), settle = Q(S, 1, 'cancel', 2.4);
   if (cp > 0.003) {
     txt('Cos ∘ (2·Atan)  =  Σ Cosₖ · (2·Atan)ᵏ', W / 2, 425, { size: 30, fam: F.math, w: 700, align: 'center', c: C.white, a: a * cp });
-    const vals = COMP_C.slice(0, UN.n).map((c, k) => (settle >= 1 ? fStr(c) : scramble(fStr(c).padEnd(4, ' '), settle, k + 3)));
-    jetRow(vals, 445, { x0: UN.x0, w: UN.w, h: UN.h, a: a * cp, label: 'Cos∘(2Atan)', lsize: 22, col: k => (settle < 1 ? C.mag : COMP_C[k][0] === 0n ? C.dim : C.now) });
+    const vals = COMP_C.slice(0, UN.n).map(fStr);
+    jetRow(vals.map(() => '?'), 445, { x0: UN.x0, w: UN.w, h: UN.h, a: a * cp * (1 - clamp(settle * 4)), label: settle < 0.5 ? 'Cos∘(2Atan)' : '', lsize: 22, col: () => C.mag });
+    jetRow(vals, 445, { x0: UN.x0, w: UN.w, h: UN.h, a: a * cp, rev: settle, label: settle >= 0.5 ? 'Cos∘(2Atan)' : '', lsize: 22, col: k => (COMP_C[k][0] === 0n ? C.dim : C.now) });
   }
   /* line 2: the Cayley row, matched column by column */
   const ca = a * at(S, 2, 0.6);
