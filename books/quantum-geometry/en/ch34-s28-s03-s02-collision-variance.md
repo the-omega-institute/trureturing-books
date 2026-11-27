@@ -653,6 +653,28 @@ There are only finitely many zero ordinates in $(T,T+1]$. In a short open interv
 
 **Manual derivation.** Under RH, equation (1) and Theorem 2 of Carneiro, Chandee and Milinovich give $|N_\zeta(T)-M(T)|\le C\log T/\log\log T$ at sufficiently large heights away from zero ordinates, for some constant $C$. This envelope is continuous at sufficiently large heights, so the right-limit theorem extends it to every sufficiently large inclusive cutoff. The actual ζ ordinates therefore satisfy the sublogarithmic condition, and the uniform pair-sum bound applies. The critical collision theorem still requires a fixed coefficient strictly below $2\pi c^2$ on the long bands. [Equation (1) and Theorem 2](https://arxiv.org/abs/1309.1526)
 
+### Phase cancellation near a commensurate return
+
+The individual phases can cancel even when the pair sum reaches the critical coefficient. The Lorentz kernel gives most of its weight to nearby ordinates. Shifting the return frequency by $2\pi/Y$ sweeps through one full turn across the cutoff interval and changes the phases of nearby pairs only slightly.
+
+::: {.theorem #thm-ch34-shifted-phase-cancellation title="Phase cancellation with critical pair energy on a commensurate spectrum" lean="D5/S3/Analytic/Oscillation/MontgomeryShiftedAlignment.exists_commensurate_shift_with_phase_cancellation"}
+There is a locally finite positive spectrum whose inclusive count satisfies $|N(Y)-M(Y)|\le D$ for a constant $D$ and all sufficiently large $Y$. For this spectrum there are a constant $B>1$ and frequencies $p(Y)$. For all sufficiently large $Y$, every retained ordinate satisfies $\sin(\gamma p(Y))=1$ and $\log Y\le p(Y)\le p(Y)+2\pi/Y\le B\log Y$. At $t_Y=p(Y)+2\pi/Y$,
+$$
+\begin{aligned}
+\frac{|F_Y(t_Y)|}{N(Y)}&\longrightarrow 0,\\
+\frac{G_Y(t_Y)}{Y(\log Y)^2}&\longrightarrow 2\pi c^2.
+\end{aligned}
+$$
+:::
+
+::: proof
+At $p(Y)$ each complex phase equals $i$. Factoring it out leaves the average of a full-turn character over the rescaled ordinates $\gamma/Y$. Summation by parts expresses the average as an integral against the inclusive count. Since $N(Yu)/N(Y)\to u$ for $0<u\le1$, the average tends to $\int_0^1 e^{2\pi i u}\,du=0$.
+
+For a difference $d=\gamma-\gamma'$, a shift by $h$ reduces the cosine by at most $(dh)^2/2$. Multiplying by the Lorentz kernel bounds the loss per unit pair weight by $2h^2$. At $h=2\pi/Y$, the pair sum therefore falls by at most $2h^2 N(Y)^2=O((\log Y)^2)$. The Cauchy lower estimate at alignment and the uniform counting upper bound give the same limiting coefficient. The full proof is checked by the Lean kernel.
+:::
+
+The comparison spectrum shows that two-term counting and cancellation of the unweighted phase sum at a specified frequency can coexist with the critical Lorentz coefficient. The upper bound on the long bands for actual $\zeta$ zeros still requires an arithmetic estimate. A second commensurate spectrum tests what the entire unit-band profile determines.
+
 ### Commensurate spectra with the same unit-band profile
 
 The upper bound in [@thm-ch34-zeta-harmonic-critical-collision-limit] controls frequencies beyond the unit band. One spectrum can match the two-term zero count with $O(\log\log H)$ error and the full unit-band Lorentz profile, while its normalized critical collision mass eventually exceeds the Gaussian constant by a fixed amount. The comparison uses one spectrum at every real truncation height.
