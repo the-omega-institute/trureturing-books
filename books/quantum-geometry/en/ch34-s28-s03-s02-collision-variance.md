@@ -599,20 +599,26 @@ m_\gamma m_{\gamma'}\frac{4\cos\bigl(t(\gamma-\gamma')\bigr)}
 {4+(\gamma-\gamma')^2}.
 $$
 
-::: {.theorem #thm-ch34-zeta-harmonic-critical-collision-limit title="Conditional Gaussian collision limit at critical resolution" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHCriticalResolutionCollisionLimit.harmonic_zeta_critical_collision_limit"}
-Assume RH in Mathlib’s formulation. For every fixed $A>1$ assume $G_Y(t)=o(Y\log^2 Y)$ uniformly on $\log Y\le |t|\le A\log Y$. Let $T_n\to\infty$ with $(\log T_n)^2/n\to0$. Use the same harmonic weights, $W(T_n)$, and $s_n=\sqrt{nP_2(T_n)/2}$ as above. Assume $\eta_n$ is eventually positive, $\eta_n/s_n\to0$, and there is an $a>0$ with $\eta_n\log T_n\ge a$ eventually. Then
+::: {.theorem #thm-ch34-zeta-harmonic-critical-collision-limit title="Conditional Gaussian collision limit at critical resolution" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHCriticalPairSumThreshold.harmonic_zeta_critical_collision_limit_of_threshold"}
+Assume RH in Mathlib’s formulation. Let $c=1/(2\pi)$ and assume there is a fixed $0<\kappa<2c^2/3$ such that for each fixed $A>1$ and all sufficiently large $Y$, $G_Y(t)\le\kappa Y\log^2 Y$ uniformly on $\log Y\le |t|\le A\log Y$. Let $T_n\to\infty$ with $(\log T_n)^2/n\to0$. Use the same harmonic weights, $W(T_n)$, and $s_n=\sqrt{nP_2(T_n)/2}$ as above. Assume $\eta_n$ is eventually positive, $\eta_n/s_n\to0$, and there is an $a>0$ with $\eta_n\log T_n\ge a$ eventually. Then
 $$
 \frac{s_n E_n(\eta_n)}{\eta_n W(T_n)^{2n}}\longrightarrow\frac1{\sqrt\pi}.
 $$
 :::
 
 ::: proof
-The pair sum equals $\int_{\mathbb R} e^{-2|u|}|F_Y(t-u)|^2\,du$. Since the phase sum is $YN(Y)$-Lipschitz, a value of magnitude $b>0$ stays at least $b/2$ on an interval of radius $b/(2YN(Y))$. Integration on that interval gives $|F_Y(t)|^3\le 4eYN(Y)G_Y(t)$. The assumed pair bound yields cancellation at $Y=T$ and $Y=3T/4$. The upper band of zeros then supplies the harmonic phase deficit above $\log T$, while the Landau estimate supplies the shorter frequencies.
+The pair sum equals $\int_{\mathbb R}e^{-2|u|}|F_Y(t-u)|^2\,du$. Put $b=|F_Y(t)|$ and $L=YN(Y)$. The magnitude profile lies above the tent $\max(b-L|u|,0)$. When $L>0$, write $r=b/L$. The tent has weighted square integral $L^2\bigl(r^2-r+(1-e^{-2r})/2\bigr)$ and attains the minimum among nonnegative profiles with the same peak and one-sided slope constraint. Use the minimum exponential weight on the tent's support and $b\le N(Y)$ to obtain
+
+$$
+|F_Y(t)|^3\le \tfrac32 e^{2/Y}YN(Y)\,G_Y(t).
+$$
+
+Since $N(Y)/(Y\log Y)\to c$, the strict threshold gives $N(Y)-|F_Y(t)|\ge dN(Y)$ for a fixed $d>0$. The harmonic weight is at least $m_\gamma/(2Y)$ throughout the inclusive cutoff. Adding nonnegative weights cannot decrease the difference between total mass and the magnitude of the phase sum. The unweighted deficit therefore transfers directly to the harmonic weights over the whole cutoff. Using $W(Y)\sim(c/2)\log^2 Y$ gives a normalized deficit of at least a positive constant divided by $\log Y$. The Landau estimate treats the shorter time window.
 
 For each fixed $A>1$, the normalized integral through $A\log T_n$ tends to the central Gaussian constant. Relative truncation bounds the remaining fraction by $64/(aA)$. Choose $A$ arbitrarily large before taking the limit in $n$. The same bound applies at each fixed positive multiple of the resolution, which permits the two secants to recover the inclusive hard-band limit. The full proof is checked by the Lean kernel.
 :::
 
-The ordinary Montgomery pair-correlation conjecture would supply the long-band upper bound. The result includes $\eta_n\log T_n\to a$ for $0<a<\infty$. At finer resolutions the diagonal contribution grows relative to the bin width, as the next section explains. [Ford–Soundararajan–Zaharescu, §1](https://arxiv.org/abs/0805.2745v3)
+The positive threshold includes the uniform condition $G_Y(t)=o(Y\log^2 Y)$, which would follow from Montgomery's pair-correlation conjecture. The long-band threshold for actual $\zeta$ zeros remains an arithmetic premise of this theorem. The result includes $\eta_n\log T_n\to a$ for $0<a<\infty$. At finer resolutions the diagonal contribution grows relative to the bin width, as the next section explains. [Ford–Soundararajan–Zaharescu, §1](https://arxiv.org/abs/0805.2745v3)
 
 ### Commensurate spectra with the same unit-band profile
 
