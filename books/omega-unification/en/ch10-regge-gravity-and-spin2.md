@@ -123,7 +123,16 @@ Let $X=1/\lambda$ have the component law weighted by each component's contributi
 
 At finitely many $b_j\ge0$, each observed $m_{b_j}$ yields one linear constraint on the mixture probabilities after multiplying by its denominator. Choose $n+2$ distinct scales with strictly positive initial probabilities and record $n$ shifted means. Including normalization, there are at most $n+1$ linear constraints. A sufficiently small perturbation in either direction in their common kernel gives two different positive mixtures with the same recorded means. An interval of mean readings determines the normalized component law, with a common multiplicative factor in the partition function still free.
 
-Suppose the unshifted measure is normalizable with finite mean $m_0$. Let $\mathbb E_0$ average the mixture components in proportion to their contributions to the unshifted partition function. With $X=1/\lambda$, one has $m_0=k\mathbb E_0 X$. A shift $b>0$ multiplies the volume weight by $e^{-bv}$. Each component's partition function acquires a factor $h(X)=(1+bX)^{-k}$, and its mean becomes $k g(X)$, where $g(X)=X/(1+bX)$. Since $h$ decreases and $g$ increases, $\mathbb E_0[hg]\le\mathbb E_0[h]\mathbb E_0[g]$. Strict concavity of $g$ then gives
+If $k$ is known and $X$ takes at most $r$ positive scale values, a measurement at $b=0$ suffices when it includes the mean and its derivatives through order $2r-2$. The equation $S'=-m_bS$ and the normalization $S(0)=1$ recover the derivatives of $S$ through order $2r-1$ successively. Differentiating $S(b)=\mathbb E_0[(1+bX)^{-k}]$ term by term gives
+$$
+S^{(j)}(0)=(-1)^j(k)_j\,\mathbb E_0[X^j],
+\qquad (k)_j=k(k+1)\cdots(k+j-1).
+$$
+The difference between two candidate laws is a signed measure on at most $2r$ distinct scales. Its moments of orders zero through $2r-1$ all vanish. Taking as many of these equations, starting at order zero, as there are distinct scales gives an invertible Vandermonde matrix, so every weight in the difference is zero.
+
+For $r\ge2$, one fewer derivative can leave the mixture ambiguous. Put $n=2r-1$ and split the scales $1+j$ ($j=0,\ldots,n$) by the parity of $j$. In each group assign weight $\binom{n}{j}/2^{n-1}$ to its scale. Each group has $r$ scales and total weight one. The $n$th finite difference vanishes on polynomials of degree less than $n$ and equals $n!$ on $x^n$. Thus the two scale laws match in moments through order $2r-2$ and differ at order $2r-1$. Their mean curves agree in derivatives through order $2r-3$ and differ at order $2r-2$. For $r=1$, the sole scale is simply $m_0/k$.
+
+Whenever the unshifted measure is normalizable with finite mean, $m_0=k\mathbb E_0 X$ also bounds the shifted mean. A shift $b>0$ multiplies the volume weight by $e^{-bv}$. Each component's partition function acquires a factor $h(X)=(1+bX)^{-k}$, and its mean becomes $k g(X)$, where $g(X)=X/(1+bX)$. Since $h$ decreases and $g$ increases, $\mathbb E_0[hg]\le\mathbb E_0[h]\mathbb E_0[g]$. Strict concavity of $g$ then gives
 $$
 m_b=k\frac{\mathbb E_0[hg]}{\mathbb E_0[h]}
 \le k g(\mathbb E_0 X)=\frac{m_0}{1+b m_0/k}.
