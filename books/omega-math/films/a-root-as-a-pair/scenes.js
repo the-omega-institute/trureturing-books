@@ -690,3 +690,22 @@ SCENES.close = S => {
   badgeQ(S, [[0, null, 'lean']]);
   closingCard(S, { from: 0.2, y: 258 });
 };
+
+/* poster: titles, the pair and its one rule, and the six cited theorems (the default layout fits five) */
+FILM.poster = () => {
+  const t = 23.7, si = Math.min(1, TL.scenes.length - 1);
+  resetCtx();
+  background(t, TL.scenes[si], si, 4);
+  drawHyper(CUBE5, [[0, 4, t * 0.21], [1, 3, t * 0.17], [2, 4, t * 0.13], [3, 4, t * 0.19], [0, 2, t * 0.07]], { scale: 2.0, rx: 0.3, ry: t * 0.05, a: 0.4, lw: 1.4, camZ: 7, cy: H / 2 - 60 });
+  grid(t, 0.6);
+  const b = DATA.book, f = DATA.film;
+  txt(f.title_zh, W / 2, 260, { size: 84, fam: F.zh, w: 900, align: 'center', c: C.white, ab: 4 });
+  txt(f.title.toUpperCase(), W / 2, 370, { size: 64, fam: F.orb, w: 900, align: 'center', c: C.white, ab: 5, ls: 6 });
+  bloom(0.65);
+  rpRich([['(p, q)  ⟷  p + qα', C.cyan], ['      ', C.white], ['α² = bα + c', C.now]], W / 2, 480, { size: 46, align: 'center' });
+  txt(`${b.code} · ${(STR.en.film || 'FILM').toUpperCase()}`, W / 2, 560, { size: 28, fam: F.mono, w: 700, align: 'center', c: C.cyan, ls: 8 });
+  leanList(W / 2, 650, 1, { align: 'center', size: 22, gap: 42 });
+  txt(`${b.title.zh} · ${b.title.en}`, W / 2, 960, { size: 32, fam: F.zh, w: 700, align: 'center', c: C.cyan });
+  hud(t, 711, si, TL.scenes[si]);
+  post(3);
+};
