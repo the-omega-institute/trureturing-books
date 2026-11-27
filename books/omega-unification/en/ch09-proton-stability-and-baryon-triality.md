@@ -91,6 +91,23 @@ Choosing $h \not\equiv 0 \pmod 3$ (the two nonzero values $h = 1, 2$ swap the ge
 
    The three third-generation $d^c$ fields carry total hypercharge $+1$, and the three lepton doublets and Higgs carry total hypercharge $-1$. In color order $0,1,2$, choose spin components $(1,0,0)$ and $(0,1,1)$ in the two $N_i$, component $0$ in each third-generation $d^c$, and component $1$ in each lepton. Choose weak-isospin components $(r,s,t,u)=(0,1,0,1)$. In each $N_i$, exchanging the two $d^c$ fields reverses both the color tensor and the Grassmann product. The six terms from the outer color contraction also have the same sign, so the chosen monomial has coefficient of magnitude $2\cdot2\cdot6=24$.
 
+   **Five-lepton sectors.** At $\Delta B=-3$, both sectors $\Delta L=\pm5$ require at least nine antiquark fields and five leptonic fields, so $d\ge21$. The dimension parity rule requires odd dimension at $\Delta L=-5$ and even dimension at $\Delta L=+5$. Both lower bounds, $21$ and $22$, are attained. For $f=u^c$ or $d^c$, contract three copies of $f$ from each of two generations to form the color singlet
+
+   $$
+   C_f=\epsilon^{abc}\epsilon^{a'b'c'}(f_{1a}f_{2a'})(f_{1b}f_{2b'})(f_{1c}f_{2c'}) .
+   $$
+
+   Write $J_{12}=\epsilon_{rs}(L_1^r L_2^s)$ and $(LH)_3=\epsilon_{rs}L_3^rH^s$. The two operators are
+
+   $$
+   \begin{aligned}
+   \mathcal O_{21}&=C_{u^c}(P_3e_3^c)(e_1^ce_1^c)(e_2^ce_2^c),\\
+   \mathcal O_{22}&=C_{d^c}(N_3(LH)_3)J_{12}^2 .
+   \end{aligned}
+   $$
+
+   The first contains eight $u^c$, one $d^c$, and five $e^c$ fields. The second contains one $u^c$, eight $d^c$, five $L$ fields, and one $H$. Both have zero total hypercharge. In $C_f$, choose spin component $0$ for the three first-generation fields and component $1$ for the three second-generation fields. The six color permutations in each generation have the same sign, giving a coefficient of magnitude $36$. Use color order $0,1,2$ in the definitions of $P_3$ and $N_3$. In $P_3$ choose component $0$ for both $u^c$ fields, and in $N_3$ choose component $0$ for both $d^c$ fields. In each case choose component $1$ for the other antiquark and for the third-generation lepton, with $L_3^0H^1$ in $(LH)_3$. Exchanging the identical antiquark fields gives two terms of the same sign in each contraction. Keep both spin components in each $(e_i^ce_i^c)$. For $J_{12}^2$, keep both spin components of $L_1^0$ and $L_2^1$. The two orders of the product contribute with the same sign. The resulting monomials have coefficients of magnitude $288$ and $144$, respectively.
+
 3. **Anomaly-free gauged $U(1)_X$ UV completion and the divisibility law $m \mid N_g$**: baryon triality need not be postulated as an ungrounded global symmetry. Introduce a gauged $U(1)_X$ with $X = 3B - 9L_\tau$, adjoin a left-handed conjugate neutrino $\nu^c_\tau$ of charge $+9$ (plus optional neutral singlets for $e, \mu$), and condense a Standard Model neutral scalar of charge $9$.
 
 ::: {.remark #rem-ou-ch09-anomaly-ledger title="Term-by-Term Cancellation of All Six Chiral Anomaly Traces for Gauged $U(1)_X$ ($X = 3B - 9L_\tau$)"}
