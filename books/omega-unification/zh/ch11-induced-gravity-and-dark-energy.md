@@ -116,6 +116,8 @@ $$
 
 这里的除差以 $s=-\Psi_0/A$ 为横坐标，其中 $A=1+L$，$L$ 是质量加权的指数积分项。按质量排序的谱满足有符号偏振前缀非正、总和为负。对 $0<x\le1$，同一谱给出 $|L|\le1.2205\times10^{-4}$，而 $DL=(2\pi)^{-1}\sum_i\alpha_i z_i e^{-z_i/x}$ 的上界为正权质量矩 $(2\pi)^{-1}\sum_i\max(\alpha_i,0)z_i<2.494\times10^{-6}$，其中 $D=x\,d/dx$，$z_i$ 是无量纲平方质量，$\alpha_i$ 是牛顿读数的谱系数。于是 $A>0$、$A-DA>0$。在单调性定理中取分母 $B=-A$ 即得 $s$ 严格递增。除差符号使用上面的区间证书。[归一化有符号热迹的单调性](lean:D5/S3/Analytic/Asymptotics/NormalizedSignedHeatTrace.normalized_cutoff_heat_strictMono)
 
+若第三个截止达到 $\log x_3\ge-22.5$，把两道除差的固定线性组合视为 $s$ 的函数，记其二阶导数为 $h$。以 $s(e^{-26.875})$、$s(e^{-25.3125})$、$s(e^{-22.5})$ 依次为 $a,b,d$。区间证书给出 $[a,b]$ 之外的 $h<0$。若节点跨过 $[a,b]$ 的一部分，帐篷核在这部分的最大值控制正部，再用同一点到 $d$ 的弦控制右侧的负部。若首节点不小于 $b$，整个节点区间的内部已经定号。只要 $[a,b]$ 上 $h$ 的正部积分小于 $[b,d]$ 上 $-h$ 乘权重 $(d-s)/(d-a)$ 的积分，相邻弦斜率就严格下降，二阶除差为负。前面的区间证书核验了三枚可见谱的符号和积分界。[三节点除差的符号判据](lean:D5/S3/Analytic/Interpolation/ConcaveKernelDividedDifference.three_node_slope_sub_slope_neg_of_lobe_bound)
+
 在背后支撑上述多矩独立性检验（例如判断真空值、牛顿常数与截止/希格斯斜率这三条实响应向量究竟是否线性无关，或衡量三枚候选零点响应空间的非退化体积）的，是实内积空间中三锚格拉姆（Gram）行列式的精确展开恒等式。该恒等式已由 Lean 4 内核冻结验证：
 
 ::: {.theorem #thm-ou-ch11-three-anchor-gram title="三锚实格拉姆行列式展开公式" lean="D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_formula"}
