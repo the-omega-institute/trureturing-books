@@ -590,7 +590,7 @@ When $\eta_n\log T_n$ is bounded, the relative error bound at the cutoff $\log T
 
 ### Critical resolution from an upper pair-correlation bound
 
-The longer Fourier window can be controlled if the Montgomery pair sum is small enough. Use the same inclusive positive-ordinate cutoff and write
+A sufficiently small uniform bound on the Montgomery pair sum controls a longer Fourier window. Use the same inclusive positive-ordinate cutoff. Write $N(Y)=\sum_{0<\gamma\le Y}m_\gamma$ and $F_Y(t)=\sum_{0<\gamma\le Y}m_\gamma e^{it\gamma}$, and set
 
 $$
 G_Y(t)=
@@ -607,7 +607,7 @@ $$
 :::
 
 ::: proof
-The pair sum equals $\int_{\mathbb R}e^{-2|u|}|F_Y(t-u)|^2\,du$. Put $b=|F_Y(t)|$ and $L=YN(Y)$. The magnitude profile lies above the tent $\max(b-L|u|,0)$. When $L>0$, write $r=b/L$. The tent has weighted square integral $L^2\bigl(r^2-r+(1-e^{-2r})/2\bigr)$ and attains the minimum among nonnegative profiles with the same peak and one-sided slope constraint. Use the minimum exponential weight on the tent's support and $b\le N(Y)$ to obtain
+The pair sum equals $\int_{\mathbb R}e^{-2|u|}|F_Y(t-u)|^2\,du$. Put $b=|F_Y(t)|$ and $L=YN(Y)$. The magnitude profile lies above the tent $\max(b-L|u|,0)$. When $L>0$, write $r=b/L$. The tent has weighted square integral $L^2\bigl(r^2-r+(1-e^{-2r})/2\bigr)$ and attains the minimum among nonnegative profiles with the same peak and pointwise lower bound. Use the minimum exponential weight on the tent's support and $b\le N(Y)$ to obtain
 
 $$
 |F_Y(t)|^3\le \tfrac32 e^{2/Y}YN(Y)\,G_Y(t).
