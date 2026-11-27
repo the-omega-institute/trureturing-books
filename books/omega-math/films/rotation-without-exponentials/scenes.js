@@ -702,5 +702,5 @@ FILM.poster = () => {
   txt('ROTATION WITHOUT', 600, 550, { size: 54, fam: F.orb, w: 900, align: 'center', c: C.cyan, ab: 3, ls: 5 });
   txt('EXPONENTIALS', 600, 620, { size: 54, fam: F.orb, w: 900, align: 'center', c: C.mag, ab: 2, ls: 5 });
   txt('R = ⅓ [[2, 1, 2], [1, 2, −2], [−2, 2, 1]]', 600, 720, { size: 30, fam: F.math, w: 700, align: 'center', c: C.white });
-  txt(`${DATA.book.code}`, 600, 330, { size: 26, fam: F.mono, w: 700, align: 'center', c: C.cyan, ls: 10 });
+  txt(`${DATA.book.code}`, 600, 290, { size: 26, fam: F.mono, w: 700, align: 'center', c: C.cyan, ls: 10 });
 };
