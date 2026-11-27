@@ -425,7 +425,7 @@ SCENES.replay = S => {
     const sz = 1 - 0.15 * ease(clamp(fly * 1.3 - i * 0.07));
     chip(x, y, w * sz, 46 * sz, s, i === 0 ? C.now : C.cyan, na, size * sz);
     /* line 1: each strict file opens with prelude */
-    const pr = a * Q(S, 1, 'opens with prelude', 0.4, 0.15 * i) * (1 - fly);
+    const pr = a * Q(S, 1, 'opens with prelude', 0.4, 0.15 * i) * (1 - clamp(fly * 5));
     if (pr > 0.003) txt('prelude', x + w / 2 + 6, y - 26, { size: 16, fam: F.mono, w: 700, c: C.cyan, a: pr });
   });
   /* official Init, kept out */
@@ -460,7 +460,6 @@ SCENES.replay = S => {
   txt('mkEmptyEnvironment', 975, 610, { size: 24, fam: F.mono, w: 700, c: eh > 0.003 ? C.now : C.dim, a: ea });
   txt('toKernelEnv.replay', 1775, 610, { size: 22, fam: F.mono, w: 700, align: 'right', c: C.cyan, a: eh });
   txt('empty · 空', EX, EY + 20, { size: 28, fam: F.zh, w: 700, align: 'center', c: C.dim, a: ea * (1 - clamp(fly * 4)) });
-  stamp('REPLAY · 重放', 470, 420, a * Q(S, 2, 'empty environment', 0.5, 1.4), C.cyan, 44, -0.06);
 };
 
 /* ======================================================================= */
