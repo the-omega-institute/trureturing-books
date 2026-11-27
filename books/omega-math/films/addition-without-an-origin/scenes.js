@@ -329,7 +329,7 @@ SCENES.sum = S => {
   for (let i = 0; i <= 11; i++) line(gx + i * k, gy, gx + i * k, gy - 8 * k, C.dim, a * 0.16, 1);
   for (let j = 0; j <= 8; j++) line(gx, gy - j * k, gx + 11 * k, gy - j * k, C.dim, a * 0.16, 1);
   /* the origin hops through the lattice points of SUM.O while line 1 is spoken */
-  const hop = clamp((u - phraseAt(S, 1, 'Move the origin')) / 1.15, 0, SUM.O.length - 1);
+  const hop = clamp((u - phraseAt(S, 1, 'Move the origin')) / 0.75, 0, SUM.O.length - 1);
   const i0 = Math.floor(hop), i1 = Math.min(i0 + 1, SUM.O.length - 1), f = ease(clamp((hop - i0) * 2.2));
   const O = [lerp(SUM.O[i0][0], SUM.O[i1][0], f), lerp(SUM.O[i0][1], SUM.O[i1][1], f)];
   const On = f > 0.5 ? SUM.O[i1] : SUM.O[i0];
