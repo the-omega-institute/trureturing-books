@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "759fabffb023d752ba9bd03074633d79c49e7963",
-  "pinned_at": "2026-11-27T02:54:25Z",
+  "commit": "168d1dc6c5f3e088edaa129ffdfa7ceb0bf4a4ff",
+  "pinned_at": "2026-11-27T03:41:47Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -9699,6 +9699,28 @@
       "statement_id": "sha256:063f7f97ac25bf3372a1d8b781307b2a3508e698e866c67bfa043a4ab100d410",
       "line": 44,
       "signature": "public theorem toStdNat_mul (a b : Omega.Nat) : toStdNat (a.mul b) = toStdNat a * toStdNat b",
+      "axioms": [
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/AURICOmega/OmegaShellProjection.shell_compress_of_eq": {
+      "module": "D5/S3/Quantum/AURICOmega/OmegaShellProjection",
+      "name": "D5.S3.Quantum.AURICOmega.OmegaShellProjection.shell_compress_of_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:88327a3cf44a7278adefab2e45b51e4a03a959d48a75d4c400cd14bfa08c7b2c",
+      "line": 19,
+      "signature": "public theorem shell_compress_of_eq (s : Int) {p q a : Quaternion} (hp : p.IsPure) (hq : q.IsPure) (ha : a.IsPure) (hs : Eq (s.mul s) ((p.dot p).mul (a.dot a))) (v : Quaternion) : let t",
+      "axioms": [
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/AURICOmega/OmegaShellProjection.shell_triangle_of_eq": {
+      "module": "D5/S3/Quantum/AURICOmega/OmegaShellProjection",
+      "name": "D5.S3.Quantum.AURICOmega.OmegaShellProjection.shell_triangle_of_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:88327a3cf44a7278adefab2e45b51e4a03a959d48a75d4c400cd14bfa08c7b2c",
+      "line": 28,
+      "signature": "public theorem shell_triangle_of_eq (s : Int) {p q r a : Quaternion} (hp : p.IsPure) (hq : q.IsPure) (hr : r.IsPure) (ha : a.IsPure) (hs : Eq (s.mul s) ((p.dot p).mul (a.dot a))) (v : Quaternion) : let z",
       "axioms": [
         "propext"
       ]
