@@ -619,6 +619,22 @@ For each fixed $A>1$, the normalized integral through $A\log T_n$ tends to the c
 
 This threshold includes the uniform condition $G_Y(t)=o(Y\log^2 Y)$, which would follow from Montgomery's pair-correlation conjecture. The long-band threshold for actual $\zeta$ zeros remains an arithmetic premise of this theorem. The result includes $\eta_n\log T_n\to a$ for $0<a<\infty$. For fixed finite support and fixed positive variance, the occupation-diagonal bound below gives a finer-resolution regime in which the normalized Fejér moment diverges. Under RH and the finer asymptotic in Conjecture 5, Ford–Soundararajan–Zaharescu’s Theorem 1.4 gives phase cancellation. Theorem 1.3 then gives the short-interval prime consequence. Lemma 1 bounds the phase sum using differences of translated centered pair sums. [§1 and Theorems 1.3–1.4](https://arxiv.org/html/0805.2745v3#S1) · [Lemma 1](https://arxiv.org/html/0805.2745v3#Thmlemma1)
 
+::: {.theorem #thm-ch34-montgomery-bounded-count-upper title="A uniform pair-sum upper bound from bounded count discrepancy" lean="D5/S3/Analytic/Oscillation/MontgomeryCountUpper.pairSum_le_of_bounded_discrepancy"}
+Take any locally finite spectrum of positive ordinates with positive integer multiplicities. Use the inclusive count $N(Y)$ and the ordered pair sum $G_Y(t)$ above, and let $c=1/(2\pi)$. If there is a constant $D$ such that $|N(Y)-cY(\log(cY)-1)|\le D$ for all sufficiently large $Y$, then for each $\varepsilon>0$ the bound
+
+$$
+G_Y(t)\le (2\pi c^2+\varepsilon)Y(\log Y)^2
+$$
+
+holds for all sufficiently large $Y$ and every real $t$.
+:::
+
+::: proof
+Suppose the count discrepancy is bounded from a fixed height $A\ge1$ onward. Center a closed interval of radius $r$ at an ordinate through $Y$. The sum of multiplicities of ordinates in the interval with $0<\gamma\le Y$ is at most $2cr\log Y+N(A)+2D+c$. The contribution through $A$ is at most $N(A)$. Bound the remaining mass by a difference of inclusive counts, shifting the lower cutoff left by $1/\log Y$ and clamping it at $A$ to include the left endpoint. Integrating over the Lorentz kernel’s superlevel intervals bounds each row by $2\pi c\log Y+N(A)+2D+c$. Bound each cosine by one and sum the rows with their multiplicities. The conclusion follows from $N(Y)/(Y\log Y)\to c$. The full proof is checked by the Lean kernel.
+:::
+
+The counting theorem allows upper coefficients arbitrarily close to $2\pi c^2$ from above. The critical collision theorem requires a fixed coefficient strictly below $2\pi c^2$ on the long bands for the actual $\zeta$ zeros.
+
 ### Commensurate spectra with the same unit-band profile
 
 The upper bound in [@thm-ch34-zeta-harmonic-critical-collision-limit] controls frequencies beyond the unit band. One spectrum can match the two-term zero count with $O(\log\log H)$ error and the full unit-band Lorentz profile, while its normalized critical collision mass eventually exceeds the Gaussian constant by a fixed amount. The comparison uses one spectrum at every real truncation height.
