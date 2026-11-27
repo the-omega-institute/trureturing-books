@@ -630,7 +630,7 @@ holds for all sufficiently large $Y$ and every real $t$.
 :::
 
 ::: proof
-Suppose the count discrepancy is bounded from a fixed height $A\ge1$ onward. A closed interval of radius $r$ centered at an ordinate through $Y$ has multiplicity at most $2cr\log Y+N(A)+2D+c$. The contribution through $A$ is at most $N(A)$. Bound the remaining mass by a difference of inclusive counts, shifting the lower cutoff left by $1/\log Y$ and clamping it at $A$ to include the left endpoint. Integrating over the Lorentz kernel’s superlevel intervals bounds each row by $2\pi c\log Y+N(A)+2D+c$. Bound each cosine by one and sum the rows with their multiplicities. The conclusion follows from $N(Y)/(Y\log Y)\to c$.
+Suppose the count discrepancy is bounded from a fixed height $A\ge1$ onward. Center a closed interval of radius $r$ at an ordinate through $Y$. The sum of multiplicities of ordinates in the interval with $0<\gamma\le Y$ is at most $2cr\log Y+N(A)+2D+c$. The contribution through $A$ is at most $N(A)$. Bound the remaining mass by a difference of inclusive counts, shifting the lower cutoff left by $1/\log Y$ and clamping it at $A$ to include the left endpoint. Integrating over the Lorentz kernel’s superlevel intervals bounds each row by $2\pi c\log Y+N(A)+2D+c$. Bound each cosine by one and sum the rows with their multiplicities. The conclusion follows from $N(Y)/(Y\log Y)\to c$. The full proof is checked by the Lean kernel.
 :::
 
 The counting theorem allows upper coefficients arbitrarily close to $2\pi c^2$ from above. The critical collision theorem requires a fixed coefficient strictly below $2\pi c^2$ on the long bands for the actual $\zeta$ zeros.
