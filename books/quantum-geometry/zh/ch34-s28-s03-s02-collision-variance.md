@@ -651,6 +651,28 @@ $(T,T+1]$ 中的零点高度只有有限多个。因此从 $T$ 向右有一段�
 
 **手工推导。** 在 RH 下，Carneiro、Chandee 与 Milinovich 的公式 (1) 和定理 2 在非零点高度给出 $|N_\zeta(T)-M(T)|\le C\log T/\log\log T$，其中 $C$ 为某个常数，$T$ 充分大。这个上界函数在充分大的高度连续，可以用右极限定理把它传到每个充分大的含端点截止高度。于是实际 ζ 纵坐标满足次对数条件，上述一致配对和上界适用。临界碰撞定理仍要求在长频带上取得一个严格低于 $2\pi c^2$ 的固定系数。[公式 (1) 与定理 2](https://arxiv.org/abs/1309.1526)
 
+### 共格回归附近的相位抵消
+
+配对和达到临界系数时，单个相位的和仍可趋于抵消。Lorentz 核主要保留纵坐标相近的配对。将共格回归的频率上移 $2\pi/Y$，会让整个区间的相位转过一圈，同时只微扰这些相近配对。
+
+::: {.theorem #thm-ch34-shifted-phase-cancellation title="共格谱上的相位抵消与临界配对和" lean="D5/S3/Analytic/Oscillation/MontgomeryShiftedAlignment.exists_commensurate_shift_with_phase_cancellation"}
+存在一个正的局部有限谱，其含端点计数满足 $|N(Y)-M(Y)|\le D$（$Y$ 充分大，$D$ 为常数）。对这个谱，存在常数 $B>1$ 和频率 $p(Y)$。在所有充分大的 $Y$，每个保留纵坐标满足 $\sin(\gamma p(Y))=1$，且 $\log Y\le p(Y)\le p(Y)+2\pi/Y\le B\log Y$。取 $t_Y=p(Y)+2\pi/Y$，则
+$$
+\begin{aligned}
+\frac{|F_Y(t_Y)|}{N(Y)}&\longrightarrow 0,\\
+\frac{G_Y(t_Y)}{Y(\log Y)^2}&\longrightarrow 2\pi c^2.
+\end{aligned}
+$$
+:::
+
+::: proof
+在 $p(Y)$，每项的复相位都是 $i$。提取这一共同因子后，归一化相位和是对缩放纵坐标 $\gamma/Y$ 取一整圈复指数的平均。分部求和把它写成含端点计数的积分。由 $N(Yu)/N(Y)\to u$（$0<u\le1$），平均趋于 $\int_0^1 e^{2\pi i u}\,du=0$。
+
+对差值 $d=\gamma-\gamma'$，移频 $h$ 造成的余弦损失至多为 $(dh)^2/2$。乘上 Lorentz 核后，每单位配对权重的损失至多为 $2h^2$。因此取 $h=2\pi/Y$ 时，配对和减少至多 $2h^2 N(Y)^2=O((\log Y)^2)$。对齐处的 Cauchy 下界与计数一致上界给出同一个极限系数。完整证明由 Lean 内核检查。
+:::
+
+这个比较谱说明，即使有两项计数公式和指定频率上的无权相位抵消，Lorentz 配对和仍可达到临界系数。实际 $\zeta$ 零点的长频带上界仍需额外的算术估计。下面用另一个共格谱检验整个单位频带的轮廓能提供多少信息。
+
 ### 具有同一单位频带轮廓的共格谱
 
 [@thm-ch34-zeta-harmonic-critical-collision-limit] 的上界控制单位频带之外的频率。同一个谱可以在 $O(\log\log H)$ 误差内满足两项计数公式，并满足整个单位频带上的 Lorentz 轮廓，同时在临界分辨率下的归一化碰撞质量最终比高斯极限常数高出一个固定正量。下面的比较在每个实数截断高度使用同一个谱。
