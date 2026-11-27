@@ -129,21 +129,21 @@ $$
 
 同一路径可用有理参数取点。令 $t=v/(1+u)$，其中 $(u,v)$ 是两个站位态的实混合系数。在 $t=1/2,2/3,3/4$ 三处，第八壳第二枢轴的排除指标依次为正、负、正。对第九壳事前登记了相同的三个符号，实际得到正、负、负。最后一项推翻了这次外推，两壳使用的最短弦及读出系数完全相同。在最后一项，保留第八壳谱权、换用第九壳的响应表，指标仍为正。改用第九壳谱权，两张表都给出负值。沿用第九壳响应，只用第十壳零点高度更新平方弦长 804 的边相位，在同一有理点事前算得指标约为 $-0.976631$。第十壳完整读数为 $-0.972117$，绝对误差小于 $0.004514$。第十三壳提供了单时钟的反号例。 [有理读出](https://github.com/the-omega-institute/trureturing-experiments/commit/ce031f5833b86e36e5cebbb93531c65dd70be663) · [第九壳事前登记](https://github.com/the-omega-institute/trureturing-experiments/commit/1b6f430f916c454a4abecbcbbd733ef066af04ed) · [第九壳检验](https://github.com/the-omega-institute/trureturing-experiments/commit/6ce69d61ea42747b3c259675f4bbd623c94202b3) · [交换两壳谱权与响应表的检验](https://github.com/the-omega-institute/trureturing-experiments/commit/554ee1a90928600e02a8a15e515046cd3cdec6a5) · [第十壳事前数值与完整读数](https://github.com/the-omega-institute/trureturing-experiments/commit/1f082d752f748d29e86c7c4ae57497685a7e1259) · [同一规则的三次事前检验](https://github.com/the-omega-institute/trureturing-experiments/commit/60a53a6f2241951f0d5b85b0c5f330b3ad73c8a4)
 
-六个相同目标给出三种规则的比较。指标绝对误差的容差定为 $0.15$。单时钟在第 11、13、15 壳事前登记，双时钟在第 17、19、21 壳事前登记。全表也包含目标揭晓后的计算。
+取随后十二对互不重叠的相邻壳，从第 22 壳到第 23 壳，依此至第 44 壳到第 45 壳。三种规则都在相同的十二个目标上预测 $t=3/4$ 处的排除指标。三十六个预测区间全部公开后，才计算目标壳的完整读数。
 
-| 起始壳向下一壳传递的读数 | 六壳中符号相同 | 六壳中误差小于 $0.15$ | 已登记的三项中误差达标 |
+| 从起始壳传递到目标壳的规则 | 符号命中 | 绝对误差小于 $0.15$ | 平均绝对误差（约） |
 | --- | ---: | ---: | ---: |
-| 沿用起始壳的指标 | 6 | 4 | — |
-| 只按目标零点高度更新 804 边相位 | 5 | 4 | 1 |
-| 按目标零点高度更新 724 和 804 边相位 | 6 | 6 | 3 |
+| 沿用起始壳的指标 | 11/12 | 9/12 | 0.142138 |
+| 按目标零点高度更新 804 边相位 | 9/12 | 6/12 | 0.350883 |
+| 按目标零点高度更新 724 和 804 边相位 | 12/12 | 12/12 | 0.012186 |
 
-[六个相同目标的单钟、双钟与沿用原值比较](https://github.com/the-omega-institute/trureturing-experiments/commit/7406722aae1519068b30a8920ea79f29ce0b49a4)
+[揭晓前公布的预测区间](https://github.com/the-omega-institute/trureturing-experiments/commit/39046f22b01b15f1ad05c0d865b558bb8c1388aa) · [十二个目标的完整读数与误差](https://github.com/the-omega-institute/trureturing-experiments/commit/d038de2c1c910714ab11113890760f0b7149f1ae) · [此前的六目标比较](https://github.com/the-omega-institute/trureturing-experiments/commit/7406722aae1519068b30a8920ea79f29ce0b49a4)
 
 第五、第七壳都能在第三枚枢轴保持全程正动能。取第五壳任一满足端点五式且全程正动能的解。按原生谱的层号逐层比较，只要第七壳的第三枚枢轴满足真空条件，十九层中至少有一层的截止能量就须改变超过 $0.04M_P$。仅改变读数所用的谱基也无法实现这一步。若保留第五壳的同一个荷六正算子，允许任意非对角相干项，在第七壳谱基中读出的真空项仍小于 $-0.09689$，而目标为 $10^{-122}$。 [跨壳截止的必要变化](https://github.com/the-omega-institute/trureturing-experiments/blob/9844531a0f60d08236c33406b2a1be2d4bd12f81/experiments/ch39-omega-research/replay/ch39-fifth-seventh-cutoff-separation.py) · [同一正算子在两套谱基下的界](https://github.com/the-omega-institute/trureturing-experiments/blob/22834e1e734aa960f2c8a1c7179fd8b44d847322/experiments/ch39-omega-research/replay/ch39-fifth-seventh-common-positive-operator.py)
 
 固定上文第五壳同时满足夸克、引力与规范条件的荷六算子。将三条最短弦分别从靠近极点的一端定向到远端，只在每条弦的两个端点之间混合站位态，其余站位保持不动。三条边共用一个实旋转角时，没有一个角度能同时达到第七壳第三枢轴的牛顿项和真空项目标。若实角可分别选择，恰需三条边。任取两条边，真空项始终低于 $-0.49$。 [同角排除与三边见证](https://github.com/the-omega-institute/trureturing-experiments/commit/5e8dc9a66c7abc8ce9b3c3d86bd293a7dedbd1bd) · [实旋转所需的最少边数](https://github.com/the-omega-institute/trureturing-experiments/commit/16abaa730477be996bc2a355bc26524cc4bd62b0)
 
-若引入复相位，取两行为 $(c,-\bar z)$、$(z,c)$ 的矩阵，其中 $c\in\mathbb R$、$z\in\mathbb C$ 且 $c^2+|z|^2=1$，在三条定向边上各施用同一矩阵一次，也能同时达到第七壳的两个目标。两种构造的参数均按第七壳目标校准。在第八壳的原生第三枢轴读出时，用这个复门共轭所得的算子两项目标均失配。即使针对这一枢轴重选参数，在上述矩阵族中，牛顿项和真空项的绝对误差总有一项超过 $0.20$。能否由同一算术联络预先给出跨壳输运，仍是开放问题。 [三边共用的复门](https://github.com/the-omega-institute/trureturing-experiments/commit/dc8cd6b9d28eddf8fd30af6ccb62a2f8f72b9933) · [第八壳的留出检验](https://github.com/the-omega-institute/trureturing-experiments/commit/b3bcfecf8e6a65b7ec15be939044e0a9b6eafbbc) · [第八壳在整个矩阵族上的误差下界](https://github.com/the-omega-institute/trureturing-experiments/commit/2331291d8b01a6e65b9715cc7c5b21967bb5af69)
+若引入复相位，在三条定向弦上各施用一次同一二阶酉矩阵，也能同时达到第七壳的两个目标。这个矩阵和前述三个实角都按第七壳目标校准。仍取同一第五壳算子，在第八壳原生第三枢轴读出，让平方弦长相同的边共用一个门，其余站位不动。只用平方弦长为 12 的三条最短弦，任意共同酉矩阵都无法同时达到两项目标。再加入下一组三条平方弦长为 32 的弦，六条弦的端点互不重合，两组各按第八壳目标校准一个相位，即可精确达到 $K=1$ 和 $W=10^{-122}$，因此所需的最小平方弦长上限为 32。能否由同一算术联络预先给出跨壳输运，仍是开放问题。 [第七壳的共同复门](https://github.com/the-omega-institute/trureturing-experiments/commit/dc8cd6b9d28eddf8fd30af6ccb62a2f8f72b9933) · [三条最短弦上的酉矩阵排除](https://github.com/the-omega-institute/trureturing-experiments/commit/0a913f06108fd4f9d96bfb1e259bd234da0cf482) · [第八壳所需的最小弦长范围](https://github.com/the-omega-institute/trureturing-experiments/commit/e51c507ce5926642e4e8d6f45663dc7486e23543)
 
 按预先登记的规则把第五壳生成元原样用于第六壳，上、粲、下、奇四个汤川耦合在任意三代空间都落在各自的参考窗外。顶和底各自可以覆盖整个参考窗。若为两者分别选取三代空间，可达的耦合对填满一个矩形。要求共用同一个三代空间后，可达范围恰好是沿对角线切出的一个闭三角形。取三循环固定的二维空间，再添一条由两种字符混合的直线作为第三个方向。改变混合比例就能走完整条斜边。顶耦合落在参考窗内时，底耦合能达到的最小值约为 $0.016525$，已经高于底窗上端 $0.01410$。[第六壳的夸克留出检验](https://github.com/the-omega-institute/trureturing-experiments/blob/fc6c363ae52c9331d7be74a5772b00b22b76eb4d/experiments/ch39-omega-research/replay/ch39-sixth-repeated-quark-holdout.py) · [共同三代空间的可达三角形](https://github.com/the-omega-institute/trureturing-experiments/blob/f3f2884384c7f2407e6f04207a5f2f27e8e977e9/experiments/ch39-omega-research/replay/ch39-sixth-heavy-frontier.py)
 
