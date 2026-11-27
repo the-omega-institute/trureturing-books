@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "4175bedc239491b18f68880af367c9f36345e85e",
-  "pinned_at": "2026-11-27T14:28:39Z",
+  "commit": "f75bd63d6dc2a2aad304e1220f037d6c26dce0e2",
+  "pinned_at": "2026-11-27T15:31:04Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -9928,6 +9928,17 @@
       "statement_id": "sha256:063f7f97ac25bf3372a1d8b781307b2a3508e698e866c67bfa043a4ab100d410",
       "line": 44,
       "signature": "public theorem toStdNat_mul (a b : Omega.Nat) : toStdNat (a.mul b) = toStdNat a * toStdNat b",
+      "axioms": [
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/AURICOmega/OmegaShellOrientedAxis.oriented_axis_from_shell": {
+      "module": "D5/S3/Quantum/AURICOmega/OmegaShellOrientedAxis",
+      "name": "D5.S3.Quantum.AURICOmega.OmegaShellOrientedAxis.oriented_axis_from_shell",
+      "kind": "theorem",
+      "statement_id": "sha256:e42b01a232323d6ae4e239d5d781eef38a40bb1eddac8aa080a81281030a37bb",
+      "line": 19,
+      "signature": "public theorem oriented_axis_from_shell {p q r a : Quaternion} (hp : p.IsPure) (hq : q.IsPure) (hr : r.IsPure) (ha : a.IsPure) (x : Quaternion) : let u",
       "axioms": [
         "propext"
       ]
