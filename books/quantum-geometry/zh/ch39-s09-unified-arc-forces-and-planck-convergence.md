@@ -351,7 +351,27 @@ $$
 2. 设三维闭单纯复形的每个四面体都是非退化的欧氏四面体，棱 $e$ 的角亏为 $\delta_e = 2\pi - \sum_{t \ni e}\theta_e^{(t)}$，雷吉作用量为 $S = \sum_e\ell_e\delta_e$。则 $\frac{\partial S}{\partial\ell_k} = \delta_k$。证明：$\frac{\partial S}{\partial\ell_k} = \delta_k - \sum_t\sum_{e \subset t}\ell_e\,\frac{\partial\theta_e^{(t)}}{\partial\ell_k}$，对每个四面体用第 1 条，后一项为零。所以三维真空雷吉方程就是每条棱的角亏为零，即逐棱平直。
 3. 数值核对：以 4-单形的边界（五个四面体、十条棱、每条棱属于三个四面体）为例，棱长在 $1 \pm 0.15$ 内随机取值时，中心差分得到的 $\frac{\partial S}{\partial\ell_k}$ 与 $\delta_k$ 之差不超过 $10^{-8}$；棱长全为 $1$ 时 $\delta_k = 2\pi - 3\arccos\frac{1}{3} \approx 2.5903$。
 
-第 1 条的证明只用到两件事：两个面法向的比较 $n_F\cdot n_G$，以及每个面的边界闭合；把前者读作 [@def-ch32-axiom-of-comparison] 条款 II 的求同通道，是本书的读法（`MODEL`）。第 2 条说，三维时与铰链长度共轭的量正是角亏这段弧。四维时 $\frac{\partial S}{\partial\ell_k} = \sum_h\delta_h\,\frac{\partial A_h}{\partial\ell_k}$ 依赖一般维数的施莱夫利公式（文献结果；见 J. Milnor, “The Schläfli differential equality”, 收于 *Collected Papers of John Milnor* 第 1 卷, 1994）。洛伦兹签名、耦合常数与量子化不由此给出（[@prob-ch34-gravity-dynamics-and-coupling]）。
+第 1 条的证明只用到两件事：两个面法向的比较 $n_F\cdot n_G$，以及每个面的边界闭合；把前者读作 [@def-ch32-axiom-of-comparison] 条款 II 的求同通道，是本书的读法（`MODEL`）。第 2 条说，三维时与铰链长度共轭的量正是角亏这段弧。上方手工推导对应的任意维欧氏单形施莱夫利微分恒等式（含三维四面体、四维 $4$-单形特化）以及四维雷吉作用量变分公式现已由下方内核定理严格形式化（非欧/双曲情形及洛伦兹签名、耦合常数与量子化不由此给出，见 [@prob-ch34-gravity-dynamics-and-coupling]）：
+:::
+
+::: {.theorem #thm-ch39-regge-schlafli-4d title="任意维欧氏单形施莱夫利微分恒等式、四维雷吉变分定理与正四维单形精确见证" lean="D5/S3/Geometry/Lorentz/ReggeSchlafli4D.facet_normal, D5/S3/Geometry/Lorentz/ReggeSchlafli4D.facet_closure, D5/S3/Geometry/Lorentz/ReggeSchlafli4D.dihedral_cosine, D5/S3/Geometry/Lorentz/ReggeSchlafli4D.euclidean_schlafli, D5/S3/Geometry/Lorentz/ReggeSchlafli4D.tetrahedron_schlafli, D5/S3/Geometry/Lorentz/ReggeSchlafli4D.four_simplex_schlafli, D5/S3/Geometry/Lorentz/ReggeSchlafli4D.regge_variation, D5/S3/Geometry/Lorentz/ReggeSchlafli4D.regular_edge_length, D5/S3/Geometry/Lorentz/ReggeSchlafli4D.regular_dihedral_angle, D5/S3/Geometry/Lorentz/ReggeSchlafli4D.regular_triangle_area, D5/S3/Geometry/Lorentz/ReggeSchlafli4D.regular_scaling_cancellation"}
+对任意维数 $n \ge 1$ 的非退化欧氏 $n$-单形以及有限四维单纯复形形变路径：
+
+1. **单位外法向、闵可夫斯基面闭合与内二面角余弦公式**（[`facet_normal`](lean:D5/S3/Geometry/Lorentz/ReggeSchlafli4D.facet_normal)、[`facet_closure`](lean:D5/S3/Geometry/Lorentz/ReggeSchlafli4D.facet_closure)、[`dihedral_cosine`](lean:D5/S3/Geometry/Lorentz/ReggeSchlafli4D.dihedral_cosine)）：每个非退化 $n$-单形拥有严格正的余维 $1$ 面体积 $F_i > 0$ 与唯一外指单位法向 $u_i$，精确满足闵可夫斯基闭合恒等式 $\sum_{i=0}^n F_i u_i = 0$，且在 $n + 2 \ge 2$ 维中任意铰链 $h = (i, j)$ 的内二面角满足 $\cos\theta_h = -\langle u_i, u_j\rangle$。
+2. **任意维、三维四面体与四维 $4$-单形欧氏施莱夫利微分恒等式**（[`euclidean_schlafli`](lean:D5/S3/Geometry/Lorentz/ReggeSchlafli4D.euclidean_schlafli)、[`tetrahedron_schlafli`](lean:D5/S3/Geometry/Lorentz/ReggeSchlafli4D.tetrahedron_schlafli)、[`four_simplex_schlafli`](lean:D5/S3/Geometry/Lorentz/ReggeSchlafli4D.four_simplex_schlafli)）：对任意 $C^1$ 非退化欧氏 $(n+2)$-单形形变路径 $p(t)$，真实欧氏脊体积加权的二面角导数之和恒为零：
+   $$
+   \sum_{h} \operatorname{Vol}_{n}(h(t))\,\frac{d\theta_h}{dt} \;=\; 0;
+   $$
+   特化至三维四面体得 $\sum_e \ell_e(t)\theta_e'(t) = 0$，特化至四维 $4$-单形得十条三角铰链面积加权恒等式 $\sum_{h} A_h(t)\theta_h'(t) = 0$。
+3. **四维雷吉作用量变分奇迹（离散帕拉蒂尼抵消）**（[`regge_variation`](lean:D5/S3/Geometry/Lorentz/ReggeSchlafli4D.regge_variation)）：对任意有限四维单纯复形路径 $p$，其雷吉作用量 $S_{\mathrm{Regge}}(t) = \sum_h A_h(t)\varepsilon_h(t)$（$\varepsilon_h(t) = 2\pi - \sum_{\sigma\ni h}\theta_{h,\sigma}(t)$）精确可导且全部二面角导数项经 `four_simplex_schlafli` 逐单形完全抵消：
+   $$
+   S'_{\mathrm{Regge}}(t) \;=\; \sum_{h} A'_h(t)\,\varepsilon_h(t).
+   $$
+4. **正四维单形精确见证**（[`regular_edge_length`](lean:D5/S3/Geometry/Lorentz/ReggeSchlafli4D.regular_edge_length)、[`regular_dihedral_angle`](lean:D5/S3/Geometry/Lorentz/ReggeSchlafli4D.regular_dihedral_angle)、[`regular_triangle_area`](lean:D5/S3/Geometry/Lorentz/ReggeSchlafli4D.regular_triangle_area)、[`regular_scaling_cancellation`](lean:D5/S3/Geometry/Lorentz/ReggeSchlafli4D.regular_scaling_cancellation)）：边长为 $\ell > 0$ 的显式正 $4$-单形具有等长棱 $\ell$、精确内二面角 $\arccos(\frac{1}{4})$、精确三角铰链面积 $\frac{\sqrt{3}}{4}\ell^2$，且在均匀标度伸缩下每条铰链二面角导数恒为零。
+:::
+
+::: proof
+第 1 款利用重心坐标梯度构造与对立超平面正交且指向外侧的单位法向 $u_i$，借助 Mathlib 的单形底高体积定理将重心梯度范数识别为面体积 $F_i$ 与总体积之比，直接由重心坐标和为常数 $1$ 推出 $\sum_i F_i u_i = 0$ 与 $\cos\theta_{ij} = -\langle u_i, u_j\rangle$。第 2 款对余弦等式求导并用余维 $2$ 脊体积分解将法向导数权重化回脊体积，按面归组后应用第 1 款闭合恒等式令总和归零，再特化 $n = 1, 2$ 得到三维棱长与四维三角面积形式。第 3 款对 $S_{\mathrm{Regge}}(t)$ 按乘积法则展开，交换铰链与 $4$-单形双重求和并对每个 $4$-单形调用 `four_simplex_schlafli` 消去全部角导数项。第 4 款在 $\mathbb{R}^4$ 显式顶点上直接计算边长、法向内积 $-\frac{1}{4}$、面积 $\frac{\sqrt{3}}{4}\ell^2$ 及常数角导数为零。完整证明由 Lean 内核检查。
 :::
 
 规范一侧也可以对作用量求一阶变分。转动一条链，威尔逊作用量的变化只经过含这条链的那些小方格：
