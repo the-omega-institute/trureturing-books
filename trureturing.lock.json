@@ -3,7 +3,7 @@
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
   "commit": "4437caa4cb82da228b8ced66e0643ed23dc60ce5",
-  "pinned_at": "2026-11-27T06:12:23Z",
+  "pinned_at": "2026-11-27T06:50:54Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1608,6 +1608,19 @@
       "statement_id": "sha256:9085d4e56010562fae7dddb16c0aa89cde6a1f1cddbc11b578fb96ac9b26fbfd",
       "line": 278,
       "signature": "theorem pathPower_banach_upper_bound (n k : ℕ) (hk : 0 < k) (g : Fin n → Fin n → E) (ε : ℝ) (hε : 0 ≤ ε) (hskew : ∀ i j, g j i = -g i j) (htri : ∀ i j l, (pathPower n k).Adj i j → (pathPower n k).Adj j l → (pathPower n k).Adj i l → ‖g i j + g j l - g i l‖ ≤ ε) : ∃ φ : Fin n → E, ∀ i j, (pathPower n k).Adj i j → ‖g i j - (φ j - φ i)‖ ≤ (2 - 2 / (k:ℝ)) * ε"
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/ChordalBanachSharpFour.SimpleGraph.exists_chordal_banach_gain_lower_four": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/ChordalBanachSharpFour",
+      "name": "SimpleGraph.exists_chordal_banach_gain_lower_four",
+      "kind": "theorem",
+      "statement_id": "sha256:f90e975bc1f06e6de7003fc93e9ae2e81640b8ab2dc4e8a28b25904e2951fc32",
+      "line": 797,
+      "signature": "theorem exists_chordal_banach_gain_lower_four (ε : ℝ) (hε : 0 < ε) : ∃ (V : Type) (_ : Fintype V) (G : SimpleGraph V), G.IsChordal ∧ G.Connected ∧ ∃ (E : Type) (N : NormedAddCommGroup E) (S : @NormedSpace ℝ E _ N.toSeminormedAddCommGroup), letI",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Combinatorics/Graph/Chordal/ChordalUniversalLowerBound.not_subtwo_universal_chordal": {
       "module": "D5/S3/Combinatorics/Graph/Chordal/ChordalUniversalLowerBound",
