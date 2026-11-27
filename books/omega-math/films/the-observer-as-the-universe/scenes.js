@@ -551,7 +551,7 @@ SCENES.split = S => {
   const l4 = a * Q(S, 4, 'Move space', 0.6);
   ouRich([['Δτ² + Δx² = Δt²  ⇒  Δτ² = Δt² ', C.white], ['−', C.now], [' Δx²', C.white]], 1000, 480, { size: 30, a: l4 });
   ouRich([['γ = ', C.white], [fs(OU_GAM), C.now], ['    γv = ', C.white], [fs(OU_GV), C.now]], 1000, 545, { size: 32, a: a * Q(S, 4, 'gamma squared', 0.6) });
-  const l5 = a * Q(S, 4, 'exactly one', 0.6);
+  const l5 = a * Q(S, 4, 'gamma squared', 0.6, 0.8);
   ouRich([['(5/4)² − (3/4)² = (25 − 9)/16 = ', C.white], ['1', C.now]], 1000, 610, { size: 30, a: l5 });
   txt('no √ · no cosh · 不开方，无双曲超越函数', 1000, 655, { size: 21, fam: F.zh, w: 700, c: C.dim, a: l5 });
   txt('numbers computed here · time/space reading is MODEL', 1000, 712, { size: 18, fam: F.mono, w: 700, c: C.argued, a: l3 });
