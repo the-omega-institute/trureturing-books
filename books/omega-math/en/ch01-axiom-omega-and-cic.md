@@ -15,11 +15,11 @@ Inside this bare kernel there is no Cantorian "completed infinite bag" pre-popul
 
 Where, then, do the three standard axioms of classical formalization enter? They arrive through three seemingly convenient classical shortcuts:
 
-1. **Non-constructive Choice (`Classical.choice`)**: extracts a data element from a mere proof that a type is nonempty without giving an algorithm to construct it. Once a definition touches `Classical.choice`, no executable machine code can be extracted from it; `noncomputable` spreads through downstream definitions and kernel reflection stalls.
+1. **Non-constructive Choice (`Classical.choice`)**: extracts a data element from a mere proof that a type is nonempty without giving an algorithm to construct it. A computation that needs this witness as data has no implementation for that step. A use of choice confined to an erased proof can leave the computed value executable.
 2. **Quotient soundness (`Quot.sound`)**: collapses an equivalence relation into a new type so that equivalent representations become propositionally equal even when computation has no canonical normal form. Defining real numbers as equivalence classes of rational Cauchy sequences pulls both `Quot.sound` and `Classical.choice` straight into the foundation.
 3. **Propositional extensionality (`propext`)**: identifies logically equivalent propositions. Though gentler computationally than `Classical.choice`, it remains an external axiom outside bare CIC reduction.
 
-One subtle trap deserves early warning: even without importing `Mathlib`, standard-library types that bundle proof fields inside data—such as a proof-carrying rational type `Rat`—can quietly pull in `propext`, `Quot.sound`, or `Classical.choice` during arithmetic operations. In the zero-axiom libraries `OmegaInit` and `OmegaMath`, we therefore start inside a bare `prelude` environment, building inductive naturals, signed integers, and exact fraction types carrying an explicit zero-denominator `undefined` branch (`Omega.Ratio` and `Omega.IntRatio`) or canonically normalized pure-data tuples. Everything rests on **constructive decidable equality (`DecidableEq`)**: for any two values $a$ and $b$, a terminating decision procedure yields either a proof of $a = b$ or a refutation of $a = b$.
+One subtle trap deserves early warning: even without importing `Mathlib`, standard-library types that bundle proof fields inside data—such as a proof-carrying rational type `Rat`—can quietly pull in `propext`, `Quot.sound`, or `Classical.choice` during arithmetic operations. In the zero-axiom arithmetic of `OmegaInit` and `OmegaMath`, we therefore start inside a bare `prelude` environment, building inductive naturals, signed integers, and exact fraction types carrying an explicit zero-denominator `undefined` branch (`Omega.Ratio` and `Omega.IntRatio`) or canonically normalized pure-data tuples. Everything rests on **constructive decidable equality (`DecidableEq`)**: for any two values $a$ and $b$, a terminating decision procedure yields either a proof of $a = b$ or a refutation of $a = b$.
 
 ::: {.definition #def-ch01-zero-axiom-core title="Zero-Axiom Bare CIC Core and Decidable Equality"}
 A formal module belongs to the **zero-axiom bare CIC core** if the transitive axiom closure of every definition and theorem in it is empty—depending neither on `propext`, `Classical.choice`, `Quot.sound`, nor on any custom `axiom`—and every type check and equality verification proceeds solely by dependent typing and $\beta\delta\iota\zeta$-reduction. A type $T$ carries **constructive decidable equality** (`DecidableEq`) if there is a computable procedure that, given any $a, b : T$, returns either a proof term witnessing $a = b$ or a refutation term witnessing $(a = b) \to \mathrm{False}$.
@@ -116,6 +116,31 @@ Pause to notice how sparse these laws are. Not a single $\pi$, $e$, $\varphi$, r
 
   Now add an arbitrary probe point $z$ and write $d = \kappa(x,z)-\kappa(y,z)$. For the sample $(x,y,z)$ and rational weights $(1,-1,-d)$, normalization and symmetry give the Gram inequality $2-2\kappa(x,y)-d^2 \ge 0$. If $\kappa(x,y)=1$, then $x$ and $y$ have the same reading against every $z$. Conversely, if their rows agree, taking $z=y$ gives $\kappa(x,y)=\kappa(y,y)=1$. This argument uses only normalization, symmetry, and rational Gram positivity. Inferring equality of the underlying points from unit fidelity requires precisely that the row map $x\mapsto\kappa(x,\cdot)$ be injective. This is the role of extensional separation in Law II.
 
+  How far apart can two probe readings be? Fix the mutual reading of $x$ and $y$ at $3/5$, and let a third point $z$ read $4/5$ against $x$ and zero against $y$. For rational weights $u,v,w$ on the three points in that order, the Gram form is $(v+3u/5)^2+(w+4u/5)^2$. These readings are therefore attainable on three points. The identity $3^2+4^2=5^2$ suggests testing the mutual reading and the difference between the probe readings in a single sum of squares.
+
+::: {.theorem #thm-ch01-three-reading-contrast title="Exact range of a three-point Gram reading contrast" lean="D5/S3/Quantum/AURICOmega/ThreeReadingContrast.exists_nonnegative_readings_iff"}
+Fix $r,d\in\mathbb Q$. There exist nonnegative rationals $a,b$ such that $a-b=d$ and
+
+$$
+Q(u,v,w)=u^2+v^2+w^2+2(ruv+auw+bvw)\ge 0
+$$
+
+for all $u,v,w\in\mathbb Q$ if and only if $r^2+d^2\le 1$.
+:::
+
+::: {.proof}
+The test $Q(1,-1,0)\ge0$ gives $r\le1$. If $d=a-b\ge0$, then
+$1-r^2-d^2=Q(1,-r,-d)+2(1-r)bd\ge0$. If $d<0$, interchange the first two points. Conversely, suppose $r^2+d^2\le1$. For $d\ge0$, choose $a=d,b=0$. The form becomes
+
+$$
+Q(u,v,w)=(v+ru)^2+(w+du)^2+(1-r^2-d^2)u^2.
+$$
+
+For $d<0$, interchange the first two points and take $a=0,b=-d$. The full proof is checked by the Lean kernel.
+:::
+
+This proof uses Mathlib’s rational numbers and their order. Its Lean dependencies include `propext`, `Classical.choice`, and `Quot.sound`. Law II also requires $r\ge0$. The criterion describes the readings on three sampled points. Extending those data to a comparison space requires the global transport laws as well.
+
 - **Any point serves temporarily as an origin, recovering a group in three lines**: pick any temporary reference point $o \in \mathcal{M}$, and define a binary product $x \star_o z := [x, o, z]$ and local inverse $x^{-1_o} := [o, x, o]$. Associativity follows straight from Law I: $(x \star_o y) \star_o z = [[x, o, y], o, z] = [x, o, [y, o, z]] = x \star_o (y \star_o z)$. Left and right identity are $[o, o, z] = z$ and $[x, o, o] = x$, and the left and right inverses take two rewrites each:
 
   $$
@@ -145,7 +170,15 @@ Two decisive failures explain why.
 
 First, **a raw `axiom` provides zero guarantee of consistency and explodes to `False` at the slightest boundary slip**. The Lean kernel accepts every user-declared `axiom` without question. If someone writes `axiom kappa_refl : ∀ x, kappa x x = 1` over raw quadruples while forgetting to exclude the zero quadruple $z_0 = (0, 0, 0, 0)$ where the ratio function returns `undefined` or $0$, substituting $x = z_0$ yields `0 = 1` and hence `False` in three lines—collapsing the entire logic. Every independent kernel auditor rejects non-standard custom axioms on sight.
 
-Second, **a raw `axiom` freezes $\iota$-reduction and severs the Curry–Howard unity of proof and computation**. Because an `axiom` carries no computation rule, any term mentioning it sticks as an irreducible neutral symbol: kernel reflection cannot simplify it, and no native executable code can run it.
+Second, **an axiom that supplies data without an implementation can block computation**. With `axiom n : Nat`, a `match` on `n` has no constructor to inspect, so the kernel's $\iota$-reduction gets stuck at that match and the code generator has no value for `n`. The compiler can erase proofs in `Prop`. The subtype value below pairs `42` with an axiomatic proof `h`. Its `.val` projection yields `42` under both kernel reduction and compiled evaluation.
+
+```lean
+axiom n : Nat
+#reduce (match n with | 0 => 0 | Nat.succ k => k)
+
+axiom h : 42 = 42
+#eval (⟨42, h⟩ : {k : Nat // k = 42}).val
+```
 
 A structure can collect the operations and their individual certificates, so that each theorem depends explicitly on the certificates it takes as input. The schematic `class OmegaSpace` below illustrates Law I and some of the reading conditions in Law II.
 
@@ -167,7 +200,7 @@ This interface guarantees exactly the fields it lists. Take the eight-element qu
 The zero-axiom library verifies integer quaternion laws using nonzero representatives and ray equivalence. Chapter 3 then derives strict cancellation and reading properties by hand for canonical representatives and gives the additional assumptions for the real-valued rank-five result. See [Chapter 3](ch03-canonical-ternion-manifold.md).
 
 ::: {.film src="the-bare-kernel"}
-**The bare CIC kernel has three primitives and four reductions while classical axioms slip in through shortcuts; precision becomes a finite contract $1/M$, and the Mother Axiom keeps only a ternary transport and a fidelity $\kappa$, written as a computable typeclass rather than a raw `axiom` (2 min 49 s).** Cyan panels list dependent functions, universes and finite inductive types with the four reductions $\beta$, $\delta$, $\iota$, $\zeta$, and $3$ is drawn as the finite tree `succ succ succ zero`; magenta cards show `Classical.choice`, `Quot.sound` and `propext`, and this type-theoretic metatheory is labelled violet as a literature result ([@rem-ch01-cic-hedberg-literature]). Deciding $12/18 = 2/3$ and $3/4 \neq 2/3$ by cross-multiplication, the $47$ reduced fractions of $[0, 1]$ with denominators up to $12$ and their least gap $1/132$ (between $1/12$ and $1/11$, amber), and $[1 : 2] \odot [1 : 3] = (5, 5) \sim [1 : 1]$ and $[1 : 2] \odot [2 : 5] = [9 : 8]$ are computed on screen (cyan NUM, [@ex-ch01-finite-horizon-budget]), raising the horizon from $M = 3$ to $M' = 9$. The precision contract and the three Mother Laws are model statements (violet, [@def-ch01-observer-precision], [@def-ch01-axiom-omega]), and the transport picture is schematic; $\kappa \le 1$ from the Gram form and the local group with any point $o$ as identity follow the chapter's derivations and are labelled argued. The raw `axiom` deriving $0 = 1$ and stalling reduction, and the schematic `class OmegaSpace`, are argued; $Q_8$ with constant $\kappa \equiv 1$ satisfies every listed field (checked case by case on screen), yet $\kappa(1, -1) = 1$ breaks separation. This chapter cites no Lean declaration, so the film shows no green.
+**The bare CIC kernel has three primitives and four reductions while classical axioms slip in through shortcuts; precision becomes a finite contract $1/M$, and the Mother Axiom keeps only a ternary transport and a fidelity $\kappa$, written as a computable typeclass rather than a raw `axiom` (3 min 2 s).** Cyan panels list dependent functions, universes and finite inductive types with the four reductions $\beta$, $\delta$, $\iota$, $\zeta$, and $3$ is drawn as the finite tree `succ succ succ zero`; magenta cards show `Classical.choice`, `Quot.sound` and `propext`, and this type-theoretic metatheory is labelled violet as a literature result ([@rem-ch01-cic-hedberg-literature]). Deciding $12/18 = 2/3$ and $3/4 \neq 2/3$ by cross-multiplication, the $47$ reduced fractions of $[0, 1]$ with denominators up to $12$ and their least gap $1/132$ (between $1/12$ and $1/11$, amber), and $[1 : 2] \odot [1 : 3] = (5, 5) \sim [1 : 1]$ and $[1 : 2] \odot [2 : 5] = [9 : 8]$ are computed on screen (cyan NUM, [@ex-ch01-finite-horizon-budget]), raising the horizon from $M = 3$ to $M' = 9$. The precision contract and the three Mother Laws are model statements (violet, [@def-ch01-observer-precision], [@def-ch01-axiom-omega]), and the transport picture is schematic; $\kappa \le 1$ from the Gram form and the local group with any point $o$ as identity follow the chapter's derivations and are labelled argued. The film labels the contradiction $0 = 1$ at the zero quadruple, the blocked match on the Nat axiom `n`, the projection of `42` with its `Prop` proof erased, and the schematic `class OmegaSpace` as argued. With constant $\kappa \equiv 1$, $Q_8$ satisfies every field in the interface (checked case by case on screen). Its readings fail separation at $(1,-1)$ and have infimum $1$, so they also fail zero-reaching.
 :::
 
 ::: {.remark #rem-ch01-three-route-comparison title="Comparison of Raw axiom, Classical Mathlib, and Zero-Axiom OmegaSpace Routes (MODEL)"}
@@ -176,7 +209,7 @@ The architectural contrast across the three formalization routes is stark:
 | Comparison Axis | Raw Custom `axiom` | Classical `Mathlib.Real` Stack | Zero-Axiom `OmegaSpace` Stack |
 | :--- | :--- | :--- | :--- |
 | **Axiom Closure Audit** | Exposes unchecked custom `axiom`; vulnerable to `False` | Imports `{propext, Classical.choice, Quot.sound}` | Empty transitive axiom closure ($\varnothing$) |
-| **Executable Evaluation** | Stalls reduction on inert constants | Real division, roots, and derivatives become `noncomputable` | Pure integer and fraction operations compile natively |
+| **Executable Evaluation** | Computation that needs an unimplemented data axiom stalls. Proofs in `Prop` can erase. | Real division, roots, and derivatives become `noncomputable` | Pure integer and fraction operations compile natively |
 | **How Laws Are Checked** | Declarations enter the trusted base directly | Depends on the declaration and its axiom audit | Supply a certificate for each law on the chosen carrier |
 | **Geometric Singularities** | The domain must be specified separately | Managed via smooth charts, limit filters, and quotients | Nonzero homogeneous coordinates keep squared-norm denominators positive |
 :::
@@ -184,7 +217,7 @@ The architectural contrast across the three formalization routes is stark:
 The diagram below maps these three formalization routes alongside the three Mother Laws of `AXIOM-Ω`, showing at a glance how the zero-axiom bare CIC floor separates cleanly from both the classical three-axiom stack and the unchecked custom `axiom` trap.
 
 ::: {.figure src="ch01-axiom-omega-cic"}
-**Three formalization routes and the Mother Laws of AXIOM-Ω.** The constructive route illustrates how to supply certificates for individual model laws. Bare CIC with OmegaMath provides zero-axiom integer and fraction operations. The classical real and custom-axiom routes have their own trust bases. See [@def-ch01-zero-axiom-core], [@def-ch01-axiom-omega], and [@rem-ch01-three-route-comparison].
+**Three formalization routes and the Mother Laws of AXIOM-Ω.** The constructive route illustrates how to supply certificates for individual model laws. Bare CIC with OmegaMath provides zero-axiom integer and fraction operations. The magenta panel shows why a match on the data axiom `n : Nat` stalls. See [@def-ch01-zero-axiom-core], [@def-ch01-axiom-omega], and [@rem-ch01-three-route-comparison].
 :::
 
 With the logical foundation and model laws in place, start with a commutative carrier in one dimension. The homogeneous integer projective line $\mathbb{QP}^1$ crosses the antipode while keeping every reading finite.
