@@ -5,7 +5,7 @@
 [第二章](ch02-homogeneous-projective-line.md)虽然用齐次射影闭环 $\mathbb{QP}^1$ 彻底驯服了 $\infty$，却留下一道无法回避的缺口：圆周上的复合运算处处可交换，无法满足母公理 `AXIOM-Ω` 的法则 III（次序敏感非对易性）。本章回答两个决定全书几何命运的核心问题：
 
 1. **为什么配备正定不变型的李代数至少要有三维才能非交换？** 在三维，这一条件又如何锁定叉积？
-2. **如何把这颗三维本原流形零公理、零根号、免商集地建在纯整数之上**——构造规范齐次整三元数载体 $\mathbb{T}_3(\mathbb{Q}) \cong \mathbb{QP}^3$，并精确划清它与经典实阴影完备化之间的边界？
+2. **如何用纯整数构造无公理、免根号、免商集的非交换算例**——规范齐次整三元数载体 $\mathbb{T}_3(\mathbb{Q}) \cong \mathbb{QP}^3$？这个射影模型与经典实值比较模型的维数和特征秩下界有什么关系？
 
 在认识论分层上，本章清晰区分两条轨道：第一节与第四节的**四条经典阴影锚点定理**位于 `Mathlib` 实/复分析侧（官方后端允许的公理上界为 `{propext, Classical.choice, Quot.sound}`，未记录这四条各自的公理闭包），为三维刚性锁定与完备化边界提供外部对照基准；第二节与第三节的**八条零公理内核定理**（汇总为三个绿色定理盒，仅依赖 `OmegaInit` 与 `OmegaMath`，传递公理闭包为空集）则在纯整数与精确分数上直接锁死了欧拉—拉格朗日四平方乘性、射线流群三元公理、四维拉格朗日恒等式、保真度上界 $\kappa \le 1$、流群平移不变性与绕正交轴各转四分之一圈的锚点的射影三元非交换见证；规范代表元约分、特征秩对照与第三节的其余整锚手算则按对应层级标明（`ARGUED` / `NUM`）。
 
@@ -29,7 +29,7 @@ $$
 
 这就说明，配备左非退化不变双线性型的一维与二维李代数只能交换。二维仿射李代数 $[H,E]=E$ 若要配备正定不变型，便会遇上 $\Phi(E,E)=\Phi([H,E],E)=\Phi(H,[E,E])=0$ 的矛盾。
 
-于是，第一个能够容纳非对易不变几何的维度是 **$3$**。而在三维实李代数中，只要不变双线性型在非零向量上取正值，连结构常数都会被唯一锁死为三维叉乘！以下两条冻结定理位于经典 `Mathlib` 阴影侧，为三维叉乘与泡利结构提供严格的内核刚性基准：
+配备左非退化不变双线性型的非交换李代数至少有 **$3$** 维，实三维叉积李代数与它的标准内积达到此下界。以下两条定理在经典实数侧给出三维叉积与泡利结构的分类。
 
 ::: {.theorem #thm-ch03-dim3-cross-bracket title="三维正定不变型非交换李代数的叉积锁定（经典阴影锚点）" lean="D5/S3/Quantum/Algebra/InvariantMetric/LowDimensionInvariantMetric.exists_basis_bracket_eq_smul_cross"}
 设 $L$ 为实数域 $\mathbb{R}$ 上的三维非交换李代数（$\dim_{\mathbb{R}} L = 3$ 且非阿贝尔），$\Phi : L \times L \to \mathbb{R}$ 为满足不变性 $\Phi([x, y], z) = -\Phi(y, [x, z])$ 且对一切 $x \neq 0$ 满足 $\Phi(x, x) > 0$ 的双线性型（不预先假设对称）。则存在 $L$ 的一组基 $b_0, b_1, b_2$ 与严格正实数 $c > 0$，使得：
@@ -69,11 +69,11 @@ $$
 
 ## 3.2 规范齐次整三元数流形 $\mathbb{T}_3(\mathbb{Q}) \cong \mathbb{QP}^3$：免商集、免根号 {#sec-ch03-canonical-ternions}
 
-经典阴影侧的刚性基准告诉我们，三维非阿贝尔几何正是四元数/旋转群的舞台。现在回到我们的零公理裸 CIC 建设任务：**怎样在完全不碰实数 $\mathbb{R}$、不碰平方根、不碰商公理 `Quot.sound` 的前提下，造出这颗三维非阿贝尔流形的可执行整数本体？**
+下面用纯整数构造一个非交换的有理射影模型。其平方读数的特征秩为 $10$。经典实值比较模型的锐利下界由有号单位四元数实现，见 [§3.4](#sec-ch03-real-shadow-completion)。
 
 先看为什么“强行把四元组归一为单位向量”会在第一步就碰壁：考虑最简单不过的 $90^\circ$ 绕第一坐标轴旋转的状态 $p_{\mathrm{Half}} = (1, 1, 0, 0)$。它的平方范数是 $1^2 + 1^2 + 0^2 + 0^2 = 2$，而 $2$ 不是整数平方数！如果执意把它变成单位四元数，立刻被迫引入无理数 $\frac{1 + \mathbf{i}}{\sqrt{2}}$，整座零公理有理建筑当场破功。
 
-破局之法与[第二章](ch02-homogeneous-projective-line.md)如出一辙，只是从二维齐次对 $[P : Q] \in \mathbb{QP}^1$ 升维到四维齐次整四元组 $[w : x : y : z] \in \mathbb{QP}^3$——四个整数坐标模去非零缩放，恰好留下**严格 $3$ 个自由度**！更妙的是，只需两条纯整数操作就能把每条射影射线变成全宇宙唯一的规范代表元，彻底甩掉 `Quot.sound`：
+沿用[第二章](ch02-homogeneous-projective-line.md)的齐次坐标，把整数对 $[P : Q] \in \mathbb{QP}^1$ 换成整四元组 $[w : x : y : z] \in \mathbb{QP}^3$。每个非零坐标都可用作分母，得到三个有理射影坐标。只需两步整数运算，就能为每条射线选出唯一的规范代表元，无需求助于 `Quot.sound`：
 
 1. 计算四元最大公约数 $g = \gcd(\lvert w\rvert, \lvert x\rvert, \lvert y\rvert, \lvert z\rvert) \ge 1$，将四个分量同时整除 $g$ 得到互素四元组 $(w', x', y', z')$；
 2. 选取符号因子 $s \in \{+1, -1\}$，锁定**第一个非零分量为严格正整数**。
@@ -263,9 +263,11 @@ $$
 
 ## 3.4 实连续统阴影的完备化边界：从秩五单射嵌入到单位四元数同构 {#sec-ch03-real-shadow-completion}
 
-在收束第一卷之前，还剩最后一道画龙点睛的检验：**我们用纯整数搭起的三维有理三元数骨架，一旦投射到经典实数分析的阴影世界中，与母公理 `AXIOM-Ω` 的无预设拓扑分类定理究竟是什么关系？**
+经典侧的 `TernaryComparison` 配备实值读数，并要求消去、结合、对称、分离、非负、双侧不变及对实系数的有限格拉姆半正定。考虑载体预连通且局部紧、三元迁移连续、对每个 $x$ 映射 $y\mapsto\kappa(x,y)$ 在 $y=x$ 连续的非交换模型。要求有一个映入 $\mathbb R^d$ 的映射，在某点的一个邻域上连续且单射，并要求读数可由映入 $\mathbb R^r$ 的特征映射的内积给出。在这个模型类中，模型存在当且仅当 $d\ge3$ 且 $r\ge5$。有号实单位四元数以读数 $(1+\langle u,v\rangle)/2$ 和正实部半球上的虚部坐标，实现 $(d,r)=(3,5)$。见经典侧冻结声明 [`exists_model_tfae`](lean:D5/S3/Quantum/AURICOmega/DimensionRankRealization.exists_model_tfae)。
 
-在经典阴影侧，`TernaryComparison` 从一开始就配备实值读数，并要求消去、结合、对称、分离、非负、双侧不变及对实系数的有限格拉姆半正定。在此载体上，非交换性与链连通性已迫使任一欧氏特征实现的维数至少为 $5$（`five_le_of_hasFeatureRank`）。链连通性指对每个 $\varepsilon>0$，任意两点可由相邻读数 $>1-\varepsilon$ 的有限链相连。若再有触零性及到 $\mathbb{R}^5$ 的特征实现，得到下面的单射结论。
+预连通性确实限制了模型类（手工推导）。离散的 $S_3$ 用 $[x,y,z]=xy^{-1}z$ 作迁移，以置换矩阵的归一化内积 $\kappa(x,y)=\operatorname{Tr}(P_x^{\mathsf T}P_y)/3$ 作读数。两侧平移保持内积，单位读数分离各点，单位元和一个三循环给出零读数，两个不同的换位给出非交换见证。单点邻域可嵌入 $\mathbb R^0$，而离散的 $S_3$ 不满足预连通性。
+
+以下转向秩五模型的分类。对实值比较结构，非交换性与链连通性迫使任一欧氏特征实现的维数至少为 $5$（`five_le_of_hasFeatureRank`）。链连通性指对每个 $\varepsilon>0$，任意两点可由相邻读数 $>1-\varepsilon$ 的有限链相连。若再有触零性及到 $\mathbb{R}^5$ 的特征实现，得到下面的单射结论。
 
 ::: {.theorem #thm-ch03-rank-five-embedding title="秩五三元比较结构的单位四元数单射嵌入（经典阴影锚点）" lean="D5/S3/Quantum/AURICOmega/TernaryComparisonRankFive.exists_unitQuaternion_embedding"}
 设 $C=(M,\operatorname{tri},\kappa)$ 为上述实值三元比较结构。若 $C$ 非交换、链连通、触零（对每个 $\varepsilon>0$ 都有 $\kappa(x,y)<\varepsilon$ 的一对点），且存在 $\varphi:M\to\mathbb{R}^5$ 使 $\kappa(x,y)=\langle\varphi(x),\varphi(y)\rangle$（`HasFeatureRank 5`），则存在单射 $u:M\to\mathrm{Sp}(1)$，使得对一切 $x,y,z\in M$：

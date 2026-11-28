@@ -101,7 +101,7 @@ Let $\mathcal{M}$ be a nonempty type equipped with a ternary comparison transpor
    \exists\, x, y, z \in \mathcal{M},\qquad [x, y, z] \;\neq\; [z, y, x],
    $$
 
-   and the carrier locks onto the minimal nontrivial degrees of freedom and minimal feature rank compatible with Laws I and II.
+   Minimality is a model selection principle once the model class, local coordinate dimension, and feature rank have been specified. The classical real-valued case has exact bounds and a realizing model. See [Chapter 3 §3.4](ch03-canonical-ternion-manifold.md#sec-ch03-real-shadow-completion).
 :::
 
 Pause to notice how sparse these laws are. Not a single $\pi$, $e$, $\varphi$, real number $\mathbb{R}$, linear sum $+$, hand-typed dimension "$3$", or privileged identity $\mathbf{1}$ enters the statement. Small Gram matrices from Law II constrain the fidelity, and the identities in Law I recover a group at each basepoint (`ARGUED`).
@@ -141,7 +141,7 @@ For $d<0$, interchange the first two points and take $a=0,b=-d$. The full proof 
 
 The three-point criterion and the five-point criterion below both use Mathlib’s ordered rational numbers. Both Lean proofs depend on `propext`, `Classical.choice`, and `Quot.sound`. Law II also requires $r\ge0$.
 
-Return to the $3/5$ example and include both transported points $w=[x,y,z]$ and $v=[y,x,z]$. By invariance under left and right translations, $z$ reads $t=\kappa(x,y)$ against both. Can the original difference of $4/5$ survive? At $t=3/5$ the largest difference allowed by the five-point matrix falls to $13/20$, attained at $a=3/4$ and $b=1/10$.
+Return to the $3/5$ example and include both transported points $w=[x,y,z]$ and $v=[y,x,z]$. Invariance under transport gives $\kappa(z,w)=\kappa(z,v)=t=\kappa(x,y)$ and $\kappa(x,w)=b$, $\kappa(y,v)=a$, where $a=\kappa(x,z)$ and $b=\kappa(y,z)$. Can the original difference of $4/5$ survive? At $t=3/5$ the criterion below gives $13/20$ as the largest contrast allowed by the five-point matrix. A positive semidefinite rational matrix attaining this bound is given by $(a,b,c,e,r)=(3/4,1/10,0,359/440,7/22)$ (computed witness).
 
 ::: {.theorem #thm-ch01-five-point-transported-contrast title="Reading contrasts with two transported points" lean="D5/S3/Quantum/AURICOmega/FivePointTransportedContrast.exists_transported_readings_iff"}
 Fix $t,d\in\mathbb Q$ with $0\le t\le1$. In the order $(x,y,z,w,v)$, there exist nonnegative rationals $a,b,c,e,r$ with $a-b=d$ such that the matrix
@@ -172,7 +172,15 @@ $$
 Exchanging $x,y$ and $w,v$ simultaneously reverses the sign of $d$, so take $a\ge b$. First omit $v$. Split the four weights into their symmetric and antisymmetric parts under the simultaneous exchange of $x,z$ and $y,w$. This gives two binary quadratic forms whose determinant bounds yield the three cases. Conversely, in each case one can choose rational four-point readings with $c=0$ and $b<1$. To give the fifth point readings $a,t$ against $y,z$, take its projection onto their span with coefficients $(a-bt)/(1-b^2)$ and $(t-ba)/(1-b^2)$. The four-point form guarantees that the slack needed to bring the fifth diagonal entry up to $1$ is nonnegative. The full proof is checked by the Lean kernel.
 :::
 
-These matrices describe compatible readings on five labels. Which such data extend to a kernel invariant under both translations on an entire heap remains a separate existence question.
+**Five-point feasibility and global extension (hand derivation).** Take $t=4/5$, $a=b=c=e=0$, and $r=7/25$. Then $G$ splits into two orthogonal Gram blocks. The first two points have vectors $(1,0),(4/5,3/5)$ and the last three have vectors $(1,0),(4/5,3/5),(4/5,-3/5)$, so $G$ is positive semidefinite.
+
+Suppose these data came from a global model satisfying Laws I and II. The map $T(u)=[x,y,u]$ has inverse $T^{-1}(u)=[y,x,u]$ and preserves the reading. Write $u_j$ for the Gram vectors at $T^jz$. The squared norm of $u_{-1}-2t u_0+u_1$ is $2(1+r-2t^2)=0$. Positive semidefiniteness makes this combination orthogonal to $u_2$, so
+
+$$
+\kappa(z,T^3z)=2tr-t=-\frac{44}{125}.
+$$
+
+This negative reading rules out an extension of the matrix. The five-point bound applies to every global model. Attaining a proposed contrast requires a kernel defined on the entire group.
 
 - **Any point serves temporarily as an origin, recovering a group in three lines**: pick any temporary reference point $o \in \mathcal{M}$, and define a binary product $x \star_o z := [x, o, z]$ and local inverse $x^{-1_o} := [o, x, o]$. Associativity follows straight from Law I: $(x \star_o y) \star_o z = [[x, o, y], o, z] = [x, o, [y, o, z]] = x \star_o (y \star_o z)$. Left and right identity are $[o, o, z] = z$ and $[x, o, o] = x$, and the left and right inverses take two rewrites each:
 

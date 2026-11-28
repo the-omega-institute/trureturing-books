@@ -44,14 +44,14 @@
 
 读者既可按卷顺序通读，也可按关注领域快速定位各卷主线：
 
-- **第一卷：公理地基与齐次有理数系**（[第一章](ch01-axiom-omega-and-cic.md)–[第三章](ch03-canonical-ternion-manifold.md)）。先剥离 `Mathlib` 经典公理，在裸 CIC 上以类型类示意母公理 `AXIOM-Ω` 的部分定律，并给出观察者精度契约 $\varepsilon_{\mathrm{self}} = 1/M$；再以齐次整数对 $\mathbb{QP}^1$ 驯服 $\infty$ 并用零公理内核证明六条圆周闭合定理；最后锁定三维非阿贝尔流形，构造既免 `Quot.sound` 又免根号的规范整三元数载体 $\mathbb{T}_3(\mathbb{Q}) \cong \mathbb{QP}^3$ 与正交非交换见证。
+- **第一卷：公理地基与齐次有理数系**（[第一章](ch01-axiom-omega-and-cic.md)–[第三章](ch03-canonical-ternion-manifold.md)）。先剥离 `Mathlib` 经典公理，在裸 CIC 上以类型类示意母公理 `AXIOM-Ω` 的部分定律，并给出观察者精度契约 $\varepsilon_{\mathrm{self}} = 1/M$；再以齐次整数对 $\mathbb{QP}^1$ 驯服 $\infty$ 并用零公理内核证明六条圆周闭合定理；最后构造免 `Quot.sound`、免根号的规范整三元数，给出特征秩为 $10$ 的非交换有理射影算例。在预连通、局部紧并满足相应连续性条件的非交换实值比较模型中，有号单位四元数达到局部坐标维数 $3$ 与特征秩 $5$ 的下界。假设详见[第三章 §3.4](ch03-canonical-ternion-manifold.md#sec-ch03-real-shadow-completion)。
 - **第二卷：无原点非线性代数与球面有理几何**（[第四章](ch04-heaps-and-lie-triple-curvature.md)–[第六章](ch06-bargmann-gram-spherical-trigonometry.md)）。把无原点流群、利雅三元恒常单位曲率 $K \equiv +1$ 与本原毕达哥拉斯有号旋量六拍双覆叠展开到底，建立双卡无奇点三维有理凯莱旋转、整系数切比雪夫谐波以及球面巴格曼—格拉姆闭合律与有理正弦／勾股定理。
 - **第三卷：无极限射流微积分与全息圆弧流形**（[第七章](ch07-second-order-jet-calculus.md)–[第九章](ch09-telescoping-stokes-and-arc-manifold.md)）。以二阶幂零射流环 $\mathbb{Q}[\eta]/(\eta^3)$、对称中点凯莱驻球守恒和任意阶 D-有限微分射流复合链式法则及凯莱—三角大一统取代 $\lim_{h \to 0}$，并借流群中继消去与单纯形锥同伦在粗剖分下完成精确积分。
-- **第四卷：三维球面有理调和分析**（[第十章](ch10-peter-weyl-rational-spin-shells.md)–[第十二章](ch12-algebraic-extensions-and-schur-positivity.md)）。在三维球面上用纯整数偶次切比雪夫特征标乘积律与无 $\pi$ 阶乘哈尔积分重铸全阶彼得—魏尔正交归一展开，并以零公理二次扩张域与有理舒尔补正定性承载不可约代数边界。
+- **第四卷：三维球面有理调和分析**（[第十章](ch10-peter-weyl-rational-spin-shells.md)–[第十二章](ch12-algebraic-extensions-and-schur-positivity.md)）。给出偶次切比雪夫特征标的整数乘积律，并用无 $\pi$ 的阶乘哈尔配对证明所有整数自旋特征标的正交归一性，并以零公理二次扩张域与有理舒尔补正定性承载不可约代数边界。
 - **第五卷：阿代尔算术与纯有理赫克—黎曼谱论**（[第十三章](ch13-computable-arithmetic-horizon.md)–[第十五章](ch15-rational-hecke-ramanujan-spectrum.md)）。以欧几里得素数逃逸、有限连分数和整数四分深度预算取代静态素数无穷集，进而联通有理阿代尔乘积守恒、模方 $5$ 赫维茨素旋子自由群 $F_3 \hookrightarrow \mathrm{SO}(3,\mathbb{Q})$ 伴随单射与无复数赫克—拉马努金谱隙。
 - **第六卷：Ω-FRACTRAN 计算论、观察者宇宙与零公理内核**（[第十六章](ch16-omega-fractran-and-nonabelian-stack.md)–[第十八章](ch18-zero-axiom-kernel-and-shadow-bridge.md)）。构造原生非阿贝尔旋子指令集与二维整数矩阵环，阐发观察者自包含时间与记忆切分模型，最终用空内核公理审计与单向阴影投影函子 $\Pi_{\mathbb{R}}$ 连接整个经典分析生态；全书以[终章](coda.md)全景对照与双语演示文稿、[附录 A](appendix-a.md) 模块冻结索引及[附录 B](appendix-b.md) 词典、证据总账与动态统计收尾。
 
-这条路线也可以一口气走完。下面的长片《一条公理，没有无穷》约 23 分钟，八幕依次对应前言、六卷与终章；每一幕都以一个问题收尾，交给下一幕回答，播放器的章节菜单可以直接跳到任何一卷。
+这条路线也可以一口气走完。下面的长片《一条公理，没有无穷》约 23 分钟，八幕依次对应前言、六卷与终章；每一幕都以一个问题收尾，交给下一幕回答。
 
 ::: {.film src="one-axiom-no-infinity"}
 **一条公理，没有无穷：从竖直的尺子走到内核查过的账。** 八幕依次对应前言、第一至第六卷与终章，左上角的一排圆点标出当前所在的一站（琥珀色）。每幕以该卷的标题卡开场，以“下一问”面板收尾，面板里的问题由下一幕回答。绿色 `LEAN ✓` 只标所引冻结声明实际陈述的结论；屏幕上的计算、文献结果、本书的模型诠释与开放问题各有标注。英文旁白配中英双语字幕。
