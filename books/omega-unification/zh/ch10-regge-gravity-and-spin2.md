@@ -274,12 +274,12 @@ $$
 在一个六点算例中，可以直接给出整个耦合窗口的统一误差常数（手工推导，`ARGUED`）。取 $k=1$，令 $T$ 以概率 $2/3$、$1/3$ 分别取 $-1$、$2$，并在 $b_j=(j-1/(2j))^2-2$（$1\le j\le6$）处读取均值。两组混合各至多有三个原子，补偿速率均在 $[15/8,5]$ 内，支撑和权重可独立选择。若 $\lvert\beta\rvert,\lvert\beta'\rvert\le10^{-3}$，则
 
 $$
-\lvert u-u'\rvert\le 46\,000\,000\|m-m'\|_\infty,\qquad u=\beta^3,\quad u'=(\beta')^3 .
+\lvert u-u'\rvert\le 13\,000\,000\|m-m'\|_\infty,\qquad u=\beta^3,\quad u'=(\beta')^3 .
 $$
 
 取立方坐标较小的一组作减项，必要时用零权速率补足三个槽，再将每个槽记两次。对另一组的任一求值速率，先从配分积分提出共同形状权。重复速率槽对应一个六阶体积微分算子，它把剩余列化为速率差的平方积、曲率二次型及交叉项。落在槽上时，平方积和交叉项同时为零。离槽时，平方积吸收可能为负的交叉项，使曲率保有严格正的余量。 [体积尾部与取样权的有理复算](https://github.com/the-omega-institute/trureturing-books/issues/2020#issuecomment-7239824730)
 
-平移 $b$ 越大，体积权中的指数衰减越快。把配方所用的体积上限取为 $200/(b+15/8)$，可按平移量控制曲率余项，同时用拉普拉斯指数矩统一压住大体积尾部。Rolle 定理将体积上的正性传给六点行列式，零耦合的平方 Cauchy 余子式逐行估计噪声。所得常数覆盖速率合流和零权。[推导与精确有理复算](https://github.com/the-omega-institute/trureturing-books/issues/2020#issuecomment-7239871055) [全窗口的完整推导](https://github.com/the-omega-institute/trureturing-books/issues/2020#issuecomment-7239600699)
+平移 $b$ 越大，体积权中的指数衰减越快。把配方所用的体积上限取为 $200/(b+15/8)$，可按平移量控制曲率余项，同时用拉普拉斯指数矩统一压住大体积尾部。Rolle 定理将体积上的正性传给六点行列式。估计零耦合余子式时，把 Cauchy 永久式按辅助列所占的行分组。交换辅助列与普通列在两行的分配，就能用速率区间的端点比较两组的贡献。这些正项约束了单行噪声的放大率，所得常数覆盖速率合流和零权。[永久式估计与精确有理复算](https://github.com/the-omega-institute/trureturing-books/issues/2020#issuecomment-7240116164) [推导与精确有理复算](https://github.com/the-omega-institute/trureturing-books/issues/2020#issuecomment-7239871055) [全窗口的完整推导](https://github.com/the-omega-institute/trureturing-books/issues/2020#issuecomment-7239600699)
 
 若一组模型的参照耦合为零，另一组满足 $0\le\beta\le10^{-3}$，两组各至多三个原子的支撑仍可独立选取。单侧论证给出的六点误差常数为 $47\,000\,000$。零耦合参照下的 Wronskian 可直接用速率差的平方项控制曲率交叉项，再用辅助 Newton 列及各读数的余子式给出常数。[单侧界的完整推导与有理复算](https://github.com/the-omega-institute/trureturing-books/issues/2020#issuecomment-7239468603)
 
