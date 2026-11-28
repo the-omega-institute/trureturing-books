@@ -6089,6 +6089,19 @@
       "line": 193,
       "signature": "theorem central_fejer_gaussian_limit {J : ℕ → Type*} [∀ n,Fintype (J n)] (g w : ∀ n,J n → ℝ) (hw : ∀ᶠ n in atTop, ∀ i j, 0≤w n i*w n j) (hW : ∀ᶠ n in atTop, ∑ j,w n j=1) (hM : ∀ᶠ n in atTop, 0<pairMoment (g n) (w n) 2) (ρ A : ℕ → ℝ) (hρ : Tendsto ρ atTop (𝓝 0)) (hA : Tendsto A atTop atTop) (hwin : ∀ᶠ n in atTop, A n^2*pairMoment (g n) (w n) 4 ≤ 6*(n:ℝ)*pairMoment (g n) (w n) 2^2) : let kernel"
     },
+    "D5/S3/Fourier/Asymptotics/PeriodicSublevelSandwich.periodic_test_sandwich": {
+      "module": "D5/S3/Fourier/Asymptotics/PeriodicSublevelSandwich",
+      "name": "D5.S3.Fourier.Asymptotics.PeriodicSublevelSandwich.periodic_test_sandwich",
+      "kind": "theorem",
+      "statement_id": "sha256:677f6b2fd6c5b136a888a2153c81b1345bcc933aa20ff5dbc3ec49a536bfc262",
+      "line": 19,
+      "signature": "theorem periodic_test_sandwich {n : ℕ} (q : Plane) {F : Plane → Plane} (hF : Continuous F) (hperiod : ∀ (a : Fin 2 → ℤ) (x : Plane), F (latticeVector a + x) = F x) (z : Fin n → Plane) (hz : Function.Injective z) (hcell : ∀ i, z i ∈ openCell q) (hzero : ∀ x ∈ closedCell q, F x = 0 ↔ ∃ i, x = z i) (A : Fin n → Plane ≃L[ℝ] Plane) (hA : ∀ i, HasFDerivAt F (A i : Plane →L[ℝ] Plane) (z i)) {η ρ σ : ℝ} (hη : 0 < η) (hη1 : η < 1) (hρ : 0 < ρ) (hρ' : ρ < (1 + η)⁻¹) (hσ : (1 - η)⁻¹ < σ) : let D",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
     "D5/S3/Fourier/Asymptotics/PlanarSublevelSandwich.smooth_local_ellipse_sandwich": {
       "module": "D5/S3/Fourier/Asymptotics/PlanarSublevelSandwich",
       "name": "D5.S3.Fourier.Asymptotics.PlanarSublevelSandwich.smooth_local_ellipse_sandwich",
