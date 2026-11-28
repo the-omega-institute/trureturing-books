@@ -176,6 +176,10 @@ The endpoint follows by an integer calculation. Write each factor as $(a+bi)/d$ 
 If both steps use the same factor, the minimum maximum-coordinate error of $z^2$ rises to $E=1851/142129$, attained only by $z=(19+18i)/26$. Its square is $(37+684i)/676$, with signed coordinate errors $(3401/568516,1851/142129)$ and squared-norm defect $12249/456976$.
 
 The real coordinate of the square is $(a+b)(a-b)/d^2$. With real error at most $E$, that coordinate is positive and at most $8780/142129$. Since $a+b\ge961d/725$ and $d\le28$, this forces $a-b=1$ and $d\ge22$. For the remaining denominators, only the squares of $(16+15i)/22$ and $(19+18i)/26$ meet the imaginary tolerance. The latter also meets the real tolerance and has imaginary error exactly $E$. [Exact arithmetic replay](https://github.com/the-omega-institute/trureturing-books/issues/1964#issuecomment-7243405631)
+
+If the factors may differ but a single positive integer $d\le28$ must clear all four coordinates, the minimum is $5158/613089$. The unique unordered pair attaining it is $(19+19i)/27$ and $(20+18i)/27$, with least joint clearing denominator $27$. The product is $(38+722i)/729$, with signed coordinate errors $(2069/613089,-5158/613089)$. The shared-denominator minimum lies strictly between the independent-factor and repeated-factor minima.
+
+Over the least joint denominator $d$, write the factors as $(a+bi)/d$ and $(c+ei)/d$, so $\gcd(a,b,c,e,d)=1$. The numerators $a,c$ and $b,e$ range over the real and imaginary intervals given above, respectively. Set $X=ac-be$ and $Y=ae+bc$. Clearing denominators, the error is at most $5158/613089$ exactly when both $729|841X-41d^2|$ and $729|841Y-840d^2|$ are at most $5158d^2$. Among the $133$ unordered pairs, the imaginary inequality leaves $20$. Of those, only the displayed pair meets the real inequality, and its absolute imaginary error attains the tolerance. [Exact arithmetic replay](https://github.com/the-omega-institute/trureturing-books/issues/1964#issuecomment-7243647573)
 :::
 
 ::: {.example #ex-ch08-cayley-half-truncation title="Truncation error table at $\eta = 1/2$ mapping to $(3/5, 4/5)$"}
