@@ -59,6 +59,12 @@ $$
 
 真实软辐边也满足这个极限。模型给出的亏额为 $\delta(\gamma)=O(\gamma^{-2})$。固定相位时，三条软化辐边使矩阵的算子范数改变量至多 $6\delta$。每个循环特征标只有一条轻线，其余本征值与轻线相隔至少 $9.6-8.685$。将扰动后的单位本征方程投影到平坦轻线的正交补，得到两条轻线主角的正弦为 $O(\delta)$，故三站最小奇异值也只改变 $O(\delta)$，且此界对相位一致。在 $\sqrt T\le\gamma\le T$ 上，读数误差为 $O(T^{-1})=o(\varepsilon(T))$，早期零点的比例则为 $O(T^{-1/2})=o(\varepsilon(T)^2)$。于是用平坦模型的两个相对扰动阈值即可夹住实际计数。[软化权重的定义](https://github.com/the-omega-institute/trureturing-experiments/blob/cb58c8e64ecea67184e0c1d68a690be098a7a384/experiments/ch39-omega-research/replay/ch39-three-ray-chiral-boundary.py#L34)
 
+**逆平方阈值下的计数上界（`ARGUED`）。** 对每个固定 $C>0$，在正零点中按重数计数，至少一荷满足 $\sigma_q(\gamma)\le C\gamma^{-2}$ 的零点数至多为 $O_C(T^{1-\eta}\log T)$，其中 $\eta>0$ 只依赖双钟速度。统一谱隙控制软化带来的 $O(\gamma^{-2})$ 读数扰动。再用平坦盲点的可逆雅可比，得到钟相位与某个平坦盲点相距 $O_C(\gamma^{-2})$。在一个二倍高度区间 $[U,2U]$ 固定盲点，以两钟的整数圈数记每次接近。两个读数的圈数差 $(k,\ell)$ 满足 $|k|=O(U)$ 和 $|\alpha k-\ell|=O_C(U^{-2})$，其中 $\alpha$ 是第二钟速度与第一钟速度的比。
+
+以同一次接近为原点，任意两圈数差向量的整数行列式为 $O_C(U^{-1})$，故在足够大的 $U$ 处为零。若有不同的第一钟圈数，差向量都为同一原始整向量 $(d,e)$ 的整数倍，取 $d>0$。两钟的角速度是固定代数旋转的对数除以 $i$，且两个旋转乘法独立。Baker–Wüstholz 的复对数线性型下界给出 $|\alpha d-e|\gg d^{-\tau}$，可取固定 $\tau>2$。因此占用圈数至多为 $1+O_C(\min(U/d,U^{-2}d^\tau))=O_C(U^{1-3/(\tau+1)})$。每圈的高度区间长 $O_C(U^{-2})$，其中至多有 $O(\log U)$ 个带重数的正零点。对有限盲点和二倍高度区间求和即可取 $\eta=3/(\tau+1)$。精确失秩也受此界约束，单个零点是否命中仍开放。[复对数线性型](https://doi.org/10.1515/crll.1993.442.19) · [圈数计数推导](https://github.com/the-omega-institute/trureturing-books/issues/1687#issuecomment-7233591419)
+
+**有限高度的排除（`CERT`）。** 对原软化模型，Arb 区间计算在整个连续高度段 $14\le t\le14\cdot2^{80}$ 上排除了五种荷的首站精确失秩。先在每个二倍高度区间圈住删除块的最低本征线，求出边界三角方程的全部相位分支，再把双钟同时命中的必要条件化为有理模余数计数。$180$ 位和 $200$ 位两种有理网格均给出零个候选圈数。第一枚正零点高于 $14$，所以该段涵盖截至 $14\cdot2^{80}$ 的全部正零点。更高处的精确命中仍开放。[区间证书与复算代码](https://github.com/the-omega-institute/trureturing-books/issues/1687#issuecomment-7233848461)
+
 如果保留原来的三个首站，只能再装一个读数器，该放在哪里？其余十六个站点中，除极点 $14$ 外，任一站都可以。每种荷在盲点只丢失一个非平凡循环特征的轻态。这个态在极点的振幅因旋转对称而恒为零，在其余十五个候选站的单站振幅却都大于 $0.0174$。加上其中任一站后，对每种荷分别读取四个坐标，在整个双钟环面和 $0\le\delta\le10^{-8}$ 上，三维轻空间限制的最小奇异值都大于 $4\times10^{-5}$。这个较小的界计入了不同特征在第四站的干涉。若读数站集本身也须保持三循环，最少要补一个完整三站轨道，共用六站。 [十五种单站补读与全域下界](https://github.com/the-omega-institute/trureturing-experiments/blob/7168d863ca1b4d92fec7cd8cbf50f5013f9282ac/experiments/ch39-omega-research/replay/ch39-ray-head-extra-site.md)
 
 将内部空间按特征标正交拆块，背后依托的是一条无 $\pi$、纯有理的群论正交骨架。正如[第二章](ch02-quaternion-clocks-and-haar-zeros.md)在双时钟球面哈尔积分中所确立的，偶次切比雪夫特征多项式 $E_m(\kappa)$ 在全阶上的正交归一性已在 Lean 内核中不依赖实数极限而严格冻结：
