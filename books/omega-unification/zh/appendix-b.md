@@ -179,6 +179,51 @@ $$
 等式 $Hw=(s,0)^T$ 还说明，在 $H$ 所定义的型下，这个残差方向与整个内部块正交。取 $n=3,a=3/4$，即得 $p=1/4$、$w=(1,3,3)^T$ 与 $w^*Hw=-7/2$。两个内部端口的块已正定，逐个端口的对角读数也都是 $1$，但经过联合调整的一个残差已足以否定整体正性。这需要完整的跨端口 Gram 读数，不能从若干标量算术钟读数直接推出；矩阵是代数模型，不指定实际零点，也不构造独立的 RH 正性证明。若 $C$ 只有正半定性，上述逆矩阵与极小值论证不再直接适用。
 :::
 
+::: {.remark #rem-ou-appb-schur-regularization title="正则化显露核方向的耦合"}
+给奇异内部块加上小的正对角项，可以继续使用 [@thm-ou-appb-schur-attained-minimum]，但正则化的极小值未必有有限极限。以下精确分解与误差界是手工推导（`ARGUED`）。设 $m,d\in\mathbb N$，$A\in\mathbb C^{m\times m}$ 厄米，$B\in\mathbb C^{m\times d}$，$C\in\mathbb C^{d\times d}$ 半正定。令 $P_0$ 为到 $\ker C$ 的正交投影，$P_\lambda$ 为各个正谱值的谱投影，并定义
+
+$$
+\begin{aligned}
+C^\dagger&=\sum_{\lambda>0}\lambda^{-1}P_\lambda,\\
+S_\dagger&=A-BC^\dagger B^*,\\
+S_\varepsilon&=A-B(C+\varepsilon I)^{-1}B^*,\qquad \varepsilon>0.
+\end{aligned}
+$$
+
+所有求和仅遍历 $C$ 的有限个正谱值，下列极限均取 $\varepsilon\to0^+$。在每个谱子空间上取倒数，便得到
+
+$$
+\begin{aligned}
+S_\varepsilon&=S_\dagger-\frac1\varepsilon BP_0B^*+E_\varepsilon,\\
+E_\varepsilon&=B\left(\sum_{\lambda>0}
+\frac{\varepsilon}{\lambda(\lambda+\varepsilon)}P_\lambda\right)B^*.
+\end{aligned}
+$$
+
+取 $\gamma>0$ 使每个正谱值均不小于 $\gamma$；若 $C=0$，可任取 $\gamma>0$，此时和式为空且 $E_\varepsilon=0$。由于每个系数都在 $0$ 与 $\varepsilon/[\gamma(\gamma+\varepsilon)]$ 之间，
+
+$$
+\begin{aligned}
+0&\preceq E_\varepsilon
+\preceq\frac{\varepsilon}{\gamma(\gamma+\varepsilon)}B(I-P_0)B^*,\\
+\|E_\varepsilon\|_{\mathrm{op}}
+&\le\frac{\varepsilon}{\gamma(\gamma+\varepsilon)}
+\|B(I-P_0)\|_{\mathrm{op}}^2.
+\end{aligned}
+$$
+
+这里的范数均为欧氏算子范数。因此 $S_\varepsilon+\varepsilon^{-1}BP_0B^*$ 总在算子范数下趋于 $S_\dagger$，而未经补偿的 $S_\varepsilon$ 有有限矩阵极限恰当且仅当 $BP_0=0$，此时极限就是 $S_\dagger$，误差由上式控制。具体地，对每个固定保留向量 $x$，
+
+$$
+x^*S_\varepsilon x=x^*S_\dagger x
+-\frac{\|P_0B^*x\|^2}{\varepsilon}+x^*E_\varepsilon x.
+$$
+
+若 $P_0B^*x\ne0$，该极小读数趋于 $-\infty$；否则趋于 $x^*S_\dagger x$。这也证明了矩阵极限的必要条件：$BP_0\ne0$ 时，其伴随 $P_0B^*$ 非零，必有前一种 $x$。对每个 $\varepsilon>0$，正则化的极小点是 $y_\varepsilon=-(C+\varepsilon I)^{-1}B^*x$，同一谱分解给出 $\varepsilon y_\varepsilon\to-P_0B^*x$，量出发散的内部响应。
+
+一次固定尺度的正性检查只能认证 $H_\varepsilon=H+\operatorname{diag}(0,\varepsilon I)$。例如 $A=[1],B=[1],C=[0]$ 时，$S_\dagger=[1]$，但 $S_\varepsilon=[1-1/\varepsilon]$；$H_\varepsilon$ 在 $\varepsilon\ge1$ 时半正定，在 $0<\varepsilon<1$ 时不半正定。若能在趋零的一列 $\varepsilon$ 上证明 $H_\varepsilon\succeq0$，则逐个固定向量取极限才可推出 $H\succeq0$。这些有限维结论不给出跨谱窗口的统一正谱隙，也不识别实际零点谱；独立 RH 谱路线仍须另外控制完整观测、极限与谱尾项。
+:::
+
 有限维可恢复性还留下一个观测问题：检出某个负方向，是否必须先准确重构指定的负方向？两点模型把这两种误差要求分开。
 
 ::: {.example #ex-ou-appb-optimal-negative-detection title="检测负方向与检验指定见证的精度分界"}

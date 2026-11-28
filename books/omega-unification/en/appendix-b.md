@@ -179,6 +179,51 @@ $$
 The identity $Hw=(s,0)^T$ also shows that this residual direction is orthogonal to the entire internal block for the form defined by $H$. Taking $n=3,a=3/4$ gives $p=1/4$, $w=(1,3,3)^T$, and $w^*Hw=-7/2$. The two internal ports already form a positive definite block, and every individual diagonal reading is $1$, yet one residual obtained by joint adjustment disproves positivity of the whole matrix. This requires all cross-port Gram readings and does not follow directly from a few scalar arithmetic clock readings. These matrices are algebraic models; they specify no actual zeros and supply no independent positivity proof of RH. If $C$ is only positive semidefinite, the inverse and minimum argument above no longer apply directly.
 :::
 
+::: {.remark #rem-ou-appb-schur-regularization title="Regularization Reveals Coupling to the Kernel"}
+Adding a small positive diagonal term to a singular internal block allows [@thm-ou-appb-schur-attained-minimum] to apply, but the regularized minimum need not have a finite limit. The following exact decomposition and error bound are manual derivations (`ARGUED`). Let $m,d\in\mathbb N$, let $A\in\mathbb C^{m\times m}$ be Hermitian, let $B\in\mathbb C^{m\times d}$, and let $C\in\mathbb C^{d\times d}$ be positive semidefinite. Let $P_0$ be the orthogonal projection onto $\ker C$, let $P_\lambda$ be the spectral projections for its positive spectral values, and define
+
+$$
+\begin{aligned}
+C^\dagger&=\sum_{\lambda>0}\lambda^{-1}P_\lambda,\\
+S_\dagger&=A-BC^\dagger B^*,\\
+S_\varepsilon&=A-B(C+\varepsilon I)^{-1}B^*,\qquad \varepsilon>0.
+\end{aligned}
+$$
+
+All sums run only over the finitely many positive spectral values of $C$, and all limits below are as $\varepsilon\to0^+$. Taking reciprocals on each spectral subspace gives
+
+$$
+\begin{aligned}
+S_\varepsilon&=S_\dagger-\frac1\varepsilon BP_0B^*+E_\varepsilon,\\
+E_\varepsilon&=B\left(\sum_{\lambda>0}
+\frac{\varepsilon}{\lambda(\lambda+\varepsilon)}P_\lambda\right)B^*.
+\end{aligned}
+$$
+
+Choose $\gamma>0$ so that every positive spectral value is at least $\gamma$; if $C=0$, any $\gamma>0$ is allowed, the sum is empty, and $E_\varepsilon=0$. Every coefficient lies between $0$ and $\varepsilon/[\gamma(\gamma+\varepsilon)]$, so
+
+$$
+\begin{aligned}
+0&\preceq E_\varepsilon
+\preceq\frac{\varepsilon}{\gamma(\gamma+\varepsilon)}B(I-P_0)B^*,\\
+\|E_\varepsilon\|_{\mathrm{op}}
+&\le\frac{\varepsilon}{\gamma(\gamma+\varepsilon)}
+\|B(I-P_0)\|_{\mathrm{op}}^2.
+\end{aligned}
+$$
+
+All norms here are Euclidean operator norms. Thus $S_\varepsilon+\varepsilon^{-1}BP_0B^*$ always converges in operator norm to $S_\dagger$, while the uncompensated $S_\varepsilon$ has a finite matrix limit if and only if $BP_0=0$. In that case the limit is $S_\dagger$, with the error controlled above. Specifically, for each fixed retained vector $x$,
+
+$$
+x^*S_\varepsilon x=x^*S_\dagger x
+-\frac{\|P_0B^*x\|^2}{\varepsilon}+x^*E_\varepsilon x.
+$$
+
+If $P_0B^*x\ne0$, this minimum reading tends to $-\infty$; otherwise it tends to $x^*S_\dagger x$. This also proves necessity for the matrix limit: if $BP_0\ne0$, its adjoint $P_0B^*$ is nonzero, so some $x$ falls in the first case. For each $\varepsilon>0$, the regularized minimizer is $y_\varepsilon=-(C+\varepsilon I)^{-1}B^*x$, and the same spectral decomposition gives $\varepsilon y_\varepsilon\to-P_0B^*x$, quantifying the divergent internal response.
+
+A positivity check at one fixed scale certifies only $H_\varepsilon=H+\operatorname{diag}(0,\varepsilon I)$. For example, $A=[1],B=[1],C=[0]$ gives $S_\dagger=[1]$ but $S_\varepsilon=[1-1/\varepsilon]$; $H_\varepsilon$ is positive semidefinite for $\varepsilon\ge1$ and fails to be so for $0<\varepsilon<1$. If $H_\varepsilon\succeq0$ can be proved along a sequence of $\varepsilon$ tending to zero, taking limits at each fixed vector does imply $H\succeq0$. These finite-dimensional conclusions provide no uniform positive spectral gap across windows and do not identify the actual zero spectrum; an independent RH spectral route still needs control of complete observation, limits, and spectral tails.
+:::
+
 Finite-dimensional recoverability leaves an observation question: must detecting some negative direction first reconstruct a prescribed negative direction accurately? A two-point model separates these error requirements.
 
 ::: {.example #ex-ou-appb-optimal-negative-detection title="Precision Thresholds for Detecting Negativity and Testing a Prescribed Witness"}
