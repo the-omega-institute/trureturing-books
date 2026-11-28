@@ -146,6 +146,20 @@ $$
 The vector $(0,1,1)^T$ has eigenvalue $(3-h)/6$. On its orthogonal complement, $6B(k,h)$ has diagonal entries $2+2h$ and $1-h$, with determinant $2(1-h^2-k^2)$. The two endpoints give distinct rank-two states at trace distance $2\sqrt{1-k^2}/3$. For instance, with $e^{i\alpha}=(4+3i)/5$, the candidate magnitude $\beta=\pi/2$ gives $k=3/5$. The states have trace distance $8/15$ and agree entry by entry in all three probability triples. For every $\alpha$ other than $\pi/2$, an arbitrarily small move toward $\pi/2$ produces this ambiguity. When the actual magnitude is $\pi/2$, the record determines both the magnitude and $B_{\mathrm{ref}}$.
 
 
+**Phase threshold when the two down readings average to the reference (`ARGUED`).** Let $y$ be the complex reading at zero and let $s_+,s_-$ be the readings at opposite phases, with $(s_++s_-)/2=y$. Put $D=(s_+-s_-)/(2i)$. At a candidate magnitude $\beta\in(0,\pi)$, the cyclic off-diagonal entries are $(-w,y,w)$, where $w=D/(2\sin\beta)$. If $D=0$, the readings are feasible exactly when $|y|\leq1/2$, and any magnitude works. For $D\ne0$, positivity requires $r=|y|<1/2$. Define $\ell=\operatorname{Re}(yD^2)/|D|^2$, so $-r\leq\ell\leq r$.
+
+Swapping Fourier coordinates $1,2$, taking complex conjugates, and flipping the sign of coordinate $0$ preserves the three cyclic entries. Averaging a feasible matrix with its transform allows the diagonal $(1-2t,t,t)$. For $r<t<1/2$, the Schur complement of the lower two-by-two block gives the exact positivity condition
+
+$$
+\sin^2\beta\geq\frac{|D|^2}{G(t)},
+\qquad
+G(t)=\frac{2(1-2t)(t^2-r^2)}{t+\ell}.
+$$
+
+If $t=r$ and $\ell>-r$, the coupling vector has a nonzero component in the block's null direction, so this endpoint is infeasible. If $r>0$ and $\ell=-r$, the vector lies in the range of the block. Cancelling $t-r$ gives $G(t)=2(1-2t)(t+r)$, which also applies at this endpoint. At $t=r=0$ the entire lower block vanishes, which excludes $w\ne0$. At $t=1/2$ the zeroth population vanishes, incompatible with $w\ne0$. Thus a magnitude is feasible exactly when $\sin^2\beta\geq |D|^2/G_{\max}$, where $G_{\max}$ is the maximum of the continuous extension of $G$ on $[r,1/2]$. Writing $G(t)/2=(1-2t)[t-\ell-(r^2-\ell^2)/(t+\ell)]$ shows that $G$ is strictly concave in the interior, so the endpoints and at most one interior stationary point determine the maximum.
+
+At equality, a positive definite completion would allow a small increase in $|w|$ with trace one, contradicting the maximum. The minimum-trace criterion above therefore gives a unique compatible state. For $D\ne0$, a pure completion exists exactly when $\ell=-r$ and $|w|^2=(1-2r)r$. The cyclic product and the two-by-two principal minors give necessity. At $t=r$ the lower block has rank one and the generalized Schur complement vanishes, giving sufficiency. At the phase threshold the state is pure precisely when $\ell=-r$ and $r\geq1/6$, since the quadratic $G$ then attains its maximum at $t=r$. The remaining threshold states have rank two. For example, $y=5i/32$ and $D=1/8$ give $t=5/16$, the exact threshold $\sin^2\beta=4/45$, and a unique rank-two completion.
+
 When the first three phases are calibrated, can one extra exposure measure the two remaining Fourier populations independently? Suppose we can apply a calibrated phase mask $D_\theta=\operatorname{diag}(1,e^{i\theta},-1)$ to the same preparation, then apply the mixer $H=V(\pi)$ and measure the three channels in their original order. Put $W=HD_\theta F$. Subtract the known contribution $\operatorname{diag}(WCW^*)$ from the readings. The residual is $Mx$, where $M_{jk}=|W_{jk}|^2$.
 
 Two channels suffice for a hand calculation. Write a population difference uniquely as $\delta=h(2,-1,-1)^T+k(0,1,-1)^T$. With $c=\cos\theta,\ s=\sin\theta$, taking the squared moduli of the entries in the first two rows of $W$ gives
@@ -301,15 +315,50 @@ $$
 
 With the two spectra and the top–bottom angle prescribed, $F$ is attainable in the plane spanned by the two heaviest mass lines. When $\theta\le\pi/4$, place one rotation eigenline between the two mass lines. When $\theta\ge\pi/4$, turn the two nearest rotation eigenlines outward until they are orthogonal. In each sector place the middle eigenline in the plane and the lightest along its normal. For equal gaps, the two offsets are both $d/2$. [Triangle inequality for the projective angle](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.fs_angle_triangle) · [Optimal offsets for unequal gaps](https://github.com/the-omega-institute/trureturing-books/issues/1849#issuecomment-7238283999)
 
-For a fixed pair of mass matrices with $0<\theta<\pi/2$, the minimum defect equals $F$ precisely when the normal to this plane lies in the kernels of both $A,B$. At equality each heaviest line occupies two rotation coordinates, and their offsets sum to $d$. If they shared only one coordinate, a common nearest rotation eigenline would force $\theta<d$, while distinct nearest eigenlines would force $\pi/2-\theta<d$. They therefore occupy the same coordinate plane. In a sector with simple spectrum, equality in the spectral-gap estimate also makes the lightest line a rotation eigenline, which must be the normal to that plane. A rank-one sector automatically annihilates the normal. For two simple spectra, equality is equivalent to $|V_{ud}|=1$. If $|V_{ud}|<1$, the minimum defect is strictly greater than $F$. [Equality criterion and quantitative gap](https://github.com/the-omega-institute/trureturing-books/issues/1875)
+**Splitting the angle near orthogonality (hand derivation).** When $d=\pi/2-\theta=\mu\varepsilon$ shrinks at the same rate as the second-heaviest eigenvalues, the two heavy lines each fix a separate rotation coordinate. Choose an orthonormal basis $(e_0,e_1,e_2)$ at the endpoint. The vectors $e_0,e_1$ span the up- and down-type heavy lines, respectively, and $e_2$ is normal to their plane. Keep the up-type mass basis fixed and rotate the entire down-type endpoint basis in that plane by $\mu\varepsilon$, bringing the bottom line toward the top line. Take normalized second-heaviest squared masses $a\varepsilon,b\varepsilon$, with $\mu,a,b>0$. Let $c,s$ be the up- and down-type second-heaviest unit vectors at the endpoint, with components $c_j,s_j$ in this basis. Set $U=a|c_1 c_2|$ and $V=b|s_0 s_2|$, the leading off-diagonal magnitudes in the two light blocks. The smallest maximum defect $D_*$ over all complex rotation eigenbases is
 
-How quickly does this gap close when the mass bases stay fixed and the middle mass-squared eigenvalues tend to zero? Let $D_*$ be the minimum defect of the fixed pair over all rotation eigenbases. Set the two normalized middle mass-squared eigenvalues to $a\varepsilon,b\varepsilon$, with $a,b>0$, and fix $0<\theta<\pi/2$. Write $\lambda_u=|V_{ub}|^2/\sin^2\theta$ and $\lambda_d=|V_{td}|^2/\sin^2\theta$ for the squared projection lengths of the lightest up- and down-type mass lines onto the top–bottom plane. A direct derivation gives
+$$
+\begin{aligned}
+x_*&=\min\left\{\mu,\max\left\{0,\frac{\mu^2+V^2-U^2}{2\mu}\right\}\right\},\\
+D_*&=\sqrt6\,\varepsilon\max\left\{\sqrt{x_*^2+U^2},\sqrt{(\mu-x_*)^2+V^2}\right\}+O(\varepsilon^2).
+\end{aligned}
+$$
+
+Rotating the endpoint basis by $x_*\varepsilon$ in the top–bottom plane attains this leading value. Indeed, any rotation eigenbasis with defect $O(\varepsilon)$ has two lines within $O(\varepsilon)$ of $e_0,e_1$, respectively, so a skew-Hermitian matrix describes its first-order change. Write its upper off-diagonal entries as $(x,y,z)$. After removing the common factor $6\varepsilon^2$, the leading squared costs are $|x|^2+|y|^2+U^2$ and $|\mu-x|^2+|z|^2+V^2$. We can therefore project $x$ onto the real segment $[0,\mu]$ and set both out-of-plane components $y,z$ to zero. Both sectors take a positive share of the angle precisely when $|U^2-V^2|<\mu^2$. If $U^2\ge V^2+\mu^2$, the up-type rotation line agrees with the top line to first order. If $V^2\ge U^2+\mu^2$, the down-type rotation line agrees with the bottom line to first order.
+
+The two-line coefficient $\sqrt{6}\mu/2$ is attained precisely when $U=V=0$. For example, with $\mu=a=b=1$, $c=(e_1+i e_2)/\sqrt2$, and $s=(e_0+e^{0.4i}e_2)/\sqrt2$, the sectors split the angle equally and the optimal coefficient rises to $\sqrt3$. [Global lower bound, optimal frame, and matrix calculation](https://github.com/the-omega-institute/trureturing-books/issues/1951#issuecomment-7238865467)
+
+For a fixed pair of mass matrices with $0<\theta<\pi/2$, the minimum defect equals $F$ precisely when the normal to the top–bottom plane lies in the kernels of both $A,B$. At equality each heaviest line occupies two rotation coordinates, and their offsets sum to $d$. If they shared only one coordinate, a common nearest rotation eigenline would force $\theta<d$, while distinct nearest eigenlines would force $\pi/2-\theta<d$. They therefore occupy the same coordinate plane. In a sector with simple spectrum, equality in the spectral-gap estimate also makes the lightest line a rotation eigenline, which must be the normal to that plane. A rank-one sector automatically annihilates the normal. For two simple spectra, equality is equivalent to $|V_{ud}|=1$. If $|V_{ud}|<1$, the minimum defect is strictly greater than $F$. [Equality criterion and quantitative gap](https://github.com/the-omega-institute/trureturing-books/issues/1875)
+
+**Near the orthogonal endpoint with nearly equal up-type light diagonals (hand derivation).** Use the endpoint heavy lines $e_0,e_1$ and the normal $e_2$ to the top–bottom plane as an orthonormal basis. Rotate the down-type reference basis toward the up-type heavy line through $\mu\varepsilon$ in that plane, with $\mu>0$. After factoring out $\varepsilon$, write $C,S$ for the off-diagonal entries of the two rank-one light blocks, $p,p_2$ for the up-type diagonal entries, and denote the down-type diagonal entry on $e_0$ by $v$. Assume bounded light blocks with coupling moduli bounded away from zero. The squared cost is the sum of squared off-diagonal moduli divided by $\varepsilon^2$, counting each pair of indices once. Set $q=|C|^2$ and $\ell=(p-p_2)/\varepsilon^{3/2}$. Measure the slack in the down-type cost at the endpoint basis by
+
+$$
+a=\frac{1}{\varepsilon}\left[q-|S|^2-
+(1-\varepsilon v)^2\frac{\sin^2(\mu\varepsilon)\cos^2(\mu\varepsilon)}{\varepsilon^2}\right].
+$$
+
+Let $D_{\mathrm{plane}}$ be the minimum defect with the normal fixed and $D_*$ the minimum over all complex rotation eigenbases. Uniformly for bounded $a,\ell$,
+
+$$
+D_{\mathrm{plane}}-D_*=
+\frac{\sqrt6\,\varepsilon^4}{2\sqrt q}
+\left(4q a_++2|\ell|\sqrt{q a_+}+\frac{|S|^2}{2}(-a)_+\right)
++O(\varepsilon^{17/4}),\qquad x_+=\max(x,0).
+$$
+
+Positive slack allows a normal tilt of order $O(\varepsilon^{3/2})$, with both linear and quadratic gains in the up-type light block. When the slack is negative, a tilt of order $O(\varepsilon^2)$ weakens the down-type coupling in that direction and reduces the in-plane offset forced on the up sector. The slack changes sign at $q-|S|^2-\mu^2=-2v\mu^2\varepsilon+O(\varepsilon^2)$. [Matching bounds over complex bases and matrix calculation](https://github.com/the-omega-institute/trureturing-books/issues/2051#issuecomment-7239397935)
+
+When the angle and the two mass bases stay fixed, how quickly does the minimum defect approach $F$ as the middle mass-squared eigenvalues tend to zero? Let $D_*$ be the minimum defect of the fixed pair over all rotation eigenbases. Set the two normalized middle mass-squared eigenvalues to $a\varepsilon,b\varepsilon$, with $a,b>0$, and fix $0<\theta<\pi/2$. Write $\lambda_u=|V_{ub}|^2/\sin^2\theta$ and $\lambda_d=|V_{td}|^2/\sin^2\theta$ for the squared projection lengths of the lightest up- and down-type mass lines onto the top–bottom plane. A direct derivation gives
 
 $$
 D_*-F=\frac{\sqrt{3/2}\sin d}{2}(a\lambda_u+b\lambda_d)\varepsilon+O(\varepsilon^2).
 $$
 
 For fixed mass bases and angle, the linear term depends on the lightest lines through their projections onto the plane. Optimizing the angle split within that plane gives effective gaps $1-a\varepsilon(1-\lambda_u)$ and $1-b\varepsilon(1-\lambda_d)$. The matrix entries coupling the plane to its normal contribute only at quadratic order to the squared defect of this construction. Every limit of minimizing rotation eigenbases as the matrices tend to rank one has the top–bottom plane as a coordinate plane. Bounding the cost of tilting that plane gives the matching first-order lower bound. Thus the gap has a strictly positive linear coefficient whenever $|V_{ud}|<1$. [First-order lower bound and matrix calculation](https://github.com/the-omega-institute/trureturing-books/issues/1902#issuecomment-7238657944)
+
+**Near orthogonality, preserving the plane still has a higher-order cost (hand derivation).** Let $e_0,e_1$ be unit vectors on the two endpoint heavy lines, and let $e_2$ be a unit normal to their plane. Rotate the down-type reference basis in the top–bottom plane toward the up-type heavy line so that the angle is $\pi/2-\mu\varepsilon$. Set the normalized middle eigenvalues to $a\varepsilon,b\varepsilon$, with $\mu,a,b>0$. When both light blocks have nonzero first-order off-diagonal entries and the optimal first-order split assigns a positive angle to both sides, the plane-constrained minimum defect $D_{\mathrm{plane}}$ and the unrestricted minimum $D_*$ have the same linear coefficient. After balancing the squared defects of the two sectors, tilting the normal has a positive quadratic cost, while the off-diagonal entries of the light blocks can contribute a linear variation. An $O(\varepsilon^2)$ tilt of the basis can therefore yield an $O(\varepsilon^3)$ improvement in the defect. If the cubic coefficient vanishes, accounting for the shift in the angle split in the normal variation gives a strictly positive fifth-order coefficient. Under these light-block and interior-split conditions, preserving the plane therefore always overestimates the minimum defect for sufficiently small positive $\varepsilon$. [Derivation and matrix check of the fifth-order coefficient](https://github.com/the-omega-institute/trureturing-books/issues/1983#issuecomment-7239062129)
+
+For example, take $\mu=a=b=1$ with reference middle mass lines spanned by $c=(e_1+e_2)/\sqrt2$ and $s=(e_0+i e_2)/\sqrt2$. The two sides split the first-order angle equally, but $D_{\mathrm{plane}}-D_*=(\sqrt3/16)\varepsilon^3+O(\varepsilon^4)$. [Matching bounds, conditions for the cubic term to vanish, and matrix calculation](https://github.com/the-omega-institute/trureturing-books/issues/1983#issuecomment-7238976867)
 
 **When the top–bottom angle and the middle eigenvalues shrink together (hand derivation).** If the top–bottom angle shrinks on the same scale as the middle eigenvalues, the light block contributes at the same order as the angle split. Let the unit vector $e_0$ span the top line. In its orthogonal complement, choose unit vectors $c,s$ for the reference middle mass lines of the up and down sectors and a unit vector $v$ for the direction of rotation. Rotate the entire down-type reference basis through $\theta=\mu\varepsilon$ in the $e_0,v$ plane. Set the two normalized middle mass-squared eigenvalues to $a\varepsilon,b\varepsilon$, with $\mu,a,b>0$. Write $D_*$ for the minimum defect over rotation eigenbases, and set $\kappa=2|\langle c,s\rangle|^2-1$, $r_w=wa^2/4$, and $s_w=(1-w)b^2/4$. Then
 
@@ -324,7 +373,31 @@ The rotation eigenline near $e_0$ absorbs the displacement between the heavy mas
 
 For example, in the standard orthonormal basis $(e_0,e_1,e_2)$ take $\mu=a=b=1$, $v=c=e_1$, and $s=(e_1+i e_2)/\sqrt2$. The optimal leading coefficient is $3/2$. Requiring one rotation eigenline to be the normal $e_2$ to the top–bottom plane raises the optimal coefficient to $5\sqrt6/8>3/2$. Reorienting the two light rotation eigenlines attains the true minimum. [Global derivation, optimizing bases, and matrix calculation](https://github.com/the-omega-institute/trureturing-books/issues/1928#issuecomment-7238762769)
 
+**At the cutoff for splitting the angle near orthogonality (hand derivation).** Take the endpoint heavy lines $e_0,e_1$ and the plane normal $e_2$ as an orthonormal basis. Rotate the reference down-sector mass basis through $\mu\varepsilon$ toward the up-sector heavy line in the top–bottom plane. Both normalized middle eigenvalues are proportional to $\varepsilon$. After factoring out $\varepsilon$, let $C,S$ be the off-diagonal entries of the two fixed rank-one light blocks in $(e_1,e_2)$ and $(e_0,e_2)$, respectively. Write $p,p_2$ for the up-sector diagonal entries and $v$ for the down-sector diagonal entry along $e_0$. At the cutoff $q=|C|^2=|S|^2+\mu^2$, assume $\mu>0$ and $C,S\ne0$, and set $L=|(p-p_2)C|$. With the normal fixed, the up-sector off-diagonal cost attains its minimum in the endpoint basis, where the down-sector cost is slightly lower. For sufficiently small positive $\varepsilon$, the exact plane-constrained defect is $D_{\mathrm{plane}}=\sqrt{6q}\,\varepsilon$. Allowing the normal to tilt gives
+
+$$
+D_{\mathrm{plane}}-D_*=\frac{\sqrt6}{2\sqrt q}
+\begin{cases}
+\tfrac32 L(2\mu^2 L)^{1/3}\varepsilon^{7/3}+O(\varepsilon^{8/3}), & p\ne p_2,\\
+8qv\mu^2\varepsilon^4+O(\varepsilon^{9/2}), & p=p_2.
+\end{cases}
+$$
+
+When the up-sector light diagonal entries differ, tilting the normal reduces the up-sector cost linearly. The down-sector cost grows quadratically with this tilt, so an in-plane turn must offset it, at a quadratic cost to the up sector. Balancing these changes gives the $7/3$ power. When the diagonal entries coincide, the up-sector gain starts at quadratic order in the tilt, and the down-sector slack at the endpoint determines the leading term. Both leading coefficients are positive. [Matching bounds and matrix reproduction](https://github.com/the-omega-institute/trureturing-books/issues/2016#issuecomment-7239160733)
+
 Table 2 at $1\,\mathrm{TeV}$ gives $y_c/y_t\le0.00316/0.8573$ and $y_s/y_b\le0.000271/0.01392$, so we can take $g=0.9996$. With the conservative mixing inputs above, $|V_{tb}|>0.98$ gives $d=\theta$, while $\sin\theta\ge |V_{cb}|>0.035$ forces a defect strictly above $0.0428$. Using the marginal intervals in Table 2 as an input box still gives $d=\theta$. Since $|V_{tb}|=\cos\theta_{23}\cos\theta_{13}$, $\sin^2\theta$ increases with each mixing angle. Substituting the lower endpoints $\theta_{23}=0.04233$ and $\theta_{13}=0.00369$ gives a defect strictly above $0.0520$. [Reference inputs, Table 2](https://arxiv.org/pdf/2510.01312v2#page=14) · [Standard CKM parametrization, Eq. (12.3)](https://pdg.lbl.gov/2024/reviews/rpp2024-rev-ckm-matrix.pdf#page=1)
+
+**The transition near orthogonal mass lines (hand derivation).** When the top–bottom angle is $\pi/2-\mu\varepsilon$ with $\mu>0$, choose an orthonormal basis of endpoint heavy lines $e_0,e_1$ and plane normal $e_2$. Rotate the entire down-type mass basis toward the up-type heavy line within their plane. After removing the common factor $\varepsilon$ from the middle eigenvalues, let $C,S$ be the off-diagonal entries of the two rank-one light blocks, and $p,p_2$ the up-type diagonal entries. Set $q=|C|^2$, $L=|(p-p_2)C|$, $k=(q-|S|^2-\mu^2)/\varepsilon^{2/3}$, and $x_+=\max(x,0)$. When both light couplings approach nonzero limits and the limiting up-type diagonal entries differ, the asymptotic formula is uniform for bounded $k$.
+
+$$
+\begin{aligned}
+D_{\mathrm{plane}}-D_*&=\frac{\sqrt6\,\varepsilon^{7/3}}{2\sqrt q}
+\left[\frac{(-k)_+^2}{4\mu^2}-m(k)\right]+O(\varepsilon^{8/3}),\\
+m(k)&=\min_{s\ge0}\left\{\frac{(s^2-k)_+^2}{4\mu^2}-2Ls\right\}.
+\end{aligned}
+$$
+
+Here $D_{\mathrm{plane}}$ is the minimum defect with the plane normal fixed, and $D_*$ allows all complex rotation eigenbases. The normal tilts by $O(\varepsilon^{4/3})$ in the original basis. Its linear benefit in the up sector competes with the quartic cost induced by the down sector. The bracket is strictly positive, and its minimizer in the quartic problem satisfies $s>\sqrt{k_+}$ and $s(s^2-k)=2\mu^2L$. Thus the planar penalty retains order $7/3$ across the leading angle-split cutoff, with a coefficient that varies continuously with the detuning. [Uniform matching bounds and matrix calculations](https://github.com/the-omega-institute/trureturing-books/issues/2033#issuecomment-7239259812)
 :::
 
 ## 8.2 The Atlas of Yukawa Hierarchy Obstructions: Single Higgs, Density Potentials, Transport Vertices, and Minimal Support {#sec-ch08-yukawa-nogo}
