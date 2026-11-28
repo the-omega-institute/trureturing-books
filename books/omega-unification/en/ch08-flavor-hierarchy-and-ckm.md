@@ -325,6 +325,18 @@ The rotation eigenline near $e_0$ absorbs the displacement between the heavy mas
 For example, in the standard orthonormal basis $(e_0,e_1,e_2)$ take $\mu=a=b=1$, $v=c=e_1$, and $s=(e_1+i e_2)/\sqrt2$. The optimal leading coefficient is $3/2$. Requiring one rotation eigenline to be the normal $e_2$ to the top–bottom plane raises the optimal coefficient to $5\sqrt6/8>3/2$. Reorienting the two light rotation eigenlines attains the true minimum. [Global derivation, optimizing bases, and matrix calculation](https://github.com/the-omega-institute/trureturing-books/issues/1928#issuecomment-7238762769)
 
 Table 2 at $1\,\mathrm{TeV}$ gives $y_c/y_t\le0.00316/0.8573$ and $y_s/y_b\le0.000271/0.01392$, so we can take $g=0.9996$. With the conservative mixing inputs above, $|V_{tb}|>0.98$ gives $d=\theta$, while $\sin\theta\ge |V_{cb}|>0.035$ forces a defect strictly above $0.0428$. Using the marginal intervals in Table 2 as an input box still gives $d=\theta$. Since $|V_{tb}|=\cos\theta_{23}\cos\theta_{13}$, $\sin^2\theta$ increases with each mixing angle. Substituting the lower endpoints $\theta_{23}=0.04233$ and $\theta_{13}=0.00369$ gives a defect strictly above $0.0520$. [Reference inputs, Table 2](https://arxiv.org/pdf/2510.01312v2#page=14) · [Standard CKM parametrization, Eq. (12.3)](https://pdg.lbl.gov/2024/reviews/rpp2024-rev-ckm-matrix.pdf#page=1)
+
+**The transition near orthogonal mass lines (hand derivation).** When the top–bottom angle is $\pi/2-\mu\varepsilon$ with $\mu>0$, choose an orthonormal basis of endpoint heavy lines $e_0,e_1$ and plane normal $e_2$. Rotate the entire down-type mass basis toward the up-type heavy line within their plane. After removing the common factor $\varepsilon$ from the middle eigenvalues, let $C,S$ be the off-diagonal entries of the two rank-one light blocks, and $p,p_2$ the up-type diagonal entries. Set $q=|C|^2$, $L=|(p-p_2)C|$, $k=(q-|S|^2-\mu^2)/\varepsilon^{2/3}$, and $x_+=\max(x,0)$. When both light couplings approach nonzero limits and the limiting up-type diagonal entries differ, the asymptotic formula is uniform for bounded $k$.
+
+$$
+\begin{aligned}
+D_{\mathrm{plane}}-D_*&=\frac{\sqrt6\,\varepsilon^{7/3}}{2\sqrt q}
+\left[\frac{(-k)_+^2}{4\mu^2}-m(k)\right]+O(\varepsilon^{8/3}),\\
+m(k)&=\min_{s\ge0}\left\{\frac{(s^2-k)_+^2}{4\mu^2}-2Ls\right\}.
+\end{aligned}
+$$
+
+Here $D_{\mathrm{plane}}$ is the minimum defect with the plane normal fixed, and $D_*$ allows all complex rotation eigenbases. The normal tilts by $O(\varepsilon^{4/3})$ in the original basis. Its linear benefit in the up sector competes with the quartic cost induced by the down sector. The bracket is strictly positive, and its minimizer in the quartic problem satisfies $s>\sqrt{k_+}$ and $s(s^2-k)=2\mu^2L$. Thus the planar penalty retains order $7/3$ across the leading angle-split cutoff, with a coefficient that varies continuously with the detuning. [Uniform matching bounds and matrix calculations](https://github.com/the-omega-institute/trureturing-books/issues/2033#issuecomment-7239259812)
 :::
 
 ## 8.2 The Atlas of Yukawa Hierarchy Obstructions: Single Higgs, Density Potentials, Transport Vertices, and Minimal Support {#sec-ch08-yukawa-nogo}
