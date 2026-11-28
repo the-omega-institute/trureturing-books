@@ -13274,6 +13274,14 @@
       "line": 151,
       "signature": "theorem nyman_halfline_distance_bound (rho : ℂ) (hz : Zeta23.IsNontrivialZero rho) (hb : 1 / 2 < rho.re) (N : ℕ) : 1 / (‖rho‖ ^ 2 * (1 / (2 * rho.re - 1) + 1 / ‖rho - 1‖ ^ 2)) ≤ distance N ^ 2"
     },
+    "D5/S3/Observer/Hilbert/NymanHalflineZeroSeparation.nyman_halfline_radius_chain": {
+      "module": "D5/S3/Observer/Hilbert/NymanHalflineZeroSeparation",
+      "name": "D5.S3.Observer.Hilbert.NymanHalflineZeroSeparation.nyman_halfline_radius_chain",
+      "kind": "theorem",
+      "statement_id": "sha256:5e4d22a2c754769586fe72b57486e68ac9d67bf4ddcd08f19c782352851207e7",
+      "line": 171,
+      "signature": "theorem nyman_halfline_radius_chain (rho : ℂ) (hz : Zeta23.IsNontrivialZero rho) (hb : 1 / 2 < rho.re) : 1 / (‖rho‖ ^ 2 * (1 / (2 * rho.re - 1) + 1 / ‖rho - 1‖ ^ 2)) = (2 * rho.re - 1) * ‖rho - 1‖ ^ 2 / ‖rho‖ ^ 4 ∧ (2 * rho.re - 1) * ‖rho - 1‖ ^ 2 / ‖rho‖ ^ 4 = ‖(1 : ℂ) - 1 / rho‖ ^ 2 * (1 - ‖(1 : ℂ) - 1 / rho‖ ^ 2) ∧ 0 < ‖(1 : ℂ) - 1 / rho‖ ^ 2 * (1 - ‖(1 : ℂ) - 1 / rho‖ ^ 2)"
+    },
     "D5/S3/Observer/Linear/ExactTaylorObservationRemainder.exp_tail_le": {
       "module": "D5/S3/Observer/Linear/ExactTaylorObservationRemainder",
       "name": "D5.S3.Observer.Linear.ExactTaylorObservationRemainder.exp_tail_le",
