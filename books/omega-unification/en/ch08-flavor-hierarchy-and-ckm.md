@@ -348,6 +348,21 @@ $$
 
 Positive slack allows a normal tilt of order $O(\varepsilon^{3/2})$, with both linear and quadratic gains in the up-type light block. When the slack is negative, a tilt of order $O(\varepsilon^2)$ weakens the down-type coupling in that direction and reduces the in-plane offset forced on the up sector. The slack changes sign at $q-|S|^2-\mu^2=-2v\mu^2\varepsilon+O(\varepsilon^2)$. [Matching bounds over complex bases and matrix calculation](https://github.com/the-omega-institute/trureturing-books/issues/2051#issuecomment-7239397935)
 
+**As the heavy lines approach orthogonality (hand derivation).** Rotate the entire down-type reference mass basis in the top–bottom plane by $\mu\varepsilon$ toward the up-type heavy line, with $\mu>0$. After factoring out $\varepsilon$, the rank-one light blocks on $(e_1,e_2)$ and $(e_0,e_2)$ are bounded and their upper off-diagonal entries $C,S$ have moduli bounded away from zero. The basis $(e_0,e_1,e_2)$ consists of the two reference heavy lines and the normal to the top–bottom plane. Define the squared cost by summing the squared off-diagonal moduli once per pair of indices and dividing by $\varepsilon^2$. Write $q=|C|^2$ and let $E_B(I)$ be the down-type cost in the reference basis. The exact endpoint slack is $q-E_B(I)=k\varepsilon^{5/3}$, where $k$ is bounded. Suppose the difference between the first and second up-type light diagonal entries is $\ell\varepsilon^{3/2}$, with $|\ell|$ bounded above and away from zero. Set $L=|\ell|\sqrt q$ and let $x>\sqrt{k_+}$ solve $x(x^2-k)=2\mu^2 L$, with $k_+=\max(k,0)$.
+
+A light-block rotation along the phase that lowers the up-type cost gives a linear gain and raises the down-type cost quadratically. The in-plane offset needed to compensate brings a quartic up-type cost. These terms balance at a normal tilt of order $\varepsilon^{11/6}$. The minimum defect $D_{\mathrm{plane}}$ with the normal fixed therefore exceeds the minimum $D_*$ over complex bases. The leading difference is of order $\varepsilon^{13/3}$ as $k$ crosses zero. With $u_0=(x^2-k)/(2\mu)$, the leading term and its phase correction are
+
+$$
+\begin{aligned}
+D_{\mathrm{plane}}-D_*&=\frac{\sqrt6}{2\sqrt q}\varepsilon^{13/3}
+\bigl[\Gamma-2\mu\ell\operatorname{Re}(C\bar S)\varepsilon^{1/6}\\
+&\qquad +(4qx^2+\mu u_0|S|^2)\varepsilon^{1/3}+O(\varepsilon^{1/2})\bigr],\\
+\Gamma&=\frac{(-k)_+^2}{4\mu^2}-u_0^2+2Lx.
+\end{aligned}
+$$
+
+At exactly zero slack, $\Gamma=\tfrac32 L(2\mu^2 L)^{1/3}$. Rotating the down-type heavy line induces an extra light-block coupling. Its component along the optimizing phase sets the sign of the $\varepsilon^{9/2}$ term. When $\operatorname{Re}(C\bar S)=0$, this correction vanishes, the next term is positive and of order $\varepsilon^{14/3}$, and the remainder inside the brackets improves to $O(\varepsilon^{2/3})$. [Matching bounds over complex bases and matrix replay](https://github.com/the-omega-institute/trureturing-books/issues/2051#issuecomment-7239648355)
+
 When the angle and the two mass bases stay fixed, how quickly does the minimum defect approach $F$ as the middle mass-squared eigenvalues tend to zero? Let $D_*$ be the minimum defect of the fixed pair over all rotation eigenbases. Set the two normalized middle mass-squared eigenvalues to $a\varepsilon,b\varepsilon$, with $a,b>0$, and fix $0<\theta<\pi/2$. Write $\lambda_u=|V_{ub}|^2/\sin^2\theta$ and $\lambda_d=|V_{td}|^2/\sin^2\theta$ for the squared projection lengths of the lightest up- and down-type mass lines onto the top–bottom plane. A direct derivation gives
 
 $$
