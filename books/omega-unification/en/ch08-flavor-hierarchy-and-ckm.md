@@ -330,7 +330,25 @@ The two-line coefficient $\sqrt{6}\mu/2$ is attained precisely when $U=V=0$. For
 
 For a fixed pair of mass matrices with $0<\theta<\pi/2$, the minimum defect equals $F$ precisely when the normal to the top–bottom plane lies in the kernels of both $A,B$. At equality each heaviest line occupies two rotation coordinates, and their offsets sum to $d$. If they shared only one coordinate, a common nearest rotation eigenline would force $\theta<d$, while distinct nearest eigenlines would force $\pi/2-\theta<d$. They therefore occupy the same coordinate plane. In a sector with simple spectrum, equality in the spectral-gap estimate also makes the lightest line a rotation eigenline, which must be the normal to that plane. A rank-one sector automatically annihilates the normal. For two simple spectra, equality is equivalent to $|V_{ud}|=1$. If $|V_{ud}|<1$, the minimum defect is strictly greater than $F$. [Equality criterion and quantitative gap](https://github.com/the-omega-institute/trureturing-books/issues/1875)
 
-How quickly does this gap close when the mass bases stay fixed and the middle mass-squared eigenvalues tend to zero? Let $D_*$ be the minimum defect of the fixed pair over all rotation eigenbases. Set the two normalized middle mass-squared eigenvalues to $a\varepsilon,b\varepsilon$, with $a,b>0$, and fix $0<\theta<\pi/2$. Write $\lambda_u=|V_{ub}|^2/\sin^2\theta$ and $\lambda_d=|V_{td}|^2/\sin^2\theta$ for the squared projection lengths of the lightest up- and down-type mass lines onto the top–bottom plane. A direct derivation gives
+**Near the orthogonal endpoint with nearly equal up-type light diagonals (hand derivation).** Use the endpoint heavy lines $e_0,e_1$ and the normal $e_2$ to the top–bottom plane as an orthonormal basis. Rotate the down-type reference basis toward the up-type heavy line through $\mu\varepsilon$ in that plane, with $\mu>0$. After factoring out $\varepsilon$, write $C,S$ for the off-diagonal entries of the two rank-one light blocks, $p,p_2$ for the up-type diagonal entries, and denote the down-type diagonal entry on $e_0$ by $v$. Assume bounded light blocks with coupling moduli bounded away from zero. The squared cost is the sum of squared off-diagonal moduli divided by $\varepsilon^2$, counting each pair of indices once. Set $q=|C|^2$ and $\ell=(p-p_2)/\varepsilon^{3/2}$. Measure the slack in the down-type cost at the endpoint basis by
+
+$$
+a=\frac{1}{\varepsilon}\left[q-|S|^2-
+(1-\varepsilon v)^2\frac{\sin^2(\mu\varepsilon)\cos^2(\mu\varepsilon)}{\varepsilon^2}\right].
+$$
+
+Let $D_{\mathrm{plane}}$ be the minimum defect with the normal fixed and $D_*$ the minimum over all complex rotation eigenbases. Uniformly for bounded $a,\ell$,
+
+$$
+D_{\mathrm{plane}}-D_*=
+\frac{\sqrt6\,\varepsilon^4}{2\sqrt q}
+\left(4q a_++2|\ell|\sqrt{q a_+}+\frac{|S|^2}{2}(-a)_+\right)
++O(\varepsilon^{17/4}),\qquad x_+=\max(x,0).
+$$
+
+Positive slack allows a normal tilt of order $O(\varepsilon^{3/2})$, with both linear and quadratic gains in the up-type light block. When the slack is negative, a tilt of order $O(\varepsilon^2)$ weakens the down-type coupling in that direction and reduces the in-plane offset forced on the up sector. The slack changes sign at $q-|S|^2-\mu^2=-2v\mu^2\varepsilon+O(\varepsilon^2)$. [Matching bounds over complex bases and matrix calculation](https://github.com/the-omega-institute/trureturing-books/issues/2051#issuecomment-7239397935)
+
+When the angle and the two mass bases stay fixed, how quickly does the minimum defect approach $F$ as the middle mass-squared eigenvalues tend to zero? Let $D_*$ be the minimum defect of the fixed pair over all rotation eigenbases. Set the two normalized middle mass-squared eigenvalues to $a\varepsilon,b\varepsilon$, with $a,b>0$, and fix $0<\theta<\pi/2$. Write $\lambda_u=|V_{ub}|^2/\sin^2\theta$ and $\lambda_d=|V_{td}|^2/\sin^2\theta$ for the squared projection lengths of the lightest up- and down-type mass lines onto the top–bottom plane. A direct derivation gives
 
 $$
 D_*-F=\frac{\sqrt{3/2}\sin d}{2}(a\lambda_u+b\lambda_d)\varepsilon+O(\varepsilon^2).
