@@ -10,7 +10,7 @@ When three running couplings narrowly miss each other, the oldest temptation in 
 
 The baseline gauge algebra is deliberately austere. The Standard Model Lie algebra $\mathfrak{g}_{\mathrm{SM}} = \mathfrak{u}(1)_Y \oplus \mathfrak{su}(2)_L \oplus \mathfrak{su}(3)_C$ has exactly $1 + 3 + 8 = 12$ generators and introduces no baryon-number-violating $(X, Y)$ leptoquark gauge bosons. At the ultraviolet arc-confluence scale $\mu_{\mathrm{arc}}$, if all three gauge factors read the same complete chiral Weyl fermion ledger with a single universal arc-trace stiffness, the quadratic trace ratios of one generation lock $g_3^2 = g_2^2 = \frac{5}{3}g_Y^2$, fixing the bare ultraviolet Weinberg angle at the rational value $\sin^2\theta_W(\mu_{\mathrm{arc}}) = \frac{3}{8}$.
 
-Yet running straight up from the $Z$-pole experimental baseline at $M_Z = 91.1876\;\mathrm{GeV}$ ($\widehat{\alpha}^{-1} = 127.930$, $\sin^2\widehat{\theta}_W = 0.23129$, $\alpha_s(M_Z) = 0.1180$) with the minimal Standard Model one-loop slopes $b = (\frac{41}{10}, -\frac{19}{6}, -7)$ makes the three lines miss cleanly. Writing $A_i(\mu) = \alpha_i^{-1}(\mu)$ (with $\alpha_1^{-1} = \frac{3}{5}\alpha_Y^{-1}$), consider the linear invariant that simultaneously annihilates both a common unified coupling and the one-loop contribution of any complete $\mathrm{SU}(5)$ family:
+Yet running straight up from the $Z$-pole experimental baseline at $M_Z = 91.1876\;\mathrm{GeV}$ ($\widehat{\alpha}^{-1} = 127.930$, $\sin^2\widehat{\theta}_W = 0.23129$, $\alpha_s(M_Z) = 0.1180$) with the minimal Standard Model one-loop slopes $b = (\frac{41}{10}, -\frac{19}{6}, -7)$ makes the three lines miss cleanly. Writing $A_i(\mu) = \alpha_i^{-1}(\mu)$ (with $\alpha_1^{-1} = \frac{3}{5}\alpha_Y^{-1}$), consider the linear combination that removes a common unified coupling and cancels the one-loop contribution of a complete $\mathrm{SU}(5)$ family at a common threshold.
 
 $$
 C(\mu) \;:=\; \alpha_1^{-1}(\mu) - 3\alpha_2^{-1}(\mu) + 2\alpha_3^{-1}(\mu).
@@ -18,12 +18,12 @@ $$
 
 Under minimal Standard Model one-loop running, $C(\mu)$ drifts with slope only $\frac{1}{5\pi}$ in $\log(\mu/M_Z)$, remaining trapped in $-11.195 < C(\mu) < -10.6083$ across the entire unification window $10^{13} \le \mu/\mathrm{GeV} \le 10^{17}$. Since $C = 3\bigl[\frac{1}{3}(\alpha_1^{-1} + 2\alpha_3^{-1}) - \alpha_2^{-1}\bigr]$, the spread between the largest and smallest inverse couplings stays above $3.5361$ at one loop; evaluated against the electroweak intersection and the near-crossing triangle, the thresholdless baseline leaves a strict inverse-coupling gap $\Delta\alpha^{-1} > 3.66$ (centrally $\approx 3.664$, equivalent to a thresholdless prediction $\sin^2\widehat{\theta}_W(M_Z) \approx 0.2076$, over $600\sigma$ below experiment).
 
-Why are those $3.66$ units so stubbornly hard to erase? A ten-second hand calculation instantly explains why adding complete families or heavy gauge vectors alone cannot budge the gap:
+Why are those $3.66$ units so hard to erase? The projection shows which heavy multiplets leave the gap unchanged when their components share a threshold.
 
-::: {.example #ex-ou-ch04-gap-invariant title="Hand Check: Why $C(\mu)$ Annihilates Complete Families and $\mathrm{SU}(5)$ Gauge Vectors"}
+::: {.example #ex-ou-ch04-gap-invariant title="Hand Check: How Complete Families and Heavy Gauge Vectors Cancel in $C(\mu)$ at Common Thresholds"}
 Write the minimal Standard Model one-loop beta-coefficient vector as $b = (\frac{41}{10}, -\frac{19}{6}, -7)$, evolving via $\frac{\mathrm{d}\alpha_i^{-1}}{\mathrm{d}\log\mu} = -\frac{b_i}{2\pi}$. Dot the projection vector $c_{\mathrm{proj}} = (1, -3, 2)$ into four key directions:
 
-1. **Common unified coupling** $(1, 1, 1)$: $1 - 3 + 2 = 0$; every complete $\mathrm{SU}(5)$ matter family runs along $(1, 1, 1)$ and therefore **cancels identically** in $C(\mu)$.
+1. **Common unified coupling** $(1, 1, 1)$: $1 - 3 + 2 = 0$; the one-loop coefficients of a complete $\mathrm{SU}(5)$ matter family sum to a multiple of $(1, 1, 1)$. Its contribution **cancels identically** in $C(\mu)$ when its components share a threshold weight, as they do at a common mass.
 2. **Neutral heavy vector index** $(0, 2, 3)$: $0 - 6 + 6 = 0$; **charged $(X, Y)$ heavy vector index** $(5, 3, 2)$: $5 - 9 + 4 = 0$. Provided each multiplet shares a common mass, arbitrary towers of heavy gauge vectors contribute **identically zero** to $C(\mu)$.
 3. **Standard Model light-field slope** $b = (\frac{41}{10}, -\frac{19}{6}, -7)$:
 
@@ -34,7 +34,7 @@ Write the minimal Standard Model one-loop beta-coefficient vector as $b = (\frac
    Hence $\frac{\mathrm{d}C}{\mathrm{d}\log\mu} = -\frac{c_{\mathrm{proj}} \cdot b}{2\pi} = +\frac{1}{5\pi} \approx +0.06366$. Climbing all the way from $M_Z$ to $10^{17}\;\mathrm{GeV}$ ($\log(\mu/M_Z) \approx 34.63$) lifts $C(\mu)$ by only $\approx 2.20$, nowhere near enough to erase its $-12.81$ starting deficit at $M_Z$.
 :::
 
-This piece of arithmetic exposes the true physical requirement: pulling $C(\mu)$ from $-10.6$ back to zero cannot be accomplished by cloning complete families or adjusting vector thresholds; the heavy spectrum must **split different hypercharge and weak multiplets inside the same family across wide mass ratios** in the exact direction that favors weak doublets over singlets and color states.
+A mass splitting can leave a finite threshold correction. Take a complete scalar $\mathbf{5}$ with the weak doublet mass $m_H$ below the color triplet mass $m_C$, both above the starting scale. In the one-loop step-threshold approximation, only the doublet is active between the two masses. The extra beta-coefficient projection is $(1,-3,2)\cdot(3/10,1/2,0)/3=-2/5$. Once the triplet becomes active, the slope contributions cancel and the accumulated positive shift $\log(m_C/m_H)/(5\pi)$ remains. Whether it closes the gap depends on the mass ratio and the rest of the heavy spectrum. [Scalar indices in Chapter 5](ch05-kinetic-trace-and-uv-ceilings.md#sec-ou-ch05-s01) · [One-loop weights](ch05-kinetic-trace-and-uv-ceilings.md#sec-ou-ch05-s03)
 
 To test whether the discrete heavy tower of the 19-point Behrend shell can generate such an asymmetric hierarchy and close the $\Delta\alpha^{-1} > 3.66$ gap on its own, we first define the charged magnetic Laplacian, its two-step mass operator, and the weak-center parity decomposition.
 

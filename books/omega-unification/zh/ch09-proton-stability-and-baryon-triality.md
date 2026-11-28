@@ -366,7 +366,28 @@ $$
 
 局部反解在不同分支上可以给出不同答案。当两个接触耦合都未知时，取两点格探针的 $t=1$，参数 $(U,V,\rho)=(1/4,1/8,1/2)$ 与另一点给出完全相同的三个比值。另一点的三个坐标分别与 $(0.1476388875849972,0.0560800415954564,0.7716008713962137)$ 相差小于 $10^{-11}$，两点都满足 $0<V/U=|F|^2<1$。以第一点的精确有理读数为目标，在三个方程中清去正分母，再用压缩映射证明第二点所在的小盒内有解。两解处的雅可比矩阵都可逆，所以附近有一整个读数开集，其中每组三比值都容许两个不同的重叠模长。
 
-对任一固定有限图上度数为正的格点，配位数律还给出一个限制。在 $(u,v)=(1,1/2)$ 处，$t^{16}$ 系数在 $\rho=1/2$ 时为正，在 $\rho=3/4$ 时为负。当跳跃充分小且非零，这两个行列式在分母为正的同一连通参数开集内异号。等维开集间的连续单射在每个连通分支上具有一致定向，故三个读数无法全局唯一确定参数三元组。十九点壳上具有相同读数的原像究竟在哪个参数上有差别，仍未判定。 [不同重叠值的两个分支](https://github.com/the-omega-institute/trureturing-experiments/blob/efc258cc375f0f58ad2b88582a1c142444245f8f/experiments/ch39-omega-research/replay/ch39-proton-ratio-global-ambiguity.md) · [有理数证书](https://github.com/the-omega-institute/trureturing-experiments/blob/efc258cc375f0f58ad2b88582a1c142444245f8f/experiments/ch39-omega-research/replay/ch39-proton-ratio-global-ambiguity.py)
+对任一固定有限图上度数为正的格点，配位数律还给出一个限制。在 $(u,v)=(1,1/2)$ 处，$t^{16}$ 系数在 $\rho=1/2$ 时为正，在 $\rho=3/4$ 时为负。当跳跃充分小且非零，这两个行列式在分母为正的同一连通参数开集内异号。等维开集间的连续单射在每个连通分支上具有一致定向，故三个读数无法全局唯一确定参数三元组。 [不同重叠值的两个分支](https://github.com/the-omega-institute/trureturing-experiments/blob/efc258cc375f0f58ad2b88582a1c142444245f8f/experiments/ch39-omega-research/replay/ch39-proton-ratio-global-ambiguity.md) · [有理数证书](https://github.com/the-omega-institute/trureturing-experiments/blob/efc258cc375f0f58ad2b88582a1c142444245f8f/experiments/ch39-omega-research/replay/ch39-proton-ratio-global-ambiguity.py)
+
+十九点壳上，同样的三个比值可以对应不同的重叠模方 $\rho=|c|^2$。任选一个格点，其度数为 $z=10,14,16,18$ 之一。对每个充分小的非零实跳跃 $t$，存在一个三维读数开集，其中每组三比值都有两支正则原像，二者的 $\rho$ 不同，且均满足 $u>0$、$0<w=v/u<1$、$0<\rho<1$。同一构造适用于任意有限简单图上度数为正的每个格点，条件是各点共用一组接触参数，各边共用同一跳跃。
+
+固定 $A=X_{AB}$ 和 $Y=(X_{BB}-X_{AA})/(zt^8)$，考察第三个读数如何随 $w$ 变化。在 $u=1$、$\rho=1/2$ 附近，前两个约束把 $u,\rho$ 局部确定为 $w$ 的函数。在此截面上，雅可比行列式首项系数在 $0.4000162<w_*<0.4000163$ 有一个简单零点。该零点在小跳跃下延续，此时 $X_{AA}$ 沿固定 $A,Y$ 的曲线有非退化极值。单键展开给出极值处 $t^{-4}\,d\rho/dw$ 的非零极限。因此极值两侧可取三个读数完全相同而 $\rho$ 不同的两点。两支在这对原像处分别局部可逆，故共同读数构成开集。若接触参数的尺度可调，任意指定的 $t\ne0$ 都允许这种歧义。从已有双解的小跳跃 $t_0\ne0$ 出发，将两支的 $u,v$ 同乘 $(t/t_0)^2$，即保持 $u/t^2,v/t^2$ 和全部三个比值。 [折叠的推导与精确根证书](https://github.com/the-omega-institute/trureturing-experiments/blob/fd415c626eb98bbc4cde18e39f97fac828351308/experiments/ch39-omega-research/replay/ch39-proton-shell-overlap-fold.md)
+
+对充分小的非零跳跃，在第二个格点以同一强度补测一次混合比值，就能分辨折叠附近的两支。选取度数分别为 $z_1,z_2$ 的两个格点，要求 $z_1,z_2>0$ 且 $z_1\ne z_2$，整图共用 $u,v,\rho$ 和已知实跳跃 $t$。在第一点读原来的三个比值，在第二点只读 $X_{AB}$。记 $A_i=X_{AB}^{(i)}$，将这四个原始读数组合为
+
+$$
+A_1,\qquad D_t=\frac{A_2-A_1}{(z_2-z_1)t^4},\qquad
+Y_t=\frac{X_{BB}^{(1)}-X_{AA}^{(1)}}{z_1t^8}.
+$$
+
+配位数律给出 $(A_1,D_t,Y_t)$ 在 $t\to0$ 时的极限 $(S,S'\ell/u^2,h/u^4)$。这里 $S=S_{AB}(\rho)$ 是静态混合比值，$\ell(w,\rho)$ 和 $h(w,\rho)$ 分别由$u=1$ 时单键的四阶混合响应和八阶对角差给出。先由 $S'>0$ 读出 $\rho$。将极限的第二项除以 $S'\sqrt{-h/u^4}$ 得到 $\ell/\sqrt{-h}$，其中尺度 $u$ 已消去。在 $0<w,\rho<1$ 上，单键矩的有理数证书给出 $h<0$ 和 $2h\,\partial_w\ell-\ell\,\partial_w h<0$。因此 $\ell/\sqrt{-h}$ 对 $w$ 的导数严格为正，即使 $\ell=0$ 也能恢复 $w$。最后由 $h/u^4$ 恢复正尺度 $u$，继而求出 $v=uw$。
+
+预先在 $u>0$、$0<w,\rho<1$ 内任选一个紧参数盒 $K$。极限读数在 $K$ 上单射且导数处处可逆，所以两组读数的距离至少是对应参数距离的一个正倍数。邻近点对由导数及其一致连续性控制，相隔给定距离的点对由紧致性与单射性控制。有限图的解析展开在 $K$ 上连同一阶参数导数以 $O_K(t^2)$ 趋于上述极限，故对某个 $t_K>0$，每个 $0<|t|<t_K$ 都保持这个距离下界的至少一半。十九点壳上格点对有限，取各阈值的最小值即可覆盖四种度数的六种不同度数组合。对盒内任意两个候选，若四个原始比值逐项相差至多 $\varepsilon$，则参数距离至多为 $O_K(\varepsilon/|t|^8)$，其中跨点差与对角差分别将原始误差放大到 $O(\varepsilon/|t|^4)$ 与 $O(\varepsilon/|t|^8)$。$t=0$ 时只剩依赖于 $\rho$ 的静态读数，同度两点也会消去跨点差中的四阶信息。 [两格点反演的推导](https://github.com/the-omega-institute/trureturing-experiments/blob/5b6aff90cdc561c0f0c8c56842e943d0110b9f69/experiments/ch39-omega-research/replay/ch39-proton-two-degree-inverse.md) · [单键矩的符号证书](https://github.com/the-omega-institute/trureturing-experiments/blob/5b6aff90cdc561c0f0c8c56842e943d0110b9f69/experiments/ch39-omega-research/replay/ch39-proton-two-degree-signs.py)
+
+两站四个原始读数的八阶误差放大是尖锐的。记 $n_j$ 为经过格点 $j$ 的三角形数。到六阶为止，该站的三个比值都沿同一条静态曲线移动，有效重叠为 $e_j=\rho+z_jt^4L+n_jt^6M$，其中 $L=u^{-2}\ell(w,\rho)$、$M=u^{-3}m(w,\rho)$。这里 $m$ 是一个三角形对混合比值的六阶贡献在 $u=1$ 时除以 $S'$ 所得的系数。取同时消去 $de_1,de_2$ 的单位参数方向，四个原始读数在这个方向上的导数都只有 $O(t^8)$。结合前面的逆估计，已知的跳跃 $t$ 趋于零时，恢复整个参数三元组的最坏局部误差放大恰为 $\Theta(|t|^{-8})$。
+
+若再测第三个格点的混合比值 $A_3$，可以选一组系数消去三个 $A_j$ 中的静态项与四阶项。这个组合保留六阶项的条件是三行 $(1,z_j,n_j)$ 的行列式非零。还须由 $M$ 提供独立于 $L$ 的参数方向，即 $G=3m\,\partial_w\ell-2\ell\,\partial_wm\ne0$。两个条件同时成立时，最坏局部误差放大降至 $\Theta(|t|^{-6})$。若任一条件失效，在该参数点仍为 $\Theta(|t|^{-8})$。这是原始读数对 $(\rho,u,w)$ 的雅可比最小奇异值倒数的阶数。
+
+十九点壳的四类 $(z_j,n_j)$ 依次是 $(10,45),(14,83),(16,100),(18,117)$。在三个不同度数中，选入度为 $10$ 的格点时，三角形计数通过行列式检验。仅用度为 $14,16,18$ 的格点时，三对计数共线。精确收缩给出 $G(1/2,1/2)=-101786027/52502068096$。在 $\rho=1/100$ 处，$w=1/100$ 与 $w=1/2$ 的 $G$ 异号，所以即使选对格点，两者之间也有只能达到八阶的参数。[三角形系数、奇异值与误差阶](https://github.com/the-omega-institute/trureturing-experiments/blob/fc88f9ba3aa8cc31e88b5fd2a603beae24eac9c5/experiments/ch39-omega-research/replay/ch39-proton-contact-noise-orders.md)
 
 若能调节两点格的跳跃强度，并在各次测量中保持 $u,v,\rho$ 不变，就可以分开上述双解。在 $t=2$ 时，第一点的 $X_{AB}$ 落在 $(1.095,1.096)$，第二点的落在 $(1.222,1.223)$。对整个参数域 $u,v>0$、$0\leq\rho\leq1$，任取 $25$ 个不同的正跳跃强度，每档精确测量 $(X_{AB},X_{AA},X_{BB})$，就能唯一确定 $(u,v,\rho)$。若仪器只读 $X_{AA}$，任取 $28$ 个不同的正强度，足以确定重叠模方 $\rho$。若允许挑选三比值的测量档位，七个在有理数域上代数独立的 $T=t^4$ 也足够。最小档数仍待确定。
 
