@@ -243,6 +243,17 @@ Even if two channels open at the same threshold, their curves above it can disti
 
 Throughout $0<a\le 1/20$, rational interval bounds and the bound on the number of spectral density sign changes give a unique optimal fixed triple $1,p_a,3$, with $1.90<p_a<1.98$. The equal-amplitude residual $v_LL-2M+v_HH$ has common amplitude $d>0$. The heavy squared modulus strictly dominates the error, with sharp amplification factor $v_H/d$. A common reply across the window gives the same lower bound for deterministic adaptive sampling. The light amplification factor $v_L/d$ decays in proportion to $1/\log(1/a)$, while the heavy amplification tends to the finite positive value $539.567599$ and $p_a$ tends to $1.902468865$, both rounded. This is the normalized limit of the positive-mass sampling design. [Derivation and reproducible rational interval bounds](https://github.com/the-omega-institute/trureturing-books/issues/2076#issuecomment-7239584826)
 
+The limit also tells us which way to adjust the sample as the light mass squared decreases. Set $\ell=\log(1/a)$, $B_0=M_0-R_0H_0$, and $W_0(P)=\log P-\log(3)H_0(P)/[H_0(3)-H_0(1)]$. Eliminating the heavy coefficient with the equal-amplitude constraints gives the normalized light column the leading correction $\ell^{-1}W_0(P)$. The heavy term keeps the endpoint changes equal. Expanding the stationarity equation for the equal-amplitude residual gives
+
+$$
+\begin{aligned}
+p_a &= p_0+\frac{c}{\ell}+O(\ell^{-2}),\\
+c &= -\frac{[B_0(1)+B_0(p_0)]W_0'(p_0)}{-2B_0''(p_0)} .
+\end{aligned}
+$$
+
+The denominator is the positive curvature of the limiting residual at $p_0$. Rational interval arithmetic gives $0.069763441380\le c\le0.069763441382$. For sufficiently small light mass squared, the optimal interior sample therefore lies to the right of $p_0$, and the distance shrinks at an inverse-logarithmic rate to leading order. [Hand derivation and reproducible rational interval bounds](https://github.com/the-omega-institute/trureturing-books/issues/2106#issuecomment-7240031962)
+
 For example, with $m=(1,4,9)$ the channels $(1,3)$ and $(2,2)$ both open at $T=16$ and have $e_{13}=4$ and $e_{22}=0$. For columns $(11,12,13,22,23,33)$ and readings at $P=1,\ldots,6$, rational interval arithmetic bounds the determinant between $-3.767\times10^{-28}$ and $-3.766\times10^{-28}$. The recovered quantities from the bubble are squared moduli. The four-layer example shows how relative cycle phases can remain ambiguous even with the static spectrum. [Determinant check](https://github.com/the-omega-institute/trureturing-books/issues/1821#issuecomment-7238133069)
 
 **Relative phases for four mixing layers.** Even the full spectrum at every constant background and the complete zero-background Euclidean two-point function can leave two distinct portal phases. Take four complex scalars with identical quantum numbers, squared masses $D=\operatorname{diag}(1,2,3,4)$, and either of the following portals, with $\sigma=\pm1$,
