@@ -247,6 +247,15 @@ As the budget approaches $B_0$ from below, set $s_*=s_\tau$, $b=W'(\tau-s_*)$, a
 
 For $1<u\le2$, the transfer endpoint still gives $V_S(B_0-\varepsilon)=N-1+A_r^u+C_r^u$ in the wider window $0<\varepsilon\le3/25$, with the same attainment conditions. If exactly two of the first $N$ weights fall below the cap, their combined exposure is at most $2\tau-\varepsilon$. Concavity tightens the prefix bound to $N-2+2W(\tau-\varepsilon/2)$. With three or more uncapped weights, the larger loss of unit weight gives the same prefix bound. Closed interval calculations show that $A_r>2W(\tau-\varepsilon/2)-1$ and that the power sum increases strictly along the transfer until the weight with zero exposure vanishes. The one-transfer comparison thus applies throughout this window. [Strengthened prefix bound and interval calculation](https://github.com/the-omega-institute/trureturing-books/issues/2193#issuecomment-7240619070)
 
+For $1<u\le2$, this same two-weight optimum holds up to the largest deficit shared by the whole exponent range,
+$$
+\varepsilon_{\mathrm{pair}}
+=\lim_{u\downarrow1}\tau_0(u)+\log\!\bigl(-\log((1+w_1)/2)\bigr),
+\qquad
+0.1701837999<\varepsilon_{\mathrm{pair}}<0.1701838001 .
+$$
+The supremum remains $N-1+A_r^u+C_r^u$, with the same attainment conditions. The critical cap increases with $u$, so throughout this window two equal shares of the residual exposure can supply more than $1+w_1$. This ensures that the single transfer can reach zero remaining heat weight. When at least two of the largest $N$ weights are uncapped, the two prefix bounds and an interval bound on the sum of $w\log w$ still favor the transfer endpoint. When exactly $N-1$ of the largest $N$ weights are capped, bounds on the ratio of the two marginal power gains give a strictly positive transfer slope. Above $\varepsilon_{\mathrm{pair}}$, for $u$ sufficiently close to $1$ the residual exposure cannot supply two heat weights with sum $1+w_1$, even at equal shares. The optimum with a positive remainder past this boundary remains open. [Derivation and interval certificate for the maximal common two-weight window](https://github.com/the-omega-institute/trureturing-books/issues/2321#issuecomment-7241885681)
+
 Once the exponent reaches the critical value, the zero-transfer endpoint wins over a wider budget window (direct derivation, `ARGUED`). For $u_c\le u\le4$, $\tau=\tau_0(u)$, and $0<\varepsilon\le0.60$, the value is
 
 $$

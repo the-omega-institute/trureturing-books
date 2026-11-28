@@ -247,6 +247,15 @@ $$
 
 对 $1<u\le2$，转移端在更宽的 $0<\varepsilon\le3/25$ 内仍给出 $V_S(B_0-\varepsilon)=N-1+A_r^u+C_r^u$，取等条件与上文相同。若前 $N$ 份中恰有两份未截顶，这两份的总暴露至多为 $2\tau-\varepsilon$。凹性将前缀上界收紧为 $N-2+2W(\tau-\varepsilon/2)$。若有三份以上未截顶，缺少的单位热权更多，同一个前缀上界仍成立。闭区间复算表明 $A_r>2W(\tau-\varepsilon/2)-1$，且幂和沿转移严格增加到零暴露余权耗尽。这样可以在整个新窗口沿用单次转移比较。[加强前缀的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2193#issuecomment-7240619070)
 
+对 $1<u\le2$，同一双权最优公式覆盖整个指数区间能够共用的最大缺口
+$$
+\varepsilon_{\mathrm{pair}}
+=\lim_{u\downarrow1}\tau_0(u)+\log\!\bigl(-\log((1+w_1)/2)\bigr),
+\qquad
+0.1701837999<\varepsilon_{\mathrm{pair}}<0.1701838001 .
+$$
+上确界仍为 $N-1+A_r^u+C_r^u$，取等条件同上。临界截顶随 $u$ 递增，因此在此窗口内，平分剩余暴露可使两份热权之和超过 $1+w_1$，单次转移因而能达到零余权端。若最大的 $N$ 份热权中至少两份未截顶，两条前缀界与 $w\log w$ 和的区间比较仍给出转移端占优。若最大的 $N$ 份热权中恰有 $N-1$ 份截顶，两份边际幂增益的比值界给出严格正的转移斜率。超过 $\varepsilon_{\mathrm{pair}}$ 后，指数 $u$ 足够接近 $1$ 时，即使平分剩余暴露也无法使两份热权之和达到 $1+w_1$。越过该边界后的正余权最优值仍待判定。 [双权共用最大窗口的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2321#issuecomment-7241885681)
+
 当指数达到临界值后，无转移端在更宽的预算窗内占优（手工推导，`ARGUED`）。取 $u_c\le u\le4$、$\tau=\tau_0(u)$ 和 $0<\varepsilon\le0.60$，则
 
 $$
