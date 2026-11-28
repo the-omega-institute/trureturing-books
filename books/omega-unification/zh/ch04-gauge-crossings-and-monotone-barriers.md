@@ -196,7 +196,9 @@ $$
 
 把尺度推到首个中心偶阈值，还需排除矩形外的交点。记 $L=\log(\mu/M_Z)$，$L_{\mathrm{even}}$ 为该阈值的对数尺度。十四枚固定谱均有 $29.39618<L_{\mathrm{even}}<29.39620$。在整个 $0.117\le\alpha_s(M_Z)\le0.119$ 内，逆耦合极差在 $0\le L\le28.940$ 恒大于 $0.33$，在 $29.140\le L\le L_{\mathrm{even}}$ 恒大于 $0.42$。因此，每枚谱在从 $M_Z$ 到首个中心偶阈值的连续尖阈值两圈流中各恰有一个三线交点。
 
-这里电弱差 $A_1-A_2$ 从正起步，在矩形下边变为负，到上边又为正。区间证书在每个中心奇阈值处分段，直接包围三组逆耦合差。每个排除步只需有一组差的绝对值始终高于所给下界。阈值处的耦合连续，因而分段也覆盖折点。首个中心偶阈值以上须另行指定中心偶场的激活与匹配。[全尺度排除的推导](https://github.com/the-omega-institute/trureturing-books/issues/1942#issuecomment-7241130065)[^pre-even-replay]
+这里电弱差 $A_1-A_2$ 从正起步，在矩形下边变为负，到上边又为正。区间证书在每个中心奇阈值处分段，直接包围三组逆耦合差。每个排除步只需有一组差的绝对值始终高于所给下界。阈值处的耦合连续，因而分段也覆盖折点。[全尺度排除的推导](https://github.com/the-omega-institute/trureturing-books/issues/1942#issuecomment-7241130065)[^pre-even-replay]
+
+首个中心偶阈值左侧还留有多少电弱差？直接包围该处的左极限，十四枚谱在同一强耦合初值闭区间上均有 $G(L_{\mathrm{even}}^-)>1.52569$，其中 $G=A_1-A_2$。在阈值右侧，容许有限次匹配跳跃，首个阈值也计在内。设 $J(s)$ 为截至 $L_{\mathrm{even}}+s$ 的匹配跳降总量，各跳跃只计 $G$ 的下降部分。若分段绝对连续的规范流满足 $G'\ge-D$（几乎处处），逐段积分给出 $G(L_{\mathrm{even}}+s)>1.52569-J(s)-Ds$。例如，若 $J(1/5)\le1/2$ 且 $D=5/2$，则从首个阈值匹配后的读数开始，整个 $0\le s\le1/5$ 区间的三线极差都大于 $0.52569$。中心偶场的实际激活与匹配规则决定这两个条件是否成立。[阈值左极限的区间复算与右侧界](https://github.com/the-omega-institute/trureturing-books/issues/2390#issuecomment-7242537993)
 
 [^pre-even-replay]: 将书库的 `gauge-global-replay.py` 放入所引实验版本的 `experiments/ch39-omega-research/replay/` 目录，与 `ch39-chiral-clock-unit-readout.py` 并列。用 Python 3.12 和 python-flint 0.9.0 运行 `python3 gauge-global-replay.py`，入口逐谱调用 `verify`。脚本的 SHA-256 为 `30746b44546961682f6385e638e154d47bd66e1e20d6ff5da79ae8573c1d4296`。[书库区间证书](https://github.com/the-omega-institute/trureturing-books/blob/149df109c2a246f204d22b5e176d90e173f795bf/books/omega-unification/replay/gauge-global-replay.py#L14) · [固定版本的谱与流输入](https://github.com/the-omega-institute/trureturing-experiments/blob/91df60d5968e4fabfc797c5660e975b9acfb3c3e/experiments/ch39-omega-research/replay/ch39-chiral-clock-unit-readout.py)
 
