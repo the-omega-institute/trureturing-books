@@ -274,12 +274,14 @@ $$
 在一个六点算例中，可以直接给出整个耦合窗口的统一误差常数（手工推导，`ARGUED`）。取 $k=1$，令 $T$ 以概率 $2/3$、$1/3$ 分别取 $-1$、$2$，并在 $b_j=(j-1/(2j))^2-2$（$1\le j\le6$）处读取均值。两组混合各至多有三个原子，补偿速率均在 $[15/8,5]$ 内，支撑和权重可独立选择。若 $\lvert\beta\rvert,\lvert\beta'\rvert\le10^{-3}$，则
 
 $$
-\lvert u-u'\rvert\le 140\,000\,000\|m-m'\|_\infty,\qquad u=\beta^3,\quad u'=(\beta')^3 .
+\lvert u-u'\rvert\le 64\,000\,000\|m-m'\|_\infty,\qquad u=\beta^3,\quad u'=(\beta')^3 .
 $$
 
-取立方坐标较小的一组作减项，必要时用零权速率补足三个槽，再将每个槽记两次。对另一组的任一求值速率，先从配分积分提出共同形状权。重复速率槽对应一个六阶体积微分算子，它把剩余列化为速率差的平方积、曲率二次型及交叉项。落在槽上时，平方积和交叉项同时为零。离槽时，平方积吸收可能为负的交叉项，使曲率保有严格正的余量。
+取立方坐标较小的一组作减项，必要时用零权速率补足三个槽，再将每个槽记两次。对另一组的任一求值速率，先从配分积分提出共同形状权。重复速率槽对应一个六阶体积微分算子，它把剩余列化为速率差的平方积、曲率二次型及交叉项。落在槽上时，平方积和交叉项同时为零。离槽时，平方积吸收可能为负的交叉项，使曲率保有严格正的余量。 分开计算体积尾部和原始前缀 Wronskian 的取样权，可得到上述常数。[常数的有理复算](https://github.com/the-omega-institute/trureturing-books/issues/2020#issuecomment-7239824730)
 
 这个配方在有界体积区间内成立，大体积尾部由拉普拉斯指数矩控制。Rolle 定理将体积上的正性传给六点行列式，再用零耦合的平方 Cauchy 行列式逐行估计噪声。由此得到的常数不依赖两组速率的间距，也涵盖速率任意靠拢和权重趋零。 [完整推导与精确有理复算](https://github.com/the-omega-institute/trureturing-books/issues/2020#issuecomment-7239600699)
+
+若一组模型的参照耦合为零，另一组满足 $0\le\beta\le10^{-3}$，两组各至多三个原子的支撑仍可独立选取。此时可将六点界中的误差常数进一步收紧为 $47\,000\,000$。零耦合参照下的 Wronskian 可直接用速率差的平方项控制曲率交叉项，再用辅助 Newton 列及各读数的余子式给出常数。[单侧界的完整推导与有理复算](https://github.com/the-omega-institute/trureturing-books/issues/2020#issuecomment-7239468603)
 
 物理耦合满足 $\lvert\beta-\beta'\rvert^3\le 4\lvert u-u'\rvert$。若每个读数的误差至多为 $\varepsilon$，任何误差预算内的拟合与真实模型的读数相距至多 $2\varepsilon$。因此 $u$ 与 $\beta$ 的最坏误差分别为 $O(\varepsilon)$ 与 $O(\varepsilon^{1/3})$，且两阶都是锐的。固定一个容许的补偿速率，比较 $\beta=\pm h$。读数差按 $h^3$ 缩小，而带号立方坐标与物理耦合的差分别为 $2h^3$ 与 $2h$，故允许达到读数差一半的噪声时，两组都能给出相同的观测。[有限差商推导与有理区间复算](https://github.com/the-omega-institute/trureturing-books/issues/1906#issuecomment-7238707033)
 
