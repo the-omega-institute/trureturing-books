@@ -302,7 +302,25 @@ $$
 
 固定整对质量矩阵后，若 $0<\theta<\pi/2$，最小破缺等于 $F$ 当且仅当这个平面的法线同时落在 $A,B$ 的核中。取等时，两条顶线各占两个轮换坐标，并且两线偏角之和恰为 $d$。若两线只共用一个坐标，最近轮换线相同会迫使 $\theta<d$，最近轮换线不同则会迫使 $\pi/2-\theta<d$。因此它们共用同一个坐标平面。对谱简单的部门，谱隙估计取等还要求最轻质量线本身是轮换本征线，只能取该平面的法线。秩一部门自动湮灭法线。两谱均简单时，等号条件化为 $|V_{ud}|=1$。若 $|V_{ud}|<1$，最小破缺严格大于 $F$。[等号判据与定量裕量的推导](https://github.com/the-omega-institute/trureturing-books/issues/1875)
 
-固定两套质量基后，若只让次重质量平方趋于零，上述差距以什么速度收窄？记 $D_*$ 为这对矩阵在全部轮换本征基上的最小破缺。令两套归一次重质量平方分别为 $a\varepsilon,b\varepsilon$，其中 $a,b>0$，并固定 $0<\theta<\pi/2$。记 $\lambda_u=|V_{ub}|^2/\sin^2\theta$、$\lambda_d=|V_{td}|^2/\sin^2\theta$，它们分别是上、下型最轻质量线在顶底平面内的投影长度平方。手工推导给出
+**接近正交且上型轻块近等对角时（手工推导）。** 取正交端点的上、下型重线 $e_0,e_1$ 和顶底平面法线 $e_2$ 为单位基。把下型参考质量基在平面内朝上型重线转过 $\mu\varepsilon$（$\mu>0$）。除去共同因子 $\varepsilon$，记两个秩一轻块的非对角元为 $C,S$，上型对角元为 $p,p_2$，下型在 $e_0$ 上的对角元为 $v$。两轻块有界且耦合模有正下界。平方成本为非对角元模平方之和除以 $\varepsilon^2$，每对指标只计一次。令 $q=|C|^2$、$\ell=(p-p_2)/\varepsilon^{3/2}$，再用
+
+$$
+a=\frac{1}{\varepsilon}\left[q-|S|^2-
+(1-\varepsilon v)^2\frac{\sin^2(\mu\varepsilon)\cos^2(\mu\varepsilon)}{\varepsilon^2}\right]
+$$
+
+衡量端点基中下型平方成本留下的余量。记 $D_{\mathrm{plane}}$ 为保留法线时的最小破缺，$D_*$ 为遍历任意复轮换基所得的最小破缺。对有界的 $a,\ell$ 一致有
+
+$$
+D_{\mathrm{plane}}-D_*=
+\frac{\sqrt6\,\varepsilon^4}{2\sqrt q}
+\left(4q a_++2|\ell|\sqrt{q a_+}+\frac{|S|^2}{2}(-a)_+\right)
++O(\varepsilon^{17/4}),\qquad x_+=\max(x,0).
+$$
+
+正余量容许轻块法线转过 $O(\varepsilon^{3/2})$，上型轻块的收益包含线性项与二次项。余量为负时，法线转过 $O(\varepsilon^2)$ 即可削弱下型在该方向的耦合，减少被迫分给上型的平面转角。余量的符号分界在 $q-|S|^2-\mu^2=-2v\mu^2\varepsilon+O(\varepsilon^2)$。[全复基上下界与矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/2051#issuecomment-7239397935)
+
+若固定夹角与两套质量基，只让次重质量平方趋于零，最小破缺又以什么速度趋近锐界 $F$？记 $D_*$ 为这对矩阵在全部轮换本征基上的最小破缺。令两套归一次重质量平方分别为 $a\varepsilon,b\varepsilon$，其中 $a,b>0$，并固定 $0<\theta<\pi/2$。记 $\lambda_u=|V_{ub}|^2/\sin^2\theta$、$\lambda_d=|V_{td}|^2/\sin^2\theta$，它们分别是上、下型最轻质量线在顶底平面内的投影长度平方。手工推导给出
 
 $$
 D_*-F=\frac{\sqrt{3/2}\sin d}{2}(a\lambda_u+b\lambda_d)\varepsilon+O(\varepsilon^2).
