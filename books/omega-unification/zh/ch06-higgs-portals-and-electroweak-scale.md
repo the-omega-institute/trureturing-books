@@ -55,6 +55,14 @@ $$
 
 对三层等比质量权 $(1,r,r^2)$，$r>1$，这种歧义恰在 $r=(1+\sqrt5)/2,\,2,\,3$ 三个公比上出现。要检验固定反项带来的额外条件，按 $i=0,1,2$ 编号各层，记 $\delta_i(\lambda)$ 为归一斜率 $\lambda$ 上的数码差。极点权重相等后，余下差值正比于 $\sum_\lambda(r\delta_1(\lambda)+2r^2\delta_2(\lambda))(1+\lambda s)^2$，其常数、一次和二次系数须全部为零。例如在黄金比上，可取两组有色、无色归一斜率 $(3,7)$ 与 $(5,1)$。两组的零至二阶加权矩都是 $(4,16,76)$。在前两层同向对换两种分配，第三层反向对换。关系 $1+r=r^2$ 抵消极点权重，而三个矩抵消余下多项式。三个例外公比上都有全正斜率的构造。 [三层阈值分类](https://github.com/the-omega-institute/trureturing-experiments/blob/4d589c1d2a4dd74ac8fb695eba260a0471cc8856/experiments/ch39-omega-research/replay/ch39-three-geometric-portal-thresholds.md) · [精确枚举](https://github.com/the-omega-institute/trureturing-experiments/blob/4d589c1d2a4dd74ac8fb695eba260a0471cc8856/experiments/ch39-omega-research/replay/ch39-three-geometric-portal-thresholds.py)
 
+给常背景加上一道波长很长的扰动，还能分清哪些门户？在同一高斯标量模型里，扰动带入欧氏动量 $p$。从二点函数中扣除 $p=0$ 的值，并除去共同的已知因子。其 $p^2$ 系数随背景 $s$ 的变化给出
+$$
+B(s)=\sum_{\text{物种}} \frac{w t^2}{m_i+t s},\qquad w\in\{3,1\}.
+$$
+这个公式来自等质量泡积分：对 $\log[1+p^2 z(1-z)/(m_i+ts)]$ 在 $p^2=0$ 求导，费曼参数 $z$ 从零积到一给出因子 $1/6$，两次源插入给出 $t^2$。固定局部反项，测得 $s=0$ 附近的势和 $B(s)$ 两个函数，就能识别任意三个不同已知阈值上全部六个带号斜率。每个非零归一斜率的极点在势的三阶导数中按 $m_i^2$ 加权，在 $B(s)$ 中按 $m_i$ 加权。两种权留下的三层差分至多共用一个方向；势中保留的层对数再利用 $m\log m$ 的严格凸性消去剩余歧义。
+
+四层已可使两项观测都失去区分能力。把每种物种的归一斜率固定在 $1$ 或 $2$，在斜率 $1$ 上分别取数字 $(3,1,3,0)$ 与 $(1,3,1,1)$。对一组两两不同的正质量平方 $m_i$，其差 $(2,-2,2,-1)$ 对 $m_i$、$m_i^2$ 和 $m_i^2\log(m_i/\mu^2)$ 的三个加权和同时为零。因此这两组门户在所有 $s\ge0$ 上都给出相同的势和低动量系数。 [三层识别证明与四层反例](https://github.com/the-omega-institute/trureturing-experiments/blob/9a6102e355d2ccdac66234f45b927737f71678c5/experiments/ch39-omega-research/replay/ch39-low-momentum-portal-thresholds.md)
+
 在检验 $8\pi I \pm \mathcal{A} \succ 0$ 是否正定、或从全图刚度矩阵中消去高势外层顶点自由度时，反复出现的决定性工具是复分块厄米矩阵的舒尔补极小值定理，它已在 Lean 4 内核中严格冻结：
 
 ::: {.theorem #thm-ou-ch06-schur-minimum title="分块舒尔补二次型是内部变量的精确最小值" lean="D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"}
