@@ -120,6 +120,50 @@ $$
 Multiplication gives $C^*JC=J$, whereas $C^*C=\operatorname{diag}(4,1/4)\ne I$. The vector $w=(1,-1)$ satisfies $\langle w,Jw\rangle=-2$. These matrices only test the proposed implication from $J$-unitarity to ordinary unitarity; they are not asserted to arise from actual $\zeta$ zeros.
 :::
 
+Detecting a negative direction also requires a precision budget: a finite observation map can be algebraically invertible while its inverse amplifies errors as two support points approach each other. The following model separates recovery of every direction from reliable certification of one negative direction. It uses the full sesquilinear Gram readings, rather than the few scalar clock readings of [Chapter 12](ch12-shared-arithmetic-clock.md).
+
+::: {.example #ex-ou-appb-two-node-recovery-precision title="Recovery Precision as Two Support Points Approach"}
+Everything below is a manual derivation (`ARGUED`); the support points and matrices form an algebraic model with no specified actual zeros. Take $h>0$ and $u=1+h$. At center $0$, read reciprocal powers one and two at support points $1,u$. With the nodes and readout scale fixed, an unknown complex amplitude vector $x\in\mathbb C^2$ gives readings $y=A_hx$, where
+
+$$
+\begin{aligned}
+A_h&=\begin{pmatrix}1&u^{-1}\\1&u^{-2}\end{pmatrix},
+&\det A_h&=-\frac{h}{u^2},\\
+A_h^{-1}&=\frac1h\begin{pmatrix}-1&u\\u^2&-u^2\end{pmatrix},
+&\|A_h^{-1}\|_{\infty\to\infty}&=\frac{2u^2}{h}.
+\end{aligned}
+$$
+
+Multiplication on both sides checks the inverse. Its absolute row sums are $(1+u)/h$ and $2u^2/h$, with the latter larger since $u>1$. For readout error $\|e\|_\infty\le\varepsilon$, where $\varepsilon\ge0$,
+
+$$
+\|A_h^{-1}(y+e)-x\|_\infty\le\frac{2u^2}{h}\varepsilon.
+$$
+
+The error $e=(\varepsilon,-\varepsilon)$ attains equality, so this fixed readout scale admits no amplification bound uniform in $h$.
+
+Now take the indefinite form $J_0=\operatorname{diag}(1,-1)$. The observation vectors $A_h^*e_1,A_h^*e_2$ have Gram matrix $K_h=A_hJ_0A_h^*$, where $e_1,e_2$ are the standard basis vectors. Put
+
+$$
+\begin{aligned}
+c_h&=(A_h^{-1})^*e_2=\frac{u^2}{h}(1,-1),\\
+c_h^*K_hc_h&=-1.
+\end{aligned}
+$$
+
+Suppose the Hermitian readings $\widehat K_h=K_h+E$ have a certified entrywise error bound $|E_{ij}|\le\eta$, where $\eta\ge0$. The triangle inequality gives
+
+$$
+\begin{aligned}
+|c_h^*E c_h|&\le\eta\Bigl(\sum_i|(c_h)_i|\Bigr)^2
+=\frac{4u^4}{h^2}\eta,\\
+\eta<\frac{h^2}{4u^4}&\quad\Longrightarrow\quad c_h^*\widehat K_hc_h<0.
+\end{aligned}
+$$
+
+The error $E=\eta\begin{pmatrix}1&-1\\-1&1\end{pmatrix}$ attains this error bound and makes this witness's quadratic form exactly zero at the threshold. Thus the strict threshold is sharp for the entrywise error guarantee of this fixed witness; it is not asserted to limit every method for detecting negative directions. Exact invertibility holds for every $h>0$, while the Gram error allowed by this certificate shrinks quadratically as $h\to0$. Node errors and infinite spectral tails are not controlled here.
+:::
+
 Thus the mirror conservation supplied by the functional equation allows positive and negative directions to balance. Chapter 3's unit-circle condition instead requires each Cayley coefficient itself to have modulus $1$. An independent spectral proof using mirror conservation still needs an additional positivity argument or the corresponding ordinary-unitarity condition. The external RH proof can support the critical-line conclusion, but this mirror identity alone supplies no independent Hilbert–Pólya operator construction.
 
 ## B.3 Interactive Laboratory and Nine-Figure Visual Media Index {#sec-ou-appb-media-map}

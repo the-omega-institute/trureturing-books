@@ -120,6 +120,50 @@ $$
 直接相乘得 $C^*JC=J$，而 $C^*C=\operatorname{diag}(4,1/4)\ne I$。向量 $w=(1,-1)$ 满足 $\langle w,Jw\rangle=-2$。这组矩阵只检验从 $J$-酉性推出普通酉性的逻辑，不声称来自实际的 $\zeta$ 零点。
 :::
 
+识别负方向还涉及读数精度：即使有限观测代数上可逆，两个支撑点靠近时，逆映射也可能放大误差。下面的模型把“恢复全部方向”与“可靠认证一个负方向”分开；它使用完整的半双线性 Gram 读数，而非[第十二章](ch12-shared-arithmetic-clock.md)的若干标量钟读数。
+
+::: {.example #ex-ou-appb-two-node-recovery-precision title="两点靠近时的恢复精度"}
+以下全为手工推导（`ARGUED`），支撑点和矩阵均为代数模型，不指定实际零点。取 $h>0$、$u=1+h$，在中心 $0$ 对支撑点 $1,u$ 读取倒数一次与二次幂。固定节点与读数尺度，令未知复振幅 $x\in\mathbb C^2$ 的读数为 $y=A_hx$，其中
+
+$$
+\begin{aligned}
+A_h&=\begin{pmatrix}1&u^{-1}\\1&u^{-2}\end{pmatrix},
+&\det A_h&=-\frac{h}{u^2},\\
+A_h^{-1}&=\frac1h\begin{pmatrix}-1&u\\u^2&-u^2\end{pmatrix},
+&\|A_h^{-1}\|_{\infty\to\infty}&=\frac{2u^2}{h}.
+\end{aligned}
+$$
+
+双侧相乘核对逆矩阵；其两行绝对值和分别为 $(1+u)/h$ 与 $2u^2/h$，后者因 $u>1$ 较大。若读数误差 $\|e\|_\infty\le\varepsilon$，其中 $\varepsilon\ge0$，则
+
+$$
+\|A_h^{-1}(y+e)-x\|_\infty\le\frac{2u^2}{h}\varepsilon.
+$$
+
+取 $e=(\varepsilon,-\varepsilon)$ 即达等号，所以在这一固定读数尺度下不存在与 $h$ 无关的统一误差放大界。
+
+再取不定形式 $J_0=\operatorname{diag}(1,-1)$，记观测向量 $A_h^*e_1,A_h^*e_2$ 的 Gram 矩阵为 $K_h=A_hJ_0A_h^*$，其中 $e_1,e_2$ 为标准基。令
+
+$$
+\begin{aligned}
+c_h&=(A_h^{-1})^*e_2=\frac{u^2}{h}(1,-1),\\
+c_h^*K_hc_h&=-1.
+\end{aligned}
+$$
+
+若已认证 Hermitian 读数 $\widehat K_h=K_h+E$ 的逐项误差满足 $|E_{ij}|\le\eta$，其中 $\eta\ge0$，则三角不等式给出
+
+$$
+\begin{aligned}
+|c_h^*E c_h|&\le\eta\Bigl(\sum_i|(c_h)_i|\Bigr)^2
+=\frac{4u^4}{h^2}\eta,\\
+\eta<\frac{h^2}{4u^4}&\quad\Longrightarrow\quad c_h^*\widehat K_hc_h<0.
+\end{aligned}
+$$
+
+误差 $E=\eta\begin{pmatrix}1&-1\\-1&1\end{pmatrix}$ 达到该误差上界，并在阈值处使此见证的二次型恰为零。因此严格阈值对这个固定见证的逐项误差保证是锐的；它不声称是所有负方向检测方法的极限。精确可逆性适用于每个 $h>0$，而该认证所允许的 Gram 误差随 $h\to0$ 按平方尺度缩小；这里未控制节点误差或无限谱尾项。
+:::
+
 因此，函数方程给出的镜像守恒允许正、负方向相互配平；第三章单位圆条件要求的是每个凯莱系数自身的模长等于 $1$。把前者用于独立谱证明时，还须证明额外的正定性或相应的普通酉性条件。已知外部 RH 证明可以支持临界线结论，却不会仅凭这条镜像恒等式给出独立的希尔伯特—波利亚算子构造。
 
 ## B.3 交互实验室与全书九幅静态图索引 {#sec-ou-appb-media-map}
