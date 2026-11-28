@@ -13074,6 +13074,22 @@
       "line": 315,
       "signature": "theorem result : ¬ claim"
     },
+    "D5/S3/Midline/Cayley/CanonicalZetaCayleyJUnitary.zeroCayleyOperator_j_unitary": {
+      "module": "D5/S3/Midline/Cayley/CanonicalZetaCayleyJUnitary",
+      "name": "D5.S3.Midline.Cayley.CanonicalZetaCayleyJUnitary.zeroCayleyOperator_j_unitary",
+      "kind": "theorem",
+      "statement_id": "sha256:0764e89e6a22be34df12fc42a4fe8b27fec5fc34d5d6de645ac851beac1916ce",
+      "line": 105,
+      "signature": "theorem zeroCayleyOperator_j_unitary (Z : ZeroData) : star (zeroCayleyOperator Z) * (mirrorFundamentalSymmetry Z : MirrorZeroHilbertSpace Z →L[Complex] MirrorZeroHilbertSpace Z) * zeroCayleyOperator Z = (mirrorFundamentalSymmetry Z : MirrorZeroHilbertSpace Z →L[Complex] MirrorZeroHilbertSpace Z)"
+    },
+    "D5/S3/Midline/Cayley/CanonicalZetaMirrorFundamentalSymmetry.mirror_odd_vector_strictly_negative": {
+      "module": "D5/S3/Midline/Cayley/CanonicalZetaMirrorFundamentalSymmetry",
+      "name": "D5.S3.Midline.Cayley.CanonicalZetaMirrorFundamentalSymmetry.mirror_odd_vector_strictly_negative",
+      "kind": "theorem",
+      "statement_id": "sha256:87495713b1e8c9cd337f2bfa6db453db9c3f5961621ee0932346ae1cdfe62aef",
+      "line": 164,
+      "signature": "theorem mirror_odd_vector_strictly_negative (Z : ZeroData) (v : ZeroCoordinate Z) (hmove : mirrorCoordinatePerm Z v ≠ v) : (mirrorKreinForm Z (mirrorOddVector Z v) (mirrorOddVector Z v)).re < 0"
+    },
     "D5/S3/Midline/Cayley/CayleyCriticalLineZetaCriterion.cayley_critical_line_zeta_criterion": {
       "module": "D5/S3/Midline/Cayley/CayleyCriticalLineZetaCriterion",
       "name": "D5.S3.Midline.Cayley.CayleyCriticalLineZetaCriterion.cayley_critical_line_zeta_criterion",

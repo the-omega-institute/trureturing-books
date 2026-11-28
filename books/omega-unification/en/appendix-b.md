@@ -85,6 +85,43 @@ The count keeps the existence of off-critical zeros conditional. Combining it wi
 | **Tier 5 — Model-Internal Effective Constructions** (`MODEL`) | Explicit effective constructions specifying every auxiliary representation, potential, scale, and weight input (accounting for the **4/4** model-internal witnesses) | Never presented as zero-fit derivations; every construction records its free inputs and fine-tuning sensitivity alongside its numerical fit | $r = 400$ two-loop crossing and rank-5 Higgs portal ([Ch 5–6](ch05-kinetic-trace-and-uv-ceilings.md)), 54-mode matrix Higgs flavor fit and $\mathrm{U}(1)_X$ triality completion ([Ch 8–9](ch08-flavor-hierarchy-and-ckm.md)), four-layer curvature balance ([Ch 11](ch11-induced-gravity-and-dark-energy.md)), and 100-parameter 105-winding vacua ([Ch 13](ch13-winding-ladder-and-joint-vacuum.md)) |
 | **Tier 6 — First-Principles Open Roadmap** (`OPEN`) | The **0/4** core unification derivations still absent from a single master connection without post-hoc fitting | Explicitly preserves unproved status without verification links, providing crisp falsifiable acceptance criteria for future work | Deriving heavy thresholds and the electroweak scale, selecting the site-variance cut and building 4D interacting chiral generations, deriving a shared flavor action and dynamical proton protection, deriving $G_N$ and dark energy, and finding a natural non-monotone weight-selection law ([Ch 15](ch15-unified-verdict-and-open-roadmap.md), [Coda](coda.md)) |
 
+### B.2.1 Evidence in a Spectral Bridge: Mirror Conservation and Positivity {#sec-ou-appb-mirror-unitarity}
+
+[The Cayley criterion in Chapter 3](ch03-riemann-zeros-fejer-and-landau.md#sec-ou-3-1) turns the critical-line condition into a unit-circle condition. The functional equation also supplies the same-height mirror $\rho\mapsto1-\bar\rho$, but which inner product does mirror conservation preserve? This question makes the ledger's evidence boundaries concrete in a spectral model that admits a direct calculation.
+
+Supply the library's full `ZeroData` $Z$, including distinct zeros $\rho_n$, exact analytic multiplicities $m_n$, exhaustiveness, both symmetries, and local finiteness. Put $I_Z=\{(n,k)\in\mathbb N^2:k<m_n\}$ and $H_Z=\ell^2(I_Z;\mathbb C)$. The same-height mirror preserves multiplicity, inducing a coordinate involution $\sigma$ and the self-adjoint involutive isometry $(J_Z\psi)(v)=\psi(\sigma v)$. Write $[\psi,\phi]_Z=\langle\psi,J_Z\phi\rangle$, and let $C_Z$ be the bounded diagonal Cayley operator with coefficients $c_n=(\rho_n-1)/\rho_n$.
+
+::: {.theorem #thm-ou-appb-mirror-j-unitarity title="Mirror Cayley Conservation and Strict Negative Directions" lean="D5/S3/Midline/Cayley/CanonicalZetaCayleyJUnitary.zeroCayleyOperator_j_unitary D5/S3/Midline/Cayley/CanonicalZetaMirrorFundamentalSymmetry.mirror_odd_vector_strictly_negative"}
+For every such `ZeroData` $Z$, with no additional RH hypothesis,
+
+$$
+C_Z^*J_ZC_Z=J_Z.
+$$
+
+If a coordinate $v\in I_Z$ satisfies $\sigma v\ne v$, its standard unit vector $e_v$ gives a mirror-odd vector $w_v=e_v-J_Ze_v$ satisfying
+
+$$
+\operatorname{Re}[w_v,w_v]_Z<0.
+$$
+:::
+
+::: proof
+If $c$ is a coordinate's coefficient and $c'$ its mirror coefficient, then $c'=1/\bar c$, so $\bar c c'=1$; pairing coordinates and summing gives the operator identity. When $\sigma v\ne v$, we have $w_v\ne0$ and $J_Zw_v=-w_v$, hence $\operatorname{Re}[w_v,w_v]_Z=-\|w_v\|^2<0$. The full proof is checked by the Lean kernel.
+:::
+
+::: {.example #ex-ou-appb-j-unitary-not-unitary title="Indefinite Conservation Does Not Ensure Ordinary Unitarity"}
+The following is a direct two-dimensional calculation (`ARGUED`). On $\mathbb C^2$, take
+
+$$
+J=\begin{pmatrix}0&1\\1&0\end{pmatrix},\qquad
+C=\begin{pmatrix}2&0\\0&1/2\end{pmatrix}.
+$$
+
+Multiplication gives $C^*JC=J$, whereas $C^*C=\operatorname{diag}(4,1/4)\ne I$. The vector $w=(1,-1)$ satisfies $\langle w,Jw\rangle=-2$. These matrices only test the proposed implication from $J$-unitarity to ordinary unitarity; they are not asserted to arise from actual $\zeta$ zeros.
+:::
+
+Thus the mirror conservation supplied by the functional equation allows positive and negative directions to balance. Chapter 3's unit-circle condition instead requires each Cayley coefficient itself to have modulus $1$. An independent spectral proof using mirror conservation still needs an additional positivity argument or the corresponding ordinary-unitarity condition. The external RH proof can support the critical-line conclusion, but this mirror identity alone supplies no independent Hilbert–Pólya operator construction.
+
 ## B.3 Interactive Laboratory and Nine-Figure Visual Media Index {#sec-ou-appb-media-map}
 
 The monograph is paired with one five-card interactive laboratory, **`OMEGA//UNIFY`** (directory ID `behrend-unification-lab`), and **9 bespoke bilingual static figures** generated from semantic scripts under `books/omega-unification/figures/` following the repository's unified color-role contract (green and blue reserved for Lean-verified and axiom-free anchors, purple for written proofs, computational certificates, and proved sharp obstructions, amber for active model choices, and red reserved strictly for open problems). The first table indexes all five interactive experimental cards:
