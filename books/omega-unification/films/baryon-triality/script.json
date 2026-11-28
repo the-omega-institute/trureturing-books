@@ -1,0 +1,310 @@
+{
+ "voice": "af_heart",
+ "speed": 0.94,
+ "say": {
+  "Lean": "Leen",
+  "QQQL": "Q Q Q L",
+  "SU(5)": "S U five",
+  "U(1)": "U one",
+  "c6": "C six",
+  "Grassmann": "Grahss-mahn",
+  "Hurwitz": "Hur-vitz",
+  "Behrend": "Bair-rent"
+ },
+ "music": {
+  "bpm": 78,
+  "progression": "a-minor"
+ },
+ "scenes": [
+  {
+   "id": "hook",
+   "name": "WILL IT DECAY",
+   "lead": 1.9,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Will the proton decay? In grand unification, quarks and leptons share one multiplet.",
+     "质子会不会衰变？在大统一里，夸克与轻子同处一个多重态。"
+    ],
+    [
+     "So three quark doublets and a lepton doublet can meet at a single point: the operator QQQL.",
+     "于是三个夸克双重态与一个轻子双重态可以在同一点相遇：这就是算符 QQQL。"
+    ],
+    [
+     "Its hypercharge, three sixths minus a half, is zero: gauge invariant, yet it changes baryon number by one.",
+     "它的超荷是三个六分之一减二分之一，恰为零：规范不变，却让重子数改变一。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 3.4,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "monomials",
+   "name": "THIRTY-SIX TERMS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.5,
+    0.5,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "Maybe three identical quarks cancel by Pauli exclusion?",
+     "也许三个同代夸克会被泡利不相容消掉？"
+    ],
+    [
+     "Expand it: twelve quark components, four lepton components.",
+     "那就逐项展开：夸克有十二个分量，轻子有四个。"
+    ],
+    [
+     "Exactly thirty-six distinct monomials survive. This one has coefficient four.",
+     "恰好有三十六个互异单项留下来；这一项的系数是四。"
+    ],
+    [
+     "So the same low-energy data allow any coefficient c6.",
+     "所以同一套低能数据，可以配上任意的系数 c6。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 1.0,
+     "kind": "impact"
+    }
+   ]
+  },
+  {
+   "id": "exact",
+   "name": "NO LOCAL WALL",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "Can local flatness forbid it? Lean checks, with zero axioms: a closed two-cochain is exact.",
+     "局域平坦能不能禁止它？Lean 内核在零公理下检验：闭的二上链一定正合。"
+    ],
+    [
+     "The proof is a cone: e of x, y is F of base, x, y, and d e gives back F.",
+     "证明就是一个锥：令 e(x, y) 等于 F(base, x, y)，它的上边缘恰好还原 F。"
+    ],
+    [
+     "Lean also checks: six Hurwitz generators split mod five into nonzero rank-one matrices.",
+     "Lean 还检验：六个赫维茨生成元在模五下分裂为非零的秩一矩阵。"
+    ],
+    [
+     "Neither fixes c6. Local closure builds no global wall.",
+     "这两条都管不住 c6。局域闭合砌不出全局的墙。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 2.6,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "triality",
+   "name": "BARYON TRIALITY",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.8,
+    0.7,
+    0.4,
+    0.4
+   ],
+   "lines": [
+    [
+     "The proton needs a global symmetry. On neutral color singlets, the charge is minus h times B, mod three.",
+     "质子需要一条全局对称：在超荷中性的色单态上，荷是负 h 乘 B，模三。"
+    ],
+    [
+     "Take h nonzero. Yukawa and Weinberg terms keep phase one; QQQL picks up a nontrivial cube root, and is forbidden.",
+     "取 h 不为零：汤川项与温伯格项相位为一，保留；QQQL 带上非平凡的三次单位根，被禁止。"
+    ],
+    [
+     "Only changes of B by three survive: the first allowed operator jumps from dimension six to fifteen.",
+     "只剩 B 改变三的过程：最低允许的算符从六维跳到十五维。"
+    ],
+    [
+     "With B minus L kept, eighteen. Three generations of weak instantons change B by exactly three.",
+     "若同时守恒 B 减 L，则是十八维；而三代弱瞬子恰好让 B 改变三。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 4.4,
+     "kind": "impact"
+    },
+    {
+     "line": 2,
+     "at": 3.6,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "anomaly",
+   "name": "SIX TRACES",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Triality can be gauged: X equals three B minus nine L tau, plus a conjugate tau neutrino.",
+     "重子三重对称可以规范化：X 等于三 B 减九 L_τ，再添一个共轭 τ 中微子。"
+    ],
+    [
+     "All six anomaly traces cancel to zero.",
+     "六项反常迹逐一相消为零。"
+    ],
+    [
+     "A charge nine condensate leaves Z nine; its cube is the color center, so singlets see Z three.",
+     "荷九凝聚留下 Z9；它的立方正是色中心，所以色单态看到的是 Z3。"
+    ],
+    [
+     "The price: the charge must depend on the generation.",
+     "代价是：荷必须依赖世代。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 2.8,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "lift",
+   "name": "TWENTY-FIVE STATES",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "On a lens space, the shell's triality phase meets a cubic anomaly; the smallest extension that trivializes it is Z nine.",
+     "把球壳的三重相位放到透镜空间上，会遇到一个立方反常；能把它平凡化的最小扩张是 Z9。"
+    ],
+    [
+     "To carry Z nine faithfully, the nineteen-point Behrend shell needs at least twenty-five states.",
+     "要忠实承载 Z9，十九点贝伦德球壳最少需要二十五个状态。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 4.0,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "fork",
+   "name": "THE FORK",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "The sharpest test: one actual Riemann zero, the joint witness, with its one hundred five winding vacuum.",
+     "最尖锐的检验是一枚实际的黎曼零点，即联合见证，以及它的一百零五圈真空。"
+    ],
+    [
+     "Orthogonal auxiliary currents cancel the dimension-six vertex: triality holds, the proton is stable.",
+     "辅助电流相互正交，六维顶点相消，三重对称成立，质子稳定。"
+    ],
+    [
+     "Parallel currents switch on QQQL, with Wilson factor at least zero point zero three one four.",
+     "辅助电流相互平行，QQQL 被激活，威尔逊因子至少约 0.0314。"
+    ],
+    [
+     "The same vacuum allows both. Deciding c6 from the partition function is still open.",
+     "同一座真空两支都容许。从配分函数裁决 c6，仍是开放问题。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 2.0,
+     "kind": "impact"
+    },
+    {
+     "line": 3,
+     "at": 2.4,
+     "kind": "glitch"
+    }
+   ]
+  },
+  {
+   "id": "close",
+   "name": "LEDGER",
+   "lead": 0.5,
+   "tail": 3.4,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.2
+   ],
+   "lines": [
+    [
+     "Omega Unification, chapter nine.",
+     "《OMEGA 统一》· 第九章"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 0.3,
+     "kind": "chime"
+    }
+   ]
+  }
+ ]
+}
