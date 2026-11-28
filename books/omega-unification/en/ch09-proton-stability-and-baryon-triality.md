@@ -171,6 +171,20 @@ $$
 
 where the parentheses contract the left-handed spinors. The two charged Higgs derivatives select the remaining undifferentiated charged component of the third generation and one second derivative from the first generation. Both fermion generators are distinct from those in the selected nonzero monomial of $\mathcal O_{35}$, so a coefficient of $\mathcal O_{35}P$ still has magnitude $6$. The minimum for thirty-seven units is therefore $130$ in the same local differential algebra. [Top exterior product construction](https://github.com/the-omega-institute/trureturing-books/issues/1625#issuecomment-7231065749) · [Charge bound and attainment](https://github.com/the-omega-institute/trureturing-books/issues/1632#issuecomment-7231094926)
 
+**Occupation bound for arbitrary odd lepton number (`ARGUED`).** For $\ell\ge37$, group the independent positive-lepton components by their deficit in the charge bound. The zero-deficit group has $c_0=36$ components. For $p\ge1$, deficit $p$ comes from symmetric covariant derivatives of order $p+1$ on neutral left-handed leptons, order $p$ on charged left-handed leptons, or order $p-1$ on charged right-handed leptons. A symmetric derivative of order $j$ in four directions has $\binom{j+3}{3}$ multi-indices. There are three generations and two spinor components per species, so
+
+$$
+c_p=6\left[\binom{p+4}{3}+\binom{p+3}{3}+\binom{p+2}{3}\right].
+$$
+
+Exchanging adjacent covariant derivatives gives a field strength times a lower-order derivative. Repeating this reduction gives symmetric derivatives, and field strengths have nonnegative deficit. Write $\ell=36+\sum_{p=1}^{k-1}c_p+s$, where $1\le s\le c_k$. Occupying the lowest-deficit groups first bounds the total deficit from below. Filled groups contribute even numbers and the remainder $s$ is odd. Dimension parity therefore adds one unit precisely when $k$ is odd. The resulting minimum is
+
+$$
+d_{\min}(\ell)=\frac{7\ell-3}{2}+\sum_{p=1}^{k-1}p\,c_p+ks+(k\bmod 2).
+$$
+
+The bound is attained group by group. Contract the three types of jets with $H$, $D_\mu H$, or $\epsilon_{ij}H^iD_\mu H^j$, respectively, and form two-lepton scalars. Each pair of independent deficit-$p$ components costs dimension $2p+7$. Starting from the top exterior product witness $\mathcal O_{35}$, pair the remaining undifferentiated charged left-handed lepton with a charged derivative component of deficit $k+(k\bmod2)$. Fill the remaining slots with whole pairs. At a flat connection the pairs use distinct symmetric jets, and the selected coefficient is a product of nonzero pair coefficients and factorials from the powers. For instance, the minimum rises from $526$ at $\ell=125$ to $535$ at $\ell=127$ and to $546$ at $\ell=129$. The scope is the same local differential algebra before quotienting by equations of motion or integration by parts. [Component counts, parity, and the attainment proof](https://github.com/the-omega-institute/trureturing-books/issues/1636#issuecomment-7231300523)
+
 ## 9.3 Shell-Triality Algebra Closure, Discrete Anomaly Inflow, and the 25-State Lifted Shell {#sec-ch09-algebra-inflow}
 
 While $U(1)_X$ gives a clean Abelian lift over the Standard Model, installing the Behrend shell's species-dependent triality phase $F$ directly atop full $SU(5)$ vertices unleashes an extraordinary sequence of algebraic and topological demands.
