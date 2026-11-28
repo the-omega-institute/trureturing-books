@@ -69,7 +69,7 @@ $$
 
 若同一个三站轨道有两站失效，余下十六站在整个共同双钟环面和允许的软化区间内仍能还原五个输入。在每个背景上，五个完整轨道都能分别还原至少两个循环特征的输入。扣除这两部分的贡献后，受损轨道的幸存站以模为 $1/\sqrt3$ 的系数读到余下一个特征。无论哪个轨道受损、哪一站幸存，最小奇异值都大于 $5\times10^{-11}$。若该轨道还保留第二站，十七站也有同一下界。[轨道缺站时的证明与误差界](https://github.com/the-omega-institute/trureturing-experiments/blob/c27504b38d60383f43ee456154edc1f09a9db377/experiments/ch39-omega-research/replay/ch39-five-charge-orbit-erasure.md)
 
-十六站也是任意固定布局的最小数。从十九站中无论选哪十五站，对每个允许的软化值，都有一对共同钟角使某个非零输入完全相消。全部 $3876$ 种布局按旋转分为 $1296$ 类。其中 $36$ 类省去了一个完整轨道，继承极点方案的盲点，其余 $1260$ 类各有一个经过区间检验的盲点角盒。若已知背景并允许按背景换站，十五站就够了：在十八个非极点站中选行列式模最大的十五行，另三行在此基底中的每个系数模至多为一，所以所选读数的最小奇异值大于 $4\times10^{-5}/\sqrt{46}$。十四个复读数无法确定十五个独立复振幅。[固定布局的完整分类与按背景选站的界](https://github.com/the-omega-institute/trureturing-experiments/blob/452040ce570808c32e91db40e326c3e26e0a3fb4/experiments/ch39-omega-research/replay/ch39-five-charge-fifteen-masks.md)
+十六站也是任意固定布局的最小数。从十九站中无论选哪十五站，对每个允许的软化值，都有一对共同钟角使某个非零输入完全相消。全部 $3876$ 种布局按旋转分为 $1296$ 类。其中 $36$ 类省去了一个完整轨道，继承极点方案的盲点，其余 $1260$ 类各有一个经过区间检验的盲点角盒。若已知背景并允许按背景换站，十五站就够了：在十八个非极点站中选行列式模最大的十五行，另三行在此基底中的每个系数模至多为一，所以所选读数的最小奇异值大于 $4\times10^{-5}/\sqrt{46}$。十四个复读数无法确定十五个独立复振幅。[固定布局的完整分类与按背景选站的界](https://github.com/the-omega-institute/trureturing-experiments/blob/1c485355843e787bf64af78c6c21b0dffd0fbd78/experiments/ch39-omega-research/replay/ch39-five-charge-fifteen-masks.md)
 
 将内部空间按特征标正交拆块，背后依托的是一条无 $\pi$、纯有理的群论正交骨架。正如[第二章](ch02-quaternion-clocks-and-haar-zeros.md)在双时钟球面哈尔积分中所确立的，偶次切比雪夫特征多项式 $E_m(\kappa)$ 在全阶上的正交归一性已在 Lean 内核中不依赖实数极限而严格冻结：
 
