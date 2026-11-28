@@ -2,7 +2,7 @@
 
 本附录完整索引本书五卷十五章所依赖的上游研究与复算目录 [`experiments/ch39-omega-research/`](https://github.com/the-omega-institute/trureturing-experiments/tree/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research)（归档于组织实验库 [`the-omega-institute/trureturing-experiments`](https://github.com/the-omega-institute/trureturing-experiments)，本书固定快照提交 `ba0ac9539cdb641744054bf3a0398494f4cba1c8`）。
 
-以下四节依次给出：上游复算目录的顶层架构、数据支撑与十份核心专题档案；独立 Lean 4 整数压缩证书 `replay/ShellProjection.lean` 的代数结构与全部定理导读；按全书十五章归类的 34 支代表性 Python / `python-flint`（Arb）/ SymPy 复算脚本永久链接；以及本地复现依赖、标准运行命令与失败即中止的断言规程。关于本仓库外接的 `trureturing@dev` 冻结声明与编译期实时统计，请参阅 [附录 B §B.4](appendix-b.md#sec-ou-appb-live-stats)。
+以下五节依次给出：上游复算目录的顶层架构、数据支撑与十份核心专题档案；独立 Lean 4 整数压缩证书 `replay/ShellProjection.lean` 的代数结构与全部定理导读；按全书十五章归类的 34 支代表性 Python / `python-flint`（Arb）/ SymPy 复算脚本永久链接；本地复现依赖、标准运行命令与失败即中止的断言规程；以及临界弦长的边束计数。关于本仓库外接的 `trureturing@dev` 冻结声明与编译期实时统计，请参阅 [附录 B §B.4](appendix-b.md#sec-ou-appb-live-stats)。
 
 ## A.1 上游研究与复算仓库全景结构 {#sec-ou-appa-repo-layout}
 

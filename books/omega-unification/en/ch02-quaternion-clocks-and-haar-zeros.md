@@ -57,7 +57,7 @@ The shortest native arc sets the axis angle $v$. How short can the edges be if c
 | $\beta=\delta=\pi$ | $40$ |
 | All other points with both $\beta$ and $\delta$ nonzero | $42$ |
 
-At the double half turn, bundles between the three main components favor a half turn between their endpoints. Giving exactly one main component that phase saves more edges there than it costs on edges to the singletons, lowering the optimum from $42$ to $40$. The actual zero pair belongs to the $42$-edge case. [Counting argument in Appendix A.5](appendix-a.md#sec-ou-appa-clock-bundle-count)
+At the double half turn, bundles between the three main components favor a half turn between their endpoints. Giving exactly one main component that phase saves more edges there than it costs on edges to the singletons, lowering the optimum from $42$ to $40$. For the Chapter 7 up-sector zero $2\,345\,666$ and down-sector zero $964\,890$, the shift from down to up gives $\beta\approx0.09687$ and $\delta\approx2.93212$ radians. These values select the $42$-edge row. [Counting argument in Appendix A.5](appendix-a.md#sec-ou-appa-clock-bundle-count)
 
 Look closely at the commutator defect $E = 1 + 2xyz - x^2 - y^2 - z^2$: it is no ad hoc polynomial, but the $3 \times 3$ Bargmann–Gram determinant of the three comparison anchors $(1, U, V)$. Whenever the two imaginary axes pull apart from collinearity, $E > 0$ registers the non-vanishing squared bivector area and the constant unit sectional curvature $K \equiv +1$ of $S^3$. The following Lean 4 frozen theorem establishes both geometric laws directly in exact integer and rational arithmetic:
 
