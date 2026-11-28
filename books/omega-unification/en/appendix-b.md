@@ -435,6 +435,63 @@ $$
 The missing ingredient is therefore a test of joint port positivity, even with every source direction present. These submatrices select sublists of the fixed observation vectors; they do not test arbitrary linear combinations of those vectors. For any fixed limit $r\ge2$, choosing $n=r+1$ gives positive definite principal submatrices on every set of at most $r$ ports while the whole matrix is indefinite. Kernel positivity in a finite window requires control of the full quadratic form for arbitrary coefficients. These are algebraic models, with no claim to arise from actual zeros or to alter the external RH fact cited in Chapter 3.
 :::
 
+Complete Gram testing must also account for null directions in the block being eliminated. A positive definite block can be inverted directly; a singular positive semidefinite block can contain directions with zero self-pairing but nonzero cross-pairings with the remaining ports. Merely replacing the inverse by a pseudoinverse misses this obstruction.
+
+::: {.theorem #thm-ou-appb-singular-schur-refutation title="A Schur Counterexample at a Singular Corner" lean="D5/S3/Quantum/Completion/SingularSchurResidualRefutation.result"}
+The complex Hermitian matrix
+
+$$
+H=\begin{pmatrix}0&1\\1&1\end{pmatrix}
+$$
+
+is not positive semidefinite.
+:::
+
+::: proof
+Take $w=(1,-1)^T$. Direct calculation gives $w^*Hw=-1<0$, contradicting the requirement that every quadratic value be nonnegative. The full proof is checked by the Lean kernel.
+:::
+
+Place the internal block first, writing $H=\begin{pmatrix}C&B^*\\B&A\end{pmatrix}$. Here $C=[0]$, $B=[1]$, and $A=[1]$. The following residual calculation is manual (`ARGUED`): the Moore–Penrose inverse of $C$ is $C^\dagger=[0]$, so $A-BC^\dagger B^*=[1]$ is strictly positive, but the cross block $B$ does not annihilate $\ker C$.
+
+::: {.remark #rem-ou-appb-singular-schur-range title="Kernel Compatibility for Pseudoinverse Elimination"}
+The following general criterion and proof are manual derivations (`ARGUED`). Let $p,q\in\mathbb N$, let $C\in\mathbb C^{p\times p}$ be positive semidefinite, let $A\in\mathbb C^{q\times q}$ be Hermitian, and let $B\in\mathbb C^{q\times p}$. Define $C^\dagger$ by reciprocating the positive eigenvalues of $C$ and setting it to zero on $\ker C$, and put
+
+$$
+\begin{aligned}
+H&=\begin{pmatrix}C&B^*\\B&A\end{pmatrix},\\
+S&=A-BC^\dagger B^*.
+\end{aligned}
+$$
+
+The complete finite-dimensional criterion is
+
+$$
+H\succeq0
+\quad\Longleftrightarrow\quad
+\bigl(B(\ker C)=\{0\}\ \land\ S\succeq0\bigr).
+$$
+
+First, the kernel condition is necessary. If some $k\in\ker C$ has $u=Bk\ne0$, fix the boundary vector $x=u$ and take the internal vector $y=-tk$, where $t>0$. Then
+
+$$
+\begin{pmatrix}y\\x\end{pmatrix}^*
+H\begin{pmatrix}y\\x\end{pmatrix}
+=u^*Au-2t\|u\|^2\longrightarrow-\infty.
+$$
+
+Thus the full matrix is not positive semidefinite, and elimination has no finite minimum even at this fixed $x$.
+
+Conversely, assume $B(\ker C)=\{0\}$. Then $\operatorname{Ran}B^*\subseteq(\ker C)^\perp=\operatorname{Ran}C$. Spectral decomposition gives $CC^\dagger=C^\dagger C=P$, where $P$ is the orthogonal projection onto $\operatorname{Ran}C$, so $CC^\dagger B^*x=B^*x$. Expanding the square gives, for every $x\in\mathbb C^q$ and $y\in\mathbb C^p$,
+
+$$
+\begin{pmatrix}y\\x\end{pmatrix}^*
+H\begin{pmatrix}y\\x\end{pmatrix}
+=(y+C^\dagger B^*x)^*C(y+C^\dagger B^*x)+x^*Sx.
+$$
+
+The first term is nonnegative and vanishes exactly when $y=-C^\dagger B^*x+k$ with $k\in\ker C$. Hence, for every fixed $x$, the minimum is exactly $x^*Sx$, with all minimizers as displayed, proving both directions of the criterion. The kernel condition is equivalent to $\operatorname{Ran}B^*\subseteq\operatorname{Ran}C$ and to $B=BP$: all cross readings between null directions and the remaining ports must vanish. Deleting zero eigenvalues cannot replace this condition. These finite-dimensional algebraic conclusions do not identify the actual zero spectrum or supply an independent RH positivity construction.
+:::
+
 Detecting a negative direction also requires a precision budget: a finite observation map can be algebraically invertible while its inverse amplifies errors as two support points approach each other. The following model separates recovery of every direction from reliable certification of one negative direction. It uses the full sesquilinear Gram readings, rather than the few scalar clock readings of [Chapter 12](ch12-shared-arithmetic-clock.md).
 
 ::: {.example #ex-ou-appb-two-node-recovery-precision title="Recovery Precision as Two Support Points Approach"}

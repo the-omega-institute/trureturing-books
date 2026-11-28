@@ -435,6 +435,63 @@ $$
 所以缺失的并非源方向，而是联合端口的正性检验。这里的子矩阵只取固定观测向量的子列表，未检验它们的任意线性组合。对任意固定上限 $r\ge2$，取 $n=r+1$，便得到所有至多 $r$ 端口的主子矩阵正定而整体不定的例子；有限窗口的核正性须控制任意系数的完整二次型。这些是代数模型，不声称来自实际零点，也不改变第三章所引的外部 RH 事实。
 :::
 
+完整 Gram 检验还须留意消元块的零方向。严格正定块可以直接求逆；奇异半正定块中的自配对为零方向，却仍可能与其余端口发生非零交叉配对。仅把逆换成伪逆，会漏掉这一障碍。
+
+::: {.theorem #thm-ou-appb-singular-schur-refutation title="奇异角块的 Schur 反例" lean="D5/S3/Quantum/Completion/SingularSchurResidualRefutation.result"}
+复厄米矩阵
+
+$$
+H=\begin{pmatrix}0&1\\1&1\end{pmatrix}
+$$
+
+不是半正定矩阵。
+:::
+
+::: proof
+取 $w=(1,-1)^T$，直接计算得 $w^*Hw=-1<0$，与半正定性要求的每个二次型值非负矛盾。完整证明由 Lean 内核检查。
+:::
+
+把内部块放在前面，写成 $H=\begin{pmatrix}C&B^*\\B&A\end{pmatrix}$。此例有 $C=[0]$、$B=[1]$、$A=[1]$。以下残差计算为手工推导（`ARGUED`）：$C$ 的 Moore–Penrose 伪逆为 $C^\dagger=[0]$，所以 $A-BC^\dagger B^*=[1]$ 严格为正，但交叉块 $B$ 没有消去 $\ker C$。
+
+::: {.remark #rem-ou-appb-singular-schur-range title="伪逆消元的核相容条件"}
+以下一般判据及其证明为手工推导（`ARGUED`）。设 $p,q\in\mathbb N$，$C\in\mathbb C^{p\times p}$ 半正定，$A\in\mathbb C^{q\times q}$ 厄米，$B\in\mathbb C^{q\times p}$。令 $C^\dagger$ 在 $C$ 的正本征空间上取本征值的倒数，在 $\ker C$ 上取零，并置
+
+$$
+\begin{aligned}
+H&=\begin{pmatrix}C&B^*\\B&A\end{pmatrix},\\
+S&=A-BC^\dagger B^*.
+\end{aligned}
+$$
+
+完整的有限维判据是
+
+$$
+H\succeq0
+\quad\Longleftrightarrow\quad
+\bigl(B(\ker C)=\{0\}\ \land\ S\succeq0\bigr).
+$$
+
+首先证明核条件不可省。若存在 $k\in\ker C$ 使 $u=Bk\ne0$，固定边界向量 $x=u$，取内部向量 $y=-tk$，其中 $t>0$，则
+
+$$
+\begin{pmatrix}y\\x\end{pmatrix}^*
+H\begin{pmatrix}y\\x\end{pmatrix}
+=u^*Au-2t\|u\|^2\longrightarrow-\infty.
+$$
+
+因此整体不半正定，且在这个固定 $x$ 上根本不存在有限的消元极小值。
+
+反之，若 $B(\ker C)=\{0\}$，则 $\operatorname{Ran}B^*\subseteq(\ker C)^\perp=\operatorname{Ran}C$。谱分解给出 $CC^\dagger=C^\dagger C=P$，其中 $P$ 是到 $\operatorname{Ran}C$ 的正交投影，故 $CC^\dagger B^*x=B^*x$。展开平方即得，对任意 $x\in\mathbb C^q$、$y\in\mathbb C^p$，
+
+$$
+\begin{pmatrix}y\\x\end{pmatrix}^*
+H\begin{pmatrix}y\\x\end{pmatrix}
+=(y+C^\dagger B^*x)^*C(y+C^\dagger B^*x)+x^*Sx.
+$$
+
+第一项非负，且恰在 $y=-C^\dagger B^*x+k$、$k\in\ker C$ 时为零。因此对每个固定 $x$，极小值恰为 $x^*Sx$，所有极小向量也由此给出，判据两向均成立。这里的核条件等价于 $\operatorname{Ran}B^*\subseteq\operatorname{Ran}C$，也等价于 $B=BP$；它要求核方向与其余端口的交叉读数全部为零，不能靠删去零本征值代替。这些有限维代数结论不识别实际零点谱，也不提供独立的 RH 正性构造。
+:::
+
 识别负方向还涉及读数精度：即使有限观测代数上可逆，两个支撑点靠近时，逆映射也可能放大误差。下面的模型把“恢复全部方向”与“可靠认证一个负方向”分开；它使用完整的半双线性 Gram 读数，而非[第十二章](ch12-shared-arithmetic-clock.md)的若干标量钟读数。
 
 ::: {.example #ex-ou-appb-two-node-recovery-precision title="两点靠近时的恢复精度"}
