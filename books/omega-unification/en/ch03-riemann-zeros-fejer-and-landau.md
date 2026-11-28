@@ -112,7 +112,26 @@ Convolve the indicator of $(0,T]$ with the nonnegative unit-mass kernel $K_B(u)=
 
 Translating the window by $u$ affects only the zeros within $|u|$ of its two endpoints. When $|u|\le T/2$, the zero-count remainder under RH bounds their combined number by $O(|u|\log T+\log T/\log\log T)$, with endpoints included. For larger $|u|$ the global count gives $O(|u|\log(2+|u|))$. Averaging against $K_B$, whose first absolute moment is $O(1/B)$ and whose tails decay as $|u|^{-4}$, recovers the sharp cutoff at a cost of $O(\log T/B+\log T/\log\log T)$. [Carneiro, Chandee, and Milinovich, Section 1 and Theorem 1](https://arxiv.org/pdf/1503.00955)
 
-Restoring the sharp cutoff in the integral against the gamma density $\bigl(\operatorname{Re}(\Gamma^\prime/\Gamma)(1/4+it/2)-\log\pi\bigr)/(2\pi)$ costs $O(\log T/B)$. For $t\ge 1$ this density is $\log(t/(2\pi))/(2\pi)+O(t^{-2})$. Integration by parts gives the displayed endpoint term with an $O_\lambda(1)$ error, since the remaining oscillatory integral $\int_1^T e^{i\lambda t}\,dt/t$ is bounded. Taking $B=\log\log T$ gives the stated remainder. Thus $|S_\lambda(T)|/\log T$ converges to $1/(2\pi|\lambda|)$ for the fixed mode. The collision estimates in the next section call for control across a frequency band that varies with $T$. [NIST DLMF, Eq. 5.11.2](https://dlmf.nist.gov/5.11.E2)
+Restoring the sharp cutoff in the integral against the gamma density $\bigl(\operatorname{Re}(\Gamma^\prime/\Gamma)(1/4+it/2)-\log\pi\bigr)/(2\pi)$ costs $O(\log T/B)$. For $t\ge 1$ this density is $\log(t/(2\pi))/(2\pi)+O(t^{-2})$. Integration by parts gives the displayed endpoint term with an $O_\lambda(1)$ error, since the remaining oscillatory integral $\int_1^T e^{i\lambda t}\,dt/t$ is bounded. Taking $B=\log\log T$ gives the stated remainder. Thus $|S_\lambda(T)|/\log T$ converges to $1/(2\pi|\lambda|)$ for the fixed mode. [NIST DLMF, Eq. 5.11.2](https://dlmf.nist.gov/5.11.E2)
+
+The same endpoint term can be recovered on average over heights without using RH, by retaining the real parts in the weights. Fix $X>1$, write $\lambda=\log X$, and keep the condition $\Lambda(X)=0$. Write $\rho=\beta+i\gamma$, counting multiplicity and including the upper endpoint. Let $S(t)$ be the argument term in the Riemann–von Mangoldt formula. Away from zero ordinates it satisfies $N(t)=1+\vartheta(t)/\pi+S(t)$, with $\vartheta$ the Riemann–Siegel theta function. Subtract the smooth endpoint term from the weighted sum
+
+$$
+R_X(t)=\sum_{0<\gamma\le t} X^{\rho-1/2}
+       -\frac{e^{it\lambda}}{2\pi i\lambda}\log\frac{t}{2\pi}.
+$$
+
+A direct derivation (`ARGUED`) gives
+
+$$
+\frac1U\int_U^{2U}\bigl|e^{-it\lambda}R_X(t)-S(t)\bigr|^2\,dt=O_X(1),
+\qquad
+\frac1U\int_U^{2U}|R_X(t)|^2\,dt\sim\frac{\log\log U}{2\pi^2}.
+$$
+
+Here the bandwidth is fixed at $B=1$. The unconditional Guinand–Weil formula samples at the complex ordinates $\gamma-i(\beta-1/2)$. When the sharp window is restored, the reflected zeros $\beta+i\gamma$ and $1-\beta+i\gamma$ at the same height cancel the linear terms in the complex shift. The remaining endpoint errors are weighted by $(\beta-1/2)^2$. Selberg's zero-density bound gives $\sum_{0<\gamma\le U}(\beta-1/2)^2=O(U/\log U)$. Localizing these weights with a kernel that decays cubically away from the endpoints gives a height average of $O(1/\log U)$ and a pointwise bound of $O(\log U)$ for the moving endpoint. Their product bounds the mean square. The lower-endpoint error is uniformly bounded. [Carneiro and Milinovich, *On Littlewood's Estimate for the Modulus of the Zeta Function on the Critical Line* (2024), Lemma 4](https://arxiv.org/pdf/2403.17803v1#page=5) · [Simonič, *Explicit Zero Density Estimate for the Riemann Zeta-Function Near the Critical Line* (2019), Eq. (3)](https://arxiv.org/pdf/1910.08274v2)
+
+On the real axis, integration by parts against the zero-counting formula isolates the upper-endpoint term $e^{it\lambda}S(t)$. The remaining terms consist of bounded terms and a convolution of $S_1(t)=\int_0^t S(u)\,du$ against a finite measure. The measure has an atom at zero and a density that decays cubically. Selberg's mean-square bound for $S_1$ controls the convolution, and his second moment for $S$ supplies the asymptotic constant. Thus for fixed $\varepsilon>0$, the fraction of heights in $[U,2U]$ with error greater than $\varepsilon\log t$ is at most $O_X(\varepsilon^{-2}\log\log U/(\log U)^2)$. A bound at every height requires further control of the error at those exceptional heights. The collision estimate in the next section also needs control across a frequency band that grows with height. [Selberg (1946), Theorems 6 and 7, as stated by Chirre and Quesada-Herrera in *The Second Moment of $S_n(t)$ on the Riemann Hypothesis* (2021), Eqs. (1.4)–(1.5)](https://arxiv.org/pdf/2006.08503v2#page=2)
 
 ## 3.3 Periodic Phase Deficits, Landau Window Transfer, and the $1/\sqrt{\pi}$ Collision Limit {#sec-ou-3-3}
 

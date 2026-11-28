@@ -112,7 +112,26 @@ $$
 
 窗口平移 $u$ 只影响两个端点各 $|u|$ 以内的零点。对 $|u|\le T/2$，RH 下的零点计数余项将这些零点的总数界为 $O(|u|\log T+\log T/\log\log T)$，并允许端点计入。对更大的 $|u|$，全局计数给出 $O(|u|\log(2+|u|))$。用 $K_B$ 平均，凭其 $O(1/B)$ 的一阶绝对矩及四次衰减，恢复硬截断的代价为 $O(\log T/B+\log T/\log\log T)$。[Carneiro、Chandee 与 Milinovich，第 1 节及定理 1](https://arxiv.org/pdf/1503.00955)
 
-对显式公式中的伽马密度 $\bigl(\operatorname{Re}(\Gamma^\prime/\Gamma)(1/4+it/2)-\log\pi\bigr)/(2\pi)$ 同样恢复硬截断，误差为 $O(\log T/B)$。在 $t\ge 1$ 时该密度为 $\log(t/(2\pi))/(2\pi)+O(t^{-2})$。分部积分给出上式中的端点项及 $O_\lambda(1)$。剩余的振荡积分 $\int_1^T e^{i\lambda t}\,dt/t$ 一致有界。取 $B=\log\log T$，各项误差合并即得所示余项。因此固定模态的 $|S_\lambda(T)|/\log T$ 收敛到 $1/(2\pi|\lambda|)$。下一节的碰撞估计需要在随 $T$ 变化的频带内控制零点和。[NIST DLMF，式 5.11.2](https://dlmf.nist.gov/5.11.E2)
+对显式公式中的伽马密度 $\bigl(\operatorname{Re}(\Gamma^\prime/\Gamma)(1/4+it/2)-\log\pi\bigr)/(2\pi)$ 同样恢复硬截断，误差为 $O(\log T/B)$。在 $t\ge 1$ 时该密度为 $\log(t/(2\pi))/(2\pi)+O(t^{-2})$。分部积分给出上式中的端点项及 $O_\lambda(1)$。剩余的振荡积分 $\int_1^T e^{i\lambda t}\,dt/t$ 一致有界。取 $B=\log\log T$，各项误差合并即得所示余项。因此固定模态的 $|S_\lambda(T)|/\log T$ 收敛到 $1/(2\pi|\lambda|)$。[NIST DLMF，式 5.11.2](https://dlmf.nist.gov/5.11.E2)
+
+去掉 RH 作为解析输入后，保留零点实部的权重仍可在高度平均下读出同一个端点项。固定 $X>1$，令 $\lambda=\log X$，继续要求 $\Lambda(X)=0$。记 $\rho=\beta+i\gamma$，按重数计并纳入上端点。令 $S(t)$ 为黎曼–冯·曼戈尔特公式中的辐角项，即离开零点高度时 $N(t)=1+\vartheta(t)/\pi+S(t)$，其中 $\vartheta$ 是黎曼–西格尔 $\vartheta$ 函数。把光滑端点项从加权零点和中扣除
+
+$$
+R_X(t)=\sum_{0<\gamma\le t} X^{\rho-1/2}
+       -\frac{e^{it\lambda}}{2\pi i\lambda}\log\frac{t}{2\pi}.
+$$
+
+手工推导（`ARGUED`）给出
+
+$$
+\frac1U\int_U^{2U}\bigl|e^{-it\lambda}R_X(t)-S(t)\bigr|^2\,dt=O_X(1),
+\qquad
+\frac1U\int_U^{2U}|R_X(t)|^2\,dt\sim\frac{\log\log U}{2\pi^2}.
+$$
+
+这次固定带宽 $B=1$。无条件的 Guinand–Weil 公式在复纵坐标 $\gamma-i(\beta-1/2)$ 处取样。恢复尖锐窗口时，同高的镜像零点 $\beta+i\gamma$ 与 $1-\beta+i\gamma$ 使复移位误差的一阶项抵消，只留下按 $(\beta-1/2)^2$ 加权的端点误差。Selberg 零点密度界给出 $\sum_{0<\gamma\le U}(\beta-1/2)^2=O(U/\log U)$。将这些权重按距窗口上端点的距离作立方衰减加权，所得误差的高度平均为 $O(1/\log U)$，逐点上界为 $O(\log U)$。二者相乘给出均方上界，下端点的误差则一致有界。[Carneiro 与 Milinovich，*On Littlewood's Estimate for the Modulus of the Zeta Function on the Critical Line*（2024），引理 4](https://arxiv.org/pdf/2403.17803v1#page=5) · [Simonič，*Explicit Zero Density Estimate for the Riemann Zeta-Function Near the Critical Line*（2019），式 (3)](https://arxiv.org/pdf/1910.08274v2)
+
+实轴上的截断修正可用零点计数公式分部积分。上端点留下 $e^{it\lambda}S(t)$，其余为有界项和 $S_1(t)=\int_0^t S(u)\,du$ 与一个有限测度的卷积。该测度在原点有一个原子，其余部分的密度呈立方衰减。Selberg 对 $S_1$ 的均方界控制后一项，对 $S$ 的二阶矩给出上式的渐近常数。因此，对任意固定 $\varepsilon>0$，误差超过 $\varepsilon\log t$ 的高度在 $[U,2U]$ 中所占比例至多为 $O_X(\varepsilon^{-2}\log\log U/(\log U)^2)$。逐高度界仍需控制这些例外处的误差。下一节的碰撞估计还需要在随高度增长的频带内控制零点和。[Selberg（1946），定理 6、7，见 Chirre 与 Quesada-Herrera 的 *The Second Moment of $S_n(t)$ on the Riemann Hypothesis*（2021），式 (1.4)–(1.5)](https://arxiv.org/pdf/2006.08503v2#page=2)
 
 ## 3.3 周期相位亏损、兰道窗转移与高斯碰撞极限 $1/\sqrt{\pi}$ {#sec-ou-3-3}
 
