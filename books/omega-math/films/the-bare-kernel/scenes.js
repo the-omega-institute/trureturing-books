@@ -1,7 +1,7 @@
 /* Film · The Bare Kernel and the Mother Axiom · 裸内核与母公理 (book omega-math, chapter 1).
    Scenes for the shared engine theme/film/engine.js.
 
-   This chapter cites no Lean declaration, so the film shows no green. What each scene shows and where it rests
+   What each scene shows and where it rests
    (all in chapter 1 of the book, section numbers of the chapter):
      kernel   1.1: the bare CIC kernel, its three primitives and four reductions βδιζ, Nat = zero | succ; the
               metatheory is the literature result of rem-ch01-cic-hedberg-literature (argued).
@@ -75,7 +75,7 @@ const kapConst = () => 1;                              // the chapter's constant
 FILM.init.push(() => {
   const E = window.FILM_ERRORS;
   const check = (ok, m) => { if (!ok) E.push('the-bare-kernel film: ' + m); };
-  check((DATA.lean || []).length === 0, 'chapter 1 cites no Lean declaration; film.json lean must stay empty');
+  check((DATA.lean || []).length === 0, 'unexpected Lean citation in this film\'s evidence table');
   /* horizon: count by Euler's totient, gap by brute force over all pairs */
   let phi = 0;
   for (let b = 1; b <= 12; b++) for (let a = 1; a <= b; a++) if (bkGcd(a, b) === 1) phi++;
@@ -549,8 +549,8 @@ SCENES.klass = S => {
 SCENES.close = S => {
   closingCard(S, { from: 0.1, y: 330 });
   const a = clamp((S.u - 2.0) / 0.8) * clamp((S.d - S.u) / 1.2);
-  txt('chapter 1 cites no Lean declaration: no green in this film', W / 2, 720, { size: 22, fam: F.disp, w: 700, align: 'center', c: C.dim, a });
-  txt('第一章不引用 Lean 声明：本片没有绿色标签', W / 2, 758, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.dim, a });
+  txt('On screen: computed examples, models and written arguments', W / 2, 720, { size: 22, fam: F.disp, w: 700, align: 'center', c: C.dim, a });
+  txt('片中依据 · 可复算的例子、模型与书面论证', W / 2, 758, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.dim, a });
 };
 
 /* ======================================================================= */
