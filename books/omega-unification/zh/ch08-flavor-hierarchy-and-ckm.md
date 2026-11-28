@@ -113,6 +113,24 @@ $$
 
 余下的秩二松弛由偶主块的 Schur 补分成平移两格的正、负特征块，核基可取 $(1,r,1,r)^T$、$(1,is,-1,-is)^T$，其中 $r,s$ 是非零实数。对置矩阵元相同，迫使 $r^2,s^2$ 位于 $1$ 的同一侧，或同为 $1$。若两个平方相等，核内可将任一可行对角读数实现为秩一。若它们不等，固定 $p$ 唯一确定核内的厄米系数矩阵 $\begin{pmatrix}a&z\\\bar z&b\end{pmatrix}$。差距要求它正定。于是 $E=a+b$、$O=r^2a+s^2b$ 给出 $E\ne O$，而 $E^2\ge4ab$、$O^2\ge4r^2s^2ab$、$|z|^2<ab$ 给出严格椭圆不等式。反过来，在严格区域内取 $a=b=E/2$，将两个互异的平方取在 $O/E$ 的两侧并充分靠近它，且使均值为 $O/E$。对角方程给出正定的系数矩阵，两个秩一块可拼出满足循环条件的 $S$。它的零面于是暴露一个唯一的秩二最优态。[分类的完整推导](https://github.com/the-omega-institute/trureturing-books/issues/1663)
 
+**指定两套读数时的最小秩（手工推导）。** 把态写成 $XX^*$，其中 $X$ 的四行是向量 $x_0,\ldots,x_3$，令 $A=x_0+x_2$、$B=x_0-x_2$、$C=x_1+x_3$、$D=x_1-x_3$。傅里叶变换后的四个向量是 $(A+C,B-iD,A-C,B+iD)/2$。记 $a,b,c,d$ 为 $A,B,C,D$ 的范数平方。给定 $p,q$ 后只需搜索 $a$，因为 $b=2(p_0+p_2)-a$、$c=2(q_0+q_2)-a$、$d=2(p_1+p_3)-c$。四个平方须非负。记
+
+$$
+g=(p_0-p_2,\ q_1-q_3,\ p_1-p_3,\ q_0-q_2),\qquad m=(ab,bd,dc,ca).
+$$
+
+四个数 $g_j$ 是沿 $A,B,D,C,A$ 一圈的实重叠，第二条边先乘 $i$。任何实现都须满足 $g_j^2\le m_j$。若有范数为零，删去对应的顶点和边，剩余的每条路径可逐边选相位。因此这些不等式在退化情形已足以构造纯态。
+
+若 $abcd>0$，先检验秩一。四段相位绕一圈相消，留下第二条边的因子 $i$。于是某组 $\epsilon_j\in\{-1,1\}$ 给出纯态，当且仅当
+
+$$
+\prod_{j=1}^4\bigl(g_j+i\epsilon_j\sqrt{m_j-g_j^2}\bigr)=i\,abcd.
+$$
+
+先将每个因子除以 $\sqrt{m_j}$，再将第二项乘以 $-i$，得到相邻相位比。依次恢复 $A,B,D,C$ 后即可反解 $x_j$。
+
+在 $abcd>0$ 时，将 $g_j/\sqrt{m_j}$ 依次记为 $r,w,t,s$。把复向量当作实向量，$B,A,C$ 上两个已知的归一化内积把 $B,C$ 的归一化内积限制在以 $rs$ 为中心、半宽 $\sqrt{(1-r^2)(1-s^2)}$ 的区间。另一方面，$B$ 与 $-iD$ 的归一化内积为 $w$，故 $B,D$ 的归一化内积可以取遍 $[-T,T]$，其中 $T=\sqrt{1-w^2}$。再用 $C,D$ 的已知内积 $t$，从这条路径得到 $B,C$ 的区间 $[-M,M]$，其中 $|t|\le T$ 时 $M=1$，否则 $M=T|t|+|w|\sqrt{1-t^2}$。后一公式来自在 $|h|\le T$ 上最大化 $ht+\sqrt{(1-h^2)(1-t^2)}$。两个区间相交就可在实四维选取 $B,D$，再依次放入 $C,A$，因此有复二维见证。若某个 $a$ 通过秩一检验（零范数时用边不等式，正范数时用相位乘积），最小秩为一。其余可行情形的最小秩为二。若没有 $a$ 通过任一可行性检验，则两套读数无法共同实现。[区间端点与重建](https://github.com/the-omega-institute/trureturing-books/issues/1667)
+
 在第 $2\,306\,888\,100\,085$ 枚正零点，把四个算术 Gram 源的正交化方向依次放在极点与三条射线的首站，用后三个原始源张成的空间代表三代。把荷 $-4,2$ 的壳算子分别压缩到这个空间，作为上型、下型左手夸克的质量平方矩阵。一步传播保留共同的反酉对称，Jarlskog 不变量 $J=0$。走两步再投影，多出了中途离开三代空间又返回的路径，给出 $J\simeq3.00189\times10^{-4}$。产生 CP 破坏后，还要同时解释夸克质量与顶底混合。在 $1\,\mathrm{TeV}$ 六个夸克汤川耦合各自的 $1\sigma$ 区间内，即使上下两部门各自任取十九个非负谱值，所得 $|V_{tb}|$ 也只能小于 $0.9936401$ 或大于 $0.99915018$，同尺度参考窗落在两者之间。若允许壳上的读数取负而压缩后的质量平方保持正定，两荷共用一个至多十一次的实多项式就能重现任意给定的六个正夸克质量与 CKM 矩阵。这个自由度使多项式的系数也成为统一模型必须解释的量。[两步传播](https://github.com/the-omega-institute/trureturing-experiments/blob/b0f5a77f57448869a358fdfb61c96dad5aa3f039/experiments/ch39-omega-research/replay/ch39-three-gram-source-flavor.py) · [非负谱的混合限制](https://github.com/the-omega-institute/trureturing-experiments/blob/b0f5a77f57448869a358fdfb61c96dad5aa3f039/experiments/ch39-omega-research/replay/ch39-three-source-positive-ckm.py) · [有符号多项式构造](https://github.com/the-omega-institute/trureturing-experiments/blob/b0f5a77f57448869a358fdfb61c96dad5aa3f039/experiments/ch39-omega-research/replay/ch39-signed-three-source-quark-pair.py) · [参考输入表 2](https://arxiv.org/html/2510.01312v2#Sx1.T2)
 
 夸克数据还约束三代空间本身的取向。取极点与三个首站构成的实四维空间，将其中一个实三维超平面复化，作为上下型共有的味空间。记 $a$ 为其单位法向在三循环固定平面上的投影长度。允许两部门各自在四站上选取任意保持三循环的正半定算子，并把压缩读作质量平方。用同一张 $1\,\mathrm{TeV}$ 表的质量与混合误差窗，区间计算给出必要条件 $0.0096549<a<0.0332714$。四个算术源中任选三个，得到的 $a$ 都在 $0.5198$ 与 $0.5774$ 之间。取 $a=0.02145737$，同表中心值有严格正定的四站扩张。[四站正扩张的范围与构造](https://github.com/the-omega-institute/trureturing-experiments/blob/cd7ec54bd5afd349e0a6734cc600f16e66ce612c/experiments/ch39-omega-research/replay/ch39-free-four-site-positive-extensions.py)
