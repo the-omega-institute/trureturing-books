@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "a3c645e8130df1b1bdc8485505efbb21265fe727",
-  "pinned_at": "2026-11-28T16:37:42Z",
+  "commit": "e36feda281c02097674adc54622621eb93415cb1",
+  "pinned_at": "2026-11-28T18:14:22Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -13021,6 +13021,19 @@
       "statement_id": "sha256:ee5bcbd3c7b25090e592bc4dc7824316772b6f961ef5199e97c621e27f709453",
       "line": 248,
       "signature": "theorem opNorm_le_div_of_comp_sub_comp_eq (hA : A.IsSymmetric) (hB : B.IsSymmetric) {c g : ℝ} (hg : 0 < g) (hAc : ∀ x, (c + g) * ‖x‖ ^ 2 ≤ RCLike.re ⟪A x, x⟫_𝕜) (hBc : ∀ v, RCLike.re ⟪B v, v⟫_𝕜 ≤ c * ‖v‖ ^ 2) (hXY : A ∘L X - X ∘L B = Y) : ‖X‖ ≤ ‖Y‖ / g"
+    },
+    "D5/S3/HilbertOperators/DeletedRowReadout.hasFDerivAt_readout_with_positive_det_factor": {
+      "module": "D5/S3/HilbertOperators/DeletedRowReadout",
+      "name": "D5.S3.HilbertOperators.DeletedRowReadout.hasFDerivAt_readout_with_positive_det_factor",
+      "kind": "theorem",
+      "statement_id": "sha256:6fe6a886c82286e87a7bdd4af0718e4b4e89b7329edcb2e4f1ff123b26e6a373",
+      "line": 23,
+      "signature": "theorem hasFDerivAt_readout_with_positive_det_factor {z : ℂ} {A R : ℂ → E →L[ℂ] E} {u : ℂ → E} {v e : E} {a : ℂ → ℝ} {p : ℂ → ℂ} {D : ℂ →L[ℝ] ℂ} (hA : ∀ᶠ x in 𝓝 z, (A x).toLinearMap.IsSymmetric) (hu : ∀ᶠ x in 𝓝 z, ‖u x‖ = 1) (he : inner ℂ e v = 0) (hAu : ∀ᶠ x in 𝓝 z, A x (u x) = (a x : ℂ) • u x) (hAv : ∀ᶠ x in 𝓝 z, A x v = p x • e) (hR : ∀ᶠ x in 𝓝 z, Function.LeftInverse (R x) (A x + rankOne ℂ (u x) (u x))) (huz : u z = v) (hne : e ≠ 0) (hcu : ContinuousAt u z) (hcR : ContinuousAt R z) (hp : HasFDerivAt p D z) (hRright : Function.RightInverse (R z) (A z + rankOne ℂ (u z) (u z))) (hpos : ∀ w ≠ ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/HilbertOperators/PointwiseStabilizer.exists_mulEquiv_orthogonal": {
       "module": "D5/S3/HilbertOperators/PointwiseStabilizer",

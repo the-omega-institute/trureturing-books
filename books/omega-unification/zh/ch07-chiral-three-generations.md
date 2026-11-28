@@ -121,7 +121,11 @@ $$
 
 将钟角除以 $2\pi$，以 $p_\gamma=(a\gamma,b\gamma)/(2\pi)$ 作为周期一的采样点，并以各零点的重数除以 $N(T)$ 作为权重。设 $c_T=O(L^{-1})$、$d_T=O(L^{-2})$ 为上面标准化频率和的两项系数。由于 $L\varepsilon^2\to\infty$ 且 $J\asymp L$，$c_T/\varepsilon^2$、$d_T/\varepsilon^4$ 和 $1/(\varepsilon^6J^4)$ 都趋于零。加权计数定理把这三项界与全环面的夹逼合在一起。对满足上面零点枚举和可逆雅可比条件的周期振幅，严格次水平比例除以 $\varepsilon^2$ 后趋于 $\pi\sum_i|\det B_i|^{-1}$。若 $A_i$ 是物理钟角坐标中的雅可比，则 $B_i=2\pi A_i$，每个零点的贡献为 $1/(4\pi|\det A_i|)$。 [周期次水平的加权计数极限](lean:D5/S3/Fourier/Asymptotics/PeriodicSublevelSampling.tendsto_weighted_sublevel_of_fourier)
 
-应用到平坦模型时，固定可能失秩的特征标，把该删点块的单位最低态补零为向量 $v$。它在完整块中的瑞利商始终低于 $8.685$。若它与轻线正交，瑞利商至少是其余本征值的下界 $9.6$。因此将 $v$ 投影到轻线后归一化，就在整个物理环面上选定了连续周期的单位轻态。取它的边界傅里叶振幅。另两个特征标的振幅模在紧环面上都有正下界，所以充分小的阈值下，三站最小奇异值与这条振幅模给出同样的次水平集。删点方程定位盲点，其微分经约化逆给出实际读数的雅可比。荷 $q$ 的角度变换使物理角中的绝对行列式乘上 $q^2$，每个有效盲点也恰有 $q^2$ 个物理原像。双钟频率界和模型识别仍分别依赖上文的算术推导和本征线分析。 [从删点方程到实际振幅的微分](https://github.com/the-omega-institute/trureturing-experiments/blob/408bafb236c0918d30571356d15798d2cd21a511/experiments/ch39-omega-research/replay/ch39-ray-near-blind-density.md)
+应用到平坦模型时，固定可能失秩的特征标，把该删点块的单位最低态补零为向量 $v$。它在完整块中的瑞利商始终低于 $8.685$。若它与轻线正交，瑞利商至少是其余本征值的下界 $9.6$。因此将 $v$ 投影到轻线后归一化，就在整个物理环面上选定了连续周期的单位轻态。取它的边界傅里叶振幅。另两个特征标的振幅模在紧环面上都有正下界，所以充分小的阈值下，三站最小奇异值与这条振幅模给出同样的次水平集。
+
+在有效钟角 $(\alpha,\beta)$ 下，写 $p=A+B e^{-i\alpha}+C e^{-i\beta}$。设 $H$ 是完整块，$\mu$ 是删点块最低能量，$e$ 是单位边界方向。补零态满足 $(H-\mu I)v=p e$。在盲点上，归一化投影给出 $u=v$。轻线简单且其余谱在 $\mu$ 上方，因此 $H-\mu I+P$ 在该点正定，其中 $P$ 投影到轻线。其逆 $R$ 在邻域内连续。以 $f=e^*u$ 表示实际振幅，则在盲点有 $df=-G\,dp$，其中 $G=e^*Re>0$。在有效钟角中的绝对实雅可比为 $G^2\big|\operatorname{Im}(\overline{B e^{-i\alpha}}\,C e^{-i\beta})\big|$，其中 $G^2$ 来自振幅导数的实二维缩放。 [边界振幅的导数与雅可比](lean:D5/S3/HilbertOperators/DeletedRowReadout.hasFDerivAt_readout_with_positive_det_factor)
+
+荷 $q$ 的角度变换使物理角中的绝对行列式乘上 $q^2$，每个有效盲点也恰有 $q^2$ 个物理原像。双钟频率界、谱隙和盲点枚举分别由前述算术和模型分析给出。 [模型系数的推导和复算](https://github.com/the-omega-institute/trureturing-experiments/blob/408bafb236c0918d30571356d15798d2cd21a511/experiments/ch39-omega-research/replay/ch39-ray-near-blind-density.md)
 
 固定荷与钟角，轻线随辐边软化能移动多远？写 $H_k(\delta)=H_k(0)-\delta K_k$。三条单位辐边构成一个星图。在极点与三叶均匀单位向量的基下，平凡特征标上的星图块为 $\left(\begin{smallmatrix}3&-\sqrt3\\-\sqrt3&1\end{smallmatrix}\right)$。两个非平凡叶模式在极点相消，各自的本征值为 $1$。其余方向上的星图作用为零，故 $K_k$ 的谱宽依次为 $w_k=4,1,1$。[软化权重的定义](https://github.com/the-omega-institute/trureturing-experiments/blob/cb58c8e64ecea67184e0c1d68a690be098a7a384/experiments/ch39-omega-research/replay/ch39-three-ray-chiral-boundary.py#L34)
 
