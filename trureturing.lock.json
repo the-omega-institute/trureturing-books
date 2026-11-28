@@ -15444,6 +15444,43 @@
         "propext"
       ]
     },
+    "D5/S3/Quantum/AURICOmega/RationalGramCospectral.five_seven_on_conic": {
+      "module": "D5/S3/Quantum/AURICOmega/RationalGramCospectral",
+      "name": "D5.S3.Quantum.AURICOmega.RationalGramCospectral.five_seven_on_conic",
+      "kind": "theorem",
+      "statement_id": "sha256:cbaeb6f1f2a12cb5d440e08ad23148ac46436d211006f0e23e23ebd6a573b0a8",
+      "line": 696,
+      "signature": "theorem five_seven_on_conic (u v : ℚ) (hu : u ≠ 0) (h : 5 * u ^ 2 + 4 * v ^ 2 = 9) (n : ℕ) : let t"
+    },
+    "D5/S3/Quantum/AURICOmega/RationalGramCospectral.seven_five_on_conic": {
+      "module": "D5/S3/Quantum/AURICOmega/RationalGramCospectral",
+      "name": "D5.S3.Quantum.AURICOmega.RationalGramCospectral.seven_five_on_conic",
+      "kind": "theorem",
+      "statement_id": "sha256:cbaeb6f1f2a12cb5d440e08ad23148ac46436d211006f0e23e23ebd6a573b0a8",
+      "line": 828,
+      "signature": "theorem seven_five_on_conic (u v : ℚ) (h : u ^ 2 + 14 * v ^ 2 = 15) (n : ℕ) : let t"
+    },
+    "D5/S3/Quantum/AURICOmega/RationalGramCospectral.spectrum_and_thresholds": {
+      "module": "D5/S3/Quantum/AURICOmega/RationalGramCospectral",
+      "name": "D5.S3.Quantum.AURICOmega.RationalGramCospectral.spectrum_and_thresholds",
+      "kind": "theorem",
+      "statement_id": "sha256:cbaeb6f1f2a12cb5d440e08ad23148ac46436d211006f0e23e23ebd6a573b0a8",
+      "line": 521,
+      "signature": "theorem spectrum_and_thresholds : ((∃ P : GramMatrix, P.det ≠ 0 ∧ ∀ t : ℚ, pairedEdges t * P = P * triangleBlock t) ∧ ∀ t : ℚ, (pairedEdges t).charpoly = (triangleBlock t).charpoly ∧ (pairedEdges t).charpoly = (Polynomial.X - Polynomial.C (1 + 4 * t)) * (Polynomial.X - 1) * (Polynomial.X - Polynomial.C (1 - 2 * t)) ^ 2) ∧ ∀ (u v : ℚ), 5*u^2 + 7*v^2 = 3 → ∀ n : ℕ, let t"
+    },
+    "D5/S3/Quantum/AURICOmega/RationalGramCospectralFourCoordinates.four_coordinate_criterion": {
+      "module": "D5/S3/Quantum/AURICOmega/RationalGramCospectralFourCoordinates",
+      "name": "D5.S3.Quantum.AURICOmega.RationalGramCospectralFourCoordinates.four_coordinate_criterion",
+      "kind": "theorem",
+      "statement_id": "sha256:c45857428ba4b49dae1deacc549e96e7cc9b4e2ed12478db80be8e53ec674a66",
+      "line": 338,
+      "signature": "theorem four_coordinate_criterion (t : ℚ) : (RealizableIn (pairedEdges t) 4 ↔ t = 1/2 ∨ ∃ s x y : ℚ, 1 + 4*t = s^2 ∧ 2*(1-2*t) = x^2+y^2) ∧ (RealizableIn (triangleBlock t) 4 ↔ t = 1/2 ∨ ∃ s x y : ℚ, 1 + 4*t = s^2 ∧ 2*(1-2*t) = x^2+y^2)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
     "D5/S3/Quantum/AURICOmega/RationalGramOddPrime.realizable_iff": {
       "module": "D5/S3/Quantum/AURICOmega/RationalGramOddPrime",
       "name": "D5.S3.Quantum.AURICOmega.RationalGramOddPrime.realizable_iff",

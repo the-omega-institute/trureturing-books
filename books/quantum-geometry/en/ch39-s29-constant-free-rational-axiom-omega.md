@@ -208,6 +208,48 @@ Give a rational Gram matrix diagonal entries $1$ and upper off-diagonal entries 
 
 In $q=\langle1,2,3,3\rangle$, take $e_0$ and the vectors $\frac{1-d_i}{1+d_i}e_0+\frac{2}{1+d_i}e_i$, with $(d_1,d_2,d_3)=(2,3,3)$. They form a unit basis, so their rational Gram matrix has diagonal entries $1$. Here $d=18$. The valuation of $-18$ at $2$ is odd, so it imposes no condition at $2$. At $3$, the nonzero square $-2\bmod3$ lifts to a square, making $-18$ a square as well. There $(18,-1)_3=1$ but $c_3(q)=(2,3)_3^2(3,3)_3=-1$. These readings require seven rational coordinates. Their Gram determinant is $18(1/6)^2=1/2$. The vectors $e_1,e_2,e_3,(1/2,1/2,0,1/2,1/2)$ have the same Gram determinant and use five coordinates. Four coordinates would force the determinant to be a rational square.
 
+The full spectrum can also leave the minimum rational dimension undetermined. Consider two four-point matrices with diagonal entries $1$. In the first, two disjoint edges have inner product $2t$ and the rest have inner product $t$. In the second, the three edges of a triangle have inner product $2t$ and the fourth point is orthogonal to the triangle.
+
+::: {.theorem #thm-ch39-cospectral-rational-gram title="Equal spectra with different rational coordinate minima" lean="D5/S3/Quantum/AURICOmega/RationalGramCospectral.spectrum_and_thresholds"}
+One invertible rational matrix conjugates the two families for every rational $t$. Both matrices have characteristic polynomial $(X-(1+4t))(X-1)(X-(1-2t))^2$. If $t=(5u^2-1)/4$ for rational $u,v$ satisfying $5u^2+7v^2=3$, the first is realizable in $\mathbb Q^n$ exactly when $n\ge7$, and the second exactly when $n\ge6$.
+:::
+
+The similarity follows by choosing rational eigenbases independent of $t$. Take $u=v=1/2$, so $t=1/16$. Rational changes of basis reduce the two Gram forms to orthogonal vectors with squared lengths $(1,5,7,7)$ and $(1,1,7,35)$, respectively. A six-dimensional realization of the first would let us align the first three vectors with $e_1$, $2e_2+e_3$, and $e_2-2e_3+e_4+e_5$. Orthogonality then reduces the last squared length to $35x^2+y^2+2z^2=14$. Clear denominators, reduce modulo $7$, divide by $7$, and reduce again. The two reductions force all three numerators and the denominator to be divisible by $7$, giving a descent. In seven dimensions, $e_4-e_5+e_6+2e_7$ supplies the required squared length $7$.
+
+In five dimensions, the first two unit axes of the second form leave a three-dimensional complement, where squared length $7$ meets the three-square obstruction. In six dimensions, take $e_1,e_2$ and place $(2,1,1,1)$ and $(3,-5,-1,0)$ in the remaining four coordinates. Along the conic, $1+4t=5u^2$ and $1-2t=7v^2/2$. Rational rescaling returns each form to its form at the base point. Lines of rational slope through $(1/2,1/2)$ give infinitely many such parameters. At $t=0$ both matrices are the identity and four coordinates suffice.
+
+When can the two matrices be realized in four rational coordinates? At this dimension they share an arithmetic criterion.
+
+::: {.theorem #thm-ch39-cospectral-four-coordinates title="The four-coordinate criterion for both cospectral matrices" lean="D5/S3/Quantum/AURICOmega/RationalGramCospectralFourCoordinates.four_coordinate_criterion"}
+Let $t\in\mathbb Q$. Each of the paired-edge and triangle-block matrices is realizable in $\mathbb Q^4$ exactly when $t=1/2$, or when $1+4t$ is a rational square and $2(1-2t)$ is a sum of two rational squares.
+:::
+
+Away from the two singular endpoints, a rational square factor $G=XX^{\mathsf T}$ forces the common determinant $(1+4t)(1-2t)^2$ to be a square. This gives $1+4t=s^2$ for a nonzero rational $s$. Write $B=2(1-2t)$, so $s^2+B=3$. Rational changes of basis put the paired-edge form into diagonal form with coefficients $(1,1,B,B)$ and the triangle-block form into $(3,1,B,3B)$. In the $(1,B)$ plane of the first form, the basis $(s,1)$, $(B,-s)$ has orthogonal coefficients $(3,3B)$, making the two forms rationally congruent.
+
+Align the two orthogonal unit vectors with standard axes. The remaining rational plane must contain a vector of squared length $B$. Conversely, if $B=x^2+y^2$, then $(x,y)$ and $(-y,x)$ give the required orthogonal pair. At $t=-6/25$, the values $(s,x,y)=(1/5,1,7/5)$ satisfy both conditions. At $t=-3/16$ we have $1+4t=1/4$ and $B=11/4$. If $B$ were a sum of two rational squares, clearing denominators and reducing modulo $11$ would force both numerators and the denominator to be divisible by $11$.
+
+At $t=-1/4$, the diagonal forms are $(1,0,3,3)$ and $(0,1,3,1)$. In the first, align the unit vector and a vector of squared length $3$ with $e_1$ and $e_2+e_3+e_4$. The remaining squared length requires $2(x^2+xy+y^2)=3$. In the second, the complement of two unit axes requires $x^2+y^2=3$. Descent modulo $3$ excludes both equations. At $t=1/2$, the diagonal forms are $(1,3,0,0)$ and $(1,1,0,0)$, both directly realizable in four coordinates.
+
+When the four-coordinate criterion fails, either ordering of the minima can occur with a gap of two coordinates.
+
+::: {.theorem #thm-ch39-cospectral-five-seven title="A conic with five and seven rational coordinates" lean="D5/S3/Quantum/AURICOmega/RationalGramCospectral.five_seven_on_conic"}
+Let rational $u,v$ satisfy $5u^2+4v^2=9$ and $u\ne0$. For $t=(5u^2/3-1)/4$, the first matrix is realizable in $\mathbb Q^n$ exactly when $n\ge5$, and the second exactly when $n\ge7$.
+:::
+
+At $(u,v)=(1,1)$ we have $t=1/6$. The common determinant is $20/27$. A four-coordinate factor would force this determinant to be a rational square, but its reduced numerator is $2$ modulo $3$. The first form reduces to squared lengths $(1,15,3,3)$. Take one unit axis and the three vectors $(-2,-1,3,1)$, $(1,1,1,0)$ and $(1,-1,0,1)$ in its four-coordinate complement.
+
+The second form reduces to squared lengths $(1,1,5,3)$. In six coordinates align the first three directions with $e_1$, $e_2$ and $2e_3+e_4$. The last direction would give $5x^2+y^2+z^2=3$. After clearing denominators, an odd denominator gives a contradiction modulo $8$. An even denominator forces all three numerators even modulo $4$, so descent gives the contradiction. Seven coordinates suffice using two unit axes, $2e_3+e_4$ and $e_5+e_6+e_7$. The two varying eigenvalues satisfy $1+4t=5u^2/3$ and $1-2t=2v^2/3$, so rational rescaling carries both thresholds from the base point. At $u=0$, the common rank drops to three.
+
+A two-coordinate gap also occurs with the paired-edge matrix requiring more coordinates.
+
+::: {.theorem #thm-ch39-cospectral-seven-five title="A conic with seven and five rational coordinates" lean="D5/S3/Quantum/AURICOmega/RationalGramCospectral.seven_five_on_conic"}
+Let rational $u,v$ satisfy $u^2+14v^2=15$. For $t=(u^2/5-1)/4$, the first matrix is realizable in $\mathbb Q^n$ exactly when $n\ge7$, and the second exactly when $n\ge5$.
+:::
+
+At the base point $(1,1)$, where $t=-1/5$, the paired-edge form has squared lengths $(1,5,70,70)$. In a putative six-coordinate realization align the first three vectors with $e_1$, $2e_2+e_3$ and $3e_4+5e_5+6e_6$. Their orthogonal complement has a rational orthogonal basis with squared lengths $(5,34,2380)$. Rescaling one coefficient reduces the final length equation to $11900x^2+y^2+170z^2=350$. Clearing denominators and reducing twice modulo $7$ yields descent. In seven coordinates the vector $-3e_2+6e_3+5e_7$ completes the frame.
+
+The triangle form has squared lengths $(15,1,70,210)$. Their product is $5\cdot210^2$, which precludes a square rational factor. In the complement of a unit axis, the three orthogonal vectors $(3,2,1,1)$, $(-5,4,2,5)$ and $(-3,8,4,-11)$ give the other squared lengths and attain five coordinates. Along the conic, $1+4t=u^2/5$ and $1-2t=7v^2/5$, with both eigenvalues nonzero. Rational rescaling transports the two minima.
+
 ## 32.5.4 Formal Anchors, Literature Boundaries, and Constant-Free Rational Audit {#sec-ch39-29-4}
 
 We gather the fifteen frozen theorems anchoring the constant-free rational skeleton of $\mathrm{AXIOM}\text{-}\Omega$, the integer-coefficient Chebyshev doubling equivalence, and the three flat/discrete residual bounds into the following theorem box:
