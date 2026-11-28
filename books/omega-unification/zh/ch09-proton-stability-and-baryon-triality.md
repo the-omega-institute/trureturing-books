@@ -388,6 +388,7 @@ $$
 
    连同作用于全部十五分量的全局相因子 $\omega I$ 组成完整群 $[SU(5) \times SU(10)] \times \mathbb{Z}_3$（[`ch39-triality-gauge-closure.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-triality-gauge-closure.py)）。
 2. **六次势（$111$ 重矢量、$288$ 标量）对照四次势（$+24$ 维伴随）**：为了把 $[SU(5)\times SU(10)]\times\mathbb{Z}_3$ 精准破缺回标准模型规范群并完好保住壳三重相位，引入两份带不同离散荷的矩阵标量（共 $400$ 个实分量）。对互补投影色三平面真空，所有四次势都会留下一个能量简并的星形构型，必须升至**六次势**才能唯一选出色三平面：破缺后精确给出 **$111$ 个有质量重规范矢量**（在 $\mu_V = \sqrt{2}\, v g_{\mathrm{low}}$ 处三支一圈对数匹配相等）、$111$ 个戈德斯通零模、$1$ 个单态相位与 **$288$ 个有质量物理实标量**（最小正质量平方 $(5 - \sqrt{13}) v^2$），三代配平立方反常后可在一圈匹配下于 $v \in (7.5628, 7.5630) \times 10^{14}\,\mathrm{GeV}$ 重现低能耦合（六个重汤川几何平均比约 $4.61 \times 10^{-5}$）。倘若坚持只用**四次势**锁出色三平面，所需新增的最少标量实维数恰为 **$24$**——恰好对应一份实伴随表示，使等真空尺度下的有质量实标量方向增至 $312$ 个（[`ch39-quartic-adjoint-lock.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-quartic-adjoint-lock.py)）。
+3. **分块动力学规范化的局域立方反常障碍（ARGUED，追踪议题 `#2373`）**：须将上述一圈匹配与完整动力学规范化严格区分。在仅含三代标准模型手征物质 $\bar{\mathbf{5}}\oplus\mathbf{10}$ 而无新增带荷手征外尔场时，对两个因子 $SU(5)$ 与 $SU(10)$ 分别取独立规范联络会留下精确非零的局域立方反常系数 **$(-3, +3)$**（仅在回退到对角 $SU(5)$ 嵌入时才借 $\sum_{i<j}(x_i+x_j)^3 = \sum_i x_i^3$ 对消）；中性外尔单态、锁相标量以及下文第 9.3.2 节的 $\mathbb{Z}_9$ 离散扩张均无法消去这两项连续立方反常。此外，独立的六次／四次锁相谱 $(s,f,v,m)=(289/313, 45, 12, 111)$ 虽各自带有 $1$ 个正则 CPR+DEP 引力固定点，却全部违背森对数时钟（$p = -1151/120$ 与 $-373/40$）。
 
 ### 9.3.2 $S^2 \times L(3, 1)$ 离散立方反常流入与二十五态提升贝伦德球壳
 
