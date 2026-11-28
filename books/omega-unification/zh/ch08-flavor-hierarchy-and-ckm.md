@@ -392,6 +392,31 @@ $$
 
 重线投影先把任意取优复基限制在有界缩放坐标内。再用下型成本约束实平面分角，上型成本的下界便含有 $|Z|^2-2\mu S\operatorname{Re}Z$ 的平方以及虚偏转的平方。限制解析余项后，两个偏转中心仍相距超过 $0.45$，因此可以分别比较两个邻域内的最小成本。[全复基定位界与矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/2203#issuecomment-7240815849)
 
+首项的约化 Hessian 还可以给出显式下界（手工推导）。在平衡面 $D_0=0$ 上消去 $X$，令
+$$
+L(Z)=\frac{|Z|^2-2\mu S\operatorname{Re}Z}{2\mu},\qquad X=A_0+L(Z).
+$$
+代回上型首项得到
+$$
+U_0=A_0^2+L(Z)^2+4(\operatorname{Im}Z)^2+I^2+|Y|^2.
+$$
+在 $Z=0$ 与 $Z=2\mu S$ 两个中心，按 $(\operatorname{Re}Z,\operatorname{Im}Z,I,\operatorname{Re}Y,\operatorname{Im}Y)$ 排列的 Hessian 分别为
+$$
+\operatorname{diag}(2S^2,8,2,2,2),
+$$
+因为 $\nabla L=(-S,0)$ 或 $(S,0)$ 且 $L=0$。参数盒给出 $2S^2=2vw\ge1.7628$。在半径 $\rho=10^{-3}$ 的任一中心邻域内，取
+$$
+\mu_-=\sqrt{1-0.79\cdot1.14},\quad S_+=\sqrt{0.79\cdot1.14},\quad
+g_\Delta=\frac{\sqrt2\rho}{\mu_-},\quad
+L_+=S_+\rho+\frac{\rho^2}{2\mu_-},
+$$
+则秩一项和 $2L\nabla^2L$ 的扰动分别至多
+$$
+2(2S_++g_\Delta)g_\Delta=0.01706762,\qquad
+\frac{2L_+}{\mu_-}=0.00603015.
+$$
+所以首项约化 Hessian 在两个邻域内的最小特征值仍大于 $1.7397$。这证明了缩放极限的统一严格正定性。#2203 中的解析余项目前只有函数值界，尚未给出对缩放坐标二阶导数的界，因此这里不把 $1.7397$ 外推为有限 $\varepsilon$ 的 Hessian 证书；下一步是补上该导数余项估计。
+
 若保持线性平衡并取 $\kappa+8\mu^2q=\eta\varepsilon$，两处分支在有限 $\varepsilon$ 下的等成本点会偏离五阶阈值（手工推导）。固定 $\mu$ 与下型轻块，调相取 $C>0$ 和实数 $S$，保留其相对符号。令 $v,w$ 分别为下型轻块沿 $e_0,e_2$ 的对角元，$c=\sqrt{\mu^2+|S|^2}$。实际交换点满足 $\eta_{\mathrm c}(\varepsilon)=-8\mu^2c^2w+O(\varepsilon)$。对于有界的 $\eta$ 和充分小的正 $\varepsilon$，$\eta>\eta_{\mathrm c}(\varepsilon)$ 时反射支胜出，$\eta<\eta_{\mathrm c}(\varepsilon)$ 时零偏转附近的分支胜出。
 
 在两支实际等成本时，可以从零偏转附近的两个方向算出固定平面的代价。
