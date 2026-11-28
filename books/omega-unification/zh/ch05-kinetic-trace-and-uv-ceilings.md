@@ -220,16 +220,16 @@ $$
 
 在 $B_0$，$N$ 份截顶热权可以同时趋于 $1$，第二热迹的上确界为 $N+w_1^u$。因此 $u\ge u_c$ 时的左跳跃为 $1-M^u-d^u$，与 $N$ 无关。取 $u=4$，复算（`NUM`）得到约 $0.113987815$。[整个指数区间的推导](https://github.com/the-omega-institute/trureturing-books/issues/2059#issuecomment-7239617760) · [四次热迹复算](https://github.com/the-omega-institute/trureturing-books/issues/2059#issuecomment-7239523334) · [小指数构造](https://github.com/the-omega-institute/trureturing-books/issues/2059#issuecomment-7239426333)
 
-把预算从 $B_0$ 向下移，最优谱还可能在截顶之前换序（手工推导，`ARGUED`）。记 $V_S(B)$ 为第一热迹等于 $S$、暴露至多 $B$ 的有限正质量整数谱的第二热迹上确界。令 $r=\tau-\varepsilon$、$M_\varepsilon=W(r)$，并令 $s_r$ 为 $W(r-s_r)+W(s_r)=1+w_1$ 在 $(0,r/2)$ 内的唯一根。置 $A_r=W(r-s_r)$、$C_r=W(s_r)$。取 $\tau=\tau_0(u)$。在 $7/2\le u\le3.56$、$0<\varepsilon\le1/20$ 时，
+把预算从 $B_0$ 向下移，最优谱还可能在截顶之前换序（手工推导，`ARGUED`）。记 $V_S(B)$ 为第一热迹等于 $S$、暴露至多 $B$ 的有限正质量整数谱的第二热迹上确界。令 $r=\tau-\varepsilon$、$M_\varepsilon=W(r)$，并令 $s_r$ 为 $W(r-s_r)+W(s_r)=1+w_1$ 在 $(0,r/2)$ 内的唯一根。置 $A_r=W(r-s_r)$、$C_r=W(s_r)$。取 $\tau=\tau_0(u)$。在 $1<u\le3.56$、$0<\varepsilon\le1/20$ 时，
 
 $$
 V_S(B_0-\varepsilon)
 =N-1+\max\bigl\{A_r^u+C_r^u,\ M_\varepsilon^u+w_1^u+(1-M_\varepsilon)^u\bigr\}.
 $$
 
-前缀支配将任意有限谱的上界归约为单次转移，转移族的幂和严格凸，所以只需比较两端。$N=1$ 时，占优端点给出唯一最优谱，换序点两组谱都取等。$N\ge2$ 时，可让 $N-1$ 份截顶热权趋于 $1$ 来逼近上确界，正质量谱无法取到它。
+前缀支配将任意有限谱的上界归约为单次转移。对 $1<u\le2$，幂和随转移严格增加，直至零暴露余权耗尽。对 $2\le u\le3.56$，转移族的幂和严格凸，所以只需比较两端。$N=1$ 时，占优端点给出唯一最优谱，换序点两组谱都取等。$N\ge2$ 时，可让 $N-1$ 份截顶热权趋于 $1$ 来逼近上确界，正质量谱无法取到它。
 
-记 $D(u,\varepsilon)$ 为两份转移谱的幂和减去三份无转移谱的幂和。在 $7/2\le u<u_c$，预算缺口增大时，最优谱在唯一的 $0<\varepsilon_c(u)<1/20$ 处由转移端换为无转移端。在 $u_c\le u\le3.56$，无转移端在整个正缺口窗口严格占优。闭区间复算确认 $D$ 随 $u$ 和 $\varepsilon$ 分别严格下降，且 $D(7/2,1/20)<0$。零缺口处的符号由临界指数 $3.55808144201<u_c<3.55808144202$ 决定。由隐函数定理，换序曲线从 $u=7/2$ 的换序点随 $u$ 光滑下降，在 $u_c$ 处趋于零，且
+记 $D(u,\varepsilon)$ 为两份转移谱的幂和减去三份无转移谱的幂和。令 $u_-$ 为 $D(u,1/20)=0$ 的唯一解，区间复算给出 $3.43591242108<u_-<3.43591242110$。当 $1<u<u_-$ 时，转移端在整个窗口占优。对 $u_-\le u<u_c$，预算缺口升至唯一的 $\varepsilon_c(u)\in(0,1/20]$ 时两端并列，越过此值后无转移端占优。对 $u_c\le u\le3.56$，无转移端在整个正缺口窗口严格占优。在换序曲线上，$D$ 对 $u$ 和 $\varepsilon$ 的偏导均严格为负。由隐函数定理，换序缺口从 $u_-$ 处的 $1/20$ 随 $u$ 光滑下降，在 $3.55808144201<u_c<3.55808144202$ 处趋于零，且
 
 $$
 \lim_{u\uparrow u_c}\frac{\varepsilon_c(u)}{u_c-u}
@@ -237,23 +237,25 @@ $$
 \in (0.407501589,\,0.407501592).
 $$
 
-这里 $D(u,0)$ 是两条有限预算分支的连续延拓。[换序曲线的推导与有理区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2146#issuecomment-7240317381) · [整段换序曲线的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2145#issuecomment-7240288302)
+这里 $D(u,0)$ 是两条有限预算分支的连续延拓。[换序曲线的推导与有理区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2146#issuecomment-7240317381) · [整段换序曲线的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2145#issuecomment-7240288302) · [低指数的换序证书](https://github.com/the-omega-institute/trureturing-books/issues/2177#issuecomment-7240496121) · [最小指数段的转移斜率](https://github.com/the-omega-institute/trureturing-books/issues/2177#issuecomment-7240540984)
 
 在 $u=7/2$，$D$ 随 $\varepsilon$ 严格下降，在 $0.0237169055<\varepsilon_c<0.0237169058$ 内唯一换号。预算越过 $B_c=B_0-\varepsilon_c$ 向上增加时，最优谱由无转移端换为转移端，$V_S$ 对 $B$ 的斜率由约 $0.230347403$ 升至约 $0.251251786$（`NUM`）。[七半次热迹的推导与有理区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2136#issuecomment-7240195509)
 
-这个换序点还决定了所有低指数共用的最大预算半径。取 $1<u\le7/2$，每次均用该指数的临界截顶 $\tau=\tau_0(u)$。对 $0<\varepsilon\le1/40$，上式的两个端点仍给出精确上确界。当 $u\le2$ 时，沿转移方向比较两份活跃热权的边际增益，幂和一路增加到余量为零。当 $2\le u\le7/2$ 时，转移族的幂和严格凸，且在固定缺口下，两份端点相对三份端点的优势随指数严格下降。因此七半次最先换序。在 $0<\varepsilon<\varepsilon_c$ 内，每个指数都有 $V_S(B_0-\varepsilon)=N-1+A_r^u+C_r^u$，其中 $0.02371690563<\varepsilon_c<0.02371690564$。在右端点仍有同一等式，只有 $u=7/2$ 时两谱并列。$N=1$ 时胜出的热权组给出全部取等谱（不计排列）。$N\ge2$ 时，以趋于 $1$ 的截顶热权替代单位权，再用一份零暴露热权补足第一热迹，即可在同一预算下逼近上确界。
+这个换序点还决定了所有低指数共用的最大预算半径。取 $1<u\le7/2$，每次均用该指数的临界截顶 $\tau=\tau_0(u)$。对 $0<\varepsilon\le1/20$，上式的两个端点仍给出精确上确界。当 $u\le2$ 时，沿转移方向比较两份活跃热权的边际增益，幂和一路增加到余量为零。当 $2\le u\le7/2$ 时，转移族的幂和严格凸，且在固定缺口下，两份端点相对三份端点的优势随指数严格下降。因此七半次最先换序。在 $0<\varepsilon<\varepsilon_c$ 内，每个指数都有 $V_S(B_0-\varepsilon)=N-1+A_r^u+C_r^u$，其中 $0.02371690563<\varepsilon_c<0.02371690564$。在右端点仍有同一等式，只有 $u=7/2$ 时两谱并列。$N=1$ 时胜出的热权组给出全部取等谱（不计排列）。$N\ge2$ 时，以趋于 $1$ 的截顶热权替代单位权，再用一份零暴露热权补足第一热迹，即可在同一预算下逼近上确界。
 
 从左侧趋近 $B_0$ 时，令 $s_*=s_\tau$、$b=W'(\tau-s_*)$、$c=W'(s_*)$。由 $A_r+C_r=1+w_1$ 得 $dA_r/dr=-dC_r/dr=bc/(c-b)$（在 $r=\tau$ 处）。以左极限为基准，预算每减少一单位时最优值的一阶损失为 $u(A_\tau^{u-1}-C_\tau^{u-1})bc/(c-b)$。[统一半径、取等条件与区间核证](https://github.com/the-omega-institute/trureturing-books/issues/2128#issuecomment-7240278006)
 
 对 $1<u\le2$，转移端在更宽的 $0<\varepsilon\le3/25$ 内仍给出 $V_S(B_0-\varepsilon)=N-1+A_r^u+C_r^u$，取等条件与上文相同。若前 $N$ 份中恰有两份未截顶，这两份的总暴露至多为 $2\tau-\varepsilon$。凹性将前缀上界收紧为 $N-2+2W(\tau-\varepsilon/2)$。若有三份以上未截顶，缺少的单位热权更多，同一个前缀上界仍成立。闭区间复算表明 $A_r>2W(\tau-\varepsilon/2)-1$，且幂和沿转移严格增加到零暴露余权耗尽。这样可以在整个新窗口沿用单次转移比较。[加强前缀的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2193#issuecomment-7240619070)
 
-当指数达到临界值后，无转移端在更宽的预算窗内占优（手工推导，`ARGUED`）。取 $u_c\le u\le4$、$\tau=\tau_0(u)$ 和 $0<\varepsilon\le1/4$，则
+当指数达到临界值后，无转移端在更宽的预算窗内占优（手工推导，`ARGUED`）。取 $u_c\le u\le4$、$\tau=\tau_0(u)$ 和 $0<\varepsilon\le0.43$，则
 
 $$
 V_S(B_0-\varepsilon)=N-1+M_\varepsilon^u+w_1^u+(1-M_\varepsilon)^u.
 $$
 
-在整个窗口内，前缀支配与严格凸性仍将谱的比较归约到两个端点。区间核证表明 $D(u,\varepsilon)$ 随缺口严格下降。从 $D(u,0)\le0$ 出发，只要缺口为正，无转移端便严格占优。$N=1$ 时，热权 $M_\varepsilon,w_1,1-M_\varepsilon$ 给出唯一最优谱。$N\ge2$ 时，令 $N-1$ 份截顶热权趋于 $1$，可用正质量谱逼近上确界。
+若最大的 $N$ 份热权中有 $k\ge2$ 份未截顶，它们分到的暴露合计至多 $k\tau-\varepsilon$。由 $W$ 的凹性，这 $N$ 份热权之和至多为 $N-k+kW(\tau-\varepsilon/k)\le N-2+2W(\tau-\varepsilon/2)$。区间核证表明 $A_r>2W(\tau-\varepsilon/2)-1$ 在整个窗口成立。因此这类谱仍受转移端的前缀支配。只用单份截顶热权估计所得的条件 $A_r>2W(\tau)-1$ 则在 $0.261<\varepsilon<0.273$ 内首次达到等号。
+
+有 $N-1$ 份截顶时，按剩余暴露构造单次转移谱即可支配各前缀，再由严格凸性将幂和的比较归约到两个端点。区间核证表明 $D(u,\varepsilon)$ 随缺口严格下降。从 $D(u,0)\le0$ 出发，只要缺口为正，无转移端便严格占优。$N=1$ 时，热权 $M_\varepsilon,w_1,1-M_\varepsilon$ 给出唯一最优谱。$N\ge2$ 时，令 $N-1$ 份截顶热权趋于 $1$，可用正质量谱逼近上确界。[总预算前缀界的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2189#issuecomment-7240610111)
 
 预算趋向 $B_0$ 时，相对左极限的一阶损失系数为 $uW'(\tau)(M^{u-1}-d^{u-1})$，与 $N$ 无关。对四次热迹 $u=4$，该系数约为 $0.2144536669$（`NUM`）。[宽预算窗的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2170#issuecomment-7240449786) · [四次热迹复算](https://github.com/the-omega-institute/trureturing-books/issues/2116#issuecomment-7240080414)
 

@@ -187,8 +187,8 @@
      "法则 I：[x, x, z] = z，[x, z, z] = x，括号可以重新结合。"
     ],
     [
-     "Law two: kappa is symmetric, separating and transport-invariant, with every finite Gram form nonnegative.",
-     "法则 II：κ 对称、能分离点、在迁移下不变，每个有限格拉姆二次型都非负。"
+     "Law two: kappa is symmetric, separating and transport-invariant, with every finite Gram form nonnegative. Its infimum is zero. Readings can reach zero or come arbitrarily close.",
+     "法则 II：κ 对称、能分离点、在迁移下不变，每个有限格拉姆二次型都非负。读数的下确界是零，可以取到零，也可以任意逼近零。"
     ],
     [
      "Law three: some bracket, read backwards, gives a different answer.",
@@ -257,8 +257,8 @@
      "Lean 无条件信任 axiom：在原始四元组上声明 κ(x, x) = 1，漏掉零四元组，就推出 0 = 1。"
     ],
     [
-     "Now everything is provable. And an axiom cannot compute: reduction stalls.",
-     "从此一切命题都能“被证明”。而且 axiom 不能计算：归约卡死。"
+     "Now everything is provable. A match on a natural-number axiom cannot compute its branch. Project forty-two from a subtype value. The axiomatic proof in Prop erases.",
+     "从此一切命题都能“被证明”。匹配一个自然数公理时，归约卡住，无法选择分支。从子类型值投影出 42，其中由公理给出的 Prop 证明可以擦除。"
     ],
     [
      "A class instead bundles the operations with a certificate for each law.",

@@ -386,7 +386,11 @@ The sixth-order coefficient is strictly positive. At the exact threshold, fixing
 
 With the linear variations balanced, set $\kappa+8\mu^2q=\eta\varepsilon$. The two branches then exchange at a shifted threshold for finite $\varepsilon$ (direct derivation). Fix $\mu$ and the down-type light block, and choose phases so that $C>0$ and $S$ is real, retaining its relative sign. Let $v,w$ be the down-type light-block diagonal entries along $e_0,e_2$, respectively, and set $c=\sqrt{\mu^2+|S|^2}$. The actual crossing satisfies $\eta_{\mathrm c}(\varepsilon)=-8\mu^2c^2w+O(\varepsilon)$. For bounded $\eta$ and sufficiently small positive $\varepsilon$, the reflected branch wins for $\eta>\eta_{\mathrm c}(\varepsilon)$, and the branch near zero tilt wins for $\eta<\eta_{\mathrm c}(\varepsilon)$.
 
-When the two branches have exactly equal cost, relaxing two directions near zero tilt gives the cost of fixing the plane.
+When the light-block shape may vary with $\varepsilon$, the fixed plane can attain the exact minimum at the crossing (direct derivation). Hold the common scale $c$ fixed and adjust $t=v/c$ and $r=w/c$ independently, with $S=-c\sqrt{tr}$, $\mu=c\sqrt{1-tr}$, and the linear variations balanced as above. At $\varepsilon=0$, the two normalized transverse gradients extend to $(r-t)\sqrt{tr/(1-tr)}-1$ and $2-4t+r$. At their common zero $t\simeq0.783854$, $r=4t-2$, the first expression increases strictly along the zero line of the second, so the Jacobian with respect to shape is invertible.
+
+The implicit function theorem gives analytic $O(\varepsilon)$ adjustments of the two shape parameters that make both transverse gradients vanish along the actual equal-cost curve. The real matrices give stationarity in the imaginary directions. The positive definite second variation makes the planar point the minimum on the branch near zero tilt. Every minimum over complex bases lies on one of these two branches. Thus, for all sufficiently small positive $\varepsilon$, tuning gives $D_{\mathrm{plane}}=D_*$, and the reflected branch attains the same value. [Analytic derivation and direct matrix calculation](https://github.com/the-omega-institute/trureturing-books/issues/2180#issuecomment-7240495038)
+
+With the shape and $\mu$ fixed, relaxing two directions near zero tilt gives the cost of fixing the plane when the two branches have exactly equal cost.
 
 $$
 \begin{aligned}
