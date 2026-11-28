@@ -61,6 +61,8 @@ $$
 
 如果保留原来的三个首站，只能再装一个读数器，该放在哪里？其余十六个站点中，除极点 $14$ 外，任一站都可以。每种荷在盲点只丢失一个非平凡循环特征的轻态。这个态在极点的振幅因旋转对称而恒为零，在其余十五个候选站的单站振幅却都大于 $0.0174$。加上其中任一站后，对每种荷分别读取四个坐标，在整个双钟环面和 $0\le\delta\le10^{-8}$ 上，三维轻空间限制的最小奇异值都大于 $4\times10^{-5}$。这个较小的界计入了不同特征在第四站的干涉。若读数站集本身也须保持三循环，最少要补一个完整三站轨道，共用六站。 [十五种单站补读与全域下界](https://github.com/the-omega-institute/trureturing-experiments/blob/7168d863ca1b4d92fec7cd8cbf50f5013f9282ac/experiments/ch39-omega-research/replay/ch39-ray-head-extra-site.md)
 
+若仪器只记录五种荷的总振幅，站数怎样改变？这里假定五荷共用已知的站点坐标和相位参考，输入是五个独立的三维轻态。十五个复系数至少需要十五个复读数。在中心正零点，六个三站轨道中任选五个都能还原这五个态。两个物理钟角各移动至多 $10^{-7}$ 弧度、辐边软化遍取允许区间时，六种方案的最小奇异值都大于 $0.00019$。沿轨道作傅里叶变换后，每个循环特征只需分辨来自五荷的五列。在完整双钟环面上，每种十五站方案都有一个零软化背景，使平凡特征中的五列线性相关；此时某个非零输入在十五站相消。各方案的失秩背景可不同。[五荷总振幅的局部反演与六个失秩角盒](https://github.com/the-omega-institute/trureturing-experiments/blob/914db8de6ac29a9dca8cca4261b32247725fe221/experiments/ch39-omega-research/replay/ch39-common-charge-amplitudes.md)
+
 将内部空间按特征标正交拆块，背后依托的是一条无 $\pi$、纯有理的群论正交骨架。正如[第二章](ch02-quaternion-clocks-and-haar-zeros.md)在双时钟球面哈尔积分中所确立的，偶次切比雪夫特征多项式 $E_m(\kappa)$ 在全阶上的正交归一性已在 Lean 内核中不依赖实数极限而严格冻结：
 
 ::: {.theorem #thm-ou-ch07-peter-weyl-orthonormal title="全阶偶次彼得—魏尔特征核的无 π 有理哈尔正交归一性" lean="D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.all_degree_peter_weyl_orthonormal"}
