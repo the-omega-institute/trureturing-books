@@ -271,6 +271,8 @@ $$
 
 对逆平方尾分部求和，$S_W(x)$ 的误差为 $O(1/x)$，归一化尾分布的 Kolmogorov 距离为 $D_H=O(1/\log H)$。对任意共同钟核 $f_v$，读数误差为 $O(1/\log H)\,v^2/(1+v^2)$，隐含常数可对 $v$ 统一。
 
+当两钟相位窗随高度缩小时，保留边界权的均值并排除小素数幂的近频项，还能得到半径满足 $r(T)\log T\to\infty$ 时的计数渐近。[两钟缩窗的推导](appendix-c.md#sec-ou-appc-shrinking-windows)
+
 ::: {.problem #prob-ou-ch12-windowed-haar-rate title="固定哈尔相位窗的显式计数余项"}
 取第 2 章的固定哈尔接受区域为 $W$，其边界为 Haar 零测集。记 $c=\mu(W)/(2\pi)$，其中 $\mu$ 为归一化 Haar 测度。判定哪些起始高度 $H\ge2\pi$ 容许一个满足 $3b_H/c<L_H$ 的可复查常数 $b_H$，且计数与主项满足
 
