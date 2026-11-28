@@ -74,7 +74,49 @@ $$
 每个非固定二元镜像轨道只取一个代表；不同代表及其镜像占据互不相交的标准基坐标，同一零点的不同重数副本也正交。因此这些向量的普通希尔伯特 Gram 矩阵为 $2I$，而 $Jv_{n,k}=-v_{n,k}$，故实际镜像 Gram 矩阵为 $-2I$。每个所选轨道贡献恰好 $m_n$ 个负特征值；镜像固定恰等价于零点在临界线上，且解析重数为正，得到最后的等价。完整证明由 Lean 内核检查。
 :::
 
-该计数对临界线外零点的存在保持条件式。结合第三章引述的外部 RH 形式化事实，可推出每个 $T$ 的 $\kappa_T=0$（组合这两层证据的手工推导，`ARGUED`）；上面的内核定理本身给出精确惯性公式。独立谱路线仍需从算术或几何构造正性并识别零点谱；有限个窗口的检查也不能代替对所有 $T$ 的控制。带着这一界限再读下表，各层证据各自承担的责任便清楚了。
+该计数对临界线外零点的存在保持条件式。结合第三章引述的外部 RH 形式化事实，可推出每个 $T$ 的 $\kappa_T=0$（组合这两层证据的手工推导，`ARGUED`）；上面的内核定理本身给出精确惯性公式。
+
+若通过有限个预解式方向观察一个厄米型，怎样保证负方向没有被遗漏？一个充分保证是这些方向张成整个待测空间。先看两点手算（`ARGUED`）：取支撑点 $x_0=0,x_1=1$、中心 $z=-1$，连续两阶倒数幂给出 $C=\begin{pmatrix}1&1\\1/2&1/4\end{pmatrix}$，且 $\det C=-1/4\ne0$。两个方向确实独立；一般情形由同一个 Vandermonde 机制控制。
+
+::: {.theorem #thm-ou-appb-cauchy-jet-inverse title="互异支撑点的单中心 Cauchy 射流逆" lean="D5/S3/Analytic/GoldenTomography/CauchyFeatureRightInverse.cauchy_feature_right_inverse"}
+设 $n\in\mathbb N$，复支撑点 $x_0,\ldots,x_{n-1}$ 两两互异，且 $z\in\mathbb C$ 满足每个 $x_a\ne z$。定义方阵
+
+$$
+C_{ak}=(x_a-z)^{-(k+1)},\qquad 0\le a,k<n,
+$$
+
+并令 $R$ 为库中 `cauchyJetFeatureRightInverse` 指定的矩阵逆。则
+
+$$
+CR=RC=I_n,
+$$
+
+且映射 $v\mapsto Cv$ 为单射。
+:::
+
+::: proof
+令 $r_a=(x_a-z)^{-1}$，则 $C=\operatorname{diag}(r_a)V$，其中 $V_{ak}=r_a^k$。避开中心使每个 $r_a\ne0$，而平移后取倒数保持支撑点互异。因此对角因子与 Vandermonde 因子均可逆，矩阵逆同时给出左右逆和分析映射的单射性。完整证明由 Lean 内核检查。
+:::
+
+::: {.remark #rem-ou-appb-cauchy-source-rank title="射流分离谱值，源覆盖重数空间"}
+以下算子解释与惯性推论是手工推导（`ARGUED`）。在上述条件下，对 $n$ 维单谱自伴算子 $K=\operatorname{diag}(x_a)$，设源向量 $s$ 的每个坐标 $s_a\ne0$。以 $(K-zI)^{-(k+1)}s$ 为列的矩阵为 $B=\operatorname{diag}(s_a)C$，故 $B^{-1}=R\operatorname{diag}(s_a^{-1})$。对任意厄米型 $Q$，二次型恒等式 $v^*B^*QBv=(Bv)^*Q(Bv)$ 与 $B$ 的双射性给出 $n_\pm(B^*QB)=n_\pm(Q)$：每个正定或负定子空间及其维数均可沿此双射来回传递。
+
+有重谱值时，互异性只适用于不同谱值，不能把重数副本当成互异支撑点。精确地说，设有限维复内积空间上的自伴算子 $K$ 有 $q$ 个不同谱值，$P_\lambda$ 为对应谱投影，源为 $s_1,\ldots,s_p$，且 $z\notin\operatorname{spec}K$。则
+
+$$
+\begin{aligned}
+\mathcal O&=\operatorname{span}\{(K-zI)^{-(k+1)}s_j:0\le k<q,\ 1\le j\le p\}\\
+&=\bigoplus_{\lambda\in\operatorname{spec}K}
+\operatorname{span}\{P_\lambda s_j:1\le j\le p\}.
+\end{aligned}
+$$
+
+每个滤波向量都是右侧投影源的线性组合；反过来，对每个固定源用上述 $q\times q$ 射流矩阵的逆，可逐个取回 $P_\lambda s_j$。所以完整观测恰要求每个本征空间被投影源张成。单源在每个本征空间至多提供一个方向；增加射流阶数无法补出缺失的重数方向。
+
+这里使用的是同一中心的连续倒数幂（即预解式对 $z$ 求导所得的归一化射流），不是任意采样列表，也不是仅给出 [第十二章](ch12-shared-arithmetic-clock.md#sec-ch12) 若干标量钟读数就已知这些向量或整个 Gram 矩阵。可逆性没有给出统一的误差放大界，更没有控制无限谱尾项。独立 RH 谱路线仍需从算术或几何构造正性并识别完整零点谱；有限个窗口的检查不能代替对所有 $T$ 的控制。
+:::
+
+带着有限维可恢复性与独立正性之间的这一区别，再读下表，各层证据各自承担的责任便清楚了。
 
 | 证据层级与徽章 | 验证机制与数据来源 | 逻辑边界与公理责任 | 全书代表内容与交叉入口 |
 | :--- | :--- | :--- | :--- |
