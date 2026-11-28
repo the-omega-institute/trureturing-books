@@ -117,6 +117,12 @@ $$
 
 单端口的第五钟至多增加一个隐藏态。令 $V=(I+H^2)^{-1/2}U$，则 $[V,HV,H^2V]$ 比 $[V,HV]$ 多一列。对精确可行的第五钟目标 $s$，若 $i$ 处的闭容差 $\varepsilon\ge |s-S_{\min}(i)|$，所需最小维数为 $q$。这里 $S_{\min}(i)$ 是四钟最小维实现的唯一预测。若 $\varepsilon$ 更小，则最小维数为 $q+1$。例如取 $A=0$，给节点 $(-1/3,1/3)$ 赋四钟权 $(1/16,1/16)$，给节点 $(-1/2,0,1/2)$ 赋权 $(1/36,5/72,1/36)$。两组均给出 $(N_0,N_1,N_2,N_3)=(1/8,0,1/72,0)$，第五钟分别为 $-1/90-i/9$ 和 $-1/120-i/9$。第二个目标在容差低于 $1/360$ 时恰需三态，达到该阈值后恰需两态。 [精确 Gram 判据与有理复算](https://github.com/the-omega-institute/trureturing-books/issues/1671#issuecomment-7236665129)
 
+即使允许隐藏态同时耦合两个端口，两端口也能有不同的容差阈值。对保持四钟的任何 $d$ 维实现，有 $\operatorname{rank}(S(i)-S_{\min}(i))\le d-q$。令 $K=\operatorname{ran}[U,HU]$，$P$ 为到 $K$ 的投影，$T=PH|_K$ 是最小维压缩。对 $p_4(t)/(i-t)$ 作多项式除法，求响应差时三阶以下的矩贡献相消。令 $R=(iI-H)^{-1}$，余下的项来自
+$$
+ PRU-(iI_K-T)^{-1}U=(iI_K-T)^{-1}PH(I-P)RU.
+$$
+左乘 $p_4(i)U^*$ 后，响应差经 $K^\perp$ 因子分解，故得到秩界。取上面的两种标量模型组成双端口，并把第一端口的权重全部加倍，令 $A=0$。两处严格舒尔余量仍为正。四态的预测在两个端口都采用二态读数，两端口均采用三态的目标与该预测相差 $\operatorname{diag}(1/180,1/360)$。上述秩界排除五态在算子范数下取得小于 $1/360$ 的误差，即使允许混合耦合。只替换第一端口即可在五态时达到该阈值。因此，容差至少为 $1/180$ 时恰需四态，从 $1/360$（含）到 $1/180$（不含）恰需五态，低于 $1/360$ 则恰需六态。 [双端口有理数构造](https://github.com/the-omega-institute/trureturing-books/issues/1671#issuecomment-7236791167)
+
 设原壳与中转态共同的传播矩阵为 $\mathcal H$，$R_{\mathrm{vis}}(\omega)$ 是预解式 $(\omega I-\mathcal H)^{-1}$ 的可见块。舒尔消元在三个时钟频率 $\omega \in \{1, \zeta_3, \zeta_3^2\}$ 给出可见逆响应 $R_{\mathrm{vis}}(\omega)^{-1} = \omega I - (A_0 + \Delta_D) - B^* (\omega I - H_{\mathrm{aux}})^{-1} B$，其中允许非零修正的旧块位置被限制在 $\operatorname{supp}(\Delta_D) \subseteq \{(u, v) : \|u - v\|^2 \le D\}$。随着截断半径 $D$ 逐步收缩，越来越多对可见站点之间的 Gram 内积被迫固定不变，从而迫使辅助空间维数 $r(D)$ 一级一级向上跃升（完整证书见 [`ch39-three-clock-minimal-memory.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-three-clock-minimal-memory.py)、[`ch39-local-memory-rank.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-local-memory-rank.py) 与 [`ch39-three-clock-symmetric-cutoff.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-three-clock-symmetric-cutoff.py)）：
 
 | 允许修改旧传播块的平方弦距范围 $D$ | 最小辅助记忆秩 $r(D)$ | 关键代数阻塞机制与精确证书 |
