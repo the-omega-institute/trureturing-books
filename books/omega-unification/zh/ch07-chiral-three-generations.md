@@ -359,6 +359,8 @@ $F$ 在三个轻中心取零，在两个重中心均取 $5(1+\sqrt5)/4$。傅里
 
 还可以用两点的曲率检验质量。记 $m_s=-B_s(0)>0$，在各中心把标量除以自身的 $m_s$。若两个外侧中心的对数梯度相同，且归一化标量的二次项之差正比于 $\sum_i x_i^2$，则四阶配平要求 $m_0=(m_+^2+m_-^2)/(m_++m_-)$。例如两侧质量为 $1,2$ 时，中间质量必须为 $5/3$。对任意一对轻中心，若两点归一化标量的一阶、二阶项都相同，四阶配平会迫使三个质量全相等。[两点曲率的质量判据](https://github.com/the-omega-institute/trureturing-experiments/blob/51aa7b2469249f9640368fa776e45d9f771556bd/experiments/ch39-omega-research/replay/ch39-three-step-fifth-jet.md#a-mass-test-from-the-curvature-at-two-centers)
 
+质量与梯度还有一个联合限制。令 $g_s=d(-B_s)(0)$。任何两步解都要求三个点 $(m_s,g_s)$ 仿射无关。若质量不全相等而 $g_s=g_*+m_s v$，取一个同时消去常数和质量的中心线性组合，它也消去梯度。三、四阶比较将质量差限制到一个例外比值；在该比值处，两个带电傅里叶矩阵的秩分别为 $20,99$，迫使带电动能系数具有置换对称性。取平均便得到梯度全为零、轻质量仍为正且不全相等的三个标量振幅，已被共同对数梯度的障碍排除。仿射无关时的完整四阶匹配仍然开放。[质量与梯度的联合限制](https://github.com/the-omega-institute/trureturing-experiments/blob/50902f50eecc74bcd202cb3e300afa8ac3cf7c7a/experiments/ch39-omega-research/replay/ch39-three-step-fifth-jet.md#the-wilson-gradient-contrasts-cannot-be-affine-in-the-mass-contrasts)
+
 相同的精度也约束最短作用程。在五个中心连续三轻、其余两个重中心的标量色散均为四时，任一有隙的平移不变实标量与克利福德向量核，若配平完整算子，必须有 $12r\ge 2K+7$；只配平标量色散也须有 $24r\ge 2K+10$。沿零和方向 $(2,2,2,-3,-3)$ 绕环面一周会经过所有五个中心。长度 $r$ 限制了沿此方向所见的傅里叶频率，而三轻中心的匹配要求相邻读数的差在两处出现高重数零点，两者给出上述必要界。一般阶数的最短作用程仍待确定。[插值构造、谱隙与五中心下界](https://github.com/the-omega-institute/trureturing-experiments/blob/021220d28b25ffdc2bcbe07f1ad59675b464edcb/experiments/ch39-omega-research/replay/%CE%A9%E5%A4%8D%E7%AE%97%E8%AF%B4%E6%98%8E.md#%E4%B8%89%E4%B8%AA%E8%BD%BB%E9%94%A5%E9%85%8D%E5%B9%B3%E5%88%B0%E4%BB%BB%E6%84%8F%E6%8C%87%E5%AE%9A%E6%9C%89%E9%99%90%E9%98%B6%E9%9C%80%E8%A6%81%E5%A4%9A%E8%BF%9C%E7%9A%84%E4%BD%9C%E7%94%A8)
 
 下表将这四类从球壳通往四维手征三代的显式构造并列成一张清晰的对照账：
