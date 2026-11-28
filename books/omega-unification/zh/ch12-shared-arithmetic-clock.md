@@ -169,6 +169,63 @@ $$
 
 此外，即使在任意截断高度 $H$ 以上按标准逆平方赋权并取任意固定正平均壳相位窗，$H / \gamma$ 的极限分布也必然落向 $[0, 1]$ 上的均匀分布——优化共同尺度后，前两项算术读数的极限最大误差仍高达 $3.71810906 \times 10^{-6}$；而在原单位尺度 $a = 1$ 下，全谱五荷三轻模支撑自身根本无法复现第一项算术时间（至少 $32.092\%$ 的概率必须落在三模集合外，前 $40$ 项更要求 $87.818\%$ 以上落在三模集合外）。
 
+::: {.remark #rem-ou-ch12-windowed-rate title="有限高度的全环面基准与窗口化缺口"}
+把固定相位窗 $W$ 的累计零点数写成 $A_W(t)$，并设
+
+$$
+A_W(t)=c\,t\left(\log\frac{t}{2\pi}-1\right)+R_W(t),
+\qquad |R_W(t)|\le b_Ht\quad(t\ge H).
+$$
+
+令 $L_x=1+\log(x/(2\pi))$，并按重数定义严格尾和 $S_W(x)=\sum_{\gamma>x,\,W}\gamma^{-2}$。分部求和给出
+
+$$
+S_W(x)=-\frac{A_W(x)}{x^2}+2\int_x^\infty\frac{A_W(t)}{t^3}\,dt
+       =\frac{c}{x}(L_x+\delta_x),
+\qquad |\delta_x|\le E:=\frac{3b_H}{c}.
+$$
+
+若 $H\ge2\pi$ 且 $L_H>E$，则 $Q_H(s):=S_W(H/s)/S_W(H)$ 满足
+
+$$
+\left\|Q_H-P_H\right\|_\infty\le\frac{2E}{L_H-E},
+\qquad
+P_H(s)=s+\frac{s\log(1/s)}{L_H}.
+$$
+
+因此逆平方加权的 $H/\gamma$ 分布到均匀分布的 Kolmogorov 距离 $D_H$ 满足
+
+$$
+\left|D_H-\frac{1}{eL_H}\right|\le\frac{2E}{L_H-E}.
+$$
+
+对未筛选的全部正零点，Hasanalizade、Shen 与 Wong 的计数界在 $t\ge e$ 时给出
+
+$$
+|N(t)-\tfrac{t}{2\pi}(\log(t/(2\pi))-1)|
+\le B(t):=0.1038\log t+0.2573\log\log t+9.3675.
+$$
+
+由于 $B(t)/t$ 在该范围内递减，可取 $c=1/(2\pi)$ 与 $b_H=B(H)/H$。在 $H=10^6$ 时，这一全环面基准推出
+
+$$
+0.0283138<D_H<0.0283806.
+$$
+
+这个数值界没有筛选相位窗。把它用于第 2 章的哈尔接受区域或本章的三条高度带，仍须证明相应的 $b_H$ 或等价的统一 Fourier 界。[计数界，推论 1.2](https://doi.org/10.1016/j.jnt.2021.06.032)
+:::
+
+::: {.problem #prob-ou-ch12-windowed-haar-rate title="固定哈尔相位窗的显式计数余项"}
+对第 2 章的固定哈尔接受区域以及第 12 章采用的固定正测度相位窗，证明或否证存在可复查的常数 $b_H$，使
+
+$$
+\left|A_W(t)-c\,t\left(\log\frac{t}{2\pi}-1\right)\right|\le b_Ht
+\qquad\text{对所有 }t\ge H
+$$
+
+成立，并把该常数传递为共同算术钟各读数的有限高度误差。现有未筛选计数与定性等分布只给出 $A_W(t)=c\,t(\log(t/(2\pi))-1)+o(t\log t)$，不足以产生上述统一余项。窗口输入获得前，有限高度的哈尔误差与共同钟读数精度仍是开放结果。
+:::
+
 所有这些排除结果背后，共同跳动着两颗已在 Lean 4 内核中形式化冻结的普适傅里叶–方差浓缩心脏。第一条内核定理用循环费耶尔（Fejér）窗给出窄剩余类频带总权重的非负傅里叶上界，定量控制了频带浓缩为何必然引发高频傅里叶分量的剧烈抬升：
 
 ::: {.theorem #thm-ou-ch12-cyclic-fejer-band title="循环费耶尔窗的窄频带非负傅里叶上界" lean="D5/S3/Fourier/Concentration/CyclicFejerBand.band_le_positive_fourier"}
