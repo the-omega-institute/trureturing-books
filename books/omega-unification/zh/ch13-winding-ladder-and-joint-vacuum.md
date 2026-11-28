@@ -195,7 +195,19 @@ $$
 \frac{dV}{dx}=\frac{Dx}{4\pi}(1-e^{-a/x})^3>0 .
 $$
 
-因此在每个牛顿标定点附近都可沿 $K=1$ 把 $\ell$ 写成 $x$ 的函数。沿这条曲线增加 $x$ 必使真空能量上升，即使 $\partial K/\partial x=0$ 也成立。这个四层势在整个正参数标定面上没有联合驻点。若另行给定 $r$，任一可实现的精确曲率先唯一确定 $x$，牛顿读数再唯一确定 $d$ 与 $k=rd^2$。在压力测试的局部盒内，证书给出 $\partial K/\partial x>0$，故固定 $r$ 增加 $d$ 会压低 $x$ 和曲率。此处 $I(0)-I(a/x)\le a/x$，有限截止修正相对主项小于 $10^{-57}$，曲率窗仍容许此前的滑行。从 $d=724$ 滑至 $724.19$ 的两次读数之差，以无限截止主项为单位，在 $1.685\times10^{-69}$ 与 $1.687\times10^{-69}$ 之间。[标定区间与截断误差](https://github.com/the-omega-institute/trureturing-experiments/blob/1922a9c010424eadf6b1ec7233be9fcb00911247/experiments/ch39-omega-research/replay/ch39-joint-vacuum-scale-window.py#L38-L68) · [两处标定根与曲率差的区间复算](https://github.com/the-omega-institute/trureturing-books/issues/1671#issuecomment-7235892201)
+因此在每个牛顿标定点附近都可沿 $K=1$ 把 $\ell$ 写成 $x$ 的函数。沿这条曲线增加 $x$ 必使真空能量上升，即使 $\partial K/\partial x=0$ 也成立。这个四层势在整个正参数标定面上没有联合驻点。
+
+若另行给定 $r$，哪些精确曲率确实来自有限正分母？记 $F_r(x)$ 为删去奇荷重层后的牛顿读数。每条奇荷的 $E_2(z_i/x)$ 在 $d$ 从零增至无穷时严格从零升至一，两组奇荷重层的总牛顿权为 $16(6+2)=128$。因此给定 $x$ 时，正分母存在且唯一的充要条件为
+
+$$
+F_r(x)<1<F_r(x)+\frac{128x}{2\pi}.
+$$
+
+在旗舰滑行 $r=32/724^2$ 上，记右侧函数等于一的根为 $x_-$，左侧函数等于一的根为 $x_+$。两根各自唯一。事实上，十九点磁拉普拉斯的行和界给出 $0\le\lambda\le36$，所以谱形 $\lambda|\lambda-\bar\lambda|\le36^2$，带偶数荷的重层均有 $z<0.00025$。它们的正权共 $112$，中性负权共 $-54$。在 $x\ge0.006$ 上，由 $\partial_x[xE_2(z/x)]=e^{-z/x}$，两端函数的导数乘 $2\pi$ 均至少为 $112e^{-0.00025/0.006}-54>53$。更小的截止即使计入全部正权也只有 $K\le253.5x/(2\pi)<1$。
+
+因此，在只施加牛顿标定的连续滑行线上，$d$ 从零增至无穷时，$x$ 由 $x_+\simeq0.087881452$ 严格降至 $x_-\simeq0.031496220$，两个端点均不取到。每个介于 $V(x_-)$ 与 $V(x_+)$ 之间的精确曲率依次唯一确定 $x,d$ 与 $k=rd^2$。整个开区间的宽度约为无限截止值的 $5.193\times10^{-60}$。 [端点推导与谱区间复算](https://github.com/the-omega-institute/trureturing-books/issues/1671#issuecomment-7236014282)
+
+在原压力测试的局部盒内，$I(0)-I(a/x)\le a/x$ 把有限截止修正限制在主项的 $10^{-57}$ 以内。从 $d=724$ 滑至 $724.19$ 的两次读数之差，以无限截止主项为单位，在 $1.685\times10^{-69}$ 与 $1.687\times10^{-69}$ 之间。[标定区间与截断误差](https://github.com/the-omega-institute/trureturing-experiments/blob/1922a9c010424eadf6b1ec7233be9fcb00911247/experiments/ch39-omega-research/replay/ch39-joint-vacuum-scale-window.py#L38-L68) · [两处标定根与曲率差的区间复算](https://github.com/the-omega-institute/trureturing-books/issues/1671#issuecomment-7235892201)
 
 一个小谱可以把这个微弱效应放大。取 $r=a=1$、$D=4$，四条低层在 $z=0,1,2,3$ 处的牛顿权依次为 $(1/3,2,1,2/3)$，净偏振为 $(-4,12,-12,4)$。再放入一条 $z=d^{-4}$ 的奇荷层，含四个实标量和一个狄拉克费米子，净偏振为零、牛顿权为一。所有牛顿权均为正，由 $\partial_x[xE_2(z/x)]=e^{-z/x}$ 知 $K$ 从零严格升至无穷。将 $d$ 从 $1$ 加倍至 $2$，唯一标定根 $x$ 由 $3.08609$ 降至 $2.67179$，曲率由 $0.16783$ 降至 $0.15821$。一般的重场耦合作用仍需自己的驻定方程。
 

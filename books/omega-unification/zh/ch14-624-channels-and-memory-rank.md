@@ -96,9 +96,22 @@ $$
 
 个隐藏态，因为分块矩阵是右侧各列的格拉姆矩阵。为达到这个下界，同时保留给定实现在 $z=-1$ 的读数，取 $p(t)=(1+t)(1-t^3)$ 与 $U=p(H)^{-1/2}B$。$U$ 和 $HU$ 的列张成 $q$ 维空间，因为 $Y=(I+H)^{1/2}U$ 且该因子可逆并与 $H$ 对易。把 $H$ 正交压缩到此空间，得到 $T$。有 $TU=HU$，故 $U^*T^jU=U^*H^jU$ 对 $0\le j\le3$ 成立。三次时，两边都是 $(HU)^*H(HU)$。在三个时钟及 $z=-1$ 处，$p(t)/(z-t)$ 都是至多三次的多项式。于是取新耦合 $p(T)^{1/2}U$ 就保住这四个读数。压缩后 $\|T\|<1$，而全矩阵严格收缩的两个舒尔补条件 $I-A-S(1)\succ0$ 与 $I+A+S(-1)\succ0$ 也都保留。故 $q$ 可达。
 
-例如取两个端口，$A=0$，令 $H$ 的四个对角元为 $t=\pm1/2,\pm1/4$，$U$ 的对应行为 $(1,t)/8$。此时 $\|B\|\le\sqrt{27/16}/4<1/2$，整个系统严格收缩。$[U,HU]$ 的列是四点上的 $1,t,t,t^2$ 各除以 $8$，秩恰为三。尽管四条谱线都有非零留数，三个隐藏态已足以保留三钟和给定的第四读数。回到原壳时，允许编辑的可见块也参与极小化，每个候选块仍须满足支集与收缩条件。
+例如取两个端口，$A=0$，令 $H$ 的四个对角元为 $t=\pm1/2,\pm1/4$，$U$ 的对应行为 $(1,t)/8$。此时 $\|B\|\le\sqrt{27/16}/4<1/2$，整个系统严格收缩。$[U,HU]$ 的列是四点上的 $1,t,t,t^2$ 各除以 $8$，秩恰为三。尽管四条谱线都有非零留数，三个隐藏态已足以保留三钟和给定的第四读数。
 
-设原壳与中转态组成的分块矩阵经舒尔补在三个时钟频率 $\omega \in \{1, \zeta_3, \zeta_3^2\}$ 给出可见逆响应 $R_{\mathrm{vis}}(\omega)^{-1} = A_0 + \Delta_D - B^* (\omega I - H_{\mathrm{aux}})^{-1} B$，其中允许非零修正的旧块位置被限制在 $\operatorname{supp}(\Delta_D) \subseteq \{(u, v) : \|u - v\|^2 \le D\}$。随着截断半径 $D$ 逐步收缩，越来越多对可见站点之间的 Gram 内积被迫固定不变，从而迫使辅助空间维数 $r(D)$ 一级一级向上跃升（完整证书见 [`ch39-three-clock-minimal-memory.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-three-clock-minimal-memory.py)、[`ch39-local-memory-rank.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-local-memory-rank.py) 与 [`ch39-three-clock-symmetric-cutoff.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-three-clock-symmetric-cutoff.py)）：
+若手里只有读数，还需判定这样的实现是否存在。记上式中的分块矩阵为 $G$，令 $C=M_0-M_2$、$D_1=M_0-M_1$。先检验三个矩都自伴、$G\succeq0$、$C\succeq0$ 且 $\ker C=\ker M_0$。最后两个条件来自 $C=Y^*(I-H^2)Y$。以 $C^\dagger$ 表示在 $\operatorname{ran}C$ 上求逆、在核上取零。还须在整个可见空间检验
+
+$$
+\begin{aligned}
+I-A-M_0-M_1-M_2&\succ0,\\
+I+A-L&\succ0,\qquad L=M_1-M_2+D_1C^\dagger D_1 .
+\end{aligned}
+$$
+
+这些条件合起来也是充分的。第一行来自正端点。为看清第二行，把 $G$ 写成 $[Y,Z]^*[Y,Z]$。在已有实现中 $Z=HY$，可以把负端点代价写成 $-S(-1)=M_1-M_2+Y^*(I-H)(I+H)^{-1}Y$。最后一项与 $C$ 组成一个非对角块为 $D_1$ 的 Gram 矩阵，故 $-S(-1)\succeq L$。反过来，在 $q$ 维空间取 $G$ 的 Gram 分解，令 $F=Y-Z$。在 $\operatorname{ran}M_0$ 上 $\|Zv\|<\|Yv\|$ 对非零 $v$ 成立，故 $D_1$ 在此处正定。取 $T_0=I-FD_1^\dagger F^*$，再从中减去充分小的正数乘以 $(\operatorname{ran}Y)^\perp$ 上的投影。由 $F^*Y=D_1$ 与 $2D_1-F^*F=C$ 得 $I+T_0\succ0$，且所得 $T$ 满足 $TY=Z$、$-I<T<I$。耦合 $(I-T^3)^{1/2}Y$ 复原三钟，又因 $2(I+T_0)^{-1}=I+FC^\dagger F^*$，当扰动趋零时负端点代价趋于 $L$。第二行的严格余量使某个这样的实现同时通过两端检验。
+
+例如 $(M_0,M_1,M_2)=(1/4,0,1/16)$ 给出 $q=2$、$L=13/48$。若 $A=-35/48$，正端点有余量，但 $1+A=L$，任何维数都无法严格收缩。改取 $A=-2/3$，令 $Y=(1/2,0)^{\mathsf T}$，$T$ 的两行依次为 $(0,1/2)$ 与 $(1/2,1/2)$。此时 $-S(-1)=23/80$，两态就够了。回到十九点壳，允许编辑的可见块也要参与极小化，每个候选都须满足对应的支集与收缩条件。 [端点构造与有理数验算](https://github.com/the-omega-institute/trureturing-books/issues/1671#issuecomment-7236014282)
+
+设原壳与中转态共同的传播矩阵为 $\mathcal H$，$R_{\mathrm{vis}}(\omega)$ 是预解式 $(\omega I-\mathcal H)^{-1}$ 的可见块。舒尔消元在三个时钟频率 $\omega \in \{1, \zeta_3, \zeta_3^2\}$ 给出可见逆响应 $R_{\mathrm{vis}}(\omega)^{-1} = \omega I - (A_0 + \Delta_D) - B^* (\omega I - H_{\mathrm{aux}})^{-1} B$，其中允许非零修正的旧块位置被限制在 $\operatorname{supp}(\Delta_D) \subseteq \{(u, v) : \|u - v\|^2 \le D\}$。随着截断半径 $D$ 逐步收缩，越来越多对可见站点之间的 Gram 内积被迫固定不变，从而迫使辅助空间维数 $r(D)$ 一级一级向上跃升（完整证书见 [`ch39-three-clock-minimal-memory.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-three-clock-minimal-memory.py)、[`ch39-local-memory-rank.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-local-memory-rank.py) 与 [`ch39-three-clock-symmetric-cutoff.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-three-clock-symmetric-cutoff.py)）：
 
 | 允许修改旧传播块的平方弦距范围 $D$ | 最小辅助记忆秩 $r(D)$ | 关键代数阻塞机制与精确证书 |
 | --- | --- | --- |
