@@ -1,7 +1,7 @@
 /* Film · The Bare Kernel and the Mother Axiom · 裸内核与母公理 (book omega-math, chapter 1).
    Scenes for the shared engine theme/film/engine.js.
 
-   This chapter cites no Lean declaration, so the film shows no green. What each scene shows and where it rests
+   What each scene shows and where it rests
    (all in chapter 1 of the book, section numbers of the chapter):
      kernel   1.1: the bare CIC kernel, its three primitives and four reductions βδιζ, Nat = zero | succ; the
               metatheory is the literature result of rem-ch01-cic-hedberg-literature (argued).
@@ -17,7 +17,7 @@
               picture is schematic.
      free     1.3: κ ≤ 1 from the Gram form with weights (1, −1), and the local group x ⋆ₒ z = [x, o, z],
               x⁻¹ = [o, x, o] (the chapter's three-line derivations, argued).
-     klass    1.4: why a raw axiom can derive False and stalls reduction, the schematic class OmegaSpace, and the
+     klass    1.4: a contradictory axiom, a blocked Nat match and an erasable Prop proof, the schematic class, and the
               chapter's Q₈ example with constant κ = 1 (argued; the Q₈ checks are recomputed here, computed).
    On load, FILM.init recomputes every number on screen by a second route; any disagreement is pushed to
    window.FILM_ERRORS, which stops the render. */
@@ -75,7 +75,7 @@ const kapConst = () => 1;                              // the chapter's constant
 FILM.init.push(() => {
   const E = window.FILM_ERRORS;
   const check = (ok, m) => { if (!ok) E.push('the-bare-kernel film: ' + m); };
-  check((DATA.lean || []).length === 0, 'chapter 1 cites no Lean declaration; film.json lean must stay empty');
+  check((DATA.lean || []).length === 0, 'unexpected Lean citation in this film\'s evidence table');
   /* horizon: count by Euler's totient, gap by brute force over all pairs */
   let phi = 0;
   for (let b = 1; b <= 12; b++) for (let a = 1; a <= b; a++) if (bkGcd(a, b) === 1) phi++;
@@ -386,7 +386,7 @@ SCENES.lift = S => {
 /* ======================================================================= */
 const LAWS = [
   { y: 190, h: 200, head: 'LAW I · 无源消去与三元结合', rows: [['[x, x, z] = z        [x, z, z] = x', 34], ['[[x, y, z], u, v] = [x, y, [z, u, v]]', 34]] },
-  { y: 405, h: 250, head: 'LAW II · 保真度 κ', rows: [['κ(x, y) = κ(y, x) ≥ 0     κ(x, y) = 1 ⇔ x = y', 27], ['κ([x,u,v], [y,u,v]) = κ([u,v,x], [u,v,y]) = κ(x, y)', 27], ['Σᵢⱼ cᵢ cⱼ κ(xᵢ, xⱼ) ≥ 0  (cᵢ ∈ ℚ)   ·   reaches 0', 27]] },
+  { y: 405, h: 250, rowStep: 46, head: 'LAW II · 保真度 κ', rows: [['κ(x, y) = κ(y, x) ≥ 0     κ(x, y) = 1 ⇔ x = y', 27], ['κ([x,u,v], [y,u,v]) = κ([u,v,x], [u,v,y]) = κ(x, y)', 27], ['Σᵢⱼ cᵢ cⱼ κ(xᵢ, xⱼ) ≥ 0  (cᵢ ∈ ℚ)', 27], ['inf κ = 0 · zero or arbitrarily small readings · 读数为零或任意逼近零', 24]] },
   { y: 670, h: 160, head: 'LAW III · 极小非对易自锁', rows: [['∃ x, y, z :  [x, y, z] ≠ [z, y, x]', 36], ['+ minimal self-lock · 极小自锁', 20]] }
 ];
 SCENES.laws = S => {
@@ -426,7 +426,7 @@ SCENES.laws = S => {
     if (la <= 0.003) return;
     const col = cl === i + 2 ? C.now : C.argued;
     panel(830, L.y, 950, L.h, la, col, L.head);
-    L.rows.forEach(([s, size], j) => txt(s, 860, L.y + 82 + j * (L.rows.length === 3 ? 56 : 54), { size, fam: s.includes('·') && size < 24 ? F.zh : F.math, w: 700, c: size < 24 ? C.dim : C.white, a: la }));
+    L.rows.forEach(([s, size], j) => txt(s, 860, L.y + 82 + j * (L.rowStep ?? 54), { size, fam: s.includes('·') ? F.zh : F.math, w: 700, c: size < 24 ? C.dim : C.white, a: la }));
   });
   tag(1560, 250, 'MODEL · 模型', C.argued, a * at(S, 2, 0.6) * (cl === 2 ? 0 : 1));
 };
@@ -505,7 +505,7 @@ SCENES.klass = S => {
   /* left: the raw axiom and its explosion */
   const xa = a * at(S, 0, 0.6) * later;
   if (xa > 0.003) {
-    panel(140, 190, 780, 400, xa, cl <= 0 ? C.now : C.mag, 'RAW AXIOM · 裸公理');
+    panel(140, 190, 780, 335, xa, cl <= 0 ? C.now : C.mag, 'RAW AXIOM · 裸公理');
     txt('Lean trusts it unchecked · 内核无条件信任', 170, 262, { size: 22, fam: F.zh, w: 700, c: C.dim, a: xa });
     const b1 = a * Q(S, 0, 'declare kappa', 0.5) * later;
     txt('axiom kappa_refl : ∀ x, kappa x x = 1', 170, 330, { size: 26, fam: F.mono, w: 700, c: C.mag, a: b1 });
@@ -513,14 +513,19 @@ SCENES.klass = S => {
     txt('x := z₀ = (0, 0, 0, 0)', 170, 400, { size: 28, fam: F.math, w: 700, c: C.white, a: b2 });
     txt('reading of z₀ is 0 · 零四元组读数为 0', 170, 440, { size: 22, fam: F.zh, w: 700, c: C.dim, a: b2 });
     const b3 = a * Q(S, 0, 'zero equals one', 0.5) * later;
-    txt('⟹  0 = 1', 170, 520, { size: 44, fam: F.math, w: 700, c: C.now, a: b3, ab: 2 });
-    stamp('FALSE', 690, 510, a * Q(S, 1, 'everything is provable', 0.6) * later, C.mag, 54, -0.08);
+    txt('⟹  0 = 1', 170, 500, { size: 44, fam: F.math, w: 700, c: C.now, a: b3, ab: 2 });
+    stamp('FALSE', 690, 480, a * Q(S, 1, 'everything is provable', 0.6) * later, C.mag, 54, -0.08);
   }
   const ia = a * Q(S, 1, 'cannot compute', 0.6) * later;
   if (ia > 0.003) {
-    panel(140, 620, 780, 210, ia, C.mag, 'NO COMPUTATION RULE · 无计算规则');
-    txt('kappa_refl  ⟶  ι  ⊘  stuck', 170, 712, { size: 34, fam: F.math, w: 700, c: C.white, a: ia });
-    txt('no kernel reflection · no native code · 归约卡死', 170, 772, { size: 22, fam: F.zh, w: 700, c: C.dim, a: ia });
+    panel(140, 550, 780, 280, ia, C.mag, 'DATA AND PROOF · 数据与证明');
+    txt('axiom n : Nat', 170, 613, { size: 23, fam: F.mono, w: 700, c: C.white, a: ia });
+    txt('match n with | 0 => 0 | Nat.succ k => k', 170, 644, { size: 23, fam: F.mono, w: 700, c: C.white, a: ia });
+    txt('Match stuck · no implementation for n · n 无可执行实现', 170, 675, { size: 22, fam: F.zh, w: 700, c: C.dim, a: ia });
+    const pa = a * Q(S, 1, 'Project forty-two', 0.6) * later;
+    txt('axiom h : 42 = 42', 170, 726, { size: 23, fam: F.mono, w: 700, c: C.white, a: pa });
+    txt('(⟨42, h⟩ : {k : Nat // k = 42}).val  ↦  42', 170, 757, { size: 23, fam: F.mono, w: 700, c: C.white, a: pa });
+    txt('Proof erases · Prop 证明可擦除', 170, 788, { size: 22, fam: F.zh, w: 700, c: C.dim, a: pa });
   }
   /* right: the schematic class */
   const ka = a * at(S, 2, 0.6);
@@ -538,7 +543,7 @@ SCENES.klass = S => {
     txt('every listed field holds · checked here on all of Q₈', 995, 650, { size: 22, fam: F.disp, w: 700, c: C.cyan, a: r1 });
     txt('ij = k ≠ −k = ji   ·   order matters', 995, 692, { size: 24, fam: F.math, w: 700, c: C.cyan, a: r1 });
     txt('κ(1, −1) = 1  but  1 ≠ −1   ✗ separation', 995, 740, { size: 26, fam: F.math, w: 700, c: C.now, a: r2 });
-    txt('κ never reaches 0   ✗ zero-reaching', 995, 784, { size: 24, fam: F.math, w: 700, c: C.white, a: r3 });
+    txt('inf κ = 1   ✗ zero-reaching', 995, 784, { size: 24, fam: F.math, w: 700, c: C.white, a: r3 });
     txt('prove each law on the carrier · 逐条补证', 995, 818, { size: 18, fam: F.zh, w: 700, c: C.dim, a: r3 });
   }
 };
@@ -549,8 +554,8 @@ SCENES.klass = S => {
 SCENES.close = S => {
   closingCard(S, { from: 0.1, y: 330 });
   const a = clamp((S.u - 2.0) / 0.8) * clamp((S.d - S.u) / 1.2);
-  txt('chapter 1 cites no Lean declaration: no green in this film', W / 2, 720, { size: 22, fam: F.disp, w: 700, align: 'center', c: C.dim, a });
-  txt('第一章不引用 Lean 声明：本片没有绿色标签', W / 2, 758, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.dim, a });
+  txt('On screen: computed examples, models and written arguments', W / 2, 720, { size: 22, fam: F.disp, w: 700, align: 'center', c: C.dim, a });
+  txt('片中依据 · 可复算的例子、模型与书面论证', W / 2, 758, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.dim, a });
 };
 
 /* ======================================================================= */
