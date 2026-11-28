@@ -37,3 +37,5 @@
 - [Coda Why Honest Boundaries Outweigh Premature Unification](coda.md)
 - [Appendix A Replay Repository Architecture, Core Scripts, and Certificate Index](appendix-a.md)
 - [Appendix B Controlled Glossary, Six-Tier Evidence Ledger, and Live Formalization Statistics](appendix-b.md)
+- [Appendix C An Explicit Constant for the Fixed Haar Window](appendix-c.md)
+- [Appendix D Support Differences and Rank Bounds for Fourier Bases](appendix-d.md)
