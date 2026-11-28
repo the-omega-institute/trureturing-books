@@ -169,6 +169,12 @@ $r = 400$ 处的两圈存在解看似为“正谱迹生成规范动能”赢得�
 
 若沿用逐质量直线，最小斜率为 $\max(c_*,(1-q)/\tau)$。上表三项 $r=400$ 尖阈值证书在代入各自的热迹与暴露上限后，预算均落在包络的起始直线段，因而在这些输入下，最优逐质量直线已经给出同一上界。[热迹与暴露上限的原始证书](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-%E8%A7%84%E8%8C%83%E5%8A%A8%E8%83%BD%E8%B0%B1%E8%BF%B9%E4%B8%8E%E9%98%88%E5%80%BC.md#L100-L134)
 
+**终端弦的整数锐性（`ARGUED`）。** 当 $\tau>\tau_0$ 且 $x^\dagger<b\le\tau$ 时，令 $\lambda=(b-x^\dagger)/(\tau-x^\dagger)$，并记 $y^\dagger$ 为切点层的平方质量比。整数谱可逼近实权锐界，当且仅当低于输入尺度的极限层所需重数 $n=S\lambda$ 与切点层所需重数 $k=Se^{y^\dagger}(1-\lambda)$ 都是非负整数。趋优谱的预算松弛和切线余量都趋于零，因此第一热权集中在 $y=0$ 与 $y=y^\dagger$ 的邻域。饱和预算把两处的份额固定为 $\lambda$ 与 $1-\lambda$。用 $Se^y$ 乘回第一热权，两处有界邻域内的整数计数就分别趋于 $n$ 与 $k$。
+
+若两项都是整数，就在 $y=\varepsilon$ 放 $n$ 份，在 $y=y^\dagger$ 放 $k$ 份。只要 $0<\varepsilon<e^{-2\tau}$，两层就恰好用完预算。第一热迹欠下的 $\delta=n(1-e^{-\varepsilon})$ 可由一份 $y=-\log\delta\ge1$ 的阈上状态补足，暴露仍为原值。令 $\varepsilon\downarrow0$ 即得实权锐界的极限。由于 $\lambda>0$ 且终端切线的另一处接触在 $y=0$，正质量谱无法取等。[完整推导与复算](https://github.com/the-omega-institute/trureturing-books/issues/1911#issuecomment-7238689688)
+
+在前面的 $u=8$、$\tau=4$、$b=3.9$ 算例中，若 $S=1$，则 $B=3.9<\tau$，每份重数的第一热权至多为 $M=\exp(-e^{-2B})$。因 $M>1/2$，把第一热权集中成 $M$ 和 $1-M$ 两份，由凸性可使第二热迹最大。第一份恰用暴露 $B$，第二份位于阈上，故该谱可行。数值复算（`NUM`）给出整数最大值约为 $0.996727$，与实权锐界相差约 $0.001992$。
+
 结论无懈可击：在纯标量同自旋谱迹框架里，**“只在一点巧合配平”与“物理意义上的全尺度热核平衡”之间横亘着一条不可弥合的鸿沟。**
 
 ## 5.3 自旋配平弧塔、Cholesky 同谱狄拉克算子与弧比分离 {#sec-ou-ch05-s03}

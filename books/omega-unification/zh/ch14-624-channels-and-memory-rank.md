@@ -111,6 +111,30 @@ $$
 
 例如 $(M_0,M_1,M_2)=(1/4,0,1/16)$ 给出 $q=2$、$L=13/48$。若 $A=-35/48$，正端点有余量，但 $1+A=L$，任何维数都无法严格收缩。改取 $A=-2/3$，令 $Y=(1/2,0)^{\mathsf T}$，$T$ 的两行依次为 $(0,1/2)$ 与 $(1/2,1/2)$。此时 $-S(-1)=23/80$，两态就够了。回到十九点壳，允许编辑的可见块也要参与极小化，每个候选都须满足对应的支集与收缩条件。 [端点构造与有理数验算](https://github.com/the-omega-institute/trureturing-books/issues/1671#issuecomment-7236014282)
 
+再固定第四钟 $-1$ 后，所有最小维实现对任一第五钟的预测相同。四钟读数在 $p_4(t)/(z-t)$ 的多项式基中插值得四个矩 $N_0,\ldots,N_3$，其中 $p_4(t)=(1+t)(1-t^3)$。对 $X=[U,HU]$，分块矩阵 $G_4=(N_{a+b})_{a,b=0}^1$ 和 $J_4=(N_{a+b+1})_{a,b=0}^1$ 分别等于 $X^*X$ 和 $X^*HX$。在维数 $q=\operatorname{rank}G_4$ 处，满行秩的 Gram 因子使 $X^*TX=J_4$ 唯一确定 $T$，只差坐标的酉变换。$X$ 的首块又决定了耦合。
+
+给出 $i$ 的读数后，伴随对称性确定 $-i$ 的读数。以 $p_6(t)=(1+t^2)p_4(t)$ 对这六个值插值，得自伴矩 $P_0,\ldots,P_5$，再组成 $G_6=(P_{a+b})_{a,b=0}^2$ 与 $J_6=(P_{a+b+1})_{a,b=0}^2$。精确可实现的条件是 $G_6\pm J_6\succeq0$、$\ker(G_6\pm J_6)=\ker G_6$，以及 $1,-1$ 两处的可见块严格舒尔不等式。最小隐藏维数等于 $\operatorname{rank}G_6$。构造时分解 $G_6=X^*X$ 并从 $X^*TX=J_6$ 得到 $T$。共同核使定义良好，两道半正定条件在像空间上给出 $-I<T<I$。比较块列可得 $TX_0=X_1$、$TX_1=X_2$。用耦合 $p_6(T)^{1/2}X_0$ 即可重现这六个值，也就得到五个独立钟值。
+
+单端口的第五钟至多增加一个隐藏态。令 $V=(I+H^2)^{-1/2}U$，则 $[V,HV,H^2V]$ 比 $[V,HV]$ 多一列。对精确可行的第五钟目标 $s$，若 $i$ 处的闭容差 $\varepsilon\ge |s-S_{\min}(i)|$，所需最小维数为 $q$。这里 $S_{\min}(i)$ 是四钟最小维实现的唯一预测。若 $\varepsilon$ 更小，则最小维数为 $q+1$。例如取 $A=0$，给节点 $(-1/3,1/3)$ 赋四钟权 $(1/16,1/16)$，给节点 $(-1/2,0,1/2)$ 赋权 $(1/36,5/72,1/36)$。两组均给出 $(N_0,N_1,N_2,N_3)=(1/8,0,1/72,0)$，第五钟分别为 $-1/90-i/9$ 和 $-1/120-i/9$。第二个目标在容差低于 $1/360$ 时恰需三态，达到该阈值后恰需两态。 [精确 Gram 判据与有理复算](https://github.com/the-omega-institute/trureturing-books/issues/1671#issuecomment-7236665129)
+
+即使允许隐藏态同时耦合两个端口，两端口也能有不同的容差阈值。对保持四钟的任何 $d$ 维实现，有 $\operatorname{rank}(S(i)-S_{\min}(i))\le d-q$。令 $K=\operatorname{ran}[U,HU]$，$P$ 为到 $K$ 的投影，$T=PH|_K$ 是最小维压缩。对 $p_4(t)/(i-t)$ 作多项式除法，求响应差时三阶以下的矩贡献相消。令 $R=(iI-H)^{-1}$，余下的项来自
+$$
+ PRU-(iI_K-T)^{-1}U=(iI_K-T)^{-1}PH(I-P)RU.
+$$
+左乘 $p_4(i)U^*$ 后，响应差经 $K^\perp$ 因子分解，故得到秩界。取上面的两种标量模型组成双端口，并把第一端口的权重全部加倍，令 $A=0$。两处严格舒尔余量仍为正。四态的预测在两个端口都采用二态读数，两端口均采用三态的目标与该预测相差 $\operatorname{diag}(1/180,1/360)$。上述秩界排除五态在算子范数下取得小于 $1/360$ 的误差，即使允许混合耦合。只替换第一端口即可在五态时达到该阈值。因此，容差至少为 $1/180$ 时恰需四态，从 $1/360$（含）到 $1/180$（不含）恰需五态，低于 $1/360$ 则恰需六态。 [双端口有理数构造](https://github.com/the-omega-institute/trureturing-books/issues/1671#issuecomment-7236791167)
+
+标量双端口数据还给出全部第五钟校正的显式判据，覆盖非正规矩阵。取 $A=0$、$D=dI_2$、$0<d<72/11$，四个矩为 $(D/8,0,D/72,0)$。令 $\Delta=S(i)-S_{\min}(i)$、$T=\Delta/(9d/400)$。实现满足严格单位范数上限的充要条件是
+$$
+\operatorname{Re}T\pm\operatorname{Im}T-\frac{81}{40}T^*T\succeq0
+$$
+对两个符号都成立，并且在 $(\ker T)^\perp$ 上严格正定。四态最小实现的预解式把校正化成新增态的耦合。在 $T$ 的像上，正定矩阵 $\operatorname{Re}T-\frac9{10}T^*T$ 可以重构达到目标读数的尾部。精确最小隐藏维数为 $4+\operatorname{rank}\Delta$。半正定条件含 $T^*T$，只检查非正规目标的特征值会遗失信息。[隐藏块及全矩阵的范数界](https://github.com/the-omega-institute/trureturing-books/issues/1671#issuecomment-7237327085)
+
+同一计算也适用于块不交换的满秩四钟数据。将前两列矩正交归一便固定两块 Jacobi 矩阵 $J$。它的第二块预解式把第五钟校正与新增隐藏态相连。此时两个端点的 Schur 不等式都能用四个矩与目标校正直接写出，并保留非交换因子的次序。严格上限至多为一，或闭上限严格小于一时，双端口的可行目标恰需 $4+\operatorname{rank}\Delta$ 个隐藏态。
+
+在闭单位上限，令 $\Sigma$ 为四钟矩测度，实际耦合的谱测度为 $p_4(t)\,d\Sigma(t)$。因 $p_4(\pm1)=0$，物理端口预解式在 $e=\pm1$ 处只对 $t\ne e$ 积分。若另给多项式端点读数 $S_{\mathrm{poly}}(e)=\int [p_4(t)/(e-t)]_{\mathrm{poly}}\,d\Sigma(t)$，商在 $t=e$ 的延拓值为 $-p_4'(e)$，正端为 $6$，负端为 $-2$。因此增广读数满足 $S_{\mathrm{poly}}(1)=S_{\mathrm{phys}}(1)+6\Sigma(\{1\})$ 与 $S_{\mathrm{poly}}(-1)=S_{\mathrm{phys}}(-1)-2\Sigma(\{-1\})$。可见块的两项 Schur 余量仍由实际耦合给出，即 $I-A-S_{\mathrm{phys}}(1)$ 与 $I+A+S_{\mathrm{phys}}(-1)$。例如在 $-1,-1/2,1/2,1$ 各放矩质量 $I_2/4$。该增广数据恰需八个隐藏态。只保留物理读数时，去掉两个脱耦端点即可用四态实现原读数，其中 $S_{\mathrm{phys}}(1)=3I_2/4$，$S_{\mathrm{phys}}(-1)=-I_2/2$。[一般分块不等式与闭端点例](https://github.com/the-omega-institute/trureturing-books/issues/1671#issuecomment-7237750979)
+
+对于闭单位上限下四钟 Gram 奇异的可行增广数据，两端允许的最大矩质量可同时取到。把多项式端点读数与其余三个物理读数合用，便得到 $\Sigma/(1+t^2)$ 的六个矩。将各端端值固定，使相应局域矩二次型最小，便得到端点容量 $C_\pm$。扣除两端容量后，两个局域矩阵的核相同，在 Gram 商上的乘法压缩严格位于区间内部。若原 Gram 商的压缩已满足两个按实际耦合计算的 Schur 不等式，最少隐藏维数就是原 Gram 秩。否则在这个双端口情形下恰多一态。一个有理例的四钟 Gram 秩为三，第五钟校正秩为一。其增广数据恰需五态，因为两个端点都必须保留矩质量。[奇异矩的端点容量与五态例](https://github.com/the-omega-institute/trureturing-books/issues/1671#issuecomment-7238058060)
+
 设原壳与中转态共同的传播矩阵为 $\mathcal H$，$R_{\mathrm{vis}}(\omega)$ 是预解式 $(\omega I-\mathcal H)^{-1}$ 的可见块。舒尔消元在三个时钟频率 $\omega \in \{1, \zeta_3, \zeta_3^2\}$ 给出可见逆响应 $R_{\mathrm{vis}}(\omega)^{-1} = \omega I - (A_0 + \Delta_D) - B^* (\omega I - H_{\mathrm{aux}})^{-1} B$，其中允许非零修正的旧块位置被限制在 $\operatorname{supp}(\Delta_D) \subseteq \{(u, v) : \|u - v\|^2 \le D\}$。随着截断半径 $D$ 逐步收缩，越来越多对可见站点之间的 Gram 内积被迫固定不变，从而迫使辅助空间维数 $r(D)$ 一级一级向上跃升（完整证书见 [`ch39-three-clock-minimal-memory.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-three-clock-minimal-memory.py)、[`ch39-local-memory-rank.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-local-memory-rank.py) 与 [`ch39-three-clock-symmetric-cutoff.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-three-clock-symmetric-cutoff.py)）：
 
 | 允许修改旧传播块的平方弦距范围 $D$ | 最小辅助记忆秩 $r(D)$ | 关键代数阻塞机制与精确证书 |
