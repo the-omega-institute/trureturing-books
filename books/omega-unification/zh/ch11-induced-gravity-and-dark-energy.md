@@ -475,7 +475,7 @@ $$
 Z-z_c=\frac{3}{2V}\delta+O(\delta^2).
 $$
 
-边界 $z_c$ 对应的切线恰好再次接触重质量端 $a$。若 $d=Z-z_*$，则 $D_s(a)=B(u,Z)-B(u,Z-d)+I_2(Z-d)(1-e^{-vd})/v$。将余差除以 $I_2(Z)d^2$ 后在 $d=0$ 延拓，得到 $-\delta/2+Vd/3+O(\delta d+d^2)$，其零点给出上式。由于 $\partial_s D_s(a)=(s-a)f''(s)$，重端余差先降后升，只有这一处内点零点。轻端余差 $D_s(1)$ 则先升后降至零，且 $D_a(1)$ 在阈值处严格为正，故略超阈值时所有内点的轻端余差仍为正。
+边界 $z_c$ 对应的切线恰好再次接触重质量端 $a$。若 $d=Z-z_*$，则 $D_s(a)=B(u,Z)-B(u,Z-d)+I_2(Z-d)(1-e^{-vd})/v$。将余差除以 $I_2(Z)d^2$ 后在 $d=0$ 延拓，得到 $-\delta/2+Vd/3+O(\delta d+d^2)$，其零点给出上式。由于 $\partial_s D_s(a)=(s-a)f''(s)$，重端余差先降后升，只有这一处内点零点。轻端余差 $D_s(1)$ 则先升后降至零，且 $D_a(1)$ 在阈值处严格为正，故略超阈值时所有内点的轻端余差仍为正。取 $u=1$、$Z=3$ 时，只要 $0<\delta\le 1/200$，上述识别范围就成立，且 $0<3-z_c<28\delta$。在整个区间内，上述接触层的局部常数也给出所有可识别单层在任意正读数误差下的锐统一平方根界。[手工推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/1689#issuecomment-7242151559)
 
 平方质量 $W_1$ 的最优统一平方根常数随 $\delta\downarrow0$ 按 $\delta^{-1/2}$ 发散。设 $s_c=e^{-vz_c}$。由 $R_u(z_c)-v=\delta/2+O(\delta^2)$ 和 $R_u$ 的单调性，$f''$ 在 $s_c\le x<1$ 上至少为正常数乘 $\delta$。把这个下界代入上面的单侧估计，就得到 $W_1=O(\sqrt{\varepsilon/\delta})$。在 $s_c$ 处把一层等权分到 $s_c\pm h$，热迹保持精确，真空误差的二阶系数为 $f''(s_c)/2$，而 $W_1/h\to1/(vs_c)$。因此 $h\downarrow0$ 时的 $W_1/\sqrt{\varepsilon}$ 趋于 $\sqrt{2/[I_2(z_c)(R_u(z_c)-v)]}$，这一下界与统一上界的增长阶相同。[临界展开与固有时积分复算](https://github.com/the-omega-institute/trureturing-books/issues/1689#issuecomment-7241441212)
 
