@@ -156,6 +156,19 @@ $$
 
 只改变两轮 52 弦门的相对符号，三壳的六个目标就能同时实现。沿原来的十二条弦依次施 $G_{12},G_{32},G_{52},-G_{52}$，每轮三条边共用一个门。最后的负号使该轮六个端点的振幅反号，与其余十三个站点的干涉随之改变。三个可调门共十二个角，固定其中六个，对另六个角做区间校准，同一个第五壳算子在第七、八、九壳的第三枢轴都精确给出 $K=1,\ W=10^{-122}$。固定这组门后，第十壳读得 $1.1134<K_{10}<1.1152$ 和 $-0.00955<W_{10}<-0.00937$，两个偏离目标的方向都与预登记预测一致。末轮负号是这项构造引入的离散选择。两轮 52 弦强制同号时的六式可达性仍开放。[固定末轮符号的区间证书](https://github.com/the-omega-institute/trureturing-experiments/blob/a163c19610f94de225de6e2b0c22a0c56aad75a9/experiments/ch39-omega-research/replay/ch39-three-shell-final-sign.md)
 
+末轮负号可看作相位 $e^{i\phi}$ 在 $\phi=\pi$ 的取值。设 $P$ 投影到末轮触及的六站，$U_\phi$ 为末轮采用 $e^{i\phi}G_{52}$ 时的输运，则 $U_\phi=(I-P+e^{i\phi}P)U_0$。站点 $9,13$ 分别只参加第三、第四轮，且都在定向弦的第二端。因此 $U_\phi$ 在这两站的对角元是 $d,e^{i\phi}d$，其中 $d=(G_{52})_{22}$。任一同号共门输运 $V$ 在这两站的对角元相等，由三角不等式得到
+$$
+\|U_\phi-V\|_{\mathrm{op}}\ge |d|\,|\sin(\phi/2)|.
+$$
+若 $d=0$，酉性使两个对角元都为零。记右上、左下元为 $b,c$。两轮的三组弦各构成一颗二边星，中心为 $a$，第三、第四轮的叶子分别为 $p,q$。合成后 $e_a\mapsto c e_p$，$e_p\mapsto e^{i\phi}bc\,e_q$，$e_q\mapsto e^{i\phi}b\,e_a$。两轮都改用右上元为 $e^{i\phi}b$、左下元仍为 $c$ 的同一酉门，就复制了这三个映射。因此末轮相位能被同号共门精确吸收，当且仅当 $e^{i\phi}=1$ 或 $d=0$。
+
+固定三门和第五壳源 $H$，记 $H_0=U_0HU_0^*$。末轮相位只改变六站与其余十三站间的交叉块，故
+$$
+\|U_\phi H U_\phi^*-H_0\|_{\mathrm{op}}
+=2|\sin(\phi/2)|\,\|PH_0(I-P)\|_{\mathrm{op}}.
+$$
+把负号证书中的末轮乘数改为区间 $-\exp(i[-10^{-7},10^{-7}])$，并保留原来的六个固定角和六个活动角盒。对每个 $|\phi-\pi|\le10^{-7}$，预条件映射的自映行界小于 $0.726791$，所以活动角盒内有唯一一组角度同时满足三壳六式。允许重新选门的同号六式可达性仍开放。[相位下界与交叉块恒等式](https://github.com/the-omega-institute/trureturing-books/issues/1627#issuecomment-7231068482) · [退化门的显式构造](https://github.com/the-omega-institute/trureturing-books/issues/1627#issuecomment-7231094749) · [相位区间复算](https://github.com/the-omega-institute/trureturing-books/issues/1627#issuecomment-7231273037)
+
 前三壳的六个等式对第十壳还留下多少自由？保留相同的第五壳源、十二条弦和末轮负号，重新选择三个门。固定其中四角，其余八角在一个区间盒内调整。任取 $|u|\le 4\times10^{-6}$、$|v|\le 5\times10^{-7}$，都能选出同一组门，使前三壳保持上述六个等式，并在第十壳同时读得 $K_{10}=1+u$、$W_{10}=10^{-122}+v$。取 $u=v=0$ 即配平四壳八式；取偏移的四种符号组合，则两项偏离的方向可以独立改变。此处第十壳也参与校准，真空尺度仍是输入。 [四壳校准与第十壳响应的区间证书](https://github.com/the-omega-institute/trureturing-experiments/blob/c6bbae236604130b5618b1c906ed36e8c532faf9/experiments/ch39-omega-research/replay/ch39-four-shell-final-sign.md)
 
 若分六轮在平方弦长不超过 56 的全部十八条边上各施门一次，同长度仍共用一个门，则可用第七、八、九壳的六项目标共同校准这四个门，使同一第五壳算子共轭一次后在三壳各自的原生第三枢轴都精确给出 $K=1$ 和 $W=10^{-122}$。第十壳的两个目标事先登记。对封存参数盒内每个满足前三壳六式的解，第十壳原生第三枢轴都给出 $1.07020<K_{10}<1.07540$ 和 $-0.002820<W_{10}<-0.002444$，两项均失配。能否由同一算术联络预先给出跨壳输运，仍是开放问题。 [三壳六式的共同解](https://github.com/the-omega-institute/trureturing-experiments/commit/9e2b8abfe862acb15667d5a0154731a67e491a95) · [第十壳的事前登记](https://github.com/the-omega-institute/trureturing-experiments/commit/062393b79f354aedffa0c211fedb458e5dfa2e35) · [第十壳的区间读数](https://github.com/the-omega-institute/trureturing-experiments/commit/2326ecde013a0e40d6487cb52bd10ae519edf08a)
