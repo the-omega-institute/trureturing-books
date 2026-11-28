@@ -21479,6 +21479,14 @@
       "line": 41,
       "signature": "theorem increasing_projection_strong_limit (S : ℕ -> Submodule 𝕜 H) [forall n, (S n).HasOrthogonalProjection] [(cumulativeSpace S).HasOrthogonalProjection] (hS : Monotone S) : (forall x, Tendsto (fun n => (S n).starProjection x) atTop (𝓝 ((cumulativeSpace S).starProjection x))) /\\ (residualSpace S = ⊥ -> Tendsto (fun n => ContinuousLinearMap.toPointwiseConvergenceCLM 𝕜 (RingHom.id 𝕜) H H (S n).starProjection) atTop (𝓝 (ContinuousLinearMap.toPointwiseConvergenceCLM 𝕜 (RingHom.id 𝕜) H H (ContinuousLinearMap.id 𝕜 H))))"
     },
+    "D5/S3/Quantum/Completion/SingularSchurResidualRefutation.result": {
+      "module": "D5/S3/Quantum/Completion/SingularSchurResidualRefutation",
+      "name": "D5.S3.Quantum.Completion.SingularSchurResidualRefutation.result",
+      "kind": "theorem",
+      "statement_id": "sha256:40bf9b9997a424da9052cd3417e7899c60bb688331ba8e47a758d7bd12a61c7a",
+      "line": 30,
+      "signature": "theorem result : ¬ claim"
+    },
     "D5/S3/Quantum/Completion/UniformCompletionObstruction.uniform_completion_obstruction": {
       "module": "D5/S3/Quantum/Completion/UniformCompletionObstruction",
       "name": "D5.S3.Quantum.Completion.UniformCompletionObstruction.uniform_completion_obstruction",
