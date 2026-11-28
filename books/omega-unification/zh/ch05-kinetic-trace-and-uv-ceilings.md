@@ -190,6 +190,14 @@ $$
 
 有 $n_0=0$ 的解时，阈值层和切点层直接取等。若所有解都需要 $n_0>0$，把这 $n_0$ 份放在足够小的平方质量比 $y=\varepsilon>0$，再用一份零暴露的阈上状态补足第一热迹，就能用足预算并逼近锐界。取 $u=8$，以 $(n_0,n_*,n_1)=(1,1,1)$ 定出 $S,B$，复算（`NUM`）得 $b\approx1.651341<x_*\approx1.695240$。此时 $2<B/t_*<3$，故没有 $n_0=0$ 的整数解。这个预算下，正实权谱可以取等，整数谱只能逼近。[临界弦的手工推导（`ARGUED`）与复算](https://github.com/the-omega-institute/trureturing-books/issues/1949#issuecomment-7238980652)
 
+**匹配预算附近的整数缺口（手工推导，`ARGUED`）。** 固定 $S$，令 $B_0$ 为满足上述计数等式的预算。记 $\Delta_{\mathrm{opt}}(B)=qS+c_*B-\sup S_R(u)$，其中上确界取遍第一热迹为 $S$、暴露至多为 $B$ 的有限正质量整数谱。沿用上面的单份热权和暴露，设 $H(w)=qw+c_*t(w)-w^u$、$\ell=t'(w_*)$、$h=t'_+(w_1)=1/(2w_1)$。
+
+预算由 $B_0$ 上调 $\varepsilon$ 时，$\Delta_{\mathrm{opt}}(B_0+\varepsilon)/\varepsilon$ 的极限是在所有匹配计数下取以下可用系数的最小值。保留原接触谱的极限给出 $c_*$。有阈值和切点状态时，可把热权从阈值状态移到切点状态，系数为 $(u-1)q/\ell$。有至少两份切点状态时，两份热权可以等量反向偏移，第一热迹守恒，暴露与余量都在二阶增加，系数为 $H''(w_*)/t''(w_*)$。
+
+下调预算时，若有切点状态，把少量热权转入零暴露尾部，给出系数 $q/\ell$。若还有阈值状态，转入阈值状态的系数为 $(c_*h-(u-1)q)/(\ell-h)$。在同一 $(S,B_0)$ 的所有匹配计数中取可用系数的最小值，就是 $\Delta_{\mathrm{opt}}(B_0-\varepsilon)/\varepsilon$ 的极限。证明将趋优谱定域到三处接触点，再用第一热迹守恒消去切点位移的线性项。若所有匹配计数都没有切点状态，趋优谱的封顶状态已经用完 $B_0$。此时只要下调侧在允许区间内，便有正的左跳跃。
+
+取 $u=8$。对只有两份切点状态的匹配预算，复算（`NUM`）得到左、右系数分别约为 $0.0000671683$ 和 $0.325176$。对 $S=1$、$B_0=\tau$，匹配计数只含一份零质量极限状态，缺口从左趋近约 $0.0906401$，而在 $B_0$ 为零。[单侧极限的推导与复算](https://github.com/the-omega-institute/trureturing-books/issues/2026#issuecomment-7239202281)
+
 **终端弦的整数锐性（`ARGUED`）。** 当 $\tau>\tau_0$ 且 $x^\dagger<b\le\tau$ 时，令 $\lambda=(b-x^\dagger)/(\tau-x^\dagger)$，并记 $y^\dagger$ 为切点层的平方质量比。整数谱可逼近实权锐界，当且仅当低于输入尺度的极限层所需重数 $n=S\lambda$ 与切点层所需重数 $k=Se^{y^\dagger}(1-\lambda)$ 都是非负整数。趋优谱的预算松弛和切线余量都趋于零，因此第一热权集中在 $y=0$ 与 $y=y^\dagger$ 的邻域。饱和预算把两处的份额固定为 $\lambda$ 与 $1-\lambda$。用 $Se^y$ 乘回第一热权，两处有界邻域内的整数计数就分别趋于 $n$ 与 $k$。
 
 若两项都是整数，就在 $y=\varepsilon$ 放 $n$ 份，在 $y=y^\dagger$ 放 $k$ 份。只要 $0<\varepsilon<e^{-2\tau}$，两层就恰好用完预算。第一热迹欠下的 $\delta=n(1-e^{-\varepsilon})$ 可由一份 $y=-\log\delta\ge1$ 的阈上状态补足，暴露仍为原值。令 $\varepsilon\downarrow0$ 即得实权锐界的极限。由于 $\lambda>0$ 且终端切线的另一处接触在 $y=0$，正质量谱无法取等。[完整推导与复算](https://github.com/the-omega-institute/trureturing-books/issues/1911#issuecomment-7238689688)
