@@ -139,7 +139,40 @@ $$
 当 $d<0$ 时交换前两点，取 $a=0,b=-d$。完整证明由 Lean 内核检查。
 :::
 
-此处使用标准 Mathlib 的有理数与序结构，Lean 证明依赖 `propext`、`Classical.choice` 和 `Quot.sound`。在法则 II 中，$r$ 还须非负。该判据描述三个采样点能共同给出的读数；若要把它们延拓到整个比较空间，还须满足迁移律等全局条件。
+三点判据与下面的五点判据都使用 Mathlib 的有理数与序结构，两条 Lean 证明均依赖 `propext`、`Classical.choice` 和 `Quot.sound`。在法则 II 中，$r$ 还须非负。
+
+回到 $3/5$ 的算例。把两枚迁移点 $w=[x,y,z]$ 与 $v=[y,x,z]$ 也纳入样本，双侧迁移不变性使 $z$ 对两者的读数都等于 $t=\kappa(x,y)$。原来 $4/5$ 的读数差还能保住吗？当 $t=3/5$ 时，五点矩阵允许的最大差值降为 $13/20$，由 $a=3/4$、$b=1/10$ 取得。
+
+::: {.theorem #thm-ch01-five-point-transported-contrast title="两枚迁移点给出的读数差范围" lean="D5/S3/Quantum/AURICOmega/FivePointTransportedContrast.exists_transported_readings_iff"}
+给定 $t,d\in\mathbb Q$，$0\le t\le1$。在标签顺序 $(x,y,z,w,v)$ 下，存在非负有理数 $a,b,c,e,r$，使 $a-b=d$ 且矩阵
+
+$$
+G=\begin{pmatrix}
+1&t&a&b&e\\
+t&1&b&c&a\\
+a&b&1&t&t\\
+b&c&t&1&r\\
+e&a&t&r&1
+\end{pmatrix}
+$$
+
+对每个 $h\in\mathbb Q^5$ 满足 $h^{\mathsf T}Gh\ge0$，当且仅当
+
+$$
+d^2\le
+\begin{cases}
+(1-t^2)^2, & 0\le t\le 1/2,\\
+(5/4-t)^2, & t>1/2,\quad (t-1/2)^2\le 1-t^2,\\
+(2t-1)^2(1-t^2), & t>1/2,\quad (t-1/2)^2>1-t^2.
+\end{cases}
+$$
+:::
+
+::: {.proof}
+同时交换 $x,y$ 和 $w,v$ 可将 $d$ 变号，故只需考虑 $a\ge b$。先删去 $v$。把前四点的权重按同时交换 $x,z$ 和 $y,w$ 分为对称与反对称两部分，得到两个二元二次型。它们的行列式约束给出分段上界。反过来，各段都可选取有理的四点读数，使 $c=0$、$b<1$。让第五点在 $y,z$ 上的投影分别给出所需读数 $a,t$。取投影系数 $(a-bt)/(1-b^2)$ 和 $(t-ba)/(1-b^2)$，四点二次型保证把第五个对角元补到 $1$ 所需的余量非负。完整证明由 Lean 内核检查。
+:::
+
+这些矩阵给出了五个标签上相容的读数。哪些五点数据能延拓为整个三元运算空间上的双侧不变核，仍是另一个存在性问题。
 
 - **任意一点都可临时充当原点，三行还原为群**：在 $\mathcal{M}$ 中任挑一点 $o$ 作为临时参照基点，定义二元乘积 $x \star_o z := [x, o, z]$ 与局部逆元 $x^{-1_o} := [o, x, o]$。由法则 I 的结合律直接得 $(x \star_o y) \star_o z = [[x, o, y], o, z] = [x, o, [y, o, z]] = x \star_o (y \star_o z)$；左右单位元分别由 $[o, o, z] = z$ 与 $[x, o, o] = x$ 证毕；左右逆元只需展开两步：
 
