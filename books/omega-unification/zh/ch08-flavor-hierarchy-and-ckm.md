@@ -75,20 +75,6 @@ $$
 
 $p$ 恰有两个正分量时，纯态的循环和位于对应单边长度的圆上，每个可行点给出唯一相对相位。单支撑只给 $s=0$。若 $p$ 均匀而 $q$ 不均匀，可交换两套基后使用同一判据。两者都均匀时，等边三角形的两个方向各给出三种整体旋转，恰有六个制备。六也是一般上界，可以在非均匀 $p$ 取到。例如 $p=(4,9,9)/22$、$q=(1,1,1)/3$ 的六次式可化为 $-8w^6+9w^3-8$，它有六个不同的单位圆根。 [六次判据与端点样例](https://github.com/the-omega-institute/trureturing-books/issues/1653#issuecomment-7232049615)
 
-**支撑差集与最小实现秩（手工推导）。** 在 $d$ 维的坐标基与循环 Fourier 基中，设第一读数恰支撑在 $S\subset\mathbb Z_d$ 上，令 $k=|S|$ 表示支撑大小。记 $m$ 为 $S$ 中不同位置之间的非零有向差所取的不同值数。每个可达的第二读数都有秩至多 $\lfloor\sqrt{k+m}\rfloor$ 的共同态。能强制秩 $k$ 的充要条件是全部 $k(k-1)$ 个有向差互异。在这个条件下，均匀第二读数唯一确定对角态。
-
-正性使支撑外的行列消失。将第二读数作离散 Fourier 逆变换，每个循环差只读到该差上的矩阵元之和。相反的两个差给出一对共轭复数，偶数维时自逆的差单独给出一个实数，共至多 $m$ 条实条件。连同 $k$ 个对角元，在秩 $r$ 的像空间内若 $r^2>k+m$，就有非零厄米扰动同时保持两读数。将它加到原态，沿该方向移动到半正定锥的边界，秩下降而读数不变。若全部非零有向差互异，均匀第二读数使每个非对角元单独为零，故唯一的共同态秩为 $k$。
-
-因此强制秩 $k$ 要求 $d\ge k(k-1)+1$。例如模 $7$ 的 $\{0,1,3\}$ 和模 $13$ 的 $\{0,1,3,9\}$ 都恰好达到门槛。若 $k=q+1$ 且 $q$ 为素数幂，有限域中的 Singer 循环差集给出一般构造。$\mathbb F_{q^3}^\times/\mathbb F_q^\times$ 中的迹零射影点组成所需支撑，每个非平凡平移和原支撑恰相交于一点。素数情形可用 [SingerTracePlane.result](lean:D5/S3/Geometry/FiniteGeometry/SingerTracePlane.result) 的两个结论：若 $\alpha$ 生成 $\mathbb F_{q^3}^\times$，在一个射影周期 $0\le i<q^2+q+1$ 内，使 $\operatorname{Tr}(\alpha^i)=0$ 的指数有 $q+1$ 个，且每个非零循环差恰出现一次。一般素数幂见 [James Singer, *A theorem in finite projective geometry and some applications to number theory*（1938），第 377–385 页](https://doi.org/10.1090/S0002-9947-1938-1501951-4)。
-
-**七点与十一点支撑。** 具有互异非零有向差的支撑就是模 Golomb 尺。Buratti 与 Stinson 的文献分类给出七点支撑的全部维数 $d\ge48$。模 $48$ 的 $\{0,1,3,15,20,38,42\}$ 是一个见证。十一点支撑的全体维数是 $120$、$133$ 和所有 $d\ge135$。模 $120$ 的 $\{0,1,4,9,23,30,41,43,58,68,74\}$ 产生 $110$ 个互异的非零差，恰好缺少 $12,24,\ldots,108$。[Buratti 与 Stinson，*Optical Orthogonal Codes and Related Structures*（2020），定理 2.3(5)、(9) 与表 1](https://arxiv.org/abs/2007.01908v2)
-
-若某个子支撑的差发生较多碰撞，还可收紧秩界。对非空 $T\subseteq S$，记 $m(T)$ 为 $T$ 的不同非零有向差数。取可行集的一个极点，其秩为 $r$，则像空间与 $T$ 的坐标子空间至少相交于 $r-(k-|T|)$ 维。该交空间上的非零不可见厄米扰动会破坏极点性。因此同一个极点满足
-$$
-r\le\min_{\varnothing\ne T\subseteq S}\left(k-|T|+\left\lfloor\sqrt{|T|+m(T)}\right\rfloor\right).
-$$
-例如模 $12$ 的 $S=\{0,1,3,6,9\}$，用四点子支撑 $T=\{0,3,6,9\}$ 可把上界从四降到三，且有读数唯一确定秩三的态。[子支撑界与可复算见证](https://github.com/the-omega-institute/trureturing-books/issues/1676#issuecomment-7233048570)
-
 哪些四站点算子也能通过这种压缩产生非零的 $J$？按轮换特征标把空间分成二维不动平面 $F$ 和两条非平凡特征标线。与轮换对易的两个厄米算子可写成 $A=A_0\oplus a_+\oplus a_-$ 与 $B=B_0\oplus b_+\oplus b_-$。将共同轻空间的单位法向量写作 $n=(n_0,n_+,n_-)$。令 $C=[A_0,B_0]$、$\alpha=a_+-a_-$、$\beta=b_+-b_-$，并令 $X_0=\beta(A_0-a_-I)-\alpha(B_0-b_-I)$。把两算子压缩到 $n^\perp$ 得到 $H_A,H_B$，其对易子的有向行列式可分解为
 $$
 \det[H_A,H_B]=-|n_+n_-|^2\det(X_0)\,n_0^*C n_0.
@@ -144,6 +130,12 @@ $$
 先将每个因子除以 $\sqrt{m_j}$，再将第二项乘以 $-i$，得到相邻相位比。依次恢复 $A,B,D,C$ 后即可反解 $x_j$。
 
 在 $abcd>0$ 时，将 $g_j/\sqrt{m_j}$ 依次记为 $r,w,t,s$。把复向量当作实向量，$B,A,C$ 上两个已知的归一化内积把 $B,C$ 的归一化内积限制在以 $rs$ 为中心、半宽 $\sqrt{(1-r^2)(1-s^2)}$ 的区间。另一方面，$B$ 与 $-iD$ 的归一化内积为 $w$，故 $B,D$ 的归一化内积可以取遍 $[-T,T]$，其中 $T=\sqrt{1-w^2}$。再用 $C,D$ 的已知内积 $t$，从这条路径得到 $B,C$ 的区间 $[-M,M]$，其中 $|t|\le T$ 时 $M=1$，否则 $M=T|t|+|w|\sqrt{1-t^2}$。后一公式来自在 $|h|\le T$ 上最大化 $ht+\sqrt{(1-h^2)(1-t^2)}$。两个区间相交就可在实四维选取 $B,D$，再依次放入 $C,A$，因此有复二维见证。若某个 $a$ 通过秩一检验（零范数时用边不等式，正范数时用相位乘积），最小秩为一。其余可行情形的最小秩为二。若没有 $a$ 通过任一可行性检验，则两套读数无法共同实现。[区间端点与重建](https://github.com/the-omega-institute/trureturing-books/issues/1667)
+
+**支撑差集与最小实现秩（手工推导）。** 在 $d$ 维的坐标基与循环 Fourier 基中，设第一读数恰支撑在 $S\subset\mathbb Z_d$ 上，令 $k=|S|$ 表示支撑大小。记 $m$ 为 $S$ 中不同位置之间的非零有向差所取的不同值数。每个可达的第二读数都有秩至多 $\lfloor\sqrt{k+m}\rfloor$ 的共同态。能强制秩 $k$ 的充要条件是全部 $k(k-1)$ 个有向差互异。在这个条件下，均匀第二读数唯一确定对角态。
+
+正性使支撑外的行列消失。将第二读数作离散 Fourier 逆变换，每个循环差只读到该差上的矩阵元之和。相反的两个差给出一对共轭复数，偶数维时自逆的差单独给出一个实数，共至多 $m$ 条实条件。连同 $k$ 个对角元，在秩 $r$ 的像空间内若 $r^2>k+m$，就有非零厄米扰动同时保持两读数。将它加到原态，沿该方向移动到半正定锥的边界，秩下降而读数不变。若全部非零有向差互异，均匀第二读数使每个非对角元单独为零，故唯一的共同态秩为 $k$。
+
+四维全支撑时 $k=4$、$m=3$，所以每套可达读数都能由秩至多二的共同态实现。上面的指定读数例子确能强制秩二。[附录 D](appendix-d.md) 给出满支撑秩的差集门槛，以及由子支撑收紧的秩界。
 
 在第 $2\,306\,888\,100\,085$ 枚正零点，把四个算术 Gram 源的正交化方向依次放在极点与三条射线的首站，用后三个原始源张成的空间代表三代。把荷 $-4,2$ 的壳算子分别压缩到这个空间，作为上型、下型左手夸克的质量平方矩阵。一步传播保留共同的反酉对称，Jarlskog 不变量 $J=0$。走两步再投影，多出了中途离开三代空间又返回的路径，给出 $J\simeq3.00189\times10^{-4}$。产生 CP 破坏后，还要同时解释夸克质量与顶底混合。在 $1\,\mathrm{TeV}$ 六个夸克汤川耦合各自的 $1\sigma$ 区间内，即使上下两部门各自任取十九个非负谱值，所得 $|V_{tb}|$ 也只能小于 $0.9936401$ 或大于 $0.99915018$，同尺度参考窗落在两者之间。若允许壳上的读数取负而压缩后的质量平方保持正定，两荷共用一个至多十一次的实多项式就能重现任意给定的六个正夸克质量与 CKM 矩阵。这个自由度使多项式的系数也成为统一模型必须解释的量。[两步传播](https://github.com/the-omega-institute/trureturing-experiments/blob/b0f5a77f57448869a358fdfb61c96dad5aa3f039/experiments/ch39-omega-research/replay/ch39-three-gram-source-flavor.py) · [非负谱的混合限制](https://github.com/the-omega-institute/trureturing-experiments/blob/b0f5a77f57448869a358fdfb61c96dad5aa3f039/experiments/ch39-omega-research/replay/ch39-three-source-positive-ckm.py) · [有符号多项式构造](https://github.com/the-omega-institute/trureturing-experiments/blob/b0f5a77f57448869a358fdfb61c96dad5aa3f039/experiments/ch39-omega-research/replay/ch39-signed-three-source-quark-pair.py) · [参考输入表 2](https://arxiv.org/html/2510.01312v2#Sx1.T2)
 
