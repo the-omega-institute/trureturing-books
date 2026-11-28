@@ -245,6 +245,8 @@ This switch also sets the largest budget radius shared by all low exponents. Tak
 
 As the budget approaches $B_0$ from below, set $s_*=s_\tau$, $b=W'(\tau-s_*)$, and $c=W'(s_*)$. Differentiating $A_r+C_r=1+w_1$ gives $dA_r/dr=-dC_r/dr=bc/(c-b)$ at $r=\tau$. Relative to the left limit, the first-order loss per unit of budget removed is $u(A_\tau^{u-1}-C_\tau^{u-1})bc/(c-b)$. [Uniform radius, attainment, and interval certificate](https://github.com/the-omega-institute/trureturing-books/issues/2128#issuecomment-7240278006)
 
+For $1<u\le2$, the transfer endpoint still gives $V_S(B_0-\varepsilon)=N-1+A_r^u+C_r^u$ in the wider window $0<\varepsilon\le3/25$, with the same attainment conditions. If exactly two of the first $N$ weights fall below the cap, their combined exposure is at most $2\tau-\varepsilon$. Concavity tightens the prefix bound to $N-2+2W(\tau-\varepsilon/2)$. With three or more uncapped weights, the larger loss of unit weight gives the same prefix bound. Closed interval calculations show that $A_r>2W(\tau-\varepsilon/2)-1$ and that the power sum increases strictly along the transfer until the weight with zero exposure vanishes. The one-transfer comparison thus applies throughout this window. [Strengthened prefix bound and interval calculation](https://github.com/the-omega-institute/trureturing-books/issues/2193#issuecomment-7240619070)
+
 Once the exponent reaches the critical value, the zero-transfer endpoint wins over a wider budget window (direct derivation, `ARGUED`). For $u_c\le u\le4$, $\tau=\tau_0(u)$, and $0<\varepsilon\le0.43$, the value is
 
 $$
