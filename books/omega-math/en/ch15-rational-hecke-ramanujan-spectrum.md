@@ -82,6 +82,58 @@ The matrix is the specialization of [@thm-ch15-toeplitz-circle] to two distinct 
 
 :::
 
+The unit-circle criterion locates the spectrum. To compare genuinely different proof mechanisms, we must also ask which estimate on which object forces it there. Once the location is fixed, multiplicity remains additional information.
+
+::: {.remark #rem-ch15-independent-rh-routes title="Independent RH Routes: Proof Obligations and Multiplicity Boundaries (Source comparison, literature results and manual derivation)"}
+**Separate a rewriting from an independent mechanism.** Alpöge's Stepanov-type route uses arithmetic integrality to constrain the size of theta lifts. The [fixed compact-edition guide of `lsernau/grh-lean`](https://github.com/lsernau/grh-lean/blob/72fead102f663d5c7a407964a13dc0cf9d977207/grh-compact/GUIDE.md) explains that the roughly 76,000-line edition follows this method; it does not constitute a second independent proof. Its [proof spine](https://github.com/lsernau/grh-lean/blob/72fead102f663d5c7a407964a13dc0cf9d977207/grh-compact/src/New/Main.lean) uses A, "short forms," and B, "enough forms," to obtain an upper bound for the covolume of a theta-lift family, and C, "integral forms are long," to obtain a lower bound on the same covolume. Cancelling the common main term gives `star_inequality`; a one-sided prime-error estimate and a Landau-type nonvanishing criterion then give `New.grh`. The mechanism pits arithmetic size against integrality. It does not construct a self-adjoint operator whose spectrum consists of zeta zeros.
+
+The rows below compare the mathematical obligations that an independent proof must meet directly. Classical criteria and their research programs do not become additional completed proofs merely through equivalence to RH.
+
+| Route | Object carrying the decisive estimate | Step needed for an independent conclusion |
+| --- | --- | --- |
+| Stepanov / theta lifts | Automorphic forms, integral lattices and theta-lift covolumes | The upper bounds A and B and lower bound C yield a power saving for a prime error; the external formalization completes this chain |
+| Masullo's functional-analysis / trace-formula draft | Adelic function spaces, spectral projections, global and local traces | Justify the global-to-$S$-local comparison and the contributions of zeros omitted outside a narrow spectral strip; an obligation remains unproved at the fixed version below |
+| Weil positivity | The test-function quadratic form in the explicit formula | Prove positivity on the full test class directly from prime, pole and archimedean terms; writing its spectral side as positive squares alone would already use zero localization |
+| Connes | Adelic-class-space traces and spectral realizations | Establish the required global trace comparison, including regularization and test-function domains; a local trace formula does not complete the global argument |
+| Nyman / Burnol | Approximation distances and zero obstructions in Mellin / Fourier Hilbert spaces | Directly produce approximation-error upper bounds tending to zero for the actual arithmetic functions; finite Gram positivity alone does not control this limit |
+| de Branges / Hermite–Biehler | Entire structure functions and reproducing kernels | Establish the required kernel positivity directly for a structure function matching zeta, with its domain checked; an RH-equivalent positivity condition cannot serve as an input |
+| de Bruijn–Newman | Real zeros of the backward-heat family $H_t$ | Independently prove that every zero of $H_0$ is real, or $\Lambda\le0$; Rodgers–Tao's $\Lambda\ge0$ controls the other direction |
+
+**The concrete interface in Masullo's route.** Alessandro Maria Masullo, *The Music of the Primes* ([draft of November 20, 2026](https://math216.wordpress.com/wp-content/uploads/2026/11/the-music-of-the-primes.pdf)), §12.3, §12.5 and Chapter 13, attempts to reach Hecke GRH over general number fields through functional analysis and a trace formula. Its theta functions cannot be identified with Alpöge's theta-lift covolume estimates by their names alone. The [fixed status account](https://github.com/mccorvie/riemann-masullo/blob/ef8ada3cd3b5ce8002f5f2d8bcbc20cec85752d7/README.md#comparator) of `mccorvie/riemann-masullo` reports that its terminal theorems still depend on the unproved `traceFormula_exteriorZeros`. Its [§12.5 source](https://github.com/mccorvie/riemann-masullo/blob/ef8ada3cd3b5ce8002f5f2d8bcbc20cec85752d7/RiemannMasullo/Ch12_TraceGeometric/Sec5.lean) retains that gap explicitly: for every positive strip width and admissible test, the sum of the exterior-zero terms must vanish, with boundary zeros included outside the strip. This attribution refers to the linked source and status account; it is neither a replay by this book nor a rejection of every possible repair. In particular, a terminal file without a local `sorry` can still depend on unproved declarations.
+
+**Sources and status of the other routes.** Connes, *Trace formula in noncommutative geometry and the zeros of the Riemann zeta function* (1999, [arXiv:math/9811068v1](https://arxiv.org/abs/math/9811068v1)), interprets critical zeros as an absorption spectrum and possible noncritical zeros as resonances, a more precise claim than simply finding a spectrum. Burnol, *A lower bound in an approximation problem involving the zeros of the Riemann zeta function* (2002, [arXiv:math/0103058v2](https://arxiv.org/abs/math/0103058v2)), supplies approximation obstructions; Báez-Duarte, *A strengthening of the Nyman–Beurling criterion for the Riemann Hypothesis* (2003, [arXiv:math/0202141v2](https://arxiv.org/abs/math/0202141v2), Theorem 1.1) supplies the closure criterion using integer dilations. These are literature results, not new independent RH proofs supplied here. The companion volume's [§31.3](https://github.com/the-omega-institute/trureturing-books/blob/main/books/quantum-geometry/en/ch34-s31-arc-calculus-riemann-and-hermite-biehler.md) gives the specific de Branges kernels, Weil-type zero forms and heat-flow criteria with their sources. Conrey–Li's analysis of additional positivity conditions underscores the need to check the precise condition ([arXiv:math/9812166v1](https://arxiv.org/abs/math/9812166v1)); the Rodgers–Tao lower bound is in *The de Bruijn–Newman constant is non-negative* (2020, §1, [10.1017/fmp.2020.6](https://doi.org/10.1017/fmp.2020.6)). None of these external sources acquires this book's frozen-verification badge through this remark.
+
+**Location and multiplicity separate in a hand calculation.** Repeat one unit-circle point, $u_1=u_2=u$. For every $N\ge0$,
+
+$$
+\begin{aligned}
+p_k&=2u^k,\\
+T_N&=[2u^{a-b}]_{0\le a,b\le N}=2vv^*,\\
+v&=(1,u,\ldots,u^N)^{\mathsf T}.
+\end{aligned}
+$$
+
+Thus $x^*T_Nx=2|v^*x|^2\ge0$: the localization criterion [@thm-ch15-toeplitz-circle] permits repeated nodes. Likewise, for real $\gamma$, the self-adjoint matrix $A=\gamma I_2$ satisfies, when $z\ne\gamma$,
+
+$$
+\begin{aligned}
+\det(zI_2-A)&=(z-\gamma)^2,\\
+(zI_2-A)^{-1}&=\frac{I_2}{z-\gamma},\\
+\operatorname{Tr}(zI_2-A)^{-1}&=\frac{2}{z-\gamma}.
+\end{aligned}
+$$
+
+The resolvent has a first-order pole, but its residue projection has rank $2$ and its trace has residue $2$. A first-order resolvent pole therefore does not certify a simple eigenvalue. For a positive integer $m$, the local analytic factorization $f(s)=(s-\rho)^m g(s)$, with $g(\rho)\ne0$, gives $f'/f=m/(s-\rho)+g'/g$, hence $(s-\rho)f'(s)/f(s)\to m$. This scalar reading records multiplicity. These calculations are manual algebraic or local analytic derivations, not formalized in this remark.
+
+They also identify additional inputs a spectral route to simplicity would need: a **multiplicity-preserving** correspondence between arithmetic zeros and the spectrum, followed by a condition excluding higher-dimensional eigenspaces. For example, if a finite-dimensional self-adjoint operator has a cyclic vector $b$, so that $b,Ab,A^2b,\ldots$ span the space, their projections onto any eigenspace $E_\gamma$ are all $\gamma^kP_\gamma b$. They span at most one dimension, so $\dim E_\gamma=1$. The arithmetic correspondence and cyclicity would still require proof. This finite-dimensional argument constructs no spectral operator for zeta.
+:::
+
+::: {.problem #prob-ch15-post-grh-simplicity title="After Critical-Line Localization: Are All Nontrivial Zeros Simple?"}
+For every $\rho$ with $0<\operatorname{Re}\rho<1$ and $\zeta(\rho)=0$, prove $\zeta'(\rho)\ne0$, or $m(\rho)=1$. Classical RH and Dirichlet GRH locate zeros without resolving this problem. The positivity and self-adjointness examples above show that these abstract properties alone do not exclude multiplicity.
+:::
+
+Extensions across function families also require separating covered cases from general frontiers. For a finite abelian extension $K/\mathbb Q$, the classical factorization $\zeta_K(s)=\prod_\chi L(s,\chi)$, with $\chi$ ranging over the primitive Dirichlet characters attached to the characters of $\operatorname{Gal}(K/\mathbb Q)$, already reduces critical-strip zero localization to Dirichlet GRH (literature result; see L. C. Washington, *Introduction to Cyclotomic Fields*, second edition, Chapter 4, 1997, [10.1007/978-1-4612-1934-7](https://doi.org/10.1007/978-1-4612-1934-7)). Such Dedekind functions must not be relisted as unresolved cases. Still open are Dedekind GRH for general number fields, GRH for general unitarily normalized Hecke $L$-functions, including imaginary-quadratic characters outside the Dirichlet family, and GRH for general $\mathrm{GL}_2$ automorphic $L$-functions. Higher-dimensional Artin $L$-functions require separate treatment of holomorphy and zero localization. Neither the Dirichlet terminal statements above nor the Ramanujan bounds on this chapter's finite Hecke shells establish these general claims.
+
 ## 15.3 Complete Algebraic Proof of the Universal Norm-5 Eigenvalue Identity
 
 Let us now bring the abstract PSD criterion down to concrete, rock-solid integer algebra. On the fundamental spin-$1$ shell $V_1$ of $\mathrm{SO}(3, \mathbb{Q})$ (the Chebyshev character shell of [Chapter 10](ch10-peter-weyl-rational-spin-shells.md)), the homogeneous ray fidelity relative to $\mathbf{o} = (1, 0, 0, 0)$ is

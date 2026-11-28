@@ -203,7 +203,7 @@ section: "第五卷"
 <div class="body">
   <h2 class="t">模方 5 的赫克谱<em>用有理数检验</em></h2>
   <p class="lead">对非常数本征模，拉马努金界可写成无复数的半正定判据 <Tex t="4p-\lambda^2\ge0" />，其中 <Tex t="\lambda" /> 是未归一化本征值。</p>
-  <TheoremCard class="compact mt" label="定理15.4" title="未归一化赫克和与自旋 1 特征标" cite="thm-ch15-hecke-t5-chi1-eigenvalue" gid="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.heckeT5_chi1_eigenvalue">
+  <TheoremCard class="compact mt" label="定理15.6" title="未归一化赫克和与自旋 1 特征标" cite="thm-ch15-hecke-t5-chi1-eigenvalue" gid="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.heckeT5_chi1_eigenvalue">
     <p>对每枚非零整四元数 <Tex t="q" />，有 <Tex t="(T_5\chi_1)(q)\equiv-\tfrac25\chi_1(q)" />。</p>
   </TheoremCard>
   <div class="card mt-s">

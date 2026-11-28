@@ -203,7 +203,7 @@ section: "Volume V"
 <div class="body">
   <h2 class="t">A <em>rational test</em> for the norm-5 Hecke spectrum</h2>
   <p class="lead">On a nonconstant eigenmode, the Ramanujan bound becomes the complex-free PSD test <Tex t="4p-\lambda^2\ge0" />, using the unnormalized eigenvalue <Tex t="\lambda" />.</p>
-  <TheoremCard class="compact mt" label="Theorem 15.4" title="The unnormalized Hecke sum on the spin-1 character" cite="thm-ch15-hecke-t5-chi1-eigenvalue" gid="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.heckeT5_chi1_eigenvalue">
+  <TheoremCard class="compact mt" label="Theorem 15.6" title="The unnormalized Hecke sum on the spin-1 character" cite="thm-ch15-hecke-t5-chi1-eigenvalue" gid="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.heckeT5_chi1_eigenvalue">
     <p>For every nonzero integer quaternion <Tex t="q" />, <Tex t="(T_5\chi_1)(q)\equiv-\tfrac25\chi_1(q)" />.</p>
   </TheoremCard>
   <div class="card mt-s">
