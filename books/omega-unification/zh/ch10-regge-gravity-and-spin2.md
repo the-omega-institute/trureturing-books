@@ -269,6 +269,14 @@ $$
 
 若一致误差界失效，可取两组耦合趋零且读数差为 $o(\lvert u-u'\rvert)$ 的序列。两组在极限有相同读数，由归一化取值列的零点界可知它们具有相同的极限速率分布。在该极限处，将三阶曲率列写成平移速率核的积分。每个原子处的取值和一阶扣减项都被泛函消去，留下严格为正的积分。混合差在这个泛函下无法抵消曲率差，从而得到统一界。若 $a<A$，少于 $2r$ 个固定读数时，取 $r$ 个互异内点速率和严格正的权重，混合参数的读数雅可比具有满行秩。因而可用隐函数保持读数固定，同时改变 $u$。$2r$ 个读数也达到识别曲率所需的下界。[完整推导与双中心六点复算](https://github.com/the-omega-institute/trureturing-books/issues/1969#issuecomment-7238956267)
 
+在一个六点算例中，可以直接给出统一的误差常数。取 $k=1$，令 $T$ 以概率 $2/3$、$1/3$ 分别取 $-1$、$2$，并在 $b_j=(j-1/(2j))^2-2$（$1\le j\le6$）处读取均值。只要两组混合各至多有三个原子，补偿速率均在 $[15/8,5]$，且 $\lvert u\rvert,\lvert u'\rvert\le 2^{-6000}$，就有
+
+$$
+\lvert u-u'\rvert\le 2^{675}\|m-m'\|_\infty.
+$$
+
+这里 $k=1$ 使零耦合的归一化核列具有公共有理分母。换基后，平方 Cauchy 核的采样行列式给出一项对合流也有效的正下界。靠近被消去的速率时，曲率项保有正下界。远离这些速率时，混合差含有的速率差平方积足以压过曲率余项。由此算出的常数很保守，适用于整个指定速率区间和任意混合权重。[手工推导与精确有理复算](https://github.com/the-omega-institute/trureturing-books/issues/1995#issuecomment-7239065501)
+
 物理耦合满足 $\lvert\beta-\beta'\rvert^3\le 4\lvert u-u'\rvert$。若每个读数的误差至多为 $\varepsilon$，任何误差预算内的拟合与真实模型的读数相距至多 $2\varepsilon$。因此 $u$ 与 $\beta$ 的最坏误差分别为 $O(\varepsilon)$ 与 $O(\varepsilon^{1/3})$，且两阶都是锐的。固定一个容许的补偿速率，比较 $\beta=\pm h$。读数差按 $h^3$ 缩小，而带号立方坐标与物理耦合的差分别为 $2h^3$ 与 $2h$，故允许达到读数差一半的噪声时，两组都能给出相同的观测。[有限差商推导与有理区间复算](https://github.com/the-omega-institute/trureturing-books/issues/1906#issuecomment-7238707033)
 
 若首项为偶次 $j$，而首个奇次 $m>j$，固定 $2r-1$ 个读数以消去混合参数后，一个剩余读数在零点折返。再加一个一般读数就能分开两支，因为未归一化权重的两个对数变分方向 $v^{j/2}$ 与 $v^{m/2}$ 在混合切向空间和常数之外仍线性独立。因此一般的 $2r+1$ 个读数足够。对刚得到的格点形状律，某个有限阶的奇次系数必非零。其首现阶数与形状均值决定适用哪一种局部情形。[高阶分支推导](https://github.com/the-omega-institute/trureturing-books/issues/1611#issuecomment-7230292091) · [精确三点算例](https://github.com/the-omega-institute/trureturing-books/issues/1611#issuecomment-7230342324)
