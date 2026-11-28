@@ -278,6 +278,14 @@ $$
 
 固定整对质量矩阵后，若 $0<\theta<\pi/2$，最小破缺等于 $F$ 当且仅当这个平面的法线同时落在 $A,B$ 的核中。取等时，两条顶线各占两个轮换坐标，并且两线偏角之和恰为 $d$。若两线只共用一个坐标，最近轮换线相同会迫使 $\theta<d$，最近轮换线不同则会迫使 $\pi/2-\theta<d$。因此它们共用同一个坐标平面。对谱简单的部门，谱隙估计取等还要求最轻质量线本身是轮换本征线，只能取该平面的法线。秩一部门自动湮灭法线。两谱均简单时，等号条件化为 $|V_{ud}|=1$。若 $|V_{ud}|<1$，最小破缺严格大于 $F$。[等号判据与定量裕量的推导](https://github.com/the-omega-institute/trureturing-books/issues/1875)
 
+固定两套质量基后，若只让次重质量平方趋于零，上述差距以什么速度收窄？记 $D_*$ 为这对矩阵在全部轮换本征基上的最小破缺。令两套归一次重质量平方分别为 $a\varepsilon,b\varepsilon$，其中 $a,b>0$，并固定 $0<\theta<\pi/2$。记 $\lambda_u=|V_{ub}|^2/\sin^2\theta$、$\lambda_d=|V_{td}|^2/\sin^2\theta$，它们分别是上、下型最轻质量线在顶底平面内的投影长度平方。手工推导给出
+
+$$
+D_*-F=\frac{\sqrt{3/2}\sin d}{2}(a\lambda_u+b\lambda_d)\varepsilon+O(\varepsilon^2).
+$$
+
+对固定的质量基和角度，首阶只读取最轻质量线在平面内的分量。在顶底平面内重做最优分角时，各部门的有效谱隙为 $1-a\varepsilon(1-\lambda_u)$、$1-b\varepsilon(1-\lambda_d)$，平面与法线间的矩阵元只在平方破缺的二次项中出现。任意使破缺达到最小的轮换基，在秩一极限都以顶底平面为一个坐标平面。控制偏离该平面的代价后，得到相同的首阶下界。因此在 $|V_{ud}|<1$ 时，差距的一次项系数严格为正。[首阶下界与矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/1902#issuecomment-7238657944)
+
 在 $1\,\mathrm{TeV}$ 的参考输入表 2 中，$y_c/y_t\le0.00316/0.8573$，$y_s/y_b\le0.000271/0.01392$，因此可取 $g=0.9996$。沿用上面的保守混合输入，$|V_{tb}|>0.98$ 使 $d=\theta$，而 $\sin\theta\ge |V_{cb}|>0.035$ 使破缺严格大于 $0.0428$。用表 2 的边际区间构成输入盒时，仍有 $d=\theta$。由 $|V_{tb}|=\cos\theta_{23}\cos\theta_{13}$，$\sin^2\theta$ 随两个混合角分别增大。代入下端点 $\theta_{23}=0.04233$、$\theta_{13}=0.00369$，得破缺严格大于 $0.0520$。[参考输入表 2](https://arxiv.org/pdf/2510.01312v2#page=14) · [CKM 标准参数化，式 (12.3)](https://pdg.lbl.gov/2024/reviews/rpp2024-rev-ckm-matrix.pdf#page=1)
 :::
 
