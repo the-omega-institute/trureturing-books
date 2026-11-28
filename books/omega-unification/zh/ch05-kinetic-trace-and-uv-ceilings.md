@@ -214,6 +214,8 @@ $$
 
 差值 $A_*^u+C_*^u-M^u-w_1^u-d^u$ 在 $[7/2,4]$ 上严格下降，其唯一零点满足 $3.55808144<u_c<3.55808145$。当 $7/2\le u<u_c$ 时，转移端点给出更大的左极限。当 $u_c\le u\le4$ 时，左极限等于 $L$。在 $u=7/2$，预算为 $B_0-0.0001$ 的有限转移谱已能超过 $L+0.00035$。[过渡点的证明与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2096#issuecomment-7239931811) · [有限转移算例](https://github.com/the-omega-institute/trureturing-books/issues/2059#issuecomment-7239638973)
 
+在 $u=7/2$，最大值由转移端点给出。为从下方逼近，在 $B_0-\varepsilon$ 取 $N-1$ 份 $1-\varepsilon^2/N$，再取 $W(\tau-s_*-\varepsilon)$ 和 $W(s_*)$，用一份趋零的零暴露热权补足 $S$。预算到达 $B_0$ 时，$N$ 份截顶热权可同时趋于 $1$，上确界升至 $N+w_1^u$。左跳跃与 $N$ 无关，复算（`NUM`）约为 $0.117293354235$，左极限比 $L$ 高约 $0.000462433708$。[完整推导与标准库复算](https://github.com/the-omega-institute/trureturing-books/issues/2059#issuecomment-7239894188)
+
 对所有实数 $u\ge4$，左极限恰为 $L$。将热权降序排列，与 $N-1$ 份 $1$ 加上 $M,w_1,d$ 的序列比较，只有第 $N+1$ 个前缀和可能超出比较值。盈余在低热权区间有贡献，前 $N$ 份热权的亏损则压低 $0.41\le z\le0.95$ 上正部和的积分。临界跑动长度 $\tau_0$ 随 $u$ 不减，因为增大 $u-1$ 会降低 $[0,1]$ 上截断指数分布的各个尾概率。这个单调性使有限指数区间可以统一比较。对 $u\ge8$，凸幂对较高热权的偏重随指数呈指数增长。上界覆盖任意有限整数重数。
 
 在 $B_0$，$N$ 份截顶热权可以同时趋于 $1$，第二热迹的上确界为 $N+w_1^u$。因此 $u\ge u_c$ 时的左跳跃为 $1-M^u-d^u$，与 $N$ 无关。取 $u=4$，复算（`NUM`）得到约 $0.113987815$。[整个指数区间的推导](https://github.com/the-omega-institute/trureturing-books/issues/2059#issuecomment-7239617760) · [四次热迹复算](https://github.com/the-omega-institute/trureturing-books/issues/2059#issuecomment-7239523334) · [小指数构造](https://github.com/the-omega-institute/trureturing-books/issues/2059#issuecomment-7239426333)
