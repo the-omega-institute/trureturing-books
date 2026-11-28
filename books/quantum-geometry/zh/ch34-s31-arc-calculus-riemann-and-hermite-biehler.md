@@ -559,6 +559,26 @@ $$
 
    将给出 $a(1-a)\le d_N^2\le U<a(1-a)$，矛盾。实际认证只需选定任意有限系数 $b_k$，严格包住 $\lVert\chi-\sum_{k\le N}b_k\rho_k\rVert^2\le U$，因为距离平方不大于这个试探误差；无需先求精确最优投影。例如 $a=\tfrac14$ 时，门槛为 $U<\tfrac3{16}$，排除的是凯莱坐标中的闭环带 $\tfrac12\le\lvert(\rho-1)/\rho\rvert\le\tfrac{\sqrt3}{2}$。仅凭这道下界，门槛不能改成 $U\le a(1-a)$：在 $x=a$ 或 $x=1-a$ 处恰好取等号。当 $\operatorname{Re}\rho\downarrow\tfrac12$ 或 $\lvert\operatorname{Im}\rho\rvert\to\infty$ 时，$x\to1$，下界可趋于零；因此这个有限区域证书本身不给出覆盖整个右半带的统一误差门槛，也不提供达到给定门槛所需的 $N$。
 
+   对矩形区域，同一下界给出精确的统一门槛。固定 $N\ge0$、$0<\delta<\tfrac12$ 与 $T\ge1$；若严格认证
+
+   $$
+   d_N^2\le U<K(\delta,T),\qquad
+   K(\delta,T)=\frac{2\delta\bigl((\tfrac12-\delta)^2+T^2\bigr)}{\bigl((\tfrac12+\delta)^2+T^2\bigr)^2},
+   $$
+
+   则不存在满足 $\tfrac12+\delta\le\operatorname{Re}\rho<1$、$1\le\lvert\operatorname{Im}\rho\rvert\le T$ 的非平凡零点，包含所列闭边界。这仍是上述冻结下界的**手工推论，未另经 Lean 核验**。为证明门槛，写 $\rho=\beta+i\gamma$，令 $u=\beta-\tfrac12\in[\delta,\tfrac12)$、$y=1-x=2u/\bigl((\tfrac12+u)^2+\gamma^2\bigr)$ 与 $B(u)=(\tfrac12+u)^2+T^2$。因为 $\beta^2\le\gamma^2$，有 $x\ge\gamma^2/(\beta^2+\gamma^2)\ge\tfrac12$，故 $0<y\le\tfrac12$。又
+
+   $$
+   \begin{aligned}
+   uB(\delta)-\delta B(u)
+   &=(u-\delta)(T^2+\tfrac14-u\delta)\ge0,\\
+   y&\ge\frac{2u}{B(u)}\ge\frac{2\delta}{B(\delta)}=:y_0,\\
+   y(1-y)-y_0(1-y_0)&=(y-y_0)(1-y-y_0)\ge0.
+   \end{aligned}
+   $$
+
+   因而假想零点将迫使 $d_N^2\ge y(1-y)\ge y_0(1-y_0)=K(\delta,T)>U$，矛盾。几何下界在 $\beta=\tfrac12+\delta$、$\lvert\gamma\rvert=T$ 处取到 $K(\delta,T)$，所以这是该下界在指定区域上的精确最小值；此处的最优性只针对几何下界，不断言该位置存在零点。例如 $\delta=\tfrac14$、$T=2$ 时门槛为 $U<\tfrac{520}{5329}$，严格宽于 $U<\tfrac1{20}$；这只是条件算例，没有计算出新的试探误差 $U$。前述任意试探向量的认证上界仍然足够。
+
 **证明。** 第 1 款：由 [@prop-ch34-nyman-beurling-frozen-facts] 第 1 款（$\theta=1/k$）加上 $\int_1^\infty\frac{1}{kx}x^{s-1}dx=-\frac{1}{k(s-1)}$，得 $\int_0^\infty\rho_k(x)x^{s-1}dx=-k^{-s}\zeta(s)/s$（$0<\operatorname{Re}s<1$），又 $\int_0^1x^{s-1}dx=1/s$；对 $f=\chi-\sum_kc'_k\rho_k$ 在 $\operatorname{Re}s=\frac12$ 上用梅林—普朗歇尔公式，$\mathcal Mf=(1-\zeta A)/s$，$a_k=-c'_k$，$\lvert s\rvert^2=\frac14+t^2$。格拉姆矩阵元的公式是同一计算。第 2 款：若 $\sum_kc_k\rho_k=0$，则 $\zeta(s)\sum_kc_kk^{-s}=0$ 在临界线上几乎处处成立；$\zeta$ 在线上的零点孤立，所以这个狄利克雷多项式在线上恒为零，它是整函数，于是恒为零，令 $\operatorname{Re}s\to+\infty$ 逐个得 $c_k=0$。$V_N$ 有限维，故是闭的；$d_N=0$ 将给出 $\chi\in V_N$，即 $\zeta A=1$ 在临界线上几乎处处成立，由唯一性在 $\mathbb C\setminus\{1\}$ 上成立，但 $\zeta(-2)=0$ 而 $A(-2)$ 有限，矛盾。第 3 款是格拉姆—施密特正交化：$\chi$ 在 $V_N$ 上的投影等于它在 $V_{N-1}$ 上的投影加上 $\langle\chi,e_N\rangle e_N$。$\square$
 
 **它说了什么，没说什么。** [@prop-ch34-nyman-beurling-frozen-facts] 第 4 款是 Nyman–Beurling 判据中“容易的方向”写出了常数。写 $\rho=\beta+i\gamma$，由 $\lvert\rho-1\rvert^2+2\beta-1=\lvert\rho\rvert^2$，下界等于 $(2\beta-1)\lvert1-\rho\rvert^2/\lvert\rho\rvert^4$，小于 $1/\lvert\rho\rvert^2<1/\gamma^2$。由 Platt–Trudgian（见 [@rem-ch34-radial-lock-pair-disks]），离线零点都有 $\lvert\gamma\rvert>3\cdot10^{12}$，所以任何这样的下界都小于 $(3\cdot10^{12})^{-2}<1.12\times10^{-25}$，而 [@ex-ch34-nyman-beurling-numbers] 中的 $d_{300}^2\approx8.0\times10^{-3}$ 比它大 $10^{22}$ 倍以上：有限个 $d_N$ 看不见假想的离线零点。这给出与 Li 曲率的共同圆盘坐标：$z(s)=1-1/s$ 把 $\operatorname{Re}s>1/2$ 映入单位圆盘，且 $z(1-\bar\rho)=1/\overline{z(\rho)}$（手工代数推导）。同一假想离线零点否定 RH，因而所引[典范 Li 曲率正性失败定理](lean:D5/S3/Weil/Probability/CanonicalLiCurvatureZeroFree.not_rh_forces_canonical_curvature_failure) 保证存在某个有限阶 $T_N(c^{\mathrm{Li}})$ 不半正定；它是埃尔米特矩阵，故有负特征值（有限维线性代数的手工推论）。这一步不需要另行假设零点和表示，也没有给出检测阶数。更强的负惯性计数见 [@rem-ch34-li-toeplitz-negative-index]。相反，Nyman 的 $G_N$ 无条件正定，同一离线零点只迫使所有 $d_N^2$ 留在同一正下界 $r^2(1-r^2)$ 以上；其障碍是逼近误差不能趋零。共同坐标没有给出两个有限矩阵之间的恒等式，也不能把有限次成功检验升级为全称结论。J.-F. Burnol（*Adv. Math.* **170**, 56–70, 2002，定理 2.1 与注 2.2）在单位圆上给出了对应的多项式模型：根全在圆上时距离平方按 $\sum m^2/N$ 趋于零，有根在开圆盘内时距离有正的下界；上面的第 4 款是后者在半平面上的对应。

@@ -139,7 +139,40 @@ $$
 For $d<0$, interchange the first two points and take $a=0,b=-d$. The full proof is checked by the Lean kernel.
 :::
 
-This proof uses Mathlib’s rational numbers and their order. Its Lean dependencies include `propext`, `Classical.choice`, and `Quot.sound`. Law II also requires $r\ge0$. The criterion describes the readings on three sampled points. Extending those data to a comparison space requires the global transport laws as well.
+The three-point criterion and the five-point criterion below both use Mathlib’s ordered rational numbers. Both Lean proofs depend on `propext`, `Classical.choice`, and `Quot.sound`. Law II also requires $r\ge0$.
+
+Return to the $3/5$ example and include both transported points $w=[x,y,z]$ and $v=[y,x,z]$. By invariance under left and right translations, $z$ reads $t=\kappa(x,y)$ against both. Can the original difference of $4/5$ survive? At $t=3/5$ the largest difference allowed by the five-point matrix falls to $13/20$, attained at $a=3/4$ and $b=1/10$.
+
+::: {.theorem #thm-ch01-five-point-transported-contrast title="Reading contrasts with two transported points" lean="D5/S3/Quantum/AURICOmega/FivePointTransportedContrast.exists_transported_readings_iff"}
+Fix $t,d\in\mathbb Q$ with $0\le t\le1$. In the order $(x,y,z,w,v)$, there exist nonnegative rationals $a,b,c,e,r$ with $a-b=d$ such that the matrix
+
+$$
+G=\begin{pmatrix}
+1&t&a&b&e\\
+t&1&b&c&a\\
+a&b&1&t&t\\
+b&c&t&1&r\\
+e&a&t&r&1
+\end{pmatrix}
+$$
+
+satisfies $h^{\mathsf T}Gh\ge0$ for every $h\in\mathbb Q^5$ if and only if
+
+$$
+d^2\le
+\begin{cases}
+(1-t^2)^2, & 0\le t\le 1/2,\\
+(5/4-t)^2, & t>1/2,\quad (t-1/2)^2\le 1-t^2,\\
+(2t-1)^2(1-t^2), & t>1/2,\quad (t-1/2)^2>1-t^2.
+\end{cases}
+$$
+:::
+
+::: {.proof}
+Exchanging $x,y$ and $w,v$ simultaneously reverses the sign of $d$, so take $a\ge b$. First omit $v$. Split the four weights into their symmetric and antisymmetric parts under the simultaneous exchange of $x,z$ and $y,w$. This gives two binary quadratic forms whose determinant bounds yield the three cases. Conversely, in each case one can choose rational four-point readings with $c=0$ and $b<1$. To give the fifth point readings $a,t$ against $y,z$, take its projection onto their span with coefficients $(a-bt)/(1-b^2)$ and $(t-ba)/(1-b^2)$. The four-point form guarantees that the slack needed to bring the fifth diagonal entry up to $1$ is nonnegative. The full proof is checked by the Lean kernel.
+:::
+
+These matrices describe compatible readings on five labels. Which such data extend to a kernel invariant under both translations on an entire heap remains a separate existence question.
 
 - **Any point serves temporarily as an origin, recovering a group in three lines**: pick any temporary reference point $o \in \mathcal{M}$, and define a binary product $x \star_o z := [x, o, z]$ and local inverse $x^{-1_o} := [o, x, o]$. Associativity follows straight from Law I: $(x \star_o y) \star_o z = [[x, o, y], o, z] = [x, o, [y, o, z]] = x \star_o (y \star_o z)$. Left and right identity are $[o, o, z] = z$ and $[x, o, o] = x$, and the left and right inverses take two rewrites each:
 
@@ -162,7 +195,17 @@ Both outcomes occur on the same finite group. Take $G=S_3\times\{+1,-1\}$ with t
 
 The permutation reading gives quotient $S_3$, where the order of $(12)$ and $(23)$ still changes the product. The parity reading gives the abelian group of order two, where both orders give the even class. Passing to reading classes restores extensional separation. The reading still distinguishes the order of transport exactly when some commutator remains visible in the quotient.
 
-For the permutation reading with quotient $S_3$, choosing $(\sigma,+1)$ in each class carries ternary transport back to the original twelve points. The same readings arise on a second set of twelve points
+**The same transposition squares can coexist with different 3-cycle cubes.** Write each element of $S_3$ as $r^is^j$, where $r=(123)$, $s=(12)$, $i$ is taken modulo $3$, and $j$ modulo $2$. Let representatives of even permutations commute with every point of the identity class, and let representatives of odd permutations act on it by inversion. Two groups of eighteen points realize this action. Use the additive group $H_0=(\mathbb Z/3\mathbb Z)^2$ or $H_1=\mathbb Z/9\mathbb Z$, and multiply points by
+
+$$
+(a,j)(b,k)=(a+(-1)^j b,\ j+k\bmod 2).
+$$
+
+Let $\bar a$ be the first coordinate in $H_0$ and the residue modulo $3$ in $H_1$. The relation $srs^{-1}=r^{-1}$ makes $(a,j)\mapsto r^{\bar a}s^j$ a homomorphism. In both groups, the reading is $1$ for equal projections and $0$ otherwise. Each class has three points, with the same Gram sum of squares and the same noncommutative transport on the quotient. Both models relax extensional separation.
+
+In both groups every transposition representative $(a,1)$ squares to $(a-a,0)=(0,0)$. In the $H_0$ model, the choice $r^is^j\mapsto((i,0),j)$ preserves multiplication by the displayed formula, so it preserves ternary transport. In the $H_1$ model, the representatives of $r$ are $(1,0),(4,0),(7,0)$, and each cubes to $(3,0)$. A choice preserving ternary transport would preserve the identity after left multiplication by the inverse of its identity representative. It would then preserve multiplication as well. Since $r^3=e$ in the quotient, the cube of its representative would have to be $(0,0)$. The cube thus detects the obstruction even when every transposition has an involutive representative.
+
+With a central identity class, a transposition square can also obstruct a choice. Return to the earlier permutation reading with quotient $S_3$. Choosing $(\sigma,+1)$ in each class carries ternary transport back to the original twelve points. The same readings arise on a second set of twelve points
 $$
   G'=\{(\sigma,j)\in S_3\times\mathbb{Z}/4\mathbb{Z}:j\bmod 2=\epsilon(\sigma)\},
 $$
