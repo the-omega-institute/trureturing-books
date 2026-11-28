@@ -326,6 +326,14 @@ $$
 
 共同标度的驻定仍允许对单个截止的移动高度敏感。对单独检验截止敏感性的四点算例，移动最敏感的截止，相对移动不到 $8.6\times 10^{-120}$ 曲率就已转负，比上表的通用上界小 $800$ 倍以上，与 $311$ 单态实例同量级，截止之间的比值须精确到约 $120$ 位。$10^{-122}$ 的微调没有减少，只是转移并分摊到截止比值与权重上（[共同标度驻定及其代价](https://github.com/the-omega-institute/trureturing-experiments/blob/f516e0f09642194c1a309ffc0cfd94e129844b15/experiments/ch39-omega-research/replay/%E4%B8%A4%E7%82%B9%E6%88%AA%E6%AD%A2%E5%9C%A8%E5%8C%B9%E9%85%8D%E7%89%9B%E9%A1%BF%E9%A1%B9%E6%97%B6%E4%B8%8D%E8%83%BD%E9%A9%BB%E5%AE%9A%E7%9C%9F%E7%A9%BA%E8%AF%BB%E6%95%B0%E8%80%8C%E5%9B%9B%E7%82%B9%E6%B5%8B%E5%BA%A6%E5%AF%B9%E5%85%B1%E5%90%8C%E6%88%AA%E6%AD%A2%E6%A0%87%E5%BA%A6%E4%B8%80%E9%98%B6%E9%A9%BB%E5%AE%9A.md) · [区间证书](https://github.com/the-omega-institute/trureturing-experiments/blob/f516e0f09642194c1a309ffc0cfd94e129844b15/experiments/ch39-omega-research/replay/ch39-cutoff-scale-stationarity.py)）。
 
+在上述配对布局中，若给总变差设预算 $B=1\,030\,993.778$，上述配对及权重符号容许把第四截止压低多少？**手工推导与区间计算。** 规定 $x_4\le e^{-\rho}$，其中 $\rho\ge0$。满足五矩且 $T\le B$ 的布局恰在 $\rho\le\rho_*$ 时存在，其中
+
+$$
+2.0364717006\times10^{-7}<\rho_*<2.0364717126\times10^{-7}.
+$$
+
+在阈值处只有一种布局，且 $t_4=-\rho_*$、$T=B$。这是因为解支的代价随 $t_4$ 严格降低，在阈值附近只需比较 $t_4=-\rho$ 上的最小值。用《OMEGA 数学》§7.1.1 的截断乘积与有限逆计算实系数热响应射流，消去前两点后读出第三坐标的代价曲率。区间证书将极小点定位在严格凸的区间，再夹定最小代价穿过预算的位置。继续压低上限只会缩小可行集。 [射流运算](https://github.com/the-omega-institute/trureturing-books/blob/94ad6c52db61555ca7d9365a64ff9764e488bfd1/books/omega-math/zh/ch07-second-order-jet-calculus.md#sec-ch07-jet2-inverse-chain) · [模型推导与阈值复算](https://github.com/the-omega-institute/trureturing-books/issues/2411#issuecomment-7242695596)
+
 若要求移动截止时牛顿标定始终精确等于 $K=1$，真空读数还能翻负吗？固定这些驻定解的有符号权重 $p_j$，记单点牛顿、真空响应为 $k,w$，则 $K=\sum_jp_jk(x_j)$、$W=\sum_jp_jw(x_j)$，沿标定面有 $C=W$。在对数坐标 $u_j=\log(x'_j/x_j)$ 中，记 $a_j=p_jDk(x'_j)$、$b_j=p_jDw(x'_j)$，其中 $D=x\,d/dx$。在内部正规点 $a\ne0$，允许的速度满足 $a\cdot v=0$。各坐标限速 $|v_j|\le1$ 时，最大的一阶真空下降率为 $\min_\lambda\sum_j|b_j-\lambda a_j|$。任取 $\lambda$ 即给出上界。取 $b_j/a_j$ 按 $|a_j|$ 加权的中位数（仅计 $a_j\ne0$），令非零剩余量对应的速度取其符号的相反数，中位数处的速度即可补足约束并达到上界。
 
 当一阶最优速度刚好触及盒面时，二阶补偿只能向盒内移动。把 $a,b$ 固定在起点，记 $S=\min_\lambda\sum_j|b_j-\lambda a_j|$，$F_*=\{v\in[-1,1]^n:a\cdot v=0,\ b\cdot v=-S\}$，并记 $\mathcal M=[\lambda_-,\lambda_+]$ 为全部加权中位数构成的区间。若 $a\ne0$ 且 $K,W$ 三次连续可微，半径 $r$ 的原盒内、沿 $K=1$ 的最小真空读数仍展开为 $c-Sr+Br^2+O(r^3)$。二阶系数为
