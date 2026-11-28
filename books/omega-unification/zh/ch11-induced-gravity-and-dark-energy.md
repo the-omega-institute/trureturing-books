@@ -479,6 +479,8 @@ $$
 
 平方质量 $W_1$ 的最优统一平方根常数随 $\delta\downarrow0$ 按 $\delta^{-1/2}$ 发散。设 $s_c=e^{-vz_c}$。由 $R_u(z_c)-v=\delta/2+O(\delta^2)$ 和 $R_u$ 的单调性，$f''$ 在 $s_c\le x<1$ 上至少为正常数乘 $\delta$。把这个下界代入上面的单侧估计，就得到 $W_1=O(\sqrt{\varepsilon/\delta})$。在 $s_c$ 处把一层等权分到 $s_c\pm h$，热迹保持精确，真空误差的二阶系数为 $f''(s_c)/2$，而 $W_1/h\to1/(vs_c)$。因此 $h\downarrow0$ 时的 $W_1/\sqrt{\varepsilon}$ 趋于 $\sqrt{2/[I_2(z_c)(R_u(z_c)-v)]}$，这一下界与统一上界的增长阶相同。[临界展开与固有时积分复算](https://github.com/the-omega-institute/trureturing-books/issues/1689#issuecomment-7241441212)
 
+继续增大 $v$，重质量端旁会重新出现一段可识别的内层。取 $u=1$、$Z=3$，令 $v_{\mathrm L}\in(1.39286084691,1.39286084692)$ 为重端切线恰好经过轻端的截止值。写 $\eta=v-v_{\mathrm L}$。当 $0<\eta\le1/1000$ 时，重端旁的可识别区间为 $[3-d(v),3]$。其内边界的切线恰好经过轻端，故可对 $D_{e^{-v(3-d)}}(1)=0$ 隐式求导。区间计算给出初始增长率 $k=d'(v_{\mathrm L}+) \in (13.96697518,13.96697520)$，并得到一致误差界 $|d(v)-k\eta|\le58\eta^2$。这里的宽度沿平方质量坐标度量。[手工推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/1689#issuecomment-7242960770)
+
 **固定整数重数的锐界（`ARGUED`）。** 参考谱各质量层有正整数个态，对照谱也允许任意正整数重数。按平方质量递增排列参考谱的正质量层。设其中 $h$ 层有至少两个态，其余是单态层。用这 $h$ 层隔开单态层，得到长度依次为 $\ell_0,\ldots,\ell_h$ 的连续段，允许空段。任意预先选定的互异正逆截止中，确定参考谱所需的读数恰为 $r+1$ 次。参考谱含零质量时取 $\delta=1$，否则取 $\delta=0$。
 
 $$
