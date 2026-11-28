@@ -85,6 +85,43 @@ $$
 | **第 5 层 · 模型内有效构造**（`MODEL`） | 明确写明全部额外表示、势函数、标尺与权重输入的有效构造（对应四问中 **4/4** 的模型内通过分支） | 严禁冒充无参数第一性原理推导；每条构造必须同页并列其外生自由度与灵敏度账单 | $r = 400$ 两圈规范交汇与秩五中性希格斯门户（[第 5–6 章](ch05-kinetic-trace-and-uv-ceilings.md)）、54 模矩阵希格斯味拟合与 $\mathrm{U}(1)_X$ 重子三重完备（[第 8–9 章](ch08-flavor-hierarchy-and-ckm.md)）、四层热核曲率窗（[第十一章](ch11-induced-gravity-and-dark-energy.md)）与 105 圈 100 维权族（[第十三章](ch13-winding-ladder-and-joint-vacuum.md)） |
 | **第 6 层 · 第一性原理开放前沿**（`OPEN`） | 对应原书四问中 **0/4** 尚未从单一主联络无事后拟合导出的核心硬问题 | 严格保留未证状态，不附验证引用，为后续理论突破与形式化提供明确验收门槛 | 导出重阈值与电弱标度、从主联络选定站点方差分界并构造四维相互作用手征三代、导出共同味作用与动态质子选择定则、导出 $G_N$ 与暗能量以及建立自然非单调选权原理（汇总于 [第十五章](ch15-unified-verdict-and-open-roadmap.md) 与 [终章](coda.md)） |
 
+### B.2.1 谱桥中的证据边界：镜像守恒与正定性 {#sec-ou-appb-mirror-unitarity}
+
+[第三章的凯莱判据](ch03-riemann-zeros-fejer-and-landau.md#sec-ou-3-1)把临界线条件转成单位圆条件。函数方程还提供同高镜像 $\rho\mapsto1-\bar\rho$，但镜像守恒究竟保住了哪一种内积？这个问题让上表中的证据边界落到一个可以手算的谱模型上。
+
+给定库中完整的 `ZeroData` $Z$，包括互异零点 $\rho_n$、精确解析重数 $m_n$、穷尽性、两种对称及局部有限性。令 $I_Z=\{(n,k)\in\mathbb N^2:k<m_n\}$，$H_Z=\ell^2(I_Z;\mathbb C)$。同高镜像保持重数，因而诱导坐标对合 $\sigma$ 与自伴对合等距算子 $(J_Z\psi)(v)=\psi(\sigma v)$。记 $[\psi,\phi]_Z=\langle\psi,J_Z\phi\rangle$，并令 $C_Z$ 为对角系数 $c_n=(\rho_n-1)/\rho_n$ 定义的有界凯莱算子。
+
+::: {.theorem #thm-ou-appb-mirror-j-unitarity title="镜像凯莱守恒与严格负方向" lean="D5/S3/Midline/Cayley/CanonicalZetaCayleyJUnitary.zeroCayleyOperator_j_unitary D5/S3/Midline/Cayley/CanonicalZetaMirrorFundamentalSymmetry.mirror_odd_vector_strictly_negative"}
+对任意上述 `ZeroData` $Z$，不添加 RH 假设，恒有
+
+$$
+C_Z^*J_ZC_Z=J_Z.
+$$
+
+若坐标 $v\in I_Z$ 满足 $\sigma v\ne v$，则其标准单位向量 $e_v$ 给出的镜像奇向量 $w_v=e_v-J_Ze_v$ 满足
+
+$$
+\operatorname{Re}[w_v,w_v]_Z<0.
+$$
+:::
+
+::: proof
+若 $c$ 为某坐标的系数，$c'$ 为其镜像系数，则 $c'=1/\bar c$，故 $\bar c c'=1$；逐坐标配对并求和即得算子恒等式。若 $\sigma v\ne v$，则 $w_v\ne0$ 且 $J_Zw_v=-w_v$，于是 $\operatorname{Re}[w_v,w_v]_Z=-\|w_v\|^2<0$。完整证明由 Lean 内核检查。
+:::
+
+::: {.example #ex-ou-appb-j-unitary-not-unitary title="不定内积守恒不保证普通酉性"}
+以下为二维代数手算（`ARGUED`）。在 $\mathbb C^2$ 上取
+
+$$
+J=\begin{pmatrix}0&1\\1&0\end{pmatrix},\qquad
+C=\begin{pmatrix}2&0\\0&1/2\end{pmatrix}.
+$$
+
+直接相乘得 $C^*JC=J$，而 $C^*C=\operatorname{diag}(4,1/4)\ne I$。向量 $w=(1,-1)$ 满足 $\langle w,Jw\rangle=-2$。这组矩阵只检验从 $J$-酉性推出普通酉性的逻辑，不声称来自实际的 $\zeta$ 零点。
+:::
+
+因此，函数方程给出的镜像守恒允许正、负方向相互配平；第三章单位圆条件要求的是每个凯莱系数自身的模长等于 $1$。把前者用于独立谱证明时，还须证明额外的正定性或相应的普通酉性条件。已知外部 RH 证明可以支持临界线结论，却不会仅凭这条镜像恒等式给出独立的希尔伯特—波利亚算子构造。
+
 ## B.3 交互实验室与全书九幅静态图索引 {#sec-ou-appb-media-map}
 
 本书配有一座五卡联动的交互三维与数值实验室 **`OMEGA//UNIFY`**（目录标识 `behrend-unification-lab`），以及 **9 幅双语定制语义静态图**（由 `books/omega-unification/figures/` 下的脚本按主题与印刷版统一配色角色生成：绿色与蓝色保留给 Lean 核验与零公理内核、紫色标记书面证明与精确证书及已证锐障、琥珀色标记当前模型选择、红色严格保留给开放前沿）。下表先列出交互实验室全部五张实验卡的部署位置与操控对象：
