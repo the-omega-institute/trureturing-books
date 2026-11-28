@@ -89,6 +89,7 @@ Determine the exact value of $C_{\mathrm{Hilb}}^*$.
 :::
 
 Sharper numerical bounds require their own evidence. The global upper bound $2.413469$, the global lower bound $C_{\mathrm{Hilb}}^*>1.53225$, and the finite-clique bounds $C_{\mathrm{Hilb}}^{(6)}<3/2$ and $C_{\mathrm{Hilb}}^{(22)}<2$ lie outside the conclusions of the frozen declarations cited here.
+
 [global-certificate]: https://github.com/the-omega-institute/trureturing/blob/8cb826a0a80a9e3bff77cd9126e1c3314d23e974/D5/S3/Combinatorics/Graph/Chordal/Reconstruction/HilbertGlobalSubJungCertificate.lean#L72
 [unit-budget]: https://github.com/the-omega-institute/trureturing/blob/8cb826a0a80a9e3bff77cd9126e1c3314d23e974/D5/S3/Combinatorics/Graph/Chordal/Reconstruction/HilbertGlobalSubJungFinite.lean#L701
 [quadratic]: https://github.com/the-omega-institute/trureturing/blob/8cb826a0a80a9e3bff77cd9126e1c3314d23e974/D5/S3/Combinatorics/Graph/Chordal/Reconstruction/HilbertGlobalSubJungFinite.lean#L79
