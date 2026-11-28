@@ -204,6 +204,10 @@ $$
 
 一般地，将质量投影与门户 $F$ 同时分成不可约直和。每个直和分量都可以独立取复共轭，最后在各质量空间内作酉变换。这恰好给出全部读数相同的门户。理由是把原矩阵与它的共轭并排放置后，每个矩阵字的迹就是原实迹的两倍；这些迹确定各不可约成分的重数。对 $N\ge2$ 个标量，三阶至 $4N^2-1$ 阶的分点响应已经足够，即使门户有零特征值也成立。[简并质量的分类、有限阶界与算例](https://github.com/the-omega-institute/trureturing-experiments/blob/c5ecff67abceeed44624cbc8346139f64dac240e/experiments/ch39-omega-research/replay/ch39-degenerate-portal-traces.md)
 
+若 $N$ 个标量的质量全相等，每一条闭路上的传播子都相同。除去已知的时空因子，$k$ 阶分点响应只剩门户特征值的幂和 $p_k=\sum_{i=1}^N\lambda_i^k$。两组谱 $(1,12)$ 和 $(9,10)$ 的立方和都是 $1729$，四次幂和却不同。一般地，当 $N$ 已知且读数从三阶连续取得时，在最坏情形下必须且只需读至 **$N+2$ 阶**，即可恢复含重数的实谱，包括负值和零。证明可将两组候选谱按大小排列，沿实轴记录两组已越过的特征值个数之差。该差至多变号 $N-1$ 次。在每个变号处分配一个多项式根，再乘以 $t^2$，所得多项式与计数差的乘积处处同号。其积分由 $p_3,\ldots,p_{N+2}$ 的差确定，读数全等便迫使两组谱吻合。少读最后一阶时，互异正特征值附近仍有一条连续的等读数曲线。
+
+读数误差最大的影响出现在门户特征值一同靠近零时。把两组谱限制在 $[-R,R]$，令 $\epsilon=\max_{3\le k\le N+2}|p_k-p'_k|$。两组谱各自排序后，最大逐项差至多为 $C_{N,R}\epsilon^{1/(N+2)}$，此指数可达。局部还能分清重根与零点的作用。若基准谱在 $a$ 有 $m_a$ 个特征值，则在其充分小的邻域内比较任意两组谱，最优指数为 $1/\max_a(m_a+2\mathbf{1}_{\{a=0\}})$。特别地，互异且非零的谱具有局部线性误差界，而一个单独的零特征值已能把指数降到 $1/3$。[分点响应的源阶与谱误差证明](https://github.com/the-omega-institute/trureturing-experiments/blob/4698b8b85eed917880b90558cb3536a0e648bc3e/experiments/ch39-omega-research/replay/ch39-degenerate-portal-moment-order.md)
+
 在检验 $8\pi I \pm \mathcal{A} \succ 0$ 是否正定、或从全图刚度矩阵中消去高势外层顶点自由度时，反复出现的决定性工具是复分块厄米矩阵的舒尔补极小值定理，它已在 Lean 4 内核中严格冻结：
 
 ::: {.theorem #thm-ou-ch06-schur-minimum title="分块舒尔补二次型是内部变量的精确最小值" lean="D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"}
