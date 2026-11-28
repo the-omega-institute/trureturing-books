@@ -123,7 +123,7 @@ If $abcd>0$, the phase differences for a pure state cancel around the cycle, lea
 $$
 \prod_{j=1}^4\bigl(g_j+i\epsilon_j\sqrt{m_j-g_j^2}\bigr)=i\,abcd.
 $$
-Normalize each factor to recover successive phase ratios, then invert the sums and differences to obtain the $x_j$.
+Divide each factor by $\sqrt{m_j}$ and multiply the second by $-i$ to recover the successive phase ratios. Invert the sums and differences to obtain the $x_j$.
 
 For states of any rank, denote $g_j/\sqrt{m_j}$ in order by $r,w,t,s$. Regard the complex vectors as real vectors. Along $B,A,C$, the two known normalized inner products put the normalized $B,C$ inner product in the interval with center $rs$ and half-width $\sqrt{(1-r^2)(1-s^2)}$. Along the other path, the normalized $B,-iD$ inner product is $w$, so the normalized $B,D$ inner product can range over $[-T,T]$, where $T=\sqrt{1-w^2}$. Combining this with the known $C,D$ inner product $t$ gives the $B,C$ interval $[-M,M]$, with $M=1$ if $|t|\le T$ and $M=T|t|+|w|\sqrt{1-t^2}$ otherwise. The endpoint is the maximum of $ht+\sqrt{(1-h^2)(1-t^2)}$ over $|h|\le T$. If the intervals intersect, one can place $B,D$ in real dimension four, then place $C$ and $A$ in that space. This gives a witness in complex dimension two. If some $a$ passes the mixed-state test, the minimum rank is one when the pure-state test succeeds and two otherwise. If every $a$ fails, the pair is infeasible. [Interval endpoints and reconstruction](https://github.com/the-omega-institute/trureturing-books/issues/1667)
 
