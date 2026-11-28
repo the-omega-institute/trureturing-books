@@ -166,6 +166,10 @@ $$
 
 在具有标准动能的一圈欧氏连续标量模型中，四次分点插入本身也能区分这对门户。沿直线将源放在 $L(0,1,3,7)$，对 $\operatorname{Tr}\log(-\partial^2+D+s(x)F)$ 取四次导数。每个回路按四条边上相应质量的传播子乘积加权。重复质量下标的项在两模型之差中抵消。在其余项中，质量越大，长距离传播衰减越快。把最大质量放在最短边上，依次匹配，就得到各回路的最慢衰减项。三个无向回路中，唯一最慢项沿 $(0,1,3,7)$ 绕行，四条边的质量下标依次是 $(4,3,2,1)$，给出环积 $-\sigma$，反向绕行同号。因此只要 $L$ 充分大，两组四源响应就不同。该读数要求能在四个位置分别施加源。 [四源响应的推导](https://github.com/the-omega-institute/trureturing-experiments/blob/c9a320cd343a00bb53d3f3f4fd4e06bd2dfe5426/experiments/ch39-omega-research/replay/ch39-four-mass-portal-cut.md) · [矩阵与回路的精确核验](https://github.com/the-omega-institute/trureturing-experiments/blob/c9a320cd343a00bb53d3f3f4fd4e06bd2dfe5426/experiments/ch39-omega-research/replay/ch39-four-mass-portal-cut.py)
 
+把四个源点移出直线，就能反演**任意**四层厄米门户，前提是四个正质量已知且互异。从正四面体出发，按所选长度单位，其六条边的平方长度都能在 $1$ 至 $1.04$ 之间独立变化。选定一条四边回路，依次对它的四条边各取一次长度差分。另两条回路各缺一条被改变的边，贡献随即抵消。至多 $5^4$ 个四点构型和 $4^3$ 个三点构型，就能读出每个四边环和三角环的实环积。即使两对质量具有相同的和，各单质量传播子在所选距离上的取值仍线性独立。
+
+若三角环的三个质量下标相同，读出的是对角元的立方。若四边环在两个下标间往返，读出的是相应耦合模的四次方。非零耦合只围成一个独立环时，实环积将剩余相位定到复共轭。若四个顶点上有两个或更多独立环，总能找到一个与另外三点相连的顶点，把这三条边重相位成正实数。此时三角环给出其余相位的余弦，四边环给出正弦的两两乘积，只剩整体符号可选。因此精确的分点读数把门户确定到重相位和整体复共轭，稀疏与奇异门户也在范围内。上述采样数针对精确读数。[推导与采样格](https://github.com/the-omega-institute/trureturing-experiments/blob/c7b62c9afc2ed5c2d63f22cf95957bb3b2faff62/experiments/ch39-omega-research/replay/ch39-four-mass-portal-cut.md#recovering-an-arbitrary-four-layer-portal-from-separated-insertions) · [传播子与相位复算](https://github.com/the-omega-institute/trureturing-experiments/blob/c7b62c9afc2ed5c2d63f22cf95957bb3b2faff62/experiments/ch39-omega-research/replay/ch39-four-source-portal-inverse.py)
+
 在检验 $8\pi I \pm \mathcal{A} \succ 0$ 是否正定、或从全图刚度矩阵中消去高势外层顶点自由度时，反复出现的决定性工具是复分块厄米矩阵的舒尔补极小值定理，它已在 Lean 4 内核中严格冻结：
 
 ::: {.theorem #thm-ou-ch06-schur-minimum title="分块舒尔补二次型是内部变量的精确最小值" lean="D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"}
