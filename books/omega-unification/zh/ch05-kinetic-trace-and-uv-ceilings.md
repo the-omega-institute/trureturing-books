@@ -286,6 +286,21 @@ $$
 
 预算趋向 $B_0$ 时，相对左极限的一阶损失系数为 $uW'(\tau)(M^{u-1}-d^{u-1})$，与 $N$ 无关。对四次热迹 $u=4$，该系数约为 $0.2144536669$（`NUM`）。[宽预算窗的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2170#issuecomment-7240449786) · [四次热迹复算](https://github.com/the-omega-institute/trureturing-books/issues/2116#issuecomment-7240080414)
 
+**小指数下双份预算的谱形换序（手工推导与向外区间核证，ARGUED）。** 取 $1.405\le u\le1.408$、$0.308\le\varepsilon\le0.309$，固定临界截顶 $\tau=\tau_0(u)$，令 $a=w_1$、$S=2+a$、$B=2\tau-\varepsilon$、$b=S/3$。写 $t(w)=-\log(-\log w)/2$、$h=t(b)$、$x=W((B-\tau)/2)$。一份截顶权趋于 $1$，其余暴露由两份 $x$ 平分，这给出候选值 $H_{\mathrm{c}}=1+2x^u+(1+a-2x)^u$。另一个候选由三份活跃热权给出，且其谱形在 $B=3h$ 两侧不同。
+
+$$
+H_3=\begin{cases}
+3c^u+(2+a-3c)^u,\quad c=W(B/3), & B\le3h,\\
+(b-2d)^u+2(b+d)^u,\quad t(b-2d)+2t(b+d)=B,\quad 0<d<0.01, & B>3h.
+\end{cases}
+$$
+
+上确界是 $\max(H_{\mathrm{c}},H_3)$。$H_3\ge H_{\mathrm{c}}$ 时，只有给出 $H_3$ 的谱取等，允许排列并省去零余权。$H_{\mathrm{c}}>H_3$ 时，上确界由正质量谱逼近。预算较小时，凹性比较把三份头权推到均分，并把余权集中到一份零暴露权。预算较大时，最大谱用尽预算且没有尾权。定总热权与定总暴露下的二阶条件迫使较大的热权重复两次。前缀证书给出外部无截顶谱的严格上界。 [低预算证明与区间证书](https://github.com/the-omega-institute/trureturing-books/issues/2459#issuecomment-7243079150) · [高预算证明与区间证书](https://github.com/the-omega-institute/trureturing-books/issues/2459#issuecomment-7243114356)
+
+两条换序曲线在三等权恰耗预算处相接，缺口约为 $0.308284050428566$。在 $B<3h$ 侧，换序指数随缺口增大而下降，在 $\varepsilon=0.309$ 时约为 $1.4061259482292314$。在 $B>3h$ 侧，换序缺口随指数增大，在 $u=1.408$ 时约为 $0.3087758201020113$。
+
+同一指数和缺口窗口内，若 $N\ge3$，上确界为 $N-2+\max(H_{\mathrm{c}},H_3)$，这里只用双份剩余预算 $2\tau-\varepsilon$ 计算两个候选值。将已有截顶权升至极限 $1$ 可以把至多两份未截顶的分支归入单份或双份问题。至少三份未截顶的分支由多前缀比较严格压低。附加 $N-2$ 份趋于 $1$ 的截顶权并补足零暴露余权，在相同预算下可逼近上确界。 [任意预算份数的归约与区间证书](https://github.com/the-omega-institute/trureturing-books/issues/2459#issuecomment-7243155733)
+
 **终端弦的整数锐性（`ARGUED`）。** 当 $\tau>\tau_0$ 且 $x^\dagger<b\le\tau$ 时，令 $\lambda=(b-x^\dagger)/(\tau-x^\dagger)$，并记 $y^\dagger$ 为切点层的平方质量比。整数谱可逼近实权锐界，当且仅当低于输入尺度的极限层所需重数 $n=S\lambda$ 与切点层所需重数 $k=Se^{y^\dagger}(1-\lambda)$ 都是非负整数。趋优谱的预算松弛和切线余量都趋于零，因此第一热权集中在 $y=0$ 与 $y=y^\dagger$ 的邻域。饱和预算把两处的份额固定为 $\lambda$ 与 $1-\lambda$。用 $Se^y$ 乘回第一热权，两处有界邻域内的整数计数就分别趋于 $n$ 与 $k$。
 
 若两项都是整数，就在 $y=\varepsilon$ 放 $n$ 份，在 $y=y^\dagger$ 放 $k$ 份。只要 $0<\varepsilon<e^{-2\tau}$，两层就恰好用完预算。第一热迹欠下的 $\delta=n(1-e^{-\varepsilon})$ 可由一份 $y=-\log\delta\ge1$ 的阈上状态补足，暴露仍为原值。令 $\varepsilon\downarrow0$ 即得实权锐界的极限。由于 $\lambda>0$ 且终端切线的另一处接触在 $y=0$，正质量谱无法取等。[完整推导与复算](https://github.com/the-omega-institute/trureturing-books/issues/1911#issuecomment-7238689688)
