@@ -148,7 +148,7 @@ $$
 对 $v \in V, \psi \in W^*$ 定义线性缠绕算子 $T(w) := \int_G \psi(\sigma(g^{-1})w)\,\rho(g)v\,d\mu(g)$。利用测度 $\mu$ 的左不变性直接验证 $\rho(h)T(w) = T(\sigma(h)w)$，故 $T$ 是从 $\sigma$ 到 $\rho$ 的表示同态。在第一款中，$\rho$ 与 $\sigma$ 不可约且互不等价，舒尔引理迫使 $T = 0$，再作用 $\varphi$ 即得积分为零。在第二款中，$\rho = \sigma$ 为复数域上的有限维不可约表示，舒尔引理迫使 $T$ 为标量倍 $c\,I_V$；两端取迹并利用 $\operatorname{Tr}(\rho(g)\circ (v\otimes\psi)\circ\rho(g^{-1})) = \psi(v)$，得到 $c\,\dim_{\mathbb{C}} V = \mu(G)\,\psi(v)$，再作用 $\varphi(w)$ 即得所求公式。完整证明由 Lean 内核检查。
 :::
 
-现在来看 [@def-ou-ch02-dual-clocks] 的四阶原弧挑选规则究竟如何从黎曼零点里“筛”出纯粹的哈尔测度（`ARGUED`，详见[规范群积分专题](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-%E9%9B%B6%E7%82%B9%E4%B8%8E%E6%A0%87%E5%87%86%E6%A8%A1%E5%9E%8B%E8%A7%84%E8%8C%83%E7%BE%A4%E7%A7%AF%E5%88%86.md)）：
+按 [@def-ou-ch02-dual-clocks] 的四角规则筛选正零点后，所选序列的无权平均收敛到哈尔积分（`ARGUED`，详见[规范群积分专题](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-%E9%9B%B6%E7%82%B9%E4%B8%8E%E6%A0%87%E5%87%86%E6%A8%A1%E5%9E%8B%E8%A7%84%E8%8C%83%E7%BE%A4%E7%A7%AF%E5%88%86.md)）：
 
 1. **三半迹上的常数哈尔体积密度**：对两枚独立哈尔随机单位四元数 $U, V$，各自标量部服从半圆律 $\frac{2}{\pi}\sqrt{1 - x^2}\,dx$；给定标量部后，两根单位虚轴在 $S^2$ 上独立均匀，故其内积在 $[-1, 1]$ 上均匀。由 $z = xy + \sqrt{(1-x^2)(1-y^2)}\cos\psi$ 做雅可比变换，平方根因子竟神奇地全数相消，留下**整个三维凸可行域上的常数密度 $2/\pi^2$**！
 2. **从均匀环面角到最优相对密度 $1/(2\pi)$**：然而当 $p, q, v$ 各自沿圆周均匀分布时，$x = \cos p$、$y = \cos q$ 与 $\cos v$ 服从反正弦律。要把反正弦律折算成上述常数哈尔密度，必须乘上归一化雅可比权重
@@ -191,7 +191,7 @@ $$
 | $1$ | $0.95054808840\ldots$ | $0.12584254589\ldots$ |
 | $2$ | $0.99752136036\ldots$ | $0.15720164049\ldots$ |
 
-这里的 $1/(2\pi)$ 是截止高度趋于无穷时的相对密度。在给定高度可以逐个检验窗条件，再用全谱计数控制未检验的尾部。第十二章用这一方法给出起始高度 $H=100$ 时逆平方加权的共同钟读数，并讨论随 $H$ 变化的误差怎样由窗口计数余项推出（[@rem-ou-ch12-windowed-rate]、[@prob-ou-ch12-windowed-haar-rate]）。
+这里的 $1/(2\pi)$ 是截止高度趋于无穷时的相对密度。在给定高度可以逐个检验窗条件，再用全谱计数控制未检验的尾部。第十二章用这一方法给出起始高度 $H=100$ 时逆平方加权的共同钟读数的上下界，并从窗口计数余项推出按对数高度平均的一阶偏差（[@rem-ou-ch12-windowed-rate]、[@prob-ou-ch12-windowed-haar-rate]）。
 
 ## 2.4 最短原弧的无穷分裂素数细分与二维面积律密度坍缩 {#sec-ou-2-4}
 
