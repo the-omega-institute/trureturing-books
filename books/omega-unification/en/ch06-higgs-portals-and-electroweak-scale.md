@@ -125,6 +125,32 @@ Taking $0<h\le\min(1/30,1/(3240NL))$ gives $E\le108Lh^{-3}\delta$. The fifth-pow
 
 How many fixed points are necessary? Every response value is nonnegative, and all vanish at zero slopes. If at most $2N$ values separated all assignments near the origin, padding the vector of readings with zeros would give a continuous injection from an open ball of slopes into $\mathbb R^{2N}$. Brouwer’s invariance of domain would make the image contain an open neighborhood of zero, which is impossible when every coordinate is nonnegative. The minimum count therefore lies between $2N+1$ and $4N$.
 
+**Mixing between three mass layers.** Suppose three heavy scalars have identical gauge quantum numbers and known positive squared masses $D=\operatorname{diag}(a,b,c)$, with $a<b<c$. Their squared-mass matrix in the background $s$ is $D+sF$, with $F$ an arbitrary Hermitian portal. Even measurements of all three mass eigenvalues for every $s$ can miss which layers mix. Take $D=\operatorname{diag}(1,2,3)$. Give the first portal only the couplings $F_{12}=F_{23}=1$ and their transposes, and the second only $F_{13}=\sqrt2$ and its transpose. Both characteristic polynomials are $(x-2)(x^2-4x+3-2s^2)$. Thus their static one-loop potentials agree wherever the squared masses are positive.
+
+The response to a slowly varying background distinguishes the two portals. At $s=0$, with the local coefficient of $(\partial s)^2$ fixed and its contribution subtracted, and with the common loop normalization removed, the coefficient of $p^2$ in the subtracted Euclidean bubble is
+
+$$
+B=\sum_{i,j}|F_{ij}|^2 I(m_i,m_j),\qquad
+I(u,v)=\int_0^1\frac{z(1-z)}{(1-z)u+zv}\,dz,\qquad (m_1,m_2,m_3)=(a,b,c).
+$$
+
+The two insertions contribute $F_{ij}F_{ji}$ and the propagators carry masses squared $m_i,m_j$, so each off-diagonal pair occurs twice. For the example above, half the difference of the bubble coefficients is $3+4\log 2-\tfrac{21}{4}\log 3>0$.
+
+For every $0<a<b<c$, the static mass curves and this single coefficient recover $F$ up to rephasing the mass eigenvectors and complex conjugation. The slopes of the three mass curves at $s=0$ give $F_{ii}$. With these fixed, the coefficient of $s^2$ in $\det(xI-D-sF)$ determines the sum of the three squared moduli $(|F_{12}|^2,|F_{13}|^2,|F_{23}|^2)$ and their sum weighted by $(c,b,a)$. The remaining direction is $(b-a,-(c-a),c-b)$. Using $I(u,v)=\tfrac12\int_0^\infty r^2/[(r+u)^2(r+v)^2]\,dr$ and taking a common denominator gives
+
+$$
+(b-a)I(a,b)-(c-a)I(a,c)+(c-b)I(b,c)
+=\frac{(b-a)(c-a)(c-b)}2\int_0^\infty\frac{r^2\,dr}{(r+a)^2(r+b)^2(r+c)^2}>0 .
+$$
+
+Thus $B$ fixes the remaining coordinate. The cubic coefficient then fixes $\operatorname{Re}(F_{12}F_{23}F_{31})$. If every edge is present, two phases can be removed by rephasing and the remaining phase is fixed up to sign. If an edge vanishes, all phases can be removed.
+
+In fact one static observable supplies all three mass curves. For every Hermitian $F$, the exact function $V(s)=\operatorname{tr}G(D+sF)$ near $s=0$, with the local counterterms fixed, determines the characteristic polynomial. Together with $B$ it therefore recovers the portal up to the same two symmetries. The logarithm in $G$ reveals which squared-mass branches vanish together. Compare two candidate pencils and follow all six eigenvalues on a common compact Riemann surface where they are single-valued. Label each branch by its known value $a,b,c$ at the same point above $s=0$. Their finite zeros are real because $D^{-1/2}FD^{-1/2}$ is Hermitian. Each vanishing branch has a simple zero even when several vanish together, since its slope at $s_0$ is $-v^*Dv/s_0$ for a normalized null eigenvector $v$. At infinity a branch has either a simple pole with real leading coefficient or a nonzero finite limit, as seen by writing $D+sF=s(F+D/s)$.
+
+Continuing the potential around a zero adds $2\pi i$ times the sum of squares of the branches vanishing there. A pole gives the same rule with the opposite sign. At the base point these sums distinguish every subset of $\{a,b,c\}$ unless $c^2=a^2+b^2$. Thus, away from that resonance, corresponding branches of the two pencils have identical zeros and poles. Their ratio is constant on the compact surface and equals one at the base point.
+
+At resonance the only possible exchange is between the branch labelled $c$ and the pair labelled $a,b$. A common branch can be removed, after which the two remaining labels have distinct subset sums. If there is an exchange and no common branch, the identity between squared branches forces the exchanged triple to have the same zeros and poles. Indeed, a zero of just one of the pair would give a common single branch. The three zero counts thus agree, and the pole set of the single branch is the union of the other two because the leading coefficients are real. Equal zero and pole counts then force identical pole sets. The exchanged triple is consequently $(c,a,b)L(s)$, and canceling its contribution to the logarithmic increments gives $(a,b,c)R(s)$ for the complementary triple, with $L(0)=R(0)=1$. The two potentials differ by $K(R^2-L^2)$ with $K=a^2\log(a/c)+b^2\log(b/c)<0$. Equality with fixed counterterms forces $R=L$. The example $F_\pm=\pm\operatorname{diag}(a,b,-c)$ shows why the counterterms matter. At resonance these portals give the same $B$ and their potentials differ by the linear term $4Ks$. [Three-layer reconstruction and exact examples](https://github.com/the-omega-institute/trureturing-experiments/blob/9ddf0a6ce4d99d35d267b8070d9785dfbe2f180e/experiments/ch39-omega-research/replay/ch39-three-mass-hermitian-portal.md)
+
 Whenever we certify positivity of $8\pi I \pm \mathcal{A}$ on coupled Higgs–heavy-radial channels or eliminate high-potential shell vertices into an effective boundary operator, the exact matrix identity at work is the Lean-verified block Schur complement minimum theorem:
 
 ::: {.theorem #thm-ou-ch06-schur-minimum title="Block Schur Complement Quadratic Form as Exact Minimum" lean="D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"}
