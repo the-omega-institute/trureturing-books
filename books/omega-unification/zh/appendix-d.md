@@ -8,6 +8,16 @@
 
 **七点与十一点支撑。** 具有互异非零有向差的支撑就是模 Golomb 尺。Buratti 与 Stinson 的文献分类给出七点支撑的全部维数 $d\ge48$。模 $48$ 的 $\{0,1,3,15,20,38,42\}$ 是一个见证。十一点支撑的全体维数是 $120$、$133$ 和所有 $d\ge135$。模 $120$ 的 $\{0,1,4,9,23,30,41,43,58,68,74\}$ 产生 $110$ 个互异的非零差，恰好缺少 $12,24,\ldots,108$。[Buratti 与 Stinson，*New Results on Modular Golomb Rulers, Optical Orthogonal Codes and Related Structures*（2020），定理 2.3(5)、(9) 与表 1](https://arxiv.org/abs/2007.01908v2)
 
+**十三点支撑。** 可强制秩十三的循环维数恰为 $168$、$183$ 和所有 $d\ge193$。模 $168$ 的 Bose–Chowla 构造给出支撑
+
+$$
+\{0,16,20,21,33,39,96,99,107,134,136,143,158\},
+$$
+
+其 $156$ 个有向差互异，恰好缺少 $14,28,\ldots,154$。第一套读数取任意恰以这十三点为支撑的分布，第二套读数取均匀分布，便唯一确定秩十三的对角态。模 $183$ 可从十四点 Singer 支撑去掉一点。模 $193$ 至 $212$ 有逐维整数见证。对 $d\ge213$，取长度 $106$ 的十三点整数 Golomb 尺。它的正差互异且任意两个正差之和至多为 $212$，所以在模 $d$ 下仍无碰撞。
+
+计数排除 $d<157$，群环与模素数平方的计算排除 $157$ 至 $159$。按最短相邻间隙归一的整数回溯排除 $160$ 至 $167$，固定单位间隙的回溯排除 $169$ 至 $182$ 及 $184$ 至 $192$。每步要求新增圆周短距互异并避开偶数模的半周距离。再用未用短距的最小可能和限制剩余间隙总长。[最短间隙搜索 `Search::extend`](https://github.com/the-omega-institute/trureturing-experiments/blob/1e9df81133f2fb709e3919702455672b5874d7c5/experiments/ch39-omega-research/replay/ch08-thirteen-golomb-minimum-gap.cpp#L36) · [单位间隙搜索 `Search::extend`](https://github.com/the-omega-institute/trureturing-experiments/blob/1e9df81133f2fb709e3919702455672b5874d7c5/experiments/ch39-omega-research/replay/ch08-thirteen-golomb-unit-gap.cpp#L45) · [逐维见证与排除记录](https://github.com/the-omega-institute/trureturing-books/issues/1676#issuecomment-7234902039)
+
 **第二读数要多接近均匀分布，才能排除低秩？** 固定无碰撞支撑 $S$ 上的第一概率，按 $p_1\ge\cdots\ge p_k>0$ 排序。设相容态 $\rho$ 的 Fourier 概率为 $q$，均匀概率为 $u=(1/d,\ldots,1/d)$。给定 $1\le r<k$，由 $\sum_{i=1}^r\max(p_i,\tau)=1$ 唯一确定 $\tau>p_r$。在秩至多为 $r$ 的态中，欧氏距离 $\|q-u\|_2$ 的最小值为
 
 $$
