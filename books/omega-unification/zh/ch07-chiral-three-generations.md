@@ -67,6 +67,8 @@ $$
 
 取齐六个轨道也足以覆盖整个共同双钟环面。对每对钟角和每个辐边软化值 $0\leq\delta\leq10^{-8}$，十八站读取的最小奇异值都大于 $0.00004$。为控制采样点之间的钟角，在每个循环特征内对五列作插值，在每个角盒内给所有控制矩阵验证同一个近似左逆。统一谱隙控制试探列投到真实最低线时的误差。因此，在背景已知且五荷共用相位参考时，要从旋转不变的站集还原五个轻态，最少恰需十八站。[全环面下界与推导](https://github.com/the-omega-institute/trureturing-experiments/blob/1499a01569f845d3230d2120ad8c4c3a347b20c7/experiments/ch39-omega-research/replay/ch39-five-charge-full-torus.md)
 
+若同一个三站轨道有两站失效，余下十六站在整个共同双钟环面和允许的软化区间内仍能还原五个输入。在每个背景上，五个完整轨道都能分别还原至少两个循环特征的输入。扣除这两部分的贡献后，受损轨道的幸存站以模为 $1/\sqrt3$ 的系数读到余下一个特征。无论哪个轨道受损、哪一站幸存，最小奇异值都大于 $5\times10^{-11}$。若该轨道还保留第二站，十七站也有同一下界。[轨道缺站时的证明与误差界](https://github.com/the-omega-institute/trureturing-experiments/blob/c27504b38d60383f43ee456154edc1f09a9db377/experiments/ch39-omega-research/replay/ch39-five-charge-orbit-erasure.md)
+
 将内部空间按特征标正交拆块，背后依托的是一条无 $\pi$、纯有理的群论正交骨架。正如[第二章](ch02-quaternion-clocks-and-haar-zeros.md)在双时钟球面哈尔积分中所确立的，偶次切比雪夫特征多项式 $E_m(\kappa)$ 在全阶上的正交归一性已在 Lean 内核中不依赖实数极限而严格冻结：
 
 ::: {.theorem #thm-ou-ch07-peter-weyl-orthonormal title="全阶偶次彼得—魏尔特征核的无 π 有理哈尔正交归一性" lean="D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.all_degree_peter_weyl_orthonormal"}
