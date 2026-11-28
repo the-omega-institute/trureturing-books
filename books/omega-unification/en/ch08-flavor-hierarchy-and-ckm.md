@@ -324,6 +324,18 @@ The rotation eigenline near $e_0$ absorbs the displacement between the heavy mas
 
 For example, in the standard orthonormal basis $(e_0,e_1,e_2)$ take $\mu=a=b=1$, $v=c=e_1$, and $s=(e_1+i e_2)/\sqrt2$. The optimal leading coefficient is $3/2$. Requiring one rotation eigenline to be the normal $e_2$ to the top–bottom plane raises the optimal coefficient to $5\sqrt6/8>3/2$. Reorienting the two light rotation eigenlines attains the true minimum. [Global derivation, optimizing bases, and matrix calculation](https://github.com/the-omega-institute/trureturing-books/issues/1928#issuecomment-7238762769)
 
+**At the cutoff for splitting the angle near orthogonality (hand derivation).** Take the endpoint heavy lines $e_0,e_1$ and the plane normal $e_2$ as an orthonormal basis. Rotate the reference down-sector mass basis through $\mu\varepsilon$ toward the up-sector heavy line in the top–bottom plane. Both normalized middle eigenvalues are proportional to $\varepsilon$. After factoring out $\varepsilon$, let $C,S$ be the off-diagonal entries of the two fixed rank-one light blocks in $(e_1,e_2)$ and $(e_0,e_2)$, respectively. Write $p,p_2$ for the up-sector diagonal entries and $v$ for the down-sector diagonal entry along $e_0$. At the cutoff $q=|C|^2=|S|^2+\mu^2$, assume $\mu>0$ and $C,S\ne0$, and set $L=|(p-p_2)C|$. With the normal fixed, the up-sector off-diagonal cost attains its minimum in the endpoint basis, where the down-sector cost is slightly lower. For sufficiently small positive $\varepsilon$, the exact plane-constrained defect is $D_{\mathrm{plane}}=\sqrt{6q}\,\varepsilon$. Allowing the normal to tilt gives
+
+$$
+D_{\mathrm{plane}}-D_*=\frac{\sqrt6}{2\sqrt q}
+\begin{cases}
+\tfrac32 L(2\mu^2 L)^{1/3}\varepsilon^{7/3}+O(\varepsilon^{8/3}), & p\ne p_2,\\
+8qv\mu^2\varepsilon^4+O(\varepsilon^{9/2}), & p=p_2.
+\end{cases}
+$$
+
+When the up-sector light diagonal entries differ, tilting the normal reduces the up-sector cost linearly. The down-sector cost grows quadratically with this tilt, so an in-plane turn must offset it, at a quadratic cost to the up sector. Balancing these changes gives the $7/3$ power. When the diagonal entries coincide, the up-sector gain starts at quadratic order in the tilt, and the down-sector slack at the endpoint determines the leading term. Both leading coefficients are positive. [Matching bounds and matrix reproduction](https://github.com/the-omega-institute/trureturing-books/issues/2016#issuecomment-7239160733)
+
 Table 2 at $1\,\mathrm{TeV}$ gives $y_c/y_t\le0.00316/0.8573$ and $y_s/y_b\le0.000271/0.01392$, so we can take $g=0.9996$. With the conservative mixing inputs above, $|V_{tb}|>0.98$ gives $d=\theta$, while $\sin\theta\ge |V_{cb}|>0.035$ forces a defect strictly above $0.0428$. Using the marginal intervals in Table 2 as an input box still gives $d=\theta$. Since $|V_{tb}|=\cos\theta_{23}\cos\theta_{13}$, $\sin^2\theta$ increases with each mixing angle. Substituting the lower endpoints $\theta_{23}=0.04233$ and $\theta_{13}=0.00369$ gives a defect strictly above $0.0520$. [Reference inputs, Table 2](https://arxiv.org/pdf/2510.01312v2#page=14) · [Standard CKM parametrization, Eq. (12.3)](https://pdg.lbl.gov/2024/reviews/rpp2024-rev-ckm-matrix.pdf#page=1)
 :::
 
