@@ -96,6 +96,28 @@ For example, take the two Fourier phases $t=\pm2\pi/3$, put $p=(1,1,1)/3$, and p
 
 Even all three pairwise tests can pass for an impossible preparation. Take $v=17/25$, so $q=(59,8,8)/75$ at both phases. At either Fourier phase the state diagonal with weights $q$ in the down basis gives uniform up probabilities. The two down bases can also give these readings together. Their first vectors have overlap of modulus $1/\sqrt3$. Rephase them to have positive inner product and normalize their sum. In both bases the first probability is $(1+1/\sqrt3)/2$, and the remaining two are equal by exchange symmetry. This realizes $v=(1+\sqrt3)/4$. Mixing with $I/3$ reaches $17/25$, above the common-preparation limit of $2/3$. [One-variable test and exact matrix checks](https://github.com/the-omega-institute/trureturing-books/issues/1649#issuecomment-7238042900)
 
+When the three readings are compatible, do they identify the preparation? In the same four-site model, put $F_{jk}=\omega^{jk}/\sqrt3$ for $0\le j,k\le2$ and write $B=F^*\rho F$. The first Fourier vector lies along $\mathbf1$, so $F^*V(t)F=\operatorname{diag}(e^{it},1,1)$. Combining the three channels into one complex number gives
+
+$$
+\sum_{j=0}^2\omega^j q_j(t)=e^{-it}B_{01}+B_{12}+e^{it}B_{20},\qquad q(0)=p.
+$$
+
+Multiplication by $e^{it}$ gives a quadratic in $e^{it}$. Three distinct phases determine its three coefficients. Conversely, the complex number on the left determines each real probability triple because its entries sum to one. The compatible preparations are exactly the matrices $F B F^*$ with $B=C+\operatorname{diag}(x)\succeq0$ and $\sum_j x_j=1$, where the readings fix the off-diagonal entries of the zero-diagonal Hermitian matrix $C$.
+
+Positivity can also determine the missing diagonal. Set $m=\max_{|u_j|=1}(-u^*Cu)$. Remove the overall phase by writing $u=(1,v,w)^T$. At fixed $v$, choose $w$ to minimize the real part of $w(C_{02}+\bar v C_{12})$. This leaves a maximum on one circle.
+
+$$
+m=2\max_{|v|=1}\left(\left|C_{02}+\bar v C_{12}\right|-\operatorname{Re}(C_{01}v)\right).
+$$
+
+A hand derivation identifies $m$ with the least trace of a positive semidefinite completion of $C$. Adding a large scalar matrix gives a positive definite completion, and positive semidefinite matrices of bounded trace form a bounded set, so a minimizer $B_*$ exists by closedness. At this trace the affine plane of completions misses the positive definite cone, since a positive definite member could be shifted down by a small scalar matrix. Take a nonzero separating functional $\operatorname{tr}(Y\,\cdot)$ with larger values on the cone. Scaling within the cone gives $Y\succeq0$ and $\operatorname{tr}(YB_*)=0$. The plane contains every traceless diagonal direction, so $Y$ has constant diagonal, which we can normalize to one.
+
+Apply the three-dimensional phase Gram maximum theorem to the real linear functional $X\mapsto-\operatorname{Re}\operatorname{tr}(CX)$ on complex correlation matrices. It gives $m\ge-\operatorname{tr}(CY)=\operatorname{tr}B_*$. The reverse inequality follows from $u^*B_*u\ge0$ for every phase vector. [Phase Gram maximum theorem](lean:D5/S3/Quantum/Recovery/CommutingRandomUnitaryRecovery.phase_gram_max)
+
+For $m>1$ there is no common state. At $m=1$, take any maximizing $u$. Every feasible $B$ satisfies $u^*Bu=0$, so positivity forces $Bu=0$ and fixes all three entries $x_j=-\bar u_j(Cu)_j$. For $m<1$, the completion $B_*+(1-m)I/3$ is positive definite. Small perturbations in both traceless diagonal directions preserve the entire record.
+
+For example, uniform readings at every phase give $C=0$ and allow the whole simplex of Fourier-diagonal states, including ranks one, two and three. For a uniquely determined mixed state, take $u=(1,1,-1)^T$ and $B=(I-uu^*/3)/2$. This matrix has rank two and $Bu=0$, so it saturates the uniqueness test. Its three probabilities are $4/9$, $(5+2\sqrt3\sin t)/18$ and $(5-2\sqrt3\sin t)/18$, all strictly positive at every phase. [Completion proof and exact matrix checks](https://github.com/the-omega-institute/trureturing-books/issues/1649#issuecomment-7238251495)
+
 At the Fourier phases we can also count the pure states that realize a given pair. For $t=2\pi/3$, set $D=\operatorname{diag}(\omega,1,1)$. Direct multiplication gives $iDVD=F$, where $F_{jk}=\omega^{jk}/\sqrt3$ with indices starting at zero. Rephasing the basis vectors preserves probabilities. The negative phase gives $\bar F$, which produces the same attainable pairs upon conjugating the state. For a hand derivation, use $F$ and write the density matrix $\rho$ in the up basis, so $p_j=\rho_{jj}$. The down probabilities $q_k=(F^*\rho F)_{kk}$ can be encoded by one complex number,
 
 $$
