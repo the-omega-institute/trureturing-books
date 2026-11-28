@@ -4,11 +4,10 @@ SIZE = (704, 305)
 WRAP = True
 ALT = {
     "zh": "三条路线均以裸 CIC 为起点。AXIOM-Ω 的消去与结合律、读数条件及非交换条件"
-          "需要逐条给出证书。Mathlib 实数路线依赖三个标准公理。自定义 axiom 引入无归约规则的假设。",
+          "需要逐条给出证书。Mathlib 实数路线依赖三个标准公理。数据公理 n : Nat 没有实现，对 n 的模式匹配停滞。",
     "en": "All three routes start from bare CIC. The AXIOM-Ω model laws require individual certificates "
           "for cancellation and associativity, the reading, and noncommutativity. "
-          "Mathlib reals bring in three standard axioms. A custom axiom introduces "
-          "an assumption with no reduction rule.",
+          "Mathlib reals bring in three standard axioms. Matching on the unimplemented data axiom n : Nat stalls.",
 }
 
 
@@ -51,8 +50,8 @@ def draw(fig):
     custom.arrow(*assumption.bottom, 112, 148, "magenta", 1.4, head=5)
     custom.text(112, 173, custom.t("边界遗漏 ⇒ False", "Missing guard ⇒ False"),
                 size=13, anchor="middle", color="magenta")
-    custom.text(112, 198, custom.t("无归约规则", "No reduction rule"),
+    custom.text(112, 198, "axiom n : Nat",
                 size=14, anchor="middle", color="magenta")
     custom.line(112, 212, 112, 224, "magenta", 1.5, dash="4 4")
     custom.cross(112, 232, color="magenta")
-    custom.box(112, 243, custom.t("计算停滞", "Computation stalls"), "magenta", w=194)
+    custom.box(112, 243, custom.t("对 n 的匹配停滞", "Matching on n stalls"), "magenta", w=194)

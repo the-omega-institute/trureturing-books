@@ -15,11 +15,11 @@
 
 那么，传统形式化数学里的三大公理究竟从哪里混进来的？它们恰恰来自三大看似无害的经典便利工具：
 
-1. **非构造性选择公理 `Classical.choice`**：允许从“某非空类型存在元素”的命题证明中凭空抽出一个数据元素，却不提供任何计算算法。一旦一条定义或定理触及 `Classical.choice`，编译器便无法生成可执行机器码，不得不标上 `noncomputable`，并阻断内核反射求值。
+1. **非构造性选择公理 `Classical.choice`**：允许从“某非空类型存在元素”的命题证明中凭空抽出一个数据元素，却不提供任何计算算法。需要把这个见证作为数据的计算，在提取见证这一步没有可执行实现。若只在可擦除的证明中使用选择公理，数据部分仍可执行。
 2. **商类型公理 `Quot.sound`**：把等价类强行压成新类型，使等价但表示不同的两个对象在命题上相等，却在计算归约层缺少唯一的规范代表元。`Mathlib` 将实数定义为有理柯西序列模去零极限序列的商，一步把 `Quot.sound` 与 `Classical.choice` 全部带进底层。
 3. **命题外延性 `propext`**：断言逻辑等价的两个命题完全相等。尽管它不像 `Classical.choice` 那样直接破坏求值，却仍属于裸 CIC 归约机制之外的附加公理。
 
-值得特别警惕的是，即便不导入 `Mathlib`，标准库中某些自带类型也可能暗藏陷阱：例如带互素证明字段的内置有理数算术往往在内部引用了 `propext`、`Quot.sound` 乃至 `Classical.choice`。因此，在零公理基础库 `OmegaInit` 与 `OmegaMath` 中，我们直接启用 `prelude` 裸环境，从零构造归纳自然数、有号整数与显式携带“零分母未定义分支”的精确分数类型（如 `Omega.Ratio` 与 `Omega.IntRatio`），或采用唯一约分的纯数据规范记录，并一律依托**构造性可判定相等性（`DecidableEq`）**——即对任意两个对象 $a, b$，都存在一个在有限步内停机、给出“$a = b$ 的显式证明”或“$a \neq b$ 的显式反驳”的决策程序。
+值得特别警惕的是，即便不导入 `Mathlib`，标准库中某些自带类型也可能暗藏陷阱：例如带互素证明字段的内置有理数算术往往在内部引用了 `propext`、`Quot.sound` 乃至 `Classical.choice`。因此，在 `OmegaInit` 与 `OmegaMath` 的零公理算术部分，我们直接启用 `prelude` 裸环境，从零构造归纳自然数、有号整数与显式携带“零分母未定义分支”的精确分数类型（如 `Omega.Ratio` 与 `Omega.IntRatio`），或采用唯一约分的纯数据规范记录，并一律依托**构造性可判定相等性（`DecidableEq`）**——即对任意两个对象 $a, b$，都存在一个在有限步内停机、给出“$a = b$ 的显式证明”或“$a \neq b$ 的显式反驳”的决策程序。
 
 ::: {.definition #def-ch01-zero-axiom-core title="零公理裸 CIC 构造层与可判定相等性"}
 称一个形式化模块处于**零公理裸 CIC 构造层**，若其中每条定义与定理的传递公理闭包均为空集（即不依赖 `propext`、`Classical.choice`、`Quot.sound` 或任何用户自定义 `axiom`），且所有类型判断与等式验证仅通过依值类型检查与 $\beta\delta\iota\zeta$-归约完成。称类型 $T$ 具有**构造性可判定相等性**（`DecidableEq`），若存在可计算函数，对任意 $a, b : T$ 返回两分支之一：或是 $a = b$ 的证明项，或是 $(a = b) \to \mathrm{False}$ 的反驳项。
@@ -217,7 +217,7 @@ class OmegaSpace (M : Type) where
 下图将上述三条形式化路线的逻辑依赖与母公理 `AXIOM-Ω` 的三条法则合画在一张结构总览中，清晰标出裸 CIC 零公理地板与经典公理栈及自定义 `axiom` 陷阱之间的分界。
 
 ::: {.figure src="ch01-axiom-omega-cic"}
-**三条形式化路线与母公理 AXIOM-Ω 的逻辑分层对照。** 构造路线展示从模型法则到分项证书的思路。裸 CIC 加 OmegaMath 提供零公理的整数与分数运算。经典实数路线与自定义公理路线各自有不同的信任基础。依据见 [@def-ch01-zero-axiom-core]、[@def-ch01-axiom-omega] 与 [@rem-ch01-three-route-comparison]。
+**三条形式化路线与母公理 AXIOM-Ω 的逻辑分层对照。** 构造路线展示从模型法则到分项证书的思路。裸 CIC 加 OmegaMath 提供零公理的整数与分数运算。品红栏以数据公理 `n : Nat` 为例，展示对 `n` 的模式匹配为何停滞。依据见 [@def-ch01-zero-axiom-core]、[@def-ch01-axiom-omega] 与 [@rem-ch01-three-route-comparison]。
 :::
 
 逻辑地板与模型契约已经就位。先在最透明的一维舞台上构造一个可交换的载体，看看齐次整数射影线 $\mathbb{QP}^1$ 如何跨过对径点，使读数始终有限。

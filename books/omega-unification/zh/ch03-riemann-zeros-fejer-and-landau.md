@@ -180,7 +180,18 @@ $$
 
 横向积分把 $\log\zeta$ 在零点左侧的割线跳跃变为与 $\beta-\sigma$ 成正比。分别移过两种指数相位，再取实部对应的半和，割线就给出上式的双曲余弦权重。水平边界由局部对数导数控制在 $O_\lambda(L)$，上界取右极限。非共振使素幂多项式的相位积分也在这一预算内。[Korolev，引理 4 前的截断权](https://www.mathnet.ru/links/2bb06e5a975dd807fe74eae4c1f9fd1f/im2766_eng.pdf#page=9) · [割线推导与复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239342305)
 
-在 $a=0$ 时，零点和经同高反射还原 $C_\lambda(T)$，只差归一化系数和有界的低高度项。增大 $a$ 会把每个右侧零点的权重改成 $\cosh(\lambda(\delta_\rho-a)_+)-1$，其中 $v_+=\max(v,0)$。将该权重的导数与 Selberg 密度界配对，右侧余项至多为 $O_\lambda((T/L)e^{-aL/4}+L)$。取 $a=1/L$ 只降低密度估计中的常数，合成谱上窄带与右侧余项均可达到 $T/L$ 量级。取 $a=8\log L/L$ 时，右侧上界降到 $O_\lambda(T/L^3+L)$。因此若要在 $T/L$ 尺度上取得严格改善，只需研究横向窄带 $1/2\le\sigma\le1/2+8\log L/L$ 内的同频积分。[Simonič，式 (3)，引 Selberg 密度界](https://arxiv.org/pdf/1910.08274v2#page=1)
+在 $a=0$ 时，零点和经同高反射还原 $C_\lambda(T)$，只差归一化系数和有界的低高度项。增大 $a$ 会把每个右侧零点的权重改成 $\cosh(\lambda(\delta_\rho-a)_+)-1$，其中 $v_+=\max(v,0)$。将该权重的导数与 Selberg 密度界配对，右侧余项至多为 $O_\lambda((T/L)e^{-aL/4}+L)$。取 $a=1/L$ 只降低密度估计中的常数，合成谱上窄带与右侧余项均可达到 $T/L$ 量级。取 $a=8\log L/L$ 时，右侧上界降到 $O_\lambda(T/L^3+L)$。在这一宽度下，窄带的同频积分由偏移的二次矩决定。具体地，令 $D_\lambda(u,T)=\sum_{0<\gamma\le T,\,\delta_\rho>u}e^{i\lambda\gamma}$，按重数计并纳入高度上端点。相减两个横向积分的割线公式，再以 $\cosh(\lambda d)-1=\lambda^2 d^2/2+O_\lambda(d^4)$ 展开，得到以下手工推导（`ARGUED`）。
+
+$$
+\int_3^T e^{i\lambda t}\int_{1/2}^{1/2+a}\log|\zeta(\sigma+it)|\,d\sigma\,dt
+=\pi\sum_{\substack{0<\gamma\le T\\\delta_\rho>0}}\delta_\rho^2 e^{i\lambda\gamma}
++O_\lambda(T/L^3+L),
+\qquad a=8\log L/L.
+$$
+
+这里 $\sum_{\delta_\rho>0,\,0<\gamma\le T}\delta_\rho^4=O(T/L^3)$ 来自同一个 Selberg 密度界，固定素幂多项式的同频积分为 $O_\lambda(1)$。[Simonič，式 (3)，引 Selberg 密度界](https://arxiv.org/pdf/1910.08274v2#page=1)
+
+二次矩等于 $2\int_0^{1/2}uD_\lambda(u,T)\,du$。若在 $0<u\le a$ 内只有一致界 $D_\lambda(u,T)=O_\lambda(T)$，分层积分给出 $O_\lambda(T(\log L)^2/L^2)$。双对数因子可以达到。每个相位周期只在末端放一对偏轴零点，偏移为 $\pm 4\log\log t/\log t$，其中 $t$ 是周期末端。这样的点数和偏移符合密度界，两枚临界线点的微移可精确抵消这对零点给带权和增加的部分。由此可同时保留光滑计数（误差 $O_\lambda(1)$）和同频带权端点首项（误差 $O_\lambda(1)$），而模型的二次矩仍为 $(8\lambda/\pi+o(1))T(\log L)^2/L^2$。要把实际 $\zeta$ 的窄带积分控制到 $O_\lambda(T/L^2)$，需要对二次矩取得同阶估计。[构造、端点与数值复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240157206)
 
 对实际 $\zeta$ 零点，保留实部权重时，无须用 RH 作为解析输入也可在高度平均下读出端点项。令 $S(t)$ 为黎曼–冯·曼戈尔特公式中的辐角项，即离开零点高度时 $N(t)=1+\vartheta(t)/\pi+S(t)$，其中 $\vartheta$ 是黎曼–西格尔 $\vartheta$ 函数。从带权和中扣除光滑端点项
 
@@ -221,7 +232,34 @@ $$
 
 将纵坐标按单位高度分组，设第 $j$ 组的质量 $B_j$ 为该组内各零点的 $\delta_\rho^2$ 之和。每组有 $O(\log U)$ 枚零点，Selberg 密度界经分层积分给出 $\sum_{\gamma\le U}\delta_\rho^4\ll U/(\log U)^3$，故 $\sum_j B_j^2\ll U/(\log U)^2$。对组内的相位小数部分和双曲余弦权作幂级数展开，得到一族以组号为整数频率的 Fourier 多项式，各项的系数至多为 $B_j$ 乘可求和的因子。Carleson–Hunt 最大不等式控制所有完整分组的部分和，含截断高度的最后一组由自身质量控制，纳入等于上端点的纵坐标。[Simonič，式 (1)、(3)](https://arxiv.org/pdf/1910.08274v2#page=1) · [Oberlin 等，定理 1.1](https://arxiv.org/pdf/0910.1555#page=2) · [推导与复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239462563)
 
-因此，在 $I$ 中存在某个 $T\le U$ 使差项的模超过 $A>0$ 的频率集合，测度至多为 $O_I(U/(A^2(\log U)^2))$。对二进高度应用 Borel–Cantelli 引理，就有 $C_\lambda(T)=O_{\lambda,\varepsilon}(\sqrt T/(\log T)^{1/2-\varepsilon})$，其中 $\varepsilon>0$ 任取，结论对几乎处处的 $\lambda$ 沿所有实数高度成立。球壳的指定模态构成可数集，仍需逐频率的算术估计。下一节的碰撞估计还需要在随高度增长的频带内控制零点和。
+因此，在 $I$ 中存在某个 $T\le U$ 使差项的模超过 $A>0$ 的频率集合，测度至多为 $O_I(U/(A^2(\log U)^2))$。对二进高度应用 Borel–Cantelli 引理，就有 $C_\lambda(T)=O_{\lambda,\varepsilon}(\sqrt T/(\log T)^{1/2-\varepsilon})$，其中 $\varepsilon>0$ 任取，结论对几乎处处的 $\lambda$ 沿所有实数高度成立。球壳的指定模态构成可数集，仍需逐频率的算术估计。
+
+固定频率目标的相位边界可在同一合成谱上精确看见。取 $\gamma_k=2\pi k$、$m_k=\lfloor\log(2\pi k)\rfloor$、$\delta_k=2/\log(2\pi k)$，并在每个 $\gamma_k$ 放置 $m_k$ 重的镜像零点。令 $u=1/\log T$ 且 $T=2\pi N$，则 $\delta_k>u$ 对所有 $\gamma_k\le T$ 成立，从而
+
+$$
+D_\lambda(u,T)=\sum_{k=16}^{N}m_k e^{2\pi i\lambda k}.
+$$
+
+若 $\lambda\notin\mathbb Z$，几何部分和的模不超过 $2/|1-e^{2\pi i\lambda}|$。对单调的 $m_k$ 作 Abel 分部求和，得到 $D_\lambda(u,T)=O_\lambda(\log T)$。若 $\lambda\in\mathbb Z$，相位完全共振，并且
+
+$$
+D_\lambda(u,T)=\sum_{k=16}^{N}\lfloor\log(2\pi k)\rfloor
+=\frac{T}{2\pi}\log T+O(T).
+$$
+
+这个模型每个单位高度仍只有 $O(\log T)$ 个零点。并且 $\mathbf 1_{\{\delta_k>v\}}\le e^{1/2}(2\pi k)^{-v/4}$，在 $0\le v\le1/2$ 内偏轴计数为 $O(T^{1-v/4}\log T)$，保留了本节使用的 Selberg 型密度阶数。由此可见，计数、镜像和密度输入同时允许非整数频率的对数级相位和与整数频率的 $T\log T$ 共振，不能单独推出指定频率的 $O_\lambda(T)$。实际 $\zeta$ 的 $\lambda=\log X$（$\Lambda(X)=0$）仍需额外的纵坐标算术相位信息。[相位边界的推导与复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239588238)
+
+在固定频率上，平滑权重可以抵消锐阈值所保留的相位。写 $D_\lambda(u,T)=\sum_{0<\gamma\le T,\ \beta>1/2+u}e^{i\lambda\gamma}$。上述格点显示了共振如何产生。即使进一步要求 $W_\lambda(T)$ 和 $S_\lambda(T)$ 都以 $O_\lambda(1)$ 误差跟随同一个光滑端点首项，锐阈值仍可保留 $T\log T$ 量级的相位和。
+
+对任意固定 $\lambda>0$，另构造一组镜像谱（手工推导，`ARGUED`）。在每个长 $2\pi/\lambda$ 的周期内，以等距网格上的四枚为一组，按黎曼—冯·曼戈尔特光滑主项分配总数。将相位落在 $(0,\pi/2]$ 的每个网格点的一对零点赋予偏移 $\pm b$，在其反相点放两对偏移 $\pm a$。选取 $a,b$ 使 $\cosh(\lambda b)-1=2(\cosh(\lambda a)-1)$，于是每个反相配置对 $C_\lambda$ 的贡献精确抵消。各周期只微调右端点的一枚临界线上零点，便可给无权和补足光滑首项的周期增量。计数的余项为 $O_\lambda(1)$，偏轴密度仍满足上述 Selberg 型界，且 $C_\lambda(T)=O_\lambda(1/\log T)$。
+
+若 $t_+$ 是周期右端，取 $b=6/(5\log t_+)$，则在充分高的周期内 $a<0.9/\log t_+$。取 $u=1/\log T$ 时，所有完整周期的较大偏移均入选，较小偏移只可能从 $t_+<T^{0.9}$ 的周期入选。第一象限的网格相位和于是留下
+
+$$
+D_\lambda(1/\log T,T)=\frac{1+i}{16\pi^2}\,T\log T+O_\lambda(T).
+$$
+
+实际 $\zeta$ 的逐频率权重差可以直接研究其平滑体积分，而锐阈值界还需要控制相位与偏移大小的关联。下一节的碰撞估计则需要在随高度增长的频带内控制零点和。[反相构造、端点推导与复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240037839)
 
 ## 3.3 周期相位亏损、兰道窗转移与高斯碰撞极限 $1/\sqrt{\pi}$ {#sec-ou-3-3}
 
@@ -291,6 +329,8 @@ $$
    两次读数各有至多 $1.8\times10^{-11}$ 的绝对积分误差时，仍能判定 $111521$ 是首次过阈值的整数半径。复算时，展开四次方，把频差 $d$ 的余弦积分写成 $\bigl(F_T(d+\eta)+F_T(d-\eta)-2F_T(d)\bigr)/(\pi\eta)$，其中 $F_T(a)=a\operatorname{Si}(aT)-(1-\cos(aT))/T$，由对 $(1-\cos(at))/t^2$ 分部积分得到。
 
    记上述有限余弦积分为 $C_{\eta,T}(d)$。在 $T=111521$ 处，孤立中点配对的两个方向共贡献 $4C_{\eta,T}(\Delta)/19^4$。仅扣除这两项后，相对 $B$ 的余量落在 $(-3.05165,-3.05163)\times10^{-5}$，读数落回阈值之下。其余异占据配对的整线系数为零，但在这个有限半径处合计贡献约 $1.5192\times10^{-9}$，大于上面的正余量。
+
+   若只保留占据对角与孤立中点配对，$\eta=10^{-3}$ 时的首次过阈整数半径为 $111526$。固定这个等权窗，把带宽从 $10^{-3}$ 增至 $10^{-3}+10^{-9}$，完整读数在 $T=111520$ 处恰有一次越过 $B$，临界带宽 $\eta_*$ 落在 $(0.0010000006020,0.0010000006021)$。因此完整读数的首次严格过阈整数半径在 $\eta\le\eta_*$ 时为 $111521$，在 $\eta>\eta_*$ 时降为 $111520$。只保留对角与中点配对的读数在此区间内始终首次过阈于 $111526$。这整个带宽区间仍在整线孤立碰撞带内。球算术利用 $F_T'(a)=\operatorname{Si}(aT)$ 围住了相邻整数半径读数的带宽导数，并核验临界带宽两端的余量符号。[区间证书与复算脚本](https://github.com/the-omega-institute/trureturing-books/issues/1996#issuecomment-7239325689)
 
    局部调和权下，首过阈值的整数半径为 $111532$（$111531$ 时仍低于相应的基线）。通用相对截尾界分别给出 $11{,}330{,}943$（等权）与 $11{,}331{,}843$（局部调和权）的充分半径。
 

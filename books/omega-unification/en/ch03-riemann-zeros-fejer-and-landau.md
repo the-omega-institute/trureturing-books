@@ -180,7 +180,18 @@ $$
 
 Horizontal integration makes the jump of $\log\zeta$ along the slit to the left of a zero proportional to $\beta-\sigma$. Shifting the contour for each of the two exponential phases and combining them to recover the real part gives the hyperbolic cosine weight. A local logarithmic derivative estimate bounds the horizontal edges by $O_\lambda(L)$. The top edge is taken by a right limit. Nonresonance keeps the modulated integral of the prime-power polynomial within the same bound. [Korolev, cutoff weights before Lemma 4](https://www.mathnet.ru/links/2bb06e5a975dd807fe74eae4c1f9fd1f/im2766_eng.pdf#page=9) · [Contour calculation and numerical check](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239342305)
 
-At $a=0$, reflection at the same ordinate recovers $C_\lambda(T)$ from the zero sum up to normalization and a bounded contribution from the lowest heights. Increasing $a$ replaces the weight of each zero on the right by $\cosh(\lambda(\delta_\rho-a)_+)-1$, where $v_+=\max(v,0)$. Integrating the derivative of that weight against Selberg's density estimate bounds the remainder on the right by $O_\lambda((T/L)e^{-aL/4}+L)$. Setting $a=1/L$ reduces the constant in the density estimate, and a synthetic spectrum can attain order $T/L$ in both the narrow strip and the region farther right. At $a=8\log L/L$, the bound on the right drops to $O_\lambda(T/L^3+L)$. To improve on the $T/L$ scale, it therefore suffices to study the same-frequency integral in the strip $1/2\le\sigma\le1/2+8\log L/L$. [Simonič, equation (3), citing Selberg's density estimate](https://arxiv.org/pdf/1910.08274v2#page=1)
+At $a=0$, reflection at the same ordinate recovers $C_\lambda(T)$ from the zero sum up to normalization and a bounded contribution from the lowest heights. Increasing $a$ replaces the weight of each zero on the right by $\cosh(\lambda(\delta_\rho-a)_+)-1$, where $v_+=\max(v,0)$. Integrating the derivative of that weight against Selberg's density estimate bounds the remainder on the right by $O_\lambda((T/L)e^{-aL/4}+L)$. Setting $a=1/L$ reduces the constant in the density estimate, and a synthetic spectrum can attain order $T/L$ in both the narrow strip and the region farther right. At $a=8\log L/L$, the bound on the right drops to $O_\lambda(T/L^3+L)$. At this width, the same-frequency integral over the strip is determined by a quadratic moment of the offsets. Write $D_\lambda(u,T)=\sum_{0<\gamma\le T,\,\delta_\rho>u}e^{i\lambda\gamma}$, counting multiplicities and including the upper endpoint in height. Subtract the two contour formulas for the horizontal integrals and expand $\cosh(\lambda d)-1=\lambda^2 d^2/2+O_\lambda(d^4)$. This gives the following hand-derived relation (`ARGUED`).
+
+$$
+\int_3^T e^{i\lambda t}\int_{1/2}^{1/2+a}\log|\zeta(\sigma+it)|\,d\sigma\,dt
+=\pi\sum_{\substack{0<\gamma\le T\\\delta_\rho>0}}\delta_\rho^2 e^{i\lambda\gamma}
++O_\lambda(T/L^3+L),
+\qquad a=8\log L/L.
+$$
+
+The same Selberg density estimate gives $\sum_{\delta_\rho>0,\,0<\gamma\le T}\delta_\rho^4=O(T/L^3)$. The integral of a fixed prime-power polynomial at this frequency is $O_\lambda(1)$. [Simonič, equation (3), citing Selberg's density estimate](https://arxiv.org/pdf/1910.08274v2#page=1)
+
+The quadratic moment equals $2\int_0^{1/2}uD_\lambda(u,T)\,du$. A uniform bound $D_\lambda(u,T)=O_\lambda(T)$ on $0<u\le a$ then gives $O_\lambda(T(\log L)^2/L^2)$. A synthetic spectrum attains this iterated-logarithm factor. Place just one off-line pair at the end of each phase period, with offsets $\pm 4\log\log t/\log t$ at the period endpoint $t$. These offsets and counts satisfy the density bound. By moving two points on the critical line slightly, one can exactly cancel the pair's contribution to the weighted sum in excess of its unit weights. The construction preserves both the smooth count and the leading term of the weighted endpoint formula at the given frequency, each up to $O_\lambda(1)$, while its quadratic moment is $(8\lambda/\pi+o(1))T(\log L)^2/L^2$. Bounding the strip integral for the actual $\zeta$ by $O_\lambda(T/L^2)$ requires the same bound for its quadratic moment. [Construction, endpoint argument, and numerical check](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240157206)
 
 For the actual zeta zeros, retaining the real-part weights recovers the endpoint term on average over heights without using RH. Let $S(t)$ be the argument term in the Riemann–von Mangoldt formula. Away from zero ordinates, $N(t)=1+\vartheta(t)/\pi+S(t)$, with $\vartheta$ the Riemann–Siegel theta function. Subtract the smooth endpoint term from the weighted sum
 
@@ -221,7 +232,34 @@ $$
 
 Group the ordinates into unit intervals and let $B_j$ be the sum of $\delta_\rho^2$ in group $j$. Each group contains $O(\log U)$ zeros. Integrating Selberg's density estimate gives $\sum_{\gamma\le U}\delta_\rho^4\ll U/(\log U)^3$, so $\sum_j B_j^2\ll U/(\log U)^2$. Expanding the phase within each group and the hyperbolic cosine weight in power series gives Fourier polynomials with the group index as the integer frequency and coefficients bounded by $B_j$ times summable factors. The Carleson–Hunt maximal inequality bounds all partial sums over complete groups. The group containing the cutoff is bounded by its own mass and includes any ordinates at the upper endpoint. [Simonič, Eqs. (1) and (3)](https://arxiv.org/pdf/1910.08274v2#page=1) · [Oberlin et al., Theorem 1.1](https://arxiv.org/pdf/0910.1555#page=2) · [Derivation and numerical check](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239462563)
 
-The frequencies in $I$ for which the modulus of the correction exceeds $A>0$ at some $T\le U$ therefore form a set of measure $O_I(U/(A^2(\log U)^2))$. Applying Borel–Cantelli at dyadic heights gives $C_\lambda(T)=O_{\lambda,\varepsilon}(\sqrt T/(\log T)^{1/2-\varepsilon})$ for each $\varepsilon>0$ and almost every $\lambda$, along all real heights. The prescribed shell modes form a countable set and still require estimates at individual frequencies. The collision estimate in the next section also needs control across a frequency band that grows with height.
+The frequencies in $I$ for which the modulus of the correction exceeds $A>0$ at some $T\le U$ therefore form a set of measure $O_I(U/(A^2(\log U)^2))$. Applying Borel–Cantelli at dyadic heights gives $C_\lambda(T)=O_{\lambda,\varepsilon}(\sqrt T/(\log T)^{1/2-\varepsilon})$ for each $\varepsilon>0$ and almost every $\lambda$, along all real heights. The prescribed shell modes form a countable set and still require estimates at individual frequencies.
+
+The phase boundary for a fixed-frequency estimate is explicit in the same synthetic spectrum. Take $\gamma_k=2\pi k$, $m_k=\lfloor\log(2\pi k)\rfloor$, and $\delta_k=2/\log(2\pi k)$, with $m_k$ reflected zeros at each ordinate. Set $u=1/\log T$ and $T=2\pi N$. Every $\gamma_k\le T$ then has $\delta_k>u$, so
+
+$$
+D_\lambda(u,T)=\sum_{k=16}^{N}m_k e^{2\pi i\lambda k}.
+$$
+
+For $\lambda\notin\mathbb Z$, the geometric partial sums have modulus at most $2/|1-e^{2\pi i\lambda}|$. Abel summation against the monotone sequence $m_k$ therefore gives $D_\lambda(u,T)=O_\lambda(\log T)$. For $\lambda\in\mathbb Z$, the phase is exactly resonant and
+
+$$
+D_\lambda(u,T)=\sum_{k=16}^{N}\lfloor\log(2\pi k)\rfloor
+=\frac{T}{2\pi}\log T+O(T).
+$$
+
+The model still has only $O(\log T)$ zeros in each unit-height interval. Moreover, $\mathbf 1_{\{\delta_k>v\}}\le e^{1/2}(2\pi k)^{-v/4}$, so for $0\le v\le1/2$ its off-line count is $O(T^{1-v/4}\log T)$ and has the Selberg-type density order used above. Thus the counting, reflection, and density inputs permit both logarithmic phase sums at noninteger frequencies and $T\log T$ resonance at integer frequencies. They cannot by themselves imply the prescribed-frequency bound $O_\lambda(T)$. For the actual zeta problem with $\lambda=\log X$ and $\Lambda(X)=0$, additional arithmetic information on the ordinates is still required. [Phase boundary derivation and computation](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239588238)
+
+At a fixed frequency, smooth weights can cancel phases that a sharp threshold retains. Write $D_\lambda(u,T)=\sum_{0<\gamma\le T,\ \beta>1/2+u}e^{i\lambda\gamma}$. The lattice above shows how resonance occurs. The sharp threshold can still retain a phase sum of order $T\log T$ even when $W_\lambda(T)$ and $S_\lambda(T)$ both follow the same smooth endpoint term to within $O_\lambda(1)$.
+
+For any fixed $\lambda>0$, construct a second reflected spectrum (hand derivation, `ARGUED`). In each period of length $2\pi/\lambda$, distribute zeros in groups of four on an equally spaced grid, using the smooth Riemann–von Mangoldt main term to set the count. At each grid point with phase in $(0,\pi/2]$, assign one pair the offsets $\pm b$. At its opposite phase, assign two pairs the offsets $\pm a$. Choose $a,b$ so that $\cosh(\lambda b)-1=2(\cosh(\lambda a)-1)$. The two groups then cancel exactly in $C_\lambda$. Moving one critical-line zero slightly to the left of each period's right endpoint supplies the smooth endpoint increment for the unweighted sum. The counting error is $O_\lambda(1)$, the off-line count satisfies the same Selberg-type bound, and $C_\lambda(T)=O_\lambda(1/\log T)$.
+
+If $t_+$ denotes a period's right endpoint, take $b=6/(5\log t_+)$. Then $a<0.9/\log t_+$ in all sufficiently high periods. At $u=1/\log T$, the larger offsets enter the sum from every complete period, while the smaller offsets can enter only from periods with $t_+<T^{0.9}$. Summing the grid phases in the first quadrant gives
+
+$$
+D_\lambda(1/\log T,T)=\frac{1+i}{16\pi^2}\,T\log T+O_\lambda(T).
+$$
+
+For the actual zeta spectrum, one can study the smooth bulk integral directly to bound the weight correction at a specified frequency. A sharp-threshold bound also needs control of how the phase depends on the size of the offset. The collision estimate in the next section requires control of ordinate sums across a frequency band that grows with height. [Reflected construction, endpoint derivation, and numerical check](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240037839)
 
 ## 3.3 Periodic Phase Deficits, Landau Window Transfer, and the $1/\sqrt{\pi}$ Collision Limit {#sec-ou-3-3}
 
@@ -291,6 +329,8 @@ Zero #11431 serves as a recurring testbed for two-loop gauge crossings and two-s
    An absolute integration error of at most $1.8\times10^{-11}$ in each reading still certifies $111521$ as the first integer radius above the threshold. To reproduce the margins, expand the fourth power and evaluate the cosine integral at each frequency difference $d$ as $\bigl(F_T(d+\eta)+F_T(d-\eta)-2F_T(d)\bigr)/(\pi\eta)$, where $F_T(a)=a\operatorname{Si}(aT)-(1-\cos(aT))/T$ comes from integrating $(1-\cos(at))/t^2$ by parts.
 
    Write $C_{\eta,T}(d)$ for this finite cosine integral. At $T=111521$, the two directions of the isolated midpoint pair together contribute $4C_{\eta,T}(\Delta)/19^4$. Subtracting just these terms leaves a margin relative to $B$ in $(-3.05165,-3.05163)\times10^{-5}$, so the reading falls below the threshold. The other off-diagonal pairs have zero full-line coefficients. At this finite radius their terms sum to about $1.5192\times10^{-9}$, exceeding the positive margin above.
+
+   Keeping just the occupation diagonal and the isolated midpoint pair gives a first integer radius of $111526$ at $\eta=10^{-3}$. In this same equal-weight window, increasing the bandwidth from $10^{-3}$ to $10^{-3}+10^{-9}$ takes the full reading at $T=111520$ through $B$ exactly once, at a critical bandwidth $\eta_*$ in $(0.0010000006020,0.0010000006021)$. The first integer radius at which the full reading strictly exceeds $B$ is $111521$ for $\eta\le\eta_*$ and $111520$ for $\eta>\eta_*$. The reading with just the diagonal and the midpoint pair first exceeds $B$ at $111526$ throughout this interval. The bandwidth stays inside the isolated collision band for the full-line integral. Ball arithmetic uses $F_T'(a)=\operatorname{Si}(aT)$ to bound the bandwidth derivatives at the neighboring integer radii and verify the signs on either side of the critical bandwidth. [Interval certificate and replay](https://github.com/the-omega-institute/trureturing-books/issues/1996#issuecomment-7239325689)
 
    With local harmonic weights, the first integer crossing is at $111532$ ($111531$ is still below its baseline). The generic relative truncation bound gives sufficient radii of $11{,}330{,}943$ for equal weights and $11{,}331{,}843$ for local harmonic weights.
 
