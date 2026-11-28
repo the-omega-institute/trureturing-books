@@ -427,7 +427,24 @@ $$
 
 没有模糊地带，也没有侥幸空间：连同时命中能量真空、三项物理窗与百万分之二级夸克混合的联合零点见证，都没有替我们拍板质子的生死——决定质子是否永恒的，不是壳真空或树级谱本身，而是紫外相互作用究竟选择正交电流（保留重子三重对称）还是平行电流。
 
-两支的差别可以压缩为一个复数，即两个辅助电流方向的重叠 $c = g_L^\dagger g_D$：正交支取 $c = 0$，平行支取 $|c| = 1$，一维辅助空间只能实现后者。有效接触项只经 $c$ 与威尔逊因子依赖取向。在只保有重子三重对称的完整模型中，作用于全部夸克的重子相位 $e^{2\pi i B/3}$ 对色瞬子是矢量型的，对三代弱瞬子相位平凡。若超荷混合反常在所考虑的背景上相位平凡，它给出选择律 $e_{21} - e_{12} \equiv -\Delta B \pmod 3$，其中 $e_{21}$、$e_{12}$ 是读数展开式里两个非对角接触系数的幂次。于是 $1/M^2$ 阶的一切三重中性读数都与取向无关，这一阶能区分两支的读数必须自带非平凡三重荷；到 $1/M^4$ 阶为止，三重中性读数至多经模长 $\rho = |c|^2$ 感知取向，更高阶上选择律不再禁止弱瞬子顶点把 $c$ 的相位带入。若以 $Q$–$L$ 接触项的静态单点格拉斯曼积分作探针，在威尔逊因子非零时可构造一个与辅助质量 $M$、威尔逊因子模长及算符归一都无关的读数比 $X(\rho)$：正交支取 $1$，平行支取 $5/4$，其间严格单调。这个探针取零跳跃且不含其余单点项，是人为定义的读数，不是模型配分函数的极限。在这个零跳跃探针上，取向因此可由一个比值读出；原配分函数给出哪一个 $\rho$，仍是下面第 1 款的开放问题。[选择律与静态读数比](https://github.com/the-omega-institute/trureturing-experiments/blob/0987c3cc83f40918fedaa72d271eab91cb526646/experiments/ch39-omega-research/replay/%E8%BE%85%E5%8A%A9%E7%94%B5%E6%B5%81%E5%8F%96%E5%90%91%E7%9A%84%E4%B8%89%E9%87%8D%E8%8D%B7%E9%80%89%E6%8B%A9%E5%BE%8B%E4%B8%8E%E5%BD%92%E4%B8%80%E6%97%A0%E5%85%B3%E7%9A%84%E9%9D%99%E6%80%81%E6%8E%A5%E8%A7%A6%E8%AF%BB%E6%95%B0.md) · [精确证书](https://github.com/the-omega-institute/trureturing-experiments/blob/0987c3cc83f40918fedaa72d271eab91cb526646/experiments/ch39-omega-research/replay/ch39-proton-current-overlap-static.py)
+两支的差别可以压缩为一个复数，即两个辅助电流方向的重叠 $c = g_L^\dagger g_D$：正交支取 $c = 0$，平行支取 $|c| = 1$，一维辅助空间只能实现后者。有效接触项只经 $c$ 与威尔逊因子依赖取向。
+
+**商群背景上的测度相位（手工推导）。** 在闭自旋四流形 $X$ 上只开启标准模型规范场，取全局规范群 $G=S(U(3)\times U(2))$。其秩三、秩二基本丛 $E,W$ 满足 $\det E\otimes\det W=1$。每代左手夸克 $Q,u^c,d^c$ 分别取值于 $E\otimes W,\Lambda^2E,E^*$，重子数依次为 $1/3,-1/3,-1/3$。在直积覆盖群上，超荷圆对 $E,W$ 的整数权为 $-2,3$，于是三种夸克的 $6Y$ 依次为 $1,-4,2$。[标准模型超荷表](lean:D5/S3/Quantum/Gauge/FiniteSpectralTripleSM.hypercharge_table)
+
+记 $I(V)$ 为丛 $V$ 的扭曲手征 Dirac 指标。四维指标公式只用到丛的秩和陈特征的四次分量，故 $I(V^*)=I(V)$。由 $(\Lambda^2E)^*=E\otimes\det W$，每代夸克与反夸克的指标差为
+
+$$
+\begin{aligned}
+J&=I(E\otimes W)-I(\Lambda^2E)-I(E^*)\\
+ &=I\big(E\otimes(W-\det W-1)\big)=-3\langle c_2(W),[X]\rangle .
+\end{aligned}
+$$
+
+这里 $1$ 是平凡线丛。若 $y_1,y_2$ 为 $W$ 的陈根，虚丛 $W-\det W-1$ 的陈特征是 $-(e^{y_1}-1)(e^{y_2}-1)$。四次项为 $-y_1y_2$，更低次项均为零，故 $E$ 只贡献秩三。对三代标准费米子作常数变换 $e^{2\pi i B/3}$ 时，测度相位因而是 $\exp(2\pi i\,3J/9)=1$。
+
+弱与超荷两项各自可以变号。把 $-y_1y_2$ 写成弱无迹部分 $(y_1-y_2)^2/4$ 与超荷部分 $-(y_1+y_2)^2/4$ 之和。在 $S^2\times S^2$ 上，取两球面的正向生成元 $a,b$，令 $W=L_a\oplus L_b$、$E=L_{-a-b}\oplus1\oplus1$，其中 $c_1(L_z)=z$。直积提升要求 $\det W$ 有六次根，而 $a+b$ 不能被六整除。由 $a^2=b^2=0$、$\int ab=1$，两项的积分均为 $-1/2$，相位相乘得 $(-1)(-1)=1$。此检验只开启 $G$ 背景。将三重对称提升为规范对称性还须考虑独立的离散背景场。[指标展开与算例](https://github.com/the-omega-institute/trureturing-books/issues/2206#issuecomment-7240833094)
+
+设其余顶点均有 $\Delta B\in3\mathbb Z$。在读数展开式中，$e_{21},e_{12}$ 分别计数重子数 $+1,-1$ 的接触插入。它们与外插入的总荷给出选择律 $e_{21}-e_{12}\equiv-\Delta B\pmod3$。于是 $1/M^2$ 阶的一切三重中性读数都与取向无关，这一阶能区分两支的读数必须自带非平凡三重荷；到 $1/M^4$ 阶为止，三重中性读数至多经模长 $\rho = |c|^2$ 感知取向，更高阶上选择律不再禁止弱瞬子顶点把 $c$ 的相位带入。若以 $Q$–$L$ 接触项的静态单点格拉斯曼积分作探针，在威尔逊因子非零时可构造一个与辅助质量 $M$、威尔逊因子模长及算符归一都无关的读数比 $X(\rho)$：正交支取 $1$，平行支取 $5/4$，其间严格单调。这个探针取零跳跃且不含其余单点项，是人为定义的读数，不是模型配分函数的极限。在这个零跳跃探针上，取向因此可由一个比值读出；原配分函数给出哪一个 $\rho$，仍是下面第 1 款的开放问题。[选择律与静态读数比](https://github.com/the-omega-institute/trureturing-experiments/blob/0987c3cc83f40918fedaa72d271eab91cb526646/experiments/ch39-omega-research/replay/%E8%BE%85%E5%8A%A9%E7%94%B5%E6%B5%81%E5%8F%96%E5%90%91%E7%9A%84%E4%B8%89%E9%87%8D%E8%8D%B7%E9%80%89%E6%8B%A9%E5%BE%8B%E4%B8%8E%E5%BD%92%E4%B8%80%E6%97%A0%E5%85%B3%E7%9A%84%E9%9D%99%E6%80%81%E6%8E%A5%E8%A7%A6%E8%AF%BB%E6%95%B0.md) · [精确证书](https://github.com/the-omega-institute/trureturing-experiments/blob/0987c3cc83f40918fedaa72d271eab91cb526646/experiments/ch39-omega-research/replay/ch39-proton-current-overlap-static.py)
 
 加入最近邻跳跃 $t$ 后，这一比值读法不再成立。在两点格上（跳跃在色、同位旋与旋量指标上对角，仍是人为探针），$X$ 不再只依赖 $\rho$，而是 $U = 1/(Mt)^2$、$V = |F|^2 U$ 与 $\rho$ 的有理函数，其中 $|F|$ 是威尔逊因子的模长。$t \to 0$ 时 $X$ 连续回到静态值；首阶修正为 $O(t^4)$，在不含三角形的图上等于配位数乘两点闭式，正交支只差 $O(t^8)$。沿 $U, V \to 0$ 的幂律方向，极限为 $3(1 + \rho)/4$；沿所查的混合幂律方向，极限为 $1$，与 $\rho$ 无关。在有限 $Mt$ 上，$X$ 对 $\rho$ 可以不单调；在 $M$、$|F|$ 未知时，两支的取值区间相交，没有分开两支的阈值。把 $X$ 与两个读数算符各自的二阶矩比合在一起，共有三个与归一无关的比值；它们的雅可比行列式作为有理函数不恒为零，所以在一般点附近能局部确定 $\rho$，而任两个在一般点附近都不够。无论跳跃到哪一阶，$c$ 的相位都不进入这一探针，因为它不含瞬子顶点。[跳跃项下的读数比与三比值的局部可识别性](https://github.com/the-omega-institute/trureturing-experiments/blob/46facb42ce16ec26b52bfb017f20f8a417628ddb/experiments/ch39-omega-research/replay/%E6%9C%80%E8%BF%91%E9%82%BB%E8%B7%B3%E8%B7%83%E4%B8%8B%E6%8E%A5%E8%A7%A6%E8%AF%BB%E6%95%B0%E6%AF%94%E9%9A%8FMt%E6%BC%82%E7%A7%BB%E4%B8%8E%E4%B8%89%E6%AF%94%E5%80%BC%E5%B1%80%E9%83%A8%E7%A1%AE%E5%AE%9A%E9%87%8D%E5%8F%A0%E6%A8%A1%E9%95%BF.md) · [精确证书](https://github.com/the-omega-institute/trureturing-experiments/blob/46facb42ce16ec26b52bfb017f20f8a417628ddb/experiments/ch39-omega-research/replay/ch39-proton-current-overlap-hopping.py)
 
