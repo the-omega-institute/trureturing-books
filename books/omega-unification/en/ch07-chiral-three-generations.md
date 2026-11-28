@@ -68,6 +68,22 @@ $$
 
 The three phases lie in a common number field of degree at most eight. Independent conjugations invert each phase individually, and each phase has a nonintegral rational trace, so it has infinite order. The phase product for a nonzero mode therefore differs from one. Multiplying each phase and its inverse by $1734$ clears the denominators, and the norm of a nonzero algebraic integer gives the explicit lower bound.
 
+::: {.theorem #thm-ou-ch07-zeta-ordinate-reflection title="Reflection cancellation in the zero sum" lean="D5/S3/Weil/ZeroData/ZetaOrdinateReflectionTransfer.actual_reflection_bound"}
+Let $\rho=\beta+i\gamma$ range over distinct nontrivial zeros, and let $m_\rho$ denote analytic multiplicity. For any real $v,T$, put $d_\rho=|v(\beta-1/2)|$. Then
+
+$$
+\left|\sum_{0<\gamma\le T}m_\rho e^{v(\rho-1/2)}
+      -\sum_{0<\gamma\le T}m_\rho e^{iv\gamma}\right|
+\le \sum_{0<\gamma\le T}m_\rho\,d_\rho^2e^{d_\rho}.
+$$
+:::
+
+::: proof
+The map $\rho\mapsto1-\bar\rho$ preserves height and multiplicity and reverses the real displacement. Averaging the original sum with its reflected reindexing cancels the linear term of the exponential expansion. The second-order remainder gives the bound. The full proof is checked by the Lean kernel.
+:::
+
+The finite-height bound controls the error by a weighted distance of the zeros from the critical line. Frequencies that grow with height also require a zero count that is uniform in the distance from the line. [Ford–Zaharescu, Lemma 2 and equation (3.8)](https://arxiv.org/abs/math/0405459v2)
+
 **Thresholds that shrink with height (`ARGUED`).** Let $L=\log T$. If $\varepsilon(T)\to0$ and $\varepsilon(T)\sqrt L\to\infty$, the fraction of near-blind positive zeros is $C_q\varepsilon(T)^2+o(\varepsilon(T)^2)$ for each of the five charges, counting zeros with multiplicity. Take $J=\lfloor cL/\log L\rfloor$ for a sufficiently small $c>0$. The explicit frequency bound controls the error near zero frequency. Ford–Meng–Zaharescu's Lemmas 1–2 then bound each normalized zero sum for $0<\|m\|_\infty\le J$ by $O(L^{-1}+\|m\|_\infty^2L^{-2})$, without assuming the Riemann hypothesis. [Zero-sum estimates](https://arxiv.org/abs/1511.06814v2) · [Derivation of the joint limit](https://github.com/the-omega-institute/trureturing/issues/35082#issuecomment-7232072134)
 
 At each blind point, use smooth inner and outer approximations at scale $\varepsilon$ to enclose the local ellipse given by the Jacobian of the boundary amplitude. The Fourier coefficients have absolute sum $O(1)$, second absolute moment $O(\varepsilon^{-2})$, and absolute tail $O((\varepsilon J)^{-4})$ beyond $J$. The difference between the sampled and torus averages is therefore $O(L^{-1}+\varepsilon^{-2}L^{-2}+(\varepsilon J)^{-4})=o(\varepsilon^2)$. Letting the two approximations approach the ellipse in area yields the same $C_q$. [Absolute tail bound in Lean](lean:D5/S3/Fourier/Asymptotics/PlanarFourierTail.lattice_fourier_tail)

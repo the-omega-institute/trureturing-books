@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "97799c5335eaf4b7622836227d15a062cb9e1511",
-  "pinned_at": "2026-11-28T07:30:42Z",
+  "commit": "fc17f0320382e47138f519ff43d223bb2d5f2664",
+  "pinned_at": "2026-11-28T08:07:51Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -28819,6 +28819,19 @@
       "statement_id": "sha256:a71a76215cfec9f535c767e38d463bf0078d1f38958dd72b84626f05ee376176",
       "line": 111,
       "signature": "theorem zetaZeroData_representation_iff (rho : ℂ) : IsNontrivialZero rho ↔ ∃! n : ℕ, zetaZeroData.zero n = rho"
+    },
+    "D5/S3/Weil/ZeroData/ZetaOrdinateReflectionTransfer.actual_reflection_bound": {
+      "module": "D5/S3/Weil/ZeroData/ZetaOrdinateReflectionTransfer",
+      "name": "D5.S3.Weil.ZeroData.ZetaOrdinateReflectionTransfer.actual_reflection_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:0dc5ae38a55cbbfdb0fc98ba265977f2f2183173a6d8014793b8d7474db257d7",
+      "line": 72,
+      "signature": "theorem actual_reflection_bound (v T : ℝ) : let s",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Weil/ZeroSum.IsNontrivialZero": {
       "module": "D5/S3/Weil/ZeroSum",
