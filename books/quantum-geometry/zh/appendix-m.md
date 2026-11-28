@@ -138,6 +138,57 @@ $$
 例如 $\delta=h=\tfrac14$、$T=2$ 时，$B=\tfrac{16}{289}<K=\tfrac{520}{5329}$，所以 $U\le\tfrac{16}{289}$ 已足以排除此矩形；这只是门槛算例，并未计算出达到门槛的试探误差。取 $h=1$ 时有 $y_+=\tfrac12$，因而总是 $K<B$，恢复上高度端点给出的门槛。反之，$h\downarrow0$ 时 $B(h)\to0$，不能删去正下限高度后仍沿用一个统一正门槛。
 :::
 
+下面给出一组实际达到排零门槛的有理试探系数，让误差证书与零点几何之间的连接可以逐项手算。
+
+::: {.example #ex-appm-nyman-rational-trial title="三项有理试探的排零证书（手工推导）"}
+沿用 [@prop-ch34-nyman-beurling-frozen-facts] 的 $\chi,\rho_k,d_N$，取
+
+$$
+\begin{aligned}
+q&=(-1,1,\tfrac32),& v&=-\rho_1+\rho_2+\tfrac32\rho_3,\\
+S&=\sum_{k=1}^3\frac{q_k}{k}=-1+\tfrac12+\tfrac12=0,&
+R&=\int_0^\infty|\chi(x)-v(x)|^2\,dx.
+\end{aligned}
+$$
+
+以下积分、有限和与排零组合均为**手工推导，未另经 Lean 核验**。$x>1$ 时 $v(x)=S/x=0$，所以该端尾部恰为零。在 $1/(j+1)<x<1/j$（$j\ge1$）上，$\lfloor1/(kx)\rfloor=\lfloor j/k\rfloor$，故
+
+$$
+\begin{aligned}
+\chi(x)-v(x)&=1-S/x+\sum_{k=1}^3q_k\lfloor j/k\rfloor=A_j,\\
+A_j&=1-j+\lfloor j/2\rfloor+\tfrac32\lfloor j/3\rfloor,\\
+A_{j+6}&=A_j,\qquad (A_0,A_1,A_2,A_3,A_4,A_5)=(1,0,0,\tfrac12,\tfrac12,-\tfrac12).
+\end{aligned}
+$$
+
+断点是零测集。取 $M=256$，用 $|\chi-v|\le1+\sum_k|q_k|=\tfrac92$ 控制 $0<x<1/M$，得到只含有理数的证书
+
+$$
+\begin{aligned}
+I_{256}&=\sum_{j=1}^{255}\frac{A_j^2}{j(j+1)},\\
+d_3^2&\le R\le U_{256}:=I_{256}+\frac{81}{1024}.
+\end{aligned}
+$$
+
+无需列出这个有限和的大分母，也能严格比较门槛。令 $w_j=1/(j(j+1))$。首六项之和为 $11/168$；以 $j=6m+1$ 开始的每个完整六项块，其平方序列为递增的 $(0,0,\tfrac14,\tfrac14,\tfrac14,1)$，均值为 $7/24$，而 $w_j$ 递减。对块内的 $a_i=A_{6m+i}^2$ 与 $w_{6m+i}$，有
+
+$$
+\sum_{i=1}^6a_iw_{6m+i}-\frac7{24}\sum_{i=1}^6w_{6m+i}
+=\frac16\sum_{1\le i<k\le6}(a_i-a_k)(w_{6m+i}-w_{6m+k})\le0.
+$$
+
+从 $j=7$ 到 $252$ 全是完整块；末三项 $j=253,254,255$ 的平方为 $0,0,\tfrac14$，各自也不超过 $7/24$。利用 $w_j=1/j-1/(j+1)$，得到
+
+$$
+\begin{aligned}
+I_{256}&\le\frac{11}{168}+\frac7{24}\left(\frac17-\frac1{256}\right)<\frac3{28},\\
+U_{256}&<\frac3{28}+\frac{81}{1024}=\frac{1335}{7168}<\frac3{16}.
+\end{aligned}
+$$
+
+因此 [@prop-ch34-nyman-beurling-frozen-facts] 第 4 款排除了 $\tfrac12<\operatorname{Re}\rho<1$ 且 $\tfrac14\le|1-1/\rho|^2\le\tfrac34$ 的零点：该环带会迫使 $d_3^2\ge\tfrac3{16}$。矩形读法则取 $\delta=\tfrac14$、$h=\tfrac34$、$T=1$；此时 $K=\tfrac{136}{625}<B=\tfrac{144}{625}$ 且 $U_{256}<\tfrac3{16}<K$，故 [@rem-appm-nyman-rectangle-infimum] 排除 $\tfrac34\le\operatorname{Re}\rho<1$、$\tfrac34\le|\operatorname{Im}\rho|\le1$ 的非平凡零点，包含所列闭边界。这是低高度的教学算例，展示有限有理残差怎样调用零点下界；证据范围限于上述区域，单个有限证书只提供局部排零。
+:::
+
 其余窗口与谱扰动的技术证明按所处理的算术对象组织：
 
 - [M.1 幂次采样、窗口质量与辅助素数](ch34-s28-s03-s01-sampling-windows.md)

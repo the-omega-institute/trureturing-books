@@ -138,6 +138,57 @@ The open boundary allows $U=B(h)$ in the second case. The first case, including 
 For example, $\delta=h=\tfrac14$, $T=2$ gives $B=\tfrac{16}{289}<K=\tfrac{520}{5329}$, so $U\le\tfrac{16}{289}$ already excludes this rectangle. This is only a threshold example; no trial error reaching it has been computed here. Taking $h=1$ gives $y_+=\tfrac12$ and hence always $K<B$, recovering the upper-height endpoint threshold. Conversely, $B(h)\to0$ as $h\downarrow0$, so removing the positive lower height does not preserve a uniform positive threshold.
 :::
 
+A concrete rational trial now reaches an exclusion threshold, making the connection between a residual certificate and zero geometry accessible by hand.
+
+::: {.example #ex-appm-nyman-rational-trial title="A Three-Term Rational Trial Certificate (Manual derivation)"}
+With $\chi,\rho_k,d_N$ as in [@prop-ch34-nyman-beurling-frozen-facts], take
+
+$$
+\begin{aligned}
+q&=(-1,1,\tfrac32),& v&=-\rho_1+\rho_2+\tfrac32\rho_3,\\
+S&=\sum_{k=1}^3\frac{q_k}{k}=-1+\tfrac12+\tfrac12=0,&
+R&=\int_0^\infty|\chi(x)-v(x)|^2\,dx.
+\end{aligned}
+$$
+
+The integrals, finite sums, and exclusion steps below are **manual derivations, not separately checked in Lean**. For $x>1$, $v(x)=S/x=0$, so that tail vanishes exactly. On $1/(j+1)<x<1/j$ with $j\ge1$, we have $\lfloor1/(kx)\rfloor=\lfloor j/k\rfloor$, giving
+
+$$
+\begin{aligned}
+\chi(x)-v(x)&=1-S/x+\sum_{k=1}^3q_k\lfloor j/k\rfloor=A_j,\\
+A_j&=1-j+\lfloor j/2\rfloor+\tfrac32\lfloor j/3\rfloor,\\
+A_{j+6}&=A_j,\qquad (A_0,A_1,A_2,A_3,A_4,A_5)=(1,0,0,\tfrac12,\tfrac12,-\tfrac12).
+\end{aligned}
+$$
+
+The breakpoints form a null set. Take $M=256$ and use $|\chi-v|\le1+\sum_k|q_k|=\tfrac92$ to bound the part $0<x<1/M$. This gives a certificate involving rational numbers alone:
+
+$$
+\begin{aligned}
+I_{256}&=\sum_{j=1}^{255}\frac{A_j^2}{j(j+1)},\\
+d_3^2&\le R\le U_{256}:=I_{256}+\frac{81}{1024}.
+\end{aligned}
+$$
+
+The threshold comparison needs no large denominator for the finite sum. Put $w_j=1/(j(j+1))$. The first six terms sum to $11/168$. Every full block of six starting at $j=6m+1$ has the increasing square sequence $(0,0,\tfrac14,\tfrac14,\tfrac14,1)$, whose mean is $7/24$, while $w_j$ decreases. For the block entries $a_i=A_{6m+i}^2$ and $w_{6m+i}$,
+
+$$
+\sum_{i=1}^6a_iw_{6m+i}-\frac7{24}\sum_{i=1}^6w_{6m+i}
+=\frac16\sum_{1\le i<k\le6}(a_i-a_k)(w_{6m+i}-w_{6m+k})\le0.
+$$
+
+The indices $j=7$ through $252$ form full blocks. The final three squares, at $j=253,254,255$, are $0,0,\tfrac14$, each at most $7/24$. Using $w_j=1/j-1/(j+1)$ gives
+
+$$
+\begin{aligned}
+I_{256}&\le\frac{11}{168}+\frac7{24}\left(\frac17-\frac1{256}\right)<\frac3{28},\\
+U_{256}&<\frac3{28}+\frac{81}{1024}=\frac{1335}{7168}<\frac3{16}.
+\end{aligned}
+$$
+
+Item 4 of [@prop-ch34-nyman-beurling-frozen-facts] therefore excludes zeros with $\tfrac12<\operatorname{Re}\rho<1$ and $\tfrac14\le|1-1/\rho|^2\le\tfrac34$: that annulus would force $d_3^2\ge\tfrac3{16}$. For the rectangle interpretation take $\delta=\tfrac14$, $h=\tfrac34$, $T=1$. Then $K=\tfrac{136}{625}<B=\tfrac{144}{625}$ and $U_{256}<\tfrac3{16}<K$, so [@rem-appm-nyman-rectangle-infimum] excludes nontrivial zeros with $\tfrac34\le\operatorname{Re}\rho<1$ and $\tfrac34\le|\operatorname{Im}\rho|\le1$, including the stated closed boundaries. This is a teaching example at low height, showing how a finite rational residual invokes a zero-induced floor. Its evidence covers the stated regions; a single finite certificate provides local exclusion.
+:::
+
 The remaining window and spectral-perturbation proofs are organized by their arithmetic objects:
 
 - [M.1 Power sampling, window mass, and auxiliary primes](ch34-s28-s03-s01-sampling-windows.md)
