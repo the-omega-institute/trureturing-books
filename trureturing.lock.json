@@ -9037,6 +9037,14 @@
       "line": 116,
       "signature": "theorem selected_tree_transport (ht : NamedSpanningTree s t T) (r : V) : (∀ u : E → Circle, rootPhase ht r u r = 1) ∧ (∀ e ∈ T, ∀ u : E → Circle, rootPhase ht r u (t e) = u e * rootPhase ht r u (s e)) ∧ (∀ g : V → Circle, ∀ u : E → Circle, ∀ a : V, rootPhase ht r (gauge s t g u) a = g a * rootPhase ht r u a * (g r)⁻¹) ∧ (∀ a : V, Continuous (fun u : E → Circle => rootPhase ht r u a)) ∧ (∀ u w : E → Circle, ∀ a : V, rootPhase ht r (u * w) a = rootPhase ht r u a * rootPhase ht r w a) ∧ (∀ a : V, rootPhase ht r (1 : E → Circle) a = 1)"
     },
+    "D5/S3/Observer/ArithmeticTomography/PrefixConstrainedGreedyOptimality.prefix_constrained_greedy_optimality": {
+      "module": "D5/S3/Observer/ArithmeticTomography/PrefixConstrainedGreedyOptimality",
+      "name": "D5.S3.Observer.ArithmeticTomography.PrefixConstrainedGreedyOptimality.prefix_constrained_greedy_optimality",
+      "kind": "theorem",
+      "statement_id": "sha256:54510d39cca680833b9e9afdac044d7ea7bc354f9e3ee4e84d88341f7c11efa9",
+      "line": 34,
+      "signature": "theorem prefix_constrained_greedy_optimality {Channel : Type u} [Finite Channel] (depth budget : Nat) (gain : Channel → Fin depth → Real) (gain_antitone : ∀ channel, Antitone (gain channel)) (top : Finset (Channel × Fin depth)) (top_card : top.card = budget) (top_dominates : ∀ inside ∈ top, ∀ outside ∉ top, gain outside.1 outside.2 ≤ gain inside.1 inside.2) : ∃ adjusted : Finset (Channel × Fin depth), adjusted.card = budget ∧ (∀ channel level, (channel, level) ∈ adjusted → ∀ earlier, earlier < level → (channel, earlier) ∈ adjusted) ∧ (∑ cell ∈ top, gain cell.1 cell.2) ≤ ∑ cell ∈ adjusted, gain"
+    },
     "D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction": {
       "module": "D5/S3/Observer/BornReduction",
       "name": "D5.S3.Observer.BornReduction.rank_one_pure_state_modulus_square_reduction",

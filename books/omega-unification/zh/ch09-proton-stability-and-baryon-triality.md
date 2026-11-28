@@ -177,7 +177,7 @@ $$
 c_p=6\left[\binom{p+4}{3}+\binom{p+3}{3}+\binom{p+2}{3}\right].
 $$
 
-交换相邻协变导数产生场强乘低阶导数，可以递归归约到对称导数。场强的缺额非负。写 $\ell=36+\sum_{p=1}^{k-1}c_p+s$，其中 $1\le s\le c_k$。先占低档给出缺额下界。满档的贡献均为偶数。余下 $s$ 为奇数，故维数奇偶只在 $k$ 为奇数时再加一。这样得到
+交换相邻协变导数产生场强乘低阶导数，可以递归归约到对称导数。场强的缺额非负。写 $\ell=36+\sum_{p=1}^{k-1}c_p+s$，其中 $1\le s\le c_k$。先占低档给出缺额下界。把有限候选槽按缺额非降序排成一个通道，每槽成本为一，收益为缺额的相反数。在固定占据数下，前缀是唯一前缀闭合的选择。[前缀闭合的最优性定理](lean:D5/S3/Observer/ArithmeticTomography/PrefixConstrainedGreedyOptimality.prefix_constrained_greedy_optimality)保证存在同样占据数的前缀闭合最优解，所以这个前缀的总缺额最小。满档的贡献均为偶数。余下 $s$ 为奇数，故维数奇偶只在 $k$ 为奇数时再加一。这样得到
 
 $$
 d_{\min}(\ell)=\frac{7\ell-3}{2}+\sum_{p=1}^{k-1}p\,c_p+ks+(k\bmod 2).
