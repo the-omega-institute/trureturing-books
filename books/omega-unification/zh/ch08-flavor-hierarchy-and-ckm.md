@@ -145,6 +145,20 @@ $$
 沿 $(0,1,1)^T$ 的本征值为 $(3-h)/6$。在正交补上，$6B(k,h)$ 的两个对角元为 $2+2h$ 和 $1-h$，行列式为 $2(1-h^2-k^2)$。区间的两个端点给出不同的秩二态，迹距离为 $2\sqrt{1-k^2}/3$。例如实际相位满足 $e^{i\alpha}=(4+3i)/5$ 时，取候选幅值 $\beta=\pi/2$ 得 $k=3/5$，两态的迹距离为 $8/15$，三组概率逐项相等。除 $\alpha=\pi/2$ 外，让幅值稍向 $\pi/2$ 移动就会出现这类歧义。实际幅值恰为 $\pi/2$ 时，读数同时确定幅值和 $B_{\mathrm{ref}}$。
 
 
+**平均读数保持时的相位门槛（`ARGUED`）。** 设零相位的复读数为 $y$，两个相反相位的复读数为 $s_+,s_-$，并满足 $(s_++s_-)/2=y$。令 $D=(s_+-s_-)/(2i)$。若幅值为 $\beta\in(0,\pi)$，循环非对角元必为 $(-w,y,w)$，其中 $w=D/(2\sin\beta)$。当 $D=0$ 时，可行性等价于 $|y|\leq1/2$，且可取任一幅值。以下取 $D\ne0$。正性要求 $r=|y|<1/2$。令 $\ell=\operatorname{Re}(yD^2)/|D|^2$，则 $-r\leq\ell\leq r$。
+
+交换 Fourier 坐标 $1,2$、取复共轭并翻转坐标 $0$ 的符号，保持三个循环非对角元。把一个可行矩阵与其变换平均，可以取对角元为 $(1-2t,t,t)$。若 $r<t<1/2$，对右下两行两列块取 Schur 补，正性恰好要求
+
+$$
+\sin^2\beta\geq\frac{|D|^2}{G(t)},
+\qquad
+G(t)=\frac{2(1-2t)(t^2-r^2)}{t+\ell}.
+$$
+
+当 $t=r$ 且 $\ell>-r$ 时，耦合向量在该块的零方向上有非零分量，故不可行。若 $r>0$ 且 $\ell=-r$，耦合向量在该块的像内，约去因子 $t-r$ 后所得 $G(t)=2(1-2t)(t+r)$ 也适用于该端点。$t=r=0$ 时整个右下块为零，同样排除 $w\ne0$。$t=1/2$ 时第零个布居为零，与 $w\ne0$ 冲突。于是可行幅值恰是满足 $\sin^2\beta\geq |D|^2/G_{\max}$ 的那些，其中 $G_{\max}$ 是 $G$ 在 $[r,1/2]$ 上连续延拓的最大值。写 $G(t)/2=(1-2t)[t-\ell-(r^2-\ell^2)/(t+\ell)]$ 可见 $G$ 在内部严格凹，比较两个端点，并在存在内部驻点时一并比较，即可确定最大值。
+
+门槛取等时，任何正定补全都允许稍增 $|w|$ 而仍保持迹一，违反极大值。所以上面的最小迹判据给出唯一相容态。若 $D\ne0$，纯态恰要求 $\ell=-r$ 且 $|w|^2=(1-2r)r$。必要性来自纯态循环乘积与二阶主子式，取 $t=r$ 时右下块秩一，广义 Schur 补为零，故条件也充分。在门槛处，仅在 $\ell=-r$ 且 $r\geq1/6$ 时得到纯态，因为此时二次式 $G$ 在 $t=r$ 处最大。其余取等情形得到唯一秩二态。例如取 $y=5i/32$、$D=1/8$，最大点是 $t=5/16$，给出精确门槛 $\sin^2\beta=4/45$ 和唯一秩二补全。
+
 若前三次曝光的相位均已校准，怎样用一次额外曝光读出剩下的两个 Fourier 布居自由度？假设在同一制备上可以先施加校准的相位掩模 $D_\theta=\operatorname{diag}(1,e^{i\theta},-1)$，再施加混合器 $H=V(\pi)$，最后按原顺序测量三个通道。令 $W=HD_\theta F$。从读数中减去已知的 $\operatorname{diag}(WCW^*)$，余量就是 $Mx$，其中 $M_{jk}=|W_{jk}|^2$。
 
 手算只需两个通道。任意布居差都可唯一写成 $\delta=h(2,-1,-1)^T+k(0,1,-1)^T$。记 $c=\cos\theta,\ s=\sin\theta$，将 $W$ 前两行逐项取模平方，得
@@ -300,15 +314,50 @@ $$
 
 只指定两套谱与顶底夹角时，可以在两条顶线张成的平面内达到 $F$。若 $\theta\le\pi/4$，一条轮换本征线从中间分开两条顶线。若 $\theta\ge\pi/4$，两条最近的轮换本征线分别向外偏到彼此正交。两部门各把次大本征线放在平面内、最小本征线放在法线上。谱隙相同时，两侧各偏 $d/2$。[射影角的三角不等式](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.fs_angle_triangle) · [不同谱隙的最优分角](https://github.com/the-omega-institute/trureturing-books/issues/1849#issuecomment-7238283999)
 
-固定整对质量矩阵后，若 $0<\theta<\pi/2$，最小破缺等于 $F$ 当且仅当这个平面的法线同时落在 $A,B$ 的核中。取等时，两条顶线各占两个轮换坐标，并且两线偏角之和恰为 $d$。若两线只共用一个坐标，最近轮换线相同会迫使 $\theta<d$，最近轮换线不同则会迫使 $\pi/2-\theta<d$。因此它们共用同一个坐标平面。对谱简单的部门，谱隙估计取等还要求最轻质量线本身是轮换本征线，只能取该平面的法线。秩一部门自动湮灭法线。两谱均简单时，等号条件化为 $|V_{ud}|=1$。若 $|V_{ud}|<1$，最小破缺严格大于 $F$。[等号判据与定量裕量的推导](https://github.com/the-omega-institute/trureturing-books/issues/1875)
+**正交端点附近的分角（手工推导）。** 当 $d=\pi/2-\theta=\mu\varepsilon$ 与次重谱同阶时，两条重线各自锁定一个轮换坐标。取端点正交基 $(e_0,e_1,e_2)$，其中 $e_0,e_1$ 为上下型端点重线的单位向量，$e_2$ 垂直于顶底平面。固定上型质量基，把下型端点质量基在该平面内整体转过 $\mu\varepsilon$，使底线朝顶线靠近。令归一次重质量平方为 $a\varepsilon,b\varepsilon$，$\mu,a,b>0$。设 $c,s$ 为上型和下型端点次重单位向量，$c_j,s_j$ 为它们在端点基中的分量。记 $U=a|c_1 c_2|$、$V=b|s_0 s_2|$，即端点基中两部门各自轻块的首阶非对角元模。设 $D_*$ 为在所有复轮换本征基上最小化最大破缺的结果，则
 
-固定两套质量基后，若只让次重质量平方趋于零，上述差距以什么速度收窄？记 $D_*$ 为这对矩阵在全部轮换本征基上的最小破缺。令两套归一次重质量平方分别为 $a\varepsilon,b\varepsilon$，其中 $a,b>0$，并固定 $0<\theta<\pi/2$。记 $\lambda_u=|V_{ub}|^2/\sin^2\theta$、$\lambda_d=|V_{td}|^2/\sin^2\theta$，它们分别是上、下型最轻质量线在顶底平面内的投影长度平方。手工推导给出
+$$
+\begin{aligned}
+x_*&=\min\left\{\mu,\max\left\{0,\frac{\mu^2+V^2-U^2}{2\mu}\right\}\right\},\\
+D_*&=\sqrt6\,\varepsilon\max\left\{\sqrt{x_*^2+U^2},\sqrt{(\mu-x_*)^2+V^2}\right\}+O(\varepsilon^2).
+\end{aligned}
+$$
+
+在顶底平面内将端点基旋转 $x_*\varepsilon$ 并保留法线，即可取得这个首阶值。因为任何达到 $O(\varepsilon)$ 破缺的轮换基都有两条线分别距 $e_0,e_1$ 至多 $O(\varepsilon)$，其一阶变化可用反厄米矩阵表示。记该矩阵的上三角元为 $(x,y,z)$，则首阶平方成本除去共同因子 $6\varepsilon^2$ 后为 $|x|^2+|y|^2+U^2$ 与 $|\mu-x|^2+|z|^2+V^2$。所以可以把 $x$ 投影到实线段 $[0,\mu]$，并将两个离开平面的分量 $y,z$ 置零。两侧各分得正角当且仅当 $|U^2-V^2|<\mu^2$。若 $U^2\ge V^2+\mu^2$，上型轮换线在首阶与顶线重合。若 $V^2\ge U^2+\mu^2$，下型轮换线在首阶与底线重合。
+
+两线界的首阶系数 $\sqrt{6}\mu/2$ 恰在 $U=V=0$ 时达到。例如 $\mu=a=b=1$、$c=(e_1+i e_2)/\sqrt2$、$s=(e_0+e^{0.4i}e_2)/\sqrt2$ 时，两侧各分一半偏角，最优系数升为 $\sqrt3$。[全局下界、取优基与矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/1951#issuecomment-7238865467)
+
+固定整对质量矩阵后，若 $0<\theta<\pi/2$，最小破缺等于 $F$ 当且仅当顶底平面的法线同时落在 $A,B$ 的核中。取等时，两条顶线各占两个轮换坐标，并且两线偏角之和恰为 $d$。若两线只共用一个坐标，最近轮换线相同会迫使 $\theta<d$，最近轮换线不同则会迫使 $\pi/2-\theta<d$。因此它们共用同一个坐标平面。对谱简单的部门，谱隙估计取等还要求最轻质量线本身是轮换本征线，只能取该平面的法线。秩一部门自动湮灭法线。两谱均简单时，等号条件化为 $|V_{ud}|=1$。若 $|V_{ud}|<1$，最小破缺严格大于 $F$。[等号判据与定量裕量的推导](https://github.com/the-omega-institute/trureturing-books/issues/1875)
+
+**接近正交且上型轻块近等对角时（手工推导）。** 取正交端点的上、下型重线 $e_0,e_1$ 和顶底平面法线 $e_2$ 为单位基。把下型参考质量基在平面内朝上型重线转过 $\mu\varepsilon$（$\mu>0$）。除去共同因子 $\varepsilon$，记两个秩一轻块的非对角元为 $C,S$，上型对角元为 $p,p_2$，下型在 $e_0$ 上的对角元为 $v$。两轻块有界且耦合模有正下界。平方成本为非对角元模平方之和除以 $\varepsilon^2$，每对指标只计一次。令 $q=|C|^2$、$\ell=(p-p_2)/\varepsilon^{3/2}$，再用
+
+$$
+a=\frac{1}{\varepsilon}\left[q-|S|^2-
+(1-\varepsilon v)^2\frac{\sin^2(\mu\varepsilon)\cos^2(\mu\varepsilon)}{\varepsilon^2}\right]
+$$
+
+衡量端点基中下型平方成本留下的余量。记 $D_{\mathrm{plane}}$ 为保留法线时的最小破缺，$D_*$ 为遍历任意复轮换基所得的最小破缺。对有界的 $a,\ell$ 一致有
+
+$$
+D_{\mathrm{plane}}-D_*=
+\frac{\sqrt6\,\varepsilon^4}{2\sqrt q}
+\left(4q a_++2|\ell|\sqrt{q a_+}+\frac{|S|^2}{2}(-a)_+\right)
++O(\varepsilon^{17/4}),\qquad x_+=\max(x,0).
+$$
+
+正余量容许轻块法线转过 $O(\varepsilon^{3/2})$，上型轻块的收益包含线性项与二次项。余量为负时，法线转过 $O(\varepsilon^2)$ 即可削弱下型在该方向的耦合，减少被迫分给上型的平面转角。余量的符号分界在 $q-|S|^2-\mu^2=-2v\mu^2\varepsilon+O(\varepsilon^2)$。[全复基上下界与矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/2051#issuecomment-7239397935)
+
+若固定夹角与两套质量基，只让次重质量平方趋于零，最小破缺又以什么速度趋近锐界 $F$？记 $D_*$ 为这对矩阵在全部轮换本征基上的最小破缺。令两套归一次重质量平方分别为 $a\varepsilon,b\varepsilon$，其中 $a,b>0$，并固定 $0<\theta<\pi/2$。记 $\lambda_u=|V_{ub}|^2/\sin^2\theta$、$\lambda_d=|V_{td}|^2/\sin^2\theta$，它们分别是上、下型最轻质量线在顶底平面内的投影长度平方。手工推导给出
 
 $$
 D_*-F=\frac{\sqrt{3/2}\sin d}{2}(a\lambda_u+b\lambda_d)\varepsilon+O(\varepsilon^2).
 $$
 
 对固定的质量基和角度，首阶只读取最轻质量线在平面内的分量。在顶底平面内重做最优分角时，各部门的有效谱隙为 $1-a\varepsilon(1-\lambda_u)$、$1-b\varepsilon(1-\lambda_d)$，平面与法线间的矩阵元只在平方破缺的二次项中出现。任意使破缺达到最小的轮换基，在秩一极限都以顶底平面为一个坐标平面。控制偏离该平面的代价后，得到相同的首阶下界。因此在 $|V_{ud}|<1$ 时，差距的一次项系数严格为正。[首阶下界与矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/1902#issuecomment-7238657944)
+
+**正交端点附近，首阶取优的平面仍有高阶代价（手工推导）。** 取端点重线的单位向量 $e_0,e_1$ 与平面单位法线 $e_2$。将下型参考质量基在顶底平面内转向上型重线，使夹角为 $\pi/2-\mu\varepsilon$，并令归一次重谱为 $a\varepsilon,b\varepsilon$，其中 $\mu,a,b>0$。当两轻块的首阶非对角元均非零，且首阶最优分角在两侧都为正时，平面最优破缺 $D_{\mathrm{plane}}$ 与全基最优破缺 $D_*$ 有相同的首阶系数。平衡两部门的平方破缺后，偏转法线的二次代价为正，而轻块的非对角元可以产生线性变化。原基中 $O(\varepsilon^2)$ 的偏转因而能给出 $O(\varepsilon^3)$ 的破缺改进。若三阶系数消失，将分角的漂移计入法线方向的变分后，仍得到严格为正的五阶系数。因而在这两个轻块与内点分角的条件下，对充分小的正 $\varepsilon$，固定平面总会高估最小破缺。[五阶系数的推导与复算](https://github.com/the-omega-institute/trureturing-books/issues/1983#issuecomment-7239062129)
+
+例如取 $\mu=a=b=1$，端点次重线由 $c=(e_1+e_2)/\sqrt2$、$s=(e_0+i e_2)/\sqrt2$ 张成。两侧在首阶各分一半偏角，但 $D_{\mathrm{plane}}-D_*=(\sqrt3/16)\varepsilon^3+O(\varepsilon^4)$。[匹配上下界、三阶消失条件与矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/1983#issuecomment-7238976867)
 
 **顶底夹角与次重谱同阶时（手工推导）。** 若连顶底夹角也随次重谱缩小，单靠顶底平面分角会漏掉同阶的轻块代价。取顶线单位向量 $e_0$，在其正交补中固定上、下型参考次重单位向量 $c,s$ 及转动方向 $v$。把下型参考质量基在 $e_0,v$ 平面内整体转过 $\theta=\mu\varepsilon$，并令两套归一次重质量平方分别为 $a\varepsilon,b\varepsilon$，其中 $\mu,a,b>0$。记 $D_*$ 为所有轮换本征基上的最小破缺，令 $\kappa=2|\langle c,s\rangle|^2-1$、$r_w=wa^2/4$、$s_w=(1-w)b^2/4$。则
 
@@ -323,7 +372,31 @@ $$
 
 例如在标准正交基 $(e_0,e_1,e_2)$ 中取 $\mu=a=b=1$、$v=c=e_1$、$s=(e_1+i e_2)/\sqrt2$。最优首阶系数为 $3/2$。若规定一条轮换本征线是顶底平面的法线 $e_2$，最小首阶系数升至 $5\sqrt6/8>3/2$。允许两条轻轮换线重新取向，才可达到真实最小值。[全局推导、取优基与矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/1928#issuecomment-7238762769)
 
+**趋于正交时的分角截断点（手工推导）。** 取端点重线 $e_0,e_1$ 和平面法线 $e_2$ 为正交单位基，把下型参考质量基在顶底平面内朝上型重线转过 $\mu\varepsilon$。两套归一次重谱均与 $\varepsilon$ 成正比。除去共同因子 $\varepsilon$ 后，记两部门固定的秩一轻块在 $(e_1,e_2)$、$(e_0,e_2)$ 中的非对角元为 $C,S$，上型的对角元为 $p,p_2$，下型在 $e_0$ 上的对角元为 $v$。在截断等号 $q=|C|^2=|S|^2+\mu^2$ 处，假设 $\mu>0$ 且 $C,S\ne0$，令 $L=|(p-p_2)C|$。保留平面法线时，上型非对角成本在端点基已达最小，下型比它略低，因此对充分小的正 $\varepsilon$，平面最优破缺恰为 $D_{\mathrm{plane}}=\sqrt{6q}\,\varepsilon$。允许法线偏转后，手工计算给出
+
+$$
+D_{\mathrm{plane}}-D_*=\frac{\sqrt6}{2\sqrt q}
+\begin{cases}
+\tfrac32 L(2\mu^2 L)^{1/3}\varepsilon^{7/3}+O(\varepsilon^{8/3}), & p\ne p_2,\\
+8qv\mu^2\varepsilon^4+O(\varepsilon^{9/2}), & p=p_2.
+\end{cases}
+$$
+
+上型轻块的两个对角元不等时，偏转法线能线性降低上型成本。下型成本因法线偏转而二次上升，需要靠平面转角来抵消，而该转角又给上型带来二次代价。平衡这两种变化得到 $7/3$ 阶。对角元相等时，法线偏转对上型的收益从二次项开始，首项由下型在端点基留下的余量决定。两种情形的首项系数都为正。[完整上下界与矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/2016#issuecomment-7239160733)
+
 在 $1\,\mathrm{TeV}$ 的参考输入表 2 中，$y_c/y_t\le0.00316/0.8573$，$y_s/y_b\le0.000271/0.01392$，因此可取 $g=0.9996$。沿用上面的保守混合输入，$|V_{tb}|>0.98$ 使 $d=\theta$，而 $\sin\theta\ge |V_{cb}|>0.035$ 使破缺严格大于 $0.0428$。用表 2 的边际区间构成输入盒时，仍有 $d=\theta$。由 $|V_{tb}|=\cos\theta_{23}\cos\theta_{13}$，$\sin^2\theta$ 随两个混合角分别增大。代入下端点 $\theta_{23}=0.04233$、$\theta_{13}=0.00369$，得破缺严格大于 $0.0520$。[参考输入表 2](https://arxiv.org/pdf/2510.01312v2#page=14) · [CKM 标准参数化，式 (12.3)](https://pdg.lbl.gov/2024/reviews/rpp2024-rev-ckm-matrix.pdf#page=1)
+
+**正交端点的过渡区（手工推导）。** 当顶底夹角为 $\pi/2-\mu\varepsilon$（$\mu>0$）时，取端点重线 $e_0,e_1$ 和平面法线 $e_2$ 为正交单位基。下型质量基在重线平面内整体转向上型重线。除去次重谱的共同因子 $\varepsilon$，设两部门秩一轻块的非对角元为 $C,S$，上型的对角元为 $p,p_2$。令 $q=|C|^2$、$L=|(p-p_2)C|$、$k=(q-|S|^2-\mu^2)/\varepsilon^{2/3}$，并记 $x_+=\max(x,0)$。当两轻块耦合均趋于非零极限且上型对角元的极限不等时，对有界 $k$ 有一致渐近式
+
+$$
+\begin{aligned}
+D_{\mathrm{plane}}-D_*&=\frac{\sqrt6\,\varepsilon^{7/3}}{2\sqrt q}
+\left[\frac{(-k)_+^2}{4\mu^2}-m(k)\right]+O(\varepsilon^{8/3}),\\
+m(k)&=\min_{s\ge0}\left\{\frac{(s^2-k)_+^2}{4\mu^2}-2Ls\right\}.
+\end{aligned}
+$$
+
+这里 $D_{\mathrm{plane}}$ 是固定平面法线时的最小破缺，$D_*$ 允许任意复轮换基。法线偏转量在原基中为 $O(\varepsilon^{4/3})$，其上型线性收益与下型引起的四次代价相竞争。括号严格为正，极小点满足 $s>\sqrt{k_+}$ 和 $s(s^2-k)=2\mu^2L$。因此跨越首阶分角截断点时，平面的代价仍为 $7/3$ 阶，系数随偏移连续变化。[一致上下界与矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/2033#issuecomment-7239259812)
 :::
 
 ## 8.2 汤川层级障碍图谱：单希格斯、密度势、输运顶角与最小站点支撑 {#sec-ch08-yukawa-nogo}

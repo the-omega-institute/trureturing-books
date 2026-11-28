@@ -90,6 +90,8 @@ $$
 
 沿壳编号每次加一、重谱编号每次加二的次序加入第三、第四组，仍取 $c=0.007$，至多允许一个线对按背景独立分配，则只有 $(0,0)$ 可行。各组须精确匹配两个引力矩，在同一能标三支交汇，并从 $M_Z$ 至交汇处全程保持正的逆耦合。对每个候选能标联合校准这些背景的分布，可行交汇能标的上确界在三组时落在 $[5.852,6.025]\times10^{15}\,\mathrm{GeV}$，四组时降至 $[5.67,5.79]\times10^{15}\,\mathrm{GeV}$。 [三背景交汇能标的上下界](https://github.com/the-omega-institute/trureturing-experiments/blob/7a0753ac3fced64ca4e754a8f81679c85edbb4d8/experiments/ch39-omega-research/replay/%E4%B8%89%E7%BB%84%E5%AE%9E%E9%99%85%E9%9B%B6%E7%82%B9%E7%9A%84%E5%85%B1%E5%90%8C%E4%BA%A4%E6%B1%87%E4%B8%8E%E5%85%A8%E7%A8%8B%E6%AD%A3%E6%80%A7%E8%83%BD%E6%A0%87.md) · [四背景交汇能标的上下界](https://github.com/the-omega-institute/trureturing-experiments/blob/e7beea87a4407a227f658255c688d934ee351fad/experiments/ch39-omega-research/replay/%E5%9B%BA%E5%AE%9A%E4%BA%A4%E6%B1%87%E8%83%BD%E6%A0%87%E4%B8%8B%E5%8F%8C%E5%89%AF%E6%9C%AC%E6%88%AA%E6%AD%A2%E7%9A%84%E5%8F%8C%E4%BE%8B%E5%A4%96%E6%8E%92%E9%99%A4.md#%E5%9B%9B%E8%83%8C%E6%99%AF%E5%85%B1%E5%90%8C%E4%BA%A4%E6%B1%87%E8%83%BD%E6%A0%87%E7%9A%84%E5%8F%AF%E8%A1%8C%E5%8C%BA%E9%97%B4)
 
+继续按此步长取第五组。若它也用标尺 $0.007$，即使 $361$ 个线对各自任取插值位置分布，只要精确匹配两个引力矩，三支就无法在 $M_Z$ 至普朗克质量间交汇。前四组仍取 $0.007$、仅将第五组降至 $0.006$ 时，要使五组都匹配两个引力矩并在同一能标正交汇，允许按背景独立分配的线对最少为两个。按 $19i+j$ 从零编号，全部 $64\,980$ 种搭配中，恰可取第 $0$ 线配第 $15$、$18$、$285$ 或 $323$ 线。每种搭配联合校准后，五组都精确匹配两个引力矩，并在 $10^7\,\mathrm{GeV}$ 交汇，三支逆耦合从 $M_Z$ 至交汇处全程为正。再按同一步长取第六组的壳权与重谱，即使各线独立选取任意分布，对全部 $0<c\le1$，两个引力矩与三支交汇也无法在这一组同时达到，交汇能标可在 $M_Z$ 至普朗克质量间任取。 [第五组在原标尺的排除](https://github.com/the-omega-institute/trureturing-experiments/blob/78e61556c63b7122a67fad4922cf126be4bb2535/experiments/ch39-omega-research/replay/%E5%9B%BA%E5%AE%9A%E4%BA%A4%E6%B1%87%E8%83%BD%E6%A0%87%E4%B8%8B%E5%8F%8C%E5%89%AF%E6%9C%AC%E6%88%AA%E6%AD%A2%E7%9A%84%E5%8F%8C%E4%BE%8B%E5%A4%96%E6%8E%92%E9%99%A4.md#%E7%AC%AC%E4%BA%94%E7%BB%84%E7%9A%84%E5%85%A8%E7%BA%BF%E8%87%AA%E7%94%B1%E6%8E%92%E9%99%A4) · [五组的四种可行搭配](https://github.com/the-omega-institute/trureturing-experiments/blob/f4767d474bcdcf8bf994855d9c77b82268480c7f/experiments/ch39-omega-research/replay/%E7%AC%AC%E4%BA%94%E7%BB%84%E9%99%8D%E4%BD%8E%E6%A0%87%E5%B0%BA%E5%90%8E%E4%BA%94%E7%BB%84%E5%85%B1%E5%90%8C%E6%AD%A3%E4%BA%A4%E6%B1%87%E6%81%B0%E9%9C%80%E4%B8%A4%E6%9D%A1%E7%8B%AC%E7%AB%8B%E7%BA%BF.md#%E5%93%AA%E5%9B%9B%E7%A7%8D%E7%BA%BF%E5%AF%B9%E5%8F%AF%E8%A1%8C) · [第六组的全标尺排除](https://github.com/the-omega-institute/trureturing-experiments/blob/21ac115968beb5a7397e819c3cc89ad5c587ff04/experiments/ch39-omega-research/replay/%E7%AC%AC%E5%85%AD%E7%BB%84%E5%AE%9E%E9%99%85%E8%83%8C%E6%99%AF%E5%9C%A8%E5%85%A8%E9%83%A8%E6%99%AE%E6%9C%97%E5%85%8B%E6%9C%89%E7%95%8C%E6%A0%87%E5%B0%BA%E4%B8%8A%E6%8E%92%E9%99%A4%E4%BA%A4%E6%B1%87.md)
+
 若固定 $c=0.007$、中央壳权和 $357$ 个位置，只连续改变重谱高度，则两项端点分权和两项单线位置可随高度连续调整。在高度闭区间 $[1310310.5534,1310311.7259]$ 上（涵盖第 $2\,345\,665$ 至 $2\,345\,667$ 枚零点），这四项调整可保持两个引力矩和 $10^{16}\,\mathrm{GeV}$ 的精确交汇，从 $M_Z$ 到交汇处三支逆耦合均大于 $1.50866$。 [随重谱高度连续调整的解支](https://github.com/the-omega-institute/trureturing-experiments/blob/642e33004e17dd15658a58b0238f78b5f93bdb2b/experiments/ch39-omega-research/replay/%E4%B8%89%E6%9E%9A%E7%9B%B8%E9%82%BB%E9%9B%B6%E7%82%B9%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BF%9E%E7%BB%AD%E6%AD%A3%E4%BA%A4%E6%B1%87%E8%A7%A3%E6%94%AF.md)
 
 保留能级次序，允许相邻层共用截止，能否再匹配真空项？在中心零点 $N=2\,306\,888\,100\,085$，把四个算术源的正交化方向依次放在极点和三条射线首站，由五种荷和三枚枢轴得到十五组固定的实权。区间计算表明，其中恰有四组可以同时达到 $K=1$、$W=10^{-122}$ 和 $A_{T_3T_3}=A_{QT_3}$。取第一枢轴时可用荷 $6,-4$，取第三枢轴时可用荷 $1,-3$。每个可行组至少需要三个不同的截止位置，三个也足够。若所有截止均须达到 $M_Z$，荷 $-4$ 的第一枢轴也被排除。还能用一条函数规定十九层的位置。写 $r=\lambda/\lambda_{\max}$、$x=Q^2/M_P^2$。在普朗克上限内，任取有限个非负实幂的非负线性组合 $x(r)=\sum_k a_k r^{d_k}$，十五组均无法满足三式。荷 $6$ 的第一枢轴若取饱和函数 $x(r)=h+\kappa r^{6000}/(r^{6000}+s)$，则有一组正参数使三式成立，且最低截止约为 $91.90005$ GeV。同一个次数至多三十的实多项式还能把这些读数与[第八章](ch08-flavor-hierarchy-and-ckm.md)的夸克味谱接起来。在荷六上逐层平方振幅给出十九个截止，在上下夸克两荷上先压缩到三代空间再平方，就能同时重现六个质量与完整 CKM。多项式的系数由十九个截止值和两副味矩阵的十二个实坐标确定。 [四组的三位置构造](https://github.com/the-omega-institute/trureturing-experiments/blob/f5d4e07402489ac2ad0b0e4ca7b3ba124b594073/experiments/ch39-omega-research/replay/ch39-ordered-cross-gravity-roots.py) · [幂函数组合的界](https://github.com/the-omega-institute/trureturing-experiments/blob/f921bbbe92f7a5fa4886e7ca7fd49a5751119358/experiments/ch39-omega-research/replay/ch39-positive-polynomial-gravity-pivots.py) · [双对数凸性](https://github.com/the-omega-institute/trureturing-experiments/blob/f921bbbe92f7a5fa4886e7ca7fd49a5751119358/experiments/ch39-omega-research/replay/ch39-log-convex-native-cutoffs.py) · [饱和截止](https://github.com/the-omega-institute/trureturing-experiments/blob/f921bbbe92f7a5fa4886e7ca7fd49a5751119358/experiments/ch39-omega-research/replay/ch39-charge-six-hill-cutoff.py) · [共同振幅的有限插值](https://github.com/the-omega-institute/trureturing-experiments/blob/bcacc2b5931b0931bf20d1a29dbf468cad6c1fa2/experiments/ch39-omega-research/replay/ch39-hill-quark-common-polynomial.py)
@@ -263,13 +265,44 @@ $$
 
 将每处有符号质量移到最近的接触点。对绝对值和 Lipschitz 常数均至多为一的测试函数，积分变化至多为上式右端。矩向量是 Lipschitz 的，四个接触列线性无关，所以移位后的四个权重与最优权重之差也受同一平方根量级控制。若矩向量在该内点附近为 $C^2$，对称分拆一枚内部原子，位移各为 $h$，并把零原子移到 $h^2$，只留下 $O(h^2)$ 的矩残差。用五个独立正截止矩列精确修复后，总变差超额仍为 $O(h^2)$，而测试函数 $d$ 的积分差为 $|w|h+O(h^2)$，其中 $w$ 是被分拆的权重，积分差取绝对值。因此即使只允许正截止，固定五矩下的有界 Lipschitz 距离一般也只能得到平方根阶。[稳定性推导与有理复算](https://github.com/the-omega-institute/trureturing-books/issues/1963#issuecomment-7238907372)
 
+固定 #11661 可见谱、零裸项和无隐场时，正负权的牛顿斜率能否各自配平，受总变差约束。记 $k,w$ 为单点牛顿与真空响应，$D=x\,d/dx$。令 $\mu^+,\mu^-$ 为归一有符号测度的正部和负部，$T=\|\mu\|_{\mathrm{TV}}$。在 $K=1$、$W=c=10^{-122}$ 和 $DK=DW=0$ 的条件下，两部分的牛顿斜率积分相同，记为 $A=\int Dk\,d\mu^+=\int Dk\,d\mu^-$。对 $k-Dk-3205000(w-Dw/2)$ 加上两种不同的 $Dk$ 修正，区间计算分别给出正部所需的逐点上界和负部所需的逐点下界。用两部分的质量 $(T+1)/2$ 和 $(T-1)/2$ 积分，得到
+
+$$
+1-3205000c < 10^{-6}(0.985T-0.975)-1.43431A.
+$$
+
+若 $A\ge0$，则 $T>1\,015\,229$。所以在 $T\le10^6$ 的预算内，必须有 $A<-0.01045$。对四个 $a_j$ 均非零、且 $\lvert a_j\rvert$ 被一道严格斜率间隔平分的布局，$DK=DW=0$ 迫使间隔两侧的 $a_j$ 两两等幅反号。若一对的两个 $Dk$ 异号，它们对应同号权重，斜率在该权重部分内抵消。若同号，两部分各得到同一符号的斜率贡献。因此在此预算内，至少一对的两个 $Dk$ 都必须为负。 [手工推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2013#issuecomment-7239394127)
+
 若规定截止下限 $\delta>0$，记 $[\delta,1]$ 上的最小总变差为 $T(\delta)$。对上述三枚谱，零裸项、无隐场且 $c=10^{-122}$ 时，每个 $0\le\delta\le10^{-14}$ 都有唯一最优测度，由四个原子组成，最左点就是 $\delta$。区间证书将移动端点的五个矩一起包住，逐谱验证同一根盒对所有 $\delta$ 的严格压缩性，并用对偶函数的严格导数符号与接触矩阵的满列秩判定全域唯一最优性。记 $w_0$ 为闭区间最优解的零截止权重，$F_0$ 为对应的对偶函数。对矩条件求导并与对偶向量配对时，两个内点的位移项由驻点条件消去，得到 $T'(0+)=-w_0F_0'(0)$。三枚谱的系数依次约为 $3.97935\times10^9$、$4.12593\times10^9$、$3.97489\times10^9$，截止变量为 $x=Q^2/M_P^2$。在上述区间内，对每一枚谱都有 $|T(\delta)-T(0)-\delta T'(0+)|\le6\times10^{13}\delta^2$。将矩与接触方程对 $\delta$ 求导，用预条件雅可比的行和界估计最左权重和对偶向量的导数，再对 $T'(\delta)=-w_0(\delta)F_\delta'(\delta)$ 求导即可。这里 $F_\delta'$ 是固定对偶系数时对截止变量的导数。三个谱的 $|T''|/2$ 均小于 $6\times10^{13}$。 [二阶余项的区间复算](https://github.com/the-omega-institute/trureturing-experiments/blob/e6e3ead69923a931d537c95e81db386851929a15/experiments/ch39-omega-research/replay/ch39-cutoff-total-variation-attainment.py) ·[截止下限的区间复算](https://github.com/the-omega-institute/trureturing-experiments/blob/525b6a6e91ef2532a6e48df30e88047a2e1b9bc6/experiments/ch39-omega-research/replay/ch39-cutoff-total-variation-attainment.py) · [一阶代价的区间复算](https://github.com/the-omega-institute/trureturing-experiments/blob/4c897cf27582fc818611877d8fdf4eb5cc1efa89/experiments/ch39-omega-research/replay/ch39-cutoff-total-variation-attainment.py) 同一证书将解的导数保留为带符号的区间，在整个区间上给出 $1.13\times10^{14}<T''(\delta)<1.19\times10^{14}$，所以三枚谱的代价曲线都严格凸，且都在零处切线的上方（$\delta>0$）。 [总代价曲率的区间复算](https://github.com/the-omega-institute/trureturing-experiments/blob/53b87f9bd8d5b6ab5dfa6f02dfdf10351a556a59/experiments/ch39-omega-research/replay/ch39-cutoff-total-variation-attainment.py)
 
-在同一截止区间，四个接触矩向量线性无关，把任一内点的矩导数添为第五列都能张成五维矩空间。可用这两个秩条件解释延续方程的雅可比为何可逆。记 $A$ 为接触矩阵，$B$ 为内点矩导数矩阵。在齐次线性化方程中，接触值固定给出 $A^{\mathsf T}y=0$，其中 $y$ 为对偶系数的增量。消去内点位移后，与 $y$ 配对得到 $\sum_i(-w_i/c_i)((B^{\mathsf T}y)_i)^2=0$，其中 $w_i$ 是内点权重，$c_i$ 是对偶函数在该点对数截止变量的二阶导数。区间证书给出 $-w_i/c_i>0$，故 $B^{\mathsf T}y=0$。联合张成迫使 $y=0$，非零曲率迫使位移为零，接触列的独立性迫使权重增量为零。 [秩与曲率的区间复算](https://github.com/the-omega-institute/trureturing-experiments/blob/13fde4b9f867a9617fe013050ddc5c3ef94b5146/experiments/ch39-omega-research/replay/ch39-cutoff-total-variation-attainment.py)
+截止下限也约束负权必须放在哪里。**区间计算与手工推导。** 对固定 #11661 可见谱，在上述五矩条件下，令 $T=\|\mu\|_{\mathrm{TV}}$、$b=e^{-14.5}$，以 $\mu^-$ 表示测度的负部。取五个矩函数的线性组合，在 $[b,1]$ 上把它夹在 $-1.01$ 与 $1.01$ 之间，在 $[0,b)$ 上把下界放宽到 $-5.675$。该组合的积分由五矩固定，于是得到
+
+$$
+1\,046\,134.326+4.12833\times10^{12}c<1.01T+4.665\,\mu^-([0,b)).
+$$
+
+若所有截止均不低于 $b$，则 $T>1\,035\,776$。预算 $T\le10^6$ 则迫使 $\mu^-([0,b))>7745$。在 $0<x<b$ 处，单点牛顿斜率 $Dk(x)$ 为正。对四点布局，若每个 $a_j=p_jDk(x_j)$ 均非零，且斜率比 $Dw(x_j)/Dk(x_j)$ 之间的一道严格间隔将 $\sum_j|a_j|$ 平分，结合正负权各自的牛顿斜率界可知，小截止节点是唯一的正牛顿斜率节点，权重小于 $-7745$。它与一个负斜率节点以两个负权配对。另一对的牛顿斜率均为负，权重一正一负。该布局能否达到预算仍待判定。 [五矩组合、符号推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2013#issuecomment-7239564941)
+
+在小截止下限的延续区间 $0\le\delta\le10^{-14}$ 内，四个接触矩向量线性无关，把任一内点的矩导数添为第五列都能张成五维矩空间。可用这两个秩条件解释延续方程的雅可比为何可逆。记 $A$ 为接触矩阵，$B$ 为内点矩导数矩阵。在齐次线性化方程中，接触值固定给出 $A^{\mathsf T}y=0$，其中 $y$ 为对偶系数的增量。消去内点位移后，与 $y$ 配对得到 $\sum_i(-w_i/c_i)((B^{\mathsf T}y)_i)^2=0$，其中 $w_i$ 是内点权重，$c_i$ 是对偶函数在该点对数截止变量的二阶导数。区间证书给出 $-w_i/c_i>0$，故 $B^{\mathsf T}y=0$。联合张成迫使 $y=0$，非零曲率迫使位移为零，接触列的独立性迫使权重增量为零。 [秩与曲率的区间复算](https://github.com/the-omega-institute/trureturing-experiments/blob/13fde4b9f867a9617fe013050ddc5c3ef94b5146/experiments/ch39-omega-research/replay/ch39-cutoff-total-variation-attainment.py)
+
+对固定 #11661 可见谱，四点布局的绝对斜率权重可以被一道严格的斜率间隔平分，使唯一的一阶最优速度在每个坐标上都达到位移上限。取 $t_j=\log x_j$，固定 $t_3=-6$ 和 $t_4=-0.001$。记 $a_j=p_jDk(x_j)$、$b_j=p_jDw(x_j)$，其中 $D=x\,d/dx$，$k,w$ 是单点的牛顿与真空读数。令 $a_1=-a_3$、$a_2=-a_4$，由 $DW=0$ 确定两对梯度的比例。权重归一后，Arb 区间证书在 $t_1\approx-14.98960427$、$t_2\approx-13.73805516$ 附近给出同时满足 $K=1$、$W=10^{-122}$ 的精确根。斜率比 $s_j=b_j/a_j$ 依次满足 $s_4<s_3<s_1<s_2$，中间的间隔平分绝对斜率权重。由此得到唯一速度 $v=(1,-1,1,-1)$，其牛顿二阶项 $\tfrac12v^{\mathsf T}\nabla^2K(0)v$ 在 $(-0.371,-0.370)$ 内。这个布局的总变差在 $1\,031\,286$ 与 $1\,031\,287$ 之间。[消元推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2013#issuecomment-7239216867)
+
+**手工推导。** 这类四点半权布局的总变差下确界严格高于上文未加半权条件的下确界。在闭区间的唯一最优测度中，零截止不贡献斜率权重，三个正截止的斜率比各异。将三者按斜率比排序，由 $DK=DW=0$ 可知，中间一项的绝对斜率权重等于两端之和。若四点半权布局的总变差逼近原下确界，可取子列使节点和权重收敛到该唯一最优测度。原来平分绝对权重的两组在极限中仍须平分，但含中间斜率的一侧也必含一个端点，故超过一半。总变差不超过 $10^6$ 时能否实现半权且牛顿二阶项非零，仍待判定。[极限论证与最优测度的斜率核验](https://github.com/the-omega-institute/trureturing-books/issues/2013#issuecomment-7239216867)
 
 驻定只发生在共同标度这一个方向上，并不意味着对截止不敏感：单独移动四点解中最敏感的一个截止，相对移动不到 $8.6\times 10^{-120}$ 曲率就已转负，比上表的通用上界小 $800$ 倍以上，与 $311$ 单态实例同量级，截止之间的比值须精确到约 $120$ 位。$10^{-122}$ 的微调没有减少，只是转移并分摊到截止比值与权重上（[共同标度驻定及其代价](https://github.com/the-omega-institute/trureturing-experiments/blob/f516e0f09642194c1a309ffc0cfd94e129844b15/experiments/ch39-omega-research/replay/%E4%B8%A4%E7%82%B9%E6%88%AA%E6%AD%A2%E5%9C%A8%E5%8C%B9%E9%85%8D%E7%89%9B%E9%A1%BF%E9%A1%B9%E6%97%B6%E4%B8%8D%E8%83%BD%E9%A9%BB%E5%AE%9A%E7%9C%9F%E7%A9%BA%E8%AF%BB%E6%95%B0%E8%80%8C%E5%9B%9B%E7%82%B9%E6%B5%8B%E5%BA%A6%E5%AF%B9%E5%85%B1%E5%90%8C%E6%88%AA%E6%AD%A2%E6%A0%87%E5%BA%A6%E4%B8%80%E9%98%B6%E9%A9%BB%E5%AE%9A.md) · [区间证书](https://github.com/the-omega-institute/trureturing-experiments/blob/f516e0f09642194c1a309ffc0cfd94e129844b15/experiments/ch39-omega-research/replay/ch39-cutoff-scale-stationarity.py)）。
 
 若要求移动截止时牛顿标定始终精确等于 $K=1$，真空读数还能翻负吗？固定这些驻定解的有符号权重 $p_j$，记单点牛顿、真空响应为 $k,w$，则 $K=\sum_jp_jk(x_j)$、$W=\sum_jp_jw(x_j)$，沿标定面有 $C=W$。在对数坐标 $u_j=\log(x'_j/x_j)$ 中，记 $a_j=p_jDk(x'_j)$、$b_j=p_jDw(x'_j)$，其中 $D=x\,d/dx$。在内部正规点 $a\ne0$，允许的速度满足 $a\cdot v=0$。各坐标限速 $|v_j|\le1$ 时，最大的一阶真空下降率为 $\min_\lambda\sum_j|b_j-\lambda a_j|$。任取 $\lambda$ 即给出上界。取 $b_j/a_j$ 按 $|a_j|$ 加权的中位数（仅计 $a_j\ne0$），令非零剩余量对应的速度取其符号的相反数，中位数处的速度即可补足约束并达到上界。
+
+当一阶最优速度刚好触及盒面时，二阶补偿只能向盒内移动。把 $a,b$ 固定在起点，记 $S=\min_\lambda\sum_j|b_j-\lambda a_j|$，$F_*=\{v\in[-1,1]^n:a\cdot v=0,\ b\cdot v=-S\}$，并记 $\mathcal M=[\lambda_-,\lambda_+]$ 为全部加权中位数构成的区间。若 $a\ne0$ 且 $K,W$ 三次连续可微，半径 $r$ 的原盒内、沿 $K=1$ 的最小真空读数仍展开为 $c-Sr+Br^2+O(r^3)$。二阶系数为
+
+$$
+B=\min_{v\in F_*}\max_{\lambda\in\mathcal M}
+   \tfrac12 v^{\mathsf T}\bigl(\nabla^2W(0)-\lambda\nabla^2K(0)\bigr)v.
+$$
+
+手工推导从位移 $u=rv+r^2z$ 出发。记 $\kappa(v)=\tfrac12v^{\mathsf T}\nabla^2K(0)v$，则标定要求 $a\cdot z=-\kappa(v)$，而每个已触边的坐标必须满足 $v_jz_j\le0$。任一最优乘子都给出 $b\cdot z\ge\lambda\,a\cdot z$。在允许的坐标方向中，若需降低牛顿读数，取实现下端点 $\lambda_-$ 的方向就能达到这个代价界。若需提高读数，则用上端点 $\lambda_+$。试点的标定余量可以用盒内 $O(r^3)$ 的位移补足。反过来，缩放后的精确最小点距一阶最优面至多 $O(r)$，因而两个端点的二阶式也给出所需的下界。
+
+例如，取三节点 $x=(1/8,1/4,1/2)$、$p=(1/2,1/4,1/4)$，以 $k(x)=4x$、$w(x)=-(x-3/16)^3$ 作算例。一阶最优速度为 $(-1,-1,1)$。因为 $\kappa(v)=1/2$，须在二阶降低牛顿读数，第三坐标退入盒内，得到 $B=-87/2048$。若只代入第一节点的斜率比，则会低估 $9/256$。将 $w$ 反号后，所有坐标仍触边，但第一坐标退入盒内便能达到相应的二次型值。 [完整推导与精确有理复算](https://github.com/the-omega-institute/trureturing-books/issues/1953#issuecomment-7238876110)
 
 从 $W=c=10^{-122}$ 出发，记 $R_*$ 为沿连续标定路径抵达 $W<0$ 所需的最小对数半径（取下确界），半径以路径上 $\max_j|u_j|$ 的最大值计。牛顿斜率非零的节点 $q$ 可作补偿，按当前位置取 $v_q=-\sum_{j\ne q}a_jv_j/a_q$，故沿全程 $dK/dt=0$。在半径 $10^{-113}$ 的盒内，区间计算验证了所选补偿速度的绝对值小于一，并给出 $-dW/dt$ 的正下界，足以使终点严格翻负。反向估计使用标量 $W-\lambda(K-1)$。它在两个标定端点分别等于相应的 $W$，沿盒内直线积分其梯度就给出任一标定终点翻负所需的位移下界。
 
@@ -278,10 +311,16 @@ $$
 记 $S$ 为初始点的最大一阶下降率，$\phi(r)$ 为原盒内的最小真空读数。沿角点路径对 $K=1$ 两次求导，可以消去补偿坐标的加速度。以 $v$ 表示初始速度、$\lambda=b_q(0)/a_q(0)$ 表示初始斜率之比，$\phi(r)=c-Sr+Br^2+O(r^3)$ 的二阶系数为
 
 $$
-B=\tfrac12 v^{\mathsf T}\bigl(\nabla^2W(0)-\lambda\nabla^2K(0)\bigr)v.
+B=Q(v),\qquad Q(v)=\tfrac12 v^{\mathsf T}\bigl(\nabla^2W(0)-\lambda\nabla^2K(0)\bigr)v.
 $$
 
-把同一求导式用在整条路径上，区间计算给出 $|\phi''(r)|<3S$。因此 $\phi$ 在半径 $(1-10^{-115})c/S$ 处仍为正，在 $(1+10^{-115})c/S$ 处已为负。原盒内的最小值排除了前一半径内的翻号，角点路径在后一半径内给出了连续的翻号路径。这个相对误差界衡量沿精确标定面作线性近似的误差。表中的十进制区间还包含初始布局的数值不确定性。[最小路径的手工推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/1843#issuecomment-7238331172)
+若初始约化斜率 $d_j=b_j(0)-\lambda a_j(0)$ 有零分量，一阶下降率便可能在一整张面上相同。记 $F$ 为完整标定图上的一阶最优方向集。取 $a(0)\cdot v=0$、$|v_j|\le1$（$j\ne q$），并让每个 $d_j\ne0$ 的坐标取 $v_j=-\operatorname{sgn}(d_j)$。设两个读数在原点邻域三次连续可微。若 $Q$ 在这张面上有一个最小方向满足 $|v_q|<1$，则二阶系数为 $B=\min_{v\in F}Q(v)$。
+
+手工推导从完整隐函数图出发。非零斜率在一个足够小的比较盒内保持符号，因此可逐坐标固定使读数下降的端点。把余下的方向按 $r$ 缩放，图上位移为 $u=rv+O(r^2)$，余项在 $F$ 上一致。展开 $W-\lambda(K-1)$ 时，补偿坐标的线性系数为零，故其二阶位移修正不会进入线性项。于是图上读数一致展开为 $c-Sr+r^2Q(v)+O(r^3)$，其中 $S=\sum_{j\ne q}|d_j|$。在完整图上取最小值得到下界，补偿严格内点的最小方向则给出原盒内达到同阶精度的试点。
+
+四节点多项式算例中，二次型选出的自由速度为 $1/39$，位于许可区间内部。三节点触边算例中，精确标定迫使一个非零斜率坐标以 $r^2$ 阶退离端点，使真二阶系数比原单位切盒的一阶最优方向上算出的 $Q$ 多 $9/256$。[手工推导与精确有理复算](https://github.com/the-omega-institute/trureturing-books/issues/1932#issuecomment-7238778063)
+
+对表中的四组非退化布局，把同一求导式用在整条角点路径上，区间计算给出 $|\phi''(r)|<3S$。因此 $\phi$ 在半径 $(1-10^{-115})c/S$ 处仍为正，在 $(1+10^{-115})c/S$ 处已为负。原盒内的最小值排除了前一半径内的翻号，角点路径在后一半径内给出了连续的翻号路径。这个相对误差界衡量沿精确标定面作线性近似的误差。表中的十进制区间还包含初始布局的数值不确定性。[最小路径的手工推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/1843#issuecomment-7238331172)
 
 | 可见谱与驻定布局 | $R_*$ 的区间 | 只动两点的充分半径 |
 | --- | --- | --- |
@@ -292,7 +331,19 @@ $$
 
 只动两点时，一个节点推动真空读数下降，另一个补偿牛顿读数。表中两列均使用平方截止 $x=Q^2/M_P^2$ 的对数，换成 $\max_j|\Delta\log Q_j|$ 时，所有界均除以二。
 
+表中四组布局的翻号半径还可用一个二次式估计。令 $\phi(r)$ 为半径 $r$ 内精确标定的最小真空读数。在翻号尺度上，各非补偿节点取各自的下降端点，补偿节点沿 $K=1$ 移动。记 $S=-\phi'(0)$、$B=\phi''(0)/2$，则 $c-Sr+Br^2$ 的近端正根为
+
+$$
+\widehat r=\frac{2c}{S+\sqrt{S^2-4Bc}}.
+$$
+
+沿最小读数路径三次求导，用 $K=1$ 消去补偿节点的三阶导数，便可估计二次式的余项。四组布局的 Arb 区间计算都给出 $\phi'''<0$ 与 $-\phi'>0$，覆盖从零到 $\widehat r$ 以及首次翻号边界的区间。因此 $\phi(\widehat r)<0$。Taylor 余项给出 $\widehat r$ 处的读数误差，再由中值定理除以途中下降斜率，得到 $0<(\widehat r-R_*)/\widehat r<10^{-231}$。这个界针对精确布局的近似误差，表中十进制区间仍受初始布局包络宽度限制。[手工推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/1900#issuecomment-7238653866)
+
 相同的三枚可见谱也允许翻号永远不可达的标定布局。取二节点匹配族中充分小的 $y>0$，另一节点 $x(y)$ 趋向满足 $w(x_*)/k(x_*)=c$、$k(x_*)>0$ 的内部点 $x_*>0$。这族解的起始值精确满足 $K=1,W=c$。因 $k(y)\to0$ 且 $k(x)<1$，充分小的 $y$ 给出 $x>y$，对应的权重为 $p=(1-k(y))/(k(x)-k(y))>1$ 和 $1-p<0$。将此处的权重固定。沿 $K=1$ 的连续路径，若两点相遇于 $z$，即有 $1=k(z)$，与全域 $k(z)<1$ 相矛盾。因此两点始终保序。由偏振前缀界得 $w$ 为正且严格递增，故 $W=w(y')+p(w(x')-w(y'))>0$。这两点满足起始匹配条件，四点与六点表中的共同标度驻定是额外条件。[标定路径与节点次序的区间证书](https://github.com/the-omega-institute/trureturing-experiments/blob/969e8412d3419bc6718ef060093016aa5a6f8dff/experiments/ch39-omega-research/replay/ch39-newton-preserving-cutoff.md)
+
+同一 #11661 可见谱也有四点驻定布局，其一阶最优速度在四个坐标上都达到位移上限。取 $t_j=\log x_j$，前两个节点为 $-21.61,-21.58$，后两个约为 $-14.14124534,-14.12911366$。先令 $a_1=-a_4,\ a_2=-a_3$，再用真空读数的驻定条件确定两对斜率权重的比例。由 $\sum_jp_j=1$ 归一化后，区间压缩证书给出其余两个节点，使 $K=1$、$W=10^{-122}$ 均精确成立。此时 $s_j=b_j/a_j$ 随节点严格递增，前两点与后两点各占 $\sum_j|a_j|$ 的一半，故整段 $[s_2,s_3]$ 都是一阶最优乘子。
+
+唯一一阶最优速度为 $v=(1,-1,-1,1)$，而牛顿读数沿 $v$ 的二阶项系数 $\kappa=\tfrac12 v^{\mathsf T}\nabla^2K(0)v$ 在 $(-0.683,-0.681)$ 内。为了精确配平，二阶内向位移必须提高 $K$。盒内所有能提高 $K$ 的坐标方向中，第三坐标的线性真空代价最小，故二阶系数取 $B=\tfrac12 v^{\mathsf T}\nabla^2W(0)v-s_3\kappa$，落在 $(1.486,1.489)\times10^{-5}$ 内。若采用同样满足一阶最优条件的 $s_2$，二阶系数会少算约 $1.50\times10^{-5}$。这个见证布局的权重总变差约为 $2.99\times10^{10}$。 [手工消元与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/1982#issuecomment-7239007009)
 
 这里的除差以 $s=-\Psi_0/A$ 为横坐标，其中 $A=1+L$，$L$ 是质量加权的指数积分项。按质量排序的谱满足有符号偏振前缀非正、总和为负。对 $0<x\le1$，同一谱给出 $|L|\le1.2205\times10^{-4}$，而 $DL=(2\pi)^{-1}\sum_i\alpha_i z_i e^{-z_i/x}$ 的上界为正权质量矩 $(2\pi)^{-1}\sum_i\max(\alpha_i,0)z_i<2.494\times10^{-6}$，其中 $D=x\,d/dx$，$z_i$ 是无量纲平方质量，$\alpha_i$ 是牛顿读数的谱系数。于是 $A>0$、$A-DA>0$。在单调性定理中取分母 $B=-A$ 即得 $s$ 严格递增。除差符号使用上面的区间证书。[归一化有符号热迹的单调性](lean:D5/S3/Analytic/Asymptotics/NormalizedSignedHeatTrace.normalized_cutoff_heat_strictMono)
 
