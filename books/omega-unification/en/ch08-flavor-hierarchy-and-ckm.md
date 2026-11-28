@@ -416,7 +416,19 @@ $$
 2(2S_++g_\Delta)g_\Delta=0.01706762,\qquad
 \frac{2L_+}{\mu_-}=0.00603015.
 $$
-Thus the smallest eigenvalue of the leading reduced Hessian remains above $1.7397$ throughout both neighborhoods. This proves uniform strict positivity for the scaled limiting problem. The analytic remainder certificate in #2203 currently bounds function values only, without second derivatives in the scaled coordinates, so $1.7397$ is not promoted here to a finite-$\varepsilon$ Hessian certificate. The next step is to supply that derivative remainder bound.
+Thus the smallest eigenvalue of the leading reduced Hessian remains above $1.7397$ throughout both neighborhoods. This proves uniform strict positivity for the scaled limiting problem. The Cauchy estimate below transfers this lower bound to the local finite-scale equal-cost graph.
+
+The local finite-scale equal-cost graph inherits this positivity (direct derivation). Continue the analytic extension from #2203 by complexifying the six scaled coordinates independently, using the same positive square-root branches on the coordinate polydisc of radius $1$ and on $|\varepsilon|\le10^{-3}$. Enlarging the coordinate box from $20000$ to $20001$, the analytic remainders
+$$
+R_u=E_u-q-\varepsilon^4U_0,\qquad R_d=E_d-q-\varepsilon^2D_0
+$$
+satisfy
+$$
+|R_u|\le10^{30}|\varepsilon|^5,\qquad |R_d|\le10^{24}|\varepsilon|^3.
+$$
+Cauchy estimates with coordinate radius $1$ therefore bound every entry of $\nabla^2(F_u-U_0)$ and $\nabla^2(F_d-D_0)$, for $F_u=(E_u-q)/\varepsilon^4$ and $F_d=(E_d-q)/\varepsilon^2$, by $2\times10^{30}\varepsilon$ and $2\times10^{24}\varepsilon$, respectively. The equal-cost equation $E_d=E_u$ has $\partial_XD_0=-2\mu$ and $\mu\ge\sqrt{1-0.79\cdot1.14}$ throughout the parameter box, so it defines an analytic graph $X=X_\varepsilon(Z,I,Y)$. Substitution into $F_u$ and the chain rule give an operator-norm difference below $3\times10^{-5}$ between its reduced Hessian and the leading reduced Hessian. Thus throughout both radius-$10^{-3}$ neighborhoods, for every $0<\varepsilon\le10^{-36}$, the smallest eigenvalue on the finite equal-cost graph remains above $1.7396$. [Cauchy derivative certificate and endpoint replay](https://github.com/the-omega-institute/trureturing-books/issues/2203#issuecomment-7241378323)
+
+This certificate covers the local equal-cost graph. Exact finite-scale branch roots, global uniqueness, and the exchange threshold still require independent certification.
 
 With the linear variations balanced, set $\kappa+8\mu^2q=\eta\varepsilon$. The two branches then exchange at a shifted threshold for finite $\varepsilon$ (direct derivation). Fix $\mu$ and the down-type light block, and choose phases so that $C>0$ and $S$ is real, retaining its relative sign. Let $v,w$ be the down-type light-block diagonal entries along $e_0,e_2$, respectively, and set $c=\sqrt{\mu^2+|S|^2}$. The actual crossing satisfies $\eta_{\mathrm c}(\varepsilon)=-8\mu^2c^2w+O(\varepsilon)$. For bounded $\eta$ and sufficiently small positive $\varepsilon$, the reflected branch wins for $\eta>\eta_{\mathrm c}(\varepsilon)$, and the branch near zero tilt wins for $\eta<\eta_{\mathrm c}(\varepsilon)$.
 
