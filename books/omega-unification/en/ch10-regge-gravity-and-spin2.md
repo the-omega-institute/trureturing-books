@@ -456,12 +456,12 @@ Polarizing in squared-edge coordinates yields all $100$ local Hessian entries (l
 $$
 Z_b[J; V_0]
 \;=\;
-\int_{\mathscr{Q}} d\mu(q)\,\delta\bigl(V(q) - V_0\bigr)\,e^{-S_g(q) - b V(q)}\,Z_{\rm matter}[J; q]
+\int_{\mathscr{Q}} d\mu(q)\,\delta\bigl(V(q) - V_0\bigr)\,e^{-S_g(q) - b V(q)}\,Z_{\mathrm{matter}}[J; q]
 \;=\;
 e^{-b V_0}\,Z_0[J; V_0],
 $$
 
-canceling every constant vacuum shift $b$ (including the heat-kernel $a_0$ constant and the constant tree-level Higgs drop) identically from all normalized correlators. Under the tangent scale projector $p_T = I - q(\nabla V)^{\mathsf T}/(2V)$, the constrained edge equations become $\beta\sum_{f\ni e}\partial_{q_e} A_f\,\delta_f + \partial_{q_e} I_m = \lambda\sum_{\sigma\ni e}\partial_{q_e} V_\sigma$ with exact global multiplier $\lambda = (\beta S_R + q\cdot\nabla I_m)/(2V_0)$, shifted by $+b$ at fixed geometry. Two honest limits remain: fixing total volume removes only the zero-momentum scale mode while leaving nonzero-momentum conformal modes intact and violating reflection positivity for half-volume fluctuations $F = V_+ - V_0/2$ ($\langle F\Theta F\rangle = -\langle F^2\rangle < 0$, attaining $-1$ and $-1/3$ in hard/soft two-state models); nor does fixing $V_0$ select the integration constant $\Lambda_{\rm int}\ell_P^2 \sim 10^{-122}$ (OPEN).
+canceling every constant vacuum shift $b$ (including the heat-kernel $a_0$ constant and the constant tree-level Higgs drop) identically from all normalized correlators. Under the tangent scale projector $p_T = I - q(\nabla V)^{\mathsf T}/(2V)$, the constrained edge equations become $\beta\sum_{f\ni e}\partial_{q_e} A_f\,\delta_f + \partial_{q_e} I_m = \lambda\sum_{\sigma\ni e}\partial_{q_e} V_\sigma$ with exact global multiplier $\lambda = (\beta S_R + q\cdot\nabla I_m)/(2V_0)$, shifted by $+b$ at fixed geometry. Two honest limits remain: fixing total volume removes only the zero-momentum scale mode while leaving nonzero-momentum conformal modes intact and violating reflection positivity for half-volume fluctuations $F = V_+ - V_0/2$ ($\langle F\Theta F\rangle = -\langle F^2\rangle < 0$, attaining $-1$ and $-1/3$ in hard/soft two-state models); nor does fixing $V_0$ select the integration constant $\Lambda_{\mathrm{int}}\ell_P^2 \sim 10^{-122}$ (OPEN).
 
 | Audit Axis | Benchmark (#11366 vs #11431 or Window Extremum) | Established Model-Internal Result or Bound | Remaining First-Principles Gap |
 | --- | --- | --- | --- |

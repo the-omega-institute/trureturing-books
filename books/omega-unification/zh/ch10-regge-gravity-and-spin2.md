@@ -456,12 +456,12 @@ $$
 $$
 Z_b[J; V_0]
 \;=\;
-\int_{\mathscr{Q}} d\mu(q)\,\delta\bigl(V(q) - V_0\bigr)\,e^{-S_g(q) - b V(q)}\,Z_{\rm matter}[J; q]
+\int_{\mathscr{Q}} d\mu(q)\,\delta\bigl(V(q) - V_0\bigr)\,e^{-S_g(q) - b V(q)}\,Z_{\mathrm{matter}}[J; q]
 \;=\;
 e^{-b V_0}\,Z_0[J; V_0],
 $$
 
-从而常数真空能偏移 $b$（含热核常数 $a_0$ 项与希格斯树势的常数落差）从全部归一化关联函数中精确消去；在切向尺度投影算子 $p_T = I - q(\nabla V)^{\mathsf T}/(2V)$ 下，受限边方程化为 $\beta\sum_{f\ni e}\partial_{q_e} A_f\,\delta_f + \partial_{q_e} I_m = \lambda\sum_{\sigma\ni e}\partial_{q_e} V_\sigma$，全局拉格朗日乘子精确为 $\lambda = (\beta S_R + q\cdot\nabla I_m)/(2V_0)$，加 $bV$ 仅在固定几何下平移 $\lambda \mapsto \lambda + b$。须如实指出两道边界：固定总体积仅移除零动量全局缩放，非零动量共形模仍在，且半体积涨落 $F = V_+ - V_0/2$ 满足 $\langle F\Theta F\rangle = -\langle F^2\rangle < 0$（两态硬／软约束玩具精确值为 $-1$ 与 $-1/3$）；同时固定体积并不挑选积分常数 $\Lambda_{\rm int}\ell_P^2 \sim 10^{-122}$（OPEN）。
+从而常数真空能偏移 $b$（含热核常数 $a_0$ 项与希格斯树势的常数落差）从全部归一化关联函数中精确消去；在切向尺度投影算子 $p_T = I - q(\nabla V)^{\mathsf T}/(2V)$ 下，受限边方程化为 $\beta\sum_{f\ni e}\partial_{q_e} A_f\,\delta_f + \partial_{q_e} I_m = \lambda\sum_{\sigma\ni e}\partial_{q_e} V_\sigma$，全局拉格朗日乘子精确为 $\lambda = (\beta S_R + q\cdot\nabla I_m)/(2V_0)$，加 $bV$ 仅在固定几何下平移 $\lambda \mapsto \lambda + b$。须如实指出两道边界：固定总体积仅移除零动量全局缩放，非零动量共形模仍在，且半体积涨落 $F = V_+ - V_0/2$ 满足 $\langle F\Theta F\rangle = -\langle F^2\rangle < 0$（两态硬／软约束玩具精确值为 $-1$ 与 $-1/3$）；同时固定体积并不挑选积分常数 $\Lambda_{\mathrm{int}}\ell_P^2 \sim 10^{-122}$（OPEN）。
 
 | 检验维度 | 基准对比（#11366 vs #11431 或全窗极值） | 模型内已确立的精确结果或边界 | 遗留的第一性原理缺口 |
 | --- | --- | --- | --- |
