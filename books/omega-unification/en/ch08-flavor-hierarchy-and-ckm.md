@@ -48,6 +48,22 @@ How much phase freedom remains if each four-dimensional operator commutes with t
 
 The weight of $e_1$ on the middle eigenline is $|\langle e_1,Bn\rangle|^2=1/3$. Since $\langle e_1,Be_1\rangle=0$, its weights on the two other lines are also $1/3$ each. In the up basis ordered by increasing mass, choose phases so that the three coordinates of $e_1$ are equal. Its image basis under $D_t$ diagonalizes the down sector, giving $V_{ij}=\delta_{ij}+(e^{it}-1)/3$. At $t=0$ one has $V=I$. At $t=\pm2\pi/3$ all nine squared moduli equal $1/3$, while $J=\pm\sqrt3/18$. In this four-site example the masses, rotation, and compression space are fixed as the relative phase varies. The rotation carries $W$ to a different hyperplane. A physical shell model still needs a law for the light space and the relative phase.
 
+If both mass bases measure the same state, which up-sector probabilities $p$ and down-sector probabilities $q$ can occur together? At $t=2\pi/3$, set $D=\operatorname{diag}(\omega,1,1)$. Direct multiplication gives $iDVD=F$, where $F_{jk}=\omega^{jk}/\sqrt3$ with indices starting at zero. Rephasing the basis vectors preserves probabilities. The negative phase gives $\bar F$, which produces the same attainable pairs upon conjugating the state. For a hand derivation, use $F$ and write the density matrix $\rho$ in the up basis, so $p_j=\rho_{jj}$. The down probabilities $q_k=(F^*\rho F)_{kk}$ can be encoded by one complex number,
+
+$$
+s=\sum_{k=0}^2 q_k\omega^{-k}=\rho_{01}+\rho_{12}+\rho_{20},\qquad q_k=\frac{1+2\operatorname{Re}(\omega^k s)}{3}.
+$$
+
+For a pure state with the given $p$, the three entries have lengths $a=\sqrt{p_0p_1}$, $b=\sqrt{p_1p_2}$ and $c=\sqrt{p_2p_0}$. Their arguments are the cyclic differences of the three amplitude phases. Thus the pure states give exactly the planar set
+
+$$
+\mathcal P_p=\{a e^{i\alpha}+b e^{i\beta}+c e^{-i(\alpha+\beta)}:\alpha,\beta\in\mathbb R\}.
+$$
+
+Allowing mixtures gives exactly the convex hull of $\mathcal P_p$. Every point of the hull comes from mixing pure states with the same $p$. Conversely, positivity forces each row and column with $p_j=0$ to vanish. On the remaining support put $S=\operatorname{diag}(\sqrt{p_j})$. Then $S^{-1}\rho S^{-1}$ is positive semidefinite with unit diagonal. For such complex correlation matrices in dimensions one through three, every real linear functional attains its maximum on a rank-one phase matrix. Apply this to each directional projection of $s$. Every point outside the convex hull exceeds the pure-state maximum in some direction and is therefore unattainable. [Phase Gram maximum theorem](lean:D5/S3/Quantum/Recovery/CommutingRandomUnitaryRecovery.phase_gram_max)
+
+In particular, uniform $q$ means $s=0$, which $\operatorname{diag}(p)$ always realizes. A pure state works exactly when $a,b,c$ close to a triangle, allowing equality and zero sides. Rotate the closed triangle to make its three arguments sum to zero modulo $2\pi$, assigning any direction to a side of length zero. Expanding the four factors in Heron’s formula and using $p_0+p_1+p_2=1$ gives the equivalent test $(p_0p_1+p_1p_2+p_2p_0)^2\le 4p_0p_1p_2$. If a triangle inequality fails, the minimum rank is two. Indeed, for any attainable $s$ with a full-rank witness, add a real $h$ to $\rho_{01}$ and subtract it from $\rho_{20}$, adjusting the conjugate entries as well. Both readouts stay fixed. Positivity confines $h$ to a bounded closed interval whose endpoints give singular states. For example, at $p=(1,8,8)/17$ the longest side $8/17$ exceeds the sum $2\sqrt8/17$ of the other two. An equal mixture of the rephased up-basis vectors $(1,4,0)/\sqrt{17}$ and $(1,0,-4)/\sqrt{17}$ gives the required rank-two state.
+
 Which other four-site operators can produce a nonzero $J$ by this mechanism? Group the rotation characters as a two-dimensional fixed plane $F$ and two character lines. Any two Hermitian operators commuting with the rotation then have the form $A=A_0\oplus a_+\oplus a_-$ and $B=B_0\oplus b_+\oplus b_-$. Write the unit normal to the common light space as $n=(n_0,n_+,n_-)$. Put $C=[A_0,B_0]$, $\alpha=a_+-a_-$, $\beta=b_+-b_-$ and $X_0=\beta(A_0-a_-I)-\alpha(B_0-b_-I)$. For the compressions $H_A,H_B$ to $n^\perp$, the signed determinant factors as
 $$
 \det[H_A,H_B]=-|n_+n_-|^2\det(X_0)\,n_0^*C n_0.

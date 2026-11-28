@@ -20329,6 +20329,14 @@
       "line": 214,
       "signature": "theorem uniform_operator_rotation (J : Matrix l s ℂ) (C P : Matrix l l ℂ) (p : ℝ) (hJ : Jᴴ * J = 1) (hC : Cᴴ * C = 1) (hP : Pᴴ = P) (hPP : P * P = P) (hA : (P * (C * J))ᴴ * (P * (C * J)) = (p : ℂ) • (1 : Matrix s s ℂ)) (hp : 0 < p) (hple : p ≤ 1) : let U"
     },
+    "D5/S3/Quantum/Recovery/CommutingRandomUnitaryRecovery.phase_gram_max": {
+      "module": "D5/S3/Quantum/Recovery/CommutingRandomUnitaryRecovery",
+      "name": "D5.S3.Quantum.Recovery.CommutingRandomUnitaryRecovery.phase_gram_max",
+      "kind": "theorem",
+      "statement_id": "sha256:a8fa92a28d1fa83a7878694adf647556697c1e3267c16197cfeea8b0ed792f8f",
+      "line": 272,
+      "signature": "theorem phase_gram_max {d : ℕ} (hd : 0 < d) (hd3 : d ≤ 3) (f : CodeMatrix d →L[ℝ] ℝ) : ∃ z : Fin d → ℂ, (∀ i, ‖z i‖ = 1) ∧ ∀ X ∈ correlationMatrices d, f X ≤ f (vecMulVec z (star z))"
+    },
     "D5/S3/Quantum/Recovery/FiniteKrausReversibility.scalar_products_construct_left_inverse": {
       "module": "D5/S3/Quantum/Recovery/FiniteKrausReversibility",
       "name": "D5.S3.Quantum.Recovery.FiniteKrausReversibility.scalar_products_construct_left_inverse",
