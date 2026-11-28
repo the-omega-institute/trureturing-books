@@ -53,7 +53,7 @@
     'noumenon-breath': { GenDepth: 1, RoleIndex: 0, nuLang: 0, c0: 0.72, play: true, still: 7.4 }
   };
   const NOTES = {
-    'bootstrap-core': ['二生三：青色二态、琥珀比较、品红投影同在 S²，平权服从比较公理 A₀，撑起 det G₃ > 0 的弧面体。', 'Two begets three: the cyan dyad, amber comparison and magenta projection share S² and axiom A₀ equally, opening det G₃ > 0.'],
+    'bootstrap-core': ['取青色二态的霍奇法向，沿它抬起品红色第三顶点，得到 det G₃ > 0 的球面三面角。', 'Lifting the magenta third vertex along the Hodge normal to the cyan pair gives a spherical trihedron with det G₃ > 0.'],
     'cascade-corolla': ['无外部注入：跨边界递归长出 1 → 4 → 10 胞，青色与品红花瓣沿黄金阻尼步长展开。', 'Zero-input proliferation: boundary recursion grows 1 → 4 → 10 cells; cyan and magenta petals open in golden-damped steps.'],
     'cyclic-triality': ['120° 的 Z₃ 语言轮换：几何本体不动，二元、比较、投影三名相互换身份。', 'A 120° Z₃ triality: the body stays still while dyad, comparison and projection trade roles.'],
     'ladder-fade': ['ν = 0.35，切刀权重 0.28175：三块投影幕与轮廓半融回同一流形。', 'At ν = 0.35 the cut weight is 0.28175: three screens and contours dissolve halfway into one manifold.'],
