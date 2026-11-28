@@ -31,7 +31,42 @@ $$
 
 :::
 
-First run the strictest possible control test: require the arithmetic times $F(j)$ and the reference quark-mixing ($\mathrm{CKM}$) determinant stationary point to share the **exact same probability measure $p$** with zero flavor reweighting. Through the fourth time, the outlook still appears deceptively smooth:
+This definition starts with a positive semidefinite operator and studies its readings. To reverse the argument and establish positivity of a candidate spectral realization from finitely many readings, one must first ask which directions the source and its filtered images can see. The smallest example is $Q=\operatorname{diag}(1,-1)$: observing only the first coordinate gives a positive reading while missing the negative second coordinate entirely. The following matrix theorem makes visibility a precise linear algebra condition.
+
+::: {.theorem #thm-ou-ch12-observation-inertia title="Negative Inertia under Finite Observation and Recovery by a Right Inverse" lean="D5/S3/Weil/ZetaLinear/FullRankInertiaPullback.negIndex_conj_le D5/S3/Weil/ZetaLinear/FullRankInertiaPullback.inertia_conj_eq_of_rightInverse"}
+Let $Q\in\mathbb C^{m\times m}$ be Hermitian, let $B\in\mathbb C^{m\times d}$, and set $G=B^*QB$. Write $\nu_+(H)$ and $\nu_-(H)$ for the numbers of strictly positive and strictly negative eigenvalues of a Hermitian matrix $H$, counted with multiplicity. Then
+
+$$
+\nu_-(G)\le\nu_-(Q).
+$$
+
+If there is also an $R\in\mathbb C^{d\times m}$ with $BR=I_m$, then
+
+$$
+\bigl(\nu_+(G),\nu_-(G)\bigr)
+=\bigl(\nu_+(Q),\nu_-(Q)\bigr).
+$$
+:::
+
+::: proof
+On any negative definite subspace for $G$, the map $B$ is injective: a nonzero kernel vector would have zero quadratic value. Its image is a negative definite subspace for $Q$, giving the negative-index bound. If $BR=I_m$, then $R^*GR=Q$; pulling back once more along $R$ gives the reverse inequality. The same two-way pullback preserves positive inertia. The full proof is checked by the Lean kernel.
+:::
+
+In a finite observation model, the columns of $B$ may be filtered source vectors. The following repeated-eigenvalue example is a **manual derivation (`ARGUED`)** showing why more sampling times need not reveal more directions. Take $K=\lambda I_2$, $\lambda>0$, and $s=e_1$, retaining $Q=\operatorname{diag}(1,-1)$ as the Hermitian form to be tested. The matrix $Q$ also represents the mirror exchange in its standard orthonormal even and odd basis, so the second coordinate is precisely a mirror-odd negative direction. For any finite list $t_i\ge0$, set
+
+$$
+\begin{aligned}
+b_i&=(I+t_iK)^{-1}s=\frac{e_1}{1+t_i\lambda},
+&B&=(b_1,\ldots,b_d),\\
+G_{ij}&=b_i^*Qb_j=\frac{1}{(1+t_i\lambda)(1+t_j\lambda)}.
+\end{aligned}
+$$
+
+Thus $G=aa^*$ with $a_i=(1+t_i\lambda)^{-1}$, so $G\succeq0$, yet $e_2^*Qe_2=-1$. All filtered images lie in $\mathbb C e_1$, so $B$ has no right inverse regardless of the number of sampling times. Adding the independent source $e_2$ and reading both sources at $t=0$ allows $B=R=I_2$, recovering the full inertia. Here $K$ itself is positive semidefinite and $Q$ is a separate form under observation; the example supplies no identification between them and assumes no off-critical branch of the actual Riemann zeros.
+
+The moment constraints below therefore test compatibility of readings within the shared positive spectral model. Connecting [Chapter 3's spectral criteria](ch03-riemann-zeros-fejer-and-landau.md#sec-ou-3-1) to an independent spectral construction for RH additionally requires an exact identification of the arithmetic readings with the candidate form and control of the subspace missed by observation. An explicit right inverse suffices to prevent loss of negative directions under finite compression; it is a sufficient condition, and a particular form may retain its entire negative inertia even without one.
+
+Now run the strictest possible control test: require the arithmetic times $F(j)$ and the reference quark-mixing ($\mathrm{CKM}$) determinant stationary point to share the **exact same probability measure $p$** with zero flavor reweighting. Through the fourth time, the outlook still appears deceptively smooth:
 
 - At the reference scale, six positive zeros match $T_1, \dots, T_4$ exactly while making reference quark mixing the unique maximum;
 - Restricting every support point to three-window zeros `[1]+[2]+[4]` pushes the feasible scale infimum past $A > 41{,}312{,}660.31094$, achieved by five real zeros at $A \approx 41{,}312{,}675.40982$ (leaving background-averaged $|V_{ub}|$ low by $8.0003\%$);
@@ -207,6 +242,31 @@ Here $P_H(s)=sL_{H/s}/L_H$ increases from $0$ to $1$, using its continuous exten
 $$
 \left|D_H-\frac{1}{eL_H}\right|\le\frac{2E}{L_H-E}.
 $$
+
+**First-order bias averaged over cutoff heights (`ARGUED`).** The linear counting remainder for the fixed Chapter 2 Haar window, derived below, supplies a constant $E$ with $|\delta_x|\le E$ for all sufficiently large $x$. Choose $X>1$ so this bound holds for $x\ge X$ and $L_X>E$. Write $\langle g\rangle_X=(\log X)^{-1}\int_X^{X^2}g(H)\,dH/H$. For $0<s\le1$ put $u=\log(1/s)$. The ratio of tail masses gives the identity
+
+$$
+(L_H+\delta_H)(Q_H(s)-s)=s(u+\delta_{H/s}-\delta_H).
+$$
+
+In the $\log H$ coordinate, the integration intervals for $\delta_{H/s}$ and $\delta_H$ are translates by $u$. Their difference leaves two end intervals of length at most $u$. Thus the averaged difference contributes at most $2Esu/\log X$. Removing $\delta_H$ from the left costs at most $E(su+2sE)/(L_X-E)$. Since $su\le1/e$,
+
+$$
+\sup_{0<s\le1}\left|\left\langle L_H(Q_H(s)-s)\right\rangle_X-s\log(1/s)\right|
+\le \frac{2E}{e\log X}+\frac{E(1/e+2E)}{L_X-E}.
+$$
+
+Taking $s=e^{-1}$ gives $\limsup_{H\to\infty}L_HD_H\ge1/e$, so the window's $O(1/\log H)$ rate is sharp in order. For the unfiltered spectrum, the [cumulative zero-count bound](lean:D5/S3/Weil/ZeroData/CumulativeRvmError.cumulative_rvm_error) gives an $O((\log t)^2)$ remainder. Hence $\sup_{x\ge H}|\delta_x|\to0$ and the same identity gives $L_HD_H\to1/e$ for individual cutoffs.
+
+The unit-scale reading $K_H=\mathbb E_H[(1+(H/\gamma)^2)^{-1}]$ also retains a signed bias. With $f(s)=(1+s^2)^{-1}$, integration by parts gives $K_H-\pi/4=\int_0^1(-f'(s))(Q_H(s)-s)\,ds$. Since $f(0)-f(1)=1/2$, the average $\langle L_H(K_H-\pi/4)\rangle_X$ differs from the following coefficient by at most half the uniform bound above.
+
+$$
+\int_0^1(-f'(s))s\log(1/s)\,ds
+=\int_0^1\frac{-\log s-1}{1+s^2}\,ds
+=G-\frac{\pi}{4},
+$$
+
+where $G=\sum_{k\ge0}(-1)^k/(2k+1)^2$ is Catalan's constant. This coefficient also bounds $\limsup_{H\to\infty}L_H(K_H-\pi/4)$ from below. [Geometric cutoffs and a counterexample for the pointwise coefficient](https://github.com/the-omega-institute/trureturing-books/issues/1637#issuecomment-7240605519)
 
 For all positive zeros without phase filtering, the counting estimate of Hasanalizade, Shen, and Wong gives for $t\ge e$
 

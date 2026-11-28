@@ -220,7 +220,7 @@ $$
 
 在 $B_0$，$N$ 份截顶热权可以同时趋于 $1$，第二热迹的上确界为 $N+w_1^u$。因此 $u\ge u_c$ 时的左跳跃为 $1-M^u-d^u$，与 $N$ 无关。取 $u=4$，复算（`NUM`）得到约 $0.113987815$。[整个指数区间的推导](https://github.com/the-omega-institute/trureturing-books/issues/2059#issuecomment-7239617760) · [四次热迹复算](https://github.com/the-omega-institute/trureturing-books/issues/2059#issuecomment-7239523334) · [小指数构造](https://github.com/the-omega-institute/trureturing-books/issues/2059#issuecomment-7239426333)
 
-把预算从 $B_0$ 向下移，最优谱还可能在截顶之前换序（手工推导，`ARGUED`）。记 $V_S(B)$ 为第一热迹等于 $S$、暴露至多 $B$ 的有限正质量整数谱的第二热迹上确界。令 $r=\tau-\varepsilon$、$M_\varepsilon=W(r)$，并令 $s_r$ 为 $W(r-s_r)+W(s_r)=1+w_1$ 在 $(0,r/2)$ 内的唯一根。置 $A_r=W(r-s_r)$、$C_r=W(s_r)$。取 $\tau=\tau_0(u)$。在 $1<u\le3.56$、$0<\varepsilon\le1/20$ 时，
+把预算从 $B_0$ 向下移，最优谱还可能在截顶之前换序（手工推导，`ARGUED`）。记 $V_S(B)$ 为第一热迹等于 $S$、暴露至多 $B$ 的有限正质量整数谱的第二热迹上确界。令 $r=\tau-\varepsilon$、$M_\varepsilon=W(r)$，并令 $s_r$ 为 $W(r-s_r)+W(s_r)=1+w_1$ 在 $(0,r/2)$ 内的唯一根。置 $A_r=W(r-s_r)$、$C_r=W(s_r)$。取 $\tau=\tau_0(u)$。在 $1<u\le3.56$、$0<\varepsilon\le1/20$ 时，以及当 $2\le u\le3.56$ 且 $0<\varepsilon\le3/25$ 时，
 
 $$
 V_S(B_0-\varepsilon)
@@ -229,7 +229,7 @@ $$
 
 前缀支配将任意有限谱的上界归约为单次转移。对 $1<u\le2$，幂和随转移严格增加，直至零暴露余权耗尽。对 $2\le u\le3.56$，转移族的幂和严格凸，所以只需比较两端。$N=1$ 时，占优端点给出唯一最优谱，换序点两组谱都取等。$N\ge2$ 时，可让 $N-1$ 份截顶热权趋于 $1$ 来逼近上确界，正质量谱无法取到它。
 
-记 $D(u,\varepsilon)$ 为两份转移谱的幂和减去三份无转移谱的幂和。令 $u_-$ 为 $D(u,1/20)=0$ 的唯一解，区间复算给出 $3.43591242108<u_-<3.43591242110$。当 $1<u<u_-$ 时，转移端在整个窗口占优。对 $u_-\le u<u_c$，预算缺口升至唯一的 $\varepsilon_c(u)\in(0,1/20]$ 时两端并列，越过此值后无转移端占优。对 $u_c\le u\le3.56$，无转移端在整个正缺口窗口严格占优。在换序曲线上，$D$ 对 $u$ 和 $\varepsilon$ 的偏导均严格为负。由隐函数定理，换序缺口从 $u_-$ 处的 $1/20$ 随 $u$ 光滑下降，在 $3.55808144201<u_c<3.55808144202$ 处趋于零，且
+记 $D(u,\varepsilon)$ 为两份转移谱的幂和减去三份无转移谱的幂和。令 $u_-$ 为 $D(u,3/25)=0$ 的唯一解，区间复算给出 $3.26658152567<u_-<3.26658152570$。在 $1<u<u_-$ 的上述预算窗内，转移端始终占优。对 $u_-\le u<u_c$，转移端占优直到预算缺口升至唯一的 $\varepsilon_c(u)\in(0,3/25]$。此时两端并列，越过此值后无转移端占优。缺口为 $1/20$ 时，换序指数仍介于 $3.43591242108$ 与 $3.43591242110$ 之间。对 $u_c\le u\le3.56$，无转移端在整个正缺口窗口严格占优。在换序曲线上，$D$ 对 $u$ 和 $\varepsilon$ 的偏导均严格为负。由隐函数定理，换序缺口从 $u_-$ 处的 $3/25$ 随 $u$ 光滑下降，在 $3.55808144201<u_c<3.55808144202$ 处趋于零，且
 
 $$
 \lim_{u\uparrow u_c}\frac{\varepsilon_c(u)}{u_c-u}
@@ -237,27 +237,48 @@ $$
 \in (0.407501589,\,0.407501592).
 $$
 
-这里 $D(u,0)$ 是两条有限预算分支的连续延拓。[换序曲线的推导与有理区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2146#issuecomment-7240317381) · [整段换序曲线的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2145#issuecomment-7240288302) · [低指数的换序证书](https://github.com/the-omega-institute/trureturing-books/issues/2177#issuecomment-7240496121) · [最小指数段的转移斜率](https://github.com/the-omega-institute/trureturing-books/issues/2177#issuecomment-7240540984)
+这里 $D(u,0)$ 是两条有限预算分支的连续延拓。[换序曲线的推导与有理区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2146#issuecomment-7240317381) · [整段换序曲线的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2145#issuecomment-7240288302) · [低指数的换序证书](https://github.com/the-omega-institute/trureturing-books/issues/2177#issuecomment-7240496121) · [较宽预算窗的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2231#issuecomment-7241158506) · [最小指数段的转移斜率](https://github.com/the-omega-institute/trureturing-books/issues/2177#issuecomment-7240540984)
 
 在 $u=7/2$，$D$ 随 $\varepsilon$ 严格下降，在 $0.0237169055<\varepsilon_c<0.0237169058$ 内唯一换号。预算越过 $B_c=B_0-\varepsilon_c$ 向上增加时，最优谱由无转移端换为转移端，$V_S$ 对 $B$ 的斜率由约 $0.230347403$ 升至约 $0.251251786$（`NUM`）。[七半次热迹的推导与有理区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2136#issuecomment-7240195509)
 
 这个换序点还决定了所有低指数共用的最大预算半径。取 $1<u\le7/2$，每次均用该指数的临界截顶 $\tau=\tau_0(u)$。对 $0<\varepsilon\le1/20$，上式的两个端点仍给出精确上确界。当 $u\le2$ 时，沿转移方向比较两份活跃热权的边际增益，幂和一路增加到余量为零。当 $2\le u\le7/2$ 时，转移族的幂和严格凸，且在固定缺口下，两份端点相对三份端点的优势随指数严格下降。因此七半次最先换序。在 $0<\varepsilon<\varepsilon_c$ 内，每个指数都有 $V_S(B_0-\varepsilon)=N-1+A_r^u+C_r^u$，其中 $0.02371690563<\varepsilon_c<0.02371690564$。在右端点仍有同一等式，只有 $u=7/2$ 时两谱并列。$N=1$ 时胜出的热权组给出全部取等谱（不计排列）。$N\ge2$ 时，以趋于 $1$ 的截顶热权替代单位权，再用一份零暴露热权补足第一热迹，即可在同一预算下逼近上确界。
 
+对 $1<u\le2$，在 $3/25<\varepsilon\le7/50$ 内仍可得到精确值 $V_S(B_0-\varepsilon)=N-1+A_r^u+C_r^u$，取等条件与上文相同。若最大的 $N$ 份热权中至少两份未截顶，可同时使用前 $N-1$ 项与前 $N$ 项的上界。若所得比较谱的前 $N$ 项和大于转移端，两谱的正部和之差只变号一次，转移端在较高热权处占优。对 $w\log w$ 的区间复算确证转移端占优，再用递增权重 $t^{u-1}$ 从这个比较推出 $w^u$ 的严格优势。若最大的 $N$ 份热权中恰有 $N-1$ 份截顶，转移斜率仍严格为正。[两条前缀与小指数极限的推导](https://github.com/the-omega-institute/trureturing-books/issues/2275#issuecomment-7241420906)
+
 从左侧趋近 $B_0$ 时，令 $s_*=s_\tau$、$b=W'(\tau-s_*)$、$c=W'(s_*)$。由 $A_r+C_r=1+w_1$ 得 $dA_r/dr=-dC_r/dr=bc/(c-b)$（在 $r=\tau$ 处）。以左极限为基准，预算每减少一单位时最优值的一阶损失为 $u(A_\tau^{u-1}-C_\tau^{u-1})bc/(c-b)$。[统一半径、取等条件与区间核证](https://github.com/the-omega-institute/trureturing-books/issues/2128#issuecomment-7240278006)
 
-当指数达到临界值后，无转移端在更宽的预算窗内占优（手工推导，`ARGUED`）。取 $u_c\le u\le4$、$\tau=\tau_0(u)$ 和 $0<\varepsilon\le0.43$，则
+对 $1<u\le2$，转移端在更宽的 $0<\varepsilon\le3/25$ 内仍给出 $V_S(B_0-\varepsilon)=N-1+A_r^u+C_r^u$，取等条件与上文相同。若前 $N$ 份中恰有两份未截顶，这两份的总暴露至多为 $2\tau-\varepsilon$。凹性将前缀上界收紧为 $N-2+2W(\tau-\varepsilon/2)$。若有三份以上未截顶，缺少的单位热权更多，同一个前缀上界仍成立。闭区间复算表明 $A_r>2W(\tau-\varepsilon/2)-1$，且幂和沿转移严格增加到零暴露余权耗尽。这样可以在整个新窗口沿用单次转移比较。[加强前缀的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2193#issuecomment-7240619070)
+
+当指数达到临界值后，无转移端在更宽的预算窗内占优（手工推导，`ARGUED`）。取 $u_c\le u\le4$、$\tau=\tau_0(u)$ 和 $0<\varepsilon\le0.60$，则
 
 $$
 V_S(B_0-\varepsilon)=N-1+M_\varepsilon^u+w_1^u+(1-M_\varepsilon)^u.
 $$
 
-若最大的 $N$ 份热权中有 $k\ge2$ 份未截顶，它们分到的暴露合计至多 $k\tau-\varepsilon$。由 $W$ 的凹性，这 $N$ 份热权之和至多为 $N-k+kW(\tau-\varepsilon/k)\le N-2+2W(\tau-\varepsilon/2)$。区间核证表明 $A_r>2W(\tau-\varepsilon/2)-1$ 在整个窗口成立。因此这类谱仍受转移端的前缀支配。只用单份截顶热权估计所得的条件 $A_r>2W(\tau)-1$ 则在 $0.261<\varepsilon<0.273$ 内首次达到等号。
+若最大的 $N$ 份热权中有 $k\ge2$ 份未截顶，它们分到的暴露合计至多 $k\tau-\varepsilon$。由 $W$ 的凹性，这 $N$ 份热权之和至多为 $N-k+kW(\tau-\varepsilon/k)\le N-2+2W(\tau-\varepsilon/2)$。区间核证表明 $A_r>2W(\tau-\varepsilon/2)-1$ 在 $\varepsilon\le0.43$ 时成立。因此这类谱仍受转移端的前缀支配。只用单份截顶热权估计所得的条件 $A_r>2W(\tau)-1$ 则在 $0.261<\varepsilon<0.273$ 内首次达到等号。
 
-有 $N-1$ 份截顶时，按剩余暴露构造单次转移谱即可支配各前缀，再由严格凸性将幂和的比较归约到两个端点。区间核证表明 $D(u,\varepsilon)$ 随缺口严格下降。从 $D(u,0)\le0$ 出发，只要缺口为正，无转移端便严格占优。$N=1$ 时，热权 $M_\varepsilon,w_1,1-M_\varepsilon$ 给出唯一最优谱。$N\ge2$ 时，令 $N-1$ 份截顶热权趋于 $1$，可用正质量谱逼近上确界。[总预算前缀界的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2189#issuecomment-7240610111)
+若最大的 $N$ 份热权中恰有 $N-1$ 份截顶，按剩余暴露构造单次转移谱即可支配各前缀，再由严格凸性将幂和的比较归约到两个端点。在 $0<\varepsilon\le0.43$，$D(u,\varepsilon)$ 从 $D(u,0)\le0$ 严格下降。无转移端的严格优势延续到 $\varepsilon=0.60$。$N=1$ 时，热权 $M_\varepsilon,w_1,1-M_\varepsilon$ 给出唯一最优谱。$N\ge2$ 时，令 $N-1$ 份截顶热权趋于 $1$，可用正质量谱逼近上确界。[总预算前缀界的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2189#issuecomment-7240610111)
 
-总预算前缀证书的边界可以独立定位（手工推导与 `NUM`）。令 $G(u,\varepsilon)=A_{\tau-\varepsilon}-2W(\tau-\varepsilon/2)+1$。在 $u=3.558081442015$，50 位 Decimal 二分给出 $1.6750618793359091<\tau<1.6750618793359092$，且 $G$ 的首个零点满足 $0.4316940644611203<\varepsilon_*<0.4316940644611204$。在 $\varepsilon=0.432$，$G=-0.0000533241825908123$，故转移前缀已经不能支配两份未截顶热权的前缀。这只否定前缀证书的外推，并不单独否定幂和最优性。[边界复算与有限谱反例](https://github.com/the-omega-institute/trureturing-books/issues/2189#issuecomment-7240947117)
+总预算前缀证书的边界可以独立定位（手工推导与 `NUM`）。令 $G(u,\varepsilon)=A_{\tau-\varepsilon}-2W(\tau-\varepsilon/2)+1$。在 $u=3.558081442015$，50 位 Decimal 二分给出 $1.6750618793359091<\tau<1.6750618793359092$，且 $G$ 的首个零点满足 $0.4316940644611203<\varepsilon_*<0.4316940644611204$。在 $\varepsilon=0.432$，$G=-0.0000533241825908123$，故转移前缀已经不能支配两份未截顶热权的前缀。对 $0.43\le\varepsilon\le0.60$，若最大的 $N$ 份热权中至少两份未截顶，可同时使用两条前缀不等式。令 $M=W(\tau)$、$x=W(\tau-\varepsilon/2)$，前 $N-1$ 项之和至多为 $N-2+M$，前 $N$ 项之和至多为 $N-2+2x$。因此 $N-2$ 份单位权加上 $M,2x-M,2+w_1-2x$ 支配所有前缀。后三份热权均为正且按降序排列。将这组向量的幂和与无转移值比较，得到整个预算窗内的严格上界。[双前缀比较及区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2260#issuecomment-7241295993)[边界复算与有限谱反例](https://github.com/the-omega-institute/trureturing-books/issues/2189#issuecomment-7240947117)
 
-在同一指数下取 $N=2$、$S=2+e^{-1}$、$\varepsilon=0.9$，令 $t=\tau-\varepsilon/2$、$x=W(t)$、$R=S-2x$。四个重数均为一的正质量层取热权 $(x,x,e^{-1},R-e^{-1})$。前两层的平方质量比为 $e^{-2t}>0$，后两层的平方质量比分别为 $1$ 与 $-\log(R-e^{-1})>1$，所以后两层暴露为零。该谱第一热迹正好为 $S$，总暴露正好为 $2\tau-\varepsilon$。数值上 $x=0.9173346735734259$、$R-e^{-1}=0.1653306528531482$，其第二热迹为 $1.5014474195549630$，比无转移端 $1+W(\tau-\varepsilon)^u+e^{-u}+(1-W(\tau-\varepsilon))^u=1.5012331718369161$ 高 $0.00021424771804686$。同一构造在 $\varepsilon=0.8$ 时低于无转移端 $0.02426304550014$，显式族的换号点约为 $0.89912897398$。因此 $(0.4316940644611,0.89912897398)$ 仍需完整分类，不能把 $0.43$ 以外的窗口宣称为已证结论。
+在 $u_c\le u\le4$、$0.60\le\varepsilon\le0.9$，若至多 $N$ 份重数消耗正暴露，第二热迹的上确界仍可显式给出（手工推导，`ARGUED`）。令 $m=W(\tau-\varepsilon)$、$x=W(\tau-\varepsilon/2)$。对 $N\ge2$，所求上确界为 $\max(P_1,P_2)$，其中
+
+$$
+\begin{aligned}
+P_1&=N-1+m^u+w_1^u+(1-m)^u,\\
+P_2&=N-2+2x^u+w_1^u+(2-2x)^u.
+\end{aligned}
+$$
+
+正暴露份数不足 $N$ 时，谱受无转移端的前缀支配。恰有 $N$ 份时，先让截顶热权趋于 $1$、用足暴露，并将零暴露余权集中为尽可能多的 $w_1$ 加一份余量。每份未截顶的暴露至少为 $\tau-\varepsilon$。在这段范围，扣除尾部热权代价后的边际增益随暴露严格递减，故固定未截顶份数时，均分剩余暴露最好。未截顶份数从两份继续增加时，均分所造成的活跃热权幂和损失超过尾部能补回的增益。因此只需比较一份未截顶的无转移端与两份未截顶的等暴露端。$N=1$ 时只有 $P_1$，谱 $(m,w_1,1-m)$ 唯一取等。$N=2$ 且 $P_2\ge P_1$ 时仅 $(x,x,w_1,2-2x)$ 取等（不计排列）。其余情形中，比较谱里的单位热权由正质量的截顶层逼近。
+
+区间复算给出唯一的换序缺口 $\varepsilon_\times(u)\in(0.88,0.9)$，它随 $u$ 严格下降。从 $u_c$ 到 $4$，换序缺口由约 $0.899128973978$ 降至约 $0.885028350536$。缺口越过这条曲线时，$P_2>P_1$。例如 $N=2$、$u=3.558081442015$、$\varepsilon=0.9$ 时，两份 $x$ 各消耗 $\tau-\varepsilon/2$，而 $w_1$ 和 $2-2x$ 均为零暴露。这个有限正质量谱的第二热迹比无转移端高约 $0.00021424771804686$。[推导与向外区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2261#issuecomment-7241416206)
+
+当 $N=2$ 且 $0.60\le\varepsilon\le0.9$，$\max(P_1,P_2)$ 是任意有限整数谱的精确上确界（手工推导与向外区间复算）。在 $0.60\le\varepsilon\le0.88$ 内，闭区间比较给出 $P_1>P_2$，无转移端始终占优。更大的缺口则由上面的换序曲线判定。
+
+若谱有一份截顶，先将其权重提高到极限 $1$，从最大未截顶权之后的尾部扣去等量热权。有两份以上正暴露而无截顶时，保留最大的两份热权作比较。两种情形中，尾部每份热权都受剩余预算和排序约束。将尾权尽量集中到单份上限，再补一份余量，就能逐个控制尾部的前缀和。余预算趋零处用边际增益比较，其余用闭区间比较。由此，在 $0.60\le\varepsilon\le0.88$，每个正质量谱都严格低于 $P_1$。在 $0.88\le\varepsilon\le0.9$，三份或更多正暴露的谱中，含一份截顶者严格低于 $P_1$，无截顶者严格低于 $P_2$。当 $P_2\ge P_1$ 时，只有 $(x,x,w_1,2-2x)$ 取等（不计排列）。当 $P_1>P_2$ 时，一份截顶热权趋于 $1$，由零暴露余权补足第一热迹，即可在同一预算下逼近上确界。[完整推导与区间证书](https://github.com/the-omega-institute/trureturing-books/issues/2261#issuecomment-7241789219)
+
+当 $N=3$ 且 $0.88\le\varepsilon\le0.9$，同一双端点公式也适用于任意有限整数谱，此时正质量谱只能逼近上确界（手工推导与向外区间复算）。有截顶状态时，将最大热权提高到 $1$，按比例缩减其余热权。幂和严格增加，去掉首份后，余谱归入 $N=2$ 的预算问题。无截顶时，最大的三份热权各自受截顶热权约束，合计受前三份暴露的凹性界约束。尾权再用排序与余预算逐份控制。这样得到的前缀界给出一致差额，幂和比 $P_2$ 至少低 $0.02$。将各端点中的单位热权换成趋于 $1$ 的截顶状态，缺下的热权由零暴露余量补足。两端在同一预算下均可逼近，换序位置与双份预算相同。[三份预算的推导与区间证书](https://github.com/the-omega-institute/trureturing-books/issues/2261#issuecomment-7241979355)
 
 预算趋向 $B_0$ 时，相对左极限的一阶损失系数为 $uW'(\tau)(M^{u-1}-d^{u-1})$，与 $N$ 无关。对四次热迹 $u=4$，该系数约为 $0.2144536669$（`NUM`）。[宽预算窗的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2170#issuecomment-7240449786) · [四次热迹复算](https://github.com/the-omega-institute/trureturing-books/issues/2116#issuecomment-7240080414)
 

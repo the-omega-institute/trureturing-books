@@ -40,7 +40,41 @@
 
 ## B.2 六层认识论证据分层总账 {#sec-ou-appb-epistemic-ledger}
 
-本书对每一条定理、数值区间、模型构造与开放目标均执行严格六层划界。各层之间实行**单向不可越级原则**：Arb 高精度区间认证、上游独立 `Init` 重放或外部 RH 形式化里程碑均不会自动把 `ARGUED`、`NUM`、`MODEL` 或 `OPEN` 条目抬升为本书所钉提交上的 `LEAN ✓` 冻结定理：
+本书对每一条定理、数值区间、模型构造与开放目标均执行严格六层划界。各层之间实行**单向不可越级原则**：Arb 高精度区间认证、上游独立 `Init` 重放或外部 RH 形式化里程碑均不会自动把 `ARGUED`、`NUM`、`MODEL` 或 `OPEN` 条目抬升为本书所钉提交上的 `LEAN ✓` 冻结定理。
+
+下面的谱例子把“计算正确”与“独立证明正性”分开：[第三章 §3.1](ch03-riemann-zeros-fejer-and-landau.md#sec-ou-3-1) 的凯莱判据可以用有限维负惯性指数精确读出，但矩阵本身仍由实际零点构造。
+
+::: {.theorem #thm-ou-appb-mirror-gram-inertia title="有限镜像奇子空间的 Gram 惯性" lean="D5/S3/Midline/Cayley/FiniteMirrorKreinGramInertia.canonical_zeta_finite_mirror_gram_inertia"}
+取库中无外部参数的典范表示 `zetaZeroData`，记其互异非平凡零点为 $\rho_n$、解析重数为 $m_n>0$。同高镜像指标置换 $\sigma$ 保持重数并满足 $\rho_{\sigma(n)}=1-\overline{\rho_n}$。对任意 $T\in\mathbb R$，定义
+
+$$
+\begin{aligned}
+W_T&=\{n:|\rho_n-\tfrac12|\le T\},\\
+R_T&=\{n\in W_T:n<\sigma(n)\},\\
+\kappa_T&=\sum_{n\in R_T}m_n.
+\end{aligned}
+$$
+
+在 $H=\ell^2(\{(n,k):k<m_n\};\mathbb C)$ 的标准基上，令 $J e_{n,k}=e_{\sigma(n),k}$、$[x,y]_J=\langle x,Jy\rangle$，并对 $n\in R_T$、$0\le k<m_n$ 取 $v_{n,k}=e_{n,k}-e_{\sigma(n),k}$。这些向量的实际 Gram 矩阵 $G_T=([v_{n,k},v_{r,l}]_J)$ 满足
+
+$$
+\begin{aligned}
+G_T&=-2I,\\
+n_-(G_T)&=\kappa_T,\\
+n_-(G_T)>0
+&\ \Longleftrightarrow\
+\exists n\in W_T:\operatorname{Re}\rho_n\ne\tfrac12.
+\end{aligned}
+$$
+
+这里 $n_-$ 按重数计负特征值，矩阵由 $\kappa_T$ 个镜像奇向量索引。窗口是谱半径窗 $|\rho-\tfrac12|\le T$，并非只限制 $|\operatorname{Im}\rho|$ 的高度窗。
+:::
+
+::: proof
+每个非固定二元镜像轨道只取一个代表；不同代表及其镜像占据互不相交的标准基坐标，同一零点的不同重数副本也正交。因此这些向量的普通希尔伯特 Gram 矩阵为 $2I$，而 $Jv_{n,k}=-v_{n,k}$，故实际镜像 Gram 矩阵为 $-2I$。每个所选轨道贡献恰好 $m_n$ 个负特征值；镜像固定恰等价于零点在临界线上，且解析重数为正，得到最后的等价。完整证明由 Lean 内核检查。
+:::
+
+该计数对临界线外零点的存在保持条件式。结合第三章引述的外部 RH 形式化事实，可推出每个 $T$ 的 $\kappa_T=0$（组合这两层证据的手工推导，`ARGUED`）；上面的内核定理本身给出精确惯性公式。独立谱路线仍需从算术或几何构造正性并识别零点谱；有限个窗口的检查也不能代替对所有 $T$ 的控制。带着这一界限再读下表，各层证据各自承担的责任便清楚了。
 
 | 证据层级与徽章 | 验证机制与数据来源 | 逻辑边界与公理责任 | 全书代表内容与交叉入口 |
 | :--- | :--- | :--- | :--- |
@@ -50,6 +84,43 @@
 | **第 4 层 · 计算证书与数值实验诊断**（`NUM`） | 组织实验库 `trureturing-experiments`（`experiments/ch39-omega-research/replay/`）1,785 文件复算归档中的 `Fraction` / `python-flint`（Arb、`fmpq_mat`）断言脚本、`Init`-重放的 `ShellProjection.lean`（`rfl`），以及 `OMEGA//UNIFY` 交互实验室的浏览器实时数值诊断 | 精确有理、Arb 与 `rfl` 复算证书具零浮点舍入漂移保证，严格依赖所声明的输入区间与截断前提；实验室实时数值诊断（如有限相位网格上的双精度雅可比本征值计算）显式披露精度与抽样边界；上游独立 `ShellProjection.lean` 归此层，不并入 `trureturing@dev` 冻结统计 | 平方半径 17 九点壳压缩（[附录 A §A.2](appendix-a.md#sec-ou-appa-shell-projection)）、35 位第七时间码 `32071996606`（[第十二章](ch12-shared-arithmetic-clock.md)）、单调权 $> 1/4$ 排斥与 105 圈联合零点见证（[第十三章](ch13-winding-ladder-and-joint-vacuum.md)）、$38 \to 19$ 最小辅助记忆秩阶梯（[第十四章](ch14-624-channels-and-memory-rank.md)） |
 | **第 5 层 · 模型内有效构造**（`MODEL`） | 明确写明全部额外表示、势函数、标尺与权重输入的有效构造（对应四问中 **4/4** 的模型内通过分支） | 严禁冒充无参数第一性原理推导；每条构造必须同页并列其外生自由度与灵敏度账单 | $r = 400$ 两圈规范交汇与秩五中性希格斯门户（[第 5–6 章](ch05-kinetic-trace-and-uv-ceilings.md)）、54 模矩阵希格斯味拟合与 $\mathrm{U}(1)_X$ 重子三重完备（[第 8–9 章](ch08-flavor-hierarchy-and-ckm.md)）、四层热核曲率窗（[第十一章](ch11-induced-gravity-and-dark-energy.md)）与 105 圈 100 维权族（[第十三章](ch13-winding-ladder-and-joint-vacuum.md)） |
 | **第 6 层 · 第一性原理开放前沿**（`OPEN`） | 对应原书四问中 **0/4** 尚未从单一主联络无事后拟合导出的核心硬问题 | 严格保留未证状态，不附验证引用，为后续理论突破与形式化提供明确验收门槛 | 导出重阈值与电弱标度、从主联络选定站点方差分界并构造四维相互作用手征三代、导出共同味作用与动态质子选择定则、导出 $G_N$ 与暗能量以及建立自然非单调选权原理（汇总于 [第十五章](ch15-unified-verdict-and-open-roadmap.md) 与 [终章](coda.md)） |
+
+### B.2.1 谱桥中的证据边界：镜像守恒与正定性 {#sec-ou-appb-mirror-unitarity}
+
+[第三章的凯莱判据](ch03-riemann-zeros-fejer-and-landau.md#sec-ou-3-1)把临界线条件转成单位圆条件。函数方程还提供同高镜像 $\rho\mapsto1-\bar\rho$，但镜像守恒究竟保住了哪一种内积？这个问题让上表中的证据边界落到一个可以手算的谱模型上。
+
+给定库中完整的 `ZeroData` $Z$，包括互异零点 $\rho_n$、精确解析重数 $m_n$、穷尽性、两种对称及局部有限性。令 $I_Z=\{(n,k)\in\mathbb N^2:k<m_n\}$，$H_Z=\ell^2(I_Z;\mathbb C)$。同高镜像保持重数，因而诱导坐标对合 $\sigma$ 与自伴对合等距算子 $(J_Z\psi)(v)=\psi(\sigma v)$。记 $[\psi,\phi]_Z=\langle\psi,J_Z\phi\rangle$，并令 $C_Z$ 为对角系数 $c_n=(\rho_n-1)/\rho_n$ 定义的有界凯莱算子。
+
+::: {.theorem #thm-ou-appb-mirror-j-unitarity title="镜像凯莱守恒与严格负方向" lean="D5/S3/Midline/Cayley/CanonicalZetaCayleyJUnitary.zeroCayleyOperator_j_unitary D5/S3/Midline/Cayley/CanonicalZetaMirrorFundamentalSymmetry.mirror_odd_vector_strictly_negative"}
+对任意上述 `ZeroData` $Z$，不添加 RH 假设，恒有
+
+$$
+C_Z^*J_ZC_Z=J_Z.
+$$
+
+若坐标 $v\in I_Z$ 满足 $\sigma v\ne v$，则其标准单位向量 $e_v$ 给出的镜像奇向量 $w_v=e_v-J_Ze_v$ 满足
+
+$$
+\operatorname{Re}[w_v,w_v]_Z<0.
+$$
+:::
+
+::: proof
+若 $c$ 为某坐标的系数，$c'$ 为其镜像系数，则 $c'=1/\bar c$，故 $\bar c c'=1$；逐坐标配对并求和即得算子恒等式。若 $\sigma v\ne v$，则 $w_v\ne0$ 且 $J_Zw_v=-w_v$，于是 $\operatorname{Re}[w_v,w_v]_Z=-\|w_v\|^2<0$。完整证明由 Lean 内核检查。
+:::
+
+::: {.example #ex-ou-appb-j-unitary-not-unitary title="不定内积守恒不保证普通酉性"}
+以下为二维代数手算（`ARGUED`）。在 $\mathbb C^2$ 上取
+
+$$
+J=\begin{pmatrix}0&1\\1&0\end{pmatrix},\qquad
+C=\begin{pmatrix}2&0\\0&1/2\end{pmatrix}.
+$$
+
+直接相乘得 $C^*JC=J$，而 $C^*C=\operatorname{diag}(4,1/4)\ne I$。向量 $w=(1,-1)$ 满足 $\langle w,Jw\rangle=-2$。这组矩阵只检验从 $J$-酉性推出普通酉性的逻辑，不声称来自实际的 $\zeta$ 零点。
+:::
+
+因此，函数方程给出的镜像守恒允许正、负方向相互配平；第三章单位圆条件要求的是每个凯莱系数自身的模长等于 $1$。把前者用于独立谱证明时，还须证明额外的正定性或相应的普通酉性条件。已知外部 RH 证明可以支持临界线结论，却不会仅凭这条镜像恒等式给出独立的希尔伯特—波利亚算子构造。
 
 ## B.3 交互实验室与全书九幅静态图索引 {#sec-ou-appb-media-map}
 

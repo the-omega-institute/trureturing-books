@@ -40,7 +40,41 @@ For rapid equation lookup across volumes, the table below summarizes recurring m
 
 ## B.2 Six-Tier Epistemic Evidence Stratification Ledger {#sec-ou-appb-epistemic-ledger}
 
-Every theorem, interval bound, effective construction, and open target across the monograph is strictly assigned to one of six epistemic tiers governed by a **strict non-escalation rule**: neither Arb ball enclosures, nor standalone upstream `Init` replays, nor external RH formalizations automatically elevate an `ARGUED`, `NUM`, `MODEL`, or `OPEN` claim into a pinned `LEAN ✓` frozen theorem:
+Every theorem, interval bound, effective construction, and open target across the monograph is strictly assigned to one of six epistemic tiers governed by a **strict non-escalation rule**: neither Arb ball enclosures, nor standalone upstream `Init` replays, nor external RH formalizations automatically elevate an `ARGUED`, `NUM`, `MODEL`, or `OPEN` claim into a pinned `LEAN ✓` frozen theorem.
+
+The following spectral example separates an exact calculation from an independent positivity proof: the Cayley criterion in [Chapter 3, Section 3.1](ch03-riemann-zeros-fejer-and-landau.md#sec-ou-3-1) admits a finite negative-index test, but the matrix itself is still built from the actual zeros.
+
+::: {.theorem #thm-ou-appb-mirror-gram-inertia title="Gram Inertia of the Finite Mirror-Odd Sector" lean="D5/S3/Midline/Cayley/FiniteMirrorKreinGramInertia.canonical_zeta_finite_mirror_gram_inertia"}
+Use the library's parameter-free canonical presentation `zetaZeroData`, with distinct nontrivial zeros $\rho_n$ and analytic multiplicities $m_n>0$. The same-height mirror permutation $\sigma$ preserves multiplicities and satisfies $\rho_{\sigma(n)}=1-\overline{\rho_n}$. For every $T\in\mathbb R$, define
+
+$$
+\begin{aligned}
+W_T&=\{n:|\rho_n-\tfrac12|\le T\},\\
+R_T&=\{n\in W_T:n<\sigma(n)\},\\
+\kappa_T&=\sum_{n\in R_T}m_n.
+\end{aligned}
+$$
+
+On the standard basis of $H=\ell^2(\{(n,k):k<m_n\};\mathbb C)$, set $J e_{n,k}=e_{\sigma(n),k}$ and $[x,y]_J=\langle x,Jy\rangle$. For $n\in R_T$ and $0\le k<m_n$, take $v_{n,k}=e_{n,k}-e_{\sigma(n),k}$. Their actual Gram matrix $G_T=([v_{n,k},v_{r,l}]_J)$ satisfies
+
+$$
+\begin{aligned}
+G_T&=-2I,\\
+n_-(G_T)&=\kappa_T,\\
+n_-(G_T)>0
+&\ \Longleftrightarrow\
+\exists n\in W_T:\operatorname{Re}\rho_n\ne\tfrac12.
+\end{aligned}
+$$
+
+Here $n_-$ counts negative eigenvalues with multiplicity, and the matrix is indexed by the $\kappa_T$ mirror-odd vectors. The window is a spectral-radius window $|\rho-\tfrac12|\le T$, rather than a height window restricting only $|\operatorname{Im}\rho|$.
+:::
+
+::: proof
+Choose one representative from each nonfixed two-element mirror orbit. Different representatives and their mirrors occupy disjoint standard-basis coordinates, and distinct multiplicity copies of the same zero are also orthogonal. Hence the ordinary Hilbert Gram matrix of these vectors is $2I$, while $Jv_{n,k}=-v_{n,k}$ makes the actual mirror Gram matrix $-2I$. Each selected orbit contributes exactly $m_n$ negative eigenvalues. Mirror fixedness is exactly critical-line location, and analytic multiplicities are positive, giving the final equivalence. The full proof is checked by the Lean kernel.
+:::
+
+The count keeps the existence of off-critical zeros conditional. Combining it with the external formalized RH fact cited in Chapter 3 gives $\kappa_T=0$ for every $T$ (a manual implication combining the two evidence tiers, `ARGUED`); the kernel theorem above supplies the exact inertia formula. An independent spectral route still needs an arithmetic or geometric positivity construction and identification of the zero spectrum; checks on finitely many windows also cannot replace control for every $T$. With this boundary explicit, the table below assigns each tier its own responsibility.
 
 | Evidence Tier & Label | Verification Mechanism & Provenance | Logical Boundary & Warrant | Representative Coverage & Pointers |
 | :--- | :--- | :--- | :--- |
@@ -50,6 +84,43 @@ Every theorem, interval bound, effective construction, and open target across th
 | **Tier 4 — Computational Certificates & Live Numerical Diagnostics** (`NUM`) | Fail-fast `Fraction` / `python-flint` (Arb, `fmpq_mat`) scripts across the 1,785-file replay archive (`experiments/ch39-omega-research/replay/` in `trureturing-experiments`), `Init`-replayed `ShellProjection.lean` (`rfl`), and explicitly labeled live numerical calculations in `OMEGA//UNIFY` | Exact rational, Arb, and `rfl` replay certificates carry zero floating-point drift strictly over stated input intervals and cutoffs; live sandbox diagnostics (such as finite-grid double-precision Jacobi spectra) explicitly disclose their precision and sampling limits; standalone `ShellProjection.lean` resides here rather than inside `trureturing@dev` frozen totals | Squared-radius-17 nine-point shell compression ([Appendix A §A.2](appendix-a.md#sec-ou-appa-shell-projection)), 35-bit seventh-time code `32071996606` ([Ch 12](ch12-shared-arithmetic-clock.md)), $> 1/4$ monotone exclusion and 105-winding witness ([Ch 13](ch13-winding-ladder-and-joint-vacuum.md)), and the $38 \to 19$ auxiliary-rank staircase ([Ch 14](ch14-624-channels-and-memory-rank.md)) |
 | **Tier 5 — Model-Internal Effective Constructions** (`MODEL`) | Explicit effective constructions specifying every auxiliary representation, potential, scale, and weight input (accounting for the **4/4** model-internal witnesses) | Never presented as zero-fit derivations; every construction records its free inputs and fine-tuning sensitivity alongside its numerical fit | $r = 400$ two-loop crossing and rank-5 Higgs portal ([Ch 5–6](ch05-kinetic-trace-and-uv-ceilings.md)), 54-mode matrix Higgs flavor fit and $\mathrm{U}(1)_X$ triality completion ([Ch 8–9](ch08-flavor-hierarchy-and-ckm.md)), four-layer curvature balance ([Ch 11](ch11-induced-gravity-and-dark-energy.md)), and 100-parameter 105-winding vacua ([Ch 13](ch13-winding-ladder-and-joint-vacuum.md)) |
 | **Tier 6 — First-Principles Open Roadmap** (`OPEN`) | The **0/4** core unification derivations still absent from a single master connection without post-hoc fitting | Explicitly preserves unproved status without verification links, providing crisp falsifiable acceptance criteria for future work | Deriving heavy thresholds and the electroweak scale, selecting the site-variance cut and building 4D interacting chiral generations, deriving a shared flavor action and dynamical proton protection, deriving $G_N$ and dark energy, and finding a natural non-monotone weight-selection law ([Ch 15](ch15-unified-verdict-and-open-roadmap.md), [Coda](coda.md)) |
+
+### B.2.1 Evidence in a Spectral Bridge: Mirror Conservation and Positivity {#sec-ou-appb-mirror-unitarity}
+
+[The Cayley criterion in Chapter 3](ch03-riemann-zeros-fejer-and-landau.md#sec-ou-3-1) turns the critical-line condition into a unit-circle condition. The functional equation also supplies the same-height mirror $\rho\mapsto1-\bar\rho$, but which inner product does mirror conservation preserve? This question makes the ledger's evidence boundaries concrete in a spectral model that admits a direct calculation.
+
+Supply the library's full `ZeroData` $Z$, including distinct zeros $\rho_n$, exact analytic multiplicities $m_n$, exhaustiveness, both symmetries, and local finiteness. Put $I_Z=\{(n,k)\in\mathbb N^2:k<m_n\}$ and $H_Z=\ell^2(I_Z;\mathbb C)$. The same-height mirror preserves multiplicity, inducing a coordinate involution $\sigma$ and the self-adjoint involutive isometry $(J_Z\psi)(v)=\psi(\sigma v)$. Write $[\psi,\phi]_Z=\langle\psi,J_Z\phi\rangle$, and let $C_Z$ be the bounded diagonal Cayley operator with coefficients $c_n=(\rho_n-1)/\rho_n$.
+
+::: {.theorem #thm-ou-appb-mirror-j-unitarity title="Mirror Cayley Conservation and Strict Negative Directions" lean="D5/S3/Midline/Cayley/CanonicalZetaCayleyJUnitary.zeroCayleyOperator_j_unitary D5/S3/Midline/Cayley/CanonicalZetaMirrorFundamentalSymmetry.mirror_odd_vector_strictly_negative"}
+For every such `ZeroData` $Z$, with no additional RH hypothesis,
+
+$$
+C_Z^*J_ZC_Z=J_Z.
+$$
+
+If a coordinate $v\in I_Z$ satisfies $\sigma v\ne v$, its standard unit vector $e_v$ gives a mirror-odd vector $w_v=e_v-J_Ze_v$ satisfying
+
+$$
+\operatorname{Re}[w_v,w_v]_Z<0.
+$$
+:::
+
+::: proof
+If $c$ is a coordinate's coefficient and $c'$ its mirror coefficient, then $c'=1/\bar c$, so $\bar c c'=1$; pairing coordinates and summing gives the operator identity. When $\sigma v\ne v$, we have $w_v\ne0$ and $J_Zw_v=-w_v$, hence $\operatorname{Re}[w_v,w_v]_Z=-\|w_v\|^2<0$. The full proof is checked by the Lean kernel.
+:::
+
+::: {.example #ex-ou-appb-j-unitary-not-unitary title="Indefinite Conservation Does Not Ensure Ordinary Unitarity"}
+The following is a direct two-dimensional calculation (`ARGUED`). On $\mathbb C^2$, take
+
+$$
+J=\begin{pmatrix}0&1\\1&0\end{pmatrix},\qquad
+C=\begin{pmatrix}2&0\\0&1/2\end{pmatrix}.
+$$
+
+Multiplication gives $C^*JC=J$, whereas $C^*C=\operatorname{diag}(4,1/4)\ne I$. The vector $w=(1,-1)$ satisfies $\langle w,Jw\rangle=-2$. These matrices only test the proposed implication from $J$-unitarity to ordinary unitarity; they are not asserted to arise from actual $\zeta$ zeros.
+:::
+
+Thus the mirror conservation supplied by the functional equation allows positive and negative directions to balance. Chapter 3's unit-circle condition instead requires each Cayley coefficient itself to have modulus $1$. An independent spectral proof using mirror conservation still needs an additional positivity argument or the corresponding ordinary-unitarity condition. The external RH proof can support the critical-line conclusion, but this mirror identity alone supplies no independent Hilbert–Pólya operator construction.
 
 ## B.3 Interactive Laboratory and Nine-Figure Visual Media Index {#sec-ou-appb-media-map}
 
