@@ -79,7 +79,13 @@ $p$ 恰有两个正分量时，纯态的循环和位于对应单边长度的圆�
 
 正性使支撑外的行列消失。将第二读数作离散 Fourier 逆变换，每个循环差只读到该差上的矩阵元之和。相反的两个差给出一对共轭复数，偶数维时自逆的差单独给出一个实数，共至多 $m$ 条实条件。连同 $k$ 个对角元，在秩 $r$ 的像空间内若 $r^2>k+m$，就有非零厄米扰动同时保持两读数。将它加到原态，沿该方向移动到半正定锥的边界，秩下降而读数不变。若全部非零有向差互异，均匀第二读数使每个非对角元单独为零，故唯一的共同态秩为 $k$。
 
-因此强制秩 $k$ 要求 $d\ge k(k-1)+1$。例如模 $7$ 的 $\{0,1,3\}$ 和模 $13$ 的 $\{0,1,3,9\}$ 都恰好达到门槛。若 $k=q+1$、$q$ 为素数幂，有限域中的 Singer 循环差集给出一般构造。$\mathbb F_{q^3}^\times/\mathbb F_q^\times$ 中的迹零射影点组成所需支撑，每个非平凡平移和原支撑恰相交于一点。七点支撑的最小环境维数为 $48$。穷举排除了 $43$ 至 $47$，模 $48$ 的 $\{0,1,3,15,20,38,42\}$ 给出见证。[七点阈值的可复算枚举](https://github.com/the-omega-institute/trureturing-books/issues/1676#issuecomment-7233017502) [差集、降秩与阈值的证明](https://github.com/the-omega-institute/trureturing-books/issues/1676)
+因此强制秩 $k$ 要求 $d\ge k(k-1)+1$。例如模 $7$ 的 $\{0,1,3\}$ 和模 $13$ 的 $\{0,1,3,9\}$ 都恰好达到门槛。若 $k=q+1$ 且 $q$ 为素数幂，有限域中的 Singer 循环差集给出一般构造。$\mathbb F_{q^3}^\times/\mathbb F_q^\times$ 中的迹零射影点组成所需支撑，每个非平凡平移和原支撑恰相交于一点。七点支撑的最小环境维数为 $48$。穷举排除了 $43$ 至 $47$，模 $48$ 的 $\{0,1,3,15,20,38,42\}$ 给出见证。[七点阈值的可复算枚举](https://github.com/the-omega-institute/trureturing-books/issues/1676#issuecomment-7233017502) [差集、降秩与阈值的证明](https://github.com/the-omega-institute/trureturing-books/issues/1676)
+
+若某个子支撑的差发生较多碰撞，还可收紧秩界。对非空 $T\subseteq S$，记 $m(T)$ 为 $T$ 的不同非零有向差数。取可行集的一个极点，其秩为 $r$，则像空间与 $T$ 的坐标子空间至少相交于 $r-(k-|T|)$ 维。该交空间上的非零不可见厄米扰动会破坏极点性。因此同一个极点满足
+$$
+r\le\min_{\varnothing\ne T\subseteq S}\left(k-|T|+\left\lfloor\sqrt{|T|+m(T)}\right\rfloor\right).
+$$
+例如模 $12$ 的 $S=\{0,1,3,6,9\}$，用四点子支撑 $T=\{0,3,6,9\}$ 可把上界从四降到三，且有读数唯一确定秩三的态。[子支撑界与可复算见证](https://github.com/the-omega-institute/trureturing-books/issues/1676#issuecomment-7233048570)
 
 哪些四站点算子也能通过这种压缩产生非零的 $J$？按轮换特征标把空间分成二维不动平面 $F$ 和两条非平凡特征标线。与轮换对易的两个厄米算子可写成 $A=A_0\oplus a_+\oplus a_-$ 与 $B=B_0\oplus b_+\oplus b_-$。将共同轻空间的单位法向量写作 $n=(n_0,n_+,n_-)$。令 $C=[A_0,B_0]$、$\alpha=a_+-a_-$、$\beta=b_+-b_-$，并令 $X_0=\beta(A_0-a_-I)-\alpha(B_0-b_-I)$。把两算子压缩到 $n^\perp$ 得到 $H_A,H_B$，其对易子的有向行列式可分解为
 $$
