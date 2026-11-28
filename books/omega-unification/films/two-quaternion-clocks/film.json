@@ -1,0 +1,32 @@
+{
+  "title": "Two Quaternion Clocks",
+  "title_zh": "两只四元数时钟",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-26",
+  "duration": "2:48",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · two quaternion axes and their area, the Gram body as a wireframe of commuting slices, Hurwitz word frames on a sphere, schematic closed walks, a bar chart of 128 Riemann zeros, the 22 shell frequencies as tiles",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.detGram3_nonneg",
+    "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_unit_sectional_curvature",
+    "D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.reduced_words_adjoint_injective",
+    "D5/S3/Quantum/Analysis/CompactGroups/SchurOrthogonality.integral_dual_mul_dual_inv_eq_zero",
+    "D5/S3/Quantum/Analysis/CompactGroups/SchurOrthogonality.integral_dual_mul_dual_inv_self"
+  ],
+  "outputs": {
+    "narrated_720p": "omega-unification_two-quaternion-clocks_720p_narrated.mp4",
+    "cover": "omega-unification_two-quaternion-clocks_cover.jpg"
+  },
+  "summary": "Two clock phases that commute on the complex circle become two unit quaternions, U = (1 + 2i)/√5 and V = (1 + 2j)/√5. Up to a common rotation only three half-traces survive, x = y = 1/√5 and z = 1/5, and the commutator defect is E = 16/25: the squared area between the two axes, with |UV − VU|² = 4E (computed). E is the Gram determinant of the anchors 1, U, V; the admissible triples fill a convex body of volume π²/2 whose skin E = 0 is where the clocks commute. Lean checks that the normalized three-anchor Gram determinant of nonzero integer quaternions is never negative and that the Lie triple bracket returns the Gram area squared; the worked values 16/25 and 16 are computed. With the six norm-5 Hurwitz quaternions, (1 + 2i)(1 + 2j) and the reverse order differ in sign, the 186 reduced words up to length three give 186 distinct frames (computed), and Lean checks that reduced words moving both axes alike are equal. Hearing non-commutativity from the two-component shell spectrum, its doubling exactly when E = 0, and the three-probe certificate (Lip ≤ 0.331) are the chapter's written argument and interval certificate. The Haar selection rule u < sin²p sin²q |sin v| keeps 16 of the first 128 Riemann zeros, starting at 8, 15, 28, 31, 38, 50 (computed); the limit density 1/(2π) and its optimality rest on classical RH, an external Lean proof, and are argued. Lean checks Schur orthogonality on compact groups; the commutator character averages 1/(n + 1) are argued from it and recomputed exactly for n = 0 to 3. The zeros give a sampler, not the dynamics: couplings and lattice actions remain inputs.",
+  "summary_zh": "在复数单位圆上彼此交换的两只时钟，被提升为两枚单位四元数 U = (1 + 2i)/√5 与 V = (1 + 2j)/√5。除去公共转动只剩三个半迹 x = y = 1/√5、z = 1/5，交换子亏量 E = 16/25 正是两根虚轴所夹面积的平方，且 |UV − VU|² = 4E（屏幕计算）。E 是锚点 1、U、V 的格拉姆行列式；可行三元组填满体积为 π²/2 的凸体，表皮 E = 0 正是两钟交换之处。Lean 检验：非零整四元数的归一化三锚格拉姆行列式永不为负，利雅三元括号恰好还原格拉姆面积平方；算例 16/25 与 16 为屏幕计算。六枚模方为 5 的赫维茨四元数中，(1 + 2i)(1 + 2j) 与反序乘积差一个符号，长度不超过 3 的 186 个既约词给出 186 个不同标架（屏幕计算），Lean 检验把两根轴转到同一处的既约词逐字母相同。从双分量球壳谱听出非交换性、谱恰在 E = 0 时加倍、三读数证书（Lip ≤ 0.331）均为本章的书面论证与区间证书。哈尔挑选规则 u < sin²p sin²q |sin v| 在前 128 个黎曼零点中保留 16 个，开头为 8、15、28、31、38、50（屏幕计算）；极限密度 1/(2π) 及其最优性依赖经典 RH（外部 Lean 证明），属论证。Lean 检验紧群上的舒尔正交关系；交换子特征标平均 1/(n + 1) 由其论证得到，并对 n = 0 至 3 精确重算。零点给出的是采样器，不是动力学：耦合与格点作用量仍是外部输入。"
+}

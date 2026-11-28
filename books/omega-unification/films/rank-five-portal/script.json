@@ -1,0 +1,276 @@
+{
+ "voice": "af_heart",
+ "speed": 0.94,
+ "say": {
+  "Lean": "Leen",
+  "GeV": "G E V",
+  "MeV": "M E V",
+  "CLEO": "Clee-oh",
+  "OPAL": "Oh-pal",
+  "LEP": "Lepp",
+  "Majorana": "Mah-yo-rah-nah",
+  "Hermitian": "Her-mish-un",
+  "m-min": "m min"
+ },
+ "music": {
+  "bpm": 76,
+  "progression": "d-minor"
+ },
+ "scenes": [
+  {
+   "id": "hook",
+   "name": "THE SECOND EXAM",
+   "lead": 1.9,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Making three forces meet at high energy is only half the exam.",
+     "让三种力在高能交汇，只完成了半张考卷。"
+    ],
+    [
+     "The tougher examiner sits at the Higgs mass: 125.25 GeV.",
+     "更严厉的考官坐在希格斯质量 125.25 GeV 处。"
+    ],
+    [
+     "Heavy states near ten to the fourteen GeV push the Higgs mass squared up.",
+     "10¹⁴ GeV 附近的重粒子，会把希格斯质量平方往上推。"
+    ],
+    [
+     "On two certified crossings, every term is positive: about 1.05 times ten to the 26 GeV squared.",
+     "在两枚认证交点上，每一项都为正：总计约 1.05 × 10²⁶ GeV²。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 2.4,
+     "kind": "impact"
+    }
+   ]
+  },
+  {
+   "id": "traceless",
+   "name": "TRACELESS PORTAL",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.5,
+    0.5,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "A portal must cancel that. The cheapest is traceless: minus F on twelve coloured parts, three F on four.",
+     "门户得把它抵消。最省的是无迹门户：12 个有色分量取 −F，4 个无色分量取 3F。"
+    ],
+    [
+     "Twelve times minus F plus four times three F is zero.",
+     "12 × (−F) + 4 × 3F = 0。"
+    ],
+    [
+     "But a negative two-loop threshold needs a wide spectrum: log Q over m-min above 3.45.",
+     "可要让两圈阈值变负，谱必须够宽：log(Q/m_min) 大于 3.45。"
+    ],
+    [
+     "No crossing, at any arc inertia, is that wide. Every traceless species portal is excluded.",
+     "任意弧内惯性下，都没有这么宽的交点。逐物种无迹门户全部被排除。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 3.6,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "rank",
+   "name": "RANK FIVE FLOOR",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.7,
+    0.6,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "Now put a traceless portal on neutral heavy scalars only. How small can its rank be?",
+     "现在让无迹门户只作用在中性重标量上。它的秩最小能是多少？"
+    ],
+    [
+     "Stability and matching set a floor on the contact strength. Up to rank four it exceeds 31.975.",
+     "有界性与匹配给接触强度定下地板：秩不超过 4 时，它高于 31.975。"
+    ],
+    [
+     "That breaks the unitarity ceiling, eight pi. Rank five fits, between 24.271 and 24.931.",
+     "这冲破了幺正天花板 8π。秩 5 放得下：落在 24.271 与 24.931 之间。"
+    ],
+    [
+     "So the minimal rank here is exactly five; on two other zero windows, six.",
+     "所以这里最小秩恰为 5；在另外两个零点窗上是 6。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 3.8,
+     "kind": "glitch"
+    },
+    {
+     "line": 3,
+     "at": 2.2,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "schur",
+   "name": "SCHUR CHECK",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.8,
+    0.7,
+    0.4,
+    0.4
+   ],
+   "lines": [
+    [
+     "How is rank five certified? With a block Schur theorem that Lean has checked.",
+     "秩五凭什么过关？靠一条经 Lean 内核检验的分块舒尔定理。"
+    ],
+    [
+     "Take A Hermitian and C positive definite, and minimize the block form over y.",
+     "设 A 厄米、C 正定，让分块二次型对 y 取最小。"
+    ],
+    [
+     "The least value is exactly x star S x, with S equal to A minus B, C inverse, B dagger.",
+     "最小值恰为 x*Sx，其中 S = A − B C⁻¹ Bᴴ。"
+    ],
+    [
+     "Applied to the contact block, the chapter's certificate leaves a margin above 3.11842.",
+     "用在接触散射块上，本章证书给出大于 3.11842 的裕度。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 3.4,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "pinch",
+   "name": "LOW-ENERGY PINCH",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.8,
+    0.7,
+    0.4,
+    0.4
+   ],
+   "lines": [
+    [
+     "In this model, balancing the broken vacuum needs light partners, and they meet the colliders.",
+     "在这个模型里，配平破缺真空需要轻伙伴，而它们躲不开对撞机。"
+    ],
+    [
+     "Twenty charged assignments add about 17.6 MeV to the Z width; LEP's error is 2.3 MeV.",
+     "20 种带电分配给 Z 宽度添上约 17.6 MeV；LEP 的误差只有 2.3 MeV。"
+    ],
+    [
+     "Six neutral ones fit CLEO with chi squared near 6.05, against at least 13.54.",
+     "6 种中性分配对 CLEO 给出 χ² ≈ 6.05，带电方案至少 13.54。"
+    ],
+    [
+     "All six need a charged singlet at 80.38 GeV, which OPAL excludes if it is long-lived.",
+     "这 6 种都需要一枚 80.38 GeV 的带电单态；若它长寿命，OPAL 已将其排除。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 3.2,
+     "kind": "impact"
+    }
+   ]
+  },
+  {
+   "id": "open",
+   "name": "QUESTION ONE",
+   "lead": 0.5,
+   "tail": 0.8,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.2
+   ],
+   "lines": [
+    [
+     "These are model-internal witnesses, not derivations.",
+     "这些是模型内的见证，不是推导。"
+    ],
+    [
+     "Question one stays open: derive thresholds, portal rank and the electroweak scale from first principles.",
+     "第一问仍然开放：从第一性原理导出阈值、门户秩与电弱标度。"
+    ],
+    [
+     "The walls are measured. The door is not yet found.",
+     "墙都量清了，门还没有找到。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 0.6,
+     "kind": "glitch"
+    }
+   ]
+  },
+  {
+   "id": "close",
+   "name": "LEDGER",
+   "lead": 0.5,
+   "tail": 3.4,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.2
+   ],
+   "lines": [
+    [
+     "Omega Unification, chapter six.",
+     "《OMEGA 统一》· 第六章"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 0.3,
+     "kind": "chime"
+    }
+   ]
+  }
+ ]
+}
