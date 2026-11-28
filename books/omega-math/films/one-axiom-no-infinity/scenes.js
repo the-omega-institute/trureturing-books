@@ -526,8 +526,8 @@ SCENES.b00_ask = S => {
      b01_circle   [P : Q] → cayleyX = (Q² − P²)/(P² + Q²), cayleyY = 2PQ/(P² + Q²) as the string from the pin (−1, 0)
                   through the mark t = P/Q; [1 : 2] → (3/5, 4/5) (computed) ..... OmegaCircleClosure.cayley_circle_unit
                   (LEAN); [p : 0] → κ = 0, s = 1, (−1, 0) ..... OmegaCircleClosure.cayley_antipodal_closure (LEAN).
-     b01_flat     projectiveMul(1, 2, 1, 3) = (5, 5) ~ [1 : 1], symmetric in its factors (computed); law III fails in one
-                  dimension and, by the book's argument, in two (argued; chapter 2.3 and 3.1).
+     b01_flat     projectiveMul(1, 2, 1, 3) = (5, 5) ~ [1 : 1], symmetric in its factors (computed); law III fails for
+                  this projective circle (chapter 2.3).
      b01_ternion  canonical names of rays of integer quaternions (computed); p_Half = (1, 1, 0, 0), q_Half = (1, 0, 1, 0)
                   act as quarter turns about x and y; triad(p_Half, p0, q_Half) = (1, 1, 1, 1),
                   triad(q_Half, p0, p_Half) = (1, 1, 1, −1) ..... OmegaComposeAndWitnesses.phalf_qhalf_noncommutative (LEAN).
@@ -824,7 +824,7 @@ SCENES.b01_axiom = S => {
     ['I', '[x, x, z] = z      [x, z, z] = x', 'a step to yourself'],
     ['', '[[x, y, z], u, v] = [x, y, [z, u, v]]', 'steps regroup freely'],
     ['II', 'κ([x, u, v], [y, u, v]) = κ(x, y)', 'carrying keeps every reading'],
-    ['III', '[x, y, z] ≠ [z, y, x]  for some x, y, z', 'order must leave a mark']
+    ['III', '[x, y, z] ≠ [z, y, x]  for some x, y, z', 'outer-slot order matters for some triple']
   ];
   laws.forEach(([n, f, ph], i) => {
     const y = 330 + i * 78, aa = a3 * out * Q(S, 3, ph, 0.5);
@@ -961,15 +961,12 @@ SCENES.b01_flat = S => {
   const sw = Q(S, 1, 'Swap the factors', 0.6);
   txt(`(1, 3) ⊙ (1, 2) = (${m2[0]}, ${m2[1]})`, fx + 30, 510, { size: 34, fam: F.math, w: 700, c: C.white, a: sw });
   txt('same', fx + 560, 510, { size: 30, fam: F.mono, w: 700, c: C.mag, a: Q(S, 1, 'nothing changes', 0.5) });
-  txt('the formula is symmetric in its two factors', fx + 30, 600, { size: 22, fam: F.mono, c: C.dim, a: Q(S, 1, 'only one plane', 0.5) });
+  txt('the formula is symmetric in its two factors', fx + 30, 600, { size: 22, fam: F.mono, c: C.dim, a: Q(S, 1, 'symmetric in the two inputs', 0.5) });
   /* law III fails */
   const a2 = at(S, 2, 0.6);
   txt('[a, b, c] = [c, b, a]  for all a, b, c', fx + 30, 720, { size: 34, fam: F.math, w: 700, c: C.white, a: a2 });
-  const dims = [['dim 1 · law III', '✗'], ['dim 2', '✗'], ['dim 3', '?']];
-  dims.forEach(([d, m3], i) => {
-    const aa = Q(S, 2, i < 1 ? 'the third law fails' : i < 2 ? 'two dimensions fail' : 'as well', 0.5);
-    chip([fx + 160, fx + 450, fx + 660][i], 800, i ? 170 : 300, 56, `${d}  ${m3}`, i < 2 ? C.argued : C.now, aa, 24);
-  });
+  txt('Law III fails on this circle · 圆周模型不满足第三条法则', fx + 30, 805,
+      { size: 24, fam: F.zh, w: 700, c: C.argued, a: a2 });
 };
 
 SCENES.b01_ternion = S => {
@@ -980,7 +977,7 @@ SCENES.b01_ternion = S => {
   const a0 = at(S, 0, 0.6), out0 = 1 - at(S, 2, 0.6);
   txt('[ w : x : y : z ]', W / 2, 330, { size: 76, fam: F.math, w: 700, align: 'center', c: C.white, a: Q(S, 0, 'four integers', 0.6) * out0, ab: 2 });
   txt('4 integers − 1 common scale = 3 degrees of freedom', W / 2, 400, { size: 28, fam: F.mono, w: 700, align: 'center', c: C.cyan, a: Q(S, 0, 'up to scale', 0.6) * out0 });
-  txt('dimension 3: the first room where turns can disagree', W / 2, 250, { size: 26, fam: F.mono, w: 700, align: 'center', c: C.argued, a: a0 * out0 });
+  txt('PROJECTIVE QUATERNION ROTATIONS · 四元数射影旋转', W / 2, 250, { size: 26, fam: F.zh, w: 700, align: 'center', c: C.argued, a: a0 * out0 });
   /* the canonical name */
   const a1 = at(S, 1, 0.6) * out0;
   const steps = [[B01.RAW, 'raw', C.white], [B01.RAW.map(v => v / 2), '÷ gcd 2', C.white], [B01.canon(B01.RAW), 'first nonzero > 0', C.now]];
@@ -3033,7 +3030,7 @@ SCENES.b04_next = S => {
                    q = (3, 1, −2, 4): w-parts 1, 5, 7, −1, −5, 11, Σ = 222, T̂χ₁ = −2/25 = −2/5 · 1/5 (computed)
                    ..... OmegaBargmannHaarHecke.heckeT5_chi1_eigenvalue (LEAN, zero axioms: for q ≠ 0, T̂₅χ₁(q) ≡
                    −2/5 · χ₁(q)) and heckeT5_ramanujan_margin (LEAN, zero axioms: 20 − (−2/5)² ≡ 496/25 > 0).
-                   The constant: T̂₅1 = 6, 20 − 36 = −16 (computed). The full bound on every shell is a literature
+                   The constant: T̂₅1 = 6, 20 − 36 = −16 (computed). The bound on nonconstant SO(3) shells is a literature
                    result (Eichler, Deligne, Lubotzky–Phillips–Sarnak; argued). The coffee spoon is a picture.
      b05_ask       the Riemann hypothesis, as PROJECT.md §14: proved by an external Lean project, not frozen in the
                    pinned library (neither green nor red); the four steps of the act; SPINE.ask.
@@ -3583,7 +3580,7 @@ SCENES.b05_mix = S => {
   const ta = a * Q(S, 1, 'two root five', 0.6);
   txt('|λ̂| ≤ 2√5   (complex Satake parameters · 复数参数)', 620, 265, { size: 30, fam: F.math, w: 700, c: C.white, a: ta * (1 - 0.5 * Q(S, 1, 'Square it', 0.6)) });
   const sa = a * Q(S, 1, 'the roots vanish', 0.6);
-  B05.rich([['λ̂² ≤ 20', C.now], ['   ⟺   Q(f) = 20⟨f, f⟩ − ⟨T̂f, T̂f⟩ ≥ 0', C.white], ['   (f ⊥ 1)', C.dim]], 620, 335, { size: 30, a: sa });
+  B05.rich([['λ̂² ≤ 20', C.now], ['   ⟺   Q(f) = 20⟨f, f⟩ − ⟨T̂f, T̂f⟩ ≥ 0', C.white], ['   (f ∈ L²₀(SO(3)))', C.dim]], 620, 335, { size: 30, a: sa });
   const ra = a * at(S, 2, 0.6);
   txt('only whole numbers and fractions · 只用整数和分数', 620, 390, { size: 22, fam: F.zh, w: 700, c: C.cyan, a: ra });
   B05.tag(620, 450, 'nonconstant SO(3) shells · 非常值 SO(3) 壳层 · Eichler–Deligne–LPS', C.argued, ra, { size: 15 });

@@ -178,7 +178,7 @@ $$
 
 ## 4.3 射影射线秩 10 与有号旋量 PythSpinor 秩 5 的精确分离
 
-从切空间的局部曲率回到全局球面载体，我们必须正视一个在零公理有理架构中至关重要的拓扑与线性代数分野：**射影三元数 `ProjTernion` 的射线核特征秩是 $10$，而保留 $720^\circ$ 符号记忆的双覆叠旋量载体特征秩却严格压缩为 $5$。**弄清这一倍之差的代数根源，才能准确衔接[第三章](ch03-canonical-ternion-manifold.md)的规范整载体与母公理 $\mathrm{AXIOM}\text{-}\Omega$ 的极小特征秩锁定。
+从切空间的局部曲率回到全局球面载体，两个读数的特征秩有精确的差别。规范整三元数的射影射线核具有秩 $10$，有号旋量核保留 $720^\circ$ 的符号记忆，具有秩 $5$。这里的秩指有限格拉姆矩阵所能达到的最大秩。秩 $5$ 对应 [§3.4](ch03-canonical-ternion-manifold.md#sec-ch03-real-shadow-completion) 所述实值模型类的锐利欧氏特征维数下界。
 
 ### 4.3.1 射影射线核与 10×10 格拉姆见证
 
@@ -194,21 +194,23 @@ $$
 \kappa_{\mathrm{proj}}(p, q) = \operatorname{Tr}\bigl(P(p)\,P(q)\bigr).
 $$
 
-因为 $4 \times 4$ 实（或有理）对称矩阵空间 $\operatorname{Sym}_4(\mathbb{Q})$ 拥有 $4$ 个对角槽位与 $\binom{4}{2} = 6$ 个非对角槽位，其维数精确为 $4 + 6 = 10$；且迹内积 $\langle A, B\rangle_{\mathrm{HS}} = \operatorname{Tr}(AB)$ 严格正定（$\operatorname{Tr}(A^2) = \sum_{i,j} A_{ij}^2 > 0$ 对一切非零对称阵成立）。由此推出任意有限射线族的射影格拉姆矩阵 $G^{\mathrm{proj}}_{ij} = \kappa_{\mathrm{proj}}(p_i, p_j)$ 均满足 $\operatorname{rank}(G^{\mathrm{proj}}) \le 10$。
+因为 $4 \times 4$ 有理对称矩阵空间 $\operatorname{Sym}_4(\mathbb{Q})$ 拥有 $4$ 个对角槽位与 $\binom{4}{2} = 6$ 个非对角槽位，其维数精确为 $4 + 6 = 10$；且迹内积 $\langle A, B\rangle_{\mathrm{HS}} = \operatorname{Tr}(AB)$ 严格正定（$\operatorname{Tr}(A^2) = \sum_{i,j} A_{ij}^2 > 0$ 对一切非零对称阵成立）。由此推出任意有限射线族的射影格拉姆矩阵 $G^{\mathrm{proj}}_{ij} = \kappa_{\mathrm{proj}}(p_i, p_j)$ 均满足 $\operatorname{rank}(G^{\mathrm{proj}}) \le 10$。
 
-这一上界 $10$ 可以被一组最简整射线精确打满。取四条坐标轴 $e_1, e_2, e_3, e_4$ 与六条两坐标对角射线 $e_i + e_j$（$1 \le i < j \le 4$）。在 $\operatorname{Sym}_4(\mathbb{Q})$ 的标准正交基 $\{E_{ii}\}_{i=1}^4 \cup \bigl\{\frac{E_{ij}+E_{ji}}{\sqrt{2}}\bigr\}_{1\le i < j \le 4}$ 下，前四枚投影阵恰为 $E_{11}, E_{22}, E_{33}, E_{44}$，而后六枚投影阵写为
-
-$$
-P(e_i + e_j) = \frac{1}{2}E_{ii} + \frac{1}{2}E_{jj} + \frac{1}{\sqrt{2}}\cdot\frac{E_{ij} + E_{ji}}{\sqrt{2}}.
-$$
-
-将这 $10$ 枚投影阵按列排成 $10 \times 10$ 坐标矩阵 $M = \bigl(\begin{smallmatrix} I_4 & A \\ 0 & 2^{-1/2} I_6 \end{smallmatrix}\bigr)$：它是分块上三角阵，其前 $k$ 列的主子式平方正是 $G^{\mathrm{proj}}_{10} = M^\top M$ 的顺序主子式，因此 $10$ 个顺序主子式依次精确为 $1, 1, 1, 1, \frac{1}{2}, \frac{1}{4}, \frac{1}{8}, \frac{1}{16}, \frac{1}{32}, \frac{1}{64}$，总行列式
+取四条坐标轴 $e_i$ 与六条对角射线 $e_i+e_j$（$i<j$）。在有理迹正交基 $\{E_{ii}\}\cup\{E_{ij}+E_{ji}:i<j\}$ 下，迹配对的矩阵为 $D=\operatorname{diag}(I_4,2I_6)$，且
 
 $$
-\det G^{\mathrm{proj}}_{10} = (\det M)^2 = \left(\frac{1}{8}\right)^2 = \frac{1}{64} > 0.
+P(e_i)=E_{ii},\qquad P(e_i+e_j)=\tfrac12(E_{ii}+E_{jj}+E_{ij}+E_{ji}).
 $$
 
-一旦再追加第十一条体对角射线 $p_{11} = (1, 1, 1, 1)$，因 $P(p_{11}) = \frac{1}{2}\sum_{1 \le i < j \le 4} P(e_i + e_j) - \frac{1}{2}\sum_{i=1}^4 P(e_i)$ 严格落入前十枚投影阵的线性张成之内，十一阶射影格拉姆行列式必然归零：$\det G^{\mathrm{proj}}_{11} = 0$。这就严格确立了 `ProjTernion` 的射影核特征秩恰为 $10$。
+十列投影坐标组成分块上三角阵 $M=\bigl(\begin{smallmatrix} I_4 & A \\ 0 & \frac12 I_6 \end{smallmatrix}\bigr)$。前四个顺序主子式为 $1$，随后每加一列，乘上 $2(\frac12)^2=\frac12$。因此
+
+$$
+\det G^{\mathrm{proj}}_{10}=\det(M^\top D M)=(2^{-6})^2\,2^6=\frac{1}{64}>0.
+$$
+
+在实数上，把六个非对角坐标乘以 $\sqrt2$ 就得到标准欧氏内积下的十维特征实现。
+
+一旦再追加第十一条体对角射线 $p_{11} = (1, 1, 1, 1)$，因 $P(p_{11}) = \frac{1}{2}\sum_{1 \le i < j \le 4} P(e_i + e_j) - \frac{1}{2}\sum_{i=1}^4 P(e_i)$ 严格落入前十枚投影阵的线性张成之内，十一阶射影格拉姆行列式必然归零：$\det G^{\mathrm{proj}}_{11} = 0$。这就严格确立了射影射线核的特征秩恰为 $10$。
 
 ### 4.3.2 本原毕达哥拉斯旋量 PythSpinor、球极凯莱提升与秩 5 锁死
 
@@ -298,6 +300,9 @@ $$
    $$
 
    其五个顺序主子式依次为 $1,\; \frac{3}{4},\; \frac{1}{2},\; \frac{5}{16},\; \frac{1}{32}$。若追加第六枚提升旋量 $u_6 = \Phi(1, 1, 1, 1) = (-1, 1, 1, 1;\, 2)$，直接核验 $(1, v_6) = \frac{1}{2}\bigl(-(1, v_1) + (1, v_2) + (1, v_3) + (1, v_4)\bigr)$，线性相关迫使 $\det G^{\mathrm{spin}}_6 = 0$。
+
+   一般地，在 $\mathbb Q^5$ 上用特征 $(1,u)$ 和配对 $\tfrac12$ 倍的点积，或在 $\mathbb R^5$ 上用特征 $(1,u)/\sqrt2$ 和标准点积，均实现此读数。若五维标准有理点积也能实现读数，这五点的格拉姆行列式就会是某个有理行列式的平方，而 $1/32$ 在素数 $2$ 处的赋值为 $-5$，不可能是平方。
+
 2. **体对角旋子 `g120_spin = (1, 1, 1, 1; 2)` 的六拍 $720^\circ$ 轨迹**：取单位元 $e = (1, 0, 0, 0;\, 1)$ 与体对角整旋子 $g = (1, 1, 1, 1;\, 2)$，逐拍作本原四元数乘法并按 $\kappa_{\mathrm{spin}}(e, g^n) = \frac{r_n + w_n}{2 r_n}$ 与二次桥 $\kappa_{\mathrm{proj}} = (2\kappa_{\mathrm{spin}} - 1)^2$ 对账如下：
 
 | 节拍 $n$ | 空间转角 | `PythSpinor` 幂次 $g^n$ | 有号旋量核 $\kappa_{\mathrm{spin}}(e, g^n)$ | 射影射线核 $\kappa_{\mathrm{proj}}(e, g^n)$ |

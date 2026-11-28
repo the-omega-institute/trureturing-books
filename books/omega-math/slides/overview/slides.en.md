@@ -54,7 +54,7 @@ section: "Volume I"
   <div class="flow mt-s">
     <div class="step"><b>Cancellation and associativity</b><p>Ternary transport obeys two cancellation laws and ternary associativity.</p></div>
     <div class="step"><b>Rational fidelity</b><p>Symmetric fidelity separates points, reaches or approaches zero, and is invariant under transport on both sides. Its finite Gram matrices are PSD.</p></div>
-    <div class="step"><b>Minimal noncommutativity</b><p>Outer-slot order can change the result. Minimize the compatible degrees of freedom and feature rank.</p></div>
+    <div class="step"><b>Order sensitivity</b><p>Some triple gives a different result when its outer slots are swapped. Dimension and rank minima concern the real model class in §3.4.</p></div>
   </div>
   <p class="lead mt-s">The model’s <Tex t="\mathbb{QP}^1" /> anchors <Tex t="\lbrack 0:1\rbrack,\ \lbrack 1:1\rbrack,\ \lbrack 1:0\rbrack" /> have fidelities <Tex t="1,\ \tfrac12,\ 0" />.</p>
   <TheoremCard class="compact mt-s" label="Theorem 2.6" title="Finite readouts at the antipode" cite="thm-ch02-antipodal-closure" gid="D5/S3/Quantum/AURICOmega/OmegaCircleClosure.cayley_antipodal_closure">
@@ -68,9 +68,9 @@ section: "Volume I"
 ---
 
 <div class="body">
-  <h2 class="t">The dimension-three lock and <em>canonical ternions</em></h2>
+  <h2 class="t">Invariant brackets and <em>canonical ternions</em></h2>
   <div class="g2 mt-s">
-    <div class="card"><h4>Classical shadow · Dimension lock</h4><p>For real Lie algebras with a positive definite invariant bilinear form, the bracket vanishes in dimensions 1 and 2. In the noncommutative three-dimensional case, it is a positive multiple of the cross product in a suitable basis.</p></div>
+    <div class="card"><h4>Classical side · Invariant form</h4><p>For real Lie algebras with a positive definite invariant bilinear form, the bracket vanishes in dimensions 1 and 2. In the noncommutative three-dimensional case, it is a positive multiple of the cross product in a suitable basis.</p></div>
     <div class="card"><h4>Rational carrier</h4><p>Each ray in <Tex t="\mathbb{T}_3(\mathbb Q)\cong\mathbb{QP}^3" /> has integer coordinates <Tex t="[w:x:y:z]" />. Divide by their GCD and make the first nonzero coordinate positive.</p></div>
   </div>
   <TheoremCard class="compact mt-s" label="Theorem 3.4" title="Ternary associativity on projective rays" cite="thm-ch03-quaternion-norm-and-heap-laws" gid="D5/S3/Quantum/AURICOmega/OmegaTernionHeap.triad_assoc">
@@ -152,7 +152,7 @@ section: "Volume IV"
 ---
 
 <div class="body">
-  <h2 class="t">Integrating Peter–Weyl spin shells <em>with factorials</em></h2>
+  <h2 class="t">Integrating even characters <em>with factorials</em></h2>
   <div class="g2 mt-s">
     <div class="card"><h4>Integer-spin characters</h4><p>Even Chebyshev polynomials give <Tex t="\chi_0=1" />, <Tex t="\chi_1=4\kappa-1" /> and <Tex t="\chi_2=16\kappa^2-12\kappa+1" />.</p></div>
     <div class="card"><h4><Tex t="\pi" />-free Haar moments on <Tex t="S^3" /></h4><p><Tex t="\kappa" /> is the squared normalized scalar coordinate.</p><Tex display t="\mathbb E[\kappa^k]=\frac{(2k)!}{4^k k!(k+1)!}" /></div>
@@ -202,9 +202,9 @@ section: "Volume V"
 
 <div class="body">
   <h2 class="t">A <em>rational test</em> for the norm-5 Hecke spectrum</h2>
-  <p class="lead">On a nonconstant eigenmode, the Ramanujan bound becomes the complex-free PSD test <Tex t="4p-\lambda^2\ge0" />, using the unnormalized eigenvalue <Tex t="\lambda" />.</p>
+  <p class="lead">For the canonical generators, the LPS bound covers nonconstant <Tex t="\mathrm{SO}(3)" /> modes, the positive even degrees on <Tex t="S^3" />. The squared test is <Tex t="4p-\widehat\lambda^2\ge0" />, where <Tex t="\widehat\lambda" /> is the Hecke sum eigenvalue.</p>
   <TheoremCard class="compact mt" label="Theorem 15.4" title="The unnormalized Hecke sum on the spin-1 character" cite="thm-ch15-hecke-t5-chi1-eigenvalue" gid="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.heckeT5_chi1_eigenvalue">
-    <p>For every nonzero integer quaternion <Tex t="q" />, <Tex t="(T_5\chi_1)(q)\equiv-\tfrac25\chi_1(q)" />.</p>
+    <p>For every nonzero integer quaternion <Tex t="q" />, <Tex t="(\widehat T_5\chi_1)(q)\equiv-\tfrac25\chi_1(q)" />.</p>
   </TheoremCard>
   <div class="card mt-s">
     <h4>Spin 1 · Exact positive margin</h4>

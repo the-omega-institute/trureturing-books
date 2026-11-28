@@ -11,7 +11,7 @@
                parameters are recomputed every frame) ..... FinitePowerSumToeplitzCircleCriterion.
                toeplitz_posSemidef_iff_norm_eq_one (LEAN: inversion-closed nonzero finite family, N + 1 ≥ number
                of distinct values ⇒ Toeplitz PSD ⟺ all |u_j| = 1).
-     boundary  remark rem-ch15-rh-epistemology: what is frozen (LEAN), the LPS full bound (literature, ARGUED),
+     boundary  remark rem-ch15-rh-epistemology: what is frozen (LEAN), the LPS bound on nonconstant SO(3) shells (literature, ARGUED),
                the critical-line reading (the book's MODEL, ARGUED), and the open problems (OPEN).
      eigen     χ₁ = (3w² − x² − y² − z²)/‖q‖²; at q = (2, 1, 3, −1): scalar parts 0, 4, −4, 8, 4, 0, sum of squares
                112 = 8·15 − 2·4, Σκ = 112/75, T̂₅χ₁(q) = −2/75 = −2/5 · χ₁(q) (computed here) .....
@@ -344,7 +344,7 @@ SCENES.stir = S => {
   if (a <= 0) return;
   badgeQ(S, [[0, null, 'computed'], [3, 'Ramanujan bound', 'argued']]);
   const [ox, oy] = ST_O;
-  /* line 2: a mean-zero pattern around q, fading under repeated averaging (schematic) */
+  /* line 2: an even, mean-zero pattern around q, fading under repeated averaging (schematic) */
   const pa = a * Q(S, 2, 'How fast', 0.6);
   if (pa > 0.003) {
     const steps = clamp((u - phraseAt(S, 2, 'flatten')) / 3.2) * 4;
@@ -368,12 +368,12 @@ SCENES.stir = S => {
   /* the ledger */
   panel(1000, 200, 800, 630, a, C.cyan, 'HECKE · 赫克算子');
   const r0 = a * at(S, 0, 0.6), r1 = a * Q(S, 1, 'six values', 0.6), r2 = a * Q(S, 2, 'Hecke operator', 0.6);
-  const r3 = a * Q(S, 3, 'squared, twenty', 0.6), r4 = a * Q(S, 3, 'never negative', 0.6);
+  const r3 = a * Q(S, 3, 'twenty minus lambda squared', 0.6), r4 = a * Q(S, 3, 'is nonnegative', 0.6);
   rich([['S₅ = { 1 ± 2i, 1 ± 2j, 1 ± 2k }', C.white]], 1035, 280, { size: 32, a: r0 });
   rich([['‖π‖² = 5,   π π̄ = 5', C.white]], 1035, 330, { size: 26, a: r0 });
   rich([['(T̂₅ f)(q) = ', C.white], ['Σ', C.cyan], [' f(q · π/√5)', C.white]], 1035, 410, { size: 32, a: r1 });
   rich([['π ∈ S₅,     T₅ = T̂₅ / 6', C.dim]], 1035, 455, { size: 24, a: r1 });
-  if (r2 > 0.003) txt('mean-zero shells · 零均值壳层', 1035, 510, { size: 24, fam: F.zh, w: 700, c: C.cyan, a: r2 });
+  if (r2 > 0.003) txt('SO(3): mean-zero, even on S³ · 偶且零均值', 1035, 510, { size: 24, fam: F.zh, w: 700, c: C.cyan, a: r2 });
   rich([['|λ̂| ≤ 2√5', C.white], ['   ⟹   ', C.dim], ['λ̂² ≤ 20', C.white]], 1035, 590, { size: 34, a: r3 });
   rich([['20 − λ̂² ≥ 0', C.now]], 1400, 680, { size: 54, align: 'center', a: r4 });
   rich([['no root, no i · 无根号，无复数', C.cyan]], 1400, 730, { size: 22, fam: F.zh, align: 'center', a: r4 });
@@ -452,9 +452,9 @@ SCENES.boundary = S => {
     { x: 120, col: C.lean, head: 'FROZEN · 已冻结', a: a * at(S, 0, 0.7), rows: [
       ['finite Toeplitz PSD ⟺ unit circle', '有限托普利茨半正定 ⟺ 单位圆'],
       ['T̂₅χ₁ ≡ −2/5 · χ₁, margin 496/25', '本征值 −2/5，裕度 496/25'],
-      ['shell recurrence, degree 1–4 matrices', '壳层递推与 1–4 次矩阵']] },
+      ['character recurrence, signed S³ matrices (d = 1–4)', '特征标递推、有号 S³ 的 1–4 次矩阵']] },
     { x: 700, col: C.argued, head: 'LITERATURE · MODEL · 文献与模型', a: a * Q(S, 1, 'Lubotzky', 0.7), rows: [
-      ['LPS 1987: |λ̂| ≤ 2√p on every nonconstant SO(3) shell', '全谱界：文献结果'],
+      ['LPS 1987: |λ̂| ≤ 2√p on every nonconstant SO(3) shell', 'SO(3) 非常值壳层谱界（文献）'],
       ['LPS 1988: Ramanujan Cayley graphs X(p, q)', '拉马努金凯莱图：文献结果'],
       ['reading: critical-line optimality, internalised', '临界线最优性的内化：模型诠释']] },
     { x: 1280, col: C.open, head: 'OPEN · 开放', a: a * at(S, 2, 0.7), rows: [
@@ -740,9 +740,11 @@ FILM.poster = () => {
   txt(DATA.film.title_zh, 600, 430, { size: 104, fam: F.zh, w: 900, align: 'center', c: C.white, ab: 4 });
   txt('THE NORM-FIVE', 600, 540, { size: 54, fam: F.orb, w: 900, align: 'center', c: C.cyan, ab: 3, ls: 5 });
   txt('SPECTRAL GAP', 600, 610, { size: 54, fam: F.orb, w: 900, align: 'center', c: C.mag, ab: 2, ls: 5 });
-  rich([['20 − λ̂² ≥ 0', C.now]], 600, 700, { size: 40, align: 'center' });
+  rich([['20 − λ̂² ≥ 0', C.white]], 600, 690, { size: 40, align: 'center' });
+  txt('LPS · NONCONSTANT SO(3) · 非常值谐波', 600, 743,
+      { size: 26, fam: F.zh, w: 700, align: 'center', c: C.argued });
   bloom(0.6);
-  txt(`${DATA.book.code} · FILM`, 600, 770, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.cyan, ls: 8 });
+  txt(`${DATA.book.code} · FILM`, 600, 804, { size: 24, fam: F.mono, w: 700, align: 'center', c: C.cyan, ls: 8 });
   txt(`${DATA.book.title.zh} · ${DATA.book.title.en}`, W / 2, 1010, { size: 26, fam: F.zh, w: 700, align: 'center', c: C.white, a: 0.9 });
   hud(t, Math.round(t * 30), 1, sc);
   post(0);

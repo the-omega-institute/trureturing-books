@@ -54,7 +54,7 @@ section: "第一卷"
   <div class="flow mt-s">
     <div class="step"><b>消去与结合</b><p>三元搬运满足左右消去与三元结合律。</p></div>
     <div class="step"><b>有理保真度</b><p>对称读数分离点、可达或逼近零，在双侧搬运下不变，且有限 Gram 矩阵半正定。</p></div>
-    <div class="step"><b>极小非交换</b><p>外槽的次序可以改变结果，并要求相容的自由度与特征秩极小。</p></div>
+    <div class="step"><b>次序敏感</b><p>存在一组三元输入，互换外槽会改变结果。维数与特征秩的极小性另见第 3.4 节的实值模型类。</p></div>
   </div>
   <p class="lead mt-s">三律给出模型。沿 <Tex t="\mathbb{QP}^1" /> 的锚点 <Tex t="\lbrack 0:1\rbrack,\ \lbrack 1:1\rbrack,\ \lbrack 1:0\rbrack" />，保真度依次为 <Tex t="1,\ \tfrac12,\ 0" />。</p>
   <TheoremCard class="compact mt-s" label="定理2.6" title="对径极点的有限读数" cite="thm-ch02-antipodal-closure" gid="D5/S3/Quantum/AURICOmega/OmegaCircleClosure.cayley_antipodal_closure">
@@ -68,9 +68,9 @@ section: "第一卷"
 ---
 
 <div class="body">
-  <h2 class="t">三维锁定与<em>规范三元数</em></h2>
+  <h2 class="t">不变型约束与<em>规范三元数</em></h2>
   <div class="g2 mt-s">
-    <div class="card"><h4>经典影子 · 三维锁定</h4><p>在带正定不变双线性型的实李代数中，维数 1、2 时括号为零。三维非交换情形的括号在适当基底下是叉积的正倍数。</p></div>
+    <div class="card"><h4>经典侧 · 不变型约束</h4><p>在带正定不变双线性型的实李代数中，维数 1、2 时括号为零。三维非交换情形的括号在适当基底下是叉积的正倍数。</p></div>
     <div class="card"><h4>有理载体</h4><p><Tex t="\mathbb{T}_3(\mathbb Q)\cong\mathbb{QP}^3" /> 的每条射线写成 <Tex t="[w:x:y:z]" />。约去最大公约数，再把首个非零坐标定为正。</p></div>
   </div>
   <TheoremCard class="compact mt-s" label="定理3.4" title="射影流群的三元结合律" cite="thm-ch03-quaternion-norm-and-heap-laws" gid="D5/S3/Quantum/AURICOmega/OmegaTernionHeap.triad_assoc">
@@ -152,7 +152,7 @@ section: "第四卷"
 ---
 
 <div class="body">
-  <h2 class="t">彼得–魏尔自旋壳<em>用阶乘积分</em></h2>
+  <h2 class="t">偶次特征标<em>用阶乘积分</em></h2>
   <div class="g2 mt-s">
     <div class="card"><h4>整自旋特征标</h4><p>偶次切比雪夫多项式给出 <Tex t="\chi_0=1" />、<Tex t="\chi_1=4\kappa-1" /> 与 <Tex t="\chi_2=16\kappa^2-12\kappa+1" />。</p></div>
     <div class="card"><h4><Tex t="S^3" /> 上的无 <Tex t="\pi" /> 哈尔矩</h4><p><Tex t="\kappa" /> 是归一化标量坐标的平方。</p><Tex display t="\mathbb E[\kappa^k]=\frac{(2k)!}{4^k k!(k+1)!}" /></div>
@@ -202,9 +202,9 @@ section: "第五卷"
 
 <div class="body">
   <h2 class="t">模方 5 的赫克谱<em>用有理数检验</em></h2>
-  <p class="lead">对非常数本征模，拉马努金界可写成无复数的半正定判据 <Tex t="4p-\lambda^2\ge0" />，其中 <Tex t="\lambda" /> 是未归一化本征值。</p>
+  <p class="lead">对规范生成元，LPS 文献界适用于 <Tex t="\mathrm{SO}(3)" /> 的非常数本征模，即 <Tex t="S^3" /> 的正偶次壳层。平方后为 <Tex t="4p-\widehat\lambda^2\ge0" />，其中 <Tex t="\widehat\lambda" /> 是赫克和的本征值。</p>
   <TheoremCard class="compact mt" label="定理15.4" title="未归一化赫克和与自旋 1 特征标" cite="thm-ch15-hecke-t5-chi1-eigenvalue" gid="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.heckeT5_chi1_eigenvalue">
-    <p>对每枚非零整四元数 <Tex t="q" />，有 <Tex t="(T_5\chi_1)(q)\equiv-\tfrac25\chi_1(q)" />。</p>
+    <p>对每枚非零整四元数 <Tex t="q" />，有 <Tex t="(\widehat T_5\chi_1)(q)\equiv-\tfrac25\chi_1(q)" />。</p>
   </TheoremCard>
   <div class="card mt-s">
     <h4>自旋 1 · 精确正余量</h4>

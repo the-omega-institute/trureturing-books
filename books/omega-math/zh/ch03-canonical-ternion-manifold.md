@@ -1,4 +1,4 @@
-# 第三章 三维本原流形锁定与规范整三元数
+# 第三章 非交换模型的维数与规范整三元数 {#第三章-三维本原流形锁定与规范整三元数}
 
 > *“一维只能沿着圆环前后滑动，二维平面上任何保正定不变内积的换位子都会同时垂直于两根基轴而当场归零；直到第三个自由度立起，非对易旋转才首次合龙——而用规范齐次整四元组 $[w : x : y : z]$ 书写它，连商公理 `Quot.sound` 与无理根号 $\sqrt{2}$ 都一并消失。”*
 
@@ -7,7 +7,7 @@
 1. **为什么配备正定不变型的李代数至少要有三维才能非交换？** 在三维，这一条件又如何锁定叉积？
 2. **如何用纯整数构造无公理、免根号、免商集的非交换算例**——规范齐次整三元数载体 $\mathbb{T}_3(\mathbb{Q}) \cong \mathbb{QP}^3$？这个射影模型与经典实值比较模型的维数和特征秩下界有什么关系？
 
-在认识论分层上，本章清晰区分两条轨道：第一节与第四节的**四条经典阴影锚点定理**位于 `Mathlib` 实/复分析侧（官方后端允许的公理上界为 `{propext, Classical.choice, Quot.sound}`，未记录这四条各自的公理闭包），为三维刚性锁定与完备化边界提供外部对照基准；第二节与第三节的**八条零公理内核定理**（汇总为三个绿色定理盒，仅依赖 `OmegaInit` 与 `OmegaMath`，传递公理闭包为空集）则在纯整数与精确分数上直接锁死了欧拉—拉格朗日四平方乘性、射线流群三元公理、四维拉格朗日恒等式、保真度上界 $\kappa \le 1$、流群平移不变性与绕正交轴各转四分之一圈的锚点的射影三元非交换见证；规范代表元约分、特征秩对照与第三节的其余整锚手算则按对应层级标明（`ARGUED` / `NUM`）。
+在认识论分层上，本章清晰区分两条轨道：第一节与第四节的**经典阴影锚点定理**位于 `Mathlib` 实/复分析侧（官方后端允许的公理上界为 `{propext, Classical.choice, Quot.sound}`，未记录这四条各自的公理闭包），为三维刚性锁定与完备化边界提供外部对照基准；第二节与第三节的**八条零公理内核定理**（汇总为三个绿色定理盒，仅依赖 `OmegaInit` 与 `OmegaMath`，传递公理闭包为空集）则在纯整数与精确分数上直接锁死了欧拉—拉格朗日四平方乘性、射线流群三元公理、四维拉格朗日恒等式、保真度上界 $\kappa \le 1$、流群平移不变性与绕正交轴各转四分之一圈的锚点的射影三元非交换见证；规范代表元约分、特征秩对照与第三节的其余整锚手算则按对应层级标明（`ARGUED` / `NUM`）。
 
 ## 3.1 低维退化与三维非阿贝尔锁定：经典阴影侧的冻结锚点 {#sec-ch03-dimension-lock}
 
@@ -30,6 +30,8 @@ $$
 这就说明，配备左非退化不变双线性型的一维与二维李代数只能交换。二维仿射李代数 $[H,E]=E$ 若要配备正定不变型，便会遇上 $\Phi(E,E)=\Phi([H,E],E)=\Phi(H,[E,E])=0$ 的矛盾。
 
 配备左非退化不变双线性型的非交换李代数至少有 **$3$** 维，实三维叉积李代数与它的标准内积达到此下界。以下两条定理在经典实数侧给出三维叉积与泡利结构的分类。
+
+同一低维结论也有经典侧冻结声明，见[维数至多二的消去定理](lean:D5/S3/Quantum/Algebra/InvariantMetric/LowDimensionInvariantMetric.isLieAbelian_of_finrank_le_two)。
 
 ::: {.theorem #thm-ch03-dim3-cross-bracket title="三维正定不变型非交换李代数的叉积锁定（经典阴影锚点）" lean="D5/S3/Quantum/Algebra/InvariantMetric/LowDimensionInvariantMetric.exists_basis_bracket_eq_smul_cross"}
 设 $L$ 为实数域 $\mathbb{R}$ 上的三维非交换李代数（$\dim_{\mathbb{R}} L = 3$ 且非阿贝尔），$\Phi : L \times L \to \mathbb{R}$ 为满足不变性 $\Phi([x, y], z) = -\Phi(y, [x, z])$ 且对一切 $x \neq 0$ 满足 $\Phi(x, x) > 0$ 的双线性型（不预先假设对称）。则存在 $L$ 的一组基 $b_0, b_1, b_2$ 与严格正实数 $c > 0$，使得：
@@ -78,7 +80,7 @@ $$
 1. 计算四元最大公约数 $g = \gcd(\lvert w\rvert, \lvert x\rvert, \lvert y\rvert, \lvert z\rvert) \ge 1$，将四个分量同时整除 $g$ 得到互素四元组 $(w', x', y', z')$；
 2. 选取符号因子 $s \in \{+1, -1\}$，锁定**第一个非零分量为严格正整数**。
 
-由此得到的规范子类型 `CanonProjTernion` 仅由纯整数构造，凭借 `deriving DecidableEq`（结合[第一章](ch01-axiom-omega-and-cic.md)的赫德伯格定理）天生具备零公理可判定相等性，且一切物理观测量与三维旋转都在分子分母中**自动平方消去全部根号**！
+规范子类型 `CanonProjTernion` 的相等性由逐项比较整数坐标判定，无需额外公理。[第一章](ch01-axiom-omega-and-cic.md)的赫德伯格定理再由可判定相等性推出恒等证明的唯一性。这个模型的平方读数与伴随旋转都可以用有理分子、分母直接计算。
 
 ::: {.definition #def-ch03-canonical-ternion title="规范齐次整三元数载体、三元迁移与无根号保真度（ARGUED）"}
 定义**规范齐次整三元数流形** $\mathbb{T}_3(\mathbb{Q}) \cong \mathbb{QP}^3$（书中的规范非零子类型记作 `CanonProjTernion`）为满足规范谓词 $\operatorname{IsCanonical}(w, x, y, z)$ 的整数四元组集合：$(w, x, y, z) \neq (0, 0, 0, 0)$，$\gcd(\lvert w\rvert, \lvert x\rvert, \lvert y\rvert, \lvert z\rvert) = 1$，且第一个非零分量严格大于 $0$。记上述约分并锁正号的规范化算子为 $\operatorname{norm}$。对任意整四元组 $\mathbf{a} = (a_w, a_x, a_y, a_z)$ 与 $\mathbf{b} = (b_w, b_x, b_y, b_z)$，定义：
@@ -267,7 +269,7 @@ $$
 
 预连通性确实限制了模型类（手工推导）。离散的 $S_3$ 用 $[x,y,z]=xy^{-1}z$ 作迁移，以置换矩阵的归一化内积 $\kappa(x,y)=\operatorname{Tr}(P_x^{\mathsf T}P_y)/3$ 作读数。两侧平移保持内积，单位读数分离各点，单位元和一个三循环给出零读数，两个不同的换位给出非交换见证。单点邻域可嵌入 $\mathbb R^0$，而离散的 $S_3$ 不满足预连通性。
 
-以下转向秩五模型的分类。对实值比较结构，非交换性与链连通性迫使任一欧氏特征实现的维数至少为 $5$（`five_le_of_hasFeatureRank`）。链连通性指对每个 $\varepsilon>0$，任意两点可由相邻读数 $>1-\varepsilon$ 的有限链相连。若再有触零性及到 $\mathbb{R}^5$ 的特征实现，得到下面的单射结论。
+以下转向秩五模型的分类。对实值比较结构，非交换性与链连通性迫使任一欧氏特征实现的维数至少为 $5$（[`five_le_of_hasFeatureRank`](lean:D5/S3/Quantum/AURICOmega/TernaryComparisonRankFive.five_le_of_hasFeatureRank)）。链连通性指对每个 $\varepsilon>0$，任意两点可由相邻读数 $>1-\varepsilon$ 的有限链相连。若再有触零性及到 $\mathbb{R}^5$ 的特征实现，得到下面的单射结论。
 
 ::: {.theorem #thm-ch03-rank-five-embedding title="秩五三元比较结构的单位四元数单射嵌入（经典阴影锚点）" lean="D5/S3/Quantum/AURICOmega/TernaryComparisonRankFive.exists_unitQuaternion_embedding"}
 设 $C=(M,\operatorname{tri},\kappa)$ 为上述实值三元比较结构。若 $C$ 非交换、链连通、触零（对每个 $\varepsilon>0$ 都有 $\kappa(x,y)<\varepsilon$ 的一对点），且存在 $\varphi:M\to\mathbb{R}^5$ 使 $\kappa(x,y)=\langle\varphi(x),\varphi(y)\rangle$（`HasFeatureRank 5`），则存在单射 $u:M\to\mathrm{Sp}(1)$，使得对一切 $x,y,z\in M$：
@@ -299,10 +301,12 @@ $$
 两条秩五定理都在实值比较结构上起步。完备性补上的是单射之像闭合这一步，在全部共同假设下由此得到满射。对这里的有号有理单位子群，其弦距完备化是实单位球面。规范整三元数用的是秩 $10$ 的平方读数，且会识别对径点。第四章的二次核桥给出二者在有理单位旋量上的读数关系。
 :::
 
-下面的影片把本章从维数锁定一路走到实阴影边界。
+下面的影片从带不变型的李括号讲到有理旋量的实完备化。
 
 ::: {.film src="four-integers-one-turn"}
-**二维里括号只能归零，三维才容得下次序；四个整数加上约分与锁正号，就写出无根号、免商集的三维有理转动（2 分 54 秒）。** 左侧平面里，琥珀色的候选括号 $[x, y]$ 同时与青色的 $x$、$y$ 正交，只能缩为零（紫色，书面论证，示意图）；右侧立起的品红第三轴给出叉积，绿色标签对应 [@thm-ch03-dim3-cross-bracket]（经典 `Mathlib` 侧）。$p_{\mathrm{Half}} = (1, 1, 0, 0)$ 的模方为 $2$，用它共轭再除以 $2$ 得到精确的四分之一圈 $(x, y, z) \mapsto (x, -z, y)$；$(-2, 2, 2, 2)$ 经 $\gcd = 2$ 约分并翻号得到规范名 $(1, -1, -1, -1)$（屏幕计算）。四平方乘性、射线左消去、四维拉格朗日恒等式与 $\kappa \le 1$ 的绿色标签对应 [@thm-ch03-quaternion-norm-and-heap-laws] 与 [@thm-ch03-lagrange-and-kappa-invariance]，算例 $\lvert(1 + \mathbf{i})(1 + \mathbf{j})\rvert^2 = 4$、$\kappa(p_0, p_{\mathrm{Half}}) = 1/2$ 与六个子式平方和 $1 + 1 + 0 + 1 + 0 + 0 = 3$ 为屏幕计算。青色三角形上 $g_{120} = (1, 1, 1, 1)$ 三拍回到 $p_0$，保留符号的紫色六边形要走六拍（[@ex-ch03-five-anchors-and-closure]，屏幕计算）。两种次序的精确整数旋转矩阵与四元组 $(1, 1, 1, 1) \neq (1, 1, 1, -1)$ 并排对照，$k = l$ 与 $k = -l$ 迫使 $l = 0$，绿色标签对应 [@thm-ch03-phalf-qhalf-noncommutative]。最后，圆上的有理点示意有理单位四元数留下的缝隙（手工推导），加上读数完备性后补成 $\mathrm{Sp}(1)$，绿色标签对应 [@thm-ch03-rank-five-isomorphism]（经典侧）；秩 $10$ 的平方读数与对径点粘合按 [@rem-ch03-shadow-boundary] 的诠释标注。
+**带左非退化不变型的二维李代数括号为零。三维已有非交换的例子，四个整数便可表示有理旋转。** 左侧平面里，琥珀色的候选括号 $[x, y]$ 同时与青色的 $x$、$y$ 正交，只能缩为零（紫色，书面论证，示意图）；右侧立起的品红第三轴给出叉积，绿色标签对应 [@thm-ch03-dim3-cross-bracket]（经典 `Mathlib` 侧）。$p_{\mathrm{Half}} = (1, 1, 0, 0)$ 的模方为 $2$，用它共轭再除以 $2$ 得到精确的四分之一圈 $(x, y, z) \mapsto (x, -z, y)$；$(-2, 2, 2, 2)$ 经 $\gcd = 2$ 约分并翻号得到规范名 $(1, -1, -1, -1)$（屏幕计算）。四平方乘性、射线左消去、四维拉格朗日恒等式与 $\kappa \le 1$ 的绿色标签对应 [@thm-ch03-quaternion-norm-and-heap-laws] 与 [@thm-ch03-lagrange-and-kappa-invariance]，算例 $\lvert(1 + \mathbf{i})(1 + \mathbf{j})\rvert^2 = 4$、$\kappa(p_0, p_{\mathrm{Half}}) = 1/2$ 与六个子式平方和 $1 + 1 + 0 + 1 + 0 + 0 = 3$ 为屏幕计算。青色三角形上 $g_{120} = (1, 1, 1, 1)$ 三拍回到 $p_0$，保留符号的紫色六边形要走六拍（[@ex-ch03-five-anchors-and-closure]，屏幕计算）。两种次序的精确整数旋转矩阵与四元组 $(1, 1, 1, 1) \neq (1, 1, 1, -1)$ 并排对照，$k = l$ 与 $k = -l$ 迫使 $l = 0$，绿色标签对应 [@thm-ch03-phalf-qhalf-noncommutative]。最后，圆上的有理点示意有理单位四元数留下的缝隙（手工推导），在非交换、链连通、触零与秩五实现之外再要求读数完备性，便补成 $\mathrm{Sp}(1)$，绿色标签对应 [@thm-ch03-rank-five-isomorphism]（经典侧）；秩 $10$ 的平方读数与对径点粘合按 [@rem-ch03-shadow-boundary] 的诠释标注。
+
+**旧版影片勘误。** 开场的低维结论针对带左非退化不变型的李代数。§3.4 的维数下界另有实值比较模型的假设。
 :::
 
 在合上第一卷之前，不妨在下方交互实验卡中亲手检验整三元数的规范化与非交换自锁：切换整四元组输入，观察 `gcd` 最大公约数约分与首非零正号锁定如何将每条射线归约为全宇宙唯一的规范整代表元（彻底免除 `Quot.sound`），并一步对比反序三元迁移 $[p_{\mathrm{Half}}, p_0, q_{\mathrm{Half}}] = (1, 1, 1, 1) \neq (1, 1, 1, -1) = [q_{\mathrm{Half}}, p_0, p_{\mathrm{Half}}]$ 在第四分量上的显式分裂（[@thm-ch03-phalf-qhalf-noncommutative]）与精确分数保真度读数。

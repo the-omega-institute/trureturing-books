@@ -54,7 +54,9 @@ Readers may read straight through from Volume I to Volume VI or navigate directl
 The long film *One Axiom, No Infinity* runs about 23 minutes. Its eight acts follow the prelude, the six volumes and the coda, with questions that carry the viewer from one act to the next.
 
 ::: {.film src="one-axiom-no-infinity"}
-**One Axiom, No Infinity: from a vertical ruler to the ledger the kernel checked.** Eight acts follow the prelude, Volumes I–VI and the coda; the row of dots at the top left marks the current stop in amber. Each act opens on its volume's title card and closes on a "next question" panel, which the following act answers. Green `LEAN ✓` marks only what the cited frozen declarations state; on-screen computations, literature results, the book's model readings and open problems are each labelled. English narration with Chinese and English subtitles.
+**One Axiom, No Infinity: from a vertical ruler to the ledger the kernel checked.** Eight acts follow the prelude, Volumes I–VI and the coda; the row of dots at the top left marks the current stop in amber. Each of the first seven acts closes with a question for the following act. The eighth ends with a receipt. Green `LEAN ✓` marks only what the cited frozen declarations state; on-screen computations, literature results, the book's model readings and open problems are each labelled. English narration with Chinese and English subtitles.
+
+**Film correction for the earlier cut of Volume I.** Law III requires an example of order sensitivity. The sharp bounds $d\ge3$ and $r\ge5$ apply to preconnected, locally compact real comparison models with continuous transport, continuity of the reading at each diagonal point, a Euclidean feature map and a continuous local injection into $\mathbb R^d$. Discrete $S_3$ has a singleton neighborhood that embeds into $\mathbb R^0$. See [Chapter 3, §3.4](ch03-canonical-ternion-manifold.md#sec-ch03-real-shadow-completion).
 :::
 
 Let us now switch off every hidden import of real continua and Choice, and lay the first stone of Volume I: the bare kernel of the Calculus of Inductive Constructions.

@@ -178,7 +178,7 @@ Take two non-orthogonal integer tangent vectors $\mathbf{u} = (1, 1, 0)$ and $\m
 
 ## 4.3 Exact Separation of Projective Rank 10 and Signed Spinor Rank 5
 
-Moving from the local tangent space back to the global spherical carrier reveals a sharp structural split inside zero-axiom rational geometry: **the projective ray carrier `ProjTernion` has feature rank $10$, whereas the signed double-cover spinor carrier preserving $720^\circ$ sign memory has feature rank exactly $5$.** Understanding this exact factor of two clarifies how canonical integer rays from [Chapter 3](ch03-canonical-ternion-manifold.md) relate to the minimal-rank lock of the mother axiom.
+From local tangent curvature, return to the two kernels on the spherical carriers. The projective ray kernel on canonical ternions has rank $10$. The signed spinor kernel preserves $720^\circ$ sign memory and has rank $5$. Here rank means the largest rank attained by a finite Gram matrix. Rank $5$ matches the sharp Euclidean feature-dimension bound in the real-valued model class of [§3.4](ch03-canonical-ternion-manifold.md#sec-ch03-real-shadow-completion).
 
 ### 4.3.1 The Projective Ray Kernel and Its 10×10 Gram Witness
 
@@ -196,17 +196,19 @@ $$
 
 Because the space $\operatorname{Sym}_4(\mathbb{Q})$ of $4 \times 4$ symmetric matrices has $4$ diagonal slots and $\binom{4}{2} = 6$ off-diagonal slots, its dimension is $4 + 6 = 10$, and the trace pairing $\operatorname{Tr}(AB)$ is strictly positive definite ($\operatorname{Tr}(A^2) = \sum_{i,j} A_{ij}^2 > 0$ for every $A \neq 0$). Consequently, every finite projective Gram matrix $G^{\mathrm{proj}}_{ij} = \kappa_{\mathrm{proj}}(p_i, p_j)$ satisfies $\operatorname{rank}(G^{\mathrm{proj}}) \le 10$.
 
-This upper bound of $10$ is attained explicitly by ten integer rays: the four coordinate axes $e_1, e_2, e_3, e_4$ and the six pairwise diagonals $e_i + e_j$ ($1 \le i < j \le 4$). In the orthonormal basis $\{E_{ii}\}_{i=1}^4 \cup \bigl\{\frac{E_{ij}+E_{ji}}{\sqrt{2}}\bigr\}_{1 \le i < j \le 4}$ of $\operatorname{Sym}_4(\mathbb{Q})$, the first four projectors are $E_{11}, E_{22}, E_{33}, E_{44}$, while the remaining six take the form
+Take the four coordinate axes $e_i$ and the six diagonal rays $e_i+e_j$ ($i<j$). In the rational trace-orthogonal basis $\{E_{ii}\}\cup\{E_{ij}+E_{ji}:i<j\}$ the trace pairing has matrix $D=\operatorname{diag}(I_4,2I_6)$, and
 
 $$
-P(e_i + e_j) = \frac{1}{2}E_{ii} + \frac{1}{2}E_{jj} + \frac{1}{\sqrt{2}}\cdot\frac{E_{ij} + E_{ji}}{\sqrt{2}}.
+P(e_i)=E_{ii},\qquad P(e_i+e_j)=\tfrac12(E_{ii}+E_{jj}+E_{ij}+E_{ji}).
 $$
 
-Collecting these ten coordinate columns forms the block upper-triangular matrix $M = \bigl(\begin{smallmatrix} I_4 & A \\ 0 & 2^{-1/2} I_6 \end{smallmatrix}\bigr)$. The leading principal minors of $G^{\mathrm{proj}}_{10} = M^\top M$ are simply the squared leading minors of $M$, namely $1, 1, 1, 1, \frac{1}{2}, \frac{1}{4}, \frac{1}{8}, \frac{1}{16}, \frac{1}{32}, \frac{1}{64}$, yielding the exact positive determinant
+The ten coordinate columns form the block upper-triangular matrix $M=\bigl(\begin{smallmatrix} I_4 & A \\ 0 & \frac12 I_6 \end{smallmatrix}\bigr)$. The first four leading principal minors are $1$. Each subsequent one picks up a factor of $2(\frac12)^2=\frac12$. Thus
 
 $$
-\det G^{\mathrm{proj}}_{10} = (\det M)^2 = \left(\frac{1}{8}\right)^2 = \frac{1}{64} > 0.
+\det G^{\mathrm{proj}}_{10}=\det(M^\top D M)=(2^{-6})^2\,2^6=\frac{1}{64}>0.
 $$
+
+Over the reals, multiplying the six off-diagonal coordinates by $\sqrt2$ gives a ten-dimensional feature map with the standard Euclidean inner product.
 
 Appending an eleventh ray $p_{11} = (1, 1, 1, 1)$ satisfies the exact rational linear relation $P(p_{11}) = \frac{1}{2}\sum_{1 \le i < j \le 4} P(e_i + e_j) - \frac{1}{2}\sum_{i=1}^4 P(e_i)$, forcing $\det G^{\mathrm{proj}}_{11} = 0$. The projective ray kernel therefore has exact feature rank $10$.
 
@@ -298,6 +300,9 @@ Exact integer arithmetic verifies both the rank-$5$ ceiling of `PythSpinor` and 
    $$
 
    with leading principal minors $1,\; \frac{3}{4},\; \frac{1}{2},\; \frac{5}{16},\; \frac{1}{32}$. Appending a sixth lifted spinor $u_6 = \Phi(1, 1, 1, 1) = (-1, 1, 1, 1;\, 2)$ satisfies $(1, v_6) = \frac{1}{2}\bigl(-(1, v_1) + (1, v_2) + (1, v_3) + (1, v_4)\bigr)$, forcing $\det G^{\mathrm{spin}}_6 = 0$.
+
+   In general the feature $(1,u)$ realizes this kernel with half the standard dot product on $\mathbb Q^5$, and $(1,u)/\sqrt2$ realizes it with the standard dot product on $\mathbb R^5$. A realization with the standard dot product on $\mathbb Q^5$ would make the five-point Gram determinant the square of a rational determinant. The $2$-adic valuation of $1/32$ is $-5$, which rules out such a square.
+
 2. **The six-beat $720^\circ$ orbit of `g120_spin = (1, 1, 1, 1; 2)`**: starting from $e = (1, 0, 0, 0;\, 1)$ and $g = (1, 1, 1, 1;\, 2)$, repeated primitive multiplication yields $\kappa_{\mathrm{spin}}(e, g^n) = \frac{r_n + w_n}{2 r_n}$ and $\kappa_{\mathrm{proj}} = (2\kappa_{\mathrm{spin}} - 1)^2$:
 
 | Beat $n$ | Spatial angle | `PythSpinor` power $g^n$ | Signed kernel $\kappa_{\mathrm{spin}}(e, g^n)$ | Projective kernel $\kappa_{\mathrm{proj}}(e, g^n)$ |

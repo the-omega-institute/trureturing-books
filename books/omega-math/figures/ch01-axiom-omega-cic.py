@@ -27,7 +27,7 @@ def draw(fig):
     for y, label in (
         (158, core.t("I · 流群消去与结合律", "I · Cancellation and associativity")),
         (182, core.t("II · 不变性与格拉姆正性", "II · Invariance and Gram positivity")),
-        (206, core.t("III · 最小非交换性", "III · Minimal noncommutativity")),
+        (206, core.t("III · 次序敏感", "III · Order sensitivity")),
     ):
         core.text(112, y, label, size=13, anchor="middle")
     core.line(112, laws.bottom[1], 112, 141, "cyan", 1.2)

@@ -6,7 +6,7 @@
 
 - [第一章 纯归纳构造演算与母公理 AXIOM-Ω](ch01-axiom-omega-and-cic.md)
 - [第二章 一维齐次射影闭环与对径锚点](ch02-homogeneous-projective-line.md)
-- [第三章 三维本原流形锁定与规范整三元数](ch03-canonical-ternion-manifold.md)
+- [第三章 非交换模型的维数与规范整三元数](ch03-canonical-ternion-manifold.md)
 
 # 第二卷 无原点非线性代数与球面有理几何
 

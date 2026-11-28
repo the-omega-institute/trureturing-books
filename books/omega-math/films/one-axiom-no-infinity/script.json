@@ -308,8 +308,8 @@
      "再加一个读数 κ：完全相同读 1，完全失配读 0。"
     ],
     [
-     "Three laws: a step to yourself does nothing and steps regroup freely; carrying keeps every reading; order must leave a mark.",
-     "三条法则：到自己的一步什么也不做，连续的步子可以随意重组；搬运不改读数；次序必须留下痕迹。"
+     "Three laws: a step to yourself does nothing and steps regroup freely; carrying keeps every reading; some triple changes when its outer slots swap.",
+     "三条法则：到自己的一步什么也不做，连续的步子可以随意重组；搬运不改读数；有一组三元输入，互换外槽就会改变结果。"
     ],
     [
      "Pick any point as a stand-in zero, and multiplication grows back around it. No point is royalty.",
@@ -401,12 +401,12 @@
      "圆上的点按整数对相乘：[1:2] 乘 [1:3] 得 [5:5]，也就是 [1:1]。"
     ],
     [
-     "Swap the factors, and nothing changes. A circle has only one plane to turn in.",
-     "交换两个因子，什么都不变。圆只有一个可以转动的平面。"
+     "Swap the factors, and nothing changes. The formula is symmetric in the two inputs.",
+     "交换两个因子，结果不变：公式对两个输入是对称的。"
     ],
     [
-     "Order leaves no mark, so the third law fails. The book argues two dimensions fail as well.",
-     "次序不留痕迹，第三条法则就落空了。书中论证：二维同样不行。"
+     "Order leaves no mark here, so the third law fails on this circle.",
+     "这个圆周模型的次序不留痕迹，所以不满足第三条法则。"
     ]
    ]
   },
@@ -424,8 +424,8 @@
    ],
    "lines": [
     [
-     "Three is the first room where turns can disagree. Write a state as four integers, up to scale.",
-     "三维是转动第一次会“意见不合”的房间。把每个态写成四个整数，倍数不计。"
+     "Now try three-dimensional rotations. Write each projective quaternion as four integers, up to scale.",
+     "现在试试三维旋转。每条四元数射线用四个整数表示，公因子不计。"
     ],
     [
      "Divide out common factors, make the first nonzero entry positive: one name per ray, no quotients.",
@@ -1610,8 +1610,8 @@
    ],
    "lines": [
     [
-     "Let the six turns stir a pattern on the sphere, like a spoon in coffee. How fast do swirls fade?",
-     "现在让六个转动去搅动球面上的花纹，就像勺子搅咖啡。漩涡消得有多快？"
+     "Let the canonical six turns stir a mean-zero pattern on the rotation group, like a spoon in coffee. How fast do swirls fade?",
+     "让规范六枚旋转搅动旋转群上的零均值花纹，就像勺子搅咖啡。漩涡消得有多快？"
     ],
     [
      "Textbooks bound this with two root five and complex numbers. Square it, and the roots vanish.",
@@ -1630,8 +1630,8 @@
      "在 q = (3, 1, −2, 4)：χ₁ = 1/5，搅一次得到 −2/25。"
     ],
     [
-     "The margin, four ninety-six over twenty-five, is positive, as Lean checks. The constant fails. The literature proves the bound on every nonconstant rotation-group shell.",
-     "裕度 496/25 > 0，Lean 已检验；常值超出此界；文献证明了旋转群所有非常值壳层的界。"
+     "The margin, four ninety-six over twenty-five, is positive, as Lean checks. The constant fails. The L P S result covers every nonconstant rotation-group shell, the positive even degrees on the three-sphere.",
+     "裕度 496/25 > 0，Lean 已检验；常值超出此界；LPS 的文献界覆盖旋转群所有非常值壳层，即三维球面上的正偶次壳层。"
     ]
    ],
    "cues": [

@@ -208,7 +208,7 @@ SCENES.flat = S => {
   const cl = curLine(S);
   /* left: the circle (line 0), then the plane where the bracket dies (lines 1–2) */
   const pa = a;
-  panel(140, 190, 780, 600, pa, cl <= 2 ? C.now : C.cyan, cl === 0 ? 'ONE DIMENSION · 一维圆周' : 'TWO DIMENSIONS · 二维平面');
+  panel(140, 190, 780, 600, pa, cl <= 2 ? C.now : C.cyan, cl === 0 ? 'ONE DIMENSION · 一维圆周' : '2D · INVARIANT FORM · 二维不变型');
   const cx = 530, cy = 540;
   if (cl === 0 || S.u < lineAt(S, 1).s) {
     /* a circle: two turns α then β equal β then α */
@@ -237,12 +237,12 @@ SCENES.flat = S => {
     const za = pa * Q(S, 2, 'it is zero', 0.5);
     dot(cx, cy, 16, 'o', za);
     txt('[x, y] = 0', cx, cy + 90, { size: 54, fam: F.math, w: 700, align: 'center', c: C.now, a: za, ab: 2 });
-    txt('x, y span the plane · x、y 张满平面', cx, 760, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.dim, a: pa * at(S, 2, 0.6) });
+    txt('Φ left-nondegenerate · Φ 左非退化', cx, 760, { size: 22, fam: F.zh, w: 700, align: 'center', c: C.dim, a: pa * at(S, 2, 0.6) });
   }
   /* right: the third axis stands up, and the bracket becomes c (x × y) */
   const ra = a * at(S, 3, 0.7);
   if (ra > 0.003) {
-    panel(1000, 190, 780, 600, ra, C.cyan, 'THREE DIMENSIONS · 三维 · ROOM');
+    panel(1000, 190, 780, 600, ra, C.cyan, '3D · CROSS PRODUCT · 三维叉积');
     const c3 = [1390, 520], s = 200, yaw = 0.55 + 0.12 * Math.sin(S.u * 0.4), pitch = 0.32;
     const up = ease(at(S, 3, 1.4, 0.3));
     const O = view([0, 0, 0], c3[0], c3[1], s, yaw, pitch);
@@ -250,7 +250,7 @@ SCENES.flat = S => {
     arrow(O[0], O[1], ex[0], ex[1], C.cyan, ra, 4); txt('x', ex[0] + 10, ex[1] + 28, { size: 32, fam: F.math, w: 700, c: C.cyan, a: ra });
     arrow(O[0], O[1], ey[0], ey[1], C.cyan, ra, 4); txt('y', ey[0] + 12, ey[1] + 8, { size: 32, fam: F.math, w: 700, c: C.cyan, a: ra });
     if (up > 0.02) { arrow(O[0], O[1], ez[0], ez[1], C.mag, ra, 5); txt('x × y', ez[0] + 16, ez[1] + 6, { size: 32, fam: F.math, w: 700, c: C.mag, a: ra * up }); }
-    const fa = ra * Q(S, 3, 'locks the bracket', 0.6);
+    const fa = ra * Q(S, 3, 'positive multiple', 0.6);
     txt('[x, y] = c · (x × y),   c > 0', 1390, 700, { size: 30, fam: F.math, w: 700, align: 'center', c: C.white, a: fa });
     txt('in a Φ-orthonormal basis · 标准正交基坐标', 1390, 732, { size: 20, fam: F.zh, w: 700, align: 'center', c: C.dim, a: fa });
     txt('dim 3 · non-Abelian · Φ(x, x) > 0', 1390, 262, { size: 22, fam: F.mono, w: 700, align: 'center', c: C.dim, a: ra });

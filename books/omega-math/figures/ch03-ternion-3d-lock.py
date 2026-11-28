@@ -21,7 +21,7 @@ def product_with_pole(a, b):
 
 def draw(fig):
     left, right = fig.row([344, 344], 322)
-    left.text(172, 24, left.t("一维与二维李代数", "Lie algebras in 1D and 2D"),
+    left.text(172, 24, left.t("低维不变李括号", "Invariant brackets in 1D and 2D"),
               size=18, anchor="middle", weight=600)
     left.text(43, 78, "1D", size=15, weight=600)
     left.line(110, 73, 282, 73, "faint", 1.4)
@@ -38,7 +38,7 @@ def draw(fig):
     left.text(190, 135, "y", size=14)
     left.text(172, 251, left.t("括号与所有生成方向正交", "Bracket orthogonal to the span"),
               size=15, anchor="middle")
-    left.text(172, 283, left.t("左非退化不变型 ⟹ [x, y] = 0", "Invariant nondegenerate form ⟹ [x, y] = 0"), size=14, anchor="middle")
+    left.text(172, 283, left.t("左非退化不变型 ⟹ [x, y] = 0", "Left-nondegenerate form ⟹ [x, y] = 0"), size=14, anchor="middle")
 
     right.text(172, 24, right.t("三元数的次序 · 𝕋₃(ℚ)", "Ternion order · 𝕋₃(ℚ)"),
                size=18, anchor="middle", weight=600)

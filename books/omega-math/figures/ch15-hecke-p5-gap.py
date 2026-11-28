@@ -8,10 +8,10 @@ SIZE = (704, 326)
 WRAP = True
 ALT = {
     "zh": "左图将六个模方为 5 的旋子按轴配对。它们对 χ₁ 的未归一化和给出特征值 −2/5 及半正定余量 "
-          "496/25。右图画出六项平均在整数自旋 ℓ=1 到 6 的谱半径，六个值均严格低于 √5/3。",
+          "496/25。右图画出六项平均在SO(3) 的整数自旋 ℓ=1 到 6 的谱半径，六个值均严格低于 √5/3。",
     "en": "Left, the six norm-five spinors are paired by axis. Their unnormalized sum acts on χ₁ "
           "with eigenvalue −2/5 and PSD margin 496/25. Right, the radii of the six-term average on "
-          "integer-spin shells ℓ=1 through 6 all lie strictly below √5/3.",
+          "SO(3) shells at spins ℓ=1 through 6 all lie strictly below √5/3.",
 }
 
 PRIME = 5
@@ -136,14 +136,14 @@ def draw(fig):
     left.text(172, 266, left.t("半正定余量", "PSD margin"), size=15, anchor="middle", weight=600)
     left.text(172, 292, "4·5 − (−2/5)² = 496/25 > 0", size=17, anchor="middle")
 
-    right.text(172, 24, right.t("各壳层六项平均的谱半径", "Spectral radii of the six-term average"),
+    right.text(172, 24, right.t("SO(3) 壳层六项平均的谱半径", "Spectral radii on SO(3) shells"),
                size=17, anchor="middle", weight=600)
     bound = sqrt(PRIME) / 3
     ax = right.axes(41, 75, 272, 175, (0.45, 6.55), (0, 0.80))
     ax.xaxis(ticks=list(range(1, 7)), color="ink")
     ax.yaxis(ticks=[0, 0.25, 0.5], labels=["0", "1/4", "1/2"], color="ink")
     ax.hline(bound, "violet", 1.8, dash="5 4")
-    ax.text(6.55, bound, right.t("拉马努金界 √5/3 ≈ 0.745", "Ramanujan bound √5/3 ≈ 0.745"),
+    ax.text(6.55, bound, right.t("LPS 界 √5/3 ≈ 0.745", "LPS bound √5/3 ≈ 0.745"),
             dy=-13, anchor="end", size=14, color="violet")
     ax.text(6.55, 0, "ℓ", dx=10, dy=5, size=14)
     character, previous = Fraction(-1, PRIME), Fraction(1)

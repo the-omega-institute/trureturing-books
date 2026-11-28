@@ -6,7 +6,7 @@
 
 ## 15.1 球面赫克算子与无复数有理拉马努金半正定判据
 
-沿用[第十章](ch10-peter-weyl-rational-spin-shells.md)和[第十一章](ch11-pi-free-haar-integration.md)，在实单位三维球面 $S^3$ 上取归一化哈尔测度。有理系数多项式的限制构成各次谐波壳层 $\mathcal H_j(\mathbb Q)$ 的代数直和，其中次数为 $2j$。阶乘哈尔公式给出有理内积。$j=0$ 的壳层由常值函数组成。正次数壳层的函数均值为零，其实线性张成在 $L^2(S^3)$ 的零均值子空间中稠密。偶次数可沿 $q\sim -q$ 下降到射影空间。奇次数能区分两种提升，例如一次坐标 $w$。
+沿用[第十章](ch10-peter-weyl-rational-spin-shells.md)和[第十一章](ch11-pi-free-haar-integration.md)，在实单位三维球面 $S^3$ 上取归一化哈尔测度。有理系数多项式的限制构成各次谐波壳层 $\mathcal H_j(\mathbb Q)$ 的代数直和，其中次数为 $d=2j$，$d\in\mathbb N$，包括奇数次数。阶乘哈尔公式给出有理内积。$j=0$ 的壳层由常值函数组成。正次数壳层的函数均值为零，其实线性张成在 $L^2(S^3)$ 的零均值子空间中稠密。偶次数可沿 $q\sim -q$ 下降到射影空间。奇次数能区分两种提升，例如一次坐标 $w$。
 
 ::: {.definition #def-ch15-spherical-hecke-psd title="一般奇素数球面赫克算子与有理拉马努金半正定二次型"}
 设 $p$ 为奇素数，从 $p+1$ 个赫维茨左单位相伴类中各取一枚模方 $p$ 的代表元，组成集合 $A$。对 $p\equiv1\pmod4$ 的规范构造，取 [@def-ch14-hurwitz-prime-spinors] 的 $A=S_p$。作用在**单位**三维球面上时，用单位四元数 $s_\pi=\pi/\sqrt p$ 定义和算子与平均算子：
@@ -24,7 +24,7 @@ $$
 在次数 $d=2j$ 的齐次壳层上，未缩放的代换 $q\mapsto q\pi$ 保持系数有理。球面代换使这一和式乘上 $p^{-d/2}$，平方范数中只留下有理因子 $p^{-d}$。不同次数的壳层仍正交，因此对有限和也有 $Q_p(f)\in\mathbb Q$。
 :::
 
-右平移保持哈尔测度与各次调和壳层。代入常值 $1$ 得 $Q_p(1)=-(p-1)^2$，故须在零均值正交补上检验。判据等价于该补空间上的算子范数界 $\|\widehat T_p\|\le2\sqrt p$。有理调和多项式在每一次数上张成实调和空间，其有限和在实零均值 $L^2$ 空间中稠密。若 $A=\overline A$，则 $s_\pi^{-1}=s_{\overline\pi}$ 保证 $\widehat T_p$ 自伴，此时判据等价于每个非常值壳层上的本征值满足 $\widehat\lambda^2\le4p$。当范数界成立时，平均算子的本征值 $\lambda=\widehat\lambda/(p+1)$ 满足 $\lambda^2\le4p/(p+1)^2$，这也是一次平均前后平方 $L^2$ 范数之比 $\lVert T_pfVert^2/\lVert fVert^2$ 的上界。在 $p=5$ 时，该上界为 $5/9$。偶次壳层下降到 $\mathrm{SO}(3)$。奇次壳层还要保留单位四元数提升的符号。
+右平移保持哈尔测度与各次调和壳层。代入常值 $1$ 得 $Q_p(1)=-(p-1)^2$，故须在零均值正交补上检验。判据等价于该补空间上的算子范数界 $\|\widehat T_p\|\le2\sqrt p$。有理调和多项式在每一次数上张成实调和空间，其有限和在实零均值 $L^2$ 空间中稠密。若 $A=\overline A$，则 $s_\pi^{-1}=s_{\overline\pi}$ 保证 $\widehat T_p$ 自伴，此时判据等价于每个非常值壳层上的本征值满足 $\widehat\lambda^2\le4p$。当范数界在某个不变的零均值子空间上成立时，该子空间上的平均本征值 $\lambda=\widehat\lambda/(p+1)$ 满足 $\lambda^2\le4p/(p+1)^2$。而且对该子空间的每个非零函数 $f$，都有 $\lVert T_p f\rVert_{L^2}^2/\lVert f\rVert_{L^2}^2\le4p/(p+1)^2$，在 $p=5$ 时即 $5/9$。偶次壳层下降到 $\mathrm{SO}(3)$。奇次壳层还要保留单位四元数提升的符号。
 
 共轭闭合只保证自伴性，非零次数上的范数界仍需另证。取 $p=5$，选 $A=\{2\pm\mathbf i,2\pm\mathbf j,2\pm\mathbf k\}$（手工推导）。六元共轭闭合，模方均为 $5$。对不同代表元 $\pi,\pi'$，$\pi'\pi^{-1}$ 的实部在虚轴相同或不同时分别为 $3/5$ 或 $4/5$。赫维茨单位的实部只能取 $\{0,\pm1/2,\pm1\}$，所以这六元恰好各代表一个左相伴类。归一化后，六个单位四元数之和为 $12/\sqrt5$。因此零均值的一次谐波 $f(w,x,y,z)=w$ 满足 $\widehat T_5f=(12/\sqrt5) f$。归一化哈尔测度下 $\lVert f\rVert^2=1/4$，于是
 
@@ -344,10 +344,12 @@ $B$ 的 $1091$ 个非平凡平方奇异值均满足 $\sigma_i^2<19$，对应的�
 第五卷从有限算术走到自由旋转生成元 $S_5$。这六枚旋子在球面上给出检验混合谱界的有理判据。冻结的标量与低阶矩阵等式、更高的有限壳层计算、有限图的移位证书，各自钉住同一图景中的一处精确读数。
 
 ::: {.film src="the-norm-five-gap"}
-**六枚模方为 5 的整四元数，一条平方后的有理不等式，一道用分数就能核验的谱隙（2 分 52 秒）。** 青色与品红的六枚旋子 $1\pm2i$、$1\pm2j$、$1\pm2k$ 围绕琥珀色的点 $q$，把拉马努金界平方成 $20-\widehat\lambda^2\ge0$。佐武参数对 $u_1,u_2$ 随 $\widehat\lambda$ 在单位圆上滑动，越过 $2\sqrt5$ 时离开圆周，$2\times2$ 托普利茨行列式 $(20-\widehat\lambda^2)/5$ 随之变号（手工推导）；绿色标签对应一般判据 [@thm-ch15-toeplitz-circle]。边界一幕分出已冻结结论、文献中的全谱界与本书的模型诠释（紫色），以及开放问题（红色），对应 [@rem-ch15-rh-epistemology]。在 $q=(2,1,3,-1)$ 处，六个标量部分 $0,4,-4,8,4,0$ 的平方和为 $112$，得 $\widehat T_5\chi_1(q)=-2/75=-\tfrac25\chi_1(q)$（屏幕计算），绿色标签指向 [@thm-ch15-hecke-t5-chi1-eigenvalue] 与 [@thm-ch15-hecke-t5-ramanujan-margin]。柱状图给出 $E_\ell(1/5)$ 的六个精确分数（[@thm-ch15-lps-hecke-trace-formula]、[@thm-ch15-lps-hecke-traces]），把它们认作壳层迹的一步标为论证；四次矩阵首尾两角的 $64$ 以琥珀色标出，五条本征线与裕度见 [@thm-ch15-lps-ramanujan-margins]、[@thm-ch15-lps-degree-four-eigenbasis]。最后一幕画出 $X^{5,13}$ 半径 $3$ 的树状邻域与一条琥珀色 $8$ 圈（屏幕计算），平方奇异值小于 $19$ 取自 [@ex-ch15-x513-certificate] 的精确证书。
+**六枚模方为 5 的整四元数，一条平方后的有理不等式，一道用分数就能核验的谱隙。** 青色与品红的六枚旋子 $1\pm2i$、$1\pm2j$、$1\pm2k$ 围绕琥珀色的点 $q$，把拉马努金界平方成 $20-\widehat\lambda^2\ge0$。佐武参数对 $u_1,u_2$ 随 $\widehat\lambda$ 在单位圆上滑动，越过 $2\sqrt5$ 时离开圆周，$2\times2$ 托普利茨行列式 $(20-\widehat\lambda^2)/5$ 随之变号（手工推导）；绿色标签对应一般判据 [@thm-ch15-toeplitz-circle]。边界一幕分出已冻结结论、规范集在 $\mathrm{SO}(3)$ 非常值壳层上的文献界与本书的模型诠释（紫色），以及开放问题（红色），对应 [@rem-ch15-rh-epistemology]。在 $q=(2,1,3,-1)$ 处，六个标量部分 $0,4,-4,8,4,0$ 的平方和为 $112$，得 $\widehat T_5\chi_1(q)=-2/75=-\tfrac25\chi_1(q)$（屏幕计算），绿色标签指向 [@thm-ch15-hecke-t5-chi1-eigenvalue] 与 [@thm-ch15-hecke-t5-ramanujan-margin]。柱状图给出 $E_\ell(1/5)$ 的六个精确分数（[@thm-ch15-lps-hecke-trace-formula]、[@thm-ch15-lps-hecke-traces]），把它们认作壳层迹的一步标为论证；四次矩阵首尾两角的 $64$ 以琥珀色标出，五条本征线与裕度见 [@thm-ch15-lps-ramanujan-margins]、[@thm-ch15-lps-degree-four-eigenbasis]。最后一幕画出 $X^{5,13}$ 半径 $3$ 的树状邻域与一条琥珀色 $8$ 圈（屏幕计算），平方奇异值小于 $19$ 取自 [@ex-ch15-x513-certificate] 的精确证书。
+
+**影片勘误。** 开场的拉马努金界适用于规范六枚生成元在 $\mathrm{SO}(3)$ 上的零均值函数，也就是 $S^3$ 上的零均值偶函数。片中的有号 $S^3$ 矩阵只核对次数 $1$ 至 $4$。
 :::
 
-至此，一个呼之欲出的跃迁已摆在眼前：**既然 $S_5$ 这六枚整四元数旋子既能在空间中自由生成永不碰撞的非阿贝尔词树 $F_3$，又携带着最优有理谱隙，那么当观察者直接把这六枚旋子的有理分式当作计算指令运行时，会发生什么？** 这将直接开启第六卷的[第十六章](ch16-omega-fractran-and-nonabelian-stack.md)——把康威标量 FRACTRAN 升维为三维非阿贝尔旋子机 $\Omega\text{-FRACTRAN}$。读者可先在下方的交互工作台实验卡中同步检视模方 $5$ 赫克谱隙与 $\Omega\text{-FRACTRAN}$ 旋子指令栈之间的无缝衔接。
+规范集 $S_5$ 的平均在 $\mathrm{SO}(3)$ 的零均值空间上满足上述拉马努金界（Lubotzky、Phillips 与 Sarnak 的文献结果）。有号 $S^3$ 前四次壳层的冻结矩阵给出了另一组有限信息。既然这六枚旋子又自由生成 $F_3$，若观察者直接把有理右分式当作程序指令，会发生什么？[第十六章](ch16-omega-fractran-and-nonabelian-stack.md)由此把 Conway 的标量 FRACTRAN 推广到非阿贝尔旋量机 $\Omega\text{-FRACTRAN}$。
 
 ::: {.viz src="omega-math-workbench" preset="hecke-p5-and-omega-fractran" height="520"}
 **模方 5 赫克谱隙与 $\Omega\text{-FRACTRAN}$ 旋子栈联动实验卡（`hecke-p5-and-omega-fractran`）。** 交互调节任意非零整四元数测试态 $\mathbf{q} = (w, x, y, z)$（默认 `(2, 1, 3, -1)`），观察六枚模方 $5$ 赫维茨素旋子 $S_5$ 跃迁与精确本征恒等 $(\widehat{T}_5 \chi_1)(\mathbf{q}) = -\frac{2}{5}\chi_1(\mathbf{q})$、拉马努金有理正定裕度 $4\cdot 5 - (-\frac{2}{5})^2 = \frac{496}{25} > 0$（以及 $\chi_2$ 在六跃迁和下分裂为多条比值而非单一标量本征函数的对照）；一键切换至 $\Omega\text{-FRACTRAN}$ 整除门模式，即可现场核对同模方非对易态 `XY` 放行与 `YX` 阻断，直接衔接第五卷与第六卷。

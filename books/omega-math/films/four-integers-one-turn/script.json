@@ -38,20 +38,20 @@
    ],
    "lines": [
     [
-     "On a circle, turns commute. How many dimensions does disagreement need?",
-     "圆周上的转动总是可交换的。要让次序产生分歧，至少需要几维？"
+     "Turns on a circle commute. Next, consider Lie brackets with an invariant form.",
+     "圆周上的转动可交换。接着来看带不变型的李括号。"
     ],
     [
      "A bracket that keeps a nondegenerate invariant form is orthogonal to both its inputs.",
      "只要括号保持一个非退化不变型，它就同时与两个输入正交。"
     ],
     [
-     "In a plane, those inputs span everything, so the bracket is orthogonal to everything: it is zero.",
-     "在平面里，两个输入已张满全空间，括号只好与一切正交：它只能是零。"
+     "In a plane, independent inputs span everything. The bracket is orthogonal to everything: it is zero.",
+     "在平面里，线性无关的两个输入张满全空间，括号与全空间正交，只能为零。"
     ],
     [
-     "A third axis makes room: there, Lean checks, a positive form locks the bracket to the cross product.",
-     "第三根轴立起来才有余地：Lean 检验，正定不变型把括号锁定为叉积的正倍数。"
+     "In dimension three, Lean checks that a nonzero bracket with a positive invariant form is a positive multiple of the cross product in a suitable basis.",
+     "在三维，Lean 检验：带正定不变型的非零括号，在适当基底下是叉积的正倍数。"
     ]
    ]
   },

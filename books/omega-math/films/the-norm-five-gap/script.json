@@ -34,16 +34,16 @@
      "取六枚模方为 5 的整四元数：1 ± 2i、1 ± 2j、1 ± 2k。"
     ],
     [
-     "Right-multiply a point of the three-sphere by each, then sum the six values.",
-     "把三维球面上的一点分别右乘这六枚旋子，再把函数的六个值加起来。"
+     "Right-multiply on the three-sphere by the unit lifts, dividing each generator by root five, then sum the six values.",
+     "先把每枚旋子除以 √5 得到单位提升，在三维球面上分别右乘，再加起六个函数值。"
     ],
     [
-     "This sum is the Hecke operator. How fast does it flatten mean-zero patterns?",
-     "这个和就是赫克算子。它把均值为零的花纹抹平得有多快？"
+     "This is the Hecke operator. How fast does its average flatten mean-zero patterns that are even under sign reversal?",
+     "这就是赫克算子。它的平均能多快抹平对变号为偶、且均值为零的花纹？"
     ],
     [
-     "The Ramanujan bound is two root five; squared, twenty minus lambda squared is never negative.",
-     "拉马努金界是 2√5。两边平方：20 − λ̂² 永不为负。"
+     "On those patterns the Ramanujan bound is two root five for the sum. Squared, twenty minus lambda squared is nonnegative.",
+     "对这些花纹，未归一化和的拉马努金界是 2√5。平方后，20 − λ̂² 非负。"
     ]
    ],
    "cues": [
@@ -106,8 +106,8 @@
      "这座桥是关于有限复数族的判据，与 ζ 的零点无关。"
     ],
     [
-     "Lubotzky, Phillips and Sarnak proved the full bound; the critical-line reading is the book's model.",
-     "Lubotzky、Phillips 与 Sarnak 证明了全谱界（文献结果）；临界线最优性的解读是本书的模型诠释。"
+     "Lubotzky, Phillips and Sarnak proved the bound on nonconstant S O three harmonics for the canonical generators. The critical-line reading is the book’s model.",
+     "Lubotzky、Phillips 与 Sarnak 证明了规范生成元在 SO(3) 非常值谐波上的界。临界线解读是本书的模型诠释。"
     ],
     [
      "Higher-rank Ramanujan–Petersson and the extended Riemann hypothesis stay open.",

@@ -6,7 +6,7 @@
 
 - [Chapter 1 Bare CIC and the Mother Axiom AXIOM-Ω](ch01-axiom-omega-and-cic.md)
 - [Chapter 2 The Homogeneous Projective Line and Antipodal Closure](ch02-homogeneous-projective-line.md)
-- [Chapter 3 Locking the Three-Dimensional Manifold and Canonical Ternions](ch03-canonical-ternion-manifold.md)
+- [Chapter 3 Dimensions of Noncommutative Models and Canonical Ternions](ch03-canonical-ternion-manifold.md)
 
 # Volume II Origin-Free Nonlinear Algebra and Rational Spherical Geometry
 

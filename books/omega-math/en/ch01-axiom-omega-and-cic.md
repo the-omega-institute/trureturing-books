@@ -95,7 +95,7 @@ Let $\mathcal{M}$ be a nonempty type equipped with a ternary comparison transpor
    \sum_{i=1}^{n}\sum_{j=1}^{n} c_i c_j\,\kappa(x_i, x_j) \;\ge\; 0.
    $$
 
-3. **Law III (Minimal Noncommutativity Self-Lock)**: ternary transport is order-sensitive in its outer slots,
+3. **Law III (Order Sensitivity)**: ternary transport is order-sensitive in its outer slots,
 
    $$
    \exists\, x, y, z \in \mathcal{M},\qquad [x, y, z] \;\neq\; [z, y, x],
