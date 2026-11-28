@@ -483,15 +483,34 @@ For any positive Hermitian common portal $B \succeq 0$ with operator norm $B_* =
 
      Take unequal model energies $(a,b',c)=(1,3,15)$ and tolerances $(1,1,16)\log q$, where $q=1001/1000$. With $M=q^3$, the upper limit at level 1 and the lower limit at level 7 set $s_*=\log q$. The atom of weight $Cq^2$ gives responses $(q,q^{-1},q^{-13})$. Tightening the cap to $M=q$ makes the level-7 lower limit and the cap set $s_*=(2/3)\log q$. The atom of weight $Cq$ now gives $(q^{1/3},q^{-1},q^{-9})$. [Exact checks for all three pairs and for the weight cap](https://github.com/the-omega-institute/trureturing-books/issues/2029#issuecomment-7241731569)
 
-     **Just beyond the latest cutoff that can hold all the weight.** Keep the tighter cap $A(0)\le Cq$, take $t_0=\log 2$, and consider $T\ge T_* = t_0+(2/3)\log q$. Set $Y=e^{-3(t-t_0)}$, $H=e^{-3(T-t_0)}$, and $m=q^{-2}$. After normalizing by the original total weight, the level-7 lower limit and the cap give $\mathbb E Y\ge m$. Nonnegative times give $Y\le8$, and the closed tail $t\ge T$ gives $Y\le H$. Hence $(8-Y)/(8-H)$ bounds the late-time indicator pointwise. Integrating gives
+     **Just beyond the latest cutoff that can hold all the weight.** In this unequal-energy example (`MODEL`), keep the tighter cap $A(0)\le Cq$ and the assumed log tolerances $(1,1,16)\log q$. Take $t_0=\log 2$ and consider $T\ge T_* = t_0+(2/3)\log q$. Set $Y=e^{-3(t-t_0)}$, $H=e^{-3(T-t_0)}$, and $m=q^{-2}$. The hand derivation (`ARGUED`) uses the probability measure $\mathrm{d}\mu/A(0)$ normalized by the original total weight. The level-7 lower limit gives $R_7=(A(0)/C)\mathbb E Y\ge q^{-1}$, so the cap implies $\mathbb E Y\ge m$. Nonnegative times give $Y\le8$, and the closed tail $t\ge T$ gives $Y\le H$. Hence $(8-Y)/(8-H)$ bounds the closed-tail indicator pointwise. Integrating gives
 
      $$
      \frac{\mu([T,\infty))}{A(0)}\le P(H)=\frac{8-m}{8-H}.
      $$
 
-     Equality requires using the full weight $Cq$ and placing fractions $1-P(H)$ and $P(H)$ at time zero and at the cutoff $T$, respectively. At $T=T_*$ we have $H=m$, and all the weight still sits at the cutoff.
+     Equality forces the full weight $Cq$ and the level-7 reading $q^{-1}$. Time zero and the cutoff are the two equality points of the pointwise bound. The mean $m$ fixes their fractions uniquely at $1-P(H)$ and $P(H)$, respectively. At $T=T_*$ we have $H=m$, and all the weight still sits at the cutoff.
 
-     A later cutoff lowers $H$. Keeping the level-7 mean at $m$ shifts weight to the time-zero atom, and the level-19 reading $q[P(H)H^5+(1-P(H))8^5]$ strictly rises. It is the first reading to reach a new limit, reaching $q^{16}$ at an offset $T-T_*$ strictly between $1789/10^9$ and $1790/10^9$. Throughout this interval the level-1 reading $q\,\mathbb E Y^{1/3}$ stays above $q^{-1}$ by $Y^{1/3}>9993/10000$ and below $q$ by Jensen's inequality. The two atoms therefore attain the largest fraction throughout the interval, up to and including contact with the level-19 upper limit. [Boundary equation and rational checks](https://github.com/the-omega-institute/trureturing-books/issues/2029#issuecomment-7241970068)
+     A later cutoff lowers $H$. Keeping the mean at $m$ shifts weight to the time-zero atom, and the level-19 reading $q[P(H)H^5+(1-P(H))8^5]$ rises strictly from $q^{-9}$. Let $T_1$ be the cutoff at which this reading first reaches its upper limit $q^{16}$, and set $H_1=e^{-3(T_1-t_0)}$. The rational certificate (`CERT`) gives the following bracket in dimensionless model diffusion time.
+
+     $$
+     \frac{1789}{10^9}<T_1-T_*<\frac{1790}{10^9}.
+     $$
+
+     For all $T_*\le T\le T_1$, both candidate nodes $H,8$ satisfy $Y^{1/3}>9993/10000$, so the level-1 reading $q\,\mathbb E Y^{1/3}$ stays above $q(9993/10000)>q^{-1}$. Jensen's inequality bounds it above by $q^{1/3}<q$. Level 19 is therefore the first to reach a new limit, and $P(H)$ is the attained maximum throughout this closed interval. [Boundary equation and rational checks](https://github.com/the-omega-institute/trureturing-books/issues/2029#issuecomment-7241970068)
+
+     For later cutoffs (`ARGUED`), keep the full weight $Cq$ and move the earlier atom to a positive time to maintain both the level-7 lower limit and the level-19 upper limit. For $H<H_1$, require the fifth-power chord through the nodes $H,u$ to have value $v=q^{15}$ at $m$. As $u$ increases, the chord value rises strictly from $m^5$ to the value at the time-zero node $u=8$, which exceeds the limit. This determines a unique $m<u<8$. With tail fraction $(u-m)/(u-H)$, the two atoms give $\mathbb E Y=m$ and $\mathbb E Y^5=v$. The tangent remainder at $u$, given by $D(y)=y^5-5u^4y+4u^5$, yields $\mathbf 1_{\{Y\le H\}}\le D(Y)/D(H)$, with equality only at $H,u$. The level-7 lower limit and level-19 upper limit give
+
+     $$
+     \begin{aligned}
+     \mathbb E D(Y)&\le 4u^5+\frac{Cq}{A(0)}(v-5u^4m)\\
+                   &\le 4u^5+v-5u^4m.
+     \end{aligned}
+     $$
+
+     The candidate's two nodes imply $v\le u^4m$, so the last inequality follows from the cap. As long as level 1 stays within its window, the two-atom spectrum of weight $Cq$ is the unique maximizer. Its earlier atom is at time $t_0-(\log u)/3>0$. [Tangent bound for two readings](https://github.com/the-omega-institute/trureturing-books/issues/2029#issuecomment-7239348942)
+
+     Along the curve of fixed fifth-power chord value, the concave chord value for level 1 decreases strictly as the cutoff moves later. This follows from the strict increase of $(y^{1/3})''/(y^5)''=-y^{-14/3}/90$. As $H\downarrow0$, the chord equation gives $u\to(v/m)^{1/4}$ and the level-1 reading tends to $q\,m(v/m)^{-1/6}=q^{-23/6}<q^{-1}$. There is thus a unique $T_2>T_1$ at which this spectrum gives the level-1 reading $q^{-1}$. Concavity still bounds the reading above by $q^{1/3}$, so the new two-atom spectrum attains the sharp fraction for $T_1<T\le T_2$. [Monotonicity at fixed chord value](https://github.com/the-omega-institute/trureturing-books/issues/2029#issuecomment-7239597179)
 
      **Applying the zero-energy cap and three response windows to the calibrated spectrum.** Keep the arc ratio $t_0=\theta_{804}/\theta_{12}$ as the reference time. Suppose $A(0)\le1.01C$ and each relative response $R_j=A(j)/(Ce^{-jt_0})$ lies in $[e^{-\delta},e^\delta]$, with $\delta=0.001$ and $j=a=e_1,b'=e_7,c=e_{19}$. The cap and tolerance specify the assumed precision of the model test. Beyond the cutoff that admits all the weight, the same readings still bound how much weight can lie in the tail. As the cutoff $T$ moves earlier, the largest fraction of original weight at or after the cutoff is initially set by the lower limit at level 1 and the upper limit at level 19. When level 7 falls to its lower limit, levels 7 and 19 fix the maximizing mixture and the level-1 response begins to rise. In both ranges the mixture has total weight $1.01C$, with one atom at the cutoff and the other at an earlier positive time.
 
