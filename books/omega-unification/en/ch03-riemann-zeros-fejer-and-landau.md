@@ -99,7 +99,25 @@ Unconditionally (without assuming RH):
 For part 1, the functional equation of $\zeta$ decomposes $-\zeta'(s)/\zeta(s) = \log(\frac{3}{4} + iu) + r(u)$, where digamma recurrence, Binet bounds, and the absolutely convergent series on the reflected line $\operatorname{Re}(1 - s) = \frac{5}{4}$ imply $|r(u)| \le 80$. Factoring out $x^{-1/4}$, the remainder integrates to at most $80(V - 1)$, while integrating the logarithm by parts against the antiderivative $e^{iu\log x}/(i\log x)$ using $|\frac{d}{du}\log(\frac{3}{4} + iu)| \le 1/u$ yields $\frac{20(1 + \log V)}{\log x}$. For part 2, integrating the von Mangoldt Dirichlet series term by term on $\operatorname{Re} s = c > 1$, the integer nearest to $x$ is bounded by the interval length (with $\Lambda(1) = 0$ if nearest to $1$), remaining integers in $[x/2, 2x]$ obey $|\log x - \log n| \ge |x - n|/(2x)$ and sum to two harmonic tails, integers outside $[x/2, 2x]$ satisfy $|\log x - \log n| \ge 1/2$, and $x^c \le 3x$ closes the estimate. The full proof is checked by the Lean kernel.
 :::
 
-The [Weyl average in §2.3](ch02-quaternion-clocks-and-haar-zeros.md#sec-ou-2-3) uses the zero sum at a fixed nonzero angular frequency $\lambda$. Write $S_\lambda(T)=\sum_{0<\gamma\le T}e^{i\lambda\gamma}$, counting analytic multiplicity and including the upper endpoint. Suppose $\Lambda(e^{|\lambda|})=0$, where $\Lambda$ is the von Mangoldt function. Under RH, as $T\to\infty$ through all real heights, a direct derivation gives (`ARGUED`)
+The [Weyl average in §2.3](ch02-quaternion-clocks-and-haar-zeros.md#sec-ou-2-3) uses the zero sum at a fixed nonzero angular frequency $\lambda$. Write $S_\lambda(T)=\sum_{0<\gamma\le T}e^{i\lambda\gamma}$, counting analytic multiplicity and including the upper endpoint.
+
+To see how the count affects the phase sum, let $N(t)$ count the zeros with the same endpoint convention and set $L(t)=\frac{t}{2\pi}(\log\frac{t}{2\pi}-1)+\frac78$ and $Q(t)=N(t)-L(t)$. The Riemann–von Mangoldt formula gives $Q(t)=S(t+0)+O(1/t)$, where $S(t+0)$ is the right limit of its argument term. Littlewood's integral bound gives $\int_1^T Q(t)\,dt=O(\log T)$. [Brent, Platt, and Trudgian, *Accurate Estimation of Sums over Zeros of the Riemann Zeta-Function* (2021), §2, Lemma 2 and Eq. (12)](https://doi.org/10.1090/mcom/3652)
+
+Integrating $dN=dL+dQ$ by parts separates the endpoint from the contribution accumulated at frequency $\lambda$ (direct derivation, `ARGUED`).
+
+$$
+\begin{aligned}
+S_\lambda(T)-\frac{e^{i\lambda T}}{2\pi i\lambda}\log\frac{T}{2\pi}
+  &=e^{i\lambda T}Q(T)-i\lambda\int_1^T e^{i\lambda t}Q(t)\,dt\\
+  &\quad+O_\lambda(1).
+\end{aligned}
+$$
+
+Suppose the left side is $o_\lambda(\log T)$ at all real heights. Subtracting the cutoffs at $T$ and $T+u$ and undoing the phase by partial summation yields $Q(T+u)=Q(T)+o_{\lambda,H}(\log T)$ uniformly for $0\le u\le H$, for each fixed $H$. The integral bound controls the average over $[T,T+H]$. Letting $H$ grow after taking the limit in $T$ gives $Q(T)=o(\log T)$. The endpoint asymptotic thus holds exactly when both $Q(T)$ and $\int_1^T e^{i\lambda t}Q(t)\,dt$ are $o(\log T)$.
+
+A synthetic spectrum at $\lambda=1$ shows the limit of the unmodulated integral bound. For $t\ge32$, give the spectrum the count $\lfloor L(t)+1/2+\cos(t)/(10t)\rfloor$. The zero-mean sawtooth from rounding has bounded integrals against both $1$ and $e^{it}$ because the phase derivatives of its nonzero harmonics are monotone and bounded away from zero. The remaining term $\cos(t)/(10t)$ has a bounded unmodulated integral and contributes $\frac1{20}\log T+O(1)$ against $e^{it}$. This example uses only the counting inputs. For the actual $\zeta$ zeros, the integral with the phase still needs control.
+
+Suppose $\Lambda(e^{|\lambda|})=0$, where $\Lambda$ is the von Mangoldt function. Under RH, as $T\to\infty$ through all real heights, a direct derivation gives (`ARGUED`)
 
 $$
 S_\lambda(T)=\frac{e^{i\lambda T}}{2\pi i\lambda}\log\frac{T}{2\pi}
@@ -150,6 +168,20 @@ The classical Landau formula gives $W_\lambda(T)=O_\lambda(\log T)$ here. An upp
 
 A synthetic spectrum attains the $T/\log T$ scale under these inputs (`ARGUED`). Take $\lambda=1$ and shift the equally spaced ordinates slightly within each $2\pi$ period so that the unweighted phase sum is biased toward the negative real axis. Place each pair at the same ordinate with reflected real parts, choosing displacements of size $O(1/\log T)$ that depend on phase so the weighted sum follows the exact increment of the smooth endpoint term over each period. This spectrum has bounded count remainder, satisfies a Selberg-type density bound, and its weighted sum follows the endpoint term with $O(1)$ error at every height, while $C_1(T)\sim T/(4\pi\log T)$. A sharper bound for the actual zeta zeros requires additional information. [Construction and numerical check](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239117179)
 
+A horizontal integral locates the part of the strip where phase cancellation matters. Write $L=\log T$ and $c=1/2+a$ with $0\le a\le 1/2$. Approximate $J_c(t)=\int_c^\infty\log|\zeta(\sigma+it)|\,d\sigma$ by the prime-power polynomial $P_{x,c}(t)=\operatorname{Re}\sum_{2\le n\le x^3}\Lambda_x(n)n^{-c-it}/(\log n)^2$, where $\Lambda_x$ is Selberg's quadratic cutoff weight. For fixed nonresonant $\lambda$, a direct calculation for large $T$ and $2\le x\le L^{2/3}$ gives the remainder (`ARGUED`).
+
+$$
+\int_3^T e^{i\lambda t}\bigl(J_c(t)-P_{x,c}(t)\bigr)\,dt
+=\frac{2\pi}{\lambda^2}
+  \sum_{\substack{3<\gamma\le T\\ \beta>c}}
+  \bigl(\cosh(\lambda(\beta-c))-1\bigr)e^{i\lambda\gamma}
+  +O_\lambda(L).
+$$
+
+Horizontal integration makes the jump of $\log\zeta$ along the slit to the left of a zero proportional to $\beta-\sigma$. Shifting the contour for each of the two exponential phases and combining them to recover the real part gives the hyperbolic cosine weight. A local logarithmic derivative estimate bounds the horizontal edges by $O_\lambda(L)$. The top edge is taken by a right limit. Nonresonance keeps the modulated integral of the prime-power polynomial within the same bound. [Korolev, cutoff weights before Lemma 4](https://www.mathnet.ru/links/2bb06e5a975dd807fe74eae4c1f9fd1f/im2766_eng.pdf#page=9) · [Contour calculation and numerical check](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239342305)
+
+At $a=0$, reflection at the same ordinate recovers $C_\lambda(T)$ from the zero sum up to normalization and a bounded contribution from the lowest heights. Increasing $a$ replaces the weight of each zero on the right by $\cosh(\lambda(\delta_\rho-a)_+)-1$, where $v_+=\max(v,0)$. Integrating the derivative of that weight against Selberg's density estimate bounds the remainder on the right by $O_\lambda((T/L)e^{-aL/4}+L)$. Setting $a=1/L$ reduces the constant in the density estimate, and a synthetic spectrum can attain order $T/L$ in both the narrow strip and the region farther right. At $a=8\log L/L$, the bound on the right drops to $O_\lambda(T/L^3+L)$. To improve on the $T/L$ scale, it therefore suffices to study the same-frequency integral in the strip $1/2\le\sigma\le1/2+8\log L/L$. [Simonič, equation (3), citing Selberg's density estimate](https://arxiv.org/pdf/1910.08274v2#page=1)
+
 For the actual zeta zeros, retaining the real-part weights recovers the endpoint term on average over heights without using RH. Let $S(t)$ be the argument term in the Riemann–von Mangoldt formula. Away from zero ordinates, $N(t)=1+\vartheta(t)/\pi+S(t)$, with $\vartheta$ the Riemann–Siegel theta function. Subtract the smooth endpoint term from the weighted sum
 
 $$
@@ -178,7 +210,18 @@ $$
 
 Reflection at each ordinate turns the left side into twice a weighted count to the right of the critical line, with weight $g(x)=\cosh(\lambda x)-1$ for $x=\beta-1/2>0$. Extend $g$ by zero for $x\le0$. Both $g$ and $g'$ vanish at zero, so the critical line contributes no boundary distribution. Test the distributional Laplacian of $\log|\zeta|$ against $e^{i\lambda t}g(x)$. The bulk coefficient follows from $g''-\lambda^2g=\lambda^2$ for $x>0$. At the right edge $\sigma=2$, both the boundary term and the tail of $J$ for $\sigma\ge2$ have absolutely convergent Euler series. Nonresonance bounds their phase integrals uniformly. The local estimate for the logarithmic derivative bounds the horizontal boundary terms by $O_\lambda(\log T)$. Taking the right-hand limit in height includes the full multiplicities at that height. [Titchmarsh, *The Theory of the Riemann Zeta-Function*, second edition, §9.6(A)](https://sites.math.rutgers.edu/~zeilberg/EM18/TitchmarshZeta.pdf) · [Boundary calculation](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239241148)
 
-The Cauchy–Riemann equations give $J(t)/\pi=S_1(t)+\mathrm{const}$. Bounding the weight correction by $O_\lambda(\log T)$ is therefore equivalent to bounding $\int_3^T e^{i\lambda t}S_1(t)\,dt$ on that scale. This requires phase cancellation across the height interval. The collision estimate in the next section also needs control across a frequency band that grows with height.
+The Cauchy–Riemann equations give $J(t)/\pi=S_1(t)+\mathrm{const}$. Bounding the weight correction by $O_\lambda(\log T)$ is therefore equivalent to bounding $\int_3^T e^{i\lambda t}S_1(t)\,dt$ on that scale. This requires cancellation across the height interval.
+
+Averaging over a fixed compact frequency interval $I\subset\mathbb R$ gives a quantitative bound on this cancellation. For $U\ge3$, a hand derivation (`ARGUED`) yields
+
+$$
+\int_I\max_{0\le T\le U}|C_\lambda(T)|^2\,d\lambda
+\ll_I \frac{U}{(\log U)^2}.
+$$
+
+Group the ordinates into unit intervals and let $B_j$ be the sum of $\delta_\rho^2$ in group $j$. Each group contains $O(\log U)$ zeros. Integrating Selberg's density estimate gives $\sum_{\gamma\le U}\delta_\rho^4\ll U/(\log U)^3$, so $\sum_j B_j^2\ll U/(\log U)^2$. Expanding the phase within each group and the hyperbolic cosine weight in power series gives Fourier polynomials with the group index as the integer frequency and coefficients bounded by $B_j$ times summable factors. The Carleson–Hunt maximal inequality bounds all partial sums over complete groups. The group containing the cutoff is bounded by its own mass and includes any ordinates at the upper endpoint. [Simonič, Eqs. (1) and (3)](https://arxiv.org/pdf/1910.08274v2#page=1) · [Oberlin et al., Theorem 1.1](https://arxiv.org/pdf/0910.1555#page=2) · [Derivation and numerical check](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239462563)
+
+The frequencies in $I$ for which the modulus of the correction exceeds $A>0$ at some $T\le U$ therefore form a set of measure $O_I(U/(A^2(\log U)^2))$. Applying Borel–Cantelli at dyadic heights gives $C_\lambda(T)=O_{\lambda,\varepsilon}(\sqrt T/(\log T)^{1/2-\varepsilon})$ for each $\varepsilon>0$ and almost every $\lambda$, along all real heights. The prescribed shell modes form a countable set and still require estimates at individual frequencies. The collision estimate in the next section also needs control across a frequency band that grows with height.
 
 ## 3.3 Periodic Phase Deficits, Landau Window Transfer, and the $1/\sqrt{\pi}$ Collision Limit {#sec-ou-3-3}
 

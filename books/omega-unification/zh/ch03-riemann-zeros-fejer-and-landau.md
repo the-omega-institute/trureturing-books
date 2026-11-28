@@ -99,7 +99,25 @@ $$
 在第一款中，借助 $\zeta$ 函数的函数方程将 $-\zeta'(s)/\zeta(s)$ 拆成 $\log(\frac{3}{4} + iu) + r(u)$；由双伽马递推、Binet 估计与反射直线 $\operatorname{Re}(1 - s) = \frac{5}{4}$ 上的绝对收敛级数可得一致界 $|r(u)| \le 80$。提出 $x^{-1/4}$ 后，余项积分至多为 $80(V - 1)$，而对数项用原函数 $e^{iu\log x}/(i\log x)$ 分部积分并利用 $|\frac{d}{du}\log(\frac{3}{4} + iu)| \le 1/u$ 给出 $\frac{20(1+\log V)}{\log x}$。在第二款中，在绝对收敛半平面 $\operatorname{Re} s = c > 1$ 逐项积分冯·曼戈尔特级数：最接近 $x$ 的整数项由区间长度控制（$n = 1$ 时 $\Lambda(1) = 0$）；$[x/2, 2x]$ 内其余整数以 $|\log x - \log n| \ge |x - n|/(2x)$ 化为两段调和和；区间外则 $|\log x - \log n| \ge 1/2$ 由积分判别控制，最后代入 $x^c \le 3x$ 即得统一界。完整证明由 Lean 内核检查。
 :::
 
-[§2.3 的外尔平均](ch02-quaternion-clocks-and-haar-zeros.md#sec-ou-2-3)用到固定非零弧度频率 $\lambda$ 的零点和。令 $S_\lambda(T)=\sum_{0<\gamma\le T}e^{i\lambda\gamma}$，按解析重数计并纳入上端点。设冯·曼戈尔特函数满足 $\Lambda(e^{|\lambda|})=0$。在 RH 下，沿全部实数高度 $T\to\infty$ 有（手工推导，`ARGUED`）
+[§2.3 的外尔平均](ch02-quaternion-clocks-and-haar-zeros.md#sec-ou-2-3)用到固定非零弧度频率 $\lambda$ 的零点和。令 $S_\lambda(T)=\sum_{0<\gamma\le T}e^{i\lambda\gamma}$，按解析重数计并纳入上端点。
+
+先看计数误差如何进入这项相位读数。记 $N(t)$ 为同一右闭截断下的零点数，$L(t)=\frac{t}{2\pi}(\log\frac{t}{2\pi}-1)+\frac78$，$Q(t)=N(t)-L(t)$。黎曼–冯·曼戈尔特公式给出 $Q(t)=S(t+0)+O(1/t)$，其中 $S(t+0)$ 是计数公式中辐角项的右极限。Littlewood 的积分界给出 $\int_1^T Q(t)\,dt=O(\log T)$。[Brent、Platt 与 Trudgian，*Accurate Estimation of Sums over Zeros of the Riemann Zeta-Function*（2021），§2，引理 2 与式 (12)](https://doi.org/10.1090/mcom/3652)
+
+对 $dN=dL+dQ$ 分部积分，将误差拆成端点读数与频率累积（手工推导，`ARGUED`）。
+
+$$
+\begin{aligned}
+S_\lambda(T)-\frac{e^{i\lambda T}}{2\pi i\lambda}\log\frac{T}{2\pi}
+  &=e^{i\lambda T}Q(T)-i\lambda\int_1^T e^{i\lambda t}Q(t)\,dt\\
+  &\quad+O_\lambda(1).
+\end{aligned}
+$$
+
+若左侧沿全部实数高度为 $o_\lambda(\log T)$，则在任意固定长度 $H$ 内，可以对相邻硬窗作差，再乘反相位分部求和，得到 $Q(T+u)=Q(T)+o_{\lambda,H}(\log T)$，对 $0\le u\le H$ 一致。用上面的积分界取 $[T,T+H]$ 的平均，再令 $H$ 趋于无穷，便有 $Q(T)=o(\log T)$。因此端点渐近式要求且只要求 $Q(T)$ 和 $\int_1^T e^{i\lambda t}Q(t)\,dt$ 都是 $o(\log T)$。
+
+取 $\lambda=1$ 可看出为何普通积分界不够。在合成谱中，令 $t\ge32$ 时的计数为 $\lfloor L(t)+1/2+\cos(t)/(10t)\rfloor$。取整产生的零均值锯齿在相位 $1$ 和 $e^{it}$ 下积分都有界，因为其各非零谐波的相位导数单调且远离零。剩下的 $\cos(t)/(10t)$ 使普通积分有界，却在乘上 $e^{it}$ 后留下 $\frac1{20}\log T+O(1)$。这个例子刻画的是仅靠计数输入的边界。对实际 $\zeta$ 零点，仍需控制带相位的积分。
+
+设冯·曼戈尔特函数满足 $\Lambda(e^{|\lambda|})=0$。在 RH 下，沿全部实数高度 $T\to\infty$ 有（手工推导，`ARGUED`）
 
 $$
 S_\lambda(T)=\frac{e^{i\lambda T}}{2\pi i\lambda}\log\frac{T}{2\pi}
@@ -150,6 +168,20 @@ $$
 
 对这些输入，$T/\log T$ 的尺度可以达到（合成谱，`ARGUED`）。取 $\lambda=1$，在每个 $2\pi$ 周期里轻推等间距的纵坐标，使未加权的相位和偏向负实轴。点仍按同高镜像成对放置，实部偏移取 $O(1/\log T)$，并随相位调整，让带权和在周期端点恰好跟随光滑端点项的增量。该谱的计数余项有界，满足 Selberg 型密度界，带权和在所有高度以 $O(1)$ 的误差跟随端点项，而 $C_1(T)\sim T/(4\pi\log T)$。对实际 $\zeta$，收紧差项仍需超出这些输入的估计。[构造与复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239117179)
 
+对实际 $\zeta$，可以用横向积分把需要相消的部分定位到临界线附近。令 $L=\log T$、$c=1/2+a$，其中 $0\le a\le 1/2$。把 $J_c(t)=\int_c^\infty\log|\zeta(\sigma+it)|\,d\sigma$ 用素幂多项式 $P_{x,c}(t)=\operatorname{Re}\sum_{2\le n\le x^3}\Lambda_x(n)n^{-c-it}/(\log n)^2$ 近似，$\Lambda_x$ 为 Selberg 的二次截断权。固定非共振 $\lambda$，对充分大的 $T$，当 $2\le x$ 且 $x^3\le L^2$ 时，余项有以下手工推导（`ARGUED`）。
+
+$$
+\int_3^T e^{i\lambda t}\bigl(J_c(t)-P_{x,c}(t)\bigr)\,dt
+=\frac{2\pi}{\lambda^2}
+  \sum_{\substack{3<\gamma\le T\\ \beta>c}}
+  \bigl(\cosh(\lambda(\beta-c))-1\bigr)e^{i\lambda\gamma}
+  +O_\lambda(L).
+$$
+
+横向积分把 $\log\zeta$ 在零点左侧的割线跳跃变为与 $\beta-\sigma$ 成正比。分别移过两种指数相位，再取实部对应的半和，割线就给出上式的双曲余弦权重。水平边界由局部对数导数控制在 $O_\lambda(L)$，上界取右极限。非共振使素幂多项式的相位积分也在这一预算内。[Korolev，引理 4 前的截断权](https://www.mathnet.ru/links/2bb06e5a975dd807fe74eae4c1f9fd1f/im2766_eng.pdf#page=9) · [割线推导与复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239342305)
+
+在 $a=0$ 时，零点和经同高反射还原 $C_\lambda(T)$，只差归一化系数和有界的低高度项。增大 $a$ 会把每个右侧零点的权重改成 $\cosh(\lambda(\delta_\rho-a)_+)-1$，其中 $v_+=\max(v,0)$。将该权重的导数与 Selberg 密度界配对，右侧余项至多为 $O_\lambda((T/L)e^{-aL/4}+L)$。取 $a=1/L$ 只降低密度估计中的常数，合成谱上窄带与右侧余项均可达到 $T/L$ 量级。取 $a=8\log L/L$ 时，右侧上界降到 $O_\lambda(T/L^3+L)$。因此若要在 $T/L$ 尺度上取得严格改善，只需研究横向窄带 $1/2\le\sigma\le1/2+8\log L/L$ 内的同频积分。[Simonič，式 (3)，引 Selberg 密度界](https://arxiv.org/pdf/1910.08274v2#page=1)
+
 对实际 $\zeta$ 零点，保留实部权重时，无须用 RH 作为解析输入也可在高度平均下读出端点项。令 $S(t)$ 为黎曼–冯·曼戈尔特公式中的辐角项，即离开零点高度时 $N(t)=1+\vartheta(t)/\pi+S(t)$，其中 $\vartheta$ 是黎曼–西格尔 $\vartheta$ 函数。从带权和中扣除光滑端点项
 
 $$
@@ -178,7 +210,18 @@ $$
 
 同高反射把左侧化为临界线右边的两倍加权计数，单点权重为 $g(x)=\cosh(\lambda x)-1$，其中 $x=\beta-1/2>0$。把 $g$ 在 $x\le0$ 延拓为零，由 $g(0)=g'(0)=0$ 可知临界线上没有分布边界项。对 $\log|\zeta|$ 的分布拉普拉斯用 $e^{i\lambda t}g(x)$ 检验，体积分的系数由 $g''-\lambda^2g=\lambda^2$ 给出。取右边界 $\sigma=2$，其边界项与 $J$ 在 $\sigma\ge2$ 的尾部均可用绝对收敛的欧拉级数积分，非共振使相位积分一致有界。两条水平边界由局部对数导数估计控制在 $O_\lambda(\log T)$，上边界取右极限，纳入该高度的全部重数。[Titchmarsh，《黎曼 ζ 函数理论》第二版，§9.6(A)](https://sites.math.rutgers.edu/~zeilberg/EM18/TitchmarshZeta.pdf) · [边界项推导](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239241148)
 
-由柯西–黎曼方程，$J(t)/\pi$ 与 $S_1(t)$ 相差常数。把实部权重的差压到 $O_\lambda(\log T)$，等价于在同一频率下把 $\int_3^T e^{i\lambda t}S_1(t)\,dt$ 控制到这一阶。这里用到的是高度区间内的相位抵消，前面的均方结论给出的是高度平均信息。下一节的碰撞估计还需要在随高度增长的频带内控制零点和。
+由柯西–黎曼方程，$J(t)/\pi$ 与 $S_1(t)$ 相差常数。把实部权重的差压到 $O_\lambda(\log T)$，等价于在同一频率下把 $\int_3^T e^{i\lambda t}S_1(t)\,dt$ 控制到这一阶。这一步需要在高度区间内累积相位抵消。
+
+若在一个固定紧频带 $I\subset\mathbb R$ 内平均，可用密度界定量控制这种抵消。对 $U\ge3$，由手工推导（`ARGUED`）得到
+
+$$
+\int_I\max_{0\le T\le U}|C_\lambda(T)|^2\,d\lambda
+\ll_I \frac{U}{(\log U)^2}.
+$$
+
+将纵坐标按单位高度分组，设第 $j$ 组的质量 $B_j$ 为该组内各零点的 $\delta_\rho^2$ 之和。每组有 $O(\log U)$ 枚零点，Selberg 密度界经分层积分给出 $\sum_{\gamma\le U}\delta_\rho^4\ll U/(\log U)^3$，故 $\sum_j B_j^2\ll U/(\log U)^2$。对组内的相位小数部分和双曲余弦权作幂级数展开，得到一族以组号为整数频率的 Fourier 多项式，各项的系数至多为 $B_j$ 乘可求和的因子。Carleson–Hunt 最大不等式控制所有完整分组的部分和，含截断高度的最后一组由自身质量控制，纳入等于上端点的纵坐标。[Simonič，式 (1)、(3)](https://arxiv.org/pdf/1910.08274v2#page=1) · [Oberlin 等，定理 1.1](https://arxiv.org/pdf/0910.1555#page=2) · [推导与复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239462563)
+
+因此，在 $I$ 中存在某个 $T\le U$ 使差项的模超过 $A>0$ 的频率集合，测度至多为 $O_I(U/(A^2(\log U)^2))$。对二进高度应用 Borel–Cantelli 引理，就有 $C_\lambda(T)=O_{\lambda,\varepsilon}(\sqrt T/(\log T)^{1/2-\varepsilon})$，其中 $\varepsilon>0$ 任取，结论对几乎处处的 $\lambda$ 沿所有实数高度成立。球壳的指定模态构成可数集，仍需逐频率的算术估计。下一节的碰撞估计还需要在随高度增长的频带内控制零点和。
 
 ## 3.3 周期相位亏损、兰道窗转移与高斯碰撞极限 $1/\sqrt{\pi}$ {#sec-ou-3-3}
 

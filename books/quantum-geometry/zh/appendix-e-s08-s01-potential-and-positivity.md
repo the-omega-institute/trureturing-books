@@ -955,3 +955,5 @@ $$
 对于半比较，返回相位刻画了另一种三点效应。见[曲率从哪里来](appendix-e-s08-s01-s04-curvature.md#sec-appe-curvature-from-half-comparison)。
 
 本节的弦图 Banach 精确分层、实 $L_1$、Hilbert、因果三树与线性填补结果见[附录 E.8.1.8](appendix-e-s08-s01-s08-chordal-banach-exact-strata.md#sec-appe-chordal-banach-exact-strata)。
+
+内积空间与实 $L_1$ 的系数次序反转、路径幂的圆周系数以及 $\mathrm{SU}(2)$ 切空间下界和球冠上界见[附录 E.8.1.9](appendix-e-s08-s01-s09-hilbert-reversal-circle-su2.md#sec-appe-hilbert-reversal-circle-su2)。
