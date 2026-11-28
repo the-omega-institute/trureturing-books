@@ -221,7 +221,7 @@ $$
 0.0283138<D_H<0.0283806.
 $$
 
-This benchmark uses the full spectrum without phase filtering. A numerical bound for the Chapter 2 Haar acceptance region requires an explicit value of $b_H$ for that window. [Hasanalizade, Shen, and Wong, Counting zeros of the Riemann zeta function (2022), Corollary 1.2](https://doi.org/10.1016/j.jnt.2021.06.032)
+This benchmark uses the full spectrum without phase filtering. For the fixed Haar window of Chapter 2, [Appendix C](appendix-c.md) gives $b_H=10^9$ under RH, valid for $H\ge1$. With this constant, $L_H>3b_H/c$ requires a much larger starting height than the whole-spectrum example $H=10^6$. [Hasanalizade, Shen, and Wong, Counting zeros of the Riemann zeta function (2022), Corollary 1.2](https://doi.org/10.1016/j.jnt.2021.06.032)
 :::
 
 **A linear counting remainder for the fixed Haar window under RH (`ARGUED`).** Count positive zeros with multiplicity. For the four-phase window of Chapter 2, $A_W(T)=c\,m(T)+O(T)$. Write $F$ for the acceptance threshold on the torus. The boundary of $W$ lies in the seam $u=0$ and the graph $u=F$. The function $F$ is Lipschitz, so the $\eta$-neighborhood of the boundary has volume $O(\eta)$. Set $K=\lfloor\log T/12000\rfloor$. The periodic trigonometric approximation of Colzani, Gigante, and Travaglini gives $P_K^-\le\mathbf1_W\le P_K^+$ with frequency support $\|k\|_\infty\le K$. The pointwise error decays rapidly in $K\,\operatorname{dist}(x,\partial W)$, giving an $L^1$ error of $O(K^{-1})$ and an $L^2$ error of $O(K^{-1/2})$ for each polynomial. For $M\ge2$, apply the same approximation with degree less than $M$ to the Fourier tail of $\mathbf1_W$. Parseval's identity then gives an $\ell^2$ coefficient norm of $O(M^{-1/2})$ for either $P=P_K^\pm$ on each dyadic shell $M\le\|k\|_\infty<2M$ with $M\le K$. For $M=1$ use $\|P\|_2=O(1)$. [Periodic approximation, Corollary 7](https://arxiv.org/abs/1001.0948)
@@ -232,7 +232,7 @@ $$
 |\lambda_k|\ge |e^{i\lambda_k}-1|\ge 2^{-31}1734^{-192\|k\|_\infty}.
 $$
 
-Apply this to differences of modes. Distinct real frequencies in the cube $\|k\|_\infty\le K$ have spacing greater than $2T^{-1/3}$ for sufficiently large $T$. By conjugation it suffices to take $\lambda_k>0$. Under RH the uniform Landau formula at $x=e^{\lambda_k}$, divided by $\sqrt{x}$, gives the phase sum. For the nearest prime power $n$ to $x$ and the von Mangoldt function $\Lambda$, the main term is bounded by a constant times $\Lambda(n)e^{-\lambda_k/2}\min(T,2/|\lambda_k-\log n|)$, using $T$ at equality. The terms at distance at least $T^{-1/3}$ from the logarithm of their nearest prime power are $O(T^{1/3})$. The remaining errors are $O\bigl(\sqrt{x}\log^2(Tx)+\log T/(\sqrt{x}\lambda_k)\bigr)$. There are $O(K^4)$ modes and $\|P\|_2=O(1)$, so the errors and the main terms away from the prime powers sum to $o(T)$ after weighting by the Fourier coefficients. [Uniform Landau formula, equation (1.6)](https://arxiv.org/abs/0805.2745)
+Apply this to differences of modes. Distinct real frequencies in the cube $\|k\|_\infty\le K$ have spacing greater than $2T^{-1/3}$ for sufficiently large $T$. By conjugation it suffices to take $\lambda_k>0$. Under RH the uniform Landau formula at $x=e^{\lambda_k}$, divided by $\sqrt{x}$, gives the phase sum. For the nearest prime power $n$ to $x$ and the von Mangoldt function $\Lambda$, the main term is bounded by a constant times $\Lambda(n)e^{-\lambda_k/2}\min(T,2/|\lambda_k-\log n|)$, using $T$ at equality. Comparison with a nearby power of two gives $n\le2x$. Thus $\Lambda(n)e^{-\lambda_k/2}\le\log(2x)/\sqrt{x}=O(1)$, and the terms at distance at least $T^{-1/3}$ from the logarithm of their nearest prime power are $O(T^{1/3})$. The remaining errors are $O\bigl(\sqrt{x}\log^2(Tx)+\log T/(\sqrt{x}\lambda_k)\bigr)$. There are $O(K^4)$ modes and $\|P\|_2=O(1)$, so the errors and the main terms away from the prime powers sum to $o(T)$ after weighting by the Fourier coefficients. [Uniform Landau formula, Lemma 1](https://arxiv.org/abs/math/0405459) · [Equation (1.6)](https://arxiv.org/abs/0805.2745)
 
 Among modes within $T^{-1/3}$ of the logarithm of their nearest prime power, each prime power matches at most one positive frequency. Fix a dyadic shell $M$ and an interval $j\le\lambda_k<j+1$. The group has at most $O(\min(e^j,M^4))$ terms. Each main term divided by $T$ is $O((j+1)e^{-j/2})$. By Cauchy–Schwarz, the group's weighted contribution divided by $T$ is
 
@@ -259,14 +259,14 @@ $$
 Partial summation gives an error $O((\log x)^{1/3}/x)$ in $S_W(x)$. On normalizing, $s(\log(H/s))^{1/3}=O((\log H)^{1/3})$ uniformly for $0<s\le1$. Thus $D_H=O((\log H)^{-2/3})$. [Zero-density bound, Eq. (3)](https://arxiv.org/abs/1910.08274v2) · [Polynomial transfer and tail normalization](https://github.com/the-omega-institute/trureturing-books/issues/1637#issuecomment-7233169018)
 
 ::: {.problem #prob-ou-ch12-windowed-haar-rate title="Explicit Remainders for a Fixed Haar Phase Window"}
-Let $W$ be the fixed Haar acceptance region in Chapter 2, whose boundary has Haar measure zero. Set $c=\mu(W)/(2\pi)$ for normalized Haar measure $\mu$. For a prescribed starting height $H$, compute a checkable constant $b_H$ such that, with $m(t)$ as above,
+Let $W$ be the fixed Haar acceptance region in Chapter 2, whose boundary has Haar measure zero. Set $c=\mu(W)/(2\pi)$ for normalized Haar measure $\mu$. Determine which starting heights $H\ge2\pi$ admit a checkable constant $b_H$ satisfying $3b_H/c<L_H$ and, with $m(t)$ as above,
 
 $$
 |A_W(t)-c\,m(t)|\le b_Ht
 \qquad\text{for all }t\ge H
 $$
 
-and substitute it into the finite-height error formula for shared-clock readings. Can the same order of remainder be proved without invoking RH?
+For those heights, give such a constant and substitute it into the shared-clock error formula. If $0\le\log(H/(2\pi))\le1/2$, taking $t=H$ and using $A_W(H)\ge0$ gives $3b_H/c\ge3(1-\log(H/(2\pi)))\ge L_H$. Can the same order of remainder be proved without invoking RH?
 :::
 
 **Limits of fixed-mode convergence (`ARGUED`).** Two constructed height sequences separate the counting assumptions for this acceptance region. Begin with the integer quantiles of the unfiltered main term. Integrating the centered counting error on each quantile interval gives $O(T/\log T)$ for each fixed nonzero Fourier mode. Then choose a small smooth patch of the acceptance boundary transverse to the phase flow. Continuous torus equidistribution gives a number of crossings proportional to the length of each sufficiently large dyadic height interval. At each crossing, use a strictly increasing local time change to move heights from a short interval just outside the region into it. The displacements and interval lengths are of order $(\log T)^{-3/4}$.

@@ -221,7 +221,7 @@ $$
 0.0283138<D_H<0.0283806.
 $$
 
-这是未作相位筛选的全谱基准。第 2 章的哈尔接受区域要给出同类数值界，还须明确算出相应的 $b_H$。[Hasanalizade、Shen 与 Wong，《Counting zeros of the Riemann zeta function》（2022），推论 1.2](https://doi.org/10.1016/j.jnt.2021.06.032)
+这是未作相位筛选的全谱基准。对第 2 章的固定哈尔窗，[附录 C](appendix-c.md) 在黎曼假设下给出 $b_H=10^9$，对 $H\ge1$ 有效。该常数只在很高的起始高度满足 $L_H>3b_H/c$，而全谱基准适用于这里的 $H=10^6$。[Hasanalizade、Shen 与 Wong，《Counting zeros of the Riemann zeta function》（2022），推论 1.2](https://doi.org/10.1016/j.jnt.2021.06.032)
 :::
 
 **黎曼假设下的固定哈尔窗余项（`ARGUED`）。** 对第 2 章的四相位窗口，按重数计正零点，有 $A_W(T)=c\,m(T)+O(T)$。将环面上的接受阈值记为 $F$，则 $\partial W$ 只可能落在 $u=0$ 的接缝和 $u=F$ 的图面上。$F$ 是 Lipschitz 函数，故厚度 $\eta$ 的边界邻域测度为 $O(\eta)$。取 $K=\lfloor\log T/12000\rfloor$。Colzani、Gigante 与 Travaglini 的周期三角多项式逼近给出 $P_K^-\le\mathbf1_W\le P_K^+$，频率满足 $\|k\|_\infty\le K$。逐点误差随 $K\,\operatorname{dist}(x,\partial W)$ 快速衰减，所以每个多项式与 $\mathbf1_W$ 的 $L^1$ 误差为 $O(K^{-1})$，$L^2$ 误差为 $O(K^{-1/2})$。当 $M\ge2$ 时，用次数小于 $M$ 的同类逼近控制 $\mathbf1_W$ 的 Fourier 尾部，再用 Parseval 恒等式，可知任一 $P=P_K^\pm$ 在每个二倍频层 $M\le\|k\|_\infty<2M$（$1\le M\le K$）上的系数 $\ell^2$ 范数为 $O(M^{-1/2})$。$M=1$ 时直接用 $\|P\|_2=O(1)$。[周期逼近，推论 7](https://arxiv.org/abs/1001.0948)
@@ -232,7 +232,7 @@ $$
 |\lambda_k|\ge |e^{i\lambda_k}-1|\ge 2^{-31}1734^{-192\|k\|_\infty}.
 $$
 
-对两个模态之差应用此界可知，当 $T$ 足够大时，盒 $\|k\|_\infty\le K$ 内不同实频率的间距大于 $2T^{-1/3}$。由共轭性，只需取 $\lambda_k>0$。在黎曼假设下，以 $x=e^{\lambda_k}$ 代入均匀 Landau 公式并除以 $\sqrt{x}$，得到相位和。若 $n$ 是离 $x$ 最近的素数幂，$\Lambda$ 为冯·曼戈尔特函数，则主项绝对值至多为常数倍的 $\Lambda(n)e^{-\lambda_k/2}\min(T,2/|\lambda_k-\log n|)$，精确相等时取 $T$。远离对数素数幂至少 $T^{-1/3}$ 的主项都是 $O(T^{1/3})$。其余误差项为 $O\bigl(\sqrt{x}\log^2(Tx)+\log T/(\sqrt{x}\lambda_k)\bigr)$。频率数为 $O(K^4)$ 且 $\|P\|_2=O(1)$，因此这些误差与远离素数幂的主项经 Fourier 系数加权后合计为 $o(T)$。[均匀 Landau 公式，式 (1.6)](https://arxiv.org/abs/0805.2745)
+对两个模态之差应用此界可知，当 $T$ 足够大时，盒 $\|k\|_\infty\le K$ 内不同实频率的间距大于 $2T^{-1/3}$。由共轭性，只需取 $\lambda_k>0$。在黎曼假设下，以 $x=e^{\lambda_k}$ 代入均匀 Landau 公式并除以 $\sqrt{x}$，得到相位和。若 $n$ 是离 $x$ 最近的素数幂，$\Lambda$ 为冯·曼戈尔特函数，则主项绝对值至多为常数倍的 $\Lambda(n)e^{-\lambda_k/2}\min(T,2/|\lambda_k-\log n|)$，精确相等时取 $T$。最近的素数幂满足 $n\le2x$，只需与邻近的二次幂比较。因此 $\Lambda(n)e^{-\lambda_k/2}\le\log(2x)/\sqrt{x}=O(1)$，远离对数素数幂至少 $T^{-1/3}$ 的主项都是 $O(T^{1/3})$。其余误差项为 $O\bigl(\sqrt{x}\log^2(Tx)+\log T/(\sqrt{x}\lambda_k)\bigr)$。频率数为 $O(K^4)$ 且 $\|P\|_2=O(1)$，因此这些误差与远离素数幂的主项经 Fourier 系数加权后合计为 $o(T)$。[均匀 Landau 公式，原始引理 1](https://arxiv.org/abs/math/0405459) · [式 (1.6)](https://arxiv.org/abs/0805.2745)
 
 在距离对数素数幂小于 $T^{-1/3}$ 的模态中，每个素数幂至多匹配一个正频率。固定二倍频层 $M$ 和区间 $j\le\lambda_k<j+1$。这一组至多含 $O(\min(e^j,M^4))$ 项，每项的主项除以 $T$ 后为 $O((j+1)e^{-j/2})$。由 Cauchy–Schwarz 不等式，该组加权贡献除以 $T$ 后为
 
@@ -259,14 +259,14 @@ $$
 对逆平方和分部求和，$S_W(x)$ 的误差为 $O((\log x)^{1/3}/x)$。归一时 $s(\log(H/s))^{1/3}=O((\log H)^{1/3})$ 对 $0<s\le1$ 一致，故 $D_H=O((\log H)^{-2/3})$。[零点密度界，式 (3)](https://arxiv.org/abs/1910.08274v2) · [整式换和与归一化](https://github.com/the-omega-institute/trureturing-books/issues/1637#issuecomment-7233169018)
 
 ::: {.problem #prob-ou-ch12-windowed-haar-rate title="固定哈尔相位窗的显式计数余项"}
-取第 2 章的固定哈尔接受区域为 $W$，其边界为 Haar 零测集。记 $c=\mu(W)/(2\pi)$，其中 $\mu$ 为归一化 Haar 测度。对给定的起始高度 $H$，显式计算一个可复查的常数 $b_H$，使上式的计数与主项满足
+取第 2 章的固定哈尔接受区域为 $W$，其边界为 Haar 零测集。记 $c=\mu(W)/(2\pi)$，其中 $\mu$ 为归一化 Haar 测度。判定哪些起始高度 $H\ge2\pi$ 容许一个满足 $3b_H/c<L_H$ 的可复查常数 $b_H$，且计数与主项满足
 
 $$
 |A_W(t)-c\,m(t)|\le b_Ht
 \qquad\text{对所有 }t\ge H
 $$
 
-成立，并把该常数代入共同算术钟读数的有限高度误差公式。还可追问不采用黎曼假设时能否取得同阶余项。
+成立。对容许的高度，给出这样的常数并代入共同算术钟读数的误差公式。若 $0\le\log(H/(2\pi))\le1/2$，取 $t=H$ 并用 $A_W(H)\ge0$ 可得 $3b_H/c\ge3(1-\log(H/(2\pi)))\ge L_H$。不采用黎曼假设时能否取得同阶余项？
 :::
 
 **逐模态收敛的限制（`ARGUED`）。** 同一固定接受域可以区分两列人为高度。先取未筛选主项的整数分位点。逐分位区间对中心化的计数误差积分，给出每个固定非零 Fourier 模态为 $O(T/\log T)$。接着取边界上一小块与相位轨道横截的光滑图面。连续环面等分布保证每个足够大的二倍高度区间内有与区间长度同阶的穿越。在每次穿越附近使用严格递增的局部时间变换，把穿越后宽度同阶于 $(\log T)^{-3/4}$ 的窄段内的高度从域外移入域内。
