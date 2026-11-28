@@ -396,7 +396,20 @@ D_{\mathrm{plane}}-D_*={}&8\sqrt6\,\mu^2c^3
 \end{aligned}
 $$
 
-The first square comes from tilting the light-block normal. The second comes from tilting the basis axis associated with the up-type heavy line out of the plane. A positive square makes the seventh-order term leading. Both vanish at a unique parameter ratio with negative relative sign, where the defect gap is $O(\varepsilon^9)$. [Localization over complex bases, the equal-cost curve, and matrix calculation](https://github.com/the-omega-institute/trureturing-books/issues/2142#issuecomment-7240252783)
+The first square comes from tilting the light-block normal. The second comes from tilting the basis axis associated with the up-type heavy line out of the plane. A positive square makes the seventh-order term leading. Both squares vanish when $w=4v-2c$ and $S(v-w)=\mu c$. These conditions determine a unique parameter ratio with $S<0$. [Localization over complex bases, the equal-cost curve, and matrix calculation](https://github.com/the-omega-institute/trureturing-books/issues/2142#issuecomment-7240252783)
+
+At this ratio, when the two branches have exactly equal cost, the first-order terms of both transverse gradients vanish. The second-order gradients give the leading ninth-order term (direct derivation)
+
+$$
+\begin{aligned}
+U&=c(c-v)+\mu^2w/c,\\
+V&=6v^2-8vc+3c^2-\mu^2(2v/c+25/6),\\
+D_{\mathrm{plane}}-D_*&=8\sqrt6\,\mu^2c^3(U^2+V^2)\varepsilon^9
+  +O(\varepsilon^{10}).
+\end{aligned}
+$$
+
+At this ratio $v<c$, so $U>0$. Fixing the plane still incurs a strictly positive cost, now set by the second-order transverse gradients. [Derivation over complex bases and direct matrix calculation](https://github.com/the-omega-institute/trureturing-books/issues/2162#issuecomment-7240373923)
 
 When the angle and the two mass bases stay fixed, how quickly does the minimum defect approach $F$ as the middle mass-squared eigenvalues tend to zero? Let $D_*$ be the minimum defect of the fixed pair over all rotation eigenbases. Set the two normalized middle mass-squared eigenvalues to $a\varepsilon,b\varepsilon$, with $a,b>0$, and fix $0<\theta<\pi/2$. Write $\lambda_u=|V_{ub}|^2/\sin^2\theta$ and $\lambda_d=|V_{td}|^2/\sin^2\theta$ for the squared projection lengths of the lightest up- and down-type mass lines onto the top–bottom plane. A direct derivation gives
 

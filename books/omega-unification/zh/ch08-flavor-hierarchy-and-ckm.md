@@ -395,7 +395,20 @@ D_{\mathrm{plane}}-D_*={}&8\sqrt6\,\mu^2c^3
 \end{aligned}
 $$
 
-第一平方来自轻块法线的偏转，第二平方来自取优基中上型重线对应的轴向平面外偏转。任一平方为正时，七阶就是首项。只有一个参数比例使两项同时消失，此时相对符号为负，破缺差为 $O(\varepsilon^9)$。[任意复基的分支定位、等成本曲线与矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/2142#issuecomment-7240252783)
+第一平方来自轻块法线的偏转，第二平方来自取优基中上型重线对应的轴向平面外偏转。任一平方为正时，七阶就是首项。两项同时消失的条件是 $w=4v-2c$ 和 $S(v-w)=\mu c$。这确定了唯一的参数比例，且 $S<0$。[任意复基的分支定位、等成本曲线与矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/2142#issuecomment-7240252783)
+
+在这个比例上，两支实际等成本时，横向梯度的一阶项同时消失。二阶梯度给出九阶首项（手工推导）
+
+$$
+\begin{aligned}
+U&=c(c-v)+\mu^2w/c,\\
+V&=6v^2-8vc+3c^2-\mu^2(2v/c+25/6),\\
+D_{\mathrm{plane}}-D_*&=8\sqrt6\,\mu^2c^3(U^2+V^2)\varepsilon^9
+  +O(\varepsilon^{10}).
+\end{aligned}
+$$
+
+该比例上 $v<c$，所以 $U>0$。固定平面仍有严格正的代价，首项来自横向梯度的二阶残量。[全复基推导与直接矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/2162#issuecomment-7240373923)
 
 若固定夹角与两套质量基，只让次重质量平方趋于零，最小破缺又以什么速度趋近锐界 $F$？记 $D_*$ 为这对矩阵在全部轮换本征基上的最小破缺。令两套归一次重质量平方分别为 $a\varepsilon,b\varepsilon$，其中 $a,b>0$，并固定 $0<\theta<\pi/2$。记 $\lambda_u=|V_{ub}|^2/\sin^2\theta$、$\lambda_d=|V_{td}|^2/\sin^2\theta$，它们分别是上、下型最轻质量线在顶底平面内的投影长度平方。手工推导给出
 
