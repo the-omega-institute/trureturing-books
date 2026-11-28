@@ -220,7 +220,16 @@ For every real $u\ge4$, the left limit is exactly $L$. Sort the weights and comp
 
 At $B_0$, $N$ capped weights can tend to $1$, giving a second-trace supremum of $N+w_1^u$. For $u\ge u_c$ the jump is therefore $1-M^u-d^u$, independent of $N$, and it is about $0.113987815$ at $u=4$ (`NUM`). [Proof for the full exponent range](https://github.com/the-omega-institute/trureturing-books/issues/2059#issuecomment-7239617760) · [Fourth-power calculation](https://github.com/the-omega-institute/trureturing-books/issues/2059#issuecomment-7239523334) · [Small-exponent construction](https://github.com/the-omega-institute/trureturing-books/issues/2059#issuecomment-7239426333)
 
-For the fourth-power trace, the entire optimal curve is explicit in a window below the cap (hand derivation, `ARGUED`). Fix $u=4$ and $\tau=\tau_0(4)$, and let $V_S(B)$ be the supremum of the second heat trace over finite positive-mass integer spectra with first trace $S$ and exposure at most $B$. If $0<\varepsilon\le1/4$, set $M_\varepsilon=W(\tau-\varepsilon)$. Then
+As the budget falls below $B_0$, the optimal spectrum can switch before the cap (hand derivation, `ARGUED`). Let $V_S(B)$ be the supremum of the second heat trace over finite positive-mass integer spectra with first trace $S$ and exposure at most $B$. Set $r=\tau-\varepsilon$ and $M_\varepsilon=W(r)$. Let $s_r$ be the unique root of $W(r-s_r)+W(s_r)=1+w_1$ in $(0,r/2)$, and set $A_r=W(r-s_r)$ and $C_r=W(s_r)$. For $u=7/2$, $\tau=\tau_0(7/2)$, and $0<\varepsilon\le1/20$,
+
+$$
+V_S(B_0-\varepsilon)
+=N-1+\max\bigl\{A_r^u+C_r^u,\ M_\varepsilon^u+w_1^u+(1-M_\varepsilon)^u\bigr\}.
+$$
+
+Prefix majorization bounds every finite spectrum by a spectrum with a single transfer. The strictly convex power sum then leaves two endpoints to compare. The two-weight transfer endpoint minus the three-weight endpoint with zero transfer decreases strictly with $\varepsilon$ and changes sign exactly once, at $0.0237169055<\varepsilon_c<0.0237169058$. As the budget increases through $B_c=B_0-\varepsilon_c$, the spectrum switches from the zero-transfer endpoint to the transfer endpoint, and the slope of $V_S$ with respect to $B$ rises from about $0.230347403$ to about $0.251251786$ (`NUM`). For $N=1$, the optimizer is unique on either side and both spectra attain the bound at the switch. For $N\ge2$, the $N-1$ capped weights must tend to $1$, so positive-mass spectra can only approach either branch. [Finite-budget derivation and rational interval calculation](https://github.com/the-omega-institute/trureturing-books/issues/2136#issuecomment-7240195509)
+
+For the fourth-power trace with $u=4$ and $\tau=\tau_0(4)$, the same comparison gives the following value on $0<\varepsilon\le1/4$.
 
 $$
 V_S(B_0-\varepsilon)=N-1+M_\varepsilon^4+w_1^4+(1-M_\varepsilon)^4.
