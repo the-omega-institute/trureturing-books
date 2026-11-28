@@ -116,7 +116,68 @@ Every filtered vector is a linear combination of the projected sources on the ri
 The scheme uses successive reciprocal powers at one center, equivalently normalized derivatives of the resolvent with respect to $z$. It makes no claim for arbitrary sample lists, and a few scalar clock readings in [Chapter 12](ch12-shared-arithmetic-clock.md#sec-ch12) do not by themselves supply these vectors or the whole Gram matrix. Invertibility provides no uniform error amplification bound and no control of infinite spectral tails. An independent RH spectral route still needs an arithmetic or geometric positivity construction and identification of the complete zero spectrum; checks on finitely many windows cannot replace control for every $T$.
 :::
 
-With finite-dimensional recoverability distinguished from independent positivity, the table below assigns each evidence tier its own responsibility.
+Finite-dimensional recoverability leaves an observation question: must detecting some negative direction first reconstruct a prescribed negative direction accurately? A two-point model separates these error requirements.
+
+::: {.example #ex-ou-appb-optimal-negative-detection title="Precision Thresholds for Detecting Negativity and Testing a Prescribed Witness"}
+The following is a complete manual derivation (`ARGUED`). Take exact nodes $1,u=1+h$, where $h>0$, and fix the readout scale by
+
+$$
+\begin{aligned}
+A_h&=\begin{pmatrix}1&u^{-1}\\1&u^{-2}\end{pmatrix},
+&J_0&=\operatorname{diag}(1,-1),\\
+K_h&=A_hJ_0A_h^*=\begin{pmatrix}a&b\\b&d\end{pmatrix},\\
+a&=1-u^{-2},\quad b=1-u^{-3},\quad d=1-u^{-4}.
+\end{aligned}
+$$
+
+All three entries $a,b,d$ are positive. Put $\tau=a+d$ and $\delta=h/u^2$. Expansion gives $\det K_h=-\delta^2$. Solving the characteristic equation $\lambda^2-\tau\lambda-\delta^2=0$ gives the unique negative eigenvalue $-\gamma_h$, where
+
+$$
+\gamma_h=\frac{\sqrt{\tau^2+4\delta^2}-\tau}{2}>0.
+$$
+
+If a Hermitian error $E$ satisfies the Euclidean operator norm bound $\|E\|_{2\to2}<\gamma_h$, a unit eigenvector $v$ for the negative eigenvalue gives $v^*(K_h+E)v\le-\gamma_h+\|E\|_{2\to2}<0$. At the boundary, $E=\gamma_hvv^*$ makes $K_h+E$ positive semidefinite, so the strict threshold in this norm is $\gamma_h$.
+
+For certified entrywise errors $|E_{ij}|\le\eta$, the sharp threshold for the whole matrix to retain a negative direction is also explicit. For $\eta\ge0$, put
+
+$$
+\begin{aligned}
+D&=a+d+2b,\\
+\eta_*&=\frac{\delta^2}{D}
+=\frac{h}{(2u+1)(2u^2+u+1)},\\
+t&=\frac{b+d}{D},\qquad w=(t,-(1-t)).
+\end{aligned}
+$$
+
+Since $0<t<1$, we have $\|w\|_1=1$. Completing the square gives
+
+$$
+a s^2-2b s(1-s)+d(1-s)^2
+=D(s-t)^2-\eta_*.
+$$
+
+Hence $w^*K_hw=-\eta_*$, while $|w^*Ew|\le\eta\|w\|_1^2=\eta$. Whenever $\eta<\eta_*$, every allowed Hermitian perturbation therefore retains a strictly negative direction. Conversely, take
+
+$$
+E_*=\eta_*\begin{pmatrix}1&-1\\-1&1\end{pmatrix}.
+$$
+
+The diagonal entries of $K_h+E_*$ are positive and its determinant is $-\delta^2+\eta_*D=0$, so it is positive semidefinite. This error is allowed for every $\eta\ge\eta_*$, proving sharpness of the strict threshold for the entire negative-direction detection problem.
+
+Compare the witness $c_h=(u^2/h)(1,-1)$ for a prescribed source direction: it satisfies $A_h^*c_h=(0,1)$ and $c_h^*K_hc_h=-1$. The bound $|c_h^*Ec_h|\le\eta\|c_h\|_1^2$ gives the strict entrywise error threshold $\eta_{\mathrm{fixed}}=h^2/(4u^4)$ for this witness; the error $E=\eta_{\mathrm{fixed}}\begin{pmatrix}1&-1\\-1&1\end{pmatrix}$ makes its quadratic form zero. The difference between these detection guarantees becomes clear as the nodes approach each other:
+
+$$
+\begin{aligned}
+\lim_{h\to0^+}\frac{\gamma_h}{h}&=\sqrt{10}-3,\\
+\lim_{h\to0^+}\frac{\eta_*}{h}&=\frac1{12},\\
+\lim_{h\to0^+}\frac{\eta_{\mathrm{fixed}}}{h^2}&=\frac14.
+\end{aligned}
+$$
+
+These limits follow from $\tau/h=(u+1)(2u^2+1)/u^4\to6$, $\delta/h=1/u^2\to1$, and the explicit thresholds. Detecting a negative direction allows errors on a linear scale, whereas the prescribed reconstruction witness allows only a quadratic scale; both tolerances vanish as $h\to0^+$. These conclusions assume certified errors for the whole Gram readout. They do not cover node errors, infinite spectral tails, or access to only a few scalar clock readings. The nodes and matrices are algebraic models, do not specify actual zeros, and supply no independent RH positivity construction.
+:::
+
+With finite-dimensional recovery, detection under error, and independent positivity distinguished, the table below assigns each evidence tier its own responsibility.
 
 | Evidence Tier & Label | Verification Mechanism & Provenance | Logical Boundary & Warrant | Representative Coverage & Pointers |
 | :--- | :--- | :--- | :--- |
