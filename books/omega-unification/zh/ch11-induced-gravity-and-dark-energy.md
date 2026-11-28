@@ -268,6 +268,14 @@ $$
 
 只动两点时，一个节点推动真空读数下降，另一个补偿牛顿读数。表中两列均使用平方截止 $x=Q^2/M_P^2$ 的对数，换成 $\max_j|\Delta\log Q_j|$ 时，所有界均除以二。
 
+表中四组布局的翻号半径还可用一个二次式估计。令 $\phi(r)$ 为半径 $r$ 内精确标定的最小真空读数。在翻号尺度上，各非补偿节点取各自的下降端点，补偿节点沿 $K=1$ 移动。记 $S=-\phi'(0)$、$B=\phi''(0)/2$，则 $c-Sr+Br^2$ 的近端正根为
+
+$$
+\widehat r=\frac{2c}{S+\sqrt{S^2-4Bc}}.
+$$
+
+沿最小读数路径三次求导，用 $K=1$ 消去补偿节点的三阶导数，便可估计二次式的余项。四组布局的 Arb 区间计算都给出 $\phi'''<0$ 与 $-\phi'>0$，覆盖从零到 $\widehat r$ 以及首次翻号边界的区间。因此 $\phi(\widehat r)<0$。Taylor 余项给出 $\widehat r$ 处的读数误差，再由中值定理除以途中下降斜率，得到 $0<(\widehat r-R_*)/\widehat r<10^{-231}$。这个界针对精确布局的近似误差，表中十进制区间仍受初始布局包络宽度限制。[手工推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/1900#issuecomment-7238653866)
+
 相同的三枚可见谱也允许翻号永远不可达的标定布局。取二节点匹配族中充分小的 $y>0$，另一节点 $x(y)$ 趋向满足 $w(x_*)/k(x_*)=c$、$k(x_*)>0$ 的内部点 $x_*>0$。这族解的起始值精确满足 $K=1,W=c$。因 $k(y)\to0$ 且 $k(x)<1$，充分小的 $y$ 给出 $x>y$，对应的权重为 $p=(1-k(y))/(k(x)-k(y))>1$ 和 $1-p<0$。将此处的权重固定。沿 $K=1$ 的连续路径，若两点相遇于 $z$，即有 $1=k(z)$，与全域 $k(z)<1$ 相矛盾。因此两点始终保序。由偏振前缀界得 $w$ 为正且严格递增，故 $W=w(y')+p(w(x')-w(y'))>0$。这两点满足起始匹配条件，四点与六点表中的共同标度驻定是额外条件。[标定路径与节点次序的区间证书](https://github.com/the-omega-institute/trureturing-experiments/blob/969e8412d3419bc6718ef060093016aa5a6f8dff/experiments/ch39-omega-research/replay/ch39-newton-preserving-cutoff.md)
 
 这里的除差以 $s=-\Psi_0/A$ 为横坐标，其中 $A=1+L$，$L$ 是质量加权的指数积分项。按质量排序的谱满足有符号偏振前缀非正、总和为负。对 $0<x\le1$，同一谱给出 $|L|\le1.2205\times10^{-4}$，而 $DL=(2\pi)^{-1}\sum_i\alpha_i z_i e^{-z_i/x}$ 的上界为正权质量矩 $(2\pi)^{-1}\sum_i\max(\alpha_i,0)z_i<2.494\times10^{-6}$，其中 $D=x\,d/dx$，$z_i$ 是无量纲平方质量，$\alpha_i$ 是牛顿读数的谱系数。于是 $A>0$、$A-DA>0$。在单调性定理中取分母 $B=-A$ 即得 $s$ 严格递增。除差符号使用上面的区间证书。[归一化有符号热迹的单调性](lean:D5/S3/Analytic/Asymptotics/NormalizedSignedHeatTrace.normalized_cutoff_heat_strictMono)
