@@ -50,7 +50,18 @@ Now require $m_C\ge m_H\ge M=1\,\mathrm{TeV}$ and $m_C/m_H\le R=10^{10}$ in each
 
 With these mass constraints, the same two signed differences bound the spread for seven copies. At the maximum net exposure, $A_2-A_1$ still increases strictly while $A_2-A_3$ decreases strictly. They coincide at $\bar t=t_*+(r_*-7s)/111$. Since $\bar t>h+s$, the net exposure has reached $7s$. At $A_1=A_3$, the projection is $J=3(A_1-A_2)$, which gives the sharp minimum spread $44(r_*-7s)/333$. Setting every pair of masses to $M$ and $RM$ attains it. The minimum is about $0.27448$ at the central input and strictly greater than $0.22$ throughout the strong-coupling interval. [Derivation and rational interval replay](https://github.com/the-omega-institute/trureturing-books/issues/2452#issuecomment-7243005938)
 
-To test whether the discrete heavy tower of the 19-point Behrend shell can generate such an asymmetric hierarchy and close the $\Delta\alpha^{-1} > 3.66$ gap on its own, we first define the charged magnetic Laplacian, its two-step mass operator, and the weak-center parity decomposition.
+The eight-copy threshold also holds for finite-momentum scalar thresholds subtracted at $M_Z$. Keep the one-loop Standard Model slopes and replace the step exposure of each extra scalar by
+
+$$
+W(\mu,m)=\frac{3}{4\pi}\int_0^1(1-2z)^2
+\log\frac{m^2+z(1-z)\mu^2}{m^2+z(1-z)M_Z^2}\,\mathrm{d}z .
+$$
+
+The doublet and triplet share this kernel, so $J$ still fixes the crossing at $t_*$. For $\mu\le4\times10^{14}\,\mathrm{GeV}$, which contains all candidate crossing scales, each pair contributes most at masses $M$ and $RM$. Raising the triplet mass to $R$ times the doublet mass increases the exposure. Raising both masses at that fixed ratio decreases it because $4RM^2>\mu M_Z$. Write $e(t)=W(\mu,M)-W(\mu,RM)$ for the exposure at these boundary masses. Interval arithmetic gives $7e(t_*)<r_*<8e(t_*)$ across the strong-input interval. Fix all eight doublet masses at $M$ and vary the common triplet mass continuously from $M$ to $RM$ to reach the required exposure. The common inverse coupling exceeds $30$.
+
+With seven copies, the net exposure per pair has derivative between $0$ and $1$ in $t$. For every fixed spectrum, $A_2-A_1$ therefore increases strictly and $A_2-A_3$ decreases strictly. At the hypercharge–color crossing $\bar t$ for the boundary masses, the two differences are equal and the net exposure is maximal at that scale. Other spectra have both gaps at least as large at $\bar t$, and moving to either side increases one of those gaps. The boundary masses thus attain the sharp minimum spread, about $0.31009$ at the central input. Its smallest value across the full input interval is about $0.26462$, attained at $\alpha_s(M_Z)=0.117$. [Hand derivation and interval replay](https://github.com/the-omega-institute/trureturing-books/issues/2462#issuecomment-7243131195)
+
+The scalar five-plet example quantifies the mass splitting needed to close the gap. To see whether the nineteen-point Behrend shell can supply those thresholds, we first need the operator that assigns masses to its spectrum.
 
 ::: {.definition #def-ou-ch04-magnetic-laplacian title="The 19-Point Behrend Magnetic Laplacian, Two-Step Mass Operator, and Weak-Center Parity Sectors"}
 On the 19-point Behrend shell ($19$ vertices, $135$ chord edges, comprising $18$ polar spokes and $12$ clock-bearing edges), assign each oriented edge $e = (u \to v)$ a positive stiffness $w_e > 0$ and a unit phase $z_e \in \mathrm{U}(1)$ determined by the chosen Riemann zero ordinate $\gamma$ and the shell's dual arc-angle differences. For a charged field of integer hypercharge label $q = 6Y \in \mathbb{Z}$, define the following four structures:
