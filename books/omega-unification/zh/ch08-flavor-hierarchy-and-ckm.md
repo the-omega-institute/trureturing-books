@@ -373,7 +373,15 @@ D_{\mathrm{plane}}-D_*&=\frac{\sqrt6\,\varepsilon^5}{2\sqrt q}
 \end{aligned}
 $$
 
-五阶系数恰在 $\kappa\le-8\mu^2q$ 且 $\lambda C=-\kappa S/(2\mu)$ 时消失。后一个条件平衡两部门的线性变化，前一个条件控制偏转的二次代价。在阈值 $\kappa=-8\mu^2q$ 且线性项平衡时，零偏转与 $Z=2\mu S$ 同时使 $f$ 最小。[全复基的双向估计、取等条件与矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/2095#issuecomment-7239878715)
+五阶系数恰在 $\kappa\le-8\mu^2q$ 且 $\lambda C=-\kappa S/(2\mu)$ 时消失。后一个条件平衡两部门的线性变化，前一个条件控制偏转的二次代价。在阈值 $\kappa=-8\mu^2q$ 且线性项平衡时，零偏转与反射偏转 $Z=2\mu S$ 同时使 $f$ 最小。[五阶公式的双向估计与取等条件](https://github.com/the-omega-institute/trureturing-books/issues/2095#issuecomment-7239878715)
+
+这两支所需的平面分角在首阶相同。把下型轻块的法线对角元 $w=|S|^2/v$ 保留在重轻谱隙中，反射支所需的分角在下一阶更小。两处极小点都具有正定的二次变分，故继续优化复基只会使 $Z$ 移动 $O(\varepsilon)$，且这一移动对平方成本的影响比两支之差高一阶。反射支因而给出全复基的最小值，且在上述参数界内一致有
+
+$$
+D_{\mathrm{plane}}-D_*=8\sqrt6\,\mu^2\sqrt q\,w|S|^2\,\varepsilon^6+O(\varepsilon^7).
+$$
+
+六阶系数严格为正，说明即使五阶系数消失，固定顶底平面在精确阈值上仍会高估最小破缺。[两支的成本展开、全复基下界与矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/2126#issuecomment-7240142503)
 
 若固定夹角与两套质量基，只让次重质量平方趋于零，最小破缺又以什么速度趋近锐界 $F$？记 $D_*$ 为这对矩阵在全部轮换本征基上的最小破缺。令两套归一次重质量平方分别为 $a\varepsilon,b\varepsilon$，其中 $a,b>0$，并固定 $0<\theta<\pi/2$。记 $\lambda_u=|V_{ub}|^2/\sin^2\theta$、$\lambda_d=|V_{td}|^2/\sin^2\theta$，它们分别是上、下型最轻质量线在顶底平面内的投影长度平方。手工推导给出
 
