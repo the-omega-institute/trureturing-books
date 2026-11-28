@@ -249,6 +249,23 @@ $$
 
 对 $1<u\le2$，转移端在更宽的 $0<\varepsilon\le3/25$ 内仍给出 $V_S(B_0-\varepsilon)=N-1+A_r^u+C_r^u$，取等条件与上文相同。若前 $N$ 份中恰有两份未截顶，这两份的总暴露至多为 $2\tau-\varepsilon$。凹性将前缀上界收紧为 $N-2+2W(\tau-\varepsilon/2)$。若有三份以上未截顶，缺少的单位热权更多，同一个前缀上界仍成立。闭区间复算表明 $A_r>2W(\tau-\varepsilon/2)-1$，且幂和沿转移严格增加到零暴露余权耗尽。这样可以在整个新窗口沿用单次转移比较。[加强前缀的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2193#issuecomment-7240619070)
 
+对 $1<u\le2$，同一双权最优公式覆盖整个指数区间能够共用的最大缺口
+$$
+\varepsilon_{\mathrm{pair}}
+=\lim_{u\downarrow1}\tau_0(u)+\log\!\bigl(-\log((1+w_1)/2)\bigr),
+\qquad
+0.1701837999<\varepsilon_{\mathrm{pair}}<0.1701838001 .
+$$
+上确界仍为 $N-1+A_r^u+C_r^u$，取等条件同上。临界截顶随 $u$ 递增，因此在此窗口内，平分剩余暴露可使两份热权之和超过 $1+w_1$，单次转移因而能达到零余权端。若最大的 $N$ 份热权中至少两份未截顶，两条前缀界与 $w\log w$ 和的区间比较仍给出转移端占优。若最大的 $N$ 份热权中恰有 $N-1$ 份截顶，两份边际幂增益的比值界给出严格正的转移斜率。超过 $\varepsilon_{\mathrm{pair}}$ 后，指数 $u$ 足够接近 $1$ 时，即使平分剩余暴露也无法使两份热权之和达到 $1+w_1$。 [双权共用最大窗口的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2321#issuecomment-7241885681)
+
+在整个小指数与预算份数范围内，两段公式有一个共用的锐缺口 $\varepsilon_\star$。记 $r_{\ast}=-\log(-\log((1+w_1)/2))$。若 $r\ge r_{\ast}$，沿用零余权端的值。若 $r<r_{\ast}$，取 $E=W(r/2)$、$R=1+w_1-2E$，精确值为 $N-1+2E^u+R^u$。两式在 $r=r_{\ast}$ 处以 $R=0$ 接合。正余权段的单次转移严格增至平分暴露。若最大的 $N$ 份热权中至少两份未截顶，再用前 $N+1$ 项的上界得到严格幂和比较，这一比较也覆盖指数趋近 $1$ 的情形。当 $N=1$ 时，零余权段由 $A_r,C_r$ 取等，正余权段由 $E,E,R$ 取等。接缝处省去零项。两段的取等谱都只差排列。$N\ge2$ 时正质量谱可逼近上确界。唯一的正质量取等例外见下段。 [正余权段的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2321#issuecomment-7242044408) · [零余权段至五分之一的补全](https://github.com/the-omega-institute/trureturing-books/issues/2321#issuecomment-7242100855) · [至四分之一的扩展证明](https://github.com/the-omega-institute/trureturing-books/issues/2354#issuecomment-7242381636) · [单次转移斜率核证](https://github.com/the-omega-institute/trureturing-books/issues/2354#issuecomment-7242306714) · [至十分之三的扩展证明与闭区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2387#issuecomment-7242465799)
+
+共用锐缺口 $\varepsilon_\star$ 由双份临界预算确定。令 $a=w_1$、$b=(2+a)/3$、$h=-\log(-\log b)/2$。三份权均为 $b$ 的谱在 $\varepsilon=2\tau_0(u)-3h$ 恰好耗尽预算。在这条分支上，它与两段公式的正余权端打平于 $1.40630126513<u_\star<1.40630126514$，对应 $0.30828405042856615328<\varepsilon_\star<0.30828405042856615329$。全谱前缀比较与三份最大权附近的凹性估计证明，两段公式对所有 $N\ge1$、$1<u\le2$ 成立至 $\varepsilon_\star$，包括端点。三等权谱在 $N=2$、$u=u_\star$、$\varepsilon=\varepsilon_\star$ 时取等。在这条分支上继续增大 $u$，三等权谱便严格超过原值，因而任何更宽的共用缺口窗都失效。 [全谱锐半径与区间证书](https://github.com/the-omega-institute/trureturing-books/issues/2437#issuecomment-7243015563)
+
+只给一份临界预算时（$N=1$），均分的全局优势会随着剩余暴露减少而消失。对 $1<u\le2$ 与 $0.66\le r\le0.90$，精确最大值是均分值 $2E^u+R^u$ 与单份正暴露值 $W(r)^u+w_1^u+(1-W(r))^u$ 的较大者（手工推导与向外区间核证，`ARGUED`）。任意可行谱都受由 $r/2\pm z$ 两份暴露及一份零暴露余权组成的谱支配。区间核证排除了这条路径的内部极大值，所以最大值只在均分端或单份正暴露端取得。每个 $u$ 都有唯一的换序点。减小 $r$ 穿过该点时，最优谱由均分切换为单份正暴露。打平时这两种谱及各自的排列均取等。 [全谱归约与连续指数的区间证书](https://github.com/the-omega-institute/trureturing-books/issues/2395#issuecomment-7242718124)
+
+以 $u=1.01$ 为例，单份端在缺口 $0.44906515449<\varepsilon<0.44906515451$ 内与均分端打平。均分端的局部曲率约到 $\varepsilon=0.504539539632$ 才变号。缺口刚越过换序点时，微小的不均分仍会降低第二热迹，而单份正暴露已经能给出更高的第二热迹。 [单指数换序括界](https://github.com/the-omega-institute/trureturing-books/issues/2395#issuecomment-7242562669) · [局部曲率推导](https://github.com/the-omega-institute/trureturing-books/issues/2395#issuecomment-7242518929)
+
 当指数达到临界值后，无转移端在更宽的预算窗内占优（手工推导，`ARGUED`）。取 $u_c\le u\le4$、$\tau=\tau_0(u)$ 和 $0<\varepsilon\le0.60$，则
 
 $$
