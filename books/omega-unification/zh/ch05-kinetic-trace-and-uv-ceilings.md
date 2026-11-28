@@ -243,6 +243,8 @@ $$
 
 这个换序点还决定了所有低指数共用的最大预算半径。取 $1<u\le7/2$，每次均用该指数的临界截顶 $\tau=\tau_0(u)$。对 $0<\varepsilon\le1/20$，上式的两个端点仍给出精确上确界。当 $u\le2$ 时，沿转移方向比较两份活跃热权的边际增益，幂和一路增加到余量为零。当 $2\le u\le7/2$ 时，转移族的幂和严格凸，且在固定缺口下，两份端点相对三份端点的优势随指数严格下降。因此七半次最先换序。在 $0<\varepsilon<\varepsilon_c$ 内，每个指数都有 $V_S(B_0-\varepsilon)=N-1+A_r^u+C_r^u$，其中 $0.02371690563<\varepsilon_c<0.02371690564$。在右端点仍有同一等式，只有 $u=7/2$ 时两谱并列。$N=1$ 时胜出的热权组给出全部取等谱（不计排列）。$N\ge2$ 时，以趋于 $1$ 的截顶热权替代单位权，再用一份零暴露热权补足第一热迹，即可在同一预算下逼近上确界。
 
+对 $1<u\le2$，在 $3/25<\varepsilon\le7/50$ 内仍可得到精确值 $V_S(B_0-\varepsilon)=N-1+A_r^u+C_r^u$，取等条件与上文相同。若最大的 $N$ 份热权中至少两份未截顶，可同时使用前 $N-1$ 项与前 $N$ 项的上界。若所得比较谱的前 $N$ 项和大于转移端，两谱的正部和之差只变号一次，转移端在较高热权处占优。对 $w\log w$ 的区间复算确证转移端占优，再用递增权重 $t^{u-1}$ 从这个比较推出 $w^u$ 的严格优势。若最大的 $N$ 份热权中恰有 $N-1$ 份截顶，转移斜率仍严格为正。[两条前缀与小指数极限的推导](https://github.com/the-omega-institute/trureturing-books/issues/2275#issuecomment-7241420906)
+
 从左侧趋近 $B_0$ 时，令 $s_*=s_\tau$、$b=W'(\tau-s_*)$、$c=W'(s_*)$。由 $A_r+C_r=1+w_1$ 得 $dA_r/dr=-dC_r/dr=bc/(c-b)$（在 $r=\tau$ 处）。以左极限为基准，预算每减少一单位时最优值的一阶损失为 $u(A_\tau^{u-1}-C_\tau^{u-1})bc/(c-b)$。[统一半径、取等条件与区间核证](https://github.com/the-omega-institute/trureturing-books/issues/2128#issuecomment-7240278006)
 
 对 $1<u\le2$，转移端在更宽的 $0<\varepsilon\le3/25$ 内仍给出 $V_S(B_0-\varepsilon)=N-1+A_r^u+C_r^u$，取等条件与上文相同。若前 $N$ 份中恰有两份未截顶，这两份的总暴露至多为 $2\tau-\varepsilon$。凹性将前缀上界收紧为 $N-2+2W(\tau-\varepsilon/2)$。若有三份以上未截顶，缺少的单位热权更多，同一个前缀上界仍成立。闭区间复算表明 $A_r>2W(\tau-\varepsilon/2)-1$，且幂和沿转移严格增加到零暴露余权耗尽。这样可以在整个新窗口沿用单次转移比较。[加强前缀的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2193#issuecomment-7240619070)
