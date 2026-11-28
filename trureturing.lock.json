@@ -3809,6 +3809,22 @@
       "line": 345,
       "signature": "theorem exists_topCycle_signedRestriction_iff (M : Matroid V) (K : Finset V) (hK : M.IsCircuit (K : Set V)) (hspan : M.Spanning (K : Set V)) (n : ℤ) : (∃ z : Chain V, TopCycle M z ∧ signedRestriction K z = n) ↔ (dualClassGcd M K : ℤ) ∣ n"
     },
+    "D5/S3/Combinatorics/Matroids/Steiner/SteinerPaschSwitchCount.variableLabelledSwitchCount_iff": {
+      "module": "D5/S3/Combinatorics/Matroids/Steiner/SteinerPaschSwitchCount",
+      "name": "D5.S3.Combinatorics.Matroids.Steiner.SteinerPaschSwitchCount.variableLabelledSwitchCount_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:a3ccf01952dad3824f17110148ec97f46537769f198f84059a71baa4696a35e9",
+      "line": 144,
+      "signature": "theorem variableLabelledSwitchCount_iff {L A : Type*} [Finite L] [Mul L] [Finite A] [AddCommGroup A] [Module (ZMod 2) A] [Nontrivial A] (G : SimpleGraph L) (e p q : L) (one : ∀ x, e * x = x) (comm : ∀ x y : L, x * y = y * x) (invol : ∀ x y : L, x * (x * y) = y) (centreless : Set.center L = {e}) (different : p ≠ q) (edges : ∀ u v, G.Adj u v ↔ p * u = v ∨ q * u = v) : let attainable (count : ℕ)"
+    },
+    "D5/S3/Combinatorics/Matroids/Steiner/SteinerRamseyObstruction.noCommonMaximumInSomePower": {
+      "module": "D5/S3/Combinatorics/Matroids/Steiner/SteinerRamseyObstruction",
+      "name": "D5.S3.Combinatorics.Matroids.Steiner.SteinerRamseyObstruction.noCommonMaximumInSomePower",
+      "kind": "theorem",
+      "statement_id": "sha256:08fa1bcc375fe015f79c78b25868ff037a8f98c2e7313608220e8e81b713360d",
+      "line": 300,
+      "signature": "theorem noCommonMaximumInSomePower {L A : Type*} [Finite L] [Finite A] [Mul L] [AddCommGroup A] [Module (ZMod 2) A] [Nontrivial A] (e t : L) (different : t ≠ e) (unit : ∀ x, e * x = x) (comm : ∀ x y : L, x * y = y * x) (invol : ∀ x y : L, x * (x * y) = y) (centre : Set.center L = {e}) : ∃ n : ℕ, 0 < n ∧ ∀ labels : Set (Fin n → L) → A, ∃ p q : Fin n → L, p ≠ (fun _ => e) ∧ q ≠ (fun _ => e) ∧ p ≠ q ∧ ∃ better : Set (Fin n → L) → A, switchCount (fun _ => e) p q labels < switchCount (fun _ => e) p q better"
+    },
     "D5/S3/Combinatorics/Matroids/SteinerAffineSwitchCount.labelledAffineSwitchCount": {
       "module": "D5/S3/Combinatorics/Matroids/SteinerAffineSwitchCount",
       "name": "D5.S3.Combinatorics.Matroids.SteinerAffineSwitchCount.labelledAffineSwitchCount",
