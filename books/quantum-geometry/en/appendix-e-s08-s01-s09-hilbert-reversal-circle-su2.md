@@ -148,7 +148,7 @@ Let $C\in\mathbb R$ with $C\ge0$. If $\mathcal R(P_n^4,C)$ for every $n\in\mathb
 :::
 
 ::: {.proof #pf-appe-su2-tangent-width-four-lower}
-Each nonempty path power is connected, so tangent transfer applies to each such fixed graph. The Euclidean fitting condition on the empty graph holds vacuously. Double the vertices of a regular tetrahedron of diameter $1$ and centroid zero. Their mean squared distance to any center is $3/2$ plus the squared norm of the center. Thus one vertex is at distance at least $\sqrt{3/2}$. Apply [@thm-appe-chordal-exact-doubled-radius] using all path lengths. The full proof is checked by the Lean kernel.
+Every nonempty fourth power of a path is connected, so tangent transfer applies to each such fixed graph. The Euclidean fitting condition on the empty graph holds vacuously. Double the vertices of a regular tetrahedron of diameter $1$ and centroid zero. Their mean squared distance to any center is $3/2$ plus the squared norm of the center. Thus one vertex is at distance at least $\sqrt{3/2}$. Apply [@thm-appe-chordal-exact-doubled-radius] using all path lengths. The full proof is checked by the Lean kernel.
 :::
 
 ::: {.theorem #thm-appe-su2-tangent-width-four-obstruction title="Finite Round-Metric Obstruction Below the Width-Four Lower Bound" lean="D5/S3/Combinatorics/Graph/Chordal/Reconstruction/SU2TangentLower.SimpleGraph.SU2Tangent.exists_round_width_four_obstruction"}

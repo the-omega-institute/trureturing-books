@@ -148,7 +148,7 @@
 :::
 
 ::: {.proof #pf-appe-su2-tangent-width-four-lower}
-非空路径幂连通，故在每个固定的图上作切空间传递。空图的欧氏拟合条件自动成立。取直径为 $1$、重心为零的正四面体，将各顶点加倍后，其到任意中心的平均平方距离是 $3/2$ 加上中心的平方范数。因而最远顶点距该中心至少 $\sqrt{3/2}$。[@thm-appe-chordal-exact-doubled-radius] 对全部路径长度给出系数下界。完整证明由 Lean 内核检查。
+路径四次幂在顶点集非空时连通，故在每个这样的固定图上作切空间传递。空图的欧氏拟合条件自动成立。取直径为 $1$、重心为零的正四面体，将各顶点加倍后，其到任意中心的平均平方距离是 $3/2$ 加上中心的平方范数。因而最远顶点距该中心至少 $\sqrt{3/2}$。[@thm-appe-chordal-exact-doubled-radius] 对全部路径长度给出系数下界。完整证明由 Lean 内核检查。
 :::
 
 ::: {.theorem #thm-appe-su2-tangent-width-four-obstruction title="低于宽度四下界的有限圆度量反例" lean="D5/S3/Combinatorics/Graph/Chordal/Reconstruction/SU2TangentLower.SimpleGraph.SU2Tangent.exists_round_width_four_obstruction"}
