@@ -102,16 +102,19 @@ $$
 B \;=\; [3.8, 4.5] \times 10^{10} \;\cup\; [7, 10] \times 10^{10} \;\cup\; [10^{12}, \infty).
 $$
 
-Using the rational nonnegative polynomial $G(y) = y(y - 0.001212594)^2 (y - 0.004902081)^2 (1 - y + 4 \times 10^{-9} y)$ and cutoff $t = u(10^{12}, A_-)$ (where $u(h, a) = [1 + (h/a)^2]^{-1}$), set $N(y) = D(t) G(y) / G(t)$. The verification script [`ch39-six-time-height-bands.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-six-time-height-bands.py) certifies that all seven degree-six Bernstein coefficients of $N - D(1 + 18 y)/(1 + 18 t)$ are nonnegative on each of the three compact intervals covering the image of $B^c$. Thus $p(B^c) \le \mathbb{E}_p[N/D]$ and $\nu(B^c) \le (1 + 18 t)\mathbb{E}_p[N/D]$; expanding $N/D = c_0 + \sum_{j=1}^6 c_j k_j(y)$ turns any timing error budget $\varepsilon_j$ directly into an explicit penalty $\sum_j |c_j|\varepsilon_j$. The resulting lower bounds survive large scale and timing perturbations:
+Let $A_-$ be the smallest allowed common scale and put $t=[1+(10^{12}/A_-)^2]^{-1}$. Take the nonnegative polynomial $G(y)=y(y-0.001212594)^2(y-0.004902081)^2(1-y+4\times10^{-9}y)$ and set $N(y)=D(t)G(y)/G(t)$. On the three radial intervals covering $B^c$, we have $y\ge t$ and all degree-six Bernstein coefficients of $N-D(1+18y)/(1+18t)$ are nonnegative. Hence $N/D\ge(1+18y)/(1+18t)\ge1$ there. The neutral shell has one zero mode and eighteen positive modes with $\lambda>8$, so $1\le\eta=1+\sum_{\lambda>0}x/(x+\lambda)\le1+18y$. Integration gives $p(B^c)\le\mathbb E_p[N/D]$ and $\nu(B^c)\le(1+18t)\mathbb E_p[N/D]$. Expanding $N/D=c_0+\sum_{j=1}^6 c_j k_j$ bounds the increase from absolute timing errors $\varepsilon_j$ by $\sum_j|c_j|\varepsilon_j$. [Bernstein coefficients and rational certificate](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-shared-clock-checks.py#L52-L110)
 
 | Error hypothesis (baseline common scale $A = 2{,}903{,}600{,}000$) | Arithmetic mass $p(B)$ | Neutral flavor mass $\nu(B)$ |
 | --- | ---: | ---: |
-| Fixed scale, six exact time readings | $> 99.93115\%$ | $> 99.93114\%$ |
-| Fixed scale, each of six times within $1.67 \times 10^{-15}$ | $> 99.91508\%$ | $> 99.91508\%$ |
-| Fixed scale, first five exact, sixth within $2.10 \times 10^{-13}$ | $> 99.91504\%$ | $> 99.91504\%$ |
+| Fixed scale, six exact time readings | $> 99.93114\%$ | $> 99.93113\%$ |
+| Fixed scale, only the six 44-bit input cells given | $> 99.74866\%$ | $> 99.74862\%$ |
+| Fixed scale, each of six times within $1.67 \times 10^{-15}$ | $> 99.91509\%$ | $> 99.91507\%$ |
+| Fixed scale, first five exact, sixth within $2.10 \times 10^{-13}$ | $> 99.91505\%$ | $> 99.91504\%$ |
 | Scale relative error $\le 4\%$, each of six times within $2^{-50}$ | $> 99.91614\%$ | $> 99.91613\%$ |
 
-Over $99.931\%$ of the total mass splits into three peaks of roughly $23.44\%$, $37.4\%$, and $39.1\%$. No single zero can hold more than $39.1568\%$ of $p$ or $39.0755\%$ of $\nu$ (nearly halving the $68.6803\%$ cap from two flavor probabilities alone). At or below this scale, the top band forces support on zeros of index at least $106{,}969{,}920{,}543{,}671$ and puts over $23.893\%$ of mass above $\gamma = 1.5 \times 10^{13}$, while a strictly positive residual weight $p(\gamma < 2 \times 10^8) > 2.44066534 \times 10^{-11}$ remains forced at the bottom.
+For the 44-bit row, each input lies in $[l_j,l_j+2^{-44})$, so $\mathbb E_p[N/D]$ is at most $c_0+\sum_j(c_j l_j+2^{-44}\max(c_j,0))$. Those cells fix the seventh code. A five-point clock in the same cells has $p(B)=0.99881449839738472$ in the continuous radial model, where the heights may be arbitrary positive reals. [Rational nodes, weights and cell checks](https://github.com/the-omega-institute/trureturing-books/issues/1637#issuecomment-7237879270)
+
+With the six exact inputs, over $99.931\%$ of the total mass splits into three peaks of roughly $23.44\%$, $37.4\%$, and $39.1\%$. No single zero can hold more than $39.1568\%$ of $p$ or $39.0755\%$ of $\nu$ (nearly halving the $68.6803\%$ cap from two flavor probabilities alone). At or below this scale, the top band forces support on zeros of index at least $106{,}969{,}920{,}543{,}671$ and puts over $23.893\%$ of mass above $\gamma = 1.5 \times 10^{13}$, while a strictly positive residual weight $p(\gamma < 2 \times 10^8) > 2.44066534 \times 10^{-11}$ remains forced at the bottom.
 
 ::: {.remark #rem-ou-ch12-stiffness-sensitivity title="Neutral-Shell Stiffness Sensitivity and Unmaskable Response Drops"}
 The six exact times already pin the mean neutral-shell response $M = \mathbb{E}_p[\eta_\gamma]$ inside $[1.0020816770805,\, 1.0020816771057]$. Perturbing every edge stiffness of $L_\gamma = \sum_e w_e b_e b_e^*$ via $w_e \mapsto w_e \exp(t a_e)$ ($|a_e| \le 1$) and writing $R = (x I + L_\gamma)^{-1}$ yields
@@ -233,6 +236,14 @@ $$
 $$
 
 Take $T=10000$. Of the $10113$ positive zeros in $(100,T]$, exactly $1635$ pass the window test, with total inverse-square weight $P=0.000916843379\ldots$. Partial summation over the full spectrum bounds the accepted mass $r$ above $T$ by $U=L_T/(2\pi T)+3B(T)/T^2<0.000133579$. For $s\ge H/T$, let $C$ be the finite mass accumulated on either side of a jump. The full distribution function on that side is $(C+r)/(P+r)$, increasing in $r$. Checking both sides of each jump bounds the largest deviation from the line $s$ on this interval. Below $H/T$ the deviation is at most $\max(H/T,U/(P+U))$. On the omitted tail the unit-scale kernel exceeds every value in the finite sum and is at most $1$. Thus if $J$ sums $(\gamma^2+H^2)^{-1}$ over the accepted finite segment, the full reading lies between $J/P$ and $(J+U)/(P+U)$. [Zero enclosures, window tests and numerical bounds](https://github.com/the-omega-institute/trureturing-books/issues/1637#issuecomment-7234614928)
+
+The same finite-height data also test the three-band concentration. Let $\pi_{100}$ be the normalized inverse-square law on accepted zeros above $100$. Its unnormalized mass is at least $P>0.00091684$. Take $X=3.8\times10^{10}-1$, strictly below every height in the three bands. The whole-spectrum tail bound above gives
+
+$$
+\pi_{100}(B)\le\frac{L_X/(2\pi X)+3B(X)/X^2}{0.00091684}<1.075\times10^{-7}.
+$$
+
+Here $B(X)$ in the numerator denotes the whole-spectrum counting error bound. At the baseline scale this selector therefore fails the requirement $p(B)>0.9974866$ imposed by the six 44-bit input cells. [Finite-height mass calculation](https://github.com/the-omega-institute/trureturing-books/issues/1637#issuecomment-7237879270)
 :::
 
 **A linear counting remainder for the fixed Haar window under RH (`ARGUED`).** Count positive zeros with multiplicity. For the four-phase window of Chapter 2, $A_W(T)=c\,m(T)+O(T)$. Write $F$ for the acceptance threshold on the torus. The boundary of $W$ lies in the seam $u=0$ and the graph $u=F$. The function $F$ is Lipschitz, so the $\eta$-neighborhood of the boundary has volume $O(\eta)$. Set $K=\lfloor\log T/12000\rfloor$. The periodic trigonometric approximation of Colzani, Gigante, and Travaglini gives $P_K^-\le\mathbf1_W\le P_K^+$ with frequency support $\|k\|_\infty\le K$. The pointwise error decays rapidly in $K\,\operatorname{dist}(x,\partial W)$, giving an $L^1$ error of $O(K^{-1})$ and an $L^2$ error of $O(K^{-1/2})$ for each polynomial. For $M\ge2$, apply the same approximation with degree less than $M$ to the Fourier tail of $\mathbf1_W$. Parseval's identity then gives an $\ell^2$ coefficient norm of $O(M^{-1/2})$ for either $P=P_K^\pm$ on each dyadic shell $M\le\|k\|_\infty<2M$ with $M\le K$. For $M=1$ use $\|P\|_2=O(1)$. [Periodic approximation, Corollary 7](https://arxiv.org/abs/1001.0948)
