@@ -55,6 +55,36 @@ $$
 
 对三层等比质量权 $(1,r,r^2)$，$r>1$，这种歧义恰在 $r=(1+\sqrt5)/2,\,2,\,3$ 三个公比上出现。要检验固定反项带来的额外条件，按 $i=0,1,2$ 编号各层，记 $\delta_i(\lambda)$ 为归一斜率 $\lambda$ 上的数码差。极点权重相等后，余下差值正比于 $\sum_\lambda(r\delta_1(\lambda)+2r^2\delta_2(\lambda))(1+\lambda s)^2$，其常数、一次和二次系数须全部为零。例如在黄金比上，可取两组有色、无色归一斜率 $(3,7)$ 与 $(5,1)$。两组的零至二阶加权矩都是 $(4,16,76)$。在前两层同向对换两种分配，第三层反向对换。关系 $1+r=r^2$ 抵消极点权重，而三个矩抵消余下多项式。三个例外公比上都有全正斜率的构造。 [三层阈值分类](https://github.com/the-omega-institute/trureturing-experiments/blob/4d589c1d2a4dd74ac8fb695eba260a0471cc8856/experiments/ch39-omega-research/replay/ch39-three-geometric-portal-thresholds.md) · [精确枚举](https://github.com/the-omega-institute/trureturing-experiments/blob/4d589c1d2a4dd74ac8fb695eba260a0471cc8856/experiments/ch39-omega-research/replay/ch39-three-geometric-portal-thresholds.py)
 
+给常背景加上一道波长很长的扰动，还能分清哪些门户？在同一高斯标量模型里，扰动带入欧氏动量 $p$。从二点函数中扣除 $p=0$ 的值，并除去共同的已知因子。其 $p^2$ 系数随背景 $s$ 的变化给出
+$$
+B(s)=\sum_{\text{物种}} \frac{w t^2}{m_i+t s},\qquad w\in\{3,1\}.
+$$
+这个公式来自等质量泡积分：对 $\log[1+p^2 z(1-z)/(m_i+ts)]$ 在 $p^2=0$ 求导，费曼参数 $z$ 从零积到一给出因子 $1/6$，两次源插入给出 $t^2$。固定局部反项，测得 $s=0$ 附近的势和 $B(s)$ 两个函数，就能识别任意三个不同已知阈值上全部六个带号斜率。每个非零归一斜率的极点在势的三阶导数中按 $m_i^2$ 加权，在 $B(s)$ 中按 $m_i$ 加权。两种权留下的三层差分至多共用一个方向；势中保留的层对数再利用 $m\log m$ 的严格凸性消去剩余歧义。
+
+四层已可使两项观测都失去区分能力。把每种物种的归一斜率固定在 $1$ 或 $2$，在斜率 $1$ 上分别取数字 $(3,1,3,0)$ 与 $(1,3,1,1)$。对一组两两不同的正质量平方 $m_i$，其差 $(2,-2,2,-1)$ 对 $m_i$、$m_i^2$ 和 $m_i^2\log(m_i/\mu^2)$ 的三个加权和同时为零。因此这两组门户在所有 $s\ge0$ 上都给出相同的势和低动量系数。 [三层识别证明与四层反例](https://github.com/the-omega-institute/trureturing-experiments/blob/9a6102e355d2ccdac66234f45b927737f71678c5/experiments/ch39-omega-research/replay/ch39-low-momentum-portal-thresholds.md)
+
+**固定非零动量的手工推导。** 保留同一个泡积分，在任意一个已知的欧氏动量平方 $P=p^2>0$ 处读取响应。固定局部项并扣除零动量值后，若完整知道 $s=0$ 附近的函数
+
+$$
+R_P(s)=\sum_{i,\alpha} w_\alpha t_{i,\alpha}^2
+\int_0^1\log\!\left(1+\frac{Pz(1-z)}{m_i+t_{i,\alpha}s}\right)\,dz,
+\qquad (w_C,w_U)=(3,1),
+$$
+
+则对任意有限个已知且两两不同的正质量平方 $m_i$，都能逐层辨认两种物种的带号斜率。这里用到整条背景响应曲线。常背景势无需另测。
+
+取其中一项，简记斜率为 $t\ne0$。对 $s$ 求导后，这一项等于 $wt^2$ 乘以核 $1/(s+v)$ 的两个读数之差。第一项对 $v=(m_i+Pz(1-z))/t$ 取均匀参数 $z$ 的平均，第二项在 $v=m_i/t$ 取值。各项相加给出一个带号测度。其支集紧且避开零，核在 $s=0$ 的展开确定 $1/v$ 的各阶正次矩，而零阶矩为零。由紧集上的多项式逼近，这些矩唯一确定测度。
+
+负点质量标出每个非零斜率的起点 $v=m_i/t$，其符号标出斜率的符号。在每个半轴上按 $a=|m_i/t|$ 从小到大处理。令 $\ell=P/(4|t|)$，则 $|v|=a+4\ell z(1-z)$。解出两支 $z$ 并换元，得到在 $|v|=a+h$ 处的连续密度贡献
+
+$$
+\frac{wt^2}{2\ell}(1-h/\ell)^{-1/2},\qquad 0<h<\ell .
+$$
+
+例如 $m_1=1,t_1=1$ 与 $m_2=2,t_2=2$ 的起点都是 $a=1$。取 $P=4$，两段密度的支撑区间长度分别为 $1$ 和 $1/2$，凭形状就能区分这两层。
+
+扣除较早起点的贡献，在当前起点右侧足够近处只剩同起点的项。给定 $a$，第 $i$ 层候选节点 $\ell_i^{-1}=4m_i/(Pa)$ 两两不同。将密度展开，前 $N$ 个系数各除以相应的非零二项式因子，就是这些节点上振幅的前 $N$ 个幂矩，其中 $N$ 是层数。这一步由[有限范德蒙德矩的单射性](lean:D5/S3/Analytic/GoldenTomography/FiniteVandermondeTomography.finite_moment_readout_injective)保证唯一。在带号起点 $v_0$ 取 $t_i=\operatorname{sgn}(v_0)m_i/a$，将振幅除以 $t_i^2/(2\ell_i)$，便得到该层在此斜率处的物种权 $0,1,3,4$。逐个起点还原后，未出现的物种斜率均为零。若两层质量相同，交换它们的有色斜率便可保留整个响应。
+
 在检验 $8\pi I \pm \mathcal{A} \succ 0$ 是否正定、或从全图刚度矩阵中消去高势外层顶点自由度时，反复出现的决定性工具是复分块厄米矩阵的舒尔补极小值定理，它已在 Lean 4 内核中严格冻结：
 
 ::: {.theorem #thm-ou-ch06-schur-minimum title="分块舒尔补二次型是内部变量的精确最小值" lean="D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"}

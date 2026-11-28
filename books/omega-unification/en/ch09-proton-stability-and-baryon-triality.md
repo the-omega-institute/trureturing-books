@@ -39,6 +39,8 @@ Ordering the single-generation Grassmann components of $Q^{ai\alpha}$ lexicograp
 This nonvanishing expansion immediately proves inverse unidentifiability: any gauge-orthogonal model can share the **exact same arc connection, dual clocks, and quadratic mass spectrum** while assigning an arbitrary dimension-six Wilson coefficient $c_6$ to $\mathcal{O}_6$. For every perturbative threshold observable with vanishing external net baryon number, a single insertion of $\mathcal{O}_6$ contributes identically zero when all other vertices conserve $B$, while pairwise insertions appear at a higher effective-theory order. Gauge orthogonality and tree spectra alone therefore cannot pin down $c_6 = 0$. (In the three-ray boundary model, forcing boundary $QQQL$ contact terms to vanish for all leptons caps the wavefunction overlap of two quark states at $\le 0.706762$.)
 :::
 
+At zero external momentum, the static exchange amplitude of two currents is $A(h)=a^{\mathsf T}L_5(h)^{-1}b$, where $L_5(h)$ is the charge-five magnetic Laplacian at height $h$. On the eight sites $S=\{0,2,3,5,6,9,11,13\}$, let each end independently choose nonnegative weights summing to one at each height. Among the first $256$ positive Riemann zeros, exact cancellation is then possible precisely at indices $120,163,177,205$. The cancellation interval containing the height $h_*$ of zero $177$ has endpoint offsets $h-h_*$ of approximately $-0.04599726466$ and $0.10647302308$. At either endpoint the cancelling currents are unique up to interchange, with site $6$ paired with sites $0,5$ at the left and with sites $2,3$ at the right. If the two ends are required in advance to have equal shell Dirichlet energy $E_h(a)=E_h(b)$, where $E_h(x)=x^{\mathsf T}[\Re L_5(h)]_{SS}x$ uses zero extension outside $S$, then $\Re A>10^{-4}$ for every pair of clock phases and every weight deficit $0\le\delta\le10^{-8}$ on the three softened spokes, a range that covers all positive zeros in the model. Deriving physical currents from matter vertices and obtaining the full proton decay rate remain open. [Static cancellation interval](https://github.com/the-omega-institute/trureturing-experiments/blob/67c52fbe6fc4409a3b544bd48d0c3fd3232e3a85/experiments/ch39-omega-research/replay/%E7%AC%AC177%E6%9E%9A%E6%AD%A3%E9%9B%B6%E7%82%B9%E7%9A%84%E5%85%AB%E7%AB%99%E9%9D%9E%E8%B4%9F%E7%94%B5%E6%B5%81%E7%9B%B8%E6%B6%88%E5%BF%85%E6%9C%89%E4%B8%80%E9%98%B6%E5%8F%98%E5%8C%96.md) · [Equal-energy current test](https://github.com/the-omega-institute/trureturing-experiments/blob/67c52fbe6fc4409a3b544bd48d0c3fd3232e3a85/experiments/ch39-omega-research/replay/%E4%B8%A4%E7%A7%8D%E7%89%A9%E8%B4%A8%E7%AB%AF%E7%82%B9%E6%9D%A1%E4%BB%B6%E5%AF%B9%E4%B8%89%E6%9E%9A%E8%8D%B7%E4%BA%94%E7%9B%B8%E6%B6%88%E9%9B%B6%E7%82%B9%E7%9A%84%E6%A3%80%E9%AA%8C.md)
+
 ### 9.1.2 Zero-Axiom Simplicial Exactness and Mod-5 Rank-One Splitting
 
 Why do local flatness and algebraic splitting fail to obstruct global baryon violation on their own? Turning back to the zero-axiom core of Lean (`axioms: []`), two strictly axiom-free theorems illuminate both local cochain exactness and non-commutative mod-5 rank-one splitting at the foundation:
@@ -108,6 +110,15 @@ Choosing $h \not\equiv 0 \pmod 3$ (the two nonzero values $h = 1, 2$ swap the ge
 
    The first contains eight $u^c$, one $d^c$, and five $e^c$ fields. The second contains one $u^c$, eight $d^c$, five $L$ fields, and one $H$. Both have zero total hypercharge. In $C_f$, choose spin component $0$ for the three first-generation fields and component $1$ for the three second-generation fields. The six color permutations in each generation have the same sign, giving a coefficient of magnitude $36$. Use color order $0,1,2$ in the definitions of $P_3$ and $N_3$. In $P_3$ choose component $0$ for both $u^c$ fields, and in $N_3$ choose component $0$ for both $d^c$ fields. In each case choose component $1$ for the other antiquark and for the third-generation lepton, with $L_3^0H^1$ in $(LH)_3$. Exchanging the identical antiquark fields gives two terms of the same sign in each contraction. Keep both spin components in each $(e_i^ce_i^c)$. For $J_{12}^2$, keep both spin components of $L_1^0$ and $L_2^1$. The two orders of the product contribute with the same sign. The resulting monomials have coefficients of magnitude $288$ and $144$, respectively.
 
+   **Seven units of positive lepton number.** Raising $\Delta L$ to $+7$ at fixed $\Delta B=-3$ requires nine antiquarks and seven leptons, already costing dimension $24$. An additional fermion pair preserving the charges would raise the dimension to $27$. Among the light Standard Model fields with one Higgs doublet, the largest hypercharges available to an antiquark and a positive-lepton-number field are $Y(d^c)=1/3$ and $Y(L)=-1/2$. The sixteen fermions therefore carry at most $-1/2$ in total. At dimension $25$ the remaining unit must supply $+1/2$ through $H$, and both bounds must be saturated. The unique field content is $(d^c)^9L^7H$. The contractions $C_{d^c}$ and $J_{12}$ above give the scalar
+
+   $$
+   \mathcal O_{25}=C_{d^c}\,\epsilon^{abc}\epsilon_{rs}\epsilon_{tu}
+   (d^c_{3a}L_1^r)(d^c_{3b}L_2^s)(d^c_{3c}L_3^t)H^u J_{12}^2 .
+   $$
+
+   To check Fermi antisymmetry, keep all three colors of each $d^c$ generation, with spin components restricted to $0,1,0$ respectively. Write lepton superscripts in (weak, spin) order and retain only $(L_1^{00},L_1^{01},L_1^{11})=(a,b,c)$, $(L_2^{01},L_2^{10},L_2^{11})=(d,e,f)$, and $L_3^{01}$, together with $H^1$. Then $J_{12}=af-be$, and the first two leptons paired with third-generation antiquarks give $bf-cd$. In $(bf-cd)(af-be)^2$, only the product of $-cd$ with the cross term leaves six distinct generators, with coefficient of magnitude $2$. The color sums supply factors of $36$ and $6$, giving a monomial of magnitude $432$. The minimum dimension $25$ is thus attained.
+
 3. **Anomaly-free gauged $U(1)_X$ UV completion and the divisibility law $m \mid N_g$**: baryon triality need not be postulated as an ungrounded global symmetry. Introduce a gauged $U(1)_X$ with $X = 3B - 9L_\tau$, adjoin a left-handed conjugate neutrino $\nu^c_\tau$ of charge $+9$ (plus optional neutral singlets for $e, \mu$), and condense a Standard Model neutral scalar of charge $9$.
 
 ::: {.remark #rem-ou-ch09-anomaly-ledger title="Term-by-Term Cancellation of All Six Chiral Anomaly Traces for Gauged $U(1)_X$ ($X = 3B - 9L_\tau$)"}
@@ -124,6 +135,143 @@ On the left-handed Weyl spectrum, the three quark families $(Q, u^c, d^c)$ carry
 
 Condensing the charge-$9$ scalar breaks $U(1)_X$ to $\mathbb{Z}_9$, assigning phase $e^{2\pi i/9}$ to quarks and $1$ to all leptons; its cube is precisely the $SU(3)_c$ color center, so on color singlets it acts faithfully as $\mathbb{Z}_3$ ($\Delta B \in 3\mathbb{Z}$). Generalizing to $N_g$ generations protecting $\Delta B \in m\mathbb{Z}$ sets $X = 3B - 3m\sum_i n_i L_i$ with a charge-$3m$ condensate, where weak anomaly cancellation is equivalent to $N_g = m\sum_i n_i$—hence **$m \mid N_g$ is both necessary and sufficient**, mirroring the electroweak instanton selection rule $\Delta B = N_g$! Crucially, demanding a generation-universal continuous $U(1)$ with no new chiral weak multiplets forces $3q + l = 0$, leaving $QQQL$ neutral—proving that **UV generation-dependence is unavoidable for an Abelian gauge lift**.
 :::
+
+In the light-field theory, nine units of positive lepton number impose a stronger hypercharge constraint on Higgs insertions. At $(\Delta B,\Delta L)=(-3,+9)$, nine antiquarks and nine leptons already cost dimension $27$ and carry total hypercharge at most $9/3-9/2=-3/2$. Each bosonic unit of dimension can supply at most $+1/2$. A scalar contains an even number of fermions. An extra pair costs three units and supplies at most $+1$ for a quark and antiquark or $+1/2$ for a lepton and antilepton. The dimension is therefore at least $30$, with $(d^c)^9 L^9 H^3$ as the only field content at equality.
+
+Write $\ell_i=\epsilon_{tu}L_i^tH^u$ and $S_i=\epsilon_{rs}(\ell_iL_i^r)L_i^s$. Using the color and spin contractions of $C_{d^c}$ gives
+
+$$
+\mathcal O_{30}=C_{d^c}\epsilon^{abc}
+(d^c_{3a}S_1)(d^c_{3b}S_2)(d^c_{3c}S_3).
+$$
+
+Set $H^1=1$ and $H^0=0$. In each generation keep $L_i^0=(a_i,b_i)$ and $L_i^1=(0,c_i)$, where the $a_i,b_i,c_i$ are distinct Grassmann generators. Then $S_i=(L_i^0L_i^0)L_i^1-(L_i^0L_i^1)L_i^0$, and its spin component $1$ is $3a_i b_i c_i$. Keep all three colors of $d^c$ in spin components $0,1,0$ for the three generations, respectively. The two color contractions give coefficients of magnitude $36$ and $6$, so the selected monomial has coefficient of magnitude $36\cdot6\cdot3^3=5832$. This attains dimension $30$.
+
+**First derivatives and lepton occupation.** Write $\ell=\Delta L$, keep $\Delta B=-3$, and use the three-generation Standard Model light fields with one Higgs doublet. Among local differential polynomials the exact minimum is $d_{\min}=(7\ell-3)/2$ for odd $9\le\ell\le35$. At the point of evaluation rotate a nonzero Higgs into weak component $1$ and let $Q=T_3+Y$. The Higgs in this direction has zero electric charge, and the full gauge scalar still has total $Q=0$.
+
+The Standard Model charge table gives the following inequality for each elementary field component $f$ or its covariant derivatives.
+
+$$
+d_f-2Y_f-Q_f+\tfrac32 B_f-\tfrac72 L_f+\nu_f\ge0,
+$$
+
+where $\nu_f$ is $1$ for an undifferentiated $L^0$ component and $0$ otherwise. For the undifferentiated doublet $Q$ and the fields $u^c,d^c,L,e^c$, the minima over components for a field and its conjugate are, respectively, $(1,1)$, $(3,0)$, $(0,3)$, $(0,3)$, and $(2,1)$. The neutral Higgs and its conjugate give $0,2$. The charged Higgs component survives only with at least one derivative, for which the left-hand side is nonnegative. The first derivative of $L^0$ adds one unit of dimension and removes the $\nu_f$ contribution. Gauge field strengths have $d_f=2$, $Y_f=0$, and $|Q_f|\le1$. Summation cancels the total hypercharge and electric charge. Three generations with two spin components supply just six undifferentiated $L^0$ generators, so $\sum_f\nu_f\le6$. This gives the lower bound.
+
+For $\ell=9+2m$, set $K_i=(\partial_\mu\ell_i\,\partial^\mu\ell_i)$ with $\ell_i=\epsilon_{tu}L_i^tH^u$ and the same spinor contraction as above. For $0\le m\le12$, write $m$ as the sum of three nonnegative integers $m_i\le4$. Then $\mathcal O_{30}\prod_iK_i^{m_i}$ has dimension $30+7m$. Keep the same components as for $\mathcal O_{30}$ and set the Higgs derivatives to zero. Each $K_i$ has a distinct pair of lepton derivative generators for each of the four spacetime directions. In $K_i^{m_i}$, pick $m_i$ different directions. The even pairs commute, so the selected monomial has coefficient of magnitude $2^{m_i}m_i!$. The derivative generators are independent across generations and independent of the undifferentiated fields in the original monomial. The full coefficient therefore survives.
+
+**Hand derivation (`ARGUED`).** Filling all twelve neutral-lepton derivative pairs leaves two more leptons to supply at $\ell=35$. Each can couple to a Higgs derivative. Set $M_{i,\mu}=\epsilon_{rs}L_i^rD_\mu H^s$. With $H=(0,1)$, the component $D_0H^0$ can pair with an unoccupied charged-lepton component. Recontract the nine $d^c$ fields and three $S_i$ in the dimension-$30$ seed and multiply by $(M_{1,\mu}M_2^\mu)\prod_{i=1}^3 K_i^4$. One monomial containing all twenty-four neutral-lepton derivatives and $(D_0H^0)^2$ has coefficient of magnitude $1944\cdot384^3$. This gauge scalar has dimension $30+7+12\cdot7=121$, attaining the charge bound. These minima apply to local differential polynomials before taking the quotient by equations of motion and integration by parts. [Color contractions and exterior-algebra coefficient](https://github.com/the-omega-institute/trureturing-books/issues/1625#issuecomment-7230854341)
+
+**Thirty-seven units of positive lepton number (`ARGUED`).** In the charge bound above, only twelve undifferentiated $L$ components and twenty-four first derivatives of neutral $L$ components can carry positive lepton number at zero excess dimension. Thus at $\ell=37$ at least one lepton generator contributes an extra unit, giving $d\ge (7\ell-3)/2+1=129$. The dimension-parity rule requires $d\equiv(-3-37)/2=0\pmod 2$, so $d\ge130$.
+
+Multiply the top exterior product construction $\mathcal O_{35}$ by the dimension-nine gauge scalar
+
+$$
+P=\bigl(\epsilon_{ij}L_3^i D_\mu H^j,\ \epsilon_{rs}(D_\rho D^\rho L_1^r)D^\mu H^s\bigr),
+$$
+
+where the parentheses contract the left-handed spinors. The two charged Higgs derivatives select the remaining undifferentiated charged component of the third generation and one second derivative from the first generation. Both fermion generators are distinct from those in the selected nonzero monomial of $\mathcal O_{35}$, so a coefficient of $\mathcal O_{35}P$ still has magnitude $6$. The minimum for thirty-seven units is therefore $130$ in the same local differential algebra. [Top exterior product construction](https://github.com/the-omega-institute/trureturing-books/issues/1625#issuecomment-7231065749) · [Charge bound and attainment](https://github.com/the-omega-institute/trureturing-books/issues/1632#issuecomment-7231094926)
+
+**Occupation bound for arbitrary odd lepton number (`ARGUED`).** For $\ell\ge37$, group the independent positive-lepton components by their deficit in the charge bound. The zero-deficit group has $c_0=36$ components. For $p\ge1$, deficit $p$ comes from symmetric covariant derivatives of order $p+1$ on neutral left-handed leptons, order $p$ on charged left-handed leptons, or order $p-1$ on charged right-handed leptons. A symmetric derivative of order $j$ in four directions has $\binom{j+3}{3}$ multi-indices. There are three generations and two spinor components per species, so
+
+$$
+c_p=6\left[\binom{p+4}{3}+\binom{p+3}{3}+\binom{p+2}{3}\right].
+$$
+
+Exchanging adjacent covariant derivatives gives a field strength times a lower-order derivative. Repeating this reduction gives symmetric derivatives, and field strengths have nonnegative deficit. Write $\ell=36+\sum_{p=1}^{k-1}c_p+s$, where $1\le s\le c_k$. Occupying the lowest-deficit groups first bounds the total deficit from below. Order the finitely many candidate slots by increasing deficit in a single channel. Each slot has unit cost and gain equal to the negative of its deficit. At a fixed occupation count, the corresponding prefix is the unique prefix-closed selection. The [frozen prefix optimality theorem](lean:D5/S3/Observer/ArithmeticTomography/PrefixConstrainedGreedyOptimality.prefix_constrained_greedy_optimality) gives a prefix-closed maximizer at that count, so this prefix minimizes total deficit. Filled groups contribute even numbers and the remainder $s$ is odd. Dimension parity therefore adds one unit precisely when $k$ is odd. The resulting minimum is
+
+$$
+d_{\min}(\ell)=\frac{7\ell-3}{2}+\sum_{p=1}^{k-1}p\,c_p+ks+(k\bmod 2).
+$$
+
+The bound is attained group by group. Contract the three types of jets with $H$, $D_\mu H$, or $\epsilon_{ij}H^iD_\mu H^j$, respectively, and form two-lepton scalars. Each pair of independent deficit-$p$ components costs dimension $2p+7$. Starting from the top exterior product witness $\mathcal O_{35}$, pair the remaining undifferentiated charged left-handed lepton with a charged derivative component of deficit $k+(k\bmod2)$. Fill the remaining slots with whole pairs. At a flat connection the pairs use distinct symmetric jets, and the selected coefficient is a product of nonzero pair coefficients and factorials from the powers. For instance, the minimum rises from $526$ at $\ell=125$ to $535$ at $\ell=127$ and to $546$ at $\ell=129$. The scope is the same local differential algebra before quotienting by equations of motion or integration by parts. [Component counts, parity, and the attainment proof](https://github.com/the-omega-institute/trureturing-books/issues/1636#issuecomment-7231300523)
+
+Write $C_k$ for the cumulative capacity and $W_k$ for the cumulative deficit through group $k$. Summing the group contributions gives
+
+$$
+\begin{aligned}
+C_k&=\frac34(k+2)(k+3)(k^2+5k+8),\\
+W_k&=\frac{k(k+1)(3k^3+27k^2+88k+107)}5.
+\end{aligned}
+$$
+
+The initial values are $C_0=36$ and $W_0=0$, and the increments are $c_k$ and $kc_k$, respectively. For $\ell=C_{k-1}+s$, let $t=s/c_k$ be the fraction occupied in the last group and set $z=(4\ell/3)^{1/4}$. Along odd $\ell$, the exact dimension formula gives
+
+$$
+\begin{aligned}
+d_{\min}(\ell)&=\frac35 z^5+\frac32\ell\\
+&\quad+\left[-\frac58+\frac32t(1-t)\right]z^3+O(z^2).
+\end{aligned}
+$$
+
+The expansion follows by linearly interpolating the two polynomials between adjacent filled groups and inverting the capacity. The remainder is uniform in the occupied fraction. The coefficient of $z^3$ tends to $-5/8$ near an empty or filled group and to $-1/4$ near a half-filled group. [Cumulative formulas and uniform expansion](https://github.com/the-omega-institute/trureturing-books/issues/1640#issuecomment-7231398815)
+
+**Lower bounds with the lepton equations of motion (`ARGUED`).** The interacting Weyl equations replace time derivatives order by order with spatial covariant derivatives and lower-order sources. The field-strength terms generated by commuting derivatives preserve canonical dimension and charges. There are three generations and two spinor components, with only $\binom{j+2}{2}$ symmetric indices for a spatial jet of order $j$. The zero-deficit capacity becomes $6+6+18=30$, and the capacity at positive deficit $p$ is at most
+
+$$
+c_p^{\mathrm{EOM}}=6\left[\binom{p+3}{2}+\binom{p+2}{2}+\binom{p+1}{2}\right].
+$$
+
+Using these capacities in the least-deficit off-shell occupation and parity calculation gives lower bounds in the quotient. For $\ell=31,35,37$ they are $109,127,136$, respectively. The vanishing below these dimensions also holds after quotienting by integration by parts. Attainment requires a nonzero class in the corresponding quotient. [Elimination of time derivatives and the lower bound](https://github.com/the-omega-institute/trureturing-books/issues/1641)
+
+The occupation bound is attained in the local quotient by the lepton Weyl equations alone. Choose a flat connection and $H(x)=(x^1,1)$, and test for nonzero coefficients on independent spatial Cauchy jets. Each Yukawa source in the time recursion uses one fewer derivative on the fermion. The recursion still determines the full jets of both chiralities, and only the principal Weyl symbol contributes at the highest fermion derivative order. The original color contraction with two Higgs derivatives supplies eleven ordinary left-handed leptons. In each generation the Lorentz contraction of neutral first jets gives a skew form with Pfaffian $-4$ on six spatial components. Taking three pairs per generation yields a nonzero representative at $\ell=29$ of dimension $100$ and leaves one ordinary charged spin component in the third generation.
+
+The free Weyl jets of order $j$ transform as $\operatorname{Sym}^{j+1}S_+\otimes\operatorname{Sym}^{j}S_-$ or its chirality reversal. Their same-order Lorentz contraction on two pure spinor tensors is proportional to $\langle\lambda,\mu\rangle^{j+1}[\tilde\lambda,\tilde\mu]^j$. This nonzero alternating form has an invariant kernel on an irreducible representation, so it is nondegenerate and whole pairs can be filled up to capacity.
+
+For $\ell=30+\sum_{p=1}^{k-1}c_p^{\mathrm{EOM}}+s$ with odd $s$, one unpaired component is needed. First pair the spare ordinary spin component with a spatial second jet using two Higgs derivatives along direction $1$. At each filled even order $j$, replace one same-order contraction by a contraction between orders $j$ and $j+2$. Write $I$ for the $j$ symmetric derivative indices. Use $(\epsilon(D_I L,D_\mu H),\epsilon(D^{(I\mu\nu)}L,D_\nu H))$, where the outer parentheses contract spinors. The chosen Higgs background fixes both extra indices to spatial direction $1$, giving the directional derivative $\partial_1^2$. Taking the Lorentz trace over those indices would kill the leading term by the free Weyl equation.
+
+Which contractions can carry the spare component? Let $V_j$ be the complex free jet space of either chirality above. A constant quadratic symbol $Q(p)$ contracts two derivative indices to give $T_Q:V_{j+2}\to V_j$. Evaluating linear functionals on pure spinor powers identifies $V_j^*$ with polynomials of bidegree $(j+1,j)$, with the degrees exchanged for the other chirality. Each derivative index on a pure power contributes one copy of the momentum $p=\lambda\tilde\lambda^{\mathsf T}$, so $T_Q^*$ multiplies by $Q(\lambda\tilde\lambda^{\mathsf T})$. The polynomial ring has no zero divisors, so a nonzero multiplier makes $T_Q$ surjective, of rank $(j+1)(j+2)$. The multiplier vanishes identically precisely for multiples of $\det p$. Indeed, every momentum of determinant zero factors as a spinor outer product. On the Hermitian matrices representing real momenta, the determinant is the Minkowski quadratic form. The real and imaginary parts of $Q$ therefore vanish on the real light cone and are each proportional to that form. Complexification gives the claim. [Spinor factorization at determinant zero](lean:D5/S3/Geometry/Lorentz/SpinorHelicityDoubleCopy4D.null_iff_rankOne) · [Quadratic rigidity on the real null cone](lean:D5/S0/Certificates/MinkowskiNullConeRigidity.eq_smul_minkowski_of_null)
+
+For every nonzero direction $v$, the symbol $Q(p)=(v\cdot p)^2$ has rank one as a quadratic form. The determinant has rank four, so even a null direction can carry the spare component. For the spatial direction used here, the pullback $T_Q^*$ carries the remaining linear factor to the next even order with nonzero coefficient in the top exterior power. Ending at $q=k+(k\bmod2)$ supplies the odd component at the required dimension cost. Filling the other slots with whole pairs gives the minimum for odd $\ell\ge31$
+
+$$
+\begin{aligned}
+d_{\min}^{\mathrm{EOM}}(\ell)
+&=\frac{7\ell-3}{2}+\sum_{p=1}^{k-1}p\,c_p^{\mathrm{EOM}}\\
+&\quad+ks+(k\bmod2).
+\end{aligned}
+$$
+
+For $\ell=31,35,37$, these minima are $109,127,136$, respectively. [Explicit constructions at 29 and 31](https://github.com/the-omega-institute/trureturing-books/issues/1641#issuecomment-7231698774) · [Contractions at arbitrary orders](https://github.com/the-omega-institute/trureturing-books/issues/1641#issuecomment-7231740723)
+
+**Attainment with all field equations and integration by parts (`ARGUED`).** In the complexified local algebra of the classical renormalizable Standard Model, set the gauge connection and the conjugate Higgs field to zero. Keep only anti-down quarks and positive-lepton-charge fermions. The fermion bilinears in the neutral field equations vanish because each requires a field from the opposite charge sector. The Higgs field obeys its free Klein–Gordon equation, while the anti-down quarks and charged right-handed leptons obey free Weyl equations. A left-handed lepton has a homogeneous solution and a particular solution sourced by the Higgs and a right-handed lepton. Extracting a Grassmann monomial with the operator's full degree in free left-handed modes selects the homogeneous contributions.
+
+Finite superpositions of on-shell plane waves span the required Cauchy jets. At generic spatial momentum, the two time roots supply Weyl polarizations spanning the two-component initial data. For a scalar, the two roots control its initial value and time derivative. Polynomial interpolation in spatial momentum supplies the required jet, so a nonzero coefficient from the Cauchy construction occurs in a plane-wave monomial. Fix the two independent polarizations of the undifferentiated anti-down quarks in the original color contraction.
+
+In the complex $2\times2$ momentum representation, a Higgs momentum $h$ satisfies $\det h=\mu$, where $\mu$ is the signed mass-shell parameter. A right-handed lepton momentum $r$ is a rank-one product of spinors. For each source pair, $\det(h+r)$ is a nonzero polynomial on the mode parameter space. For instance, $h=\operatorname{diag}(\mu,1)$ and $r=\operatorname{diag}(t,0)$ give determinant $\mu+t$. The finite product of complex mass shells and spinor parameter spaces is irreducible, so the selected coefficient and all the finitely many source determinants can be nonzero at once. The Weyl equation can then be inverted at every source frequency to obtain the particular left-handed solution.
+
+Keep the left spinors $\lambda_1,\lambda_2$ of the two anti-down quarks fixed and vary their dotted spinors $\tilde\lambda_1,\tilde\lambda_2$. Their on-shell momenta can sum to any complex four-momentum $\lambda_1\tilde\lambda_1+\lambda_2\tilde\lambda_2$. Both quarks enter undifferentiated and neither enters the left-handed lepton source. This adjustment sets the total momentum of the selected monomial to zero while preserving its nonzero coefficient and every source determinant.
+
+A total derivative of a translation-invariant local current multiplies its coefficient at momentum $P$ by $iP$. The coefficient at zero momentum therefore vanishes. The field equations and all their derivatives also vanish on this plane-wave solution. Extracting the selected zero-momentum coefficient detects a nonzero class after all field equations and integration by parts. It gives a dimension-$100$ representative at $\ell=29$ and attains the minima above for odd $\ell\ge31$. [Jets satisfying all field equations](https://github.com/the-omega-institute/trureturing-books/issues/1641#issuecomment-7231982046) · [Zero-total-momentum witness](https://github.com/the-omega-institute/trureturing-books/issues/1641#issuecomment-7232021736)
+
+**Lower odd lepton numbers (`ARGUED`).** For $\ell=1,3,5,7$, reuse the nonzero monomials at dimensions $16,19,22,25$. If an operator contains $u^c$, take free $u^c$ modes with the conjugate Higgs set to zero. Use $H u^c$ to solve for the particular part of $Q^\dagger$, then use $H Q^\dagger$ to solve for the particular part of $d^c$. The finitely many source frequencies are noncharacteristic for generic momenta. These particular solutions carry only $u^c$ Grassmann labels. Keeping the operator's full degree in free $d^c$ labels therefore extracts the homogeneous $d^c$ contributions. Each of the four nonzero monomials contains two undifferentiated $d^c$ legs with independent polarizations. Their dotted spinors can balance the total momentum, leaving the source frequencies and the selected coefficient intact.
+
+For $\ell=9+2m$ with $0\le m\le9$, use $\mathcal O_{30}\prod_i K_i^{m_i}$ with $\sum_i m_i=m$ and each $m_i$ at most $3$. In each generation, the nondegenerate neutral first-jet form supplies three pairs. The $\mathcal O_{30}$ contraction again supplies two independent $d^c$ polarizations. The minimum dimension in the integration-by-parts quotient is $30+7m$ throughout this range. Together with $\ell=29$ and the higher occupation groups, these values cover every positive odd lepton number at $\Delta B=-3$. [Zero-momentum test at lower lepton numbers](https://github.com/the-omega-institute/trureturing-books/issues/1641#issuecomment-7232117226)
+
+**Low dimensions at negative lepton charge (`ARGUED`).** Fix $\Delta B=-3$ and let $n=-\Delta L>0$. For each odd $n$ through $11$, the minimum is the fermion-count bound $3(9+n)/2$. The earlier negative-lepton operators cover $n=1,3,5$. For $n=7,9$, multiply $C_{u^c}$ by $(N_3e_3^c)\bar J_{12}^{\,3}$ or $(P_3e_3^c)\bar J_{12}^{\,4}$, where $\bar J_{ij}$ is the conjugate of $J_{ij}$. Its pairing on the four weak and spin components is nondegenerate. For $n=11$, contract nine $u^c$ and one $e^c$ across generations, then multiply by the top product of the four ordinary $L^\dagger$ components of the first generation and by $\bar J_{23}^{\,3}$. With both Higgs fields and the gauge connection set to zero, the constant fermion data in the chosen negative-charge sectors satisfy the classical equations. The constant coefficient also annihilates total derivatives, giving the same minima in the full quotient. [Low-dimensional negative-lepton contractions](https://github.com/the-omega-institute/trureturing-books/issues/1660)
+
+At $n=13$, the fermion count and dimension parity allow $d=33,35$, but the fields at $d=33$ cannot cancel their positive hypercharge. Using two $H^\dagger$ fields at $d=35$ fills the twelve ordinary $L^\dagger$ components, whose top product is a weak singlet. The two identical Higgs fields supply no singlet. With one $H^\dagger$ and one derivative, the twelve ordinary components are again filled. The remaining dotted indices force the derivative on the thirteenth $L^\dagger$ to appear in its Weyl trace. Off shell that trace gives a nonzero representative of dimension $35$. The lepton equation replaces it by an $e^c H^\dagger$ source, and the antisymmetric weak contraction of the two Higgs fields vanishes. Dimension $37$ is attained by multiplying the eleven-lepton operator by a conjugate neutral first-jet pair and using independently polarized anti-up quarks to balance the total momentum. [Dimension increase from the field equation](https://github.com/the-omega-institute/trureturing-books/issues/1660)
+
+**Occupation and two exceptional negative-lepton counts (`ARGUED`).** Fix the neutral direction of $H^\dagger$ at the evaluation point. The nonnegative deficit is
+$$
+w_f=d_f+2Y_f+Q_f-\tfrac32 B_f+\tfrac72 L_f+\nu_f,
+$$
+where $\nu_f=1$ applies only to an ordinary neutral $L^\dagger$. Summation yields $d\ge(7n-21)/2$. Equality fills all six ordinary neutral components. The zero-deficit $u^c$ fields and any added $d^{c\dagger}$ fields carry at least six units of negative electric charge. Only the six ordinary charged $L^\dagger$ components can cancel it at zero deficit. This fixes the quark content to nine $u^c$ fields, fills all six charged components, and leaves exactly $n-12$ neutral first jets.
+
+With the Weyl equation imposed, one neutral first jet has six independent components in $S_+\otimes\operatorname{Sym}^2S_-$. The top product of ordinary $L^\dagger$ fields supplies no right spinor index to the remaining jets. Neither the first nor the seventeenth exterior power of the eighteen-dimensional jet space contains a right spin singlet. The seventeenth power is dual to the original space. The lower bound therefore cannot be attained at $n=13,29$. Dimension parity gives the next possible values $37,93$, attained by adding one or nine conjugate neutral first-jet pairs to the eleven-lepton operator.
+
+For odd $15\le n\le27$, begin with three neutral first jets in the first generation. Contract their symmetric right spinor pairs with the alternating tensor on the three-dimensional space of those pairs. The three left spinor indices are symmetric and contract with the color-antisymmetric product of three first-generation $u^c$ fields. Choosing a common left polarization and distinct right components gives a nonzero coefficient. Each of the other two generations supplies up to three additional jet pairs. After the full classical equations and integration by parts, these counts have minimum dimension $(7n-21)/2$. [Negative-lepton deficits, the right-spinor boundary, and witnesses](https://github.com/the-omega-institute/trureturing-books/issues/1660#issuecomment-7232272635)
+
+**Higher occupation groups at negative lepton charge (`ARGUED`).** For odd $n\ge31$, the zero-deficit capacity is $30$. The three families at positive deficit $p$ are neutral $L^\dagger$ jets of order $p+1$, charged $L^\dagger$ jets of order $p$, and $e^c$ jets of order $p-1$. The spatial counts again give $c_p^{\mathrm{EOM}}$. Write $n=30+\sum_{p=1}^{k-1}c_p^{\mathrm{EOM}}+s$ with $1\le s\le c_k^{\mathrm{EOM}}$. The minimum dimension is
+$$
+\begin{aligned}
+d_{\min}(-n)&=\frac{7n-21}{2}
++\sum_{p=1}^{k-1}p\,c_p^{\mathrm{EOM}}\\
+&\quad+ks+(k\bmod2).
+\end{aligned}
+$$
+Filling the lowest groups first and imposing dimension parity gives the lower bound. For the unpaired slot, put $S_\mu=\epsilon_{rs}H^{\dagger r}D_\mu H^{\dagger s}$. Its hypercharge is $-1$, so $S^\mu D_\mu e^c$ is a left spinor of zero hypercharge. Substitute it for the ordinary $e^c$ in the nine-anti-up-quark color contraction and fill the zero group. This gives a dimension-$100$ representative at $n=31$. Contract the three positive-deficit families with $H^\dagger$, $D_\mu H^\dagger$, and $S_\mu$, respectively, and fill whole pairs using the alternating form at each order. In each even $e^c$ group, contract both $S_\mu$ factors with the two additional indices on the higher jet. On the chosen background this gives a squared directional derivative, so the same principal-symbol rank criterion transfers the unpaired component to deficit $k+(k\bmod2)$.
+
+Set $H=0$ and take a flat connection, retaining $H^\dagger,u^c,e^c,L^\dagger$. The particular Yukawa solution for $L^\dagger$ carries only $e^c$ coefficients. Selecting the full free $L^\dagger$ degree preserves the nonzero coefficient, and two undifferentiated anti-up quarks balance its total momentum. The minimum is attained in the quotient by all classical field equations and integration by parts. For $n\ge31$, the positive-lepton sector of the same magnitude has minimum dimension nine higher. [Pairs and parity in the higher negative-lepton groups](https://github.com/the-omega-institute/trureturing-books/issues/1660#issuecomment-7232292405)
 
 ## 9.3 Shell-Triality Algebra Closure, Discrete Anomaly Inflow, and the 25-State Lifted Shell {#sec-ch09-algebra-inflow}
 

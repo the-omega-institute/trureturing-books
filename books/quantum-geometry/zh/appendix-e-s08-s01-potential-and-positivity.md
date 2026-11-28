@@ -953,3 +953,5 @@ $$
 这里的因子 $m-2$ 与 [@thm-appe-chordal-gain-potential-stability] 中的 $\lvert V\rvert-2$ 来源不同：定理中它是沿消去次序累积的三点偏差的个数，这里它是扰动矩阵每行非零元的个数。
 
 对于半比较，返回相位刻画了另一种三点效应。见[曲率从哪里来](appendix-e-s08-s01-s04-curvature.md#sec-appe-curvature-from-half-comparison)。
+
+本节的弦图 Banach 精确分层、实 $L_1$、Hilbert、因果三树与线性填补结果见[附录 E.8.1.8](appendix-e-s08-s01-s08-chordal-banach-exact-strata.md#sec-appe-chordal-banach-exact-strata)。
