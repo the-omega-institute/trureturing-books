@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "a0e4d21ef59d4db2d5d0c3fc859cb87f3b569365",
-  "pinned_at": "2026-11-28T14:45:25Z",
+  "commit": "d872c69c58175b134201c396a6c332525d502df3",
+  "pinned_at": "2026-11-28T15:16:18Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -13287,6 +13287,14 @@
       "line": 151,
       "signature": "theorem nyman_halfline_distance_bound (rho : ℂ) (hz : Zeta23.IsNontrivialZero rho) (hb : 1 / 2 < rho.re) (N : ℕ) : 1 / (‖rho‖ ^ 2 * (1 / (2 * rho.re - 1) + 1 / ‖rho - 1‖ ^ 2)) ≤ distance N ^ 2"
     },
+    "D5/S3/Observer/Hilbert/NymanHalflineZeroSeparation.nyman_halfline_radius_chain": {
+      "module": "D5/S3/Observer/Hilbert/NymanHalflineZeroSeparation",
+      "name": "D5.S3.Observer.Hilbert.NymanHalflineZeroSeparation.nyman_halfline_radius_chain",
+      "kind": "theorem",
+      "statement_id": "sha256:5e4d22a2c754769586fe72b57486e68ac9d67bf4ddcd08f19c782352851207e7",
+      "line": 171,
+      "signature": "theorem nyman_halfline_radius_chain (rho : ℂ) (hz : Zeta23.IsNontrivialZero rho) (hb : 1 / 2 < rho.re) : 1 / (‖rho‖ ^ 2 * (1 / (2 * rho.re - 1) + 1 / ‖rho - 1‖ ^ 2)) = (2 * rho.re - 1) * ‖rho - 1‖ ^ 2 / ‖rho‖ ^ 4 ∧ (2 * rho.re - 1) * ‖rho - 1‖ ^ 2 / ‖rho‖ ^ 4 = ‖(1 : ℂ) - 1 / rho‖ ^ 2 * (1 - ‖(1 : ℂ) - 1 / rho‖ ^ 2) ∧ 0 < ‖(1 : ℂ) - 1 / rho‖ ^ 2 * (1 - ‖(1 : ℂ) - 1 / rho‖ ^ 2)"
+    },
     "D5/S3/Observer/Linear/ExactTaylorObservationRemainder.exp_tail_le": {
       "module": "D5/S3/Observer/Linear/ExactTaylorObservationRemainder",
       "name": "D5.S3.Observer.Linear.ExactTaylorObservationRemainder.exp_tail_le",
@@ -15706,6 +15714,19 @@
       "statement_id": "sha256:1669ee1acff69d57fc1780c0cc54663b47bbe309fe7a5e939affa8f24ba17e75",
       "line": 36,
       "signature": "theorem reflectionSeq_eq_pow (C : TernaryComparison M) (a b : M) (n : ℕ) : reflectionSeq C a b n = (letI"
+    },
+    "D5/S3/Quantum/AURICOmega/ThreeReadingContrast.exists_nonnegative_readings_iff": {
+      "module": "D5/S3/Quantum/AURICOmega/ThreeReadingContrast",
+      "name": "D5.S3.Quantum.AURICOmega.ThreeReadingContrast.exists_nonnegative_readings_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:764c7126b804d685a26901a47a0e8c81045901fe276a861574d73d7c3a9867d2",
+      "line": 17,
+      "signature": "theorem exists_nonnegative_readings_iff (r d : ℚ) : (∃ a b : ℚ, 0 ≤ a ∧ 0 ≤ b ∧ a - b = d ∧ ∀ x y z : ℚ, 0 ≤ x ^ 2 + y ^ 2 + z ^ 2 + 2 * (r * x * y + a * x * z + b * y * z)) ↔ r ^ 2 + d ^ 2 ≤ 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/UnitQuaternionClosedSubgroup.eq_top_of_isClosed_of_chainConnected": {
       "module": "D5/S3/Quantum/AURICOmega/UnitQuaternionClosedSubgroup",
@@ -30335,6 +30356,19 @@
       "statement_id": "sha256:0648d499fd32bc7fff51faf73ff211bb9072b7d2040d02d10bca7a2817bce22f",
       "line": 17,
       "signature": "theorem xi_reading_endpoint_values : xiReading 0 = (1 / 2 : ℂ) ∧ xiReading 1 = (1 / 2 : ℂ)"
+    },
+    "D5/S3/Zeros/GRH/Lib/SiegelWeil/RallisInner/SharpData.inner_product_formula": {
+      "module": "D5/S3/Zeros/GRH/Lib/SiegelWeil/RallisInner/SharpData",
+      "name": "inner_product_formula",
+      "kind": "theorem",
+      "statement_id": "sha256:6e7af02b05e60785e5000a995db323923b9ec2edcf3e6e480a62a5112c02706d",
+      "line": 164,
+      "signature": "lemma inner_product_formula (h : 2 * card n < card m) a b {f} (hf : IsClean f) {y y'} (hy : y ∈ S.rapidFunctions) (hy' : y' ∈ S.rapidFunctions) (f'",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.FixedLineLocalization": {
       "module": "D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization",

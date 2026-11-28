@@ -4,12 +4,12 @@
 
 本章正式摊开第一卷最底层的解析数论谱底座，并同时把**形式化证明的疆界**与**有限物理窗的实算证据**放在一张对照图上。我们按四步层层推进：
 
-1. 先明确界定经典黎曼猜想（RH）与狄利克雷广义黎曼猜想（Dirichlet GRH）的**外部形式化事实状态**，并用 Lean 4 冻结定理立起临界线上的费耶尔临界差额与凯莱单位圆判据；
+1. 先明确界定经典黎曼猜想（RH）与狄利克雷广义黎曼猜想（Dirichlet GRH）的**外部形式化事实状态**，用 Lean 4 冻结定理立起费耶尔临界差额与凯莱单位圆判据，再借 theta 提升说明算术核如何接到谱内积；
 2. 再沿 `trureturing@dev` 冻结的四条核心解析定理，完整走通“调和权配对矩比 $\to$ 倒高度与周期相位亏损 $\to$ 无条件兰道左右竖边积分界 $\to$ 调和加权零点谱的高斯硬碰撞极限 $1/\sqrt{\pi}$”的严密链条，并求出固定原弧模态的截断端点项；
 3. 随后把镜头拉进具体的有限零点窗口，展示第 $11431$ 枚零点在 $[10000, 12999]$ 中的中点隔离、费耶尔对角占比、最大额外配对份额与有限观察半径（$111521$ / $111532$），以及第 $8236$ 与第 $8359$ 枚零点如何踏入三物理窗口筛选；
 4. 最后毫不粉饰地划出**全局调和平均界**与**单枚零点双钟选点**之间仍未合龙的比较定理鸿沟。
 
-## 3.1 RH 与狄利克雷 GRH 的外部形式化状态及费耶尔—凯莱判据 {#sec-ou-3-1}
+## 3.1 RH 与狄利克雷 GRH：外部形式化状态、费耶尔—凯莱判据与 theta 提升 {#sec-ou-3-1}
 
 按[前言](README.md#rem-ou-epistemic-contract)立下的六层认识论诚实契约，我们在动用任何带 `RiemannHypothesis` 前提的定理之前，先清点它的外部形式化凭证（`EXT-LEAN`）：
 
@@ -44,6 +44,33 @@
 ::: proof
 第一款正向在 RH 下对谱中各零点的余弦项赋非负权，取 $N \ge 2$ 个等距相位构成非负费耶尔核 $\sum_{j,k=0}^{N-1} \cos((j-k)\theta) = |\sum_{j=0}^{N-1} e^{ij\theta}|^2 \ge 0$。取步长 $b_{jk} y e^{-y/2}$（其中 $y = \log x$、$b_{jk} = |j-k|/(2N)$），将谱亏量的二阶差分与曼戈尔特斜坡的中点上界逐对比较并按 $y^2 e^{-y/2}$ 归一化，平均系数给出 $C_N = \frac{1 - N^{-2}}{48} \to \frac{1}{48}$；对任意给定 $c < 1/48$ 选定有限 $N$ 使 $c < C_N$ 即可得出最终尾部不等式。反向取 $c = 1/128$ 即可推出差额趋于正无穷并由临界包络判据回到 RH。第二款由凯莱莫比乌斯映射 $(s - 1)/s$ 把有限临界线 $\operatorname{Re} s = 1/2$ 逐点双射映到除去 $1$ 点的单位圆 $S^1 \setminus \{1\}$，再将对数径向亏量归零等价于 $|\mathrm{cayleyCoefficient}(\rho)| = 1$ 代入全部非平凡零点即得。完整证明由 Lean 内核检查。
 :::
+
+### 3.1.1 Theta 提升：从算术核到谱内积 {#sec-ou-3-1-1-rallis-bridge}
+
+费耶尔与凯莱判据刻画零点应满足的条件；算术证明还需要把可构造的形式同可估计的范数连接起来。Theta 提升提供一种具体机制：用 Weil 表示的 theta 核对源空间上的自守形式积分，得到目标空间上的形式。Rallis 倍增公式把两个提升的内积还原为源群上的矩阵系数积分。这里的 Weil 表示与显式公式中的 Weil 二次型是不同对象，不能仅凭同名互换正性结论。
+
+::: {.theorem #thm-ou-ch03-rallis-bridge title="Rallis 倍增内积公式" lean="D5/S3/Zeros/GRH/Lib/SiegelWeil/RallisInner/SharpData.inner_product_formula"}
+设 $E$ 带有所引库的域、CM 型及 Weil 数据结构，$n,m$ 为有限指标类型，$S=\operatorname{Space}(E,n,s)$、$T=\operatorname{Space}(E,m,t)$ 为相应空间。取自守特征 $a,b$、Schwartz 数据 $f,f'$ 与源空间上的自守形式 $y,y'$。假设 $2|n|<|m|$，$f$ 满足库中洁净条件 `IsClean`，且 $y,y'$ 属于 `S.rapidFunctions`，即快速衰减自守形式。记 $R(g)$ 为右平移，$\omega_{1,b}$ 为相应 Weil 表示，$\langle\cdot,\cdot\rangle_S$、$\langle\cdot,\cdot\rangle_T$ 为库中的 Petersson 内积，则
+
+$$
+k(g)=\langle f',\omega_{1,b}(g,1)f\rangle\,\langle y',R(g)y\rangle_S
+$$
+
+在 $U(S)(\mathbb A)$ 上可积，且参数为 $a,b$ 的 theta 提升满足
+
+$$
+\langle\theta_{f'}y',\theta_fy\rangle_T
+=\operatorname{vol}([U(T)])\int_{U(S)(\mathbb A)}k(g)\,dg.
+$$
+
+这里第一因子的配对为库中的 `dataInner`；$[U(T)]$ 为目标群的自守商空间，体积使用 Petersson 内积所采用的商测度；$f'$ 不要求洁净。
+:::
+
+::: proof
+将两个 theta 核倍增并应用 Siegel–Weil 公式。洁净条件排除边界轨道，留下由源空间有理等距映射给出的图轨道；展开这些轨道得到矩阵系数积分。严格秩不等式与快速衰减假设保证可积性。完整证明由 Lean 内核检查。
+:::
+
+取 $f'=f$、$y'=y$，左边就是提升形式的范数平方（手工代入，`ARGUED`）。这使算术构造与谱内积之间的联系具体可见，但该恒等式本身没有证明提升非零，也没有给出范数下界或构造以黎曼零点为谱的自伴算子。下面转回本书使用的零点相位和：它们的定量抵消仍需各自的解析估计。
 
 ## 3.2 调和权配对矩比、倒高度亏损与兰道围道竖边界 {#sec-ou-3-2}
 
@@ -192,7 +219,22 @@ $$
 
 横向积分把 $\log\zeta$ 在零点左侧的割线跳跃变为与 $\beta-\sigma$ 成正比。分别移过两种指数相位，再取实部对应的半和，割线就给出上式的双曲余弦权重。水平边界由局部对数导数控制在 $O_\lambda(L)$，上界取右极限。非共振使素幂多项式的相位积分也在这一预算内。[Korolev，引理 4 前的截断权](https://www.mathnet.ru/links/2bb06e5a975dd807fe74eae4c1f9fd1f/im2766_eng.pdf#page=9) · [割线推导与复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239342305)
 
-在 $a=0$ 时，零点和经同高反射还原 $C_\lambda(T)$，只差归一化系数和有界的低高度项。增大 $a$ 会把每个右侧零点的权重改成 $\cosh(\lambda(\delta_\rho-a)_+)-1$，其中 $v_+=\max(v,0)$。将该权重的导数与 Selberg 密度界配对，右侧余项至多为 $O_\lambda((T/L)e^{-aL/4}+L)$。取 $a=1/L$ 只降低密度估计中的常数，合成谱上窄带与右侧余项均可达到 $T/L$ 量级。取 $a=8\log L/L$ 时，右侧上界降到 $O_\lambda(T/L^3+L)$。在这一宽度下，窄带的同频积分由偏移的二次矩决定。具体地，令 $D_\lambda(u,T)=\sum_{0<\gamma\le T,\,\delta_\rho>u}e^{i\lambda\gamma}$，按重数计并纳入高度上端点。相减两个横向积分的割线公式，再以 $\cosh(\lambda d)-1=\lambda^2 d^2/2+O_\lambda(d^4)$ 展开，得到以下手工推导（`ARGUED`）。
+对实际 $\zeta$，更强的近临界线密度定理已能控制一定距离外的单层读数。设 $L_U=\log U$、$0\le a\le1/2$、$U\le V\le 2U$，并按重数取右闭窗。写 $N_+(u,T)$ 为 $0<\gamma\le T$ 且 $\delta_\rho>u$ 的零点个数。对每个固定 $0<\theta<4/7$，有一致界 $N_+(u,T)\ll_\theta T^{1-2\theta u}\log T$（$0\le u\le1/2$）。取计数上界 $3U$ 可覆盖右闭窗的端点。[Baluyot，*On the Zeros of Riemann’s Zeta-function*（2017），定理 1.2.1 与 §3.6](https://hdl.handle.net/1802/32855)
+
+逐零点把超过阈值的偏移写成分层积分，再取绝对值，得到以下手工推导（`ARGUED`）。
+
+$$
+\begin{aligned}
+\left|\sum_{\substack{U<\gamma\le V\\\delta_\rho>a}}
+(\delta_\rho-a)e^{i\lambda\gamma}\right|
+&\le \int_a^{1/2} N_+(u,3U)\,du \\
+&\ll_\theta U e^{-2\theta a L_U}.
+\end{aligned}
+$$
+
+固定在实部 $1/2+a$ 时，割线权重为 $\sinh(\lambda(\delta_\rho-a))/\lambda$（只计 $\delta_\rho>a$）。它至多是 $\cosh(\lambda/2)$ 倍的线性权重，因此同频对数模积分也受此界控制，另加水平边界的 $O_\lambda(L_U)$。取 $a=b\log L_U/L_U$，每个固定 $b>7/8$ 都可选 $2\theta b>1$，从而得到 $o(U/L_U)$。在 $b=2$，一次矩为 $O_\varepsilon(U/L_U^{16/7-\varepsilon})$，无需假定 RH 或利用零点之间的相位抵消。$b=7/8$ 时，这族密度界只给出 $O_\varepsilon(U/L_U^{1-\varepsilon})$。[单层割线与分层推导](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240931083)
+
+回到横向积分的公式，在 $a=0$ 时，零点和经同高反射还原 $C_\lambda(T)$，只差归一化系数和有界的低高度项。增大 $a$ 会把每个右侧零点的权重改成 $\cosh(\lambda(\delta_\rho-a)_+)-1$，其中 $v_+=\max(v,0)$。将该权重的导数与 Selberg 密度界配对，右侧余项至多为 $O_\lambda((T/L)e^{-aL/4}+L)$。取 $a=1/L$ 只降低密度估计中的常数，合成谱上窄带与右侧余项均可达到 $T/L$ 量级。取 $a=8\log L/L$ 时，右侧上界降到 $O_\lambda(T/L^3+L)$。在这一宽度下，窄带的同频积分由偏移的二次矩决定。具体地，令 $D_\lambda(u,T)=\sum_{0<\gamma\le T,\,\delta_\rho>u}e^{i\lambda\gamma}$，按重数计并纳入高度上端点。相减两个横向积分的割线公式，再以 $\cosh(\lambda d)-1=\lambda^2 d^2/2+O_\lambda(d^4)$ 展开，得到以下手工推导（`ARGUED`）。
 
 $$
 \int_3^T e^{i\lambda t}\int_{1/2}^{1/2+a}\log|\zeta(\sigma+it)|\,d\sigma\,dt
@@ -204,6 +246,29 @@ $$
 这里 $\sum_{\delta_\rho>0,\,0<\gamma\le T}\delta_\rho^4=O(T/L^3)$ 来自同一个 Selberg 密度界，固定素幂多项式的同频积分为 $O_\lambda(1)$。[Simonič，式 (3)，引 Selberg 密度界](https://arxiv.org/pdf/1910.08274v2#page=1)
 
 二次矩等于 $2\int_0^{1/2}uD_\lambda(u,T)\,du$。若在 $0<u\le a$ 内只有一致界 $D_\lambda(u,T)=O_\lambda(T)$，分层积分给出 $O_\lambda(T(\log L)^2/L^2)$。双对数因子可以达到。每个相位周期只在末端放一对偏轴零点，偏移为 $\pm 4\log\log t/\log t$，其中 $t$ 是周期末端。这样的点数和偏移符合密度界，两枚临界线点的微移可精确抵消这对零点给带权和增加的部分。由此可同时保留光滑计数（误差 $O_\lambda(1)$）和同频带权端点首项（误差 $O_\lambda(1)$），而模型的二次矩仍为 $(8\lambda/\pi+o(1))T(\log L)^2/L^2$。要把实际 $\zeta$ 的窄带积分控制到 $O_\lambda(T/L^2)$，需要对二次矩取得同阶估计。[构造、端点与数值复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240157206)
+
+固定实部上的同频积分读出的是一次偏移矩。固定上文的非共振频率 $\lambda>0$。对充分大的 $U$，令 $L_U=\log U$、$0\le a\le 1/2$，零点按重数计，并设 $M_a(U,V)=\sum_{U<\gamma\le V}(\delta_\rho-a)_+e^{i\lambda\gamma}$。同一割线计算（`ARGUED`）在 $U\le V\le 2U$ 上一致给出
+
+$$
+\int_U^V e^{i\lambda t}\log|\zeta(1/2+a+it)|\,dt
+=2\pi M_a(U,V)+O_\lambda(U/L_U^2+L_U).
+$$
+
+固定实部后，每条割线贡献的是 $\sinh(\lambda(\delta_\rho-a)_+)/\lambda$。用 Selberg 密度界控制偏移的三阶绝对矩，即得线性化余差。右边界的对数欧拉级数只有素幂频率，非共振使其积分一致有界。水平边界耗费 $O_\lambda(L_U)$，两端均取右极限以恢复 $(U,V]$。因此 $a=1/L_U$ 处的 $O_\lambda(U/L_U)$ 积分目标等价于同阶的一次矩估计。若只补充一致阈值界 $|D_\lambda(u,V)-D_\lambda(u,U)|\ll_\lambda U$，在 $u=4\log L_U/L_U$ 处切开分层积分，得到 $O_\lambda(U\log L_U/L_U)$。 [割线推导与密度估计](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240412364)
+
+即使二次矩在每个右闭窗中都很小，一次矩仍可达到这个量级（合成谱，`ARGUED`）。令 $P=2\pi/\lambda$、$t_j=jP$、$d_j=4\log\log t_j/\log t_j$。从此后恒有 $d_j<1/2$ 的指标起，在每个周期末端放一对偏移 $\pm d_j$，两点均在临界带内。在 $t_j-P/2$ 处放两对偏移 $\pm d_j/\sqrt{2}$，相位与末端相反。完整周期的二次矩恰为零，一次矩却为 $(1-\sqrt{2})d_j+a$，只要两组正偏移都大于 $a$。于是二进窗内的二次矩只剩边界贡献，而 $M_{1/L_U}(U,2U)\sim-4(\sqrt{2}-1)U\log L_U/(P L_U)$。用带限核补偿这些偏轴点，可同时保留光滑计数、Selberg 型密度、同频带权硬窗首项和固定无素幂频带的平滑显式公式读数。[构造与数值复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240412364)
+
+把阈值推广为 $a_\kappa=\kappa\log L_U/L_U$ 可直接检验下一目标。对每个固定的 $0<\kappa<2\sqrt{2}$ 及充分大的 $U$，二进窗内两组右侧偏移均超过 $a_\kappa$，并且每个完整周期的一次矩为
+$$
+(d_j-a_\kappa)-2(d_j/\sqrt{2}-a_\kappa)
+=\bigl[\kappa-4(\sqrt{2}-1)+o(1)\bigr]\frac{\log L_U}{L_U}.
+$$
+因此在 $\kappa=2$ 时
+$$
+M_{a_2}(U,2U)=\frac{2-4(\sqrt{2}-1)+o(1)}{P}\frac{U\log L_U}{L_U},
+\qquad 2-4(\sqrt{2}-1)=0.3431457505\ldots.
+$$
+同一构造的完整周期二次矩仍为 $d_j^2-2(d_j/\sqrt{2})^2=0$，任意右闭二进窗的二次矩只有两个边界部分，大小为 $O((\log L_U/L_U)^2)$。因此，单靠计数、指数 $1/4$ 的 Selberg 型密度、固定无素幂频带复取样和带权端点补偿，仍允许 $a_2$ 处的一次矩达到 $U\log\log U/\log U$。对实际 $\zeta$ 零点，从 $a$ 起积分零点计数的绝对上界，Jutila 指数为 $3/4$ 的密度界给出 $|M_a(U,V)|\ll U\exp(-3aL_U/4)$。在 $a_2$ 处已得 $O(U/L_U^{3/2})$，在 $a=1/L_U$ 处这一步给出 $O(U)$。[零点密度，定理 2.4](https://arxiv.org/pdf/1404.3080#page=5) · [参数化推导](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240636139) · [临界带内的右闭窗复算与密度积分](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240967665)
 
 对实际 $\zeta$ 零点，保留实部权重时，无须用 RH 作为解析输入也可在高度平均下读出端点项。令 $S(t)$ 为黎曼–冯·曼戈尔特公式中的辐角项，即离开零点高度时 $N(t)=1+\vartheta(t)/\pi+S(t)$，其中 $\vartheta$ 是黎曼–西格尔 $\vartheta$ 函数。从带权和中扣除光滑端点项
 
@@ -342,7 +407,9 @@ $$
 
    记上述有限余弦积分为 $C_{\eta,T}(d)$。在 $T=111521$ 处，孤立中点配对的两个方向共贡献 $4C_{\eta,T}(\Delta)/19^4$。仅扣除这两项后，相对 $B$ 的余量落在 $(-3.05165,-3.05163)\times10^{-5}$，读数落回阈值之下。其余异占据配对的整线系数为零，但在这个有限半径处合计贡献约 $1.5192\times10^{-9}$，大于上面的正余量。
 
-   若只保留占据对角与孤立中点配对，$\eta=10^{-3}$ 时的首次过阈整数半径为 $111526$。固定这个等权窗，把带宽从 $10^{-3}$ 增至 $10^{-3}+10^{-9}$，完整读数在 $T=111520$ 处恰有一次越过 $B$，临界带宽 $\eta_*$ 落在 $(0.0010000006020,0.0010000006021)$。因此完整读数的首次严格过阈整数半径在 $\eta\le\eta_*$ 时为 $111521$，在 $\eta>\eta_*$ 时降为 $111520$。只保留对角与中点配对的读数在此区间内始终首次过阈于 $111526$。这整个带宽区间仍在整线孤立碰撞带内。球算术利用 $F_T'(a)=\operatorname{Si}(aT)$ 围住了相邻整数半径读数的带宽导数，并核验临界带宽两端的余量符号。[区间证书与复算脚本](https://github.com/the-omega-institute/trureturing-books/issues/1996#issuecomment-7239325689)
+   把仅保留占据对角与孤立中点配对的积分记为 $J_\eta(T)$。在 $\eta=10^{-3}$ 时，它的首次严格过阈整数半径为 $111526$。将带宽增至 $10^{-3}+10^{-9}$ 的过程中，完整读数在 $T=111520$ 处恰有一次越过 $B$，临界带宽 $\eta_*$ 落在 $(0.0010000006020,0.0010000006021)$。在此区间内，完整读数的首次严格过阈整数半径在 $\eta\le\eta_*$ 时为 $111521$，在 $\eta>\eta_*$ 时降为 $111520$，而 $J_\eta$ 始终首次过阈于 $111526$。[增大带宽的区间证书](https://github.com/the-omega-institute/trureturing-books/issues/1996#issuecomment-7239325689)
+
+   从 $10^{-3}$ 减小带宽至 $0.000999990$ 时，$J_\eta(111526)$ 先降至 $B$，其临界带宽为 $\eta_J\in(0.000999994536,0.000999994537)$。完整读数 $I_\eta(111521)$ 随后在 $\eta_I\in(0.000999990430,0.000999990431)$ 降至 $B$。在这个区间内，$J_\eta$ 的首次严格过阈整数半径在 $\eta\le\eta_J$ 时升至 $111527$，$I_\eta$ 的则在 $\eta\le\eta_I$ 时升至 $111522$。两次切换之间（$\eta_I<\eta\le\eta_J$），两个首过半径相差六个单位。增减带宽的两个区间都处于整线孤立碰撞带内。球算术利用 $F_T'(a)=\operatorname{Si}(aT)$ 围住相邻整数半径读数的带宽导数，并核验临界带宽两端的余量符号。[减小带宽的区间证书与复算脚本](https://github.com/the-omega-institute/trureturing-books/issues/1996#issuecomment-7240859714)
 
    局部调和权下，首过阈值的整数半径为 $111532$（$111531$ 时仍低于相应的基线）。通用相对截尾界分别给出 $11{,}330{,}943$（等权）与 $11{,}331{,}843$（局部调和权）的充分半径。
 
