@@ -233,6 +233,10 @@ $$
 
 平移不变的局域流取总导数后，零动量系数必为零。这个系数因而检验了全场方程与分部积分商中的非零性，维数 $100$ 的 $\ell=29$ 见证和上述奇数 $\ell\ge31$ 的最低维数均可达到。[全场方程的射流见证](https://github.com/the-omega-institute/trureturing-books/issues/1641#issuecomment-7231982046) · [零总动量见证](https://github.com/the-omega-institute/trureturing-books/issues/1641#issuecomment-7232021736)
 
+**较低奇数轻子数（`ARGUED`）。** 在 $\ell=1,3,5,7$ 时复用前面的维数 $16,19,22,25$ 的非零单项式。若算子含 $u^c$，在 Higgs 共轭为零的背景上先取自由 $u^c$，再用 $H u^c$ 与 $H Q^\dagger$ 依次求出 $Q^\dagger$ 和 $d^c$ 的特解。所涉源频率在泛型动量下非特征。特解只携带 $u^c$ 的 Grassmann 系数。选择自由 $d^c$ 系数的次数等于算子中 $d^c$ 的个数，就只读出 $d^c$ 的齐次部分。这四个非零单项式都含两枚未微分、极化独立的 $d^c$，仍可用其点旋量平衡总动量。特解的频率只依赖 $H$ 与 $u^c$，故这一步保留非零性。
+
+在 $\ell=9+2m$、$0\le m\le9$ 时，用 $\mathcal O_{30}\prod_i K_i^{m_i}$，其中三个 $m_i$ 的和为 $m$，每个至多为 $3$。每代中性一阶空间射流的非退化交替型提供三对，$\mathcal O_{30}$ 仍提供两枚独立极化的 $d^c$。因此分部积分商在这一段的最低维数为 $30+7m$。连同 $\ell=29$ 及更高各档，覆盖了 $\Delta B=-3$ 时全部正奇数轻子数。[较低轻子数的零动量检验](https://github.com/the-omega-institute/trureturing-books/issues/1641#issuecomment-7232117226)
+
 ## 9.3 壳三重代数闭合、离散反常流入与二十五态提升球壳 {#sec-ch09-algebra-inflow}
 
 如果说上一节展示的是标准模型之上的洁净 $U(1)_X$ 提升，那么当我们把贝伦德球壳的逐物种三重相位 $F$ 直接塞进完整大统一群 $SU(5)$ 时，真正的代数雪崩与拓扑奇观才正式上演。
