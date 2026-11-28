@@ -217,6 +217,17 @@ For a transposition $s$, the two representatives in $G'$ are $(s,1)$ and $(s,3)$
 
 The parity of the square's index is therefore the same for every choice of representative in a given model. In the direct product, $\sigma\mapsto(\sigma,0)$ preserves ternary transport. In the pullback, once the representative of the identity class has been moved to the identity, the chosen representative of a transposition would have to square to the identity. Its square has odd index. Each model has thirty-six points in six reading classes, with identical readings and quotient transport.
 
+**Worked example. The two obstructions can occur independently.** Keep six reading classes of six points each, and let odd representatives act on the identity class by inversion. Write each factor using integer representatives $(k,i,j)$ with $0\le k<6$, $0\le i<3$, and $0\le j<2$. The quotient coordinates $(i,j)$ represent $(123)^i(12)^j$. Choose $\alpha\in\{0,3\}$ and $\beta\in\{0,2,4\}$. Compute $m=i+(-1)^j i'$ in the integers. Reduce the first coordinate of the following product modulo $6$.
+
+$$
+(k,i,j)(\ell,i',j')
+=\bigl(k+(-1)^j\ell+\beta\lfloor m/3\rfloor+\alpha jj',\ m\bmod 3,\ (j+j')\bmod 2\bigr).
+$$
+
+The first coordinate records two carries, one from the rotation index and one from the parity. In a product of three factors the total signed carry from the rotation index is independent of the bracketing. The same holds for the parity carry since inversion fixes $\alpha$. The identity is $(0,0,0)$. To find an inverse, invert the quotient coordinates and solve uniquely for the first coordinate. Comparing just the quotient coordinates gives the same readings and Gram sum of squares as above.
+
+Every representative of a transposition has square indexed by $\alpha$ in the identity class. The cube of a representative $(k,1,0)$ of the cycle $(123)$ has index $\beta+3k$, so its residue modulo $3$ is always $\beta\bmod 3$. If $\alpha\ne0$ or $\beta\bmod3\ne0$, some required power cannot be the identity for any choice of representative. When $\alpha=\beta=0$, the choice $(i,j)\mapsto(0,i,j)$ preserves multiplication and hence ternary transport. Choosing $\alpha$ and $\beta$ independently gives all four patterns of vanishing and nonvanishing obstructions.
+
 ## 1.4 Why a Computable Typeclass class OmegaSpace Rather Than an Unchecked axiom {#sec-ch01-typeclass-not-axiom}
 
 When formalizing `AXIOM-Ω` in a proof assistant, the most tempting shortcut is also the deadliest: typing `axiom M : Type`, `axiom triad : M → M → M → M`, and `axiom kappa_refl : ∀ x, kappa x x = 1`. **This monograph bans unchecked `axiom` declarations from the very first line.**
