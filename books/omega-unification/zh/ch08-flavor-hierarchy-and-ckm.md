@@ -276,7 +276,20 @@ $$
 
 只指定两套谱与顶底夹角时，可以在两条顶线张成的平面内达到 $F$。若 $\theta\le\pi/4$，一条轮换本征线从中间分开两条顶线。若 $\theta\ge\pi/4$，两条最近的轮换本征线分别向外偏到彼此正交。两部门各把次大本征线放在平面内、最小本征线放在法线上。谱隙相同时，两侧各偏 $d/2$。[射影角的三角不等式](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.fs_angle_triangle) · [不同谱隙的最优分角](https://github.com/the-omega-institute/trureturing-books/issues/1849#issuecomment-7238283999)
 
-固定整对质量矩阵后，若 $0<\theta<\pi/2$，最小破缺等于 $F$ 当且仅当这个平面的法线同时落在 $A,B$ 的核中。取等时，两条顶线各占两个轮换坐标，并且两线偏角之和恰为 $d$。若两线只共用一个坐标，最近轮换线相同会迫使 $\theta<d$，最近轮换线不同则会迫使 $\pi/2-\theta<d$。因此它们共用同一个坐标平面。对谱简单的部门，谱隙估计取等还要求最轻质量线本身是轮换本征线，只能取该平面的法线。秩一部门自动湮灭法线。两谱均简单时，等号条件化为 $|V_{ud}|=1$。若 $|V_{ud}|<1$，最小破缺严格大于 $F$。[等号判据与定量裕量的推导](https://github.com/the-omega-institute/trureturing-books/issues/1875)
+**正交端点附近的分角（手工推导）。** 当 $d=\pi/2-\theta=\mu\varepsilon$ 与次重谱同阶时，两条重线各自锁定一个轮换坐标。取端点正交基 $(e_0,e_1,e_2)$，其中 $e_0,e_1$ 为上下型端点重线的单位向量，$e_2$ 垂直于顶底平面。固定上型质量基，把下型端点质量基在该平面内整体转过 $\mu\varepsilon$，使底线朝顶线靠近。令归一次重质量平方为 $a\varepsilon,b\varepsilon$，$\mu,a,b>0$。设 $c,s$ 为上型和下型端点次重单位向量，$c_j,s_j$ 为它们在端点基中的分量。记 $U=a|c_1 c_2|$、$V=b|s_0 s_2|$，即端点基中两部门各自轻块的首阶非对角元模。设 $D_*$ 为在所有复轮换本征基上最小化最大破缺的结果，则
+
+$$
+\begin{aligned}
+x_*&=\min\left\{\mu,\max\left\{0,\frac{\mu^2+V^2-U^2}{2\mu}\right\}\right\},\\
+D_*&=\sqrt6\,\varepsilon\max\left\{\sqrt{x_*^2+U^2},\sqrt{(\mu-x_*)^2+V^2}\right\}+O(\varepsilon^2).
+\end{aligned}
+$$
+
+在顶底平面内将端点基旋转 $x_*\varepsilon$ 并保留法线，即可取得这个首阶值。因为任何达到 $O(\varepsilon)$ 破缺的轮换基都有两条线分别距 $e_0,e_1$ 至多 $O(\varepsilon)$，其一阶变化可用反厄米矩阵表示。记该矩阵的上三角元为 $(x,y,z)$，则首阶平方成本除去共同因子 $6\varepsilon^2$ 后为 $|x|^2+|y|^2+U^2$ 与 $|\mu-x|^2+|z|^2+V^2$。所以可以把 $x$ 投影到实线段 $[0,\mu]$，并将两个离开平面的分量 $y,z$ 置零。两侧各分得正角当且仅当 $|U^2-V^2|<\mu^2$。若 $U^2\ge V^2+\mu^2$，上型轮换线在首阶与顶线重合。若 $V^2\ge U^2+\mu^2$，下型轮换线在首阶与底线重合。
+
+两线界的首阶系数 $\sqrt{6}\mu/2$ 恰在 $U=V=0$ 时达到。例如 $\mu=a=b=1$、$c=(e_1+i e_2)/\sqrt2$、$s=(e_0+e^{0.4i}e_2)/\sqrt2$ 时，两侧各分一半偏角，最优系数升为 $\sqrt3$。[全局下界、取优基与矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/1951#issuecomment-7238865467)
+
+固定整对质量矩阵后，若 $0<\theta<\pi/2$，最小破缺等于 $F$ 当且仅当顶底平面的法线同时落在 $A,B$ 的核中。取等时，两条顶线各占两个轮换坐标，并且两线偏角之和恰为 $d$。若两线只共用一个坐标，最近轮换线相同会迫使 $\theta<d$，最近轮换线不同则会迫使 $\pi/2-\theta<d$。因此它们共用同一个坐标平面。对谱简单的部门，谱隙估计取等还要求最轻质量线本身是轮换本征线，只能取该平面的法线。秩一部门自动湮灭法线。两谱均简单时，等号条件化为 $|V_{ud}|=1$。若 $|V_{ud}|<1$，最小破缺严格大于 $F$。[等号判据与定量裕量的推导](https://github.com/the-omega-institute/trureturing-books/issues/1875)
 
 固定两套质量基后，若只让次重质量平方趋于零，上述差距以什么速度收窄？记 $D_*$ 为这对矩阵在全部轮换本征基上的最小破缺。令两套归一次重质量平方分别为 $a\varepsilon,b\varepsilon$，其中 $a,b>0$，并固定 $0<\theta<\pi/2$。记 $\lambda_u=|V_{ub}|^2/\sin^2\theta$、$\lambda_d=|V_{td}|^2/\sin^2\theta$，它们分别是上、下型最轻质量线在顶底平面内的投影长度平方。手工推导给出
 
