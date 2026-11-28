@@ -324,6 +324,16 @@ $$
 
 由此，$t_1,t_2$ 落在唯一根盒内，$t_3\in[-5.67,-5.64]$，$t_4\in[-10^{-3},0)$。沿该解支增加 $t_4$ 会严格降低总变差。闭包的边界 $t_4=0$ 上有唯一极小布局，因此这一配对及符号类的全域下确界介于 $1\,030\,993.777$ 与 $1\,030\,993.778$ 之间。所有最小化序列都趋于该布局，合法内点只在 $x_4\to1^-$ 时逼近下确界。其余配对及符号类的最优代价仍开放。 [边界极小值的区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2207#issuecomment-7241039259)
 
+对这一配对及符号类，若规定最大截止 $x_4\le e^{-\rho}$，其中 $0<\rho\le10^{-7}$，最优布局在 $t_4=-\rho$ 取到，并且第三截止也向小值移动。**手工推导与区间计算。** 记 $t_3^*$ 为上限为 $1$ 时的边界极小点，$T_{\inf}=T(t_3^*,0)$。以 $T_{ij}$ 表示消去前两点及权重后的二阶偏导，以下系数均在 $(t_3^*,0)$ 计算。由 $\partial_3T(t_3(\rho),-\rho)=0$ 得
+
+$$
+t_3(\rho)=t_3^*+\frac{T_{34}}{T_{33}}\rho+O(\rho^2),\qquad
+T_{\min}(\rho)=T_{\inf}-T_4\rho+
+\frac12\left(T_{44}-\frac{T_{34}^2}{T_{33}}\right)\rho^2+O(\rho^3).
+$$
+
+把五矩固定的节点延续写成二阶射流，逐阶解出前两点的位移，再读取代价系数。区间计算给出 $T_{34}/T_{33}\approx-0.539828$，$-T_4\approx2680.956$，二阶代价系数约为 $626.859$。其中 $T_{34}^2/(2T_{33})\approx724.305$ 是允许第三截止调整所节省的二阶代价。在整个上限区间，最小代价超过其切线 $T_{\inf}+a\rho$ 的量介于 $149\rho^2$ 与 $1091\rho^2$ 之间，其中 $a=-T_4$。 [《OMEGA 数学》§7.1.1 的射流运算](https://github.com/the-omega-institute/trureturing-books/blob/main/books/omega-math/zh/ch07-second-order-jet-calculus.md#sec-ch07-jet2-inverse-chain) · [热响应的实系数延拓与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2380#issuecomment-7242491058)
+
 共同标度的驻定仍允许对单个截止的移动高度敏感。对单独检验截止敏感性的四点算例，移动最敏感的截止，相对移动不到 $8.6\times 10^{-120}$ 曲率就已转负，比上表的通用上界小 $800$ 倍以上，与 $311$ 单态实例同量级，截止之间的比值须精确到约 $120$ 位。$10^{-122}$ 的微调没有减少，只是转移并分摊到截止比值与权重上（[共同标度驻定及其代价](https://github.com/the-omega-institute/trureturing-experiments/blob/f516e0f09642194c1a309ffc0cfd94e129844b15/experiments/ch39-omega-research/replay/%E4%B8%A4%E7%82%B9%E6%88%AA%E6%AD%A2%E5%9C%A8%E5%8C%B9%E9%85%8D%E7%89%9B%E9%A1%BF%E9%A1%B9%E6%97%B6%E4%B8%8D%E8%83%BD%E9%A9%BB%E5%AE%9A%E7%9C%9F%E7%A9%BA%E8%AF%BB%E6%95%B0%E8%80%8C%E5%9B%9B%E7%82%B9%E6%B5%8B%E5%BA%A6%E5%AF%B9%E5%85%B1%E5%90%8C%E6%88%AA%E6%AD%A2%E6%A0%87%E5%BA%A6%E4%B8%80%E9%98%B6%E9%A9%BB%E5%AE%9A.md) · [区间证书](https://github.com/the-omega-institute/trureturing-experiments/blob/f516e0f09642194c1a309ffc0cfd94e129844b15/experiments/ch39-omega-research/replay/ch39-cutoff-scale-stationarity.py)）。
 
 若要求移动截止时牛顿标定始终精确等于 $K=1$，真空读数还能翻负吗？固定这些驻定解的有符号权重 $p_j$，记单点牛顿、真空响应为 $k,w$，则 $K=\sum_jp_jk(x_j)$、$W=\sum_jp_jw(x_j)$，沿标定面有 $C=W$。在对数坐标 $u_j=\log(x'_j/x_j)$ 中，记 $a_j=p_jDk(x'_j)$、$b_j=p_jDw(x'_j)$，其中 $D=x\,d/dx$。在内部正规点 $a\ne0$，允许的速度满足 $a\cdot v=0$。各坐标限速 $|v_j|\le1$ 时，最大的一阶真空下降率为 $\min_\lambda\sum_j|b_j-\lambda a_j|$。任取 $\lambda$ 即给出上界。取 $b_j/a_j$ 按 $|a_j|$ 加权的中位数（仅计 $a_j\ne0$），令非零剩余量对应的速度取其符号的相反数，中位数处的速度即可补足约束并达到上界。
