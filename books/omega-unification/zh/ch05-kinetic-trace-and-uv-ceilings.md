@@ -254,7 +254,9 @@ $$
 \qquad
 0.1701837999<\varepsilon_{\mathrm{pair}}<0.1701838001 .
 $$
-上确界仍为 $N-1+A_r^u+C_r^u$，取等条件同上。临界截顶随 $u$ 递增，因此在此窗口内，平分剩余暴露可使两份热权之和超过 $1+w_1$，单次转移因而能达到零余权端。若最大的 $N$ 份热权中至少两份未截顶，两条前缀界与 $w\log w$ 和的区间比较仍给出转移端占优。若最大的 $N$ 份热权中恰有 $N-1$ 份截顶，两份边际幂增益的比值界给出严格正的转移斜率。超过 $\varepsilon_{\mathrm{pair}}$ 后，指数 $u$ 足够接近 $1$ 时，即使平分剩余暴露也无法使两份热权之和达到 $1+w_1$。越过该边界后的正余权最优值仍待判定。 [双权共用最大窗口的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2321#issuecomment-7241885681)
+上确界仍为 $N-1+A_r^u+C_r^u$，取等条件同上。临界截顶随 $u$ 递增，因此在此窗口内，平分剩余暴露可使两份热权之和超过 $1+w_1$，单次转移因而能达到零余权端。若最大的 $N$ 份热权中至少两份未截顶，两条前缀界与 $w\log w$ 和的区间比较仍给出转移端占优。若最大的 $N$ 份热权中恰有 $N-1$ 份截顶，两份边际幂增益的比值界给出严格正的转移斜率。超过 $\varepsilon_{\mathrm{pair}}$ 后，指数 $u$ 足够接近 $1$ 时，即使平分剩余暴露也无法使两份热权之和达到 $1+w_1$。 [双权共用最大窗口的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2321#issuecomment-7241885681)
+
+缺口达到 $1/5$ 时仍有两段精确公式。记 $r_*=-\log(-\log((1+w_1)/2))$。若 $r\ge r_*$，沿用零余权端的值。若 $r<r_*$，取 $E=W(r/2)$、$R=1+w_1-2E$，精确值为 $N-1+2E^u+R^u$。两式在 $r=r_*$ 处以 $R=0$ 接合。正余权段的单次转移严格增至平分暴露。若最大的 $N$ 份热权中至少两份未截顶，再用前 $N+1$ 项的上界得到严格幂和比较，这一比较也覆盖指数趋近 $1$ 的情形。$N=1$ 时取等热权为 $E,E,R$，不计排列。$N\ge2$ 时正质量谱可逼近上确界。 [正余权段的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2321#issuecomment-7242044408) · [零余权段至五分之一的补全](https://github.com/the-omega-institute/trureturing-books/issues/2321#issuecomment-7242100855)
 
 当指数达到临界值后，无转移端在更宽的预算窗内占优（手工推导，`ARGUED`）。取 $u_c\le u\le4$、$\tau=\tau_0(u)$ 和 $0<\varepsilon\le0.60$，则
 
