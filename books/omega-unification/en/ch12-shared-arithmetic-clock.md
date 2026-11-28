@@ -167,10 +167,10 @@ Once six arithmetic times crush more than $99.931\%$ of spectral mass into three
 | Short coherent walks & light-mode counts | 2-step open / 3-step closed; linear five-charge light-mode modulation | Short-walk Born efficiency ratio $< 3.705 \times 10^8$ vs required $2.28327 \times 10^{14}$ (longer closed walks need up to $63$ edges on $22$ indexed zeros); five-charge light-mode count share over 41 arithmetic times must stay $< 7.8 \times 10^{-9}$ |
 | Single-shot physical selector vs entropy-minimizing prior | Full-spectrum pass rate / relative entropy to inverse-square prior | Full-spectrum pass rate strictly $< 4.42870 \times 10^{-5}$ (optimal endpoint exceeds all bounded-step dual-clock circuits; on 11 zeros it uniquely recovers the 8-zero $6.08330\%$ deficit in exactly $363$ controlled dual-clock queries for fixed-path superposition, or $243$–$363$ in general); entropy minimization uniquely selects $6.83812\%$ deficit ($\approx 50.08072$ bits per accepted sample; full-spectrum entropy weights require one exact radial spoke plus $b + 154$ and $b + 54$ coordinate bits for $2^{-b}$ log-weight accuracy) |
 
-Even retaining all zeros above any cutoff $H$ under inverse-square weighting inside any fixed positive shell-phase window drives the limiting distribution of $H / \gamma$ to uniform on $[0, 1]$, leaving a limiting two-time error of $3.71810906 \times 10^{-6}$ after optimizing scale; at unit scale $a = 1$, the five-charge three-light-mode support cannot match even the first arithmetic time alone ($> 32.092\%$ must sit outside it, rising past $87.818\%$ for the first $40$ times).
+Even retaining all zeros above any cutoff $H$ under inverse-square weighting inside any fixed shell-phase window of positive Haar measure with Haar-null boundary drives the limiting distribution of $H / \gamma$ to uniform on $[0, 1]$, leaving a limiting two-time error of $3.71810906 \times 10^{-6}$ after optimizing scale; at unit scale $a = 1$, the five-charge three-light-mode support cannot match even the first arithmetic time alone ($> 32.092\%$ must sit outside it, rising past $87.818\%$ for the first $40$ times).
 
 ::: {.remark #rem-ou-ch12-windowed-rate title="A Whole-Spectrum Benchmark and the Windowed Rate Gap"}
-Let $A_W(t)$ count the positive zeros through height $t$ in the fixed phase window $W$, with multiplicity. Suppose $c>0$, $b_H\ge0$, and
+**Argument (`ARGUED`).** Let $A_W(t)$ count the positive zeros through height $t$ in the fixed phase window $W$, with multiplicity. Suppose $c>0$, $b_H\ge0$, and
 
 $$
 \begin{aligned}
@@ -221,11 +221,11 @@ $$
 0.0283138<D_H<0.0283806.
 $$
 
-This numerical bound has no phase filter. Applying it to the Chapter 2 Haar acceptance region or the three height bands in this chapter still requires the corresponding $b_H$ or an equivalent uniform Fourier bound. [Counting estimate, Corollary 1.2](https://doi.org/10.1016/j.jnt.2021.06.032)
+This benchmark uses the full spectrum without phase filtering. The Chapter 2 Haar acceptance region still requires its own $b_H$ or an equivalent uniform Fourier bound. [Hasanalizade, Shen, and Wong, Counting zeros of the Riemann zeta function (2022), Corollary 1.2](https://doi.org/10.1016/j.jnt.2021.06.032)
 :::
 
 ::: {.problem #prob-ou-ch12-windowed-haar-rate title="Explicit Remainders for a Fixed Haar Phase Window"}
-For the fixed Haar acceptance region in Chapter 2 and the fixed positive-measure phase window used in Chapter 12, prove or disprove the existence of a checkable constant $b_H$ such that, with $m(t)$ as above,
+Let $W$ be the fixed Haar acceptance region in Chapter 2, whose boundary has Haar measure zero. Set $c=\mu(W)/(2\pi)$ for normalized Haar measure $\mu$. Prove or disprove the existence of a checkable constant $b_H$ such that, with $m(t)$ as above,
 
 $$
 |A_W(t)-c\,m(t)|\le b_Ht
