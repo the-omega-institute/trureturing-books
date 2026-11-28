@@ -265,7 +265,17 @@ $$
 
 这个有限极限也可能很大。取 $k=1$，令 $T$ 以概率 $2/3$、$1/3$ 分别取 $-1$、$2$，并在 $b_j=(j-1/(2j))^2-2$（$1\le j\le6$）处读取均值。若三原子混合的补偿速率限制在 $[15/8,5]$，则任一 $\rho>0$ 的窗口 $|\beta|,|\beta'|\le\rho$ 内的统一界 $\lvert u-u'\rvert\le C\|m-m'\|_\infty$ 都要求 $C>3\,811\,441$（手工推导，`ARGUED`）。让三个速率从区间内部合拢到 $5$，并记 $\tau_j=(b_j+5)^{-1}$。把各读数变分除以 $\tau_j^2$ 后，五个混合方向张成采样的次数不超过四的多项式，曲率方向正比于 $\sqrt{\tau_j}$。五阶差商消去这五个混合方向。将它在原读数上的权重绝对值之和除以剩余的曲率信号，即得合流时的放大率。[完整推导与有理区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2020#issuecomment-7239159894)
 
-在零耦合处，这一合流极限也是三原子局部放大率的上确界（手工推导，`ARGUED`）。用《OMEGA 数学》§8.1 的三阶射流展开补偿形状因子，立方曲率方向对应配分积分中的 $v^{3/2}/3$。对三枚互异速率和严格正权，将零耦合配分函数写成有理函数。三个极点和两个交错零点给出五个平方 Cauchy 列。用余子式消去这五列后，曲率信号成为关于附加平移速率的同号积分，三个原混合速率各贡献一个平方差。比较该积分与余子式绝对值之和，任意三枚互异速率的局部放大率都严格低于合流于 $5$ 的极限 $3\,811\,441.155351\ldots$。这个比较采用固定的六个平移和零耦合基点。 [射流代数](https://github.com/the-omega-institute/trureturing-books/blob/74e53372782e78594192a0a4e943fdcf4141d5b6/books/omega-math/zh/ch08-dfinite-jets-and-cayley-unification.md#sec-ch08-dfinite-jet-ring) · [完整推导与有理复算](https://github.com/the-omega-institute/trureturing-books/issues/2020#issuecomment-7242364436)
+在同一个六点算例中，消去五个混合切向后，考察六个读数的无穷范数误差对 $u=\beta^3$ 的局部放大率。取固定的严格正概率权，让三枚互异的补偿速率从区间内部合流于 $5$，记放大率的极限为 $A_5(\beta)$。在 $\beta=0$，任意三枚互异的补偿速率 $x_i\in[15/8,5]$ 和严格正概率权的局部放大率都严格小于 $A_5(0)$，而合流可任意逼近这一上确界（手工推导，`ARGUED`）。精确区间为 $3\,811\,441.155351<A_5(0)<3\,811\,441.155352$。
+
+按《OMEGA 数学》§8.1 展开补偿形状因子 $K(s)=e^{-s^2}\mathbb E e^{sT}$，三阶项给出配分积分中的立方曲率方向 $v^{3/2}/3$。零耦合配分函数是有理函数，其三个极点和两个交错零点给出五个平方 Cauchy 列。用余子式消去这五列后，曲率信号化为关于附加平移速率的同号积分，三个原混合速率各贡献一个平方差。把信号和噪声权重和同除以一次 Cauchy 矩阵删去第六行后所得的永久式，再分别用各自的合流值归一化。逐行比较及有理闭盒证书给出归一化信号减去归一化噪声权重和严格大于 $d/2000$，其中 $d=\max_i(5-x_i)$。 [射流代数](https://github.com/the-omega-institute/trureturing-books/blob/74e53372782e78594192a0a4e943fdcf4141d5b6/books/omega-math/zh/ch08-dfinite-jets-and-cayley-unification.md#sec-ch08-dfinite-jet-ring) · [完整推导与有理复算](https://github.com/the-omega-institute/trureturing-books/issues/2020#issuecomment-7242364436)
+
+在上端点合流的极限中，改变耦合也会改变放大率。对整个 $0<|\beta|\le10^{-3}$，有严格的二阶界（手工推导，`ARGUED`）
+
+$$
+0.159\beta^2<1-\frac{A_5(\beta)}{A_5(0)}<0.160\beta^2.
+$$
+
+$K$ 的四阶项在曲率列中产生关于 $\beta$ 的一次项，合流时可用二阶速率导数对应的混合切向消去它。用截断射流计算余子式的系数，并用拉普拉斯矩控制实积分余项，得到信号与噪声权重和之比的二阶比较。精确有理证书在除以 $\beta^2$ 后仍给出严格余量，因而合流极限在整个窗口中于零耦合严格最大。非零耦合下互异速率的最优性，以及两组独立混合的全窗口锐常数，仍需另行判定。 [射流代数](https://github.com/the-omega-institute/trureturing-books/blob/b0a22a8bfe4517c58a91aae98f7f38208adb1f4a/books/omega-math/zh/ch08-dfinite-jets-and-cayley-unification.md#sec-ch08-dfinite-jet-ring) · [完整推导与精确有理区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2020#issuecomment-7242521262)
 
 **三阶曲率的有限误差（手工推导，`ARGUED`）。** 若 $\mathbb ET=0$ 且 $\mathbb ET^3\ne0$，即使两组混合的体积衰减速率分属不同中心，仍能在带噪读数中稳定地分辨 $u=\beta^3$。把补偿速率限制在任意预先固定的正紧区间 $[a,A]$，取任意 $2r$ 个互异的平移 $b_j>-a$。对两组各至多 $r$ 个原子的归一化正混合，只要两组耦合都充分接近零，就有 $\lvert u-u'\rvert\le C\|m-m'\|_\infty$。常数和零耦合邻域可对两组混合统一选取，涵盖速率任意靠拢和权重趋零。
 
