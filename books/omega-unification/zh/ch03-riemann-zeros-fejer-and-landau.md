@@ -166,7 +166,19 @@ $$
 
 经典兰道公式在这里给出 $W_\lambda(T)=O_\lambda(\log T)$。因此，要为无权和取得同一阶上界，恰好需要 $C_\lambda(T)=O_\lambda(\log T)$。Selberg 密度界给出 $\sum_{0<\gamma\le T}\delta_\rho^2=O(T/\log T)$，而双曲余弦差至多是常数乘 $\delta_\rho^2$，所以逐项取绝对值只能给出 $O_\lambda(T/\log T)$ 的上界。要降低这一尺度，需要控制偏离临界线的零点在同一频率下的相位抵消。[Gonek，式 (1)](https://www.sas.rochester.edu/mth/people/faculty/gonek-steve/assets/pdf/8-landau-form.pdf#page=1) · [Ford 与 Zaharescu，§3 引理 2 与式 (3.8)](https://www.ford126.web.illinois.edu/wwwpapers/fz.pdf#page=9)
 
-对这些输入，$T/\log T$ 的尺度可以达到（合成谱，`ARGUED`）。取 $\lambda=1$，在每个 $2\pi$ 周期里轻推等间距的纵坐标，使未加权的相位和偏向负实轴。点仍按同高镜像成对放置，实部偏移取 $O(1/\log T)$，并随相位调整，让带权和在周期端点恰好跟随光滑端点项的增量。该谱的计数余项有界，满足 Selberg 型密度界，带权和在所有高度以 $O(1)$ 的误差跟随端点项，而 $C_1(T)\sim T/(4\pi\log T)$。对实际 $\zeta$，收紧差项仍需超出这些输入的估计。[构造与复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239117179)
+对这些输入，$T/\log T$ 的尺度可以达到（合成谱，`ARGUED`）。取 $\lambda=1$，在每个 $2\pi$ 周期里轻推等间距的纵坐标，使未加权的相位和偏向负实轴。点仍按同高镜像成对放置，实部偏移取 $O(1/\log T)$，并随相位调整，让带权和在周期端点恰好跟随光滑端点项的增量。该谱的计数余项有界，满足 Selberg 型密度界，带权和在所有高度以 $O(1)$ 的误差跟随端点项，而 $C_1(T)\sim T/(4\pi\log T)$。[构造与复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239117179)
+
+在固定无素幂频带上，即使显式公式在所有平滑窗上都匹配到一致的 $O_{J,B}(U^{-3})$ 精度，仍可能出现偏轴二次矩的累积。取围住 $\lambda$、避开所有 $\pm\log(p^m)$ 的紧频带 $J$，并让平滑窗 $h(z)=e^{i\nu z}(K_B*\mathbf 1_{(U,V]})(z)$ 的傅里叶支撑落在带内，$B$ 固定。以下合成谱的构造为手工推导（`ARGUED`）。同一个谱对所有这些平滑窗复现伽马密度积分与两项极点值，误差为 $O_{J,B}(U^{-3})$，对允许的 $\nu$ 及 $U\le V\le 2U$ 一致。构造在每个相位周期末端放一对偏轴点。对带内的测试函数，同高镜像对的复取样等于实轴上某个带限核的积分。将补偿核从光滑密度中扣除，记剩余密度为 $g$，令 $G(t)=\int_0^t g(x)\,dx$。取充分大的 $A$ 使 $G(A)=K$ 为正整数。在 $(0,A)$ 补入 $K$ 枚临界线点，在 $A$ 以上按 $G(t)+1/2$ 的整数层取点，再作负高度镜像。于是高处的正临界线点数为 $\lfloor G(t)+1/2\rfloor$，全谱也满足累计计数界 $\int_1^T(N(t)-L(t))\,dt=O(\log T)$。计数的有界余差、Selberg 型密度和带权硬窗端点首项仍同时成立。[合成谱构造与一致离散误差](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240279673) · [低高度归一化与累计计数界](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240573705) · [黎曼 $\zeta$ 函数的显式公式，Carneiro 与 Milinovich 引理 4](https://arxiv.org/pdf/2403.17803v1#page=5)
+
+右闭窗中的偏轴二次矩却会累积，因为周期末端的相位都是 $1$。取偏移大小 $4\log\log\gamma/\log\gamma$，手工推导（`ARGUED`）给出
+
+$$
+\sum_{\substack{U<\gamma\le 2U\\ \delta_\rho>0}}\delta_\rho^2e^{i\lambda\gamma}
+\sim\frac{8\lambda}{\pi}\frac{U(\log\log U)^2}{(\log U)^2}
+\quad\text{（合成谱）}.
+$$
+
+若采用第 3.1 节的黎曼假设，实际 $\zeta$ 零点的偏轴二次矩恒为零。考虑独立于该假设的显式公式论证，令调制频率 $\nu=\lambda$。单位窗计数与核的端点衰减给出 $O(\log U)$ 的平滑二次矩与右闭窗之差。实轴无权平滑相位和扣除伽马密度积分后，等于右闭窗二次矩的 $-\lambda^2$ 倍加上 $O_{\lambda,B}(U/(\log U)^3+\log U)$ 的余差。余差已计入显式公式的两项极点贡献。要用这条等式得到 $O_\lambda(U/(\log U)^2)$ 的二次矩界，仍需控制扣除伽马积分后的无权相位和。[构造、端点估计与复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240279673)
 
 对实际 $\zeta$，可以用横向积分把需要相消的部分定位到临界线附近。令 $L=\log T$、$c=1/2+a$，其中 $0\le a\le 1/2$。把 $J_c(t)=\int_c^\infty\log|\zeta(\sigma+it)|\,d\sigma$ 用素幂多项式 $P_{x,c}(t)=\operatorname{Re}\sum_{2\le n\le x^3}\Lambda_x(n)n^{-c-it}/(\log n)^2$ 近似，$\Lambda_x$ 为 Selberg 的二次截断权。固定非共振 $\lambda$，对充分大的 $T$，当 $2\le x$ 且 $x^3\le L^2$ 时，余项有以下手工推导（`ARGUED`）。
 

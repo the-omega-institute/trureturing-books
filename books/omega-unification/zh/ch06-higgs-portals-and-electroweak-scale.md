@@ -250,7 +250,7 @@ c &= -\frac{[B_0(1)+B_0(p_0)]W_0'(p_0)}{-2B_0''(p_0)} .
 \end{aligned}
 $$
 
-分母是极限残差在 $p_0$ 的正曲率。有理区间运算给出 $0.069763441380\le c\le0.069763441382$，因此内点与极限点的间距首阶按对数的倒数缩小。移动方向可直接由驻点方程确定。对轻层平方质量求偏导后，等幅系数分母中的 $2L(1)$ 提供主导项，因为 $a\partial_a L(1)\to-1$。有理界在整个 $0<a\le 2^{-23}$ 内控制其余各项，给出试探斜率对 $a$ 的负偏导和驻点处的正曲率，所以 $dp_a/da>0$。 [对数首项的手工推导](https://github.com/the-omega-institute/trureturing-books/issues/2106#issuecomment-7240031962) · [单调性的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2138#issuecomment-7240234207)
+分母是极限残差在 $p_0$ 的正曲率。有理区间运算给出 $0.069763441380\le c\le0.069763441382$，因此内点在极限点右侧，间距首阶按对数的倒数缩小。移动方向可直接由等幅残差的驻点方程确定。对 $0<a\le 2^{-23}$，质量偏导由等幅系数分母中的 $2L(1)$ 主导，因为 $a\partial_a L(1)\to-1$。对 $2^{-23}\le a\le 1/20$，连续有理区间在夹住驻点的同时，给出消元后驻点方程的质量偏导为负、动量平方偏导为正。隐式求导给出这两段上的 $dp_a/da>0$。连同前面 $1/20\le a\le1/5$ 的强分裂区间，最优内点在 $0<a\le1/5$ 随轻层平方质量严格递增。 [对数首项的手工推导](https://github.com/the-omega-institute/trureturing-books/issues/2106#issuecomment-7240031962) · [近零端的定号](https://github.com/the-omega-institute/trureturing-books/issues/2138#issuecomment-7240234207) · [连接两段的推导与复算](https://github.com/the-omega-institute/trureturing-books/issues/2159#issuecomment-7240408368)
 
 例如 $m=(1,4,9)$ 时，通道 $(1,3)$ 和 $(2,2)$ 同在 $T=16$ 开启，却分别有 $e_{13}=4$ 与 $e_{22}=0$。按列顺序 $(11,12,13,22,23,33)$ 在 $P=1,\ldots,6$ 取值，有理区间运算将行列式夹在 $-3.767\times10^{-28}$ 与 $-3.766\times10^{-28}$ 之间。二点核恢复的是模方。四层算例说明，即使再给静态背景谱，相对环相位仍可能有歧义。 [行列式复算](https://github.com/the-omega-institute/trureturing-books/issues/1821#issuecomment-7238133069)
 
