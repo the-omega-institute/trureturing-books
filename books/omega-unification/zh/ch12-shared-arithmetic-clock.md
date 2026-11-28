@@ -235,6 +235,10 @@ $$
 成立，并把该常数传递为共同算术钟各读数的有限高度误差。现有未筛选计数与定性等分布只给出 $A_W(t)=c\,m(t)+o(t\log t)$，不足以产生上述统一余项。窗口输入获得前，有限高度的哈尔误差与共同钟读数精度仍是开放结果。
 :::
 
+**逐模态收敛的限制（`ARGUED`）。** 同一固定接受域可以区分两列人为高度。先取未筛选主项的整数分位点。逐分位区间对中心化的计数误差积分，给出每个固定非零 Fourier 模态为 $O(T/\log T)$。接着取边界上一小块与相位轨道横截的光滑图面。连续环面等分布保证每个足够大的二倍高度区间内有与区间长度同阶的穿越。在每次穿越附近使用严格递增的局部时间变换，把穿越后宽度同阶于 $(\log T)^{-3/4}$ 的窄段内的高度从域外移入域内。
+
+这样总计数仍有 $O(\log T)$ 余项，每个固定模态的变化只有 $O(T/\sqrt{\log T})$。但两列的窗口计数沿二倍截断相差至少为 $T(\log T)^{1/4}$ 的常数倍。因此逐固定模态的 $o(T)$ 界与总计数界合用，也不足以推出固定接受域的均匀 $O(T)$ 余项。[分位点与横截穿越的完整构造](https://github.com/the-omega-institute/trureturing-books/issues/1637#issuecomment-7232488702) · [严格递增的局部位移](https://github.com/the-omega-institute/trureturing-books/issues/1637#issuecomment-7232557747)
+
 所有这些排除结果背后，共同跳动着两颗已在 Lean 4 内核中形式化冻结的普适傅里叶–方差浓缩心脏。第一条内核定理用循环费耶尔（Fejér）窗给出窄剩余类频带总权重的非负傅里叶上界，定量控制了频带浓缩为何必然引发高频傅里叶分量的剧烈抬升：
 
 ::: {.theorem #thm-ou-ch12-cyclic-fejer-band title="循环费耶尔窗的窄频带非负傅里叶上界" lean="D5/S3/Fourier/Concentration/CyclicFejerBand.band_le_positive_fourier"}
