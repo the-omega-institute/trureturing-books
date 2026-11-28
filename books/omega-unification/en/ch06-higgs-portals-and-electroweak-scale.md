@@ -412,6 +412,20 @@ For any positive Hermitian common portal $B \succeq 0$ with operator norm $B_* =
 
      Choose $q$ small enough to meet any positive log tolerance at the third level, uniformly in $T>t_0$. Then let $T$ grow. The weight fraction at $T$, $\bigl(1+\frac{1-q}{q}e^{-a(T-s)}\bigr)^{-1}$, tends to $1$. This uses the freedom in the total weight $A(0)$. If $A(0)$ is also fixed exactly at $C$, apply the same strict convexity to $Y=e^{-at}$ with exponent $b'/a$ under the original normalized measure. The two exact positive-energy readings then force $t=t_0$.
 
+     **A worked calculation with finite zero-energy precision.** Take equally spaced positive energies $a,2a,3a$. The first two readings match the reference exactly, and the third has positive log tolerance $\delta$. Suppose an independent zero-energy reading gives the upper limit $A(0)\le CM$, with $M=1+\varepsilon>1$. Set $y=e^{-a(t-t_0)}$ and integrate against $\mathrm{d}\mu/C$. Both $y$ and $y^2$ then integrate to $1$, and the total weight $W=A(0)/C$ is at most $M$. For $T>t_0$, set $h=e^{-a(T-t_0)}$. When $Mh<1$, take $u=(1-h)/(1-Mh)>1$. On the late-time side $y\le h$, the square $(y-u)^2$ is at least $(u-h)^2$. Elsewhere it is nonnegative. Integrating and dividing by $W$ gives
+
+     $$
+     \begin{aligned}
+     \frac{\mu([T,\infty))}{A(0)}
+       &\le \frac{u^2-(2u-1)/W}{(u-h)^2}\\
+       &\le \frac{M-1}{M-1+(1-Mh)^2}.
+     \end{aligned}
+     $$
+
+     Call the last fraction $P$. It also equals $(u-1/M)/(u-h)$, so weights $CM P$ and $CM(1-P)$ at $y=h$ and $y=u$ give first moment $1$ under $\mathrm{d}\mu/C$. At those nodes, $y^2=(h+u)y-hu$, so the second moment is $h+u-Mhu=1$. Both nodes attain equality in the square bound. At those two nodes, $y^3=(h+u)y^2-hu\,y$, so the third reading is exactly $1+(1-h)(u-1)$ times its reference value. If $u\le e^{at_0}$ and this ratio is at most $e^\delta$, the two nodes correspond to nonnegative diffusion times and satisfy all the reading constraints. For every fixed $\delta>0$, both conditions hold for sufficiently large $T$ because $u\to1$. The maximum allowed late-time fraction therefore tends to $\varepsilon/(1+\varepsilon)$.
+
+     For example, take $a=C=1$, $t_0=\log 2$, and a total weight cap of $1.01$. At $T=5\log 2$, the nodes are $h=1/16$ and $u=1500/1499$, and the tail fraction is exactly $25600/2272601$ (about $1.126\%$). The third reading has relative error $15/23984<0.001$, and its log error is smaller.
+
 The table below collects the entire ultraviolet Higgs-portal landscape—every exclusion boundary and every surviving corridor—before we turn to the low-energy collider pinch:
 
 | UV Portal Family | Crossing & Spectral Regime | Certified Verdict | Quantitative Criterion & Sensitivity |
