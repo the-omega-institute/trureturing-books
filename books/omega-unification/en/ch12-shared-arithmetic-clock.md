@@ -242,6 +242,15 @@ $$
 
 Summing over $j\ge0$ gives $O(M^{-1/2}(1+\log M)^2)$, which is summable over dyadic $M$. The two bracketing polynomials thus give the same leading term $\mu(W)N(T)$. The error from their constant terms is $O(N(T)/K)=O(T)$. Substituting the unfiltered counting main term gives the stated window remainder. The preceding partial summation formula yields $D_H=O(1/\log H)$. For every shared-clock kernel $f_v(s)=(1+v^2s^2)^{-1}$ the readout error is consequently bounded by $O(1/\log H)\,v^2/(1+v^2)$, with a constant uniform in $v$.
 
+**An unconditional remainder for the fixed Haar window (hand derivation).** Reduce the frequency cutoff to $K=\lfloor(\log T)^{4/9}\rfloor$. Pointwise bracketing, frequency separation, and prime-power grouping still bound the normalized Landau sum before passing to the zero ordinates. Their contribution is $O(T)$. Let $L=\log T$. For $x=e^{|\lambda_k|}$, Ford–Meng–Zaharescu's Lemma 2 replaces that sum by the phase sum on the ordinates, with additional error $O(T\lambda_k^2/L+T/L^{10})$. All retained frequencies satisfy the lemma's range $|\lambda_k|\le L/(50\log L)$. [Lemma for passing to the ordinates](https://arxiv.org/abs/1511.06814v2)
+
+A dyadic shell $M$ has $O(M^4)$ modes and coefficient two-norm $O(M^{-1/2})$. Its coefficient one-norm is $O(M^{3/2})$ by Cauchy–Schwarz. Using $|\lambda_k|=O(M)$, the added error summed over the shells is $O(TK^{7/2}/L)$. The constant coefficient costs $O(TL/K)$. Balancing the two terms gives
+$$
+A_W(T)=\mu(W)N(T)+O\bigl(T(\log T)^{5/9}\bigr).
+$$
+Partial summation turns the new counting error into $O((\log x)^{5/9}/x)$ in $S_W(x)$. For $x=H/s$, the normalized error uses $s(\log(H/s))^{5/9}=O((\log H)^{5/9})$ uniformly for $0<s\le1$. Thus $D_H=O((\log H)^{-4/9})$ holds unconditionally. [Fixed-window count and cutoff calculation](https://github.com/the-omega-institute/trureturing-books/issues/1637#issuecomment-7233058282)
+
+
 ::: {.problem #prob-ou-ch12-windowed-haar-rate title="Explicit Remainders for a Fixed Haar Phase Window"}
 Let $W$ be the fixed Haar acceptance region in Chapter 2, whose boundary has Haar measure zero. Set $c=\mu(W)/(2\pi)$ for normalized Haar measure $\mu$. For a prescribed starting height $H$, compute a checkable constant $b_H$ such that, with $m(t)$ as above,
 
