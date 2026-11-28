@@ -220,7 +220,7 @@ For every real $u\ge4$, the left limit is exactly $L$. Sort the weights and comp
 
 At $B_0$, $N$ capped weights can tend to $1$, giving a second-trace supremum of $N+w_1^u$. For $u\ge u_c$ the jump is therefore $1-M^u-d^u$, independent of $N$, and it is about $0.113987815$ at $u=4$ (`NUM`). [Proof for the full exponent range](https://github.com/the-omega-institute/trureturing-books/issues/2059#issuecomment-7239617760) · [Fourth-power calculation](https://github.com/the-omega-institute/trureturing-books/issues/2059#issuecomment-7239523334) · [Small-exponent construction](https://github.com/the-omega-institute/trureturing-books/issues/2059#issuecomment-7239426333)
 
-As the budget falls below $B_0$, the optimal spectrum can switch before the cap (hand derivation, `ARGUED`). Let $V_S(B)$ be the supremum of the second heat trace over finite positive-mass integer spectra with first trace $S$ and exposure at most $B$. Set $r=\tau-\varepsilon$ and $M_\varepsilon=W(r)$. Let $s_r$ be the unique root of $W(r-s_r)+W(s_r)=1+w_1$ in $(0,r/2)$, and set $A_r=W(r-s_r)$ and $C_r=W(s_r)$. Take $\tau=\tau_0(u)$. The following formula holds when $u=7/2$ and $0<\varepsilon\le1/20$, or when $3.55\le u\le3.56$ and $0<\varepsilon\le0.005$.
+As the budget falls below $B_0$, the optimal spectrum can switch before the cap (hand derivation, `ARGUED`). Let $V_S(B)$ be the supremum of the second heat trace over finite positive-mass integer spectra with first trace $S$ and exposure at most $B$. Set $r=\tau-\varepsilon$ and $M_\varepsilon=W(r)$. Let $s_r$ be the unique root of $W(r-s_r)+W(s_r)=1+w_1$ in $(0,r/2)$, and set $A_r=W(r-s_r)$ and $C_r=W(s_r)$. Take $\tau=\tau_0(u)$. The following formula holds for $7/2\le u\le3.56$ and $0<\varepsilon\le1/20$.
 
 $$
 V_S(B_0-\varepsilon)
@@ -229,7 +229,7 @@ $$
 
 Prefix majorization bounds every finite spectrum by a spectrum with a single transfer. Strict convexity of the power sum leaves two endpoints to compare. For $N=1$, the winning endpoint gives a unique optimal spectrum and both spectra attain the bound at the switch. For $N\ge2$, letting $N-1$ capped weights tend to $1$ approaches the supremum, which no positive-mass spectrum attains.
 
-Let $D(u,\varepsilon)$ be the power sum for the two-weight transfer endpoint minus that for the three-weight endpoint with zero transfer. For $3.55\le u<u_c$, the optimal spectrum switches from the transfer endpoint to the zero-transfer endpoint as the budget shortfall rises through a unique value $0<\varepsilon_c(u)<0.005$. For $u_c\le u\le3.56$, the zero-transfer endpoint wins throughout the positive-shortfall window. Rational interval arithmetic gives $3.55808144201<u_c<3.55808144202$ and shows that $D$ decreases strictly in both $u$ and $\varepsilon$. By the implicit function theorem, the switch curve decreases smoothly with $u$, tends to zero at $u_c$, and satisfies
+Let $D(u,\varepsilon)$ be the power sum for the two-weight transfer endpoint minus that for the three-weight endpoint with zero transfer. For $7/2\le u<u_c$, the optimal spectrum switches from the transfer endpoint to the zero-transfer endpoint as the budget shortfall rises through a unique value $0<\varepsilon_c(u)<1/20$. For $u_c\le u\le3.56$, the zero-transfer endpoint wins throughout the positive-shortfall window. Closed interval calculations show that $D$ decreases strictly in both $u$ and $\varepsilon$ and that $D(7/2,1/20)<0$. The sign at zero shortfall is determined by the critical exponent $3.55808144201<u_c<3.55808144202$. By the implicit function theorem, the switch curve decreases smoothly from the switch at $u=7/2$, tends to zero at $u_c$, and satisfies
 
 $$
 \lim_{u\uparrow u_c}\frac{\varepsilon_c(u)}{u_c-u}
@@ -237,7 +237,7 @@ $$
 \in (0.407501589,\,0.407501592).
 $$
 
-Here $D(u,0)$ uses the continuous extensions of the two finite-budget branches. [Derivation of the switch curve and rational interval calculation](https://github.com/the-omega-institute/trureturing-books/issues/2146#issuecomment-7240317381)
+Here $D(u,0)$ uses the continuous extensions of the two finite-budget branches. [Derivation of the switch curve and rational interval calculation](https://github.com/the-omega-institute/trureturing-books/issues/2146#issuecomment-7240317381) · [Derivation and interval calculation for the full switch curve](https://github.com/the-omega-institute/trureturing-books/issues/2145#issuecomment-7240288302)
 
 At $u=7/2$, $D$ decreases strictly with $\varepsilon$ and changes sign exactly once, at $0.0237169055<\varepsilon_c<0.0237169058$. As the budget increases through $B_c=B_0-\varepsilon_c$, the optimum switches from the zero-transfer endpoint to the transfer endpoint, and the slope of $V_S$ with respect to $B$ rises from about $0.230347403$ to about $0.251251786$ (`NUM`). [Seven-halves derivation and rational interval calculation](https://github.com/the-omega-institute/trureturing-books/issues/2136#issuecomment-7240195509)
 
@@ -245,13 +245,15 @@ This switch also sets the largest budget radius shared by all low exponents. Tak
 
 As the budget approaches $B_0$ from below, set $s_*=s_\tau$, $b=W'(\tau-s_*)$, and $c=W'(s_*)$. Differentiating $A_r+C_r=1+w_1$ gives $dA_r/dr=-dC_r/dr=bc/(c-b)$ at $r=\tau$. Relative to the left limit, the first-order loss per unit of budget removed is $u(A_\tau^{u-1}-C_\tau^{u-1})bc/(c-b)$. [Uniform radius, attainment, and interval certificate](https://github.com/the-omega-institute/trureturing-books/issues/2128#issuecomment-7240278006)
 
-For the fourth-power trace with $u=4$ and $\tau=\tau_0(4)$, the same comparison gives the following value on $0<\varepsilon\le1/4$.
+Once the exponent reaches the critical value, the zero-transfer endpoint wins over a wider budget window (direct derivation, `ARGUED`). For $u_c\le u\le4$, $\tau=\tau_0(u)$, and $0<\varepsilon\le1/4$, the value is
 
 $$
-V_S(B_0-\varepsilon)=N-1+M_\varepsilon^4+w_1^4+(1-M_\varepsilon)^4.
+V_S(B_0-\varepsilon)=N-1+M_\varepsilon^u+w_1^u+(1-M_\varepsilon)^u.
 $$
 
-Throughout this window, prefix majorization still reduces the upper bound to a single exposure transfer. Strict convexity of the power sum limits the comparison to the endpoints, and rational interval arithmetic shows that the endpoint with zero transfer always wins. For $N=1$, the weights $M_\varepsilon,w_1,1-M_\varepsilon$ give the unique optimal spectrum. For $N\ge2$, another $N-1$ capped weights must tend to $1$, so positive-mass spectra can only approach the supremum. As the budget tends to $B_0$, the difference between the left limit and the current optimum has first-order coefficient $4W'(\tau)(M^3-d^3)\approx0.2144536669$ (`NUM`), also independent of $N$. [Finite-budget derivation and rational interval calculation](https://github.com/the-omega-institute/trureturing-books/issues/2116#issuecomment-7240080414)
+Throughout this window, prefix majorization and strict convexity still reduce the comparison to the two endpoints. Interval arithmetic shows that $D(u,\varepsilon)$ decreases strictly with the shortfall. Starting from $D(u,0)\le0$, every positive shortfall strictly favors the zero-transfer endpoint. For $N=1$, the weights $M_\varepsilon,w_1,1-M_\varepsilon$ give the unique optimal spectrum. For $N\ge2$, positive-mass spectra approach the supremum by letting $N-1$ capped weights tend to $1$.
+
+As the budget tends to $B_0$, the first-order loss relative to the left limit has coefficient $uW'(\tau)(M^{u-1}-d^{u-1})$, independent of $N$. For the fourth-power trace $u=4$, the coefficient is about $0.2144536669$ (`NUM`). [Derivation and interval calculation for the wider window](https://github.com/the-omega-institute/trureturing-books/issues/2170#issuecomment-7240449786) · [Fourth-power calculation](https://github.com/the-omega-institute/trureturing-books/issues/2116#issuecomment-7240080414)
 
 **Sharpness of the terminal chord for integer multiplicities (`ARGUED`).** Suppose $\tau>\tau_0$ and $x^\dagger<b\le\tau$. Set $\lambda=(b-x^\dagger)/(\tau-x^\dagger)$ and let $y^\dagger$ be the squared mass ratio at the point of tangency. Integer spectra can approach the sharp real-weight bound exactly when the limiting layer below the input scale requires a nonnegative integer count $n=S\lambda$ and the tangent layer requires a nonnegative integer count $k=Se^{y^\dagger}(1-\lambda)$. Along a sequence approaching the bound, both the unused budget and the slack in the tangent bound tend to zero. The first heat weight therefore concentrates near $y=0$ and $y=y^\dagger$. Saturating the budget fixes their shares at $\lambda$ and $1-\lambda$. Multiplying the first heat weight by $Se^y$ recovers the integer counts in bounded neighborhoods of the two points, which must converge to $n$ and $k$, respectively.
 

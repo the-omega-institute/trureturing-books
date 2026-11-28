@@ -220,7 +220,7 @@ $$
 
 在 $B_0$，$N$ 份截顶热权可以同时趋于 $1$，第二热迹的上确界为 $N+w_1^u$。因此 $u\ge u_c$ 时的左跳跃为 $1-M^u-d^u$，与 $N$ 无关。取 $u=4$，复算（`NUM`）得到约 $0.113987815$。[整个指数区间的推导](https://github.com/the-omega-institute/trureturing-books/issues/2059#issuecomment-7239617760) · [四次热迹复算](https://github.com/the-omega-institute/trureturing-books/issues/2059#issuecomment-7239523334) · [小指数构造](https://github.com/the-omega-institute/trureturing-books/issues/2059#issuecomment-7239426333)
 
-把预算从 $B_0$ 向下移，最优谱还可能在截顶之前换序（手工推导，`ARGUED`）。记 $V_S(B)$ 为第一热迹等于 $S$、暴露至多 $B$ 的有限正质量整数谱的第二热迹上确界。令 $r=\tau-\varepsilon$、$M_\varepsilon=W(r)$，并令 $s_r$ 为 $W(r-s_r)+W(s_r)=1+w_1$ 在 $(0,r/2)$ 内的唯一根。置 $A_r=W(r-s_r)$、$C_r=W(s_r)$。取 $\tau=\tau_0(u)$。若 $u=7/2$ 且 $0<\varepsilon\le1/20$，或 $3.55\le u\le3.56$ 且 $0<\varepsilon\le0.005$，则
+把预算从 $B_0$ 向下移，最优谱还可能在截顶之前换序（手工推导，`ARGUED`）。记 $V_S(B)$ 为第一热迹等于 $S$、暴露至多 $B$ 的有限正质量整数谱的第二热迹上确界。令 $r=\tau-\varepsilon$、$M_\varepsilon=W(r)$，并令 $s_r$ 为 $W(r-s_r)+W(s_r)=1+w_1$ 在 $(0,r/2)$ 内的唯一根。置 $A_r=W(r-s_r)$、$C_r=W(s_r)$。取 $\tau=\tau_0(u)$。在 $7/2\le u\le3.56$、$0<\varepsilon\le1/20$ 时，
 
 $$
 V_S(B_0-\varepsilon)
@@ -229,7 +229,7 @@ $$
 
 前缀支配将任意有限谱的上界归约为单次转移，转移族的幂和严格凸，所以只需比较两端。$N=1$ 时，占优端点给出唯一最优谱，换序点两组谱都取等。$N\ge2$ 时，可让 $N-1$ 份截顶热权趋于 $1$ 来逼近上确界，正质量谱无法取到它。
 
-记 $D(u,\varepsilon)$ 为两份转移谱的幂和减去三份无转移谱的幂和。在 $3.55\le u<u_c$，预算缺口增大时，最优谱在唯一的 $0<\varepsilon_c(u)<0.005$ 处由转移端换为无转移端。在 $u_c\le u\le3.56$，无转移端在整个正缺口窗口严格占优。有理区间核证给出 $3.55808144201<u_c<3.55808144202$，并确认 $D$ 随 $u$ 和 $\varepsilon$ 分别严格下降。由隐函数定理，换序曲线随 $u$ 光滑下降，在 $u_c$ 处趋于零，且
+记 $D(u,\varepsilon)$ 为两份转移谱的幂和减去三份无转移谱的幂和。在 $7/2\le u<u_c$，预算缺口增大时，最优谱在唯一的 $0<\varepsilon_c(u)<1/20$ 处由转移端换为无转移端。在 $u_c\le u\le3.56$，无转移端在整个正缺口窗口严格占优。闭区间复算确认 $D$ 随 $u$ 和 $\varepsilon$ 分别严格下降，且 $D(7/2,1/20)<0$。零缺口处的符号由临界指数 $3.55808144201<u_c<3.55808144202$ 决定。由隐函数定理，换序曲线从 $u=7/2$ 的换序点随 $u$ 光滑下降，在 $u_c$ 处趋于零，且
 
 $$
 \lim_{u\uparrow u_c}\frac{\varepsilon_c(u)}{u_c-u}
@@ -237,7 +237,7 @@ $$
 \in (0.407501589,\,0.407501592).
 $$
 
-这里 $D(u,0)$ 是两条有限预算分支的连续延拓。[换序曲线的推导与有理区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2146#issuecomment-7240317381)
+这里 $D(u,0)$ 是两条有限预算分支的连续延拓。[换序曲线的推导与有理区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2146#issuecomment-7240317381) · [整段换序曲线的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2145#issuecomment-7240288302)
 
 在 $u=7/2$，$D$ 随 $\varepsilon$ 严格下降，在 $0.0237169055<\varepsilon_c<0.0237169058$ 内唯一换号。预算越过 $B_c=B_0-\varepsilon_c$ 向上增加时，最优谱由无转移端换为转移端，$V_S$ 对 $B$ 的斜率由约 $0.230347403$ 升至约 $0.251251786$（`NUM`）。[七半次热迹的推导与有理区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2136#issuecomment-7240195509)
 
@@ -245,13 +245,15 @@ $$
 
 从左侧趋近 $B_0$ 时，令 $s_*=s_\tau$、$b=W'(\tau-s_*)$、$c=W'(s_*)$。由 $A_r+C_r=1+w_1$ 得 $dA_r/dr=-dC_r/dr=bc/(c-b)$（在 $r=\tau$ 处）。以左极限为基准，预算每减少一单位时最优值的一阶损失为 $u(A_\tau^{u-1}-C_\tau^{u-1})bc/(c-b)$。[统一半径、取等条件与区间核证](https://github.com/the-omega-institute/trureturing-books/issues/2128#issuecomment-7240278006)
 
-取四次热迹 $u=4$ 和 $\tau=\tau_0(4)$，同样的比较在 $0<\varepsilon\le1/4$ 给出
+当指数达到临界值后，无转移端在更宽的预算窗内占优（手工推导，`ARGUED`）。取 $u_c\le u\le4$、$\tau=\tau_0(u)$ 和 $0<\varepsilon\le1/4$，则
 
 $$
-V_S(B_0-\varepsilon)=N-1+M_\varepsilon^4+w_1^4+(1-M_\varepsilon)^4.
+V_S(B_0-\varepsilon)=N-1+M_\varepsilon^u+w_1^u+(1-M_\varepsilon)^u.
 $$
 
-在这段预算内，前缀支配仍把上界归约为单次暴露转移。幂和的严格凸性把比较限制在转移的两端，有理区间核证表明无转移的一端始终占优。$N=1$ 时，热权 $M_\varepsilon,w_1,1-M_\varepsilon$ 实现唯一的最优谱。$N\ge2$ 时，还需让 $N-1$ 份截顶热权趋于 $1$，因而正质量谱只能逼近上确界。预算趋向 $B_0$ 时，从左极限扣去当前最优值，差额的一阶系数为 $4W'(\tau)(M^3-d^3)\approx0.2144536669$（`NUM`），同样与 $N$ 无关。[有限预算的推导与有理区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2116#issuecomment-7240080414)
+在整个窗口内，前缀支配与严格凸性仍将谱的比较归约到两个端点。区间核证表明 $D(u,\varepsilon)$ 随缺口严格下降。从 $D(u,0)\le0$ 出发，只要缺口为正，无转移端便严格占优。$N=1$ 时，热权 $M_\varepsilon,w_1,1-M_\varepsilon$ 给出唯一最优谱。$N\ge2$ 时，令 $N-1$ 份截顶热权趋于 $1$，可用正质量谱逼近上确界。
+
+预算趋向 $B_0$ 时，相对左极限的一阶损失系数为 $uW'(\tau)(M^{u-1}-d^{u-1})$，与 $N$ 无关。对四次热迹 $u=4$，该系数约为 $0.2144536669$（`NUM`）。[宽预算窗的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2170#issuecomment-7240449786) · [四次热迹复算](https://github.com/the-omega-institute/trureturing-books/issues/2116#issuecomment-7240080414)
 
 **终端弦的整数锐性（`ARGUED`）。** 当 $\tau>\tau_0$ 且 $x^\dagger<b\le\tau$ 时，令 $\lambda=(b-x^\dagger)/(\tau-x^\dagger)$，并记 $y^\dagger$ 为切点层的平方质量比。整数谱可逼近实权锐界，当且仅当低于输入尺度的极限层所需重数 $n=S\lambda$ 与切点层所需重数 $k=Se^{y^\dagger}(1-\lambda)$ 都是非负整数。趋优谱的预算松弛和切线余量都趋于零，因此第一热权集中在 $y=0$ 与 $y=y^\dagger$ 的邻域。饱和预算把两处的份额固定为 $\lambda$ 与 $1-\lambda$。用 $Se^y$ 乘回第一热权，两处有界邻域内的整数计数就分别趋于 $n$ 与 $k$。
 
