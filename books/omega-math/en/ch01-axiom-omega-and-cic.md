@@ -205,7 +205,20 @@ Let $\bar a$ be the first coordinate in $H_0$ and the residue modulo $3$ in $H_1
 
 In both groups every transposition representative $(a,1)$ squares to $(a-a,0)=(0,0)$. In the $H_0$ model, the choice $r^is^j\mapsto((i,0),j)$ preserves multiplication by the displayed formula, so it preserves ternary transport. In the $H_1$ model, the representatives of $r$ are $(1,0),(4,0),(7,0)$, and each cubes to $(3,0)$. A choice preserving ternary transport would preserve the identity after left multiplication by the inverse of its identity representative. It would then preserve multiplication as well. Since $r^3=e$ in the quotient, the cube of its representative would have to be $(0,0)$. The cube thus detects the obstruction even when every transposition has an involutive representative.
 
-With a central identity class, a transposition square can also obstruct a choice. Return to the earlier permutation reading with quotient $S_3$. Choosing $(\sigma,+1)$ in each class carries ternary transport back to the original twelve points. The same readings arise on a second set of twelve points
+**Transposition lifts with a quaternion identity class.** Suppose a lift that commutes with the identity class has a nontrivial square. Can a lift that acts nontrivially on the class still preserve transport? Keep the equal-row quotient $S_3$ and take the identity class to be the quaternion group $Q_8$. Assume each class has a lift commuting with every element of the identity class. Equivalently, the quotient acts trivially by outer automorphisms. Choose such a lift $v$ of the 3-cycle $r$. Its cube lies in the center $\{1,-1\}$, so $u=v^4$ still lifts $r$ and satisfies $u^3=1$. Every lift has the form $ku$ with $k\in Q_8$. Since $u$ commutes with $k$, we have $(ku)^3=k^3$, and only $1$ has cube $1$ in $Q_8$. Thus $u$ is unique, and $u^{-1}$ is the unique order-three lift of $r^{-1}$. Every lift $t$ of $s$ therefore satisfies $tut^{-1}=u^{-1}$.
+
+If $t$ commutes with the entire identity class, then $t^2\in\{1,-1\}$ and $(kt)^2=k^2t^2$. When $t^2=-1$, the lifts that still commute with the class are those with $k=\pm1$, and they still square to $-1$. Any noncentral quaternion, such as $\mathbf i$, has $k^2=-1$ and gives $(kt)^2=1$. The lifts $u,kt$ now satisfy the three defining relations of $S_3$. They give a choice of representatives preserving both multiplication and ternary transport.
+
+To compare two examples point for point, use the same 48-point set $Q_8\times S_3$. Let $\epsilon(\sigma)$ be the parity bit, choose $b=1$ or $b=-1$, and multiply by
+
+$$
+(k,\sigma)(\ell,\tau)=
+\bigl(k\ell b^{\epsilon(\sigma)\epsilon(\tau)},\ \sigma\tau\bigr).
+$$
+
+Since $b$ is central, the extra factor in a triple product depends only on the total carry from adding three parity bits. This gives associativity. The identity is $(1,e)$, and one obtains the inverse by first inverting the permutation and then solving for the quaternion coordinate. Comparing only the permutation component again gives identical readings and quotient transport, with the same sum of squares for the Gram form. Both examples relax extensional separation. For $b=1$, choose $(1,s)$ as the lift of $s$. For $b=-1$, choose $(\mathbf i,s)$. In the second example, a choice preserving identity and multiplication requires a transposition lift that acts on the identity class by a nontrivial inner automorphism.
+
+When the identity class is central, every lift commutes with it, and a transposition square can obstruct a choice. Return to the earlier permutation reading with quotient $S_3$. Choosing $(\sigma,+1)$ in each class carries ternary transport back to the original twelve points. The same readings arise on a second set of twelve points
 $$
   G'=\{(\sigma,j)\in S_3\times\mathbb{Z}/4\mathbb{Z}:j\bmod 2=\epsilon(\sigma)\},
 $$
