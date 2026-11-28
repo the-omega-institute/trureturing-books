@@ -347,6 +347,21 @@ $$
 
 正余量容许轻块法线转过 $O(\varepsilon^{3/2})$，上型轻块的收益包含线性项与二次项。余量为负时，法线转过 $O(\varepsilon^2)$ 即可削弱下型在该方向的耦合，减少被迫分给上型的平面转角。余量的符号分界在 $q-|S|^2-\mu^2=-2v\mu^2\varepsilon+O(\varepsilon^2)$。[全复基上下界与矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/2051#issuecomment-7239397935)
 
+**两条重线趋于正交时（手工推导）。** 在顶底平面内将下型参考质量基整体朝上型重线转过 $\mu\varepsilon$，其中 $\mu>0$。除去 $\varepsilon$ 后，两部门在 $(e_1,e_2)$ 和 $(e_0,e_2)$ 上的秩一轻块有界，其上三角元 $C,S$ 的模有正下界。基 $(e_0,e_1,e_2)$ 由两条参考重线与顶底平面法线组成。每对非对角元只计一次，将模平方之和除以 $\varepsilon^2$，得到平方成本。记 $q=|C|^2$，下型在参考基中的成本为 $E_B(I)$，精确端点余量为 $q-E_B(I)=k\varepsilon^{5/3}$，其中 $k$ 有界。设上型轻块的第一、第二对角元之差为 $\ell\varepsilon^{3/2}$，其中 $|\ell|$ 有正下界且有界。记 $L=|\ell|\sqrt q$，令 $x>\sqrt{k_+}$ 解 $x(x^2-k)=2\mu^2 L$，其中 $k_+=\max(k,0)$。
+
+轻块沿降低上型成本的复相位转动时，线性收益伴随下型成本的二次上升。补偿这一上升所需的平面分角给上型带来四次代价，两项平衡使法线转角与 $\varepsilon^{11/6}$ 同阶。固定法线的最小破缺 $D_{\mathrm{plane}}$ 因而高于全复基的最小值 $D_*$，差的首项为 $\varepsilon^{13/3}$ 阶，且在 $k$ 过零时保持同阶。写 $u_0=(x^2-k)/(2\mu)$，首项及其相位修正为
+
+$$
+\begin{aligned}
+D_{\mathrm{plane}}-D_*&=\frac{\sqrt6}{2\sqrt q}\varepsilon^{13/3}
+\bigl[\Gamma-2\mu\ell\operatorname{Re}(C\bar S)\varepsilon^{1/6}\\
+&\qquad +(4qx^2+\mu u_0|S|^2)\varepsilon^{1/3}+O(\varepsilon^{1/2})\bigr],\\
+\Gamma&=\frac{(-k)_+^2}{4\mu^2}-u_0^2+2Lx.
+\end{aligned}
+$$
+
+精确零余量时，$\Gamma=\tfrac32 L(2\mu^2 L)^{1/3}$。下型重线的转动诱发了额外的轻块耦合，其沿取优相位的分量决定 $\varepsilon^{9/2}$ 项的符号。如果 $\operatorname{Re}(C\bar S)=0$，这个修正消失，下一项为正，阶数为 $\varepsilon^{14/3}$，括号余项收紧为 $O(\varepsilon^{2/3})$。[任意复基的匹配界与矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/2051#issuecomment-7239648355)
+
 若固定夹角与两套质量基，只让次重质量平方趋于零，最小破缺又以什么速度趋近锐界 $F$？记 $D_*$ 为这对矩阵在全部轮换本征基上的最小破缺。令两套归一次重质量平方分别为 $a\varepsilon,b\varepsilon$，其中 $a,b>0$，并固定 $0<\theta<\pi/2$。记 $\lambda_u=|V_{ub}|^2/\sin^2\theta$、$\lambda_d=|V_{td}|^2/\sin^2\theta$，它们分别是上、下型最轻质量线在顶底平面内的投影长度平方。手工推导给出
 
 $$
