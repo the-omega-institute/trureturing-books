@@ -196,6 +196,15 @@ Inverting $z \mapsto z + \sin z$ on the complex disk $\lvert w\rvert < \frac{7}{
 
 Notice the sharp epistemological distinction between [@thm-ch08-cayley-circle-unit] and [@thm-ch08-dottie-rational-inverse-endpoint]. The former lives inside the zero-axiom `OmegaMath` kernel without ever mentioning $\pi$ or $\mathbb{R}$. The latter bridges into the classical analytic shadow layer: it reveals that the rational coefficient DNA of $\theta^*$ already resides in $\mathbb{Q}[[X]]$, while inside native rational fidelity coordinates $\kappa \in [0, 1]$, the self-dual midpoint anchor simplifies immediately to the linear rational equation $\kappa = 1 - \kappa \iff \kappa^* = \frac{1}{2}$.
 
+
+::: {.example #ex-ch08-cayley-product-tolerance title="Coordinate tolerance and squared-norm defect for two Cayley steps"}
+At $t=2/5$, the exact Cayley step is $P=(21+20i)/29$, and the largest coordinate error of the cubic truncation is $\epsilon=32/725$. Choose two rational complex factors $z,w$, each with least common denominator at most $28$ and both coordinates within $\epsilon$ of $P$. Require both coordinates of the product to lie within $\epsilon$ of $P^2=(41+840i)/841$ as well.
+
+The least squared-norm defect $\bigl\lvert\lvert zw\rvert^2-1\bigr\rvert$ is $1/419904$. The unique unordered pair attaining it is $(18+17i)/24$ and $(19+18i)/27$. Their product is $(36+647i)/648$, with signed coordinate errors $103/15138$ and $-193/544968$.
+
+The calculation uses integers. Write a factor as $(a+bi)/d$ with $1\le d\le28$ and $\gcd(a,b,d)=1$. The numerator ranges are $493d\le725a\le557d$ and $468d\le725b\le532d$. For factors $(a+bi)/d$ and $(c+ei)/f$, the defect has numerator $\lvert(a^2+b^2)(c^2+e^2)-(df)^2\rvert$ and denominator $(df)^2$. A positive defect at most $1/648^2$ requires $648\le df\le784$, so that integer must equal $1$. The eleven unordered denominator pairs in this range yield just the factor pair above with numerator $1$. Of the seven unordered pairs with squared norm exactly $1$, six give $i$ and one gives $(36+323i)/325$. These products have largest coordinate errors $41/841$ and $16951/273325$, respectively. Thus with the same factor bounds, $41/841$ is the first output tolerance that allows exact unit norm. [Exact arithmetic replay](https://github.com/the-omega-institute/trureturing-books/issues/1964#issuecomment-7243061281)
+:::
+
 ## 8.3 Purely Rational Machin Tangent Chain and $\pi$-Free Alternating Brackets {#sec-ch08-machin-brackets}
 
 What if an external comparison or classical benchmark demands rational approximations to the radian constant $\pi$ at an arbitrary observer precision $\varepsilon_{\mathrm{self}}$? One still never needs to postulate a completed transcendental real number $\pi$. Rewriting homogeneous circle multiplication from [Chapter 2](ch02-homogeneous-projective-line.md) in affine tangent coordinates turns Machin's classical formula into a four-step finite rational chain and a strictly nested $\pi$-free rational bracket.
