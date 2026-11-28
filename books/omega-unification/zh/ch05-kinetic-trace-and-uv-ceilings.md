@@ -245,13 +245,15 @@ $$
 
 从左侧趋近 $B_0$ 时，令 $s_*=s_\tau$、$b=W'(\tau-s_*)$、$c=W'(s_*)$。由 $A_r+C_r=1+w_1$ 得 $dA_r/dr=-dC_r/dr=bc/(c-b)$（在 $r=\tau$ 处）。以左极限为基准，预算每减少一单位时最优值的一阶损失为 $u(A_\tau^{u-1}-C_\tau^{u-1})bc/(c-b)$。[统一半径、取等条件与区间核证](https://github.com/the-omega-institute/trureturing-books/issues/2128#issuecomment-7240278006)
 
-当指数达到临界值后，无转移端在更宽的预算窗内占优（手工推导，`ARGUED`）。取 $u_c\le u\le4$、$\tau=\tau_0(u)$ 和 $0<\varepsilon\le1/4$，则
+当指数达到临界值后，无转移端在更宽的预算窗内占优（手工推导，`ARGUED`）。取 $u_c\le u\le4$、$\tau=\tau_0(u)$ 和 $0<\varepsilon\le0.43$，则
 
 $$
 V_S(B_0-\varepsilon)=N-1+M_\varepsilon^u+w_1^u+(1-M_\varepsilon)^u.
 $$
 
-在整个窗口内，前缀支配与严格凸性仍将谱的比较归约到两个端点。区间核证表明 $D(u,\varepsilon)$ 随缺口严格下降。从 $D(u,0)\le0$ 出发，只要缺口为正，无转移端便严格占优。$N=1$ 时，热权 $M_\varepsilon,w_1,1-M_\varepsilon$ 给出唯一最优谱。$N\ge2$ 时，令 $N-1$ 份截顶热权趋于 $1$，可用正质量谱逼近上确界。
+若最大的 $N$ 份热权中有 $k\ge2$ 份未截顶，它们分到的暴露合计至多 $k\tau-\varepsilon$。由 $W$ 的凹性，这 $N$ 份热权之和至多为 $N-k+kW(\tau-\varepsilon/k)\le N-2+2W(\tau-\varepsilon/2)$。区间核证表明 $A_r>2W(\tau-\varepsilon/2)-1$ 在整个窗口成立。因此这类谱仍受转移端的前缀支配。只用单份截顶热权估计所得的条件 $A_r>2W(\tau)-1$ 则在 $0.261<\varepsilon<0.273$ 内首次达到等号。
+
+有 $N-1$ 份截顶时，按剩余暴露构造单次转移谱即可支配各前缀，再由严格凸性将幂和的比较归约到两个端点。区间核证表明 $D(u,\varepsilon)$ 随缺口严格下降。从 $D(u,0)\le0$ 出发，只要缺口为正，无转移端便严格占优。$N=1$ 时，热权 $M_\varepsilon,w_1,1-M_\varepsilon$ 给出唯一最优谱。$N\ge2$ 时，令 $N-1$ 份截顶热权趋于 $1$，可用正质量谱逼近上确界。[总预算前缀界的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2189#issuecomment-7240610111)
 
 预算趋向 $B_0$ 时，相对左极限的一阶损失系数为 $uW'(\tau)(M^{u-1}-d^{u-1})$，与 $N$ 无关。对四次热迹 $u=4$，该系数约为 $0.2144536669$（`NUM`）。[宽预算窗的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2170#issuecomment-7240449786) · [四次热迹复算](https://github.com/the-omega-institute/trureturing-books/issues/2116#issuecomment-7240080414)
 
