@@ -316,6 +316,8 @@ $$
 
 六个额外能量能与十九个可见能量相距多远？对邻接矩阵，等分是使最近一对间距最大的唯一选择，间距 $0.35951814959\ldots$ 是离零最近的可见本征值的绝对值。$\lambda$ 的三个分量之和为零。隔离可见根可知，若要达到该间距，除三者全零外，只剩一个分量小于 $-1.6$、另两个均在 $(0.67,0.93)$ 的情形；代入逆公式 $w=\mathbf1/3+C^T\lambda/9$ 就会得到负权。对拉普拉斯，等分会与可见二重本征值八精确重合。令 $\ell=7.41025823168\ldots$ 为八以下最大的可见拉普拉斯本征值，最优间距是 $b=(8-\ell)/2=0.29487088415\ldots$，恰在 $\lambda=(b,b,-2b)$ 的三个排列处达到。至少一个 $\lambda_k$ 非负，而它在变换后的可见谱 $8-\operatorname{spec}(L)$ 中所能进入的最长空隙为 $(0,2b)$。达到上界时，每个非负分量都须取中点。最小间距和零和条件随即确定另两项。 [截止 200 的跳跃、根隔离与最优权重](https://github.com/the-omega-institute/trureturing-experiments/blob/00d170105b1a1b5590250273cfce80e32b04bf01/experiments/ch39-omega-research/replay/ch39-lifted-shell-hidden-spectrum.md)
 
+若同一张图要同时保护两种谱隙，就须让两个算子共用一组跳跃振幅。把隐藏邻接坐标与并集 $\operatorname{spec}(A)\cup(8-\operatorname{spec}(L))$ 比较。令 $r=-0.4285835950\ldots$ 为 $(-0.429,-0.428)$ 内的可见邻接本征值，记 $\beta=8-\ell$。最优共同间距是 $g=(r+2\beta)/3=0.25029998053739\ldots$。当间距至少为 $1/4$ 时，根隔离与零和条件迫使一个隐藏坐标落在 $r$ 以下，另两个在零与 $\beta$ 之间。若间距为 $d$，则三者之和至多为 $(r-d)+2(\beta-d)$，由此得 $d\le g$。取 $u=(\beta-r)/3$，$(-2u,u,u)$ 的三个排列各自以正跳跃权达到上界。按弦长赋权也有确切的误差代价。平方弦距 $200$ 的共同微观振幅 $s$ 给出两种底边振幅 $s$ 与 $3s$。它们相对于一的最大绝对误差最小为 $1/2$，在 $s=1/2$ 处达到。其余每种弦长均可精确匹配。若对乘上 $\sqrt{m_xm_y}$ 的归一化振幅施加弦长规则，便可精确恢复单位底边，并在九循环内部选出等权。 [共同间距与依弦长赋权](https://github.com/the-omega-institute/trureturing-experiments/blob/70887161336b967558d18faec9bf578f7e62a12c/experiments/ch39-omega-research/replay/ch39-lifted-shell-hidden-spectrum.md)
+
 ## 9.4 谱分级与站点局域性张力及联合见证上的双支分叉 {#sec-ch09-spectral-local-fork}
 
 正当我们以为壳三重对称已经稳稳落地时，两条收官发现揭示了“谱空间对称”与“局域几何对称”之间的深刻裂缝，也把最终抉择端到了联合见证零点的天平上。
