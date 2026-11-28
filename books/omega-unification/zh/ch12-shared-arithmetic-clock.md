@@ -242,14 +242,17 @@ $$
 
 对 $j\ge0$ 求和得到 $O(M^{-1/2}(1+\log M)^2)$，再对二倍频层求和仍有界。两侧三角多项式给出同一个主项 $\mu(W)N(T)$，其中常数项的逼近损失为 $O(N(T)/K)=O(T)$。用总零点计数的主项即得所述窗口余项。代入上文的分部求和，得到 $D_H=O(1/\log H)$，因而任意共同钟核 $f_v(s)=(1+v^2s^2)^{-1}$ 的读数误差至多为 $O(1/\log H)\,v^2/(1+v^2)$，其中隐含常数可对 $v$ 统一。
 
-**无条件的固定哈尔窗余项（手工推导）。** 将最高频数降为 $K=\lfloor(\log T)^{4/9}\rfloor$，仍可沿用上面的逐点夹逼、频率分离和素数幂分组。这些估计先控制除以 $\sqrt{x}$ 的陆道和，代价为 $O(T)$。记 $L=\log T$。对 $x=e^{|\lambda_k|}$，Ford–Meng–Zaharescu 引理 2 将其换成只含零点虚部的相位和，附加误差为 $O(T\lambda_k^2/L+T/L^{10})$。所有保留频率都在该引理的范围 $|\lambda_k|\le L/(50\log L)$ 内。[虚部换和引理](https://arxiv.org/abs/1511.06814v2)
+**无条件的固定哈尔窗余项（手工推导）。** 记 $L=\log T$，取频数 $K=\lfloor L^{2/3}\rfloor$。上面的频率分离和素数幂分组仍把除以 $\sqrt{x}$ 的带实部陆道和控制到合计 $O(T)$。对一个有界夹逼多项式 $P_K$，沿相位速度写 $p(z)=P_K(az/(2\pi))$。逐坐标的 Bernstein 不等式把实轴上的二阶导数控制在 $O(K^2)$。逐坐标应用 Laurent 多项式的最大模原理，把这个界延拓到虚部 $v$ 时至多乘 $\exp(O(K|v|))$。
 
-二倍频层 $M$ 上有 $O(M^4)$ 个模态，系数的二范数为 $O(M^{-1/2})$。由 Cauchy–Schwarz，其一范数为 $O(M^{3/2})$。用 $|\lambda_k|=O(M)$，于是换和代价为 $O(TK^{7/2}/L)$。常数项误差为 $O(TL/K)$。平衡两项就得到
+将 $p$ 取在 $\gamma-i(\beta-1/2)$ 时，正频项就是带实部的陆道和，负频项用零点对称性及共轭处理。对同高的 $\beta$ 与 $1-\beta$ 配对，一阶导数相消。二阶 Taylor 余项至多为 $O(K^2v^2\exp(O(K|v|)))$，其中 $v=\beta-1/2$。Selberg 的一致密度界 $N(1/2+u,T)\ll T^{1-u/4}L$ 与零点对称性给出
 $$
-A_W(T)=\mu(W)N(T)+O\bigl(T(\log T)^{5/9}\bigr).
+\sum_{0<\gamma\le T}|\beta-1/2|^2\exp(O(K|\beta-1/2|))=O(T/L).
 $$
-分部求和把新的计数误差传成 $S_W(x)$ 中的 $O((\log x)^{5/9}/x)$ 误差。按 $x=H/s$ 归一时，$s(\log(H/s))^{5/9}=O((\log H)^{5/9})$ 对 $0<s\le1$ 一致。故无需黎曼假设也有 $D_H=O((\log H)^{-4/9})$。[固定窗计数和截断优化](https://github.com/the-omega-institute/trureturing-books/issues/1637#issuecomment-7233058282)
-
+这可由对密度尾函数分部积分得到。整个多项式换到零点虚部的误差为 $O(TK^2/L)$。与常数项的 $O(TL/K)$ 平衡，得到
+$$
+A_W(T)=\mu(W)N(T)+O\bigl(T(\log T)^{1/3}\bigr).
+$$
+对逆平方和分部求和，$S_W(x)$ 的误差为 $O((\log x)^{1/3}/x)$。归一时 $s(\log(H/s))^{1/3}=O((\log H)^{1/3})$ 对 $0<s\le1$ 一致，故 $D_H=O((\log H)^{-2/3})$。[零点密度界，式 (3)](https://arxiv.org/abs/1910.08274v2) · [整式换和与归一化](https://github.com/the-omega-institute/trureturing-books/issues/1637#issuecomment-7233169018)
 
 ::: {.problem #prob-ou-ch12-windowed-haar-rate title="固定哈尔相位窗的显式计数余项"}
 取第 2 章的固定哈尔接受区域为 $W$，其边界为 Haar 零测集。记 $c=\mu(W)/(2\pi)$，其中 $\mu$ 为归一化 Haar 测度。对给定的起始高度 $H$，显式计算一个可复查的常数 $b_H$，使上式的计数与主项满足
