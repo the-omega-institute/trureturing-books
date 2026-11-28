@@ -338,6 +338,30 @@ $$
 
 加入最近邻跳跃 $t$ 后，这一比值读法不再成立。在两点格上（跳跃在色、同位旋与旋量指标上对角，仍是人为探针），$X$ 不再只依赖 $\rho$，而是 $U = 1/(Mt)^2$、$V = |F|^2 U$ 与 $\rho$ 的有理函数，其中 $|F|$ 是威尔逊因子的模长。$t \to 0$ 时 $X$ 连续回到静态值；首阶修正为 $O(t^4)$，在不含三角形的图上等于配位数乘两点闭式，正交支只差 $O(t^8)$。沿 $U, V \to 0$ 的幂律方向，极限为 $3(1 + \rho)/4$；沿所查的混合幂律方向，极限为 $1$，与 $\rho$ 无关。在有限 $Mt$ 上，$X$ 对 $\rho$ 可以不单调；在 $M$、$|F|$ 未知时，两支的取值区间相交，没有分开两支的阈值。把 $X$ 与两个读数算符各自的二阶矩比合在一起，共有三个与归一无关的比值；它们的雅可比行列式作为有理函数不恒为零，所以在一般点附近能局部确定 $\rho$，而任两个在一般点附近都不够。无论跳跃到哪一阶，$c$ 的相位都不进入这一探针，因为它不含瞬子顶点。[跳跃项下的读数比与三比值的局部可识别性](https://github.com/the-omega-institute/trureturing-experiments/blob/46facb42ce16ec26b52bfb017f20f8a417628ddb/experiments/ch39-omega-research/replay/%E6%9C%80%E8%BF%91%E9%82%BB%E8%B7%B3%E8%B7%83%E4%B8%8B%E6%8E%A5%E8%A7%A6%E8%AF%BB%E6%95%B0%E6%AF%94%E9%9A%8FMt%E6%BC%82%E7%A7%BB%E4%B8%8E%E4%B8%89%E6%AF%94%E5%80%BC%E5%B1%80%E9%83%A8%E7%A1%AE%E5%AE%9A%E9%87%8D%E5%8F%A0%E6%A8%A1%E9%95%BF.md) · [精确证书](https://github.com/the-omega-institute/trureturing-experiments/blob/46facb42ce16ec26b52bfb017f20f8a417628ddb/experiments/ch39-omega-research/replay/ch39-proton-current-overlap-hopping.py)
 
+把跳跃强度作为可控读数后，取向的全局识别可以给出一个有限充分上界。对同一组未知的 $u,v>0$ 与 $
+ho=|c|^2$，在 $25$ 个彼此不同的正跳跃强度上测一个自比值，就能唯一确定 $
+ho$。在 $28$ 个彼此不同的正强度上测三个归一化比值，就能唯一确定 $(u,v,
+ho)$。理由是六个插入矩关于 $T=t^4$ 的次数分别为 $8,7,7,6,6,6$，三条读数的分子和分母次数都是 $14$。两组候选在 $28$ 个点上给出同一个自比值时，交叉乘积的 $T^{28}$ 项因共同的 $3/4$ 极限消失，剩下的次数至多为 $27$，所以两条有理曲线相同。静态值
+$$
+rac{3(15
+ho^2+12
+ho+1)(15
+ho^4+80
+ho^3+90
+ho^2+24
+ho+1)}
+{4(20
+ho^3+45
+ho^2+18
+ho+1)^2}
+$$
+在 $[0,1]$ 上严格下降，从 $3/4$ 到 $5/8$，因而给出 $
+ho$。无穷远展开的第一项随后恢复 $uv$ 与 $16u^2-v^2$，在 $
+ho=0$ 时由 $X_{AB}$ 的系数补足 $16u^2+v^2$。[有限跳跃强度的精确系数与识别证书](https://github.com/the-omega-institute/trureturing-experiments/blob/4da4b20ea51552326757322e65c07f19e046e709/experiments/ch39-omega-research/replay/ch39-proton-hopping-recovery.md)
+
+这些计数是充分上界。共同放大 $u,v$ 会把所有有效采样点缩放为 $T/lambda^2$，因此无界参数域上不存在统一的噪声稳定性界。有限精确读数能决定这个辅助探针中的参数，原配分函数选择哪个取向仍是开放问题。
+
+
 相位何时可以吸收、何时成为物理参数，可以分三层说清。在接触探针里，只要其余作用在 $Q$ 的重相下不变、各格点的乘积 $Fc$ 相同，$Q \to e^{-i\arg(Fc)/3} Q$ 就是别列津雅可比为 $1$ 的场重定义，它把 $Fc$ 变成 $|Fc|$；由荷确定的算符构成、对每个算符的复数重标度不变的读数因此都只依赖 $|Fc|$。相位要成为物理参数，必须有不保持这一重相的顶点。在汤川矩阵含代间混合并带弱瞬子耦合 $\eta_I$ 的完整模型里，按荷计数，含 $\arg(Fc)$ 的重相不变组合只能是 $3\arg(Fc) - \arg\eta_I$ 的整数倍再加味相位；没有代间混合时不存在这样的组合。这一组合是否进入完整模型的任何读数，尚未判定。在单点接触项外加一个保持同一荷关系的替身顶点 $\eta W^3 + \bar\eta \bar W^3$（$W = \sum_a (QL)_a D_a$；这是人为选择，不是完整模型的瞬子）时，$\Phi = 3\arg(Fc) - \arg\eta$ 是唯一的相位不变量，并确实经 $\cos\Phi$ 进入归一无关的读数比：在 $\rho = 1$ 与一组取定的替身强度上，$X_{AB}$ 在 $\Phi = 0$ 与 $\Phi = \pi$ 处分别等于 $2747/2058$ 与 $380123/321602$（[重叠相位的三层判定](https://github.com/the-omega-institute/trureturing-experiments/blob/a6a358f5167c57f3eada67026298cf6327e288cf/experiments/ch39-omega-research/replay/%E8%BE%85%E5%8A%A9%E7%94%B5%E6%B5%81%E9%87%8D%E5%8F%A0%E7%9A%84%E7%9B%B8%E4%BD%8D%E5%9C%A8%E6%8E%A5%E8%A7%A6%E6%8E%A2%E9%92%88%E4%B8%AD%E5%8F%AF%E5%90%B8%E6%94%B6%E8%80%8C%E5%9C%A8%E9%87%8D%E5%AD%90%E6%95%B0%E6%94%B9%E5%8F%983%E7%9A%84%E5%8D%95%E7%82%B9%E6%9B%BF%E8%BA%AB%E9%A1%B6%E7%82%B9%E4%B8%8B%E8%BF%9B%E5%85%A5%E5%BD%92%E4%B8%80%E6%97%A0%E5%85%B3%E8%AF%BB%E6%95%B0.md) · [精确证书](https://github.com/the-omega-institute/trureturing-experiments/blob/a6a358f5167c57f3eada67026298cf6327e288cf/experiments/ch39-omega-research/replay/ch39-proton-current-phase-spurion.py)）。三比值对重叠模长的局部可识别性不依赖图的细节。在任意有限图上，取各点同参、各边同一跳跃的人为探针，配位数为 $z$ 的格点上三个比值的雅可比行列式在静态极限附近为 $z^2 J^{(2)}_{16}\,t^{16} + O(t^{18})$，$t^8$ 到 $t^{14}$ 的系数恒为零：到 $t^8$ 阶为止，三角形、四边形和邻点的度只沿静态曲线的切向平移读数，只有单键的二阶修正贡献横向分量。两点格系数 $J^{(2)}_{16}$ 有精确闭式，正比于 $\rho^2$ 乘一个不可约多项式；对每个 $\rho \in (0, 1]$，除至多六个 $|F|^2$ 的取值外，首个非零阶恰为 $t^{16}$，静态端按 $(Mt)^{20}$ 衰减，例如在 $|F| = 1$ 上唯一的例外落在 $\rho \in (0.929583,\, 0.929584)$ 内。把同一个跳跃放在十九点壳图 $G_{19}$ 的全部 $135$ 条边上时，四类格点的度为 $10, 14, 16, 18$，系数依次是两点格的 $100, 196, 256, 324$ 倍，所以三个比值在 $G_{19}$ 的每个格点上都在一般点附近局部确定 $\rho$。这一推导用到单键与三点格的展开（[三角形图与三点链上的三比值](https://github.com/the-omega-institute/trureturing-experiments/blob/a6a358f5167c57f3eada67026298cf6327e288cf/experiments/ch39-omega-research/replay/%E4%B8%89%E6%AF%94%E5%80%BC%E5%9C%A8%E4%B8%89%E8%A7%92%E5%BD%A2%E5%9B%BE%E4%B8%8E%E4%B8%89%E7%82%B9%E9%93%BE%E4%B8%8A%E4%BA%8E%E5%8F%82%E6%95%B0%E5%8F%96%E4%B8%89%E5%88%86%E4%B9%8B%E4%B8%80%E4%B8%8E%E4%BA%8C%E5%88%86%E4%B9%8B%E4%B8%80%E5%A4%84%E5%88%B0t16%E9%98%B6%E6%89%8D%E5%B1%80%E9%83%A8%E7%A1%AE%E5%AE%9A%E9%87%8D%E5%8F%A0%E6%A8%A1%E9%95%BF.md) · [精确证书](https://github.com/the-omega-institute/trureturing-experiments/blob/a6a358f5167c57f3eada67026298cf6327e288cf/experiments/ch39-omega-research/replay/ch39-proton-overlap-identifiability-graphs.py)；[配位数律与 $G_{19}$ 的判定](https://github.com/the-omega-institute/trureturing-experiments/blob/df7150304d6bb1c02cc294d03a2808751ccab62f/experiments/ch39-omega-research/replay/%E4%B8%89%E6%AF%94%E5%80%BC%E9%9B%85%E5%8F%AF%E6%AF%94%E8%A1%8C%E5%88%97%E5%BC%8F%E5%9C%A8%E4%BB%BB%E6%84%8F%E6%9C%89%E9%99%90%E5%9B%BE%E4%B8%8A%E7%9A%84t16%E7%B3%BB%E6%95%B0%E4%B8%BA%E9%85%8D%E4%BD%8D%E6%95%B0%E5%B9%B3%E6%96%B9%E4%B9%98%E4%B8%A4%E7%82%B9%E6%A0%BC%E7%B3%BB%E6%95%B0%E4%B8%94%E4%B8%80%E8%88%AC%E5%8F%82%E6%95%B0%E5%A4%84%E9%A6%96%E4%B8%AA%E9%9D%9E%E9%9B%B6%E9%98%B6%E4%B8%BAt16%E7%94%B1%E6%AD%A4%E5%88%A4%E5%AE%9AG19%E5%9B%9B%E7%B1%BB%E6%A0%BC%E7%82%B9.md) · [精确证书](https://github.com/the-omega-institute/trureturing-experiments/blob/df7150304d6bb1c02cc294d03a2808751ccab62f/experiments/ch39-omega-research/replay/ch39-proton-overlap-jacobian-coordination-law.py)）。
 
 在两点格上，正交支的三个参数也都能在跳跃充分小且非零时由三个读数局部反解。记按 $t$ 重标度前的两个对角接触耦合为 $u,v>0$，令 $w=v/u=|F|^2$。把读数按 $(X_{AB},X_{AA},X_{BB})$、参数按 $(u,v,\rho)$ 排列，$\rho=0$ 处雅可比行列式的首个非零项是
