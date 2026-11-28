@@ -64,6 +64,17 @@ Allowing mixtures gives exactly the convex hull of $\mathcal P_p$. Every point o
 
 In particular, uniform $q$ means $s=0$, which $\operatorname{diag}(p)$ always realizes. A pure state works exactly when $a,b,c$ close to a triangle, allowing equality and zero sides. Rotate the closed triangle to make its three arguments sum to zero modulo $2\pi$, assigning any direction to a side of length zero. Expanding the four factors in Heron’s formula and using $p_0+p_1+p_2=1$ gives the equivalent test $(p_0p_1+p_1p_2+p_2p_0)^2\le 4p_0p_1p_2$. If a triangle inequality fails, the minimum rank is two. Indeed, for any attainable $s$ with a full-rank witness, add a real $h$ to $\rho_{01}$ and subtract it from $\rho_{20}$, adjusting the conjugate entries as well. Both readouts stay fixed. Positivity confines $h$ to a bounded closed interval whose endpoints give singular states. For example, at $p=(1,8,8)/17$ the longest side $8/17$ exceeds the sum $2\sqrt8/17$ of the other two. An equal mixture of the rephased up-basis vectors $(1,4,0)/\sqrt{17}$ and $(1,0,-4)/\sqrt{17}$ gives the required rank-two state.
 
+General $q$ also admits a one-variable pure-state test. If $p$ is positive and nonuniform, cyclically shift the up-basis indices so that $b\ne c$. This permutes the three summands $\rho_{j,j+1}$ and preserves $s$. Set $w=e^{i\alpha}$ and $u=e^{i\beta}$. The phase equation is $s-aw=bu+cw^{-1}\bar u$. Combining it with its conjugate gives
+$$
+\begin{aligned}
+N(w)&=bs-abw-c\bar s\,w^{-1}+acw^{-2},\\
+u&=\frac{N(w)}{b^2-c^2}.
+\end{aligned}
+$$
+Test the polynomial $w^3[N(w)\overline{N(1/\bar w)}-(b^2-c^2)^2]$ for a unit-circle root. Its leading and constant coefficients are both $-a^2bc$. Each distinct root on the circle gives a single pure state up to overall phase. Check $w=-1$ separately, then substitute $w=(1+ix)/(1-ix)$ in the squared-modulus condition. The positive factor $(1+x^2)^3$ clears denominators and gives a real polynomial with the same real roots. Multiplicity does not change the number of states.
+
+If exactly two entries of $p$ are positive, the pure-state cyclic sum runs along the circle whose radius is the corresponding side length. Each point fixes a unique relative phase. One positive entry gives only $s=0$. When $p$ is uniform and $q$ is nonuniform, exchange the two bases to apply the same tests. When both are uniform, the two orientations of the equilateral triangle each give three rotations and thus six states. Six is the general maximum and is also attained with nonuniform $p$. For $p=(4,9,9)/22$ and $q=(1,1,1)/3$, the polynomial is proportional to $-8w^6+9w^3-8$, with six distinct unit-circle roots. [Sextic test and endpoint examples](https://github.com/the-omega-institute/trureturing-books/issues/1653#issuecomment-7232049615)
+
 Which other four-site operators can produce a nonzero $J$ by this mechanism? Group the rotation characters as a two-dimensional fixed plane $F$ and two character lines. Any two Hermitian operators commuting with the rotation then have the form $A=A_0\oplus a_+\oplus a_-$ and $B=B_0\oplus b_+\oplus b_-$. Write the unit normal to the common light space as $n=(n_0,n_+,n_-)$. Put $C=[A_0,B_0]$, $\alpha=a_+-a_-$, $\beta=b_+-b_-$ and $X_0=\beta(A_0-a_-I)-\alpha(B_0-b_-I)$. For the compressions $H_A,H_B$ to $n^\perp$, the signed determinant factors as
 $$
 \det[H_A,H_B]=-|n_+n_-|^2\det(X_0)\,n_0^*C n_0.
