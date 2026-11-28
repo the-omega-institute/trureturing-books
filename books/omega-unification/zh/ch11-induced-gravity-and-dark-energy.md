@@ -168,6 +168,8 @@ $L>0$ 时这个下界严格大于 $L$。若原门是对角门，选 $d'$ 为 $d,
 
 若 $d=0$，酉性使两个对角元都为零。记右上、左下元为 $b,c$。两轮的三组弦各构成一颗二边星，中心为 $a$，第三、第四轮的叶子分别为 $p,q$。合成后 $e_a\mapsto c e_p$，$e_p\mapsto e^{i\phi}bc\,e_q$，$e_q\mapsto e^{i\phi}b\,e_a$。两轮都改用右上元为 $e^{i\phi}b$、左下元仍为 $c$ 的同一酉门，就复制了这三个映射。因此末轮相位能被同号共门精确吸收，当且仅当 $e^{i\phi}=1$ 或 $d=0$。
 
+一般情形也有显式上界。令 $w^2=z$ 且 $\operatorname{Re}w\ge0$。将两轮的门同时改为 $\operatorname{diag}(w,1)G_{52}\operatorname{diag}(1,w)$，并保留前两轮。在每颗星上，误差算子的早叶列与另外两列的像正交。前者的范数是 $|1-w|\sqrt{|ab|^2+|d|^2}$，后两列共用一个像方向，沿该方向的行范数为 $|1-w|\sqrt{|ac|^2+|d|^2}$。两者相等，故这组门给出的误差为 $|1-w|\,|d|\sqrt{2-|d|^2}$。三颗星的直和与前两轮的酉输运都保留该算子范数。[共门显式构造](https://github.com/the-omega-institute/trureturing-books/issues/1627#issuecomment-7232623572)
+
 固定三门和第五壳源 $H$，记 $H_0=U_0HU_0^*$。末轮相位只改变六站与其余十三站间的交叉块，故
 $$
 \|U_\phi H U_\phi^*-H_0\|_{\mathrm{op}}

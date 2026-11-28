@@ -168,6 +168,8 @@ For $L>0$ the bound is strictly greater than $L$. If the original gate is diagon
 
 If $d=0$, unitarity forces both gate diagonal entries to vanish. Let $b$ and $c$ be the upper-right and lower-left entries. The last two rounds form three two-edge stars. In each, let $a$ be the center and $p,q$ the leaves in rounds three and four. Their composition sends $e_a\mapsto c e_p$, $e_p\mapsto e^{i\phi}bc\,e_q$, and $e_q\mapsto e^{i\phi}b\,e_a$. A single gate with upper-right entry $e^{i\phi}b$ and lower-left entry $c$, used in both rounds, reproduces all three maps. The last-round phase can therefore be absorbed into the shared gate exactly when $e^{i\phi}=1$ or $d=0$.
 
+An explicit upper bound holds for general gates. Choose $w^2=z$ with $\operatorname{Re}w\ge0$ and use $\operatorname{diag}(w,1)G_{52}\operatorname{diag}(1,w)$ in both rounds, keeping the first two rounds fixed. On each star, the error column for the early leaf is orthogonal to the image of the other two columns. Its norm is $|1-w|\sqrt{|ab|^2+|d|^2}$. The other columns have a common image direction and a combined row norm $|1-w|\sqrt{|ac|^2+|d|^2}$. The two norms agree, giving an error of $|1-w|\,|d|\sqrt{2-|d|^2}$. Taking the direct sum across the three stars and multiplying on the right by the earlier unitary transport preserve this operator norm. [Explicit shared-gate construction](https://github.com/the-omega-institute/trureturing-books/issues/1627#issuecomment-7232623572)
+
 With the three gates and the fifth-shell source $H$ fixed, put $H_0=U_0HU_0^*$. The last-round phase changes only the cross blocks between the six sites and the other thirteen, giving
 $$
 \|U_\phi H U_\phi^*-H_0\|_{\mathrm{op}}
