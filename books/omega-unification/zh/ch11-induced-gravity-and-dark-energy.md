@@ -185,6 +185,12 @@ $$
 
 若同时重选三个门，同号输运能得到已知负号解的源算子吗？固定第五壳源和十二条定向弦，负号解所在六维角盒内的每个输运后源算子，与全部同号共门所得算子的算子范数距离都大于 $1.2\times10^{-5}$。两条重本征线提供了这一区分。在三条射线的早、晚两片叶上逆推，负号门以相反的符号留下同一对角元，同号门在两处留下相同的对角元。六组读数足以分辨这两个系数，而未受门作用的站点 $14$ 固定了两条重线各自的相位。因此，同号六式若有解，必须由与这个负号角盒相隔正距离的算子实现。[两条重本征线给出的距离界](https://github.com/the-omega-institute/trureturing-experiments/blob/a646b9d10eed33e413ee0bd2b65125c674025e2d/experiments/ch39-omega-research/replay/ch39-three-shell-source-phase-distance.md)
 
+固定前两门与 $G_{52}$ 的第一行 $(a,b)$，其第二行是 $(-h\bar b,h\bar a)$，其中 $h=\det G_{52}$。按早、晚两轮相乘后，改变 $h$ 只将三颗二边星的六片叶子同时乘以 $h$。故三壳 57 个原始振幅共有同一个二维参数 $t=(\Re h,\Im h)$，可写成 $A=m+Mt$，其中 $\|t\|_2=1$。给定 $A$，先检查 $A-m$ 是否落在 $M$ 的列空间。若 $M$ 秩为二，原像唯一且须为单位向量。秩为一时，最短原像的长度至多为一便可沿核补足。秩为零时只可得到 $A=m$。这一步可消去一个公共相位，其余门角和作用于振幅平方的六个热方程仍需联立。[相位消元与三壳振幅](https://github.com/the-omega-institute/trureturing-books/issues/1627#issuecomment-7234045041)
+
+若只约束两条重线的逐站强度，并允许任意相位来恢复正交，已知负号解就为该松弛提供了六读数见证。末轮的对角符号保留每条重线的逐站强度和两线的正交性，同时改变跨站相干。因此全域判定还需要约束同号门产生的相干。[强度松弛的见证](https://github.com/the-omega-institute/trureturing-books/issues/1627#issuecomment-7234053080)
+
+**只改变公共相位时的排除（`CERT`）。** 将负号证书中心的前十一个角固定，只让同号重复 $G_{52}$ 的整体相位绕行一周。每壳投影振幅来自整体相位的至多二次复多项式。Arb 的 316 次区间求值覆盖全圆，每个终盒至少有一个热读数余项避开零。因此这个一维切片无法同时满足六式。允许其余门角共同变化时的可达性仍开放。[全圆区间证书与代码](https://github.com/the-omega-institute/trureturing-books/issues/1627#issuecomment-7234066551)
+
 前三壳的六个等式对第十壳还留下多少自由？保留相同的第五壳源、十二条弦和末轮负号，重新选择三个门。固定其中四角，其余八角在一个区间盒内调整。任取 $|u|\le 4\times10^{-6}$、$|v|\le 5\times10^{-7}$，都能选出同一组门，使前三壳保持上述六个等式，并在第十壳同时读得 $K_{10}=1+u$、$W_{10}=10^{-122}+v$。取 $u=v=0$ 即配平四壳八式；取偏移的四种符号组合，则两项偏离的方向可以独立改变。此处第十壳也参与校准，真空尺度仍是输入。 [四壳校准与第十壳响应的区间证书](https://github.com/the-omega-institute/trureturing-experiments/blob/c6bbae236604130b5618b1c906ed36e8c532faf9/experiments/ch39-omega-research/replay/ch39-four-shell-final-sign.md)
 
 若分六轮在平方弦长不超过 56 的全部十八条边上各施门一次，同长度仍共用一个门，则可用第七、八、九壳的六项目标共同校准这四个门，使同一第五壳算子共轭一次后在三壳各自的原生第三枢轴都精确给出 $K=1$ 和 $W=10^{-122}$。第十壳的两个目标事先登记。对封存参数盒内每个满足前三壳六式的解，第十壳原生第三枢轴都给出 $1.07020<K_{10}<1.07540$ 和 $-0.002820<W_{10}<-0.002444$，两项均失配。能否由同一算术联络预先给出跨壳输运，仍是开放问题。 [三壳六式的共同解](https://github.com/the-omega-institute/trureturing-experiments/commit/9e2b8abfe862acb15667d5a0154731a67e491a95) · [第十壳的事前登记](https://github.com/the-omega-institute/trureturing-experiments/commit/062393b79f354aedffa0c211fedb458e5dfa2e35) · [第十壳的区间读数](https://github.com/the-omega-institute/trureturing-experiments/commit/2326ecde013a0e40d6487cb52bd10ae519edf08a)
