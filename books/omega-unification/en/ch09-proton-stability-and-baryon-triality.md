@@ -251,6 +251,18 @@ With the Weyl equation imposed, one neutral first jet has six independent compon
 
 For odd $15\le n\le27$, begin with three neutral first jets in the first generation. Contract their symmetric right spinor pairs with the alternating tensor on the three-dimensional space of those pairs. The three left spinor indices are symmetric and contract with the color-antisymmetric product of three first-generation $u^c$ fields. Choosing a common left polarization and distinct right components gives a nonzero coefficient. Each of the other two generations supplies up to three additional jet pairs. After the full classical equations and integration by parts, these counts have minimum dimension $(7n-21)/2$. [Negative-lepton deficits, the right-spinor boundary, and witnesses](https://github.com/the-omega-institute/trureturing-books/issues/1660#issuecomment-7232272635)
 
+**Higher occupation groups at negative lepton charge (`ARGUED`).** For odd $n\ge31$, the zero-deficit capacity is $30$. The three families at positive deficit $p$ are neutral $L^\dagger$ jets of order $p+1$, charged $L^\dagger$ jets of order $p$, and $e^c$ jets of order $p-1$. The spatial counts again give $c_p^{\mathrm{EOM}}$. Write $n=30+\sum_{p=1}^{k-1}c_p^{\mathrm{EOM}}+s$ with $1\le s\le c_k^{\mathrm{EOM}}$. The minimum dimension is
+$$
+\begin{aligned}
+d_{\min}(-n)&=\frac{7n-21}{2}
++\sum_{p=1}^{k-1}p\,c_p^{\mathrm{EOM}}\\
+&\quad+ks+(k\bmod2).
+\end{aligned}
+$$
+Filling the lowest groups first and imposing dimension parity gives the lower bound. For the unpaired slot, put $S_\mu=\epsilon_{rs}H^{\dagger r}D_\mu H^{\dagger s}$. Its hypercharge is $-1$, so $S^\mu D_\mu e^c$ is a left spinor of zero hypercharge. Substitute it for the ordinary $e^c$ in the nine-anti-up-quark color contraction and fill the zero group. This gives a dimension-$100$ representative at $n=31$. Contract the three positive-deficit families with $H^\dagger$, $D_\mu H^\dagger$, and $S_\mu$, respectively, and fill whole pairs using the alternating form at each order. In each even $e^c$ group, contract both $S_\mu$ factors with the two additional indices on the higher jet. This transfers the unpaired component along a spatial direction to deficit $k+(k\bmod2)$.
+
+Set $H=0$ and take a flat connection, retaining $H^\dagger,u^c,e^c,L^\dagger$. The particular Yukawa solution for $L^\dagger$ carries only $e^c$ coefficients. Selecting the full free $L^\dagger$ degree preserves the nonzero coefficient, and two undifferentiated anti-up quarks balance its total momentum. The minimum is attained in the quotient by all classical field equations and integration by parts. For $n\ge31$, the positive-lepton sector of the same magnitude has minimum dimension nine higher. [Pairs and parity in the higher negative-lepton groups](https://github.com/the-omega-institute/trureturing-books/issues/1660#issuecomment-7232292405)
+
 ## 9.3 Shell-Triality Algebra Closure, Discrete Anomaly Inflow, and the 25-State Lifted Shell {#sec-ch09-algebra-inflow}
 
 While $U(1)_X$ gives a clean Abelian lift over the Standard Model, installing the Behrend shell's species-dependent triality phase $F$ directly atop full $SU(5)$ vertices unleashes an extraordinary sequence of algebraic and topological demands.
