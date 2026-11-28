@@ -71,6 +71,10 @@ $$
 
 十六站也是任意固定布局的最小数。从十九站中无论选哪十五站，对每个允许的软化值，都有一对共同钟角使某个非零输入完全相消。全部 $3876$ 种布局按旋转分为 $1296$ 类。其中 $36$ 类省去了一个完整轨道，继承极点方案的盲点，其余 $1260$ 类各有一个经过区间检验的盲点角盒。若已知背景并允许按背景换站，十五站就够了：在十八个非极点站中选行列式模最大的十五行，另三行在此基底中的每个系数模至多为一，所以所选读数的最小奇异值大于 $4\times10^{-5}/\sqrt{46}$。十四个复读数无法确定十五个独立复振幅。[固定布局的完整分类与按背景选站的界](https://github.com/the-omega-institute/trureturing-experiments/blob/1c485355843e787bf64af78c6c21b0dffd0fbd78/experiments/ch39-omega-research/replay/ch39-five-charge-fifteen-masks.md)
 
+实际的两只钟由同一个黎曼零点的纵坐标驱动。它们多常走近固定布局的盲点？在第 $2\,306\,888\,100\,085$ 个正零点逐一取出所有十五行方阵，无论用实际软化还是零软化，每个布局的最小奇异值都大于 $3.11736\times10^{-6}$。这个共同锚点也决定了一个密度问题。每个布局的行 Gram 矩阵都可用各荷、各循环特征的最低线投影来写。谱隙使这些投影随钟角实解析，各布局的 Gram 行列式之积在零软化锚点严格为正，故其零集面积为零。由两钟等分布及实际软化随高度趋零，按重数计的正零点中，全部 $3876$ 种布局同时满秩的比例趋于一。
+
+满秩时还要问测量误差会放大多少。固定一种布局，记 $s$ 为其最小奇异值。零软化时，两钟角沿短弧总共移动 $h$ 弧度，$s$ 至多改变 $\sqrt{132}\,h$。故一个盲点周围就有一块面积可算的近盲菱形。令 $\varepsilon(T)\downarrow0$ 且 $\varepsilon(T)\sqrt{\log T}\to\infty$。在高度 $T$ 以内全部正零点中，满足 $s<\varepsilon(T)$ 且所有布局都满秩的比例，除以 $\varepsilon(T)^2$ 后下极限至少为 $1/(264\pi^2)$。各布局各有自己的近盲零点。某个实际零点是否恰好失秩仍开放。[逐布局锚点、近盲面积与零点计数](https://github.com/the-omega-institute/trureturing-experiments/blob/bc1aeeab70bbe7a36e7f8df8365267542da81aad/experiments/ch39-omega-research/replay/ch39-five-charge-zero-density.md)
+
 将内部空间按特征标正交拆块，背后依托的是一条无 $\pi$、纯有理的群论正交骨架。正如[第二章](ch02-quaternion-clocks-and-haar-zeros.md)在双时钟球面哈尔积分中所确立的，偶次切比雪夫特征多项式 $E_m(\kappa)$ 在全阶上的正交归一性已在 Lean 内核中不依赖实数极限而严格冻结：
 
 ::: {.theorem #thm-ou-ch07-peter-weyl-orthonormal title="全阶偶次彼得—魏尔特征核的无 π 有理哈尔正交归一性" lean="D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.all_degree_peter_weyl_orthonormal"}
