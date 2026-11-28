@@ -193,7 +193,7 @@ $$
 
 二次矩等于 $2\int_0^{1/2}uD_\lambda(u,T)\,du$。若在 $0<u\le a$ 内只有一致界 $D_\lambda(u,T)=O_\lambda(T)$，分层积分给出 $O_\lambda(T(\log L)^2/L^2)$。双对数因子可以达到。每个相位周期只在末端放一对偏轴零点，偏移为 $\pm 4\log\log t/\log t$，其中 $t$ 是周期末端。这样的点数和偏移符合密度界，两枚临界线点的微移可精确抵消这对零点给带权和增加的部分。由此可同时保留光滑计数（误差 $O_\lambda(1)$）和同频带权端点首项（误差 $O_\lambda(1)$），而模型的二次矩仍为 $(8\lambda/\pi+o(1))T(\log L)^2/L^2$。要把实际 $\zeta$ 的窄带积分控制到 $O_\lambda(T/L^2)$，需要对二次矩取得同阶估计。[构造、端点与数值复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240157206)
 
-固定实部上的同频积分读出的是一次偏移矩。令 $L_U=\log U$、$0\le a\le 1/2$，并设 $M_a(U,V)=\sum_{U<\gamma\le V}(\delta_\rho-a)_+e^{i\lambda\gamma}$。同一割线计算（`ARGUED`）在 $U\le V\le 2U$ 上一致给出
+固定实部上的同频积分读出的是一次偏移矩。固定上文的非共振频率 $\lambda>0$。对充分大的 $U$，令 $L_U=\log U$、$0\le a\le 1/2$，零点按重数计，并设 $M_a(U,V)=\sum_{U<\gamma\le V}(\delta_\rho-a)_+e^{i\lambda\gamma}$。同一割线计算（`ARGUED`）在 $U\le V\le 2U$ 上一致给出
 
 $$
 \int_U^V e^{i\lambda t}\log|\zeta(1/2+a+it)|\,dt
@@ -202,9 +202,9 @@ $$
 
 固定实部后，每条割线贡献的是 $\sinh(\lambda(\delta_\rho-a)_+)/\lambda$。用 Selberg 密度界控制偏移的三阶绝对矩，即得线性化余差。右边界的对数欧拉级数只有素幂频率，非共振使其积分一致有界。水平边界耗费 $O_\lambda(L_U)$，两端均取右极限以恢复 $(U,V]$。因此 $a=1/L_U$ 处的 $O_\lambda(U/L_U)$ 积分目标等价于同阶的一次矩估计。若只补充一致阈值界 $|D_\lambda(u,V)-D_\lambda(u,U)|\ll_\lambda U$，在 $u=4\log L_U/L_U$ 处切开分层积分，得到 $O_\lambda(U\log L_U/L_U)$。 [割线推导与密度估计](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240412364)
 
-即使二次矩在每个右闭窗中都很小，一次矩仍可达到这个量级（合成谱，`ARGUED`）。令 $P=2\pi/\lambda$，每周期末端 $t_j=jP$ 放一对偏移 $\pm d_j$，其中 $d_j=4\log\log t_j/\log t_j$。在半周期处放两对偏移 $\pm d_j/\sqrt{2}$，相位与末端相反。完整周期的二次矩恰为零，一次矩却为 $(1-\sqrt{2})d_j+a$，只要两组正偏移都大于 $a$。于是二进窗内的二次矩只剩边界贡献，而 $M_{1/L_U}(U,2U)\sim-4(\sqrt{2}-1)U\log L_U/(P L_U)$。用带限核补偿这些偏轴点，可同时保留光滑计数、Selberg 型密度、同频带权硬窗首项和固定无素幂频带的平滑显式公式读数。[构造与数值复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240412364)
+即使二次矩在每个右闭窗中都很小，一次矩仍可达到这个量级（合成谱，`ARGUED`）。令 $P=2\pi/\lambda$、$t_j=jP$、$d_j=4\log\log t_j/\log t_j$。从此后恒有 $d_j<1/2$ 的指标起，在每个周期末端放一对偏移 $\pm d_j$，两点均在临界带内。在 $t_j-P/2$ 处放两对偏移 $\pm d_j/\sqrt{2}$，相位与末端相反。完整周期的二次矩恰为零，一次矩却为 $(1-\sqrt{2})d_j+a$，只要两组正偏移都大于 $a$。于是二进窗内的二次矩只剩边界贡献，而 $M_{1/L_U}(U,2U)\sim-4(\sqrt{2}-1)U\log L_U/(P L_U)$。用带限核补偿这些偏轴点，可同时保留光滑计数、Selberg 型密度、同频带权硬窗首项和固定无素幂频带的平滑显式公式读数。[构造与数值复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240412364)
 
-把阈值推广为 $a_\kappa=\kappa\log L_U/L_U$ 可直接检验下一目标。若 $0<\kappa<2\sqrt{2}$，二进窗内两组右侧偏移均超过 $a_\kappa$，并且每个完整周期的一次矩为
+把阈值推广为 $a_\kappa=\kappa\log L_U/L_U$ 可直接检验下一目标。对每个固定的 $0<\kappa<2\sqrt{2}$ 及充分大的 $U$，二进窗内两组右侧偏移均超过 $a_\kappa$，并且每个完整周期的一次矩为
 $$
 (d_j-a_\kappa)-2(d_j/\sqrt{2}-a_\kappa)
 =\bigl[\kappa-4(\sqrt{2}-1)+o(1)\bigr]\frac{\log L_U}{L_U}.
@@ -214,7 +214,7 @@ $$
 M_{a_2}(U,2U)=\frac{2-4(\sqrt{2}-1)+o(1)}{P}\frac{U\log L_U}{L_U},
 \qquad 2-4(\sqrt{2}-1)=0.3431457505\ldots.
 $$
-同一构造的完整周期二次矩仍为 $d_j^2-2(d_j/\sqrt{2})^2=0$，任意右闭二进窗的二次矩只有两个边界部分，大小为 $O((\log L_U/L_U)^2)$。因此，单靠计数、指数 $1/4$ 的 Selberg 型密度、固定无素幂频带复取样和带权端点补偿，仍允许 $a_2$ 处的一次矩达到 $U\log\log U/\log U$。[参数化推导](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240636139) · [右闭窗数值复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240919252)
+同一构造的完整周期二次矩仍为 $d_j^2-2(d_j/\sqrt{2})^2=0$，任意右闭二进窗的二次矩只有两个边界部分，大小为 $O((\log L_U/L_U)^2)$。因此，单靠计数、指数 $1/4$ 的 Selberg 型密度、固定无素幂频带复取样和带权端点补偿，仍允许 $a_2$ 处的一次矩达到 $U\log\log U/\log U$。对实际 $\zeta$ 零点，从 $a$ 起积分零点计数的绝对上界，Jutila 指数为 $3/4$ 的密度界给出 $|M_a(U,V)|\ll U\exp(-3aL_U/4)$。在 $a_2$ 处已得 $O(U/L_U^{3/2})$，在 $a=1/L_U$ 处这一步给出 $O(U)$。[零点密度，定理 2.4](https://arxiv.org/pdf/1404.3080#page=5) · [参数化推导](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240636139) · [临界带内的右闭窗复算与密度积分](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240967665)
 
 对实际 $\zeta$ 零点，保留实部权重时，无须用 RH 作为解析输入也可在高度平均下读出端点项。令 $S(t)$ 为黎曼–冯·曼戈尔特公式中的辐角项，即离开零点高度时 $N(t)=1+\vartheta(t)/\pi+S(t)$，其中 $\vartheta$ 是黎曼–西格尔 $\vartheta$ 函数。从带权和中扣除光滑端点项
 
