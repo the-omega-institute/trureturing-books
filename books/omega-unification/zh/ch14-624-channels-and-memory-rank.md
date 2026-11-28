@@ -86,6 +86,18 @@ $$
 
 取极点 $(-1/4,1/4)$ 及权 $16w=(1/2,1/2)$，再独立取极点 $(-1/2,0,1/2)$ 及权 $16w=(1/8,3/4,1/8)$。两次都有 $(m_0,m_1,m_2)=(1/16,0,1/256)$；由对称性 $\sum_j b_j^2=1/16$，所以整个耦合矩阵的算子范数至多为 $1/2+1/4=3/4$。单极点必有 $m_0m_2=m_1^2$，此处却有 $m_0m_2>0$，故复现这组读数至少且只需两个隐藏态。第二个系统的三个极点都有正留数，在全频响应中都可见。取第四个频率 $z=-1$，两组 $S(-1)$ 已分别为 $-257/3840$ 和 $-53/768$。一般地，若有 $r$ 个互异极点且权非零，由矩 $m_0,\ldots,m_{2r-2}$ 组成的 $r$ 阶 Hankel 矩阵秩恰为 $r$。[有限矩的秩定理](lean:D5/S3/Analytic/GoldenTomography/FinitePronyHankelReconstruction.prony_hankel_rank)
 
+若有多个可见端口，三个矩变成矩阵，未必能同时对角化。固定可见块 $A=A^*$，假设读数来自有限维自伴严格收缩矩阵，其隐藏块为 $H$、由可见空间到隐藏空间的耦合为 $B$。将 $S(z)=B^*(zI-H)^{-1}B$ 的三钟数据插值成 $M_0z^2+M_1z+M_2$。以下手工推导给出复现数据的最小隐藏维数。令 $Y=(I-H^3)^{-1/2}B$，同一个三次因式分解给出 $M_j=Y^*H^jY$。于是每个实现至少需要
+
+$$
+q=\operatorname{rank}
+\begin{pmatrix}M_0&M_1\\M_1&M_2\end{pmatrix}
+=\operatorname{rank}[Y,\ HY]
+$$
+
+个隐藏态，因为分块矩阵是右侧各列的格拉姆矩阵。为达到这个下界，同时保留给定实现在 $z=-1$ 的读数，取 $p(t)=(1+t)(1-t^3)$ 与 $U=p(H)^{-1/2}B$。$U$ 和 $HU$ 的列张成 $q$ 维空间，因为 $Y=(I+H)^{1/2}U$ 且该因子可逆并与 $H$ 对易。把 $H$ 正交压缩到此空间，得到 $T$。有 $TU=HU$，故 $U^*T^jU=U^*H^jU$ 对 $0\le j\le3$ 成立。三次时，两边都是 $(HU)^*H(HU)$。在三个时钟及 $z=-1$ 处，$p(t)/(z-t)$ 都是至多三次的多项式。于是取新耦合 $p(T)^{1/2}U$ 就保住这四个读数。压缩后 $\|T\|<1$，而全矩阵严格收缩的两个舒尔补条件 $I-A-S(1)\succ0$ 与 $I+A+S(-1)\succ0$ 也都保留。故 $q$ 可达。
+
+例如取两个端口，$A=0$，令 $H$ 的四个对角元为 $t=\pm1/2,\pm1/4$，$U$ 的对应行为 $(1,t)/8$。此时 $\|B\|\le\sqrt{27/16}/4<1/2$，整个系统严格收缩。$[U,HU]$ 的列是四点上的 $1,t,t,t^2$ 各除以 $8$，秩恰为三。尽管四条谱线都有非零留数，三个隐藏态已足以保留三钟和给定的第四读数。回到原壳时，允许编辑的可见块也参与极小化，每个候选块仍须满足支集与收缩条件。
+
 设原壳与中转态组成的分块矩阵经舒尔补在三个时钟频率 $\omega \in \{1, \zeta_3, \zeta_3^2\}$ 给出可见逆响应 $R_{\mathrm{vis}}(\omega)^{-1} = A_0 + \Delta_D - B^* (\omega I - H_{\mathrm{aux}})^{-1} B$，其中允许非零修正的旧块位置被限制在 $\operatorname{supp}(\Delta_D) \subseteq \{(u, v) : \|u - v\|^2 \le D\}$。随着截断半径 $D$ 逐步收缩，越来越多对可见站点之间的 Gram 内积被迫固定不变，从而迫使辅助空间维数 $r(D)$ 一级一级向上跃升（完整证书见 [`ch39-three-clock-minimal-memory.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-three-clock-minimal-memory.py)、[`ch39-local-memory-rank.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-local-memory-rank.py) 与 [`ch39-three-clock-symmetric-cutoff.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-three-clock-symmetric-cutoff.py)）：
 
 | 允许修改旧传播块的平方弦距范围 $D$ | 最小辅助记忆秩 $r(D)$ | 关键代数阻塞机制与精确证书 |
