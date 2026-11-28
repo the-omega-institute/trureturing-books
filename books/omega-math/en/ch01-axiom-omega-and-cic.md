@@ -116,6 +116,8 @@ Pause to notice how sparse these laws are. Not a single $\pi$, $e$, $\varphi$, r
 
   Now add an arbitrary probe point $z$ and write $d = \kappa(x,z)-\kappa(y,z)$. For the sample $(x,y,z)$ and rational weights $(1,-1,-d)$, normalization and symmetry give the Gram inequality $2-2\kappa(x,y)-d^2 \ge 0$. If $\kappa(x,y)=1$, then $x$ and $y$ have the same reading against every $z$. Conversely, if their rows agree, taking $z=y$ gives $\kappa(x,y)=\kappa(y,y)=1$. This argument uses only normalization, symmetry, and rational Gram positivity. Inferring equality of the underlying points from unit fidelity requires precisely that the row map $x\mapsto\kappa(x,\cdot)$ be injective. This is the role of extensional separation in Law II.
 
+  How far apart can two probe readings be? Fix the mutual reading of $x$ and $y$ at $3/5$, and let a third point $z$ read $4/5$ against $x$ and zero against $y$. For rational weights $u,v,w$ on the three points in that order, the Gram form is $(v+3u/5)^2+(w+4u/5)^2$. These readings are therefore attainable on three points. The identity $3^2+4^2=5^2$ suggests testing the mutual reading and the difference between the probe readings in a single sum of squares.
+
 - **Any point serves temporarily as an origin, recovering a group in three lines**: pick any temporary reference point $o \in \mathcal{M}$, and define a binary product $x \star_o z := [x, o, z]$ and local inverse $x^{-1_o} := [o, x, o]$. Associativity follows straight from Law I: $(x \star_o y) \star_o z = [[x, o, y], o, z] = [x, o, [y, o, z]] = x \star_o (y \star_o z)$. Left and right identity are $[o, o, z] = z$ and $[x, o, o] = x$, and the left and right inverses take two rewrites each:
 
   $$
