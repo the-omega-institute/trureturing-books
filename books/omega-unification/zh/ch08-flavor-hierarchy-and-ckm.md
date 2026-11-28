@@ -310,6 +310,10 @@ $$
 
 对固定的质量基和角度，首阶只读取最轻质量线在平面内的分量。在顶底平面内重做最优分角时，各部门的有效谱隙为 $1-a\varepsilon(1-\lambda_u)$、$1-b\varepsilon(1-\lambda_d)$，平面与法线间的矩阵元只在平方破缺的二次项中出现。任意使破缺达到最小的轮换基，在秩一极限都以顶底平面为一个坐标平面。控制偏离该平面的代价后，得到相同的首阶下界。因此在 $|V_{ud}|<1$ 时，差距的一次项系数严格为正。[首阶下界与矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/1902#issuecomment-7238657944)
 
+**正交端点附近，首阶取优的平面可以在三阶失去取优性（手工推导）。** 取端点重线的单位向量 $e_0,e_1$ 与平面单位法线 $e_2$。将下型参考质量基在顶底平面内转向上型重线，使夹角为 $\pi/2-\mu\varepsilon$，并令归一次重谱为 $a\varepsilon,b\varepsilon$，其中 $\mu,a,b>0$。当两轻块的首阶非对角元均非零，且首阶最优分角在两侧都为正时，平面最优破缺 $D_{\mathrm{plane}}$ 与全基最优破缺 $D_*$ 有相同的首阶系数。平衡两部门的平方破缺后，偏转法线的二次代价为正，而轻块的非对角元可以产生线性变化。原基中 $O(\varepsilon^2)$ 的偏转因而能给出 $O(\varepsilon^3)$ 的破缺改进。若这个三阶系数消失，差值降至 $O(\varepsilon^5)$。
+
+例如取 $\mu=a=b=1$，端点次重线由 $c=(e_1+e_2)/\sqrt2$、$s=(e_0+i e_2)/\sqrt2$ 张成。两侧在首阶各分一半偏角，但 $D_{\mathrm{plane}}-D_*=(\sqrt3/16)\varepsilon^3+O(\varepsilon^4)$，所以对充分小的正 $\varepsilon$，固定平面会高估最小破缺。[匹配上下界、三阶消失条件与矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/1983#issuecomment-7238976867)
+
 **顶底夹角与次重谱同阶时（手工推导）。** 若连顶底夹角也随次重谱缩小，单靠顶底平面分角会漏掉同阶的轻块代价。取顶线单位向量 $e_0$，在其正交补中固定上、下型参考次重单位向量 $c,s$ 及转动方向 $v$。把下型参考质量基在 $e_0,v$ 平面内整体转过 $\theta=\mu\varepsilon$，并令两套归一次重质量平方分别为 $a\varepsilon,b\varepsilon$，其中 $\mu,a,b>0$。记 $D_*$ 为所有轮换本征基上的最小破缺，令 $\kappa=2|\langle c,s\rangle|^2-1$、$r_w=wa^2/4$、$s_w=(1-w)b^2/4$。则
 
 $$
