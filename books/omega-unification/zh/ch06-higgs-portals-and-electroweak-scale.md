@@ -258,6 +258,17 @@ $$
 
 分母是极限残差在 $p_0$ 的正曲率。有理区间运算给出 $0.069763441380\le c\le0.069763441382$，因此内点在极限点右侧，间距首阶按对数的倒数缩小。移动方向可直接由等幅残差的驻点方程确定。对 $0<a\le 2^{-23}$，质量偏导由等幅系数分母中的 $2L(1)$ 主导，因为 $a\partial_a L(1)\to-1$。对 $2^{-23}\le a\le 1/20$，连续有理区间在夹住驻点的同时，给出消元后驻点方程的质量偏导为负、动量平方偏导为正。隐式求导给出这两段上的 $dp_a/da>0$。连同前面 $1/20\le a\le7/20$ 的两个分裂区间，最优内点在 $0<a\le7/20$ 随轻层平方质量严格递增。 [对数首项的手工推导](https://github.com/the-omega-institute/trureturing-books/issues/2106#issuecomment-7240031962) · [近零端的定号](https://github.com/the-omega-institute/trureturing-books/issues/2138#issuecomment-7240234207) · [连接两段的推导与复算](https://github.com/the-omega-institute/trureturing-books/issues/2159#issuecomment-7240408368)
 
+取点和重层误差放大率都以对数的倒数为首阶尺度。把等幅残差的重层系数归一为一，记 $D=d/v_H$ 和 $D_0=\lim_{a\downarrow0}D(a)$。从轻层列中拆出共同项 $\ell$，再用混合层列使两端的剩余改变量相等。等幅条件给出的轻层系数分母形如 $2\ell+O(1)$，内点的移动在幅度的一阶变化中由驻点条件消去。由此得到
+
+$
+\frac{1}{D(a)}=\frac{1}{D_0}+\frac{\gamma}{D_0^2\ell}+O(\ell^{-2}),
+\qquad
+\lim_{a\downarrow0}a\ell^2D'(a)=-\gamma,\qquad
+\gamma\approx0.00093789712.
+$$
+
+放大率的逆对数修正系数 $\gamma/D_0^2$ 约为 $273.053$。有理区间运算与积分余项界给出 $-0.00362<a\ell^2D'(a)<-0.00090$，覆盖整个 $0<a\le2^{-12}$。因此从 $a=2^{-12}$ 再降低轻层平方质量时，放大率从约 $593.91$ 严格降向 $539.567599$。 [手工推导、区间证书与直接积分复算](https://github.com/the-omega-institute/trureturing-books/issues/2416#issuecomment-7242732424)
+
 例如 $m=(1,4,9)$ 时，通道 $(1,3)$ 和 $(2,2)$ 同在 $T=16$ 开启，却分别有 $e_{13}=4$ 与 $e_{22}=0$。按列顺序 $(11,12,13,22,23,33)$ 在 $P=1,\ldots,6$ 取值，有理区间运算将行列式夹在 $-3.767\times10^{-28}$ 与 $-3.766\times10^{-28}$ 之间。二点核恢复的是模方。四层算例说明，即使再给静态背景谱，相对环相位仍可能有歧义。 [行列式复算](https://github.com/the-omega-institute/trureturing-books/issues/1821#issuecomment-7238133069)
 
 **四层混合门户的相位。** 即使给出每个常背景下的全部质量本征值，再给出零背景处所有欧氏动量的二点响应，四层间的相对相位仍可有两解。取四个量子数相同的复标量，质量平方矩阵为 $D=\operatorname{diag}(1,2,3,4)$，令 $\sigma=\pm1$，选择门户
