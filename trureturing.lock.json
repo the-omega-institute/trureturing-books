@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "a5909e7f611954fc71b26eed9efff2d7b42a2cc3",
-  "pinned_at": "2026-11-28T05:18:22Z",
+  "commit": "3eb13caf5b05bcc2d0434207222b1d7cbdc7cf9d",
+  "pinned_at": "2026-11-28T06:22:05Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -5849,6 +5849,19 @@
       "statement_id": "sha256:990d12ae0b8105b023c6a83152a2b2959ceb21caf6236c8d7defe7cbdfeba986",
       "line": 24,
       "signature": "theorem result {I : Type*} [Fintype I] (g : I → Circle) : let G"
+    },
+    "D5/S3/Fourier/Asymptotics/TwoClockFrequencySeparation.frequency_separation": {
+      "module": "D5/S3/Fourier/Asymptotics/TwoClockFrequencySeparation",
+      "name": "D5.S3.Fourier.Asymptotics.TwoClockFrequencySeparation.frequency_separation",
+      "kind": "theorem",
+      "statement_id": "sha256:4f0668534ea91171aa494ad45813c76909d63c4e2a78579743bf785dbfa1d046",
+      "line": 314,
+      "signature": "theorem frequency_separation (m n : ℤ) (hmn : m ≠ 0 ∨ n ≠ 0) : 1 ≤ |clockFrequency m n| * (128 * (1734 : ℝ) ^ (32 * max m.natAbs n.natAbs))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Fourier/Asymptotics/WeightedCumulativeRemainder.weighted_tail_error_le": {
       "module": "D5/S3/Fourier/Asymptotics/WeightedCumulativeRemainder",
