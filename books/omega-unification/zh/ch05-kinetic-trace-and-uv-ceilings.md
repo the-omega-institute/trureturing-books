@@ -220,7 +220,16 @@ $$
 
 在 $B_0$，$N$ 份截顶热权可以同时趋于 $1$，第二热迹的上确界为 $N+w_1^u$。因此 $u\ge u_c$ 时的左跳跃为 $1-M^u-d^u$，与 $N$ 无关。取 $u=4$，复算（`NUM`）得到约 $0.113987815$。[整个指数区间的推导](https://github.com/the-omega-institute/trureturing-books/issues/2059#issuecomment-7239617760) · [四次热迹复算](https://github.com/the-omega-institute/trureturing-books/issues/2059#issuecomment-7239523334) · [小指数构造](https://github.com/the-omega-institute/trureturing-books/issues/2059#issuecomment-7239426333)
 
-对于四次热迹，预算尚差一小段才到截顶时，也能求出整条最优曲线（手工推导，`ARGUED`）。固定 $u=4$ 和 $\tau=\tau_0(4)$，记 $V_S(B)$ 为第一热迹等于 $S$、暴露至多 $B$ 的有限正质量整数谱的第二热迹上确界。若 $0<\varepsilon\le1/4$，令 $M_\varepsilon=W(\tau-\varepsilon)$，则
+把预算从 $B_0$ 向下移，最优谱还可能在截顶之前换序（手工推导，`ARGUED`）。记 $V_S(B)$ 为第一热迹等于 $S$、暴露至多 $B$ 的有限正质量整数谱的第二热迹上确界。令 $r=\tau-\varepsilon$、$M_\varepsilon=W(r)$，并令 $s_r$ 为 $W(r-s_r)+W(s_r)=1+w_1$ 在 $(0,r/2)$ 内的唯一根。置 $A_r=W(r-s_r)$、$C_r=W(s_r)$。在 $u=7/2$、$\tau=\tau_0(7/2)$ 和 $0<\varepsilon\le1/20$ 时，
+
+$$
+V_S(B_0-\varepsilon)
+=N-1+\max\bigl\{A_r^u+C_r^u,\ M_\varepsilon^u+w_1^u+(1-M_\varepsilon)^u\bigr\}.
+$$
+
+前缀支配将任意有限谱的上界归约为单次转移，转移族的幂和严格凸，所以只需比较两端。两份转移谱的幂和减去三份无转移谱的幂和，随 $\varepsilon$ 严格下降，在 $0.0237169055<\varepsilon_c<0.0237169058$ 内唯一换号。预算越过 $B_c=B_0-\varepsilon_c$ 向上增加时，最优谱由无转移端换为转移端，$V_S$ 对 $B$ 的斜率由约 $0.230347403$ 升至约 $0.251251786$（`NUM`）。$N=1$ 时，每侧的最优谱唯一，换序点两组谱都取等。$N\ge2$ 时，$N-1$ 份截顶热权必须趋于 $1$，两支曲线都只能由正质量谱逼近。[有限预算推导与有理区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2136#issuecomment-7240195509)
+
+取四次热迹 $u=4$ 和 $\tau=\tau_0(4)$，同样的比较在 $0<\varepsilon\le1/4$ 给出
 
 $$
 V_S(B_0-\varepsilon)=N-1+M_\varepsilon^4+w_1^4+(1-M_\varepsilon)^4.
