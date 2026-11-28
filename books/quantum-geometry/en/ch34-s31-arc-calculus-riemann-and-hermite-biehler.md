@@ -574,7 +574,7 @@ Item 1: for $\theta=1$ both sides are analytic on $\operatorname{Re}s>0$, $s\ne1
    and $\langle\rho_j,\rho_k\rangle=(jk)^{-1/2}\frac1{2\pi}\int_{\mathbb R}w(t)(k/j)^{it}dt$ with $w(t)=\lvert\zeta(\frac12+it)\rvert^2/(\frac14+t^2)$: up to the diagonal factor $\operatorname{diag}(k^{-1/2})$ on both sides, $G_N$ is a Toeplitz form with symbol $w\ge0$, sampled at the points $\log k$.
 2. **The remainder never vanishes.** $\rho_1,\dots,\rho_N$ are linearly independent, $G_N$ is positive definite, and $d_N>0$ for every $N$.
 3. **Each decrement.** With the Cholesky factorization $G_N=LL^{\top}$ and $y=L^{-1}c$: $d_N^2=1-\sum_{k\le N}y_k^2$ and $d_{N-1}^2-d_N^2=y_N^2=\langle\chi,e_N\rangle^2$, where $e_N$ is the unit direction of the component of $\rho_N$ orthogonal to $V_{N-1}$, and the pivot $L_{NN}^2=\det G_N/\det G_{N-1}>0$ is the squared distance from $\rho_N$ to $V_{N-1}$. Hence $d_N$ is non-increasing; it decreases strictly at step $N$ exactly when $\langle\chi,e_N\rangle\ne0$, for which this book has no general proof.
-4. **Reading a finite error as a zero-free region.** A nonzero remainder can still exclude a whole region of zero locations. Fix $N\ge0$ and a real $0<a\le\tfrac12$. If one has rigorously certified
+4. **Reading a finite error as a zero-free region.** A nonzero remainder can still exclude a whole region of zero locations; [@rem-appm-nyman-rectangle-infimum] gives the exact rectangle threshold for any positive lower height and explains the role of its open boundary. First see the mechanism in the disk: fix $N\ge0$ and a real $0<a\le\tfrac12$. If one has rigorously certified
 
    $$
    d_N^2\le U<a(1-a),
@@ -594,14 +594,84 @@ Item 1: for $\theta=1$ both sides are analytic on $\operatorname{Re}s>0$, $s\ne1
 
    would give the contradiction $a(1-a)\le d_N^2\le U<a(1-a)$. In practice it suffices to choose any finite coefficients $b_k$ and rigorously enclose $\lVert\chi-\sum_{k\le N}b_k\rho_k\rVert^2\le U$, since the squared distance is at most this trial error; the exact optimal projection is unnecessary. For example, $a=\tfrac14$ gives the threshold $U<\tfrac3{16}$ and excludes the closed annulus $\tfrac12\le\lvert(\rho-1)/\rho\rvert\le\tfrac{\sqrt3}{2}$ in the Cayley coordinate. This floor alone does not allow $U\le a(1-a)$ as the threshold: equality holds at $x=a$ and $x=1-a$. As $\operatorname{Re}\rho\downarrow\tfrac12$ or $\lvert\operatorname{Im}\rho\rvert\to\infty$, $x\to1$ and the floor can tend to zero. Thus this finite regional certificate supplies neither a uniform error threshold covering the entire right half-strip nor the $N$ needed to reach a prescribed threshold.
 
+   On a rectangular region, the same floor gives an exact uniform threshold. Fix $N\ge0$, $0<\delta<\tfrac12$ and $T\ge1$. If one rigorously certifies
+
+   $$
+   d_N^2\le U<K(\delta,T),\qquad
+   K(\delta,T)=\frac{2\delta\bigl((\tfrac12-\delta)^2+T^2\bigr)}{\bigl((\tfrac12+\delta)^2+T^2\bigr)^2},
+   $$
+
+   then there is no nontrivial zero with $\tfrac12+\delta\le\operatorname{Re}\rho<1$ and $1\le\lvert\operatorname{Im}\rho\rvert\le T$, including the indicated closed boundaries. This remains a **manual consequence of the frozen floor, not separately checked in Lean**. To prove the threshold, write $\rho=\beta+i\gamma$ and set $u=\beta-\tfrac12\in[\delta,\tfrac12)$, $y=1-x=2u/\bigl((\tfrac12+u)^2+\gamma^2\bigr)$ and $B(u)=(\tfrac12+u)^2+T^2$. Since $\beta^2\le\gamma^2$, we have $x\ge\gamma^2/(\beta^2+\gamma^2)\ge\tfrac12$, hence $0<y\le\tfrac12$. Also,
+
+   $$
+   \begin{aligned}
+   uB(\delta)-\delta B(u)
+   &=(u-\delta)(T^2+\tfrac14-u\delta)\ge0,\\
+   y&\ge\frac{2u}{B(u)}\ge\frac{2\delta}{B(\delta)}=:y_0,\\
+   y(1-y)-y_0(1-y_0)&=(y-y_0)(1-y-y_0)\ge0.
+   \end{aligned}
+   $$
+
+   A hypothetical zero would therefore force $d_N^2\ge y(1-y)\ge y_0(1-y_0)=K(\delta,T)>U$, a contradiction. The geometric floor attains $K(\delta,T)$ at $\beta=\tfrac12+\delta$, $\lvert\gamma\rvert=T$, so this is its exact minimum on the specified region. Optimality here concerns the geometric floor alone and asserts no zero at that location. For example, $\delta=\tfrac14$ and $T=2$ give the threshold $U<\tfrac{520}{5329}$, strictly less restrictive than $U<\tfrac1{20}$; this is only a conditional example, with no new trial error $U$ computed. A certified upper bound from any trial vector still suffices, as above.
+
 **Proof.** Item 1: item 1 of [@prop-ch34-nyman-beurling-frozen-facts] with $\theta=1/k$, together with $\int_1^\infty\frac{1}{kx}x^{s-1}dx=-\frac{1}{k(s-1)}$, gives $\int_0^\infty\rho_k(x)x^{s-1}dx=-k^{-s}\zeta(s)/s$ for $0<\operatorname{Re}s<1$, and $\int_0^1x^{s-1}dx=1/s$; apply Mellin–Plancherel on $\operatorname{Re}s=\frac12$ to $f=\chi-\sum_kc'_k\rho_k$, for which $\mathcal Mf=(1-\zeta A)/s$ with $a_k=-c'_k$, and $\lvert s\rvert^2=\frac14+t^2$. The formula for the Gram entries is the same computation. Item 2: if $\sum_kc_k\rho_k=0$, then $\zeta(s)\sum_kc_kk^{-s}=0$ almost everywhere on the critical line; the zeros of $\zeta$ on the line are isolated, so the Dirichlet polynomial vanishes on the line; it is entire, hence identically zero, and letting $\operatorname{Re}s\to+\infty$ gives $c_k=0$ one by one. $V_N$ is finite-dimensional, hence closed, so $d_N=0$ would give $\chi\in V_N$, i.e. $\zeta A=1$ almost everywhere on the line, hence on $\mathbb C\setminus\{1\}$ by uniqueness; but $\zeta(-2)=0$ while $A(-2)$ is finite. Item 3 is Gram–Schmidt: the projection of $\chi$ onto $V_N$ is its projection onto $V_{N-1}$ plus $\langle\chi,e_N\rangle e_N$. $\square$
 
 **What it says and what it does not.** Item 4 of [@prop-ch34-nyman-beurling-frozen-facts] is the "easy direction" of the Nyman–Beurling criterion with its constant written out. Writing $\rho=\beta+i\gamma$ and using $\lvert\rho-1\rvert^2+2\beta-1=\lvert\rho\rvert^2$, the floor equals $(2\beta-1)\lvert1-\rho\rvert^2/\lvert\rho\rvert^4$, which is less than $1/\lvert\rho\rvert^2<1/\gamma^2$. By Platt–Trudgian (see [@rem-ch34-radial-lock-pair-disks]) every off-line zero has $\lvert\gamma\rvert>3\cdot10^{12}$, so every such floor is below $(3\cdot10^{12})^{-2}<1.12\times10^{-25}$, while $d_{300}^2\approx8.0\times10^{-3}$ from [@ex-ch34-nyman-beurling-numbers] exceeds it by a factor of more than $10^{22}$: finitely many values $d_N$ cannot see a hypothetical off-line zero. This gives a common disk coordinate with Li curvature: $z(s)=1-1/s$ maps $\operatorname{Re}s>1/2$ into the unit disk, and $z(1-\bar\rho)=1/\overline{z(\rho)}$ (manual algebraic derivation). The same hypothetical off-line zero negates RH, so the cited [canonical Li-curvature positivity-failure theorem](lean:D5/S3/Weil/Probability/CanonicalLiCurvatureZeroFree.not_rh_forces_canonical_curvature_failure) guarantees a finite order at which $T_N(c^{\mathrm{Li}})$ is not positive semidefinite. Since it is Hermitian, it has a negative eigenvalue (a manual consequence of finite-dimensional linear algebra). This step needs no additional zero-sum representation and supplies no detection order. The stronger negative-index count is discussed in [@rem-ch34-li-toeplitz-negative-index]. In contrast, the Nyman matrix $G_N$ is positive definite unconditionally: the same zero forces every $d_N^2$ above the common positive floor $r^2(1-r^2)$, obstructing approximation to zero. The shared coordinate gives neither an identity between the two finite matrices nor a universal conclusion from finitely many successful tests. J.-F. Burnol (*Adv. Math.* **170**, 56–70, 2002, Theorem 2.1 and Note 2.2) gives the corresponding polynomial model on the unit circle: when all roots lie on the circle the squared distance tends to zero like $\sum m^2/N$, and when a root lies in the open disk the distance has a positive floor; item 4 above is the half-plane counterpart of the latter.
 
+**From finite error to finite height (manual consequence).** The small scale of the numerical comparison above still allows a finite regional certificate. Fix $N\ge0$, $0<\delta<\tfrac12$ and $T\ge1$. If a rigorously certified upper bound satisfies
+
+$$
+d_N^2\le U<\frac{\delta}{1+T^2},
+$$
+
+then there is no nontrivial zero with $\tfrac12+\delta\le\operatorname{Re}\rho<1$ and $1\le\lvert\operatorname{Im}\rho\rvert\le T$. Indeed, suppose $\rho=\beta+i\gamma$ were such a zero and set $x=r^2$. Since $\beta<1$ and $\gamma^2\ge1$, we have $\beta^2+\gamma^2\le2\gamma^2$, so
+
+$$
+\begin{aligned}
+x&=\frac{(1-\beta)^2+\gamma^2}{\beta^2+\gamma^2}\ge\frac12,\\
+1-x&=\frac{2\beta-1}{\beta^2+\gamma^2}\ge\frac{2\delta}{1+T^2},\\
+d_N^2&\ge x(1-x)\ge\frac{\delta}{1+T^2}>U,
+\end{aligned}
+$$
+
+contradicting the upper bound. The last line uses item 4 of [@prop-ch34-nyman-beurling-frozen-facts]; the finite-height combination above is a manual consequence, not separately checked in Lean. Any rigorous error bound $\lVert\chi-v\rVert^2\le U$ for $v\in V_N$ suffices, since $d_N^2\le\lVert\chi-v\rVert^2$; an optimal projection is unnecessary. The certificate includes the boundaries $\operatorname{Re}\rho=\tfrac12+\delta$ and $\lvert\operatorname{Im}\rho\rvert=1,T$. For example, $\delta=\tfrac14$ and $T=2$ give the threshold $U<\tfrac1{20}$; this is a conditional example, not a newly computed $U$. The lower height cutoff $1$ ensures $x\ge\tfrac12$; for fixed $U>0$, the condition also covers only heights satisfying $T^2<\delta/U-1$. The threshold tends to zero as the region approaches the critical line or the height tends to infinity, so one finite error certificate alone does not imply RH.
+
 **Literature result, not formalized in this book.** The unconditional bound $\liminf_N d_N^2\log N\ge\sum_{\operatorname{Re}\rho=1/2}m_\rho^2/\lvert\rho\rvert^2$ and the conditions under which the constant is $2+\gamma-\log4\pi$ are recalled in [@rem-ch34-arithmetic-pivot-literature] and [@rem-ch34-burnol-nbb-mollifier-literature]. Combined with the externally verified [@conj-riemann-hypothesis] and Báez-Duarte's criterion, $d_N\to0$ now holds unconditionally, and the lower bound runs over all nontrivial zeros to give $\liminf_N d_N^2\log N\ge\sum_\rho m_\rho^2/\lvert\rho\rvert^2\ge2+\gamma-\log4\pi$ (with equality in the second step iff all zeros are simple). However, the second hypothesis required by S. Bettin, J. B. Conrey, and D. W. Farmer (*Proc. Steklov Inst. Math.* **280**, 30–36, 2013, DOI [10.1134/S0081543813030036](https://doi.org/10.1134/S0081543813030036), Theorem 1) to establish the matching upper asymptotic $(2+\gamma-\log4\pi)/\log N$—namely $\sum_{\lvert\operatorname{Im}\rho\rvert\le T}\lvert\zeta'(\rho)\rvert^{-2}\ll T^{3/2-\delta}$ for some $\delta>0$, which presupposes Simple Zeros—is not implied by the Riemann Hypothesis, so both $d_N^2\sim(2+\gamma-\log4\pi)/\log N$ and Simple Zeros remain open (`OPEN`).
 :::
 
-The Gram entries have a closed form, a single Cholesky factorization gives every $d_N$ at once, and the numbers can be enclosed rigorously in ball arithmetic.
+The Gram entries have a closed form, a single Cholesky factorization gives every $d_N$ at once, and the numbers can be enclosed rigorously in ball arithmetic. When only an upper bound for a zero-exclusion threshold is needed, the following trial certificate avoids propagating errors through a matrix inverse.
+
+::: {.remark #rem-ch34-nyman-trial-error-certificate title="A Nyman Trial-Error Certificate from Rational Enclosures (Manual derivation)"}
+The upper bound needed in item 4 of [@rem-ch34-nyman-beurling-remainder] can be obtained directly from a trial residual. Fix $N\ge1$ and $q\in\mathbb Q^N$, and write $G=G_N$. All the functions are real-valued, so $G,c$ are a real matrix and vector. Suppose rational data $\widehat G,\widehat c$ and nonnegative rational errors $E_{jk},\eta_j$ rigorously enclose the true integrals: for every $1\le j,k\le N$,
+
+$$
+\lvert c_j-\widehat c_j\rvert\le\eta_j,\qquad
+\lvert G_{jk}-\widehat G_{jk}\rvert\le E_{jk}.
+$$
+
+Writing $\lvert q\rvert=(\lvert q_j\rvert)_j$, the following gives a complete rational error certificate:
+
+$$
+\begin{aligned}
+\widehat R(q)&=1-2q^{\top}\widehat c+q^{\top}\widehat Gq,\\
+P(q)&=2\lvert q\rvert^{\top}\eta+\lvert q\rvert^{\top}E\lvert q\rvert,\\
+R(q)&:=\Bigl\lVert\chi-\sum_{k\le N}q_k\rho_k\Bigr\rVert^2,\\
+0\le d_N^2&\le R(q)\le U(q):=\widehat R(q)+P(q).
+\end{aligned}
+$$
+
+To prove it, expand the square: $\lVert\chi\rVert^2=1$ gives $R(q)=1-2q^{\top}c+q^{\top}Gq$, and the triangle inequality applied term by term gives $\lvert R(q)-\widehat R(q)\rvert\le2\sum_j\lvert q_j\rvert\eta_j+\sum_{j,k}\lvert q_jq_k\rvert E_{jk}=P(q)$. For the uniform choices $\eta_j=\varepsilon_c$ and $E_{jk}=\varepsilon_G$, this becomes
+
+$$
+\begin{aligned}
+U(q)&=1-2q^{\top}\widehat c+q^{\top}\widehat Gq\\
+&\quad+2\varepsilon_c\lVert q\rVert_1+\varepsilon_G\lVert q\rVert_1^2,\qquad
+\lVert q\rVert_1=\sum_j\lvert q_j\rvert.
+\end{aligned}
+$$
+
+A numerical solver may find candidate coefficients, which can then be rounded to a fixed rational vector $q$; the expansion above checks the rounded vector itself. It requires neither a certified $\widehat G^{-1}$ nor positive definiteness of $\widehat G$. Once the integral enclosures are rigorous, evaluating $U(q)$ and comparing it with the zero-exclusion thresholds above use only finite rational arithmetic; floating-point approximations alone do not supply those enclosures. The zero-exclusion certificates above can take $U=U(q)$ directly. This error-propagation formula is a manual derivation, not separately checked in Lean, and no new Nyman integral enclosures have been computed here.
+:::
 
 ::: {.example #ex-ch34-nyman-beurling-numbers title="The Nyman–Beurling Distance for N ≤ 300 (Literature result, computer-assisted verification and numerical results)"}
 **Literature result, not formalized in this book.** For coprime $h,k$ (V. I. Vasyunin, *Algebra i Analiz* **7**(3), 118–135, 1995; taken here from L. Báez-Duarte, M. Balazard, B. Landreau, E. Saias, *Ramanujan J.* **9**, 215–240, 2005, DOI [10.1007/s11139-005-0834-4](https://doi.org/10.1007/s11139-005-0834-4), Proposition 89 of their working paper [arXiv:math/0306251](https://arxiv.org/abs/math/0306251), rewritten through $\langle\rho_h,\rho_k\rangle=A(h/k)/h$):

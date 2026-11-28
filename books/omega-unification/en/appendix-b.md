@@ -40,7 +40,252 @@ For rapid equation lookup across volumes, the table below summarizes recurring m
 
 ## B.2 Six-Tier Epistemic Evidence Stratification Ledger {#sec-ou-appb-epistemic-ledger}
 
-Every theorem, interval bound, effective construction, and open target across the monograph is strictly assigned to one of six epistemic tiers governed by a **strict non-escalation rule**: neither Arb ball enclosures, nor standalone upstream `Init` replays, nor external RH formalizations automatically elevate an `ARGUED`, `NUM`, `MODEL`, or `OPEN` claim into a pinned `LEAN ✓` frozen theorem:
+Every theorem, interval bound, effective construction, and open target across the monograph is strictly assigned to one of six epistemic tiers governed by a **strict non-escalation rule**: neither Arb ball enclosures, nor standalone upstream `Init` replays, nor external RH formalizations automatically elevate an `ARGUED`, `NUM`, `MODEL`, or `OPEN` claim into a pinned `LEAN ✓` frozen theorem.
+
+The following spectral example separates an exact calculation from an independent positivity proof: the Cayley criterion in [Chapter 3, Section 3.1](ch03-riemann-zeros-fejer-and-landau.md#sec-ou-3-1) admits a finite negative-index test, but the matrix itself is still built from the actual zeros.
+
+::: {.theorem #thm-ou-appb-mirror-gram-inertia title="Gram Inertia of the Finite Mirror-Odd Sector" lean="D5/S3/Midline/Cayley/FiniteMirrorKreinGramInertia.canonical_zeta_finite_mirror_gram_inertia"}
+Use the library's parameter-free canonical presentation `zetaZeroData`, with distinct nontrivial zeros $\rho_n$ and analytic multiplicities $m_n>0$. The same-height mirror permutation $\sigma$ preserves multiplicities and satisfies $\rho_{\sigma(n)}=1-\overline{\rho_n}$. For every $T\in\mathbb R$, define
+
+$$
+\begin{aligned}
+W_T&=\{n:|\rho_n-\tfrac12|\le T\},\\
+R_T&=\{n\in W_T:n<\sigma(n)\},\\
+\kappa_T&=\sum_{n\in R_T}m_n.
+\end{aligned}
+$$
+
+On the standard basis of $H=\ell^2(\{(n,k):k<m_n\};\mathbb C)$, set $J e_{n,k}=e_{\sigma(n),k}$ and $[x,y]_J=\langle x,Jy\rangle$. For $n\in R_T$ and $0\le k<m_n$, take $v_{n,k}=e_{n,k}-e_{\sigma(n),k}$. Their actual Gram matrix $G_T=([v_{n,k},v_{r,l}]_J)$ satisfies
+
+$$
+\begin{aligned}
+G_T&=-2I,\\
+n_-(G_T)&=\kappa_T,\\
+n_-(G_T)>0
+&\ \Longleftrightarrow\
+\exists n\in W_T:\operatorname{Re}\rho_n\ne\tfrac12.
+\end{aligned}
+$$
+
+Here $n_-$ counts negative eigenvalues with multiplicity, and the matrix is indexed by the $\kappa_T$ mirror-odd vectors. The window is a spectral-radius window $|\rho-\tfrac12|\le T$, rather than a height window restricting only $|\operatorname{Im}\rho|$.
+:::
+
+::: proof
+Choose one representative from each nonfixed two-element mirror orbit. Different representatives and their mirrors occupy disjoint standard-basis coordinates, and distinct multiplicity copies of the same zero are also orthogonal. Hence the ordinary Hilbert Gram matrix of these vectors is $2I$, while $Jv_{n,k}=-v_{n,k}$ makes the actual mirror Gram matrix $-2I$. Each selected orbit contributes exactly $m_n$ negative eigenvalues. Mirror fixedness is exactly critical-line location, and analytic multiplicities are positive, giving the final equivalence. The full proof is checked by the Lean kernel.
+:::
+
+The count keeps the existence of off-critical zeros conditional. Combining it with the external formalized RH fact cited in Chapter 3 gives $\kappa_T=0$ for every $T$ (a manual implication combining the two evidence tiers, `ARGUED`); the kernel theorem above supplies the exact inertia formula.
+
+When a Hermitian form is observed through finitely many resolvent directions, what ensures that no negative direction is missed? A sufficient guarantee is that the directions span the whole space being tested. Start with a two-point calculation (`ARGUED`): support points $x_0=0,x_1=1$ and center $z=-1$ give $C=\begin{pmatrix}1&1\\1/2&1/4\end{pmatrix}$ from two successive reciprocal powers, with $\det C=-1/4\ne0$. The two directions are independent; the same Vandermonde mechanism controls the general case.
+
+::: {.theorem #thm-ou-appb-cauchy-jet-inverse title="One-Center Cauchy Jet Inverse at Distinct Support Points" lean="D5/S3/Analytic/GoldenTomography/CauchyFeatureRightInverse.cauchy_feature_right_inverse"}
+Let $n\in\mathbb N$, let the complex support points $x_0,\ldots,x_{n-1}$ be pairwise distinct, and let $z\in\mathbb C$ satisfy $x_a\ne z$ at every index. Define the square matrix
+
+$$
+C_{ak}=(x_a-z)^{-(k+1)},\qquad 0\le a,k<n,
+$$
+
+and let $R$ be the matrix inverse specified by the library's `cauchyJetFeatureRightInverse`. Then
+
+$$
+CR=RC=I_n,
+$$
+
+and the map $v\mapsto Cv$ is injective.
+:::
+
+::: proof
+Put $r_a=(x_a-z)^{-1}$. Then $C=\operatorname{diag}(r_a)V$, where $V_{ak}=r_a^k$. Avoiding the center makes every $r_a\ne0$, and translation followed by inversion preserves distinctness of the support points. Thus both the diagonal and Vandermonde factors are invertible. The matrix inverse gives both inverse identities and injectivity of the analysis map. The full proof is checked by the Lean kernel.
+:::
+
+::: {.remark #rem-ou-appb-cauchy-source-rank title="Jets Separate Spectral Values; Sources Cover Multiplicity Spaces"}
+The following operator interpretation and inertia consequence are manual derivations (`ARGUED`). Under the theorem's hypotheses, in dimension $n$ take a self-adjoint operator $K=\operatorname{diag}(x_a)$ with simple spectrum, and suppose a source vector $s$ has every coordinate $s_a\ne0$. The matrix with columns $(K-zI)^{-(k+1)}s$ is $B=\operatorname{diag}(s_a)C$, so $B^{-1}=R\operatorname{diag}(s_a^{-1})$. For any Hermitian form $Q$, the identity $v^*B^*QBv=(Bv)^*Q(Bv)$ and bijectivity of $B$ give $n_\pm(B^*QB)=n_\pm(Q)$: every positive or negative definite subspace, with its dimension, transfers in both directions through this bijection.
+
+With repeated eigenvalues, distinctness applies only to different spectral values; multiplicity copies cannot be treated as distinct support points. Precisely, let a self-adjoint operator $K$ on a finite-dimensional complex inner-product space have $q$ distinct eigenvalues with spectral projections $P_\lambda$, take sources $s_1,\ldots,s_p$, and assume $z\notin\operatorname{spec}K$. Then
+
+$$
+\begin{aligned}
+\mathcal O&=\operatorname{span}\{(K-zI)^{-(k+1)}s_j:0\le k<q,\ 1\le j\le p\}\\
+&=\bigoplus_{\lambda\in\operatorname{spec}K}
+\operatorname{span}\{P_\lambda s_j:1\le j\le p\}.
+\end{aligned}
+$$
+
+Every filtered vector is a linear combination of the projected sources on the right. Conversely, for each fixed source the inverse of the $q\times q$ jet matrix recovers each $P_\lambda s_j$ separately. Full observation therefore requires, and is equivalent to, the projected sources spanning every eigenspace. One source supplies at most one direction in each eigenspace; increasing the jet order cannot supply missing multiplicity directions.
+
+The scheme uses successive reciprocal powers at one center, equivalently normalized derivatives of the resolvent with respect to $z$. It makes no claim for arbitrary sample lists, and a few scalar clock readings in [Chapter 12](ch12-shared-arithmetic-clock.md#sec-ch12) do not by themselves supply these vectors or the whole Gram matrix. Invertibility provides no uniform error amplification bound and no control of infinite spectral tails. An independent RH spectral route still needs an arithmetic or geometric positivity construction and identification of the complete zero spectrum; checks on finitely many windows cannot replace control for every $T$.
+:::
+
+Even when observations cover every direction, positivity concerns the full quadratic form. If one block is known to be positive definite, its coefficients can first vary freely, leaving the minimum reading at the retained ports. The Schur complement gives this reading, rather than an individual port's diagonal entry.
+
+::: {.theorem #thm-ou-appb-schur-attained-minimum title="Attained Schur Minimum with a Positive Definite Internal Block" lean="D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"}
+Let $m,d\in\mathbb N$, let $A\in\mathbb C^{m\times m}$ be Hermitian, let $B\in\mathbb C^{m\times d}$, and let $C\in\mathbb C^{d\times d}$ be positive definite Hermitian. Set
+
+$$
+H=\begin{pmatrix}A&B\\B^*&C\end{pmatrix},\qquad S=A-BC^{-1}B^*.
+$$
+
+For each fixed $x\in\mathbb C^m$, the following minimum is attained:
+
+$$
+\min_{y\in\mathbb C^d}
+\begin{pmatrix}x\\y\end{pmatrix}^{\!*}
+H\begin{pmatrix}x\\y\end{pmatrix}=x^*Sx.
+$$
+:::
+
+::: proof
+Positive definiteness makes $C$ invertible. Completing the square gives
+
+$$
+\begin{pmatrix}x\\y\end{pmatrix}^{\!*}H\begin{pmatrix}x\\y\end{pmatrix}
+=x^*Sx+(y+C^{-1}B^*x)^*C(y+C^{-1}B^*x).
+$$
+
+The second term is nonnegative and vanishes at $y=-C^{-1}B^*x$, so $x^*Sx$ is an attained least element of the range. The full proof is checked by the Lean kernel.
+:::
+
+A manual consequence (ARGUED) is that, under $C\succ0$, we have $H\succeq0$ if and only if $S\succeq0$. One direction follows directly from the completed square; the other, for each fixed $x$, tests $H$ at the minimizer. A positive definite background therefore cannot hide a negative residual after elimination, but testing that residual requires the cross-block readings $B$.
+
+::: {.example #ex-ou-appb-collective-schur-residual title="One Negative Residual beyond a Positive Definite Background"}
+The matrix substitution and explicit witness below are a manual derivation (ARGUED). Take an integer $n\ge3$ and a real $1/(n-1)<a<1/(n-2)$, write $\mathbf1_k=(1,\ldots,1)^T$, and separate one port from the remaining $n-1$ ports:
+
+$$
+\begin{aligned}
+H&=(1+a)I_n-a\mathbf1_n\mathbf1_n^*,\\
+A&=1,\qquad B=-a\mathbf1_{n-1}^*,\\
+C&=(1+a)I_{n-1}-a\mathbf1_{n-1}\mathbf1_{n-1}^*,\\
+p&=1-(n-2)a>0.
+\end{aligned}
+$$
+
+On the direction $\mathbf1_{n-1}$, the eigenvalue of $C$ is $p$; on its orthogonal complement it is $1+a>0$, so $C\succ0$. Thus $C^{-1}\mathbf1_{n-1}=p^{-1}\mathbf1_{n-1}$, and the final scalar Schur residual is
+
+$$
+s=1-\frac{(n-1)a^2}{p}
+=\frac{(1+a)(1-(n-1)a)}{p}<0.
+$$
+
+Fixing the retained coefficient at $x=1$ gives the minimizer and its full reading:
+
+$$
+\begin{aligned}
+y_{\min}&=\frac{a}{p}\mathbf1_{n-1},\qquad
+w=\begin{pmatrix}1\\y_{\min}\end{pmatrix},\\
+Hw&=\begin{pmatrix}s\\0\end{pmatrix},\qquad w^*Hw=s.
+\end{aligned}
+$$
+
+The identity $Hw=(s,0)^T$ also shows that this residual direction is orthogonal to the entire internal block for the form defined by $H$. Taking $n=3,a=3/4$ gives $p=1/4$, $w=(1,3,3)^T$, and $w^*Hw=-7/2$. The two internal ports already form a positive definite block, and every individual diagonal reading is $1$, yet one residual obtained by joint adjustment disproves positivity of the whole matrix. This requires all cross-port Gram readings and does not follow directly from a few scalar arithmetic clock readings. These matrices are algebraic models; they specify no actual zeros and supply no independent positivity proof of RH. If $C$ is only positive semidefinite, the inverse and minimum argument above no longer apply directly.
+:::
+
+::: {.remark #rem-ou-appb-schur-regularization title="Regularization Reveals Coupling to the Kernel"}
+Adding a small positive diagonal term to a singular internal block allows [@thm-ou-appb-schur-attained-minimum] to apply, but the regularized minimum need not have a finite limit. The following exact decomposition and error bound are manual derivations (`ARGUED`). Let $m,d\in\mathbb N$, let $A\in\mathbb C^{m\times m}$ be Hermitian, let $B\in\mathbb C^{m\times d}$, and let $C\in\mathbb C^{d\times d}$ be positive semidefinite. Let $P_0$ be the orthogonal projection onto $\ker C$, let $P_\lambda$ be the spectral projections for its positive spectral values, and define
+
+$$
+\begin{aligned}
+C^\dagger&=\sum_{\lambda>0}\lambda^{-1}P_\lambda,\\
+S_\dagger&=A-BC^\dagger B^*,\\
+S_\varepsilon&=A-B(C+\varepsilon I)^{-1}B^*,\qquad \varepsilon>0.
+\end{aligned}
+$$
+
+All sums run only over the finitely many positive spectral values of $C$, and all limits below are as $\varepsilon\to0^+$. Taking reciprocals on each spectral subspace gives
+
+$$
+\begin{aligned}
+S_\varepsilon&=S_\dagger-\frac1\varepsilon BP_0B^*+E_\varepsilon,\\
+E_\varepsilon&=B\left(\sum_{\lambda>0}
+\frac{\varepsilon}{\lambda(\lambda+\varepsilon)}P_\lambda\right)B^*.
+\end{aligned}
+$$
+
+Choose $\gamma>0$ so that every positive spectral value is at least $\gamma$; if $C=0$, any $\gamma>0$ is allowed, the sum is empty, and $E_\varepsilon=0$. Every coefficient lies between $0$ and $\varepsilon/[\gamma(\gamma+\varepsilon)]$, so
+
+$$
+\begin{aligned}
+0&\preceq E_\varepsilon
+\preceq\frac{\varepsilon}{\gamma(\gamma+\varepsilon)}B(I-P_0)B^*,\\
+\|E_\varepsilon\|_{\mathrm{op}}
+&\le\frac{\varepsilon}{\gamma(\gamma+\varepsilon)}
+\|B(I-P_0)\|_{\mathrm{op}}^2.
+\end{aligned}
+$$
+
+All norms here are Euclidean operator norms. Thus $S_\varepsilon+\varepsilon^{-1}BP_0B^*$ always converges in operator norm to $S_\dagger$, while the uncompensated $S_\varepsilon$ has a finite matrix limit if and only if $BP_0=0$. In that case the limit is $S_\dagger$, with the error controlled above. Specifically, for each fixed retained vector $x$,
+
+$$
+x^*S_\varepsilon x=x^*S_\dagger x
+-\frac{\|P_0B^*x\|^2}{\varepsilon}+x^*E_\varepsilon x.
+$$
+
+If $P_0B^*x\ne0$, this minimum reading tends to $-\infty$; otherwise it tends to $x^*S_\dagger x$. This also proves necessity for the matrix limit: if $BP_0\ne0$, its adjoint $P_0B^*$ is nonzero, so some $x$ falls in the first case. For each $\varepsilon>0$, the regularized minimizer is $y_\varepsilon=-(C+\varepsilon I)^{-1}B^*x$, and the same spectral decomposition gives $\varepsilon y_\varepsilon\to-P_0B^*x$, quantifying the divergent internal response.
+
+A positivity check at one fixed scale certifies only $H_\varepsilon=H+\operatorname{diag}(0,\varepsilon I)$. For example, $A=[1],B=[1],C=[0]$ gives $S_\dagger=[1]$ but $S_\varepsilon=[1-1/\varepsilon]$; $H_\varepsilon$ is positive semidefinite for $\varepsilon\ge1$ and fails to be so for $0<\varepsilon<1$. If $H_\varepsilon\succeq0$ can be proved along a sequence of $\varepsilon$ tending to zero, taking limits at each fixed vector does imply $H\succeq0$. These finite-dimensional conclusions provide no uniform positive spectral gap across windows and do not identify the actual zero spectrum; an independent RH spectral route still needs control of complete observation, limits, and spectral tails.
+:::
+
+Finite-dimensional recoverability leaves an observation question: must detecting some negative direction first reconstruct a prescribed negative direction accurately? A two-point model separates these error requirements.
+
+::: {.example #ex-ou-appb-optimal-negative-detection title="Precision Thresholds for Detecting Negativity and Testing a Prescribed Witness"}
+The following is a complete manual derivation (`ARGUED`). Take exact nodes $1,u=1+h$, where $h>0$, and fix the readout scale by
+
+$$
+\begin{aligned}
+A_h&=\begin{pmatrix}1&u^{-1}\\1&u^{-2}\end{pmatrix},
+&J_0&=\operatorname{diag}(1,-1),\\
+K_h&=A_hJ_0A_h^*=\begin{pmatrix}a&b\\b&d\end{pmatrix},\\
+a&=1-u^{-2},\quad b=1-u^{-3},\quad d=1-u^{-4}.
+\end{aligned}
+$$
+
+All three entries $a,b,d$ are positive. Put $\tau=a+d$ and $\delta=h/u^2$. Expansion gives $\det K_h=-\delta^2$. Solving the characteristic equation $\lambda^2-\tau\lambda-\delta^2=0$ gives the unique negative eigenvalue $-\gamma_h$, where
+
+$$
+\gamma_h=\frac{\sqrt{\tau^2+4\delta^2}-\tau}{2}>0.
+$$
+
+If a Hermitian error $E$ satisfies the Euclidean operator norm bound $\|E\|_{2\to2}<\gamma_h$, a unit eigenvector $v$ for the negative eigenvalue gives $v^*(K_h+E)v\le-\gamma_h+\|E\|_{2\to2}<0$. At the boundary, $E=\gamma_hvv^*$ makes $K_h+E$ positive semidefinite, so the strict threshold in this norm is $\gamma_h$.
+
+For certified entrywise errors $|E_{ij}|\le\eta$, the sharp threshold for the whole matrix to retain a negative direction is also explicit. For $\eta\ge0$, put
+
+$$
+\begin{aligned}
+D&=a+d+2b,\\
+\eta_*&=\frac{\delta^2}{D}
+=\frac{h}{(2u+1)(2u^2+u+1)},\\
+t&=\frac{b+d}{D},\qquad w=(t,-(1-t)).
+\end{aligned}
+$$
+
+Since $0<t<1$, we have $\|w\|_1=1$. Completing the square gives
+
+$$
+a s^2-2b s(1-s)+d(1-s)^2
+=D(s-t)^2-\eta_*.
+$$
+
+Hence $w^*K_hw=-\eta_*$, while $|w^*Ew|\le\eta\|w\|_1^2=\eta$. Whenever $\eta<\eta_*$, every allowed Hermitian perturbation therefore retains a strictly negative direction. Conversely, take
+
+$$
+E_*=\eta_*\begin{pmatrix}1&-1\\-1&1\end{pmatrix}.
+$$
+
+The diagonal entries of $K_h+E_*$ are positive and its determinant is $-\delta^2+\eta_*D=0$, so it is positive semidefinite. This error is allowed for every $\eta\ge\eta_*$, proving sharpness of the strict threshold for the entire negative-direction detection problem.
+
+Compare the witness $c_h=(u^2/h)(1,-1)$ for a prescribed source direction: it satisfies $A_h^*c_h=(0,1)$ and $c_h^*K_hc_h=-1$. The bound $|c_h^*Ec_h|\le\eta\|c_h\|_1^2$ gives the strict entrywise error threshold $\eta_{\mathrm{fixed}}=h^2/(4u^4)$ for this witness; the error $E=\eta_{\mathrm{fixed}}\begin{pmatrix}1&-1\\-1&1\end{pmatrix}$ makes its quadratic form zero. The difference between these detection guarantees becomes clear as the nodes approach each other:
+
+$$
+\begin{aligned}
+\lim_{h\to0^+}\frac{\gamma_h}{h}&=\sqrt{10}-3,\\
+\lim_{h\to0^+}\frac{\eta_*}{h}&=\frac1{12},\\
+\lim_{h\to0^+}\frac{\eta_{\mathrm{fixed}}}{h^2}&=\frac14.
+\end{aligned}
+$$
+
+These limits follow from $\tau/h=(u+1)(2u^2+1)/u^4\to6$, $\delta/h=1/u^2\to1$, and the explicit thresholds. Detecting a negative direction allows errors on a linear scale, whereas the prescribed reconstruction witness allows only a quadratic scale; both tolerances vanish as $h\to0^+$. These conclusions assume certified errors for the whole Gram readout. They do not cover node errors, infinite spectral tails, or access to only a few scalar clock readings. The nodes and matrices are algebraic models, do not specify actual zeros, and supply no independent RH positivity construction.
+:::
+
+With finite-dimensional recovery, detection under error, and independent positivity distinguished, the table below assigns each evidence tier its own responsibility.
 
 | Evidence Tier & Label | Verification Mechanism & Provenance | Logical Boundary & Warrant | Representative Coverage & Pointers |
 | :--- | :--- | :--- | :--- |
@@ -50,6 +295,133 @@ Every theorem, interval bound, effective construction, and open target across th
 | **Tier 4 — Computational Certificates & Live Numerical Diagnostics** (`NUM`) | Fail-fast `Fraction` / `python-flint` (Arb, `fmpq_mat`) scripts across the 1,785-file replay archive (`experiments/ch39-omega-research/replay/` in `trureturing-experiments`), `Init`-replayed `ShellProjection.lean` (`rfl`), and explicitly labeled live numerical calculations in `OMEGA//UNIFY` | Exact rational, Arb, and `rfl` replay certificates carry zero floating-point drift strictly over stated input intervals and cutoffs; live sandbox diagnostics (such as finite-grid double-precision Jacobi spectra) explicitly disclose their precision and sampling limits; standalone `ShellProjection.lean` resides here rather than inside `trureturing@dev` frozen totals | Squared-radius-17 nine-point shell compression ([Appendix A §A.2](appendix-a.md#sec-ou-appa-shell-projection)), 35-bit seventh-time code `32071996606` ([Ch 12](ch12-shared-arithmetic-clock.md)), $> 1/4$ monotone exclusion and 105-winding witness ([Ch 13](ch13-winding-ladder-and-joint-vacuum.md)), and the $38 \to 19$ auxiliary-rank staircase ([Ch 14](ch14-624-channels-and-memory-rank.md)) |
 | **Tier 5 — Model-Internal Effective Constructions** (`MODEL`) | Explicit effective constructions specifying every auxiliary representation, potential, scale, and weight input (accounting for the **4/4** model-internal witnesses) | Never presented as zero-fit derivations; every construction records its free inputs and fine-tuning sensitivity alongside its numerical fit | $r = 400$ two-loop crossing and rank-5 Higgs portal ([Ch 5–6](ch05-kinetic-trace-and-uv-ceilings.md)), 54-mode matrix Higgs flavor fit and $\mathrm{U}(1)_X$ triality completion ([Ch 8–9](ch08-flavor-hierarchy-and-ckm.md)), four-layer curvature balance ([Ch 11](ch11-induced-gravity-and-dark-energy.md)), and 100-parameter 105-winding vacua ([Ch 13](ch13-winding-ladder-and-joint-vacuum.md)) |
 | **Tier 6 — First-Principles Open Roadmap** (`OPEN`) | The **0/4** core unification derivations still absent from a single master connection without post-hoc fitting | Explicitly preserves unproved status without verification links, providing crisp falsifiable acceptance criteria for future work | Deriving heavy thresholds and the electroweak scale, selecting the site-variance cut and building 4D interacting chiral generations, deriving a shared flavor action and dynamical proton protection, deriving $G_N$ and dark energy, and finding a natural non-monotone weight-selection law ([Ch 15](ch15-unified-verdict-and-open-roadmap.md), [Coda](coda.md)) |
+
+### B.2.1 Evidence in a Spectral Bridge: Mirror Conservation and Positivity {#sec-ou-appb-mirror-unitarity}
+
+[The Cayley criterion in Chapter 3](ch03-riemann-zeros-fejer-and-landau.md#sec-ou-3-1) turns the critical-line condition into a unit-circle condition. The functional equation also supplies the same-height mirror $\rho\mapsto1-\bar\rho$, but which inner product does mirror conservation preserve? This question makes the ledger's evidence boundaries concrete in a spectral model that admits a direct calculation.
+
+Supply the library's full `ZeroData` $Z$, including distinct zeros $\rho_n$, exact analytic multiplicities $m_n$, exhaustiveness, both symmetries, and local finiteness. Put $I_Z=\{(n,k)\in\mathbb N^2:k<m_n\}$ and $H_Z=\ell^2(I_Z;\mathbb C)$. The same-height mirror preserves multiplicity, inducing a coordinate involution $\sigma$ and the self-adjoint involutive isometry $(J_Z\psi)(v)=\psi(\sigma v)$. Write $[\psi,\phi]_Z=\langle\psi,J_Z\phi\rangle$, and let $C_Z$ be the bounded diagonal Cayley operator with coefficients $c_n=(\rho_n-1)/\rho_n$.
+
+::: {.theorem #thm-ou-appb-mirror-j-unitarity title="Mirror Cayley Conservation and Strict Negative Directions" lean="D5/S3/Midline/Cayley/CanonicalZetaCayleyJUnitary.zeroCayleyOperator_j_unitary D5/S3/Midline/Cayley/CanonicalZetaMirrorFundamentalSymmetry.mirror_odd_vector_strictly_negative"}
+For every such `ZeroData` $Z$, with no additional RH hypothesis,
+
+$$
+C_Z^*J_ZC_Z=J_Z.
+$$
+
+If a coordinate $v\in I_Z$ satisfies $\sigma v\ne v$, its standard unit vector $e_v$ gives a mirror-odd vector $w_v=e_v-J_Ze_v$ satisfying
+
+$$
+\operatorname{Re}[w_v,w_v]_Z<0.
+$$
+:::
+
+::: proof
+If $c$ is a coordinate's coefficient and $c'$ its mirror coefficient, then $c'=1/\bar c$, so $\bar c c'=1$; pairing coordinates and summing gives the operator identity. When $\sigma v\ne v$, we have $w_v\ne0$ and $J_Zw_v=-w_v$, hence $\operatorname{Re}[w_v,w_v]_Z=-\|w_v\|^2<0$. The full proof is checked by the Lean kernel.
+:::
+
+::: {.example #ex-ou-appb-j-unitary-not-unitary title="Indefinite Conservation Does Not Ensure Ordinary Unitarity"}
+The following is a direct two-dimensional calculation (`ARGUED`). On $\mathbb C^2$, take
+
+$$
+J=\begin{pmatrix}0&1\\1&0\end{pmatrix},\qquad
+C=\begin{pmatrix}2&0\\0&1/2\end{pmatrix}.
+$$
+
+Multiplication gives $C^*JC=J$, whereas $C^*C=\operatorname{diag}(4,1/4)\ne I$. The vector $w=(1,-1)$ satisfies $\langle w,Jw\rangle=-2$. These matrices only test the proposed implication from $J$-unitarity to ordinary unitarity; they are not asserted to arise from actual $\zeta$ zeros.
+:::
+
+Even when the observation vectors span the whole space, the choice of linear combinations to test still matters. The right-inverse condition in [@thm-ou-ch12-observation-inertia] ensures that the full Gram matrix preserves inertia. Testing only its two-by-two principal submatrices for a fixed observation list can miss a negative direction requiring all ports together.
+
+::: {.example #ex-ou-appb-collective-gram-negativity title="Every Proper Principal Submatrix Can Be Positive Definite While the Whole Is Indefinite"}
+The following is a finite-dimensional manual derivation (`ARGUED`). Start with three ports:
+
+$$
+G_3=\begin{pmatrix}1&-3/4&-3/4\\-3/4&1&-3/4\\-3/4&-3/4&1\end{pmatrix}.
+$$
+
+Every two-by-two principal submatrix has the strictly positive eigenvalues $1/4,7/4$. Yet $\mathbf1_3=(1,1,1)^T$ satisfies $G_3\mathbf1_3=-\mathbf1_3/2$, so $\mathbf1_3^*G_3\mathbf1_3=-3/2<0$. A joint variation of three ports reveals the negative direction missed by every pairwise test.
+
+This can occur at any number of ports. Let $n\ge3$ be an integer, write $\mathbf1_n=(1,\ldots,1)^T$, and choose a real $a$ with
+
+$$
+\frac1{n-1}<a<\frac1{n-2},\qquad
+G_n=(1+a)I_n-a\mathbf1_n\mathbf1_n^*.
+$$
+
+For any nonempty principal submatrix on $m$ ports, $1\le m\le n$, split the space into the direction $\mathbf1_m$ and its orthogonal complement. This gives the eigenvalues
+
+$$
+1-(m-1)a\quad\text{(multiplicity }1\text{)},\qquad
+1+a\quad\text{(multiplicity }m-1\text{)}.
+$$
+
+Thus every nonempty proper principal submatrix is positive definite, while the full matrix has exactly one negative eigenvalue, $1-(n-1)a$. The open interval above is also the exact parameter range for these two properties together: the common direction of all ports requires the strict lower bound, and the common direction of $n-1$ ports requires the strict upper bound.
+
+The matrix can also be realized as the actual indefinite Gram matrix of observation vectors spanning the whole space. Set
+
+$$
+\begin{aligned}
+P&=\frac{\mathbf1_n\mathbf1_n^*}{n},&J&=I_n-2P,\\
+B&=\sqrt{1+a}\,(I_n-P)+\sqrt{(n-1)a-1}\,P.
+\end{aligned}
+$$
+
+Since $P=P^*=P^2$, we have $J=J^*$ and $J^2=I_n$. Both coefficients of $B$ on the two orthogonal subspaces are strictly positive, so $B$ is invertible. For the observation vectors $b_j=Be_j$ and the form $[x,y]_J=x^*Jy$, multiplication gives
+
+$$
+(b_i^*Jb_j)_{ij}=B^*JB
+=(1+a)(I_n-P)-((n-1)a-1)P=G_n.
+$$
+
+The missing ingredient is therefore a test of joint port positivity, even with every source direction present. These submatrices select sublists of the fixed observation vectors; they do not test arbitrary linear combinations of those vectors. For any fixed limit $r\ge2$, choosing $n=r+1$ gives positive definite principal submatrices on every set of at most $r$ ports while the whole matrix is indefinite. Kernel positivity in a finite window requires control of the full quadratic form for arbitrary coefficients. These are algebraic models, with no claim to arise from actual zeros or to alter the external RH fact cited in Chapter 3.
+:::
+
+Detecting a negative direction also requires a precision budget: a finite observation map can be algebraically invertible while its inverse amplifies errors as two support points approach each other. The following model separates recovery of every direction from reliable certification of one negative direction. It uses the full sesquilinear Gram readings, rather than the few scalar clock readings of [Chapter 12](ch12-shared-arithmetic-clock.md).
+
+::: {.example #ex-ou-appb-two-node-recovery-precision title="Recovery Precision as Two Support Points Approach"}
+Everything below is a manual derivation (`ARGUED`); the support points and matrices form an algebraic model with no specified actual zeros. Take $h>0$ and $u=1+h$. At center $0$, read reciprocal powers one and two at support points $1,u$. With the nodes and readout scale fixed, an unknown complex amplitude vector $x\in\mathbb C^2$ gives readings $y=A_hx$, where
+
+$$
+\begin{aligned}
+A_h&=\begin{pmatrix}1&u^{-1}\\1&u^{-2}\end{pmatrix},
+&\det A_h&=-\frac{h}{u^2},\\
+A_h^{-1}&=\frac1h\begin{pmatrix}-1&u\\u^2&-u^2\end{pmatrix},
+&\|A_h^{-1}\|_{\infty\to\infty}&=\frac{2u^2}{h}.
+\end{aligned}
+$$
+
+Multiplication on both sides checks the inverse. Its absolute row sums are $(1+u)/h$ and $2u^2/h$, with the latter larger since $u>1$. For readout error $\|e\|_\infty\le\varepsilon$, where $\varepsilon\ge0$,
+
+$$
+\|A_h^{-1}(y+e)-x\|_\infty\le\frac{2u^2}{h}\varepsilon.
+$$
+
+The error $e=(\varepsilon,-\varepsilon)$ attains equality, so this fixed readout scale admits no amplification bound uniform in $h$.
+
+Now take the indefinite form $J_0=\operatorname{diag}(1,-1)$. The observation vectors $A_h^*e_1,A_h^*e_2$ have Gram matrix $K_h=A_hJ_0A_h^*$, where $e_1,e_2$ are the standard basis vectors. Put
+
+$$
+\begin{aligned}
+c_h&=(A_h^{-1})^*e_2=\frac{u^2}{h}(1,-1),\\
+c_h^*K_hc_h&=-1.
+\end{aligned}
+$$
+
+Suppose the Hermitian readings $\widehat K_h=K_h+E$ have a certified entrywise error bound $|E_{ij}|\le\eta$, where $\eta\ge0$. The triangle inequality gives
+
+$$
+\begin{aligned}
+|c_h^*E c_h|&\le\eta\Bigl(\sum_i|(c_h)_i|\Bigr)^2
+=\frac{4u^4}{h^2}\eta,\\
+\eta<\frac{h^2}{4u^4}&\quad\Longrightarrow\quad c_h^*\widehat K_hc_h<0.
+\end{aligned}
+$$
+
+The error $E=\eta\begin{pmatrix}1&-1\\-1&1\end{pmatrix}$ attains this error bound and makes this witness's quadratic form exactly zero at the threshold. Thus the strict threshold is sharp for the entrywise error guarantee of this fixed witness; it is not asserted to limit every method for detecting negative directions. Exact invertibility holds for every $h>0$, while the Gram error allowed by this certificate shrinks quadratically as $h\to0$. Node errors and infinite spectral tails are not controlled here.
+:::
+
+Thus the mirror conservation supplied by the functional equation allows positive and negative directions to balance. Chapter 3's unit-circle condition instead requires each Cayley coefficient itself to have modulus $1$. An independent spectral proof using mirror conservation still needs an additional positivity argument or the corresponding ordinary-unitarity condition. The external RH proof can support the critical-line conclusion, but this mirror identity alone supplies no independent Hilbert–Pólya operator construction.
 
 ## B.3 Interactive Laboratory and Nine-Figure Visual Media Index {#sec-ou-appb-media-map}
 

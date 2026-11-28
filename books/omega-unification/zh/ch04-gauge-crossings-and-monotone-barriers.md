@@ -160,17 +160,35 @@ $$
 
 保留谱点的排序时，还可以在相邻谱段间重新分配斜率。上述交点也是全部共同非减、对数凸质量样本与交汇能标的严格局部最小点。为检验斜率可以怎样变化，把样本间的曲线线性插值，每个非负斜率增量都可放在相应的谱点。固定 $t$，在 $x_k$ 处加入一个这样的增量，再用匹配雅可比调节原斜率和交汇能标。除原折点及末端外，跨度对增量的导数均严格大于 $0.00852$。原折点的增量可并入原斜率，末端增量对样本没有影响。其余增量都为非负，沿匹配分支的正导数与原一折点极小点的正曲率合在一起，给出严格的局部极小性。[手工推导与 Arb 区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2043#issuecomment-7239308615)
 
-把第二个折点固定在偏移锚点 $x_7$，可以从局部比较推进到全局。给原曲线加上 $a(x-x_7)_+$（$a\ge0$），前、后斜率分别为 $s$ 与 $s+a$。跨度预算、共同逆耦合的正性和两项匹配差把所有竞争交汇限制在 $261\le s\le s+a\le267$、$-1.04\le t\le0$。在每个这样的 $t$，沿参数线段平均匹配雅可比，将候选与同偏移的一折点交汇比较。固定模型内的手工推导与 Arb 区间复算给出，若 $a>0$，跨度比同偏移的一折点交汇多出严格超过 $1.013a$。因此这一凸质量族仍在 $a=0$ 处唯一取得全局最小跨度 $(283.68396,283.68397)$。同时在 $x_7$ 和 $x_9$ 增加斜率时，全局比较仍待确定。[跨度比较与 Arb 区间证书](https://github.com/the-omega-institute/trureturing-books/issues/2289#issuecomment-7241591366)
+从局部比较推进到全局，仍固定第 $11431$ 枚正零点的十八高模矢量状谱、低能中心输入与一圈有限动量减法，只考察 $10^{13}\le\mu\le10^{17}\,\mathrm{GeV}$ 内共同逆耦合为正的三线交汇。下文的联合比较对谱盒内每个固定的共同谱移位分别成立。记 $D_j=x_{107}-x_j$、$D=D_3$，以 $S_0(t)$ 表示同偏移的一折点跨度。已知该分支的最小跨度低于 $283.68397$，故全局比较只需覆盖跨度 $S\le283.68397$ 的候选。
 
-在第 $11431$ 枚正零点的十八高模矢量状谱上，沿用低能中心输入与一圈有限动量减法。只比较 $10^{13}\le\mu\le10^{17}\,\mathrm{GeV}$ 内共同逆耦合为正的三线交汇。在从 $x_3$ 起坡、斜率 $s\ge0$ 的一折点曲线上，对各谱层加上对数质量增量 $u_i$。取 $u_i=0$（$i<10$）、$0\le u_i\le h$（$10\le i\le107$），其中 $h=u_{107}$。加重后的总质量须沿谱点非减，增量本身可以下降。这包含在 $x_9$ 至 $x_{106}$ 任意叠加非负斜率增量。记 $D=x_{107}-x_3$，则跨度为 $Ds+h$。
+先把第二个折点固定在偏移锚点 $x_7$。在一折点曲线上加上 $a(x-x_7)_+$（$a\ge0$），从 $x_3$ 起坡至锚点的斜率为 $s$，锚后为 $s+a$，跨度为 $S=Ds+D_7a$。跨度预算、共同逆耦合的正性和两项匹配差把竞争交汇限制在 $261\le s\le s+a\le267$、$-1.04\le t\le0$。在同一 $t$，沿候选与一折点交汇之间的参数线段平均匹配雅可比。手工推导与 Arb 区间算术给出，若 $a>0$，则 $S-S_0(t)>1.013a$。取 $a=0$ 的一折点交汇唯一达到全局最小跨度，最小值落在 $(283.68396,283.68397)$。[第 7 谱点单独增坡的推导与 Arb 区间证书](https://github.com/the-omega-institute/trureturing-books/issues/2289#issuecomment-7241591366)
 
-一折点交汇已给出低于 $283.68397$ 的跨度，因而只需考察加重预算 $h\le283.68397-Ds$ 内的竞争交汇。这笔预算给出逐场曝光损失的上界，损失按场权的投影符号计入匹配差。以费米核为参照，曝光沿有序质量非增，且不超过同层未加重的费米核曝光。阿贝尔分部求和用这一上界为权，累加投影权重前缀和每次创新高的增量。矢量核和标量核相对费米核的差额则按谱层另行估计。结合这些界，区间排除将竞争交汇限制在 $-1.04\le t\le0$、$261\le s<261.875112$。
+要比较多个折点，可在 $x_3$ 以 $s\ge0$ 起坡，在 $x_4$、$x_5$、$x_6$、$x_7$ 分别增加斜率 $d_4,p,r,a\ge0$，并从 $x_{10}$ 起加上对数质量增量 $u_i$。令 $u_i=0$（$i<10$）、$0\le u_i\le h=u_{107}$（$i\ge10$）。总质量沿谱非减，增量 $u_i$ 本身可以下降。总跨度为 $S=Ds+D_4d_4+D_5p+D_6r+D_7a+h$。
 
-在这个区域，取偏移 $t$ 相同的一折点交汇与加重交汇，分别记其斜率为 $s_0$、$s_u$。固定增量，沿连接两交汇点的 $(s,L)$ 线段平均匹配雅可比，其行列式严格大于 $83$。因此当 $h>0$ 时，调节斜率和能标所能省回的跨度至多为 $D|s_u-s_0|$，它严格小于 $6.02\times10^{-7}h$，所以 $Ds_u+h>Ds_0$。全族仍只在 $h=0$ 的一折点交汇处取得最小跨度，最小值落在 $(283.68396,283.68397)$。这是固定模型内的手工推导与 Arb 严格区间算术所得的结论。[从 $x_{10}$ 开始的推导与区间证书](https://github.com/the-omega-institute/trureturing-books/issues/2217#issuecomment-7241019554)
+固定 $x_7$ 的偏移 $t$，把 $x_3$ 与 $x_7$ 之间的各段斜率换成按对数谱间距加权的均斜率 $y=s+f_4d_4+f_5p+f_6r$，其中 $f_j=(x_7-x_j)/(x_7-x_3)$。保留锚点后的基底斜率 $b=s+d_4+p+r+a$ 及尾段增量。有限链端点恒等式保证替换保留两端质量与总跨度。原曲线相对于替换曲线只在第 $4$、$5$、$6$ 层有质量降幅。把锚前的三个斜率增量按 $1-f_j$ 加权后，每单位总权重的对数质量降幅是三个折点剖面的凸组合。第 $4$ 点的剖面给出逐层最大降幅，第 $6$ 层的三个剖面值相同。区间排除用这一组合包围早段的有号曝光，并用加重预算和阿贝尔分部求和控制尾段，得到 $261\le y\le b\le267$、$-1.04\le t\le0$。[《OMEGA 数学》§9.2 的有限链端点恒等式](https://github.com/the-omega-institute/trureturing-books/blob/461051dca4d0f2d6197e72388d69058036dcb1e9/books/omega-math/zh/ch09-telescoping-stokes-and-arc-manifold.md#thm-ch09-chain-telescope-and-nilpotency)
 
-加重起点越靠后，阈值曝光的指数衰减使跨度补偿界更紧。沿用上述质量排序、预算与同偏移比较，若仅从 $x_{24}$、$x_{30}$、$x_{36}$ 或 $x_{42}$ 开始加重，则 $h>0$ 时的严格补偿上界分别为 $3\times10^{-64}h$、$2.2\times10^{-65}h$、$2.1\times10^{-134}h$ 和 $1.1\times10^{-135}h$。[从 $x_{24}$ 开始的预算约束与 Arb 区间证书](https://github.com/the-omega-institute/trureturing-books/issues/2195#issuecomment-7240711189) · [从 $x_{30}$ 开始的证书](https://github.com/the-omega-institute/trureturing-books/issues/2176#issuecomment-7240483585) · [从 $x_{36}$ 开始的证书](https://github.com/the-omega-institute/trureturing-books/issues/2154#issuecomment-7240354940) · [从 $x_{42}$ 开始的证书](https://github.com/the-omega-institute/trureturing-books/issues/2131#issuecomment-7240224570)
+在这个区域，沿参数线段将去掉尾段增量的替换曲线与同偏移的一折点交汇比较，再用平均匹配雅可比把早段与尾段的曝光修正换算成跨度差。若 $S\le283.68397$ 且 $d_4+p+r+a+h>0$，则
 
-若只给末三层加上 $0\le u_{105}\le u_{106}\le u_{107}=h$，第 $105$ 层的曝光损失压低两项匹配差，末两层的损失则抬高它们。逐项保留这些符号可排除中心区外的竞争解，中心区内的指数衰减给出严格补偿上界 $10^{-203}h$（$h>0$）。若只给末两层加上 $0\le u_{106}\le u_{107}=h$，该界收紧为 $10^{-226}h$。允许在 $x_9$ 之前再加折点的更大质量族，其全局最小跨度仍待判定。[末三层的证书](https://github.com/the-omega-institute/trureturing-books/issues/2110#issuecomment-7240043764) · [末两层的精细界](https://github.com/the-omega-institute/trureturing-books/issues/2087#issuecomment-7239777427) · [最重单层比较](https://github.com/the-omega-institute/trureturing-books/issues/2077#issuecomment-7239568050)
+$$
+S-S_0(t)>0.3885d_4+0.4136p+0.443r+1.014a+0.9999997h.
+$$
+
+联合质量族只在 $d_4=p=r=a=h=0$ 的一折点交汇处达到全局最小跨度，最小值落在 $(283.68396,283.68397)$。证据为固定模型内的手工推导与 Arb 区间算术。[联合折点的推导与区间证书](https://github.com/the-omega-institute/trureturing-books/issues/2419#issuecomment-7242762375) · [第 7 谱点与尾段加重的联合证书](https://github.com/the-omega-institute/trureturing-books/issues/2330#issuecomment-7242055064)
+
+中性图拉普拉斯的最小正特征值是一个二重根，恰占第 $8$、$9$ 两个谱秩，因此 $x_8=x_9$。在 $x_8$ 处添加非负斜率增量 $d_8$ 时，对数质量增量 $d_8(x_i-x_8)_+$ 到第 $9$ 层仍为零，在末层达到 $d_8D_8$。并入 $u_i$ 后，末层预算变为 $h+d_8D_8$，候选的质量样本逐项相同。因此 $x_8$ 至 $x_{106}$ 的任意非负斜率增量均可同时并入预算，特别是 $x_7$ 与 $x_9$ 同时增坡也保留同一个唯一最小值。若单列 $d_8$，当计入它的总跨度 $S\le283.68397$ 且 $d_4+p+r+a+h+d_8>0$ 时，由 $0.9999997D_8>1.00827$ 得
+
+$$
+S-S_0(t)>0.3885d_4+0.4136p+0.443r+1.014a+0.9999997h+1.00827d_8.
+$$
+
+[重根的整数证书与跨度推导](https://github.com/the-omega-institute/trureturing-books/issues/2353#issuecomment-7242234051)
+
+固定 $d_4=p=r=a=0$，只从 $x_{10}$ 起加重时，可以直接控制斜率调整所补偿的跨度。预算 $h\le283.68397-Ds$ 限制逐场曝光损失，损失按投影权重的符号计入匹配差。以费米核为参照，曝光沿有序质量非增，且受同层未加重的费米核曝光控制。阿贝尔分部求和以这一上界为权，累加投影权重前缀和每次创新高的增量，矢量核与标量核的差额则逐层另估。区间排除给出 $261\le s<261.875112$、$-1.04\le t\le0$。固定 $u_i$，沿候选 $(s_u,L_u)$ 与同偏移的一折点交汇 $(s_0,L_0)$ 之间的线段取平均匹配雅可比，行列式严格大于 $83$。当 $h>0$ 时，斜率调整满足 $D|s_u-s_0|<6.02\times10^{-7}h$。[从 $x_{10}$ 开始的独立推导与 Arb 区间证书](https://github.com/the-omega-institute/trureturing-books/issues/2217#issuecomment-7241019554)
+
+加重起点越靠后，阈值曝光的指数衰减使跨度补偿界更紧。在同样的质量排序、预算和同偏移比较下，若仅从 $x_{24}$、$x_{30}$、$x_{36}$ 或 $x_{42}$ 开始加重，则 $h>0$ 时 $D|s_u-s_0|$ 的严格上界分别为 $3\times10^{-64}h$、$2.2\times10^{-65}h$、$2.1\times10^{-134}h$ 和 $1.1\times10^{-135}h$。[从 $x_{24}$ 开始的预算约束与 Arb 区间证书](https://github.com/the-omega-institute/trureturing-books/issues/2195#issuecomment-7240711189) · [从 $x_{30}$ 开始的证书](https://github.com/the-omega-institute/trureturing-books/issues/2176#issuecomment-7240483585) · [从 $x_{36}$ 开始的证书](https://github.com/the-omega-institute/trureturing-books/issues/2154#issuecomment-7240354940) · [从 $x_{42}$ 开始的证书](https://github.com/the-omega-institute/trureturing-books/issues/2131#issuecomment-7240224570)
+
+若只给末三层加上 $0\le u_{105}\le u_{106}\le u_{107}=h$，第 $105$ 层的曝光损失压低两项匹配差，末两层的损失则抬高它们。逐项保留这些符号可排除中心区外的竞争解，中心区内的指数衰减给出严格补偿上界 $10^{-203}h$（$h>0$）。若只给末两层加上 $0\le u_{106}\le u_{107}=h$，该界收紧为 $10^{-226}h$。[末三层的证书](https://github.com/the-omega-institute/trureturing-books/issues/2110#issuecomment-7240043764) · [末两层的精细界](https://github.com/the-omega-institute/trureturing-books/issues/2087#issuecomment-7239777427) · [最重单层比较](https://github.com/the-omega-institute/trureturing-books/issues/2077#issuecomment-7239568050)
 
 共同非减质量律保持谱点排序。接下来考察两种改变重谱排序的机制，一种按弱中心奇偶分档，另一种用正一步传递收缩归一化非单调的两步算子。
 
@@ -195,6 +213,12 @@ $$
 | `#8359` | $\approx 3.73 \times 10^{14}$ | $\approx 0.11842\text{–}0.11844$ | 从第 $1$ 枚顺筛首枚通过三窗的零点（含同族对比零点 `#95478` 之 $0.11844$） |
 
 这组两圈交点在多大的范围内能够唯一确定？对第六章门户检验用到的四枚拟合候选和十枚留出候选，逐枚固定谱与上述处方，在 $28.940\le\log(\mu/M_Z)\le29.140$ 和 $0.117\le\alpha_s(M_Z)\le0.119$ 的矩形内各恰有一个交点。已有种子盒给出存在性。沿规范流同时传播对初始逆强耦合的导数，并在每个质量阈值两侧分别界定终点斜率，可得交点映射在加权最大范数下的 Lipschitz 常数小于 $0.42$，原种子盒内则小于 $0.152$。同一矩形内若有两个不动点，它们的距离经此映射必须缩小，与两点均固定矛盾。[阈值折点与十四枚候选的导数证书](https://github.com/the-omega-institute/trureturing-experiments/blob/91df60d5968e4fabfc797c5660e975b9acfb3c3e/experiments/ch39-omega-research/replay/ch39-gauge-seed-uniqueness.md)
+
+把尺度推到首个中心偶阈值，还需排除矩形外的交点。记 $L=\log(\mu/M_Z)$，$L_{\mathrm{even}}$ 为该阈值的对数尺度。十四枚固定谱均有 $29.39618<L_{\mathrm{even}}<29.39620$。在整个 $0.117\le\alpha_s(M_Z)\le0.119$ 内，逆耦合极差在 $0\le L\le28.940$ 恒大于 $0.33$，在 $29.140\le L\le L_{\mathrm{even}}$ 恒大于 $0.42$。因此，每枚谱在从 $M_Z$ 到首个中心偶阈值的连续尖阈值两圈流中各恰有一个三线交点。
+
+这里电弱差 $A_1-A_2$ 从正起步，在矩形下边变为负，到上边又为正。区间证书在每个中心奇阈值处分段，直接包围三组逆耦合差。每个排除步只需有一组差的绝对值始终高于所给下界。阈值处的耦合连续，因而分段也覆盖折点。首个中心偶阈值以上须另行指定中心偶场的激活与匹配。[全尺度排除的推导](https://github.com/the-omega-institute/trureturing-books/issues/1942#issuecomment-7241130065)[^pre-even-replay]
+
+[^pre-even-replay]: 将书库的 `gauge-global-replay.py` 放入所引实验版本的 `experiments/ch39-omega-research/replay/` 目录，与 `ch39-chiral-clock-unit-readout.py` 并列。用 Python 3.12 和 python-flint 0.9.0 运行 `python3 gauge-global-replay.py`，入口逐谱调用 `verify`。脚本的 SHA-256 为 `30746b44546961682f6385e638e154d47bd66e1e20d6ff5da79ae8573c1d4296`。[书库区间证书](https://github.com/the-omega-institute/trureturing-books/blob/149df109c2a246f204d22b5e176d90e173f795bf/books/omega-unification/replay/gauge-global-replay.py#L14) · [固定版本的谱与流输入](https://github.com/the-omega-institute/trureturing-experiments/blob/91df60d5968e4fabfc797c5660e975b9acfb3c3e/experiments/ch39-omega-research/replay/ch39-chiral-clock-unit-readout.py)
 
 更有意义的是，这并非孤立的数值巧合：将 `#11661` 处的两只钟角各扩宽 $10^{-6}\;\mathrm{rad}$，整片相位方格均保持五荷分界 $9$ 且反推 $\alpha_s(M_Z) \in (0.1183783, 0.1183874)$。结合[第三章](ch03-riemann-zeros-fejer-and-landau.md)在黎曼假设下的兰道—外尔双时钟等分布定理，完整命中集合在全体正零点中拥有严格为正的自然下密度（至少 $(10^{-6}/\pi)^2 \approx 1.013 \times 10^{-13}$）。同时，弱中心奇偶分档与共同两档质量规则之间也存在干净的可分辨指纹：在第 $11431$ 枚零点上，共同两档质量交点（$6.14424 \times 10^{14}\;\mathrm{GeV}$，分界 $7.70$ 在 $1238$ 枚零点中恰选出 $17$ 枚，补齐共轭场后两圈规范交点落于 $(1.38, 1.54) \times 10^{15}\;\mathrm{GeV}$）要求荷二与荷一十八层平方质量和之比约为 **$1.125$**，而弱中心奇偶刚度交点要求该比值约为 **$8.058$**——对照原生贝伦德壳上任何共同非负非减谱函数，该比值恒有锐上界 **$3$**（且可达到），一举将两类机制从谱几何上彻底切开。当然，必须坦诚标明证据边界：分母 $d = 724$、倍率 $32$ 以及 $16$ 重标量计数，均是在检视了拟合质量单位之后提出的模型规则，尚非原离散配分函数的无自由参数推论。
 
