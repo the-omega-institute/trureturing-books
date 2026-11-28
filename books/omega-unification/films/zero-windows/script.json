@@ -1,0 +1,327 @@
+{
+ "voice": "af_heart",
+ "speed": 0.94,
+ "say": {
+  "Lean": "Leen",
+  "Alpöge": "Al-puh-gay",
+  "GRH": "G R H",
+  "RH": "R H",
+  "111521": "one hundred eleven thousand, five hundred twenty-one",
+  "11431": "eleven four thirty-one",
+  "11427": "eleven thousand, four hundred twenty-seven",
+  "11436": "eleven thousand, four hundred thirty-six",
+  "8359": "eighty-three fifty-nine",
+  "8236": "eighty-two thirty-six",
+  "35.6": "thirty-five point six",
+  "32 log T": "thirty-two log T"
+ },
+ "music": {
+  "bpm": 76,
+  "progression": "d-minor"
+ },
+ "scenes": [
+  {
+   "id": "ground",
+   "name": "THE GROUND",
+   "lead": 1.5,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Chapter two averaged over infinitely many zeros. What can one finite window give?",
+     "第二章在无穷多枚零点上取平均。一个有限的窗口，究竟能给出什么？"
+    ],
+    [
+     "First, the ground: RH and Dirichlet GRH have an external Lean proof, by Levent Alpöge.",
+     "先看地基：RH 与狄利克雷 GRH 如今有了 Levent Alpöge 的外部 Lean 证明。"
+    ],
+    [
+     "It is not frozen in the pinned library, so it never wears green.",
+     "它尚未冻结进所钉的库，所以从不佩戴绿色徽章。"
+    ],
+    [
+     "It covers only zeta and Dirichlet L functions, nothing in physics. Grand RH stays open.",
+     "它只管 ζ 函数与狄利克雷 L 函数，不涉物理；全广义黎曼猜想仍是开放问题。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 1.0,
+     "kind": "chime"
+    },
+    {
+     "line": 3,
+     "at": 4.6,
+     "kind": "glitch"
+    }
+   ]
+  },
+  {
+   "id": "circle",
+   "name": "LINE INTO CIRCLE",
+   "lead": 0.5,
+   "tail": 0.5,
+   "music": [
+    0.9,
+    0.5,
+    0.5,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "Lean restates RH twice.",
+     "Lean 把 RH 改写了两次。"
+    ],
+    [
+     "First as a circle: the Cayley map lands on the unit circle exactly when the real part is one half.",
+     "第一次改写成圆：凯莱映射落在单位圆上，当且仅当实部是二分之一。"
+    ],
+    [
+     "So RH says every nontrivial zero lands on the circle.",
+     "于是 RH 说：每一枚非平凡零点都落在圆上。"
+    ],
+    [
+     "Then as a gap: RH holds exactly when the prime remainder stays c log squared below M root x, for all c under a forty-eighth.",
+     "第二次改写成差额：RH 成立，当且仅当对每个 c < 1/48，曼戈尔特余项最终比 M√x 低出 c(log x)²。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 0.6,
+     "kind": "stamp"
+    },
+    {
+     "line": 3,
+     "at": 0.6,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "phases",
+   "name": "PHASES FALL SHORT",
+   "lead": 0.5,
+   "tail": 0.5,
+   "music": [
+    0.9,
+    0.7,
+    0.6,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "Weight each zero height gamma harmonically, and add the phases at time t.",
+     "给每个零点高度 γ 配上调和权，再把时刻 t 的相位加起来。"
+    ],
+    [
+     "Z reaches length one only when every phase lines up.",
+     "Z 的长度只有在所有相位对齐时才能达到 1。"
+    ],
+    [
+     "Under RH, Lean bounds the shortfall near one over T by a constant over a power of log T.",
+     "在 RH 前提下，Lean 给亏损定下界：在 1/T 附近，下界是常数除以 log T 的幂。"
+    ],
+    [
+     "Out to log T, given a Landau envelope, it is at least one over 32 log T.",
+     "一直到 log T，在兰道包络的前提下，亏损至少是 1/(32 log T)。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 0.4,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "collide",
+   "name": "ONE OVER ROOT PI",
+   "lead": 0.5,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.8,
+    0.7,
+    0.4,
+    0.4
+   ],
+   "lines": [
+    [
+     "That envelope needs a Landau contour around the zeros.",
+     "这个包络需要一个圈住零点的兰道围道。"
+    ],
+    [
+     "Lean bounds its two vertical edges with explicit constants, and needs no RH for that.",
+     "Lean 用显式常数界住它的两条竖边，这一步不需要 RH。"
+    ],
+    [
+     "With the top edge they give the envelope; that step is argued, not cited.",
+     "接上顶边就得到包络；这一步只是论证，未作引用。"
+    ],
+    [
+     "Stitch the windows, and Lean checks that the scaled near-collision count tends to one over root pi.",
+     "把各时间窗拼起来，Lean 检验：近碰撞的归一化计数趋于 1/√π。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 3.6,
+     "kind": "impact"
+    }
+   ]
+  },
+  {
+   "id": "window",
+   "name": "ZERO 11431",
+   "lead": 0.5,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Now one window: zero 11431, nine neighbours on each side.",
+     "现在看一个窗口：第 11431 枚零点，左右各九枚邻居。"
+    ],
+    [
+     "Of three thousand centres, it sits nearest a midpoint: within two millionths.",
+     "在三千个中心里，它最贴近一个中点：误差在百万分之二以内。"
+    ],
+    [
+     "The runner-up is 35.6 times worse; the extra pair holds under a quarter of the fourth moment.",
+     "次优者差了 35.6 倍；这组额外配对只占四阶矩不到四分之一。"
+    ],
+    [
+     "At resolution one thousandth, it first shows up at radius 111521. Certificates, not theorems.",
+     "分辨率取千分之一，它在半径 111521 处首次显现。是证书，不是定理。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 3.4,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "filter",
+   "name": "THREE WINDOWS",
+   "lead": 0.5,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Later volumes ask one zero to pass three windows at once.",
+     "后面几卷要求单枚零点同时通过三扇窗。"
+    ],
+    [
+     "With the cut fixed at nine, zero 8359 passes all three first.",
+     "分界固定为 9 时，第 8359 枚最先三窗全通。"
+    ],
+    [
+     "With the shell's own site-variance cut, zero 8236 gets in first.",
+     "换成球壳自身的站点方差分界，第 8236 枚抢先过关。"
+    ],
+    [
+     "But the inputs are chosen. A window hit is not a prediction.",
+     "但这些输入都是选定的。命中窗口不是预言。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 2.8,
+     "kind": "chime"
+    },
+    {
+     "line": 3,
+     "at": 3.4,
+     "kind": "glitch"
+    }
+   ]
+  },
+  {
+   "id": "gap",
+   "name": "THE HONEST GAP",
+   "lead": 0.5,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Here is the gap: every Lean bound here is an average up to T.",
+     "缺口就在这里：这里每一条 Lean 界都是截至 T 的平均。"
+    ],
+    [
+     "The shell reads one zero, or a handful. No comparison theorem bridges the two yet.",
+     "球壳读取的却是一枚零点、或寥寥几枚。连接两者的比较定理至今还没有。"
+    ],
+    [
+     "Higher up, almost every centre beats 11431. Averages are welded; selection is open.",
+     "更高处，几乎每个中心都胜过第 11431 枚。平均已焊死，选点仍开放。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 2.6,
+     "kind": "glitch"
+    }
+   ]
+  },
+  {
+   "id": "close",
+   "name": "LEDGER",
+   "lead": 0.5,
+   "tail": 2.6,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.2
+   ],
+   "lines": [
+    [
+     "Omega Unification, chapter three.",
+     "《OMEGA 统一》· 第三章"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 0.3,
+     "kind": "chime"
+    }
+   ]
+  }
+ ]
+}

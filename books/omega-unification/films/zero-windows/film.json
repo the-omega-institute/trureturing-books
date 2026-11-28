@@ -1,0 +1,36 @@
+{
+  "title": "Windows on the Zeros",
+  "title_zh": "零点窗口",
+  "summary": "What can a finite height, or one single Riemann zero, really give? RH and Dirichlet GRH stand as an external formalized fact: a Lean proof by Levent Alpöge, replayed by independent kernels but not frozen in trureturing, so it never wears the green badge; its reach ends at zeta and Dirichlet L-functions over the rationals, and it says nothing about physics. Inside the pinned library Lean restates RH twice: the Cayley map (s − 1)/s puts a point on the unit circle exactly when Re s = 1/2, so RH means every nontrivial zero has zero radial defect; and RH holds exactly when, for every c < 1/48, the integrated Mangoldt remainder eventually stays c (log x)² below M√x. A chain of harmonically weighted phases shows why the sum Z_T(t) falls short of length one, and Lean bounds the shortfall window by window under RH: P₄/P₂² ≤ 4096 log T, a reciprocal-time and a periodic window, and 1/(32 log T) out to log T given a Landau envelope. The two vertical edges of the Landau contour are bounded unconditionally; joining them with the top edge is argued, not cited. Lean checks that the scaled near-collision count tends to 1/√π. Then one concrete window: zero #11431 sits closest to a midpoint among 3,000 centres, 35.60 times sharper than the runner-up, its extra pair holds under a quarter of the fourth Fejér moment (the closed form 4/(12 + 2√6) is recomputed on screen), and a finite clock first sees it at radius 111521 — ball-arithmetic certificates, not theorems. Zeros #8359 and #8236 enter the three-window filter under two cuts, on chosen inputs; a window hit is not a prediction. The comparison theorem from global averages to a single zero is open.",
+  "summary_zh": "有限的高度、单独一枚黎曼零点，究竟能给出什么？RH 与狄利克雷 GRH 作为外部形式化事实登场：Levent Alpöge 的 Lean 证明已经多套独立内核重放，但尚未冻结进 trureturing，所以从不佩戴绿色徽章；其范围止于有理数域上的 ζ 函数与狄利克雷 L 函数，也不对物理说任何话。在所钉的库内部，Lean 把 RH 改写了两次：凯莱映射 (s − 1)/s 把一个点送上单位圆，当且仅当 Re s = 1/2，于是 RH 等于每枚非平凡零点的对数径向亏量为零；RH 又等价于对每个 c < 1/48，积分曼戈尔特余项最终比 M√x 低出 c (log x)²。一串调和加权的相位说明为何和 Z_T(t) 到不了长度 1；在 RH 前提下，Lean 逐窗给出亏损下界：P₄/P₂² ≤ 4096 log T、倒高度窗与周期窗，以及在兰道包络前提下直到 log T 的 1/(32 log T)。兰道围道的左右两条竖边无条件地被界住；接上顶边得到包络这一步只作论证、不作引用。Lean 检验近碰撞的归一化计数趋于 1/√π。随后进入一个具体窗口：第 11431 枚在三千个中心里最贴近中点，比次优者锐利 35.60 倍；其额外配对只占四阶费耶尔矩不到四分之一（闭式 4/(12 + 2√6) 在屏幕上复算）；有限观察在半径 111521 处首次看见它——这些是球算术证书，不是定理。第 8359 与第 8236 枚在两种分界下踏入三窗筛选，所依赖的是选定的输入；命中窗口不是预言。从全局平均走到单枚零点的比较定理仍是开放问题。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-26",
+  "duration": "2:45",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · the critical line folded onto the unit circle, a Fejér kernel, a chain of weighted phasors with three deficit windows on a log axis, the Landau rectangle and a Gaussian band, a 19-zero window with its midpoint arc and certified bars, the three-window filter, the open bridge from averages to one zero",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Midline/Cayley/CayleyCriticalLineZetaCriterion.cayley_critical_line_zeta_criterion",
+    "D5/S3/Weil/Mertens/IntegratedExplicit/MangoldtFejerGap.rh_iff_eventually_fejer_gap",
+    "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment.harmonic_pair_ratio",
+    "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHHarmonicPairMoment.harmonic_reciprocal_time_deficit",
+    "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHPeriodicPhaseCoverage.harmonic_periodic_phase_deficit",
+    "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHLandauWindowTransfer.harmonic_landau_window_deficit",
+    "D5/S3/Weil/ZetaExplicit/LandauLeftVertical.norm_left_vertical_integral",
+    "D5/S3/Weil/ZetaExplicit/LandauRightVertical.norm_right_vertical_integral",
+    "D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHLogarithmicCollisionLimit.harmonic_zeta_collision_limit"
+  ],
+  "outputs": {
+    "narrated_720p": "omega-unification_zero-windows_720p_narrated.mp4",
+    "cover": "omega-unification_zero-windows_cover.jpg"
+  }
+}
