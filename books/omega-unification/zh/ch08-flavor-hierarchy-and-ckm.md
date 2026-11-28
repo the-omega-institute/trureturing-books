@@ -102,6 +102,17 @@ $$
 $$
 两块各秩一且半正定，核由 $u,v$ 张成。共同实现 $p,q$ 的任一态 $X$ 都满足 $\operatorname{tr}(SX)=3(p_0+p_2)+18(p_1+p_3)+c\cdot q=0$，因而 $X=UHU^*$，其中 $U=[u\ v]$。第 $0,2$ 项对角元相等，第 $1,3$ 项对角元也相等，分别迫使 $H$ 的非对角元实部和虚部为零。其余两条对角方程确定 $H=I_2/44$。若 $q$ 来自第一读数同为 $p$ 的纯态凸组合，每个正权重分量都须使非负量 $\operatorname{tr}(SX)$ 为零。核内具有读数 $p$ 的态只有上述秩二态。[四维反例的精确核对](https://github.com/the-omega-institute/trureturing-books/issues/1657#issuecomment-7232238573)
 
+**哪些第一读数会出现差距？** 记 $E=(p_0+p_2)/2$、$O=(p_1+p_3)/2$、$\delta_e=(p_0-p_2)/2$、$\delta_o=(p_1-p_3)/2$。四维 Fourier 双基中，固定 $p$ 的混合态读数严格超出同一 $p$ 的纯态读数凸包，当且仅当
+$$
+EO>0,\qquad E\ne O,\qquad
+\left(\frac{\delta_e}{E}\right)^2+\left(\frac{\delta_o}{O}\right)^2<1.
+$$
+有零分量时，正性把问题限在至多三维的支撑上。此时对任一方向，前述相位格拉姆矩阵的极值定理保证纯态可以达到混合态的极值。
+
+对满支撑的 $p$，用线性泛函分离两种读数的可达域。目标矩阵是厄米循环矩阵，固定对角的半正定规划有严格可行点。对偶松弛 $S$ 只调整对角元，最优态支撑在 $\ker S$。秩为零或三的 $S$ 总允许纯态最优解。秩一时，核条件给出闭合的向量和，其边长由 $p$ 与 $S$ 决定。同样边长可排成闭合平面多边形，给出所需的纯态。秩二时，若循环非对角元可通过对角酉变换化为实数，取实部可得核内实半正定解。将它的至多两个实外积因子作为一个复向量的实、虚部，就得到同一第一读数。
+
+余下的秩二松弛由偶主块的 Schur 补分成平移两格的正、负特征块，核基可取 $(1,r,1,r)^T$、$(1,is,-1,-is)^T$，其中 $r,s$ 是非零实数。对置矩阵元相同，迫使 $r^2,s^2$ 位于 $1$ 的同一侧，或同为 $1$。若两个平方相等，核内可将任一可行对角读数实现为秩一。若它们不等，固定 $p$ 唯一确定核内的厄米系数矩阵 $\begin{pmatrix}a&z\\\bar z&b\end{pmatrix}$。差距要求它正定。于是 $E=a+b$、$O=r^2a+s^2b$ 给出 $E\ne O$，而 $E^2\ge4ab$、$O^2\ge4r^2s^2ab$、$|z|^2<ab$ 给出严格椭圆不等式。反过来，在严格区域内取 $a=b=E/2$，将两个互异的平方取在 $O/E$ 的两侧并充分靠近它，且使均值为 $O/E$。对角方程给出正定的系数矩阵，两个秩一块可拼出满足循环条件的 $S$。它的零面于是暴露一个唯一的秩二最优态。[分类的完整推导](https://github.com/the-omega-institute/trureturing-books/issues/1663)
+
 在第 $2\,306\,888\,100\,085$ 枚正零点，把四个算术 Gram 源的正交化方向依次放在极点与三条射线的首站，用后三个原始源张成的空间代表三代。把荷 $-4,2$ 的壳算子分别压缩到这个空间，作为上型、下型左手夸克的质量平方矩阵。一步传播保留共同的反酉对称，Jarlskog 不变量 $J=0$。走两步再投影，多出了中途离开三代空间又返回的路径，给出 $J\simeq3.00189\times10^{-4}$。产生 CP 破坏后，还要同时解释夸克质量与顶底混合。在 $1\,\mathrm{TeV}$ 六个夸克汤川耦合各自的 $1\sigma$ 区间内，即使上下两部门各自任取十九个非负谱值，所得 $|V_{tb}|$ 也只能小于 $0.9936401$ 或大于 $0.99915018$，同尺度参考窗落在两者之间。若允许壳上的读数取负而压缩后的质量平方保持正定，两荷共用一个至多十一次的实多项式就能重现任意给定的六个正夸克质量与 CKM 矩阵。这个自由度使多项式的系数也成为统一模型必须解释的量。[两步传播](https://github.com/the-omega-institute/trureturing-experiments/blob/b0f5a77f57448869a358fdfb61c96dad5aa3f039/experiments/ch39-omega-research/replay/ch39-three-gram-source-flavor.py) · [非负谱的混合限制](https://github.com/the-omega-institute/trureturing-experiments/blob/b0f5a77f57448869a358fdfb61c96dad5aa3f039/experiments/ch39-omega-research/replay/ch39-three-source-positive-ckm.py) · [有符号多项式构造](https://github.com/the-omega-institute/trureturing-experiments/blob/b0f5a77f57448869a358fdfb61c96dad5aa3f039/experiments/ch39-omega-research/replay/ch39-signed-three-source-quark-pair.py) · [参考输入表 2](https://arxiv.org/html/2510.01312v2#Sx1.T2)
 
 夸克数据还约束三代空间本身的取向。取极点与三个首站构成的实四维空间，将其中一个实三维超平面复化，作为上下型共有的味空间。记 $a$ 为其单位法向在三循环固定平面上的投影长度。允许两部门各自在四站上选取任意保持三循环的正半定算子，并把压缩读作质量平方。用同一张 $1\,\mathrm{TeV}$ 表的质量与混合误差窗，区间计算给出必要条件 $0.0096549<a<0.0332714$。四个算术源中任选三个，得到的 $a$ 都在 $0.5198$ 与 $0.5774$ 之间。取 $a=0.02145737$，同表中心值有严格正定的四站扩张。[四站正扩张的范围与构造](https://github.com/the-omega-institute/trureturing-experiments/blob/cd7ec54bd5afd349e0a6734cc600f16e66ce612c/experiments/ch39-omega-research/replay/ch39-free-four-site-positive-extensions.py)
