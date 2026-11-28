@@ -225,7 +225,13 @@ d_{\min}^{\mathrm{EOM}}(\ell)
 \end{aligned}
 $$
 
-例如 $\ell=31,35,37$ 时分别为 $109,127,136$。把其他运动方程或分部积分也纳入商以后，非零性仍待核对。 [二十九与三十一轻子的显式构造](https://github.com/the-omega-institute/trureturing-books/issues/1641#issuecomment-7231698774) · [任意阶的跨阶缩并](https://github.com/the-omega-institute/trureturing-books/issues/1641#issuecomment-7231740723)
+例如 $\ell=31,35,37$ 时分别为 $109,127,136$。[二十九与三十一轻子的显式构造](https://github.com/the-omega-institute/trureturing-books/issues/1641#issuecomment-7231698774) · [任意阶的跨阶缩并](https://github.com/the-omega-institute/trureturing-books/issues/1641#issuecomment-7231740723)
+
+**全场方程与分部积分商中的达到性（`ARGUED`）。** 对经典可重整化标准模型，取复化局域场代数，令规范联络与 Higgs 共轭为零。保留的费米场只取反下夸克和正轻子荷扇区，中性方程中的费米双线性源随荷相反的字段一同消失。Higgs 满足自由 Klein–Gordon 方程，反下夸克与带电右轻子满足自由 Weyl 方程。左轻子可分为齐次解和由 Higgs 与右轻子产生的特解。在有限个壳上平面波的和中，选取泛型动量，使每个源项的合频处 Weyl 算子可逆。抽取含有原算子全部自由左轻子系数的 Grassmann 单项式，便只读出齐次部分。
+
+有限阶空间 Cauchy 初值可由壳上平面波的有限叠加给出。对泛型空间动量，两支时间根的 Weyl 极化张成二分量初值。标量的两支根分别控制初值与时间导数。空间动量上的多项式插值给出所需的各阶空间射流，因此前面的非零系数可选成一个具体的平面波单项式。原颜色缩并的两枚反下夸克可取线性独立的极化 $\lambda_1,\lambda_2$。保持这两个左旋量，改变其点旋量 $\tilde\lambda_1,\tilde\lambda_2$ 时，两枚壳上动量之和 $\lambda_1\tilde\lambda_1+\lambda_2\tilde\lambda_2$ 可以取任意复四动量。算子中这两枚反夸克不带导数，所以可让外腿总动量恰为零，同时保留所选系数。
+
+平移不变的局域流取总导数后，零动量系数必为零。这个系数因而检验了全场方程与分部积分商中的非零性，维数 $100$ 的 $\ell=29$ 见证和上述奇数 $\ell\ge31$ 的最低维数均可达到。[全场方程的射流见证](https://github.com/the-omega-institute/trureturing-books/issues/1641#issuecomment-7231982046) · [零总动量见证](https://github.com/the-omega-institute/trureturing-books/issues/1641#issuecomment-7232021736)
 
 ## 9.3 壳三重代数闭合、离散反常流入与二十五态提升球壳 {#sec-ch09-algebra-inflow}
 
