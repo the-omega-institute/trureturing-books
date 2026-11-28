@@ -81,6 +81,8 @@ $p$ 恰有两个正分量时，纯态的循环和位于对应单边长度的圆�
 
 因此强制秩 $k$ 要求 $d\ge k(k-1)+1$。例如模 $7$ 的 $\{0,1,3\}$ 和模 $13$ 的 $\{0,1,3,9\}$ 都恰好达到门槛。若 $k=q+1$ 且 $q$ 为素数幂，有限域中的 Singer 循环差集给出一般构造。$\mathbb F_{q^3}^\times/\mathbb F_q^\times$ 中的迹零射影点组成所需支撑，每个非平凡平移和原支撑恰相交于一点。七点支撑的最小环境维数为 $48$。穷举排除了 $43$ 至 $47$，模 $48$ 的 $\{0,1,3,15,20,38,42\}$ 给出见证。[七点阈值的可复算枚举](https://github.com/the-omega-institute/trureturing-books/issues/1676#issuecomment-7233017502) [差集、降秩与阈值的证明](https://github.com/the-omega-institute/trureturing-books/issues/1676)
 
+十一点支撑的最小环境维数为 $120$。Buratti 和 Stinson 的穷举分类排除了 $111$ 至 $119$，更小的维数由有向差计数排除。模 $120$ 的支撑 $\{0,1,4,9,23,30,41,43,58,68,74\}$ 产生 $110$ 个互异的非零差，恰好缺少 $12,24,\ldots,108$。该分类给出十一点支撑可强制秩十一的全部维数，分别是 $120$、$133$ 和所有 $d\ge135$。[定理 2.3(9) 与表 1](https://arxiv.org/abs/2007.01908v2) · [独立枚举与源码](https://github.com/the-omega-institute/trureturing-books/issues/1676#issuecomment-7234137030)
+
 若某个子支撑的差发生较多碰撞，还可收紧秩界。对非空 $T\subseteq S$，记 $m(T)$ 为 $T$ 的不同非零有向差数。取可行集的一个极点，其秩为 $r$，则像空间与 $T$ 的坐标子空间至少相交于 $r-(k-|T|)$ 维。该交空间上的非零不可见厄米扰动会破坏极点性。因此同一个极点满足
 $$
 r\le\min_{\varnothing\ne T\subseteq S}\left(k-|T|+\left\lfloor\sqrt{|T|+m(T)}\right\rfloor\right).
