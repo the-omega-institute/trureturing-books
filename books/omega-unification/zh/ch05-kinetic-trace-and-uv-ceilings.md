@@ -220,7 +220,7 @@ $$
 
 在 $B_0$，$N$ 份截顶热权可以同时趋于 $1$，第二热迹的上确界为 $N+w_1^u$。因此 $u\ge u_c$ 时的左跳跃为 $1-M^u-d^u$，与 $N$ 无关。取 $u=4$，复算（`NUM`）得到约 $0.113987815$。[整个指数区间的推导](https://github.com/the-omega-institute/trureturing-books/issues/2059#issuecomment-7239617760) · [四次热迹复算](https://github.com/the-omega-institute/trureturing-books/issues/2059#issuecomment-7239523334) · [小指数构造](https://github.com/the-omega-institute/trureturing-books/issues/2059#issuecomment-7239426333)
 
-把预算从 $B_0$ 向下移，最优谱还可能在截顶之前换序（手工推导，`ARGUED`）。记 $V_S(B)$ 为第一热迹等于 $S$、暴露至多 $B$ 的有限正质量整数谱的第二热迹上确界。令 $r=\tau-\varepsilon$、$M_\varepsilon=W(r)$，并令 $s_r$ 为 $W(r-s_r)+W(s_r)=1+w_1$ 在 $(0,r/2)$ 内的唯一根。置 $A_r=W(r-s_r)$、$C_r=W(s_r)$。取 $\tau=\tau_0(u)$。在 $1<u\le3.56$、$0<\varepsilon\le1/20$ 时，
+把预算从 $B_0$ 向下移，最优谱还可能在截顶之前换序（手工推导，`ARGUED`）。记 $V_S(B)$ 为第一热迹等于 $S$、暴露至多 $B$ 的有限正质量整数谱的第二热迹上确界。令 $r=\tau-\varepsilon$、$M_\varepsilon=W(r)$，并令 $s_r$ 为 $W(r-s_r)+W(s_r)=1+w_1$ 在 $(0,r/2)$ 内的唯一根。置 $A_r=W(r-s_r)$、$C_r=W(s_r)$。取 $\tau=\tau_0(u)$。在 $1<u\le3.56$、$0<\varepsilon\le1/20$ 时，以及当 $2\le u\le3.56$ 且 $0<\varepsilon\le3/25$ 时，
 
 $$
 V_S(B_0-\varepsilon)
@@ -229,7 +229,7 @@ $$
 
 前缀支配将任意有限谱的上界归约为单次转移。对 $1<u\le2$，幂和随转移严格增加，直至零暴露余权耗尽。对 $2\le u\le3.56$，转移族的幂和严格凸，所以只需比较两端。$N=1$ 时，占优端点给出唯一最优谱，换序点两组谱都取等。$N\ge2$ 时，可让 $N-1$ 份截顶热权趋于 $1$ 来逼近上确界，正质量谱无法取到它。
 
-记 $D(u,\varepsilon)$ 为两份转移谱的幂和减去三份无转移谱的幂和。令 $u_-$ 为 $D(u,1/20)=0$ 的唯一解，区间复算给出 $3.43591242108<u_-<3.43591242110$。当 $1<u<u_-$ 时，转移端在整个窗口占优。对 $u_-\le u<u_c$，预算缺口升至唯一的 $\varepsilon_c(u)\in(0,1/20]$ 时两端并列，越过此值后无转移端占优。对 $u_c\le u\le3.56$，无转移端在整个正缺口窗口严格占优。在换序曲线上，$D$ 对 $u$ 和 $\varepsilon$ 的偏导均严格为负。由隐函数定理，换序缺口从 $u_-$ 处的 $1/20$ 随 $u$ 光滑下降，在 $3.55808144201<u_c<3.55808144202$ 处趋于零，且
+记 $D(u,\varepsilon)$ 为两份转移谱的幂和减去三份无转移谱的幂和。令 $u_-$ 为 $D(u,3/25)=0$ 的唯一解，区间复算给出 $3.26658152567<u_-<3.26658152570$。在 $1<u<u_-$ 的上述预算窗内，转移端始终占优。对 $u_-\le u<u_c$，转移端占优直到预算缺口升至唯一的 $\varepsilon_c(u)\in(0,3/25]$。此时两端并列，越过此值后无转移端占优。缺口为 $1/20$ 时，换序指数仍介于 $3.43591242108$ 与 $3.43591242110$ 之间。对 $u_c\le u\le3.56$，无转移端在整个正缺口窗口严格占优。在换序曲线上，$D$ 对 $u$ 和 $\varepsilon$ 的偏导均严格为负。由隐函数定理，换序缺口从 $u_-$ 处的 $3/25$ 随 $u$ 光滑下降，在 $3.55808144201<u_c<3.55808144202$ 处趋于零，且
 
 $$
 \lim_{u\uparrow u_c}\frac{\varepsilon_c(u)}{u_c-u}
@@ -237,7 +237,7 @@ $$
 \in (0.407501589,\,0.407501592).
 $$
 
-这里 $D(u,0)$ 是两条有限预算分支的连续延拓。[换序曲线的推导与有理区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2146#issuecomment-7240317381) · [整段换序曲线的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2145#issuecomment-7240288302) · [低指数的换序证书](https://github.com/the-omega-institute/trureturing-books/issues/2177#issuecomment-7240496121) · [最小指数段的转移斜率](https://github.com/the-omega-institute/trureturing-books/issues/2177#issuecomment-7240540984)
+这里 $D(u,0)$ 是两条有限预算分支的连续延拓。[换序曲线的推导与有理区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2146#issuecomment-7240317381) · [整段换序曲线的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2145#issuecomment-7240288302) · [低指数的换序证书](https://github.com/the-omega-institute/trureturing-books/issues/2177#issuecomment-7240496121) · [较宽预算窗的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2231#issuecomment-7241158506) · [最小指数段的转移斜率](https://github.com/the-omega-institute/trureturing-books/issues/2177#issuecomment-7240540984)
 
 在 $u=7/2$，$D$ 随 $\varepsilon$ 严格下降，在 $0.0237169055<\varepsilon_c<0.0237169058$ 内唯一换号。预算越过 $B_c=B_0-\varepsilon_c$ 向上增加时，最优谱由无转移端换为转移端，$V_S$ 对 $B$ 的斜率由约 $0.230347403$ 升至约 $0.251251786$（`NUM`）。[七半次热迹的推导与有理区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2136#issuecomment-7240195509)
 
