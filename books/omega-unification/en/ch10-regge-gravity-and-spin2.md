@@ -56,7 +56,16 @@ Once matter fields from the Behrend shell are coupled to the triangulation, howe
 | Subdivide $\{0,1,4,5,7\}$ vs $\{1,2,3,4,5\}$ | $(20, 54)$ | Same $V, K$; $\sum_h q_h^2 = 776$ vs $784$ | Deg-17 diff has deg $14$, lead $8$, all $> 0$ | $(0.1170699,\, 0.1209196)$ (tail $\le 1.139\times 10^{-10}$) | Distinct second hinge moment |
 | Two-step path A vs path B | $(24, 64)$ | Exact valence counts $q=3,4,5,6$: $(33, 21, 3, 7)$ | Deg-22 diff has deg $16$, lead $42$, all $> 0$ | $(0.00194428,\, 0.00210545)$ (tail $< 7.904\times 10^{-22}$) | $252$ extra directed 6-step dual closed walks |
 
-The second pair of 24-simplex $4$-spheres is especially telling: because their valence histograms $(33, 21, 3, 7)$ coincide identically, every local single-hinge functional $\sum_h F(2\pi - q_h\theta)$, volume term, and topological invariant agrees on both geometries. Yet the large-$x$ expansion $\log(p/r) = 42/x^6 + O(x^{-7})$ reveals that the two $5$-regular dual Laplacians match through the fifth trace and differ at the sixth by $-252$—meaning the matter determinant detects **nonlocal six-step closed-walk arrangements** of curvature hinges. Even on equilateral triangulations, coupling shell matter inevitably induces multi-hinge adjacency correlations beyond linear deficit sums.
+The second pair of 24-simplex four-spheres have identical valence histograms. Every single-hinge functional $\sum_h F(2\pi-q_h\theta)$, the volume term, and any topological invariant therefore give the same readings. The large-mass expansion $\log(p/r)=42/x^6+O(x^{-7})$ shows that the dual Laplacians agree through the fifth trace, with a sixth-trace difference of $-252$ (A minus B). The matter determinant thus detects how six-step closed walks are arranged in the dual graphs.
+
+A single diffusion reading can detect the same difference. Write $M_X=\mathrm{Adj}_X$ and use the unnormalized heat-trace gap $D(t)=\operatorname{tr}e^{-tL_B}-\operatorname{tr}e^{-tL_A}$ at dimensionless time $t$. Traces of adjacency powers count closed walks with a marked start and direction, so the coefficient of $t^k$ in $e^{5t}D(t)$ is $(\operatorname{tr}M_B^k-\operatorname{tr}M_A^k)/k!$. The first nonzero term is $(7/20)t^6$. Counting walks through order $40$ and factoring out $t^6$ gives a polynomial whose smallest Bernstein coefficient on $[0,1]$ is $7/20$. At most $24\cdot5^k$ walks return at each order, so the factored tail has absolute value below $10^{-19}$. Exact rational arithmetic gives
+
+$$
+D(t)>\frac{349}{1000}e^{-5t}t^6\quad(0<t\le1),\qquad
+0.00400871827083<D(1)<0.00400871827084 .
+$$
+
+At $t=1$, the two predicted traces have disjoint error intervals even with an absolute measurement error of $0.002$ on each. [Walk counts, tail bound, and independent replay](https://github.com/the-omega-institute/trureturing-books/issues/2460#issuecomment-7243087434)
 
 Beneath all simplicial gauge and curvature variations lies the pure algebraic nilpotency of simplicial coboundaries—the discrete prototype of curl-of-gradient vanishing and the Bianchi identity—verified with an empty axiom closure in `OmegaInit`:
 
