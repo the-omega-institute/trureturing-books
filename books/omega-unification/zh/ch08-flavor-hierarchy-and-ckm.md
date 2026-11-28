@@ -385,7 +385,11 @@ $$
 
 若保持线性平衡并取 $\kappa+8\mu^2q=\eta\varepsilon$，两处分支在有限 $\varepsilon$ 下的等成本点会偏离五阶阈值（手工推导）。固定 $\mu$ 与下型轻块，调相取 $C>0$ 和实数 $S$，保留其相对符号。令 $v,w$ 分别为下型轻块沿 $e_0,e_2$ 的对角元，$c=\sqrt{\mu^2+|S|^2}$。实际交换点满足 $\eta_{\mathrm c}(\varepsilon)=-8\mu^2c^2w+O(\varepsilon)$。对于有界的 $\eta$ 和充分小的正 $\varepsilon$，$\eta>\eta_{\mathrm c}(\varepsilon)$ 时反射支胜出，$\eta<\eta_{\mathrm c}(\varepsilon)$ 时零偏转附近的分支胜出。
 
-在两支实际等成本时，可以从零偏转附近的两个方向算出固定平面的代价。
+若允许轻块形状随 $\varepsilon$ 变化，固定平面可以在等成本点上精确取优（手工推导）。固定共同尺度 $c$，让 $t=v/c$ 和 $r=w/c$ 独立微调，保持 $S=-c\sqrt{tr}$、$\mu=c\sqrt{1-tr}$ 及上述线性平衡。两条归一化横向梯度在 $\varepsilon=0$ 的延拓值为 $(r-t)\sqrt{tr/(1-tr)}-1$ 和 $2-4t+r$。在共同零点 $t\simeq0.783854$、$r=4t-2$，第一式沿第二式的零线严格递增，所以两梯度对形状的雅可比可逆。
+
+由隐函数定理，两项形状各作 $O(\varepsilon)$ 的解析微调，就能沿实际等成本曲线同时消去两条横向梯度。矩阵为实使虚方向驻定，正定二次变分使平面点成为零偏转支的极小点。所有全复基极小点都落在这两处分支，故对充分小的正 $\varepsilon$，微调后有 $D_{\mathrm{plane}}=D_*$，反射支也取到这个值。[解析推导与直接矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/2180#issuecomment-7240495038)
+
+若保持形状和 $\mu$ 固定，两支实际等成本时，可从零偏转附近的两个方向算出固定平面的代价。
 
 $$
 \begin{aligned}
