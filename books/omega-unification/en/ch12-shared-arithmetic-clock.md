@@ -174,7 +174,8 @@ Let $A_W(t)$ count the positive zeros through height $t$ in the fixed phase wind
 
 $$
 \begin{aligned}
-A_W(t)&=c\,t\left(\log\frac{t}{2\pi}-1\right)+R_W(t),\\
+m(t)&=t\left(\log\frac{t}{2\pi}-1\right),\\
+A_W(t)&=c\,m(t)+R_W(t),\\
 |R_W(t)|&\le b_Ht\quad(t\ge H).
 \end{aligned}
 $$
@@ -208,9 +209,9 @@ For all positive zeros without phase filtering, the counting estimate of Hasanal
 
 $$
 \begin{aligned}
-|N(t)-\tfrac{t}{2\pi}(\log(t/(2\pi))-1)|&\le B(t),\\
+\left|N(t)-\frac{m(t)}{2\pi}\right|&\le B(t),\\
 B(t)&=0.1038\log t\\
-&\quad+0.2573\log\log t+9.3675.
+&+0.2573\log\log t+9.3675.
 \end{aligned}
 $$
 
@@ -224,14 +225,14 @@ This numerical bound has no phase filter. Applying it to the Chapter 2 Haar acce
 :::
 
 ::: {.problem #prob-ou-ch12-windowed-haar-rate title="Explicit Remainders for a Fixed Haar Phase Window"}
-For the fixed Haar acceptance region in Chapter 2 and the fixed positive-measure phase window used in Chapter 12, prove or disprove the existence of a checkable constant $b_H$ such that
+For the fixed Haar acceptance region in Chapter 2 and the fixed positive-measure phase window used in Chapter 12, prove or disprove the existence of a checkable constant $b_H$ such that, with $m(t)$ as above,
 
 $$
-\left|A_W(t)-c\,t\left(\log\frac{t}{2\pi}-1\right)\right|\le b_Ht
+|A_W(t)-c\,m(t)|\le b_Ht
 \qquad\text{for all }t\ge H
 $$
 
-and propagate it to a finite-height error for every shared-clock reading. The available unfiltered count and qualitative equidistribution only give $A_W(t)=c\,t(\log(t/(2\pi))-1)+o(t\log t)$, which does not supply this uniform remainder. Until the window input is established, the finite-height Haar error and shared-clock precision remain open.
+and propagate it to a finite-height error for every shared-clock reading. The available unfiltered count and qualitative equidistribution only give $A_W(t)=c\,m(t)+o(t\log t)$, which does not supply this uniform remainder. Until the window input is established, the finite-height Haar error and shared-clock precision remain open.
 :::
 
 Beneath every exclusion beat two universal Fourier-and-variance concentration theorems formally frozen inside the Lean 4 kernel. The first bounds nonnegative cyclic band weights above by a positive Fejér Fourier average, quantifying why narrow-band concentration inevitably pumps high-frequency Fourier energy:
