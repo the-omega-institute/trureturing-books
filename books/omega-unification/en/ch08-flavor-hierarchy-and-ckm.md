@@ -376,6 +376,20 @@ $$
 
 The fifth-order coefficient vanishes exactly when $\kappa\le-8\mu^2q$ and $\lambda C=-\kappa S/(2\mu)$. The latter condition balances the linear variations in the two sectors, while the former controls the quadratic cost of tilting. At the threshold $\kappa=-8\mu^2q$ with the linear variations balanced, both zero tilt and $Z=2\mu S$ minimize $f$. [Matching bounds over complex bases, equality conditions, and matrix calculation](https://github.com/the-omega-institute/trureturing-books/issues/2095#issuecomment-7239878715)
 
+With the linear variations balanced, set $\kappa+8\mu^2q=\eta\varepsilon$. The two branches then exchange at a shifted threshold for finite $\varepsilon$ (direct derivation). Fix $\mu$ and the down-type light block, and choose phases so that $C>0$ and $S$ is real, retaining its relative sign. Let $v,w$ be the down-type light-block diagonal entries along $e_0,e_2$, respectively, and set $c=\sqrt{\mu^2+|S|^2}$. The actual crossing satisfies $\eta_{\mathrm c}(\varepsilon)=-8\mu^2c^2w+O(\varepsilon)$. For bounded $\eta$ and sufficiently small positive $\varepsilon$, the reflected branch wins for $\eta>\eta_{\mathrm c}(\varepsilon)$, and the branch near zero tilt wins for $\eta<\eta_{\mathrm c}(\varepsilon)$.
+
+When the two branches have exactly equal cost, relaxing two directions near zero tilt gives the cost of fixing the plane.
+
+$$
+\begin{aligned}
+D_{\mathrm{plane}}-D_*={}&8\sqrt6\,\mu^2c^3
+\left[(2c-4v+w)^2+\left(c-\frac{S(v-w)}{\mu}\right)^2\right]\varepsilon^7\\
+&+O(\varepsilon^8).
+\end{aligned}
+$$
+
+The first square comes from tilting the light-block normal. The second comes from tilting the basis axis associated with the up-type heavy line out of the plane. A positive square makes the seventh-order term leading. Both vanish at a unique parameter ratio with negative relative sign, where the defect gap is $O(\varepsilon^9)$. [Localization over complex bases, the equal-cost curve, and matrix calculation](https://github.com/the-omega-institute/trureturing-books/issues/2142#issuecomment-7240252783)
+
 When the angle and the two mass bases stay fixed, how quickly does the minimum defect approach $F$ as the middle mass-squared eigenvalues tend to zero? Let $D_*$ be the minimum defect of the fixed pair over all rotation eigenbases. Set the two normalized middle mass-squared eigenvalues to $a\varepsilon,b\varepsilon$, with $a,b>0$, and fix $0<\theta<\pi/2$. Write $\lambda_u=|V_{ub}|^2/\sin^2\theta$ and $\lambda_d=|V_{td}|^2/\sin^2\theta$ for the squared projection lengths of the lightest up- and down-type mass lines onto the top–bottom plane. A direct derivation gives
 
 $$
