@@ -27344,6 +27344,14 @@
       "line": 259,
       "signature": "theorem separable_cone_residual_witness {R : CompositeMatrix m n} (hR : R.PosSemidef) : let P"
     },
+    "D5/S3/SpectralTopology/HermitianEigenvaluePerturbation.abs_eigenvalues0_sub_le_norm": {
+      "module": "D5/S3/SpectralTopology/HermitianEigenvaluePerturbation",
+      "name": "D5.S3.SpectralTopology.HermitianEigenvaluePerturbation.abs_eigenvalues0_sub_le_norm",
+      "kind": "theorem",
+      "statement_id": "sha256:888cfecc08c39c89cf7934a2b8d35ab93331d2abb433e7fa5e5be379ca32aa11",
+      "line": 309,
+      "signature": "theorem abs_eigenvalues0_sub_le_norm {A B : Matrix (Fin n) (Fin n) ℂ} (hA : A.IsHermitian) (hB : B.IsHermitian) (k : Fin (Fintype.card (Fin n))) : |hA.eigenvalues₀ k - hB.eigenvalues₀ k| ≤ ‖Matrix.toEuclideanCLM (n"
+    },
     "D5/S3/StatisticalMechanics/ZTwoHighTemperatureExpansion.sum_sgn_mul_prod_one_add_eq": {
       "module": "D5/S3/StatisticalMechanics/ZTwoHighTemperatureExpansion",
       "name": "D5.S3.StatisticalMechanics.ZTwoHighTemperatureExpansion.sum_sgn_mul_prod_one_add_eq",
