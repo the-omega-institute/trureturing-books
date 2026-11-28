@@ -108,6 +108,31 @@ $$
 
 [§2.3](ch02-quaternion-clocks-and-haar-zeros.md#sec-ou-2-3) 已由原弧的代数相位推出本书任一非零整数模态都满足 $\Lambda(e^{|\lambda|})=0$。
 
+保留每枚零点的实部权重，取固定 $X=e^\lambda>1$ 且 $\Lambda(X)=0$。以下手工推导（`ARGUED`）刻画端点渐近式沿全部实数高度成立的条件。
+
+$$
+\sum_{0<\gamma\le T}X^{\rho-1/2}
+=\frac{e^{i\lambda T}}{2\pi i\lambda}\log\frac{T}{2\pi}+o_X(\log T)
+\quad\Longleftrightarrow\quad
+\text{Lindelöf 猜想成立}.
+$$
+
+这里按解析重数计且纳入上端点。令 $\delta_\rho=\operatorname{Re}\rho-1/2$。Backlund 的局部零点计数判据等价于 $\sum_{|\gamma-T|\le1}\delta_\rho^2=o(\log T)$。临界线反射把两侧配对，且半径为 $1$ 的高度窗共有 $O(\log T)$ 枚零点，因此可以先固定距临界线的阈值，再让阈值趋零。Lindelöf 猜想还给出计数公式的辐角余项 $S(T)=o(\log T)$。[Titchmarsh，第二版，定理 13.5 与 13.6(A)](https://sites.math.rutgers.edu/~zeilberg/EM18/TitchmarshZeta.pdf)
+
+充分性沿用下文的平滑窗口，先固定带宽 $B$。无条件显式公式在 $\gamma-i\delta_\rho$ 处取样。把窗口值移回实轴时，同高反射消去关于 $\delta_\rho$ 的一次项，二次误差由距端点的衰减核加权。局部平方质量界使这项误差为 $o_{X,B}(\log T)$。实轴上恢复硬窗的代价为 $O_X(\log T/B)+o_{X,B}(\log T)$，其中第二项来自 $S$。先令 $T$ 趋于无穷，再令 $B$ 趋于无穷。[Carneiro 与 Milinovich，引理 4](https://arxiv.org/pdf/2403.17803v1#page=5)
+
+必要性来自一个正差。设 $P_a(u)=a/(\pi(a^2+u^2))$，取 $a>1/2$ 且 $a^2-1/4\ge4/\lambda^2$。若硬窗渐近式成立，分部求和给出 $\sum_{\gamma>0}e^{\lambda\delta_\rho}P_a(\gamma-T)=\log(T/(2\pi))/(2\pi)+o_X(\log T)$。另一方面，$\xi$ 的哈达玛积在 $1/2+a+iT$ 处的对数导数给出 $\sum_\rho\operatorname{Re}P_a(\gamma-T-i\delta_\rho)=\log(T/(2\pi))/(2\pi)+O_a(1)$。负纵坐标的贡献是 $O_a(\log T/T)$。配对后，前一和的权重变为 $\cosh(\lambda\delta_\rho)$，并有
+
+$$
+\cosh(\lambda\delta)P_a(u)-\operatorname{Re}P_a(u-i\delta)
+\ \ge\ \frac{\lambda^2}{4}\delta^2P_a(u)
+\qquad (u\in\mathbb R,\ |\delta|\le1/2).
+$$
+
+事实上，$\operatorname{Re}P_a(u-i\delta)/P_a(u)\le 1+\delta^2/(a^2-1/4)$，而 $\cosh(\lambda\delta)\ge1+\lambda^2\delta^2/2$。两和之差为 $o_X(\log T)$ 就迫使半径为 $1$ 的窗内平方质量同样为 $o(\log T)$。[Titchmarsh，第二版，式 (2.12.5)](https://sites.math.rutgers.edu/~zeilberg/EM18/TitchmarshZeta.pdf) · [NIST DLMF，式 5.11.2](https://dlmf.nist.gov/5.11.E2)
+
+上面的 RH 估计还给出了定量余项。
+
 把窗口 $(0,T]$ 的指标函数同非负、积分为 $1$ 的核 $K_B(u)=\frac{3B}{8\pi}\bigl(\frac{\sin(Bu/4)}{Bu/4}\bigr)^4$ 卷积，再乘 $e^{i\lambda u}$。在核对应的角频带 $[-B,B]$ 内，Guinand–Weil 显式公式的素幂项采样的是离 $\lambda$ 至多 $B$ 的有符号对数频率 $\pm\log n$。每项包含 $\int_0^T e^{i(\lambda\mp\log n)v}\,dv$，因固定频率与所有素幂频率有正距离，该积分关于 $T$ 一致有界。因此素幂项合计为 $O_\lambda((1+B)e^{B/2})$。测试函数在 $\pm i/2$ 的极点项由核在这两条水平线上的衰减界为 $O_\lambda(e^{B/2})$。[Carneiro、Chandee 与 Milinovich，引理 5](https://arxiv.org/pdf/1309.1526#page=6)
 
 窗口平移 $u$ 只影响两个端点各 $|u|$ 以内的零点。对 $|u|\le T/2$，RH 下的零点计数余项将这些零点的总数界为 $O(|u|\log T+\log T/\log\log T)$，并允许端点计入。对更大的 $|u|$，全局计数给出 $O(|u|\log(2+|u|))$。用 $K_B$ 平均，凭其 $O(1/B)$ 的一阶绝对矩及四次衰减，恢复硬截断的代价为 $O(\log T/B+\log T/\log\log T)$。[Carneiro、Chandee 与 Milinovich，第 1 节及定理 1](https://arxiv.org/pdf/1503.00955)
