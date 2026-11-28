@@ -3,7 +3,7 @@
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
   "commit": "08c4ab6859286ebbfd9c7da5ae2a860fbf4b0b36",
-  "pinned_at": "2026-11-28T15:09:52Z",
+  "pinned_at": "2026-11-28T15:14:56Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -30356,6 +30356,19 @@
       "statement_id": "sha256:0648d499fd32bc7fff51faf73ff211bb9072b7d2040d02d10bca7a2817bce22f",
       "line": 17,
       "signature": "theorem xi_reading_endpoint_values : xiReading 0 = (1 / 2 : ℂ) ∧ xiReading 1 = (1 / 2 : ℂ)"
+    },
+    "D5/S3/Zeros/GRH/Lib/SiegelWeil/RallisInner/SharpData.inner_product_formula": {
+      "module": "D5/S3/Zeros/GRH/Lib/SiegelWeil/RallisInner/SharpData",
+      "name": "inner_product_formula",
+      "kind": "theorem",
+      "statement_id": "sha256:6e7af02b05e60785e5000a995db323923b9ec2edcf3e6e480a62a5112c02706d",
+      "line": 164,
+      "signature": "lemma inner_product_formula (h : 2 * card n < card m) a b {f} (hf : IsClean f) {y y'} (hy : y ∈ S.rapidFunctions) (hy' : y' ∈ S.rapidFunctions) (f'",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.FixedLineLocalization": {
       "module": "D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization",
