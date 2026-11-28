@@ -698,6 +698,56 @@ $$
 
 A two-site counterexample ($P_L = |1\rangle\langle 1|$, $P_R = |2\rangle\langle 2|$, one-hop $Y = |1\rangle\langle 2|$ vs. $|2\rangle\langle 1|$) proves that principal angles and site leakage alone imply neither a positive heavy–heavy lower bound nor an upper cap. At #22027, #28325, and #2,306,888,100,085, unconstrained fixed-$h$ operator-ratio brackets stay small—$[0.0349, 0.1048]$ ($8$ terms) and $[0.00514, 0.0127]$ ($27$ terms)—whereas enforcing the required light mass-hierarchy ratios $r_d = 61.365$, $r_e = 84.981$ via positive-semidefinite Gram certificates $s G_{\rm HH} - U + \mu(D - U) \succeq 0$ lifts the floors to $16.637$–$16.687$ ($8$ terms) and $0.2977$–$0.4473$ ($27$ terms), demonstrating that the severe heavy-block penalty of Section 8.2 is driven by cross-sector hierarchy constraints rather than light-subspace angles alone.
 
+### 8.4.4 Full Functional-Calculus Covariant Flavor Selection, Single-Spoke Commutator Identity, and Native-Deficit CP Obstruction {#sec-ou-ch08-covariant-spectral-flavor-nogo}
+
+Addressing the connection-covariant spectral escape route left open by the fixed-matrix rigidity ladder of Section 8.4.2 (tracking issue `#2466`), extending cyclic character selection to the full functional calculus and testing single-spoke softening at native and free deficits establish three sharp results:
+
+| Audit Axis | Exact Statement or Construction | Quantitative Outcome & Scope | Epistemic Tier |
+| :--- | :--- | :--- | :--- |
+| Full functional-calculus covariance & selection | $Y = f(L_{q_L})\operatorname{diag}(g(L_{q_H})h)\tilde{f}(L_{q_R})$ and single-character seesaw $YM_R^{-1}Y^T$ | Gauge-covariant for all finite-spectrum functions; unbroken cycle with one light line per character forces permutation mixing ($J=0$) and seesaw character $2a-b\bmod 3$ with Takagi degeneracy | ARGUED |
+| Single-spoke identity & native-deficit CP no-go | Softened pole spoke $(17,17,17)\text{--}(1,5,29)$; width-$1$ bounded rational family ($A_f \le 512$) | Exact $\|PL_qP^\dagger - L_q\|_{\mathrm{op}} = \sqrt{3}\epsilon$ ($3\delta$ vs. native star); at native $\delta(\gamma)$, any fit keeping all six Yukawas within $2\times$ of $1\,\mathrm{TeV}$ benchmarks obeys $|J_{\mathrm{CKM}}| \le 1.3638\times 10^{-9} < 3\times 10^{-9}$ | ARGUED / NUM |
+| Seven-zero shared benchmark & exact heavy norm | Largest real root of degree-$16$ polynomial $p_f(s)$, Gaussian-rational intervals, and free-$\epsilon$ witness | Native single-spoke RMS $0.613615$, free $\epsilon \approx 0.859557$ witness RMS $0.506196$ ($|J| \le 7.062\times 10^{-10}$); max heavy-norm intervals $(14.6423,14.6543)$ and $(14.6487,14.6607)$ | ARGUED / NUM / OPEN |
+
+1. **Gauge-Covariant Functional Calculus and Complete Cyclic Character Selection (ARGUED).** Under site rephasings $u_{xy} \mapsto e^{i(\alpha_x - \alpha_y)}u_{xy}$, each magnetic Laplacian transforms as $L_q \mapsto D_q L_q D_q^\dagger$ ($D_q = \operatorname{diag}(e^{iq\alpha_x})$). Whenever $q_L = q_R + q_H$, for any functions $f, \tilde{f}, g$ defined on the corresponding finite spectra (including arbitrarily high-degree polynomials and pole-free resolvents), the spectral vertex
+
+$$
+Y \;=\; f(L_{q_L})\operatorname{diag}\bigl(g(L_{q_H})h\bigr)\tilde{f}(L_{q_R})
+$$
+
+as well as all compositions across matching intermediate charges and sums between equal endpoint charges are strictly gauge-covariant. On the unbroken $\mathbb{Z}_3$-symmetric shell ($[P, L_q]=0$, character multiplicities $(7,6,6)$), a single-character Higgs $Ph = \omega^k h$ (including $k=0$ states generated from an invariant seed) permits nonzero matrix elements only for $j_L - j_R \equiv k \pmod 3$; when the common light space carries one line of each character and squared masses are simple, CKM and Dirac PMNS remain strictly permutation-and-phase ($J = 0$). The same selection law extends the cyclic Majorana Takagi degeneracy $(|a|,|b|,|b|)$ of Section 8.4.3 to the entire single-character functional calculus and seesaw mechanism: on a multiplicity-free active space with one line per character, if $P_L Y P_R^\dagger = \omega^a Y$ and $\overline{P_R} M_R P_R^\dagger = \omega^b M_R$ with invertible $M_R$, the Schur complement obeys $P_L(Y M_R^{-1} Y^T)P_L^T = \omega^{2a-b}(Y M_R^{-1} Y^T)$, excluding three distinct active Majorana masses across all single-character spectral vertices (summing over distinct Higgs characters preserves gauge covariance while generically lifting the single-character selection rule).
+
+2. **Single-Spoke Commutator Identity and Bounded-Response Native-Deficit CP Obstruction (ARGUED / NUM).** Reducing the weight of the single pole spoke $(17,17,17)\text{--}(1,5,29)$ by $\epsilon$ adds the $q$-independent rank-one perturbation $-\epsilon E$ ($E = (e_p - e_{(1,5,29)})(e_p - e_{(1,5,29)})^\dagger$) to $L_q$ in pole gauge, giving the exact cyclic-breaking commutator norm $\|P L_q P^\dagger - L_q\|_{\mathrm{op}} = \sqrt{3}\,\epsilon$, while replacing the native three-spoke $\delta(\gamma)$-star ($\delta(\gamma) = \frac{(23/25)2^{-20}}{\gamma^2 + 30 + 1/4 + 2/15}$) with a single $\delta(\gamma)$-spoke shifts $L_q$ by norm $3\delta$. Across all seven benchmark zeros (`28325, 48067, 58214, 22027, 11661, 11934, 12207`) and the entire single-spoke range $0 \le \epsilon \le 1$, dyadic directed-interval certification confirms that the mass cut $|\lambda(\lambda - c)| < 9$ ($c = \operatorname{tr}(L_0)/18$) retains the same three simple light lines across all four charged quark sectors (raw light–heavy separation $>0.60$) and the isolated 10th $q=3$ Higgs eigenline (separation $>0.017$). Consider the width-$1$ real rational covariant response family
+
+$$
+\varphi_a(x) = \frac{1}{x - a - i} + \frac{1}{x - a + i},
+\qquad
+r_{a,b}(x) = \varphi_a(x)\varphi_b(x),
+\qquad
+Y_f = A_f\, r_{a_L,b_L}(L_1)\operatorname{diag}(h_f)\,r_{a_f,b_f}(L_{q_R(f)}),
+$$
+
+with $f \in \{u,d\}$, $q_R = (4,-2)$, $h_u = \bar{h}$, $h_d = h$, $a,b \in [0,36]$, and $0 < A_f \le 512$. At the native deficit scale $\delta(\gamma)$ (whether added on one spoke to the native star or replacing the star by one spoke), spectral perturbation bounds yield $e \le 2\delta < 14\times 10^{-15}$ and compressed light-block drift $D = 116\cdot 512\cdot 14\times 10^{-15} \approx 8.315\times 10^{-10} < 10^{-9}$; for any shared or zero-wise fit keeping all six quark Yukawas within a factor of $2$ of their $1\,\mathrm{TeV}$ benchmarks, the Hermitian dilation maintains singular-value separation at least $d_* = 3\times 10^{-6}$, proving pointwise at every one of the seven zeros
+
+$$
+|J_{\mathrm{CKM}}|
+\;\le\;
+\left(\frac{4D}{d_* - D}\right)^3
+\;\le\;
+1.3638\times 10^{-9}
+\;<\;
+3\times 10^{-9},
+$$
+
+more than four orders of magnitude below the observed $3.08\times 10^{-5}$.
+
+3. **Shared Seven-Zero Numerical Benchmark and Exact Algebraic Heavy–Heavy Norm (ARGUED / NUM / OPEN).** For any fixed parameter set, forming the exact rank-one light projectors $P_{q,\lambda} = \operatorname{adj}(\lambda I - L_q)/\chi_q'(\lambda)$ and heavy complements $Q_q = I - \sum_{\lambda\,\mathrm{light}} P_{q,\lambda}$ identifies the exact squared heavy–heavy operator norm as the largest real root of the explicit degree-$16$ scalar polynomial
+
+$$
+p_f(s) \;=\; s^{-3}\det\!\left(sI_{19} - Q_{q_R(f)} Y_f^\dagger Q_1 Y_f Q_{q_R(f)}\right)
+$$
+
+(with the global maximum across all seven zeros and both sectors given by the largest real root of the product of these fourteen polynomials). In multistart seven-zero RMS fits over $70$ real observables (six Yukawas, three CKM moduli, and signed $J$ per zero), the native single-spoke witness attains RMS $0.613615$ ($|V_{us}| \approx 1$, the other two moduli $< 9\times 10^{-13}$, $y_t \in (0.375, 0.381)$). Freeing the common spoke deficit yields a best observed witness at $\epsilon \approx 0.859557$ (RMS $0.506196$), keeping all five lighter Yukawas within a factor of $2$ at every zero ($y_t \in (0.375, 0.381)$) and lifting $|V_{us}|$ into $0.1705$–$0.1831$, while $|V_{cb}| \in [4.02\times 10^{-5}, 2.19\times 10^{-4}]$, $|V_{ub}| \in [4.16, 4.21]\times 10^{-5}$, and all seven $J$ values remain negative with maximum magnitude $7.062\times 10^{-10}$. Gaussian-rational interval certificates incorporating the full Odlyzko ordinate uncertainties enclose the seven-zero maximum heavy–heavy norm strictly inside $(14.6423, 14.6543)$ (native witness, central max $14.6483$ at #48067) and $(14.6487, 14.6607)$ (free witness, central max $14.6547$ at #11661, with down heavy norm $4.479$). Global optimality at large $\epsilon$, arbitrarily narrow poles, alternative Higgs preparation rules, and general spectral dictionaries under explicit cycle breaking remain open (OPEN).
+
 ::: {.problem #prob-ou-ch08-common-flavor-law title="Open Flavor Horizon of Question 3: Deriving Spectra and Mixing from One Common Arc Action"}
 This chapter has charted the exact flavor boundaries of the 19-point Behrend shell: the cyclic-breaking floor $\max_{X\in\{A,B\}}\|[T,X]\|_{\mathrm{HS}}>0.0428$, five families of Yukawa hierarchy obstructions, four-step rational Newton folding ($4^{-16}$ precision), the directional coupling floor $|\lambda| > 0.03010$, five- and seven-zero fixed-matrix rigidity, and the finite rational response $(I + T^{16})^{-1}$ tracking seven zeros to $10^{-11}$. Two major pillars remain open:
 
