@@ -292,7 +292,7 @@ While $U(1)_X$ gives a clean Abelian lift over the Standard Model, installing th
 
 ### 9.3.2 Discrete Cubic Anomaly Inflow on $S^2 \times L(3, 1)$ and the 25-State Lifted Shell
 
-Placing this three-family locking model on the explicit four-dimensional spin manifold $S^2 \times L(3, 1)$ (two-sphere times order-3 lens space) with determinant target flux $m$ and external triality flat line $k$ uncovers an unmistakable order-3 mixed chiral anomaly phase:
+The four-dimensional three-family locking model has a five-dimensional spin background for anomaly inflow, $S^2 \times L(3, 1)$, the product of a two-sphere and a three-dimensional lens space. With determinant target flux $m$ and external triality flat line $k$, the mixed anomaly phase is
 
 $$
 \mathcal{A}(m, k) = \exp\!\left(-\frac{2\pi i\, m k^2}{3}\right).
@@ -301,6 +301,12 @@ $$
 As long as the two matrix scalars retain unit target charge, reassigning continuous charges across the three generations cannot cancel this cubic phase (canceling all four spin-cobordism generators with Weyl gauge singlets requires minimally four fields, with full-rank mass at dimension $13$). Equivalently, a $k$-winding determinant vortex string carries $k \bmod 3$ discrete anomaly inflow; the minimal finite group extension trivializing this $3$-cocycle is **$\mathbb{Z}_9$**.
 
 Lifting that order-9 action back onto the 19-point Behrend shell so that labeled vertices carry a faithful permutation projecting back onto the original coordinate 3-cycle $P$ forces the minimal expansion to exactly **25 states—the 25-state lifted Behrend shell**! In [Chapter 14](ch14-624-channels-and-memory-rank.md), two copies of this 25-state lifted register with pole-pair ports generate precisely $25^2 - 1 = 624$ internal channels ($85$ three-cycles and $41$ nine-cycles), welding proton-stability anomaly inflow directly onto the book's scattering and memory-rank frontier.
+
+What hopping on the lifted shell reproduces the dynamics of all nineteen sites? Copy each point of the coordinate orbit of $(13,13,23)$ three times and each other point once. Join sites whose squared chord distance satisfies $0<d^2\le152$, as in the local routing model of Chapter 14. Of the 39 base edges, 27 join two single sites and 12 connect a single site to one with three copies. There are 63 lifted edges. A ninefold-equivariant lift requires base dynamics invariant under the coordinate cycle $P$.
+
+For a continuous-time walk, every copy of $x$ must have total rate $w_{xy}$ into the fiber over $y$. With symmetric microscopic rates, a unit-rate mixed edge would need total flow three in one direction and one in the reverse. The smallest possible maximum absolute error in these rates is $1/2$, attained by rate $1/2$ on each mixed lifted edge. Exact recovery is possible with a different reversible measure. Write $m_x$ for the number of copies of $x$. If the base rates are reversible for $\pi_x$, assigning each copy mass $\pi_x/m_x$ and each target copy rate $w_{xy}/m_y$ preserves both the projected evolution and detailed balance.
+
+For quantum propagation, encode a base site as the unit vector $E|x\rangle=m_x^{-1/2}\sum_k|x,k\rangle$. A real symmetric lifted Hamiltonian must satisfy $\widetilde H E=EH$. On this graph that fixes every matrix element, since the three copied sites are mutually nonadjacent and distinct labels of the same site have zero chord length. The lifted diagonal equals $H_{xx}$ at every copy. A single-to-single edge keeps amplitude $H_{xy}$ and each mixed edge gets $H_{xy}/\sqrt3$. If every lifted edge has the same amplitude $s$, the visible amplitudes are $s$ and $\sqrt3s$, with sharp maximum edge error $2-\sqrt3$ for a unit target. The six extra directions are the two independent zero-sum label combinations per copied site. They have energy zero for the unit adjacency and energy four for the lifted base Laplacian, since all three copied sites have base degree four. The unit-rate classical walk damps the same modes as $e^{-4t}$. [Exact shell matrices, fiber balances and spectra](https://github.com/the-omega-institute/trureturing-experiments/blob/821fab5bfa1e5fb1d0e261c094f1481fb61d9ee0/experiments/ch39-omega-research/replay/ch39-lifted-shell-hopping.md)
 
 ## 9.4 Spectral vs. Site-Local Grading Tension and the Two-Branch Fork on the Joint Witness {#sec-ch09-spectral-local-fork}
 
