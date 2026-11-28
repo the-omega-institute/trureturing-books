@@ -9,7 +9,7 @@
 // The page is read through its read-only probe window.BUL_DEBUG (fractions are [numerator, denominator] strings).
 import fs from 'node:fs';
 import path from 'node:path';
-import { ROOT } from '../../../../tools/node/viz-common.mjs';
+import { ROOT, readLock } from '../../../../tools/node/viz-common.mjs';
 import { session, stageFirstChecks, stageView, settle, openStill, playsAfter, until, labelOverlaps, overflowX, cjkLeftovers } from '../../../../tools/node/viz-testkit.mjs';
 
 const BOOK = 'omega-unification';
@@ -421,7 +421,7 @@ check('two green boxes, one for each frozen theorem of the registry', JSON.strin
 {
   const registry = JSON.parse(fs.readFileSync(path.join(ROOT, 'books', BOOK, 'viz', 'visualizations.json'), 'utf8')),
     entry = registry.visualizations.find((v) => v.id === ID),
-    lock = JSON.parse(fs.readFileSync(path.join(ROOT, 'trureturing.lock.json'), 'utf8')).declarations,
+    lock = readLock().declarations,
     // only the chapters declared in dependencies.json (@citations for the card citations, ch02 and ch11 for the GIDs)
     zh = ZH_READS.map((f) => fs.readFileSync(path.join(ROOT, 'books', BOOK, 'zh', f), 'utf8')).join('\n');
   check('registry: live, the two GIDs, five chapters', !!entry && entry.status === 'live' && JSON.stringify(entry.lean.map((x) => x.gid)) === JSON.stringify(GIDS) && entry.theory.length === 5);
