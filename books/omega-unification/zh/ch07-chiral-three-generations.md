@@ -53,7 +53,16 @@ $$
 
 这些孤立的盲点还决定了实际读数能以多高的频率接近零。记 $\sigma_q$ 为三站限制的最小奇异值，在正黎曼零点上按重数计数。固定一个充分小的阈值 $\varepsilon>0$，先让计数高度趋于无穷。由上述双钟等分布与辐边软化趋零，$\sigma_q<\varepsilon$ 的极限比例等于零软化环面上的归一化面积。再令 $\varepsilon\downarrow0$，这个面积为 $C_q\varepsilon^2+O(\varepsilon^4)$。按上面的荷顺序，$C_q$ 约为 $25.99279,17.37426,26.16959,12.59218,14.28552$。每个盲点处，边界复振幅对两个钟角的实雅可比可逆，半径 $\varepsilon$ 的振幅圆盘因此在钟面上截出面积为二阶的邻域。五种荷的这些邻域在充分小的阈值下仍两两不交，故至少一荷近盲的二次项系数约为 $96.41434$。精确失秩的正零点集由此具有自然密度零，个别零点是否命中仍开放。[面积系数的推导和复算](https://github.com/the-omega-institute/trureturing-experiments/blob/408bafb236c0918d30571356d15798d2cd21a511/experiments/ch39-omega-research/replay/ch39-ray-near-blind-density.md)
 
-**随高度缩小的阈值（`ARGUED`）。** 令 $L=\log T$。若 $\varepsilon(T)\to0$ 且 $\varepsilon(T)\sqrt L\to\infty$，那么在模型的五种荷中，每种荷的近盲零点比例均为 $C_q\varepsilon(T)^2+o(\varepsilon(T)^2)$，仍按重数计数。证明取 $J=\lfloor cL/\log L\rfloor$，其中 $c>0$ 充分小。独立共轭排除非零整数频率的相位重合，清分母后的代数范数进一步给出指数型分离下界。Ford–Meng–Zaharescu 的引理 1–2 随即把每个 $0<\|m\|_\infty\le J$ 的标准化零点傅里叶和控制在 $O(L^{-1}+\|m\|_\infty^2L^{-2})$，无需假定黎曼猜想。[零点和估计](https://arxiv.org/abs/1511.06814v2) · [联合极限的推导](https://github.com/the-omega-institute/trureturing/issues/35082#issuecomment-7232072134)
+::: {.theorem #thm-ou-ch07-two-clock-frequency-separation title="双钟频率的显式分离" lean="D5/S3/Fourier/Asymptotics/TwoClockFrequencySeparation.frequency_separation"}
+令 $\theta_d=\arccos(1-d/1734)$，$a=\theta_{724}-\theta_{244}$，$b=\theta_{804}-\theta_{244}$。对任意不同时为零的整数 $m,n$，令 $M=\max(|m|,|n|)$，则
+$$
+|ma+nb|\ge \frac{1}{128\cdot 1734^{32M}}.
+$$
+:::
+
+三个相位所在的共同数域次数至多为八。独立共轭能单独反转任一相位，而三个相位的有理迹均非整数，使它们各自具有无限阶。非零模式的相位积因此异于一。用 $1734$ 清除各相位和逆相位的分母后，非零代数整数的范数给出显式下界。
+
+**随高度缩小的阈值（`ARGUED`）。** 令 $L=\log T$。若 $\varepsilon(T)\to0$ 且 $\varepsilon(T)\sqrt L\to\infty$，那么在模型的五种荷中，每种荷的近盲零点比例均为 $C_q\varepsilon(T)^2+o(\varepsilon(T)^2)$，仍按重数计数。证明取 $J=\lfloor cL/\log L\rfloor$，其中 $c>0$ 充分小。双钟频率的显式下界控制接近零频率时的误差。Ford–Meng–Zaharescu 的引理 1–2 随即把每个 $0<\|m\|_\infty\le J$ 的标准化零点傅里叶和控制在 $O(L^{-1}+\|m\|_\infty^2L^{-2})$，无需假定黎曼猜想。[零点和估计](https://arxiv.org/abs/1511.06814v2) · [联合极限的推导](https://github.com/the-omega-institute/trureturing/issues/35082#issuecomment-7232072134)
 
 在每个盲点取尺度为 $\varepsilon$ 的光滑内外逼近，夹住由边界振幅雅可比决定的局部椭圆。其傅里叶系数的绝对和为 $O(1)$，二阶绝对矩为 $O(\varepsilon^{-2})$，超过 $J$ 的绝对尾和为 $O((\varepsilon J)^{-4})$。因此采样与环面平均之差为 $O(L^{-1}+\varepsilon^{-2}L^{-2}+(\varepsilon J)^{-4})=o(\varepsilon^2)$。让内外逼近的面积趋于同一椭圆面积即可恢复同一个 $C_q$。 [Lean 中的绝对尾界](lean:D5/S3/Fourier/Asymptotics/PlanarFourierTail.lattice_fourier_tail)
 
