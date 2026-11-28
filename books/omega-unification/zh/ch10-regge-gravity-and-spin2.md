@@ -150,7 +150,15 @@ W_1(P,Q)\le C\delta^{1/n}.
 $$
 $C$ 依赖于区间、平移、$\rho$ 与 $r$。速率间距和正权重都可以任意小。若每个读数的绝对误差至多为 $\varepsilon$，与同一组观测相容的两种混合满足 $\delta\le2\varepsilon$。
 
-上界的推导从归一化的单组分核 $K(b,\lambda)=L(b+\lambda)/L(\lambda)$ 出发。在两组速率的并集上对 $K$ 作牛顿插值。速率并合时，用关于速率的导数延拓差商。令 $U=S_P-S_Q$。在采样点有 $U'+m_Q U=S_P(m_Q-m_P)$，所以均值之差给出关于 $U$ 的插值系数的线性方程组。在体积变量下展开 Wronskian，各速率的连续阶导数给出合流指数行列式。指数和按重数计的零点界保证它非零，前述除法与 Rolle 论证遂给出方程组的非奇异性。在包含重合节点与零权重的紧集上，逆矩阵一致有界。把速率区间缩放为 $[0,1]$ 后，在任一宽为 $g$ 的间隙左侧取值一、右侧取值零。其 $j$ 阶差商至多为 $2^{j-1}g^{-j}$（$j\ge1$），故跨间隙的质量差至多为 $\min(1,C_1\delta/g^n)$。乘以 $g$ 再对至多 $n$ 个间隙求和，即得上界。[合流行列式、常数与搬运估计的推导](https://github.com/the-omega-institute/trureturing-books/issues/1597#issuecomment-7234188498)
+单速率时可以直接算出误差常数。取 $b=0$、$\lambda\in[1,2]$、$\beta=1/(3840\pi)$。设 $n_h$ 个四单纯形共用铰链 $h$，则 $|\delta_h|\le n_h\pi$，而每个入射单纯形都给出 $A_h\le Q_\sigma/2\le\sqrt{24V_\sigma}$。按单纯形计数，每个单纯形有十个三角面，故 $|S_R|\le10\pi\sqrt{24}\sum_\sigma\sqrt{V_\sigma}\le3840\pi\sqrt V$，最后一步用了 $6144$ 个单纯形的柯西–施瓦茨不等式。于是形状变量 $d=\beta S_R/\sqrt V$ 满足 $|d|\le1$。
+
+令 $t=\lambda+b$，$\mu=\mathbb E_t V$。共同缩放平方边长时 $d$ 保持不变，故在每个形状下，体积缩放律给出的径向密度正比于 $v^{k-1}e^{-tv+d\sqrt v}$。记 $D=tv-d\sqrt v/2-k$。对 $v$ 分部积分，再对形状取平均，得 $\mathbb E_t[fD]=\mathbb E_t[v\,\partial_v f]$。依次令 $f=1,v,D$，可得 $\mathbb E_t D=0$、$\mathbb E_t[(V-\mu)D]=\mu$ 和 $\mathbb E_t D^2=(k+t\mu)/2$。柯西–施瓦茨不等式因此给出均值曲线的斜率界
+$$
+-\mu'(t)=\operatorname{Var}_t V\ge\frac{2\mu^2}{k+t\mu}.
+$$
+在所选区间上，第一条恒等式给出 $1920\le2\mu+\sqrt\mu/2$。因 $\sqrt{952}<32$，故 $\mu>952$，从而 $-\mu'(t)>2(952)^2/(1920+2\cdot952)>474$。积分可知，平均体积相差 $\delta$ 的两个候选速率至多相差 $\delta/474$。零耦合时上式取等号，直接给出 $\mu(t)=k/t$ 的精确斜率。[任意已知耦合与速率区间上的单速率常数](https://github.com/the-omega-institute/trureturing-books/issues/1597#issuecomment-7234392256)
+
+多速率上界的推导从归一化的单组分核 $K(b,\lambda)=L(b+\lambda)/L(\lambda)$ 出发。在两组速率的并集上对 $K$ 作牛顿插值。速率并合时，用关于速率的导数延拓差商。令 $U=S_P-S_Q$。在采样点有 $U'+m_Q U=S_P(m_Q-m_P)$，所以均值之差给出关于 $U$ 的插值系数的线性方程组。在体积变量下展开 Wronskian，各速率的连续阶导数给出合流指数行列式。指数和按重数计的零点界保证它非零，前述除法与 Rolle 论证遂给出方程组的非奇异性。在包含重合节点与零权重的紧集上，逆矩阵一致有界。把速率区间缩放为 $[0,1]$ 后，在任一宽为 $g$ 的间隙左侧取值一、右侧取值零。其 $j$ 阶差商至多为 $2^{j-1}g^{-j}$（$j\ge1$），故跨间隙的质量差至多为 $\min(1,C_1\delta/g^n)$。乘以 $g$ 再对至多 $n$ 个间隙求和，即得上界。[合流行列式、常数与搬运估计的推导](https://github.com/the-omega-institute/trureturing-books/issues/1597#issuecomment-7234188498)
 
 要看出指数为何不能再大，在 $\lambda_0+jh$（$0\le j\le n$）的偶数与奇数下标上分别放置权重 $\binom nj/2^{n-1}$。每种混合恰有 $r$ 个速率，跨各间隙搬运的质量之和为一，故 $W_1=h$。整数节点 $j$ 上的交错二项权消去所有低于 $n$ 阶的单项式。在每个采样点分别对 $K$ 和 $\partial_b K$ 关于速率作 Taylor 展开，首个可能保留的项均为 $O(h^n)$，配分函数则保持正下界。这样，同一固定曲率下已经出现 $\delta=O(h^n)$ 的正权混合。若同时把曲率耦合也作为未知量，速率并合处的最坏精度仍待确定。[整数节点的差商恒等式](lean:D5/S3/Quantum/Dynamics/ParityNodeDividedDifference.sum_eval_div_nodal_eq_coeff)
 
