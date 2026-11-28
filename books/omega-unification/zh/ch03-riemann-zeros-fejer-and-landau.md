@@ -192,7 +192,22 @@ $$
 
 横向积分把 $\log\zeta$ 在零点左侧的割线跳跃变为与 $\beta-\sigma$ 成正比。分别移过两种指数相位，再取实部对应的半和，割线就给出上式的双曲余弦权重。水平边界由局部对数导数控制在 $O_\lambda(L)$，上界取右极限。非共振使素幂多项式的相位积分也在这一预算内。[Korolev，引理 4 前的截断权](https://www.mathnet.ru/links/2bb06e5a975dd807fe74eae4c1f9fd1f/im2766_eng.pdf#page=9) · [割线推导与复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239342305)
 
-在 $a=0$ 时，零点和经同高反射还原 $C_\lambda(T)$，只差归一化系数和有界的低高度项。增大 $a$ 会把每个右侧零点的权重改成 $\cosh(\lambda(\delta_\rho-a)_+)-1$，其中 $v_+=\max(v,0)$。将该权重的导数与 Selberg 密度界配对，右侧余项至多为 $O_\lambda((T/L)e^{-aL/4}+L)$。取 $a=1/L$ 只降低密度估计中的常数，合成谱上窄带与右侧余项均可达到 $T/L$ 量级。取 $a=8\log L/L$ 时，右侧上界降到 $O_\lambda(T/L^3+L)$。在这一宽度下，窄带的同频积分由偏移的二次矩决定。具体地，令 $D_\lambda(u,T)=\sum_{0<\gamma\le T,\,\delta_\rho>u}e^{i\lambda\gamma}$，按重数计并纳入高度上端点。相减两个横向积分的割线公式，再以 $\cosh(\lambda d)-1=\lambda^2 d^2/2+O_\lambda(d^4)$ 展开，得到以下手工推导（`ARGUED`）。
+对实际 $\zeta$，更强的近临界线密度定理已能控制一定距离外的单层读数。设 $L_U=\log U$、$0\le a\le1/2$、$U\le V\le 2U$，并按重数取右闭窗。写 $N_+(u,T)$ 为 $0<\gamma\le T$ 且 $\delta_\rho>u$ 的零点个数。对每个固定 $0<\theta<4/7$，有一致界 $N_+(u,T)\ll_\theta T^{1-2\theta u}\log T$（$0\le u\le1/2$）。取计数上界 $3U$ 可覆盖右闭窗的端点。[Baluyot，*On the Zeros of Riemann’s Zeta-function*（2017），定理 1.2.1 与 §3.6](https://hdl.handle.net/1802/32855)
+
+逐零点把超过阈值的偏移写成分层积分，再取绝对值，得到以下手工推导（`ARGUED`）。
+
+$$
+\begin{aligned}
+\left|\sum_{\substack{U<\gamma\le V\\\delta_\rho>a}}
+(\delta_\rho-a)e^{i\lambda\gamma}\right|
+&\le \int_a^{1/2} N_+(u,3U)\,du \\
+&\ll_\theta U e^{-2\theta a L_U}.
+\end{aligned}
+$$
+
+固定在实部 $1/2+a$ 时，割线权重为 $\sinh(\lambda(\delta_\rho-a))/\lambda$（只计 $\delta_\rho>a$）。它至多是 $\cosh(\lambda/2)$ 倍的线性权重，因此同频对数模积分也受此界控制，另加水平边界的 $O_\lambda(L_U)$。取 $a=b\log L_U/L_U$，每个固定 $b>7/8$ 都可选 $2\theta b>1$，从而得到 $o(U/L_U)$。在 $b=2$，一次矩为 $O_\varepsilon(U/L_U^{16/7-\varepsilon})$，无需假定 RH 或利用零点之间的相位抵消。$b=7/8$ 时，这族密度界只给出 $O_\varepsilon(U/L_U^{1-\varepsilon})$。[单层割线与分层推导](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240931083)
+
+回到横向积分的公式，在 $a=0$ 时，零点和经同高反射还原 $C_\lambda(T)$，只差归一化系数和有界的低高度项。增大 $a$ 会把每个右侧零点的权重改成 $\cosh(\lambda(\delta_\rho-a)_+)-1$，其中 $v_+=\max(v,0)$。将该权重的导数与 Selberg 密度界配对，右侧余项至多为 $O_\lambda((T/L)e^{-aL/4}+L)$。取 $a=1/L$ 只降低密度估计中的常数，合成谱上窄带与右侧余项均可达到 $T/L$ 量级。取 $a=8\log L/L$ 时，右侧上界降到 $O_\lambda(T/L^3+L)$。在这一宽度下，窄带的同频积分由偏移的二次矩决定。具体地，令 $D_\lambda(u,T)=\sum_{0<\gamma\le T,\,\delta_\rho>u}e^{i\lambda\gamma}$，按重数计并纳入高度上端点。相减两个横向积分的割线公式，再以 $\cosh(\lambda d)-1=\lambda^2 d^2/2+O_\lambda(d^4)$ 展开，得到以下手工推导（`ARGUED`）。
 
 $$
 \int_3^T e^{i\lambda t}\int_{1/2}^{1/2+a}\log|\zeta(\sigma+it)|\,d\sigma\,dt
