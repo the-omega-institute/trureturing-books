@@ -195,6 +195,17 @@ Both outcomes occur on the same finite group. Take $G=S_3\times\{+1,-1\}$ with t
 
 The permutation reading gives quotient $S_3$, where the order of $(12)$ and $(23)$ still changes the product. The parity reading gives the abelian group of order two, where both orders give the even class. Passing to reading classes restores extensional separation. The reading still distinguishes the order of transport exactly when some commutator remains visible in the quotient.
 
+**Swapping quaternion axes can obstruct a section.** Keep $S_3$ as the quotient and take the quaternion group $Q_8$ as the identity class. Let $\alpha$ exchange $\mathbf i$ and $\mathbf j$, sending $\mathbf k=\mathbf i\mathbf j$ to $-\mathbf k$. On the same set of forty-eight points $Q_8\times S_3$, choose $b=1$ or $b=-1$ and define multiplication by
+
+$$
+(a,\sigma)(c,\tau)=
+\bigl(a\,\alpha^{\epsilon(\sigma)}(c)\,b^{\epsilon(\sigma)\epsilon(\tau)},\,\sigma\tau\bigr).
+$$
+
+Swapping $\mathbf i$ and $\mathbf j$ preserves their squares and anticommutation, so $\alpha$ is an automorphism and $\alpha^2=1$. The central element $b$ is fixed by $\alpha$. Under either bracketing of a triple product, the exponents of $\alpha$ add modulo two and the exponent of $b$ records the total carry from adding the three parity bits. This gives associativity. The identity is $(1,e)$. To find an inverse, invert the permutation and solve for the quaternion coordinate. Comparing only the permutation component gives identical readings and quotient transport and the same Gram sum of squares. Both models relax extensional separation.
+
+For a transposition $s$, every lift $(a,s)$ squares to $(a\alpha(a)b,e)$. The factor $a\alpha(a)$ is $1$ for $a=\pm1,\pm\mathbf k$, $\mathbf k$ for $a=\pm\mathbf i$, and $-\mathbf k$ for $a=\pm\mathbf j$. Suppose a section preserves ternary transport. Left-multiplying all its values by the inverse of its identity representative preserves their classes and transport, and makes the section preserve the identity. Fixing the middle slot at the identity then shows that it preserves multiplication. When $b=-1$, no lift squares to the identity, so such a section cannot exist. When $b=1$, exactly four lifts of $s$ square to the identity, and $\sigma\mapsto(1,\sigma)$ gives a multiplication-preserving section. The designated lifts $(1,s)$ act on the identity class by the same $\alpha$ in both models. Even with this action fixed, the readings do not determine whether a section exists.
+
 **The same transposition squares can coexist with different 3-cycle cubes.** Write each element of $S_3$ as $r^is^j$, where $r=(123)$, $s=(12)$, $i$ is taken modulo $3$, and $j$ modulo $2$. Let representatives of even permutations commute with every point of the identity class, and let representatives of odd permutations act on it by inversion. Two groups of eighteen points realize this action. Use the additive group $H_0=(\mathbb Z/3\mathbb Z)^2$ or $H_1=\mathbb Z/9\mathbb Z$, and multiply points by
 
 $$
