@@ -384,6 +384,15 @@ $$
 
 The sixth-order coefficient is strictly positive. At the exact threshold, fixing the top–bottom plane still overestimates the minimum defect even though the fifth-order coefficient vanishes. [Cost expansions for both branches, lower bound over complex bases, and matrix calculation](https://github.com/the-omega-institute/trureturing-books/issues/2126#issuecomment-7240142503)
 
+The two branches can be localized quantitatively near the threshold (direct derivation). Take the common scale $c=\sqrt{\mu^2+|S|^2}=1$, with $v\in[0.78,0.79]$, $w\in[1.13,1.14]$, and $S=-\sqrt{vw}$. Keep the linear variations balanced and set $\kappa+8\mu^2q=\eta\varepsilon$ with $|\eta|\le2$. After ordering the basis columns and fixing their phases, first use a direct rotation to carry $e_0$ to the first column, then rotate the remaining columns within the light subspace. Write the two off-diagonal entries in the first row of the first rotation as $\varepsilon^3(X+iI,Y)$ and the upper off-diagonal entry of the second as $\varepsilon^2Z$, with $X,I$ real and $Y,Z$ complex. For $0<\varepsilon\le10^{-36}$ every globally minimizing complex basis satisfies
+
+$$
+\max\bigl(|X-4\mu|,\ |I|,\ |Y|,\ \min(|Z|,|Z-2\mu S|)\bigr)
+\le 10^{15}\sqrt{\varepsilon}\le10^{-3}.
+$$
+
+The heavy-line projections first confine every minimizing complex basis to bounded scaled coordinates. The down-type cost then bounds the real in-plane tilt, and the lower bound on the up-type cost contains the square of $|Z|^2-2\mu S\operatorname{Re}Z$ and the square of the imaginary tilt. With the analytic remainders bounded, the two tilt centers lie more than $0.45$ apart, so the minimum costs in the two neighborhoods can be compared separately. [Localization bound over complex bases and matrix calculation](https://github.com/the-omega-institute/trureturing-books/issues/2203#issuecomment-7240815849)
+
 With the linear variations balanced, set $\kappa+8\mu^2q=\eta\varepsilon$. The two branches then exchange at a shifted threshold for finite $\varepsilon$ (direct derivation). Fix $\mu$ and the down-type light block, and choose phases so that $C>0$ and $S$ is real, retaining its relative sign. Let $v,w$ be the down-type light-block diagonal entries along $e_0,e_2$, respectively, and set $c=\sqrt{\mu^2+|S|^2}$. The actual crossing satisfies $\eta_{\mathrm c}(\varepsilon)=-8\mu^2c^2w+O(\varepsilon)$. For bounded $\eta$ and sufficiently small positive $\varepsilon$, the reflected branch wins for $\eta>\eta_{\mathrm c}(\varepsilon)$, and the branch near zero tilt wins for $\eta<\eta_{\mathrm c}(\varepsilon)$.
 
 When the two branches have exactly equal cost, relaxing two directions near zero tilt gives the cost of fixing the plane.
