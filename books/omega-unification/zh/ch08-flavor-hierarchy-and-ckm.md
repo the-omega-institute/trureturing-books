@@ -367,6 +367,18 @@ $$
 上型轻块的两个对角元不等时，偏转法线能线性降低上型成本。下型成本因法线偏转而二次上升，需要靠平面转角来抵消，而该转角又给上型带来二次代价。平衡这两种变化得到 $7/3$ 阶。对角元相等时，法线偏转对上型的收益从二次项开始，首项由下型在端点基留下的余量决定。两种情形的首项系数都为正。[完整上下界与矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/2016#issuecomment-7239160733)
 
 在 $1\,\mathrm{TeV}$ 的参考输入表 2 中，$y_c/y_t\le0.00316/0.8573$，$y_s/y_b\le0.000271/0.01392$，因此可取 $g=0.9996$。沿用上面的保守混合输入，$|V_{tb}|>0.98$ 使 $d=\theta$，而 $\sin\theta\ge |V_{cb}|>0.035$ 使破缺严格大于 $0.0428$。用表 2 的边际区间构成输入盒时，仍有 $d=\theta$。由 $|V_{tb}|=\cos\theta_{23}\cos\theta_{13}$，$\sin^2\theta$ 随两个混合角分别增大。代入下端点 $\theta_{23}=0.04233$、$\theta_{13}=0.00369$，得破缺严格大于 $0.0520$。[参考输入表 2](https://arxiv.org/pdf/2510.01312v2#page=14) · [CKM 标准参数化，式 (12.3)](https://pdg.lbl.gov/2024/reviews/rpp2024-rev-ckm-matrix.pdf#page=1)
+
+**正交端点的过渡区（手工推导）。** 当顶底夹角为 $\pi/2-\mu\varepsilon$（$\mu>0$）时，取端点重线 $e_0,e_1$ 和平面法线 $e_2$ 为正交单位基。下型质量基在重线平面内整体转向上型重线。除去次重谱的共同因子 $\varepsilon$，设两部门秩一轻块的非对角元为 $C,S$，上型的对角元为 $p,p_2$。令 $q=|C|^2$、$L=|(p-p_2)C|$、$k=(q-|S|^2-\mu^2)/\varepsilon^{2/3}$，并记 $x_+=\max(x,0)$。当两轻块耦合均趋于非零极限且上型对角元的极限不等时，对有界 $k$ 有一致渐近式
+
+$$
+\begin{aligned}
+D_{\mathrm{plane}}-D_*&=\frac{\sqrt6\,\varepsilon^{7/3}}{2\sqrt q}
+\left[\frac{(-k)_+^2}{4\mu^2}-m(k)\right]+O(\varepsilon^{8/3}),\\
+m(k)&=\min_{s\ge0}\left\{\frac{(s^2-k)_+^2}{4\mu^2}-2Ls\right\}.
+\end{aligned}
+$$
+
+这里 $D_{\mathrm{plane}}$ 是固定平面法线时的最小破缺，$D_*$ 允许任意复轮换基。法线偏转量在原基中为 $O(\varepsilon^{4/3})$，其上型线性收益与下型引起的四次代价相竞争。括号严格为正，极小点满足 $s>\sqrt{k_+}$ 和 $s(s^2-k)=2\mu^2L$。因此跨越首阶分角截断点时，平面的代价仍为 $7/3$ 阶，系数随偏移连续变化。[一致上下界与矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/2033#issuecomment-7239259812)
 :::
 
 ## 8.2 汤川层级障碍图谱：单希格斯、密度势、输运顶角与最小站点支撑 {#sec-ch08-yukawa-nogo}
