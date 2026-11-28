@@ -255,10 +255,10 @@ $$
 
 **固定哈尔窗的无条件线性余项（`ARGUED`）。** 令 $L=\log T$，取 $n=\lfloor\kappa L\rfloor$，其中 $\kappa>0$ 固定且充分小。把宽 $1/n$ 的边界邻域与非负带限核卷积，得到 $0\le B\le1$、$\int B=O(1/n)$ 的边界多项式。用衰减更快的核平滑窗指标，再加减常数倍的 $B$，给出夹逼多项式 $P^\pm$。在相位速度 $b=a/(2\pi)$ 方向作复移时，三个多项式的二阶导数由 $O(n^2e^{Cn|y|}B)$ 控制，其中 $y$ 是虚移量，$B$ 取在实环面上。平滑窗的导数估计来自卷积中扣去实点的窗指标，只保留足以触及边界的位移。[边界管与带限核的构造](https://github.com/the-omega-institute/trureturing-books/issues/1637#issuecomment-7233283092)
 
-这个带宽需要在边界管内计数偏离临界线的零点。取固定短 Dirichlet 多项式 $M$，使 $\zeta M$ 的最早一段 Dirichlet 系数除常数项外均为零。先估计 $|\zeta M-1|^2$ 的通常均值。把钟相位的边界权乘进去时，光滑乘积近似函数方程把需要估计的非零钟频化为与既约有理数对数的比较。Baker 的代数系数对数线性型界排除低高度近频项。其余项按分子、分母的大小分组，由有理数间距控制。最后用带边界权的 Green 恒等式把均方界传给零点计数，得到
+这个带宽需要在边界管内计数偏离临界线的零点。对每个高度区间 $[X,2X]$，选定一个短 Dirichlet 多项式 $M$，使 $\zeta M$ 的最早一段 Dirichlet 系数除常数项外均为零。先估计 $|\zeta M-1|^2$ 的通常均值。把钟相位的边界权乘进去时，光滑乘积近似函数方程把需要估计的非零钟频化为与既约有理数对数的比较。Baker 的代数系数对数线性型界排除低高度近频项。其余项按分子、分母的大小分组，由有理数间距控制。最后用带边界权的 Green 恒等式把均方界传给零点计数，得到
 
 $$
-\sum_{\substack{0<\gamma\le T\\|\beta-1/2|\ge u}} B(b\gamma)\ll T e^{-c_1uL}\qquad (u\ge 2/L)
+\sum_{0<\gamma\le T,\,\lvert\beta-1/2\rvert\ge u} B(b\gamma)\ll T e^{-c_1uL}\qquad (u\ge 2/L)
 $$
 
 其中零点按重数计，$c_1>0$ 固定。[带权均方、零点密度与所用文献](https://github.com/the-omega-institute/trureturing-books/issues/1637#issuecomment-7234629760) · [区间截止与文献前提](https://github.com/the-omega-institute/trureturing-books/issues/1637#issuecomment-7234728563)
