@@ -975,6 +975,14 @@
       "line": 199,
       "signature": "theorem completed_zeta_mellin_reconstruction : let theta : ℝ → ℂ"
     },
+    "D5/S3/Analytic/ExponentialSum/DescartesRule.zero_bound": {
+      "module": "D5/S3/Analytic/ExponentialSum/DescartesRule",
+      "name": "D5.S3.Analytic.ExponentialSum.DescartesRule.zero_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:e44b59bbf668d138e0346f714453db557953d8d141bfe82c2d55abc936a8154e",
+      "line": 322,
+      "signature": "theorem zero_bound {N : ℕ} (a μ : Fin N → ℝ) (hμ : StrictAnti μ) (ha : ∃ i, a i ≠ 0) (Z : Finset ℝ) (hZ : ∀ t ∈ Z, exponentialSum a μ t = 0) : Z.card ≤ (List.ofFn a).signVariations"
+    },
     "D5/S3/Analytic/Fourier/PositiveDefinite/Closure.cos": {
       "module": "D5/S3/Analytic/Fourier/PositiveDefinite/Closure",
       "name": "D5.S3.Analytic.Fourier.PositiveDefinite.Closure.cos",
