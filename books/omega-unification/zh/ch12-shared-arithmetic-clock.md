@@ -221,7 +221,7 @@ $$
 0.0283138<D_H<0.0283806.
 $$
 
-这是未作相位筛选的全谱基准。第 2 章的哈尔接受区域要给出同类数值界，还须明确算出相应的 $b_H$。[Hasanalizade、Shen 与 Wong，《Counting zeros of the Riemann zeta function》（2022），推论 1.2](https://doi.org/10.1016/j.jnt.2021.06.032)
+这是未作相位筛选的全谱基准。对第 2 章的固定哈尔窗，[附录 C](appendix-c.md) 在黎曼假设下给出 $b_H=10^9$，对 $H\ge1$ 有效。该常数只在很高的起始高度满足 $L_H>3b_H/c$，而全谱基准适用于这里的 $H=10^6$。[Hasanalizade、Shen 与 Wong，《Counting zeros of the Riemann zeta function》（2022），推论 1.2](https://doi.org/10.1016/j.jnt.2021.06.032)
 :::
 
 **黎曼假设下的固定哈尔窗余项（`ARGUED`）。** 对第 2 章的四相位窗口，按重数计正零点，有 $A_W(T)=c\,m(T)+O(T)$。将环面上的接受阈值记为 $F$，则 $\partial W$ 只可能落在 $u=0$ 的接缝和 $u=F$ 的图面上。$F$ 是 Lipschitz 函数，故厚度 $\eta$ 的边界邻域测度为 $O(\eta)$。取 $K=\lfloor\log T/12000\rfloor$。Colzani、Gigante 与 Travaglini 的周期三角多项式逼近给出 $P_K^-\le\mathbf1_W\le P_K^+$，频率满足 $\|k\|_\infty\le K$。逐点误差随 $K\,\operatorname{dist}(x,\partial W)$ 快速衰减，所以每个多项式与 $\mathbf1_W$ 的 $L^1$ 误差为 $O(K^{-1})$，$L^2$ 误差为 $O(K^{-1/2})$。当 $M\ge2$ 时，用次数小于 $M$ 的同类逼近控制 $\mathbf1_W$ 的 Fourier 尾部，再用 Parseval 恒等式，可知任一 $P=P_K^\pm$ 在每个二倍频层 $M\le\|k\|_\infty<2M$（$1\le M\le K$）上的系数 $\ell^2$ 范数为 $O(M^{-1/2})$。$M=1$ 时直接用 $\|P\|_2=O(1)$。[周期逼近，推论 7](https://arxiv.org/abs/1001.0948)
@@ -243,7 +243,7 @@ $$
 对 $j\ge0$ 求和得到 $O(M^{-1/2}(1+\log M)^2)$，再对二倍频层求和仍有界。两侧三角多项式给出同一个主项 $\mu(W)N(T)$，其中常数项的逼近损失为 $O(N(T)/K)=O(T)$。用总零点计数的主项即得所述窗口余项。代入上文的分部求和，得到 $D_H=O(1/\log H)$，因而任意共同钟核 $f_v(s)=(1+v^2s^2)^{-1}$ 的读数误差至多为 $O(1/\log H)\,v^2/(1+v^2)$，其中隐含常数可对 $v$ 统一。
 
 ::: {.problem #prob-ou-ch12-windowed-haar-rate title="固定哈尔相位窗的显式计数余项"}
-取第 2 章的固定哈尔接受区域为 $W$，其边界为 Haar 零测集。记 $c=\mu(W)/(2\pi)$，其中 $\mu$ 为归一化 Haar 测度。对给定的起始高度 $H$，显式计算一个可复查的常数 $b_H$，使上式的计数与主项满足
+取第 2 章的固定哈尔接受区域为 $W$，其边界为 Haar 零测集。记 $c=\mu(W)/(2\pi)$，其中 $\mu$ 为归一化 Haar 测度。对给定的起始高度 $H\ge 2\pi$，求一个满足 $3b_H/c<L_H$ 的可复查常数，使上式的计数与主项满足
 
 $$
 |A_W(t)-c\,m(t)|\le b_Ht

@@ -221,7 +221,7 @@ $$
 0.0283138<D_H<0.0283806.
 $$
 
-This benchmark uses the full spectrum without phase filtering. A numerical bound for the Chapter 2 Haar acceptance region requires an explicit value of $b_H$ for that window. [Hasanalizade, Shen, and Wong, Counting zeros of the Riemann zeta function (2022), Corollary 1.2](https://doi.org/10.1016/j.jnt.2021.06.032)
+This benchmark uses the full spectrum without phase filtering. For the fixed Haar window of Chapter 2, [Appendix C](appendix-c.md) gives $b_H=10^9$ under RH, valid for $H\ge1$. With this constant, $L_H>3b_H/c$ requires a much larger starting height than the whole-spectrum example $H=10^6$. [Hasanalizade, Shen, and Wong, Counting zeros of the Riemann zeta function (2022), Corollary 1.2](https://doi.org/10.1016/j.jnt.2021.06.032)
 :::
 
 **A linear counting remainder for the fixed Haar window under RH (`ARGUED`).** Count positive zeros with multiplicity. For the four-phase window of Chapter 2, $A_W(T)=c\,m(T)+O(T)$. Write $F$ for the acceptance threshold on the torus. The boundary of $W$ lies in the seam $u=0$ and the graph $u=F$. The function $F$ is Lipschitz, so the $\eta$-neighborhood of the boundary has volume $O(\eta)$. Set $K=\lfloor\log T/12000\rfloor$. The periodic trigonometric approximation of Colzani, Gigante, and Travaglini gives $P_K^-\le\mathbf1_W\le P_K^+$ with frequency support $\|k\|_\infty\le K$. The pointwise error decays rapidly in $K\,\operatorname{dist}(x,\partial W)$, giving an $L^1$ error of $O(K^{-1})$ and an $L^2$ error of $O(K^{-1/2})$ for each polynomial. For $M\ge2$, apply the same approximation with degree less than $M$ to the Fourier tail of $\mathbf1_W$. Parseval's identity then gives an $\ell^2$ coefficient norm of $O(M^{-1/2})$ for either $P=P_K^\pm$ on each dyadic shell $M\le\|k\|_\infty<2M$ with $M\le K$. For $M=1$ use $\|P\|_2=O(1)$. [Periodic approximation, Corollary 7](https://arxiv.org/abs/1001.0948)
@@ -243,7 +243,7 @@ $$
 Summing over $j\ge0$ gives $O(M^{-1/2}(1+\log M)^2)$, which is summable over dyadic $M$. The two bracketing polynomials thus give the same leading term $\mu(W)N(T)$. The error from their constant terms is $O(N(T)/K)=O(T)$. Substituting the unfiltered counting main term gives the stated window remainder. The preceding partial summation formula yields $D_H=O(1/\log H)$. For every shared-clock kernel $f_v(s)=(1+v^2s^2)^{-1}$ the readout error is consequently bounded by $O(1/\log H)\,v^2/(1+v^2)$, with a constant uniform in $v$.
 
 ::: {.problem #prob-ou-ch12-windowed-haar-rate title="Explicit Remainders for a Fixed Haar Phase Window"}
-Let $W$ be the fixed Haar acceptance region in Chapter 2, whose boundary has Haar measure zero. Set $c=\mu(W)/(2\pi)$ for normalized Haar measure $\mu$. For a prescribed starting height $H$, compute a checkable constant $b_H$ such that, with $m(t)$ as above,
+Let $W$ be the fixed Haar acceptance region in Chapter 2, whose boundary has Haar measure zero. Set $c=\mu(W)/(2\pi)$ for normalized Haar measure $\mu$. For a prescribed starting height $H\ge 2\pi$, find a checkable constant $b_H$ satisfying $3b_H/c<L_H$ and, with $m(t)$ as above,
 
 $$
 |A_W(t)-c\,m(t)|\le b_Ht
