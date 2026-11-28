@@ -259,6 +259,16 @@ Can the vacuum reading turn negative while the Newton calibration stays exactly 
 
 Starting at $W=c=10^{-122}$, let $R_*$ be the infimum of the radii of continuous calibrated paths reaching $W<0$, where the radius is the largest $\max_j|u_j|$ along the path. A node $q$ with nonzero Newton slope can compensate for the others. Setting $v_q=-\sum_{j\ne q}a_jv_j/a_q$ at the current position gives $dK/dt=0$ throughout the motion. In the box of radius $10^{-113}$, interval evaluation bounds the magnitude of the chosen compensating speed strictly below one and bounds $-dW/dt$ away from zero, long enough to reach a strictly negative reading. For the reverse bound, $W-\lambda(K-1)$ equals $W$ at both calibrated endpoints. Integrating its gradient along the straight segment in the box bounds the displacement required to reach any negative calibrated endpoint.
 
+At the sign-reversal scale, this path also gives the unique minimum in the original displacement box. For each of the four layouts below, take $0<r\le4\times10^{-116}$. Extending the comparison range to $|u_q|\le1.7r$ gives a unique calibrated value of $u_q$ for every choice of $|u_j|\le r$ with $j\ne q$. On this entire calibration graph, the partial derivative $b_j-(b_q/a_q)a_j$ of the vacuum reading has a fixed, nonzero sign. Taking each endpoint $u_j=\pm r$ that lowers the reading therefore selects a unique minimizing corner. As that corner moves with the radius, the compensating speed has magnitude below $0.999$, so the minimizer lies inside the original bound $|u_q|<r$.
+
+Let $S$ be the maximum initial rate of decrease and $\phi(r)$ the minimum vacuum reading in the original box. Differentiating $K=1$ twice along the corner path eliminates the acceleration of the compensating coordinate. With initial velocity $v$ and initial slope ratio $\lambda=b_q(0)/a_q(0)$, the quadratic coefficient in $\phi(r)=c-Sr+Br^2+O(r^3)$ is
+
+$$
+B=\tfrac12 v^{\mathsf T}\bigl(\nabla^2W(0)-\lambda\nabla^2K(0)\bigr)v.
+$$
+
+Applying the same differentiation formula along the path, interval calculations give $|\phi''(r)|<3S$. Thus $\phi$ is positive at radius $(1-10^{-115})c/S$ and negative at $(1+10^{-115})c/S$. The box minimum rules out a sign reversal within the smaller radius, and the corner path realizes one within the larger radius. This relative error bound measures the accuracy of the linear approximation along the exact calibration surface. The decimal intervals in the table also account for numerical uncertainty in the initial layouts. [Hand derivation and interval check of the minimizing path](https://github.com/the-omega-institute/trureturing-books/issues/1843#issuecomment-7238331172)
+
 | Visible spectrum and stationary layout | Interval for $R_*$ | Sufficient radius with two moving nodes |
 | --- | --- | --- |
 | #11661, four nodes | $[2.05401,2.05424]\times10^{-120}$ | $3.500\times10^{-120}$ |
