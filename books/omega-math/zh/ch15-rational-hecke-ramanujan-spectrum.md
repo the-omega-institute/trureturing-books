@@ -82,6 +82,58 @@ $$
 
 :::
 
+单位圆判据把注意力放在谱的位置；要比较真正不同的证明机制，还须问：哪个对象的哪一个估计，迫使谱落到那里？而位置确定以后，谱点的重数仍是另一份信息。
+
+::: {.remark #rem-ch15-independent-rh-routes title="独立 RH 路线的证明义务与重数边界（源码比较、文献结果与手工推导）"}
+**先区分证明的改写与机制的独立。** Alpöge 的 Stepanov 型路线以算术整性约束 theta-lift 的大小。[`lsernau/grh-lean` 的固定紧凑版导读](https://github.com/lsernau/grh-lean/blob/72fead102f663d5c7a407964a13dc0cf9d977207/grh-compact/GUIDE.md)说明，约七万六千行的紧凑版沿用这一方法，不能计为第二条独立证明。其 [主干源码](https://github.com/lsernau/grh-lean/blob/72fead102f663d5c7a407964a13dc0cf9d977207/grh-compact/src/New/Main.lean)用 A「短形式」、B「足够多形式」产生 theta-lift 族的协体积上界，用 C「整形式必须长」给出下界；比较的是同一协体积。消去共同主项后得到 `star_inequality`，再经单侧素数误差界与 Landau 型不消失判据得到 `New.grh`。这是算术大小与整性的冲突，并未构造以 ζ 零点为谱的自伴算子。
+
+以下各行比较独立证明仍须直接完成的数学义务；经典判据及其研究纲领不因与 RH 等价而自动成为另一份完成的证明。
+
+| 路线 | 承担关键估计的对象 | 独立闭合所需的那一步 |
+| --- | --- | --- |
+| Stepanov／theta-lift | 自守形式、整格与 theta-lift 协体积 | A、B 的上界与 C 的下界给出素数误差的幂次节省；上述外部形式化已完成此链 |
+| Masullo 的泛函分析／迹公式草稿 | 阿代尔函数空间、谱投影与全局及局部迹 | 核对全局到 $S$-局部的比较，以及窄谱带外被省略零点的贡献；固定版本仍有未证义务，详见下段 |
+| Weil 正性 | 显式公式的测试函数二次型 | 从素数项、极点项与无穷位项直接证明整个测试类上的正性；仅把谱侧写成正平方和会预先使用零点定位 |
+| Connes | 阿代尔类空间的迹与谱实现 | 完成所需的全局迹比较，核对正则化与测试函数域；局部迹公式不自动完成全局论证 |
+| Nyman／Burnol | Mellin／Fourier 希尔伯特空间中的逼近距离与零点障碍 | 对实际算术函数直接给出趋零的逼近误差上界；有限格拉姆矩阵正定本身不控制这个极限 |
+| de Branges／Hermite–Biehler | 整函数结构函数与再生核 | 为匹配 ζ 的具体结构函数直接建立所需核正性，并核对定义域；不能把 RH 等价的正性条件当作输入 |
+| de Bruijn–Newman | 向后热方程族 $H_t$ 的实零点 | 独立证明 $H_0$ 全部零点为实数，即 $\Lambda\le0$；Rodgers–Tao 的 $\Lambda\ge0$ 控制另一方向 |
+
+**Masullo 路线的具体接口。** Alessandro Maria Masullo，*The Music of the Primes*（[2026 年 11 月 20 日草稿](https://math216.wordpress.com/wp-content/uploads/2026/11/the-music-of-the-primes.pdf)），§12.3、§12.5 与第 13 章，尝试由泛函分析与迹公式走向一般数域的 Hecke GRH。这里的「theta」函数和 Alpöge 的 theta-lift 协体积估计不能仅凭名称等同。`mccorvie/riemann-masullo` 的 [固定版本状态说明](https://github.com/mccorvie/riemann-masullo/blob/ef8ada3cd3b5ce8002f5f2d8bcbc20cec85752d7/README.md#comparator)报告，终端定理仍依赖未证的 `traceFormula_exteriorZeros`；其 [§12.5 源码](https://github.com/mccorvie/riemann-masullo/blob/ef8ada3cd3b5ce8002f5f2d8bcbc20cec85752d7/RiemannMasullo/Ch12_TraceGeometric/Sec5.lean)明确保留了该缺口：对每个正带宽与合格测试函数，带外零点项之和须为零，带边界上的零点也计入带外。这一归属是对所链版本的源码与状态说明的引用，不是本书重放或对所有可能修补的否定。特别是，一个没有局部 `sorry` 的终端文件仍可能在依赖闭包中使用未证声明。
+
+**其余路线的来源与身份。** Connes，*Trace formula in noncommutative geometry and the zeros of the Riemann zeta function*（1999，[arXiv:math/9811068v1](https://arxiv.org/abs/math/9811068v1)），把临界零点解释为吸收谱，可能的非临界零点解释为共振；这比「找到了一个谱」更精确。Burnol，*A lower bound in an approximation problem involving the zeros of the Riemann zeta function*（2002，[arXiv:math/0103058v2](https://arxiv.org/abs/math/0103058v2)）给出逼近障碍；Báez-Duarte，*A strengthening of the Nyman–Beurling criterion for the Riemann Hypothesis*（2003，[arXiv:math/0202141v2](https://arxiv.org/abs/math/0202141v2)，Theorem 1.1）给出自然数伸缩的闭包判据。这些是文献结果，不是这里新增的独立 RH 证明。de Branges 核、Weil 型零点二次型与热流的具体判据及来源见姊妹卷 [§31.3](https://github.com/the-omega-institute/trureturing-books/blob/main/books/quantum-geometry/zh/ch34-s31-arc-calculus-riemann-and-hermite-biehler.md)；其中 Conrey–Li 对额外正性条件的分析提醒我们核对具体条件（[arXiv:math/9812166v1](https://arxiv.org/abs/math/9812166v1)），Rodgers–Tao 的下界见 *The de Bruijn–Newman constant is non-negative*（2020，§1，[10.1017/fmp.2020.6](https://doi.org/10.1017/fmp.2020.6)）。上述外部源码与文献均不由本注记获得本书的冻结验证徽章。
+
+**位置与重数的分离可以手算。** 取单位圆上的同一个点两次，$u_1=u_2=u$，则对每个 $N\ge0$，
+
+$$
+\begin{aligned}
+p_k&=2u^k,\\
+T_N&=[2u^{a-b}]_{0\le a,b\le N}=2vv^*,\\
+v&=(1,u,\ldots,u^N)^{\mathsf T}.
+\end{aligned}
+$$
+
+所以 $x^*T_Nx=2|v^*x|^2\ge0$；[@thm-ch15-toeplitz-circle] 的定位判据完全允许重复节点。类似地，对实数 $\gamma$ 取自伴矩阵 $A=\gamma I_2$，在 $z\ne\gamma$ 时，
+
+$$
+\begin{aligned}
+\det(zI_2-A)&=(z-\gamma)^2,\\
+(zI_2-A)^{-1}&=\frac{I_2}{z-\gamma},\\
+\operatorname{Tr}(zI_2-A)^{-1}&=\frac{2}{z-\gamma}.
+\end{aligned}
+$$
+
+预解式只有一阶极点，而留数投影的秩为 $2$；其迹的留数也为 $2$。因此「预解式的极点是一阶」不能替代「特征值单重」。对正整数 $m$，局部解析分解 $f(s)=(s-\rho)^m g(s)$、$g(\rho)\ne0$ 给出 $f'/f=m/(s-\rho)+g'/g$，故 $(s-\rho)f'(s)/f(s)\to m$，这才是记录重数的标量读数。以上均为手工代数或局部解析推导，未在本注记形式化。
+
+这也指出从谱路线走向单重性所需的新输入：先有**保留重数的**算术零点与谱的对应，再有排除多维特征空间的条件。例如有限维自伴算子若有循环向量 $b$，即 $b,Ab,A^2b,\ldots$ 张成全空间，则在任一特征空间 $E_\gamma$ 上，这些向量的投影都是 $\gamma^kP_\gamma b$，只能张成至多一维；于是 $\dim E_\gamma=1$。构造这样的算术对应与循环性仍须证明。这个有限维推导没有构造 ζ 的谱算子。
+:::
+
+::: {.problem #prob-ch15-post-grh-simplicity title="临界线定位之后：非平凡零点是否全部单重？"}
+对每个满足 $0<\operatorname{Re}\rho<1$ 与 $\zeta(\rho)=0$ 的 $\rho$，证明 $\zeta'(\rho)\ne0$，即 $m(\rho)=1$。经典 RH 与狄利克雷 GRH 确定零点位置，尚未解决这个问题；上面的正性与自伴性算例说明，单靠这两种抽象性质不能排除重数。
+:::
+
+跨越函数族的推广也须区分已覆盖的特例与一般前沿。对有限阿贝尔扩张 $K/\mathbb Q$，经典分解 $\zeta_K(s)=\prod_\chi L(s,\chi)$（$\chi$ 遍历 $\operatorname{Gal}(K/\mathbb Q)$ 的各特征所对应的本原狄利克雷特征）已把临界带零点定位归于狄利克雷 GRH（文献结果，见 L. C. Washington，*Introduction to Cyclotomic Fields*，第 2 版，第 4 章，1997，[10.1007/978-1-4612-1934-7](https://doi.org/10.1007/978-1-4612-1934-7)）；不能把这类戴德金函数重新列为未解。仍开放的是一般数域的戴德金 GRH、一般酉归一化 Hecke $L$ 函数的 GRH（包括虚二次域上不归于狄利克雷族的特征），以及一般 $\mathrm{GL}_2$ 自守 $L$ 函数的 GRH。高维 Artin $L$ 函数还须分别处理全纯性与零点定位。它们既未由上述狄利克雷终端声明覆盖，也不由本章有限 Hecke 壳层的拉马努金界推出。
+
 ## 15.3 普适模方 5 本征值恒等式的完整初等代数证明
 
 现在把抽象判据拉回最透明、最可触摸的纯整数算术现场。在三维旋转群的基础自旋 $j = 1$ 壳层 $V_1$（对应[第十章](ch10-peter-weyl-rational-spin-shells.md)的切比雪夫球面特征标）中，相对基准态 $\mathbf{o} = (1, 0, 0, 0)$ 的齐次射线保真度为
