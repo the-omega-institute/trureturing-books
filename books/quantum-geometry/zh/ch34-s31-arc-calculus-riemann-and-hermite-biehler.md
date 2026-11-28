@@ -529,7 +529,7 @@ $$
 第 1 款：$\theta=1$ 时，两边在 $\operatorname{Re}s>0$、$s\ne1$ 上都解析，在 $\operatorname{Re}s>1$ 上逐段计算相等，再由解析延拓的唯一性得到整个区域上的等式；一般的 $\theta$ 由伸缩代换化归到 $\theta=1$。第 2 款是同一类积分的闭式计算。第 3 款是有限维子空间上的正交投影公式：投影等于综合映射、格拉姆矩阵的广义逆与其伴随的复合，不需要假设 $G_N$ 可逆。第 4 款构造一个有界线性泛函 $J(f)=\int_0^1f(x)x^{\rho-1}dx+\frac1{1-\rho}\int_1^\infty f(x)x^{-1}dx$（取共轭约定后由内积给出）。$x>1$ 时 $\rho_k(x)=1/(kx)$，再用第 1 款（$\theta=1/k$）与 $\zeta(\rho)=0$，得 $J(\rho_k)=0$，所以 $J$ 在每个 $V_N$ 上为零；$J(\chi)=1/\rho$；$\lVert J\rVert^2=\int_0^1x^{2\operatorname{Re}\rho-2}dx+\lvert1-\rho\rvert^{-2}\int_1^\infty x^{-2}dx=\frac1{2\operatorname{Re}\rho-1}+\frac1{\lvert\rho-1\rvert^2}$。于是 $d_N\ge\lvert J(\chi)\rvert/\lVert J\rVert$。最后用 $\lvert\rho-1\rvert^2+2\operatorname{Re}\rho-1=\lvert\rho\rvert^2$ 与 $r^2=\lvert\rho-1\rvert^2/\lvert\rho\rvert^2$，把下界改写为 $r^2(1-r^2)$；这条正值恒等链也由所引声明给出。完整证明由 Lean 内核检查。
 :::
 
-::: {.remark #rem-ch34-nyman-beurling-remainder title="Nyman–Beurling 距离的有限尺寸事实：余项永不为零，离线零点的下界看不见（手工推导，依赖文献结果与冻结结论）"}
+::: {.remark #rem-ch34-nyman-beurling-remainder title="Nyman–Beurling 距离的有限尺寸事实：非零余项与凯莱环带排零门槛（手工推导，依赖文献结果与冻结结论）"}
 **手工推导**，依赖文献结果（未在本书形式化）：梅林—普朗歇尔公式 $\int_0^\infty\lvert f\rvert^2dx=\frac1{2\pi}\int_{\mathbb R}\lvert\mathcal Mf(\tfrac12+it)\rvert^2dt$。记号同 [@prop-ch34-nyman-beurling-frozen-facts]。Báez-Duarte 的判据（见 [@rem-ch34-arithmetic-pivot-literature]）说：[@conj-riemann-hypothesis] 等价于 $d_N\to0$；第 31.2 节记 $d_N^2=1-c^{\top}G_N^{-1}c$，即上面第 3 款。
 
 1. **梅林一侧。** 对狄利克雷多项式 $A(s)=\sum_{k\le N}a_kk^{-s}$，
@@ -539,6 +539,25 @@ $$
    并且 $\langle\rho_j,\rho_k\rangle=(jk)^{-1/2}\frac1{2\pi}\int_{\mathbb R}w(t)(k/j)^{it}dt$，$w(t)=\lvert\zeta(\frac12+it)\rvert^2/(\frac14+t^2)$：除去两侧的对角因子 $\operatorname{diag}(k^{-1/2})$，$G_N$ 是以 $w\ge0$ 为符号、在点 $\log k$ 处取样的托普利茨形式。
 2. **余项永不为零。** $\rho_1,\dots,\rho_N$ 线性无关，$G_N$ 正定；对每个 $N$ 都有 $d_N>0$。
 3. **每一步的减量。** 作楚列斯基分解 $G_N=LL^{\top}$，令 $y=L^{-1}c$，则 $d_N^2=1-\sum_{k\le N}y_k^2$，$d_{N-1}^2-d_N^2=y_N^2=\langle\chi,e_N\rangle^2$，其中 $e_N$ 是 $\rho_N$ 在 $V_{N-1}$ 的正交补中的分量的单位方向，主元 $L_{NN}^2=\det G_N/\det G_{N-1}>0$ 是 $\rho_N$ 到 $V_{N-1}$ 的距离的平方。所以 $d_N$ 不增；它在第 $N$ 步严格下降当且仅当 $\langle\chi,e_N\rangle\ne0$，本书没有这一点的一般证明。
+4. **把有限误差读成排零区域。** 非零余项仍能排除一整片零点位置。固定 $N\ge0$ 与实数 $0<a\le\tfrac12$；若已严格认证
+
+   $$
+   d_N^2\le U<a(1-a),
+   $$
+
+   则不存在满足 $\zeta(\rho)=0$、$\tfrac12<\operatorname{Re}\rho<1$ 且
+
+   $$
+   a\le\left\lvert\frac{\rho-1}{\rho}\right\rvert^2\le1-a
+   $$
+
+   的零点。这是 [@prop-ch34-nyman-beurling-frozen-facts] 第 4 款的**手工推论**：记 $x=\lvert(\rho-1)/\rho\rvert^2$，由 $\lvert\rho-1\rvert^2+2\operatorname{Re}\rho-1=\lvert\rho\rvert^2$，其下界等于 $x(1-x)$；而
+
+   $$
+   x(1-x)-a(1-a)=(x-a)(1-a-x)\ge0
+   $$
+
+   将给出 $a(1-a)\le d_N^2\le U<a(1-a)$，矛盾。实际认证只需选定任意有限系数 $b_k$，严格包住 $\lVert\chi-\sum_{k\le N}b_k\rho_k\rVert^2\le U$，因为距离平方不大于这个试探误差；无需先求精确最优投影。例如 $a=\tfrac14$ 时，门槛为 $U<\tfrac3{16}$，排除的是凯莱坐标中的闭环带 $\tfrac12\le\lvert(\rho-1)/\rho\rvert\le\tfrac{\sqrt3}{2}$。仅凭这道下界，门槛不能改成 $U\le a(1-a)$：在 $x=a$ 或 $x=1-a$ 处恰好取等号。当 $\operatorname{Re}\rho\downarrow\tfrac12$ 或 $\lvert\operatorname{Im}\rho\rvert\to\infty$ 时，$x\to1$，下界可趋于零；因此这个有限区域证书本身不给出覆盖整个右半带的统一误差门槛，也不提供达到给定门槛所需的 $N$。
 
 **证明。** 第 1 款：由 [@prop-ch34-nyman-beurling-frozen-facts] 第 1 款（$\theta=1/k$）加上 $\int_1^\infty\frac{1}{kx}x^{s-1}dx=-\frac{1}{k(s-1)}$，得 $\int_0^\infty\rho_k(x)x^{s-1}dx=-k^{-s}\zeta(s)/s$（$0<\operatorname{Re}s<1$），又 $\int_0^1x^{s-1}dx=1/s$；对 $f=\chi-\sum_kc'_k\rho_k$ 在 $\operatorname{Re}s=\frac12$ 上用梅林—普朗歇尔公式，$\mathcal Mf=(1-\zeta A)/s$，$a_k=-c'_k$，$\lvert s\rvert^2=\frac14+t^2$。格拉姆矩阵元的公式是同一计算。第 2 款：若 $\sum_kc_k\rho_k=0$，则 $\zeta(s)\sum_kc_kk^{-s}=0$ 在临界线上几乎处处成立；$\zeta$ 在线上的零点孤立，所以这个狄利克雷多项式在线上恒为零，它是整函数，于是恒为零，令 $\operatorname{Re}s\to+\infty$ 逐个得 $c_k=0$。$V_N$ 有限维，故是闭的；$d_N=0$ 将给出 $\chi\in V_N$，即 $\zeta A=1$ 在临界线上几乎处处成立，由唯一性在 $\mathbb C\setminus\{1\}$ 上成立，但 $\zeta(-2)=0$ 而 $A(-2)$ 有限，矛盾。第 3 款是格拉姆—施密特正交化：$\chi$ 在 $V_N$ 上的投影等于它在 $V_{N-1}$ 上的投影加上 $\langle\chi,e_N\rangle e_N$。$\square$
 
