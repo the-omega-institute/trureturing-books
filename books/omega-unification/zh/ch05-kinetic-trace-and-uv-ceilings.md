@@ -290,13 +290,15 @@ $$
 
 若两项都是整数，就在 $y=\varepsilon$ 放 $n$ 份，在 $y=y^\dagger$ 放 $k$ 份。只要 $0<\varepsilon<e^{-2\tau}$，两层就恰好用完预算。第一热迹欠下的 $\delta=n(1-e^{-\varepsilon})$ 可由一份 $y=-\log\delta\ge1$ 的阈上状态补足，暴露仍为原值。令 $\varepsilon\downarrow0$ 即得实权锐界的极限。由于 $\lambda>0$ 且终端切线的另一处接触在 $y=0$，正质量谱无法取等。[完整推导与复算](https://github.com/the-omega-institute/trureturing-books/issues/1911#issuecomment-7238689688)
 
-**预算进一步缩减时的三头换出（手工推导与向外区间核证，ARGUED）。** 固定临界截顶 $\tau=\tau_0(u)$、$N\ge2$、$1.405\le u\le1.408$，取 $0.40\le\varepsilon\le0.55$。令 $a=w_1$、$m=W(\tau-\varepsilon)$、$c=W((2\tau-\varepsilon)/3)$。任意有限正质量整数谱的第二热迹上确界为
+**预算进一步缩减时的三头换出（手工推导与向外区间核证，ARGUED）。** 固定临界截顶 $\tau=\tau_0(u)$、整数 $N\ge2$ 与 $1.405\le u\le1.408$。第一热迹取 $S=N+e^{-1}$，总暴露至多为 $B=N\tau-\varepsilon$。在 $0.40\le\varepsilon\le0.55$，令 $a=w_1$、$m=W(\tau-\varepsilon)$、$c=W((2\tau-\varepsilon)/3)$。任意有限正质量整数谱的第二热迹上确界为
 
 $$
-N-2+\max\{3c^u+(2+a-3c)^u,\ 1+m^u+a^u+(1-m)^u\}.
+N-2+\max\!\left(3c^u+(2+a-3c)^u,\ 1+m^u+a^u+(1-m)^u\right).
 $$
 
 缺口增大时先由三等头谱占优，再切换到把全部剩余暴露分给一份未截顶权的谱。唯一换序缺口随 $u$ 严格增大，从 $u=1.405$ 时的约 $0.5438148735994816$ 移至 $u=1.408$ 时的约 $0.5452575394927968$。当 $N=2$ 且三等头谱占优或打平，三份 $c$ 加一份零暴露余权是唯一取等谱，允许排列。其余情形由正质量谱逼近上确界。已有截顶权的严格归约与尾权前缀证书一起排除其他谱形。 [全谱证明与换序证书](https://github.com/the-omega-institute/trureturing-books/issues/2492#issuecomment-7243397443)
+
+在 $0.55\le\varepsilon\le0.84$，同一指数范围和任意整数 $N\ge2$ 的锐上确界延续为单份正暴露端 $N-1+m^u+a^u+(1-m)^u$。去掉极限单位热权后，剩余暴露低至约 $0.395$ 仍可把预算集中到最大未截顶权。三等头和其余未截顶谱由严格前缀比较排除。因此这个窗口内的锐界均由有限正质量谱逼近。 [至缺口 0.84 的全谱证明](https://github.com/the-omega-institute/trureturing-books/issues/2517#issuecomment-7243655777)
 
 在前面的 $u=8$、$\tau=4$、$b=3.9$ 算例中，若 $S=1$，则 $B=3.9<\tau$，每份重数的第一热权至多为 $M=\exp(-e^{-2B})$。因 $M>1/2$，把第一热权集中成 $M$ 和 $1-M$ 两份，由凸性可使第二热迹最大。第一份恰用暴露 $B$，第二份位于阈上，故该谱可行。数值复算（`NUM`）给出整数最大值约为 $0.996727$，与实权锐界相差约 $0.001992$。
 
