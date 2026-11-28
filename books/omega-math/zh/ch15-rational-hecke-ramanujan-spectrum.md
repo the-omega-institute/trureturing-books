@@ -59,12 +59,27 @@ $$
 由主子式判据，$T_1(u) \succeq 0$ 当且仅当 $\det T_1(u) = 4 - \frac{\widehat{\lambda}^2}{p} = \frac{4p - \widehat{\lambda}^2}{p} \ge 0$，恰与有理不等式 **$4p - \widehat{\lambda}^2 \ge 0$** 丝毫不差等价！
 
 ::: {.remark #rem-ch15-rh-epistemology title="认识论边界：四元赫克—拉马努金界与经典黎曼猜想及高阶自守谱的严格区分"}
-本节必须以最高学术诚实度划清四类不同数学陈述的归属边界，**绝不宣称经典黎曼猜想（RH）或广义黎曼猜想（GRH）已由本卷的有理赫克正定判据解决，或已在所钉 `trureturing` / `OmegaMath` 内核中获 Lean 形式化证明**：
+经典 RH 与全体狄利克雷 $L$ 函数的 GRH 在本书中作为**外部已核验形式化事实**使用：Levent Alpöge 的终端声明见[固定版本的 `Main.lean`](https://github.com/the-omega-institute/riemann-hypothesis/blob/b14f2bd19e5e12a4ba6b1d207e3c5fbb06e49ed6/src/Main.lean)，五条终端定理的标准公理闭包见[独立核验记录](https://math.mit.edu/~drew/grh/audit.log)。这项外部成果与本卷的有理赫克判据须分别归属；它不等于在零公理 `OmegaMath` 内部重构了解析谱理论。以下四类陈述各有自己的证据边界：
 
 1. **内核冻结锚点**：经典层 [@thm-ch15-toeplitz-circle] 严格证明了有限反演闭合复族的托普利茨半正定性与单位圆定位等价（抽象判据桥，而非具体 $L$ 函数零点位置的证明）；使用 `OmegaInit` 与 `OmegaMath` 的严格端 D5 结果（`strict_omega.axioms: []`）中，[@thm-ch15-hecke-t5-chi1-eigenvalue] 与 [@thm-ch15-hecke-t5-ramanujan-margin] 对**一切**非零整四元数 $\mathbf{q} \in \mathbb{Z}^4 \setminus \{0\}$ 无公理锁死了模方 $5$ 自旋 $1$ 特征标本征值 $-\frac{2}{5}$ 与严格正定裕度 $\frac{496}{25} > 0$，而 [@thm-ch15-lps-hecke-trace-formula]、[@thm-ch15-lps-hecke-traces]、[@thm-ch15-lps-ramanujan-margins] 与 [@thm-ch15-lps-degree-four-eigenbasis] 进一步无公理锁死了各整数自旋的标量特征标递推及其前六项有理值、$d = 1, 2, 3, 4$（自旋 $j = \frac{1}{2}, 1, \frac{3}{2}, 2$）四层低自旋对称幂整数矩阵与正定裕度以及四次对称幂壳层的完整五条整数本征基。
 2. **规范 LPS 构造的全谱界（文献结果，未在本书形式化）。** 对 $p\equiv1\pmod4$ 的规范集 $S_p$，Lubotzky、Phillips 与 Sarnak 证明了 $\mathrm{SO}(3)$ 的非常值谐波上的界 $|\widehat\lambda|\le2\sqrt p$（*Comm. Pure Appl. Math.* **40**, 401–420, 1987）。他们构造的有限凯莱图 $X^{p,q}$ 的非平凡邻接谱满足同一界，双分情形须去掉 $\pm(p+1)$（*Combinatorica* **8**, 261–277, 1988）。下文 $V_3,\dots,V_6$ 的逐壳计算与 $X^{5,13}$ 的有限移位核验使用精确算术。
 3. **结构内化诠释（`MODEL`）**：将 $4p\,\langle f, f\rangle_{\mathrm{Haar}} - \langle \widehat{T}_p f, \widehat{T}_p f\rangle_{\mathrm{Haar}} \ge 0$（配合 [@thm-ch15-toeplitz-circle] 的 $2 \times 2$ 佐武桥接）读作临界谱最优性在无复数、无对数有理球面 $\mathbb{T}_3(\mathbb{Q})$ 上的纯代数内化形态，属本书的统一框架建构，它**并不逻辑蕴含**经典黎曼 $\zeta(s)$ 或一般狄利克雷 $L$ 函数的零点定理。
 4. **严格保持开放的前沿问题（`OPEN`）**：一般非全纯马斯（Maass）波形与高秩群 $\mathrm{GL}_n$（$n \ge 3$）自守表示的拉马努金—彼得松猜想、一般代数数域戴德金 $\zeta_K$ 函数的扩展黎曼猜想（ERH）、高阶自守 $L$ 函数的全广义黎曼猜想（Grand RH），以及在零公理 `OmegaMath` 内部不依赖经典实复分析而独立重构 $\zeta(s)$ 谱理论的纲领，在本书中全部严格标为 **`OPEN`**。
+
+**同一半径，两种有限读数（手工代数推导）。** 姊妹卷的 [Nyman–Beurling 距离与 Li 曲率比较](https://github.com/the-omega-institute/trureturing-books/blob/main/books/quantum-geometry/zh/ch34-s31-arc-calculus-riemann-and-hermite-biehler.md) 使用 Cayley 坐标 $z(s)=1-1/s$：若有右半带非平凡零点 $\rho$，则 $r=|z(\rho)|\in(0,1)$ 给出所有有限 Nyman 距离的统一下界 $d_N^2\ge r^2(1-r^2)>0$；同一假设又迫使某个有限阶的典范 Li 曲率托普利茨矩阵不半正定。前者检验逼近余项能否趋零，后者检验矩阵的符号。
+
+取有理半径 $r=3/5$，则正多项式与反演闭合族 $(r,r^{-1})$ 的二阶矩阵可同时手算：
+
+$$
+\begin{aligned}
+r^2(1-r^2)&=\frac{144}{625}>0,\\
+T_1(r,r^{-1})&=\begin{pmatrix}2&34/15\\34/15&2\end{pmatrix},
+\qquad \det T_1=-\frac{256}{225}<0.
+\end{aligned}
+$$
+
+矩阵一侧正是 [@thm-ch15-toeplitz-circle] 在两个互异实节点上的特例；正数 $144/625$ 只是距离下界多项式的有理读数，不是某个实际 $d_N^2$。这一算例没有构造 $\zeta$ 零点，也没有把全体零点的无穷解析问题化成一个二阶矩阵。它说明有理算术可以保留桥梁的代数形状；从有限证书到全局解析对象的传递仍须单独证明。
+
 :::
 
 ## 15.3 普适模方 5 本征值恒等式的完整初等代数证明
