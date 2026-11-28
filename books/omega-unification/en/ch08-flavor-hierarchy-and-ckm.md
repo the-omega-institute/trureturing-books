@@ -374,7 +374,15 @@ D_{\mathrm{plane}}-D_*&=\frac{\sqrt6\,\varepsilon^5}{2\sqrt q}
 \end{aligned}
 $$
 
-The fifth-order coefficient vanishes exactly when $\kappa\le-8\mu^2q$ and $\lambda C=-\kappa S/(2\mu)$. The latter condition balances the linear variations in the two sectors, while the former controls the quadratic cost of tilting. At the threshold $\kappa=-8\mu^2q$ with the linear variations balanced, both zero tilt and $Z=2\mu S$ minimize $f$. [Matching bounds over complex bases, equality conditions, and matrix calculation](https://github.com/the-omega-institute/trureturing-books/issues/2095#issuecomment-7239878715)
+The fifth-order coefficient vanishes exactly when $\kappa\le-8\mu^2q$ and $\lambda C=-\kappa S/(2\mu)$. The latter condition balances the linear variations in the two sectors, while the former controls the quadratic cost of tilting. At the threshold $\kappa=-8\mu^2q$ with the linear variations balanced, both zero tilt and the reflected tilt $Z=2\mu S$ minimize $f$. [Matching bounds and equality conditions for the fifth-order formula](https://github.com/the-omega-institute/trureturing-books/issues/2095#issuecomment-7239878715)
+
+The two branches require the same leading in-plane angle. Keeping the down-type light diagonal entry $w=|S|^2/v$ along the normal in the heavy–light gap shows that the reflected branch needs a smaller angle at the next order. The quadratic variation at each minimum is positive definite, so optimizing the complex basis further shifts $Z$ by $O(\varepsilon)$. This shift changes the squared cost one order beyond the difference between the branches. The reflected branch therefore gives the minimum over complex bases, with the following expansion uniform under the stated parameter bounds.
+
+$$
+D_{\mathrm{plane}}-D_*=8\sqrt6\,\mu^2\sqrt q\,w|S|^2\,\varepsilon^6+O(\varepsilon^7).
+$$
+
+The sixth-order coefficient is strictly positive. At the exact threshold, fixing the top–bottom plane still overestimates the minimum defect even though the fifth-order coefficient vanishes. [Cost expansions for both branches, lower bound over complex bases, and matrix calculation](https://github.com/the-omega-institute/trureturing-books/issues/2126#issuecomment-7240142503)
 
 When the angle and the two mass bases stay fixed, how quickly does the minimum defect approach $F$ as the middle mass-squared eigenvalues tend to zero? Let $D_*$ be the minimum defect of the fixed pair over all rotation eigenbases. Set the two normalized middle mass-squared eigenvalues to $a\varepsilon,b\varepsilon$, with $a,b>0$, and fix $0<\theta<\pi/2$. Write $\lambda_u=|V_{ub}|^2/\sin^2\theta$ and $\lambda_d=|V_{td}|^2/\sin^2\theta$ for the squared projection lengths of the lightest up- and down-type mass lines onto the top–bottom plane. A direct derivation gives
 
