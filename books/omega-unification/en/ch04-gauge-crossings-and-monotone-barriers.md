@@ -134,7 +134,7 @@ What happens if we demand maximum minimalism—sticking to the native 12 gauge g
 | Native 12 generators + high modes | No extra vectors, shared stiffness & ruler, 18 high modes | One-loop spread $> 2.936$ ($P_* < -8.894$) | All independent edge phases, $10^{13}\text{–}10^{17}\;\mathrm{GeV}$ |
 | 0/1/2-step positive face weights | Nonnegative mixtures of shell-determinant face weights | $\alpha_s(M_Z) < 0.076$, short by $> 4.6833$ | All internal phases, all positive zeros & EW box |
 | All-phase shared monotone mass | Three-generation spectrum, any common nondecreasing $m = f(h)$ | Spread $> 0.7048$ (sharp), $> 0.2426$ (smooth) | Entire dual-clock torus (every positive zero) |
-| 18-layer monotone log slope | Zero #11431, 18 heavy layers with common monotone $m(\lambda)$ | Minimal log slope $K_{\min} = 106.75467$ (convex span $>142.00327$ sharp, $>82.58089$ finite-momentum) | $10^{13}\text{–}10^{17}\;\mathrm{GeV}$ |
+| 18-layer monotone log slope | Zero #11431, 18 heavy layers with common monotone $m(\lambda)$ | Minimal log slope $K_{\min} = 106.75467$ (convex span $>142.00327$ at sharp thresholds, $>82.58089$ finite-momentum) | $10^{13}\text{–}10^{17}\;\mathrm{GeV}$ |
 | Direct Planck normalization | Mass unit $\kappa$ or heaviest mode fixed at $M_P$ or $\bar{M}_P$ | Spread $> 2.037$ (sharp), $> 3.334$ (smooth) | Entire dual-clock torus, all positive zeros |
 
 Together, these four walls draw an unmistakable map: **monotone ordering + direct Planck normalization + center-blind masses is mathematically closed**. Opening a physical crossing near $\alpha_s(M_Z) \approx 0.118$ requires turning at least one structural key—breaking monotone uniformity via weak-center parity, or normalizing the non-monotone two-step operator as a positive contraction.
