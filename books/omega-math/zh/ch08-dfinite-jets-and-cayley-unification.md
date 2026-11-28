@@ -164,7 +164,15 @@ $$
 再证凯莱—三角大一统。令内层流为 $g := 2\,\mathrm{Atan}$，其各项有限且常数项 $g_0 \equiv 0$；由 [@thm-ch08-dfinite-calculus-laws] 的反正切微分方程乘以 $2$ 得 $(1 + \eta^2)\cdot Dg \equiv 2$。对任意系数有限的外层流 $f$ 应用前述链式法则并与 $1 + \eta^2$ 相乘，立得 $(1 + \eta^2)\cdot D(\mathrm{compose}\;f\;g) \equiv 2\cdot\mathrm{compose}\;(Df)\;g$。分别取 $f = \mathrm{Cos}$ 与 $f = \mathrm{Sin}$，代入 $D(\mathrm{Cos}) \equiv -\mathrm{Sin}$、$D(\mathrm{Sin}) \equiv \mathrm{Cos}$ 以及常数项 $(\mathrm{compose}\;\mathrm{Cos}\;g)_0 \equiv 1$、$(\mathrm{compose}\;\mathrm{Sin}\;g)_0 \equiv 0$，恰满足 [@thm-ch08-cayley-ode-uniqueness] 所需的全部初值与耦合微分方程假设；调用唯一性定理 `cayley_unique_at` 即对任意 $N \in \mathbb{N}$ 同时证毕两式。完整证明由 Lean 内核检查。
 :::
 
-这一零公理恒等式在 $J_N(\mathbb{Q})$ 中写作 $\mathrm{Cos}_N\bigl(2\,\mathrm{Atan}_N(\eta)\bigr) \equiv \frac{1 - \eta^2}{1 + \eta^2} \pmod{\eta^{N+1}}$ 与 $\mathrm{Sin}_N\bigl(2\,\mathrm{Atan}_N(\eta)\bigr) \equiv \frac{2\eta}{1 + \eta^2} \pmod{\eta^{N+1}}$，彻底颠倒了传统认知：**不是有理凯莱映射在“近似”超越三角函数，而是无穷级数三角函数在绕了一大圈之后，不过是在低效地重新展开本就一步闭式的有理凯莱分数！** 下面的数值对账将这种反差展现得淋漓尽致。
+这一零公理恒等式在 $J_N(\mathbb{Q})$ 中写作 $\mathrm{Cos}_N\bigl(2\,\mathrm{Atan}_N(\eta)\bigr) \equiv \frac{1 - \eta^2}{1 + \eta^2} \pmod{\eta^{N+1}}$ 与 $\mathrm{Sin}_N\bigl(2\,\mathrm{Atan}_N(\eta)\bigr) \equiv \frac{2\eta}{1 + \eta^2} \pmod{\eta^{N+1}}$，彻底颠倒了传统认知：**不是有理凯莱映射在“近似”超越三角函数，而是无穷级数三角函数在绕了一大圈之后，不过是在低效地重新展开本就一步闭式的有理凯莱分数！** 下面的算例展示了求值后的坐标误差。
+
+::: {.example #ex-ch08-cayley-first-product-tolerance title="两步凯莱乘积的最小坐标误差"}
+取 $t=2/5$，精确凯莱步为 $P=(21+20i)/29$。三阶规范截断的最大坐标误差是 $32/725$。以此为每一步的容差，并要求两个有理复数因子各自的最小公分母至多为 $28$。这里的最小公分母是能同时消去两坐标分母的最小正整数。
+
+相对于目标 $P^2=(41+840i)/841$，乘积的最小最大坐标误差是 $1/841$。唯一达到此值的无序因子对是 $z=(5+5i)/7$ 与 $w=(11+10i)/15$。乘积为 $1/21+i$，有号坐标误差为 $(-20/17661,1/841)$，模长平方偏差 $\bigl\lvert\lvert zw\rvert^2-1\bigr\rvert$ 为 $1/441$。
+
+可用整数验算端点。把因子写成 $(a+bi)/d$，其中 $1\le d\le28$、$\gcd(a,b,d)=1$，并令 $493d\le725a\le557d$、$468d\le725b\le532d$。用分母 $D=df$ 写两因子的乘积为 $(X+Yi)/D$。若虚部误差至多为 $1/841$，则 $0\le D-Y\le2D/841<2$，因为 $D\le784$。51 个因子组成的无序对中，有 29 对满足 $D-Y=0$，另有 15 对满足 $D-Y=1$ 且 $2D\ge841$。其中只有上述因子对还满足实部条件 $\lvert841X-41D\rvert\le D$。它的虚部误差恰为 $1/841$，故任何更小的容差都无法达到。[精确算术复算](https://github.com/the-omega-institute/trureturing-books/issues/1964#issuecomment-7243255979)
+:::
 
 ::: {.example #ex-ch08-cayley-half-truncation title="有理点 $\eta = 1/2$ 映射到 $(3/5, 4/5)$ 的五档截断误差表"}
 取 $\eta = \frac{1}{2}$。未截断的零公理有理凯莱映射（[@thm-ch08-cayley-circle-unit]，取 $p = 1, q = 2$）仅需两次乘法即一步命中精确毕达哥拉斯有理点 $\bigl(\frac{3}{5}, \frac{4}{5}\bigr)$，误差恒为 $0/1$。若改将 $J_N(\mathbb{Q})$ 中次数至多 $N$ 的规范多项式代表元 $U_N(\eta)$、$V_N(\eta)$ 在非零点 $\eta = \frac{1}{2}$ 处求值（注意非零点求值不下沉至商环），则截断余项在 $N = 2, 4, 6, 8, 12$ 处呈现精确的等比交错分数（手工推导）：
