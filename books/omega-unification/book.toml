@@ -45,3 +45,5 @@ embed_fonts = false
 "coda.md" = "Coda"
 "appendix-a.md" = "A"
 "appendix-b.md" = "B"
+"appendix-c.md" = "C"
+"appendix-d.md" = "D"
