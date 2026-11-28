@@ -25,13 +25,13 @@ $$
 若进一步抹去 $\mathbf{A}$ 与 $\mathbf{B}$ 之间的先后偏袒，记原初单位态对为 $(\mathbf{V}_0, \mathbf{V}_1)$、夹角内积为 $c_0 = \mathbf{V}_0\cdot\mathbf{V}_1 = \cos\epsilon \in (-\frac{1}{2}, 1)$，并取平面内单位角平分对称轴 $\mathbf{S}_{01} = \frac{\mathbf{V}_0 + \mathbf{V}_1}{\sqrt{2(1+c_0)}}$ 与所选三维定向下的霍奇对偶单位法向 $\mathbf{A}_{01} = \frac{\star(\mathbf{V}_0\wedge\mathbf{V}_1)}{\sqrt{1-c_0^2}}$，则沿正交分解 $\mathbf{V}_2 = \alpha\mathbf{S}_{01} + \beta\mathbf{A}_{01}$（$\alpha^2 + \beta^2 = 1$）取 $\alpha = \frac{\sqrt{2}\,c_0}{\sqrt{1+c_0}}$、$\beta = \sqrt{\frac{(1-c_0)(1+2c_0)}{1+c_0}} > 0$，新生的单位投影态 $\mathbf{V}_2$ 与 $\mathbf{V}_0, \mathbf{V}_1$ 便结成三边内积全等于 $c_0$ 的**等边极小三角弧面体**：其三元格拉姆行列式恒为 $\det G_3 = (1-c_0)^2(1+2c_0) > 0$，球面帽吉拉尔角超精确等于 $\Omega_0 = 3\arccos\bigl(\frac{c_0}{1+c_0}\bigr) - \pi > 0$！
 
 ::: {.viz src="triadic-nameless-sandbox" preset="bootstrap-core" height="520"}
-**沿霍奇法向构造等边球面三面角。** 在选定的三维定向下，模型取角平分线 $\mathbf{S}_{01}$ 与单位法向 $\mathbf{A}_{01}$，构造 $\mathbf{V}_2 = \alpha\mathbf{S}_{01} + \beta\mathbf{A}_{01}$。条件 $\alpha^2 + \beta^2 = 1$ 给出单位长度，正的法向分量 $\beta$ 使第三顶点离开原平面。图中三边的内积均为 $c_0$，因此 $\det G_3 = (1-c_0)^2(1+2c_0) > 0$，品红色球面区域的角超为 $\Omega_0 = 3\arccos\bigl(\frac{c_0}{1+c_0}\bigr) - \pi$。
+**沿霍奇法向构造等边球面三面角。** 在选定的三维定向下，模型取角平分线 $\mathbf{S}_{01}$ 与单位法向 $\mathbf{A}_{01}$，构造 $\mathbf{V}_2 = \alpha\mathbf{S}_{01} + \beta\mathbf{A}_{01}$。条件 $\alpha^2 + \beta^2 = 1$ 给出单位长度，正的法向分量 $\beta$ 使第三顶点离开原平面。图中三边的内积均为 $c_0$，因此 $\det G_3 = (1-c_0)^2(1+2c_0) > 0$，三顶点围成的球面三角形的角超为 $\Omega_0 = 3\arccos\bigl(\frac{c_0}{1+c_0}\bigr) - \pi$。
 :::
 
-紧接着，无需从宇宙外部注入半点新原料，初生弧面体的三条边界弧 $(\mathbf{V}_0, \mathbf{V}_1)$、$(\mathbf{V}_1, \mathbf{V}_2)$ 与 $(\mathbf{V}_2, \mathbf{V}_0)$ 上重复同一构造，每次选择外法向，依次得到第二代、第三代归一投影态：在步长按黄金阻尼律 $\delta_\ell = 0.42\,\varphi^{-(\ell-1)}$ 逐层收束的模型下，球面原胞数沿 $1 \to 4 \to 10$ 层层绽放为自相似花冠，直观演绎“道生一，一生二，二生三，三生万物”的无尽开维创生链（`MODEL`）。
+以这个等边三面角为种子，模型另外选定一条边界生长规则。第一步取三条边界弧 $(\mathbf{V}_0, \mathbf{V}_1)$、$(\mathbf{V}_1, \mathbf{V}_2)$ 与 $(\mathbf{V}_2, \mathbf{V}_0)$ 的中点。模型在每个中点沿背离父胞的单位法向迈出一步，步长由黄金阻尼律 $\delta_\ell = 0.42\,\varphi^{-(\ell-1)}$ 指定。这个角距决定子胞两条新边的长度，子胞一般为等腰球面三角形。第一步添三个子胞，第二步沿六条前缘弧再添六个，累计原胞数为 $1 \to 4 \to 10$（`MODEL`）。
 
 ::: {.viz src="triadic-nameless-sandbox" preset="cascade-corolla" height="520"}
-**沿边界弧递归构造 $1 \to 4 \to 10$ 个球面原胞。** 模型在每条边界弧的中点取背离父胞的单位法向，沿这个方向在球面上走过角距 $\delta_\ell = 0.42\,\varphi^{-(\ell-1)}$，得到新顶点。图中第 1 代共有 $4$ 个原胞，第 2 代共有 $10$ 个（`MODEL`）。
+**沿边界弧递归构造 $1 \to 4 \to 10$ 个球面原胞。** 模型在每条边界弧的中点取背离父胞的单位法向，沿这个方向在球面上走过角距 $\delta_\ell = 0.42\,\varphi^{-(\ell-1)}$，得到新顶点。连同初始原胞，第一步后累计 $4$ 个原胞，第二步后累计 $10$ 个（`MODEL`）。
 :::
 
 ## 29.6.2 拆掉先后叙事：120° 三元循环对称与主谓宾切面 {#sec-ch34-5-2}
