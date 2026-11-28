@@ -334,6 +334,14 @@ $$
 
 在阈值处只有一种布局，且 $t_4=-\rho_*$、$T=B$。这是因为解支的代价随 $t_4$ 严格降低，在阈值附近只需比较 $t_4=-\rho$ 上的最小值。用《OMEGA 数学》§7.1.1 的截断乘积与有限逆计算实系数热响应射流，消去前两点后读出第三坐标的代价曲率。区间证书将极小点定位在严格凸的区间，再夹定最小代价穿过预算的位置。继续压低上限只会缩小可行集。 [射流运算](https://github.com/the-omega-institute/trureturing-books/blob/94ad6c52db61555ca7d9365a64ff9764e488bfd1/books/omega-math/zh/ch07-second-order-jet-calculus.md#sec-ch07-jet2-inverse-chain) · [模型推导与阈值复算](https://github.com/the-omega-institute/trureturing-books/issues/2411#issuecomment-7242695596)
 
+阈值附近，第四截止的剩余移动量为 $O(\delta)$，第三截止为 $O(\sqrt{\delta})$，其中 $\delta=\rho_*-\rho$。因此在 $(s,r)=(t_3,-t_4)$ 平面中，同时满足 $r\ge\rho$ 和预算的区域迅速收缩。**手工推导与区间计算。** 写 $V(s,r)=T(s,-r)$，在阈值极小点 $(s_*,\rho_*)$ 记 $a=V_r>0$、$b=V_{ss}>0$。等预算边界 $r=g(s)$ 在该点的曲率为 $-b/a$。令 $z$ 为带 $s-s_*$ 符号的 $\sqrt{\rho_*-g(s)}$，则 $ds/dz$ 在零点为 $\sqrt{2a/b}$。沿第三坐标积分可行高度 $\delta-z^2$，其中 $ds/dz$ 的奇次项在对称积分中抵消，得到对数坐标面积
+
+$$
+A(\rho)=\frac43\sqrt{\frac{2a}{b}}\,\delta^{3/2}+O(\delta^{5/2}).
+$$
+
+首项系数在 $(1.38477211,1.38477213)$ 内。用两道抛物线包住等预算边界，对 $0<\delta\le10^{-10}$ 得到 $1.383\,\delta^{3/2}<A(\rho)<1.387\,\delta^{3/2}$。这里面积以 $ds\,dr$ 计，每一对可行坐标在预算内唯一确定前两枚截止与全部权重。 [面积推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2490)
+
 若要求移动截止时牛顿标定始终精确等于 $K=1$，真空读数还能翻负吗？固定这些驻定解的有符号权重 $p_j$，记单点牛顿、真空响应为 $k,w$，则 $K=\sum_jp_jk(x_j)$、$W=\sum_jp_jw(x_j)$，沿标定面有 $C=W$。在对数坐标 $u_j=\log(x'_j/x_j)$ 中，记 $a_j=p_jDk(x'_j)$、$b_j=p_jDw(x'_j)$，其中 $D=x\,d/dx$。在内部正规点 $a\ne0$，允许的速度满足 $a\cdot v=0$。各坐标限速 $|v_j|\le1$ 时，最大的一阶真空下降率为 $\min_\lambda\sum_j|b_j-\lambda a_j|$。任取 $\lambda$ 即给出上界。取 $b_j/a_j$ 按 $|a_j|$ 加权的中位数（仅计 $a_j\ne0$），令非零剩余量对应的速度取其符号的相反数，中位数处的速度即可补足约束并达到上界。
 
 当一阶最优速度刚好触及盒面时，二阶补偿只能向盒内移动。把 $a,b$ 固定在起点，记 $S=\min_\lambda\sum_j|b_j-\lambda a_j|$，$F_*=\{v\in[-1,1]^n:a\cdot v=0,\ b\cdot v=-S\}$，并记 $\mathcal M=[\lambda_-,\lambda_+]$ 为全部加权中位数构成的区间。若 $a\ne0$ 且 $K,W$ 三次连续可微，半径 $r$ 的原盒内、沿 $K=1$ 的最小真空读数仍展开为 $c-Sr+Br^2+O(r^3)$。二阶系数为
