@@ -121,6 +121,19 @@ $$
 
 例如，各相位读数都均匀时 $C=0$，整个 Fourier 对角概率单纯形中的态都符合读数，秩一、二、三皆有。另一方面，取 $u=(1,1,-1)^T$，$B=(I-uu^*/3)/2$。它的秩为二且 $Bu=0$，故上述取等条件唯一确定它。在每个相位，其三个概率依次为 $4/9$、$(5+2\sqrt3\sin t)/18$ 和 $(5-2\sqrt3\sin t)/18$，全部严格为正。[补全构造与精确矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/1649#issuecomment-7238251495)
 
+怎样用一次额外曝光读出剩下的两个 Fourier 布居自由度？假设在同一制备上可以先施加校准的相位掩模 $D_\theta=\operatorname{diag}(1,e^{i\theta},-1)$，再施加混合器 $H=V(\pi)$，最后按原顺序测量三个通道。令 $W=HD_\theta F$。从读数中减去已知的 $\operatorname{diag}(WCW^*)$，余量就是 $Mx$，其中 $M_{jk}=|W_{jk}|^2$。
+
+手算只需两个通道。任意布居差都可唯一写成 $\delta=h(2,-1,-1)^T+k(0,1,-1)^T$。记 $c=\cos\theta,\ s=\sin\theta$，将 $W$ 前两行逐项取模平方，得
+
+$$
+\begin{aligned}
+(M\delta)_0 &= (4/9-4c/3)h-(4\sqrt3\,s/27)k,\\
+(M\delta)_1 &= -8h/9+(8\sqrt3\,s/27)k.
+\end{aligned}
+$$
+
+系数矩阵的行列式为 $-32\sqrt3\,cs/81$。因此当且仅当 $\theta\notin(\pi/2)\mathbb Z$ 时，第四次曝光能辨认每一个制备：以均匀布居为原点解出 $h,k$，再补回 $C$ 即可。在每个例外角，第二行仍非零，恰有一个盲方向。沿该方向取充分小的非零布居差 $\delta$，则 $\mathbf1/3\pm\delta$ 给出两个正定态，四次读数完全相同。[精确矩阵复算与盲方向](https://github.com/the-omega-institute/trureturing-books/issues/1649#issuecomment-7238485270)
+
 在 Fourier 相位，还可以数出实现同一对读数的纯态。先取 $t=2\pi/3$ 和 $D=\operatorname{diag}(\omega,1,1)$，直接相乘得 $iDVD=F$，其中 $F_{jk}=\omega^{jk}/\sqrt3$，指标从零起。基向量的相位不影响概率。负相位给出 $\bar F$，将态也取共轭便得到相同的可达读数。以下手工推导采用 $F$。在上型基中写密度矩阵 $\rho$，则 $p_j=\rho_{jj}$。把下型概率合成一个复数，由 $q_k=(F^*\rho F)_{kk}$ 得
 
 $$

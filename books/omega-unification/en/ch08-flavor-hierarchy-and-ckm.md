@@ -122,6 +122,19 @@ For $m>1$ there is no common state. At $m=1$, take any maximizing $u$. Every fea
 
 For example, uniform readings at every phase give $C=0$ and allow the whole simplex of Fourier-diagonal states, including ranks one, two and three. For a uniquely determined mixed state, take $u=(1,1,-1)^T$ and $B=(I-uu^*/3)/2$. This matrix has rank two and $Bu=0$, so it saturates the uniqueness test. Its three probabilities are $4/9$, $(5+2\sqrt3\sin t)/18$ and $(5-2\sqrt3\sin t)/18$, all strictly positive at every phase. [Completion proof and exact matrix checks](https://github.com/the-omega-institute/trureturing-books/issues/1649#issuecomment-7238251495)
 
+Can one extra exposure measure the two remaining Fourier populations independently? Suppose we can apply a calibrated phase mask $D_\theta=\operatorname{diag}(1,e^{i\theta},-1)$ to the same preparation, then apply the mixer $H=V(\pi)$ and measure the three channels in their original order. Put $W=HD_\theta F$. Subtract the known contribution $\operatorname{diag}(WCW^*)$ from the readings. The residual is $Mx$, where $M_{jk}=|W_{jk}|^2$.
+
+Two channels suffice for a hand calculation. Write a population difference uniquely as $\delta=h(2,-1,-1)^T+k(0,1,-1)^T$. With $c=\cos\theta,\ s=\sin\theta$, taking the squared moduli of the entries in the first two rows of $W$ gives
+
+$$
+\begin{aligned}
+(M\delta)_0 &= (4/9-4c/3)h-(4\sqrt3\,s/27)k,\\
+(M\delta)_1 &= -8h/9+(8\sqrt3\,s/27)k.
+\end{aligned}
+$$
+
+The coefficient matrix has determinant $-32\sqrt3\,cs/81$. Thus the fourth exposure identifies every preparation exactly when $\theta\notin(\pi/2)\mathbb Z$. Taking uniform populations as the origin, solve for $h,k$ and restore $C$. At each exceptional angle the second row is still nonzero, leaving one blind direction. For a sufficiently small nonzero population difference $\delta$ along it, the populations $\mathbf1/3\pm\delta$ give two positive definite states with identical readings in all four exposures. [Exact matrix calculation and blind directions](https://github.com/the-omega-institute/trureturing-books/issues/1649#issuecomment-7238485270)
+
 At the Fourier phases we can also count the pure states that realize a given pair. For $t=2\pi/3$, set $D=\operatorname{diag}(\omega,1,1)$. Direct multiplication gives $iDVD=F$, where $F_{jk}=\omega^{jk}/\sqrt3$ with indices starting at zero. Rephasing the basis vectors preserves probabilities. The negative phase gives $\bar F$, which produces the same attainable pairs upon conjugating the state. For a hand derivation, use $F$ and write the density matrix $\rho$ in the up basis, so $p_j=\rho_{jj}$. The down probabilities $q_k=(F^*\rho F)_{kk}$ can be encoded by one complex number,
 
 $$
