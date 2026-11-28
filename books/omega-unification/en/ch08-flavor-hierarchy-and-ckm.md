@@ -122,7 +122,31 @@ For $m>1$ there is no common state. At $m=1$, take any maximizing $u$. Every fea
 
 For example, uniform readings at every phase give $C=0$ and allow the whole simplex of Fourier-diagonal states, including ranks one, two and three. For a uniquely determined mixed state, take $u=(1,1,-1)^T$ and $B=(I-uu^*/3)/2$. This matrix has rank two and $Bu=0$, so it saturates the uniqueness test. Its three probabilities are $4/9$, $(5+2\sqrt3\sin t)/18$ and $(5-2\sqrt3\sin t)/18$, all strictly positive at every phase. [Completion proof and exact matrix checks](https://github.com/the-omega-institute/trureturing-books/issues/1649#issuecomment-7238251495)
 
-Can one extra exposure measure the two remaining Fourier populations independently? Suppose we can apply a calibrated phase mask $D_\theta=\operatorname{diag}(1,e^{i\theta},-1)$ to the same preparation, then apply the mixer $H=V(\pi)$ and measure the three channels in their original order. Put $W=HD_\theta F$. Subtract the known contribution $\operatorname{diag}(WCW^*)$ from the readings. The residual is $Mx$, where $M_{jk}=|W_{jk}|^2$.
+**Recovery with an unknown common phase magnitude (`ARGUED`).** Write $B_{\mathrm{ref}}$ for the rank-two example above. Its record comes from phases $0,\pm\alpha$, with $0<\alpha<\pi$. In fitting the record, assume the two down phases have opposite signs and an unknown common magnitude $\beta\in(0,\pi)$. Denote the complex readout above by $s_B(t)$, so that $s_{B_{\mathrm{ref}}}(t)=1/6+i\sin(t)/3$. The zero reading and the average of the down readings determine the sum of the phase-dependent entries. Their difference determines the other combination. Together they give
+
+$$
+(B_{01},B_{12},B_{20})=\frac16(-k,1,k),
+\qquad k=\frac{\sin\alpha}{\sin\beta}.
+$$
+
+Positivity and $u^*Bu=2(1-k)/3$ require $k\leq1$. Equality forces $Bu=0$, which fixes all three diagonal entries at $1/3$ and gives the unique state $B_{\mathrm{ref}}$. For every allowed $k$, the cyclic product $B_{01}B_{12}B_{20}$ is $-k^2/216$. In a pure state this product equals the product of three populations, which is nonnegative. Thus every compatible state is mixed.
+
+For $0<k<1$ the following completions show that $\sin\beta\geq\sin\alpha$ also suffices.
+
+$$
+B(k,h)=\frac16
+\begin{pmatrix}
+2+2h&-k&k\\
+-k&2-h&1\\
+k&1&2-h
+\end{pmatrix},
+\qquad |h|\leq\sqrt{1-k^2}.
+$$
+
+The vector $(0,1,1)^T$ has eigenvalue $(3-h)/6$. On its orthogonal complement, $6B(k,h)$ has diagonal entries $2+2h$ and $1-h$, with determinant $2(1-h^2-k^2)$. The two endpoints give distinct rank-two states at trace distance $2\sqrt{1-k^2}/3$. For instance, with $e^{i\alpha}=(4+3i)/5$, the candidate magnitude $\beta=\pi/2$ gives $k=3/5$. The states have trace distance $8/15$ and agree entry by entry in all three probability triples. For every $\alpha$ other than $\pi/2$, an arbitrarily small move toward $\pi/2$ produces this ambiguity. When the actual magnitude is $\pi/2$, the record determines both the magnitude and $B_{\mathrm{ref}}$.
+
+
+When the first three phases are calibrated, can one extra exposure measure the two remaining Fourier populations independently? Suppose we can apply a calibrated phase mask $D_\theta=\operatorname{diag}(1,e^{i\theta},-1)$ to the same preparation, then apply the mixer $H=V(\pi)$ and measure the three channels in their original order. Put $W=HD_\theta F$. Subtract the known contribution $\operatorname{diag}(WCW^*)$ from the readings. The residual is $Mx$, where $M_{jk}=|W_{jk}|^2$.
 
 Two channels suffice for a hand calculation. Write a population difference uniquely as $\delta=h(2,-1,-1)^T+k(0,1,-1)^T$. With $c=\cos\theta,\ s=\sin\theta$, taking the squared moduli of the entries in the first two rows of $W$ gives
 
