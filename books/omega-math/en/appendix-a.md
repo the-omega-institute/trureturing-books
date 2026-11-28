@@ -1,12 +1,12 @@
 # Appendix A Index of Zero-Axiom OmegaInit and OmegaMath Modules and Frozen Declarations
 
-This appendix catalogs the strict zero-axiom `OmegaInit` foundation and the completed six-volume `OmegaMath` library merged on `the-omega-institute/trureturing` (`dev` branch), registers all 14 zero-axiom D5 frozen modules (127 `axioms: []` theorems) together with the 11-theorem Layer-2 one-way shadow functor `OmegaShadowBridge` and the classical `Mathlib` shadow anchors cited across Volumes I–VI, and states the reproducible empty-kernel audit checklist. In keeping with the repository's source-only contract, the dynamic per-edition verification ledger spanning Chapters 1–18 is compiled automatically from `trureturing.lock.json` in [Appendix B §B.4](appendix-b.md#sec-om-appb-live-stats) at build time rather than duplicated manually here.
+This appendix uses the pinned trureturing commit [{commit}](trureturing:) to index the main strict library modules, frozen D5 theorems, one-way bridges, and classical reference results. It closes with commands for empty-kernel replay of strict library modules and for comparing D5 consumers across the two backends. For book-wide verification statistics, see [Appendix B §B.4](appendix-b.md#sec-om-appb-live-stats).
 
-## A.1 Index of the Strict Foundation OmegaInit (10 Modules, 0 Axioms) {#sec-om-appa-omegainit}
+## A.1 Strict OmegaInit Foundation Index {#sec-om-appa-omegainit}
 
-`OmegaInit` resides under `src/OmegaInit*` in `trureturing` and builds as a standalone Lake library target in `lakefile.toml`. All 10 source files open with `module` and `prelude`, closing off implicit `Init` and `Mathlib` imports; public declarations mirror pinned Lean `v4.35.0` `Init` modules under the prefix `Omega.`, are audited against official `.olean` owners by `OmegaChecks.Audit`, and carry an empty transitive axiom closure:
+The strict implementation lives in `strict/OmegaInit.lean` and `strict/OmegaInit/`. The ordinary build uses the official interface files under `src/OmegaInit*`. The table lists entry points for inductive foundations and integer arithmetic. For empty-kernel replay and the upstream ownership checks on ported declarations, see [§A.6](#sec-om-appa-audit-checklist).
 
-| # | Source Path (under `src/`) | Mirrored Official `Init` Module | Key Public Declarations and Role |
+| # | Strict source path (under `strict/`) | Mirrored Official `Init` Module | Key Public Declarations and Role |
 | :---: | :--- | :--- | :--- |
 | 1 | `OmegaInit/Prelude.lean` | `Init.Prelude` | `Omega.Eq`, `Omega.True`/`False`/`And`/`Or`/`Not`, `Omega.Bool`, `Omega.Nat` (`add`/`mul`/`sub`/`le`/`lt`) |
 | 2 | `OmegaInit/Core.lean` | `Init.Core` | `Omega.Nat.add_zero` and foundational recursive identities |
@@ -19,27 +19,27 @@ This appendix catalogs the strict zero-axiom `OmegaInit` foundation and the comp
 | 9 | `OmegaInit/Data/Int.lean` | `Init.Data.Int` | Umbrella export of `OmegaInit.Data.Int.{Basic, Lemmas, Order}` |
 | 10 | `OmegaInit.lean` | `Init` root | Top-level strict foundation umbrella exporting `OmegaInit.Data.{Nat, Int}` |
 
-## A.2 Complete Six-Volume OmegaMath Zero-Axiom Source Inventory (78 Modules, 0 Axioms) {#sec-om-appa-omegamath}
+## A.2 Core OmegaMath Modules across the Six Volumes {#sec-om-appa-omegamath}
 
-The complete six-volume zero-axiom library `OmegaMath` is merged on `the-omega-institute/trureturing@dev`, comprising **78 strict `module` + `prelude` source files** (`src/OmegaMath.lean` plus 77 submodules under `src/OmegaMath/`) with zero `Init`/`Mathlib` imports, zero `Quot.sound`, and zero `Classical.choice`:
+The table groups the main entry points and implementation modules in `src/OmegaMath.lean` and `src/OmegaMath/` by volume. Consult the pinned sources and audit output for modules outside the umbrella and for the audited import closure.
 
-| Volume & Chapters | Source Paths (under `src/OmegaMath/`) | Files | Frozen Zero-Axiom Constructions |
-| :--- | :--- | :---: | :--- |
-| **Vol. I — Foundations & Projective Circle** (Ch 1–2) | `OmegaMath.lean`, `Data/{Nat, Ratio, Int, IntRatio}.lean`, `Projective.lean`, `Projective/{Basic, Circle, Circle/Identity}.lean` | 9 | Quotient-free `Omega.Ratio`/`IntRatio`, homogeneous overlap `kappa`, antipodal closure $[p:0]$, circle multiplication |
-| **Vol. I–II — Quaternions & Ternion Heaps** (Ch 3–4) | `Algebra/{Quaternion, Quaternion/Polynomial}.lean`, `Ternion/{Heap, Heap/Core, Heap/Fidelity, Heap/Spinor}.lean` | 6 | Integer four-square multiplicativity, origin-free heap absorption/associativity, Lagrange identity, signed spinor lift |
-| **Vol. II — Cayley Rotations & Spherical Triangles** (Ch 5–6) | `Geometry/{Cayley3D, Cayley3D/Adjoint, Cayley3D/Matrix, Cayley3D/Recurrence}.lean`, `Geometry/{BargmannGram, BargmannGram/Coordinates, BargmannGram/Determinant, BargmannGram/Fractions, BargmannGram/Identities, BargmannGram/Monomial, BargmannGram/Polynomial, BargmannGram/Scaling}.lean` | 12 | Rational 3D Cayley orthogonal matrices $\mathrm{SO}(3,\mathbb{Q})$, adjoint homomorphism, iterate norm, $3\times 3$ Bargmann–Gram determinant |
-| **Vol. III — Jet Calculus & Simplicial Exactness** (Ch 7–9) | `Calculus/{Jet2, Jet2/Basic, Jet2/Fidelity, Jet2/Operations, Jet2/Scalar, Jet2/Secant}.lean`, `Calculus/{DFiniteJet, DFiniteJet/Basic, DFiniteJet/Cayley, DFiniteJet/Coefficients, DFiniteJet/Identities}.lean`, `Topology/SimplicialCoboundary.lean` | 12 | Second-order nilpotent jets $\mathbb{Q}[\eta]/(\eta^3)$, arbitrary-order D-finite exponential/trig/Cayley jets, simplicial cone-homotopy exactness |
-| **Vol. IV — Spherical Harmonics, Quadratic Fields & Schur PSD** (Ch 10–12) | `Harmonic/{ChebyshevHecke, ChebyshevHecke/Character, ChebyshevHecke/Orbitals, ChebyshevHecke/Recurrence, ChebyshevHecke/S5, ChebyshevHecke/SpinShells, ChebyshevHecke/Traces}.lean`, `Harmonic/{PiFreeHaar, PiFreeHaar/Hecke, PiFreeHaar/Moments}.lean`, `Algebra/{QuadraticExt, QuadraticExt/Basic, QuadraticExt/Fibonacci, QuadraticExt/Operations, QuadraticExt/Polynomial, QuadraticExt/Polynomial/Monomials, QuadraticExt/Ring, QuadraticExt/SpecialValues, QuadraticExt/Spinor}.lean`, `Matrix/{LagrangeSchur, LagrangeSchur/Diagonal, LagrangeSchur/Gram, LagrangeSchur/Order, LagrangeSchur/Schur, LagrangeSchur/Sequence, LagrangeSchur/Vector}.lean` | 26 | Chebyshev spin shells and norm-$5$ Hecke traces, Catalan-factorial $\pi$-free Haar moments, zero-axiom `QSqrt2`/`QPhi`, rational Schur positivity |
-| **Vol. V — Computable Arithmetic Horizon** (Ch 13–15) | `Arithmetic/{Euclidean, Euclidean/Division, Euclidean/GCD, Euclidean/Prime}.lean`, `Arithmetic/{ContinuedFraction, ContinuedFraction/Convergents, ContinuedFraction/Tangent}.lean`, `Arithmetic/DepthBudget.lean` | 8 | Bézout identity, constructive Euclid prime escape, finite continued-fraction coprimality/determinants, $\pi$-free Machin chain, integer quarter-depth |
-| **Vol. V–VI — 2x2 Matrix Algebra & Non-Abelian Computation** (Ch 14–16) | `Matrix/{Mat2, Mat2/Hurwitz}.lean`, `Computability/{Fractran, Fractran/Division, QuaternionFractran}.lean` | 5 | Integer `Mat2` adjugate and Cayley–Hamilton, 12 Hurwitz core units and mod-$5$ rank-one splitting, FRACTRAN and quaternion spinor gates |
+| Volume & Chapters | Source Paths (under `src/OmegaMath/`) | Frozen Zero-Axiom Constructions |
+| :--- | :--- | :--- |
+| **Vol. I — Foundations & Projective Circle** (Ch 1–2) | `OmegaMath.lean`, `Data/{Nat, Ratio, Int, IntRatio}.lean`, `Projective.lean`, `Projective/{Basic, Circle, Circle/Identity}.lean` | Quotient-free `Omega.Ratio`/`IntRatio`, homogeneous overlap `kappa`, antipodal closure $[p:0]$, circle multiplication |
+| **Vol. I–II — Quaternions & Ternion Heaps** (Ch 3–4) | `Algebra/{Quaternion, Quaternion/Polynomial}.lean`, `Ternion/{Heap, Heap/Core, Heap/Fidelity, Heap/Spinor}.lean` | Integer four-square multiplicativity, origin-free heap absorption/associativity, Lagrange identity, signed spinor lift |
+| **Vol. II — Cayley Rotations & Spherical Triangles** (Ch 5–6) | `Geometry/{Cayley3D, Cayley3D/Adjoint, Cayley3D/Matrix, Cayley3D/Recurrence}.lean`, `Geometry/{BargmannGram, BargmannGram/Coordinates, BargmannGram/Determinant, BargmannGram/Fractions, BargmannGram/Identities, BargmannGram/Monomial, BargmannGram/Polynomial, BargmannGram/Scaling}.lean` | Rational 3D Cayley orthogonal matrices $\mathrm{SO}(3,\mathbb{Q})$, adjoint homomorphism, iterate norm, $3\times 3$ Bargmann–Gram determinant |
+| **Vol. III — Jet Calculus & Simplicial Exactness** (Ch 7–9) | `Calculus/{Jet2, Jet2/Basic, Jet2/Fidelity, Jet2/Operations, Jet2/Scalar, Jet2/Secant}.lean`, `Calculus/{DFiniteJet, DFiniteJet/Basic, DFiniteJet/Cayley, DFiniteJet/Coefficients, DFiniteJet/Identities}.lean`, `Topology/SimplicialCoboundary.lean` | Second-order nilpotent jets $\mathbb{Q}[\eta]/(\eta^3)$, arbitrary-order D-finite exponential/trig/Cayley jets, simplicial cone-homotopy exactness |
+| **Vol. IV — Spherical Harmonics, Quadratic Fields & Schur PSD** (Ch 10–12) | `Harmonic/{ChebyshevHecke, ChebyshevHecke/Character, ChebyshevHecke/Orbitals, ChebyshevHecke/Recurrence, ChebyshevHecke/S5, ChebyshevHecke/SpinShells, ChebyshevHecke/Traces}.lean`, `Harmonic/{PiFreeHaar, PiFreeHaar/Hecke, PiFreeHaar/Moments}.lean`, `Algebra/{QuadraticExt, QuadraticExt/Basic, QuadraticExt/Fibonacci, QuadraticExt/Operations, QuadraticExt/Polynomial, QuadraticExt/Polynomial/Monomials, QuadraticExt/Ring, QuadraticExt/SpecialValues, QuadraticExt/Spinor}.lean`, `Matrix/{LagrangeSchur, LagrangeSchur/Diagonal, LagrangeSchur/Gram, LagrangeSchur/Order, LagrangeSchur/Schur, LagrangeSchur/Sequence, LagrangeSchur/Vector}.lean` | Chebyshev spin shells and norm-$5$ Hecke traces, Catalan-factorial $\pi$-free Haar moments, zero-axiom `QSqrt2`/`QPhi`, rational Schur positivity |
+| **Vol. V — Computable Arithmetic Horizon** (Ch 13–15) | `Arithmetic/{Euclidean, Euclidean/Division, Euclidean/GCD, Euclidean/Prime}.lean`, `Arithmetic/{ContinuedFraction, ContinuedFraction/Convergents, ContinuedFraction/Tangent}.lean`, `Arithmetic/DepthBudget.lean` | Bézout identity, constructive Euclid prime escape, finite continued-fraction coprimality/determinants, $\pi$-free Machin chain, integer quarter-depth |
+| **Vol. V–VI — 2x2 Matrix Algebra & Non-Abelian Computation** (Ch 14–16) | `Matrix/{Mat2, Mat2/Hurwitz}.lean`, `Computability/{Fractran, Fractran/Division, QuaternionFractran}.lean` | Integer `Mat2` adjugate and Cayley–Hamilton, 12 Hurwitz core units and mod-$5$ rank-one splitting, FRACTRAN and quaternion spinor gates |
 
 The companion audit and regression harness lives in `src/OmegaChecks/`: `Audit.lean` (Lake test driver `omegaAudit` running empty-kernel replay and upstream name verification), `Examples.lean`, `ProjectiveOverlap.lean`, `Mixed.lean` (demonstrating `open Omega renaming Nat → OmegaNat` alongside `Mathlib`), and `check.py` (reproducibility and incremental-rebuild checks).
 
-## A.3 Complete Zero-Axiom D5 Frozen Registry (14 Modules, 127 Theorems, 0 Axioms) {#sec-om-appa-frozen-registry}
+## A.3 Frozen D5 Theorems and Axiom Records for Both Backends {#sec-om-appa-frozen-registry}
 
-The table below registers all **14 zero-axiom D5 frozen modules** under `D5/S3/Quantum/AURICOmega/` merged on `the-omega-institute/trureturing@dev`. Every single one of their **127 public theorems** carries frozen metadata `libraries: ["OmegaInit", "OmegaMath"]` and **`axioms: []`**, verified via empty-kernel replay:
+The table lists the book’s core theorems under `D5/S3/Quantum/AURICOmega/`. Each theorem has a row in the frozen state’s `declarations` array. Its `axioms` field records official dependencies. Its `strict_omega.axioms` and `strict_omega.libraries` fields record strict dependencies. At the pinned commit, all 127 listed theorems across 14 modules have `[]` on the strict backend. On the official backend, 107 depend only on `propext` and 20 have `[]`. The libraries and axioms column shows the strict measurements. See [§A.6](#sec-om-appa-audit-checklist) for the commands and records behind the paired comparison.
 
-| # | Frozen D5 Module (under `D5/S3/Quantum/AURICOmega/`) | Volumes & Chapters | Theorems | Libraries / Axioms | Core Mathematical Content |
+| # | Frozen D5 Module (under `D5/S3/Quantum/AURICOmega/`) | Volumes & Chapters | Theorems | Strict Libraries / Axioms | Core Mathematical Content |
 | :---: | :--- | :---: | :---: | :---: | :--- |
 | 1 | `ProjectiveOverlapScaling` | Vol. I Ch 2, Vol. VI Ch 18 | 1 | `OmegaInit, OmegaMath` / `[]` | Positive natural scaling preserves unsigned projective overlap under `Omega.Ratio.Equivalent` |
 | 2 | `OmegaCircleClosure` | Vol. I Ch 2, Vol. III Ch 8, Vol. VI Ch 18 | 5 | `OmegaInit, OmegaMath` / `[]` | Signed scaling invariance, `kappa + spread ≈ 1`, Cayley unit circle, antipodal pole closure, two-square norm multiplicativity |
@@ -55,9 +55,9 @@ The table below registers all **14 zero-axiom D5 frozen modules** under `D5/S3/Q
 | 12 | `OmegaComposeAndWitnesses` | Vols. I–III, VI Ch 3–4, 6, 8, 16 | 8 | `OmegaInit, OmegaMath` / `[]` | Formal composition chain rule and all-order Cayley–trig unification, `Mat2` determinant multiplicativity, non-commutativity, 6-beat spinor orbit, orthogonal excess $\frac{1}{4}$, and $P_\Omega$ halting at $22$ |
 | 13 | `OmegaSphericalHaarMidpoint` | Vols. II–IV Ch 6–7, 10–11 | 8 | `OmegaInit, OmegaMath` / `[]` | All-degree even-character fusion, $\pi$-free Haar vanishing and all-degree Peter–Weyl orthonormality, rational spherical sine and Pythagorean laws, $\alpha$-sampling drift, midpoint unit-sphere conservation, and half-step fidelity |
 | 14 | `OmegaLieTripleAndFreeGroup` | Vols. II, V Ch 4–5, 14 | 15 | `OmegaInit, OmegaMath` / `[]` | Lie triple axioms and constant unit sectional curvature $K \equiv +1$, dual-chart MRP denominator sum $1$ / half-bound / unit-ball containment, and $S_5$ reduced-word mod-$5$ non-vanishing / exact norm / non-scalarity / $F_3 \hookrightarrow \mathrm{SO}(3,\mathbb{Q})$ adjoint injectivity |
-| **Total** | **14 Zero-Axiom Frozen D5 Modules** | **Volumes I–VI** | **127** | **`OmegaInit, OmegaMath` / `[]`** | **Complete six-volume strict zero-axiom kernel closure (`axioms: []`)** |
+| **Total** | **14 listed D5 modules** | **Volumes I–VI** | **127** | **`OmegaInit, OmegaMath` / `[]`** | **Strict measurements for the listed theorems** |
 
-The complete list of all **127 zero-axiom frozen theorems** is indexed by module below:
+The declarations are linked below in module order.
 
 - `ProjectiveOverlapScaling` (1): [`kappa_scale`](lean:D5/S3/Quantum/AURICOmega/ProjectiveOverlapScaling.kappa_scale).
 - `OmegaCircleClosure` (5): [`kappa_scale`](lean:D5/S3/Quantum/AURICOmega/OmegaCircleClosure.kappa_scale), [`kappa_add_spread_eq_one`](lean:D5/S3/Quantum/AURICOmega/OmegaCircleClosure.kappa_add_spread_eq_one), [`cayley_circle_unit`](lean:D5/S3/Quantum/AURICOmega/OmegaCircleClosure.cayley_circle_unit), [`cayley_antipodal_closure`](lean:D5/S3/Quantum/AURICOmega/OmegaCircleClosure.cayley_antipodal_closure), [`projective_circle_mul_normSq`](lean:D5/S3/Quantum/AURICOmega/OmegaCircleClosure.projective_circle_mul_normSq).
@@ -78,7 +78,7 @@ The complete list of all **127 zero-axiom frozen theorems** is indexed by module
 
 The module `D5/S3/Quantum/AURICOmega/OmegaShadowBridge` lives strictly in Layer 2 (an outer `noncomputable section` importing both `OmegaMath.Projective.Circle` and `Mathlib.Basic.Real.Basic`). It transports `Omega.Nat`, `Omega.Int`, and `Omega.IntRatio` one-way into standard `ℕ`, `ℤ`, `ℚ`, and `ℝ` without allowing classical axioms to leak back into Layers 0–1. On `trureturing@dev`, it freezes **11 public bridge theorems** (supported by 10 private helper lemmas):
 
-| # | Public Bridge Theorem (under `OmegaShadowBridge.`) | Transport Layer / Axiom Side | Core Bridge Statement |
+| # | Public Bridge Theorem (under `OmegaShadowBridge.`) | Transport / Official Axioms | Core Bridge Statement |
 | :---: | :--- | :---: | :--- |
 | 1 | [`toStdNat_add`](lean:D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toStdNat_add) | `Omega.Nat → ℕ` (`[]`) | `toStdNat (a.add b) = toStdNat a + toStdNat b` |
 | 2 | [`toStdNat_mul`](lean:D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toStdNat_mul) | `Omega.Nat → ℕ` (`propext`) | `toStdNat (a.mul b) = toStdNat a * toStdNat b` |
@@ -94,7 +94,7 @@ The module `D5/S3/Quantum/AURICOmega/OmegaShadowBridge` lives strictly in Layer 
 
 ## A.5 Classical Mathlib Shadow Anchors Cited Across Volumes I–VI {#sec-om-appa-classical-anchors}
 
-Alongside the 14 zero-axiom modules and `OmegaShadowBridge`, Volumes I–VI cite a companion set of frozen classical `Mathlib` shadow declarations (kernel-verified under the standard three-axiom closure; live book-wide totals appear in [Appendix B §B.4](appendix-b.md#sec-om-appb-live-stats)) as external laboratory gauges verifying that the zero-axiom rational skeleton projects cleanly into classical real and complex analysis:
+Volumes I–VI cite the 35 distinct frozen `Mathlib` declarations below for comparison with classical real and complex analysis. At the pinned commit, all 35 declaration rows omit the official `axioms` field. Their official dependencies are bounded by the permitted set `{propext, Classical.choice, Quot.sound}`. The individual closures are unreported. See [Appendix B §B.4](appendix-b.md#sec-om-appb-live-stats) for book-wide counts.
 
 | Volume & Chapters | Frozen Classical `Mathlib` Shadow Declarations (`trureturing@dev`) | Cross-Volume Comparison Role |
 | :--- | :--- | :--- |
@@ -105,13 +105,21 @@ Alongside the 14 zero-axiom modules and `OmegaShadowBridge`, Volumes I–VI cite
 | **Vol. V** (Ch 13–15) | [`reduced_den`](lean:D5/S1/Depth/ContinuedFractions/FiniteRationalConvergents.reduced_den), [`convergents_length_log`](lean:D5/S1/Depth/ContinuedFractions/FiniteRationalConvergentsLength.convergents_length_log), [`stripFactors_correct`](lean:D5/S3/FiniteGroups/Cyclic/VerifiedPrimeFactorStripping.stripFactors_correct), [`rationalQuarterDepth_integer_sound`](lean:D5/S3/Weil/BurnolGram/BurnolRationalDepthBudget.rationalQuarterDepth_integer_sound), [`rationalQuarterDepth_real_sound`](lean:D5/S3/Weil/BurnolGram/BurnolRationalDepthBudget.rationalQuarterDepth_real_sound), [`rational_padic_product_formula`](lean:D5/S3/Factorization/Embeddings/RationalPadicProductFormula.rational_padic_product_formula), [`prime_log_rational_independence`](lean:D5/S3/Weil/PrimeAddress/PrimeLogIndependence.prime_log_rational_independence), [`toeplitz_posSemidef_iff_norm_eq_one`](lean:D5/S3/Weil/TestFunctions/FinitePowerSumToeplitzCircleCriterion.toeplitz_posSemidef_iff_norm_eq_one) | Continued-fraction logarithmic step bound, prime-factor-stripping order recovery, integer-to-real quarter-depth bridge, adelic $p$-adic product formula, prime-log independence, Toeplitz unit-circle criterion (plus `rational_six_axis_open_cover`) |
 | **Vol. VI** (Ch 16–18) | [`signed_prime_ledger_equiv_positive_rationals`](lean:D5/S3/Factorization/PositiveRationalGroup.signed_prime_ledger_equiv_positive_rationals), [`name_compare_run`](lean:D5/S0/Computability/BinaryNameComparison.name_compare_run), [`observable_krylov_strict_growth_bound`](lean:D5/S3/ObserverMemory/Dynamics/ObservableKrylovGrowthBound.observable_krylov_strict_growth_bound), [`observable_krylov_once_stable_permanently`](lean:D5/S3/ObserverMemory/Dynamics/ObservableKrylovPermanentStability.observable_krylov_once_stable_permanently), [`ReversibleQram.correctness`](lean:D5/S3/Quantum/Routing/ReversibleQram.correctness) | Signed prime ledger isomorphism, binary name-comparison step bound, observable Krylov growth bound and permanent stability, reversible static QRAM correctness (Ch 18 also re-cites `rationalQuarterDepth_*`) |
 
-## A.6 Empty-Kernel Zero-Axiom Audit Checklist {#sec-om-appa-audit-checklist}
+## A.6 Strict Library Replay and D5 Backend Comparison {#sec-om-appa-audit-checklist}
 
-Every source module and frozen D5 declaration entering the strict libraries `OmegaInit` or `OmegaMath` must pass all six hard gates enforced by `src/OmegaChecks/Audit.lean` prior to merge and freeze:
+Check out the book’s pinned trureturing commit [{commit}](trureturing:) and run this command from the repository root.
 
-1. **Strict module header (`module` + `prelude`)**: open every strict file with `module` and `prelude` to suppress implicit imports of official `Init`;
-2. **Strict root closure**: every module name in the compiled `.olean` transitive import graph must have root `OmegaInit` or `OmegaMath`, rejecting any `Init` or `Mathlib` import;
-3. **Zero inadmissible declaration kinds**: reject every `.axiomInfo`, `.quotInfo`, and `isUnsafe` entry across the closure (eliminating `sorry`, custom `axiom`, `Quot`/`Quot.sound`, `propext`, and `Classical.choice`);
-4. **Empty transitive axiom closure (`axioms: []`)**: `collectAxioms` must return empty for every constant, frozen in `Golden/Frozen/state/<module>.lean.json` as `"axioms": []`;
-5. **Fresh empty-kernel replay**: instantiate `mkEmptyEnvironment` and run `toKernelEnv.replay` across the entire constant map inside a fresh Lean `v4.35.0` kernel (reproducible via `lake test -- OmegaMath.Projective.Circle`);
-6. **Upstream naming and provenance discipline**: ported declarations must live under mirrored module paths named `Omega.<OfficialName>` and match official `.olean` owners; original Omega modules must carry `Omega original.` on line 1 of their module docstring.
+```sh
+lake test -- OmegaMath.Projective.Circle
+```
+
+`src/OmegaChecks/check.py` selects the strict library import closure of `OmegaMath.Projective.Circle`. `src/OmegaChecks/Audit.lean` checks the actual closure against the selected module set, the direction of imports between library layers, and the upstream ownership of ported declarations. The auditor runs `collectAxioms` on every declaration in the closure, rejects nonempty axiom dependencies, `.axiomInfo`, `.quotInfo` and unsafe declarations, then replays the closure with `toKernelEnv.replay` in a fresh `mkEmptyEnvironment`. Choose other strict library roots as needed, or run `lake test -- OmegaInit OmegaMathlib OmegaMath` for the combined closure of those three roots.
+
+D5 consumers undergo two separate compilations and a comparison of their exports. Install the pinned inspector to check the circle module listed in the registry.
+
+```sh
+make install-tools
+python3 src/OmegaChecks/portable.py --backend both D5.S3.Quantum.AURICOmega.OmegaCircleClosure
+```
+
+This command compiles the consumer against both backends, compares the exported interfaces, and writes an official axiom dependency report to `.lake/build/omega-checks/selected-official-axioms.json`. The freezing workflow additionally measures paired build artifacts and compares eligible declarations’ types and related definitions. It writes the measurements in the matching `declarations` row of `Golden/Frozen/state/<module>.lean.json`, with official fields on that row and strict fields in its `strict_omega` object. See the `--frozen-request` path in `src/OmegaChecks/portable.py` and the `--consumer` branch of `Audit.lean`. To check the table, match the listed GIDs to theorem records at the pinned commit and read `axioms` and `strict_omega.axioms` separately. For example, `OmegaCircleClosure.cayley_antipodal_closure` has `["propext"]` in the official record and `[]` in the strict record.

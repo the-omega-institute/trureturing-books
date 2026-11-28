@@ -1,7 +1,7 @@
 {
   "schema": "trureturing-books.template-manifest.v1",
   "template": "trureturing-books-template",
-  "version": "1.25.0",
+  "version": "1.26.0",
   "files": {
     ".claude/skills": {
       "sha256": "c1aefaccb300698f4b7ae764e1fa857f93c0609ba47b078e4806d926f289c23b",
@@ -92,7 +92,7 @@
       "mode": "120000"
     },
     "CLAUDE.md": {
-      "sha256": "d5fd2c5bb95b08f7d7dc347d20064ba2b2cfffcc6471d810d6635726a5aa8180",
+      "sha256": "3a7c4c2f2d2d9597c2169db8832c985fb03768bab94106250c90344985a94705",
       "mode": "100644"
     },
     "CONTRIBUTING.md": {
@@ -108,7 +108,7 @@
       "mode": "100644"
     },
     "docs/CHANGELOG.md": {
-      "sha256": "2c409d048d9686714f0ac7429df3c836e25ba9c9a91bca79d43e26fb85e0620a",
+      "sha256": "4e3e2b4859facab11ef051c4ad10dc70c463a6a2658da9ef9996d2fbb91c4b73",
       "mode": "100644"
     },
     "docs/CONTAINERS.md": {
@@ -368,7 +368,7 @@
       "mode": "100644"
     },
     "theme/film/site/player.css": {
-      "sha256": "e9f2419fb21b523c93e8ab98e5571fe8338b07dcf49e10745fb588d1e66012aa",
+      "sha256": "3bb5992919fdd664824b3674b195c345da74fa2c12a896e408ce7e84c817ff2d",
       "mode": "100644"
     },
     "theme/film/site/player.html": {
@@ -376,7 +376,7 @@
       "mode": "100644"
     },
     "theme/film/site/player.js": {
-      "sha256": "04c380484e5fb872ab9ad149ec789b37903242d5dd3c0cf28a649c99e34181c0",
+      "sha256": "7072651a54a3b47d715a654526aeb191233bc5dfe21300070c14a51cbc1a1505",
       "mode": "100644"
     },
     "theme/film/tts.py": {
@@ -824,7 +824,7 @@
       "mode": "100644"
     },
     "tools/tbook/lean.py": {
-      "sha256": "3475e00c16eb59c881d129b82da717e88d262f480ca6220d06d8035533398b9c",
+      "sha256": "74bf0664313fc8234702fc7bfaee2d949eee0cabefb6c7ffa18b19575c836ba0",
       "mode": "100644"
     },
     "tools/tbook/leanverify.py": {
@@ -988,7 +988,7 @@
       "mode": "100644"
     },
     "tools/tests/test_core.py": {
-      "sha256": "e84eab612d24160050544c855740c0d3d84653b233aed06623d59900a0499987",
+      "sha256": "de38ff827b61907379f363cfbb381ab873ce2e04ba19ebf72239e3482fce37d4",
       "mode": "100644"
     },
     "tools/tests/test_cover_cache.py": {

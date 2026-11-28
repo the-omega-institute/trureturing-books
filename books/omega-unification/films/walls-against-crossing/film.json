@@ -1,0 +1,29 @@
+{
+  "title": "Walls Against the Crossing",
+  "title_zh": "交汇之墙",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-26",
+  "duration": "2:44",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · three running inverse couplings and their triangle, a blind combination, the folded two-step reading, four brick walls, a shared monotone rule, an α_s number line, two Lean-checked tools",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/QuantumBounds/LagrangeGramIdentity.lagrange_gram_identity",
+    "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.lps_ramanujan_margins"
+  ],
+  "outputs": {
+    "narrated_720p": "omega-unification_walls-against-crossing_720p_narrated.mp4",
+    "cover": "omega-unification_walls-against-crossing_cover.jpg"
+  },
+  "summary": "Why the three gauge couplings of the Omega shell model do not meet. The three inverse couplings run up from the Z mass with the one-loop Standard Model slopes and pass each other in a small triangle; at the crossing of lines one and three, line two sits 3.664 higher (computed on screen from the chapter's inputs). The combination α₁⁻¹ − 3α₂⁻¹ + 2α₃⁻¹ is blind to a shared coupling, complete families and heavy gauge vectors, and the light fields lift it only from −12.81 by 2.20 up to 10¹⁷ GeV (computed). On the nineteen-point magnetic shell the two-step reading λ|λ − 15| folds back to zero at the neutral mean 15, and the weak centre splits the fields into odd doublets and even singlets (the book's model). Four walls follow, quoted from the chapter's model-internal interval certificates: spread above 2.936, strong coupling below 0.076, Planck calibration spread above 2.037, and, sharpest, any shared non-decreasing mass rule leaves a spread above 0.7048 at sharp thresholds, a tower needs log slope at least 106.75467, and a log-convex rule a span above 82.58 against 37.82 from the Z mass to the reduced Planck mass. Two conditional keys, the weak-centre split by 32 with unit set by chord 724 and the dyadic one-step denominator 32, read α_s ≈ 0.1184 and 0.1189, but both are model rules, not derivations, and another matching rule sends the second to 0.1532. Under all of it, Lean checks the Lagrange–Gram sum-of-squares identity (here both sides are 54) and the norm-5 LPS shell margins 0 < 20 − λ² on every branch.",
+  "summary_zh": "为什么在 Omega 球壳模型里三种规范耦合不交汇。三条逆耦合从 Z 质量出发按标准模型单圈斜率向上跑，错身围出一个小三角；在第一、三条线的交点处，第二条线高出 3.664（按本章输入在屏幕上算出）。组合 α₁⁻¹ − 3α₂⁻¹ + 2α₃⁻¹ 看不见共同耦合、完整家族与重规范矢量，轻场把它从 −12.81 一路抬到 10¹⁷ GeV 也只抬高 2.20（屏幕计算）。十九点磁球壳上，两步读数 λ|λ − 15| 在中性均值 15 处折回到零，弱中心把场分成奇的双重态与偶的单态（本书的模型）。随后四道墙，数值取自本章的模型内区间证书：极差大于 2.936；强耦合低于 0.076；普朗克标定极差大于 2.037；最锋利的一道：任何共用的非减质量规则在尖阈值下留下大于 0.7048 的极差，一座重塔的对数斜率至少 106.75467，对数凸规则的跨度须超过 82.58，而从 Z 质量到约化普朗克质量只有 37.82。两把有条件的钥匙——偶扇区加重 32 倍并以钟弦 724 定单位、单步二进分母 32——读出 α_s ≈ 0.1184 与 0.1189，但两者都是模型规则而非推导，换一种匹配处方第二个跳到 0.1532。这一切之下，Lean 检验拉格朗日—格拉姆平方和恒等式（算例两边都是 54）与模方 5 LPS 壳层在每个分支上的裕度 0 < 20 − λ²。"
+}

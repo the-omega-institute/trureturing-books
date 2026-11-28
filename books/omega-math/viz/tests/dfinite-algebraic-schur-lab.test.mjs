@@ -507,12 +507,22 @@ s = await press('[data-cmode="stokes"]');
     U30 = q([1, 2], [1, 2], [1, 2], [1, 2]),
     U13 = q([4, 5], [3, 5], 0, 0);
   const W1 = qmulM(qmulM(U30, U13), U01),
-    W2 = qmulM(qmulM(qinv(U01), qmulM(qmulM(qinv(U13), U23), U12)), U01),
+    F2 = qmulM(qmulM(qinv(U13), U23), U12),
+    W2 = qmulM(qmulM(qinv(U01), F2), U01),
     hol = qmulM(qmulM(qmulM(U30, U23), U12), U01),
     prod = qmulM(W1, W2),
     rev = qmulM(W2, W1);
   const H = exact.heap;
   check('heap holonomy: W₁·W̃₂ = Hol(∂Σ) = (31/250, −17/250, 7/10, 7/10), and W̃₂·W₁ = (31/250, 7/10, −7/10, 17/250) differs (matrices, inverses by conjugate over norm)', prod.map(strQ).join() === '31/250,-17/250,7/10,7/10' && hol.map(strQ).join() === prod.map(strQ).join() && rev.map(strQ).join() === '31/250,7/10,-7/10,17/250' && H.prod.every((x, i) => eqQ(x, prod[i])) && H.rev.every((x, i) => eqQ(x, rev[i])) && W1.map(strQ).join() === '-1/2,1/2,1/2,-1/2');
+  const viaThree = qmulM(qinv(U13), qinv(U30));
+  const alternate = qmulM(W1, qmulM(qmulM(qinv(viaThree), F2), viaThree));
+  const alternateReadout = await page.locator('#roV7').textContent();
+  check('changing the whisker to 0→3→1 at fixed order changes the product',
+    alternate.map(strQ).join() === '31/250,-7/10,-17/250,-7/10' &&
+    alternate.some((x, i) => !eqQ(x, hol[i])) &&
+    H.alt.every((x, i) => eqQ(x, alternate[i])) &&
+    alternateReadout.includes('(31/250, −7/10, −17/250, −7/10)') &&
+    await page.locator('#roRow7').isVisible());
   check('[y, x, x] = y: U₁₃ times its inverse is 1', qmulM(U13, qinv(U13)).map(strQ).join() === '1,0,0,0');
   let worst = '';
   for (let k = 0; k <= 8; k++) {

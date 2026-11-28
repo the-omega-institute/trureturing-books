@@ -198,7 +198,7 @@ $$
 
 既然在微步层面上 $\mathcal{J}_2(\mathbb{Q})$ 已把曲率矢高纳入代数本身，那么回到**有限宏观步长**的离散演化 $\mathbf{x}_0 \to \mathbf{x}_1$ 时，应当在何处对联络切生成元求值，才能彻底杜绝平直切线脱离球面并保持链式法则不变？答案把我们再次带回唯一自对偶中点 **`1/2`**。
 
-在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中，以公有正整数分母表示有理四元数载体 `RationalQuaternion`（整数分子 `num : Quaternion` 除以正分母 `den = denPred.succ`，平方范数 `normSq` 落入 `Omega.IntRatio`，`IsUnit` 定义为 $\lVert x\rVert^2 \equiv 1$）。设 $a \in \mathrm{RationalQuaternion}$ 为纯虚切生成元（$a.\mathrm{num}.w = 0$，从而对一切四元数 $v$ 恒有实内积正交律 $\langle a.\mathrm{num}\cdot v,\, v\rangle = 0$），考虑以任意有限有理权重 $\alpha \in \mathrm{IntRatio}$ 在起点 $x_0$ 与终点 $x$ 之间插值求值的离散切步方程
+所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。以公有正整数分母表示有理四元数载体 `RationalQuaternion`（整数分子 `num : Quaternion` 除以正分母 `den = denPred.succ`，平方范数 `normSq` 落入 `Omega.IntRatio`，`IsUnit` 定义为 $\lVert x\rVert^2 \equiv 1$）。设 $a \in \mathrm{RationalQuaternion}$ 为纯虚切生成元（$a.\mathrm{num}.w = 0$，从而对一切四元数 $v$ 恒有实内积正交律 $\langle a.\mathrm{num}\cdot v,\, v\rangle = 0$），考虑以任意有限有理权重 $\alpha \in \mathrm{IntRatio}$ 在起点 $x_0$ 与终点 $x$ 之间插值求值的离散切步方程
 
 $$
 (1 + \alpha a)\,x \;=\; \bigl(1 - (1 - \alpha)a\bigr)\,x_0 \quad \Longleftrightarrow \quad x - x_0 \;=\; -a\bigl((1 - \alpha)x_0 + \alpha x\bigr)
@@ -282,6 +282,10 @@ $$
 
 ::: {.remark #rem-ch07-ito-stratonovich-boundary title="有理中点守恒与连续随机分析的文献边界"}
 **文献结果与证据分层。** 上述 $\alpha$-采样范数漂移恒等式（[@thm-ch07-alpha-sampling-norm-drift]）、对称中点严格单位球面守恒（[@thm-ch07-midpoint-unit-norm]）与中点流群前后半拍射影保真度守恒（[@thm-ch07-midpoint-half-step-fidelity]）均已在零公理内核 `OmegaInit` 与 `OmegaMath` 中直接证毕，全程不涉及概率测度或极限。在连续随机微分几何中，左端点非预见求和诱导带二阶漂移修正的伊藤积分（K. Itô，1944），而对称中点求和诱导保持流形坐标不变性与经典链式法则的斯特拉托诺维奇积分（R. L. Stratonovich，1966；光滑路径逼近收敛定理见 E. Wong 与 M. Zakai，1965；文献结果）。本章的纯有理机制表明：伊藤脱轨在代数根源上正是 $\alpha = 0$ 处 $1 - 2\alpha = +1$ 的有限弦模方外溢。
+:::
+
+::: {.film src="a-symbol-whose-cube-vanishes"}
+**一个立方为零的形式符号 η，把求导、求逆与球面上的一步都变成精确的有理运算（2 分 52 秒）。** 片中每个量是三格有理数（值、斜率、弯曲的一半），截断乘法让第四格落下；常数格非零的射流两项之内求逆，在 $a = (2, 2, 1)$ 上逐阶乘回得 $(1, 0, 0)$，零位移链式法则在 $g = (1, 2, 3)$、$f = (0, \frac{1}{2}, \frac{1}{4})$ 上演示（绿色标签对应 [@thm-ch07-jet2-algebra-and-chain] 的 `mul_inv` 与 `chain_rule`，例子为屏幕计算）。按比例绘制的圆上，品红色平直切向步刺出球壳，青色圆弧步模 $\eta^3$ 驻球（手工推导），实际步长 $\frac{1}{2}$ 时两者模方为 $\frac{5}{4}$ 与 $\frac{65}{64}$（屏幕计算），过去、现在、未来的三阶读法标为模型诠释。青色射流在 $x_0 = 1$ 读出 `{1/2, -1/2, +1/4}`，品红割线在 $(1, \frac{1}{4})$ 高出 $\frac{5}{82}$、在 $(\frac{1}{2}, \frac{1}{4})$ 碰巧零偏差却看不见 $-\frac{16}{125}$（绿色标签对应 [@thm-ch07-fidelity-jet-and-secant] 的 `kappa_jet_one` 与 `kappa_secant_discrepancy`）。最后五档权重 $\alpha$ 的模方 $\frac{23}{9}$、$\frac{135}{79}$、$1$、$\frac{79}{135}$、$\frac{9}{23}$ 以精确四元数运算复算，琥珀色中点 $(11, 18, 12, 6)/25$ 留在球面上，前后两个半拍保真度同为 $\frac{121}{625}$（绿色标签对应 [@thm-ch07-alpha-sampling-norm-drift]、[@thm-ch07-midpoint-unit-norm] 与 [@thm-ch07-midpoint-half-step-fidelity]）；伊藤与斯特拉托诺维奇按 [@rem-ch07-ito-stratonovich-boundary] 标为文献结果。
 :::
 
 在下面的交互工作台卡片中，读者可以拖动琥珀色锚点与采样权重，在同一只紫色三元吻合球面上实时对比 $\mathcal{J}_2(\mathbb{Q})$ 的青色精确射流三元组 `{1/2, -1/2, +1/4}`、品红色有限割线偏差以及 $\alpha = \frac{1}{2}$ 中点步对比 $\alpha = 0$ 伊藤切线脱轨的几何差异；下一章，我们将把二阶射流推广到任意截断阶 $N$ 的 D-有限微分射流环 $J_N(\mathbb{Q})$，并在纯有理环内完成凯莱参数化与三角函数的代数大一统。

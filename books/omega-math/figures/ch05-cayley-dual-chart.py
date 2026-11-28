@@ -7,10 +7,10 @@ SIZE = (704, 342)
 WRAP = True
 ALT = {
     "zh": "三维生成向量 σ=(1/2,1/2,0) 的垂直截面中，Cayley 的十二步都留在单位圆上，"
-          "二阶 Taylor 的终点模方则为 (17/16)¹²。右图把两个原分母除以其和 (1+a)(1+b)，"
+          "二阶 Taylor 的终点模方则为 (17/16)¹²。右图把有理 MRP 乘法的两个原分母除以其和 (1+a)(1+b)，"
           "归一化后两者之和为 1，较大者至少为 1/2，因此所选原分母也至少为 1/2。",
     "en": "In the plane perpendicular to σ=(1/2,1/2,0), all twelve Cayley iterates stay on the unit "
-          "circle. The second-order Taylor endpoint has squared norm (17/16)¹². Right, dividing the "
+          "circle. The second-order Taylor endpoint has squared norm (17/16)¹². Right, for rational MRP inputs, dividing the "
           "raw denominators by their sum (1+a)(1+b) makes the normalized sum 1. The larger normalized "
           "denominator, and therefore the selected raw denominator, is at least 1/2.",
 }
@@ -52,7 +52,7 @@ def draw(fig):
     left.text(172, 310, left.t("Taylor 终点模方", "Taylor final squared norm") + "   (17/16)¹²",
               size=15, anchor="middle", color="magenta")
 
-    right.text(172, 24, right.t("双坐标图 · 分母平衡", "Dual charts · denominator balance"),
+    right.text(172, 24, right.t("有理 MRP · 分母平衡", "Rational MRP · denominators"),
                size=17, anchor="middle", weight=600)
     ax = right.axes(53, 61, 236, 162, (0, 1), (0, 1.08))
     ax.xaxis(ticks=[0, 0.5, 1], labels=["0", "1/2", "1"])

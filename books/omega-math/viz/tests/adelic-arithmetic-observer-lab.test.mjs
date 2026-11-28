@@ -209,25 +209,48 @@ function gramDetN(vs) {
   }
   return G[n - 1][n - 1];
 }
-/** The beats of §17.3: τ grows by ‖x⊥‖²/‖x‖² + 1/4 for each new state, by 0 for the seed again. */
-function beatsN(idle) {
+// Reconstruct the comparison graph and count connected components by traversal.
+function canvasBeatsN(idle) {
   const seed = [1n, 0n, 0n, 0n],
-    states = [seed, [1n, 1n, 0n, 0n], [1n, 0n, 1n, 0n], [1n, 1n, 1n, 1n], [2n, 1n, 1n, 0n], [1n, -1n, 0n, 1n]];
-  let span = [seed],
-    tau = ZERO;
-  const out = [ZERO];
-  for (const x0 of states) {
-    const x = idle ? seed : x0,
+    states = [seed, [1n, 1n, 0n, 0n], [1n, 0n, 1n, 0n], [1n, 1n, 1n, 1n], [2n, 1n, 1n, 0n], [1n, -1n, 0n, 1n]],
+    links = [[], [[0, 2]], [[0, 3], [2, 3]], [[0, 4]], [[0, 5], [2, 5]], [[0, 6], [3, 6]]],
+    adjacency = new Map([[0, []]]);
+  let span = [seed], tau = ZERO, edges = 0, previousBetti = 0;
+  const out = [{ tau, schur: ZERO, graph: { vertices: 1, edges: 0, components: 1, betti: 0, deltaBetti: 0 } }];
+  for (const [i, state] of states.entries()) {
+    const x = idle ? seed : state,
       d0 = gramDetN(span),
       d1 = gramDetN([...span, x]),
-      inno = d0 === 0n ? ZERO : Q(d1, d0 * x.reduce((acc, v) => acc + v * v, 0n)),
-      fresh = x.some((v, i) => v !== seed[i]);
+      schur = Q(d1, d0 * x.reduce((acc, v) => acc + v * v, 0n));
     if (d1 !== 0n) span = [...span, x];
-    tau = addQ(tau, addQ(inno, fresh ? Q(1, 4) : ZERO));
-    out.push(tau);
+    for (const [a, b] of idle ? [] : links[i]) {
+      if (!adjacency.has(b)) adjacency.set(b, []);
+      adjacency.get(a).push(b);
+      adjacency.get(b).push(a);
+      edges++;
+    }
+    const seen = new Set();
+    let components = 0;
+    for (const vertex of adjacency.keys()) {
+      if (seen.has(vertex)) continue;
+      components++;
+      const stack = [vertex];
+      while (stack.length) {
+        const u = stack.pop();
+        if (seen.has(u)) continue;
+        seen.add(u);
+        stack.push(...adjacency.get(u));
+      }
+    }
+    const vertices = adjacency.size, betti = edges - vertices + components,
+      deltaBetti = betti - previousBetti;
+    previousBetti = betti;
+    tau = addQ(tau, addQ(schur, Q(deltaBetti)));
+    out.push({ tau, schur, graph: { vertices, edges, components, betti, deltaBetti } });
   }
   return out;
 }
+const beatsN = (idle) => canvasBeatsN(idle).map(({ tau }) => tau);
 
 /** One generation of Weyl fermions as (multiplicity, 2T₃, 3Q): u_L, d_L, ν_L, e_L, u_R, d_R, e_R. */
 const FERMIONS = [
@@ -610,17 +633,20 @@ s = await pick(CANVAS);
   const L = s.ledger;
   check('canvas still: κ_time = 16/25, κ_space = 9/25, sum 1; Δτ² = Δt² − Δx² as 16 = 25 − 9', strQ(L.kt) === '16/25' && strQ(L.ks) === '9/25' && eqQ(L.sum, ONE) && L.dtau2 === '16' && L.dt2 === '25' && L.dx2 === '9');
   check('u = 1/3: Δτ/Δt = 4/5, v = 3/5, γ² − (γv)² = 25/16 − 9/16 = 1', strQ(L.root) === '4/5' && strQ(L.vel) === '3/5' && strQ(L.u) === '1/3' && strQ(L.gamma2) === '25/16' && strQ(L.gv2) === '9/16' && eqQ(subQ(L.gamma2.map(BigInt), L.gv2.map(BigInt)), ONE));
-  const want = beatsN(false);
-  check('canvas still at beat 3: structural time τ = 0 → 0 → 3/4 → 3/2 (Gram-determinant innovation + 1/4 per new edge)', L.t === 3 && want.slice(0, 4).map(strQ).join() === '0,0,3/4,3/2' && L.taus.slice(0, 4).map(strQ).join() === '0,0,3/4,3/2' && strQ(L.tau) === '3/2', L.taus.map(strQ).join());
+  const expectedBeats = canvasBeatsN(false);
+  const want = expectedBeats.map(({ tau }) => tau);
+  check('canvas still at beat 3: structural time τ = 0 → 0 → 1/2 → 2 (Gram-determinant innovation + integer cycle rank)', L.t === 3 && want.slice(0, 4).map(strQ).join() === '0,0,1/2,2' && L.taus.slice(0, 4).map(strQ).join() === '0,0,1/2,2' && strQ(L.tau) === '2', L.taus.map(strQ).join());
   const tr3 = FERMIONS.reduce((acc, [m, t]) => addQ(acc, Q(m * t * t, 4)), ZERO),
     trq = FERMIONS.reduce((acc, [m, , q]) => addQ(acc, Q(m * q * q, 9)), ZERO);
   check('sin²θ_W = Tr(T₃²)/Tr(Q²) = 2/(16/3) = 3/8 from the charges of one generation', strQ(L.trT3) === strQ(tr3) && strQ(L.trQ) === strQ(trq) && strQ(L.weinberg) === strQ(divQ(tr3, trq)) && strQ(divQ(tr3, trq)) === '3/8');
   let worst = '';
   for (let t = 0; t <= 6; t++) {
     s = await rail(t);
-    if (!eqQ(s.ledger.tau, want[t])) worst ||= `t = ${t}: ${strQ(s.ledger.tau)} vs ${strQ(want[t])}`;
+    const { graph, schur } = expectedBeats[t];
+    if (!eqQ(s.ledger.tau, want[t]) || !eqQ(s.ledger.beat.schur, schur)
+        || Object.keys(graph).some((key) => s.ledger.beat.graph[key] !== graph[key])) worst ||= `t = ${t}: ${strQ(s.ledger.tau)} vs ${strQ(want[t])}`;
   }
-  check('the rail over beats 0 … 6: τ = 0, 0, 3/4, 3/2, 2, 9/4, 5/2 (the Schur innovation vanishes once ℚ⁴ is spanned)', !worst && want.map(strQ).join() === '0,0,3/4,3/2,2,9/4,5/2', worst || want.map(strQ).join());
+  check('the rail over beats 0 … 6: τ = 0, 0, 1/2, 2, 9/4, 13/4, 17/4 with integer Betti steps and no Schur innovation after full span', !worst && want.map(strQ).join() === '0,0,1/2,2,9/4,13/4,17/4', worst || want.map(strQ).join());
 }
 for (const [u, want] of [
   ['0', Q(1)],
@@ -644,7 +670,7 @@ s = await press('[data-idle="1"]');
   let worst = '';
   for (let t = 0; t <= 6; t++) {
     s = await rail(t);
-    if (!eqQ(s.ledger.tau, idle[t]) || s.ledger.moved !== 0) worst ||= `t = ${t}`;
+    if (!eqQ(s.ledger.tau, idle[t]) || s.ledger.beat.graph.betti !== 0 || s.ledger.beat.graph.vertices !== 1 || s.ledger.moved !== 0) worst ||= `t = ${t}`;
   }
   check('the idle loop [x, x, x] = x re-scans the seed: Δτ = 0 every beat, τ = 0 and the focus stays', s.idle === 1 && s.ledger.idle && !worst && idle.every((x) => eqQ(x, ZERO)), worst);
 }
@@ -695,7 +721,7 @@ const CAPTIONS = {
   [HORIZON]: (d) => d.mode === 'escape' && d.ledger.N === '30031' && d.ledger.q === '59' && d.at.escape === 6,
   [ADELIC]: (d) => d.mode === 'tree' && d.ledger.now === '3750' && d.at.tree === 5,
   [MACHINE]: (d) => d.mode === 'fractran' && d.ledger.N === '22' && d.ledger.halted && d.at.fractran === 15,
-  [CANVAS]: (d) => d.mode === 'canvas' && strQ(d.ledger.kt) === '16/25' && strQ(d.ledger.tau) === '3/2' && d.at.canvas === 3
+  [CANVAS]: (d) => d.mode === 'canvas' && strQ(d.ledger.kt) === '16/25' && strQ(d.ledger.tau) === '2' && d.at.canvas === 3
 };
 for (const [card, ok] of Object.entries(CAPTIONS))
   for (const lang of ['zh', 'en']) {

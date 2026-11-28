@@ -1,0 +1,26 @@
+{
+  "title": "The Four-Question Ledger",
+  "title_zh": "四问总账",
+  "summary": "The closing balance sheet of the book. The verdict: all four unification questions have explicit model-internal witnesses (4/4), and none is derived from one master connection without fitting (0/4). The sheet, one number per cell: alpha_s(M_Z) ≈ 0.1184 given a field table, thresholds and d = 724, k = 32; 67 of the first 8,192 zeros leave three light modes in all five charges at cut 9; |V_ub|² and J within +1.33 / +0.81 ppm on zero #2,306,888,100,085; the four-layer curvature at 0.99941058 of target on #28325. Every witness rests on chosen inputs (argued, model-internal). The five structural tensions with their certificate numbers: the forced seventh-time code 32071996606, 4,130 steps off its reference; 105 windings and then a 100-dimensional feasible family; five selection rules crowning five different zeros; a heavy Yukawa norm above 16.63 pushing more than 3.45 × 10^34 GeV² into the vacuum; ΛG above 0.01180 against Λℓ_P² ~ 10^-122. The floating log is a picture. The four refined open problems in red, how they constrain one another, and the one exam a future master connection must pass. The chapter cites no Lean theorem, and the film shows no green badge.",
+  "summary_zh": "全书收官的总账。裁决：四项统一问题在模型内都有显式见证（4/4），但没有一项能从同一条主联络无拟合地推出（0/4）。总账每格一个数：给定场表、阈值与 d = 724、k = 32 时 α_s(M_Z) ≈ 0.1184；分界 9 时前 8,192 枚零点中有 67 枚在五种超荷上各留三个轻模；零点 #2,306,888,100,085 上 |V_ub|² 与 J 落在 +1.33 / +0.81 ppm；#28325 上四层曲率为目标的 0.99941058 倍。每项见证都依赖指定输入（论证，模型内）。五重结构张力及其证书数字：第七项强迫码 32071996606 偏离参考值 4,130 格；105 圈之后留下 100 维连续可行族；五条选点准则拥立五枚不同零点；重—重汤川范数超过 16.63，向真空注入超过 3.45 × 10³⁴ GeV²；ΛG > 0.01180 而目标是 Λℓ_P² ~ 10⁻¹²²。浮木只是示意。四个精炼的开放问题以红色标出，并画出它们如何彼此牵制，以及未来主联络必须通过的那一场考试。本章不引用 Lean 定理，片中没有绿色标签。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-26",
+  "duration": "2:31",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · a verdict of two counts, a four-row balance sheet, a pentagon of five tensions with certificate cards, four red problem cards, a graph of how the problems constrain one another",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [],
+  "outputs": {
+    "narrated_720p": "omega-unification_four-question-ledger_720p_narrated.mp4",
+    "cover": "omega-unification_four-question-ledger_cover.jpg"
+  }
+}

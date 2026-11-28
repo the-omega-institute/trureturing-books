@@ -21,7 +21,7 @@ def product_with_pole(a, b):
 
 def draw(fig):
     left, right = fig.row([344, 344], 322)
-    left.text(172, 24, left.t("一维与二维 · 阿贝尔退化", "1D and 2D · Abelian collapse"),
+    left.text(172, 24, left.t("一维与二维李代数", "Lie algebras in 1D and 2D"),
               size=18, anchor="middle", weight=600)
     left.text(43, 78, "1D", size=15, weight=600)
     left.line(110, 73, 282, 73, "faint", 1.4)
@@ -38,9 +38,9 @@ def draw(fig):
     left.text(190, 135, "y", size=14)
     left.text(172, 251, left.t("括号与所有生成方向正交", "Bracket orthogonal to the span"),
               size=15, anchor="middle")
-    left.text(172, 283, "dim ≤ 2    ⟹    [x, y] = 0", size=17, anchor="middle")
+    left.text(172, 283, left.t("左非退化不变型 ⟹ [x, y] = 0", "Invariant nondegenerate form ⟹ [x, y] = 0"), size=14, anchor="middle")
 
-    right.text(172, 24, right.t("三维锁定 · 𝕋₃(ℚ)", "Three-dimensional lock · 𝕋₃(ℚ)"),
+    right.text(172, 24, right.t("三元数的次序 · 𝕋₃(ℚ)", "Ternion order · 𝕋₃(ℚ)"),
                size=18, anchor="middle", weight=600)
     p, q = (1, 1, 0, 0), (1, 0, 1, 0)
     forward, reverse = product_with_pole(p, q), product_with_pole(q, p)

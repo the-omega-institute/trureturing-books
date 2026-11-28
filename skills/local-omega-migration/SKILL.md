@@ -20,11 +20,11 @@ python3 skills/local-omega-migration/omega_inventory.py                 # 全部
 python3 skills/local-omega-migration/omega_inventory.py --book quantum-geometry
 ```
 
-脚本只读 `--ref`（默认 `origin/dev`）上的冻结状态片与源码，不改上游 checkout；输出在 `build/omega/`（不提交）：`inventory.json` 给每条引用的层级、签名与全部被引位置（含视频、演示文稿与可视化），`inventory.md` 按层级列出候选。
+脚本只读 `--ref`（默认 `origin/dev`）上的冻结状态片与源码，不改上游 checkout；输出在 `build/omega/`（不提交）：`inventory.json` 给每条引用的层级、两个后端各自的 `libraries` 与 `axioms`、签名与全部被引位置（含视频、演示文稿与可视化），`inventory.md` 按层级列出候选，并写明 `A-omega` 各条在官方端的公理。
 
 | 层级 | 判定 |
 | --- | --- |
-| `A-omega` | 冻结行的 `libraries` 是 `{OmegaInit, OmegaMath}` 的非空子集，且 `axioms` 为 `[]`：已迁移 |
+| `A-omega` | 冻结行某一后端的测量中，`libraries` 是 `{OmegaInit, OmegaMath}` 的非空子集，且 `axioms` 为 `[]`：已迁移。主记录是官方端，`strict_omega` 是严格端；官方端把基础库记作 `Init`，所以 D5 的 Omega 出版引用靠严格端入选 |
 | `C-exact` | 签名与模块源码只用自然数、整数、有理数、有限对象或纯逻辑：候选 |
 | `B-structural` | 用到 Mathlib 的有限结构（`Finset`、`Matrix`、`ZMod`、图、群等）：候选，需先在 OmegaMath 补基础设施 |
 | `D-analytic` | 需要实数、复数、极限、测度、拓扑或赋范空间：不迁移 |
@@ -48,16 +48,16 @@ python3 skills/local-omega-migration/omega_inventory.py --book quantum-geometry
 
 在 trureturing 按它的 `CLAUDE.md` §3.1–3.2、`src/README.md` 与 `skills/codex-formalize/SKILL.md` 工作；本仓库不写 Lean。
 
-- 可复用的通用结果放 `src/OmegaMath/`：移植钉版 Mathlib 的，保留定义模块的路径，把 `Mathlib` 换成 `OmegaMath`，在原全名前加 `Omega.`；原创结果就近放在专题目录，模块文档首行写 `Omega original.`。Init 级基础放 `src/OmegaInit/`，按官方 Init 的对应规则命名。
+- 项目自己的数学放 `src/OmegaMath/`，原创模块文档首行写 `Omega original.`。钉版 Lean Init 的严格移植放 `strict/OmegaInit/`，钉版 Mathlib 的严格移植放 `strict/OmegaMathlib/`。移植沿用上游定义模块的相对路径，声明全名前加 `Omega.`。`src/OmegaInit/` 与 `src/OmegaMathlib/` 是生成的官方接口。
 - 面向书的结论放 D5 模块：`module`、`prelude`，只 `public import` 所需的 Omega 模块；一批按主题合成少数几个模块。
 - PR 正文逐条写书中位置（文件与 `#id`）、被替换的原 GID 与新 GID；判形照实写 `bind-only`，准入依据是 §3.2 的“OmegaMath 的 D5 出版引用”，数学成果归于 OmegaMath 中的原证明。
-- 合入 `dev` 并冻结后核对状态片：每条新声明 `libraries ⊆ {OmegaInit, OmegaMath}`、`axioms: []`；`lake test -- <模块>` 通过严格审计。
+- 合入 `dev` 并冻结后按书锁在冻结状态片中匹配声明行，核对官方端 `declarations[].libraries` 与 `declarations[].axioms`。历史行缺官方公理字段时只给出许可上界。有严格端测量时，同时核对该行的 `declarations[].strict_omega.libraries` 与 `declarations[].strict_omega.axioms`。库根的空内核重放可用 `lake test -- <严格库根>`，D5 消费模块先用 `make install-tools` 安装所钉检查器，再用 `python3 src/OmegaChecks/portable.py --backend both <消费模块名>` 检查双端编译和导出。写作与核验见 [local-content-accuracy](../local-content-accuracy/SKILL.md)。
 
 ## 4. 回到书库
 
 1. `git -C "$TRURETURING_DIR" fetch origin dev`，`./tbook pin --refresh`。
 2. 先改权威版本（`zh`）再同步 `en`：`lean="…"`、正文的 `lean:` 链接、视频 `film.json` 与 `scenes.js`、演示文稿的 `gid=`、可视化里的 GID，位置与顺序逐语言一致。
-3. 定理框按新的 Lean 陈述重写，假设与结论逐项对齐：`IntRatio.Equivalent` 写“两个比值相等”，有限性、非零分母一类前提照写，不沿用旧声明的措辞。`proof` 块可说明证明在严格 Omega 库中完成、不依赖任何公理，结语仍是固定句。
+3. 定理框按新的 Lean 陈述重写，假设与结论逐项对齐：`IntRatio.Equivalent` 写“两个比值相等”，有限性、非零分母一类前提照写，不沿用旧声明的措辞。`proof` 块可以说明证据所覆盖的后端及其公理依赖，结语仍是固定句。
 4. `lean=` 有增删时运行 `python3 books/quantum-geometry/viz/lean-declaration-map/gen-data.py` 与 `node tools/node/viz-thumbs.mjs quantum-geometry lean-declaration-map`；由锁文件算数的静态图运行 `./tbook fig build --book quantum-geometry`（`PROJECT.md` 第 6 节第 6 条）。
 5. `./tbook check` 0 错误，构建并抽查受影响章节，提 PR，正文附上游 PR 链接与追踪 Issue。
 

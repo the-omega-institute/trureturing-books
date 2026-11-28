@@ -1,0 +1,26 @@
+{
+  "title": "The Line That Closes",
+  "title_zh": "闭合的直线",
+  "summary": "A ray tilts toward upright and its slope P/Q runs through 1/2, 1, 2, 5, 10 until Q = 0 crashes into 1/0. Keeping the homogeneous integer pair [P : Q] instead, multiples such as 2 : 4, 3 : 6 and −1 : −2 are one point [1 : 2], the denominator P² + Q² is at least 1, and fidelity κ = Q²/(P² + Q²) gives 16/20 ≡ 4/5 (computed); Lean checks that natural and nonzero signed rescalings leave κ unchanged. The spread s = P²/(P² + Q²) splits [1 : 2] into 4/5 + 1/5 and [2 : 3] into 9/13 + 4/13 (computed), and Lean checks κ + s ≡ 1 for every nonzero pair. The line bends onto the rational Cayley circle: [1 : 2] ↦ (3/5, 4/5), [2 : 3] ↦ (5/13, 12/13) (computed), with Lean checking X² + Y² ≡ 1 for every nonzero pair. The three anchors the book names past [0 : 1] ↦ (1, 0), present [1 : 1] ↦ (0, 1) with κ = s = 1/2, and future [1 : 0] ↦ (−1, 0) carry finite readings; Lean checks κ = 0, s = 1, (−1, 0) at every [p : 0]. Homogeneous circle multiplication gives (1, 2) ⊙ (1, 3) = (5, 5) ~ [1 : 1] with 5 × 10 = 50 = 5² + 5², and squaring walks [1 : 1] → [1 : 0] → [0 : 1] (computed); Lean checks the Brahmagupta–Fibonacci norm identity for all integers. Finite horizons hold 4, 8 and 184 points at M = 1, 2, 12 (counted here); the general count 4Φ(M) and the commutativity limit that points to chapter 3 are the chapter's argument.",
+  "summary_zh": "一条射线向竖直方向倾斜，斜率 P/Q 依次读出 1/2、1、2、5、10，直到 Q = 0 撞上 1/0。改为保留齐次整数对 [P : Q] 后，2 : 4、3 : 6、−1 : −2 等倍数都是同一个点 [1 : 2]，分母 P² + Q² 至少为 1，保真度 κ = Q²/(P² + Q²) 给出 16/20 ≡ 4/5（屏幕计算）；Lean 检验正自然数与非零有号整数缩放都不改变 κ。展开度 s = P²/(P² + Q²) 把 [1 : 2] 分成 4/5 + 1/5、把 [2 : 3] 分成 9/13 + 4/13（屏幕计算），Lean 检验对每个非零整数对 κ + s ≡ 1。直线弯成有理凯莱单位圆：[1 : 2] ↦ (3/5, 4/5)、[2 : 3] ↦ (5/13, 12/13)（屏幕计算），Lean 检验每个非零整数对都满足 X² + Y² ≡ 1。书中称为过去、现在、未来的三枚锚点 [0 : 1] ↦ (1, 0)、[1 : 1] ↦ (0, 1)（κ = s = 1/2）与 [1 : 0] ↦ (−1, 0) 读数全部有限；Lean 检验每个 [p : 0] 处 κ = 0、s = 1、像点为 (−1, 0)。齐次圆群乘法给出 (1, 2) ⊙ (1, 3) = (5, 5) ~ [1 : 1]，且 5 × 10 = 50 = 5² + 5²；自乘沿 [1 : 1] → [1 : 0] → [0 : 1] 走一圈（屏幕计算）；Lean 对一切整数检验婆罗摩笈多—斐波那契范数乘性。有限视界在 M = 1、2、12 时分别含 4、8、184 个点（屏幕计数）；一般计数 4Φ(M) 以及指向第三章的交换性限制属本章论证。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-27",
+  "duration": "2:49",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · a tilting ray against a slope ruler, an integer lattice with one projective line lit, unit-cell share bars, the rational Cayley circle with its anchors, arcs composed by integer products, finite horizons of rational points",
+  "narration": {"language": "en", "engine": "Kokoro-82M v1.0 (onnx)", "voice": "af_heart"},
+  "subtitles": ["zh", "en"],
+  "lean": [
+    "D5/S3/Quantum/AURICOmega/ProjectiveOverlapScaling.kappa_scale",
+    "D5/S3/Quantum/AURICOmega/OmegaCircleClosure.kappa_scale",
+    "D5/S3/Quantum/AURICOmega/OmegaCircleClosure.kappa_add_spread_eq_one",
+    "D5/S3/Quantum/AURICOmega/OmegaCircleClosure.cayley_circle_unit",
+    "D5/S3/Quantum/AURICOmega/OmegaCircleClosure.cayley_antipodal_closure",
+    "D5/S3/Quantum/AURICOmega/OmegaCircleClosure.projective_circle_mul_normSq"
+  ],
+  "outputs": {
+    "narrated_720p": "omega-math_the-line-that-closes_720p_narrated.mp4",
+    "cover": "omega-math_the-line-that-closes_cover.jpg"
+  }
+}

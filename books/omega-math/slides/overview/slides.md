@@ -33,8 +33,8 @@ section: "前言"
     </div>
     <div class="card">
       <h4>Mathlib.Real</h4>
-      <h3>3 条标准公理</h3>
-      <p><code>propext</code>、<code>Classical.choice</code> 与 <code>Quot.sound</code> 支撑本书所用的经典实数路线。</p>
+      <h3>至多 3 条标准公理</h3>
+      <p>每条冻结定理的官方依赖以 <code>propext</code>、<code>Classical.choice</code> 与 <code>Quot.sound</code> 为许可上界。</p>
     </div>
     <div class="card hot">
       <h4>自定义 axiom</h4>
@@ -88,7 +88,7 @@ section: "第二卷"
   <h2 class="t">从无原点流群到<em>三维有理旋转</em></h2>
   <div class="flow mt">
     <div class="step"><b>三元搬运</b><p>以中间点为临时参照，把两点的关系搬到第三点。</p></div>
-    <div class="step"><b>PythSpinor 双覆盖</b><p>有号旋量在 <Tex t="360^\circ" /> 到达反号位置，在 <Tex t="720^\circ" /> 回到起点。</p></div>
+    <div class="step"><b>PythSpinor 双覆盖</b><p>在有理单位旋量覆盖的子群上，有号旋量在 <Tex t="360^\circ" /> 到达反号位置，在 <Tex t="720^\circ" /> 回到起点。</p></div>
     <div class="step"><b>凯莱正逆桥</b><p>斜对称阵 <Tex t="X" /> 给出有理旋转 <Tex t="R" />。当 <Tex t="\det(R+I)\ne0" /> 时可反求 <Tex t="X" />。</p></div>
   </div>
   <TheoremCard class="mt-l" label="定理5.2" title="去分母的凯莱闭合方程" cite="thm-ch05-rational-cayley-core" gid="D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.cayley_identity">
@@ -122,7 +122,7 @@ section: "第三卷"
   <h2 class="t">无极限微积分<em>直接计算系数</em></h2>
   <div class="g2 mt">
     <div class="card"><h4>Jet2 · 幂零环</h4><p>在 <Tex t="\mathbb Q[\eta]/(\eta^3)" /> 中，二阶射流是三个精确的有理系数。</p></div>
-    <div class="card"><h4>D-有限 · 任意有限阶</h4><p>用有理递推按需生成系数。形式微分与乘法可逐阶计算。</p></div>
+    <div class="card"><h4>D-有限 · 任意有限阶</h4><p>在有理普通点给定有理初始导数后，递推逐阶生成有理系数。形式微分与乘法可逐阶计算。</p></div>
   </div>
   <TheoremCard class="compact mt" label="定理7.5" title="保真度核的精确二阶射流" cite="thm-ch07-fidelity-jet-and-secant" gid="D5/S3/Quantum/AURICOmega/OmegaJetCalculus.kappa_jet">
     <p>令 <Tex t="D=1+x^2" />。对有限有理 <Tex t="x" />，<Tex t="\kappa(x)=D^{-1}" /> 的 Jet2 读数为 <Tex t="\bigl(D^{-1},-2xD^{-2},(3x^2-1)D^{-3}\bigr)" />。</p>
@@ -235,14 +235,9 @@ layout: cover
 ---
 
 <h2 class="t">空内核<em>审计</em></h2>
-<p class="sm muted"><code>OmegaInit</code> 与 <code>OmegaMath</code> 的 88 个模块、2,211 条声明在全新空内核中重放，传递公理数为 0。</p>
-<div class="g4 mt-s">
-  <Stat value="14" label="D5 零公理模块" />
-  <Stat value="127" label="D5 冻结零公理定理" tone="ok" />
-  <Stat value="138" label="Omega D5 核心与桥接冻结定理" />
-  <Stat value="173" label="引用的不同冻结 Lean 4 声明" />
-</div>
-<p class="sm mt-s">零公理定理的依赖为 <code>axioms: []</code>。第 2 层模块 <code>OmegaShadowBridge</code> 计入 11 条定理。</p>
+<p class="sm muted">审计器在全新空内核中重放选定的严格库导入闭包，并逐条检查传递公理。</p>
+<p class="sm mt-s">附录 A.3 的 127 条 D5 定理经过双端编译对照。各声明行的 <code>strict_omega.axioms</code> 给出严格端公理，<code>axioms</code> 给出官方端公理。</p>
+<p class="sm mt-s"><code>OmegaShadowBridge</code> 将核心构造单向接到经典实数层。</p>
 <p class="sm mt-s"><b>四座 3D 交互实验室</b> · <a :href="readingLink('viz/omega-math-workbench/')">OMEGA//LAB</a> · <a :href="readingLink('viz/ternion-cayley-lab/')">OMEGA//SPIN</a> · <a :href="readingLink('viz/dfinite-algebraic-schur-lab/')">OMEGA//JET</a> · <a :href="readingLink('viz/adelic-arithmetic-observer-lab/')">OMEGA//ARC</a></p>
 <p class="sm mt-s"><b>阅读路线</b> · <a :href="readingLink('zh/ch01-axiom-omega-and-cic.html')">第 1 章 基础</a> · <a :href="readingLink('zh/ch18-zero-axiom-kernel-and-shadow-bridge.html')">第 18 章 审计</a> · <a :href="readingLink('zh/coda.html')">终章 六卷对照</a> · 19 幅双语静态图 · <a :href="readingLink('zh/appendix-a.html')">附录 A 冻结索引</a> · <a :href="readingLink('zh/appendix-b.html')">附录 B 证据总账</a></p>
 

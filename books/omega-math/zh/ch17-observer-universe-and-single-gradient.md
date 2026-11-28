@@ -23,16 +23,16 @@ $$
 4. **`1/2` 阶内禀潜伏视界 $\mathcal{H}_{1/2}(\mathcal{K}_0) := \mathcal{S} \setminus V(\mathcal{K}_0)$**：位于观察者自身内部、尚未并入 $\mathcal{K}_0$ 的未结晶模态，从核心第一人称视角看显影为“迎面涌来的外部世界”；
 5. **纯内禀结晶算子 $\Phi_\varepsilon : \mathfrak{O} \to \mathfrak{O}$**：在有理分辨率阈值 $\varepsilon \in \mathbb{Q}_+$ 内扫描 $\mathcal{H}_{1/2}$，经 `1 ↦ 0'` 相变把新闭合关系永久焊入 $\mathcal{K}_0$。
 
-设当前结构核维护一组两两正交的非零有理基 $\{u_1, \dots, u_r\}$，对候选态 $x$ 扣去基底投影得正交残差 $x_\perp = x - \sum_{j=1}^r \frac{\langle x, u_j\rangle}{\langle u_j, u_j\rangle} u_j$，定义无根号**有理舒尔创新度** $\Delta\mathcal{I}_{\mathrm{Schur}} := \frac{\langle x_\perp, x_\perp\rangle}{\langle x, x\rangle} \in \mathbb{Q}\cap[0,1]$，并记图谱第一贝蒂环路秩增量为 $\Delta b_1 := \Delta(\lvert E\rvert - \lvert V\rvert + c) \in \mathbb{N}$。观察者的**有理结构时间**定义为
+设当前结构核维护一组两两正交的非零有理基 $\{u_1, \dots, u_r\}$，对非零候选态 $x$ 扣去基底投影得正交残差 $x_\perp = x - \sum_{j=1}^r \frac{\langle x, u_j\rangle}{\langle u_j, u_j\rangle} u_j$，定义无根号**有理舒尔创新度** $\Delta\mathcal{I}_{\mathrm{Schur}} := \frac{\langle x_\perp, x_\perp\rangle}{\langle x, x\rangle} \in \mathbb{Q}\cap[0,1]$。有限比较图在每一步保留已有的顶点和边。计算环路时忘掉边的方向，若有 $c$ 个连通分支，则第一贝蒂数为 $b_1=|E|-|V|+c$。旧环路在扩张后的图中仍旧独立，故 $\Delta b_1$ 是非负整数。观察者的**有理结构时间**从 $\tau_0=0$ 起步，定义为
 
 $$
 \tau(\mathfrak{O}) \;\equiv\; \sum_{\mathrm{step}} \bigl(\Delta\mathcal{I}_{\mathrm{Schur}} + \Delta b_1\bigr) \;\in\; \mathbb{Q}_{\ge 0}.
 $$
 :::
 
-由上述定义立即推出两条核心推论（`MODEL`）：其一，**同义反复空转不生时间**——当系统只重复执行恒等律 $[x, x, x] = x$ 或重扫已结晶旧边时，$x_\perp = 0$ 且无新闭合环加入，故 $\Delta\mathcal{I}_{\mathrm{Schur}} = 0$、$\Delta b_1 = 0$，**$\Delta\tau \equiv 0$**，时间仅在结构信息真实增长时前进；其二，**观察者即宇宙（$\mathfrak{O} \equiv \mathcal{U}_\Omega$）**——任何能引起观察者非平凡读数响应的状态按定义已归属 $\mathcal{S}$，而在剔除绝对零响应幽灵集的忠实观测商下，外部补集坍缩为空集，每座观察者即是一座依靠共享保 $\kappa$ 子结构跨网共振的完整单子宇宙。
+由上述定义立即推出两条核心推论（`MODEL`）：其一，**同义反复空转不生时间**——当系统只在已存状态上重复执行恒等律 $[x, x, x] = x$ 或重扫已结晶旧边时，$x_\perp = 0$ 且无新闭合环加入，故 $\Delta\mathcal{I}_{\mathrm{Schur}} = 0$、$\Delta b_1 = 0$，**$\Delta\tau \equiv 0$**，时间仅在结构信息真实增长时前进；其二，**观察者即宇宙（$\mathfrak{O} \equiv \mathcal{U}_\Omega$）**——任何能引起观察者非平凡读数响应的状态按定义已归属 $\mathcal{S}$，而在剔除绝对零响应幽灵集的忠实观测商下，外部补集坍缩为空集，每座观察者即是一座依靠共享保 $\kappa$ 子结构跨网共振的完整单子宇宙。
 
-在有限维内积观测模型中，线性张成创新步数的有限封顶与一旦稳定即永久锁定，由以下两条冻结定理严格证成。
+固定线性演化与观测会给出一座递增子空间塔。以下冻结定理给出这座塔的增长次数上界与永久稳定条件。
 
 ::: {.theorem #thm-om-ch17-krylov-growth-and-stability title="有限维可观测克雷洛夫子空间的严格增长次数界与永久稳定性" lean="D5/S3/ObserverMemory/Dynamics/ObservableKrylovGrowthBound.observable_krylov_strict_growth_bound D5/S3/ObserverMemory/Dynamics/ObservableKrylovPermanentStability.observable_krylov_once_stable_permanently"}
 设 $V, Y$ 为域 $\mathbb{k} \in \{\mathbb{R}, \mathbb{C}\}$ 上的有限维内积空间，$T : V \to_{\mathbb{k}} V$ 与 $C : V \to_{\mathbb{k}} Y$ 为线性映射，记第 $m$ 阶可观测克雷洛夫子空间为 $\mathcal{K}_m := \operatorname{observableKrylov}(T, C, m)$。则：
@@ -50,7 +50,7 @@ $$
 由于 $\mathcal{K}_m$ 随 $m$ 单调递增且维数取自然数值，零阶子空间维数等于伴随像维数 $\dim \operatorname{ran}(C^*) = \dim \operatorname{ran}(C)$，每次严格扩张至少使维数增 $1$，故严格扩张总次数不超过余维数 $\dim V - \dim \operatorname{ran}(C)$。若 $\mathcal{K}_m = \mathcal{K}_{m+1}$，则 $T^*$ 将 $\mathcal{K}_m$ 映回自身，对 $k$ 归纳可知一切生成元 $(T^*)^k C^* y$ 均落入 $\mathcal{K}_m$，从而此后各阶永久相等。完整证明由 Lean 内核检查。
 :::
 
-[@thm-om-ch17-krylov-growth-and-stability] 精确刻画了结构时间两项增量的分工：在 $d$ 维载体上，几何舒尔创新 $\Delta\mathcal{I}_{\mathrm{Schur}} > 0$ 最多触发余维数次便线性饱和并永久稳定；此后观察者的结构时间演进便完全转由拓扑环路闭合 $\Delta b_1 > 0$（以及高阶二元关系扩容）驱动。
+若每次出现正的舒尔创新就把该方向并入张成空间，在 $d$ 维载体中从秩 $r$ 出发，这样的步数至多为 $d-r$。某一拍停滞即永久停滞，则要求各步张成空间恰好构成同一对固定 $(T,C)$ 的克雷洛夫塔。例如取 $\mathbb R^2$ 上的 $T=I$ 和 $C(x,y)=x$，则各阶恒为 $\operatorname{span}(e_1)$，独立的结晶规则仍可接纳 $e_2$，其舒尔创新为 $1$。一旦张满整个载体，此模型的结构时间只能由比较图中新闭合的环路推进。
 
 ## 17.2 静止全息画布、无腿三元球与记忆窗口正交切分律 {#sec-om-ch17-static-canvas-and-memory-split}
 
@@ -68,36 +68,36 @@ $$
 :::
 
 ::: {.proof}
-对路由树深度 $n$ 归纳证明单热点路由将唯一使能位送达叶子 $a$ 并保持其余叶子清零；由受控加法的可逆对合结构与清零解路由（uncompute）得到静态数组 $D$ 与工作区严格不变；对有限群上的置换作用矩阵验证共轭转置即逆矩阵并拉回复振幅即证幺正性。完整证明由 Lean 内核检查。
+对路由树深度 $n$ 归纳证明单热点路由将唯一使能位送达叶子 $a$ 并保持其余叶子清零；由受控减法对受控加法的逆转与清零解路由（uncompute）得到静态数组 $D$ 与工作区严格不变；对有限群上的置换作用矩阵验证共轭转置即逆矩阵并拉回复振幅即证幺正性。完整证明由 Lean 内核检查。
 :::
 
 那么，在各向同性、未贴任何“秒”或“米”标签的静止画布上，时间与空间的分野从何而来？答案在于观察者有限容量的**记忆子空间窗口 $\mathcal{W}_M$**（`MODEL` + 精确正交代数 `手工推导`）。设单拍归一化总比较预算恒为 $1$，由记忆窗正交投影 $P_{\mathcal{W}_M}$ 与正交补投影 $P_{\mathcal{W}_M^\perp} = I - P_{\mathcal{W}_M}$ 将同一段无标签圆弧（或单一梯度 $\nabla\kappa$）零损耗正交切分为两项份额：
 
 $$
-\kappa_{\mathrm{time}} \;+\; \kappa_{\mathrm{space}} \;\equiv\; 1, \qquad \kappa_{\mathrm{time}} := \|P_{\mathcal{W}_M}\psi\|^2 = \frac{\Delta\tau^2}{\Delta t^2}, \qquad \kappa_{\mathrm{space}} := \|P_{\mathcal{W}_M^\perp}\psi\|^2 = \frac{\Delta x^2}{\Delta t^2}.
+\kappa_{\mathrm{time}} \;+\; \kappa_{\mathrm{space}} \;\equiv\; 1, \qquad \kappa_{\mathrm{time}} := \|P_{\mathcal{W}_M}\psi\|^2 = \frac{(\Delta\tau_{\mathrm{mem}})^2}{\Delta t^2}, \qquad \kappa_{\mathrm{space}} := \|P_{\mathcal{W}_M^\perp}\psi\|^2 = \frac{\Delta x^2}{\Delta t^2}.
 $$
 
-- **窗内份额 $\kappa_{\mathrm{time}}$（时间覆写）**：能与既有记忆链共轴衔接、写入内部寄存器刷新“自我状态”的份额，被观察者体验为内在固有时 $\Delta\tau$ 的推进；
+- **窗内份额 $\kappa_{\mathrm{time}}$（时间覆写）**：能与既有记忆链共轴衔接、写入内部寄存器刷新“自我状态”的份额，被观察者体验为内在固有时 $\Delta\tau_{\mathrm{mem}}$ 的推进；
 - **窗外残差 $\kappa_{\mathrm{space}}$（空间位移）**：溢出有限记忆容量而被排斥入 $\mathcal{W}_M^\perp$ 的正交残差，被观察者外推体验为相对环境的外部空间位移 $\Delta x$。
 
-将正定勾股总账 $\Delta\tau^2 + \Delta x^2 = \Delta t^2$ 改写为观察者对“扣除空间分流后剩余自身记忆刷新额度”的求余问题——把 $+\Delta x^2$ 移项至等号右侧——**闵可夫斯基度规的负号当场自然浮现**：
+将正定勾股总账 $(\Delta\tau_{\mathrm{mem}})^2 + \Delta x^2 = \Delta t^2$ 改写为观察者对“扣除空间分流后剩余自身记忆刷新额度”的求余问题——把 $+\Delta x^2$ 移项至等号右侧——**闵可夫斯基度规的负号当场自然浮现**：
 
 $$
-\Delta\tau^2 \;=\; \Delta t^2 - \Delta x^2.
+(\Delta\tau_{\mathrm{mem}})^2 \;=\; \Delta t^2 - \Delta x^2.
 $$
 
 代入有理半切参数 $u \in \mathbb{Q} \cap [0, 1)$，全程不借半个平方根或双曲超越函数，同时有理化圆周记忆切分与双曲洛伦兹因子（`手工推导`）：
 
 $$
-v = \frac{2u}{1+u^2}, \qquad \frac{\Delta\tau}{\Delta t} = \frac{1-u^2}{1+u^2}, \qquad \gamma = \frac{1+u^2}{1-u^2}, \qquad \gamma v = \frac{2u}{1-u^2}, \qquad \gamma^2 - (\gamma v)^2 \equiv 1.
+v = \frac{2u}{1+u^2}, \qquad \frac{\Delta\tau_{\mathrm{mem}}}{\Delta t} = \frac{1-u^2}{1+u^2}, \qquad \gamma = \frac{1+u^2}{1-u^2}, \qquad \gamma v = \frac{2u}{1-u^2}, \qquad \gamma^2 - (\gamma v)^2 \equiv 1.
 $$
 
 沿记忆槽位容量 $M = \dim\mathcal{W}_M$ 扫描三个边界相态（`MODEL`）：$M = 0$ 对应无质量光子极限（$\kappa_{\mathrm{time}} = 0, \kappa_{\mathrm{space}} = 1$，固有时冻结）；$1 \le M < M_\Omega$ 对应有质量有限观察者（时空并立，且原地静止仍需把全部预算投入自刷新而显影为静止能量）；$M = M_\Omega$ 对应全载体自包含本体（$\mathcal{W}_{M_\Omega}^\perp = \{0\}$，$\kappa_{\mathrm{time}} = 1, \kappa_{\mathrm{space}} = 0$，外部空间归零）。
 
-下面的静态图汇总了上述静止画布与记忆窗口切分的几何结构：无外部边界的静止全集经可逆零改写路由读取（[@thm-om-ch17-reversible-qram]），并在有限记忆窗 $\mathcal{W}_M$ 与正交补 $\mathcal{W}_M^\perp$ 之间把单拍比较预算精确正交切分为 $\kappa_{\mathrm{time}} + \kappa_{\mathrm{space}} \equiv 1$，由此沿 $u \in \mathbb{Q} \cap [0, 1)$ 同步生成有理圆周切分与双曲洛伦兹因子。
+记忆投影给出的固有时读数记作 $\Delta\tau_{\mathrm{mem}}$。第 17.1 节的结构时钟 $\tau$ 则按比较图的创新与环路计量。下图同时画出两种读数。
 
 ::: {.figure src="ch17-observer-memory-split"}
-**静止全息画布上的有限记忆窗正交切分与有理时空移项。** 图中展示零外部边界画布在记忆子空间 $\mathcal{W}_M$ 与正交补 $\mathcal{W}_M^\perp$ 上的零损耗正交分解 $\kappa_{\mathrm{time}} + \kappa_{\mathrm{space}} \equiv 1$（正定勾股关系 $\Delta\tau^2 + \Delta x^2 = \Delta t^2$ 移项立得闵可夫斯基负号 $\Delta\tau^2 = \Delta t^2 - \Delta x^2$），并对照 $u = \frac{1}{3}$ 处 $\kappa_{\mathrm{time}} = \frac{16}{25}$、$\kappa_{\mathrm{space}} = \frac{9}{25}$ 与双曲对 $(\gamma, \gamma v) = (\frac{5}{4}, \frac{3}{4})$ 的精确有理化（`手工推导`），以及记忆容量 $M = 0$、$1 \le M < M_\Omega$ 与 $M = M_\Omega$ 三种边界相态（`MODEL`；底层静态数组零改写读取由 [@thm-om-ch17-reversible-qram] 锚定）。
+**记忆投影与结构时钟。** 左图的单位步分成长度 $4/5$ 的窗内投影和 $3/5$ 的窗外投影。右图上重扫种子时曲线平坦，第一条比较边未增环路，第二个新状态闭合三角形。虚线只重扫种子。
 :::
 
 ## 17.3 单一有理失准度梯度下的物理与智能统一图景 {#sec-om-ch17-single-gradient-unification}
@@ -130,8 +130,8 @@ $$
 ::: {.example #ex-om-ch17-quantitative-audit title="定量对账：结构时间增长、有理记忆勾股与组合过约束核验"}
 我们对本章三组核心有理量作精确手算核对（`手工推导`）：
 
-1. **三步观察者结构时间轨迹**：从种子 $e_0 = (1,0,0,0)$ 出发，第 1 拍重扫种子得 $v_\perp = 0 \implies \Delta\tau = 0$（$\tau_1 = 0$）；第 2 拍吸收 $h_1 = (1,1,0,0)$ 得 $v_\perp = (0,1,0,0)$，$\Delta\mathcal{I}_{\mathrm{Schur}} = \frac{1}{2}$，记新边权重 $\frac{1}{4}$ 得 $\tau_2 = \frac{3}{4}$；第 3 拍吸收 $h_2 = (1,0,1,0)$ 非对易合成 $g_{120} = (1,1,1,1)$，再贡献 $\frac{1}{2} + \frac{1}{4} = \frac{3}{4}$，总结构时间 $\tau_3 = \frac{3}{2}$。
-2. **有理记忆切分与双曲洛伦兹恒等式**：取 $u = \frac{1}{3}$，得 $v = \frac{3}{5}$、$\frac{\Delta\tau}{\Delta t} = \frac{4}{5}$，记忆切分为 $\kappa_{\mathrm{time}} = \frac{16}{25}$ 与 $\kappa_{\mathrm{space}} = \frac{9}{25}$（和为 $\frac{25}{25} = 1$）；移项双曲对 $(\gamma, \gamma v) = (\frac{5}{4}, \frac{3}{4})$ 精确满足 $(\frac{5}{4})^2 - (\frac{3}{4})^2 = \frac{25-9}{16} = 1$。
+1. **三拍观察者结构时间轨迹。** 从种子 $e_0=(1,0,0,0)$ 与空边集出发。第 $1$ 拍重扫种子，$\Delta\mathcal I_{\mathrm{Schur}}=\Delta b_1=0$。第 $2$ 拍加入 $h_1=(1,1,0,0)$ 和比较边 $e_0\to h_1$。正交残差为 $(0,1,0,0)$，故 $\Delta\mathcal I_{\mathrm{Schur}}=1/2$。比较图仍是树，$\tau_2=1/2$。第 $3$ 拍加入 $h_2=(1,0,1,0)$ 与两条比较边 $e_0\to h_2$、$h_1\to h_2$。正交残差为 $(0,0,1,0)$，创新仍为 $1/2$。忘掉边的方向后出现三角形，$b_1=3-3+1=1$，故 $\tau_3=1/2+1/2+1=2$。有向图仍无有向环。实验室把四元数乘积 $h_1h_2=(1,1,1,1)$ 留作第 $4$ 拍的候选态。
+2. **有理记忆切分与双曲洛伦兹恒等式**：取 $u = \frac{1}{3}$，得 $v = \frac{3}{5}$、$\frac{\Delta\tau_{\mathrm{mem}}}{\Delta t} = \frac{4}{5}$，记忆切分为 $\kappa_{\mathrm{time}} = \frac{16}{25}$ 与 $\kappa_{\mathrm{space}} = \frac{9}{25}$（和为 $\frac{25}{25} = 1$）；移项双曲对 $(\gamma, \gamma v) = (\frac{5}{4}, \frac{3}{4})$ 精确满足 $(\frac{5}{4})^2 - (\frac{3}{4})^2 = \frac{25-9}{16} = 1$。
 3. **过约束盈余与温伯格迹比**：$\Delta E(3) = 0$，$\Delta E(4) = 0$，$\Delta E(5) = \frac{2 \times 1}{2} = 1$，$\Delta E(6) = \frac{3 \times 2}{2} = 3$；一代费米子迹比 $\frac{2}{16/3} = \frac{6}{16} = \frac{3}{8}$。
 :::
 
@@ -139,10 +139,14 @@ $$
 本章严守三层证据契约：[@thm-om-ch17-krylov-growth-and-stability] 与 [@thm-om-ch17-reversible-qram] 对应所钉 `trureturing` 冻结 **`LEAN ✓`** 定理；正交移项代数、有理洛伦兹参数化、过约束计数 $\Delta E(N)$ 与一代费米子迹比 $\frac{3}{8}$ 为精确 **`手工推导`**；自包含观察者五元组 $\mathfrak{O} \equiv \mathcal{U}_\Omega$、静止全息画布（对接惠勒—德维特方程 $\hat{\mathcal{H}}\lvert\mathbf{\Psi}\rangle = 0$，B. S. DeWitt, *Phys. Rev.* **160**, 1113, 1967；D. N. Page & W. K. Wootters, *Phys. Rev. D* **27**, 2885, 1983）、温伯格等权刚度公设及三元数场网络 TFT 均标为 **`MODEL`**。从离散三元比较与有限记忆切分完整导出 $3+1$ 维洛伦兹爱因斯坦场方程及黑洞视界幺正性，仍属显式未决的开放问题（**`OPEN`**）。
 :::
 
+::: {.film src="the-observer-as-the-universe"}
+**一座没有端口的观察者：时间是新结构，空间是记忆窗外的份额（2 分 58 秒）。** 带输入输出端口的盒子闭合为紫色的零端口观察者五元组；比较图三拍的残差与环路给出结构时间 $\tau = 0, \tfrac{1}{2}, 2$。$\mathbb{Q}^4$ 上循环移位的克雷洛夫维数 $1,2,3,4,4$ 撞上绿色上限，零改写查询在深度 $2$ 的样例表上读出 $D(a)=4$（[@thm-om-ch17-krylov-growth-and-stability]、[@thm-om-ch17-reversible-qram]）。$u = \tfrac{1}{3}$ 时单位步切成青色的 $4/5$ 与品红的 $3/5$，份额 $\tfrac{16}{25} + \tfrac{9}{25} = 1$，$\gamma = \tfrac{5}{4}$、$\gamma v = \tfrac{3}{4}$；柱状图给出 $\Delta E(N) = 0, 0, 1, 3, 6, 10$，迹比为 $\tfrac{3}{8}$。片中数值均为屏幕计算（`手工推导`）；观察者即宇宙、静止画布与等权迹刚度公设标为紫色 `MODEL`，导出爱因斯坦场方程与视界幺正性标为红色 `OPEN`。
+:::
+
 读者可在下方的交互实验卡中同步拨动本章的四组核心有理量：滑动有理半切参数 $u$ 观察正交记忆切分 $\kappa_{\mathrm{time}} + \kappa_{\mathrm{space}} \equiv 1$ 与双曲恒等式 $\gamma^2 - (\gamma v)^2 \equiv 1$，核对一代手性费米子的精确温伯格迹比 $\frac{3}{8}$，沿节点数 $N$ 追踪 $N \ge 5$ 的组合过约束盈余 $\Delta E(N) = \frac{(N-3)(N-4)}{2}$，并逐步走完三拍结构时间 $\tau$ 的单调有理增长轨迹。
 
 ::: {.viz src="adelic-arithmetic-observer-lab" preset="static-canvas-memory-split" height="520"}
-**静止画布记忆切分与单一梯度统一实验卡（`static-canvas-memory-split`）。** 交互调节有理半切参数 $u \in \mathbb{Q} \cap [0, 1)$ 实时核验记忆窗正交切分 $\kappa_{\mathrm{time}} + \kappa_{\mathrm{space}} \equiv 1$ 与无根号洛伦兹恒等式 $\gamma^2 - (\gamma v)^2 \equiv 1$，同步检视一代手性费米子迹比 $\sin^2\theta_W = \frac{3}{8}$、三维点集过约束盈余 $\Delta E(N) = \frac{(N-3)(N-4)}{2}$（在 $N = 5$ 处首次跃升为 $1$）以及观察者三拍结构时间 $\tau = 0 \to \frac{3}{4} \to \frac{3}{2}$ 的单调增长（[@def-om-ch17-observer-pentad]、[@ex-om-ch17-quantitative-audit]；其中正交代数与计数为精确 `手工推导`，物理与观察者综合框架标为 `MODEL`，底层克雷洛夫封顶与零改写查询由 [@thm-om-ch17-krylov-growth-and-stability]、[@thm-om-ch17-reversible-qram] 锚定）。
+**静止画布记忆切分与单一梯度统一实验卡（`static-canvas-memory-split`）。** 交互调节有理半切参数 $u \in \mathbb{Q} \cap [0, 1)$ 实时核验记忆窗正交切分 $\kappa_{\mathrm{time}} + \kappa_{\mathrm{space}} \equiv 1$ 与无根号洛伦兹恒等式 $\gamma^2 - (\gamma v)^2 \equiv 1$，同步检视一代手性费米子迹比 $\sin^2\theta_W = \frac{3}{8}$、三维点集过约束盈余 $\Delta E(N) = \frac{(N-3)(N-4)}{2}$（在 $N = 5$ 处首次跃升为 $1$）以及观察者三拍结构时间 $\tau = 0 \to \frac{1}{2} \to 2$ 的单调增长（[@def-om-ch17-observer-pentad]、[@ex-om-ch17-quantitative-audit]；其中正交代数与计数为精确 `手工推导`，物理与观察者综合框架标为 `MODEL`，底层克雷洛夫封顶与零改写查询由 [@thm-om-ch17-krylov-growth-and-stability]、[@thm-om-ch17-reversible-qram] 锚定）。
 :::
 
-至此，六卷的数学对象、计算语言与观察者模型已全部合拢。最后一章将把整座六卷大厦交回最冷酷、也最诚实的裁判——Lean 4 空内核公理审计器与四模式三维全息工作台。
+至此，六卷的数学对象、计算语言与观察者模型已全部合拢。最后一章请 Lean 4 逐一核验严格库的导入闭包与 D5 消费模块的双端证据，再回到四模式三维工作台。

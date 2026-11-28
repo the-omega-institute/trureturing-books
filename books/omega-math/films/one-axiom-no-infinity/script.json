@@ -146,8 +146,8 @@
    ],
    "lines": [
     [
-     "Ask Lean's kernel which axioms that proof uses. The list is empty.",
-     "问一问 Lean 内核：这条证明用了哪些公理？答案是一张空表。"
+     "Read the frozen record for the strict backend. The list is empty.",
+     "翻开严格端的冻结记录，这条定理的公理清单为空。"
     ],
     [
      "Its numbers grow from zero and successor, like a kitchen with no pantry: all grown on the spot.",
@@ -265,12 +265,12 @@
    ],
    "lines": [
     [
-     "In the usual library, they arrive with three extra axioms: choice, quotients, and propositional extensionality.",
-     "在常用的库里，它们随三条额外公理一起进来：选择公理、商公理、命题外延性。"
+     "A classical proof here can use up to three standard axioms: choice, quotients, and propositional extensionality.",
+     "这里的经典证明最多可以用三条标准公理，即选择公理、商公理与命题外延性。"
     ],
     [
-     "Omega Math uses none of them. Equality is checked integer by integer, by a program that halts.",
-     "Omega 数学一件都不用：相等逐个整数核对，由一个必定停机的程序判定。"
+     "The strict library uses none of them. Equality is checked integer by integer, by a program that halts.",
+     "严格库的这项运算不依赖公理：相等逐个整数核对，由一个必定停机的程序判定。"
     ],
     [
      "Precision becomes a contract: one over M. Need it finer? Raise M. It is always some finite number.",
@@ -316,8 +316,8 @@
      "任选一点临时当零，乘法就在它周围长回来；没有哪一点是王室。"
     ],
     [
-     "Lean keeps the laws as a class, not an axiom: a job posting, not a hire. Only a built example fills it.",
-     "Lean 把法则写成类型类，而不是公理：是招聘启事，不是录用通知。只有亲手造出的实例才能上岗。"
+     "The sample class lists six equations. The prototype checks examples. A full model needs proofs of all the laws.",
+     "示意类型类列出六条等式。原型核验具体算例。完整模型还须证明所有定律。"
     ]
    ],
    "cues": [
@@ -440,8 +440,8 @@
      "一种顺序得 (1, 1, 1, 1)，另一种得 (1, 1, 1, −1)。"
     ],
     [
-     "Lean checks that these two never share a ray. Order finally leaves a mark, with no axiom used.",
-     "Lean 内核检验：两者不在同一条射线上。次序终于留下痕迹，且没用一条公理。"
+     "Lean checks that these two never share a ray. Order leaves a mark. The strict proof uses no axioms.",
+     "Lean 内核检验：两者不在同一条射线上。次序留下了痕迹。严格端证明的公理清单为空。"
     ]
    ],
    "cues": [
@@ -874,8 +874,8 @@
      "(2 + η)³ = 8 + 12η + 6η²。6 正是二阶导数的一半。"
     ],
     [
-     "Value, slope and bend in one product. Lean checks the cube rule, with zero axioms.",
-     "函数值、斜率、弯曲，一次乘法同时到手。立方归零由 Lean 检验，零公理。"
+     "Value, slope and bend in one product. Lean checks the cube rule without axioms on the strict backend.",
+     "函数值、斜率、弯曲，一次乘法同时到手。Lean 在严格端无公理地检验了立方归零。"
     ]
    ],
    "cues": [
@@ -950,8 +950,8 @@
      "像编织图样，每一格都由往前两格的那一格织出。想停在哪一阶，就停在哪一阶。"
     ],
     [
-     "And cosine squared plus sine squared is one, in every coefficient. Lean checks it, with zero axioms.",
-     "而余弦平方加正弦平方等于 1，每个系数都成立。Lean 检验了它，零公理。"
+     "Cosine squared plus sine squared is one in every coefficient. The strict Lean proof uses no axioms.",
+     "余弦平方加正弦平方等于 1，每个系数都成立。Lean 的严格端证明不依赖公理。"
     ]
    ],
    "cues": [
@@ -1630,8 +1630,8 @@
      "在 q = (3, 1, −2, 4)：χ₁ = 1/5，搅一次得到 −2/25。"
     ],
     [
-     "The margin, four ninety-six over twenty-five, is positive, as Lean checks. Only the constant fails; for every other shell, the literature proves the bound.",
-     "裕度 496/25 > 0，Lean 已检验；常值不及格，其余各层的界由文献证明。"
+     "The margin, four ninety-six over twenty-five, is positive, as Lean checks. The constant fails. The literature proves the bound on every nonconstant rotation-group shell.",
+     "裕度 496/25 > 0，Lean 已检验；常值超出此界；文献证明了旋转群所有非常值壳层的界。"
     ]
    ],
    "cues": [
@@ -1776,8 +1776,8 @@
      "17 = 16 + 1：十六颗 2 一路爬到顶，剩下一颗留在原地。"
     ],
     [
-     "Lean's kernel checked every step, and that the first halt comes at step fifteen. Zero axioms.",
-     "Lean 内核逐步查过这条轨迹，也查过第一次停机恰在第十五步。零公理。"
+     "Lean's kernel checked every step, and that the first halt comes at step fifteen. Zero axioms on the strict backend.",
+     "Lean 内核逐步查过这条轨迹，证实第十五步首次停机。严格端公理为空。"
     ]
    ],
    "cues": [
@@ -1822,8 +1822,8 @@
      "一道闸门除以 5：前者干净通过，后者留下余数，被挡在门外。"
     ],
     [
-     "Lean checks this split, again with zero axioms. A number remembers how much. A turn remembers when.",
-     "这一分离由 Lean 检查，同样零公理。数记得多少，转动记得先后。"
+     "Lean checks this split without axioms on the strict backend. A number remembers how much. A turn remembers when.",
+     "这一分离经 Lean 检查，严格端公理为空。数记得多少，转动记得先后。"
     ]
    ],
    "cues": [
@@ -1865,8 +1865,8 @@
      "它的时间不是墙上的钟，而是它真正吸收了多少新结构。"
     ],
     [
-     "Like a diary: a day with nothing new written adds no page. Here, zero, three quarters, three halves.",
-     "就像日记：一天没写下新东西，就不添一页。这里依次是 0、3/4、3/2。"
+     "Like a diary: a day with nothing new written adds no page. A first comparison adds no cycle. The next closes a triangle. The readings are zero, one half, and two.",
+     "就像日记：一天没写下新东西，就不添一页。第一条比较边未增环路，下一拍闭合三角形。读数依次为 0、1/2、2。"
     ],
     [
      "That is an interpretation, so it wears purple, not green.",
@@ -1892,12 +1892,12 @@
      "最后登场的是裁判：Lean 内核，一个小程序，逐步检查每个证明的每一步。"
     ],
     [
-     "We add no axioms, and the core library does not even import Init, the library Lean loads by default.",
-     "我们不加一条公理；核心库连 Lean 默认载入的 Init 都不导入。"
+     "The strict library skips official Init. Its selected import closures replay in an empty kernel.",
+     "严格库不导入官方 Init。选定的导入闭包在空内核中重放。"
     ],
     [
-     "Every point this formula builds from two whole numbers lands exactly on the circle. Axiom list: empty.",
-     "这条公式用两个整数造出的每个点，都恰好落在圆上。公理清单：空。"
+     "Every point this formula builds from two integers, not both zero, lands exactly on the circle. Axiom list on the strict backend: empty.",
+     "两个不全为零的整数经公式造出的点恰在圆上。严格端公理清单为空。"
     ],
     [
      "The real numbers live outside, past a one-way bridge. There the same circle reappears, at a price.",
@@ -2095,8 +2095,8 @@
    ],
    "lines": [
     [
-     "Add up the ledger: fourteen modules, one hundred twenty-seven theorems, every axiom list empty.",
-     "合账：十四个模块，一百二十七条定理，每条的公理清单都是空的。"
+     "Each D5 theorem shown here has two records. Its strict axiom list is empty. Its official dependencies are recorded separately.",
+     "画面所列各条 D5 定理都有两套记录。严格端的公理清单为空，官方端的依赖另有记录。"
     ],
     [
      "Outside the wall, eleven bridge theorems cast shadows onto the classical numbers. One way only.",

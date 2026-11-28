@@ -15,7 +15,7 @@
 | 黄金比无理数 $\varphi = (1+\sqrt{5})/2$ | 零公理黄金二次扩张 `QPhi` $= \mathrm{QuadPoly}(1, 1)$（纯有序对，满足 $\varphi^2 = \varphi + 1$、斐波那契幂律与五角切比雪夫闭合） | [第 12 章](ch12-algebraic-extensions-and-schur-positivity.md) |
 | 二次根号 $\sqrt{2}$（旋量归一与 CHSH 上界） | 零公理二次扩张 `QSqrt2` $= \mathrm{QuadPoly}(0, 2)$（纯有序对，满足 $\delta^2 = 2$、贝尔平方 $(8,0)$ 与精确旋量归一） | [第 12 章](ch12-algebraic-extensions-and-schur-positivity.md) |
 | 超越角度与三角函数 $\theta, \sin, \cos, \arccos$ | 有理保真度 $\kappa$、展度 $s = 1 - \kappa$、巴格曼三点环路不变量 $B$ 与格拉姆闭合行列式 $\det\mathbf{G}_3 = 1 + 2B - \Sigma\kappa \ge 0$ | [第 2 章](ch02-homogeneous-projective-line.md)、[第 6 章](ch06-bargmann-gram-spherical-trigonometry.md) |
-| 李矩阵指数 $e^X$、矩阵对数 $\ln R$ 与欧拉角 | 三维有理凯莱旋转 $\mathbf{R}(\boldsymbol{\sigma}) \in \mathrm{SO}(3, \mathbb{Q})$（双卡分母下界 $1/2$）与无根号伴随作用 $\operatorname{Ad}(p)$ | [第 5 章](ch05-rational-cayley-rotations.md) |
+| 李矩阵指数 $e^X$、矩阵对数 $\ln R$ 与欧拉角 | 三维有理凯莱旋转 $\mathbf{R}(\boldsymbol{\sigma}) \in \mathrm{SO}(3, \mathbb{Q})$ 来自普通凯莱参数；$\operatorname{Ad}(S^3(\mathbb{Q}))$ 上的双卡修正罗德里格斯参数有一张分母 $\ge 1/2$ 的图；无根号伴随作用 $\operatorname{Ad}(p)$ | [第 5 章](ch05-rational-cayley-rotations.md) |
 | 带特权原点的向量加法与一阶换位子 $[X, Y]$ | 无原点普吕弗—贝尔流群 $[x, y, z]$、利雅三元曲率括号与有号毕达哥拉斯旋量双覆叠 `PythSpinor` | [第 4 章](ch04-heaps-and-lie-triple-curvature.md) |
 | 无穷小极限 $\lim_{h \to 0}$ 与 `Filter.Tendsto` 导数 | 二阶幂零射流商环 $\mathcal{J}_2(\mathbb{Q}) = \mathbb{Q}[\eta]/(\eta^3)$（两项精确闭式求逆与对称中点 $\alpha = 1/2$ 保球步长） | [第 7 章](ch07-second-order-jet-calculus.md) |
 | 切丛 $T_p M$、联络 $\Gamma^k_{ij}$ 与光滑斯托克斯公式 | 流群精确伸缩积分、无选择公理单纯形锥同伦（$dH + Hd = \mathrm{id}$）与二阶吻合三元球流形 $\mathcal{M}_\Omega$ | [第 9 章](ch09-telescoping-stokes-and-arc-manifold.md) |
@@ -24,7 +24,7 @@
 | 静态素数无穷集、复 $\zeta(s)$、$\ln p$ 与 $\sqrt{p}$ | 构造性欧几里得素数逃逸、有限连分数与整数四分深度；阿代尔乘积归元 $\lvert x\rvert_\infty\prod_p\lvert x\rvert_p = 1$、赫维茨自由群 $F_3$ 与无复数赫克—拉马努金半正定判据 $4p\langle f,f\rangle_{\mathbb{Q}} - \langle \widehat{T}_p f, \widehat{T}_p f\rangle_{\mathbb{Q}} \ge 0$ | [第 13 章](ch13-computable-arithmetic-horizon.md)、[第 14 章](ch14-adelic-closure-and-hurwitz-primes.md)、[第 15 章](ch15-rational-hecke-ramanujan-spectrum.md) |
 | 图灵纸带、可变字节数组与不可逆逻辑门 | 非阿贝尔 $\Omega$-FRACTRAN 四元数旋子精确整除闸门（配零公理 `Mat2` 凯莱—哈密顿与模 $5$ 秩一分裂） | [第 16 章](ch16-omega-fractran-and-nonabelian-stack.md) |
 | 外置实数时钟 $t \in \mathbb{R}$ 与刚性背景时空 | 自包含观察者内部有理结构时间 $\tau = \sum(\Delta\mathcal{I}_{\mathrm{Schur}} + \Delta b_1)$ 与静止画布记忆切分 $\kappa_{\mathrm{time}} + \kappa_{\mathrm{space}} = 1$ | [第 17 章](ch17-observer-universe-and-single-gradient.md) |
-| 携带三大经典公理的 `noncomputable` `Mathlib.Real` | 空内核重放的 `OmegaInit` $+$ `OmegaMath`（`axioms: []`）核心，经单向阴影函子 $\Pi_{\mathbb{R}}$（`OmegaShadowBridge`）隔离对接经典分析 | [第 1 章](ch01-axiom-omega-and-cic.md)、[第 18 章](ch18-zero-axiom-kernel-and-shadow-bridge.md) |
+| 携带三大经典公理的 `noncomputable` `Mathlib.Real` | 所选严格库根 `OmegaInit`、`OmegaMath` 的导入闭包经空内核重放，传递公理依赖为空。该核心经单向阴影函子 $\Pi_{\mathbb{R}}$（`OmegaShadowBridge`）隔离对接经典分析 | [第 1 章](ch01-axiom-omega-and-cic.md)、[第 18 章](ch18-zero-axiom-kernel-and-shadow-bridge.md) |
 
 ## B.2 六层认识论证据分层总账 {#sec-om-appb-epistemic-ledger}
 
@@ -32,9 +32,9 @@
 
 | 证据层级与标识 | 仓库范围与核验机制 | 公理闭包与逻辑边界 | 代表内容与索引入口 |
 | :--- | :--- | :--- | :--- |
-| **第 1 层 · 零公理内核核心**（`LEAN ✓`，`axioms: []`） | `OmegaInit`（10 模块）$+$ `OmegaMath`（78 模块）共 88 模块通过全新 `mkEmptyEnvironment` 空内核重放；14 个零公理 D5 冻结模块导出 127 条公开定理 | 严格 `module` $+$ `prelude`，零 `Init`/`Mathlib` 导入，传递公理闭包严格为空集 $\varnothing$（无 `propext`、`Classical.choice`、`Quot.sound`） | 射影闭环、三元流群与利雅三元系恒常单位曲率 $K \equiv +1$、三维凯莱旋转与双卡无奇点分母半界（$\max(D_+, D_-) \ge 1/2$）及闭球锁定、巴格曼—格拉姆与有理球面正弦／勾股律、二阶射流与 $\alpha$-采样／对称中点凯莱驻球守恒、任意阶 D-有限射流复合链式法则与凯莱—三角大一统、单纯形锥同伦、全阶偶次特征标乘积与全阶无 $\pi$ 彼得—魏尔哈尔正交归一、二次扩张与有理舒尔正定、欧几里得／连分数／深度预算、$S_5$ 模 $5$ 非消去与自由群 $F_3 \hookrightarrow \mathrm{SO}(3,\mathbb{Q})$ 伴随单射、模方 $5$ 赫克迹与裕度、`Mat2`（含行列式乘性与凯莱—哈密顿）、非阿贝尔 FRACTRAN 及四项显式核心见证（正交非交换、`g120_spin` 六拍双覆叠、正交角盈 $\frac{1}{4}$、$P_\Omega$ 停机于 $22$）；清单见 [附录 A §A.1–§A.3](appendix-a.md#sec-om-appa-omegainit) |
+| **第 1 层 · 严格库与 D5 核心定理** | 严格库选定的导入闭包在 `mkEmptyEnvironment` 中重放。D5 定理作双端编译对照和分端测量 | 严格库闭包的传递公理为空。表列 D5 定理的 `strict_omega.axioms` 均为 `[]`，同一声明行的 `axioms` 给出官方端依赖 | 射影闭环、三元流群与利雅三元系恒常单位曲率 $K \equiv +1$、三维凯莱旋转与双卡无奇点分母半界（$\max(D_+, D_-) \ge 1/2$）及闭球锁定、巴格曼—格拉姆与有理球面正弦／勾股律、二阶射流与 $\alpha$-采样／对称中点凯莱驻球守恒、任意阶 D-有限射流复合链式法则与凯莱—三角大一统、单纯形锥同伦、全阶偶次特征标乘积与全阶无 $\pi$ 彼得—魏尔哈尔正交归一、二次扩张与有理舒尔正定、欧几里得／连分数／深度预算、$S_5$ 模 $5$ 非消去与自由群 $F_3 \hookrightarrow \mathrm{SO}(3,\mathbb{Q})$ 伴随单射、模方 $5$ 赫克迹与裕度、`Mat2`（含行列式乘性与凯莱—哈密顿）、非阿贝尔 FRACTRAN 及四项显式核心见证（正交非交换、`g120_spin` 六拍双覆叠、正交角盈 $\frac{1}{4}$、$P_\Omega$ 停机于 $22$）；清单见 [附录 A §A.1–§A.3](appendix-a.md#sec-om-appa-omegainit) |
 | **第 2 层 · 单向阴影函子**（`OmegaShadowBridge`，`LEAN ✓` 桥接） | `D5/S3/Quantum/AURICOmega/OmegaShadowBridge` 共 11 条公开桥接定理（附 10 条私有引理） | 外层单向投射 $\Pi_{\mathbb{R}}$，公理按层阶梯递进（`[]` $\to$ `propext` $\to$ `{Quot.sound, propext}` $\to$ 经典三公理），绝不向第 0–1 层回流 | `Omega.Nat`/`Omega.Int`/`Omega.IntRatio` 环同态、交叉相乘商坍缩及凯莱单位圆／保真度闭区间实阴影；详见 [第 18 章](ch18-zero-axiom-kernel-and-shadow-bridge.md) 与 [附录 A §A.4](appendix-a.md#sec-om-appa-shadow-bridge) |
-| **第 3 层 · 经典 Mathlib 阴影锚点**（`LEAN ✓` 经典对照） | 全书卷 I–VI 引用的 `trureturing@dev` 经典连续统对照声明（索引见 [附录 A §A.5](appendix-a.md#sec-om-appa-classical-anchors)，动态分类计数见 [§B.4](#sec-om-appb-live-stats)） | 经 Lean 4 内核检查冻结，位于 `{propext, Classical.choice, Quot.sound}` 侧，仅作外部连续统刻度尺 | 三维不变度量叉积锁定、自旋因子分类、彼得—魏尔矩阵元稠密、厄米舒尔极小、阿代尔 $p$-进乘积公式、托普利茨单位圆判据、克雷洛夫界与可逆 QRAM |
+| **第 3 层 · 经典 Mathlib 阴影锚点**（`LEAN ✓` 经典对照） | 全书卷 I–VI 引用的 `trureturing@dev` 经典连续统对照声明（索引见 [附录 A §A.5](appendix-a.md#sec-om-appa-classical-anchors)，动态分类计数见 [§B.4](#sec-om-appb-live-stats)） | 所钉的 35 条声明行均缺少官方 `axioms`，许可上界为 `{propext, Classical.choice, Quot.sound}` | 三维不变度量叉积锁定、自旋因子分类、彼得—魏尔矩阵元稠密、厄米舒尔极小、阿代尔 $p$-进乘积公式、托普利茨单位圆判据、克雷洛夫界与可逆 QRAM |
 | **第 4 层 · 构造性手工推导与文献边界**（`ARGUED` / `手工推导`） | 作者与评审负责的完整初等代数推导及注明出处的经典文献边界 | 不佩戴 Lean 内核徽章；其中纯构造性高阶命题仍可继续下沉至零公理内核 | $V_3 \dots V_6$ 高阶实际矩阵赫克谱界推导与有理洛伦兹／温伯格 $3/8$ 迹比推导（[第 15 章](ch15-rational-hecke-ramanujan-spectrum.md)、[第 17 章](ch17-observer-universe-and-single-gradient.md)）、马青交错级数向经典 $\pi$ 的单向阴影归结（[第 8 章](ch08-dfinite-jets-and-cayley-unification.md)），以及雅可比 $r_4(n)$、艾希勒—德利涅—LPS 全谱界、辛格—索普曲率分解、赫德伯格定理与图灵／巴拿赫—塔斯基／埃尔米特—林德曼等经典文献结果 |
 | **第 5 层 · 精确有理、Arb 与 Lean 计算证书**（`NUM`） | 纯整数与精确分数轨迹、有理矩阵正定移位证书、Arb 严格区间与有限可判定 Lean 核验 | 零浮点舍入误差，读者可逐行复算或交由精确整数算术独立复核（核心有限见证 `phalf_qhalf_noncommutative`、`g120_spin_six_beat_orbit`、`orthogonal_triad_excess_quarter` 与 `p_omega_halts_at_22` 已升格入第 1 层零公理冻结定理） | $\mathbb{QP}^1$ 锚点表（[第 2 章](ch02-homogeneous-projective-line.md)）、五枚整三元锚手算（[第 3 章](ch03-canonical-ternion-manifold.md)）、$\eta = 1/2$ 截断对账（[第 8 章](ch08-dfinite-jets-and-cayley-unification.md)）、`QSqrt2`/`QPhi` 账本（[第 12 章](ch12-algebraic-extensions-and-schur-positivity.md)）、$\mathbf{q}=(3,1,-2,4)$ 逐点验算与 $2184$ 顶图 $X^{5,13}$ 的 $1092\times 1092$ 精确有理移位证书 $M \succeq I_{1092}$（[第 15 章](ch15-rational-hecke-ramanujan-spectrum.md)）及 18 拍康威乘法器轨迹（[第 16 章](ch16-omega-fractran-and-nonabelian-stack.md)） |
 | **第 6 层 · 结构统一模型与开放前沿**（`MODEL` 与 `OPEN`） | 明确区分建构诠释框架（`MODEL`）与真正未解问题（`OPEN`） | `MODEL` 不得冒充演绎定理；`OPEN` 严格保留未证身份，不附验证引用 | **`MODEL`**：`0 · 1/2 · 1` 因果射流诠释（[第 7 章](ch07-second-order-jet-calculus.md)）、吻合流形 $\mathcal{M}_\Omega$（[第 9 章](ch09-telescoping-stokes-and-arc-manifold.md)）、素数曲率回收核（[第 14 章](ch14-adelic-closure-and-hurwitz-primes.md)）、赫克临界谱内化（[第 15 章](ch15-rational-hecke-ramanujan-spectrum.md)）与观察者即宇宙／静止画布／TFT 框架（[第 17 章](ch17-observer-universe-and-single-gradient.md)）；**`OPEN`**：经典黎曼猜想（RH）、广义与扩展黎曼猜想、$\mathrm{GL}_n$（$n \ge 3$）与马斯波形拉马努金猜想、零公理内核内独立重构 $\zeta(s)$ 谱理论、任意高阶实际矩阵赫克迹的零公理闭合、非各向同性外尔／里奇曲率耦合，以及从离散三元比较导出 $3+1$ 维洛伦兹爱因斯坦方程与视界幺正性 |
@@ -77,7 +77,7 @@
 
 ## B.4 全书动态形式化统计 {#sec-om-appb-live-stats}
 
-依照本书库“源文件唯一真理、统计产物编译生成”的契约，本节不手工维护全书定理与环境计数副本，而是直接嵌入构建系统依据 `trureturing.lock.json`（所钉 `trureturing@dev` 提交 [{commit}](trureturing:)）实时编译的全书证据摘要表，其中明确分列零公理（`axioms: []`）与依赖经典公理的 Lean 验证环境次数：
+本节嵌入构建系统依据 `trureturing.lock.json` 生成的全书证据摘要。无公理、依赖公理与公理状态未知的环境次数采用各冻结声明行的官方 `axioms` 字段。同一环境引用多条定理时，只有每条都有空公理记录才计作无公理。严格端测量及两种复现入口见 [附录 A](appendix-a.md)。
 
 ::: {.stats src="summary"}
 :::
@@ -91,5 +91,5 @@
 阅读上述编译产物时，请同时留意统计索引与数学证明责任之间的清晰边界：
 
 ::: {.remark #rem-om-appb-epistemic-boundary title="动态统计与证据责任的边界"}
-上方的动态汇总与声明索引精确反映本书在所钉提交上引用的机器检查声明、公理分布与环境频次；但索引登记、可视化动画或统计计数本身从不替代数学证明，也不将 `ARGUED`、`NUM`、`MODEL` 或 `OPEN` 条目升级为 `LEAN ✓`。逐条核验每项结论时，请始终回到对应章节的完整前提、证明骨架与 [附录 A](appendix-a.md) 的空内核审计清单。
+上方的汇总与索引记录出版所用的冻结引用、公理分布和环境频次。数学结论的前提与证明见相应章节，后端公理证据见 [附录 A §A.3](appendix-a.md#sec-om-appa-frozen-registry)。
 :::

@@ -261,7 +261,7 @@
   ].map(Z4);
   const chi1 = (p) => minus(times([4n, 1n], kappa4(O4, p)), ONE);
   const LAMBDA = over(sumF(S5.map(chi1)), [3n, 1n]); // Σ χ₁(s) / χ₁(1): the eigenvalue on χ₁
-  const MARGIN = minus([20n, 1n], times(LAMBDA, LAMBDA)); // 4p − λ²
+  const MARGIN = minus([20n, 1n], times(LAMBDA, LAMBDA)); // 4p − λ̂²
   const X5 = Z4([1, 2, 0, 0]),
     Y5 = Z4([1, 0, 2, 0]),
     PSI_XY = qmul(X5, Y5),
@@ -814,7 +814,7 @@
         return m.mode === 'fractran'
           ? L('Ω-FRACTRAN · Ȳ/5：XY 通过，YX 拦下', 'Ω-FRACTRAN · Ȳ/5: XY passes, YX blocked')
           : state.lens
-            ? L(`p = 5 赫克 · |λ| = 2/5 ≤ 2√5 ≈ ${fix(2 * Math.sqrt(5), 4)}`, `p = 5 Hecke · |λ| = 2/5 ≤ 2√5 ≈ ${fix(2 * Math.sqrt(5), 4)}`)
+            ? L(`p = 5 赫克 · |λ̂| = 2/5 ≤ 2√5 ≈ ${fix(2 * Math.sqrt(5), 4)}`, `p = 5 Hecke · |λ̂| = 2/5 ≤ 2√5 ≈ ${fix(2 * Math.sqrt(5), 4)}`)
             : L(`p = 5 赫克 · Σ χ₁(q s) = ${fstr(m.total)}`, `p = 5 Hecke · Σ χ₁(q s) = ${fstr(m.total)}`);
       default:
         return state.lens ? L(`球面三角 · 角盈 E ≈ ${fix(excess(m), 4)}`, `Spherical triangle · excess E ≈ ${fix(excess(m), 4)}`) : L(`巴格曼—格拉姆 · det G₃ = ${fstr(m.det)}`, `Bargmann–Gram · det G₃ = ${fstr(m.det)}`);
@@ -833,7 +833,7 @@
       case 'hecke':
         return m.mode === 'fractran'
           ? L('青色先 X 后 Y，品红先 Y 后 X；只有最后压进的 Y 能被 Ȳ/5 退出。', 'Cyan pushes X then Y, magenta Y then X; only a Y pushed last can be undone by Ȳ/5.')
-          : L(`六个模 5 跳跃：青 χ₁ > 0，品红 χ₁ < 0，墨圈 κ = 1/4；λ = −2/5，4·5 − λ² = ${fstr(MARGIN)} > 0。`, `Six jumps of norm 5: cyan χ₁ > 0, magenta χ₁ < 0, ink κ = 1/4; λ = −2/5, 4·5 − λ² = ${fstr(MARGIN)} > 0.`);
+          : L(`六个模 5 跳跃：青 χ₁ > 0，品红 χ₁ < 0，墨圈 κ = 1/4；λ̂ = −2/5，4·5 − λ̂² = ${fstr(MARGIN)} > 0。`, `Six jumps of norm 5: cyan χ₁ > 0, magenta χ₁ < 0, ink κ = 1/4; λ̂ = −2/5, 4·5 − λ̂² = ${fstr(MARGIN)} > 0.`);
       default:
         return state.lens
           ? L('经典读法：边长与角都要反余弦，角盈要减去 π。', 'Classical reading: sides and angles need arccos, the excess subtracts π.')
@@ -983,9 +983,9 @@
             [L('q · ‖q‖² · κ(o, q) · χ₁(q)', 'q · ‖q‖² · κ(o, q) · χ₁(q)'), `${tup(m.q)} · ${m.N} · ${fstr(m.kappa)} · ${fstr(m.chi)}`],
             [L(`前 ${m.n} 个跳跃的 Σ χ₁(q s)`, `Σ χ₁(q s) over the first ${m.n} jumps`), fstr(m.partial)],
             [L('Σ Re(q s)² = 6w² + 8(x² + y² + z²)', 'Σ Re(q s)² = 6w² + 8(x² + y² + z²)'), `${m.reSq} = ${m.reSqForm} ${m.reSq === m.reSqForm ? yes : '✗'}`],
-            [L('拉马努金：4·5 − λ²', 'Ramanujan: 4·5 − λ²'), `λ = ${fstr(m.lambda)} · ${fstr(m.margin)} > 0 ${yes}`],
+            [L('拉马努金：4·5 − λ̂²', 'Ramanujan: 4·5 − λ̂²'), `λ̂ = ${fstr(m.lambda)} · ${fstr(m.margin)} > 0 ${yes}`],
             [L('子午切片 [x : w]·[2 : 1] 的模方', 'Meridian slice [x : w]·[2 : 1], squared norms'), `${brk(m.slice.pair)}·[2 : 1] = ${brk(m.slice.prod)} · ${m.slice.left / 5n}·5 = ${m.slice.right} ${m.slice.left === m.slice.right ? yes : '✗'}`],
-            [L('经典：|λ| ≤ 2√5', 'Classical: |λ| ≤ 2√5'), `2/5 ≤ ${fix(2 * Math.sqrt(5), 6)}…`]
+            [L('经典：|λ̂| ≤ 2√5', 'Classical: |λ̂| ≤ 2√5'), `2/5 ≤ ${fix(2 * Math.sqrt(5), 6)}…`]
           ],
           note:
             L('平凡特征 χ₀ 的特征值是 6 = p + 1，χ₁ 的是 −2/5；比较只用整数：4·5·25 − 4 = 496 > 0。', 'The trivial character χ₀ has eigenvalue 6 = p + 1 and χ₁ has −2/5; the comparison uses integers only: 4·5·25 − 4 = 496 > 0.') +
@@ -1238,7 +1238,7 @@
       drawLegend(g, rws);
     } else {
       $('plotTitle').textContent = L('六个跳跃的 χ₁ 与累加和', 'χ₁ of the six jumps and the running sum');
-      $('plotMeta').textContent = `λ = −2/5 · 4·5 − λ² = ${fstr(MARGIN)}`;
+      $('plotMeta').textContent = `λ̂ = −2/5 · 4·5 − λ̂² = ${fstr(MARGIN)}`;
       const vals = m.jumps.map((j) => fval(j.chi)),
         run = [[0, 0], ...vals.map((_, i) => [i + 1, vals.slice(0, i + 1).reduce((s, x) => s + x, 0)])],
         all = [...vals, ...run.map((p) => p[1]), fval(m.rhs)],

@@ -1,0 +1,263 @@
+{
+ "voice": "af_heart",
+ "speed": 0.94,
+ "say": {
+  "Lean": "Leen",
+  "QuadPoly": "Quad Poly",
+  "Chebyshev": "Cheb-ee-shev",
+  "Cassini": "Cass-ee-nee",
+  "Cauchy": "Co-shee"
+ },
+ "music": {
+  "bpm": 80,
+  "progression": "a-minor"
+ },
+ "scenes": [
+  {
+   "id": "pair",
+   "name": "A ROOT AS A PAIR",
+   "lead": 2.6,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Root two and the golden ratio never need the real line.",
+     "√2 与黄金比都不需要整条实数轴。"
+    ],
+    [
+     "Take two fractions, p and q, and read the pair as p plus q alpha.",
+     "取两个分数 p 与 q，把这一对读作 p + qα。"
+    ],
+    [
+     "Add one rule: alpha squared is b alpha plus c. Multiplying is expanding, then using the rule.",
+     "再加一条规则：α² = bα + c。相乘就是展开，再套用这条规则。"
+    ],
+    [
+     "That is QuadPoly b c: finite arithmetic, nothing infinite.",
+     "这就是 QuadPoly(b, c)：有限步运算，没有任何无穷。"
+    ]
+   ]
+  },
+  {
+   "id": "norm",
+   "name": "CONJUGATE AND NORM",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.5,
+    0.4,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "Every pair has a conjugate. Multiply by it, and the alpha part cancels.",
+     "每个数对都有共轭。与它相乘，α 的部分恰好消去。"
+    ],
+    [
+     "What is left is one fraction, the norm.",
+     "剩下的是一个分数：范数。"
+    ],
+    [
+     "Conjugate over norm is the exact inverse: in root two, one, one has norm minus one and inverse minus one, one.",
+     "共轭除以范数就是精确的逆元：在 √2 域中，(1, 1) 的范数是 −1，逆元是 (−1, 1)。"
+    ],
+    [
+     "Lean checks the inverse whenever the norm is not zero.",
+     "Lean 检验：只要范数不为零，这个逆元就成立。"
+    ]
+   ]
+  },
+  {
+   "id": "spinor",
+   "name": "EIGHT BEATS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "Set b to zero and c to two: delta squares to two.",
+     "取 b = 0、c = 2：δ 的平方等于 2。"
+    ],
+    [
+     "The spinor u is delta over two times one plus i, of squared length exactly one.",
+     "旋量 u = (δ/2)(1 + i)，模方恰好为 1。"
+    ],
+    [
+     "Square it: i. Square again: minus one, a full turn that flips the sign. Once more: plus one.",
+     "平方一次得 i；再平方得 −1，转满一圈却翻了号；再平方回到 +1。"
+    ],
+    [
+     "Eight beats, seven hundred twenty degrees, home. Lean checks unit length and eighth power.",
+     "八拍、720°，回到原位。Lean 检验其单位模方与八次幂。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 1.6,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "golden",
+   "name": "GOLDEN PAIRS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Set b and c to one: phi squared is phi plus one.",
+     "取 b = c = 1：φ² = φ + 1。"
+    ],
+    [
+     "Each power of phi is a pair of neighbouring Fibonacci numbers; the twelfth is eighty-nine, one forty-four.",
+     "φ 的每个幂都是一对相邻的斐波那契数；第十二次幂是 (89, 144)。"
+    ],
+    [
+     "Their norms alternate, minus one, plus one: Cassini's identity, in whole numbers.",
+     "它们的范数交替为 −1、+1：这就是卡西尼恒等式，全是整数。"
+    ],
+    [
+     "Lean checks: the norm of phi to the n is minus one to the n.",
+     "Lean 检验：φⁿ 的范数等于 (−1)ⁿ，对一切 n 成立。"
+    ]
+   ]
+  },
+  {
+   "id": "pentagon",
+   "name": "A DECAGON WITHOUT COSINE",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.6,
+    0.6,
+    0.3,
+    0.4
+   ],
+   "lines": [
+    [
+     "Run Chebyshev's recurrence on phi over two: every value stays a pair.",
+     "在 φ/2 上运行切比雪夫递推：每一个值都仍是数对。"
+    ],
+    [
+     "Five steps land on minus one, ten return to one: the corners of a regular decagon.",
+     "五步精确落在 −1，十步回到 1：正是正十边形的顶点。"
+    ],
+    [
+     "No cosine was taken. Lean checks both closures, and the companion value.",
+     "全程没有取余弦。Lean 检验这两处闭合，以及另一个根的值。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 1.2,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "squares",
+   "name": "SQUARES, NOT ROOTS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.7,
+    0.6,
+    0.3,
+    0.4
+   ],
+   "lines": [
+    [
+     "Positivity needs only fractions too. Take three pairs: one two, three one, two five.",
+     "正定性同样只需分数。取三个数对：(1, 2)、(3, 1)、(2, 5)。"
+    ],
+    [
+     "Their Gram determinant is four twenty minus two twenty-five: one ninety-five.",
+     "它们的格拉姆行列式是 420 − 225 = 195。"
+    ],
+    [
+     "The minors are minus five, one and thirteen; their squares also add to one ninety-five.",
+     "子式是 −5、1、13，平方和同样是 195。"
+    ],
+    [
+     "Lean checks this Lagrange identity for every list of pairs: the Cauchy-Schwarz gap is a sum of squares.",
+     "Lean 对任意有理数对序列检验这条拉格朗日恒等式：柯西—施瓦茨亏量就是平方和。"
+    ]
+   ]
+  },
+  {
+   "id": "gram",
+   "name": "RIGID BY ITS GRAM",
+   "lead": 0.5,
+   "tail": 0.8,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Last, rigidity, which Lean checks in the classical shadow.",
+     "最后是刚性，由 Lean 在经典阴影层检验。"
+    ],
+    [
+     "A permutation that keeps every inner product of a spanning family extends to exactly one isometry.",
+     "保持张成族全部内积的置换，恰好延拓为唯一的等距。"
+    ],
+    [
+     "Swap e one and two e two, and length one becomes length two: no isometry.",
+     "对换 e₁ 与 2e₂，长度 1 变成长度 2：不存在等距。"
+    ],
+    [
+     "Keep e one alone, and it no longer spans: the identity and a reflection both extend it.",
+     "只留 e₁，它不再张成全平面：恒等映射与一次反射都是延拓。"
+    ]
+   ]
+  },
+  {
+   "id": "close",
+   "name": "END",
+   "lead": 0.6,
+   "tail": 3.4,
+   "music": [
+    0.8,
+    0.3,
+    0.2,
+    0.0,
+    0.0
+   ],
+   "lines": [
+    [
+     "Pairs and squares: Volume Five turns them on the primes.",
+     "数对与平方和：第五卷将用它们直面素数。"
+    ]
+   ]
+  }
+ ]
+}

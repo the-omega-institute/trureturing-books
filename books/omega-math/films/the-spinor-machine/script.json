@@ -1,0 +1,297 @@
+{
+ "voice": "af_heart",
+ "speed": 0.94,
+ "say": {
+  "Lean": "Leen",
+  "Frac-tran": "Frack-tran",
+  "Cayley": "Kay-lee"
+ },
+ "music": {
+  "bpm": 80,
+  "progression": "a-minor"
+ },
+ "scenes": [
+  {
+   "id": "machine",
+   "name": "ONE NUMBER",
+   "lead": 2.6,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Conway's Frac-tran machine keeps one whole number as its state, and a list of fractions as its program.",
+     "康威的 FRACTRAN 机器只有一个正整数作状态，一列分数作程序。"
+    ],
+    [
+     "Each beat, multiply by the first fraction that keeps the number whole.",
+     "每一拍，用第一枚能让它保持整数的分数去乘它。"
+    ],
+    [
+     "When no denominator divides, the machine halts.",
+     "没有任何分母整除时，机器停机。"
+    ]
+   ]
+  },
+  {
+   "id": "registers",
+   "name": "PRIME REGISTERS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.5,
+    0.4,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "Factor the number, and every prime becomes its own register.",
+     "把这个数分解质因数，每颗素数就是一根独立的寄存器。"
+    ],
+    [
+     "Three quarters is an update: take two from register two, add one to register three.",
+     "四分之三是一次更新：从 2 号寄存器取走两份，给 3 号寄存器加上一份。"
+    ],
+    [
+     "The divisibility guard says only this: no register may go below zero.",
+     "整除守卫说的只是一件事：任何寄存器都不许变成负数。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 1.4,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "trace",
+   "name": "SIXTEEN STATES",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.7,
+    0.7,
+    0.4,
+    0.4
+   ],
+   "lines": [
+    [
+     "Start at two to the seventeenth and run the four rules.",
+     "从 2¹⁷ 出发，运行这四条规则。"
+    ],
+    [
+     "Pairs of twos climb to a three, pairs of threes to a five, then seven, then eleven.",
+     "两份 2 升成一份 3，两份 3 升成一份 5，再升成 7，再升成 11。"
+    ],
+    [
+     "Fifteen transitions, sixteen states, and the machine stops at twenty-two.",
+     "十五次跃迁，十六个状态，机器停在 22。"
+    ],
+    [
+     "Seventeen is sixteen plus one: sixteen twos became one eleven, one two stayed behind.",
+     "17 = 16 + 1：十六份 2 归并成一份 11，剩下一份 2。"
+    ],
+    [
+     "Lean checks the whole trace, the first halt at step fifteen, and that a halted machine stays put.",
+     "Lean 内核检验了整条轨迹、第十五步首次停机，以及停机后永远不动。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 2.6,
+     "kind": "impact"
+    },
+    {
+     "line": 4,
+     "at": 0.4,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "tax",
+   "name": "THE ORDER TAX",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.8,
+    0.5,
+    0.4,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "But one number forgets order: times three, then five, is times five, then three.",
+     "可是单个数记不住次序：先乘 3 再乘 5，等于先乘 5 再乘 3。"
+    ],
+    [
+     "Scalar programs fake a call stack with extra flag primes, like traffic lights.",
+     "标量程序只好额外花掉一批标志素数，像红绿灯一样模拟调用栈。"
+    ],
+    [
+     "The chapter's model: make the state an integer quaternion, whose squared length keeps the prime registers.",
+     "本章的模型诠释：把状态换成整四元数，它的模方仍保存着素数寄存器。"
+    ]
+   ]
+  },
+  {
+   "id": "orders",
+   "name": "TWO ORDERS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "Take X, one plus two i, and Y, one plus two j, each of squared length five.",
+     "取 X = 1 + 2i 与 Y = 1 + 2j，模方都是 5。"
+    ],
+    [
+     "X times Y is one, two, two, four. Y times X is one, two, two, minus four.",
+     "X·Y = (1, 2, 2, 4)，Y·X = (1, 2, 2, −4)。"
+    ],
+    [
+     "Both have squared length twenty-five: one number to a scalar, two directions to a spinor.",
+     "两者模方都是 25：对标量是同一个数，对旋子却是两个方向。"
+    ]
+   ]
+  },
+  {
+   "id": "gate",
+   "name": "THE DIVISIBILITY GATE",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "A gate multiplies on the right by one minus two j, then divides by five.",
+     "闸门先右乘 1 − 2j，再把四个分量都除以 5。"
+    ],
+    [
+     "X Y gives five, ten, zero, zero. All divide, so the gate opens and returns X.",
+     "X·Y 给出 (5, 10, 0, 0)，全部整除，闸门放行，还原出 X。"
+    ],
+    [
+     "Y X gives five, minus six, zero, minus eight. Remainders four and two: the gate stays shut.",
+     "Y·X 给出 (5, −6, 0, −8)，余数 4 与 2：闸门关闭。"
+    ],
+    [
+     "Gate one minus two i unwinds Y X to Y instead: last in, first out.",
+     "闸门 1 − 2i 则把 Y·X 退回 Y：后进先出。"
+    ],
+    [
+     "Lean checks the split: equal squared lengths, one clean step for X Y, and none for Y X.",
+     "Lean 内核检验这次分离：模方相等，X·Y 干净走一步，Y·X 一步也走不了。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 2.2,
+     "kind": "glitch"
+    },
+    {
+     "line": 4,
+     "at": 0.4,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "matrix",
+   "name": "TWO BY TWO",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Four integers also make a two by two matrix, with a trace and a determinant.",
+     "四个整数也能排成二阶矩阵，带有迹 a + d 与行列式 ad − bc。"
+    ],
+    [
+     "Take A as two, three, one, four, and B as one, minus two, five, three.",
+     "取 A = (2, 3; 1, 4)，B = (1, −2; 5, 3)。"
+    ],
+    [
+     "A B and B A differ, yet both have trace twenty-seven; A B has determinant sixty-five, five times thirteen.",
+     "AB 与 BA 不同，迹却都是 27；AB 的行列式是 65 = 5 × 13。"
+    ],
+    [
+     "A squared minus six A plus five I is the zero matrix: Cayley-Hamilton, with no eigenvalues.",
+     "A² − 6A + 5I 是零矩阵：凯莱—哈密顿，不用特征值。"
+    ],
+    [
+     "For every integer matrix, Lean checks: traces cycle, determinants multiply, Cayley-Hamilton holds.",
+     "Lean 内核对任意整数矩阵检验：迹可循环，行列式相乘，凯莱—哈密顿成立。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 2.0,
+     "kind": "chime"
+    },
+    {
+     "line": 4,
+     "at": 0.4,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "close",
+   "name": "LEDGER",
+   "lead": 0.5,
+   "tail": 3.2,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.2
+   ],
+   "lines": [
+    [
+     "Omega Math, chapter sixteen.",
+     "《OMEGA MATH》· 第十六章"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 0.3,
+     "kind": "chime"
+    }
+   ]
+  }
+ ]
+}

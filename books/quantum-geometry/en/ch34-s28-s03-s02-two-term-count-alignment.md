@@ -22,4 +22,16 @@ The increase of $F$ from $v(T)$ to $T$ is less than one, giving a bounded counti
 With $T$ in block $n$, take $q=21q_n$. For each earlier block, $q_i$ divides $q_n$ and the quotient is a power of five, congruent to one modulo four. Thus $q\gamma_j$ is an integer congruent to one modulo four for each retained $\gamma_j\le T$. Each sine equals one at every $u_m$. The stated interval is longer than the spacing $2\pi q$, so it contains an alignment point. The full proof is checked by the Lean kernel.
 :::
 
+At any of these alignment points, the retained frequencies have the same phase, so the cosine of each phase difference is one. This determines the leading coefficient of the ordered Lorentz pair sum $G_T(u)$ through the inclusive cutoff. Write $c=1/(2\pi)$.
+
+::: {.theorem #thm-ch34-montgomery-aligned-lower title="Pair-sum lower bound under full phase alignment" lean="D5/S3/Analytic/Oscillation/MontgomeryAlignmentLower.eventually_montgomery_gt_of_phase_alignment"}
+Let the positive ordinate spectrum be locally finite, and let the inclusive count $N(T)$ include multiplicities. Assume $N(T)/(T\log T)\to c$. For each $\kappa<2\pi c^2$, the following holds for all sufficiently large $T$. For every real $u$, if $\cos((\gamma_i-\gamma_j)u)=1$ for each pair through the cutoff, then $G_T(u)>\kappa T(\log T)^2$.
+:::
+
+::: proof
+The phase condition reduces the pair sum to the Lorentz energy with multiplicities. Apply Cauchy–Schwarz on the interval obtained by extending the cutoff interval by $\sqrt{T}$ at both ends. The ratio of the extended length to $T$ tends to one, and so does the fraction of each ordinate's kernel mass retained in the extended interval. After division by $T(\log T)^2$, the lower bound tends to $2\pi c^2$. The full proof is checked by the Lean kernel.
+:::
+
+**Manual derivation.** The commensurate spectrum has bounded counting discrepancy, so [@thm-ch34-montgomery-bounded-count-upper] gives a uniform upper bound on the normalized pair sum. For every $\varepsilon>0$, the bound is $2\pi c^2+\varepsilon$ for all sufficiently large $T$. To find $u_m$, use the open interval starting at $\log T$ of length $(42\pi/\log 2)\log(21T)$. For $T\ge21$, it lies in $[\log T,(1+84\pi/\log 2)\log T]$. On this spectrum one can choose such a $u_m$ at every sufficiently large $T$ so that $G_T(u_m)/(T(\log T)^2)$ tends to $2\pi c^2$. For the actual ζ ordinates, the critical collision theorem still needs an arithmetic bound. A single $\kappa<2\pi c^2$ must bound the normalized pair sum throughout $\log T\le |u|\le A\log T$ for each fixed $A>1$ and all sufficiently large $T$.
+
 Even with bounded two-term count discrepancy, unit multiplicity and the specified harmonic weights, these hypotheses allow the sine sum to reach the full weight in every interval of the stated logarithmic length. Character averaging detects the zero frequency. Over a finite window, using that method on actual ζ ordinates still requires control of nonzero high-order weighted frequency differences close to zero. The estimate at moment orders growing with $T$ remains open here. [Lean implementation of character averaging](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L32-L78)

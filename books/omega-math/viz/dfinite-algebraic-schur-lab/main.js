@@ -332,8 +332,10 @@
       prod = qmul(W1, W2),
       hol = qmul(qmul(qmul(U30, U23), U12), U01),
       rev = qmul(W2, W1),
+      viaThree = qmul(qconj(U13), qconj(U30)),
+      alt = qmul(W1, qmul(qmul(qconj(viaThree), F2), viaThree)),
       cancel = qmul(U13, qconj(U13));
-    return { U01, U12, U23, U30, U13, W1, F2, W2, prod, hol, rev, cancel, ok: prod.every((x, i) => same(x, hol[i])), revOk: rev.every((x, i) => same(x, hol[i])) };
+    return { U01, U12, U23, U30, U13, W1, F2, W2, prod, hol, rev, alt, cancel, ok: prod.every((x, i) => same(x, hol[i])), revOk: rev.every((x, i) => same(x, hol[i])) };
   })();
   const q4str = (q) => `(${q.map(fstr).join(', ')})`;
 
@@ -1243,7 +1245,7 @@
           ? L(`经典 · 4 arctan(1/5) − arctan(1/239) = π/4 · M = ${m.M}`, `Classical · 4 arctan(1/5) − arctan(1/239) = π/4 · M = ${m.M}`)
           : L(`马青链 · 1/5 ⊕ … ⊖ 1/239 = 28561/28561 = 1 · W<sub>${m.M}</sub> &lt; 10${sup1(-m.below)}`, `Machin chain · 1/5 ⊕ … ⊖ 1/239 = 28561/28561 = 1 · W<sub>${m.M}</sub> &lt; 10${sup1(-m.below)}`);
       case 'cone:stokes':
-        return state.lens ? L('经典斯托克斯 · 网格加密 h → 0', 'Classical Stokes · refine the mesh, h → 0') : L(`粗网格斯托克斯 · Δ₁ + Δ₂ = ∂Σ = ${mstr(m.boundary)}`, `Coarse-mesh Stokes · Δ₁ + Δ₂ = ∂Σ = ${mstr(m.boundary)}`);
+        return state.lens ? L('经典斯托克斯 · 网格加密 h → 0', 'Classical Stokes · refine the mesh, h → 0') : L(`加法粗网格斯托克斯 · Δ₁ + Δ₂ = ∂Σ = ${mstr(m.boundary)}`, `Additive coarse-mesh Stokes · Δ₁ + Δ₂ = ∂Σ = ${mstr(m.boundary)}`);
       case 'cone:cone':
         return state.lens ? L('经典庞加莱引理 · 可缩区域上的积分', 'Classical Poincaré lemma · integrals over a contractible region') : L(`顶点锥 · b = ${m.base} · δ₂F = ${mstr(m.defect)}${m.defect === 0 ? ' · e = H₂F 是原势' : ' · 无原势'}`, `Vertex cone · b = ${m.base} · δ₂F = ${mstr(m.defect)}${m.defect === 0 ? ' · e = H₂F is a primitive' : ' · no primitive'}`);
       case 'shell:shell':
@@ -1417,10 +1419,11 @@
             [L('Δ₁ = Φ01 + Φ13 + Φ30 · Δ₂ = Φ12 + Φ23 + Φ31', 'Δ₁ = Φ01 + Φ13 + Φ30 · Δ₂ = Φ12 + Φ23 + Φ31'), `${mstr(m.circ[0])} · ${mstr(m.circ[1])}`],
             [L('内边：Φ13 + Φ31', 'Interior edge: Φ13 + Φ31'), `${mstr(m.e1(1, 3))} + ${mstr(m.e1(3, 1))} = 0 ${yes}`],
             [L('δ₁(δ₀f) 在 64 个有序三元组上', 'δ₁(δ₀f) on the 64 ordered triples'), `${L('全为 0', 'all 0')} (${m.d1d0}/64) ${mark(m.d1d0 === 64)}`],
-            [L('流群和乐：W₁·W̃₂ = Hol(∂Σ)', 'Heap holonomy: W₁·W̃₂ = Hol(∂Σ)'), `${q4str(HEAP.prod)} ${mark(HEAP.ok)}`],
-            [L('乘序颠倒：W̃₂·W₁', 'Reversed order: W̃₂·W₁'), `${q4str(HEAP.rev)} ≠`]
+            [L('沿 0→1 锚定：W₁·W̃₂ = Hol(∂Σ)', 'Whisker 0→1: W₁·W̃₂ = Hol(∂Σ)'), `${q4str(HEAP.prod)} ${mark(HEAP.ok)}`],
+            [L('乘序颠倒：W̃₂·W₁', 'Reversed order: W̃₂·W₁'), `${q4str(HEAP.rev)} ≠`],
+            [L('改沿 0→3→1 锚定', 'Whisker changed to 0→3→1'), `${q4str(HEAP.alt)} ≠`]
           ],
-          note: L('内边 U<sub>13</sub> 与它的逆 U<sub>31</sub> 相乘为 1，即流群消去律 [y, x, x] = y：粗网格上不需要任何细分。', 'The interior edge U<sub>13</sub> times its inverse U<sub>31</sub> is 1, the heap cancellation [y, x, x] = y: no refinement is needed on the coarse mesh.')
+          note: L('舞台演示整数环流相加。四元数读数是手算例的复算，沿当前边界前缀 0→1 锚定第二面，再把新因子乘在右侧。', 'The stage adds integer circulations. The quaternion readouts recompute the worked example. Whisker the second face along the current boundary prefix 0→1 and multiply the new factor on the right.')
         };
       }
       case 'cone:cone': {
@@ -1528,6 +1531,7 @@
       put('roL' + (i + 1), kept(l));
       put('roV' + (i + 1), kept(v));
     });
+    $('roRow7').hidden = m.key !== 'cone:stokes';
     put('roNote', R.note);
     $('scenePill').innerHTML = `${L(...PILL[state.scene])} <strong>${state.lens ? 'ℝ' : 'Ω'}</strong>`;
     $('keyPill').innerHTML = `P/Q <strong>${kept(R.key[1])}</strong>`;
@@ -2443,6 +2447,7 @@
     cone123: () => mstr(DEF.coneFace),
     hol: () => q4str(HEAP.prod),
     holRev: () => q4str(HEAP.rev),
+    holAlt: () => q4str(HEAP.alt),
     evens: () => [1, 2, 3].map((n) => polyStr(EVEN[n])).join('; '),
     fusion: () => polyStr(pmulZ(EVEN[1], EVEN[2])),
     d10: () => `(${D10.map(fstr).join(', ')})`,
@@ -2525,7 +2530,7 @@
     exact: () =>
       plain({
         chain: CHAIN,
-        heap: { W1: HEAP.W1, W2: HEAP.W2, prod: HEAP.prod, hol: HEAP.hol, rev: HEAP.rev },
+        heap: { W1: HEAP.W1, W2: HEAP.W2, prod: HEAP.prod, hol: HEAP.hol, rev: HEAP.rev, alt: HEAP.alt },
         orbitals: ORB.map((o) => ({ key: o.key, diag: o.diag, off: o.off })),
         d10: D10,
         spin: SPIN.slice(0, 9),

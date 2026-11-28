@@ -2,7 +2,8 @@
 
 > *"Do not alter the verifier's kernel, and never inject unchecked dogma with the `axiom` keyword; write the Mother Axiom as a computable typeclass and build a pure integer carrier that inhabits it without Choice or quotients—consistency and executability arrive together."*
 
-When rebuilding mathematics from zero axioms, the first question is not how to write numbers, but **what logical floor we are standing on**. If our proof engine silently opens with ZFC set theory and the real continuum, then claiming to reject actual infinity or transcendentals in prose changes nothing beneath the hood: Choice and quotient axioms are already active in the kernel's dependency graph. This chapter lays the floor bare in four steps. First, we inspect the bare Calculus of Inductive Constructions (CIC) kernel of Lean 4 and see why it natively lacks actual infinity and Choice. Second, we replace static infinite sets with an explicit observer rational precision contract $\varepsilon_{\mathrm{self}} = 1/M$. Third, we state the three Mother Laws of `AXIOM-Ω`. Fourth, we show why `AXIOM-Ω` must be encoded as a computable typeclass `class OmegaSpace` and never as a raw `axiom`.
+When rebuilding mathematics from zero axioms, the first question is not how to write numbers, but **what logical floor we are standing on**. If our proof engine silently opens with ZFC set theory and the real continuum, then claiming to reject actual infinity or transcendentals in prose changes nothing beneath the hood: Choice and quotient axioms are already active in the kernel's dependency graph. This chapter lays the floor bare in four steps. First, we inspect the bare Calculus of Inductive Constructions (CIC) kernel of Lean 4 and see why it natively lacks actual infinity and Choice. Second, we replace static infinite sets with an explicit observer rational precision contract $\varepsilon_{\mathrm{self}} = 1/M$. Third, we state the three Mother Laws of `AXIOM-Ω`. Fourth, a schematic interface shows how to pass operations and their individual certificates to the kernel.
+“Zero-axiom kernel verification” refers to the empty axiom record in the strict Omega backend. The official version reached by a source link has its own frozen axiom record. For example, the ray left-cancellation result in Chapter 3 has no axioms in the strict backend and depends on `propext` in the official backend.
 
 ## 1.1 The Bare CIC Kernel and the Three Hidden Classical Axioms {#sec-ch01-bare-cic}
 
@@ -24,7 +25,7 @@ One subtle trap deserves early warning: even without importing `Mathlib`, standa
 A formal module belongs to the **zero-axiom bare CIC core** if the transitive axiom closure of every definition and theorem in it is empty—depending neither on `propext`, `Classical.choice`, `Quot.sound`, nor on any custom `axiom`—and every type check and equality verification proceeds solely by dependent typing and $\beta\delta\iota\zeta$-reduction. A type $T$ carries **constructive decidable equality** (`DecidableEq`) if there is a computable procedure that, given any $a, b : T$, returns either a proof term witnessing $a = b$ or a refutation term witnessing $(a = b) \to \mathrm{False}$.
 :::
 
-Once a type enjoys zero-axiom `DecidableEq` and represents every geometric class by a unique canonical integer tuple, `Quot.sound` becomes completely unnecessary: two objects denote the same state if and only if their canonical integer tuples agree coordinate by coordinate. In [Chapter 2](ch02-homogeneous-projective-line.md) and [Chapter 3](ch03-canonical-ternion-manifold.md), we will watch this discipline replace an entire stack of real-analytic quotient machinery with elementary integer reduction.
+When each ray has a unique canonical representative, comparing canonical integer tuples decides whether they represent the same ray. The underlying library can also keep unreduced representatives and compare them by ray equivalence. See [Chapter 2](ch02-homogeneous-projective-line.md) and [Chapter 3](ch03-canonical-ternion-manifold.md).
 
 ::: {.remark #rem-ch01-cic-hedberg-literature title="CIC Metatheory, Hedberg's Theorem, and Three-Axiom Auditing (ARGUED)"}
 The metatheoretic facts cited here are established literature results: the Calculus of Inductive Constructions was formulated by T. Coquand and C. Paulin-Mohring (*COLOG-88*, LNCS **417**, 50–66, 1990); Lean 4's compiler and kernel architecture are documented by L. de Moura and S. Ullrich (*CADE-28*, LNCS **12699**, 625–635, 2021); and Lean's type theory together with its three standard classical axioms `{propext, Classical.choice, Quot.sound}` is analyzed by M. Carneiro (*The Type Theory of Lean*, CMU master's thesis, 2019). Moreover, M. Hedberg (*J. Funct. Program.* **8**(4), 413–436, 1998) proved **Hedberg's theorem**: any type with constructive `DecidableEq` satisfies uniqueness of identity proofs (UIP) without additional axioms. This ensures that when [Chapter 3](ch03-canonical-ternion-manifold.md) bundles a decidable canonical predicate into the subtype `CanonProjTernion`, the subtype retains zero-axiom decidable equality without invoking `propext` or `Quot.sound`.
@@ -103,7 +104,7 @@ Let $\mathcal{M}$ be a nonempty type equipped with a ternary comparison transpor
    and the carrier locks onto the minimal nontrivial degrees of freedom and minimal feature rank compatible with Laws I and II.
 :::
 
-Pause to notice how sparse these laws are. Not a single $\pi$, $e$, $\varphi$, real number $\mathbb{R}$, linear sum $+$, hand-typed dimension "$3$", or privileged identity $\mathbf{1}$ enters the statement. Yet three lines of elementary algebra (`ARGUED`) already unlock both its boundedness and its basepoint democracy:
+Pause to notice how sparse these laws are. Not a single $\pi$, $e$, $\varphi$, real number $\mathbb{R}$, linear sum $+$, hand-typed dimension "$3$", or privileged identity $\mathbf{1}$ enters the statement. Small Gram matrices from Law II constrain the fidelity, and the identities in Law I recover a group at each basepoint (`ARGUED`).
 
 - **The upper bound $\kappa \le 1$ comes for free**: apply Law II's rational Gram positivity with $n = 2$, sample $(x, y)$, and weights $(c_1, c_2) = (1, -1)$. Using $\kappa(x, x) = \kappa(y, y) = 1$ and symmetry gives
 
@@ -111,7 +112,9 @@ Pause to notice how sparse these laws are. Not a single $\pi$, $e$, $\varphi$, r
   1^2\cdot 1 + (-1)^2\cdot 1 + 2(1)(-1)\kappa(x, y) \;=\; 2 - 2\kappa(x, y) \;\ge\; 0 \quad \Longrightarrow \quad \kappa(x, y) \;\le\; 1,
   $$
 
-  so $\kappa(x, y) \in \mathbb{Q} \cap [0, 1]$ needs no separate axiom.
+  so nonnegativity gives $\kappa(x, y) \in \mathbb{Q} \cap [0, 1]$.
+
+  Now add an arbitrary probe point $z$ and write $d = \kappa(x,z)-\kappa(y,z)$. For the sample $(x,y,z)$ and rational weights $(1,-1,-d)$, normalization and symmetry give the Gram inequality $2-2\kappa(x,y)-d^2 \ge 0$. If $\kappa(x,y)=1$, then $x$ and $y$ have the same reading against every $z$. Conversely, if their rows agree, taking $z=y$ gives $\kappa(x,y)=\kappa(y,y)=1$. This argument uses only normalization, symmetry, and rational Gram positivity. Inferring equality of the underlying points from unit fidelity requires precisely that the row map $x\mapsto\kappa(x,\cdot)$ be injective. This is the role of extensional separation in Law II.
 
 - **Any point serves temporarily as an origin, recovering a group in three lines**: pick any temporary reference point $o \in \mathcal{M}$, and define a binary product $x \star_o z := [x, o, z]$ and local inverse $x^{-1_o} := [o, x, o]$. Associativity follows straight from Law I: $(x \star_o y) \star_o z = [[x, o, y], o, z] = [x, o, [y, o, z]] = x \star_o (y \star_o z)$. Left and right identity are $[o, o, z] = z$ and $[x, o, o] = x$, and the left and right inverses take two rewrites each:
 
@@ -124,6 +127,16 @@ Pause to notice how sparse these laws are. Not a single $\pi$, $e$, $\varphi$, r
 
   The original ternary transport recovers identically as $x \star_o y^{-1_o} \star_o z = [x, y, z]$, and shifting basepoint $o \mapsto o'$ via $x \mapsto [x, o, o']$ is a bijection (with inverse $x \mapsto [x, o', o]$) preserving both transport and fidelity. Every point stands on equal footing; an observer plants a local reference wherever it stands, computes, and lets the bridge cancel away without trace.
 
+**Identifying points with the same row.** Keep normalization and the other reading conditions of Law II while dropping extensional separation. Can we perform ternary transport on the resulting classes? Write $x\sim y$ when their rows agree. In the group $G$ based at $o$, let $N=\{n\in G:n\sim o\}$. Left translations are invertible and preserve the reading, so $x\sim y$ exactly when $x^{-1}y\in N$. For $n,m\in N$, left translation gives $nm\sim n\sim o$ and $n^{-1}\sim o$, so $N$ is a subgroup. When right translations also preserve the reading, multiplying first on the left by $g$ and then on the right by $g^{-1}$ gives $gng^{-1}\sim o$, so $N$ is normal.
+
+The classes are then the elements of the quotient group $G/N$, where $[xN,yN,zN]=(xy^{-1}z)N$. With left invariance alone, normality is still both necessary and sufficient for transport to descend. Indeed, if transport is independent of representatives, fixing its middle slot at $o$ gives a well-defined multiplication, so we can multiply both sides of $n\sim o$ on the left by $g$ and on the right by $g^{-1}$. Row equality makes the quotient reading independent of the first representative, and symmetry does the same for the second. Computing on representatives carries each available translation invariance to the quotient. The Gram form of a finite sample of classes is the Gram form of its representatives, and the set of reading values stays the same, preserving zero-reaching. Unit fidelity on the quotient holds exactly between equal classes.
+
+To check whether swapping the outer slots can still change the result, compare $xy$ with $yx$ in the quotient. Fixing the middle slot at the identity gives group multiplication, and in an abelian group every ternary transport is symmetric in its outer slots. Noncommutativity therefore survives exactly when some commutator $xyx^{-1}y^{-1}$ lies outside $N$, equivalently when $[G,G]\nsubseteq N$.
+
+Both outcomes occur on the same finite group. Take $G=S_3\times\{+1,-1\}$ with transport $[x,y,z]=xy^{-1}z$. One reading is $1$ when the permutation components agree and $0$ otherwise. Another uses the same rule with permutation parity. Both readings group points by the fibers of a homomorphism, and both left and right translations preserve the grouping relation. If $r_i$ records the permutation or parity of the sample point $x_i$, the Gram form is the sum of squares $\sum_r(\sum_{i:\,r_i=r}c_i)^2$. Both readings identify $(e,+1)$ with $(e,-1)$ and give zero between the identity and a transposition.
+
+The permutation reading gives quotient $S_3$, where the order of $(12)$ and $(23)$ still changes the product. The parity reading gives the abelian group of order two, where both orders give the even class. Thus passing to reading classes restores extensional separation, and which commutators survive determines whether the reading can still distinguish the order of transport. Minimality still requires a specified class of models.
+
 ## 1.4 Why a Computable Typeclass class OmegaSpace Rather Than an Unchecked axiom {#sec-ch01-typeclass-not-axiom}
 
 When formalizing `AXIOM-Ω` in a proof assistant, the most tempting shortcut is also the deadliest: typing `axiom M : Type`, `axiom triad : M → M → M → M`, and `axiom kappa_refl : ∀ x, kappa x x = 1`. **This monograph bans unchecked `axiom` declarations from the very first line.**
@@ -134,7 +147,7 @@ First, **a raw `axiom` provides zero guarantee of consistency and explodes to `F
 
 Second, **a raw `axiom` freezes $\iota$-reduction and severs the Curry–Howard unity of proof and computation**. Because an `axiom` carries no computation rule, any term mentioning it sticks as an irreducible neutral symbol: kernel reflection cannot simplify it, and no native executable code can run it.
 
-The genuine zero-axiom solution encodes the Mother Laws as a **computable typeclass (`class OmegaSpace`)**. A typeclass asks the logic for nothing free; it simply states an algebraic interface:
+A structure can collect the operations and their individual certificates, so that each theorem depends explicitly on the certificates it takes as input. The schematic `class OmegaSpace` below illustrates Law I and some of the reading conditions in Law II.
 
 ```lean
 class OmegaSpace (M : Type) where
@@ -149,7 +162,13 @@ class OmegaSpace (M : Type) where
   kappa_inv_l : ∀ x y u v, kappa (triad u v x) (triad u v y) = kappa x y
 ```
 
-Encoding `AXIOM-Ω` as a typeclass scores a double logical victory. First, every theorem proved abstractly over `[OmegaSpace M]` applies automatically to every model without adding a single axiom to the kernel. Second, the moment we construct a concrete non-Abelian inhabitant `instance : OmegaSpace CanonProjTernion` inside bare CIC (the culmination of [Chapter 3](ch03-canonical-ternion-manifold.md)), that concrete instance **constructively proves the relative consistency and nontrivial satisfiability of `AXIOM-Ω` relative to bare CIC**: an inconsistent axiom system has no inhabitant at all.
+This interface guarantees exactly the fields it lists. Take the eight-element quaternion group $Q_8 = \{\pm 1,\pm\mathbf{i},\pm\mathbf{j},\pm\mathbf{k}\}$ with transfer $[x,y,z]=xy^{-1}z$ and constant reading $\kappa(x,y)=1$. The group identities give cancellation and associativity. The constant reading meets the remaining fields and even gives the nonnegative Gram form $(\sum_i c_i)^2 \ge 0$, while $\mathbf{i}\mathbf{j}\neq\mathbf{j}\mathbf{i}$. Yet $\kappa(1,-1)=1$ and the reading cannot approach zero. A full model needs separate evidence for separation, nonnegativity, Gram positivity, zero-reaching, and noncommutativity, together with a specified class of structures for the minimality claim.
+
+The zero-axiom library verifies integer quaternion laws using nonzero representatives and ray equivalence. Chapter 3 then derives strict cancellation and reading properties by hand for canonical representatives and gives the additional assumptions for the real-valued rank-five result. See [Chapter 3](ch03-canonical-ternion-manifold.md).
+
+::: {.film src="the-bare-kernel"}
+**The bare CIC kernel has three primitives and four reductions while classical axioms slip in through shortcuts; precision becomes a finite contract $1/M$, and the Mother Axiom keeps only a ternary transport and a fidelity $\kappa$, written as a computable typeclass rather than a raw `axiom` (2 min 49 s).** Cyan panels list dependent functions, universes and finite inductive types with the four reductions $\beta$, $\delta$, $\iota$, $\zeta$, and $3$ is drawn as the finite tree `succ succ succ zero`; magenta cards show `Classical.choice`, `Quot.sound` and `propext`, and this type-theoretic metatheory is labelled violet as a literature result ([@rem-ch01-cic-hedberg-literature]). Deciding $12/18 = 2/3$ and $3/4 \neq 2/3$ by cross-multiplication, the $47$ reduced fractions of $[0, 1]$ with denominators up to $12$ and their least gap $1/132$ (between $1/12$ and $1/11$, amber), and $[1 : 2] \odot [1 : 3] = (5, 5) \sim [1 : 1]$ and $[1 : 2] \odot [2 : 5] = [9 : 8]$ are computed on screen (cyan NUM, [@ex-ch01-finite-horizon-budget]), raising the horizon from $M = 3$ to $M' = 9$. The precision contract and the three Mother Laws are model statements (violet, [@def-ch01-observer-precision], [@def-ch01-axiom-omega]), and the transport picture is schematic; $\kappa \le 1$ from the Gram form and the local group with any point $o$ as identity follow the chapter's derivations and are labelled argued. The raw `axiom` deriving $0 = 1$ and stalling reduction, and the schematic `class OmegaSpace`, are argued; $Q_8$ with constant $\kappa \equiv 1$ satisfies every listed field (checked case by case on screen), yet $\kappa(1, -1) = 1$ breaks separation. This chapter cites no Lean declaration, so the film shows no green.
+:::
 
 ::: {.remark #rem-ch01-three-route-comparison title="Comparison of Raw axiom, Classical Mathlib, and Zero-Axiom OmegaSpace Routes (MODEL)"}
 The architectural contrast across the three formalization routes is stark:
@@ -158,14 +177,14 @@ The architectural contrast across the three formalization routes is stark:
 | :--- | :--- | :--- | :--- |
 | **Axiom Closure Audit** | Exposes unchecked custom `axiom`; vulnerable to `False` | Imports `{propext, Classical.choice, Quot.sound}` | Empty transitive axiom closure ($\varnothing$) |
 | **Executable Evaluation** | Stalls reduction on inert constants | Real division, roots, and derivatives become `noncomputable` | Pure integer and fraction operations compile natively |
-| **Consistency Guarantee** | None; relies on human vigilance at boundaries | Relative to classical real-analytic set theory | Constructively witnessed inside bare CIC by an explicit carrier |
-| **Geometric Singularities** | Uncoordinated symbols; boundary omission breaks soundness | Managed via smooth charts, limit filters, and quotients | Homogeneous canonical integer carriers keep denominators strictly positive everywhere |
+| **How Laws Are Checked** | Declarations enter the trusted base directly | Depends on the declaration and its axiom audit | Supply a certificate for each law on the chosen carrier |
+| **Geometric Singularities** | The domain must be specified separately | Managed via smooth charts, limit filters, and quotients | Nonzero homogeneous coordinates keep squared-norm denominators positive |
 :::
 
 The diagram below maps these three formalization routes alongside the three Mother Laws of `AXIOM-Ω`, showing at a glance how the zero-axiom bare CIC floor separates cleanly from both the classical three-axiom stack and the unchecked custom `axiom` trap.
 
 ::: {.figure src="ch01-axiom-omega-cic"}
-**Logical hierarchy contrasting the three formalization routes with the three Mother Laws of `AXIOM-Ω`.** The figure contrasts the bare CIC plus `OmegaMath` zero-axiom stack (empty axiom closure $\varnothing$, natively executable), the classical `Mathlib.Real` stack (relying on `{propext, Classical.choice, Quot.sound}`), and the unchecked custom `axiom` trap (where an unguarded zero boundary collapses to `False`), while charting how the computable typeclass `class OmegaSpace` packages Law I (origin-free cancellation and ternary associativity), Law II (bilateral invariance and rational Gram positivity), and Law III (minimal noncommutativity self-lock); see [@def-ch01-zero-axiom-core], [@def-ch01-axiom-omega], and [@rem-ch01-three-route-comparison].
+**Three formalization routes and the Mother Laws of AXIOM-Ω.** The constructive route illustrates how to supply certificates for individual model laws. Bare CIC with OmegaMath provides zero-axiom integer and fraction operations. The classical real and custom-axiom routes have their own trust bases. See [@def-ch01-zero-axiom-core], [@def-ch01-axiom-omega], and [@rem-ch01-three-route-comparison].
 :::
 
-Our logical floor and typeclass contract are now fixed. Rather than leaping straight into three-dimensional non-Abelian geometry, let us build our first zero-axiom geometric carrier in one dimension—abolishing the open real line $\mathbb{R}$ and bending homogeneous integer pairs $\mathbb{QP}^1$ into a seamless rational circle with no tear at $\infty$.
+With the logical foundation and model laws in place, start with a commutative carrier in one dimension. The homogeneous integer projective line $\mathbb{QP}^1$ crosses the antipode while keeping every reading finite.

@@ -4,7 +4,7 @@
 
 经过[第四章](ch04-heaps-and-lie-triple-curvature.md)的无原点流群与利雅三元曲率，以及[第五章](ch05-rational-cayley-rotations.md)的三维凯莱有理旋转与切比雪夫谐波，我们在第二卷的最后一章正面攻克古典几何中最顽固的超越壁垒：**球面三角学**。在传统教材中，球面三角形被写满 $\cos c = \cos a\cos b + \sin a\sin b\cos C$、$\arccos$ 反三角函数与吉拉尔角盈 $\Omega = A + B + C - \pi$；只要三个顶点取在普通的非平方模方整射线（如 `[1:0:0:0]`、`[1:1:0:0]`、`[1:0:1:0]`）上，连一条边的夹角余弦都立刻溅出无理根号 $\frac{1}{\sqrt{2}}$。
 
-本章将证明，这些无理数与超越函数全都是强行拆解三点闭环留下的假象。一旦引入**尺度无关、符号无关的纯有理巴格曼三点环路不变量** $B(\mathbf{a}, \mathbf{b}, \mathbf{c}) \in \mathbb{Q}$ 与归一化的 $3 \times 3$ **巴格曼—格拉姆闭合行列式** $\det\mathbf{G}_3(\mathbf{a}, \mathbf{b}, \mathbf{c}) \ge 0$，整部球面三角学便彻底化为纯有理多项式代数：它在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中对一切非零整四元数普遍非负，在流群测地倍增三元组上精确归零并锁死整系数圆弧倍增律，直接导出普遍成立的有理球面正弦律与有理球面勾股定理，并在基准正交半步三元组 $(o, p_{\mathrm{Half}}, q_{\mathrm{Half}})$ 上给出精确零公理角盈见证 $\det\mathbf{G}_3 \equiv \frac{1}{4}$，全篇不见半个 $\sin$、$\cos$、$\arccos$ 或 $\pi$。
+本章将证明，这些无理数与超越函数全都是强行拆解三点闭环留下的假象。一旦引入**尺度无关、符号无关的纯有理巴格曼三点环路不变量** $B(\mathbf{a}, \mathbf{b}, \mathbf{c}) \in \mathbb{Q}$ 与归一化的 $3 \times 3$ **巴格曼—格拉姆闭合行列式** $\det\mathbf{G}_3(\mathbf{a}, \mathbf{b}, \mathbf{c}) \ge 0$，整部球面三角学便彻底化为纯有理多项式代数：它在使用 `OmegaInit` 与 `OmegaMath` 的 D5 形式化（`strict_omega.axioms: []`）中对一切非零整四元数普遍非负，在流群测地倍增三元组上精确归零并锁死整系数圆弧倍增律，直接导出普遍成立的有理球面正弦律与有理球面勾股定理，并在基准正交半步三元组 $(o, p_{\mathrm{Half}}, q_{\mathrm{Half}})$ 上给出精确零公理角盈见证 $\det\mathbf{G}_3 \equiv \frac{1}{4}$，全篇不见半个 $\sin$、$\cos$、$\arccos$ 或 $\pi$。
 
 ## 6.1 告别正弦与余弦：无根号巴格曼三点环路不变量
 
@@ -41,7 +41,7 @@ $$
    B(\mathbf{a}, \mathbf{b}, \mathbf{c})^2 = \kappa(\mathbf{a}, \mathbf{b})\,\kappa(\mathbf{b}, \mathbf{c})\,\kappa(\mathbf{c}, \mathbf{a}).
    $$
 
-   即便 $\sqrt{\kappa_{ab}}, \sqrt{\kappa_{bc}}, \sqrt{\kappa_{ca}}$ 各自皆为无理数，三者沿闭环相乘却自动回归有理数 $B \in \mathbb{Q}$，且保留了单独知道三条边长 $\kappa_{ab}, \kappa_{bc}, \kappa_{ca}$ 所丢失的环路手性符号。
+   即便 $\sqrt{\kappa_{ab}}, \sqrt{\kappa_{bc}}, \sqrt{\kappa_{ca}}$ 各自皆为无理数，三者沿闭环相乘却自动回归有理数 $B \in \mathbb{Q}$，且保留了单独知道三条边长 $\kappa_{ab}, \kappa_{bc}, \kappa_{ca}$ 所丢失的内积乘积符号。
 3. **秩一投影巴格曼迹等同**：以[第四章](ch04-heaps-and-lie-triple-curvature.md)的秩一正交投影阵 $P(\mathbf{v}) = \frac{\mathbf{v}\mathbf{v}^\top}{\lVert\mathbf{v}\rVert^2} \in \operatorname{Sym}_d(\mathbb{Q})$ 写出三算符环路迹，立见 $\operatorname{Tr}\bigl(P(\mathbf{a})P(\mathbf{b})P(\mathbf{c})\bigr) = B(\mathbf{a}, \mathbf{b}, \mathbf{c})$。
 4. **精确闭合展开式**：按三阶行列式萨吕法则展开 $\det G_{\mathrm{raw}}(\mathbf{a}, \mathbf{b}, \mathbf{c})$ 并同除以恒正分母 $\lVert\mathbf{a}\rVert^2\lVert\mathbf{b}\rVert^2\lVert\mathbf{c}\rVert^2 > 0$，无需对任何向量开方归一，即得**巴格曼—格拉姆闭合方程**：
 
@@ -73,9 +73,9 @@ $$
 由于实数平方非负，右端恒 $\ge 0$，且等于 $0$ 当且仅当每一项 $u_i v_j - u_j v_i = 0$。完整证明由 Lean 内核检查。
 :::
 
-在一般维数 $d \ge 2$ 的有理空间 $\mathbb{Q}^d$ 中，只需将 $\mathbf{b}, \mathbf{c}$ 正交化到 $\mathbf{a}$ 的补空间并对所得向量施加 [@thm-ch06-lagrange-gram-identity]，即可纯多项式地推出 $\det\mathbf{G}_3(\mathbf{a}, \mathbf{b}, \mathbf{c}) \ge 0$。在三元球面整数载体 `Quad4`（$\mathbb{Z}^4 \setminus \{\mathbf{0}\}$）上，这一球面有理三角基本闭合不等式彻底摆脱了实数连续统，直接落户于零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）的精确有号分数序 `Omega.IntRatio.Le` 之中：
+在一般维数 $d \ge 2$ 的有理空间 $\mathbb{Q}^d$ 中，只需将 $\mathbf{b}, \mathbf{c}$ 正交化到 $\mathbf{a}$ 的补空间并对所得向量施加 [@thm-ch06-lagrange-gram-identity]，即可纯多项式地推出 $\det\mathbf{G}_3(\mathbf{a}, \mathbf{b}, \mathbf{c}) \ge 0$。在三元球面整数载体 `Quad4`（$\mathbb{Z}^4 \setminus \{\mathbf{0}\}$）上，这一球面有理三角基本闭合不等式彻底摆脱了实数连续统，直接落户于使用 `OmegaInit` 与 `OmegaMath` 的 D5 形式化（`strict_omega.axioms: []`）的精确有号分数序 `Omega.IntRatio.Le` 之中：
 
-::: {.theorem #thm-ch06-detgram3-nonneg title="四元巴格曼—格拉姆闭合行列式的零公理普遍非负性" lean="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.detGram3_nonneg"}
+::: {.theorem #thm-ch06-detgram3-nonneg title="四元巴格曼—格拉姆闭合行列式的普遍非负性" lean="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.detGram3_nonneg"}
 设 $\mathbf{a}, \mathbf{b}, \mathbf{c} \in \mathbb{Z}^4$ 为 `Quad4` 中任意三枚非零整四元数（$\mathbf{a} \neq \mathbf{0}$、$\mathbf{b} \neq \mathbf{0}$、$\mathbf{c} \neq \mathbf{0}$）。在零公理有号分数类型 `Omega.IntRatio` 及其序关系 `IntRatio.Le` 下，归一化 $3 \times 3$ 巴格曼—格拉姆闭合行列式普遍非负：
 
 $$
@@ -137,9 +137,9 @@ $$
 \bigl(\kappa(\mathbf{a}, \mathbf{b}) + \kappa(\mathbf{b}, \mathbf{c}) + \kappa(\mathbf{c}, \mathbf{a}) - 1\bigr)^2 = 4\,\kappa(\mathbf{a}, \mathbf{b})\,\kappa(\mathbf{b}, \mathbf{c})\,\kappa(\mathbf{c}, \mathbf{a}).
 $$
 
-值得注意的是，保留 $B$ 的巴格曼—格拉姆一次方程比消去 $B$ 的二次方程更强，因为 $B$ 的正负号直接区分了沿大圆“向前倍增”还是“折返归原”。
+保留 $B$ 的一次方程记录了有号内积的乘积关系。平方只保留乘积的模方。$B$ 对任意顶点置换和共同正交变换都不变，因此不记录大圆的行进方向。
 
-现在将这套大圆共线律施于[第四章](ch04-heaps-and-lie-triple-curvature.md)的等步流群自平行延拓：对任意两枚非零整四元数 $\mathbf{a}, \mathbf{b} \in \mathbb{Z}^4 \setminus \{\mathbf{0}\}$，令 $\mathbf{c} := [\mathbf{b}, \mathbf{a}, \mathbf{b}] = \mathbf{b}\bar{\mathbf{a}}\mathbf{b}$（`triad b a b`）。在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中，以下两条冻结定理依次确立了倍增三元组的大圆共线归零律与整系数圆弧倍增保真度律。
+现在将这套大圆共线律施于[第四章](ch04-heaps-and-lie-triple-curvature.md)的等步流群自平行延拓：对任意两枚非零整四元数 $\mathbf{a}, \mathbf{b} \in \mathbb{Z}^4 \setminus \{\mathbf{0}\}$，令 $\mathbf{c} := [\mathbf{b}, \mathbf{a}, \mathbf{b}] = \mathbf{b}\bar{\mathbf{a}}\mathbf{b}$（`triad b a b`）。在使用 `OmegaInit` 与 `OmegaMath` 的 D5 形式化（`strict_omega.axioms: []`）中，以下两条冻结定理依次确立了倍增三元组的大圆共线归零律与整系数圆弧倍增保真度律。
 
 ::: {.theorem #thm-ch06-geodesic-doubling-detgram3-zero title="流群测地倍增三元组的巴格曼—格拉姆行列式恒为零" lean="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.geodesic_doubling_detGram3_zero"}
 设 $\mathbf{a}, \mathbf{b} \in \mathbb{Z}^4$ 为 `Quad4` 中任意两枚非零整四元数（$\mathbf{a} \neq \mathbf{0}$、$\mathbf{b} \neq \mathbf{0}$），记流群测地倍增延拓为 $[\mathbf{b}, \mathbf{a}, \mathbf{b}] := \mathbf{b}\bar{\mathbf{a}}\mathbf{b}$（`triad b a b`）。则在零公理等价关系 `Omega.IntRatio.Equivalent` 下，三元组 $(\mathbf{a}, \mathbf{b}, [\mathbf{b}, \mathbf{a}, \mathbf{b}])$ 的巴格曼—格拉姆闭合行列式恒为零：
@@ -165,7 +165,7 @@ $$
 \bigl(2\kappa_1 + \kappa_2 - 1\bigr)^2 - 4\kappa_1^2\kappa_2 \equiv (\kappa_2 - 1)\Bigl(\kappa_2 - (2\kappa_1 - 1)^2\Bigr) = 0.
 $$
 
-两支根分别对应原地折返（$\mathbf{c} = \mathbf{a}$，$B = \kappa_1$，$\kappa_2 = 1$）与向前平行延拓；代入流群延拓的巴格曼不变量 $B(\mathbf{a}, \mathbf{b}, [\mathbf{b}, \mathbf{a}, \mathbf{b}]) = \kappa_1(2\kappa_1 - 1)$，一次闭合方程直接锁定向前倍增支 $\kappa_2 = 1 + 2\kappa_1(2\kappa_1 - 1) - 2\kappa_1 = (2\kappa_1 - 1)^2$。这一整系数圆弧倍增律同样在零公理内核中直接证毕：
+两种构造分别是回到起点射线（$\mathbf{c}=\mathbf{a}$，$B=\kappa_1$，$\kappa_2=1$）与测地倍增。将 $\mathbf{c}=2\langle\mathbf{a},\mathbf{b}\rangle\mathbf{b}-\lVert\mathbf{b}\rVert^2\mathbf{a}$ 代入内积乘积，可得倍增时 $B=\kappa_1(2\kappa_1-1)$。因此一次方程给出 $\kappa_2=(2\kappa_1-1)^2$。当 $0<\kappa_1<1$ 时，两种构造的完整读数不同。当 $\kappa_1=0$ 或 $1$ 时，两支重合，倍增点也落回起点射线。整系数倍增律同样由零公理内核证得：
 
 ::: {.theorem #thm-ch06-geodesic-doubling-kappa title="测地圆弧倍增的整系数保真度律" lean="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.geodesic_doubling_kappa"}
 设 $\mathbf{a}, \mathbf{b} \in \mathbb{Z}^4$ 为 `Quad4` 中任意两枚非零整四元数（$\mathbf{a} \neq \mathbf{0}$、$\mathbf{b} \neq \mathbf{0}$）。则在零公理等价关系 `Omega.IntRatio.Equivalent` 下，起点 $\mathbf{a}$ 与测地倍增点 $[\mathbf{b}, \mathbf{a}, \mathbf{b}] = \mathbf{b}\bar{\mathbf{a}}\mathbf{b}$（`triad b a b`）之间的射影保真度满足
@@ -187,7 +187,8 @@ $$
 
 ::: {.example #ex-ch06-collinear-doubling title="正、负巴格曼不变量下的大圆共线倍增双算例"}
 1. **正环路不变量情形**：取 $\mathbf{a} = [1:0:0:0]$、$\mathbf{b} = [2:1:0:0]$（$\kappa_1 = \frac{4}{5}$），流群自平行一步得 $\mathbf{c} = (2 + \mathbf{i})\cdot 1\cdot(2 + \mathbf{i}) = [3:4:0:0]$（$\lVert\mathbf{c}\rVert^2 = 25$）。直接核验 $\kappa_{ab} = \frac{4}{5}$、$\kappa_{bc} = \frac{10^2}{5 \cdot 25} = \frac{4}{5}$、$\kappa_{ca} = \frac{9}{25} = (2\cdot\frac{4}{5} - 1)^2$，且 $B = \frac{2 \cdot 10 \cdot 3}{1 \cdot 5 \cdot 25} = +\frac{12}{25} = \frac{4}{5}\cdot\frac{3}{5}$；闭合行列式 $\det\mathbf{G}_3 = 1 + \frac{24}{25} - (\frac{4}{5} + \frac{4}{5} + \frac{9}{25}) = 0$。
-2. **负环路不变量与符号不变性情形**：取 $\mathbf{a} = [1:0:0:0]$、$\mathbf{b} = [1:2:0:0]$（$\kappa_1 = \frac{1}{5}$），流群延拓给出 $(1 + 2\mathbf{i})^2 = [-3:4:0:0]$，在 `ProjTernion` 中约去负号规范写为 $\mathbf{c}' = [3:-4:0:0]$。算得 $\langle\mathbf{a}, \mathbf{b}\rangle = 1$、$\langle\mathbf{b}, \mathbf{c}'\rangle = 3 - 8 = -5$、$\langle\mathbf{c}', \mathbf{a}\rangle = 3$，于是巴格曼不变量取负值 $B = \frac{1 \cdot (-5) \cdot 3}{1 \cdot 5 \cdot 25} = -\frac{3}{25} < 0$（用未翻号的 $[-3:4:0:0]$ 计算同样得 $\frac{1 \cdot 5 \cdot (-3)}{125} = -\frac{3}{25}$！），而 $\kappa_{ab} = \kappa_{bc} = \frac{1}{5}$、$\kappa_{ca} = \frac{9}{25} = (2\cdot\frac{1}{5} - 1)^2$，依然精确给出 $\det\mathbf{G}_3 = 1 - \frac{6}{25} - (\frac{1}{5} + \frac{1}{5} + \frac{9}{25}) = 0$。
+2. **负环路不变量与符号不变性情形**：取 $\mathbf{a} = [1:0:0:0]$、$\mathbf{b} = [1:2:0:0]$（$\kappa_1 = \frac{1}{5}$），流群延拓给出 $(1 + 2\mathbf{i})^2 = [-3:4:0:0]$，在规范代表元约定下写为 $\mathbf{c}' = [3:-4:0:0]$。算得 $\langle\mathbf{a}, \mathbf{b}\rangle = 1$、$\langle\mathbf{b}, \mathbf{c}'\rangle = 3 - 8 = -5$、$\langle\mathbf{c}', \mathbf{a}\rangle = 3$，于是巴格曼不变量取负值 $B = \frac{1 \cdot (-5) \cdot 3}{1 \cdot 5 \cdot 25} = -\frac{3}{25} < 0$（用未翻号的 $[-3:4:0:0]$ 计算同样得 $\frac{1 \cdot 5 \cdot (-3)}{125} = -\frac{3}{25}$！），而 $\kappa_{ab} = \kappa_{bc} = \frac{1}{5}$、$\kappa_{ca} = \frac{9}{25} = (2\cdot\frac{1}{5} - 1)^2$，依然精确给出 $\det\mathbf{G}_3 = 1 - \frac{6}{25} - (\frac{1}{5} + \frac{1}{5} + \frac{9}{25}) = 0$。
+3. **同号的倍增与折返**：仍取 $\mathbf{a}=1$、$\mathbf{b}=2+\mathbf{i}$，但令 $\mathbf{c}=\mathbf{a}$。此时 $B=2\cdot2\cdot1/(1\cdot5\cdot1)=4/5$，与倍增时的 $12/25$ 同号，且两者的格拉姆行列式都为零。若同时把倍增算例的 $\mathbf{b},\mathbf{c}$ 共轭，弧的定向反转，$B$ 与三条边保真度却全部保留。
 :::
 
 ## 6.4 有理球面角盈定理、正弦与勾股律及精确算例
@@ -210,7 +211,7 @@ $$
 s(\mathbf{a}, \mathbf{b})\,s(\mathbf{c}, \mathbf{a}) - \det\mathbf{G}_3(\mathbf{a}, \mathbf{b}, \mathbf{c}) = \frac{\bigl(\lVert\mathbf{a}\rVert^2\langle\mathbf{b}, \mathbf{c}\rangle - \langle\mathbf{a}, \mathbf{b}\rangle\langle\mathbf{a}, \mathbf{c}\rangle\bigr)^2}{\lVert\mathbf{a}\rVert^4\,\lVert\mathbf{b}\rVert^2\,\lVert\mathbf{c}\rVert^2} \ge 0.
 $$
 
-由此立见有理球面交叉律 $\det\mathbf{G}_3(\mathbf{a}, \mathbf{b}, \mathbf{c}) = s(\mathbf{a}, \mathbf{b})\,s(\mathbf{c}, \mathbf{a})\,S_a$。在三元球面整四元数载体 `Quad4` 上，古典球面正弦定理与球面勾股定理的纯有理版本均已在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中直接证毕。先看轮换对称的有理球面正弦律：
+由此立见有理球面交叉律 $\det\mathbf{G}_3(\mathbf{a}, \mathbf{b}, \mathbf{c}) = s(\mathbf{a}, \mathbf{b})\,s(\mathbf{c}, \mathbf{a})\,S_a$。在三元球面整四元数载体 `Quad4` 上，古典球面正弦定理与球面勾股定理的纯有理版本均已在使用 `OmegaInit` 与 `OmegaMath` 的 D5 形式化（`strict_omega.axioms: []`）中直接证毕。先看轮换对称的有理球面正弦律：
 
 ::: {.theorem #thm-ch06-rational-spherical-sine-law title="有理球面正弦律" lean="D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.rational_spherical_sine_law"}
 设 $\mathbf{a}, \mathbf{b}, \mathbf{c} \in \mathbb{Z}^4$ 为 `Quad4` 中任意三枚非零整四元数（$\mathbf{a} \neq \mathbf{0}$、$\mathbf{b} \neq \mathbf{0}$、$\mathbf{c} \neq \mathbf{0}$），且三条边展开度在 `Omega.IntRatio` 中均不等价于零：$s(\mathbf{a}, \mathbf{b}) \not\equiv 0$、$s(\mathbf{b}, \mathbf{c}) \not\equiv 0$、$s(\mathbf{c}, \mathbf{a}) \not\equiv 0$。则在零公理等价关系 `Omega.IntRatio.Equivalent` 下，三处有理顶点展开度与各自对边展开度之比在轮换下完全相等：
@@ -293,7 +294,11 @@ $$
 
 ## 6.5 交互工作台：巴格曼—格拉姆有理球面三角实验
 
-读者可在下方交互工作台实验卡中以过去锚 $\mathbf{a} = \mathbf{o} = [1:0:0:0]$ 为基点，直接调节其余两枚有理射线顶点 $\mathbf{b}, \mathbf{c}$：将三点切至大圆倍弧构造核对 [@thm-ch06-geodesic-doubling-detgram3-zero] 的 $\det\mathbf{G}_3 = 0$ 与 [@thm-ch06-geodesic-doubling-kappa] 的整系数倍增律 $\kappa_2 = (2\kappa_1 - 1)^2$，再将第三点抬离大圆进入正交三元组 `[1:0:0:0], [1:1:0:0], [1:0:1:0]`（[@thm-ch06-orthogonal-triad-excess-quarter]），亲眼核对 [@thm-ch06-rational-spherical-sine-law] 与 [@thm-ch06-rational-spherical-pythagorean]，观察巴格曼环路不变量 $B \in \mathbb{Q}$ 如何在零根号下保持符号不变、以及 [@thm-ch06-detgram3-nonneg] 所保证的非负曲率体积平方 $\det\mathbf{G}_3 > 0$ 如何同步跃升至精确值 $\frac{1}{4}$。
+读者可在下方交互工作台实验卡中以过去锚 $\mathbf{a} = \mathbf{o} = [1:0:0:0]$ 为基点，直接调节其余两枚有理射线顶点 $\mathbf{b}, \mathbf{c}$：将三点切至大圆倍弧构造核对 [@thm-ch06-geodesic-doubling-detgram3-zero] 的 $\det\mathbf{G}_3 = 0$ 与 [@thm-ch06-geodesic-doubling-kappa] 的整系数倍增律 $\kappa_2 = (2\kappa_1 - 1)^2$，再将第三点抬离大圆进入正交三元组 `[1:0:0:0], [1:1:0:0], [1:0:1:0]`（[@thm-ch06-orthogonal-triad-excess-quarter]），亲眼核对 [@thm-ch06-rational-spherical-sine-law] 与 [@thm-ch06-rational-spherical-pythagorean]，观察巴格曼环路不变量 $B \in \mathbb{Q}$ 如何保留内积乘积的符号、以及 [@thm-ch06-detgram3-nonneg] 所保证的非负曲率体积平方 $\det\mathbf{G}_3 > 0$ 如何同步跃升至精确值 $\frac{1}{4}$。
+
+::: {.film src="closing-a-spherical-triangle"}
+**沿三点闭环走一圈，根号与符号成对消尽，整部球面三角学收束为一条有理闭合律（2 分 49 秒）。** 紫色球面上，整四元数射线 $a = 1$、$b = 1 + \mathbf{i}$、$c = 1 + \mathbf{j}$ 的单条边余弦 $1/\sqrt{2}$ 为无理数，且随 $a \mapsto -a$ 变号，而巴格曼环路数 $B = 1/4$ 不变；原始格拉姆行列式 $1$ 除以模方之积 $4$，品红三角形的闭合数 $\det\mathbf{G}_3 = 1 + 2B - (\kappa_{ab} + \kappa_{bc} + \kappa_{ca}) = 1/4$，绿色标签对应 [@thm-ch06-orthogonal-triad-excess-quarter]。等边三元组 $1 + \mathbf{i}, 1 + \mathbf{j}, 1 + \mathbf{k}$ 的四个三阶子式 $1, -1, 1, 1$ 平方和为 $4$，得 $\det\mathbf{G}_3 = 4/8 = 1/2$（屏幕计算；柯西—比内恒等式为本章手工推导），普遍非负性对应 [@thm-ch06-detgram3-nonneg]。青色大圆上 $a = 1$、$b = 2 + \mathbf{i}$、$c = b\bar{a}b = 3 + 4\mathbf{i}$ 给出 $\kappa = 4/5, 4/5, 9/25$、$B = 12/25$ 与 $\det\mathbf{G}_3 = 0$，取 $b = 1 + 2\mathbf{i}$ 时 $B = -3/25$（屏幕计算，[@ex-ch06-collinear-doubling]）；归零律与倍增律 $\kappa_2 = (2\kappa_1 - 1)^2$ 分别对应 [@thm-ch06-geodesic-doubling-detgram3-zero] 与 [@thm-ch06-geodesic-doubling-kappa]，琥珀色的当前一行依次演示 $4/5 \to 9/25$、$9/10 \to 16/25$、$1/2 \to 0$。顶点展开度 $1, 2/3, 2/3$ 与正弦律比值 $4/3$ 为屏幕计算，绿色标签对应 [@thm-ch06-rational-spherical-sine-law] 与 [@thm-ch06-rational-spherical-pythagorean]。四组三元组并列读出 $0, 1/4, 1/2, 1$；$1$ 为最大值与紫色的实数影子 $\det\mathbf{G}_3 = \sin^2\alpha\sin^2\beta\sin^2 C$ 按 [@rem-ch06-classical-shadow] 标为论证。
+:::
 
 至此，第二卷已用无原点流群、利雅三元曲率、有理凯莱旋转、切比雪夫谐波与巴格曼—格拉姆闭合律完成了弯曲三维球面的全套纯有理代数与三角重构。下一步的追问水到渠成：**既然代数与三角都能彻底告别实无穷与超越数，微积分中的导数、曲率与积分能否也一并摆脱 $\lim_{h \to 0}$ 极限？**让我们携带这套球面有理引擎，翻开第三卷的序幕——[第七章 二阶幂零射流环与无极限微积分](ch07-second-order-jet-calculus.md)。
 

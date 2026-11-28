@@ -87,12 +87,13 @@ def strictly_above_roots(polynomial, threshold):
     )
 
 
-def radius_bracket(spin):
+def radius_bracket(spin, character):
     # Rotations act orthogonally for the invariant inner product. The inverse-paired sum
     # is self-adjoint, so the squared numerator has real, nonnegative eigenvalues.
     numerator = hecke_numerator(spin)
-    polynomial = characteristic_polynomial(matrix_product(numerator, numerator))
     denominator = len(SPINORS) * PRIME ** spin
+    assert Fraction(sum(row[i] for i, row in enumerate(numerator)), denominator) == character
+    polynomial = characteristic_polynomial(matrix_product(numerator, numerator))
     scale = 10000
 
     def above_radius(tick):
@@ -129,7 +130,7 @@ def draw(fig):
     left.line(65, 123, 279, 123, "cyan", 1.5)
     left.arrow(172, 123, 172, 153, "cyan", 1.5, head=6)
     left.box(172, 157, "Σ_{s∈S₅} χ₁(qs) = (−2/5) χ₁(q)", "ink", w=255, size=17)
-    left.text(172, 217, left.t("六项和的特征值 λ = −2/5", "Eigenvalue of the sum λ = −2/5"),
+    left.text(172, 217, left.t("六项和的特征值 λ̂ = −2/5", "Eigenvalue of the sum λ̂ = −2/5"),
               size=15, anchor="middle")
     left.line(47, 240, 297, 240, "ink", 1.0, opacity=0.28)
     left.text(172, 266, left.t("半正定余量", "PSD margin"), size=15, anchor="middle", weight=600)
@@ -145,8 +146,10 @@ def draw(fig):
     ax.text(6.55, bound, right.t("拉马努金界 √5/3 ≈ 0.745", "Ramanujan bound √5/3 ≈ 0.745"),
             dy=-13, anchor="end", size=14, color="violet")
     ax.text(6.55, 0, "ℓ", dx=10, dy=5, size=14)
+    character, previous = Fraction(-1, PRIME), Fraction(1)
     for spin in range(1, 7):
-        lo, hi = radius_bracket(spin)
+        lo, hi = radius_bracket(spin, character)
+        character, previous = Fraction(-6, PRIME) * character - previous, character
         assert hi ** 2 < Fraction(PRIME, 9)
         radius = float((lo + hi) / 2)
         ax.path([(spin, 0), (spin, radius)], "cyan", 2)

@@ -1,0 +1,69 @@
+{
+  "voice": "af_heart",
+  "speed": 0.94,
+  "say": {
+    "Lean": "Leen",
+    "8.685": "eight point six eight five",
+    "9.2061": "nine point two oh six one",
+    "9.6": "nine point six",
+    "148341": "one four eight, three four one",
+    "8236": "eighty-two thirty-six",
+    "8359": "eighty-three fifty-nine",
+    "867": "eight hundred sixty-seven",
+    "135": "one hundred thirty-five",
+    "Weyl": "Vile",
+    "Chebyshev": "Chebby-shev",
+    "Haar": "Har",
+    "SU five": "S U five",
+    "SU two": "S U two"
+  },
+  "music": {
+    "bpm": 76,
+    "progression": "a-minor"
+  },
+  "scenes": [
+    {"id": "hook", "name": "NINETEEN POINTS", "lead": 1.9, "tail": 0.6, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "cues": [{"line": 2, "at": 3.0, "kind": "chime"}], "lines": [
+      ["Nineteen integer points lie on the sphere x squared plus y squared plus z squared equals 867.", "球面 x² + y² + z² = 867 上恰有十九个整点。"],
+      ["Join them by 135 edges, each with a charge-dependent phase.", "用 135 条边把它们连起来，每条边带一个随荷而变的相位。"],
+      ["Five hypercharges, five spectra: in every one, three modes sit low.", "五种超荷，五套谱：每一套里都有三个模落在低端。"],
+      ["Are three low notes three generations of matter?", "三声低音，就是三代物质吗？"]
+    ]},
+    {"id": "gap", "name": "ONE GAP, WHOLE TORUS", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.6, 0.5, 0.1, 0.2], "cues": [{"line": 1, "at": 0.4, "kind": "glitch"}], "lines": [
+      ["Here are all nineteen eigenvalues per charge. Now turn the two clocks across the whole torus.", "这是每种荷的全部十九个本征值。现在转动两只钟，扫过整张环面。"],
+      ["Three cyan modes stay below 8.685; sixteen stay above 9.6.", "三个青色模始终低于 8.685，十六个始终高于 9.6。"],
+      ["An interval certificate extends this to the whole torus and every positive zero.", "区间证书把这一点推广到整张环面与全部正零点。"]
+    ]},
+    {"id": "turn", "name": "TURN THE COORDINATES", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.7, 0.6, 0.2, 0.3], "cues": [{"line": 3, "at": 1.4, "kind": "stamp"}], "lines": [
+      ["Why one of each? Cycle the coordinates, x to y, y to z, z to x.", "为什么三个轻模各不相同？把坐标轮换：x 变 y，y 变 z，z 变 x。"],
+      ["The shell lands on itself, so each matrix splits into blocks of seven, six and six.", "球壳映回自身，于是每个矩阵都拆成七、六、六三块。"],
+      ["Each block holds exactly one light mode: characters one, omega, omega squared.", "每块恰有一个轻模：特征标 1、ω、ω² 各占一个。"],
+      ["Lean checks the backbone: even Chebyshev characters are orthonormal under a pi-free Haar average.", "Lean 内核检验其有理骨架：无 π 哈尔平均下，偶次切比雪夫特征标正交归一。"]
+    ]},
+    {"id": "cut", "name": "WHERE TO CUT", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.8, 0.7, 0.4, 0.4], "cues": [{"line": 1, "at": 1.4, "kind": "impact"}], "lines": [
+      ["But three is not forced: shared gaps allow one, three, seven or fifteen.", "但三并非必然：共享谱隙容许 1、3、7 或 15 个轻模。"],
+      ["The widest gap picks one; equal characters leave three and fifteen.", "最宽谱隙选出 1；特征标等重则留下 3 与 15。"],
+      ["One cut reads only edge weights: T equals nine plus one minus delta, squared.", "有一种分界只读边权：T = 9 + (1 − δ)²。"],
+      ["Three outer sites of degree ten attain it, so T sits just below ten.", "三个度为 10 的外点取到它，所以 T 略小于 10。"]
+    ]},
+    {"id": "zeros", "name": "THREE ZEROS", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "cues": [{"line": 1, "at": 1.8, "kind": "chime"}, {"line": 3, "at": 0.8, "kind": "glitch"}], "lines": [
+      ["Read the two-step masses at actual zeros, against the cut nine and the cut T.", "在实际零点上读两步质量，对照分界 9 与分界 T。"],
+      ["At zero 8236 the third mass is 9.2061: above nine, below T.", "第 8236 号零点的第三个质量是 9.2061：高于 9，低于 T。"],
+      ["Under T it is the earliest zero to hit all three windows; T also rescues zero 148341.", "按 T 分界，它是最早三窗齐中的零点；T 还挽救了第 148341 号零点。"],
+      ["Still, T is a model choice: with charge-conjugate pairs per site, zero 8359 keeps two charge-two modes.", "但 T 仍是模型假设：换成共轭双态站点，第 8359 号零点的荷二只剩两模。"]
+    ]},
+    {"id": "lattice", "name": "INTO FOUR DIMENSIONS", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["Three eigenvalues are not yet four-dimensional Weyl fermions.", "三个本征值，还不是四维外尔费米子。"],
+      ["A five-step overlap kernel, with Wilson mass in a narrow window, gives three species of one chirality.", "威尔逊质量落在窄窗内时，五步重叠核给出三个同手征物种。"],
+      ["With the shell as mass, the index is three times a single one; sixteen heavy layers give zero.", "以球壳作质量项，指数恰为单份的三倍；十六个重层为零。"]
+    ]},
+    {"id": "rough", "name": "ROUGH FIELDS", "lead": 0.5, "tail": 0.8, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "cues": [{"line": 1, "at": 2.0, "kind": "impact"}, {"line": 3, "at": 0.5, "kind": "stamp"}], "lines": [
+      ["But rough gauge links dominate the path integral.", "可路径积分的主体，是粗糙的规范链。"],
+      ["One SU five background gives indices two and seven: centre charge twelve, two mod five.", "一个 SU(5) 粗糙背景给出指数 (2, 7)：中心荷 12，模 5 余 2。"],
+      ["Three Higgs frames lose the gap; four frames hold it.", "三份希格斯标架守不住谱隙，四份才守得住。"],
+      ["Still open: why three, not fifteen; why this cut; and a chiral measure with no frames put in by hand.", "仍然开放：为何是 3 不是 15，为何是这条分界，以及无外置标架的手征测度。"]
+    ]},
+    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.4, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "cues": [{"line": 0, "at": 0.3, "kind": "chime"}], "lines": [
+      ["Omega Unification, chapter seven.", "《OMEGA 统一》· 第七章"]
+    ]}
+  ]
+}

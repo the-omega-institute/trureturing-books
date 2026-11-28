@@ -1,41 +1,42 @@
 """The isolated constructive stack exports results to Mathlib through a one-way bridge."""
 
-SIZE = (358, 460)
+SIZE = (358, 500)
 ALT = {
-    "zh": "第 0 层 OmegaInit 有 10 个模块，第 1 层 OmegaMath 有 78 个模块；核心审计覆盖 2,211 条声明。"
-          "D5 注册表含 14 个模块的 127 条零公理定理。第 2 层的单向桥接 Πℝ OmegaShadowBridge 用 11 条冻结定理"
-          "把核心结果传到 Mathlib 实数。",
-    "en": "Layer 0 OmegaInit has 10 modules and Layer 1 OmegaMath has 78. The core audit covers "
-          "2,211 declarations. The D5 registry has 127 zero-axiom theorems in 14 modules. At Layer 2, "
-          "the one-way bridge Πℝ OmegaShadowBridge transports core results to Mathlib reals through "
-          "11 frozen theorems.",
+    "zh": "严格库 OmegaInit 与 OmegaMath 的选定导入闭包在空内核中重放。D5 消费模块在两端编译，"
+          "成对声明行的 strict_omega.axioms 和 axioms 分别给出严格端与官方端公理。紫色单向桥把核心结果传到 Mathlib 实数。",
+    "en": "Selected strict library closures replay in an empty kernel. D5 consumers build on both "
+          "backends. Each paired declaration row gives strict_omega.axioms for the strict backend "
+          "and axioms for the official backend. The violet bridge transports core results one way to the Mathlib reals.",
 }
 
 
 def draw(p):
     p.text(179, 26, p.t("三层架构 · 单向输运", "Three layers · one-way transport"),
            size=18, anchor="middle", weight=600)
-    p.rect(28, 49, 302, 210, color="blue", fill="panel", rx=7)
+    p.rect(28, 49, 302, 174, color="blue", fill="panel", rx=7)
     for y, name, detail in (
         (61, p.t("第 0 层 · OmegaInit", "Layer 0 · OmegaInit"),
-         p.t("10 模块 · 归纳基础", "10 modules · inductive foundation")),
+         p.t("归纳基础", "Inductive foundation")),
         (136, p.t("第 1 层 · OmegaMath", "Layer 1 · OmegaMath"),
-         p.t("78 模块 · 构造数学", "78 modules · constructive math")),
+         p.t("构造数学", "Constructive mathematics")),
     ):
         p.rect(48, y, 262, 54, color="blue", fill="blue", fill_opacity=0.10, rx=6)
         p.text(179, y + 20, name, size=14, color="blue", anchor="middle")
         p.text(179, y + 44, detail, size=13, color="dim", anchor="middle")
     p.arrow(179, 116, 179, 133, "blue", 1.5, head=6)
-    p.text(179, 211, p.t("module + prelude · 2,211 条声明", "module + prelude · 2,211 declarations"),
+    p.text(179, 214, p.t("选定导入闭包 · 空内核重放", "Selected closure · empty-kernel replay"),
+           size=13, anchor="middle")
+    p.rect(28, 231, 302, 60, color="edge", fill="panel", rx=7)
+    p.text(179, 251, p.t("D5 · 双后端编译与对照", "D5 · paired builds and comparison"),
            size=14, anchor="middle")
-    p.text(179, 239, p.t("D5 · 14 模块 · 127 条定理", "D5 · 14 modules · 127 theorems") + " · axioms: []",
-           size=13, anchor="middle", color="blue")
+    p.text(179, 273, p.t("严格端 / 官方端公理记录", "Strict and official axiom records"),
+           size=13, anchor="middle", color="dim")
 
-    p.arrow(179, 260, 179, 288, "violet", 1.7, head=7)
-    p.rect(45, 293, 268, 59, color="violet", fill="violet", fill_opacity=0.10, rx=6)
-    p.text(179, 314, "Π_{ℝ} · OmegaShadowBridge", size=14, color="violet", anchor="middle")
-    p.text(179, 339, p.t("单向 · 11 条冻结定理", "One way · 11 frozen theorems"),
+    p.arrow(179, 293, 179, 313, "violet", 1.7, head=7)
+    p.rect(45, 318, 268, 59, color="violet", fill="violet", fill_opacity=0.10, rx=6)
+    p.text(179, 339, "Π_{ℝ} · OmegaShadowBridge", size=14, color="violet", anchor="middle")
+    p.text(179, 364, p.t("单向 · 冻结桥接定理", "One way · frozen bridge theorems"),
            size=13, color="dim", anchor="middle")
-    p.arrow(179, 352, 179, 376, "violet", 1.7, head=7)
-    p.box(179, 381, p.t("第 2 层 · Mathlib ℝ", "Layer 2 · Mathlib ℝ"), "violet",
+    p.arrow(179, 377, 179, 401, "violet", 1.7, head=7)
+    p.box(179, 406, p.t("第 2 层 · Mathlib ℝ", "Layer 2 · Mathlib ℝ"), "violet",
           w=262, note=p.t("经典实数阴影", "Classical real shadow"))

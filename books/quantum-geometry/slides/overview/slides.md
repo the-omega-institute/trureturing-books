@@ -506,7 +506,7 @@ section: "第六部 · 依据"
     </div>
   </div>
 </div>
-<Source>第 21 章哥德尔–塔斯基文献 · 第 22 章 <a href="https://alpo.ge/remark.pdf">Alpöge（2026）</a> 与开放问题 ERH · 第 24 章沙努埃尔猜想</Source>
+<Source>第 21 章哥德尔–塔斯基文献 · 第 22 章 <a href="https://github.com/leanprover-community/riemann-hypothesis">Lean RH/GRH</a> 与开放问题 ERH · 第 24 章沙努埃尔猜想</Source>
 
 ---
 # 29 第六部 · 越界 · 图景（续）

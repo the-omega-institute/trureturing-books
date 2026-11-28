@@ -33,8 +33,8 @@ section: "Prelude"
     </div>
     <div class="card">
       <h4>Mathlib.Real</h4>
-      <h3>3 standard axioms</h3>
-      <p>The classical real route used in the book draws on <code>propext</code>, <code>Classical.choice</code> and <code>Quot.sound</code>.</p>
+      <h3>Up to 3 standard axioms</h3>
+      <p>The official dependencies of each frozen theorem lie within the permitted set of <code>propext</code>, <code>Classical.choice</code> and <code>Quot.sound</code>.</p>
     </div>
     <div class="card hot">
       <h4>Custom axiom</h4>
@@ -88,7 +88,7 @@ section: "Volume II"
   <h2 class="t">From origin-free heaps to <em>3D rational rotations</em></h2>
   <div class="flow mt">
     <div class="step"><b>Ternary transport</b><p>Use the middle point as a temporary reference and carry the relation to the third point.</p></div>
-    <div class="step"><b>PythSpinor double cover</b><p>The signed spinor reaches its negative at <Tex t="360^\circ" /> and returns to its starting point at <Tex t="720^\circ" />.</p></div>
+    <div class="step"><b>PythSpinor double cover</b><p>Over the rational unit-lift subgroup, the signed spinor reaches its negative at <Tex t="360^\circ" /> and returns to its starting point at <Tex t="720^\circ" />.</p></div>
     <div class="step"><b>Two-way Cayley bridge</b><p>A skew matrix <Tex t="X" /> gives a rational rotation <Tex t="R" />. Recover <Tex t="X" /> whenever <Tex t="\det(R+I)\ne0" />.</p></div>
   </div>
   <TheoremCard class="mt-l" label="Theorem 5.2" title="Denominator-free Cayley identity" cite="thm-ch05-rational-cayley-core" gid="D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.cayley_identity">
@@ -122,7 +122,7 @@ section: "Volume III"
   <h2 class="t">Limit-free calculus <em>computes coefficients directly</em></h2>
   <div class="g2 mt">
     <div class="card"><h4>Jet2 · Nilpotent ring</h4><p>In <Tex t="\mathbb Q[\eta]/(\eta^3)" />, a second-order jet consists of three exact rational coefficients.</p></div>
-    <div class="card"><h4>D-finite · Any finite order</h4><p>Rational recurrences generate coefficients on demand. Formal differentiation and multiplication work order by order.</p></div>
+    <div class="card"><h4>D-finite · Any finite order</h4><p>At an ordinary rational basepoint with rational initial derivatives, the recurrence generates rational coefficients. Formal differentiation and multiplication work order by order.</p></div>
   </div>
   <TheoremCard class="compact mt" label="Theorem 7.5" title="Exact second-order fidelity jet" cite="thm-ch07-fidelity-jet-and-secant" gid="D5/S3/Quantum/AURICOmega/OmegaJetCalculus.kappa_jet">
     <p>Set <Tex t="D=1+x^2" />. At finite rational <Tex t="x" />, the Jet2 coefficients of <Tex t="\kappa(x)=D^{-1}" /> are <Tex t="\bigl(D^{-1},-2xD^{-2},(3x^2-1)D^{-3}\bigr)" />.</p>
@@ -235,14 +235,9 @@ layout: cover
 ---
 
 <h2 class="t">Empty-kernel <em>audit</em></h2>
-<p class="sm muted">A fresh empty kernel replayed 2,211 declarations in 88 <code>OmegaInit</code> and <code>OmegaMath</code> modules with zero transitive axioms.</p>
-<div class="g4 mt-s">
-  <Stat value="14" label="zero-axiom D5 modules" />
-  <Stat value="127" label="frozen zero-axiom D5 theorems" tone="ok" />
-  <Stat value="138" label="frozen Omega D5 core and bridge theorems" />
-  <Stat value="173" label="distinct frozen Lean 4 declarations cited" />
-</div>
-<p class="sm mt-s">The zero-axiom theorems have <code>axioms: []</code>. The Layer 2 module <code>OmegaShadowBridge</code> contributes 11 theorems.</p>
+<p class="sm muted">The auditor replays selected strict library import closures in a fresh empty kernel and checks each declaration’s transitive axioms.</p>
+<p class="sm mt-s">For the 127 D5 theorems in Appendix A.3, both builds are compared. Each declaration row records strict dependencies under <code>strict_omega.axioms</code> and official dependencies under <code>axioms</code>.</p>
+<p class="sm mt-s"><code>OmegaShadowBridge</code> carries core constructions one way into the classical reals.</p>
 <p class="sm mt-s"><b>Four interactive 3D labs</b> · <a :href="readingLink('viz/omega-math-workbench/')">OMEGA//LAB</a> · <a :href="readingLink('viz/ternion-cayley-lab/')">OMEGA//SPIN</a> · <a :href="readingLink('viz/dfinite-algebraic-schur-lab/')">OMEGA//JET</a> · <a :href="readingLink('viz/adelic-arithmetic-observer-lab/')">OMEGA//ARC</a></p>
 <p class="sm mt-s"><b>Reading map</b> · <a :href="readingLink('en/ch01-axiom-omega-and-cic.html')">Ch. 1 Foundations</a> · <a :href="readingLink('en/ch18-zero-axiom-kernel-and-shadow-bridge.html')">Ch. 18 Audit</a> · <a :href="readingLink('en/coda.html')">Coda Six volumes</a> · 19 bilingual static figures · <a :href="readingLink('en/appendix-a.html')">App. A Frozen index</a> · <a :href="readingLink('en/appendix-b.html')">App. B Evidence ledger</a></p>
 

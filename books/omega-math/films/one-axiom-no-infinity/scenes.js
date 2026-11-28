@@ -70,7 +70,7 @@ const SPINE = (() => {
                  the real shadow imports Mathlib (same state record for OmegaShadowBridge); chapter 18 reports its
                  axioms lie within the classical closure {propext, Classical.choice, Quot.sound} (argued, not in the state)
                    ..... OmegaShadowBridge.cayley_circle_unit (LEAN, its statement only)
-                 AXIOM-Ω as a typeclass contract, not an axiom declaration (argued, chapter 1)
+                 a schematic typeclass for selected AXIOM-Ω equations (argued, chapter 1)
      b00_road    the eight rungs of SPINE.PARTS as one road (argued: a way to read the book)
      b00_ask     the next question.
    FILM.init re-derives every number on screen by a second route and checks the three citations. */
@@ -387,14 +387,14 @@ SCENES.b00_ledger = S => {
   /* left: the zero-axiom kernel ledger */
   const la = at(S, 0, 0.6, -0.3) * A, out4 = 1 - at(S, 3, 0.4);
   const x1 = 140, y1 = 200, w1 = 800, h1 = 400;
-  panel(x1, y1, w1, h1, la * out4, C.cyan, 'KERNEL LEDGER · 零公理一侧');
+  panel(x1, y1, w1, h1, la * out4, C.cyan, 'STRICT D5 RECORD · 严格端记录');
   B00.leanChip(x1 + 30, y1 + 84, B00.LEAN.unit, la * out4, 20);
   txt('cayleyX² + cayleyY² ≡ 1   (fractions of integers)', x1 + 30, y1 + 136, { size: 22, fam: F.math, w: 700, c: C.white, a: la * out4 });
   txt(`libraries   ${B00.LIB_CORE}`, x1 + 30, y1 + 196, { size: 22, fam: F.mono, w: 700, c: C.cyan, a: la * out4 });
-  txt('axioms', x1 + 30, y1 + 266, { size: 22, fam: F.mono, w: 700, c: C.cyan, a: la * out4 });
+  txt('strict_omega.axioms', x1 + 30, y1 + 266, { size: 22, fam: F.mono, w: 700, c: C.cyan, a: la * out4 });
   const em = Q(S, 0, 'The list is empty', 0.6) * out4;
-  txt('[ ]', x1 + 150, y1 + 284, { size: 66, fam: F.mono, w: 700, c: C.lean, a: la * em, ab: 2 });
-  txt('#print axioms → none · 一条也没有', x1 + 300, y1 + 268, { size: 22, fam: F.mono, w: 700, c: C.lean, a: la * em });
+  txt('[ ]', x1 + 300, y1 + 284, { size: 66, fam: F.mono, w: 700, c: C.lean, a: la * em, ab: 2 });
+  txt('separate official record · 官方端另记', x1 + 30, y1 + 320, { size: 17, fam: F.zh, w: 700, c: C.dim, a: la * em });
   txt('from the pinned frozen record · 取自所钉冻结记录', x1 + 30, y1 + 360, { size: 17, fam: F.mono, w: 700, c: C.dim, a: la * em });
   /* below: built from zero and successor */
   const ba = at(S, 1, 0.6) * A * out4;
@@ -446,7 +446,7 @@ SCENES.b00_ledger = S => {
     const cc = Q(S, 3, 'is a contract', 0.5);
     txt('class OmegaSpace (M : Type) where …', cx, 520, { size: 30, fam: F.mono, w: 700, c: C.cyan, a: ca * cc });
     txt('a contract: a model must be built · 契约：得造出一个模型', cx + 700, 520, { size: 22, fam: F.mono, w: 700, c: C.cyan, a: ca * cc });
-    B00.note('the book builds one: Volume I, chapter 3 · 第一卷第三章亲手造出一个', cx, 620, ca * Q(S, 3, 'must build', 0.6), { size: 22 });
+    B00.note('Chapter 3 derives the laws on canonical representatives · 第三章在规范代表元上推导定律', cx, 620, ca * Q(S, 3, 'must build', 0.6), { size: 22 });
   }
 };
 
@@ -748,7 +748,7 @@ SCENES.b01_floor = S => {
   txt('3/6  ≟  1/2', 420, 520, { size: 46, fam: F.math, w: 700, c: C.white, a: a1 });
   txt('decide:  3 · 2 = 6 · 1', 420, 600, { size: 38, fam: F.math, w: 700, c: C.cyan, a: a1 * Q(S, 1, 'integer by integer', 0.5) });
   txt('→ yes, in finitely many steps', 420, 660, { size: 26, fam: F.mono, w: 700, c: C.cyan, a: a1 * Q(S, 1, 'a program that halts', 0.5) });
-  txt('equal ⇔ the same integers', 1040, 520, { size: 26, fam: F.mono, w: 700, c: C.white, a: a1 * Q(S, 1, 'Equality is checked', 0.5) });
+  txt('equivalent ⇔ cross products agree', 1040, 520, { size: 26, fam: F.mono, w: 700, c: C.white, a: a1 * Q(S, 1, 'Equality is checked', 0.5) });
   txt('no quotient, no choice', 1040, 560, { size: 22, fam: F.mono, c: C.dim, a: a1 * Q(S, 1, 'Equality is checked', 0.5) });
   /* the precision contract: fractions of [0, 1] with denominator ≤ M */
   const a2 = at(S, 2, 0.7);
@@ -840,13 +840,13 @@ SCENES.b01_axiom = S => {
   panel(900, 240, 860, 250, a5, C.dim, 'AXIOM · 硬塞的公理');
   txt('axiom kappa_refl : ∀ x, kappa x x = 1', 930, 330, { size: 24, fam: F.mono, w: 700, c: C.white, a: a5 });
   txt('trusted, never built: one bad edge case gives False', 930, 380, { size: 21, fam: F.mono, c: C.dim, a: a5 });
-  B01.strike(925, 336, 560, Q(S, 5, 'not an axiom', 0.4) * a5);
-  txt('a hire nobody interviewed', 930, 440, { size: 22, fam: F.mono, c: C.argued, a: Q(S, 5, 'not a hire', 0.5) * a5 });
-  const a6 = Q(S, 5, 'a job posting', 0.5);
-  panel(900, 520, 860, 280, a6, C.cyan, 'CLASS · 类型类契约');
+  B01.strike(925, 336, 560, Q(S, 5, 'sample class', 0.4) * a5);
+  txt('an assumed equation', 930, 440, { size: 22, fam: F.mono, c: C.argued, a: Q(S, 5, 'six equations', 0.5) * a5 });
+  const a6 = Q(S, 5, 'six equations', 0.5);
+  panel(900, 520, 860, 280, a6, C.cyan, 'SCHEMATIC CLASS · 类型类示意');
   ['class OmegaSpace (M : Type) where', '  triad : M → M → M → M', '  kappa : M → M → QRat', '  idemp_left : ∀ x z, triad x x z = z  …'].forEach((s, i) =>
     txt(s, 930, 600 + i * 40, { size: 24, fam: F.mono, w: 700, c: i ? C.white : C.cyan, a: a6 }));
-  txt('a job posting · filled only by a built instance', 930, 780, { size: 21, fam: F.mono, c: C.argued, a: Q(S, 5, 'Only a built example', 0.5) });
+  txt('the prototype checks examples · 原型核验算例', 930, 780, { size: 21, fam: F.mono, c: C.argued, a: Q(S, 5, 'checks examples', 0.5) });
 };
 
 SCENES.b01_circle = S => {
@@ -1019,7 +1019,7 @@ SCENES.b01_ternion = S => {
     txt('≠', W / 2, 734, { size: 64, fam: F.math, w: 700, align: 'center', c: C.mag, a: r2 });
     const lq = Q(S, 4, 'Lean checks', 0.5);
     B01.leanChip(520, 802, B01.GID.noncomm, lq, 18);
-    txt('no nonzero k, l with k·(1, 1, 1, 1) = l·(1, 1, 1, −1)  ·  axioms: none', 520, 838, { size: 19, fam: F.mono, c: C.lean, a: Q(S, 4, 'never share a ray', 0.5) });
+    txt('no nonzero k, l with k·(1, 1, 1, 1) = l·(1, 1, 1, −1)  ·  strict axioms: none', 520, 838, { size: 19, fam: F.mono, c: C.lean, a: Q(S, 4, 'never share a ray', 0.5) });
   }
 };
 
@@ -2177,7 +2177,7 @@ SCENES.b03_jet2 = S => {
   if (lz > 0.003) {
     txt('(η · η) · η ≡ 0', 1040, 790, { size: 38, fam: F.math, w: 700, c: C.white, a: lz });
     B03.lean(1390, 790, B03.G.var_cube, lz, { size: 22 });
-    txt('zero axioms · 零公理', 1390, 824, { size: 18, fam: F.zh, w: 700, c: C.lean, a: lz * 0.85 });
+    txt('strict axioms: [] · 严格端', 1390, 824, { size: 18, fam: F.zh, w: 700, c: C.lean, a: lz * 0.85 });
   }
 };
 
@@ -2301,10 +2301,10 @@ SCENES.b03_series = S => {
         txt(B03.str(B03.PYTH[k]), x0 + k * cw + cw / 2, y + 60, { size: 32, fam: F.mono, w: 700, align: 'center', c: k === 0 ? C.white : C.dim, a: pa * kk });
       }
       B03.tag(x0, y + 128, 'computed', 'NUM · 前 9 个系数', pa);
-      const lz = a * Q(S, 3, 'cosine squared plus sine squared', 0.6, 1.2);
+      const lz = a * Q(S, 3, 'Cosine squared plus sine squared', 0.6, 1.2);
       txt('Cos·Cos + Sin·Sin ≡ 1, every coefficient · 每个系数', 820, y + 128, { size: 24, fam: F.zh, w: 700, c: C.white, a: lz });
       B03.lean(820, y + 166, B03.G.cos_sq_add_sin_sq, lz, { size: 22 });
-      txt('zero axioms · no π · 零公理 · 不用 π', 1300, y + 166, { size: 20, fam: F.zh, w: 700, c: C.lean, a: lz * 0.85 });
+      txt('strict axioms: [] · no π · 严格端', 1300, y + 166, { size: 20, fam: F.zh, w: 700, c: C.lean, a: lz * 0.85 });
     }
   }
 };
@@ -3052,7 +3052,7 @@ const B05 = (() => {
     eig: 'D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.heckeT5_chi1_eigenvalue',
     margin: 'D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.heckeT5_ramanujan_margin'
   };
-  /* axioms: [] at the pinned commit (trureturing.lock.json); the product formula uses the classical library */
+  /* empty strict_omega.axioms at the pin; the product formula uses the classical library */
   const ZERO = new Set(['escape', 'det', 'coprime', 'norm5', 'free', 'eig', 'margin']);
 
   /* ---------- exact fractions [n, d], d > 0, in lowest terms ---------- */
@@ -3141,7 +3141,7 @@ const B05 = (() => {
     txt(head, x + 9, y - size * 0.1, { size: hs, fam: F.mono, w: 700, c: C.bg, a, ls: 1 });
     const wn = tw(r.short, size, F.mono, 700);
     txt(r.short, x + wh + 12, y, { size, fam: F.mono, w: 700, c: C.lean, a });
-    if (ZERO.has(key)) txt('· axioms: [ ] · 零公理', x + wh + 24 + wn, y, { size: size * 0.8, fam: F.zh, w: 700, c: C.cyan, a: a * 0.85 });
+    if (ZERO.has(key)) txt('· strict axioms: [] · 严格端', x + wh + 24 + wn, y, { size: size * 0.8, fam: F.zh, w: 700, c: C.cyan, a: a * 0.85 });
   }
   /* a small evidence tag: NUM (cyan, computed here) or a violet picture / model / literature tag */
   function tag(x, y, s, col, a, o = {}) {
@@ -3586,7 +3586,7 @@ SCENES.b05_mix = S => {
   B05.rich([['λ̂² ≤ 20', C.now], ['   ⟺   Q(f) = 20⟨f, f⟩ − ⟨T̂f, T̂f⟩ ≥ 0', C.white], ['   (f ⊥ 1)', C.dim]], 620, 335, { size: 30, a: sa });
   const ra = a * at(S, 2, 0.6);
   txt('only whole numbers and fractions · 只用整数和分数', 620, 390, { size: 22, fam: F.zh, w: 700, c: C.cyan, a: ra });
-  B05.tag(620, 450, 'the bound on every shell: literature result (Eichler, Deligne, LPS) · 全部壳层的界：文献结果', C.argued, ra, { size: 15 });
+  B05.tag(620, 450, 'nonconstant SO(3) shells · 非常值 SO(3) 壳层 · Eichler–Deligne–LPS', C.argued, ra, { size: 15 });
 
   /* the spectrum line: the band λ̂² ≤ 20, χ₁ inside, the constant outside */
   const la = a * at(S, 2, 0.6, 0.6);
@@ -3600,7 +3600,7 @@ SCENES.b05_mix = S => {
     const ea = a * Q(S, 3, 'minus two fifths', 0.5);
     dot(X(-0.4), y, 12, 'g', ea);
     txt('χ₁: −2/5', X(-0.4) - 14, y + 74, { size: 22, fam: F.math, w: 700, align: 'right', c: C.now, a: ea });
-    const ka = a * Q(S, 5, 'Only the constant', 0.5);
+    const ka = a * Q(S, 5, 'The constant fails', 0.5);
     dot(X(6), y, 12, 'm', ka);
     txt('constant: 6,  20 − 36 = −16', X(6), y - 34, { size: 22, fam: F.math, w: 700, align: 'center', c: C.mag, a: ka });
   }
@@ -3626,8 +3626,8 @@ SCENES.b05_mix = S => {
     panel(120, 640, 1680, 170, ma, C.lean, 'MARGIN · 正定裕度');
     txt('20 − (−2/5)²  ≡  496/25  >  0', 160, 718, { size: 40, fam: F.math, w: 700, c: C.white, a: ma });
     B05.lean(160, 782, 'margin', a * Q(S, 5, 'as Lean checks', 0.5), { size: 17 });
-    txt('the constant: T̂₅1 = 6,  20 − 6² = −16 < 0', 1100, 718, { size: 28, fam: F.math, w: 700, c: C.mag, a: a * Q(S, 5, 'Only the constant', 0.5) });
-    B05.num(1100, 782, a * Q(S, 5, 'Only the constant', 0.5), { size: 15 });
+    txt('the constant: T̂₅1 = 6,  20 − 6² = −16 < 0', 1100, 718, { size: 28, fam: F.math, w: 700, c: C.mag, a: a * Q(S, 5, 'The constant fails', 0.5) });
+    B05.num(1100, 782, a * Q(S, 5, 'The constant fails', 0.5), { size: 15 });
   }
 };
 
@@ -3667,7 +3667,7 @@ SCENES.b05_ask = S => {
      the four-rule FRACTRAN program P_Ω = [11/49, 7/25, 5/9, 3/4] run from 2^17 (ch. 16, theorem p_omega_halts_at_22);
      the integer quaternions X = 1 + 2i, Y = 1 + 2j, XY, YX and the unwind gate conj(Y) with divisor 5
      (ch. 16, quaternion_fractran_order_separation);
-     the observer's structural time 0 → 3/4 → 3/2 (ch. 17, the book's worked example; an interpretation, MODEL);
+     the observer's structural time 0 → 1/2 → 2 (ch. 17, the book's worked example; an interpretation, MODEL);
      the Cayley point (q² − p², 2pq) / (p² + q²) at (p, q) = (1, 2) (ch. 18, cayley_circle_unit, core and shadow).
    FILM.init re-derives every number independently and reports any disagreement as a page error. */
 const B06 = (() => {
@@ -3702,7 +3702,7 @@ const B06 = (() => {
   const XY = qmul(X, Y), YX = qmul(Y, X);
   const XYG = qmul(XY, GATE), YXG = qmul(YX, GATE);
   const fmtQ = q => `(${q.map(v => (v < 0 ? '−' + -v : String(v))).join(', ')})`;
-  /* the observer's three steps (ch. 17 worked example): Schur innovation |x⊥|²/|x|² plus the book's edge weight 1/4 */
+  /* the observer's three steps (ch. 17 worked example): Schur innovation |x⊥|²/|x|² plus the comparison-graph cycle increment */
   function gcd(a, b) { a = Math.abs(a); b = Math.abs(b); while (b) [a, b] = [b, a % b]; return a; }
   function frac(n, d) { const g = gcd(n, d) || 1; return [n / g, d / g]; }
   function fadd(a, b) { return frac(a[0] * b[1] + b[0] * a[1], a[1] * b[1]); }
@@ -3718,16 +3718,28 @@ const B06 = (() => {
     const sq = num.reduce((s, v) => fadd(s, [v[0] * v[0], v[1] * v[1]]), [0, 1]);
     return { perp: num, ratio: frac(sq[0] * 1, sq[1] * dotv(x, x)) };
   }
-  const E0 = [1, 0, 0, 0], H1 = [1, 1, 0, 0], G = [1, 1, 1, 1], EDGE = [1, 4];
+  const E0 = [1, 0, 0, 0], H1 = [1, 1, 0, 0], H2 = [1, 0, 1, 0];
   function observerSteps() {
     const basis = [E0];
-    const s1 = innovation(basis, E0);                       // repeat the seed: nothing new
-    const s2 = innovation(basis, H1);                       // absorb h1
-    basis.push(s2.perp.map(v => v[0] / v[1]));
-    const s3 = innovation(basis, G);                        // absorb the composite g = (1, 1, 1, 1)
-    const d1 = s1.ratio, d2 = fadd(s2.ratio, EDGE), d3 = fadd(s3.ratio, EDGE);
-    const t1 = d1, t2 = fadd(t1, d2), t3 = fadd(t2, d3);
-    return [{ x: E0, di: s1.ratio, edge: [0, 1], d: d1, tau: t1 }, { x: H1, di: s2.ratio, edge: EDGE, d: d2, tau: t2 }, { x: G, di: s3.ratio, edge: EDGE, d: d3, tau: t3 }];
+    const beats = [
+      { x: E0, comparisons: [] },
+      { x: H1, comparisons: [[0, 1]] },
+      { x: H2, comparisons: [[0, 2], [1, 2]] }
+    ];
+    let tau = [0, 1], vertices = 1, edges = 0, previousBetti = 0;
+    return beats.map(({ x, comparisons }) => {
+      const { perp, ratio: di } = innovation(basis, x);
+      if (di[0] > 0) basis.push(perp.map(([n, d]) => n / d));
+      // Each new vertex attaches to the seed component. The third beat closes a triangle.
+      if (comparisons.length) vertices++;
+      edges += comparisons.length;
+      const betti = edges - vertices + 1;
+      const deltaBetti = betti - previousBetti;
+      const d = fadd(di, [deltaBetti, 1]);
+      previousBetti = betti;
+      tau = fadd(tau, d);
+      return { x, comparisons, di, deltaBetti, d, tau };
+    });
   }
   const OBS = observerSteps();
   /* the Cayley point of (p, q) = (1, 2) */
@@ -3801,9 +3813,10 @@ FILM.init.push(() => {
   if (mm(B.XY, B.GATE).join() !== '5,10,0,0' || B.XYG.some(v => B.mod(v, 5))) err('XY does not pass the gate');
   if (B.XYG.map(v => v / 5).join() !== B.X.join()) err('XY does not unwind to X');
   if (B.YXG.join() !== '5,-6,0,-8' || B.YXG.map(v => B.mod(v, 5)).join() !== '0,4,0,2') err('YX remainders changed');
-  /* observer: 0, 3/4, 3/2 */
-  if (B.OBS.map(s => B.fstr(s.tau)).join() !== '0,3/4,3/2') err('structural time is not 0, 3/4, 3/2');
+  /* observer: 0, 1/2, 2 */
+  if (B.OBS.map(s => B.fstr(s.tau)).join() !== '0,1/2,2') err('structural time is not 0, 1/2, 2');
   if (B.OBS.map(s => B.fstr(s.di)).join() !== '0,1/2,1/2') err('innovation ratios changed');
+  if (B.OBS.map(s => s.deltaBetti).join() !== '0,0,1') err('comparison cycle increments changed');
   /* Cayley point (3/5, 4/5) and x² + y² = 1 */
   const cx = B.CAY.x, cy = B.CAY.y;
   if (B.fstr(cx) !== '3/5' || B.fstr(cy) !== '4/5') err('Cayley point is not (3/5, 4/5)');
@@ -3910,7 +3923,7 @@ SCENES.b06_run = S => {
   if (l > 0) {
     panel(150, 760, 780, 80, l, C.lean);
     B.leanRef(170, 796, B.GID.halt, l, { maxW: 740, size: 24 });
-    txt('axioms: [ ]', 910, 796, { size: 22, fam: F.mono, w: 700, align: 'right', c: C.lean, a: l * Q(S, 4, 'Zero axioms', 0.4) });
+    txt('strict axioms: []', 910, 796, { size: 22, fam: F.mono, w: 700, align: 'right', c: C.lean, a: l * Q(S, 4, 'Zero axioms', 0.4) });
   }
 };
 
@@ -3969,31 +3982,33 @@ SCENES.b06_observer = S => {
   txt('MODEL · 诠释', cx, cy - R - 30, { size: 20, fam: F.mono, w: 700, align: 'center', c: C.argued, a, ls: 3 });
   const inside = at(S, 1, 0.8);
   txt('∂S = ∅ · no outside · 没有外部', cx, cy + R + 52, { size: 24, fam: F.zh, w: 700, align: 'center', c: C.argued, a: a * inside });
-  /* the ledger rows appear one by one; nodes = the seed plus one per step that brought new structure (one new edge each) */
-  const shownAt = [Q(S, 3, 'Like a diary', 0.5), Q(S, 3, 'three quarters', 0.5), Q(S, 3, 'three halves', 0.5)];
+  /* The ledger and the comparison graph use the same beat data. */
+  const shownAt = [Q(S, 3, 'Like a diary', 0.5), Q(S, 3, 'A first comparison', 0.5), Q(S, 3, 'closes a triangle', 0.5)];
   const cur = shownAt.reduce((k, v, i) => (v > 0 ? i : k), -1);
-  const nn = 1 + B.OBS.filter((s, i) => shownAt[i] > 0 && s.d[0] > 0).length;
-  const nodes = [[0, 0], [-120, -80], [110, -60]];
-  for (let i = 0; i < nn; i++) {
-    const [dx, dy] = nodes[i], x = cx + dx * Math.cos(spin) - dy * Math.sin(spin) * 0.2, y = cy + dy;
-    if (i) line(cx, cy, x, y, C.argued, a * 0.6, 2);
-    dot(x, y, 12, i === nn - 1 && i > 0 ? 'g' : 'v', a);
-  }
+  const nodes = [[0, 0], [-120, -80], [110, -60]].map(([dx, dy]) =>
+    [cx + dx * Math.cos(spin) - dy * Math.sin(spin) * 0.2, cy + dy]);
+  let count = 1;
+  B.OBS.forEach(({ comparisons }, i) => {
+    if (!comparisons.length || shownAt[i] <= 0) return;
+    count++;
+    comparisons.forEach(([from, to]) => line(...nodes[from], ...nodes[to], C.argued, a * shownAt[i] * 0.65, 2));
+  });
+  nodes.slice(0, count).forEach(([x, y], i) => dot(x, y, 12, i === count - 1 && i > 0 ? 'g' : 'v', a));
   /* the eye turned around */
   const eye = at(S, 0, 0.6) * (1 - at(S, 1, 0.5));
   txt('?', cx, cy + 30, { size: 140, fam: F.orb, w: 900, align: 'center', c: C.argued, a: eye * fade });
   /* the diary ledger */
   const d = Q(S, 2, 'Its time', 0.6) * fade;
   panel(1000, 210, 780, 560, d, C.argued, 'STRUCTURAL TIME · 结构时间 · τ');
-  txt('Δτ = |x⊥|²/|x|² + edge weight 1/4 (the book\'s worked example)', 1030, 290, { size: 18, fam: F.mono, w: 700, c: C.white, a: d });
+  txt('Δτ = |x⊥|²/|x|² + Δb₁ · cycle rank / 环路秩', 1030, 290, { size: 18, fam: F.mono, w: 700, c: C.white, a: d });
   txt('a wall clock ticks anyway; τ does not · 钟总在走，τ 不', 1030, 326, { size: 20, fam: F.zh, w: 700, c: C.dim, a: d });
-  const rows = ['repeat e₀ = (1,0,0,0)', 'absorb (1,1,0,0)', 'absorb (1,1,1,1)'];
+  const rows = ['repeat e₀ = (1,0,0,0)', 'add h₁ = (1,1,0,0) · tree edge', 'add h₂ = (1,0,1,0) · triangle'];
   B.OBS.forEach((s, i) => {
     const y = 410 + i * 110, now = i === cur;
     const al = d * shownAt[i];
     txt(`day ${i + 1} · ${rows[i]}`, 1030, y, { size: 22, fam: F.mono, w: 700, c: C.white, a: al });
     txt(s.d[0] > 0 ? '+ page' : 'no new page', 1750, y, { size: 20, fam: F.mono, w: 700, align: 'right', c: C.argued, a: al });
-    txt(`Δτ = ${B.fstr(s.di)} + ${B.fstr(s.edge)} = ${B.fstr(s.d)}`, 1030, y + 40, { size: 26, fam: F.math, w: 700, c: C.argued, a: al });
+    txt(`Δτ = ${B.fstr(s.di)} + ${s.deltaBetti} = ${B.fstr(s.d)}`, 1030, y + 40, { size: 26, fam: F.math, w: 700, c: C.argued, a: al });
     txt(`τ = ${B.fstr(s.tau)}`, 1750, y + 40, { size: 34, fam: F.orb, w: 900, align: 'right', c: now ? C.now : C.white, a: al });
   });
   const w = Q(S, 4, 'interpretation', 0.5) * fade;
@@ -4011,11 +4026,11 @@ SCENES.b06_kernel = S => {
   /* the core */
   panel(140, 190, 820, 630, a, C.cyan, 'CORE · OmegaInit + OmegaMath · 核心');
   txt('LEAN KERNEL · checks every step · 逐步检查', 170, 262, { size: 22, fam: F.zh, w: 700, c: C.white, a: a * at(S, 0, 0.6) });
-  const imp = Q(S, 1, 'does not even import', 0.5);
-  txt('module  ·  prelude', 170, 312, { size: 24, fam: F.mono, w: 700, c: C.cyan, a: a * Q(S, 1, 'We add no axioms', 0.5) });
+  const imp = Q(S, 1, 'skips official Init', 0.5);
+  txt('module  ·  prelude', 170, 312, { size: 24, fam: F.mono, w: 700, c: C.cyan, a: a * Q(S, 1, 'The strict library', 0.5) });
   txt('import Init', 470, 312, { size: 24, fam: F.mono, w: 700, c: C.mag, a: a * imp });
   line(462, 304, 640, 304, C.mag, a * imp, 3);
-  txt('no axiom keyword · 不写 axiom', 170, 350, { size: 20, fam: F.zh, w: 700, c: C.dim, a: a * Q(S, 1, 'We add no axioms', 0.5) });
+  txt('selected closures replay · 重放选定闭包', 170, 350, { size: 20, fam: F.zh, w: 700, c: C.dim, a: a * Q(S, 1, 'The strict library', 0.5) });
   /* the circle */
   const c = at(S, 2, 0.6) * fade, ox = 360, oy = 560, R = 150;
   if (c > 0) {
@@ -4032,7 +4047,7 @@ SCENES.b06_kernel = S => {
     txt('9/25 + 16/25 = 1', 560, 554, { size: 26, fam: F.math, w: 700, c: C.cyan, a: c * Q(S, 2, 'lands exactly', 0.5) });
     txt('every (p, q) ≠ (0, 0)', 560, 596, { size: 20, fam: F.mono, w: 700, c: C.white, a: c * Q(S, 2, 'lands exactly', 0.5) });
     const l = Q(S, 2, 'Axiom list', 0.5) * fade;
-    txt('axioms: [ ]', 560, 660, { size: 34, fam: F.orb, w: 900, c: C.lean, a: l, ab: 1 });
+    txt('strict axioms: [] · 严格端', 560, 660, { size: 34, fam: F.orb, w: 900, c: C.lean, a: l, ab: 1 });
     B.leanRef(170, 778, B.GID.circle, l, { maxW: 770, size: 20 });
   }
   /* the bridge and the shadow */
@@ -4070,8 +4085,8 @@ SCENES.b06_ask = S => {
   const a = clamp(u / 0.6);
   const cards = [
     [480, 'MACHINE · 机器', '[11/49, 7/25, 5/9, 3/4]', C.lean, 'LEAN ✓ halts at 22'],
-    [960, 'OBSERVER · 观察者', 'τ : 0 → 3/4 → 3/2', C.argued, 'MODEL · interpretation'],
-    [1440, 'JUDGE · 裁判', 'axioms: [ ]', C.lean, 'LEAN ✓ core circle']
+    [960, 'OBSERVER · 观察者', 'τ : 0 → 1/2 → 2', C.argued, 'MODEL · interpretation'],
+    [1440, 'JUDGE · 裁判', 'strict axioms: []', C.lean, 'LEAN ✓ core circle']
   ];
   cards.forEach(([x, t, body, col, foot], i) => {
     const p = a * clamp((u - 0.25 * i) / 0.6);
@@ -4086,8 +4101,8 @@ SCENES.b06_ask = S => {
 /* ---- b07 · What the kernel checked · 内核查过的账 ---- */
 /* Act b07 · Coda · What the kernel checked · 内核查过的账 (film one-axiom-no-infinity, book omega-math).
    The act walks the position rail once more as an audit ledger: one line per rung, each landing on a zero-axiom
-   theorem frozen at the pinned trureturing commit (D5/S3/Quantum/AURICOmega/*, axioms: []), then adds up the
-   ledger (14 modules, 127 theorems, counted from the pinned lock) and keeps purple and red apart from green.
+   theorem frozen at the pinned trureturing commit with empty strict_omega.axioms, then adds up the
+   D5 registry shown in Appendix A and keeps purple and red apart from green.
    Every number on screen is computed below in B07 and re-checked independently in FILM.init:
      κ(p, q) = q² / (p² + q²) (OmegaMath.Projective), Cayley point ((q² − p²), 2pq) / (p² + q²),
      the 3D Cayley matrix of s = (1, 0, 0) / 2 (cayleyNum, OmegaMath.Geometry.Cayley3D.Matrix),
@@ -4149,7 +4164,7 @@ const B07 = (() => {
     { f: '⟨χₘ, χₙ⟩ = δₘₙ, even χ, all m, n', cites: [G + 'OmegaSphericalHaarMidpoint.all_degree_peter_weyl_orthonormal'], cells: [[12, 2]] },
     { f: '∏s > 0 ⇒ ∃ prime p ∣ ∏s + 1, p ∉ s', sz: 23, cites: [G + 'OmegaArithmeticHorizon.euclid_prime_escape'], cells: [[8, 1]] },
     { f: 'P_Ω: 2¹⁷ → 22, halts at step 15', cites: [G + 'OmegaComposeAndWitnesses.p_omega_halts_at_22'], cells: [[11, 7]] },
-    { f: '14 modules · 127 theorems · axioms: [ ]', cites: [], cells: [], kind: 'num' }
+    { f: 'D5 · strict axiom records', cites: [], cells: [], kind: 'num' }
   ];
   const short = g => g.slice(g.lastIndexOf('.') + 1);
   const LX = 130, LW = 900, LY = 212, LH = 68, LG = 8, RX = 1070, RW = 730;
@@ -4416,13 +4431,13 @@ SCENES.b07_tally = S => {
   badgeQ(S, [[0, null, 'computed']]);
   const a = clamp(S.u / 0.5) * clamp((S.d - S.u) / 0.6);
   const X = 140, Y = 200, Wd = 1040, Hh = 610;
-  panel(X, Y, Wd, Hh, a, C.cyan, 'ZERO-AXIOM CORE · 零公理核心 · OmegaInit + OmegaMath');
+  panel(X, Y, Wd, Hh, a, C.cyan, 'D5 · PAIRED BACKEND RECORDS · 双后端记录');
   const M = B07.MODS, cs = 21, gx = 70, x0 = X + 70, yb = Y + 570;
   const L0 = lineAt(S, 0), fill = clamp((S.u - L0.s - 0.2) / Math.max(1, (L0.e - L0.s) * 0.7));
   let idx = 0;
   const total = M.reduce((s, m) => s + m[1], 0), shown = Math.floor(fill * total);
   const citedCells = new Set(B07.ROWS.flatMap(r => r.cells.map(([m, k]) => m + ':' + k)));
-  const g = Q(S, 0, 'every axiom list empty', 0.6, 1.4);  /* the eight cited theorems light up inside the wall */
+  const g = Q(S, 0, 'strict axiom list is empty', 0.6, 1.4);  /* the eight cited theorems light up inside the wall */
   M.forEach(([name, n], m) => {
     for (let k = 0; k < n; k++) {
       const on = idx++ < shown, x = x0 + m * gx, y = yb - (k + 1) * (cs + 3);
@@ -4435,9 +4450,9 @@ SCENES.b07_tally = S => {
   });
   txt(`${Math.min(shown, total)}`, X + 50, Y + 120, { size: 72, fam: F.orb, w: 900, c: C.white, a, ab: 2 });
   txt('theorems · 定理', X + 250, Y + 92, { size: 20, fam: F.zh, w: 700, c: C.cyan, a });
-  const ax = Q(S, 0, 'every axiom list empty', 0.5);
-  txt('14 modules · 14 个模块', X + 250, Y + 122, { size: 20, fam: F.zh, w: 700, c: C.cyan, a: a * fill });
-  txt('axioms: [ ]', X + Wd - 50, Y + 112, { size: 40, fam: F.mono, w: 700, align: 'right', c: C.white, a: a * ax });
+  const ax = Q(S, 0, 'strict axiom list is empty', 0.5);
+  txt(`${M.length} modules · ${M.length} 个模块`, X + 250, Y + 122, { size: 20, fam: F.zh, w: 700, c: C.cyan, a: a * fill });
+  txt('strict axioms: [] · 严格端', X + Wd - 50, Y + 112, { size: 26, fam: F.mono, w: 700, align: 'right', c: C.white, a: a * ax });
   txt(`${B07.ROWS.flatMap(r => r.cites).length} read aloud · 刚才念过 ${B07.ROWS.flatMap(r => r.cites).length} 条`, X + Wd - 50, Y + 150, { size: 20, fam: F.zh, w: 700, align: 'right', c: C.lean, a: a * g });
   /* outside the wall: the one-way bridge to the classical numbers */
   const b = at(S, 1, 0.6), bx = 1250, by = 300;
