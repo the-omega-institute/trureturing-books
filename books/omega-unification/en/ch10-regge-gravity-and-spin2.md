@@ -187,6 +187,26 @@ Equality holds precisely for a single value of $\lambda$. For instance, at $b=k/
 
 Fixing the mean four-volume also gives a comparison of the full distributions. Let $G$ have gamma shape $k$ and rate $1$, independently of the random scale $X=1/\lambda$. The mixture volume is $V=XG$. Write $m=k\mathbb E X$. The volume at the single rate $k/m$ is $V_*=(m/k)G$. Since $\mathbb E[V\mid G]=V_*$, conditional Jensen gives $\mathbb E\phi(V)\ge\mathbb E\phi(V_*)$ for every convex $\phi$ for which the expectations exist. If $\phi$ is strictly convex and its expectations are finite, equality holds exactly when $X$ is constant. For $t>0$, this gives the sharp bound $\mathbb E e^{-tV}\ge(1+tm/k)^{-k}$. Every shift with finite normalization and mean gives the same comparison using the shifted random scale and shifted mean.
 
+**Unknown curvature coupling (hand derivation, `ARGUED`).** Use the same volume-shift experiment with a fixed shape law and a finite mixture of cosmological coefficients, and treat the common real curvature coefficient $\beta$ as unknown as well. Set $T=S_R/\sqrt V$. Multiplying all squared edge lengths by $a$ multiplies $S_R$ by $a$ and $V$ by $a^2$, so $T$ depends only on shape. In the shape-restricted domain without curvature weighting, the edge-length measure below volume $v$ scales as $v^{1920}$ on every measurable set of shapes. The pushforward to $(V,T)$ is therefore a constant times $v^{1919}dv\,P(dT)$, where $P$ is the normalized law of $T$ below volume one. The shape bound gives $q_e\le\sqrt{96V}$. Each hinge area is at most $\max_e q_e/2$, and deficits on the finite lattice are bounded, so $T$ is bounded.
+
+Write $M(t)=\int e^{tT}P(dT)$. Combine all weights at the same cosmological coefficient. Let $\lambda_i$ be the distinct positive coefficients and $a_i$ the normalized exponential weight at each one. Factor $v^{1919}$ out of the normalized volume density. The remaining factor at $v=w^2>0$ is
+
+$$
+H(w)=M(\beta w)\sum_i a_i e^{-\lambda_i w^2},\qquad a_i>0.
+$$
+
+The exact mean-volume response on any nonempty open interval of positive $b$ determines the normalized volume density. The mean is the negative logarithmic derivative of the volume Laplace transform. Analytic continuation and normalization at zero fix the transform. Laplace uniqueness then determines the density and hence the real-analytic function $H$.
+
+The exponential mixture depends only on $w^2$, so the odd coefficients of $\log H$ come from $\log M(\beta w)$. If $P$ is asymmetric about zero, some odd coefficient of $\log M$ is nonzero. If all of them vanished, all odd moments would vanish, and compact support would force $P$ to be symmetric. The corresponding coefficient of $\log H$ determines an odd power of $\beta$ and therefore its magnitude and sign. If $P$ is symmetric and $T$ is nonzero with positive probability, set $a_*=\operatorname{ess\,sup}|T|>0$. As $w\to+\infty$, $\log H(w)=-\lambda_{\min}w^2+a_*|\beta|w+o(w)$. The smallest $\lambda_i$ controls the finite positive sum, and $\log M(\beta w)/w$ tends to $\operatorname{ess\,sup}(\beta T)$. The quadratic and linear terms give $\lambda_{\min}$ and $|\beta|$, respectively. Both signs then give the same $M$.
+
+Divide out the determined factor $M(\beta w)$. Linear independence of the exponential functions identifies the distinct $\lambda_i$ and their combined weights $a_i$, up to ordering. Multiply each $a_i$ by the partition function for its rate and normalize to obtain the total partition share at that rate. For two components with the same rate, every split into positive weights $c_1,c_2$ with the same sum gives the same response.
+
+If $T=0$ almost surely, the response still identifies the mixture and is independent of the curvature coefficient. The finite lattice here excludes this case. At unit equilateral lengths, $\chi_\sigma=5/16>1/16$, the total deficit per periodic cell is $100\pi-240\arccos(1/4)<0$, and all hinges have the same positive area. By continuity, a set of admissible shapes of positive measure has $T\ne0$.
+
+::: {.problem #prob-ou-ch10-regge-shape-symmetry title="Is the finite lattice shape law symmetric?"}
+For the shape-restricted $4^4$ Regge lattice of this section, determine whether $T=S_R/\sqrt V$ and $-T$ have the same distribution under the curvature-free weight on $V\le1$. This determines whether the full mean-volume response can identify the sign of a nonzero curvature coupling.
+:::
+
 Even when the spatial curvature action is completely fixed, recovering a Lorentzian spin-2 propagator requires an independent test of **extrinsic shear** across time slices. On a spatial three-torus with unit lapse and zero shift, set $h = a(t)^2\bigl[dz^2 + H_{AB}(t, z)\,dx^A dx^B\bigr]$ where $H$ is symmetric positive definite with $\det H = 1$, $J_\mu = H^{-1}\partial_\mu H$, and $h_0 = \dot{a}/a$. The spatial scalar curvature and extrinsic curvature invariant take the exact closed forms ([4D deficit and shell spectral weights](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-%E5%9B%9B%E7%BB%B4%E8%A7%92%E4%BA%8F%E4%B8%8E%E7%90%83%E5%A3%B3%E8%B0%B1%E6%9D%83%E9%87%8D.md)):
 
 $$
