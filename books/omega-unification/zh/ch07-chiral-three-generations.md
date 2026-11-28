@@ -110,7 +110,9 @@ $$
 
 在周期一的坐标中，连续振幅在整数平移下不变。取一张基本方形，在其内部无重复地列出全部零点，并设每点在该坐标中的雅可比 $B_i$ 都可逆。每个零点预先选定一对光滑紧支撑的测试窗。对所有低于同一正上界的正阈值，缩放后的窗可放在互不相交的邻域内。各邻域之外若有剩余的紧集，振幅模在其上有统一的正下界。将各缩放窗沿整数格平移求和后，得到整个严格次水平集指示函数的上下界。各个未缩放下窗在平面上的积分之和至少为 $\pi r_-^2\sum_i|\det B_i|^{-1}$，对应的上窗积分之和至多为 $\pi r_+^2\sum_i|\det B_i|^{-1}$。 [周期次水平集的光滑夹逼](lean:D5/S3/Fourier/Asymptotics/PeriodicSublevelSandwich.periodic_test_sandwich)
 
-将钟角除以 $2\pi$，以 $p_\gamma=(a\gamma,b\gamma)/(2\pi)$ 作为周期一的采样点，并以各零点的重数除以 $N(T)$ 作为权重。若 $f$ 是角坐标中的固定测试函数，换元后用 $u\mapsto f(2\pi u)$，其平面积分正好带来归一化因子 $(2\pi)^{-2}$。把上面的纵坐标和估计代入光滑窗的采样定理，常数项为 $O(L^{-1})$，二次频率项贡献 $O(\varepsilon^{-2}L^{-2})$，超过 $J$ 的尾项为 $O((\varepsilon J)^{-4})$。三项之和为 $o(\varepsilon^2)$。让内外逼近的面积趋于同一椭圆面积即可恢复同一个 $C_q$。这一步使用上面的零点和估计与局部雅可比可逆性。 [光滑平面窗的采样定理](lean:D5/S3/Fourier/Asymptotics/PlanarWindowSampling.compact_window_sampling)
+将钟角除以 $2\pi$，以 $p_\gamma=(a\gamma,b\gamma)/(2\pi)$ 作为周期一的采样点，并以各零点的重数除以 $N(T)$ 作为权重。设 $c_T=O(L^{-1})$、$d_T=O(L^{-2})$ 为上面标准化频率和的两项系数。由于 $L\varepsilon^2\to\infty$ 且 $J\asymp L$，$c_T/\varepsilon^2$、$d_T/\varepsilon^4$ 和 $1/(\varepsilon^6J^4)$ 都趋于零。加权计数定理把这三项界与全环面的夹逼合在一起。对满足上面零点枚举和可逆雅可比条件的周期振幅，严格次水平比例除以 $\varepsilon^2$ 后趋于 $\pi\sum_i|\det B_i|^{-1}$。若 $A_i$ 是角坐标中的雅可比，则 $B_i=2\pi A_i$，每个零点的贡献为 $1/(4\pi|\det A_i|)$。 [周期次水平的加权计数极限](lean:D5/S3/Fourier/Asymptotics/PeriodicSublevelSampling.tendsto_weighted_sublevel_of_fourier)
+
+应用到三站读数时，应取单位轻态的边界傅里叶振幅。在盲点附近，另两个特征标振幅的模有正下界，因而这条振幅的模给出最小奇异值。删点方程定位盲点，其微分经约化逆得到实际读数的雅可比。上文的双钟频率界和这些模型识别步骤仍分别依赖算术推导及盲点处的本征线分析。 [从删点方程到实际振幅的微分](https://github.com/the-omega-institute/trureturing-experiments/blob/408bafb236c0918d30571356d15798d2cd21a511/experiments/ch39-omega-research/replay/ch39-ray-near-blind-density.md)
 
 固定荷与钟角，轻线随辐边软化能移动多远？写 $H_k(\delta)=H_k(0)-\delta K_k$。三条单位辐边构成一个星图。在极点与三叶均匀单位向量的基下，平凡特征标上的星图块为 $\left(\begin{smallmatrix}3&-\sqrt3\\-\sqrt3&1\end{smallmatrix}\right)$。两个非平凡叶模式在极点相消，各自的本征值为 $1$。其余方向上的星图作用为零，故 $K_k$ 的谱宽依次为 $w_k=4,1,1$。[软化权重的定义](https://github.com/the-omega-institute/trureturing-experiments/blob/cb58c8e64ecea67184e0c1d68a690be098a7a384/experiments/ch39-omega-research/replay/ch39-three-ray-chiral-boundary.py#L34)
 
