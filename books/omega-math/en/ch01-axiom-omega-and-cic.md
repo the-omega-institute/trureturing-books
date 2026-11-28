@@ -205,6 +205,24 @@ Let $\bar a$ be the first coordinate in $H_0$ and the residue modulo $3$ in $H_1
 
 In both groups every transposition representative $(a,1)$ squares to $(a-a,0)=(0,0)$. In the $H_0$ model, the choice $r^is^j\mapsto((i,0),j)$ preserves multiplication by the displayed formula, so it preserves ternary transport. In the $H_1$ model, the representatives of $r$ are $(1,0),(4,0),(7,0)$, and each cubes to $(3,0)$. A choice preserving ternary transport would preserve the identity after left multiplication by the inverse of its identity representative. It would then preserve multiplication as well. Since $r^3=e$ in the quotient, the cube of its representative would have to be $(0,0)$. The cube thus detects the obstruction even when every transposition has an involutive representative.
 
+**Square and cube returns can distinguish transports with the same readings.** Give each reading class eight points and take the quaternion group $Q_8=\{\pm1,\pm\mathbf i,\pm\mathbf j,\pm\mathbf k\}$ as the identity class. Write $A_\sigma$ for the action of a permutation $\sigma$ on $Q_8$. Compare three actions. The trivial action fixes every point. The parity action lets odd permutations swap $\mathbf i,\mathbf j$ and negate $\mathbf k$, while even permutations fix every point. The faithful action permutes the three axis units by $\sigma$ and negates all three for odd permutations. It preserves the cyclic products and anticommutation of the axis units. With $\epsilon(\sigma)$ the parity bit and $b=\pm1$ a central sign, set
+$$
+(a,\sigma)(c,\tau)=\bigl(aA_\sigma(c)b^{\epsilon(\sigma)\epsilon(\tau)},\sigma\tau\bigr).
+$$
+The central factor records the carry when two parity bits are added. For three factors the total carry is independent of the bracketing, so all six choices give groups. Comparing only the permutation component yields the same positive semidefinite reading matrix and the same noncommutative quotient transport in all six models, with extensional separation relaxed.
+
+For any transposition $s$ and either 3-cycle $r$, take all eight points of each class and count how many squares and cubes return to the identity. Both powers use ternary transport with the middle slot fixed. If that slot is set to another point $o$ in the identity class, left multiplication by $o$ preserves each reading class and carries the original product to $[x,o,y]$. The counts of returns to $o$ stay the same.
+
+| Action on the axes | $(\text{square},\text{cube})$ for $b=1$ | $(\text{square},\text{cube})$ for $b=-1$ |
+| --- | --- | --- |
+| Trivial | $(2,1)$ | $(6,1)$ |
+| Parity only | $(4,1)$ | $(0,1)$ |
+| Faithful | $(4,4)$ | $(0,4)$ |
+
+The quaternion coordinate of the square is $aA_s(a)b$. For the trivial action, $a^2$ gives two copies of $1$ and six of $-1$. In the other two actions, $aA_s(a)$ gives four copies of $1$ and two of each sign of an axis unit. That axis is always $\mathbf k$ for the parity action and is the axis fixed by the transposition for the faithful action. The quaternion coordinate of the cube is $aA_r(a)A_r^2(a)$. For the first two actions, this is $a^3$, which runs through all eight kernel elements once. For the faithful action with $r=(123)$, the product $\mathbf i\mathbf j\mathbf k=-1$ gives the cube outcome for each positive axis unit, and each negative axis unit gives $1$. Including $\pm1$ gives four outcomes of each sign. Taking inverses gives the same counts for the other orientation.
+
+The six pairs of return counts are distinct. If the kernel elements are labelled, the full square distributions across the three transpositions also distinguish the six models. To choose representatives for a section, one must check the inversion relation $tut^{-1}=u^{-1}$ as well. In the faithful model with $b=1$, only eight of the sixteen pairs that pass both power tests also satisfy inversion. [Derivation and exact replay](https://github.com/the-omega-institute/trureturing-books/issues/1952#issuecomment-7242650832)
+
 With a central identity class, a transposition square can also obstruct a choice. Return to the earlier permutation reading with quotient $S_3$. Choosing $(\sigma,+1)$ in each class carries ternary transport back to the original twelve points. The same readings arise on a second set of twelve points
 $$
   G'=\{(\sigma,j)\in S_3\times\mathbb{Z}/4\mathbb{Z}:j\bmod 2=\epsilon(\sigma)\},
