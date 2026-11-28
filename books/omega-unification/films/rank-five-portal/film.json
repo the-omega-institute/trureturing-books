@@ -1,0 +1,28 @@
+{
+  "title": "The Rank-Five Portal",
+  "title_zh": "秩五门户",
+  "summary": "The second half of Question 1, on screen. The matching targets come first: m_H = 125.25 GeV, v = 246.22 GeV, the tree boundary λ(M_Z) ≈ 0.12938 and the contact ceiling 8π ≈ 25.133, computed on screen; heavy states near 10¹⁴ GeV then lift the Higgs mass squared by about 1.05 × 10²⁶ GeV² on two certified crossings, 1.34 × 10²² times the tree value. A species-traceless portal (−F, 3F) cancels the one-loop tadpole, 12(−F) + 4(3F) = 0, but would need log(Q/m_min) > 3.45, and no crossing at any arc inertia is that wide, so it is excluded (written argument with interval certificates). For a neutral traceless portal the contact floor falls like 1/(d − 1): above 31.975 > 8π for rank four or less, while the rank-five portal p(5vv* − I)/4 fits with a heavy diagonal between 24.271 and 24.931, so the minimal rank on this crossing is exactly five (six on two other zero windows). The block Schur minimum theorem, checked by the Lean kernel, says the least value over the inner variable is x*(A − BC⁻¹Bᴴ)x; a 1 × 1 worked example shows it, and the chapter's certificate gives the rank-five check a margin above 3.11842. At low energy, in this model, the light partners meet the colliders: twenty charged colour assignments add 17.59–17.75 MeV to the Z width against LEP's 2.3 MeV error, the six neutral ones fit CLEO with χ² ≈ 6.05 against at least 13.54, and all six need an 80.38 GeV charged singlet that OPAL excludes if long-lived. Question 1 itself, a first-principles derivation of thresholds, portal rank and the electroweak scale, stays open (red).",
+  "summary_zh": "第一问的另一半，摆在画面上。先是匹配目标：m_H = 125.25 GeV、v = 246.22 GeV、树级边界 λ(M_Z) ≈ 0.12938 与接触天花板 8π ≈ 25.133，均在屏幕上算出；摆在 10¹⁴ GeV 附近的重粒子随后在两枚认证交点上把希格斯质量平方抬高约 1.05 × 10²⁶ GeV²，是树级值的 1.34 × 10²² 倍。逐物种无迹门户 (−F, 3F) 让一圈蝌蚪 12(−F) + 4(3F) = 0 精确抵消，却需要 log(Q/m_min) > 3.45，而任意弧内惯性下都没有这么宽的交点，因此被排除（书面论证配区间证书）。对中性无迹门户，接触强度下界按 1/(d − 1) 下降：秩不超过 4 时高于 31.975 > 8π，秩五门户 p(5vv* − I)/4 则放得下，负重径向对角元落在 24.271 与 24.931 之间，所以该交点上的最小秩恰为 5（另两个零点窗为 6）。经 Lean 内核检验的分块舒尔补极小值定理说：对内部变量取最小，值恰为 x*(A − BC⁻¹Bᴴ)x；画面用一个 1 × 1 手算示例演示它，本章证书给秩五检验大于 3.11842 的裕度。在低能端，在这个模型里，轻伙伴直面对撞机：20 种带电色分配给 Z 宽度添上 17.59–17.75 MeV，而 LEP 的误差只有 2.3 MeV；6 种中性分配对 CLEO 给出 χ² ≈ 6.05，带电方案至少 13.54；这 6 种都需要一枚 80.38 GeV 的带电单态，若长寿命即被 OPAL 排除。第一问本身——从第一性原理导出阈值、门户秩与电弱标度——仍然开放（红色）。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-26",
+  "duration": "2:42",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · a log ladder of the Higgs mass squared, the traceless tadpole bars, the rank-by-rank contact floor under the 8π ceiling, a block Schur parabola, three collider panels, the open Question 1",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"
+  ],
+  "outputs": {
+    "narrated_720p": "omega-unification_rank-five-portal_720p_narrated.mp4",
+    "cover": "omega-unification_rank-five-portal_cover.jpg"
+  }
+}

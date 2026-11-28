@@ -1,0 +1,29 @@
+{
+  "title": "The Winding Ladder",
+  "title_zh": "绕数阶梯",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-26",
+  "duration": "2:48",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · one schematic shell triangle and its loop angle, the harmonics 1 − cos kφ, two quaternion products and the Gram quarter, a seven-rung winding staircase, decaying weights against a native competitor, binary flavor codes, a ppm ruler for one Riemann zero, four stress-test panels",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.phalf_qhalf_noncommutative",
+    "D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.orthogonal_triad_excess_quarter"
+  ],
+  "outputs": {
+    "narrated_720p": "omega-unification_winding-ladder_720p_narrated.mp4",
+    "cover": "omega-unification_winding-ladder_cover.jpg"
+  },
+  "summary": "Picking zeros from outside the 19-point shell has failed, so the film writes an action inside it: on the shell's 529 triangles each winding number k charges 1 − cos(kφ) of the loop angle, and higher windings are sharper harmonics (a model choice, argued; the curves are computed). Lean checks why a triangle can feel orientation: (1 + i)(1 + j) = (1, 1, 1, 1) and (1 + j)(1 + i) = (1, 1, 1, −1) lie on different rays, and the half-step triad 1, 1 + i, 1 + j has Bargmann–Gram determinant exactly 1/4 with zero axioms. The replay certificates of the chapter then climb a sharp staircase (computed): no stationary point inside the three windows up to K = 18 (gradient > 3.00565), a saddle at 19, a strict local minimum at 21, a global minimum at 27 that crashes flavor to at most 26.922 % and 31.362 % of reference, a reference-flavor local minimum at 31, a height-dependent flavor vacuum at 36 (the 6899-part split brings both errors below half a ppm), and one fixed vacuum for every height at exactly 105, with 100 coefficients still free. Non-increasing weights lose by more than 1/4 to a native shell competitor, and ten binary digits of the flavor coordinate already exclude them while nine admit a counterexample. Zero #2,306,888,100,085 passes all three windows on its own clocks, sits 4.857224 × 10⁻⁸ above the vacuum and hits both flavor readings within 1.33 ppm; such zeros have positive density, but this is a witness inside the model, not a derivation of quark mixing (argued). Four stress tests on that zero expose a resolution cliff below 1.690 × 10⁻⁷⁵, light-mode leakage above 31 %, a vacuum silent on proton decay, and windows that fix only k/d² (computed).",
+  "summary_zh": "从十九点球壳外部挑零点的路已经走不通，于是本片在壳内写下作用量：在球壳的 529 个三角面上，每个绕数 k 对回路角收取 1 − cos(kφ)，绕数越高谐波越尖锐（这是模型选择，标为论证；曲线为屏幕计算）。Lean 内核检验三角面为何分得出取向：(1+i)(1+j) = (1, 1, 1, 1) 与 (1+j)(1+i) = (1, 1, 1, −1) 不在同一条射线上，半步三元组 1、1+i、1+j 的巴格曼–格拉姆行列式恰为 1/4，且零公理。随后本章的复算证书爬上一座陡峭的阶梯（屏幕计算）：直到 K = 18 三窗内无驻点（梯度大于 3.00565），19 圈出现鞍点，21 圈出现严格局部极小，27 圈全局极小落进三窗但味读数跌到参考值的 26.922% 与 31.362% 以下，31 圈出现参考味局部极小，36 圈在权重随高度调整时出现参考味全局真空（6899 份的整数分割把两项误差压到百万分之零点五以下），恰到 105 圈才有通吃全部高度的统一真空，且仍留 100 个自由系数。随圈数不增的权重比一个原生竞争点高出四分之一以上；六面味坐标只记十位二进制就能全数排除，退到九位便出现反例。第 2,306,888,100,085 枚零点仅凭自己的两只钟通过三窗，作用量只比真空高 4.857224 × 10⁻⁸，两项味读数偏差都在 1.33 ppm 以内；这样的零点具有正密度，但这是模型内部的见证，不是对夸克混合的推导（论证）。施在这枚零点上的四项压力测试暴露出低于 1.690 × 10⁻⁷⁵ 的反演悬崖、超过 31% 的轻模泄漏、对质子衰变沉默的真空，以及只钉住 k/d² 的三窗（屏幕计算）。"
+}
