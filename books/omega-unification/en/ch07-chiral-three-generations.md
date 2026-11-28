@@ -454,7 +454,7 @@ $$
 \big\langle T_L,\, T_{e^c}\otimes T_{\nu^c}\big\rangle_{\epsilon^{\otimes 2}},
 $$
 
-where $T_R^{\alpha_1\cdots\alpha_{d_R}} = \sum \epsilon_{a_1\cdots a_{d_R}}\chi_R^{a_1,\alpha_1}\cdots \chi_R^{a_{d_R},\alpha_{d_R}}$. Expanding in the $32$-generator exterior algebra yields $924$ quark monomials and $6$ lepton monomials ($5544$ distinct degree-$16$ monomials in the product); for $\epsilon_{12}=1$, the ordered monomial with all $Q,L$ spin indices $1$ and all others $2$ carries exact coefficient $+25920 \times 2 = +51840$, certifying nonvanishing. Lifting the site $\mathbb{Z}_3$ rotation to an internal $U(1)_F$ with charges $(0,1,-1)$ on the three characters is likewise anomaly-free on spin $BG_6\times BU(1)_F$ (since $\mathrm{Sq}^2(\ell u_F)=\ell^2 u_F+\ell u_F^2$ removes the mixed degree-$4$ column). Crucially, $\mathcal{O}_{16}$ supplies symmetry and anomaly matching only; proving a thermodynamic mirror gap and an equivariant rough-link Weyl measure remains open (OPEN).
+where $T_R^{\alpha_1\cdots\alpha_{d_R}} = \sum \epsilon_{a_1\cdots a_{d_R}}\chi_R^{a_1,\alpha_1}\cdots \chi_R^{a_{d_R},\alpha_{d_R}}$. Expanding in the $32$-generator exterior algebra yields $924$ quark monomials and $6$ lepton monomials ($5544$ distinct degree-$16$ monomials in the product); for $\epsilon_{12}=1$, the ordered monomial with all $Q,L$ spin indices $1$ and all others $2$ carries exact coefficient $+25920 \times 2 = +51840$, certifying nonvanishing. Lifting the site $\mathbb{Z}_3$ rotation to an internal $U(1)_F$ with charges $(0,1,-1)$ on the three characters is likewise anomaly-free on spin $BG_6\times BU(1)_F$ (since $\mathrm{Sq}^2(\ell u_F)=\ell^2 u_F+\ell u_F^2$ removes the mixed degree-$4$ column). Crucially, $\mathcal{O}_{16}$ supplies symmetry and anomaly matching only; although the single-site spectrum and autonomous frozen-link 3D wall gap are established in Section 7.3.4, embedding the mirror wall into a dynamical rough-link regulator and taking an interacting chiral continuum limit remain open (OPEN).
 
 2. **Non-Additive Balanced Selection and the Independent Conditional Triple Intersection (ARGUED / NUM).** Across the five nonzero shell charges $q \in \{+1,+2,-3,-4,+6\}$, directed-interval Schur-complement inertia certifies the uniform one-step ranks and $(1,\omega,\omega^2)$ character counts `1:(1,0,0)`, `3:(1,1,1)`, `7:(3,2,2)`, and `15:(5,5,5)`, while excluding all $14$ other one-step and $17$ other two-step fixed cuts over the torus (the additive Dirac-sea window $[8.221, 10.6]$ applies to these five charged sectors and excludes $q=0$, where $\lambda_2=\lambda_3\approx 8.24686$ at $\delta=0$). Going beyond additive spectral traces, minimizing the non-additive balanced occupation functional over nonzero orthogonal projectors $Q$ commuting with $P$ (total rank $r=\operatorname{tr}Q$, character ranks $r_k$),
 
@@ -486,6 +486,62 @@ $$
 $$
 
 Across the same independent-clock cover, fixed-basis odd–even leakage lies strictly in $0.50255 < \Lambda < 0.56417$; at flagship zero $2{,}306{,}888{,}100{,}085$, relaxed assignment bounds further certify monomial leakage $> 31.060\%$ for $(1,2)$ and $> 31.097\%$ for $(1,-4)$, whereas the same-parity pair $(2,-4)$ drops to $0.008589$ at $(0, 4\pi/3)$ despite nonzero flux, sharply delineating the odd–even versus same-parity regimes.
+
+### 7.3.4 Exact Single-Site SMG Spectrum, Fixed-Background 3D Wall Gap, and the 15-Weyl Local Counterexample {#sec-ou-ch07-smg-fock-gap-and-wall-stability}
+
+For the dynamical mirror-gapping horizon of Question 2 (tracking issue `#2466`), exact decomposition of the full $2^{32}$-dimensional Fock space and Kirkwood–Thomas cluster conjugation establish three sharp results and delineate their exact boundaries:
+
+| Audit Axis | Exact Statement or Construction | Quantitative Outcome & Scope | Epistemic Tier |
+| :--- | :--- | :--- | :--- |
+| Exact single-site $2^{32}$ spectrum of $H_{16}$ | $H_{\mathrm{SMG}} = H_{16} = -g(\mathcal{O}_{16}+\mathcal{O}_{16}^\dagger)$ with zero extra stabilizer terms | $B = 56{,}435{,}097{,}600$; unique singlet ground state and exact gap $\Delta E_{\mathrm{site}} = 51{,}840\sqrt{21}(\sqrt{2}-1)|g|$; $3{,}468{,}798$ nonzero eigenvalues | ARGUED / NUM |
+| Uniform 3D wall gap in fixed gauge backgrounds | Finite graphs of max degree $d \le 6$ with arbitrary frozen unitary links $U_{xy}$ | $|t|/\Delta E_{\mathrm{site}} \le 1/32{,}985{,}348{,}833{,}280 \implies \operatorname{gap}(H_{\mathrm{wall}}) \ge \tfrac{383}{480}\Delta E_{\mathrm{site}}$ (dynamical rough links & continuum limit remain open) | ARGUED / OPEN |
+| 15-Weyl local counterexample vs. 4D anomaly | $30$-mode space with $X = i^N$, $H_{15} = \mu N$ ($\mu > 0$), and even-filling singlet series | Unique singlet ground state $|0\rangle$ with gap $\mu$ (refuting an unqualified on-site no-go); even-$N$ singlets $(1,0,6,14,53,92,181,233,233,\dots,1)$; no spin singlet at $N=15$ | ARGUED / NUM |
+
+1. **Exact $2^{32}$ Single-Site Spectrum of $H_{16}$ and Accidental Symmetries (ARGUED / NUM).** Ordering the sixteen gauge slots as $Q, u^c, d^c, L, e^c, \nu^c$ (dimensions $(6,3,3,2,1,1)$) with two spin modes $0,1$ per slot, set $A = \mathcal{O}_{16}^\dagger$. The quark and lepton bracket tensors $T_m$ ($m=6,2$, prefactors $K_6=(3!)^2=36$, $K_2=1$) have exact closed form $T_m(s) = K_m(-1)^r r!(m-r)!$ whenever $|s|=m$ with $r$ ones in the first half (and $0$ otherwise), yielding $924\times 6 = 5{,}544$ nonzero entries and extremal coefficient $+51{,}840$. On the three-state vacuum chain $(|0\rangle, A|0\rangle, A^2|0\rangle)$, exact contraction gives
+
+$$
+B := \|A|0\rangle\|^2 = 7\cdot 3\cdot 51{,}840^2 = 56{,}435{,}097{,}600,
+\qquad
+A^2|0\rangle = +B|32\rangle,
+$$
+
+so $H_{16} = -g(A + A^\dagger)$ (real $g \ne 0$) has chain eigenvalues $\{-|g|\sqrt{2B},\, 0,\, +|g|\sqrt{2B}\}$ and unique $G_6 \times \mathbb{Z}_4^X \times SU(2)_{\mathrm{spin}}$ singlet ground state $|\Psi_0\rangle = \tfrac12\bigl(|0\rangle + \sqrt{2}\,\operatorname{sgn}(g)\,v + |32\rangle\bigr)$ ($v = A|0\rangle/\sqrt{B}$). Across the remaining $2^{32}$ states, every occupation pattern carrying both a double and an empty slot is annihilated by both $A$ and $A^\dagger$, leaving an active subspace of dimension $2\cdot 3^{16} - 2^{16} = 86{,}027{,}906$. Each proper nonempty singly occupied subset $S$ forms an orthogonal pair $\mathcal{U}_S \oplus \mathcal{V}_S$ coupled by the signed coefficient flattening $F_S$, yielding $3{,}468{,}798$ nonzero eigenvalues in total and exact sector squared operator norms $\|A|_{\mathcal{H}_N}\|^2/B = (1,\, \tfrac12,\, \tfrac34,\, \tfrac12,\, 1,\, \tfrac12,\, \tfrac{7}{12},\, \tfrac{7}{18},\, \tfrac{7}{15})$ for $N=0,\dots,8$ (symmetric under $N \mapsto 16-N$, and zero for $N \ge 17$). Since every flattening satisfies the Frobenius ceiling $\|F_S\|_{\mathrm{op}} \le \|F_S\|_F = \sqrt{B}$, with equality attained **if and only if** $S$ is the full $12$-slot quark set or the full $4$-slot lepton set (giving two degenerate singlet first-excited states at $-|g|\sqrt{B}$), $H_{16}$ alone—with zero extra stabilizer terms—fixes the exact single-site spectral gap:
+
+$$
+H_{\mathrm{SMG}} = H_{16},
+\qquad
+\Delta E_{\mathrm{site}}
+\;=\;
+(\sqrt{2}-1)|g|\sqrt{B}
+\;=\;
+51{,}840\sqrt{21}(\sqrt{2}-1)|g|.
+$$
+
+Scope and accidental symmetries must be stated explicitly: this on-site Hamiltonian realizes spatial $SU(2)_{\mathrm{spin}} \times G_6 \times \mathbb{Z}_4^X$ (not yet a relativistic $3+1$D spacetime continuum) and additionally preserves accidental on-site charges $N_q \bmod 12$, $N_\ell \bmod 4$, $N \bmod 16$, $N_q - 3N_\ell$, and $B-L$; species-preserving wall hopping retains global $N_q \bmod 12, N_\ell \bmod 4$, whereas generic $U(32)$ links break them down to global $N \bmod 16$.
+
+2. **Volume-Uniform 3D Wall Gap in Fixed Unitary Gauge Backgrounds (ARGUED / OPEN).** On any finite graph of maximum degree $d \le 6$ (including arbitrary finite 3D cubic mirror walls) with $32$ modes per site and nearest-neighbor hopping $V = t\sum_e h_e$ through arbitrary frozen unitary links $U_{xy}$ ($h_{xy} = c_x^\dagger U_{xy} c_y + \mathrm{h.c.}$, exact edge norm $\|h_{xy}\| = 32$), Kirkwood–Thomas conjugation $e^C H e^{-C}$ by the commuting even excitation generator $C = \sum_M c_M a_M$ terminates identically after the fourth commutator (three creators on one side of an edge force site overlap). Marked-site counting yields the control polynomial $F(r) = \sum_{k=0}^4 \frac{(1+k/2)(4r)^k}{k!}$ ($F(1/4) = 97/24$, $F'(1/4) = 21$). Fixed-point contraction on the radius-$1/4$ ball combined with column Gershgorin estimates on the excited block proves a volume-uniform spectral gap across all fixed unitary backgrounds:
+
+$$
+\frac{|t|}{\Delta E_{\mathrm{site}}}
+\;\le\;
+\frac{1}{40\cdot 6\cdot 2^{32}\cdot 32}
+\;=\;
+\frac{1}{32{,}985{,}348{,}833{,}280}
+\quad\Longrightarrow\quad
+\operatorname{gap}(H_{\mathrm{wall}})
+\;\ge\;
+\frac{383}{480}\,\Delta E_{\mathrm{site}}.
+$$
+
+For symmetry-preserving links, nonzero overlap with the product vacuum $\Omega = \bigotimes_x |\Psi_0\rangle_x$ locks the unique finite-wall ground state into the same singlet sector; for general frozen links, the state transforms gauge-covariantly and extends smoothly along the gapped even local path in $t$ (infinite-lattice continuation requires specifying a compatible CAR spectral-flow setting and infinite frozen-link background). Incorporating dynamical gauge fields, controlling the rough four-dimensional link measure coupled to the target wall, and constructing the interacting chiral continuum limit remain open (OPEN).
+
+3. **The 15-Weyl Local Counterexample vs. the 4D Boundary Anomaly (ARGUED / NUM).** Without an additional half-filling ($N=15$) or particle–hole requirement, the universal on-site conjecture that the $30$-mode 15-Weyl Hilbert space admits no $G_6 \times \mathbb{Z}_4^X \times SU(2)_{\mathrm{spin}}$-invariant unique gapped ground state is false: with trivial vacuum lift, setting $X = i^N$ (satisfying the fermionic group law $X^2 = (-1)^N$) and $H_{15} = \mu N$ ($\mu > 0$) directly yields the unique singlet ground state $|0\rangle$ with gap $\mu$. Exact Weyl-character torus integration gives the joint $G_6 \times SU(2)_{\mathrm{spin}}$ singlet dimensions at even fillings $N = 0,2,\dots,30$ as
+
+$$
+(1,\, 0,\, 6,\, 14,\, 53,\, 92,\, 181,\, 233,\, 233,\, 181,\, 92,\, 53,\, 14,\, 6,\, 0,\, 1),
+$$
+
+while every odd filling has zero singlets by the spin center $(-1)^N$ (in particular, exact half filling $N=15$ admits no spin singlet, the fully filled $N=30$ state is an even-parity singlet with $X=-1$, and centering $X \mapsto i^5 X$ violates $X^2 = (-1)^N$ in the fixed-parity convention). This cleanly separates finite-site local algebra from the autonomous 4D $\mathrm{Spin}^{\mathbb{Z}_4}$ cobordism boundary obstruction of Section 7.3.3 ($15 \bmod 16$ per family, $45 \equiv 13 \bmod 16$ for three families).
 
 ::: {.problem #prob-ou-ch07-chiral-selection title="Open Horizon of Question 2: Selecting Three Generations and an Unpinned 4D Interacting Chiral Theory"}
 This chapter has established the torus-wide five-charge spectral gap ($\lambda_3 < 8.685 < 9.6 < \lambda_4$), the intrinsic site-variance min-cut $T = 9 + (1-\delta)^2$, the 5-step simplex three-species overlap kernel (smooth index $-3\operatorname{Pf}(C)$), the four-frame logarithmic gap-protection regime, and the strictly positive pure-weak $\Delta B = \Delta L = 3$ twelve-fermion vertex ($> 2^{-9472}$). By the monograph's first-principles standard, three fundamental doors remain open:
