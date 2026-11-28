@@ -174,7 +174,7 @@ For a transposition $s$, the two representatives in $G'$ are $(s,1)$ and $(s,3)$
 
 The parity of the square's index is therefore the same for every choice of representative in a given model. In the direct product, $\sigma\mapsto(\sigma,0)$ preserves ternary transport. In the pullback, once the representative of the identity class has been moved to the identity, the chosen representative of a transposition would have to square to the identity. Its square has odd index. Each model has thirty-six points in six reading classes, with identical readings and quotient transport.
 
-**Worked example. The two obstructions can occur independently.** Keep six reading classes of six points each, and let odd representatives act on the identity class by inversion. Write a point as $(k,i,j)$ with coordinates modulo $6,3,2$, respectively. The quotient coordinates $(i,j)$ represent $(123)^i(12)^j$. Choose $\alpha\in\{0,3\}$ and $\beta\in\{0,2,4\}$. With $m=i+(-1)^j i'$, the product is
+**Worked example. The two obstructions can occur independently.** Keep six reading classes of six points each, and let odd representatives act on the identity class by inversion. Write each factor using integer representatives $(k,i,j)$ with $0\le k<6$, $0\le i<3$, and $0\le j<2$. The quotient coordinates $(i,j)$ represent $(123)^i(12)^j$. Choose $\alpha\in\{0,3\}$ and $\beta\in\{0,2,4\}$. Compute $m=i+(-1)^j i'$ in the integers. Reduce the first coordinate of the following product modulo $6$.
 
 $$
 (k,i,j)(\ell,i',j')
