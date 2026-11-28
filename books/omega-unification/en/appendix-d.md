@@ -8,6 +8,16 @@ For a support of size $k$, forcing rank $k$ requires the $k(k-1)$ directed diffe
 
 **Seven-site and eleven-site supports.** A support with distinct nonzero directed differences is a modular Golomb ruler. Buratti and Stinson's classification gives every dimension $d\ge48$ for seven supported sites. A witness modulo $48$ is $\{0,1,3,15,20,38,42\}$. The eleven-site dimensions are $120$, $133$, and every $d\ge135$. The support $\{0,1,4,9,23,30,41,43,58,68,74\}$ modulo $120$ gives $110$ distinct nonzero differences, omitting exactly $12,24,\ldots,108$. [Buratti and Stinson, *New Results on Modular Golomb Rulers, Optical Orthogonal Codes and Related Structures* (2020), Theorem 2.3(5), (9), and Table 1](https://arxiv.org/abs/2007.01908v2)
 
+**Thirteen-site supports.** Rank thirteen can be forced in cyclic dimensions $168$, $183$, and every $d\ge193$. The Bose–Chowla construction modulo $168$ gives the support
+
+$$
+\{0,16,20,21,33,39,96,99,107,134,136,143,158\},
+$$
+
+with $156$ distinct directed differences, omitting exactly $14,28,\ldots,154$. Any first readout supported on exactly these thirteen sites, together with a uniform second readout, uniquely specifies a diagonal state of rank thirteen. Deleting one site from a fourteen-site Singer support gives a witness modulo $183$. There are explicit integer witnesses for $193$ through $212$. For $d\ge213$, use a thirteen-mark integer Golomb ruler of length $106$. Its positive differences are distinct and the sum of any two is at most $212$, so they remain distinct from the negative differences modulo $d$.
+
+Counting excludes $d<157$. Group-ring arguments and a computation modulo a prime square exclude $157$ through $159$. Exhaustive integer backtracking rules out the other dimensions from $160$ through $192$. Each new circular distance must be distinct and, in even dimension, avoid the half-circumference. A lower bound from the smallest unused distances limits the total length of the remaining gaps. [Witnesses, exclusion records, and enumeration source](https://github.com/the-omega-institute/trureturing-books/issues/1676#issuecomment-7234902039)
+
 ## D.2 Bounds from Subsets (Hand Derivation) {#sec-ou-appd-subsets}
 
 A subset with more collisions can tighten the bound. For nonempty $T\subseteq S$, let $m(T)$ count its distinct nonzero directed differences. Take an extreme point of the feasible set of rank $r$. Its range intersects the coordinate space on $T$ in dimension at least $r-(k-|T|)$. A nonzero invisible Hermitian perturbation on the intersection would violate extremality. Thus the same extreme point satisfies
