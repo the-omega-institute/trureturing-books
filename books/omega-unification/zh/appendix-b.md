@@ -116,6 +116,69 @@ $$
 这里使用的是同一中心的连续倒数幂（即预解式对 $z$ 求导所得的归一化射流），不是任意采样列表，也不是仅给出 [第十二章](ch12-shared-arithmetic-clock.md#sec-ch12) 若干标量钟读数就已知这些向量或整个 Gram 矩阵。可逆性没有给出统一的误差放大界，更没有控制无限谱尾项。独立 RH 谱路线仍需从算术或几何构造正性并识别完整零点谱；有限个窗口的检查不能代替对所有 $T$ 的控制。
 :::
 
+即使观测覆盖全部方向，正性也要检验完整的二次型。若其中一块已知正定，可以先让这部分系数自由调整，只保留剩余端口的最小读数；这个读数由 Schur 补给出，而不是某个端口单独的对角读数。
+
+::: {.theorem #thm-ou-appb-schur-attained-minimum title="正定内部块的 Schur 极小值" lean="D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"}
+设 $m,d\in\mathbb N$，$A\in\mathbb C^{m\times m}$ 为厄米矩阵，$B\in\mathbb C^{m\times d}$，$C\in\mathbb C^{d\times d}$ 为正定厄米矩阵。令
+
+$$
+H=\begin{pmatrix}A&B\\B^*&C\end{pmatrix},\qquad S=A-BC^{-1}B^*.
+$$
+
+对每个固定的 $x\in\mathbb C^m$，下列最小值实际达到：
+
+$$
+\min_{y\in\mathbb C^d}
+\begin{pmatrix}x\\y\end{pmatrix}^{\!*}
+H\begin{pmatrix}x\\y\end{pmatrix}=x^*Sx.
+$$
+:::
+
+::: proof
+正定性保证 $C$ 可逆，配方给出
+
+$$
+\begin{pmatrix}x\\y\end{pmatrix}^{\!*}H\begin{pmatrix}x\\y\end{pmatrix}
+=x^*Sx+(y+C^{-1}B^*x)^*C(y+C^{-1}B^*x).
+$$
+
+第二项非负，取 $y=-C^{-1}B^*x$ 即为零，故 $x^*Sx$ 是值域中实际达到的最小元。完整证明由 Lean 内核检查。
+:::
+
+由此可作手工推导（ARGUED）：在 $C\succ0$ 的前提下，$H\succeq0$ 恰等价于 $S\succeq0$。一向由配方直接得出；另一向在每个固定 $x$ 的极小点检验 $H$。因此正定背景不会掩盖经过消元的负残差，但检验残差需要保留跨块读数 $B$。
+
+::: {.example #ex-ou-appb-collective-schur-residual title="正定背景后的单个负残差"}
+以下矩阵代入与显式见证是手工推导（ARGUED）。取整数 $n\ge3$、实数 $1/(n-1)<a<1/(n-2)$，记 $\mathbf1_k=(1,\ldots,1)^T$，并把一个端口与其余 $n-1$ 个端口分块：
+
+$$
+\begin{aligned}
+H&=(1+a)I_n-a\mathbf1_n\mathbf1_n^*,\\
+A&=1,\qquad B=-a\mathbf1_{n-1}^*,\\
+C&=(1+a)I_{n-1}-a\mathbf1_{n-1}\mathbf1_{n-1}^*,\\
+p&=1-(n-2)a>0.
+\end{aligned}
+$$
+
+在 $\mathbf1_{n-1}$ 方向上，$C$ 的特征值为 $p$；在其正交补上为 $1+a>0$，故 $C\succ0$。于是 $C^{-1}\mathbf1_{n-1}=p^{-1}\mathbf1_{n-1}$，最后一个 Schur 残差为
+
+$$
+s=1-\frac{(n-1)a^2}{p}
+=\frac{(1+a)(1-(n-1)a)}{p}<0.
+$$
+
+把保留端口的系数固定为 $x=1$，极小点及其完整读数为
+
+$$
+\begin{aligned}
+y_{\min}&=\frac{a}{p}\mathbf1_{n-1},\qquad
+w=\begin{pmatrix}1\\y_{\min}\end{pmatrix},\\
+Hw&=\begin{pmatrix}s\\0\end{pmatrix},\qquad w^*Hw=s.
+\end{aligned}
+$$
+
+等式 $Hw=(s,0)^T$ 还说明，在 $H$ 所定义的型下，这个残差方向与整个内部块正交。取 $n=3,a=3/4$，即得 $p=1/4$、$w=(1,3,3)^T$ 与 $w^*Hw=-7/2$。两个内部端口的块已正定，逐个端口的对角读数也都是 $1$，但经过联合调整的一个残差已足以否定整体正性。这需要完整的跨端口 Gram 读数，不能从若干标量算术钟读数直接推出；矩阵是代数模型，不指定实际零点，也不构造独立的 RH 正性证明。若 $C$ 只有正半定性，上述逆矩阵与极小值论证不再直接适用。
+:::
+
 有限维可恢复性还留下一个观测问题：检出某个负方向，是否必须先准确重构指定的负方向？两点模型把这两种误差要求分开。
 
 ::: {.example #ex-ou-appb-optimal-negative-detection title="检测负方向与检验指定见证的精度分界"}
@@ -221,6 +284,52 @@ C=\begin{pmatrix}2&0\\0&1/2\end{pmatrix}.
 $$
 
 直接相乘得 $C^*JC=J$，而 $C^*C=\operatorname{diag}(4,1/4)\ne I$。向量 $w=(1,-1)$ 满足 $\langle w,Jw\rangle=-2$。这组矩阵只检验从 $J$-酉性推出普通酉性的逻辑，不声称来自实际的 $\zeta$ 零点。
+:::
+
+即使观测向量已经张成整个空间，检验哪些线性组合仍然重要。[@thm-ou-ch12-observation-inertia] 的右逆条件保证完整 Gram 矩阵保留惯性；只检验固定观测向量的两两主子矩阵，却可能遗漏必须联合所有端口才能看到的负方向。
+
+::: {.example #ex-ou-appb-collective-gram-negativity title="所有真主子矩阵正定，整体仍可不定"}
+以下为有限维手工推导（`ARGUED`）。先看三个端口：
+
+$$
+G_3=\begin{pmatrix}1&-3/4&-3/4\\-3/4&1&-3/4\\-3/4&-3/4&1\end{pmatrix}.
+$$
+
+每个二阶主子矩阵的特征值都是 $1/4,7/4$，严格为正。然而 $\mathbf1_3=(1,1,1)^T$ 满足 $G_3\mathbf1_3=-\mathbf1_3/2$，故 $\mathbf1_3^*G_3\mathbf1_3=-3/2<0$。三端口共同变化暴露了两两检验看不到的负方向。
+
+这种现象可发生在任意端口数。设整数 $n\ge3$，记 $\mathbf1_n=(1,\ldots,1)^T$，取实数 $a$ 满足
+
+$$
+\frac1{n-1}<a<\frac1{n-2},\qquad
+G_n=(1+a)I_n-a\mathbf1_n\mathbf1_n^*.
+$$
+
+对任意含 $m$ 个端口的非空主子矩阵，$1\le m\le n$，把向量分成 $\mathbf1_m$ 方向及其正交补，直接得到特征值
+
+$$
+1-(m-1)a\quad\text{（重数 }1\text{）},\qquad
+1+a\quad\text{（重数 }m-1\text{）}.
+$$
+
+因此每个非空真主子矩阵都正定，而整体恰有一个负特征值 $1-(n-1)a$。上述开区间也恰好是这两个性质同时成立的参数范围：全体端口的共同方向要求左侧严格不等式，$n-1$ 个端口的共同方向要求右侧严格不等式。
+
+它也能实现为一组张成整个空间的观测向量的实际不定 Gram 矩阵。令
+
+$$
+\begin{aligned}
+P&=\frac{\mathbf1_n\mathbf1_n^*}{n},&J&=I_n-2P,\\
+B&=\sqrt{1+a}\,(I_n-P)+\sqrt{(n-1)a-1}\,P.
+\end{aligned}
+$$
+
+由 $P=P^*=P^2$，有 $J=J^*$、$J^2=I_n$，且 $B$ 在两个正交子空间上的系数均严格为正，故可逆。以 $b_j=Be_j$ 为观测向量，在形式 $[x,y]_J=x^*Jy$ 下相乘即得
+
+$$
+(b_i^*Jb_j)_{ij}=B^*JB
+=(1+a)(I_n-P)-((n-1)a-1)P=G_n.
+$$
+
+所以缺失的并非源方向，而是联合端口的正性检验。这里的子矩阵只取固定观测向量的子列表，未检验它们的任意线性组合。对任意固定上限 $r\ge2$，取 $n=r+1$，便得到所有至多 $r$ 端口的主子矩阵正定而整体不定的例子；有限窗口的核正性须控制任意系数的完整二次型。这些是代数模型，不声称来自实际零点，也不改变第三章所引的外部 RH 事实。
 :::
 
 识别负方向还涉及读数精度：即使有限观测代数上可逆，两个支撑点靠近时，逆映射也可能放大误差。下面的模型把“恢复全部方向”与“可靠认证一个负方向”分开；它使用完整的半双线性 Gram 读数，而非[第十二章](ch12-shared-arithmetic-clock.md)的若干标量钟读数。

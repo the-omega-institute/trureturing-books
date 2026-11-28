@@ -199,4 +199,6 @@ Set $b=\arccos(1/6)/2=\arcsin\sqrt{5/12}$. On $[0,b]$, convexity gives $2R(\delt
 
 ## E.8.1.9.6 Scope of the Coefficients
 
-The width-$4$ tangent lower bound concerns the entire path-power family. A bound at a specified finite path length, including a stronger numerical lower bound at finite curvature, requires a witness for that length. The optimal uniform round coefficient for arbitrary clique size remains open. Further estimates beyond the scope of these results include the global bound $C_{\mathrm{Hilb}}^*<1+\sqrt2$, the bound $H_4<1.199724$ at clique size at most four, the bound $C_{\mathbb R^3}^{(6)}<\sqrt2$ at clique size at most six, and the global bound $C_{\mathrm{SU}(2)}^*\le3.439$.
+The width-$4$ tangent lower bound concerns the entire path-power family. A bound at a specified finite path length, including a stronger numerical lower bound at finite curvature, requires a witness for that length. The optimal uniform round coefficient for arbitrary clique size remains open. Further estimates beyond the scope of these results include the bound $H_4<1.199724$ at clique size at most four, the bound $C_{\mathbb R^3}^{(6)}<\sqrt2$ at clique size at most six, and the global bound $C_{\mathrm{SU}(2)}^*\le3.439$.
+
+The global Hilbert reconstruction bound for arbitrary finite chordal graphs and its finite-clique improvements are in [Appendix E.8.1.10](appendix-e-s08-s01-s10-hilbert-global-sub-jung.md#sec-appe-hilbert-global-sub-jung).

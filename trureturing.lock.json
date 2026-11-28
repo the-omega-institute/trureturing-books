@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "08c4ab6859286ebbfd9c7da5ae2a860fbf4b0b36",
-  "pinned_at": "2026-11-28T15:14:56Z",
+  "commit": "a3c645e8130df1b1bdc8485505efbb21265fe727",
+  "pinned_at": "2026-11-28T16:37:42Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -2652,6 +2652,45 @@
       "statement_id": "sha256:2b6ee1cc3ee0e169555107cb1806afb171e6d682d5bd03e26c089e27db5953d7",
       "line": 284,
       "signature": "theorem realL1_hilbert_banach_phase_reversal : sInf {C | RealL1CliqueUpper 4 C} = 1 ∧ 1 < hilbertCliqueCoefficient 4 ∧ hilbertCliqueCoefficient 5 < (3 / 2 : ℝ) ∧ (3 / 2 : ℝ) ≤ sInf {C | RealL1CliqueUpper 5 C} ∧ sInf {C | RealL1CliqueUpper 5 C} ≤ sInf {C | BanachCliqueUpper 5 C}",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/HilbertGlobalSubJung.SimpleGraph.IsChordal.exists_hilbert_gain_potential_clique_credit": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/HilbertGlobalSubJung",
+      "name": "SimpleGraph.IsChordal.exists_hilbert_gain_potential_clique_credit",
+      "kind": "theorem",
+      "statement_id": "sha256:a0b448f9fa2a44ee51c61df72dbdd7f1eb54044043093c7eab7b59beac53f27c",
+      "line": 904,
+      "signature": "theorem IsChordal.exists_hilbert_gain_potential_clique_credit (hG : G.IsChordal) (N : ℕ) (hN : 1 ≤ N) (hclique : ∀ S : Finset V, G.IsClique (S : Set V) → S.card ≤ N + 1) (g : V → V → E) (D : ℝ) (hD : 0 ≤ D) (hg : Skew g) (ht : ∀ i j k, Triangle G i j k → ‖holonomy g i j k‖ ≤ D) : (∃ p : V → E, ∀ i j, G.Adj i j → ‖g i j + p i - p j‖ ≤ Real.sqrt ((241361 / 100000 : ℝ) ^ 2 - 57 / (10 * (N : ℝ))) * D) ∧ Real.sqrt ((241361 / 100000 : ℝ) ^ 2 - 57 / (10 * (N : ℝ))) ≤ 241361 / 100000 - 59 / (50 * (N : ℝ))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/HilbertGlobalSubJung.SimpleGraph.IsChordal.exists_hilbert_gain_potential_retained_curl": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/HilbertGlobalSubJung",
+      "name": "SimpleGraph.IsChordal.exists_hilbert_gain_potential_retained_curl",
+      "kind": "theorem",
+      "statement_id": "sha256:a0b448f9fa2a44ee51c61df72dbdd7f1eb54044043093c7eab7b59beac53f27c",
+      "line": 924,
+      "signature": "theorem IsChordal.exists_hilbert_gain_potential_retained_curl (hG : G.IsChordal) (k : HilbertGlobalSubJungFinite.Cutoff) (hclique : ∀ W : Finset V, G.IsClique (W : Set V) → W.card ≤ k.parameters.N + 1) (g : V → V → E) (D : ℝ) (hD : 0 ≤ D) (hg : Skew g) (ht : ∀ i j l, Triangle G i j l → ‖holonomy g i j l‖ ≤ D) : ∃ p : V → E, ∀ i j, G.Adj i j → ‖g i j + p i - p j‖ ≤ k.parameters.R * D",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/HilbertGlobalSubJung.SimpleGraph.IsChordal.exists_hilbert_gain_potential_sub_jung": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/HilbertGlobalSubJung",
+      "name": "SimpleGraph.IsChordal.exists_hilbert_gain_potential_sub_jung",
+      "kind": "theorem",
+      "statement_id": "sha256:a0b448f9fa2a44ee51c61df72dbdd7f1eb54044043093c7eab7b59beac53f27c",
+      "line": 888,
+      "signature": "theorem IsChordal.exists_hilbert_gain_potential_sub_jung (hG : G.IsChordal) (g : V → V → E) (D : ℝ) (hD : 0 ≤ D) (hg : Skew g) (ht : ∀ i j k, Triangle G i j k → ‖holonomy g i j k‖ ≤ D) : (∃ p : V → E, ∀ i j, G.Adj i j → ‖g i j + p i - p j‖ ≤ (241361 / 100000) * D) ∧ ((241361 / 100000 : ℝ) < 2414 / 1000 ∧ (2414 / 1000 : ℝ) < 1 + Real.sqrt 2 ∧ (3 / 5000 : ℝ) < 1 + Real.sqrt 2 - 241361 / 100000)",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -6097,6 +6136,19 @@
       "line": 193,
       "signature": "theorem central_fejer_gaussian_limit {J : ℕ → Type*} [∀ n,Fintype (J n)] (g w : ∀ n,J n → ℝ) (hw : ∀ᶠ n in atTop, ∀ i j, 0≤w n i*w n j) (hW : ∀ᶠ n in atTop, ∑ j,w n j=1) (hM : ∀ᶠ n in atTop, 0<pairMoment (g n) (w n) 2) (ρ A : ℕ → ℝ) (hρ : Tendsto ρ atTop (𝓝 0)) (hA : Tendsto A atTop atTop) (hwin : ∀ᶠ n in atTop, A n^2*pairMoment (g n) (w n) 4 ≤ 6*(n:ℝ)*pairMoment (g n) (w n) 2^2) : let kernel"
     },
+    "D5/S3/Fourier/Asymptotics/PeriodicSublevelSampling.tendsto_weighted_sublevel_of_fourier": {
+      "module": "D5/S3/Fourier/Asymptotics/PeriodicSublevelSampling",
+      "name": "D5.S3.Fourier.Asymptotics.PeriodicSublevelSampling.tendsto_weighted_sublevel_of_fourier",
+      "kind": "theorem",
+      "statement_id": "sha256:fe5e50cf00543ad60c32effd64866347ae44372314327eb30f27165301d0e0f7",
+      "line": 75,
+      "signature": "theorem tendsto_weighted_sublevel_of_fourier {ι α β : Type*} [Fintype ι] (l : Filter α) (q : Plane) {F : Plane → Plane} (hF : Continuous F) (hperiod : ∀ (a : Fin 2 → ℤ) (x : Plane), F (latticeVector a + x) = F x) (z : ι → Plane) (hz : Function.Injective z) (hcell : ∀ i, z i ∈ openCell q) (hzero : ∀ x ∈ closedCell q, F x = 0 ↔ ∃ i, x = z i) (A : ι → Plane ≃L[ℝ] Plane) (hA : ∀ i, HasFDerivAt F (A i : Plane →L[ℝ] Plane) (z i)) (s : α → Finset β) (p : α → β → Plane) (w : α → β → ℝ) (hw : ∀ n, ∀ j ∈ s n, 0 ≤ w n j) (hw₁ : ∀ n, ∑ j ∈ s n, w n j = 1) (ε : α → ℝ) (hεpos : ∀ n, 0 < ε n) (hε : Tendsto ε",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
     "D5/S3/Fourier/Asymptotics/PeriodicSublevelSandwich.periodic_test_sandwich": {
       "module": "D5/S3/Fourier/Asymptotics/PeriodicSublevelSandwich",
       "name": "D5.S3.Fourier.Asymptotics.PeriodicSublevelSandwich.periodic_test_sandwich",
@@ -6117,19 +6169,6 @@
       "statement_id": "sha256:7967f58a7a14fb893bcae48114640339d644764c435483778402622547e231d1",
       "line": 23,
       "signature": "theorem smooth_local_ellipse_sandwich {f : Plane → Plane} {z : Plane} (A : Plane ≃L[ℝ] Plane) (hf : HasFDerivAt f (A : Plane →L[ℝ] Plane) z) (hz : f z = 0) {η ρ σ : ℝ} (hη : 0 < η) (hη1 : η < 1) (hρ : 0 < ρ) (hρ' : ρ < (1 + η)⁻¹) (hσ : (1 - η)⁻¹ < σ) : let determinant",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ]
-    },
-    "D5/S3/Fourier/Asymptotics/PlanarWindowSampling.compact_window_sampling": {
-      "module": "D5/S3/Fourier/Asymptotics/PlanarWindowSampling",
-      "name": "D5.S3.Fourier.Asymptotics.PlanarWindowSampling.compact_window_sampling",
-      "kind": "theorem",
-      "statement_id": "sha256:3a65dbd0081e0a5d9c83341a65266f271b1391a49bffc892cc7fea4a9fee44a5",
-      "line": 430,
-      "signature": "theorem compact_window_sampling {ι : Type*} (f : Plane → ℂ) (hf : HasCompactSupport f) (hs : ContDiff ℝ ∞ f) : ∃ K ≥ (0 : ℝ), ∀ (ε : ℝ), 0 < ε → ε ≤ 1 → ∀ (center : Plane) (s : Finset ι) (w : ι → ℝ) (p : ι → Plane) (J : ℕ) (c d : ℝ), 0 ≤ c → 0 ≤ d → 0 < J → (∀ i ∈ s, 0 ≤ w i) → (∑ i ∈ s, w i = 1) → (∀ m ≠ (0, 0), modeRadius m ≤ J → ‖∑ i ∈ s, (w i : ℂ) * character m (p i)‖ ≤ c + d * (modeRadius m : ℝ) ^ 2) → ‖(∑ i ∈ s, (w i : ℂ) * ∑' a : Fin 2 → ℤ, f (ε⁻¹ • (toLp 2 (fun j => (a j : ℝ)) + p i - center))) - (ε ^ 2 : ℝ) • (∫ x, f x)‖ ≤ 27 * K * c + (27 * K / ε ^ 2) * d + 2 * K / (ε ^ 4 * (J : ℝ) ^",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
