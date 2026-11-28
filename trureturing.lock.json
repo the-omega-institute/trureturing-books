@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "0af44e10cdd7b7349650de90b29862ed8b3a182d",
-  "pinned_at": "2026-11-28T09:17:11Z",
+  "commit": "d62fe655143e32365cbd5eb47a2a5498d5de3931",
+  "pinned_at": "2026-11-28T09:52:23Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -6829,6 +6829,175 @@
       "statement_id": "sha256:48b540216ce0c16cb4164f5c3666695c71cd35301c1eca2c2d24786906cdf8dd",
       "line": 443,
       "signature": "theorem bloch_ball_hyperbolic : (∃ Φ : {r : EuclideanSpace ℝ (Fin 3) // ‖r‖ < 1} ≃ HyperbolicThreeSpace, ∀ r s, Real.cosh (dist (Φ r) (Φ s)) = kleinCosh r s) ∧ (∀ r : EuclideanSpace ℝ (Fin 3), blochFilter 1 r = r) ∧ (∀ (g h : Matrix (Fin 2) (Fin 2) ℂ) (r : EuclideanSpace ℝ (Fin 3)), (Matrix.trace (g * blochMatrix 1 r * gᴴ)).re ≠ 0 → blochFilter h (blochFilter g r) = blochFilter (h * g) r) ∧ (∀ (g : Matrix (Fin 2) (Fin 2) ℂ) (r s : EuclideanSpace ℝ (Fin 3)), (Matrix.trace (g * blochMatrix 1 r * gᴴ)).re ≠ 0 → (Matrix.trace (g * blochMatrix 1 s * gᴴ)).re ≠ 0 → 1 - ⟪blochFilter g r, blochFilter g "
+    },
+    "D5/S3/Geometry/Lorentz/ADMHamiltonianGravity4D.admMetric_congruence_factorization": {
+      "module": "D5/S3/Geometry/Lorentz/ADMHamiltonianGravity4D",
+      "name": "D5.S3.Geometry.Lorentz.ADMHamiltonianGravity4D.admMetric_congruence_factorization",
+      "kind": "theorem",
+      "statement_id": "sha256:533865e1869d8546bb458089fdf26173783d4b80dda3b9c7c3da79393679fe73",
+      "line": 68,
+      "signature": "theorem admMetric_congruence_factorization (N : ℝ) (β : Fin 3 → ℝ) (γ : Mat3) : admMetric N β γ = (admShiftMatrix β)ᵀ * (fromBlocks (!![-(N ^ 2)] : Matrix (Fin 1) (Fin 1) ℝ) 0 0 γ).reindex finSumFinEquiv finSumFinEquiv * admShiftMatrix β",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/ADMHamiltonianGravity4D.admMetric_det_and_volume": {
+      "module": "D5/S3/Geometry/Lorentz/ADMHamiltonianGravity4D",
+      "name": "D5.S3.Geometry.Lorentz.ADMHamiltonianGravity4D.admMetric_det_and_volume",
+      "kind": "theorem",
+      "statement_id": "sha256:533865e1869d8546bb458089fdf26173783d4b80dda3b9c7c3da79393679fe73",
+      "line": 129,
+      "signature": "theorem admMetric_det_and_volume (N : ℝ) (β : Fin 3 → ℝ) (γ : Mat3) : (admMetric N β γ).det = -(N ^ 2) * γ.det ∧ (0 < N → 0 ≤ γ.det → Real.sqrt (-(admMetric N β γ).det) = N * Real.sqrt γ.det)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/ADMHamiltonianGravity4D.admMetric_mul_inv": {
+      "module": "D5/S3/Geometry/Lorentz/ADMHamiltonianGravity4D",
+      "name": "D5.S3.Geometry.Lorentz.ADMHamiltonianGravity4D.admMetric_mul_inv",
+      "kind": "theorem",
+      "statement_id": "sha256:533865e1869d8546bb458089fdf26173783d4b80dda3b9c7c3da79393679fe73",
+      "line": 105,
+      "signature": "theorem admMetric_mul_inv {N : ℝ} (hN : N ≠ 0) (β : Fin 3 → ℝ) {γ γInv : Mat3} (hRight : γ * γInv = 1) (hLeft : γInv * γ = 1) : admMetric N β γ * admInvMetric N β γInv = 1 ∧ admInvMetric N β γInv * admMetric N β γ = 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/ADMHamiltonianGravity4D.adm_hamiltonian_constraint_reproduces_friedmann": {
+      "module": "D5/S3/Geometry/Lorentz/ADMHamiltonianGravity4D",
+      "name": "D5.S3.Geometry.Lorentz.ADMHamiltonianGravity4D.adm_hamiltonian_constraint_reproduces_friedmann",
+      "kind": "theorem",
+      "statement_id": "sha256:533865e1869d8546bb458089fdf26173783d4b80dda3b9c7c3da79393679fe73",
+      "line": 388,
+      "signature": "theorem adm_hamiltonian_constraint_reproduces_friedmann {a : ℝ → ℝ} {t : ℝ} (ha : 0 < a t) (k Λ G ρ : ℝ) : let γInv : Mat3",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/ADMHamiltonianGravity4D.adm_legendre_transform_involution": {
+      "module": "D5/S3/Geometry/Lorentz/ADMHamiltonianGravity4D",
+      "name": "D5.S3.Geometry.Lorentz.ADMHamiltonianGravity4D.adm_legendre_transform_involution",
+      "kind": "theorem",
+      "statement_id": "sha256:533865e1869d8546bb458089fdf26173783d4b80dda3b9c7c3da79393679fe73",
+      "line": 297,
+      "signature": "theorem adm_legendre_transform_involution {sdetγ : ℝ} (hs : sdetγ ≠ 0) (K P : Mat3) : admExtrinsicFromMomentum sdetγ (admMomentum sdetγ K) = K ∧ admMomentum sdetγ (admExtrinsicFromMomentum sdetγ P) = P ∧ (admMomentum sdetγ K).trace = -2 * sdetγ * K.trace ∧ (K * K).trace - K.trace ^ 2 = (1 / sdetγ ^ 2) * dewittKinetic (admMomentum sdetγ K)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/ADMHamiltonianGravity4D.adm_lorentzian_signature": {
+      "module": "D5/S3/Geometry/Lorentz/ADMHamiltonianGravity4D",
+      "name": "D5.S3.Geometry.Lorentz.ADMHamiltonianGravity4D.adm_lorentzian_signature",
+      "kind": "theorem",
+      "statement_id": "sha256:533865e1869d8546bb458089fdf26173783d4b80dda3b9c7c3da79393679fe73",
+      "line": 229,
+      "signature": "theorem adm_lorentzian_signature {N : ℝ} (hN : 0 < N) (β : Fin 3 → ℝ) (γ : Mat3) (hSym : γᵀ = γ) (hγ : ∀ w : Fin 3 → ℝ, w ≠ 0 → 0 < w ⬝ᵥ (γ *ᵥ w)) : (∀ v : Fin 4 → ℝ, let w",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/ADMHamiltonianGravity4D.adm_unit_timelike_normal": {
+      "module": "D5/S3/Geometry/Lorentz/ADMHamiltonianGravity4D",
+      "name": "D5.S3.Geometry.Lorentz.ADMHamiltonianGravity4D.adm_unit_timelike_normal",
+      "kind": "theorem",
+      "statement_id": "sha256:533865e1869d8546bb458089fdf26173783d4b80dda3b9c7c3da79393679fe73",
+      "line": 199,
+      "signature": "theorem adm_unit_timelike_normal {N : ℝ} (hN : N ≠ 0) (β : Fin 3 → ℝ) (γ : Mat3) : nUp N β ⬝ᵥ (admMetric N β γ *ᵥ nUp N β) = -1 ∧ (∀ i : Fin 3, nUp N β ⬝ᵥ (admMetric N β γ *ᵥ eSpatial i) = 0) ∧ admMetric N β γ *ᵥ nUp N β = Fin.cons (-N) (fun _ => 0)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/ADMHamiltonianGravity4D.brill_lindquist_harmonic_positive_mass_and_binding_energy": {
+      "module": "D5/S3/Geometry/Lorentz/ADMHamiltonianGravity4D",
+      "name": "D5.S3.Geometry.Lorentz.ADMHamiltonianGravity4D.brill_lindquist_harmonic_positive_mass_and_binding_energy",
+      "kind": "theorem",
+      "statement_id": "sha256:533865e1869d8546bb458089fdf26173783d4b80dda3b9c7c3da79393679fe73",
+      "line": 589,
+      "signature": "theorem brill_lindquist_harmonic_positive_mass_and_binding_energy {N : ℕ} (m : Fin N → ℝ) (c : Fin N → Point) : (∀ x, (∀ a, x ≠ c a) → laplacian (blPsi m c) x = 0) ∧ (0 < N → (∀ a, 0 < m a) → 0 < blADMMass m) ∧ (∀ u, r3 u 0 = 1 → Tendsto (fun R : ℝ => -2 * R ^ 2 * (blPsi m c (R • u)) ^ 3 * deriv (fun s : ℝ => blPsi m c (s • u)) R) atTop (𝓝 (blADMMass m))) ∧ blADMMass m - ∑ a, blBareMass m c a = -(1 / 2 : ℝ) * ∑ a, ∑ b ∈ Finset.univ.erase a, (m a * m b) / r3 (c a) (c b) ∧ (2 ≤ N → (∀ a, 0 < m a) → Function.Injective c → blADMMass m < ∑ a, blBareMass m c a)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/ADMHamiltonianGravity4D.dewitt_supermetric_lorentzian_signature": {
+      "module": "D5/S3/Geometry/Lorentz/ADMHamiltonianGravity4D",
+      "name": "D5.S3.Geometry.Lorentz.ADMHamiltonianGravity4D.dewitt_supermetric_lorentzian_signature",
+      "kind": "theorem",
+      "statement_id": "sha256:533865e1869d8546bb458089fdf26173783d4b80dda3b9c7c3da79393679fe73",
+      "line": 342,
+      "signature": "theorem dewitt_supermetric_lorentzian_signature : (∀ P : Mat3, Pᵀ = P → let Ptf",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/ADMHamiltonianGravity4D.isotropic_schwarzschild_throat_and_inversion_isometry": {
+      "module": "D5/S3/Geometry/Lorentz/ADMHamiltonianGravity4D",
+      "name": "D5.S3.Geometry.Lorentz.ADMHamiltonianGravity4D.isotropic_schwarzschild_throat_and_inversion_isometry",
+      "kind": "theorem",
+      "statement_id": "sha256:533865e1869d8546bb458089fdf26173783d4b80dda3b9c7c3da79393679fe73",
+      "line": 467,
+      "signature": "theorem isotropic_schwarzschild_throat_and_inversion_isometry {M r : ℝ} (hM : 0 < M) (hr : 0 < r) : isotropicArealRadius M (isotropicInversion M r) = isotropicArealRadius M r ∧ (schwPsi M (isotropicInversion M r)) ^ 4 * (deriv (isotropicInversion M) r) ^ 2 = (schwPsi M r) ^ 4 ∧ isotropicInversion M (isotropicInversion M r) = r ∧ (isotropicInversion M r < M / 2 ↔ M / 2 < r) ∧ (r < M / 2 ↔ M / 2 < isotropicInversion M r) ∧ 2 * M ≤ isotropicArealRadius M r ∧ (isotropicArealRadius M r = 2 * M ↔ r = M / 2)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/ADMHamiltonianGravity4D.lichnerowicz_radial_harmonic_vanishing": {
+      "module": "D5/S3/Geometry/Lorentz/ADMHamiltonianGravity4D",
+      "name": "D5.S3.Geometry.Lorentz.ADMHamiltonianGravity4D.lichnerowicz_radial_harmonic_vanishing",
+      "kind": "theorem",
+      "statement_id": "sha256:533865e1869d8546bb458089fdf26173783d4b80dda3b9c7c3da79393679fe73",
+      "line": 436,
+      "signature": "theorem lichnerowicz_radial_harmonic_vanishing (M : ℝ) {r : ℝ} (hr : 0 < r) : radialLaplacian (schwPsi M) r = 0 ∧ conformalScalarCurvature (schwPsi M) r = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/ADMHamiltonianGravity4D.riemannian_penrose_inequality_schwarzschild_saturation": {
+      "module": "D5/S3/Geometry/Lorentz/ADMHamiltonianGravity4D",
+      "name": "D5.S3.Geometry.Lorentz.ADMHamiltonianGravity4D.riemannian_penrose_inequality_schwarzschild_saturation",
+      "kind": "theorem",
+      "statement_id": "sha256:533865e1869d8546bb458089fdf26173783d4b80dda3b9c7c3da79393679fe73",
+      "line": 632,
+      "signature": "theorem riemannian_penrose_inequality_schwarzschild_saturation {M : ℝ} (hM : 0 < M) : let A",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/ADMHamiltonianGravity4D.schwarzschild_adm_mass_limit_and_komar_invariance": {
+      "module": "D5/S3/Geometry/Lorentz/ADMHamiltonianGravity4D",
+      "name": "D5.S3.Geometry.Lorentz.ADMHamiltonianGravity4D.schwarzschild_adm_mass_limit_and_komar_invariance",
+      "kind": "theorem",
+      "statement_id": "sha256:533865e1869d8546bb458089fdf26173783d4b80dda3b9c7c3da79393679fe73",
+      "line": 510,
+      "signature": "theorem schwarzschild_adm_mass_limit_and_komar_invariance (M : ℝ) : (∀ R > 0, conformalADMMass (schwPsi M) R = M * (1 + M / (2 * R)) ^ 3) ∧ Tendsto (conformalADMMass (schwPsi M)) atTop (𝓝 M) ∧ (∀ R > 0, komarSchwarzschildMass M R = M)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Geometry/Lorentz/AdS4CFT3BulkBoundary4D.ads4_propagator_boundary_limit": {
       "module": "D5/S3/Geometry/Lorentz/AdS4CFT3BulkBoundary4D",
@@ -25339,6 +25508,188 @@
       "statement_id": "sha256:03b46bd509964254dd5d6af61504b0f9b7feb5d7f5554078e6751e87bf805c29",
       "line": 346,
       "signature": "theorem two_flavor_oscProb_formula (θ : ℝ) (mSq : Fin 2 → ℝ) (x : ℝ) : let Δ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/StrongCPAxionThetaVacuum4D.axion_quartic_self_coupling_exact_and_attractive": {
+      "module": "D5/S3/Quantum/Gauge/StrongCPAxionThetaVacuum4D",
+      "name": "D5.S3.Quantum.Gauge.StrongCPAxionThetaVacuum4D.axion_quartic_self_coupling_exact_and_attractive",
+      "kind": "theorem",
+      "statement_id": "sha256:0c5d2970b409b0750a49d769d09ddb333395525f414c636d93eca15384cb39ee",
+      "line": 483,
+      "signature": "theorem axion_quartic_self_coupling_exact_and_attractive {B₀ fπ mᵤ m_d fₐ : ℝ} (hB : 0 < B₀) (hf : 0 < fπ) (hu : 0 < mᵤ) (hd : 0 < m_d) (ha : 0 < fₐ) (θ₀ : ℝ) : let V",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/StrongCPAxionThetaVacuum4D.dashen_degenerate_cusp_and_spontaneous_cp_breaking": {
+      "module": "D5/S3/Quantum/Gauge/StrongCPAxionThetaVacuum4D",
+      "name": "D5.S3.Quantum.Gauge.StrongCPAxionThetaVacuum4D.dashen_degenerate_cusp_and_spontaneous_cp_breaking",
+      "kind": "theorem",
+      "statement_id": "sha256:0c5d2970b409b0750a49d769d09ddb333395525f414c636d93eca15384cb39ee",
+      "line": 303,
+      "signature": "theorem dashen_degenerate_cusp_and_spontaneous_cp_breaking {B₀ fπ m : ℝ} (hB : 0 < B₀) (hf : 0 < fπ) (hm : 0 < m) : (∀ θ, qcdThetaEnergy B₀ fπ m m θ = -2 * B₀ * fπ ^ 2 * m * |Real.cos (θ / 2)|) ∧ (∀ U : SU2, thetaChiralPotential B₀ fπ m m Real.pi U = 0) ∧ HasDerivWithinAt (qcdThetaEnergy B₀ fπ m m) (-B₀ * fπ ^ 2 * m) (Ici Real.pi) Real.pi ∧ HasDerivWithinAt (qcdThetaEnergy B₀ fπ m m) (B₀ * fπ ^ 2 * m) (Iic Real.pi) Real.pi ∧ (¬ DifferentiableAt ℝ (qcdThetaEnergy B₀ fπ m m) Real.pi) ∧ ∃ U₁ U₂ : SU2, (U₁ : CMat2) = Matrix.diagonal ![Complex.I, -Complex.I] ∧ (U₂ : CMat2) = Matrix.diagonal ![-Comp",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/StrongCPAxionThetaVacuum4D.domain_wall_vacuum_count_and_fa_invariance": {
+      "module": "D5/S3/Quantum/Gauge/StrongCPAxionThetaVacuum4D",
+      "name": "D5.S3.Quantum.Gauge.StrongCPAxionThetaVacuum4D.domain_wall_vacuum_count_and_fa_invariance",
+      "kind": "theorem",
+      "statement_id": "sha256:0c5d2970b409b0750a49d769d09ddb333395525f414c636d93eca15384cb39ee",
+      "line": 567,
+      "signature": "theorem domain_wall_vacuum_count_and_fa_invariance {B₀ fπ mᵤ m_d fPQ : ℝ} {d : ℕ} (hB : 0 < B₀) (hf : 0 < fπ) (hu : 0 < mᵤ) (hd : 0 < m_d) (hPQ : 0 < fPQ) (hD : 0 < d) (θ₀ : ℝ) : let V",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/StrongCPAxionThetaVacuum4D.instanton_dilute_gas_bridge": {
+      "module": "D5/S3/Quantum/Gauge/StrongCPAxionThetaVacuum4D",
+      "name": "D5.S3.Quantum.Gauge.StrongCPAxionThetaVacuum4D.instanton_dilute_gas_bridge",
+      "kind": "theorem",
+      "statement_id": "sha256:0c5d2970b409b0750a49d769d09ddb333395525f414c636d93eca15384cb39ee",
+      "line": 542,
+      "signature": "theorem instanton_dilute_gas_bridge {K g ρ : ℝ} (hK : 0 < K) (hg : 0 < g) (hρ : 0 < ρ) : let V",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/StrongCPAxionThetaVacuum4D.massless_quark_theta_unobservable": {
+      "module": "D5/S3/Quantum/Gauge/StrongCPAxionThetaVacuum4D",
+      "name": "D5.S3.Quantum.Gauge.StrongCPAxionThetaVacuum4D.massless_quark_theta_unobservable",
+      "kind": "theorem",
+      "statement_id": "sha256:0c5d2970b409b0750a49d769d09ddb333395525f414c636d93eca15384cb39ee",
+      "line": 196,
+      "signature": "theorem massless_quark_theta_unobservable {B₀ fπ m_d : ℝ} (hB : 0 < B₀) (hf : 0 < fπ) (hd : 0 < m_d) (θ : ℝ) : qcdThetaEnergy B₀ fπ 0 m_d θ = -B₀ * fπ ^ 2 * m_d ∧ ∃ U₀ : SU2, (U₀ : CMat2) = Matrix.diagonal ![massPhase (θ / 2), massPhase (-(θ / 2))] ∧ thetaChiralPotential B₀ fπ 0 m_d θ U₀ = -B₀ * fπ ^ 2 * m_d",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/StrongCPAxionThetaVacuum4D.nondegenerate_smooth_at_pi": {
+      "module": "D5/S3/Quantum/Gauge/StrongCPAxionThetaVacuum4D",
+      "name": "D5.S3.Quantum.Gauge.StrongCPAxionThetaVacuum4D.nondegenerate_smooth_at_pi",
+      "kind": "theorem",
+      "statement_id": "sha256:0c5d2970b409b0750a49d769d09ddb333395525f414c636d93eca15384cb39ee",
+      "line": 347,
+      "signature": "theorem nondegenerate_smooth_at_pi {B₀ fπ mᵤ m_d : ℝ} (hu : 0 < mᵤ) (hd : 0 < m_d) (hne : mᵤ ≠ m_d) : Differentiable ℝ (qcdThetaEnergy B₀ fπ mᵤ m_d) ∧ deriv (qcdThetaEnergy B₀ fπ mᵤ m_d) Real.pi = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/StrongCPAxionThetaVacuum4D.peccei_quinn_relaxation_and_axion_mass": {
+      "module": "D5/S3/Quantum/Gauge/StrongCPAxionThetaVacuum4D",
+      "name": "D5.S3.Quantum.Gauge.StrongCPAxionThetaVacuum4D.peccei_quinn_relaxation_and_axion_mass",
+      "kind": "theorem",
+      "statement_id": "sha256:0c5d2970b409b0750a49d769d09ddb333395525f414c636d93eca15384cb39ee",
+      "line": 423,
+      "signature": "theorem peccei_quinn_relaxation_and_axion_mass {B₀ fπ mᵤ m_d fₐ : ℝ} (hB : 0 < B₀) (hf : 0 < fπ) (hu : 0 < mᵤ) (hd : 0 < m_d) (ha : 0 < fₐ) (θ₀ : ℝ) : let V",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/StrongCPAxionThetaVacuum4D.qcdThetaEnergy_attained_on_diagonal_su2": {
+      "module": "D5/S3/Quantum/Gauge/StrongCPAxionThetaVacuum4D",
+      "name": "D5.S3.Quantum.Gauge.StrongCPAxionThetaVacuum4D.qcdThetaEnergy_attained_on_diagonal_su2",
+      "kind": "theorem",
+      "statement_id": "sha256:0c5d2970b409b0750a49d769d09ddb333395525f414c636d93eca15384cb39ee",
+      "line": 175,
+      "signature": "theorem qcdThetaEnergy_attained_on_diagonal_su2 {B₀ fπ mᵤ m_d θ : ℝ} (hB : 0 < B₀) (hf : 0 < fπ) (h : 0 < mᵤ ^ 2 + m_d ^ 2 + 2 * mᵤ * m_d * Real.cos θ) : let R",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/StrongCPAxionThetaVacuum4D.qcdThetaEnergy_periodic_and_even": {
+      "module": "D5/S3/Quantum/Gauge/StrongCPAxionThetaVacuum4D",
+      "name": "D5.S3.Quantum.Gauge.StrongCPAxionThetaVacuum4D.qcdThetaEnergy_periodic_and_even",
+      "kind": "theorem",
+      "statement_id": "sha256:0c5d2970b409b0750a49d769d09ddb333395525f414c636d93eca15384cb39ee",
+      "line": 239,
+      "signature": "theorem qcdThetaEnergy_periodic_and_even {B₀ fπ mᵤ m_d : ℝ} (hB : 0 < B₀) (hf : 0 < fπ) (hu : 0 < mᵤ) (hd : 0 < m_d) : Function.Periodic (qcdThetaEnergy B₀ fπ mᵤ m_d) (2 * Real.pi) ∧ (∀ θ, qcdThetaEnergy B₀ fπ mᵤ m_d (-θ) = qcdThetaEnergy B₀ fπ mᵤ m_d θ) ∧ (∀ θ, qcdThetaEnergy B₀ fπ mᵤ m_d θ ≤ qcdThetaEnergy B₀ fπ mᵤ m_d Real.pi) ∧ qcdThetaEnergy B₀ fπ mᵤ m_d Real.pi = -B₀ * fπ ^ 2 * |mᵤ - m_d|",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/StrongCPAxionThetaVacuum4D.qcd_topological_susceptibility_exact": {
+      "module": "D5/S3/Quantum/Gauge/StrongCPAxionThetaVacuum4D",
+      "name": "D5.S3.Quantum.Gauge.StrongCPAxionThetaVacuum4D.qcd_topological_susceptibility_exact",
+      "kind": "theorem",
+      "statement_id": "sha256:0c5d2970b409b0750a49d769d09ddb333395525f414c636d93eca15384cb39ee",
+      "line": 386,
+      "signature": "theorem qcd_topological_susceptibility_exact {fπ mᵤ m_d : ℝ} (hf : 0 < fπ) (hs : 0 < mᵤ + m_d) (B₀ : ℝ) : let V",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/StrongCPAxionThetaVacuum4D.thetaBar_chiral_rotation_invariant": {
+      "module": "D5/S3/Quantum/Gauge/StrongCPAxionThetaVacuum4D",
+      "name": "D5.S3.Quantum.Gauge.StrongCPAxionThetaVacuum4D.thetaBar_chiral_rotation_invariant",
+      "kind": "theorem",
+      "statement_id": "sha256:0c5d2970b409b0750a49d769d09ddb333395525f414c636d93eca15384cb39ee",
+      "line": 54,
+      "signature": "theorem thetaBar_chiral_rotation_invariant (θ argDetM αᵤ α_d φ α : ℝ) (M U : CMat2) : thetaBar (θ - (αᵤ + α_d)) (argDetM + (αᵤ + α_d)) = thetaBar θ argDetM ∧ (Matrix.diagonal ![massPhase αᵤ, massPhase α_d] * M).det = massPhase (αᵤ + α_d) * M.det ∧ (Matrix.diagonal ![massPhase φ, massPhase (-φ)] * U).det = U.det ∧ ((massPhase α • (1 : CMat2)) * U).det = massPhase (2 * α) * U.det ∧ thetaBar (θ - 2 * α) (argDetM + 2 * α) = thetaBar θ argDetM",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/StrongCPAxionThetaVacuum4D.thetaChiralPotential_ge_qcdThetaEnergy": {
+      "module": "D5/S3/Quantum/Gauge/StrongCPAxionThetaVacuum4D",
+      "name": "D5.S3.Quantum.Gauge.StrongCPAxionThetaVacuum4D.thetaChiralPotential_ge_qcdThetaEnergy",
+      "kind": "theorem",
+      "statement_id": "sha256:0c5d2970b409b0750a49d769d09ddb333395525f414c636d93eca15384cb39ee",
+      "line": 158,
+      "signature": "theorem thetaChiralPotential_ge_qcdThetaEnergy {B₀ fπ mᵤ m_d θ : ℝ} (hB : 0 < B₀) (hf : 0 < fπ) (U : SU2) : qcdThetaEnergy B₀ fπ mᵤ m_d θ ≤ thetaChiralPotential B₀ fπ mᵤ m_d θ U",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/StrongCPAxionThetaVacuum4D.thetaChiralPotential_zero_eq_chiralPotential": {
+      "module": "D5/S3/Quantum/Gauge/StrongCPAxionThetaVacuum4D",
+      "name": "D5.S3.Quantum.Gauge.StrongCPAxionThetaVacuum4D.thetaChiralPotential_zero_eq_chiralPotential",
+      "kind": "theorem",
+      "statement_id": "sha256:0c5d2970b409b0750a49d769d09ddb333395525f414c636d93eca15384cb39ee",
+      "line": 45,
+      "signature": "theorem thetaChiralPotential_zero_eq_chiralPotential (B₀ fπ mᵤ m_d : ℝ) (U : CMat2) : thetaChiralPotential B₀ fπ mᵤ m_d 0 U = chiralPotential B₀ fπ mᵤ m_d U",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/StrongCPAxionThetaVacuum4D.vafa_witten_cp_conserving_minimum": {
+      "module": "D5/S3/Quantum/Gauge/StrongCPAxionThetaVacuum4D",
+      "name": "D5.S3.Quantum.Gauge.StrongCPAxionThetaVacuum4D.vafa_witten_cp_conserving_minimum",
+      "kind": "theorem",
+      "statement_id": "sha256:0c5d2970b409b0750a49d769d09ddb333395525f414c636d93eca15384cb39ee",
+      "line": 212,
+      "signature": "theorem vafa_witten_cp_conserving_minimum {B₀ fπ mᵤ m_d : ℝ} (hB : 0 < B₀) (hf : 0 < fπ) (hu : 0 < mᵤ) (hd : 0 < m_d) (θ : ℝ) : qcdThetaEnergy B₀ fπ mᵤ m_d 0 ≤ qcdThetaEnergy B₀ fπ mᵤ m_d θ ∧ (qcdThetaEnergy B₀ fπ mᵤ m_d 0 = qcdThetaEnergy B₀ fπ mᵤ m_d θ ↔ Real.cos θ = 1)",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
