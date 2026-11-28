@@ -539,7 +539,7 @@ $$
    并且 $\langle\rho_j,\rho_k\rangle=(jk)^{-1/2}\frac1{2\pi}\int_{\mathbb R}w(t)(k/j)^{it}dt$，$w(t)=\lvert\zeta(\frac12+it)\rvert^2/(\frac14+t^2)$：除去两侧的对角因子 $\operatorname{diag}(k^{-1/2})$，$G_N$ 是以 $w\ge0$ 为符号、在点 $\log k$ 处取样的托普利茨形式。
 2. **余项永不为零。** $\rho_1,\dots,\rho_N$ 线性无关，$G_N$ 正定；对每个 $N$ 都有 $d_N>0$。
 3. **每一步的减量。** 作楚列斯基分解 $G_N=LL^{\top}$，令 $y=L^{-1}c$，则 $d_N^2=1-\sum_{k\le N}y_k^2$，$d_{N-1}^2-d_N^2=y_N^2=\langle\chi,e_N\rangle^2$，其中 $e_N$ 是 $\rho_N$ 在 $V_{N-1}$ 的正交补中的分量的单位方向，主元 $L_{NN}^2=\det G_N/\det G_{N-1}>0$ 是 $\rho_N$ 到 $V_{N-1}$ 的距离的平方。所以 $d_N$ 不增；它在第 $N$ 步严格下降当且仅当 $\langle\chi,e_N\rangle\ne0$，本书没有这一点的一般证明。
-4. **把有限误差读成排零区域。** 非零余项仍能排除一整片零点位置。固定 $N\ge0$ 与实数 $0<a\le\tfrac12$；若已严格认证
+4. **把有限误差读成排零区域。** 非零余项仍能排除一整片零点位置；任意正下限高度的精确矩形门槛与开边界的区别见 [@rem-appm-nyman-rectangle-infimum]。先在圆盘中看清机制：固定 $N\ge0$ 与实数 $0<a\le\tfrac12$；若已严格认证
 
    $$
    d_N^2\le U<a(1-a),
@@ -559,14 +559,84 @@ $$
 
    将给出 $a(1-a)\le d_N^2\le U<a(1-a)$，矛盾。实际认证只需选定任意有限系数 $b_k$，严格包住 $\lVert\chi-\sum_{k\le N}b_k\rho_k\rVert^2\le U$，因为距离平方不大于这个试探误差；无需先求精确最优投影。例如 $a=\tfrac14$ 时，门槛为 $U<\tfrac3{16}$，排除的是凯莱坐标中的闭环带 $\tfrac12\le\lvert(\rho-1)/\rho\rvert\le\tfrac{\sqrt3}{2}$。仅凭这道下界，门槛不能改成 $U\le a(1-a)$：在 $x=a$ 或 $x=1-a$ 处恰好取等号。当 $\operatorname{Re}\rho\downarrow\tfrac12$ 或 $\lvert\operatorname{Im}\rho\rvert\to\infty$ 时，$x\to1$，下界可趋于零；因此这个有限区域证书本身不给出覆盖整个右半带的统一误差门槛，也不提供达到给定门槛所需的 $N$。
 
+   对矩形区域，同一下界给出精确的统一门槛。固定 $N\ge0$、$0<\delta<\tfrac12$ 与 $T\ge1$；若严格认证
+
+   $$
+   d_N^2\le U<K(\delta,T),\qquad
+   K(\delta,T)=\frac{2\delta\bigl((\tfrac12-\delta)^2+T^2\bigr)}{\bigl((\tfrac12+\delta)^2+T^2\bigr)^2},
+   $$
+
+   则不存在满足 $\tfrac12+\delta\le\operatorname{Re}\rho<1$、$1\le\lvert\operatorname{Im}\rho\rvert\le T$ 的非平凡零点，包含所列闭边界。这仍是上述冻结下界的**手工推论，未另经 Lean 核验**。为证明门槛，写 $\rho=\beta+i\gamma$，令 $u=\beta-\tfrac12\in[\delta,\tfrac12)$、$y=1-x=2u/\bigl((\tfrac12+u)^2+\gamma^2\bigr)$ 与 $B(u)=(\tfrac12+u)^2+T^2$。因为 $\beta^2\le\gamma^2$，有 $x\ge\gamma^2/(\beta^2+\gamma^2)\ge\tfrac12$，故 $0<y\le\tfrac12$。又
+
+   $$
+   \begin{aligned}
+   uB(\delta)-\delta B(u)
+   &=(u-\delta)(T^2+\tfrac14-u\delta)\ge0,\\
+   y&\ge\frac{2u}{B(u)}\ge\frac{2\delta}{B(\delta)}=:y_0,\\
+   y(1-y)-y_0(1-y_0)&=(y-y_0)(1-y-y_0)\ge0.
+   \end{aligned}
+   $$
+
+   因而假想零点将迫使 $d_N^2\ge y(1-y)\ge y_0(1-y_0)=K(\delta,T)>U$，矛盾。几何下界在 $\beta=\tfrac12+\delta$、$\lvert\gamma\rvert=T$ 处取到 $K(\delta,T)$，所以这是该下界在指定区域上的精确最小值；此处的最优性只针对几何下界，不断言该位置存在零点。例如 $\delta=\tfrac14$、$T=2$ 时门槛为 $U<\tfrac{520}{5329}$，严格宽于 $U<\tfrac1{20}$；这只是条件算例，没有计算出新的试探误差 $U$。前述任意试探向量的认证上界仍然足够。
+
 **证明。** 第 1 款：由 [@prop-ch34-nyman-beurling-frozen-facts] 第 1 款（$\theta=1/k$）加上 $\int_1^\infty\frac{1}{kx}x^{s-1}dx=-\frac{1}{k(s-1)}$，得 $\int_0^\infty\rho_k(x)x^{s-1}dx=-k^{-s}\zeta(s)/s$（$0<\operatorname{Re}s<1$），又 $\int_0^1x^{s-1}dx=1/s$；对 $f=\chi-\sum_kc'_k\rho_k$ 在 $\operatorname{Re}s=\frac12$ 上用梅林—普朗歇尔公式，$\mathcal Mf=(1-\zeta A)/s$，$a_k=-c'_k$，$\lvert s\rvert^2=\frac14+t^2$。格拉姆矩阵元的公式是同一计算。第 2 款：若 $\sum_kc_k\rho_k=0$，则 $\zeta(s)\sum_kc_kk^{-s}=0$ 在临界线上几乎处处成立；$\zeta$ 在线上的零点孤立，所以这个狄利克雷多项式在线上恒为零，它是整函数，于是恒为零，令 $\operatorname{Re}s\to+\infty$ 逐个得 $c_k=0$。$V_N$ 有限维，故是闭的；$d_N=0$ 将给出 $\chi\in V_N$，即 $\zeta A=1$ 在临界线上几乎处处成立，由唯一性在 $\mathbb C\setminus\{1\}$ 上成立，但 $\zeta(-2)=0$ 而 $A(-2)$ 有限，矛盾。第 3 款是格拉姆—施密特正交化：$\chi$ 在 $V_N$ 上的投影等于它在 $V_{N-1}$ 上的投影加上 $\langle\chi,e_N\rangle e_N$。$\square$
 
 **它说了什么，没说什么。** [@prop-ch34-nyman-beurling-frozen-facts] 第 4 款是 Nyman–Beurling 判据中“容易的方向”写出了常数。写 $\rho=\beta+i\gamma$，由 $\lvert\rho-1\rvert^2+2\beta-1=\lvert\rho\rvert^2$，下界等于 $(2\beta-1)\lvert1-\rho\rvert^2/\lvert\rho\rvert^4$，小于 $1/\lvert\rho\rvert^2<1/\gamma^2$。由 Platt–Trudgian（见 [@rem-ch34-radial-lock-pair-disks]），离线零点都有 $\lvert\gamma\rvert>3\cdot10^{12}$，所以任何这样的下界都小于 $(3\cdot10^{12})^{-2}<1.12\times10^{-25}$，而 [@ex-ch34-nyman-beurling-numbers] 中的 $d_{300}^2\approx8.0\times10^{-3}$ 比它大 $10^{22}$ 倍以上：有限个 $d_N$ 看不见假想的离线零点。这给出与 Li 曲率的共同圆盘坐标：$z(s)=1-1/s$ 把 $\operatorname{Re}s>1/2$ 映入单位圆盘，且 $z(1-\bar\rho)=1/\overline{z(\rho)}$（手工代数推导）。同一假想离线零点否定 RH，因而所引[典范 Li 曲率正性失败定理](lean:D5/S3/Weil/Probability/CanonicalLiCurvatureZeroFree.not_rh_forces_canonical_curvature_failure) 保证存在某个有限阶 $T_N(c^{\mathrm{Li}})$ 不半正定；它是埃尔米特矩阵，故有负特征值（有限维线性代数的手工推论）。这一步不需要另行假设零点和表示，也没有给出检测阶数。更强的负惯性计数见 [@rem-ch34-li-toeplitz-negative-index]。相反，Nyman 的 $G_N$ 无条件正定，同一离线零点只迫使所有 $d_N^2$ 留在同一正下界 $r^2(1-r^2)$ 以上；其障碍是逼近误差不能趋零。共同坐标没有给出两个有限矩阵之间的恒等式，也不能把有限次成功检验升级为全称结论。J.-F. Burnol（*Adv. Math.* **170**, 56–70, 2002，定理 2.1 与注 2.2）在单位圆上给出了对应的多项式模型：根全在圆上时距离平方按 $\sum m^2/N$ 趋于零，有根在开圆盘内时距离有正的下界；上面的第 4 款是后者在半平面上的对应。
 
+**把有限误差换成有限高度（手工推论）。** 上述数值尺度的局限仍允许一个有限区域证书。固定 $N\ge0$、$0<\delta<\tfrac12$ 与 $T\ge1$。若有严格认证的上界
+
+$$
+d_N^2\le U<\frac{\delta}{1+T^2},
+$$
+
+则不存在满足 $\tfrac12+\delta\le\operatorname{Re}\rho<1$ 且 $1\le\lvert\operatorname{Im}\rho\rvert\le T$ 的非平凡零点。为证此事，设 $\rho=\beta+i\gamma$ 是这样的零点，记 $x=r^2$。由 $\beta<1$ 与 $\gamma^2\ge1$，有 $\beta^2+\gamma^2\le2\gamma^2$，故
+
+$$
+\begin{aligned}
+x&=\frac{(1-\beta)^2+\gamma^2}{\beta^2+\gamma^2}\ge\frac12,\\
+1-x&=\frac{2\beta-1}{\beta^2+\gamma^2}\ge\frac{2\delta}{1+T^2},\\
+d_N^2&\ge x(1-x)\ge\frac{\delta}{1+T^2}>U,
+\end{aligned}
+$$
+
+与上界矛盾。最后一行使用 [@prop-ch34-nyman-beurling-frozen-facts] 第 4 款；上述有限高度组合步骤是手工推论，未另经 Lean 核验。任意 $v\in V_N$ 的严格误差上界 $\lVert\chi-v\rVert^2\le U$ 都足够，因为 $d_N^2\le\lVert\chi-v\rVert^2$，不必求出最优投影。该证书包含 $\operatorname{Re}\rho=\tfrac12+\delta$ 与 $\lvert\operatorname{Im}\rho\rvert=1,T$ 的边界。例如 $\delta=\tfrac14$、$T=2$ 时，门槛为 $U<\tfrac1{20}$；这是条件算例，没有计算出新的 $U$。高度下限 $1$ 用于保证 $x\ge\tfrac12$；固定 $U>0$ 时，条件也只覆盖满足 $T^2<\delta/U-1$ 的高度。逼近临界线或令高度趋于无穷时，门槛趋于零，因而一个有限误差证书本身不推出 RH。
+
 **文献结果，未在本书形式化。** 无条件的下界 $\liminf_N d_N^2\log N\ge\sum_{\operatorname{Re}\rho=1/2}m_\rho^2/\lvert\rho\rvert^2$ 与常数 $2+\gamma-\log4\pi$ 的条件见 [@rem-ch34-arithmetic-pivot-literature] 与 [@rem-ch34-burnol-nbb-mollifier-literature]。结合外部已验证的 [@conj-riemann-hypothesis] 与 Báez-Duarte 判据，如今无条件成立 $d_N\to0$，且上述下界遍历全体非平凡零点给出 $\liminf_N d_N^2\log N\ge\sum_\rho m_\rho^2/\lvert\rho\rvert^2\ge2+\gamma-\log4\pi$（等号取到当且仅当零点全为单零点）。然而 S. Bettin, J. B. Conrey, D. W. Farmer（*Proc. Steklov Inst. Math.* **280**, 30–36, 2013，DOI [10.1134/S0081543813030036](https://doi.org/10.1134/S0081543813030036)，定理 1）用以给出上界渐近 $(2+\gamma-\log4\pi)/\log N$ 的第二条假设——存在 $\delta>0$ 使 $\sum_{\lvert\operatorname{Im}\rho\rvert\le T}\lvert\zeta'(\rho)\rvert^{-2}\ll T^{3/2-\delta}$（预设零点全为单零点）——并不由黎曼猜想推出，因此精确渐近律 $d_N^2\sim(2+\gamma-\log4\pi)/\log N$ 与单零点猜想依然保持开放（`OPEN`）。
 :::
 
-格拉姆矩阵元有闭式，一次楚列斯基分解就同时给出全部 $d_N$，并且可以在球算术中严格包住。
+格拉姆矩阵元有闭式，一次楚列斯基分解就同时给出全部 $d_N$，并且可以在球算术中严格包住。若只需排零门槛所用的上界，还可以绕开矩阵逆的误差传播，直接使用以下试探证书。
+
+::: {.remark #rem-ch34-nyman-trial-error-certificate title="有理包围给出的 Nyman 试探误差证书（手工推导）"}
+要取得 [@rem-ch34-nyman-beurling-remainder] 第 4 款所需的上界，可以直接检验试探残差。固定 $N\ge1$ 与 $q\in\mathbb Q^N$，令 $G=G_N$。这些函数均为实值，故 $G,c$ 为实矩阵与实向量。设有理数据 $\widehat G,\widehat c$ 与非负有理误差 $E_{jk},\eta_j$ 严格包住真实积分：对所有 $1\le j,k\le N$，
+
+$$
+\lvert c_j-\widehat c_j\rvert\le\eta_j,\qquad
+\lvert G_{jk}-\widehat G_{jk}\rvert\le E_{jk}.
+$$
+
+记 $\lvert q\rvert=(\lvert q_j\rvert)_j$，则以下是完整的有理误差证书：
+
+$$
+\begin{aligned}
+\widehat R(q)&=1-2q^{\top}\widehat c+q^{\top}\widehat Gq,\\
+P(q)&=2\lvert q\rvert^{\top}\eta+\lvert q\rvert^{\top}E\lvert q\rvert,\\
+R(q)&:=\Bigl\lVert\chi-\sum_{k\le N}q_k\rho_k\Bigr\rVert^2,\\
+0\le d_N^2&\le R(q)\le U(q):=\widehat R(q)+P(q).
+\end{aligned}
+$$
+
+证明只需展开平方：$\lVert\chi\rVert^2=1$ 给出 $R(q)=1-2q^{\top}c+q^{\top}Gq$；逐项取绝对值即得 $\lvert R(q)-\widehat R(q)\rvert\le2\sum_j\lvert q_j\rvert\eta_j+\sum_{j,k}\lvert q_jq_k\rvert E_{jk}=P(q)$。若统一取 $\eta_j=\varepsilon_c$、$E_{jk}=\varepsilon_G$，则
+
+$$
+\begin{aligned}
+U(q)&=1-2q^{\top}\widehat c+q^{\top}\widehat Gq\\
+&\quad+2\varepsilon_c\lVert q\rVert_1+\varepsilon_G\lVert q\rVert_1^2,\qquad
+\lVert q\rVert_1=\sum_j\lvert q_j\rvert.
+\end{aligned}
+$$
+
+数值求解器可用来寻找候选系数，再舍入为固定的有理向量 $q$；上述展开检验的是舍入后的向量本身。无需认证 $\widehat G^{-1}$，也无需假设 $\widehat G$ 正定。只要积分包围已严格成立，计算 $U(q)$ 及其与上述排零门槛的比较便全是有限有理运算；仅有浮点近似则不足以提供这些包围。上述排零证书可直接取 $U=U(q)$。新误差传播公式是手工推导，未另经 Lean 核验，也没有计算出新的 Nyman 积分包围。
+:::
 
 ::: {.example #ex-ch34-nyman-beurling-numbers title="N ≤ 300 的 Nyman–Beurling 距离（文献结果、计算机辅助验证与数值）"}
 **文献结果，未在本书形式化。** 对互素的 $h,k$（V. I. Vasyunin，*Algebra i Analiz* **7**(3), 118–135, 1995；这里依据 L. Báez-Duarte, M. Balazard, B. Landreau, E. Saias，*Ramanujan J.* **9**, 215–240, 2005，DOI [10.1007/s11139-005-0834-4](https://doi.org/10.1007/s11139-005-0834-4)，其工作稿 [arXiv:math/0306251](https://arxiv.org/abs/math/0306251) 命题 89，经 $\langle\rho_h,\rho_k\rangle=A(h/k)/h$ 换写）：
