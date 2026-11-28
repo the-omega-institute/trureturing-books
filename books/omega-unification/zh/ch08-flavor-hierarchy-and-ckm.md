@@ -337,6 +337,16 @@ $$
 
 例如在标准正交基 $(e_0,e_1,e_2)$ 中取 $\mu=a=b=1$、$v=c=e_1$、$s=(e_1+i e_2)/\sqrt2$。最优首阶系数为 $3/2$。若规定一条轮换本征线是顶底平面的法线 $e_2$，最小首阶系数升至 $5\sqrt6/8>3/2$。允许两条轻轮换线重新取向，才可达到真实最小值。[全局推导、取优基与矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/1928#issuecomment-7238762769)
 
+**两条重线趋于正交时（手工推导）。** 在顶底平面内将下型参考质量基整体转过 $\mu\varepsilon$，使下型重线朝上型重线靠近，其中 $\mu>0$。两部门的秩一轻块除去 $\varepsilon$ 后有界，其非对角元 $C,S$ 的模有正下界。记 $q=|C|^2$，将矩阵的非对角元模平方按每对指标计一次，求和后除以 $\varepsilon^2$，作为平方成本。精确端点余量是 $q-E_B(I)$，其中 $E_B(I)$ 是下型在两条参考重线及其法线组成的正交基中的平方成本。设上型轻块的对角差为 $\ell\varepsilon^{3/2}$，其中 $|\ell|$ 有正下界且有界，令 $L=|\ell|\sqrt q$。记 $D_{\mathrm{plane}}$ 为固定法线时的最小破缺，则余量恰为零时有
+
+$$
+D_{\mathrm{plane}}-D_*=
+\frac{\sqrt6}{2\sqrt q}\,\frac32 L(2\mu^2 L)^{1/3}\varepsilon^{13/3}
++O(\varepsilon^{9/2}).
+$$
+
+轻块转动可沿降低上型成本的复相位取向。这个线性收益伴随下型成本的二次上升，需要平面分角补偿，因而给上型增加四次代价。两项平衡时，法线转角与 $\varepsilon^{11/6}$ 同阶。即使端点余量恰为零，固定法线仍会高估最小破缺。对有界实数 $k$，余量为 $k\varepsilon^{5/3}$ 时，两侧的破缺差也与 $\varepsilon^{13/3}$ 同阶。[一致系数、任意复基下界与复算](https://github.com/the-omega-institute/trureturing-books/issues/2051#issuecomment-7239517945)
+
 在 $1\,\mathrm{TeV}$ 的参考输入表 2 中，$y_c/y_t\le0.00316/0.8573$，$y_s/y_b\le0.000271/0.01392$，因此可取 $g=0.9996$。沿用上面的保守混合输入，$|V_{tb}|>0.98$ 使 $d=\theta$，而 $\sin\theta\ge |V_{cb}|>0.035$ 使破缺严格大于 $0.0428$。用表 2 的边际区间构成输入盒时，仍有 $d=\theta$。由 $|V_{tb}|=\cos\theta_{23}\cos\theta_{13}$，$\sin^2\theta$ 随两个混合角分别增大。代入下端点 $\theta_{23}=0.04233$、$\theta_{13}=0.00369$，得破缺严格大于 $0.0520$。[参考输入表 2](https://arxiv.org/pdf/2510.01312v2#page=14) · [CKM 标准参数化，式 (12.3)](https://pdg.lbl.gov/2024/reviews/rpp2024-rev-ckm-matrix.pdf#page=1)
 :::
 

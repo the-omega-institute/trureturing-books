@@ -338,6 +338,16 @@ The rotation eigenline near $e_0$ absorbs the displacement between the heavy mas
 
 For example, in the standard orthonormal basis $(e_0,e_1,e_2)$ take $\mu=a=b=1$, $v=c=e_1$, and $s=(e_1+i e_2)/\sqrt2$. The optimal leading coefficient is $3/2$. Requiring one rotation eigenline to be the normal $e_2$ to the top–bottom plane raises the optimal coefficient to $5\sqrt6/8>3/2$. Reorienting the two light rotation eigenlines attains the true minimum. [Global derivation, optimizing bases, and matrix calculation](https://github.com/the-omega-institute/trureturing-books/issues/1928#issuecomment-7238762769)
 
+**As the heavy lines approach orthogonality (hand derivation).** Rotate the entire down-type reference mass basis in the top–bottom plane by $\mu\varepsilon$, with $\mu>0$, so its heavy line approaches the up-type heavy line. After factoring out $\varepsilon$, the two rank-one light blocks are bounded and the moduli of their off-diagonal entries $C,S$ are bounded away from zero. Write $q=|C|^2$ and define the squared cost as the sum of squared off-diagonal moduli divided by $\varepsilon^2$, with each pair of indices counted once. The exact endpoint slack is $q-E_B(I)$, where $E_B(I)$ is the down-type squared cost in the orthonormal basis formed by the two reference heavy lines and their normal. Suppose the up-type light diagonals differ by $\ell\varepsilon^{3/2}$, with $|\ell|$ bounded above and away from zero, and set $L=|\ell|\sqrt q$. Write $D_{\mathrm{plane}}$ for the minimum defect with the normal fixed. At exactly zero slack,
+
+$$
+D_{\mathrm{plane}}-D_*=
+\frac{\sqrt6}{2\sqrt q}\,\frac32 L(2\mu^2 L)^{1/3}\varepsilon^{13/3}
++O(\varepsilon^{9/2}).
+$$
+
+The light-block rotation can take the complex phase that lowers the up-type cost. This linear gain comes with a quadratic rise in the down-type cost. An in-plane offset compensates for that rise and produces a quartic cost in the up sector. These terms balance at a normal tilt of order $\varepsilon^{11/6}$. Even at exactly zero endpoint slack, fixing the normal overestimates the minimum defect. For bounded real $k$, slack of $k\varepsilon^{5/3}$ gives a defect gap of order $\varepsilon^{13/3}$ on both sides. [Uniform coefficient, lower bound over complex bases, and numerical replay](https://github.com/the-omega-institute/trureturing-books/issues/2051#issuecomment-7239517945)
+
 Table 2 at $1\,\mathrm{TeV}$ gives $y_c/y_t\le0.00316/0.8573$ and $y_s/y_b\le0.000271/0.01392$, so we can take $g=0.9996$. With the conservative mixing inputs above, $|V_{tb}|>0.98$ gives $d=\theta$, while $\sin\theta\ge |V_{cb}|>0.035$ forces a defect strictly above $0.0428$. Using the marginal intervals in Table 2 as an input box still gives $d=\theta$. Since $|V_{tb}|=\cos\theta_{23}\cos\theta_{13}$, $\sin^2\theta$ increases with each mixing angle. Substituting the lower endpoints $\theta_{23}=0.04233$ and $\theta_{13}=0.00369$ gives a defect strictly above $0.0520$. [Reference inputs, Table 2](https://arxiv.org/pdf/2510.01312v2#page=14) · [Standard CKM parametrization, Eq. (12.3)](https://pdg.lbl.gov/2024/reviews/rpp2024-rev-ckm-matrix.pdf#page=1)
 :::
 
