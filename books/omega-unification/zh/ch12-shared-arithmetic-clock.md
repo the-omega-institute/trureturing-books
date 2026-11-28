@@ -253,17 +253,23 @@ $$
 
 对 $j\ge0$ 求和得到 $O(M^{-1/2}(1+\log M)^2)$，再对二倍频层求和仍有界。两侧三角多项式给出同一个主项 $\mu(W)N(T)$，其中常数项的逼近损失为 $O(N(T)/K)=O(T)$。用总零点计数的主项即得所述窗口余项。代入上文的分部求和，得到 $D_H=O(1/\log H)$，因而任意共同钟核 $f_v(s)=(1+v^2s^2)^{-1}$ 的读数误差至多为 $O(1/\log H)\,v^2/(1+v^2)$，其中隐含常数可对 $v$ 统一。
 
-**无条件的固定哈尔窗余项（`ARGUED`）。** 用带限多项式平滑窗指示函数，把零点实部造成的误差集中到窗边界附近。令 $L=\log T$，平滑尺度为 $1/n$，其中 $n=\lfloor\kappa L/\log L\rfloor$，$\kappa>0$ 充分小。取一个非负带限核，对宽 $1/n$ 的边界邻域作卷积，得到 $0\le B\le1$、$\int B=O(1/n)$ 的边界多项式。再用衰减更快的带限核平滑窗指示函数。所得平滑函数加减适当常数倍的 $B$ 后，给出夹逼多项式 $P^\pm$。两种核都可用平移相加的正弦商偶次幂构造，次数为 $O(n)$。沿相位速度 $b=a/(2\pi)$ 作大小 $O(1/n)$ 的虚移，$B$ 与 $P^\pm$ 的二阶导数都由 $O(n^2B)$ 控制，其中 $B$ 取在实环面上。对平滑后的指示函数，这一局部界来自在卷积中扣去当前位置的指示值，留下的积分只取自足以触及边界的位移。[核的构造与局部导数界](https://github.com/the-omega-institute/trureturing-books/issues/1637#issuecomment-7233283092)
+**固定哈尔窗的无条件线性余项（`ARGUED`）。** 令 $L=\log T$，取 $n=\lfloor\kappa L\rfloor$，其中 $\kappa>0$ 固定且充分小。把宽 $1/n$ 的边界邻域与非负带限核卷积，得到 $0\le B\le1$、$\int B=O(1/n)$ 的边界多项式。用衰减更快的核平滑窗指标，再加减常数倍的 $B$，给出夹逼多项式 $P^\pm$。在相位速度 $b=a/(2\pi)$ 方向作复移时，三个多项式的二阶导数由 $O(n^2e^{Cn|y|}B)$ 控制，其中 $y$ 是虚移量，$B$ 取在实环面上。平滑窗的导数估计来自卷积中扣去实点的窗指标，只保留足以触及边界的位移。[边界管与带限核的构造](https://github.com/the-omega-institute/trureturing-books/issues/1637#issuecomment-7233283092)
 
-上述多项式仍满足素数幂分组所用的二倍频层系数界。在 $\gamma-i(\beta-1/2)$ 求值时，正频率给出带实部的陆道和，负频率由零点对称性与共轭处理。对每个多项式，该复移位和等于 $N(T)$ 乘其环面均值，加上 $O(T)$。选取充分大的固定常数 $C$，令 $v_0=C\log L/L$。Selberg 的一致密度界与多项式在虚方向上的指数增长界一起表明，$|\beta-\tfrac12|>v_0$ 的零点在换和中总共只造成 $o(T)$ 的误差。对其余同高的对称零点配对，一阶项抵消。取充分小的 $\kappa$ 后，二阶余项之和至多为 $\tfrac12\sum_{0<\gamma\le T}B(b\gamma)$。先对 $B$ 自身应用换和并移项，得到 $\sum B(b\gamma)=O(N(T)/n+T)$。再对 $P^\pm$ 应用同一估计，夹住实轴上的窗口计数。[零点密度界，式 (3)](https://arxiv.org/abs/1910.08274v2)
-
-因此
+这个带宽需要在边界管内计数偏离临界线的零点。对每个高度区间 $[X,2X]$，选定一个短 Dirichlet 多项式 $M$，使 $\zeta M$ 的最早一段 Dirichlet 系数除常数项外均为零。先估计 $|\zeta M-1|^2$ 的通常均值。把钟相位的边界权乘进去时，光滑乘积近似函数方程把需要估计的非零钟频化为与既约有理数对数的比较。Baker 的代数系数对数线性型界排除低高度近频项。其余项按分子、分母的大小分组，由有理数间距控制。最后用带边界权的 Green 恒等式把均方界传给零点计数，得到
 
 $$
-A_W(T)=\mu(W)N(T)+O(T\log\log T).
+\sum_{0<\gamma\le T,\,\lvert\beta-1/2\rvert\ge u} B(b\gamma)\ll T e^{-c_1uL}\qquad (u\ge 2/L)
 $$
 
-对逆平方尾分部求和，$S_W(x)$ 的误差为 $O(\log\log x/x)$。归一时，$s\log\log(H/s)=O(\log\log H)$ 对 $0<s\le1$ 一致，故 $D_H=O(\log\log H/\log H)$。对任意共同钟核 $f_v$，读数误差至多为 $O(\log\log H/\log H)\,v^2/(1+v^2)$，其中隐含常数可对 $v$ 统一。
+其中零点按重数计，$c_1>0$ 固定。[Chen An，*A generalization of Graham’s estimate on the Barban–Vehov problem*（2022），式 (1.1)](https://arxiv.org/abs/2206.10104v1) · [Aleksander Simonič，*Explicit zero density estimate for the Riemann zeta-function near the critical line*（2019），定理 7](https://arxiv.org/abs/1910.08274v2) · [Alan Baker，*A sharpening of the bounds for linear forms in logarithms*（1972），第 117 页](https://doi.org/10.4064/aa-21-1-117-129) · [带权均方与零点密度的推导](https://github.com/the-omega-institute/trureturing-books/issues/1637#issuecomment-7234629760) · [区间截止与文献前提](https://github.com/the-omega-institute/trureturing-books/issues/1637#issuecomment-7234728563)
+
+在 $\gamma-i(\beta-1/2)$ 求值时，三个多项式的带复移陆道和都等于 $N(T)$ 乘其环面均值，加上 $O(T)$。按同高的对称零点配对后，换到实轴时一阶项相消。在 $|\beta-1/2|\le2/L$ 内，选足够小的 $\kappa$，二阶余项至多为 $\frac14\sum B(b\gamma)$。条带外对带权指数尾分部积分，误差为 $O(Tn^2/L^2)=O(T)$。先对 $B$ 应用该估计并移项，得到 $\sum B(b\gamma)=O(T)$。再用 $P^\pm$ 夹住窗口计数，得
+
+$$
+A_W(T)=\mu(W)N(T)+O(T).
+$$
+
+对逆平方尾分部求和，$S_W(x)$ 的误差为 $O(1/x)$，归一化尾分布的 Kolmogorov 距离为 $D_H=O(1/\log H)$。对任意共同钟核 $f_v$，读数误差为 $O(1/\log H)\,v^2/(1+v^2)$，隐含常数可对 $v$ 统一。
 
 ::: {.problem #prob-ou-ch12-windowed-haar-rate title="固定哈尔相位窗的显式计数余项"}
 取第 2 章的固定哈尔接受区域为 $W$，其边界为 Haar 零测集。记 $c=\mu(W)/(2\pi)$，其中 $\mu$ 为归一化 Haar 测度。判定哪些起始高度 $H\ge2\pi$ 容许一个满足 $3b_H/c<L_H$ 的可复查常数 $b_H$，且计数与主项满足
@@ -273,7 +279,7 @@ $$
 \qquad\text{对所有 }t\ge H
 $$
 
-成立。对容许的高度，给出这样的常数并代入共同算术钟读数的误差公式。首个入窗零点是 $\gamma_8=43.32707328\ldots$。若 $H<\gamma_8$，令 $t$ 从左侧趋近 $\gamma_8$，此时 $A_W(t)=0$，故 $b_H/c\ge\log(\gamma_8/(2\pi))-1$。严格条件 $3b_H/c<L_H$ 因而要求 $H>\gamma_8^3/((2\pi)^2e^4)=37.73465613\ldots$。在 $H=100$ 时，区间 $[100,10000]$ 上归一化计数误差 $|A_W(t)-c\,m(t)|/t$ 的上确界为 $0.0205536595\ldots$，从左侧趋近第 $93$ 个零点时达到这一极限。对 $t>10000$，其上确界是否也严格小于 $cL_{100}/3=0.0318088831\ldots$？不采用黎曼假设时能否取得同阶余项？
+成立。对容许的高度，给出这样的常数并代入共同算术钟读数的误差公式。首个入窗零点是 $\gamma_8=43.32707328\ldots$。若 $H<\gamma_8$，令 $t$ 从左侧趋近 $\gamma_8$，此时 $A_W(t)=0$，故 $b_H/c\ge\log(\gamma_8/(2\pi))-1$。严格条件 $3b_H/c<L_H$ 因而要求 $H>\gamma_8^3/((2\pi)^2e^4)=37.73465613\ldots$。在 $H=100$ 时，区间 $[100,10000]$ 上归一化计数误差 $|A_W(t)-c\,m(t)|/t$ 的上确界为 $0.0205536595\ldots$，从左侧趋近第 $93$ 个零点时达到这一极限。对 $t>10000$，其上确界是否也严格小于 $cL_{100}/3=0.0318088831\ldots$？
 :::
 
 **逐模态收敛的限制（`ARGUED`）。** 同一固定接受域可以区分两列人为高度。先取未筛选主项的整数分位点。逐分位区间对中心化的计数误差积分，给出每个固定非零 Fourier 模态为 $O(T/\log T)$。接着取边界上一小块与相位轨道横截的光滑图面。连续环面等分布保证每个足够大的二倍高度区间内有与区间长度同阶的穿越。在每次穿越附近使用严格递增的局部时间变换，把穿越后宽度同阶于 $(\log T)^{-3/4}$ 的窄段内的高度从域外移入域内。
