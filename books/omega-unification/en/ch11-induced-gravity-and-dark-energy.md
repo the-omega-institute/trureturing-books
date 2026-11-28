@@ -271,13 +271,13 @@ Regard the positive and negative polarizations as two towers with positive weigh
 
 Why does one fewer reading leave an ambiguity? Call this smaller count $m$ and fix the $m$ inverse cutoffs $u_j$. Interleave the reference levels with new ones to obtain $m+1$ nodes, ending with a new level. Start with a new level in the all-massive case and with the reference level $0$ in the massless case. Each node $z$ gives a column of readings $B(u_j,z)=\int_{u_j}^\infty e^{-zt}t^{-3}\,dt$. Any $m$ columns form an invertible matrix, since a nonzero combination of at most $m$ layers vanishing at $m$ cutoffs would exceed its sign-change bound. All these ordered minors have the same sign by continuity as the ordered nodes vary. The signed minors obtained by deleting each column in turn therefore give an alternating null vector. Choose its negative entries to lie on the reference levels. Adding a sufficiently small positive multiple to the reference weights gives a different positive tower with identical readings, for any prescribed positive real reference weights.
 
-**Sharp bound for fixed integer multiplicities (`ARGUED`).** The reference and comparison spectra may have any positive integer multiplicities. Order the positive reference masses. Let $h$ of these levels have at least two states. They divide the single-state levels into runs of lengths $\ell_0,\ldots,\ell_h$, allowing empty runs. The exact number of readings needed to identify the reference at any prescribed distinct positive inverse cutoffs is $r+1$, where
+**Sharp bound for fixed integer multiplicities (`ARGUED`).** The reference and comparison spectra may have any positive integer multiplicities. Order the positive reference masses. Let $h$ of these levels have at least two states. They divide the single-state levels into runs of lengths $\ell_0,\ldots,\ell_h$, allowing empty runs. The exact number of readings needed to identify the reference at any prescribed distinct positive inverse cutoffs is $r+1$. Set $\delta=1$ when the reference has a massless level and $\delta=0$ otherwise.
 
 $$
 r=
 \begin{cases}
-2h+\ell_0+2\sum_{j=1}^h\lfloor\ell_j/2\rfloor,&\text{no massless reference level},\\
-1+2h+2\sum_{j=0}^h\lfloor\ell_j/2\rfloor,&\text{a massless reference level}.
+2h+\ell_0+2\sum_{j=1}^h\lfloor\ell_j/2\rfloor,&\delta=0,\\
+1+2h+2\sum_{j=0}^h\lfloor\ell_j/2\rfloor,&\delta=1.
 \end{cases}
 $$
 
