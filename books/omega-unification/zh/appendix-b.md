@@ -20,7 +20,7 @@
 | **重子三重对称** $\mathbb{Z}_3$ | Baryon Triality | 残余离散对称 $X = h(2Y-B) + q(3B) \pmod 3$，要求局域算符满足 $\Delta B \in 3\mathbb{Z}$，将轻场重子破坏算符推高至维数 15（保 $B-L$ 为 18） | [第九章](ch09-proton-stability-and-baryon-triality.md) |
 | **四维单纯形雷吉作用与铰链负载** | Simplicial Regge Action & Hinge Load | 等边四单形上的角亏和 $K = A(2\pi N_2 - 10\theta N_4)$ 与三角面铰链阶数 $q_h$；在 $g = I - J/5$ 上复现自旋二 Fierz–Pauli 动能并暴露共形模发散障碍 | [第十章](ch10-regge-gravity-and-spin2.md) |
 | **四层热核真空配平** | Four-Layer Vacuum Stencil | 利用四层重谱热核系数抵消主导紫外真空能的千分之二曲率窗方案，仍伴随显著暗能量灵敏度与共同标尺外生性 | [第十一章](ch11-induced-gravity-and-dark-energy.md) |
-| **共同算术钟** $F(j)$ | Shared Arithmetic Clock | 单一正半定算子 $K$ 与单位源 $s$ 的二次预解式读数 $F(j) = \langle s, (I + j^2 K)^{-1}s\rangle$；六项 44 位输入浓缩 $>99.931\%$ 谱权于三带 $B$ 并锁定第七项 35 位码 `32071996606` | [第十二章](ch12-shared-arithmetic-clock.md) |
+| **共同算术钟** $F(j)$ | Shared Arithmetic Clock | 单一正半定算子 $K$ 与单位源 $s$ 的二次预解式读数 $F(j) = \langle s, (I + j^2 K)^{-1}s\rangle$；基准尺度上，六项精确输入使 $p(B)>99.931\%$，六项输入的 44 位格锁定第七项 35 位码 `32071996606` | [第十二章](ch12-shared-arithmetic-clock.md) |
 | **529 面双钟作用与绕数阶梯** | 529-Triangle Action & Winding Ladder | 十九点壳 529 个三角面的加权双钟变分作用，其临界阶梯依次经 19、21、27、31、36 圈抵达 105 圈跨高度全局门槛，且单调权全阶受阻 $> 1/4$ | [第十三章](ch13-winding-ladder-and-joint-vacuum.md) |
 | **624 内部通道与三分之一中转格** | 624 Internal Channels & Denominator-Three Shell | 由极点三条最近邻有向弦比较派生的 624 通道及允许九步回程与 17 拍局部反射的 76 点三分之一球面中转格 | [第十四章](ch14-624-channels-and-memory-rank.md) |
 | **局部辅助记忆秩阶梯** | Auxiliary Memory Rank Staircase | 在原十九点上精确复现三时钟完整响应所需的最小辅助维数随平方弦距截止 $D$ 的单调阶梯：$38 \to 29\text{--}31 \to 26\text{--}27 \to 25\text{--}26 \to 24 \to 23 \to 21 \to 20 \to 19$（$C_3$ 对称截止 $D = 392$） | [第十四章](ch14-624-channels-and-memory-rank.md) |

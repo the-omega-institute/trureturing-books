@@ -46,6 +46,20 @@ $$
 的实际正黎曼零点。
 :::
 
+最短原弧给出了轴角 $v$。若要移动两只原始钟的标量相位，改动多短的边就够了？固定单位荷的背景边输运，允许所有顶点重定相，并令 $D$ 为可改边的平方弦长上限。闭路上的相位乘积消去了顶点相位。$D<372$ 时两钟都不能移动（最短弦的平方长为 $12$），$372\le D<724$ 时恰可让两钟同移任意角，$D\ge724$ 时可让两钟独立移动。按同一单位荷比较[第七章](ch07-chiral-three-generations.md)选取的两枚正零点，两个钟移不同，故所需的最小上限恰为 $724$，在这一上限下最少须改动 $42$ 条无向壳边。[闭路与最少改边数](https://github.com/the-omega-institute/trureturing-experiments/blob/78d69c0ea72a7e4e1b8b63562031d5bf35e5e655/experiments/ch39-omega-research/replay/%E5%8D%81%E4%B9%9D%E7%82%B9%E5%A3%B3%E4%B8%A4%E9%92%9F%E8%81%94%E7%BB%9C%E7%9A%84%E5%B1%80%E9%83%A8%E5%BC%A6%E9%95%BF%E9%98%88%E5%80%BC.md)
+
+**临界弦长的改边数（手工推导，`ARGUED`）。** 把实际零点换成任意目标钟移，仍可精确计算最少改边数。令 $\alpha,\beta$ 分别为 $724,804$ 两组边的钟移，并记 $\delta=\alpha-\beta$。角度都按 $2\pi$ 取模。固定上限 $D=724$ 后，最少改边数为
+
+| 目标条件 | 最少无向改边 |
+| --- | ---: |
+| $\beta=\delta=0$ | $0$ |
+| $\beta=0$ 且 $\delta\ne0$ | $6$ |
+| $\delta=0$ 且 $\beta\ne0$ | $36$ |
+| $\beta=\delta=\pi$ | $40$ |
+| 其余 $\beta$ 与 $\delta$ 均非零的点 | $42$ |
+
+在双半周点，三个主分量之间的边束偏好相差半周。恰有一个主分量取半周时，这些边束节省的改边数超过它通往单点分量的额外改边数，故最优值由 $42$ 降到 $40$。对于第 7 章上型第 $2\,345\,666$ 枚和下型第 $964\,890$ 枚正零点，从下型移到上型的读数给出 $\beta\approx0.09687$、$\delta\approx2.93212$ 弧度，因而落在 $42$ 边一类。[附录 A.5 的计数推导](appendix-a.md#sec-ou-appa-clock-bundle-count)
+
 细看交换子亏量 $E = 1 + 2xyz - x^2 - y^2 - z^2$：它并不是临时拼出的多项式，而是三个比较锚点 $(1, U, V)$ 所张成的 $3 \times 3$ 巴格曼—格拉姆行列式！只要把两对纯虚轴拉离共线，$E > 0$ 就化作三维球面 $S^3$ 上不可消去的非交换面积平方与恒常单位截面曲率 $K \equiv +1$。下面这条 Lean 4 冻结定理在纯整数与有理分数层面上把这两条几何铁律一起钉死：
 
 ::: {.theorem #thm-ou-ch02-bargmann-gram title="三锚巴格曼—格拉姆行列式非负性与利雅三元恒常单位截面曲率" lean="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.detGram3_nonneg D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_unit_sectional_curvature"}
@@ -164,6 +178,8 @@ $$
 | $1/4$ | $0.64177727725\ldots$ | $0.02244015826\ldots$ |
 | $1$ | $0.95054808840\ldots$ | $0.12584254589\ldots$ |
 | $2$ | $0.99752136036\ldots$ | $0.15720164049\ldots$ |
+
+这里的 $1/(2\pi)$ 是截止高度趋于无穷时的相对密度。在给定高度可以逐个检验窗条件，再用全谱计数控制未检验的尾部。第十二章用这一方法给出起始高度 $H=100$ 时逆平方加权的共同钟读数，并讨论随 $H$ 变化的误差怎样由窗口计数余项推出（[@rem-ou-ch12-windowed-rate]、[@prob-ou-ch12-windowed-haar-rate]）。
 
 ## 2.4 最短原弧的无穷分裂素数细分与二维面积律密度坍缩 {#sec-ou-2-4}
 
