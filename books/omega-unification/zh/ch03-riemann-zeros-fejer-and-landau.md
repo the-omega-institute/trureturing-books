@@ -253,13 +253,23 @@ $$
 
 在阈值 $b=7/8$，这族固定指数的界给出 $O_\varepsilon(U/L_U^{1-\varepsilon})$。用合成谱可以检验这些输入的边界（手工推导）。每周期两组偏轴点的相位相反，点数相差一枚。调节两组略高于 $a$ 的偏移，使二次权重恰好相等。这个谱满足上方整族密度界，且隐含常数至多随 $\theta$ 按 $(4/7-\theta)^{-1}$ 增长，但右闭窗一次矩仍可达到 $U\log L_U/L_U$ 量级。实际 $\zeta$ 在这条线上的 $O(U/L_U)$ 无 RH 估计需要额外输入。[阈值构造与复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7241173664)
 
-磨光器均方可以把缺口落实为一个谱估计的常数问题（条件推导，`ARGUED`）。令 $K_{\mathrm{DI}}(r)\ge1$ 为 Baluyot 引理 3.1.6 中系数模至多为 1、指数余量为 $r>0$ 的一致常数。若存在固定 $K>0$，使充分小的 $r$ 满足 $\log K_{\mathrm{DI}}(r)\le\exp(K/r)$，取足够大的固定 $c_0$，令 $h=c_0/\log L_U$、$y=U^{4/7-h}$、$r=h/256$。按此追踪二进块与平滑端点的代价，归一化磨光器均方的非主余项为 $o(1/L_U)$，主误差为 $O(y^{-2a})=O(e^{7c_0/4}/L_U)$。Littlewood 引理于是给出 $\sum_{U<\gamma\le2U}(\delta_\rho-a)_+=O(U/L_U)$，直接控制每个右闭子窗的一次矩。[Baluyot §3.4–3.6 与引理 3.2.1](https://hdl.handle.net/1802/32855) · [条件归约](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7241441718)
+磨光器均方将临界层的一次矩归约到一个谱常数的增长率（条件推导，`ARGUED`）。令 $K_{\mathrm{DI}}(r)\ge1$ 为 Baluyot 引理 3.1.6 中系数模至多为 1、指数余量为 $r>0$ 的一致常数。若存在固定 $K>0$，使充分小的 $r$ 满足 $\log K_{\mathrm{DI}}(r)\le\exp(K/r)$，取足够大的固定 $c_0$，令 $h=c_0/\log L_U$、$y=U^{4/7-h}$、$r=h/256$。按此追踪二进块与平滑端点的代价，归一化磨光器均方的非主余项为 $o(1/L_U)$，主误差为 $O(y^{-2a})=O(e^{7c_0/4}/L_U)$。Littlewood 引理于是给出 $\sum_{U<\gamma\le2U}(\delta_\rho-a)_+=O(U/L_U)$，直接控制每个右闭子窗的一次矩。[Baluyot §3.4–3.6 与引理 3.2.1](https://hdl.handle.net/1802/32855) · [条件归约](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7241441718)
 
 所需的不完全 Kloosterman 和只用 Deshouillers–Iwaniec 定理 12 中模数因子固定为 $1$ 的情形。泊松完备化后，高频块只需两次分部积分，所得常数由完全和的定理 11 及一个除数界控制。定理 11 所用的常规谱大筛在尖点 $\infty$ 可取远离驻点的固定截断。用有限射流控制反复分部积分产生的导数，定理 2 的常数 $B_2(\rho)$ 满足 $\log B_2(\rho)\le\exp(C/\rho)$。定理 7 的归纳每步节省模数尺度的 $10\epsilon^2$ 次幂，将这一增长界传给层平均例外谱。[Deshouillers–Iwaniec §§5、8.3、9.2](https://doi.org/10.1007/BF01390728) · [泊松完备化](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7241812505) · [层平均归纳](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7242050047) · [大筛常数与射流证书](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7242312088)
 
 固定层也可用同一个大筛常数控制（手工推导）。当 $Y=8\pi N/q$ 足够小时，取支撑在 $(Y,2Y)$ 内的对数导数权 $-x\partial_x\Phi(x/Y)$。此时 Kloosterman 和的核自变量均不超过 $Y$，几何侧消失。对数导数权经分部积分消去实谱核在零阶附近的对数增长，对例外谱参数 $\kappa=-iv$、$0<v\le1/4$ 仍给出与 $Y^{-2v}$ 同阶的正下界。由此所得定理 5 常数满足 $K_5(\eta)\ll B_2(\eta/2)$。Fricke 变换把这个估计传给固定模数因子 $1$ 时定理 11 所用的尖点 $1$。[Deshouillers–Iwaniec §8.1](https://doi.org/10.1007/BF01390728) · [固定层的推导与复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7242491319)
 
-在完全和中，逐变量以区间截断分离两族光滑权，层平均大筛的系数仍是区间特征序列。对常规谱，有限射流的乘积律控制 Bessel 方程两次迭代后的四次谱频率衰减。对例外谱，设 $X$ 为 Bessel 自变量的倒数尺度，$N$ 为差值尺度，$R$ 为层尺度。在 (9.5) 保留低谱因子 $1+\max(0,\log X)$，用指数余量吸收。把拆权参数取为 $1+R/N$，在 $N$ 大于 $R$ 时也保留定理 11 所需的例外谱尺度。这给出 $\log K_{11}(r)\le\exp(C_*/r)$，并经泊松完备化传给固定模数因子 $1$ 的定理 12（手工推导）。临界阈值 $b=7/8$ 的单层界还需要核对这个估计经 1984 年磨光器均方传入 Baluyot 引理 3.1.6 的参数与常数。[Deshouillers–Iwaniec §§9.1–9.2](https://doi.org/10.1007/BF01390728) · [光滑权、谱尾与拆权的推导及复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7242687670)
+在完全和中，逐变量以区间截断分离两族光滑权，层平均大筛的系数仍是区间特征序列。对常规谱，有限射流的乘积律控制 Bessel 方程两次迭代后的四次谱频率衰减。对例外谱，设 $X$ 为 Bessel 自变量的倒数尺度，$N$ 为差值尺度，$R$ 为层尺度。在 (9.5) 保留低谱因子 $1+\max(0,\log X)$，用指数余量吸收。把拆权参数取为 $1+R/N$，在 $N$ 大于 $R$ 时也保留定理 11 所需的例外谱尺度。这给出 $\log K_{11}(r)\le\exp(C_*/r)$，并经泊松完备化传给固定模数因子 $1$ 的定理 12（手工推导）。[Deshouillers–Iwaniec §§9.1–9.2](https://doi.org/10.1007/BF01390728) · [光滑权、谱尾与拆权的推导及复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7242687670)
+
+这项谱估计通过平方展开进入 Baluyot 引理 3.1.6。内和中两项相乘后，$\ell_1/a_1$ 与 $\ell_2/a_2$ 的差由分子 $n=\ell_1a_2-\ell_2a_1$ 和乘积 $q=a_1a_2$ 记录。当模数 $v$ 与 $qb$ 互素时，相应相位为 $e(n\overline{qb}/v)$，其中 $b$ 是外和的第二个整数指标。按《OMEGA 数学》§8.1 的柯西卷积，固定 $(a_1,a_2)$ 时可从两行系数的乘积读出每个差值的权重，第二行先共轭并反转指数。同一差值的重复次数由步长 $(a_1,a_2)/\gcd(a_1,a_2)$ 控制。分开零差值后，固定形状的平滑权只需固定阶的导数界。对非零差值应用定理 12，再从平方和开方，得到下列手工推导。
+
+$$
+K_{\mathrm{DI}}(r)\ll r^{-1/2}
+\left(1+D_2(r/8)^{1/4}K_{12}^{(s=1)}(r/8)^{1/2}\right),
+\qquad D_2(\eta)=\sup_{m\ge1}\tau(m)m^{-\eta}.
+$$
+
+因而固定模数因子的谱常数若有上述增长界，Baluyot 引理的常数也满足同级增长。把它用于 $b=7/8$ 还需在同一参数路径上复核磨光器均方及其高度端点的误差。[Deshouillers–Iwaniec 1984，Lemma 1，pp. 310–311](https://doi.org/10.4064/aa-43-3-305-312) · [Baluyot，引理 3.1.6，p. 103](https://hdl.handle.net/1802/32855) · [常数传递与复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7243166212)
 
 回到横向积分的公式，在 $a=0$ 时，零点和经同高反射还原 $C_\lambda(T)$，只差归一化系数和有界的低高度项。增大 $a$ 会把每个右侧零点的权重改成 $\cosh(\lambda(\delta_\rho-a)_+)-1$，其中 $v_+=\max(v,0)$。将该权重的导数与 Selberg 密度界配对，右侧余项至多为 $O_\lambda((T/L)e^{-aL/4}+L)$。取 $a=1/L$ 只降低密度估计中的常数，合成谱上窄带与右侧余项均可达到 $T/L$ 量级。取 $a=8\log L/L$ 时，右侧上界降到 $O_\lambda(T/L^3+L)$。在这一宽度下，窄带的同频积分由偏移的二次矩决定。具体地，令 $D_\lambda(u,T)=\sum_{0<\gamma\le T,\,\delta_\rho>u}e^{i\lambda\gamma}$，按重数计并纳入高度上端点。相减两个横向积分的割线公式，再以 $\cosh(\lambda d)-1=\lambda^2 d^2/2+O_\lambda(d^4)$ 展开，得到以下手工推导（`ARGUED`）。
 
