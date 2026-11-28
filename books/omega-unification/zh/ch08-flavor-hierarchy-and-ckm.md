@@ -88,6 +88,10 @@ $$
 
 从单位圆上的点 $1$ 指向 $e^{it_1},e^{it_2}$ 的两条弦不共线，所以每个通道的两次读数唯一确定 $\operatorname{Re}z_j,\operatorname{Im}z_j$。三组概率各自归一，故 $\sum_j z_j=0$。这样便能预言其余相位的读数。要判定这些读数是否来自同一制备，还须检验正性。
 
+若三次曝光都有误差，怎样选相位才能稳健地读出一个通道？把参考相位也算作一次等权曝光。令 $x=(\operatorname{Re}z_j,\operatorname{Im}z_j)^T$，矩阵 $U$ 的第 $k$ 行为 $u_k^T=(\cos t_k,-\sin t_k)$。三次读数合成 $y=a\mathbf1+(2/3)Ux+e$，其中 $a=p_j-(2/3)\operatorname{Re}z_j$ 未知，$\|e\|_2\le\epsilon$。减去三个读数的均值相当于乘 $H=I-\mathbf1\mathbf1^T/3$。在这个仿射模型中，沿 $HU$ 的最弱奇异方向反演，误差最多为 $3\epsilon/(2\sigma_{\min}(HU))$，沿对应左奇异方向的噪声恰能取等。
+
+因此应让两条正交方向都尽量容易测量。两奇异值的平方和为 $3-\|\sum_k u_k\|^2/3\le3$，较小者的平方至多为 $3/2$。取等要求三个单位向量之和为零，两两内积便都是 $-1/2$。反过来，选 $0,\pm2\pi/3$ 时，$U$ 的两列均值为零、互相正交且平方范数均为 $3/2$。于是直接用 $U^Ty$ 即可重建，最坏误差为 $\sqrt{3/2}\,\epsilon$；在参考相位固定时，只有这一对相位（次序任意）达到最优放大率。[共用参考读数的误差与正性取等算例](https://github.com/the-omega-institute/trureturing-books/issues/1649#issuecomment-7238249917)
+
 若 $\lambda=0$，正性要求 $\rho\mathbf1=0$。若且唯若 $z=0$ 且三个 $\sqrt{p_j}$ 能围成三角形，此支可行，允许退化。必要性可由 $\rho=XX^*$ 的三行向量之和为零看出，反过来三条有向边就是纯态振幅。对 $0<\lambda\le1$，置 $w=z+\lambda\mathbf1$ 及 $d_j=3\lambda p_j-|w_j|^2$。此 $\lambda$ 的可行条件是三个 $d_j$ 都非负，且三个 $\sqrt{d_j}$ 能围成三角形。事实上，任何见证都使 $R=3\lambda\rho-ww^*$ 半正定，这是对 $\rho^{1/2}\mathbf1$ 应用柯西–施瓦茨不等式的结果。又有 $R\mathbf1=0$，故其格拉姆向量长度为 $\sqrt{d_j}$ 且和为零。反过来，取闭合的复平面边向量 $v_j$，则 $\rho=(ww^*+vv^*)/(3\lambda)$ 给出所需的对角线和行和。
 
 因此，只须在 $0<\lambda\le1$ 上检验三个 $d_j\ge0$ 和三角不等式的多项式形式 $(d_2-d_0-d_1)^2\le4d_0d_1$。每组可行读数都有秩至多二的见证。在正 $\lambda$ 支，纯态存在的充要条件是某个可行 $\lambda$ 使所有 $d_j=0$，因为秩一时柯西–施瓦茨取等。[平面边长的冻结闭合定理](lean:D5/S3/Geometry/Polygons/BalancedPlanarClosure.result)
