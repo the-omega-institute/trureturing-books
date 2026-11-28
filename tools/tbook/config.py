@@ -284,12 +284,18 @@ class Site:
     raw: dict[str, Any] = field(repr=False, default_factory=dict)
     book_hide: list[str] = field(default_factory=list)
     pdf_release_only: bool = False
+    epub_release_only: bool = False
+    film_release_only: bool = False
     trureturing_mode: str = "frozen-state"
     trureturing_source_root: str = ""
 
     @property
     def build_release_pdfs(self) -> bool:
         return not self.pdf_release_only or os.environ.get("TBOOK_BUILD_RELEASE") == "1"
+
+    @property
+    def build_release_epubs(self) -> bool:
+        return not self.epub_release_only or os.environ.get("TBOOK_BUILD_RELEASE") == "1"
 
     @property
     def default_language(self) -> str:
@@ -364,6 +370,12 @@ def load_site() -> Site:
     pdf_release_only = site.get("pdf_release_only", False)
     if not isinstance(pdf_release_only, bool):
         raise ConfigError("site.toml: site.pdf_release_only must be a boolean")
+    epub_release_only = site.get("epub_release_only", False)
+    if not isinstance(epub_release_only, bool):
+        raise ConfigError("site.toml: site.epub_release_only must be a boolean")
+    film_release_only = site.get("film_release_only", False)
+    if not isinstance(film_release_only, bool):
+        raise ConfigError("site.toml: site.film_release_only must be a boolean")
     return Site(
         root=paths.ROOT,
         repo=repo,
@@ -377,6 +389,8 @@ def load_site() -> Site:
         raw=raw,
         book_hide=hide_patterns(books.get("hide")),
         pdf_release_only=pdf_release_only,
+        epub_release_only=epub_release_only,
+        film_release_only=film_release_only,
         trureturing_mode=mode,
         trureturing_source_root=source_root,
     )
@@ -477,6 +491,7 @@ class Book:
     fold_enable: bool = True
     fold_level: int = 1
     max_chapter_depth: int | None = None
+    long_form_films: tuple[str, ...] = ()
 
     def edition(self, lang: str) -> Edition:
         for ed in self.editions:
@@ -561,6 +576,19 @@ def load_book(slug_or_dir: str | Path) -> Book:
         raise ConfigError(f"{where}: html.fold.enable must be true or false")
     if type(fold_level) is not int or not 0 <= fold_level <= 255:
         raise ConfigError(f"{where}: html.fold.level must be an integer from 0 to 255")
+    films = raw.get("films", {})
+    if not isinstance(films, dict):
+        raise ConfigError(f"{where}: films must be a table")
+    long_form = films.get("long_form", [])
+    if not isinstance(long_form, list) or any(
+        not isinstance(name, str) or not SLUG_RE.fullmatch(name) for name in long_form
+    ):
+        raise ConfigError(f"{where}: films.long_form must list film directory names (kebab-case)")
+    if repeated := duplicates(long_form):
+        raise ConfigError(f"{where}: films.long_form lists {repeated[0]!r} twice")
+    for name in long_form:
+        if not (bdir / "films" / name / "film.json").is_file():
+            raise ConfigError(f"{where}: films.long_form names an unknown film {name!r}")
     numbering = raw.get("numbering", {})
     if not isinstance(numbering, dict):
         raise ConfigError(f"{where}: numbering must be a table")
@@ -598,6 +626,7 @@ def load_book(slug_or_dir: str | Path) -> Book:
         fold_enable=fold_enable,
         fold_level=fold_level,
         unnumbered=dict(unnumbered),
+        long_form_films=tuple(long_form),
         max_page_lines=page_line_limit(meta.get("max_page_lines"), where),
         max_chapters=_positive_book_limit(meta.get("max_chapters"), where, "max_chapters"),
         max_chapter_depth=_nonnegative_book_limit(meta.get("max_chapter_depth"), where, "max_chapter_depth"),

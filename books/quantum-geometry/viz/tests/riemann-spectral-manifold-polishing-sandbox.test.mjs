@@ -956,7 +956,7 @@ for (const lang of ['zh', 'en']) {
     drawer = (await page.locator('#drawer .sheet > div.' + lang).allTextContents()).join(' ').replace(/\s+/g, ' ');
   check(
     lang + ' ARGUED box: the critical line is the externally verified formalization fact of Levent Alpöge, with its replays',
-    ['Levent Alpöge', 'RiemannHypothesis', 'DirichletLZerosOnLine', 'the-omega-institute/riemann-hypothesis', 'lean4lean', 'nanoda', 'con-leche', 'u_div_rpow_tendsto_zero_iff', 'cayley_critical_line_zeta_criterion', 'not_rh_forces_canonical_curvature_failure', 'propext', 'Classical.choice', 'Quot.sound'].every((x) => argued.includes(x)) &&
+    ['Levent Alpöge', 'RiemannHypothesis', 'DirichletLZerosOnLine', 'lean4lean', 'nanoda', 'con-leche', 'u_div_rpow_tendsto_zero_iff', 'cayley_critical_line_zeta_criterion', 'not_rh_forces_canonical_curvature_failure', 'propext', 'Classical.choice', 'Quot.sound'].every((x) => argued.includes(x)) &&
       (lang === 'zh' ? ['外部已核验的形式化事实', '不是本书冻结的声明', '不带绿色标签', '手工推导', '外尔曲率', '施瓦茨', '冯·科赫', '雷杰'] : ['externally verified formalization fact', 'not a declaration frozen for this book', 'no green badge', 'hand derivation', 'Weyl', 'Schwarz', 'von Koch', 'Regge']).every((x) => argued.includes(x)) &&
       (await page.locator('#basis .lean.argued a[data-lean-gid]').count()) === 0,
     argued.slice(0, 200)
@@ -984,8 +984,9 @@ for (const lang of ['zh', 'en']) {
   );
 }
 check(
-  'the RH note links permanent records: the paper, the statements, the terminal theorems, the replays, the community statement, the kernels and the audit',
+  'the RH note links the recommended proof and records for the original release',
   same(await page.locator('#basis .lean.argued a').evaluateAll((els) => els.map((a) => a.getAttribute('href'))), [
+    'https://github.com/leanprover-community/riemann-hypothesis',
     'https://alpo.ge/remark.pdf',
     'https://github.com/the-omega-institute/riemann-hypothesis/blob/b14f2bd19e5e12a4ba6b1d207e3c5fbb06e49ed6/src/Statements.lean',
     'https://github.com/the-omega-institute/riemann-hypothesis/blob/b14f2bd19e5e12a4ba6b1d207e3c5fbb06e49ed6/src/Main.lean',

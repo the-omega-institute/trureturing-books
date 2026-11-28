@@ -1,0 +1,281 @@
+{
+ "voice": "af_heart",
+ "speed": 0.96,
+ "say": {
+  "Lean": "Leen",
+  "Landauer": "Landower",
+  "zeptojoules": "zepto joules"
+ },
+ "music": {
+  "bpm": 80,
+  "progression": "d-minor"
+ },
+ "scenes": [
+  {
+   "id": "hook",
+   "name": "A TURN IS FREE",
+   "lead": 1.9,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "A quantum gate is a turn. Turn it back, and the qubit comes home, with no new entropy.",
+     "量子门就是一次转动：倒着转回去，比特就回到原处，熵一点没多。"
+    ],
+    [
+     "So why do computers get warm? We think a forgotten bit vanishes. So where would it go?",
+     "那计算机为什么会发热？我们总以为，忘掉的比特凭空消失了。可它能去哪儿？"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 3.0,
+     "kind": "glitch"
+    }
+   ]
+  },
+  {
+   "id": "page",
+   "name": "A PAGE WITH NOTES",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.5,
+    0.4,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "Write a qubit as a two by two table. The diagonal is the record of outcomes.",
+     "把量子比特写成一张 2×2 的表：对角线是记录，记着各个结果出现的概率。"
+    ],
+    [
+     "Off the diagonal sit margin notes: the coherence that lets outcomes interfere.",
+     "对角线外的两格是页边批注：让结果彼此干涉的相干。"
+    ],
+    [
+     "An unread measurement keeps the record and shreds the notes. That is pinching.",
+     "不看结果的测量，留下记录、撕掉批注，这一步叫捏合。"
+    ]
+   ]
+  },
+  {
+   "id": "hand",
+   "name": "ONE BIT BY HAND",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.2,
+    0.2
+   ],
+   "lines": [
+    [
+     "Turn zero into plus. Every cell is one half, and the entropy is still zero.",
+     "把 |0⟩ 转成 |+⟩：表里四格都是 1/2，熵仍然是 0。"
+    ],
+    [
+     "Shred the notes, and the entropy jumps to log two.",
+     "撕掉批注，熵一下跳到 ln 2。"
+    ],
+    [
+     "That is exactly the relative entropy between the table before and after.",
+     "这恰好就是撕掉前后两张表之间的相对熵。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 1.4,
+     "kind": "impact"
+    }
+   ]
+  },
+  {
+   "id": "steps",
+   "name": "STEP BY STEP",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Now turn by sixty degrees and pinch, three times.",
+     "现在每步转 60°、再捏合，连做三步。"
+    ],
+    [
+     "The record drifts to the middle: three quarters, five eighths, nine sixteenths.",
+     "记录一步步向中间靠拢：3/4，5/8，9/16。"
+    ],
+    [
+     "Each pinch adds a smaller block of entropy.",
+     "每捏一次，添上的熵就小一块。"
+    ],
+    [
+     "Lean checks, for any finite size and one fixed turn: each step adds exactly its relative entropy, never negative.",
+     "Lean 内核检验：任意有限维、每步用同一个幺正转动，每步添上的熵恰好是这一步的相对熵，从不为负。"
+    ],
+    [
+     "And the total is the sum of the steps.",
+     "总熵增，就是各步之和。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 0.6,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "bill",
+   "name": "THE HEAT BILL",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.8,
+    0.6,
+    0.4,
+    0.4
+   ],
+   "lines": [
+    [
+     "Entropy is not heat yet. To reuse the bit, a bath must reset it.",
+     "熵还不是热。想重用这个比特，得靠热浴把它复位。"
+    ],
+    [
+     "The bill has three lines: entropy removed, correlation left behind, and how far the bath is pushed.",
+     "账单有三行：拿走的熵、留下的关联、热浴被推离平衡的距离。"
+    ],
+    [
+     "From one half each, one small bath qubit only reaches three quarters. The bill comes to point two seven.",
+     "从对角各 1/2 出发，一个热浴比特只能把它推到 3/4，账单合计 0.27。"
+    ],
+    [
+     "Lean checks: if the bill balances and both extras are not negative, the heat covers the entropy removed.",
+     "Lean 内核检验：只要账目平衡、两项附加项不为负，热量就不少于拿走的熵。"
+    ],
+    [
+     "Equality holds exactly when both extras are zero. Our bath was pushed, so we paid more.",
+     "恰好当两项附加项都为零时取等。我们的热浴被推动了，所以付得更多。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 0.6,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "copy",
+   "name": "A COPY YOU CAN UNDO",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Now copy the bit into a blank record. Seen alone, the bit loses its notes too.",
+     "现在把比特拷进一份空白记录。单看比特自己，它的批注也没了。"
+    ],
+    [
+     "Plus and minus differ only in their notes. After the copy, their local tables are identical.",
+     "|+⟩ 和 |−⟩ 只差在批注上；拷贝之后，它们的局部表格一模一样。"
+    ],
+    [
+     "The notes were filed in the corners of the joint table. Pinching is this same copy, with the record out of reach.",
+     "批注被归档到联合表格的角上。捏合就是这样一次拷贝，只是记录拿不回来了。"
+    ],
+    [
+     "Lean checks: no map reading only the local table rebuilds both. Running the copy backwards restores both.",
+     "Lean 内核检验：只读局部表格的映射，无法同时还原两者；把拷贝倒着做一遍，两者都回来了。"
+    ],
+    [
+     "What is filed can be fetched back. What is reset must be paid for.",
+     "归档的，能取回来；复位的，得付账。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 0.6,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "edge",
+   "name": "WHAT IT DOES NOT SAY",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.5,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "These theorems count entropy, not joules. Landauer's floor is about three zeptojoules per bit; real chips burn far more.",
+     "这些定理算的是熵，不是焦耳。兰道尔的地板是每比特约 3 仄焦，属于文献结果；真实芯片耗散的远比这多。"
+    ],
+    [
+     "And the bound does not build a reset that reaches it.",
+     "而且下界本身并不造出一个能达到它的复位方案。"
+    ]
+   ]
+  },
+  {
+   "id": "close",
+   "name": "LEDGER",
+   "lead": 0.5,
+   "tail": 3.6,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.2
+   ],
+   "lines": [
+    [
+     "Geometric Intuition of Quantum Computing, chapter eight.",
+     "《量子计算的几何直觉》· 第八章"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 0.3,
+     "kind": "chime"
+    }
+   ]
+  }
+ ]
+}

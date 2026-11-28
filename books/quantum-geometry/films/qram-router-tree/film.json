@@ -1,0 +1,29 @@
+{
+  "title": "Set the switches, fetch the cell",
+  "title_zh": "拨好道岔，取回一格",
+  "summary": "A memory chip plays a film while none of its cells move; only an address changes. In a depth-3 routing tree over eight cells holding 3 1 4 1 5 9 2 6, the address bits 1 0 1 set the three levels of switches (0 left, 1 right, pictured as rail-yard points), and the enable signal ends at cell 5 alone. A tally passes every cell and adds a cell's number only where that signal stands: on a ten-digit dial, 0 + 9 = 9. Running the routing backwards undoes every gate and leaves the scratch wires clean. Lean checks, at every depth and for data in any additive group, that routing a clean input lights exactly the addressed leaf, that a query restores the address and any wires while adding the routed data, and that from a clean start it adds exactly the addressed cell; for a finite group the query matrix is unitary and moves any amplitudes, so the address half 2, half 5 comes out paired with 4 and 9, each with weight one half. The film then switches to a different circuit, three-state bucket-brigade routers that wait (W) or point left or right. If these routers leave marks in their surroundings, Lean checks that the marks of the active routers tell every address apart exactly when every router of the bottom row is active; silencing one bottom router makes 110 and 111 look the same, while the bottom row alone separates all eight. The circuit is ideal, over fixed classical data, and gives no gate, depth or noise bound; the three-switch path per branch is the bucket-brigade literature, and the observer as a pointer over a still memory is the book's interpretive model.",
+  "summary_zh": "存储芯片放电影时，没有一格存储在动，变的只有地址。八格存储里放着 3 1 4 1 5 9 2 6，上面是三层路由树：地址 101 逐层拨好道岔（0 往左，1 往右，用铁路道岔作比方），使能信号只停在第 5 格。计数员走过每一格，只在信号停着的那格加上它的数：十位数字转盘上 0 + 9 = 9。路由倒着走一遍，逐门撤销，暂存线重新干净。Lean 检验了：任意深度、数据取任意加法交换群时，干净输入路由后恰好点亮被寻址的叶；查询保留地址与任意线路，并加上路由选中的数据；从干净状态出发恰好加上被寻址的那一格；群有限时查询矩阵是幺正的，并按同一规则搬动任意振幅，所以一半 2、一半 5 的地址出来时分别配上 4 和 9，权重各一半。随后换一种电路：桶链式三态路由器，要么等待（W），要么指向左或右。若这些路由器向周围留下痕迹，Lean 检验了：活跃路由器的标签能分清每个地址，当且仅当最底层路由器全部活跃；底层一副沉默，110 与 111 就一模一样，而单凭底层一排就分清全部八个地址。这是固定经典数据上的理想电路，不给门数、深度或噪声的界；每支只拨三副道岔出自桶链式文献，观察者即静止存储上的指针是本书的模型诠释。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-25",
+  "duration": "2:28",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · a still memory grid, a depth-3 routing tree with rail-yard switches and an amber train, a bus dial, two superposed paths, router marks and their label table",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/Routing/ReversibleQram.correctness",
+    "D5/S3/Quantum/Routing/HannRouterProfiles.profile_separation_iff"
+  ],
+  "outputs": {
+    "narrated_720p": "quantum-geometry_qram-router-tree_720p_narrated.mp4",
+    "cover": "quantum-geometry_qram-router-tree_cover.jpg"
+  }
+}

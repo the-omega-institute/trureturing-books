@@ -1,0 +1,46 @@
+{
+  "voice": "af_heart",
+  "speed": 0.94,
+  "say": {"Lean": "Leen", "sagitta": "suh-jitta", "Itô": "Eetoh"},
+  "music": {"bpm": 76, "progression": "d-minor"},
+  "scenes": [
+    {"id": "bow", "name": "A STEP ON A CIRCLE", "lead": 1.9, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
+      ["Calculus says a tiny step is a straight line. On a circle, that is never quite true.", "微积分说：极小的一步就是一小段直线。可在圆上，这从来不完全对。"],
+      ["So turn the point by a small angle instead. The move splits into two parts.", "换个做法：让点转一个小角度。这一步自然分成两部分。"],
+      ["Sideways it goes sine theta. Downward it drops one minus cosine theta.", "横着走了 sin θ，往下落了 1 − cos θ。"],
+      ["Think of a bow: the string is the chord, and the arrow from string to bow is the sagitta.", "想象一张弓：弓弦是弦，弦到弓背的那支箭就是矢高。"]
+    ], "cues": [{"line": 3, "at": 2.2, "kind": "chime"}]},
+    {"id": "step", "name": "ONE STEP BY HAND", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.5, 0.4, 0.1, 0.2], "lines": [
+      ["Take theta as zero point one. Sideways, the point moves zero point zero nine nine eight.", "取 θ = 0.1：横向走了 0.0998。"],
+      ["The drop is about zero point zero zero five, roughly half of theta squared.", "下落大约 0.005，差不多是 θ² 的一半。"],
+      ["Together, the two parts land exactly on the circle. No rounding, no limit.", "两部分合在一起，点恰好落回圆上：不截断，也不取极限。"],
+      ["Old calculus throws the drop away as second order. Does it really vanish?", "旧微积分把这一截当二阶小量扔掉。它真的会消失吗？"]
+    ], "cues": [{"line": 2, "at": 2.4, "kind": "stamp"}]},
+    {"id": "ledger", "name": "ADD UP THE DROPS", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.7, 0.6, 0.2, 0.3], "lines": [
+      ["Take a hundred steps, and drop each sagitta into a jar, like loose change.", "走一百步，把每一截矢高投进罐子，就像攒零钱。"],
+      ["A smooth path turns zero point zero one per step. The jar holds only zero point zero zero five.", "光滑的路每步转 0.01，罐里只攒下 0.005。"],
+      ["A rough path shrinks its steps only like one over root N. Here each is zero point one, and the jar fills to almost one half.", "粗糙的路，步长只按 1/√N 缩小：这里每步 0.1，罐子攒到将近 0.5。"],
+      ["We called it negligible because we never added it up.", "我们说它可以忽略，只是因为从没把它加起来。"]
+    ], "cues": [{"line": 3, "at": 0.4, "kind": "impact"}]},
+    {"id": "squeeze", "name": "A TWO-SIDED BOUND", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["How sure is that total? Lean checks a bound from both sides.", "这笔总账有多可靠？Lean 检验了一个双侧界。"],
+      ["Each drop sits between two curves: theta squared over two, and the same minus theta to the fourth over twenty-four.", "每一截下落都夹在两条曲线之间：θ²/2，以及 θ²/2 − θ⁴/24。"],
+      ["Times N, the whole ledger is pinned, for any real sigma, T and alpha, and every N.", "乘以 N，整本账就被夹住：对任意实数 σ、T、α 和每一个 N 都成立。"],
+      ["Our hundred steps: zero point four nine nine six, just under one half.", "一百步的例子：0.4996，略低于 1/2。"]
+    ], "cues": [{"line": 0, "at": 2.4, "kind": "stamp"}]},
+    {"id": "fates", "name": "THREE FATES", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.8, 0.7, 0.4, 0.4], "lines": [
+      ["Now let N grow, with each turn sigma times T over N, to the power alpha.", "现在让 N 变大，每步转角取 σ·(T/N)^α。"],
+      ["Lean checks three fates. When alpha is above one half, the total shrinks to nothing as N grows.", "Lean 检验了三种结局：α 大于 1/2，N 越大，总账越趋于零。"],
+      ["At exactly one half, they settle at sigma squared T over two.", "α 恰好等于 1/2，总账停在 σ²T/2。"],
+      ["Below one half, with sigma not zero, they grow without bound.", "α 小于 1/2 且 σ ≠ 0，总账无限增长。"]
+    ], "cues": [{"line": 2, "at": 2.2, "kind": "chime"}]},
+    {"id": "edge", "name": "WHAT IT DOES NOT SAY", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["Nothing is claimed for alpha at or below zero. With alpha zero and full turns, every drop is zero.", "α ≤ 0 不在定理之内：α = 0、每步都转满一圈时，每截下落都是零。"],
+      ["The steps are equal and fixed, not random or uneven.", "这里的步子等长且确定，不是随机的，也不是长短不一的。"],
+      ["The Itô reading of the one half is a literature result. Turns as a new calculus is the chapter's model.", "把 1/2 读成伊藤修正项，是文献结果；把小转动当成一门新微积分，是本章的模型。"]
+    ]},
+    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.4, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
+      ["Geometric Intuition of Quantum Computing, chapter thirty.", "《量子计算的几何直觉》· 第三十章"]
+    ], "cues": [{"line": 0, "at": 0.3, "kind": "chime"}]}
+  ]
+}

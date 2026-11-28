@@ -1,0 +1,49 @@
+# 《OMEGA 统一》书籍元数据
+[book]
+version = "0.1.0"
+authors = ["Auric"]
+license = "CC-BY-4.0"
+editions = ["zh", "en"]
+max_page_lines = 1000
+max_chapters = 15
+max_chapter_depth = 2
+code = "OMEGA//UNIFY"
+date = "2026-11-26"
+
+[book.title]
+zh = "OMEGA 统一"
+en = "Omega Unification"
+
+[book.subtitle]
+zh = "贝伦德球壳、黎曼零点谱与四力大统一的数学边界"
+en = "Behrend Shells, Riemann Zero Spectra, and the Mathematical Boundaries of Unification"
+
+[book.description]
+zh = "一部基于十九点贝伦德球壳、四元数双时钟与黎曼零点谱系统考察物理四力大统一数学边界的中英双语专著。全书五卷十五章，严密区分 Lean 4 内核冻结定理、精确有理与 Arb 区间证书、模型内构造及开放问题，系统梳理三力规范交汇与希格斯门户、手征三代与夸克味谱、质子重子三重保护、离散雷吉引力与暗能量配平，以及共同算术钟、529 面双钟绕数阶梯与 624 通道局部记忆秩的全部边界与未解路线。"
+en = "A bilingual monograph charting the mathematical boundaries of grand unification through the 19-point Behrend shell, dual quaternion clocks, and Riemann zero spectra. Across five volumes and fifteen chapters, it rigorously separates Lean 4 kernel-checked theorems, exact rational and Arb interval certificates, model-internal constructions, and open problems—covering gauge unification and Higgs portals, three chiral generations and quark flavor hierarchies, baryon triality and proton stability, discrete Regge gravity and dark-energy cancellation, and the coupled arithmetic clock, 529-triangle winding ladder, and 624-channel local memory rank."
+
+[outputs]
+html = true
+pdf = ["screen", "print", "academic"]
+epub = true
+
+[films]
+long_form = ["four-questions-zero-shortcuts"]
+
+[html.fold]
+enable = true
+level = 0
+
+[pdf]
+paper = "a4"
+academic_paper = "a4"
+
+[epub]
+embed_fonts = false
+
+[numbering.unnumbered]
+"coda.md" = "Coda"
+"appendix-a.md" = "A"
+"appendix-b.md" = "B"
+"appendix-c.md" = "C"
+"appendix-d.md" = "D"

@@ -1,6 +1,6 @@
 # 《OMEGA MATH》书籍元数据
 [book]
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Auric"]
 license = "CC-BY-4.0"
 editions = ["zh", "en"]
@@ -27,6 +27,9 @@ html = true
 pdf = ["screen", "print", "academic"]
 epub = true
 
+[films]
+long_form = ["one-axiom-no-infinity"]
+
 [html.fold]
 enable = true
 level = 0
@@ -41,3 +44,4 @@ embed_fonts = false
 [numbering.unnumbered]
 "coda.md" = "Coda"
 "appendix-a.md" = "A"
+"appendix-b.md" = "B"

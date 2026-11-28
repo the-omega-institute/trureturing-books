@@ -4,6 +4,10 @@
 [site]
 # PDF 随 GitHub Release 发布，站点使用已发布的附件链接。
 pdf_release_only = true
+# EPUB 随 GitHub Release 发布，站点按书籍版本和语言链接附件。
+epub_release_only = true
+# 网页按音轨实时绘制影片，完整 MP4 随书籍 Release 提供下载。
+film_release_only = true
 # GitHub 仓库 owner/name。留空时 CI 用 GITHUB_REPOSITORY，本地用 git remote 推断。
 repo = ""
 # Pages 根地址（PDF/EPUB 中的外链用它拼绝对地址）。留空则由 repo 推断为 https://<owner>.github.io/<name>/。
@@ -27,7 +31,7 @@ branch = "dev"
 
 [books]
 # 书库首页的排列顺序；未列出的书按目录名排在后面。
-order = ["quantum-geometry", "omega-math"]
+order = ["quantum-geometry", "omega-math", "omega-unification"]
 # 隐藏的书（glob 模式，按书的目录名匹配，区分大小写）：所有命令与产物都当它们不存在（检查、钉版、构建、站点、发版），
 # 文件仍留在 books/ 中。模板仓库展示自己的示例书，所以这里为空；从模板创建的书库设为 ["example-*"]，
 # 隐藏模板附带的示例书而不删除它们，以后用 git 合并模板的改动就不会因示例书冲突。

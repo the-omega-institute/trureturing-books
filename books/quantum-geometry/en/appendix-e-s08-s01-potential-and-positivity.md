@@ -185,9 +185,9 @@ C(3)&=\cdots=C(7)=1,\qquad C(8)=2,\\
 \end{aligned}
 $$
 
-A bounded nondecreasing integer sequence is eventually constant, here with value in $\{2,3,4\}$.
+The nondecreasing bounded integer sequence eventually becomes constant. Its terminal value is $4$ by [@thm-appe-chordal-banach-sharp-four] and the implication for additive groups of real Banach spaces.
 
-**Real scalar and Banach targets.** For $n\ge3$ and real gains the minimum uniform error equals the largest absolute mean gain around an oriented simple cycle. Telescoping potentials gives the lower bound. Conversely, if those means are at most $r$, weight each oriented edge by $g_{uv}+r$. Both orientations satisfy the cycle bound and backtracks have weight $2r$, so there are no negative cycles. Take shortest-path distances from an added zero-weight source as potentials. The shortest-path inequalities in both orientations give error at most $r$. Chord splitting fills a length-$\ell$ cycle by $\ell-2$ triangles, so the bound is $(n-2)\varepsilon/n$. A fan with zero spokes and gain $\varepsilon$ along the ordered rim path attains it on the outer cycle of length $n$. Extend the example to $K_n$ by giving every increasing non-spoke edge the same gain. For a real Banach target on $K_n$, average the $n$ stars $g_{av}$ with $g_{aa}=0$. On any edge the two endpoint stars fit exactly and every other star has error at most $\varepsilon$, so the mean gives the same sharp constant $(n-2)/n$.
+**Real scalar and Banach targets.** For $n\ge3$ and real gains the minimum uniform error equals the largest absolute mean gain around an oriented simple cycle. Telescoping potentials gives the lower bound. Conversely, if those means are at most $r$, weight each oriented edge by $g_{uv}+r$. Both orientations satisfy the cycle bound and backtracks have weight $2r$, so there are no negative cycles. Take shortest-path distances from an added zero-weight source as potentials. The shortest-path inequalities in both orientations give error at most $r$. Chord splitting fills a length-$\ell$ cycle by $\ell-2$ triangles, so the bound is $(n-2)\varepsilon/n$. A fan with zero spokes and gain $\varepsilon$ along the ordered rim path attains it on the outer cycle of length $n$. Extend the example to $K_n$ by giving every increasing non-spoke edge the same gain. Over all real Banach targets, the exact uniform coefficient on $K_n$ is also $(n-2)/n$, by [@thm-appe-complete-cliquesum-banach].
 
 ::: {.theorem #thm-appe-chordal-path-power-two title="The $2\varepsilon$ Reconstruction Bound for Path Powers and the Universal Chordal Lower Bound of $2$" lean="D5/S3/Combinatorics/Graph/Chordal/ChordalUniversalLowerBound.pathPower_isChordal, D5/S3/Combinatorics/Graph/Chordal/ChordalUniversalLowerBound.pathPower_exists_two_approximate_gain_potential, D5/S3/Combinatorics/Graph/Chordal/ChordalUniversalLowerBound.pathPower_three_banach_and_integral_lower_bound, D5/S3/Combinatorics/Graph/Chordal/ChordalUniversalLowerBound.pathPower_three_exact_two, D5/S3/Combinatorics/Graph/Chordal/ChordalUniversalLowerBound.not_subtwo_universal_chordal"}
 For $n,k\in\mathbb N$, let $P_n^k$ be the path power on $\mathrm{Fin}(n)=\{i\in\mathbb N:i<n\}$, with $i$ and $j$ adjacent exactly when $i\ne j$ and $|i-j|\le k$.
@@ -324,7 +324,362 @@ For an edge $(x,y)$ from the preceding layer to layer $i\ge2$, let $C$ be the co
 Adjacent vertices $x,y$ in the same layer share a component, shadow, and anchor. If neither predecessor set contained the other, a predecessor from each set difference would be adjacent in the common shadow and would form a chordless four-cycle with $x,y$, contradicting chordality. Orient the edge so that $N^-(x)\subseteq N^-(y)$. Fix $b\in N^-(x)$ and compare the path through $b$ to $x$ followed by $xy$ with the predecessor paths to $y$. The matching term through $b$ at $y$ uses just the triangle $(b,x,y)$, with error at most $\varepsilon$. Every other term costs at most two additional triangle defects, for an error of at most $3\varepsilon$. The common offset $Q_C$ cancels. Among the $m$ terms for $N^-(y)$, at least one has error at most $\varepsilon$, so the average has error at most $(3-2/m)\varepsilon\le(3-2/k)\varepsilon$. Averaging over $N^-(x)$ preserves this bound. Since $k\ge2$, it is at most $(4-4/k)\varepsilon$. Adjacent vertices differ by at most $1$ in depth, and reversing an edge negates its residual, so the same potential gives the bound on every oriented edge. The full proof is checked by the Lean kernel.
 :::
 
-For $k=3$ and $k=4$, the clique size limits are $4$ and $5$, and the respective bounds are $\frac{8}{3}\varepsilon$ and $3\varepsilon$. These bounds apply in particular to $3$-trees and $4$-trees. The coefficient is strictly below $4$ for every finite $k$ and tends to $4$ as $k$ grows. The exact real Banach chordal coefficient $C_{\mathrm{Ban,chordal}}$ remains open in $[2,4]$. By the earlier integrality argument, the exact universal coefficient $C_{\mathrm{chordal}}$ for groups with a bi-invariant pseudometric remains open among $\{2,3,4\}$. Fixing the target group leads to the question of the optimal coefficient on an individual chordal graph.
+When we average across distance layers, the clique size controls the number of predecessors. Averaging along a simplicial deletion order brings the total number of vertices into the bound. Interval and split graphs each admit a way to join local fits using at most two triangle comparisons per edge, even with arbitrarily large cliques.
+
+::: {.theorem #thm-appe-simplicial-interval-split-potential title="Simplicial Averaging and Gain Reconstruction on Interval and Split Graphs" lean="D5/S3/Combinatorics/Graph/Chordal/SimplicialAndIntervalPotential.SimpleGraph.IsChordal.exists_simplicial_banach_gain_potential, D5/S3/Combinatorics/Graph/Chordal/SimplicialAndIntervalPotential.SimpleGraph.intervalGraph_isChordal_and_two_approximate_gain_potential, D5/S3/Combinatorics/Graph/Chordal/SimplicialAndIntervalPotential.SimpleGraph.exists_two_approximate_gain_potential_of_split, D5/S3/Combinatorics/Graph/Chordal/SimplicialAndIntervalPotential.SimpleGraph.BanachPathPower.pathPower_isIntervalGraph"}
+1. **Simplicial averaging.** Let $G$ be a simple chordal graph on a finite vertex set $V$. Let $k\in\mathbb N$ with $k\ge2$, and suppose every clique has at most $k+1$ vertices. Let $E$ be a real seminormed vector space, let $\varepsilon\ge0$ be real, and let $g:V\times V\to E$ satisfy $g(j,i)=-g(i,j)$ for all vertex pairs. Suppose $\|g(i,j)+g(j,t)-g(i,t)\|\le\varepsilon$ for every ordered triple $(i,j,t)$ of pairwise adjacent vertices. Then there exists $\varphi:V\to E$ such that every ordered pair $(u,v)$ of adjacent vertices satisfies
+
+   $$
+   \begin{aligned}
+   &\|g(u,v)-(\varphi(v)-\varphi(u))\|\\
+   &\qquad\le (k-1)\left[1-\left(\frac{k-1}{k}\right)^{|V|\mathbin{\dot{-}}1}\right]\varepsilon .
+   \end{aligned}
+   $$
+
+   In the exponent, $|V|$ is the natural-number cardinality and $\dot{-}$ denotes truncated natural subtraction. The coefficient is computed over the reals.
+
+2. **Interval graphs.** Let $G$ be a simple graph on a finite vertex set $V$. Suppose $\ell,r:V\to\mathbb R$ satisfy $\ell(v)\le r(v)$ for every $v$, and for all $x,y$, $G.\mathrm{Adj}(x,y)$ holds exactly when $x\ne y$ and $\max(\ell(x),\ell(y))\le\min(r(x),r(y))$. Let $H$ be a group with a pseudometric $d$ invariant under both left and right translations, let $\varepsilon\ge0$ be real, and let $g:V\times V\to H$. Suppose $g(y,x)=g(x,y)^{-1}$ for every ordered adjacent pair $(x,y)$, and $d(g(x,y)g(y,z),g(x,z))\le\varepsilon$ for every ordered triple $(x,y,z)$ of pairwise adjacent vertices. Then $G$ is chordal and there exists $\varphi:V\to H$ such that $d(g(x,y),\varphi(x)^{-1}\varphi(y))\le2\varepsilon$ for every ordered adjacent pair $(x,y)$.
+
+3. **Split graphs.** Let $G$ be a simple graph on a finite vertex set $V$, and let $C\subseteq V$ be a clique with $V\setminus C$ independent. For $H,d,\varepsilon,g$ under the same pseudometric, gain reversal, and triangle defect hypotheses as in item 2, $G$ is chordal and there exists $\varphi:V\to H$ such that $d(g(x,y),\varphi(x)^{-1}\varphi(y))\le2\varepsilon$ for every ordered adjacent pair $(x,y)$.
+
+4. **Path powers.** For all $n,k\in\mathbb N$, there exist real endpoint functions $\ell,r$ on the vertex set $\mathrm{Fin}(n)$ of $P_n^k$ such that $\ell(i)=i$, $r(i)=i+k$, and $\ell(i)\le r(i)$ for every vertex $i$, using its natural-number index starting at $0$ and taking the endpoints in the reals. For all $x,y$, the vertices $x,y$ are adjacent in $P_n^k$ exactly when $x\ne y$ and $\max(\ell(x),\ell(y))\le\min(r(x),r(y))$.
+:::
+
+::: {.proof #pf-appe-simplicial-interval-split-potential}
+**Simplicial averaging.** By Dirac's theorem, a nonempty chordal graph has a vertex $a$ whose neighbors form a clique. Deleting $a$ leaves an induced subgraph that inherits the hypotheses. If it has $n-1$ vertices, let $\psi$ be a potential there with error at most $r_{n-1}\varepsilon$. Each neighbor $x$ gives a candidate $p_x=\psi(x)+g(x,a)$ that would fit $xa$ exactly. The difference of two candidates is the residual on $xy$ minus the gain defect on $(x,y,a)$, so its seminorm is at most $(r_{n-1}+1)\varepsilon$. The neighbors form a clique with $a$, so their number $m$ is at most $k$. Assign $a$ the mean of the candidates. In the error on $xa$, the contribution from $p_x$ is zero, giving the factor $(m-1)/m\le(k-1)/k$. Thus we can take $r_1=0$ and $r_n=\frac{k-1}{k}(r_{n-1}+1)$ for $n\ge2$. Solving the recurrence gives the displayed coefficient. It is nondecreasing in $n$, so the old edges also satisfy the new bound. At an isolated vertex the value is arbitrary, the empty graph has no edge constraints, and reversing an edge negates its residual.
+
+**Interval graphs.** In each nonempty vertex subset, all neighbors of an interval with the least right endpoint contain that endpoint. Apply this to the vertices of any cycle of length at least $4$. The two cycle neighbors of that interval are adjacent, giving a chord. For reconstruction, the induction requires a root $p$ whose left endpoint is at most every right endpoint in the current set. Start with an interval of least left endpoint, set $\varphi(p)=1$, and fit its spokes exactly by $\varphi(x)=g(p,x)$. Retain a neighbor $q$ with the greatest right endpoint and recurse on $q$ together with the nonneighbors of $p$ other than $p$ itself. These nonneighbors begin strictly to the right of $r(p)$. Since $\ell(q)\le r(p)$, the new root satisfies the induction condition. Left-translate the recursive potential to give $\varphi(q)=g(p,q)$, preserving the exact fit on the recursive spokes at $q$. If $p$ is isolated, remove it and restart at an interval of least left endpoint when vertices remain.
+
+An edge between neighbors of $p$ costs one triangle comparison through $p$. If an edge $xy$ joins a neighbor $x$ to a nonneighbor $y$, then $\ell(y)\le r(x)\le r(q)$ and $\ell(y)>r(p)$, so $y$ meets $q$. If $x\ne q$, both $x$ and $q$ contain $r(p)$ and hence are adjacent. Compare $g(p,x)g(x,y)$ with $\varphi(y)=g(p,q)g(q,y)$ using $(x,q,y)$ and then $(p,x,q)$, for a total error of at most $2\varepsilon$. If $x=q$, the edge already fits exactly. Induction controls the remaining edges. By left invariance the fitted edge error is $d(\varphi(x)g(x,y),\varphi(y))$. Right translation by the inverse gain and symmetry of $d$ give the same error in reverse. The empty graph has no edges to fit.
+
+**Split graphs.** In each nonempty induced subgraph, a vertex outside the clique has all its neighbors in the clique. If the subgraph lies entirely within the clique, every vertex is simplicial. Again, every cycle of length at least $4$ has a chord. When the clique is nonempty, choose a root $o$, set $\varphi(o)=1$, and assign $\varphi(x)=g(o,x)$ elsewhere in the clique. The spokes fit exactly and the other clique edges have error at most $\varepsilon$. For each nonisolated vertex $y$ outside the clique, choose a clique neighbor $a$ and set $\varphi(y)=\varphi(a)g(a,y)$. The edge $ay$ fits exactly. For another clique neighbor $x$, compare along the triangle $(x,a,y)$ and then use the bound on the clique edge $xa$, for error at most $2\varepsilon$. There are no edges within the independent set, and isolated vertices can take any potential. If the clique is empty, the graph has no edges.
+
+**Path powers.** For distinct indices $x,y$, the closed intervals $[x,x+k]$ and $[y,y+k]$ intersect exactly when $x\le y+k$ and $y\le x+k$, which is the adjacency condition for $P_n^k$. The full proof is checked by the Lean kernel.
+:::
+
+**Manual derivation.** The coefficient in item 1 is strictly below $k-1$ on every nonempty finite graph. For $k=2$, it is below $1$. Each recursive $2$-tree in [@thm-appe-two-tree-stretch-separation] attains its finite-size bound, and the coefficients tend to $1$ with the recursion depth. For $k=3$, the coefficient is below $2$, improving the $8/3$ bound of [@thm-appe-clique-bounded-banach-potential] for chordal graphs with cliques of size at most $4$, including all $3$-trees. For $n\ge4$, $P_n^3$ starts with $K_4$ and attaches each new vertex to the clique of the preceding $3$ vertices. The exact supremum over this family is $\frac43$. See [@thm-appe-three-tree-path-sup].
+
+Item 2 applies to the additive group of a real Banach space with $d(a,b)=\|a-b\|$. Item 4 places the path powers from [@thm-appe-chordal-banach-limit-two] within the finite interval graphs. First let $n$ grow at fixed $k$, then increase $k$. The lower bounds for the optimal coefficients come arbitrarily close to $2$. Thus the supremum of the reconstruction coefficients over finite interval graphs is exactly $2$ both for real Banach spaces and for groups with bi-invariant pseudometrics.
+
+Combine item 1 with [@thm-appe-clique-bounded-banach-potential]. For cliques of size at most $k+1$, this gives an error of at most $\min(k-1,\,4-4/k)\varepsilon$.
+
+On a complete graph, averaging all the star potentials brings the triangle-error coefficient below $1$. When a larger graph is assembled from pieces along a tree, the pieces can be fitted locally and then joined by taking midpoints on their shared cliques.
+
+::: {.theorem #thm-appe-complete-cliquesum-banach title="Exact Real Banach Reconstruction on Complete Graphs and Midpoint Averaging on Separated Clique Sums" lean="D5/S3/Combinatorics/Graph/Chordal/CompleteAndCliqueSumBanach.SimpleGraph.completeGraph_banach_upper_bound, D5/S3/Combinatorics/Graph/Chordal/CompleteAndCliqueSumBanach.SimpleGraph.completeGraph_banach_lower_bound, D5/S3/Combinatorics/Graph/Chordal/CompleteAndCliqueSumBanach.SimpleGraph.separatedCliqueSum_banach_gain_potential"}
+1. **Complete-graph upper bound in real seminormed spaces.** Let $V$ be a finite vertex set with $|V|\ge2$, let $E$ be any real seminormed vector space, and let $\varepsilon\in\mathbb R$. Suppose $g:V\times V\to E$ satisfies $g(j,i)=-g(i,j)$ for all $i,j$ and $\|g(i,j)+g(j,l)-g(i,l)\|\le\varepsilon$ for every triple of pairwise distinct $i,j,l$. Then there is a potential $\varphi:V\to E$ such that for all $i\ne j$,
+
+   $$
+   \|g(i,j)-(\varphi(j)-\varphi(i))\|\le\frac{|V|-2}{|V|}\varepsilon.
+   $$
+
+2. **Sharp complete-graph lower bound in a real Banach space.** For each natural number $m\ge2$, let $\mathrm{ZeroDivSkew}(m)$ be the space of real skew-symmetric $m\times m$ matrices with zero row sums, equipped with the entrywise supremum norm. It is a finite-dimensional real Banach space. There is a gain $g:\mathrm{Fin}(m)\times\mathrm{Fin}(m)\to\mathrm{ZeroDivSkew}(m)$ satisfying $g(j,i)=-g(i,j)$ for all $i,j$ and $\|g(i,j)+g(j,l)-g(i,l)\|\le1$ for pairwise distinct $i,j,l$, such that for every potential $\varphi:\mathrm{Fin}(m)\to\mathrm{ZeroDivSkew}(m)$ there are $i\ne j$ with
+
+   $$
+   \|g(i,j)-(\varphi(j)-\varphi(i))\|\ge\frac{m-2}{m}.
+   $$
+
+3. **Midpoint averaging on separated clique sums.** Let $T$ be a tree on an arbitrary index type $I$, let $G$ be a simple graph on a finite vertex set $V$, and let $P:I\to\mathcal P(V)$ be a family of piece vertex sets, with each vertex in at least one piece and both endpoints of every $G$-edge together in at least one piece. Let $m\ge1$ be a natural number. For each tree edge $ab$, the intersection $S(a,b)=P(a)\cap P(b)$ is a nonempty clique in $G$ with $|S(a,b)|\le m$. Pieces of distinct nonadjacent tree vertices $a,b$ are disjoint. Within each piece $P(a)$ the attachment sets $S(a,b),S(a,c)$ for distinct tree neighbors $b,c$ are disjoint, and no $G$-edge joins them.
+
+   Let $E$ be any real seminormed vector space, $g:V\times V\to E$ an arbitrary gain, $R\ge0$ a real number, and $\varphi_a:V\to E$ a family of local potentials satisfying $\|g(u,v)-(\varphi_a(v)-\varphi_a(u))\|\le R$ for every $a\in I$ and every directed $G$-edge $(u,v)$ within $P(a)$. Then there is a global potential $\Phi:V\to E$ such that every directed $G$-edge $(u,v)$ satisfies
+
+   $$
+   \|g(u,v)-(\Phi(v)-\Phi(u))\|\le(2-1/m)R.
+   $$
+:::
+
+::: {.proof #pf-appe-complete-cliquesum-banach}
+**Averaging the star potentials.** Set $n=|V|$ and take $\varphi(v)=\frac1n\sum_{w\in V}g(w,v)$. Skew symmetry gives $g(i,i)=0$. The residual on $(i,j)$ is the mean of $g(w,i)+g(i,j)-g(w,j)$ over all $w$. The two terms $w=i,j$ vanish, and the other $n-2$ terms have seminorm at most $\varepsilon$. The triangle inequality gives the desired bound. When $n=2$, both terms vanish, so any real $\varepsilon$ is allowed.
+
+**Signed triangle witness.** Let $A_{ab}$ be the matrix obtained from the zero matrix by adding $1$ at $(a,b)$ and subtracting $1$ at $(b,a)$, and set $T(a,b,c)=A_{ab}+A_{bc}+A_{ca}$. It is skew-symmetric with zero row sums. Its entries have absolute value at most $1$ when the vertices are distinct, and the matrix vanishes when any vertices coincide. Fix $0\in\mathrm{Fin}(m)$ and take $g(i,j)=T(0,i,j)$. Interchanging $i,j$ negates the gain, and $g(i,j)+g(j,l)-g(i,l)=T(i,j,l)$. For $i\ne j$, if neither endpoint is $0$, the coordinate $g(i,j)_{ij}$ equals $1$; otherwise it equals $0$. The sum of these coordinates is therefore $(m-1)(m-2)$. Every potential matrix has zero row and column sums, the latter by skew symmetry. Summing the $(i,j)$ entries of the potential differences by rows and columns gives zero in total (the diagonal entries also vanish). Hence
+
+$$
+\sum_{i\ne j}\bigl(g(i,j)-(\varphi(j)-\varphi(i))\bigr)_{ij}=(m-1)(m-2).
+$$
+
+Among the $m(m-1)$ ordered pairs of distinct vertices, at least one residual coordinate is at least the mean $(m-2)/m$. Its norm is at least that value as well.
+
+**Joining along the tree.** Let $d(a,b)$ be the mean of $\varphi_a-\varphi_b$ on $S(a,b)$. It changes sign when a tree edge is reversed. Sum $d$ along the unique finite paths from a tree root to obtain shifts $c_a$ with $c_b-c_a=d(a,b)$. Then $\psi_a=\varphi_a+c_a$ retains the original edge errors, and $D(s)=\psi_b(s)-\psi_a(s)$ has mean zero on each attachment clique $S(a,b)$. Let $q$ be its size. For distinct $s,t$ in the clique, subtract the two pieces' residuals on the same directed edge $(s,t)$ to obtain $\|D(s)-D(t)\|\le2R$. Using the zero mean and the vanishing self-difference gives
+
+$$
+\left\|\frac{D(s)}2\right\|\le\frac{q-1}{q}R\le(1-1/m)R.
+$$
+
+Disjointness of nonadjacent pieces and of distinct attachments within a piece ensures that every shared vertex belongs to exactly two pieces. Assign the midpoint of the two shifted potentials at each shared vertex, and retain the shifted potential at each unshared vertex. Every edge lies within a piece. If both endpoints are shared, separation forces them to lie in the same attachment clique. The edge residual is then the mean of the two original residuals, with seminorm at most $R$. On any other edge, at most one endpoint receives a midpoint adjustment of size at most $(1-1/m)R$, giving total error at most $(2-1/m)R$. The full proof is checked by the Lean kernel.
+:::
+
+**Manual derivation.** Together, the first two items give the exact uniform coefficient $(m-2)/m$ on the complete graph with $m$ vertices over all real Banach targets. Item 3 transfers a local fit to a global fit with a factor of $2-1/m$ when separated attachment cliques have size at most $m$.
+
+For general chordal graphs with a clique size bound, we can improve the equal-weight estimate of [@thm-appe-clique-bounded-banach-potential]. When both endpoints of a cross-layer edge have the maximum number of predecessors, give the shallower endpoint more weight in the deeper endpoint's average.
+
+::: {.theorem #thm-appe-biased-clique-banach-potential title="Biased Predecessor Averaging on Chordal Graphs with Bounded Clique Number" lean="D5/S3/Combinatorics/Graph/Chordal/WeightedCliqueBanachPotential.SimpleGraph.IsChordal.exists_biased_clique_banach_gain_potential"}
+Let $G$ be a simple chordal graph on a finite vertex set $V$, and let $k\in\mathbb N$ with $k\ge3$. Suppose every clique of $G$ has at most $k+1$ vertices. Let $E$ be a real seminormed vector space, let $\varepsilon\ge0$ be real, and let $g:V\times V\to E$ satisfy $g(j,i)=-g(i,j)$ for all $i,j\in V$. Suppose that $\|g(i,j)+g(j,\ell)-g(i,\ell)\|\le\varepsilon$ for every ordered triple $(i,j,\ell)$ in which $i$ is adjacent to $j$, $j$ to $\ell$, and $i$ to $\ell$. Then there exists a potential $\varphi:V\to E$ such that every ordered adjacent pair $(u,v)$ satisfies
+
+$$
+\begin{aligned}
+\bigl\|g(u,v)-(\varphi(v)-\varphi(u))\bigr\|
+&\le \left(4-\frac{4}{k}-\frac{2(k-2)^2}{k(k-1)^3}\right)\varepsilon .
+\end{aligned}
+$$
+:::
+
+::: {.proof #pf-appe-biased-clique-banach-potential}
+Each connected component inherits the hypotheses, and every edge lies in one component, so the component potentials can be combined. Denote the displayed coefficient by $R_k$. In each component choose a root $o$, form layers by distance from $o$, and let $P(x)$ be the neighbors of $x$ in the preceding layer. For a component $C$ of the subgraph induced by layers $i$ and above ($i\ge1$), its shadow $S_C$ consists of its neighbors in layer $i-1$. If two shadow vertices were nonadjacent, take shortest paths between them with interiors in $C$ and in the lower layers, respectively. The second path exists because both vertices have shortest paths to the root. Both connecting paths are induced, and their interiors differ in depth by at least $2$, so their union is a chordless cycle. Thus the shadow is a clique.
+
+Every nonroot vertex $x$ has a predecessor on a shortest path toward the root, and all its predecessors lie in the same shadow. Hence $P(x)\cup\{x\}$ is a clique and $|P(x)|\le k$. For adjacent vertices $x,y$ in the same layer, the predecessor sets are nested by inclusion. Otherwise, choosing one predecessor from each set difference gives two adjacent vertices in the common shadow that form a chordless quadrilateral with $x,y$. Call a vertex saturated if it has $k$ predecessors. Two saturated vertices of $P(v)$ would be adjacent and would have identical predecessor sets by nesting. Together with those predecessors they would form a clique of size $k+2$, a contradiction.
+
+Set $\delta=\frac{k-2}{k(k-1)^2}$. When $P(x)$ has size $m\ge2$ and contains a saturated vertex, give that vertex weight $1/m+\delta$ and every other predecessor weight $1/m-\delta/(m-1)$. Use equal weights in the other cases. The weights $w_x(b)$ sum to $1$ and are bounded below by $f(m)$, where $f(1)=1$ and $f(m)=1/m-\delta/(m-1)$ for $m\ge2$. Since $0<\delta\le1/4$, we have $f(m)>0$. For integers $2\le m\le n$, we have $(m-1)(n-1)\ge mn/4$, so $f(m)-f(n)=(n-m)\bigl(1/(mn)-\delta/((m-1)(n-1))\bigr)\ge0$. Also, $f(2)\le f(1)$.
+
+When $i\ge2$, let $D$ be the parent component containing $C$ once layer $i-1$ is included. A shortest path to the root gives a vertex in $S_C$. All vertices in $S_C$ lie in $D$, and their predecessor sets are nonempty and pairwise nested. Thus any vertex $a_C$ in the smallest set is adjacent to all of $S_C$ and belongs to $S_D$. Set $Q_C=Q_D+g(a_D,a_C)$. At layer $1$, take $a_C=o$ and $Q_C=0$, and set $\varphi(o)=0$. For each nonroot $x$, use its component $C$ in the subgraph induced by its layer and the layers above to define
+
+$$
+\begin{aligned}
+\varphi(x)&=Q_C+\sum_{b\in P(x)}w_x(b)\bigl(g(a_C,b)+g(b,x)\bigr).
+\end{aligned}
+$$
+
+Skew symmetry gives zero defect on triangles with repeated vertices. Each neighbor $x$ of the root has the sole predecessor $o$, so $\varphi(x)=g(o,x)$ and all edges at the root fit exactly. Write $T(a,b,d)=g(a,b)+g(b,d)-g(a,d)$. The difference between the gains along paths from a common anchor $a$ through predecessors $b,d$ in the same shadow to the same vertex $z$ is $T(a,b,d)-T(b,d,z)$, of seminorm at most $2\varepsilon$.
+
+For an edge from a shallower vertex $u$ other than the root to a deeper vertex $v$, let $C$ be the component at the layer of $v$ and write $c=a_C$. The construction gives $c\in P(u)$ and $u\in P(v)$. Set $M=Q_C+g(c,u)$. Then $M$ is the term through $c$ in the average for $\varphi(u)$, and $M+g(u,v)$ is the term through $u$ in the average for $\varphi(v)$. Each average differs from its distinguished term only through the other predecessor paths, with error at most $2\varepsilon$ per term. Adding the two error bounds gives a residual of seminorm at most $(4-2w_u(c)-2w_v(u))\varepsilon$. If both endpoints have $k$ predecessors, $u$ receives the extra weight in $P(v)$ and the two distinguished weights sum to at least $f(k)+1/k+\delta$. If at least one endpoint has at most $k-1$ predecessors, their sum is at least $f(k)+f(k-1)$. Substituting $\delta$ gives
+
+$$
+\begin{aligned}
+f(k)+\frac{1}{k}+\delta
+&=f(k)+f(k-1)\\
+&=\frac{2}{k}+\frac{(k-2)^2}{k(k-1)^3}.
+\end{aligned}
+$$
+
+Thus the cross-layer residual has seminorm at most $R_k\varepsilon$. For a within-layer edge, orient it so that $P(u)\subseteq P(v)$. Both endpoints share the anchor and offset $Q_C$. Fix $b\in P(u)$ and compare the path through $b$ to $u$ followed by the edge to $v$ with the predecessor paths to $v$. The matching term through $b$ uses only the triangle $(b,u,v)$, with error at most $\varepsilon$. Every other term adds at most $2\varepsilon$. Averaging over $P(v)$ gives $(3-2w_v(b))\varepsilon\le(3-2f(k))\varepsilon$, and averaging over $P(u)$ preserves the bound. As $2\delta\le(k-2)/k$, we have $R_k-(3-2f(k))=1-2/k-2\delta\ge0$. Adjacent vertices differ in depth by at most $1$, and reversing an edge negates the residual, so the estimate holds on every oriented edge. The full proof is checked by the Lean kernel.
+:::
+
+**Manual derivation.** At $k=4$, every $4$-tree has cliques of size at most $5$, so its reconstruction coefficient is at most $R_4=79/27<3$. This improves the $4-4/k=3$ bound of [@thm-appe-clique-bounded-banach-potential] and the size-independent bound from item 1 of [@thm-appe-simplicial-interval-split-potential], which is $k-1=3$. For the universal constant with unrestricted clique size, see [@thm-appe-chordal-banach-sharp-four].
+
+Biased predecessor weights improve the estimate when clique sizes are bounded. With unrestricted clique sizes, how much error can pure layer-by-layer averaging and root averaging of the two-step construction control? Fix real scalar gains and retain the predecessor sets $P(x)$, shadows $S_C$, anchors $a_C$, and transport values $Q_C$ above. Call a gain $g:V\times V\to\mathbb R$ triangle-$1$-flat if it is skew on all vertex pairs and every ordered triangle $(x,y,z)$ satisfies $|g(x,y)+g(y,z)-g(x,z)|\le1$.
+
+Valid anchors equal the root $r$ at depth $1$. At greater depths, $a_C$ lies in the parent shadow and is adjacent to all of $S_C$. At depth $1$ set $Q_C=0$ and $Q_C=Q_D+g(a_D,a_C)$ at greater depths, where $D$ is the parent component. Valid weights $w_x(b)$ are nonnegative for all $x,b$, equal $0$ outside $P(x)$, and sum to $1$ on $P(x)$ for every nonroot vertex. The two-step breadth-first potential takes $\varphi_r(r)=0$ and, at a nonroot vertex $x\in C$, is defined by
+
+$$
+\varphi_r(x)=Q_C+\sum_{b\in P(x)}w_x(b)\bigl(g(a_C,b)+g(b,x)\bigr).
+$$
+
+A pure predecessor barycenter potential takes $\varphi(r)=0$ and requires $\varphi(x)=|P(x)|^{-1}\sum_{b\in P(x)}(\varphi(b)+g(b,x))$ at every nonroot vertex with a nonempty predecessor set.
+
+Define the tower graph $\operatorname{barycenterTower}(m,n)$ with root $r$ and $n$ layers of $m$ vertices $(i,j)$, where $0\le i<n$ and $0\le j<m$. Each layer is a clique, and the root is adjacent to the entire first layer. Between consecutive layers, column $0$ of the later layer is adjacent only to column $0$ of the earlier one. The remaining vertices meet the entire preceding layer. Tower gains are $0$ within a layer and $0$ forward into column $0$. Forward gains from the root or column $0$ into other columns are $1$, and all remaining forward gains are $2$. Reverse orientations negate the gains (defined on all vertex pairs by their heights).
+
+Define the bridged graph $\operatorname{bridgedGadget}(m,N)$ with $N$ copies, each having a root $o$ and sets $A=\{a_j\}$, $U=\{u_i\}$, $B=\{v_j\}$, $Y=\{y_j\}$ of $m$ vertices each. Its edges are exactly those from the root to $A$, those of the clique $A\cup U$, those joining each $v_j$ to all of $U$ and to $a_j$, those joining each $y_j$ to all of $U$ and to $v_j$, and the edges joining the copy roots into a path.
+
+::: {.theorem #thm-appe-bfs-barycenter-obstructions title="The Four-Defect Two-Step Breadth-First Bound and Obstructions to Predecessor Barycenters and Root Averaging" lean="D5/S3/Combinatorics/Graph/Chordal/Reconstruction/WeightedTwoStepBFS.SimpleGraph.two_step_residual_bound, D5/S3/Combinatorics/Graph/Chordal/TwoStepBFSAndBarycenterObstructions.SimpleGraph.pure_predecessor_barycenter_unbounded, D5/S3/Combinatorics/Graph/Chordal/TwoStepBFSAndBarycenterObstructions.SimpleGraph.twoStepBFS_root_averaging_lower_bound"}
+1. **Two-step reconstruction bound for arbitrary weights.** For every finite connected simple chordal graph, every root $r$, every valid shadow-anchor and predecessor-weight assignment, and every triangle-$1$-flat real scalar gain $g$, the corresponding two-step potential $\varphi_r$ satisfies $|g(u,v)-(\varphi_r(v)-\varphi_r(u))|\le4$ on every oriented edge $(u,v)$.
+
+2. **Unbounded pure predecessor barycenter error.** For all natural numbers $m\ge2$, $n\ge1$, the tower graph is connected and chordal, its tower gain $g$ is triangle-$1$-flat, and a pure predecessor barycenter potential exists. Each vertex $(i,j)$ has distance $i+1$ from the root, and every pure predecessor barycenter potential $\varphi$ satisfies
+
+   $$
+   \begin{aligned}
+   \varphi(i,0)&=0,\\
+   \varphi(i,j)&=(2m-1)-(2m-2)\left(\frac{m-1}{m}\right)^i\quad(j\ne0).
+   \end{aligned}
+   $$
+
+   For every real $M$, there exist natural numbers $m\ge2$, $n\ge1$ such that the corresponding tower is connected and chordal, its tower gain is triangle-$1$-flat, and there is an oriented edge $(u,v)$ on which every pure predecessor barycenter potential on that graph satisfies $|g(u,v)-(\varphi(v)-\varphi(u))|>M$.
+
+3. **Obstruction to root averaging of two-step potentials.** For all natural numbers $m\ge2$, $N\ge2$, the bridged graph is connected and chordal. For every probability distribution $\mu$ on roots ($\mu(r)\ge0$ and $\sum_r\mu(r)=1$), and every valid shadow-anchor and predecessor-weight assignment chosen in advance for each root, there exist a triangle-$1$-flat real scalar gain $g$ and an oriented edge $(u,v)$. With $\bar\varphi(x)=\sum_r\mu(r)\varphi_r(x)$ denoting the weighted mean of these two-step potentials,
+
+   $$
+   |g(u,v)-(\bar\varphi(v)-\bar\varphi(u))|\ge4-\frac4m-\frac8N.
+   $$
+:::
+
+::: {.proof #pf-appe-bfs-barycenter-obstructions}
+**Two-step bound.** Each neighbor of the root has the root as its sole predecessor, so root edges have zero residual. Adjacent vertices $u,v$ in the same layer share an anchor $a$ and transport value. Choose any predecessors $b\in P(u)$ and $t\in P(v)$. The shadow is a clique, so $b,t$ coincide or are adjacent. Chordality gives the quadrilateral $b,u,v,t$ at least one diagonal $b,v$ or $t,u$ (the assertion holds directly if $b=t$). Thus the gain difference between the path from $a$ through $b,u$ to $v$ and the path from $a$ through $t$ to $v$ splits into at most $3$ triangle defects. For a cross-layer edge $u,v$, write its two anchors as $a,c$, where $c$ lies in the shadow of $u$ and is adjacent to $u$. The difference between the path from $a$ through $b,u$ to $v$ and the path from $a$ through $c,t$ to $v$ splits into defects on $(a,b,c)$, $(b,c,u)$, $(c,u,t)$, $(u,t,v)$, each of absolute value at most $1$, or $0$ for repeated vertices. Every predecessor pair therefore has absolute residual at most $4$. Averaging over the two predecessor probability distributions preserves the bound. Reversing an edge negates its residual.
+
+**Tower.** Eliminate vertices from the last layer to the first, removing column $0$ before the remaining vertices in each layer, and remove the root last. At each elimination the remaining neighbors form a clique, proving chordality. Edges change height by at most $1$, and every vertex reaches the root along a path descending one layer at a time, so the graph is connected and the distance is exactly $i+1$. Every triangle spans at most two consecutive layers. Within-layer gains are $0$, and the two cross-layer gains differ by at most $1$ in absolute value, giving triangle-$1$-flatness. Column $0$ always has potential $0$, and the other columns share the initial value $s_0=1$ and recurrence $s_{i+1}=(1+(m-1)(s_i+2))/m$. This recurrence constructs the potential and uniquely determines it layer by layer, yielding the closed form in item 2. The edge from column $0$ to column $1$ in the final layer has gain $0$ and absolute residual exactly $(2m-1)-(2m-2)((m-1)/m)^{n-1}$. First choose $m$ with $2m-1>M$, then use $0<(m-1)/m<1$ to choose $n$ large enough that this edge has absolute residual greater than $M$ for every pure predecessor barycenter potential.
+
+**Bridged graph.** Eliminating $Y,B,U,A$ in that order and then the roots in path order gives a perfect elimination order, proving chordality. The root path and local edges ensure connectivity. Select a copy with root probability mass $p\le1/N$ and call its root $o$. For every root $r$ outside this copy, distances to its vertices equal the distance to $o$ plus the local distance. Hence $P(u_i)=A$ and $P(y_j)=U\cup\{v_j\}$, and the valid anchors at these vertices are forced to be $o$ and $a_j$, respectively. Indeed, the tail component of $y_j$ is a singleton with shadow $U\cup\{v_j\}$, and its parent shadow is $A$, where only $a_j$ is adjacent to $v_j$. The parent component's anchor must be $o$.
+
+Write the weights for root $r$ as $w_{r,x}(b)$. Normalization gives summing $w_{r,u_i}(a_j)+w_{r,y_j}(u_i)$ over all $m^2$ pairs $(i,j)$ gives a total of at most $2m$. Weight this sum by $\mu$ over roots outside the copy and average over pairs to select $(i,j)$ with
+
+$$
+\begin{aligned}
+\sum_{r\text{ outside the copy}}\mu(r)\bigl(w_{r,u_i}(a_j)+w_{r,y_j}(u_i)\bigr)&\le\frac{2}{m}(1-p).
+\end{aligned}
+$$
+
+Order the vertices with those of the other copies and $o$ first, followed by $A\setminus\{a_j\}$, $u_i$, $Y$, $(U\setminus\{u_i\})\cup B$, and $a_j$, refining each group to a strict order. Assign forward gain $1$, reverse gain $-1$, and diagonal gain $0$, so every triangle has absolute defect $1$. For each root outside the copy, the common anchor transport cancels. The mean gain of two-edge paths from $o$ to $u_i$ is $2(1-w_{r,u_i}(a_j))$, and from $a_j$ to $y_j$ it is $-2(1-w_{r,y_j}(u_i))$. Also $g(o,a_j)=g(u_i,y_j)=1$. Consequently the signed residual on $(u_i,y_j)$ is exactly $4-2w_{r,u_i}(a_j)-2w_{r,y_j}(u_i)$. For roots inside the copy, item 1 gives a signed residual lower bound of $-4$. Combining the probability masses and the weight estimate above, the signed residual of the root average is at least
+
+$$
+\begin{aligned}
+4(1-p)-\frac4m(1-p)-4p&\ge4-\frac4m-\frac8N.
+\end{aligned}
+$$
+
+Its absolute value satisfies the same bound. The full proof is checked by the Lean kernel.
+:::
+
+**Manual derivation.** Scaling the gains replaces triangle defect $1$ by any $\varepsilon>0$. Pure predecessor barycenter recurrence has no uniform error coefficient. As $m,N$ tend to infinity, root averaging in the two-step scheme with graph-dependent root laws, anchors, and predecessor weights cannot reduce the uniform error bound below $4\varepsilon$. [@thm-appe-chordal-banach-sharp-four] extends the obstruction to arbitrary potentials.
+
+The root-averaging lower bound gives a family on which to compare reconstruction methods. With bounded clique sizes, the two-step estimate improves when the weights account for the sizes of the predecessor sets. On the bridged graph, a different construction first fits the core of each copy using its universal vertices, then extends the fit to the root.
+
+::: {.theorem #thm-appe-multitier-universal-banach title="Multi-Tier Predecessor Bounds and Simplicial Extension from a Universal Core" lean="D5/S3/Combinatorics/Graph/Chordal/MultiTierAndUniversalCliqueBanach.SimpleGraph.IsChordal.exists_multitier_clique_banach_gain_potential, D5/S3/Combinatorics/Graph/Chordal/MultiTierAndUniversalCliqueBanach.SimpleGraph.exists_universal_core_simplicial_banach_potential, D5/S3/Combinatorics/Graph/Chordal/MultiTierAndUniversalCliqueBanach.SimpleGraph.bridgedGadget_banach_upper_bound"}
+In each part, let $E$ be a real seminormed vector space, let $\varepsilon\ge0$ be real, and let $g:V\times V\to E$ be a gain defined on all ordered pairs of the given vertex set $V$. Assume that $g(j,i)=-g(i,j)$ for all $i,j\in V$ and that $\|g(i,j)+g(j,\ell)-g(i,\ell)\|\le\varepsilon$ on every ordered triangle $(i,j,\ell)$.
+
+1. **Multi-tier bound with bounded clique size.** Let $G$ be a simple chordal graph on a finite vertex set $V$, and let $k\ge4$ be a natural number such that every clique has at most $k+1$ vertices. Then there exists a potential $\varphi:V\to E$ such that every ordered adjacent pair $(u,v)$ satisfies
+
+   $$
+   \bigl\|g(u,v)-(\varphi(v)-\varphi(u))\bigr\|\le\left(4-\frac{4(k-2)}{k^2-3k+3}\right)\varepsilon .
+   $$
+
+2. **Simplicial attachments to a universal core.** Let $G$ be a simple graph on a finite vertex set $V$. Suppose $U\subseteq H\subseteq V$, with $U$ nonempty and every $u\in U$ adjacent to every other vertex in $H$. Suppose $H^c$ is independent and for some natural number $m\ge1$, the neighborhood $N(o)$ of each $o\in H^c$ is a clique contained in $H$ with at most $m$ vertices. Then there exists a potential $\varphi:V\to E$ with error $\|g(u,v)-(\varphi(v)-\varphi(u))\|$ at most $\max\{1,2-2/m\}\varepsilon$ on every ordered adjacent pair $(u,v)$.
+
+3. **Reconstruction on the bridged graph.** For any natural numbers $m\ge2$ and $N\ge1$, take $\operatorname{bridgedGadget}(m,N)$ from [@thm-appe-bfs-barycenter-obstructions], with vertex set $V$ indexed by copy and vertex within the copy. Then there exists a potential $\varphi:V\to E$ with error $\|g(u,v)-(\varphi(v)-\varphi(u))\|$ at most $(2-2/m)\varepsilon$ on every ordered adjacent pair $(u,v)$.
+:::
+
+::: {.proof #pf-appe-multitier-universal-banach}
+**Multi-tier predecessor weights.** Root each connected component and use the distance layers, predecessor sets $P(v)$, shadow anchors $a_C$, and transport values $Q_C$ from the proof of [@thm-appe-biased-clique-banach-potential]. The set $P(v)$ together with $v$ forms a clique, so $|P(v)|\le k$. Adjacent vertices in the same layer have nested predecessor sets. If $S=\{u\in P(v):s\le|P(u)|\}$ is nonempty, choose $u\in S$ with a smallest predecessor set. By nesting, every vertex of $P(u)$ is adjacent to every vertex of $S$. The two sets are cliques in disjoint layers, so $P(u)\cup S$ is a clique and $|S|+s\le k+1$.
+
+Set $D=k^2-3k+3$, $\alpha=(k-3)/D$, and $\beta=(k-2)/D$. For positive integers $m\le k-2$, take $f_m=1/m$ and set $f_{k-1}=\beta$, $f_k=\alpha$, and $f_0=1$. For each $b\in P(v)$, start with weight $\max\{f_{|P(v)|},2\beta-f_{|P(b)|}\}$. Since $2\beta-\alpha=(k-1)/D<1/(k-2)\le1/2$, the smallest profile value is $\alpha>0$. When $1\le|P(v)|\le k-2$, all initial weights are $1/|P(v)|$. When $|P(v)|=k-1$, the baseline is $\beta$, with an extra $\beta-\alpha$ for a vertex with $k$ predecessors. There is at most $1$ such vertex. When $|P(v)|=k$, the baseline is $\alpha$, with $\beta-\alpha$ added at each threshold $k-1$ and $k$. At most $2$ vertices meet the first threshold and at most $1$ meets the second. The two largest rows thus have total weights bounded by $(k-1)\beta+(\beta-\alpha)=1$ and $k\alpha+3(\beta-\alpha)=1$, respectively. Distribute any unused weight uniformly to obtain weights $w_v(b)$ summing to $1$ and still meeting both initial lower bounds.
+
+For a nonroot vertex $x$, take its potential to be $Q_C$ plus the weighted average of the path gains $g(a_C,b)+g(b,x)$ with weights $w_x(b)$. Give the root potential $0$. Its incident edges fit exactly because each neighbor has the root as its sole predecessor. For paths from the same anchor $a$ through shadow predecessors $b,d$ to the same vertex $x$, the difference in path gains is the difference of the defects on $(a,b,d)$ and $(b,d,x)$, with seminorm at most $2\varepsilon$. A triangle with repeated vertices has zero defect by skew symmetry. For an edge from a nonroot vertex $u$ to a vertex $v$ in the next layer, let $c$ be the shadow anchor of the component containing $v$. Then $c\in P(u)$ and $u\in P(v)$. By the transport recursion, the term through $c$ in the average at $u$, once extended by $g(u,v)$, equals the term through $u$ at $v$. Each average differs from its matching term by at most twice the triangle tolerance times the weight of the other terms. The resulting error is at most $(4-2w_u(c)-2w_v(u))\varepsilon$. The weight bounds give $w_u(c)+w_v(u)\ge f_{|P(u)|}+(2\beta-f_{|P(u)|})=2\beta$, so the cross-layer error is at most $(4-4\beta)\varepsilon$.
+
+For a within-layer edge, orient it so that $P(u)\subseteq P(v)$. The endpoints share an anchor and transport value. The path through any $b\in P(u)$, extended from $u$ to $v$, differs from the matching term at $v$ by one triangle defect and from every other term by at most three. Averaging over $P(v)$ gives $(3-2w_v(b))\varepsilon\le(3-2\alpha)\varepsilon$, and averaging over $P(u)$ preserves this bound. Since $2\beta-\alpha\le1/2$, the bound is at most $(4-4\beta)\varepsilon$. Reversing an edge negates its residual, and the component potentials combine to give the desired potential.
+
+**Universal core and simplicial vertices.** For $h\in H$, take $\varphi(h)$ to be the average of $g(z,h)$ over $z\in U$. The residual on a core edge $(a,b)$ is the average of $g(z,a)+g(a,b)-g(z,b)$. Skew symmetry makes the term zero when $z$ is an endpoint. Otherwise universality gives a triangle, and the term has seminorm at most $\varepsilon$. For $o\notin H$ with nonempty $N(o)$, set $\varphi(o)$ to the average of the candidate values $\varphi(b)+g(b,o)$ over $b\in N(o)$. The difference between two distinct neighbors' candidates is bounded by the core edge residual plus the defect of the triangle through $o$, giving seminorm at most $2\varepsilon$. On an edge $(a,o)$ the term from $a$ itself contributes zero to the average of the differences, giving error at most $2(1-1/|N(o)|)\varepsilon\le(2-2/m)\varepsilon$. Give any isolated vertex outside $H$ potential zero. The set $H^c$ has no edges, and reversing an edge preserves its error. The two edge estimates give part 2.
+
+**Bridged graph.** In each copy, let $H$ consist of the vertices left after removing the root, and let $U$ be the universal vertex set in $H$. The root $o$ is the sole vertex outside the core, and its neighborhood is the clique $A$ of size $m$. Apply part 2 to the whole copy. Since $m\ge2$, the local error bound is $(2-2/m)\varepsilon$. Traverse the path of roots, translating the potential on each copy by a constant so that consecutive root potentials differ by the gain on their bridge. These translations preserve all differences within a copy and give zero residual on every bridge. The full proof is checked by the Lean kernel.
+:::
+
+**Manual derivation.** Part 1 strictly improves the bound in [@thm-appe-biased-clique-banach-potential] for every $k\ge4$. Subtracting the common term $4-4/k$ reduces the comparison to $2(k-3)(k-1)^3>(k-2)^2D$, which follows from $D<(k-1)^2$ and $2(k-3)(k-1)=2((k-2)^2-1)>(k-2)^2$. At $k=4$, every $4$-tree has reconstruction coefficient at most $20/7$, with $20/7<79/27<3$. When $N(m-1)>4m$, the real triangle-$1$-flat gain supplied by [@thm-appe-bfs-barycenter-obstructions] for any fixed root-averaged two-step scheme has an edge error of at least $4-4/m-8/N>2-2/m$. For the same gain, part 3 gives a potential with every edge error at most $2-2/m$. For the exact universal constant with unrestricted clique size, see [@thm-appe-chordal-banach-sharp-four].
+
+The predecessor bounds use clique size to control the error. With a clique tree, we can track how the error grows with separator size and distance from the center, or combine the two local potentials directly at each shared vertex.
+
+::: {.theorem #thm-appe-cliquetree-banach-potential title="Banach Potential Bounds by Clique-Tree Center Extension and Two-Clique Midpoint Gluing" lean="D5/S3/Combinatorics/Graph/Chordal/CliqueTreeBanachPotential.SimpleGraph.cliqueTree_center_extension_banach_potential, D5/S3/Combinatorics/Graph/Chordal/CliqueTreeBanachPotential.SimpleGraph.cliqueTree_twoClique_midpoint_banach_potential"}
+Let $G$ be a simple graph on a finite vertex set $V$, and let $T$ be a tree on a finite index set $I$. Suppose $(T,K)$ is a clique tree of $G$. Each bag $K(a)\subseteq V$ is a clique in $G$, every vertex and every edge is contained in a bag, and every bag on any simple tree path between two bags containing a vertex also contains that vertex. For each tree edge $ab$, assume that the separator $S(a,b)=K(a)\cap K(b)$ is nonempty.
+
+Let $E$ be any real seminormed vector space, let $\varepsilon\ge0$ be real, and let $g:V\times V\to E$ be a gain. Assume $g(j,i)=-g(i,j)$ for all $i,j\in V$ and $\|g(i,j)+g(j,\ell)-g(i,\ell)\|\le\varepsilon$ whenever $ij$, $j\ell$, and $i\ell$ are all edges of $G$. In both parts, the fitting error on a directed adjacent pair $(u,v)$ is $\|g(u,v)-(\varphi(v)-\varphi(u))\|$.
+
+1. **Clique-tree center extension.** Let $m\ge1$ be a natural number with $|S(a,b)|\le m$ for every tree edge $ab$, and let $D$ be a natural number with $\operatorname{dist}_T(a,b)\le D$ for all $a,b\in I$. Define
+
+   $$
+   \begin{aligned}
+   R_0 &= 1,\\
+   R_{\ell+1} &= \max\left\{R_\ell,1,\left(1-\frac1m\right)(1+R_\ell)\right\}.
+   \end{aligned}
+   $$
+
+   Then there is a potential $\varphi:V\to E$ with fitting error at most $R_{\lfloor D/2\rfloor}\varepsilon$ on every directed edge of $G$.
+
+2. **Two-clique midpoint gluing.** Suppose $|\{i\in I:x\in K(i)\}|\le2$ for every vertex $x\in V$. Give each tree edge $ab$ the weight
+
+   $$
+   \sigma(a,b)=\left(1-\frac1{|S(a,b)|}\right)\left(1-\frac{|S(a,b)|}{\max\{|K(a)|,|K(b)|\}}\right).
+   $$
+
+   Let $\tau(a)$ be the largest sum of weights of two distinct tree edges incident to $a$, padding with $0$ if there is only one incident edge and taking $0$ if there are none. Set
+
+   $$
+   M(T,K)=\max\left(\{0\}\cup\left\{1-\frac2{|K(a)|}+\tau(a):a\in I,\ |K(a)|\ge2\right\}\right).
+   $$
+
+   Then $M(T,K)<3$, and there is a potential $\varphi:V\to E$ with fitting error at most $M(T,K)\varepsilon$ on every directed edge of $G$.
+:::
+
+::: {.proof #pf-appe-cliquetree-banach-potential}
+**Center extension.** Take the middle vertex of a longest simple tree path, or both endpoints of its middle edge, as the center. The distance from any bag to the path is at most the shorter distance from its attachment point to the two ends. Otherwise its path to the farther end would be longer. Thus every bag lies within $\lfloor D/2\rfloor$ of the nearest center. Average the star potentials $g(t,\cdot)$ over the whole center bag in the single-bag case or over the common separator in the two-bag case. This gives the same potential on the center bags. Each edge residual is the mean of triangle defects, with terms at the endpoints vanishing by skew symmetry, so its seminorm is at most $\varepsilon$. An empty bag has no edges to fit.
+
+Extend outward one layer at a time. If the parent bag has potential $p$, keep $p$ on the parent–child separator $S$. At every other vertex $v$ in the child bag, take the mean of $p(t)+g(t,v)$ over $t\in S$. An edge with both endpoints in $S$ retains the bound $R_\ell\varepsilon$. With both endpoints outside $S$, the $p(t)$ terms cancel and the error is at most $\varepsilon$. If just the endpoint $u$ lies in $S$, the $t=u$ term in the residual average vanishes. Each other term is the sum of a triangle defect and a parent-bag residual. The error is therefore at most $(1-1/|S|)(1+R_\ell)\varepsilon\le(1-1/m)(1+R_\ell)\varepsilon$. Reversing an edge negates its residual. These three edge estimates give the recurrence. Neighboring bags agree on their separator, so the path intersection property makes the potential consistent across all bags containing a vertex. Every edge lies in a bag, giving the global bound.
+
+**Midpoint gluing.** For each nonempty bag $K(a)$, let $p_a(x)$ be the mean of $g(t,x)$ over the bag. The two endpoint terms vanish, giving the within-bag bound $(1-2/|K(a)|)\varepsilon$. Sum the means of $p_a-p_b$ on $S(a,b)$ along the tree to obtain translations $\psi_a=p_a+c_a$ for which $\psi_b-\psi_a$ has mean zero on every common separator. This is the tree offset construction `tree_offsets` used in the proof of [@thm-appe-complete-cliquesum-banach]. The translations preserve every within-bag potential difference.
+
+Take $u,v$ in a separator $S=S(a,b)$. The increment of $\psi_b-\psi_a$ from $v$ to $u$ is the difference of the two bag residuals on the same edge, and it vanishes when $u=v$. Each residual is a mean of triangle defects. Put $q=1/\max\{|K(a)|,|K(b)|\}$ and subtract $q$ times the sum of the common star defects from each mean. The remaining weights are nonnegative and sum to $1-|S|q$ in each bag, so the increment has seminorm at most $2(1-|S|q)\varepsilon$. With $u$ fixed, average over $v\in S$. The zero mean recovers the difference at $u$, and the term $v=u$ contributes zero. Dividing by $2$ bounds the shift from $\psi_a(u)$ to the midpoint by $\sigma(a,b)\varepsilon$.
+
+At a vertex in a single bag, use its translated potential. A vertex in two bags must belong to neighboring bags by the path intersection property, so use the midpoint of their translated potentials. On an edge in one bag with neither endpoint shared, the residual stays the same. If both endpoints lie in the same separator, the residual is the average of the two bag residuals, each bounded by $M(T,K)\varepsilon$. In the remaining cases each endpoint contributes at most one shift. Two shifts correspond to distinct incident tree edges, and an unshared endpoint contributes zero. The error is at most $(1-2/|K(a)|+\tau(a))\varepsilon$. Every weight belongs to $[0,1)$ and the tree is finite, so $\tau(a)<2$ and hence $M(T,K)<3$. The full proof is checked by the Lean kernel.
+:::
+
+**Manual derivation.** Both parts allow arbitrarily large bags and edges joining distinct incident separators within a bag. Compare the separation condition in [@thm-appe-complete-cliquesum-banach]. Every finite $m\ge1$ gives $R_\ell<1+\ell$ for $\ell\ge1$, since the last term in the maximum is strictly below $1+R_\ell$. Part 1 thus gives, for $D\le5$, a coefficient strictly below $3$, and for $D\le7$, a coefficient strictly below $4$. For $m\le4$ and $D\le19$, the recurrence at $m=4$ gives the upper bound $R_9=373533/131072<20/7$, strictly below the general $4$-tree bound in [@thm-appe-multitier-universal-banach]. Part 2 gives $M(T,K)<3$ at any diameter whenever each vertex belongs to at most two bags. For the exact universal constant with unrestricted clique size, see [@thm-appe-chordal-banach-sharp-four]. The exact value of $C_{\mathrm{SU}(2)}(K_4)$ in $[c_*,4/5]$ remains open. See [@prob-appe-round-quaternion-k4-optimal-constant].
+
+Weights can improve both constructions. In simplicial elimination they let old residuals cancel. In clique-tree gluing, the weight shared by adjacent bags controls how much their potentials differ at a shared vertex.
+
+::: {.theorem #thm-appe-weighted-simplicial-and-occurrence-banach title="Banach Potential Bounds from Weighted Simplicial Elimination and Clique-Tree Occurrence Centers" lean="D5/S3/Combinatorics/Graph/Chordal/WeightedSimplicialBanachPotential.SimpleGraph.IsChordal.exists_weighted_simplicial_banach_gain_potential, D5/S3/Combinatorics/Graph/Chordal/WeightedSimplicialBanachPotential.SimpleGraph.cliqueTree_occurrenceCenter_banach_potential"}
+In both parts, take any real seminormed vector space $E$, any real $\varepsilon\ge0$, and a gain $g:V\times V\to E$. Assume $g(y,x)=-g(x,y)$ for all $x,y\in V$ and $\|g(x,y)+g(y,z)-g(x,z)\|\le\varepsilon$ whenever $xy,yz,xz$ are edges of $G$. The residual of a potential $\varphi:V\to E$ on a directed adjacent pair $(u,v)$ is $g(u,v)-(\varphi(v)-\varphi(u))$.
+
+1. **Weighted simplicial elimination for chordal graphs of bounded clique size.** Let $G$ be a simple chordal graph on a finite vertex set $V$. Let $k\in\mathbb N$ satisfy $k\ge2$ and suppose every clique of $G$ has at most $k+1$ vertices. There is a potential $\varphi$ whose residual seminorm on every directed edge of $G$ is at most
+
+   $$
+   R_k\varepsilon,\qquad R_k=\max\left\{k-2,\frac{k-1+\sqrt{(k+3)^2-16}}{4}\right\}.
+   $$
+
+2. **Occurrence centers for weighted clique trees.** Let $V,I$ be finite and let $G$ be a simple graph on $V$. Let $(T,K)$ be a clique tree of $G$ indexed by $I$, with bags $K(a)\subseteq V$, as defined in [@thm-appe-cliquetree-banach-potential]. For every tree edge $ab$, assume its separator $S_{ab}=K(a)\cap K(b)$ is nonempty. For each $a\in I$, take a probability distribution $\pi_a:V\to\mathbb R_{\ge0}$ supported on $K(a)$, with weight zero outside $K(a)$ and $\sum_{x\in V}\pi_a(x)=1$. Take real numbers $\alpha,d$ with $d\ge0$ satisfying the following inequalities.
+
+   $$
+   \begin{aligned}
+   1-\pi_a(x)-\pi_a(y)&\le\alpha &&\text{if }x,y\in K(a)\text{ and }xy\text{ is an edge of }G,\\
+   \left(1-\frac1{|S_{ab}|}\right)\left(1-\sum_{x\in S_{ab}}\min\{\pi_a(x),\pi_b(x)\}\right)&\le d &&\text{if }ab\text{ is an edge of }T.
+   \end{aligned}
+   $$
+
+   Let $D\in\mathbb N$ and suppose $\operatorname{dist}_T(a,b)\le D$ for every $x\in V$ and any two bags $K(a),K(b)$ containing $x$. There is a potential $\varphi$ whose residual seminorm on every directed edge is at most $\bigl(\alpha+4\lfloor(D+1)/2\rfloor d\bigr)\varepsilon$. If $D\le1$, the same potential also gives residual seminorm at most $(\alpha+2d)\varepsilon$ on every directed edge.
+:::
+
+::: {.proof #pf-appe-weighted-simplicial-and-occurrence-banach}
+**Weighted elimination.** Use Dirac's theorem to delete simplicial vertices successively, then reverse the order. The earlier neighbors $S_v$ of each vertex $v$ form a clique even after adjoining $v$, so $|S_v|\le k$. Put $R=R_k$, $s=1/(1+R)$, and $t=1-(k-1)s$. The inequality $(k+3)^2-16\le9(k-1)^2$ gives $k-2\le R\le k-1$, hence $0\le t\le s$. Set $\varphi(v)$ to a weighted mean of the candidates $\varphi(w)+g(w,v)$. Use uniform weights when $0<|S_v|<k$. When $|S_v|=k$, give the latest predecessor weight $t$ and all others weight $s$. With no predecessors, set $\varphi(v)=0$. Write $w_v(w)$ for the weights and $r_{w,v}$ for the residuals. The mean gives $\sum_{w\in S_v}w_v(w)r_{w,v}=0$, and later insertions leave these residuals intact.
+
+For $x\in S_v$, subtract the mean from its candidate to obtain $r_{x,v}$. The term at $w=x$ vanishes. Each other term is the sum of an old residual $r_{x,w}$ and the triangle defect $g(x,v)-g(x,w)-g(w,v)$. If $x$ has weight at least $s$, these terms have total weight at most $1-s$, and the induction bound gives $(1-s)(R+1)\varepsilon=R\varepsilon$. This covers the uniform case because $|S_v|\le k-1\le1+R$.
+
+If $|S_v|=k$ and $x$ is the latest predecessor, then $A=S_v\setminus\{x\}\subseteq S_x$ and $|A|=k-1$. By skew symmetry, the zero-sum identity at $x$ also holds for the reversed residuals $r_{x,w}$. If $A=S_x$, uniform weighting gives $\sum_{w\in A}s r_{x,w}=0$. Otherwise $S_x=A\cup\{z\}$. Let $b$ be the latest vertex in $S_x$. Subtracting the weighted zero sum at $x$ from $\sum_{w\in A}s r_{x,w}$ leaves $(s-t)r_{x,b}-s r_{x,z}$, with seminorm at most $(2s-t)R\varepsilon$. The triangle defects contribute at most $(k-1)s\varepsilon$. The radical term in $R_k$ is the positive root of $2R^2-(k-1)R-(k-1)=0$, so the maximum gives $2R^2-(k-1)R-(k-1)\ge0$. Substituting $s,t$ gives the equivalent inequality $(k-1)s+(2s-t)R\le R$, completing the induction.
+
+**Occurrence centers.** Take the weighted mean of the stars in each bag, $p_a(v)=\sum_{x\in K(a)}\pi_a(x)g(x,v)$. An edge residual within the bag is a weighted mean of triangle defects. Both endpoint terms vanish, so its seminorm is at most $\alpha\varepsilon$. Use `tree_offsets` to construct the translations. Starting at a tree root, add the mean of $p_a-p_b$ on $S_{ab}$ when crossing from $a$ to $b$. These translations give potentials $\psi_a$ with $\psi_b-\psi_a$ of mean zero on every $S_{ab}$.
+
+Put $M=1-\sum_{x\in S_{ab}}\min\{\pi_a(x),\pi_b(x)\}$. The increment of $\psi_b-\psi_a$ between two separator vertices is a difference of two bag residuals. Subtract the common weight from both distributions, leaving nonnegative weights of total mass $M$ in each. The increment then has seminorm at most $2M\varepsilon$. Fix one vertex and average over the other. The zero mean recovers the potential difference at the fixed vertex, and the increment vanishes when the vertices coincide. Thus the jump at a shared vertex has seminorm at most $2(1-1/|S_{ab}|)M\varepsilon\le2d\varepsilon$.
+
+The bags containing $v$ form a subtree. Choose a middle vertex of a longest path as its center. A branch off that path has length at most the shorter distance from its attachment point to the two ends, since a longer branch would extend the path to the farther end. The center is therefore within $\lfloor(D+1)/2\rfloor$ edges of every occurrence. Set $\varphi(v)$ to the translated potential at the center. Every edge lies in a bag. Summing the jumps from that bag to the centers at the two endpoints adds at most $4\lfloor(D+1)/2\rfloor d\varepsilon$ to its error.
+
+When $D\le1$, each vertex occurs in at most two bags, since three pairwise adjacent bags would form a cycle. Use the translated value if there is one occurrence and the midpoint if there are two. Each endpoint then moves by at most $d\varepsilon$ from its value in the bag containing the edge, giving $(\alpha+2d)\varepsilon$. When $D=0$ neither endpoint moves, giving $\alpha\varepsilon$. When $D=1$ the midpoint bound also implies the general bound. The full proof is checked by the Lean kernel.
+:::
+
+Part 1 gives $R_2=1$ and $R_3=(1+\sqrt5)/2<5/3<2$. Thus all chordal graphs of clique size at most $4$, including every $3$-tree, have a uniform coefficient below $2$. The value $R_4=(3+\sqrt{33})/4<7/3<20/7$ improves the bound for all $4$-trees in [@thm-appe-multitier-universal-banach]. The value $R_5=3<40/13$ applies to all chordal graphs of clique size at most $6$.
+
+The following consequences of Part 2 allow any clique size and any diameter of the whole clique tree, with every bag nonempty. For $D\le2$ and maximum tree degree at most $3$, the coefficient can be taken strictly below $11/3$. For $D\le1$ and maximum degree at most $2$, it can be taken strictly below $2$. If $D\le2$ and every tree edge satisfies $\max\{|K(a)|,|K(b)|\}\le c|S_{ab}|$ with $c\ge1$, the coefficient is at most $5-4/c$, giving $c=2$ the coefficient $3$ and $c=4/3$ the coefficient $2$.
+
+In the weighted elimination of [@thm-appe-weighted-simplicial-and-occurrence-banach], a triangle of already fitted edges controls the difference between two old residuals. When one retained identity leaves too much error, a second identity can eliminate the contribution from the latest predecessor.
+
+::: {.theorem #thm-appe-multi-identity-simplicial-banach title="Banach Potential Bounds from Multiple Retained Identities in Simplicial Elimination" lean="D5/S3/Combinatorics/Graph/Chordal/MultiIdentitySimplicialBanach.SimpleGraph.IsChordal.exists_regrouped_simplicial_banach_gain_potential, D5/S3/Combinatorics/Graph/Chordal/MultiIdentitySimplicialBanach.SimpleGraph.IsChordal.exists_multiIdentity_cliqueSix_banach_gain_potential, D5/S3/Combinatorics/Graph/Chordal/MultiIdentitySimplicialBanach.SimpleGraph.IsChordal.exists_multiIdentity_cliqueSeven_banach_gain_potential"}
+Let $G$ be a simple chordal graph on a finite vertex set $V$ and let $E$ be a real seminormed vector space. Take $g:V\times V\to E$ and a real number $\varepsilon\ge0$. Assume $g(y,x)=-g(x,y)$ for all $x,y\in V$, and $\|g(x,y)+g(y,z)-g(x,z)\|\le\varepsilon$ whenever $xy,yz,xz$ are edges of $G$. Each part gives a potential $\varphi:V\to E$ whose residual seminorm $\|g(u,v)-(\varphi(v)-\varphi(u))\|$ on every ordered adjacent pair $(u,v)$ satisfies the stated bound.
+
+1. **Regrouping by old triangles.** Let $k\in\mathbb N$ with $k\ge2$ and suppose every clique $C$ of $G$ satisfies $|C|\le k+1$. For every real $R$ with $\max\{1,k-2\}\le R\le k-1$ and $2(k-1)\le R(R+1)$, the residual seminorm is at most $R\varepsilon$.
+2. **Clique size at most $6$.** If every clique of $G$ has at most $6$ vertices, the residual seminorm is at most $(2\sqrt3-1)\varepsilon$.
+3. **Clique size at most $7$.** If every clique of $G$ has at most $7$ vertices, the residual seminorm is at most $\frac{3+\sqrt7}{2}\varepsilon$.
+:::
+
+::: {.proof #pf-appe-multi-identity-simplicial-banach}
+Reverse a perfect elimination order, which exists by chordality, and insert the vertices in that order. Let $P_v$ be the predecessors of $v$, namely its neighbors already inserted. The set $P_v$ together with $v$ is a clique. If $P_v$ is empty, set $\varphi(v)=0$. Otherwise take the weighted mean of the candidates $\varphi(x)+g(x,v)$ with weights $w_v(x)\ge0$ summing to $1$ on $P_v$. Write $r_{xy}=g(x,y)-(\varphi(y)-\varphi(x))$ and $\delta_{xyz}=g(x,y)+g(y,z)-g(x,z)$. The mean gives $\sum_{x\in P_v}w_v(x)r_{vx}=0$, an identity retained after every later insertion.
+
+For $c\in P_v$, the new edge residual is $\sum_{x\in P_v\setminus\{c\}}w_v(x)(r_{cx}-\delta_{cxv})$. The weighted defects contribute at most $(1-w_v(c))\varepsilon$. Already fitted edges satisfy $\|r_{xy}\|\le R\varepsilon$. Set $s=1/(R+1)$. When $w_v(c)\ge s$, the direct bound is $(1-s)(R+1)\varepsilon=R\varepsilon$. Also, for $x,y\in P_c$, the identity $r_{cx}-r_{cy}=\delta_{cxy}-r_{xy}$ gives $\|r_{cx}-r_{cy}\|\le(R+1)\varepsilon$. For coincident vertices the difference is zero.
+
+**Part 1.** Use uniform weights below $k$ predecessors. Since $|P_v|\le k-1\le R+1$, the direct bound applies. With exactly $k$ predecessors, give the latest weight $t=1-(k-1)s$ and the others weight $s$, with $0\le t\le s$. Only the edge from the latest predecessor $c$ requires another estimate. The other $k-1$ predecessors form $A=P_v\setminus\{c\}\subseteq P_c$. If $P_c=A$, the uniform identity at $c$ makes the old residual sum zero, leaving at most $(1-t)\varepsilon\le R\varepsilon$ from triangle defects. Otherwise $P_c=A\cup\{z\}$. Let $b$ be the latest vertex in $P_c$. Subtracting the retained identity at $c$ leaves $(s-t)(r_{cb}-r_{cz})-t r_{cz}$. The old triangle bounds the difference, giving a total error of at most $\bigl((s-t)(R+1)+tR+1-t\bigr)\varepsilon$. The coefficient equals $2(k-1)s$, which is at most $R$ by the quadratic inequality.
+
+**Parts 2 and 3.** The predecessor limits $k$ are $5$ and $6$, respectively. Use uniform weights for at most $3$ predecessors. Otherwise use $s,s,s,t,0,\ldots$ in insertion order with $t=1-3s$. Both radii satisfy $R\ge2$ and $1/4\le s\le1/3$, so $0\le t\le s$. The direct bound covers edges of weight at least $s$. On each remaining edge, the old residual sum uses only vertices earlier than $c$. Extend their weights by zero to $Q=P_c$ and call them $b_x$. Put $\mu=1-w_v(c)$. Subtracting $\mu$ times the retained identity gives $\sum_{x\in Q}h_xr_{cx}$ with $h_x=b_x-\mu w_c(x)$ and $\sum_{x\in Q}h_x=0$. Pair positive and negative coefficients by mass. If the total negative mass is $M=\sum_{x\in Q}\max\{-h_x,0\}$, the sum has seminorm at most $M(R+1)\varepsilon$. For $M>0$, assign mass $h_x(-h_y)/M$ to each positive-negative pair $x,y$ and apply the triangle inequality to the residual differences. For $M=0$, the sum is zero.
+
+In the exceptional cases, the latest vertex $a$ of $Q$ has coefficient $\lambda=h_a\ge0$, and $Q\setminus\{a\}\subseteq P_a$. Use the identity at $a$ to replace $\lambda r_{ca}$ by a sum of $r_{ca}+r_{ax}$ with weights $\lambda w_a(x)$. For shared predecessors $x\in Q\cap P_a$, replacing this vector by $r_{cx}$ costs one triangle defect. For extra predecessors $x\in P_a\setminus Q$, keep the auxiliary vector $r_{ca}+r_{ax}$. Its difference from $r_{cy}$ at a negative coefficient $y$ is $(r_{ax}-r_{ay})+\delta_{cay}$, adding at most $\varepsilon$ to the usual pairing bound. Across shared and extra predecessors these costs sum to at most $\lambda\varepsilon$, since the weights $w_a$ sum to $1$. If $M$ is the negative mass after replacement, adding the new triangle defects leaves the condition $M+s(\mu+\lambda)\le1-s$. Use $\lambda=0$ when one identity suffices.
+
+To check this inequality, number the positions in $Q$ from $0$. Put $d=|Q|$ and let $T$ be the positions in $Q$ of the vertices in $P_v$ earlier than $c$, with $j=|T|$. The cases are $3\le j\le d\le k$ and $j<k$. Assign $b_x=s,s,s,t,0,\ldots$ in order on $T$. Eliminate the last position $d-1$ in the following cases.
+
+- $d=k=5$, with $j=3$ and $3,4\in T$.
+- $d=k=6$, with either $j=3$ and $4,5\in T$, or $j=4$ and exactly one of $0,1,2$ in $T$.
+
+In these cases $P_a$ contains at most one vertex beyond $Q\setminus\{a\}$. Since the weights are nonincreasing, a shift of one position to the right gives a lower bound on the weight each remaining position receives. To upper-bound the negative mass, replace the coefficient at $i<d-1$ by $h_i+\lambda w_{i+1}$, where $w_{i+1}$ is the weight at position $i+1$ in $Q$, and set the last coefficient to zero. Substituting the subsets $T\subseteq\{0,\ldots,d-1\}$ gives the following upper bounds on $M+s(\mu+\lambda)$, listed in increasing order of $j$.
+
+| $k$ | One identity | Two identities |
+| --- | --- | --- |
+| $5$ | $3s-3s^2$, $2s$ | $12s^2-s$ |
+| $6$ | $9s^2$, $1-s$, $2s$ | $3s^2+2s$, $3s-t^2$ |
+
+Part 2 uses $s=1/(2\sqrt3)$, which satisfies $12s^2=1$. Part 3 uses $s=(5-\sqrt7)/9$, which satisfies $9s^2-10s+2=0$. Substitution bounds every entry by $1-s$. The residual bound thus holds at each insertion, and skew symmetry gives the bound on the reverse edges. The full proof is checked by the Lean kernel.
+:::
+
+Write $\omega(G)$ for the size of the largest clique. For $\omega(G)\le4$, Part 1 gives the older upper bound $R=(\sqrt{17}-1)/2\approx1.5616$. For all finite chordal graphs with $\omega(G)\le4$, [@thm-appe-three-tree-clique-four-bracket] gives $\frac43\le S_4\le\frac{72537}{50000}=1.45074<\frac32$. For $\omega(G)\le5$, it allows $R=2<(3+\sqrt{33})/4$, so all $4$-trees have a uniform upper bound of $2\varepsilon$. Part 2 gives, for $\omega(G)\le6$, $2\sqrt3-1\approx2.4641<3$, improving the previous bound. Part 3 gives, for $\omega(G)\le7$, $(3+\sqrt7)/2\approx2.8229<3$, so all $6$-trees have a uniform coefficient strictly below $3$.
+
+With unrestricted clique size, the optimal uniform real Banach coefficient equals $4$, and the optimal uniform coefficient for groups with bi-invariant pseudometrics also equals $4$, as established in [@thm-appe-chordal-banach-sharp-four]. The optional ceiling of $3$ under a dominating-clique hypothesis still requires formal evidence. For the nonabelian group $\mathrm{SU}(2)$ with its round distance, Lean 4 gives the uniform upper coefficient $\frac{434}{125}=3.472<\frac72<4$ alongside bounds for small defects and small cliques. See [Appendix E.8.1.7](appendix-e-s08-s01-s07-chordal-su2-sharp-bounds.md#sec-appe-chordal-su2-sharp-bounds). The optimal uniform coefficient remains open, as does the separate question of whether $C_{\mathrm{SU}(2)}(K_4)=c_*$ holds. See [@prob-appe-round-quaternion-k4-optimal-constant].
+
+For a fixed nonlinear target group, the optimal coefficient is already a question on complete graphs.
 
 **A four-vertex round $\mathrm{SU}(2)$ counterexample.** A four-vertex chordal graph with no triangle is a forest. If it has one triangle, gauge the two spokes to the identity, write the remaining gain as $\exp X$, and take potentials $1,\exp(-X/3),\exp(X/3)$. Each triangle edge has error $|X|/3\le\varepsilon/3$. Fit any attached tree edge exactly. The remaining non-complete graph is the diamond, with two triangles sharing an edge. Take a degree-$3$ vertex as hub and gauge its spokes to $1$. Give the midpoint of the rim path potential $1$, and give each endpoint the midpoint of a minimizing geodesic from $1$ to the value fitting its rim edge exactly. Every error is at most $\varepsilon/2$.
 
@@ -372,12 +727,114 @@ $$
 Solving $u\le(\sqrt3/2)(1-u^2)$ gives $u\le1/\sqrt3$, so $r\ge r_0$. The same lower bound holds immediately for $r\ge\pi/2$. Take $t=1/\sqrt3$. In the plane perpendicular to $1,I$, start with $v_1=J$ (the unit quaternion along the second imaginary axis) and rotate cyclically by $v_{j+1}=-v_j/2+(\sqrt3/2)v_j I$. The potentials $q_j=t+\sqrt{1-t^2}\,v_j$ give cosine $t$ on the spokes and $(1-t^2)\sqrt3/2=t$ on the rim. Since $\cos(3\pi/10)=\sin(\pi/5)$ has square $(5-\sqrt5)/8>1/3$, we have $r_0>3\pi/10$. A universal coefficient $k<c_*$ applied to $Q$ at $\varepsilon=\pi/2$ would give radius $k\pi/2<r_0$, contradicting the lower bound. The full proof is checked by the Lean kernel.
 :::
 
-**The cyclic one-parameter family (`manual derivation`).** The ratio $c_*$ is also the optimum within the cyclic family with spoke gains $1$ and common rim gain $\cos\theta+I\sin\theta$ for $0<\theta\le\pi$. Write $r(\theta)$ for the minimum fit radius and $r_0=\arccos(1/\sqrt3)$. For $0<\theta\le\pi/3$, the identity potential and the rim triangle lower bound give $r(\theta)=\theta$, with ratio $1/3$. For $\pi/3\le\theta\le\pi/2$, the largest defect is $2\pi-3\theta$. With $\delta=\pi/2-\theta$, each rim gain moves by distance $\delta$, so $r(\theta)\le r_0+\delta$. Since $3c_*>1$, the ratio is strictly below $c_*$ when $\delta>0$.
+Keeping the three directed rim gains equal and varying their common angle gives an exact fit radius at each angle and explains why the quarter turn gives the largest ratio.
 
-For $\pi/2\le\theta\le\pi$, the largest defect is $\theta$. Put $a=\cos\theta$ and $k=\cos(\theta-2\pi/3)$. The optimal radius is $\arccos u_\theta$, where $u_\theta$ is the unique zero of $F_\theta(u)=k+(a-k)u^2-u$ in $(0,1)$. Indeed, for a fit with minimum residual cosine $u>0$, the symmetric part of the mean rim inner product is $a(3|m|^2-1)/2$, and the skew part is at most $(\sqrt3/2)\sin\theta(1-|m|^2)$. Thus $u\le k+(a-k)|m|^2\le k+(a-k)u^2$. In the planar construction from the proof, take real part $u_\theta$ and imaginary length $\sqrt{1-u_\theta^2}$. Each spoke then has cosine $u_\theta$, and each rim edge has cosine $k+(a-k)u_\theta^2=u_\theta$. On $\pi/2\le\theta\le2\pi/3$, $F_\theta(1/\sqrt3)=(\sin\theta-1)/\sqrt3\le0$, giving $u_\theta\le1/\sqrt3$. By implicit differentiation, the numerator of $r'(\theta)$ is $\sin\theta\,u_\theta^2+\sin(\theta-2\pi/3)(1-u_\theta^2)\le u_\theta^2$, and the denominator is $(1+2(k-a)u_\theta)\sqrt{1-u_\theta^2}\ge\sqrt{1-u_\theta^2}$, so $r'(\theta)\le1/\sqrt6<c_*$. On $2\pi/3\le\theta\le\pi$, $9F_\theta(1/3)=-3\cos\theta+4\sqrt3\sin\theta-3\ge0$ by concavity on this interval and the endpoint values. Hence $r(\theta)\le\arccos(1/3)<4r_0/3$. The strict inequality follows by comparing $3\arccos(1/3)$ and $4r_0$, whose cosines are $-23/27$ and $-7/9$. Both angles are in $(\pi,2\pi)$. These bounds give a strictly smaller ratio for $\theta>\pi/2$.
+::: {.theorem #thm-appe-round-quaternion-equal-rim-minimax title="Exact Minimax Radius and Unique Quarter-Turn Maximum for Equal Cyclic Rim Gains" lean="D5/S3/Combinatorics/Graph/Chordal/RoundQuaternionEqualRimMinimax.RoundQuaternionEqualRimMinimax.equalRim_exact_defect_and_minimax, D5/S3/Combinatorics/Graph/Chordal/RoundQuaternionEqualRimMinimax.RoundQuaternionEqualRimMinimax.equalRim_ratio_unique_maximum_at_quarter_turn"}
+On $K_4$ with vertex set $\mathrm{Fin}(4)=\{0,1,2,3\}$, take gains in the group of unit real quaternions $S=\operatorname{unitary}\mathbb H$ with round distance $d(p,q)=\arccos\langle p,q\rangle_{\mathbb R}$. Let $I\in\mathbb H$ satisfy $\operatorname{Re}I=0$ and $\|I\|=1$. For $a\in[0,\pi]$, define the gain assignment $G(I,a)=(g_{ij})$ as follows. The diagonal and the spokes at hub $0$ have gain $1$. The directed rim edges $(1,2),(2,3),(3,1)$ have gain $A=\cos a+I\sin a$, and their reverses have gain $A^{-1}$.
+
+An assignment has triangle defect at most $\varepsilon$ if $g_{ji}=g_{ij}^{-1}$, $g_{ii}=1$, and $d(g_{ij}g_{jk},g_{ik})\le\varepsilon$ for all pairwise distinct $i,j,k$. A potential $\varphi:\mathrm{Fin}(4)\to S$ fits the gains within radius $r$ if $d(g_{ij},\varphi_i^{-1}\varphi_j)\le r$ for every directed edge $i\ne j$.
+
+For $0\le a\le\pi/3$, define $e(a)=3a$. For $\pi/3<a\le\pi/2$, define $e(a)=2\pi-3a$. For $\pi/2<a\le\pi$, define $e(a)=a$. Set $R(a)=a$ for $0\le a\le\pi/3$ and $R(a)=\arccos t(a)$ for $\pi/3<a\le\pi$, where $t(a)$ is the unique positive root of the following equation with $\lambda(a)=\cos(a-2\pi/3)$.
+
+$$
+(\lambda(a)-\cos a)t^2+t-\lambda(a)=0.
+$$
+
+1. **Exact triangle defect and minimax radius.** For every such $I$ and every $a\in[0,\pi]$, the assignment $G(I,a)$ has triangle defect at most $e(a)$. For every real $\varepsilon$, if its triangle defect is at most $\varepsilon$, then $e(a)\le\varepsilon$. There is a potential $\varphi:\mathrm{Fin}(4)\to S$ that fits $G(I,a)$ within radius $R(a)$. For every potential $\varphi:\mathrm{Fin}(4)\to S$ and real $r$, if $\varphi$ fits $G(I,a)$ within radius $r$, then $R(a)\le r$.
+2. **Equality only at the quarter turn.** For all $a\in(0,\pi]$, we have $R(a)/e(a)\le c_*=\frac{2}{\pi}\arccos(1/\sqrt3)$, with equality if and only if $a=\pi/2$.
+:::
+
+::: {.proof #pf-appe-round-quaternion-equal-rim-minimax}
+Since $I^2=-1$, triangles through the hub have holonomy $A^{\pm1}$, and the rim triangle has holonomy $A^{\pm3}$. Left and right multiplication by unit quaternions preserve distance, so the respective defects are $a$ and $\arccos(\cos(3a))$. Both occur. Taking the larger principal angle, with angles folded into $[0,\pi]$, gives the three branches of $e(a)$.
+
+Left-multiply all potentials by $\varphi_0^{-1}$ to set the hub potential to $1$ while preserving every relative potential $\varphi_i^{-1}\varphi_j$. Write $x_i$ for the rim potentials and read their indices cyclically. If a potential fits within radius $r<\pi/2$, put $u=\cos r>0$. Since $r\ge0$, the spoke constraints give $u\le\langle 1,m\rangle_{\mathbb R}\le\|m\|\le1$, where $m=(x_1+x_2+x_3)/3$. Left-multiplying along each rim edge by its source potential gives $u\le\langle x_i A,x_{i+1}\rangle_{\mathbb R}$.
+
+Write $x_i=m+y_i$. Then $\sum_i y_i=0$ and $\sum_i\|y_i\|^2=3(1-\|m\|^2)$. Use orthogonal coordinates $E=(y_1-y_2)/\sqrt2$ and $H=(y_1+y_2-2y_3)/\sqrt6$ on the zero-sum subspace, so $\|E\|^2+\|H\|^2=\sum_i\|y_i\|^2$. The symmetric cyclic sum $\sum_i\langle x_i,x_{i+1}\rangle_{\mathbb R}$ equals $3\|m\|^2-\tfrac12\sum_i\|y_i\|^2$. Right multiplication by $I$ is a skew-symmetric isometry, so the skew cyclic sum is $\sum_i\langle x_i I,x_{i+1}\rangle_{\mathbb R}=\sqrt3\langle EI,H\rangle_{\mathbb R}$, bounded above by $\tfrac{\sqrt3}{2}(\|E\|^2+\|H\|^2)$. Using $\sin a\ge0$ and $\lambda(a)=-\cos a/2+(\sqrt3/2)\sin a$ yields
+
+$$
+u\le\frac13\sum_i\langle x_i A,x_{i+1}\rangle_{\mathbb R} \le\cos a\,\|m\|^2+\lambda(a)(1-\|m\|^2).
+$$
+
+The difference $\lambda(a)-\cos a=\sqrt3\sin(a-\pi/3)$ is nonpositive for $a\le\pi/3$, so $u\le\cos a$. The constant potential $1$ attains radius $a$. For $a>\pi/3$, let $D=\lambda(a)-\cos a>0$. Since $\|m\|\ge u$, we get $Du^2+u\le\lambda(a)$. The polynomial $Dt^2+t-\lambda(a)$ is strictly increasing on $[0,\infty)$. Its value at $0$ is $-\lambda(a)<0$ because $|a-2\pi/3|\le\pi/3$, and its value at $1$ is $1-\cos a>0$. Thus $u\le t(a)<1$. Cosine is decreasing on $[0,\pi]$, which gives the lower bound on the fit radius. Both branches have $R(a)\le\pi/2$, so the lower bound also holds for $r\ge\pi/2$.
+
+Choose a unit quaternion $J$ perpendicular to $1,I$. In the plane spanned by $J,JI$, take $v_i=J(\cos b_i+I\sin b_i)$ with successive angles $b_i$ equal to $0,2\pi/3,4\pi/3$. Set the hub potential to $1$ and the rim potentials to $x_i=t+\sqrt{1-t^2}\,v_i$. Each spoke has residual cosine $t$. Right multiplication by $A$ advances the angle in the plane by $a$, so each rim edge has residual cosine $\cos a\,t^2+\lambda(a)(1-t^2)$. At $t=t(a)$ the two cosines agree, attaining radius $R(a)$. Inversion preserves distance, so reverse edges have the same errors.
+
+For $0<a\le\pi/3$, the ratio is $1/3$. For $a>\pi/3$, use the same construction at fixed latitude $q=1/\sqrt3$. The rim cosine simplifies to $q\sin a\le q$, so $R(a)\le f(s)=\arccos(q\cos s)$, where $s=|a-\pi/2|$. On $[0,\pi/2]$, we have $f''(s)=q(1-q^2)\cos s/(1-q^2\cos^2 s)^{3/2}\ge0$. The secant between the endpoints gives $f(s)\le f(0)+(1-c_*)s$. Also, $e(a)\ge\pi/2+s$ and $c_*=2f(0)/\pi>1/2$ because $q<\cos(\pi/4)$. Thus for $s>0$,
+
+$$
+R(a)\le f(s)\le f(0)+(1-c_*)s<c_*(\pi/2+s)\le c_*e(a).
+$$
+
+At $a=\pi/2$ the spoke and rim cosines agree at latitude $q$, so $q=t(\pi/2)$. Hence $R(\pi/2)=f(0)$ and $e(\pi/2)=\pi/2$, giving ratio $c_*$. The full proof is checked by the Lean kernel.
+:::
+
+When the three rim gains vary independently, the optimal potential at the quarter turn still provides a starting point. Splitting the transverse displacement into two cyclic Fourier modes gives a potential with quantitative control on every edge.
+
+::: {.theorem #thm-appe-round-quaternion-local-sharpness title="Strict Local Sharpness at the Cyclic Quarter Turn and Its Weighted-Variance Angular Region" lean="D5/S3/Combinatorics/Graph/Chordal/RoundQuaternionLocalSharpness.RoundQuaternionLocalSharpness.quarterLocal_strictFit, D5/S3/Combinatorics/Graph/Chordal/RoundQuaternionLocalSharpness.RoundQuaternionLocalSharpness.quarterLocal_angularRegion"}
+Let $c_*=\frac{2}{\pi}\arccos(1/\sqrt3)$. On $K_4$, assign gain $1$ to the diagonal and the spokes at vertex $0$. Give the directed rim edges $12,23,31$ unit-quaternion gains $A_0,A_1,A_2$, respectively, and assign their inverses to the reverse edges. For the resulting gain assignment $g$, with rim indices $j\in\{0,1,2\}$, put $e=\max\{\max_j d(1,A_j),\,d(A_0A_1A_2,1)\}$.
+
+In both cases below, the defect $d(g_{ij}g_{jk},g_{ik})$ of every ordered triangle with pairwise distinct vertices is at most $e$, and some triangle attains $e$. Fit radii use the round distance defined above.
+
+1. **Strict quantitative fit in complex-pair Fourier coordinates.** In complex-pair coordinates $(z,h)\mapsto z+hJ$, suppose $A_j=(-\eta_j+i\gamma_j,w_j)$, where $\eta_j,\gamma_j\in\mathbb R$, $\gamma_j=\sqrt{1-\eta_j^2-|w_j|^2}>0$, $w_j=p\zeta^j+q\zeta^{-j}$, $p,q\in\mathbb C$, and $\zeta=(-1+i\sqrt3)/2$. Put $E=\max_j|\eta_j|$ and assume $\max\{|p|,|q|,E\}\le3/50$. The phase-normalized potential $\varphi=P(p,q)$ constructed below satisfies, on every directed edge $i\ne j$,
+
+   $$
+   \langle g_{ij},\varphi_i^{-1}\varphi_j\rangle_{\mathbb R}\ge\cos(c_*e)+\frac{|q|}{200}+\frac{3}{100}(|p|^2+E).
+   $$
+
+   The potential $\varphi$ fits $g$ at radius $c_*e$. If $(p,q,\eta)\ne(0,0,0)$, there is a real $R<c_*e$ at which the same $\varphi$ fits $g$. If $(p,q,\eta)=(0,0,0)$, no potential fits $g$ at any real radius $R<c_*e$.
+
+2. **Weighted-variance angular region.** In the basis $1,I,J,IJ$, suppose the rim gains are
+
+   $$
+   \begin{aligned}
+   A_0&=(\cos a,\sin a,0,0),\\
+   A_1&=(\cos b,\sin b\cos u,\sin b\sin u,0),\\
+   A_2&=(\cos c,\sin c\cos v,\sin c\sin v\cos w,\sin c\sin v\sin w).
+   \end{aligned}
+   $$
+
+   All angles are in radians and the azimuth $w\in\mathbb R$ is arbitrary. Assume $u,v\ge0$ and $u+v<\pi/2$, with $\max\{|a-\pi/2|,|b-\pi/2|,|c-\pi/2|\}\le17\pi/900$ and $u^2+v^2+(u+v)^2\le(4497/500)(3/50)^2$.
+
+   There is a potential $\varphi$ that fits $g$ at radius $c_*e$ and, if $(a,b,c,u,v)\ne(\pi/2,\pi/2,\pi/2,0,0)$, also fits $g$ at some real radius $R<c_*e$. At the center $(a,b,c,u,v)=(\pi/2,\pi/2,\pi/2,0,0)$, no potential fits $g$ at any real radius $R<c_*e$.
+:::
+
+::: {.proof #pf-appe-round-quaternion-local-sharpness}
+The triangles through vertex $0$ give the defects $d(1,A_j)$, and the rim triangle gives $d(A_0A_1A_2,1)$. Left and right multiplication and inversion preserve the round distance, so cyclic permutations and reversal preserve each defect. These four values exhaust the ordered triangles, and each is attained.
+
+For Part 1, set $\ell=\exp(-i\arg(q(\zeta-1))/2)$, with $\ell=1$ when $q=0$. Conjugation by $(\ell,0)$ rotates about $I$ and multiplies both modes by $\ell^2$, so the rotated coefficients satisfy $q(\zeta-1)=\sqrt3\,|q|$. Write $p,q$ for the rotated modes until we conjugate back. Set $t=1/\sqrt3$, $\rho=3/50$, $s=\sqrt{2/3}$, and $v_j=\zeta^{-j}$, with rim subscripts taken modulo $3$. Write $x=\operatorname{Re}p$ and $y=\operatorname{Im}p$. The coefficients are $F_0=\sqrt3(x^2-y^2)/96+xy/16$, $F_1=\sqrt3(x^2-y^2)/96-xy/16$, $F_2=-\sqrt3(x^2-y^2)/48$, $b_j=\operatorname{Re}(p v_{j-1})/\sqrt6$, $f_j=s(\sqrt3\,b_j+F_j-F_{j-1})$, $U=t+|q|/\sqrt6-(\sqrt3/12)|p|^2$.
+Use $1$ at the hub and the unit quaternion $X_j=(U+ib_j,\,v_j(\sqrt{1-U^2-b_j^2-f_j^2}+if_j))$ at vertex $j+1$. The parameter bounds make the radicand nonnegative. Conjugation preserves the inner product of each gain with its relative potential, so conjugating back at each vertex gives the phase-normalized potential in the original coordinates.
+
+Write the rim-edge inner product as $\langle X_jA_j,X_{j+1}\rangle_{\mathbb R}$. At $q=0$ and $\eta=0$, expansion gives common constant and quadratic terms $t-(\sqrt3/12)|p|^2$. The linear term cancels, and each cubic term has absolute value at most $(2/5)|p|^3$. Bound the terms in the two potentials and the gain by their norms and sum the products of total degree at least $4$, using $|p|\le\rho$. The resulting remainder is bounded by $3|p|^4$. Restoring $q$ and $\eta$ gives a common linear increase of $Q/\sqrt6$ from phase alignment, where $Q=|q|$. The other perturbation terms cost at most $(627/100)\rho Q+2\rho E$. Every spoke has inner product $U$, and the reverse edge has the same inner product as the forward edge. Thus every directed edge has inner product at least
+
+$$
+t+\frac{Q}{\sqrt6}-\frac{\sqrt3}{12}|p|^2-\frac25|p|^3-3|p|^4-\frac{627}{100}\rho Q-2\rho E.
+$$
+
+To compare these inner products with the defect, set $D_{jk}=\gamma_j\gamma_k+\operatorname{Re}(\overline{w_j}w_k)$. The cyclic area identity $\operatorname{Im}(\overline{w_j}w_{j+1})=(\sqrt3/2)(|p|^2-|q|^2)$ gives the real part $T=\operatorname{Re}(A_0A_1A_2)$ of the quaternion product as
+
+$$
+T=-\eta_0\eta_1\eta_2+\sum_j\eta_j D_{j+1,j+2}-\frac{\sqrt3}{2}\Bigl(\sum_j\gamma_j\Bigr)(|p|^2-|q|^2).
+$$
+
+Since $d(1,A_j)=\arccos(-\eta_j)$ and $d(A_0A_1A_2,1)=\arccos T$, the parameter $h=\max\{\max_j\eta_j,-T\}$ gives $e=\pi/2+\arcsin h$. Using $\gamma_j=\sqrt{1-\eta_j^2-|w_j|^2}$ to bound the products and inner products in the trace, and combining $h\ge\eta_j$ with $h\ge-T$, gives $|h|<1/5$ and $h\ge E/3+(51/120)|p|^2-\tfrac13((13/5)Q^2+25\rho^2 E)$.
+
+Put $\theta_*=\arccos t$ and $k=c_*\sqrt{2/3}$. Concavity of $x\mapsto\cos(\theta_*+c_*\arcsin x)$ on $[-1/5,1/5]$ gives its tangent bound $\cos(c_*e)\le t-kh$ at zero. The rational bounds $3/5<c_*<61/100$ and $496/1000<k<1/2$, together with $|p|^3\le\rho|p|^2$, $|p|^4\le\rho^2|p|^2$, and $Q^2\le\rho Q$, give a margin of $Q/200+(3/100)(|p|^2+E)$ when substituted into the two estimates. Since $c_*e\in[0,\pi]$ and the round distance is the arccosine of the inner product, this gives a fit at radius $c_*e$. For nonzero perturbations the margin is positive, so the maximum edge error of the same potential gives a smaller radius. At zero perturbation all three rim gains equal $I$ and $e=\pi/2$. The lower bound follows from [@thm-appe-round-quaternion-k4-bounds].
+
+For Part 2, write $\theta=(a,b,c)$ and express each imaginary part as $s_jd_j$, where $s_j=\sin\theta_j\in[499/500,1]$ and $d_j$ is a unit imaginary quaternion. The three pairwise chord lengths are bounded by $u,v,u+v$, respectively. The angular bound gives $u+v<1$, so the pairwise inner products are positive and $m=\sum_j s_jd_j$ has positive inner product with each $d_j$. Conjugate by a unit quaternion taking $m/\|m\|$ to $I$. The imaginary parts then have positive $I$ components, and the scalar perturbations satisfy $|\eta_j|=|\cos\theta_j|\le\rho$. Write $x_j$ for the complex projection of the rotated $d_j$ onto the $J,IJ$ plane. Then $w_j=s_jx_j$ and $\sum_j s_jx_j=0$.
+
+Put $S=\sum_j s_j$. Weighted variance gives $S\sum_j s_j|x_j|^2=\sum_{j<k}s_js_k|x_j-x_k|^2$. Since $s_j\le1$, we have $\sum_j|w_j|^2\le\sum_j s_j|x_j|^2$, and each $s_js_k/S\le 1/(2+499/500)$. Projection cannot increase chord lengths. The three-point Fourier expansion of the zero-sum sequence $w_j$ has only the two nonconstant modes, so Parseval's identity gives
+
+$$
+3(|p|^2+|q|^2)=\sum_j |w_j|^2\le\frac{u^2+v^2+(u+v)^2}{2+499/500}\le3(3/50)^2.
+$$
+
+Part 1 now applies, and inverse conjugation preserves both fit conclusions for the same potential. If $p=q=0$ and $\eta=0$, all three axial angles are $\pi/2$ and all three rotated imaginary directions equal $I$. The original directions therefore coincide, which forces $u=v=0$ since $u,v\in[0,\pi/2)$. At the center the original assignment is the cyclic quarter turn of [@thm-appe-round-quaternion-k4-bounds]. The full proof is checked by the Lean kernel.
+:::
+
+**Manual derivation.** The angular region contains the full closed $3.4^\circ\times4.2^\circ$ box, with each of $a,b,c$ within $3.4^\circ$ of $90^\circ$ and $0\le u,v\le4.2^\circ$ for arbitrary azimuth $w$. The left side of the angular inequality is at most $6(7\pi/300)^2<\frac{4497}{500}(3/50)^2$ on this box. Hub normalization and conjugation preserve the ratio, so the quarter-turn class is a strict local maximizer. In the compact space of hub-normalized gains, the complement of the interior of this neighborhood is the compact set that remains to be treated in Lean. See [@prob-appe-round-quaternion-k4-optimal-constant].
 
 ::: {.problem #prob-appe-round-quaternion-k4-optimal-constant title="The Optimal Universal Coefficient for Round Unit-Quaternion Gains on $K_4$"}
-Let $C_{\mathrm{SU}(2)}(K_4)$ be the supremum, over all round unit-quaternion gain assignments on $K_4$ with positive triangle defect, of the minimum fit radius divided by the maximum triangle defect. The uniform bound and the quarter-turn instance in [@thm-appe-round-quaternion-k4-bounds] give $c_*\le C_{\mathrm{SU}(2)}(K_4)\le4/5$. The exact supremum over unrestricted gains remains open.
+Let $C_{\mathrm{SU}(2)}(K_4)$ be the supremum, over all round unit-quaternion gain assignments on $K_4$ with positive triangle defect, of the minimum fit radius divided by the maximum triangle defect. The uniform bound and the quarter-turn instance in [@thm-appe-round-quaternion-k4-bounds] give $c_*\le C_{\mathrm{SU}(2)}(K_4)\le4/5$. By [@thm-appe-round-quaternion-equal-rim-minimax], the equal cyclic rim family attains its largest ratio $c_*$ only at the quarter turn. The strict bound extends to an angular neighborhood of the quarter turn by [@thm-appe-round-quaternion-local-sharpness]. Proving $C_{\mathrm{SU}(2)}(K_4)=c_*$ for unrestricted gains remains an open formalization problem.
 :::
 
 **Attainment away from zero defect (`manual derivation`).** As the defect $\varepsilon$ tends to zero, gauge the spokes to $1$ and take tangent-space logarithms $z_{ij}=\log g_{ij}$. Each rim gain is within $\varepsilon$ of $1$, so its logarithm has norm at most $\varepsilon$. The first-order term in the logarithm of a triangle product is the sum of its three logarithms, giving an additive triangle defect of at most $\varepsilon+O(\varepsilon^2)$. Averaging the $4$ additive star potentials gives potentials of norm $O(\varepsilon)$ and edge errors at most $\varepsilon/2+O(\varepsilon^2)$. Exponentiating the potentials introduces an error of order $O(\varepsilon^2)$, so the ratio of the minimum fit radius to the defect is at most $1/2+O(\varepsilon)$. The minimum fit radius depends continuously on the gains because it minimizes a continuous error function over a compact space of potentials. The maximum triangle defect is continuous as well. Since $c_*>1/2$, all sufficiently small positive defects give ratios below $c_*$. The supremum is therefore attained on a compact set bounded away from zero defect.
@@ -495,132 +952,8 @@ Because the diagonal is $1$ and $\lvert G_{ij}\rvert\le1$, the trivial lower bou
 
 The factor $m-2$ here and the factor $\lvert V\rvert-2$ of [@thm-appe-chordal-gain-potential-stability] have different origins: in the theorem it counts the three-point defects accumulated along the elimination order, and here it counts the nonzero entries in each row of the perturbation matrix.
 
-## E.8.1.4 Where Curvature Comes From {#sec-appe-curvature-from-half-comparison}
+For half comparisons, the return phase measures another effect involving three points. See [Where Curvature Comes From](appendix-e-s08-s01-s04-curvature.md#sec-appe-curvature-from-half-comparison).
 
-Clause IV makes every three-point holonomy equal to $\mathbf{1}$, yet spherical excess and the Berry phase do exist. There is no conflict: what is flat is the full comparison, and what is curved is its square root.
+The chordal Banach strata, real $L_1$, Hilbert, causal three-tree, and linear-filling results are collected in [Appendix E.8.1.8](appendix-e-s08-s01-s08-chordal-banach-exact-strata.md#sec-appe-chordal-banach-exact-strata).
 
-::: {.remark #rem-appe-half-comparison-holonomy title="The Full Comparison Is Flat; the Three-Point Holonomy of the Half Comparison Is the Girard Excess (Manual Derivation and Literature)"}
-**Manual derivation.** For a fair element $u$ whose similarity reading is a real scalar $s>-1$, $u+u^*=2s\mathbf{1}$ gives $u^2=2su-\mathbf{1}$, hence $(\mathbf{1}+u)^2=2(1+s)\,u$. Put
-
-$$
-r(u):=\frac{\mathbf{1}+u}{\sqrt{2(1+s)}} .
-$$
-
-Then $r(u)$ is fair and $r(u)^2=u$; call it the **half comparison** of $u$. Its similarity reading satisfies $S(r)^2=\frac{1+s}{2}=1-\frac v2$.
-
-In $\mathcal{Cl}_{3,0}$ take unit vectors $a,b,c$, no two of them antipodal, and write $r_{ab}=r(ab)$, $[a,b,c]=a\cdot(b\times c)$, $\mathbf{I}=e_1e_2e_3$. The full comparisons satisfy $ab\cdot bc\cdot ca=\mathbf{1}$, whereas
-
-$$
-r_{ab}\,r_{bc}\,r_{ca}=\frac{(1+a\cdot b+b\cdot c+c\cdot a)+[a,b,c]\,\mathbf{I}a}{\sqrt{2(1+a\cdot b)(1+b\cdot c)(1+c\cdot a)}} .
-$$
-
-Derivation: $(\mathbf{1}+ab)(\mathbf{1}+bc)(\mathbf{1}+ca)=2+ab+ba+ca+ac+bc+a(bc)a$, using $ab\cdot bc=ac$, $bc\cdot ca=ba$, $ab\cdot ca=a(bc)a$ and $ab\cdot bc\cdot ca=\mathbf{1}$. The scalar part is $2(1+a\cdot b+b\cdot c+c\cdot a)$. The bivector part is $b\wedge c+a(b\wedge c)a$; with $b\wedge c=\mathbf{I}n$, $n=b\times c$, one has $a(\mathbf{I}n)a=\mathbf{I}\bigl(2(a\cdot n)a-n\bigr)$, and the two terms add up to $2[a,b,c]\,\mathbf{I}a$. The denominator is fixed by the fairness of $r$, which also gives the identity
-
-$$
-(1+a\cdot b+b\cdot c+c\cdot a)^2+[a,b,c]^2=2(1+a\cdot b)(1+b\cdot c)(1+c\cdot a).
-$$
-
-**Literature.** The right-hand side above has the form $\cos\frac\Omega2+\sin\frac\Omega2\,\mathbf{I}a$, a rotor that fixes $a$, with $\frac\Omega2=\operatorname{atan2}\bigl([a,b,c],\,1+a\cdot b+b\cdot c+c\cdot a\bigr)$; when the denominator is positive this is $\tan\frac\Omega2=\dfrac{[a,b,c]}{1+a\cdot b+b\cdot c+c\cdot a}$. The absolute value $\lvert\Omega\rvert$ is the area of the spherical triangle $abc$, that is, its Girard excess, and the sign of $\Omega$ is the sign of $[a,b,c]$ (van Oosterom–Strackee 1983; Eriksson 1990).
-
-**Correspondence with frozen theorems.** The product formula and the identity for the denominator are frozen in the Pauli-matrix model; see [@thm-appe-bloch-triangle-return-phase]. The two quantities in the numerator, $1+a\cdot b+b\cdot c+c\cdot a$ and $[a,b,c]$, are the real and imaginary parts of $4\operatorname{Tr}(P_aP_bP_c)$ in [`triple_bargmann_bloch`](lean:D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.triple_bargmann_bloch). Combining the identity above with $\det G(a,b,c)=[a,b,c]^2$ (the expansion of $[a,b,c]^2$ is frozen as [`triangle_gram`](lean:D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.triangle_gram)) gives
-
-$$
-\det G(a,b,c)=(2-v_{ab})(2-v_{bc})(2-v_{ca})\,(1-\cos\Omega),\qquad v_{xy}=1-x\cdot y ,
-$$
-
-where the expansion of $\det G$ is [`three_anchor_gram_det_formula`](lean:D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_formula).
-:::
-
-On the Bloch sphere $S(r)^2=1-\frac v2$ is $\cos^2\frac\theta2$: the squared similarity of the half comparison equals $1$ minus half the sagitta. This is the Born weight written in chord–sagitta terms; it does not replace the additivity premise of `H5`. The determinant formula says that the three-point Gram volume equals the product of the three complementary sagittas times the sagitta of the excess; the value $\det G=\sin^4\epsilon$ of the "two begets three" cell in [§28.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison) is a special case. For `H8` this means that the projective holonomy native to Layer 1 needs no new input: it is what one gets under Clause IV by taking the square root of the full comparison. What still needs new Layer-2 input is a fibre connection that varies with the spacetime base point, together with its dynamics.
-
-The product formula does not rest on the manual derivation alone. Replace $\mathcal{Cl}_{3,0}$ by its Pauli-matrix model ($e_k\mapsto\sigma_k$, $\mathbf{I}\mapsto i\mathbf{1}$, the involution ${}^*$ becoming the conjugate transpose); the half comparison is then a concrete $2\times2$ unitary matrix, and the two statements below are verified in Lean. For $r\in\mathbb{R}^3$ write $r\cdot\sigma=r_1\sigma_x+r_2\sigma_y+r_3\sigma_z$ and $P_r=\frac12(\mathbf{1}+r\cdot\sigma)$; for $\phi\in\mathbb{C}^2$ write the normalized projection onto $r$ as
-
-$$
-N_r(\phi):=\frac{P_r\phi}{\sqrt{\operatorname{Re}\,\phi^\dagger P_r\phi}} .
-$$
-
-::: {.lemma #lem-appe-rotor-gate-normalized-projection title="The Rotor Gate Carries $a\cdot\sigma$ to $b\cdot\sigma$ and Acts on Eigenspinors as the Normalized Projection" lean="D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.rotor_shortest_gate"}
-Let $a,b\in\mathbb{R}^3$ be unit vectors with $b\neq-a$, and put
-
-$$
-R_{a\to b}:=\frac{\mathbf{1}+(b\cdot\sigma)(a\cdot\sigma)}{\sqrt{2(1+a\cdot b)}} .
-$$
-
-Then
-
-1. $R_{a\to b}\,R_{a\to b}^\dagger=\mathbf{1}$;
-2. $R_{a\to b}\,(a\cdot\sigma)\,R_{a\to b}^\dagger=b\cdot\sigma$;
-3. for every $\psi\in\mathbb{C}^2$ with $\psi^\dagger\psi=1$ and $P_a\psi=\psi$, one has $R_{a\to b}\,\psi=N_b(\psi)$.
-:::
-
-::: proof
-Write $A=a\cdot\sigma$ and $B=b\cdot\sigma$, so that $A^2=B^2=\mathbf{1}$ and $AB+BA=2(a\cdot b)\mathbf{1}$. The numerator $\mathbf{1}+BA$ satisfies $(\mathbf{1}+BA)(\mathbf{1}+AB)=2(1+a\cdot b)\mathbf{1}$ and $(\mathbf{1}+BA)A(\mathbf{1}+AB)=2(1+a\cdot b)B$, which are the first two items. For the third, $A\psi=\psi$ gives $(\mathbf{1}+BA)\psi=2P_b\psi$, while $\psi^\dagger P_b\psi=\frac{1+a\cdot b}{2}>0$, so the two normalizing factors agree. The full proof is checked by the Lean kernel.
-:::
-
-::: {.theorem #thm-appe-bloch-triangle-return-phase title="Return Phase of Three Rotor Gates around a Bloch Triangle" lean="D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.shortest_gate_triangle_holonomy"}
-Let $a,b,c\in\mathbb{R}^3$ be unit vectors with $b\neq-a$, $c\neq-b$ and $a\neq-c$. Put
-
-$$
-S:=1+a\cdot b+b\cdot c+c\cdot a,\qquad D:=a\cdot(b\times c).
-$$
-
-Then
-
-1. $S^2+D^2=2(1+a\cdot b)(1+b\cdot c)(1+c\cdot a)$, and $S^2+D^2>0$;
-2. the three rotor gates compose to
-
-   $$
-   R_{c\to a}\,R_{b\to c}\,R_{a\to b}=\frac{S\,\mathbf{1}-iD\,(a\cdot\sigma)}{\sqrt{S^2+D^2}} ;
-   $$
-
-3. for every $\psi\in\mathbb{C}^2$ with $\psi^\dagger\psi=1$ and $P_a\psi=\psi$, the successive normalized projections onto $b$, $c$ and $a$ give
-
-   $$
-   N_a\bigl(N_c(N_b(\psi))\bigr)=\frac{S-iD}{\sqrt{S^2+D^2}}\,\psi .
-   $$
-:::
-
-::: proof
-Item 1: write $x=a\cdot b$, $y=b\cdot c$, $z=c\cdot a$. Substituting the Gram identity $D^2=1+2xyz-x^2-y^2-z^2$ ([`triangle_gram`](lean:D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.triangle_gram)), the sum $S^2+D^2$ expands to $2(1+x)(1+y)(1+z)$, and each factor is positive because no two of the vectors are antipodal. Item 2: the three numerators multiply to $(\mathbf{1}+AC)(\mathbf{1}+CB)(\mathbf{1}+BA)=2S\,\mathbf{1}-2iD\,A$, and by item 1 the three normalizing factors multiply to $2\sqrt{S^2+D^2}$. Item 3: the third item of [@lem-appe-rotor-gate-normalized-projection] replaces each normalized projection by the corresponding rotor gate, and its first two items guarantee that after each step the spinor is still a unit spinor lying in the eigenspace the next step requires; the last step uses $A\psi=\psi$. The full proof is checked by the Lean kernel.
-:::
-
-Compare with [@rem-appe-half-comparison-holonomy]: $R_{a\to b}$ is the image of $r_{ba}=r_{ab}^*$, so item 2 of the theorem is the involution of the product in the remark, $(r_{ab}\,r_{bc}\,r_{ca})^*=r_{ac}\,r_{cb}\,r_{ba}$, and the sign in front of $D$ changes from plus to minus accordingly; item 1 is the identity at the end of the remark. Item 3 is the operational reading of item 2: start from an eigenspinor of $a$, apply the three normalized projections along $a\to b\to c\to a$, and the spinor returns multiplied by the unit-modulus factor $(S-iD)/\sqrt{S^2+D^2}$. What Lean does not state keeps its earlier status. Identifying the argument $\operatorname{atan2}(D,S)$ with half the Girard excess is a literature result. The exponential form of the rotor is not formalized, and neither is any minimality or uniqueness in the sense of "shortest": in the Lean module `rotor` and `shortestGate` are names only. In Lean $N_r(\phi)$ is defined for every $\phi$ (when the denominator vanishes, Lean's convention returns the zero vector); the theorem uses it only where each denominator $\sqrt{(1+u\cdot v)/2}$ is positive.
-
-Items 1 and 2 of [@rem-appe-real-realizability-return-phase] are frozen in the pinned repository in the case where one object is non-orthogonal to every other one, in the following form; no filling condition is needed there. The general filled case and the qubit statement of item 4 remain manual derivations.
-
-::: {.proposition #prop-appe-real-rephasing-star title="A Hermitian Matrix with a Row without Zeros: Rephasable to a Real Matrix If and Only If All Three-Point Products Are Real" lean="D5/S3/Quantum/PureState/BargmannRealRephasing.exists_real_rephasing_iff_triple_products_real D5/S3/Quantum/PureState/BargmannRealRephasing.exists_real_gram_rephasing_iff_triple_products_real"}
-Let $G$ be an $N\times N$ complex matrix and $i_0$ an index such that $G_{i_0j}\neq0$ for every $j$.
-
-1. If $G$ is Hermitian, then there are real numbers $\theta_1,\dots,\theta_N$ such that every $e^{i\theta_i}G_{ij}e^{-i\theta_j}$ is real if and only if $G_{ij}G_{jk}G_{ki}$ is real for all indices $i,j,k$ (repetitions allowed).
-2. If $G$ is positive semidefinite, then there are real numbers $\theta_1,\dots,\theta_N$ and a real $N\times N$ matrix $B$ with $e^{i\theta_i}G_{ij}e^{-i\theta_j}=\left(B^{\mathsf T}B\right)_{ij}$ for all $i,j$ if and only if $G_{ij}G_{jk}G_{ki}$ is real for all indices $i,j,k$.
-:::
-
-::: proof
-"Only if": the phases cancel around $i\to j\to k\to i$, so rephasing does not change $G_{ij}G_{jk}G_{ki}$, and computed in a real matrix it is real. "If": take $\theta_j=\arg G_{i_0j}$. Since $G$ is Hermitian, $G_{ji_0}=\overline{G_{i_0j}}$, hence
-
-$$
-e^{i\theta_i}G_{ij}e^{-i\theta_j}=\frac{G_{i_0i}\,G_{ij}\,G_{ji_0}}{\lvert G_{i_0i}\rvert\,\lvert G_{i_0j}\rvert},
-$$
-
-a positive multiple of the three-point product $G_{i_0i}G_{ij}G_{ji_0}$, and therefore real; an entry $G_{ij}=0$ stays zero. Item 2: rephasing is $G\mapsto DGD^{*}$ with $D$ a diagonal unitary, which preserves positive semidefiniteness; the rephased matrix has real entries, so it is a real symmetric positive semidefinite matrix and can be written $B^{\mathsf T}B$.
-
-For a Hermitian matrix, three-point products with a repeated index (such as $G_{ij}G_{ji}G_{ii}=\lvert G_{ij}\rvert^2G_{ii}$) and those containing a zero entry are automatically real, so the condition has content only on the triangles of the non-orthogonality graph, in agreement with item 2 of [@rem-appe-real-realizability-return-phase]. The full proof is checked by the Lean kernel.
-:::
-
-The imaginary part of the return phase appears only when $D\neq0$. Pairwise comparisons can tell whether $D$ vanishes but not its sign: $D^2=1+2xyz-x^2-y^2-z^2$ (with $x=a\cdot b$, $y=b\cdot c$, $z=c\cdot a$; this is [`triangle_gram`](lean:D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.triangle_gram)) gives only its square. Whether $D$ vanishes answers a question adjacent to `H7`: whether a family of objects needs complex amplitudes.
-
-::: {.remark #rem-appe-real-realizability-return-phase title="When a Family of Objects Can Be Described with Real Numbers Alone: Whether the Three-Point Bargmann Products Are Real (Manual Derivation and Literature)"}
-**Manual derivation.** Let $\psi_1,\dots,\psi_N\in\mathbb{C}^d$ be unit vectors and $G_{ij}=\langle\psi_i,\psi_j\rangle$. Join the pairs with $G_{ij}\neq0$ by an edge and call the resulting graph $\Gamma$ the **non-orthogonality graph**. Call the family **realizable over the reals** if there are real numbers $\theta_1,\dots,\theta_N$ such that every $e^{i\theta_i}G_{ij}e^{-i\theta_j}$ is real. That real matrix is then the Gram matrix of the vectors $e^{-i\theta_i}\psi_i$; it is real symmetric and positive semidefinite of rank $r=\operatorname{rank}G\le d$, so it can be written $V^{\mathsf T}V$ with the columns of $V$ real vectors $v_i\in\mathbb{R}^r\subseteq\mathbb{C}^d$. The two families have the same Gram matrix, so by the frozen theorem [`exists_unitary_mul_eq_of_conjTranspose_mul_eq`](lean:D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq) there is a $d\times d$ unitary $U$ with $e^{-i\theta_i}\psi_i=Uv_i$. So realizability over the reals means: after phases are applied, the vectors lie in the unitary image of a real subspace, with the Gram matrix unchanged up to those phases. For a closed walk $i_0,i_1,\dots,i_k=i_0$ in $\Gamma$, call $G_{i_0i_1}G_{i_1i_2}\cdots G_{i_{k-1}i_0}$ its **Bargmann product**; it is invariant under $\psi_i\mapsto e^{-i\theta_i}\psi_i$.
-
-1. If the family is realizable over the reals, every Bargmann product is real, in particular every three-point product $G_{ij}G_{jk}G_{ki}$.
-2. Conversely, if $\Gamma$ is filled by triangles ([@rem-appe-triangle-simple-connectivity]; for instance when no two objects are orthogonal, or when $\Gamma$ is chordal) and the three-point product on every triangle of $\Gamma$ is real, then the family is realizable over the reals.
-3. The filling condition cannot be dropped. In $\mathbb{C}^3$ take $\psi_1=e_1$, $\psi_2=\frac{1}{\sqrt3}(e_1+e_2+e_3)$, $\psi_3=e_2$, $\psi_4=\frac12\bigl(e_1+ie_2-(1+i)e_3\bigr)$. Then $\psi_1\perp\psi_3$ and $\psi_2\perp\psi_4$, the other inner products are nonzero, and $\Gamma$ is a four-cycle without triangles: the requirement of item 2 that triangles be real holds vacuously, while "filled by triangles" fails. The Bargmann product of the four-cycle is $G_{12}G_{23}G_{34}G_{41}=\frac{1}{\sqrt3}\cdot\frac{1}{\sqrt3}\cdot\frac i2\cdot\frac12=\frac{i}{12}$, which is not real, so by item 1 the family is not realizable over the reals.
-4. Qubits: let $a$ be the Bloch vector of $\psi_a$. The family is realizable over the reals if and only if all Bloch vectors lie in one plane through the center, if and only if the oriented volume $D=a\cdot(b\times c)$ of every three of them vanishes; no filling condition is needed here: for instance $a,b,-a,-b$ have a four-cycle as non-orthogonality graph and are still realizable. For pairwise non-antipodal $a,b,c$, the return phase $(S-iD)/\sqrt{S^2+D^2}$ of [@thm-appe-bloch-triangle-return-phase] is non-real if and only if $D\neq0$.
-5. The pairwise similarity readings $a\cdot b$, $b\cdot c$, $c\cdot a$ give only $D^2$. Complex conjugation $\psi\mapsto\bar\psi$ maps the Bloch vector $(r_x,r_y,r_z)$ to $(r_x,-r_y,r_z)$: the pairwise readings are unchanged, $D$ changes sign, and the return phase is conjugated.
-
-Derivation: item 1, the Bargmann product is invariant, and computed in the real matrix $e^{i\theta_i}G_{ij}e^{-i\theta_j}$ it is real. Item 2: on the edges of $\Gamma$ put $g(i,j)=\left(G_{ij}/\lvert G_{ij}\rvert\right)^2$; it is defined only on edges, where $G_{ij}\neq0$, and takes values in the circle group. $G_{ji}=\overline{G_{ij}}$ gives $g(j,i)=g(i,j)^{-1}$. On a triangle $ijk$, with $B_{ijk}=G_{ij}G_{jk}G_{ki}\neq0$, one has $g(i,j)\,g(j,k)\,g(i,k)^{-1}=g(i,j)\,g(j,k)\,g(k,i)=\left(B_{ijk}/\lvert B_{ijk}\rvert\right)^2$, which equals $1$ exactly when $B_{ijk}$ is real (of either sign). So reality of the three-point products is exactly the chain rule $g(i,j)\,g(j,k)=g(i,k)$ for $g$ on triangles. By item 1 of [@rem-appe-triangle-simple-connectivity] (by [@thm-appe-chordal-gain-potential] with the circle group when $\Gamma$ is chordal) there are $\varphi_i$ in the circle group with $g(i,j)=\varphi_i^{-1}\varphi_j$. Choose $\theta_i$ with $e^{2i\theta_i}=\varphi_i$; then $\left(e^{i\theta_i}G_{ij}e^{-i\theta_j}/\lvert G_{ij}\rvert\right)^2=\varphi_i\,g(i,j)\,\varphi_j^{-1}=1$, so $e^{i\theta_i}G_{ij}e^{-i\theta_j}$ is real; on non-adjacent pairs $G_{ij}=0$ is real already. Item 3 is a direct computation. Item 4: for the rank-one projections $P_a=\lvert\psi_a\rangle\langle\psi_a\rvert=\frac12(\mathbf{1}+a\cdot\sigma)$ one has $G_{ab}G_{bc}G_{ca}=\operatorname{Tr}(P_aP_bP_c)$, and the frozen theorem [`triple_bargmann_bloch`](lean:D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.triple_bargmann_bloch) gives $\operatorname{Tr}(P_aP_bP_c)=\frac14(S+iD)$, so the three-point product is real exactly when $D=0$. If all Bloch vectors lie in one plane through the center, a rotation takes that plane to the $xz$ plane, and the rotation is implemented by a unitary matrix (the map from $\mathrm{SU}(2)$ to $\mathrm{SO}(3)$ is onto, `Literature`); the eigenspinor of a unit vector $(\sin\alpha,0,\cos\alpha)$ in the $xz$ plane is $\left(\cos\frac\alpha2,\sin\frac\alpha2\right)$, a real vector, so the family is realizable over the reals. Conversely, realizability gives real vectors $v_i$ in $\mathbb{R}^r\subseteq\mathbb{C}^2$ ($r\le2$) and a unitary $U$; the Bloch vectors of real vectors lie in the $xz$ plane, and $U$ turns that plane into another plane through the center. The Bloch vectors lie in one plane through the center exactly when they span at most two dimensions, that is, exactly when every three of them have zero oriented volume. The last sentence is items 1 and 2 of [@thm-appe-bloch-triangle-return-phase]: for pairwise non-antipodal vectors $S^2+D^2>0$. The formula for $D^2$ in item 5 is the one above; the action of complex conjugation is a direct computation ($\bar\sigma_y=-\sigma_y$).
-
-**Literature result.** The direction of item 1 (a non-real Bargmann product shows that the family cannot all be written as real vectors) is the imaginarity witness of Fernandes, Wagner, Novo and Galvão (2024). They also point out that pairwise overlap measurements suffice to witness imaginarity of sets of four states but not of sets of three. This does not contradict items 4 and 5: the pairwise overlap moduli of three unit vectors can always be realized by real vectors in $\mathbb{R}^3$ (replacing the three off-diagonal entries of the Gram matrix by their moduli does not decrease the determinant), whereas item 4 uses the dimension of a qubit, and realizability here keeps the Gram matrix up to phases. The argument for item 2 has the same form as the balance criterion for gain graphs: a gain graph is balanced if and only if its gains can be switched to the identity (Zaslavsky 1989).
-:::
-
-The "central complex structure" listed under `H7` in the ledger is an input about tomography of composite systems. This remark answers an adjacent and narrower question: whether a given family of objects needs complex amplitudes, in the sense of keeping its Gram matrix up to phases. As long as comparable triangles fill every cycle, the answer is decided by the three-point Bargmann products, which are readings of products of comparison values; the moduli of pairwise overlaps are in general not enough. On a qubit the pairwise similarity readings are already enough through $D^2$: the family is realizable exactly when no three objects enclose a nonzero oriented volume; what pairwise readings cannot see is only the sign of $D$, the chirality that complex conjugation exchanges. None of this derives the complex structure. A model built from real vectors satisfies every clause (see the count in E.8.2.3), so "complex numbers are needed" remains an input; what changes is its form. The four-cycle of item 3 is the same graph as the four-cycle in [@rem-appe-triangle-simple-connectivity]: in general dimension this graph keeps triangle compatibility from giving a potential and keeps three-point readings from settling realizability; the qubit family $a,b,-a,-b$ shows that with restricted dimension the same graph need not prevent a decision.
+For the reversal of the inner-product and real $L_1$ coefficients, the circle coefficient on path powers, and the tangent lower and cap upper bounds for $\mathrm{SU}(2)$, see [Appendix E.8.1.9](appendix-e-s08-s01-s09-hilbert-reversal-circle-su2.md#sec-appe-hilbert-reversal-circle-su2).

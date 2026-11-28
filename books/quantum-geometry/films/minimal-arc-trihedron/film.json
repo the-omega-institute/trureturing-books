@@ -1,0 +1,30 @@
+{
+  "title": "One step or two, one tiny cell",
+  "title_zh": "一步与两步，同一枚小弧面体",
+  "summary": "On a sphere you can go from A to C in one step along a great circle, or in two steps along two walls with a right-angle turn at B. Add the centre O and the three rays close up into one small solid with three flat walls and a bulging cap: looked at straight down the edge OB, B hides behind O, the two walls flatten into two legs, and the only arc left on the sphere is the one-step arc; looked at along the walls, it shows the two steps and the corner. Reading the two routes as two shadows of one cell is the book's model. With steps of 45° the two steps have dot product 0.707 each, and the direct step has dot product 0.5 = 0.707²; together the three dot products fix the size 0.5 of the volume the three rays span, six times the violet tetrahedron OABC, but not which way it turns. Lean checks that the trace of the three qubit projectors is (1 + the three dot products)/4 plus i times the oriented volume over 4, for any real vectors; here it is 0.729 + 0.125 i. Writing each projector as the ket-bra of its spinor is a hand step; Lean checks that for spinors the trace of such a chain is the product of the overlaps around the loop; their sizes 0.924 × 0.924 × 0.866 give 0.739, the size of the trace. The angle of the trace, 9.74°, is half the cap's angle excess of 19.47° (Girard's classical theorem); at 90° the trace is (1 + i)/4 and the cap fills an octant, and at 15° the angle is about 1°. Every number is computed on screen.",
+  "summary_zh": "在球面上从 A 到 C，可以沿大圆一步走到，也可以沿两面墙走两步、在 B 处拐一个直角。加上球心 O，三根射线围成一枚小小的立体：三面平墙，顶上一块鼓起的球面帽。顺着棱 OB 看过去，B 藏到 O 背后，两面墙压成两条腿，球面上只剩一步那条弧；贴着两面墙看，看到的是两步和一个拐角。把两条路线读成同一枚小胞的两个影子，是本书的模型。每步取 45° 时，两步的点积各是 0.707，一步直达的点积是 0.5 = 0.707²；三个点积合起来能定出三根射线撑开的体积大小 0.5（紫色四面体 OABC 的 6 倍），却定不出它朝哪边转。Lean 检验了：三个单比特投影算子乘积的迹，实部是 1 加三个点积再除以 4，虚部是有向体积除以 4，对任意实向量成立；这里是 0.729 + 0.125 i。把每个投影算子写成其旋量的 ket-bra 是手算一步；Lean 检验了：对旋量，这样一条链的迹等于绕回路一圈的重叠之积，三个重叠的大小 0.924 × 0.924 × 0.866 = 0.739，正是迹的大小。迹的辐角 9.74° 恰是球面帽角超 19.47° 的一半（角超来自吉拉尔的经典定理）；步长 90° 时迹为 (1 + i)/4，帽铺满八分之一个球面；15° 时辐角约 1°。片中数字都是屏幕上的计算。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-25",
+  "duration": "2:27",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · a lit spherical cell with a magenta cap, the view down its ridge and along its walls, the complex trace with cyan real and violet imaginary legs, its angle as half the cap",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.triple_bargmann_bloch",
+    "D5/S3/Quantum/Information/BargmannImaginaryMaximizers.bargmann_path_product"
+  ],
+  "solid": true,
+  "outputs": {
+    "narrated_720p": "quantum-geometry_minimal-arc-trihedron_720p_narrated.mp4",
+    "cover": "quantum-geometry_minimal-arc-trihedron_cover.jpg"
+  }
+}

@@ -10163,6 +10163,127 @@
       "capture_lock": "links"
     },
     {
+      "id": "primorial-cascade-vernier-horizon-sandbox",
+      "code": "OMEGA//PRIMORIAL",
+      "title": "素数阶乘级联、游标分辨率与有限寄存器上限",
+      "title_en": "Primorial Cascade, Vernier Resolution, and the Finite Register Cap",
+      "summary": "沿固定周期的余数轨找到合数，再扩展素数阶乘筛轮，观察第一个合数如何出现在平方视界。改变寄存器的铸造上限，比较有理游标盒中的最小比与满支撑见证，再对照串行计算和单拍引理，观察同余读出何时解除混叠。",
+      "summary_en": "Find a composite on a fixed-period residue rail, then widen the primorial wheel and see where its first composite appears. Change the minting horizon, compare the smallest ratio above one with the full-support witness in the Vernier box, and see how serial computation, a one-beat lemma shortcut, and CRT readout behave.",
+      "path": "primorial-cascade-vernier-horizon-sandbox/",
+      "thumbnail": "primorial-cascade-vernier-horizon-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-25",
+      "chapter": 31,
+      "section": "31.8",
+      "presets": [
+        "static-period-composite-refutation",
+        "primorial-wheel-square-horizon",
+        "jit-allocator-epsilon-horizon-cap",
+        "rational-vernier-caliper-sphere",
+        "minsky-tower-vs-lemma-shortcut",
+        "crt-dark-sector-and-memory-refresh"
+      ],
+      "preset_titles": {
+        "static-period-composite-refutation": {
+          "zh": "固定周期的合数反例",
+          "en": "A composite on every fixed-period rail"
+        },
+        "primorial-wheel-square-horizon": {
+          "zh": "素数阶乘筛轮与平方视界",
+          "en": "Primorial wheel and square horizon"
+        },
+        "jit-allocator-epsilon-horizon-cap": {
+          "zh": "零槽位与有限视界停机门",
+          "en": "The zero slot and the finite-horizon halt gate"
+        },
+        "rational-vernier-caliper-sphere": {
+          "zh": "有理游标卡尺与球面星座",
+          "en": "Rational Vernier caliper on the sphere"
+        },
+        "minsky-tower-vs-lemma-shortcut": {
+          "zh": "串行幂塔与单拍引理捷径",
+          "en": "Serial power tower and one-beat lemma shortcut"
+        },
+        "crt-dark-sector-and-memory-refresh": {
+          "zh": "同余解混叠、暗态与记忆刷新",
+          "en": "CRT anti-aliasing, dark sector, and memory refresh"
+        }
+      },
+      "tags": [
+        "素数阶乘",
+        "平方视界",
+        "有理游标",
+        "有限寄存器",
+        "中国剩余定理"
+      ],
+      "tags_en": [
+        "Primorial wheel",
+        "Square horizon",
+        "Rational Vernier",
+        "Finite registers",
+        "Chinese remainder theorem"
+      ],
+      "theory": [
+        {
+          "label": "§31.8 · 素数阶乘级联自举、平方视界零误差律、有理游标分辨率与有限寄存器视界封顶",
+          "label_en": "§31.8 · Primorial Cascade, the Square Horizon, Rational Vernier Resolution, and the Finite Register Cap",
+          "href": "../zh/ch31-s08-primorial-cascade-vernier-resolution-and-finite-register-cap.html#sec-ch31-primorial-cascade-vernier-resolution-and-finite-register-cap",
+          "href_en": "../en/ch31-s08-primorial-cascade-vernier-resolution-and-finite-register-cap.html#sec-ch31-primorial-cascade-vernier-resolution-and-finite-register-cap"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.bezout_identity"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.euclid_prime_escape"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.cf_convergent_coprime"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.cf_convergent_determinant"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.fractran_step_iff"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.fractran_deterministic"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.fractran_positive"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.fractran_stable"
+        },
+        {
+          "gid": "D5/S3/PrimeGaps/SieveCoefficients.totient_eq_prod_sub_one_of_squarefree"
+        },
+        {
+          "gid": "D5/S3/Arith/ChineseRemainder.chinese_remainder_bijective"
+        },
+        {
+          "gid": "D5/S3/Arith/Coding/HorizontalCompletenessDepth.residue_reading_injOn_iff_primorial_gt"
+        },
+        {
+          "gid": "D5/S3/Arith/Coding/PrimorialWitnessBound.primorial_witness_bound"
+        },
+        {
+          "gid": "D5/S3/Factorization/Embeddings/RationalPadicProductFormula.rational_padic_product_formula"
+        },
+        {
+          "gid": "D5/S3/Factorization/PositiveRationalGroup.signed_prime_ledger_equiv_positive_rationals"
+        },
+        {
+          "gid": "D5/S3/Weil/PrimeAddress/PrimeLogIndependence.prime_log_rational_independence"
+        },
+        {
+          "gid": "D5/S3/Factorization/Automata/ExactPrimeDivisionNoDFAO.no_finite_dfao_for_exact_prime_division"
+        }
+      ],
+      "capture_lock": "links"
+    },
+    {
       "id": "omega-math-recompilation-atlas-sandbox",
       "code": "OMEGA//RECOMPILE",
       "title": "OmegaMath 零公理去近似重编译与全书自指结晶图谱收束沙盘",
@@ -10508,6 +10629,122 @@
         },
         {
           "gid": "D5/S3/ConceptDynamics/ObservationTopology/PartitionTopologyKernel.partition_inseparable_iff_kernel"
+        }
+      ],
+      "capture_lock": "links"
+    },
+    {
+      "id": "auric-trivalent-gold-observer-focus-sandbox",
+      "code": "OMEGA//AURIC",
+      "title": "AURIC 四重本相与观察者焦点",
+      "title_en": "The Fourfold Identity of AURIC and Observer Focus",
+      "summary": "从破晓词根与 5d¹⁰ 满壳球出发，移走两个电子，观察 Z = 79 三价金的平面四方空窗口。核对有理四极矩、自旋 2 特征与十二节点旋转平均，沿十五步 pOmega 的结构时间脊柱走向四站衔尾环。",
+      "summary_en": "Explore the dawn root and the round 5d10 shell. Remove two electrons to reveal the square-planar window of trivalent gold at Z = 79. Check the rational quadrupole, spin-two character and twelve-node rotation average, then follow the fifteen pOmega steps along the structural-time spine to the four-station ring.",
+      "path": "auric-trivalent-gold-observer-focus-sandbox/",
+      "thumbnail": "auric-trivalent-gold-observer-focus-sandbox/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-25",
+      "chapter": 38,
+      "section": "38.17",
+      "presets": [
+        "pie-dawn-and-noble-aurous-sphere",
+        "relativistic-z79-d4h-lumo-window",
+        "trivalent-rank-and-j2-quadrupole-ledger",
+        "observer-focus-half-horizon-and-tau-spine",
+        "auric-ouroboros-matter-to-omega-closure"
+      ],
+      "preset_titles": {
+        "pie-dawn-and-noble-aurous-sphere": {
+          "zh": "破晓词根与满壳金的圆球",
+          "en": "The dawn root and the round full shell"
+        },
+        "relativistic-z79-d4h-lumo-window": {
+          "zh": "相对论金与平面四方的空窗口",
+          "en": "Relativistic gold and the D4h empty window"
+        },
+        "trivalent-rank-and-j2-quadrupole-ledger": {
+          "zh": "三价秩与 j = 2 四极账本",
+          "en": "Trivalent rank and the j = 2 ledger"
+        },
+        "observer-focus-half-horizon-and-tau-spine": {
+          "zh": "观察者焦点：半视界与 τ 脊柱",
+          "en": "Observer focus: half horizon and τ spine"
+        },
+        "auric-ouroboros-matter-to-omega-closure": {
+          "zh": "AURIC 衔尾环：从物质回到 Ω",
+          "en": "The AURIC ring: from matter back to Ω"
+        }
+      },
+      "tags": [
+        "破晓词源",
+        "三价金",
+        "有理四极矩",
+        "胡尔维茨旋转平均",
+        "观察者焦点"
+      ],
+      "tags_en": [
+        "Dawn etymology",
+        "Trivalent gold",
+        "Rational quadrupole",
+        "Hurwitz rotation average",
+        "Observer focus"
+      ],
+      "theory": [
+        {
+          "label": "§38.17 · AURIC 的四重本相：破晓词源、三价金相对论平面破缺与 0 · 1/2 · 1 观察者焦点签名",
+          "label_en": "§38.17 · The Fourfold Identity of AURIC: Dawn Etymology, Relativistic Square-Planar Breaking of Trivalent Gold, and the 0 · 1/2 · 1 Observer-Focus Signature",
+          "href": "../zh/ch38-s17-auric-trivalent-gold-and-observer-focus-signature.html#sec-ch38-auric-trivalent-gold-and-observer-focus-signature",
+          "href_en": "../en/ch38-s17-auric-trivalent-gold-and-observer-focus-signature.html#sec-ch38-auric-trivalent-gold-and-observer-focus-signature"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.orthogonal_triad_excess_quarter"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.lps_norm_five"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.lps_hecke_traces"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaJetCalculus.kappa_jet_one"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaJetCalculus.var_cube"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.hurwitz_core_unit"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.fractran_deterministic"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaSimplicialExactness.d2_eq_zero_iff"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.orbital_quadrupole"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.full_orbital_quadrupole"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.spin_two_character"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.haar_evenChar_expectation"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaTernionHeap.triad_left_absorption"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.p_omega_halts_at_22"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/DimensionRankRealization.exists_model_tfae"
+        },
+        {
+          "gid": "D5/S3/Quantum/Algebra/OrthogonalProjectionComplement.orthogonal_complement_projection_identities"
         }
       ],
       "capture_lock": "links"

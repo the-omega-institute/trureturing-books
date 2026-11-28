@@ -24,7 +24,7 @@
 
 - [Chapter 10 Peter–Weyl Rational Spin Shells and Integer Chebyshev Kernels](ch10-peter-weyl-rational-spin-shells.md)
 - [Chapter 11 Pi-Free Factorial Haar Integration and Character Orthonormality](ch11-pi-free-haar-integration.md)
-- [Chapter 12 Zero-Axiom Quadratic Extensions and Rational Schur Positivity](ch12-algebraic-extensions-and-schur-positivity.md)
+- [Chapter 12 Quadratic Extensions and Rational Schur Positivity](ch12-algebraic-extensions-and-schur-positivity.md)
 
 # Volume V Adelic Arithmetic and Rational Hecke–Riemann Spectral Theory
 
@@ -42,3 +42,4 @@
 
 - [Coda Six-Volume Comparison and Sister-Monograph Map](coda.md)
 - [Appendix A Index of Zero-Axiom OmegaInit and OmegaMath Modules and Frozen Declarations](appendix-a.md)
+- [Appendix B Classical-to-OmegaMath Dictionary and Evidence Ledger](appendix-b.md)

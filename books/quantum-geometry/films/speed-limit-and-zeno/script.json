@@ -1,0 +1,47 @@
+{
+  "voice": "af_heart",
+  "speed": 0.94,
+  "say": {"Lean": "Leen", "h-bar": "aitch bar", "gigahertz": "giga hertz", "eigenvalues": "eye-gen values", "Bloch": "Block"},
+  "music": {"bpm": 76, "progression": "d-minor"},
+  "scenes": [
+    {"id": "tick", "name": "ONE TICK", "lead": 1.9, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
+      ["How fast can a quantum state tick, like a clock?", "量子态能像钟一样滴答，最快能多快？"],
+      ["A tick counts only if the new reading can never be mistaken for the old.", "一声滴答要算数，新读数就绝不能被错认成旧的。"],
+      ["For states, that means zero overlap: no shadow at all. The angle is ninety degrees, a wall.", "对量子态，这就是重叠为零：一点影子都没有。夹角 90°，一堵墙。"]
+    ], "cues": [{"line": 2, "at": 4.2, "kind": "impact"}]},
+    {"id": "limit", "name": "A SPEED LIMIT", "lead": 0.5, "tail": 0.4, "music": [0.9, 0.5, 0.5, 0.1, 0.2], "lines": [
+      ["Why assume ticks come for free? Suppose the angle can only grow so fast.", "我们凭什么以为滴答是免费的？假设夹角只能长得这么快："],
+      ["In time tau, it turns at most energy times tau, over h-bar: a speed limit we supply.", "时间 τ 里，它最多转过 energy·τ/ħ：这是我们给定的限速。"],
+      ["Picture two towns a right angle apart. Two vans leave one depot, one for each town.", "想象两座小镇相隔一个直角。两辆车从同一个车站出发，各去一座。"],
+      ["A detour never helps, so the two drives together must cover the whole right angle.", "绕路帮不上忙，所以两段车程加起来，必须盖住整整一个直角。"]
+    ], "cues": [{"line": 3, "at": 3.0, "kind": "chime"}]},
+    {"id": "clock", "name": "THE SIMPLEST CLOCK", "lead": 0.5, "tail": 0.4, "music": [0.9, 0.6, 0.6, 0.2, 0.3], "lines": [
+      ["Try the simplest clock: a qubit, half in the low level, half in the high one.", "试最简单的钟：一个比特，一半在低能级，一半在高能级。"],
+      ["Its overlap with the start is a cosine, so the angle grows steadily.", "它和起点的重叠是一个余弦，于是夹角匀速增长。"],
+      ["It hits the wall at pi h-bar over E. Halfway there, it is forty-five degrees from each end.", "到 πħ/E 撞墙；走到一半时，离两端各 45°。"],
+      ["Lean checks the general rule: tau is at least pi h-bar over four times energy.", "Lean 内核检验了一般规律：τ 至少是 πħ/(4·energy)。"],
+      ["Our qubit meets it exactly, with energy E over two and tau half the trip.", "这个比特恰好取等：energy = E/2，τ 是全程的一半。"],
+      ["At five gigahertz, that tick takes a hundred picoseconds.", "能隙对应 5 GHz 时，这声滴答要 100 皮秒。"]
+    ], "cues": [{"line": 3, "at": 0.8, "kind": "stamp"}]},
+    {"id": "watch", "name": "A WATCHED POT", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.7, 0.6, 0.2, 0.3], "lines": [
+      ["Now flip it: keep checking whether it has left home.", "反过来：不停地查它离家了没有。"],
+      ["A short step moves it off by a small amount. A check loses only that amount squared.", "一小步只把它推开一点点；一次检查只损失这一点点的平方。"],
+      ["Four checks on the way to a full flip keep it home with chance zero point five three. Sixty-four: zero point nine six.", "翻到底的路上查 4 次，它留在家的概率是 0.53；查 64 次，是 0.96。"]
+    ], "cues": [{"line": 2, "at": 1.0, "kind": "glitch"}]},
+    {"id": "back", "name": "THE RETURN LEDGER", "lead": 0.5, "tail": 0.4, "music": [1.0, 0.8, 0.7, 0.4, 0.4], "lines": [
+      ["A second ledger: each step, ask if it is back. Stop at the first yes.", "再记一本账：每一步都问“回来了吗”，第一次答“是”就停。"],
+      ["With forty-five degree turns on the Bloch sphere, it is back at once with chance zero point eight five.", "布洛赫球上每步转 45°，第一步就回来的概率是 0.85。"],
+      ["If not, the return takes seven point eight three steps on average. Together: exactly two.", "没回来的话，平均要 7.83 步；两边合起来，恰好 2 步。"],
+      ["Lean checks the reason: the mean is the number of distinct eigenvalues the start state occupies.", "Lean 内核检验了原因：平均步数等于初态占据的不同本征值的个数。"],
+      ["Eigenvalues are like pitches. The start plucks all four strings, two tuned alike: three notes, so the mean is three.", "本征值就像音高：初态拨响全部四根弦，其中两根同音，只响三个音，平均就是 3 步。"],
+      ["For this qubit, watching harder only reshapes the wait. The average stays at two.", "对这只比特，看得再勤，也只改等待的形状，平均仍是 2 步。"]
+    ], "cues": [{"line": 3, "at": 0.8, "kind": "stamp"}, {"line": 5, "at": 0.4, "kind": "chime"}]},
+    {"id": "edge", "name": "WHAT IT DOES NOT SAY", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["What this film does not say: energy is a bound we supply, and the mean counts steps, not seconds.", "这部片没说的：energy 是我们给定的上界；平均数的是步数，不是秒。"],
+      ["The classic speed limits are literature results, not formalized here. The strobe numbers are computed.", "经典的速度极限是文献结果，本书没有形式化；频闪那几个数是屏幕上算出来的。"]
+    ]},
+    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 2.2, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
+      ["Geometric Intuition of Quantum Computing, chapter seven.", "《量子计算的几何直觉》· 第七章"]
+    ], "cues": [{"line": 0, "at": 0.3, "kind": "chime"}]}
+  ]
+}

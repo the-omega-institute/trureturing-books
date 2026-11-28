@@ -2,11 +2,11 @@
 
 在[第七章](ch07-second-order-jet-calculus.md)与[第八章](ch08-dfinite-jets-and-cayley-unification.md)中，我们以二阶与任意阶有理射流环彻底清除了微分算子中的 $\epsilon\text{-}\delta$ 极限。现在必须直面微积分与微分几何的全局半壁江山：**积分、斯托克斯定理与流形本身。**
 
-传统分析深信两道教条：第一，曲线与曲面积分必须将区域无限细分（网格步长 $h \to 0$），否则离散斯托克斯公式必然残留 $O(h^2)$ 截断误差；第二，弯曲流形必须靠局部拍平的欧氏坐标卡 $\mathbb{R}^n$、每点外挂的平直切空间铁板 $T_p M \cong \mathbb{R}^n$ 以及非解析 $C^\infty$ 单位分解隆起函数勉强缝合。本章将这两道教条一并翻案：先利用流群法则 I 消去律 $[\mathbf{y}, \mathbf{x}, \mathbf{x}] \equiv \mathbf{y}$ 在任意粗粒度有限网格上建立**无细分精确斯托克斯定理**；再以零公理内核定理锁死任意顶点类型与交换群上的**有限链端点伸缩消去、上边缘普适幂零律与无选择公理顶点锥同伦正合性**，并衔接冻结的交换群四面体上链修复定理；最后彻底撤除黎曼 1854 年的平直切板与 $C^\infty$ 隆起补丁，以有理共形莫比乌斯群缝合**二阶吻合三元球流形 $\mathcal{M}_\Omega$**，并由冻结的复幂螺线管零荷定理锚定其紧致螺线管编织。
+传统分析深信两道教条：第一，曲线与曲面积分必须将区域无限细分（网格步长 $h \to 0$），否则离散斯托克斯公式必然残留 $O(h^2)$ 截断误差；第二，弯曲流形必须靠局部拍平的欧氏坐标卡 $\mathbb{R}^n$、每点外挂的平直切空间铁板 $T_p M \cong \mathbb{R}^n$ 以及非解析 $C^\infty$ 单位分解隆起函数勉强缝合。本章将这两道教条一并翻案：先利用流群法则 I 消去律 $[\mathbf{y}, \mathbf{x}, \mathbf{x}] \equiv \mathbf{y}$ 在有限网格上建立**无细分精确斯托克斯公式**，非交换乘积按相容的路径与次序拼接；再以零公理内核定理锁死任意顶点类型与交换群上的**有限链端点伸缩消去、上边缘普适幂零律与无选择公理顶点锥同伦正合性**，并衔接冻结的交换群四面体上链修复定理；最后彻底撤除黎曼 1854 年的平直切板与 $C^\infty$ 隆起补丁，以有理共形莫比乌斯群缝合**二阶吻合三元球流形 $\mathcal{M}_\Omega$**，并由冻结的复幂螺线管零荷定理锚定其紧致螺线管编织。
 
 ## 9.1 无细分精确斯托克斯定理：流群折叠与粗网格面和乐相消 {#sec-ch09-telescoping-heap-stokes}
 
-为什么经典微积分基本定理与斯托克斯定理看似依赖网格步长趋于零的极限？纯粹因为人们先用平直矩形去硬逼近弯曲积分，再把逼近误差与拓扑边界消去混为一谈。只要把积分直接定义为**无原点三元流群上的有向折叠**，边界与内部的等价便还原为在任意粗糙有限网格上零余项成立的纯代数恒等式。
+为什么经典微积分基本定理与斯托克斯定理看似依赖网格步长趋于零的极限？纯粹因为人们先用平直矩形去硬逼近弯曲积分，再把逼近误差与拓扑边界消去混为一谈。把积分直接定义为**无原点三元流群上的有向折叠**，就能在有限网格上追踪准确相消的项。非阿贝尔面和乐还要追踪每次拼接的路径与乘序。
 
 ::: {.definition #def-ch09-heap-line-integral title="流群有向链折叠线积分与有限网格面和乐"}
 设 $(\mathcal{M}, [-,-,-])$ 为[第四章](ch04-heaps-and-lie-triple-curvature.md)确立的无原点三元流群（核心实现为有理三元球 $\mathbb{T}_3(\mathbb{Q}) = S^3(\mathbb{Q})$，满足法则 I 左右吸收律 $[\mathbf{x}, \mathbf{x}, \mathbf{y}] = \mathbf{y}$、$[\mathbf{y}, \mathbf{x}, \mathbf{x}] = \mathbf{y}$ 与三元结合律）。
@@ -17,7 +17,7 @@
    \mathcal{I}_{\mathrm{heap}}(\mathbf{x}_0) := \mathbf{x}_0, \qquad \mathcal{I}_{\mathrm{heap}}(\mathbf{x}_0, \dots, \mathbf{x}_k, \mathbf{x}_{k+1}) := \bigl[\mathbf{x}_{k+1},\; \mathbf{x}_k,\; \mathcal{I}_{\mathrm{heap}}(\mathbf{x}_0, \dots, \mathbf{x}_k)\bigr].
    $$
 
-2. **一般非阿贝尔离散联络与锚定面和乐**：在有限定向三角剖分曲面 $\Sigma$ 的有向边 $e_{ij}$ 上赋予有理单位旋子输运 $\mathbf{U}_{ij} \in S^3(\mathbb{Q})$（满足反向求逆 $\mathbf{U}_{ji} = \mathbf{U}_{ij}^{-1}$），沿路径 $\gamma = (v_0 \to v_1 \to \dots \to v_m)$ 的路径和乐按自右向左复合定义为 $\operatorname{Hol}(\gamma) := \mathbf{U}_{v_{m-1} v_m}\cdots \mathbf{U}_{v_0 v_1}$。选定边界根点 $r$ 与树路径输运 $\mathbf{P}_{r \to v_k}$，将每枚有理球面三角形（面元）$\Delta_k$ 的边界回路和乐 $\mathbf{W}_k$ 拉回根点，得**锚定面和乐** $\widetilde{\mathbf{W}}_k^{(r)} := \mathbf{P}_{r \to v_k}^{-1}\,\mathbf{W}_k\,\mathbf{P}_{r \to v_k}$。
+2. **一般非阿贝尔离散联络与锚定面和乐**：在有限定向三角剖分曲面 $\Sigma$ 的有向边 $e_{ij}$ 上赋予有理单位旋子输运 $\mathbf{U}_{ij} \in S^3(\mathbb{Q})$（满足反向求逆 $\mathbf{U}_{ji} = \mathbf{U}_{ij}^{-1}$），沿路径 $\gamma = (v_0 \to v_1 \to \dots \to v_m)$ 的路径和乐按自右向左复合定义为 $\operatorname{Hol}(\gamma) := \mathbf{U}_{v_{m-1} v_m}\cdots \mathbf{U}_{v_0 v_1}$。给定从边界根点 $r$ 到面元回路起点 $v_k$ 的路径，记其输运为 $\mathbf{P}_{r \to v_k}$。将该面边界回路的和乐 $\mathbf{W}_k$ 拉回根点，得**锚定面和乐** $\widetilde{\mathbf{W}}_k^{(r)} := \mathbf{P}_{r \to v_k}^{-1}\,\mathbf{W}_k\,\mathbf{P}_{r \to v_k}$。
 :::
 
 由法则 I 消去律 $[\mathbf{y}, \mathbf{x}, \mathbf{x}] \equiv \mathbf{y}$ 与结合律，一维与二维精确积分定理无需任何细分极限即刻成立（非阿贝尔流群与面和乐情形为手工推导；任意交换加群中的一维链伸缩消去与闭合回路归零则在下节 [@thm-ch09-chain-telescope-and-nilpotency] 中获零公理内核认证）：
@@ -31,13 +31,13 @@
    在任意定基群表示中，所有中继节点 $\mathbf{x}_1, \dots, \mathbf{x}_{n-1}$ 经 $(\mathbf{x}_n \bar{\mathbf{x}}_{n-1})(\mathbf{x}_{n-1}\bar{\mathbf{x}}_{n-2})\cdots(\mathbf{x}_1\bar{\mathbf{x}}_0) \equiv \mathbf{x}_n \bar{\mathbf{x}}_0$ 严格成对抵消，不留半点步长残差。
 2. **二维粗网格无细分斯托克斯定理**：设有限定向圆盘 $\Sigma$ 被任意粗糙地剖分为 $M$ 枚三角形面元 $\{\Delta_k\}_{k=1}^M$。
    - **阿贝尔上链情形**：当边赋值取自交换加群 $A$（$\Phi(e_{BA}) = -\Phi(e_{AB})$）时，每条内部共享边被相邻两面以正反各走一次，故 $\Phi(e_{AB}) + \Phi(e_{BA}) \equiv 0$，面通量总和 $\sum_{k=1}^M (\delta\Phi)(\Delta_k) \equiv \sum_{e \subset \partial\Sigma} \Phi(e)$ 零误差归结为外边界环流；
-   - **非阿贝尔旋子情形**：在单连通圆盘剖分上按**平面剥壳序**（每次并入的新三角形沿一段连通内边链贴合已有圆盘）连乘锚定面和乐，每条共享内边及其共轭须路径经 $\mathbf{P}_{r\to A}^{-1}\mathbf{U}_{BA}\mathbf{U}_{AB}\mathbf{P}_{r\to A} = \mathbf{1}$（流群法则 I 消去）严格对消，从而边界总和乐严格等于内部有理角盈面元的有序乘积：
+   - **非阿贝尔旋子情形（手工推导）**。从含根点 $r$ 的第一面出发。设每次贴入一面，都能把当前从 $r$ 出发的定向边界写成三段连续路径：前缀、共享边链、后缀。新边界只把共享边链换成新面的外侧边链，前缀和后缀照旧。记前缀、旧链、新链、后缀的输运分别为 $P,B,C,D$。共享链与外侧链同起同终，新面的正向回路先走外侧链、再沿共享链折返，故以拼接起点为基点的面和乐是 $B^{-1}C$。
 
      $$
-     \operatorname{Hol}(\partial\Sigma) \;\equiv\; \widetilde{\mathbf{W}}_1^{(r)}\,\widetilde{\mathbf{W}}_2^{(r)}\cdots\widetilde{\mathbf{W}}_M^{(r)}.
+     DCP = (DBP)\bigl(P^{-1}B^{-1}CP\bigr).
      $$
 
-     对顶点均落于有理球面 $S^3(\mathbb{Q})$ 的每枚测地三角形，其巴格曼—格拉姆角盈余弦 $\cos E_k$ 亦恒为精确有理数（[第六章](ch06-bargmann-gram-spherical-trigonometry.md)），哪怕整片曲面只剖成两块粗糙三角形，等式两边亦分毫不差！
+     因此每一步都沿**当前边界前缀**取锚定路径，在旧和乐**右侧**乘入新因子。若拼接序列始终保留这样的定根边界，反复应用等式就得到 $\operatorname{Hol}(\partial\Sigma)=\widetilde{\mathbf{W}}_1^{(r)}\cdots\widetilde{\mathbf{W}}_M^{(r)}$。第一因子直接以 $r$ 为基点。等式依靠相邻逆元的精确消去，粗到只剩两块三角形也分毫不差。
 
 ::: {.example #ex-ch09-coarse-two-plaquette-stokes title="四顶点双面元粗网格上的非阿贝尔精确斯托克斯手算"}
 考虑四顶点圆盘 $\Sigma = (0, 1, 2, 3)$，由一条内部对角线 $(1, 3)$ 粗剖为仅有的两枚三角形 $\Delta_1 = (0 \to 1 \to 3 \to 0)$ 与 $\Delta_2 = (1 \to 2 \to 3 \to 1)$，外边界为 $\partial\Sigma = (0 \to 1 \to 2 \to 3 \to 0)$。在五条有向边上赋予纯有理凯莱单位旋子（手工推导）：
@@ -56,13 +56,15 @@ $$
 
 1. **第一面元（直锚于 $0$）**：因 $\mathbf{U}_{13}\mathbf{U}_{01} = (0, 1, 0, 0) = \mathbf{i}$，立得 $\mathbf{W}_1 = \mathbf{U}_{30}\mathbf{U}_{13}\mathbf{U}_{01} = \bigl(-\frac{1}{2}, \frac{1}{2}, \frac{1}{2}, -\frac{1}{2}\bigr)$；
 2. **第二面元（经 $\mathbf{U}_{01}$ 共轭锚定至 $0$）**：$\mathbf{F}_2 = \mathbf{U}_{13}^{-1}\mathbf{U}_{23}\mathbf{U}_{12} = \bigl(-\frac{12}{125}, -\frac{91}{125}, \frac{84}{125}, \frac{12}{125}\bigr)$，经须共轭得 $\widetilde{\mathbf{W}}_2 = \mathbf{U}_{01}^{-1}\mathbf{F}_2\mathbf{U}_{01} = \bigl(-\frac{12}{125}, -\frac{91}{125}, -\frac{12}{125}, -\frac{84}{125}\bigr)$；
-3. **精确剥壳乘积核验**：按剥壳序左乘得
+3. **精确剥壳乘积核验**：在第一面的和乐右侧乘入第二面的锚定和乐，得到
 
    $$
    \mathbf{W}_1\,\widetilde{\mathbf{W}}_2 \;=\; \left(\frac{31}{250},\; -\frac{17}{250},\; \frac{7}{10},\; \frac{7}{10}\right) \;=\; \mathbf{U}_{30}\mathbf{U}_{23}\mathbf{U}_{12}\mathbf{U}_{01} \;=\; \operatorname{Hol}(\partial\Sigma),
    $$
 
-   内部共享边 $\mathbf{U}_{13}$ 与锚定须 $\mathbf{U}_{01}$ 全部零余项抵消！反之，若颠倒非阿贝尔乘序计算 $\widetilde{\mathbf{W}}_2\mathbf{W}_1$，结果变为 $\bigl(\frac{31}{250}, \frac{7}{10}, -\frac{7}{10}, \frac{17}{250}\bigr) \neq \operatorname{Hol}(\partial\Sigma)$，直观证实了非阿贝尔斯托克斯对剥壳次序的严格依赖。
+   展开乘积，$(\mathbf{U}_{30}\mathbf{U}_{13}\mathbf{U}_{01})(\mathbf{U}_{01}^{-1}\mathbf{U}_{13}^{-1}\mathbf{U}_{23}\mathbf{U}_{12}\mathbf{U}_{01})$ 中的逆元依次相邻，正好消去。若颠倒乘序，$\widetilde{\mathbf{W}}_2\mathbf{W}_1=\bigl(\frac{31}{250}, \frac{7}{10}, -\frac{7}{10}, \frac{17}{250}\bigr)\ne\operatorname{Hol}(\partial\Sigma)$。
+
+再用同一剖分检验路径条件。取 $\mathbf{U}_{01}=\mathbf{U}_{12}=\mathbf{U}_{30}=1$、$\mathbf{U}_{23}=\mathbf{j}$、$\mathbf{U}_{13}=\mathbf{i}$，则外边界和乐是 $\mathbf{j}$，两个面回路分别给出 $\mathbf{W}_1=\mathbf{i}$ 与 $\mathbf{F}_2=-\mathbf{k}$。经边 $0\to1$ 锚定第二面，得到 $\mathbf{i}(-\mathbf{k})=\mathbf{j}$。若改沿树 $\{03,31,12\}$ 的 $0\to3\to1$ 路径，输运为 $-\mathbf{i}$，第二面经共轭变成 $\mathbf{k}$，同一乘序却给出 $\mathbf{i}\mathbf{k}=-\mathbf{j}$。
 :::
 
 ## 9.2 粗单纯形上链微积分与无选择公理顶点锥同伦 {#sec-ch09-simplicial-cone-homotopy}
@@ -157,6 +159,12 @@ $$
 
 回到有限有序完全单纯形 $K_n = \{0, \dots, n-1\}$（$n \ge 4$）上的交错有理上链空间 $C^j(K_n; \mathbb{Q})$，由 [@thm-ch09-cone-homotopy-exactness] 的二阶拆分 $F = \delta_1(H_2 0\, F) + H_3 0\,(\delta_2 F)$ 还可直接读出精确秩与零第二贝蒂数（手工推导）：限制到含顶点 $0$ 的三角形诱导同构 $\ker\delta_2 = \operatorname{im}\delta_1 \cong \mathbb{Q}^{\binom{n-1}{2}}$，故 $\operatorname{rank}\delta_1 = \binom{n-1}{2}$、$\operatorname{rank}\delta_2 = \binom{n-1}{3}$ 且 $\beta_2(K_n) = 0$。
 
+下图直观并置了这两套无细分代数骨架：左侧标出四顶点双面元粗网格的反向共边与第二面的锚定路径 $0	o1$，右侧展示由显式基点 $b$ 发起的顶点锥同伦算子 $e = H_2 b\, F$ 如何将任意闭 $2$-上链（$\delta_2 F = 0$）无选择公理地拉回为边势 $1$-上链。
+
+::: {.figure src="ch09-coarse-stokes-cone"}
+**粗网格内边伸缩相消与无选择公理顶点锥同伦。** 左侧呈现四顶点双面元圆盘（[@ex-ch09-coarse-two-plaquette-stokes]）上的内部对角线 $(1,3)$ 与锚定边 $0	o1$。以该边锚定第二面，按 $\mathbf{W}_1\widetilde{\mathbf{W}}_2$ 相乘，逆元相邻消去，得到青色外边界的和乐；右侧呈现以显式基点 $b$ 为锥顶的单纯形锥同伦算子 $e(x, y) = (H_2 b\, F)(x, y) = F(b, x, y)$（[@def-ch09-cone-homotopy]），直观展现闭 $2$-上链经 $\delta_1(H_2 b\, F) = F$ 构造性还原为精确边势（[@thm-ch09-cone-homotopy-exactness]）。
+:::
+
 而在不预先指定基点 $b$、仅假定有限非空顶点集 `[Fintype V]`、`[Nonempty V]` 的一般情形下，上述正合性判据及其面向**非闭合上链**的定量缺陷计数双侧界，已由所钉内核的另一条冻结定理严格验证：
 
 ::: {.theorem #thm-ch09-simplex-cochain-repair title="完全有序单纯形四面体缺陷计数、最优锚点界与边势正合充要判据" lean="D5/S3/Fourier/CharacterSelection/SimplexTwoCochainRepair.tetra_defects_incidence_repair_and_exactness"}
@@ -247,7 +255,19 @@ $$
 | **一阶与二阶导数** | 柯西 $\epsilon\text{-}\delta$ 极限 $\lim_{h \to 0}$ 与割线差商 | 二阶幂零射流环 $\mathcal{J}_2(\mathbb{Q}) = \mathbb{Q}[\eta]/(\eta^3)$ 两项闭式逆 | 根除 $0/0$ 幽灵与有限割线偏差 |
 | **离散球面演化** | 左端点伊藤 / 显式欧拉切步（$\alpha = 0$） | 对称中点凯莱步（$\alpha = \frac{1}{2}$）与前后半拍保真守恒 | 消除切线外漂与链式法则破缺 |
 | **超越函数与 $\pi$** | 无穷收敛级数与先验实常数 $\pi, e$ | 任意阶 D-有限射流 $J_N(\mathbb{Q})$、凯莱统一与无 $\pi$ 马青包络 | 以有理递推与按需有理区间取代超越数 |
-| **积分与斯托克斯** | $h \to 0$ 细网格黎曼和与 $O(h^2)$ 离散余项 | 流群法则 I 伸缩折叠、剥壳面和乐与无选择公理锥同伦 | 任意粗有限网格零余项精确闭合 |
+| **积分与斯托克斯** | $h \to 0$ 细网格黎曼和与 $O(h^2)$ 离散余项 | 流群伸缩折叠、相容路径与乘序下的面和乐、无选择公理锥同伦 | 精确的有限边界消去 |
 | **流形基底与粘合** | 一阶平直切板 $T_p M \cong \mathbb{R}^n$ 与 $C^\infty$ 隆起补丁 | 二阶吻合三元球 $\mathbb{T}_3^{(p)}(\mathbb{Q})$、莫比乌斯缝合与零荷螺线管 | 消除常曲率联络补丁与非解析死区 |
 
-既然微积分的局部导数、任意阶射流、粗网格积分与吻合球流形均已在有理三元球 $\mathbb{T}_3(\mathbb{Q}) \cong S^3(\mathbb{Q})$ 上全面落成，下一个自然而必然的问题随之浮现：**如何在这只紧致有理三维球面上展开全域函数与算子？不用复指数 $e^{i\omega t}$、不用 $\pi$、也不用勒贝格实测度，三维球面上的傅里叶分析与谱理论长什么模样？** 这正是第四卷（[第十章](ch10-peter-weyl-rational-spin-shells.md)至[第十二章](ch12-algebraic-extensions-and-schur-positivity.md)）将要展开的壮阔图景——彼得—魏尔有理自旋壳、无 $\pi$ 阶乘哈尔积分与零公理舒尔正定性。
+下面的短片沿本章主线，用几个可以手算的例子把这张表中“积分与斯托克斯”与“流形基底”两行演示一遍。
+
+::: {.film src="exact-on-a-coarse-grid"}
+**粗网格上，积分只剩边界（2 分 49 秒）。** 片中先以流群法则 I $[\mathbf{y},\mathbf{x},\mathbf{x}]=\mathbf{y}$ 沿五点链逐点折叠，积分塌缩为终点（紫色，手工推导）；交换群中的伸缩相消“各步之和等于终点减起点”标绿色 LEAN ✓（[@thm-ch09-chain-telescope-and-nilpotency]），屏幕上的 $-4+7-5+3=1=6-5$ 为计算。随后在四顶点双面元圆盘上放整数边值：两面环流 $9$ 与 $0$，紫色对角线正反各走一次而相消，琥珀色外缘环流仍为 $9$（青色 `NUM`，一般交换情形为手工推导）。换成 [@ex-ch09-coarse-two-plaquette-stokes] 的有理单位四元数后，$\mathbf{W}_1\widetilde{\mathbf{W}}_2=\bigl(\frac{31}{250},-\frac{17}{250},\frac{7}{10},\frac{7}{10}\bigr)=\operatorname{Hol}(\partial\Sigma)$，颠倒乘序或改沿琥珀色虚线 $0\to3\to1$ 锚定则结果改变，$\mathbf{j}$ 变为 $-\mathbf{j}$（精确计算；剥壳恒等式为手工推导）。锥同伦一幕以琥珀色基点 $b$ 为锥顶，绿色标签给出 $\delta_2\circ\delta_1=0$、拆分 $F=\delta_1(H_2 b\,F)+H_3 b\,(\delta_2 F)$ 与闭即恰当的显式见证 $H_2 b\,F$（[@thm-ch09-chain-telescope-and-nilpotency]、[@thm-ch09-cone-homotopy-exactness]），四顶点算例 $10=9+1$ 为屏幕计算。最后，吻合三元球冠与莫比乌斯缝合按模型示意（紫色，[@def-ch09-osculating-manifold]）；螺线管线程的零对数荷判据标绿色（[@thm-ch09-solenoid-zero-charge]），品红色一行 $\lvert z_1\rvert=2$ 的线程漂离单位圆为屏幕计算；全片以第三卷对照表收尾。
+:::
+
+在下面的交互实验卡中，读者可以在粗粒度单纯形网格上亲手检验双面元的加法环流相消，并在读数中对照非交换和乐对锚定路径和乘序的依赖，切换显式锥顶基点 `base` 与任意 $2$-上链赋值 $F$，实时构造无选择公理边势 `e = H2(base, F)` 并逐面核对同伦分解 $\delta_1(H_2 b\, F) + H_3 b\,(\delta_2 F) = F$（[@thm-ch09-chain-telescope-and-nilpotency]、[@thm-ch09-cone-homotopy-exactness]）。
+
+::: {.viz src="dfinite-algebraic-schur-lab" preset="simplicial-stokes-cone" height="520"}
+**无细分粗网格斯托克斯与单纯形锥同伦实验卡（`simplicial-stokes-cone`）。** 擦去紫色共边，观察两面的整数环流之和等于外边界环流。读数另比较双面元的四元数因子在换路或逆序后的乘积（[@ex-ch09-coarse-two-plaquette-stokes]）。切换显式锥顶基点 `base` 实时生成构造性原势 `e = H2(base, F)`，对照闭 $2$-上链（$\delta_2 F = 0$）时的精确还原 $\delta_1 e = F$ 与非闭情形下的四面体缺陷项 $H_3 b\,(\delta_2 F)$（[@thm-ch09-cone-homotopy-exactness]）。
+:::
+
+既然微积分的局部导数、任意阶射流、粗网格积分与吻合球流形均已在有理三元球 $\mathbb{T}_3(\mathbb{Q}) \cong S^3(\mathbb{Q})$ 上全面落成，下一个自然而必然的问题随之浮现：**经典紧致实三维球面上的傅里叶谱如何分壳？其中哪些谱读数能用有理多项式和有限阶乘比精确算出？** 这正是第四卷（[第十章](ch10-peter-weyl-rational-spin-shells.md)至[第十二章](ch12-algebraic-extensions-and-schur-positivity.md)）将要展开的壮阔图景——彼得—魏尔有理自旋壳、无 $\pi$ 阶乘哈尔积分与零公理舒尔正定性。

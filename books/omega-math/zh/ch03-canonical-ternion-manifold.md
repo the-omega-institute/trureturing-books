@@ -4,10 +4,10 @@
 
 [第二章](ch02-homogeneous-projective-line.md)虽然用齐次射影闭环 $\mathbb{QP}^1$ 彻底驯服了 $\infty$，却留下一道无法回避的缺口：圆周上的复合运算处处可交换，无法满足母公理 `AXIOM-Ω` 的法则 III（次序敏感非对易性）。本章回答两个决定全书几何命运的核心问题：
 
-1. **为什么极小非阿贝尔流形必然被死死锁在三维（$3$ 个自由度）**——一维与二维为何沦为死寂的交换平面，三维非紧候选为何悉数出局，仅余三维叉乘与单位四元数球面？
+1. **为什么配备正定不变型的李代数至少要有三维才能非交换？** 在三维，这一条件又如何锁定叉积？
 2. **如何把这颗三维本原流形零公理、零根号、免商集地建在纯整数之上**——构造规范齐次整三元数载体 $\mathbb{T}_3(\mathbb{Q}) \cong \mathbb{QP}^3$，并精确划清它与经典实阴影完备化之间的边界？
 
-在认识论分层上，本章清晰区分两条轨道：第一节与第四节的**四条经典阴影锚点定理**位于 `Mathlib` 实/复分析侧（依赖 `{propext, Classical.choice, Quot.sound}`），为三维刚性锁定与完备化边界提供外部对照基准；第二节的**七条零公理内核定理**（汇总为两个绿色定理盒，仅依赖 `OmegaInit` 与 `OmegaMath`，传递公理闭包为空集）则在纯整数与精确分数上直接锁死了欧拉—拉格朗日四平方乘性、射线流群三元公理、四维拉格朗日恒等式、保真度上界 $\kappa \le 1$ 与流群平移不变性；规范代表元约分、特征秩对照与第三节的五枚整锚手算则按对应层级标明（`ARGUED` / `NUM`）。
+在认识论分层上，本章清晰区分两条轨道：第一节与第四节的**四条经典阴影锚点定理**位于 `Mathlib` 实/复分析侧（官方后端允许的公理上界为 `{propext, Classical.choice, Quot.sound}`，未记录这四条各自的公理闭包），为三维刚性锁定与完备化边界提供外部对照基准；第二节与第三节的**八条零公理内核定理**（汇总为三个绿色定理盒，仅依赖 `OmegaInit` 与 `OmegaMath`，传递公理闭包为空集）则在纯整数与精确分数上直接锁死了欧拉—拉格朗日四平方乘性、射线流群三元公理、四维拉格朗日恒等式、保真度上界 $\kappa \le 1$、流群平移不变性与绕正交轴各转四分之一圈的锚点的射影三元非交换见证；规范代表元约分、特征秩对照与第三节的其余整锚手算则按对应层级标明（`ARGUED` / `NUM`）。
 
 ## 3.1 低维退化与三维非阿贝尔锁定：经典阴影侧的冻结锚点 {#sec-ch03-dimension-lock}
 
@@ -27,7 +27,7 @@ $$
 
 现在检查维数 $\dim_K L \le 2$：若存在 $x, y \in L$ 使 $[x, y] \neq 0$，则 $x \neq 0$ 且 $x, y$ 必线性无关（若 $sx + ty = 0$，与 $x$ 取括号得 $t[x, y] = 0 \implies t = 0 \implies s = 0$），从而 $x, y$ 张成整个空间 $L$。但线性泛函 $\Phi([x, y], \cdot)$ 在生成元 $x$ 和 $y$ 上同时为零，故它在整个 $L$ 上恒为零！只要 $\Phi$ 左非退化（即由 $\forall z,\; \Phi(u, z) = 0$ 可推 $u = 0$），就必然导出 $[x, y] = 0$，矛盾！
 
-这就是一维和二维无法支撑 `AXIOM-Ω` 法则 III 的根本原因：一维只有零括号；二维平面哪怕硬塞入非交换仿射李代数 $[H, E] = E$，不变性也会迫使 $\Phi(E, E) = \Phi([H, E], E) = -\Phi(E, [H, E]) = -\Phi(E, E) \implies \Phi(E, E) = 0$，当场破坏正定与非退化度量。
+这就说明，配备左非退化不变双线性型的一维与二维李代数只能交换。二维仿射李代数 $[H,E]=E$ 若要配备正定不变型，便会遇上 $\Phi(E,E)=\Phi([H,E],E)=\Phi(H,[E,E])=0$ 的矛盾。
 
 于是，第一个能够容纳非对易不变几何的维度是 **$3$**。而在三维实李代数中，只要不变双线性型在非零向量上取正值，连结构常数都会被唯一锁死为三维叉乘！以下两条冻结定理位于经典 `Mathlib` 阴影侧，为三维叉乘与泡利结构提供严格的内核刚性基准：
 
@@ -61,11 +61,17 @@ $$
 先由 `P2 D` 在二阶复格拉姆阵上的厄米性与行列式非负性无正则性预设地推出 $D$ 反对称、比例输入归零与零行消去；再结合 `PB D` 在纯向量方向上的刚性分类锁死全局单一符号 $\varepsilon \in \{\mathrm{plus}, \mathrm{minus}\}$ 并推广到含标量分量的全体输入；最后将两种定向分别映射到 $2 \times 2$ 厄米矩阵的正序乘积与反序乘积，一次性验证全部有限格拉姆半正定与矩阵接口。本声明位于经典 `Mathlib` 阴影侧；完整证明由 Lean 内核检查。
 :::
 
+下图并置两个层次：低维李代数的不变型约束，以及三维有理射影旋转的整四元数非交换见证。
+
+::: {.figure src="ch03-ternion-3d-lock"}
+**低维李代数的括号与整三元数的次序。** 左图的非退化不变型迫使一维与二维李代数的括号归零。右图用两枚整四元数演示三维有理射影旋转的非交换见证。叉积分类与具体射线见证分别见 [@thm-ch03-dim3-cross-bracket] 与 [@thm-ch03-phalf-qhalf-noncommutative]。
+:::
+
 ## 3.2 规范齐次整三元数流形 $\mathbb{T}_3(\mathbb{Q}) \cong \mathbb{QP}^3$：免商集、免根号 {#sec-ch03-canonical-ternions}
 
 经典阴影侧的刚性基准告诉我们，三维非阿贝尔几何正是四元数/旋转群的舞台。现在回到我们的零公理裸 CIC 建设任务：**怎样在完全不碰实数 $\mathbb{R}$、不碰平方根、不碰商公理 `Quot.sound` 的前提下，造出这颗三维非阿贝尔流形的可执行整数本体？**
 
-先看为什么“强行把四元组归一为单位向量”会在第一步就碰壁：考虑最简单不过的 $90^\circ$ 正交半转态 $p_{\mathrm{Half}} = (1, 1, 0, 0)$。它的平方范数是 $1^2 + 1^2 + 0^2 + 0^2 = 2$，而 $2$ 不是整数平方数！如果执意把它变成单位四元数，立刻被迫引入无理数 $\frac{1 + \mathbf{i}}{\sqrt{2}}$，整座零公理有理建筑当场破功。
+先看为什么“强行把四元组归一为单位向量”会在第一步就碰壁：考虑最简单不过的 $90^\circ$ 绕第一坐标轴旋转的状态 $p_{\mathrm{Half}} = (1, 1, 0, 0)$。它的平方范数是 $1^2 + 1^2 + 0^2 + 0^2 = 2$，而 $2$ 不是整数平方数！如果执意把它变成单位四元数，立刻被迫引入无理数 $\frac{1 + \mathbf{i}}{\sqrt{2}}$，整座零公理有理建筑当场破功。
 
 破局之法与[第二章](ch02-homogeneous-projective-line.md)如出一辙，只是从二维齐次对 $[P : Q] \in \mathbb{QP}^1$ 升维到四维齐次整四元组 $[w : x : y : z] \in \mathbb{QP}^3$——四个整数坐标模去非零缩放，恰好留下**严格 $3$ 个自由度**！更妙的是，只需两条纯整数操作就能把每条射影射线变成全宇宙唯一的规范代表元，彻底甩掉 `Quot.sound`：
 
@@ -75,7 +81,7 @@ $$
 由此得到的规范子类型 `CanonProjTernion` 仅由纯整数构造，凭借 `deriving DecidableEq`（结合[第一章](ch01-axiom-omega-and-cic.md)的赫德伯格定理）天生具备零公理可判定相等性，且一切物理观测量与三维旋转都在分子分母中**自动平方消去全部根号**！
 
 ::: {.definition #def-ch03-canonical-ternion title="规范齐次整三元数载体、三元迁移与无根号保真度（ARGUED）"}
-定义**规范齐次整三元数流形** $\mathbb{T}_3(\mathbb{Q}) \cong \mathbb{QP}^3$（代码载体记作规范非零子类型 `CanonProjTernion`）为满足规范谓词 $\operatorname{IsCanonical}(w, x, y, z)$ 的整数四元组集合：$(w, x, y, z) \neq (0, 0, 0, 0)$，$\gcd(\lvert w\rvert, \lvert x\rvert, \lvert y\rvert, \lvert z\rvert) = 1$，且第一个非零分量严格大于 $0$。记上述约分并锁正号的规范化算子为 $\operatorname{norm}$。对任意整四元组 $\mathbf{a} = (a_w, a_x, a_y, a_z)$ 与 $\mathbf{b} = (b_w, b_x, b_y, b_z)$，定义：
+定义**规范齐次整三元数流形** $\mathbb{T}_3(\mathbb{Q}) \cong \mathbb{QP}^3$（书中的规范非零子类型记作 `CanonProjTernion`）为满足规范谓词 $\operatorname{IsCanonical}(w, x, y, z)$ 的整数四元组集合：$(w, x, y, z) \neq (0, 0, 0, 0)$，$\gcd(\lvert w\rvert, \lvert x\rvert, \lvert y\rvert, \lvert z\rvert) = 1$，且第一个非零分量严格大于 $0$。记上述约分并锁正号的规范化算子为 $\operatorname{norm}$。对任意整四元组 $\mathbf{a} = (a_w, a_x, a_y, a_z)$ 与 $\mathbf{b} = (b_w, b_x, b_y, b_z)$，定义：
 
 1. **纯整数哈密顿乘积与共轭**：$\bar{\mathbf{b}} := (b_w, -b_x, -b_y, -b_z)$，
 
@@ -109,7 +115,7 @@ $$
 
 为什么三元迁移 $[\mathbf{a}, \mathbf{b}, \mathbf{c}] = \operatorname{norm}(\mathbf{a}\bar{\mathbf{b}}\mathbf{c})$ 永远不会把三个合法非零整三元数乘成零四元组 $(0, 0, 0, 0)$，又为何左右消去律与外结合律在射影层面上无条件成立？在零公理基础库 `OmegaMath` 中，我们甚至不需要把最大公约数约分硬塞进核心代数定律里：直接在整四元数 `Quaternion` 上取未约分三元代表元 $\operatorname{triad}(\mathbf{a}, \mathbf{b}, \mathbf{c}) := (\mathbf{a}\bar{\mathbf{b}})\mathbf{c}$，并以纯整数缩放关系 `RayEquiv` 刻画有号射影共线（完全不碰 `Quot.sound`），下面四条零公理冻结定理一次性把范数乘性与流群公理钉死在裸 CIC 内核之中：
 
-::: {.theorem #thm-ch03-quaternion-norm-and-heap-laws title="整四元数四平方乘性与射影流群公理（零公理内核定理）" lean="D5/S3/Quantum/AURICOmega/OmegaTernionHeap.normSq_mul D5/S3/Quantum/AURICOmega/OmegaTernionHeap.triad_left_absorption D5/S3/Quantum/AURICOmega/OmegaTernionHeap.triad_right_absorption D5/S3/Quantum/AURICOmega/OmegaTernionHeap.triad_assoc"}
+::: {.theorem #thm-ch03-quaternion-norm-and-heap-laws title="整四元数四平方乘性与射影流群公理" lean="D5/S3/Quantum/AURICOmega/OmegaTernionHeap.normSq_mul D5/S3/Quantum/AURICOmega/OmegaTernionHeap.triad_left_absorption D5/S3/Quantum/AURICOmega/OmegaTernionHeap.triad_right_absorption D5/S3/Quantum/AURICOmega/OmegaTernionHeap.triad_assoc"}
 设 `Quaternion` 为 `Omega.Int` 上的整四元数类型，配哈密顿乘积 $\mathbf{a}\mathbf{b}$、共轭 $\bar{\mathbf{b}}$、自然数平方范数 $\lVert\mathbf{a}\rVert^2 := \operatorname{normSq}(\mathbf{a}) \in \mathbb{N}$、非零谓词 `Nonzero` 与整数三元代表元 $\operatorname{triad}(\mathbf{a}, \mathbf{b}, \mathbf{c}) := (\mathbf{a}\bar{\mathbf{b}})\mathbf{c}$。称两枚整四元数 $\mathbf{a}, \mathbf{b}$ 满足射影射线等价 $\mathbf{a} \sim_{\mathrm{ray}} \mathbf{b}$（`RayEquiv a b`），若二者均非零且存在非零整数 $k, l \in \mathbb{Z} \setminus \{0\}$ 使 $k\mathbf{a} = l\mathbf{b}$。则在裸 CIC（仅依赖 `OmegaInit` 与 `OmegaMath`，零公理）中，以下四条定理全部成立：
 
 1. **欧拉—拉格朗日四平方乘性**（[`normSq_mul`](lean:D5/S3/Quantum/AURICOmega/OmegaTernionHeap.normSq_mul)）：对一切 $\mathbf{a}, \mathbf{b} : \mathrm{Quaternion}$，
@@ -143,7 +149,7 @@ $$
 
 有了四平方乘性与流群公理，接下来要锁死读数通道：如何不借实数柯西—施瓦茨不等式、全凭整数恒等式证出射影保真度 $\kappa(\mathbf{a}, \mathbf{b}) \le 1$，并确认它在共同流群平移下精确不变？答案藏在四维拉格朗日恒等式里——$\lVert\mathbf{a}\rVert^2\lVert\mathbf{b}\rVert^2$ 与 $\langle\mathbf{a}, \mathbf{b}\rangle^2$ 的差值，恰好等于六枚 $2 \times 2$ 普吕克子式（Plücker minors）的整数平方和！这三条定理同样落在零公理 `OmegaInit` 与 `OmegaMath` 内核层中：
 
-::: {.theorem #thm-ch03-lagrange-and-kappa-invariance title="四维拉格朗日恒等式、射影保真度上界与流群平移不变性（零公理内核定理）" lean="D5/S3/Quantum/AURICOmega/OmegaTernionHeap.lagrange_identity D5/S3/Quantum/AURICOmega/OmegaTernionHeap.kappa_le_one D5/S3/Quantum/AURICOmega/OmegaTernionHeap.kappa_heap_invariant"}
+::: {.theorem #thm-ch03-lagrange-and-kappa-invariance title="四维拉格朗日恒等式、射影保真度上界与流群平移不变性" lean="D5/S3/Quantum/AURICOmega/OmegaTernionHeap.lagrange_identity D5/S3/Quantum/AURICOmega/OmegaTernionHeap.kappa_le_one D5/S3/Quantum/AURICOmega/OmegaTernionHeap.kappa_heap_invariant"}
 对整四元数 $\mathbf{a} = (a_w, a_x, a_y, a_z)$ 与 $\mathbf{b} = (b_w, b_x, b_y, b_z)$，记欧氏整内积为 $\langle\mathbf{a}, \mathbf{b}\rangle := \mathbf{a}\cdot\mathbf{b} \in \mathbb{Z}$，在 `Omega.IntRatio` 中定义射影保真度 $\kappa(\mathbf{a}, \mathbf{b}) := \operatorname{IntRatio.value}\bigl(\langle\mathbf{a}, \mathbf{b}\rangle^2,\, \lVert\mathbf{a}\rVert^2\lVert\mathbf{b}\rVert^2\bigr)$，并定义六枚 $2 \times 2$ 普吕克子式的平方和为
 
 $$
@@ -178,12 +184,16 @@ $$
 第 1 款在八元整多项式环上直接展开两侧，四对角项 $a_i^2 b_i^2$ 彼此消去，其余十二项恰好配成六枚 $2 \times 2$ 行列式平方 $(a_i b_j - a_j b_i)^2$ 之和。第 2 款由每个整数平方非负立即推出 $\operatorname{minorSquares}(\mathbf{a}, \mathbf{b}) \ge 0$，代入第 1 款即得 $\langle\mathbf{a}, \mathbf{b}\rangle^2 \le \lVert\mathbf{a}\rVert^2\lVert\mathbf{b}\rVert^2$；因 $\mathbf{a}, \mathbf{b}$ 非零，分母 $\lVert\mathbf{a}\rVert^2\lVert\mathbf{b}\rVert^2$ 严格为正，按 `IntRatio.Le` 定义直接证得 $\kappa(\mathbf{a}, \mathbf{b}) \le 1$。第 3 款令 $\mathbf{p} := \bar{\mathbf{u}}\mathbf{v}$；由 $\mathbf{u}, \mathbf{v}$ 非零知 $\mathbf{p}$ 非零且平方范数 $n := \lVert\mathbf{p}\rVert^2 > 0$。结合律给出 $\operatorname{triad}(\mathbf{a}, \mathbf{u}, \mathbf{v}) = \mathbf{a}\mathbf{p}$，而右乘 $\mathbf{p}$ 使内积满足 $\langle\mathbf{a}\mathbf{p}, \mathbf{b}\mathbf{p}\rangle = \langle\mathbf{a}, \mathbf{b}\rangle\,n$（平方放大 $n^2$ 倍），同时由 [@thm-ch03-quaternion-norm-and-heap-laws] 第 1 款使分母满足 $\lVert\mathbf{a}\mathbf{p}\rVert^2\lVert\mathbf{b}\mathbf{p}\rVert^2 = \lVert\mathbf{a}\rVert^2\lVert\mathbf{b}\rVert^2\,n^2$；分子与分母同乘正整数因子 $n^2$ 在 `IntRatio.Equivalent` 中精确消去（若 $\mathbf{a}$ 或 $\mathbf{b}$ 为零则两端同为 `undefined` 亦等价）。本声明仅依赖 `OmegaInit` 与 `OmegaMath`，传递公理闭包为空集。完整证明由 Lean 内核检查。
 :::
 
-把 [@thm-ch03-quaternion-norm-and-heap-laws] 与 [@thm-ch03-lagrange-and-kappa-invariance] 同前文的规范子类型 `CanonProjTernion` 合起来看，整个零公理构造闭环便一目了然：约分与首正号锁定算子 $\operatorname{norm}$ 只是在每条 `RayEquiv` 等价射线中挑出全宇宙唯一的整四元组代表（从而免去 `Quot.sound`），并在规范子类型上忠实继承上述全部流群公理与保真度不变性（含同类左平移不变性与自反、对称律，`ARGUED`）。注意此处必须排除零元组 $(0, 0, 0, 0)$ 与未约分元组 $(2, 0, 0, 0)$，这正是[第一章](ch01-axiom-omega-and-cic.md)强调“不能在未加守卫的原始载体上硬写 `axiom`”的活教材。
+实际 Lean 载体 `Omega.Ternion.ProjTernion` 只要求代表元的平方范数为正。其三元积保留原始乘积，因此 $p_{\mathrm{Half}}\overline{p_{\mathrm{Half}}}\,p_0=2p_0=(2,0,0,0)$ 与 $p_0$ 共射线，代表元却不同。右消去 $p_0\overline{p_{\mathrm{Half}}}\,p_{\mathrm{Half}}$ 同样得到 $2p_0$。原始外结合律本身已有分量等式，见底层的 `triad_assoc_eq`。
 
-同时，为了与下节的经典实阴影锚点严格对齐，此处必须清晰划出一道拓扑双覆叠边界（`ARGUED`）：
+规范模型的桥接是另一步手工推导（`ARGUED`）。若两个互素四元组共射线，写成 $\mathbf{b}=(m/n)\mathbf{a}$，其中 $m,n$ 互素且 $n>0$。则 $n$ 整除 $\mathbf{a}$ 的每个分量，故 $n=1$，再由 $\mathbf{b}$ 互素得 $\lvert m\rvert=1$。首个非零分量取正便强制 $m=1$。三元积对每个槽位的非零缩放只会改变整体标量，因此中间是否约分都得到同一条射线。对最终代表元施以 $\operatorname{norm}$，射线消去律变成逐分量等式，原始外结合律也传到规范模型。
+
+读数在缩放下不变。六个子式同时为零当且仅当两非零向量共射线，因此 [@thm-ch03-lagrange-and-kappa-invariance] 也给出规范模型的分离。读数平方保证非负，$1$ 与 $\mathbf{i}$ 给出零读数。共同左乘与右乘都让内积和平方范数按同一个正因子伸缩。有限格拉姆半正定性则来自下述投影坐标，二次型等于 $\sum_{i,j}(\sum_k c_k P(\mathbf{a}_k)_{ij})^2$。
+
+另一种做法是保留有号单位旋量。两种载体及其读数的区别如下（手工推导）。
 
 - **射影商载体 `CanonProjTernion`（$\mathbb{QP}^3 \cong \mathrm{SO}(3, \mathbb{Q})$）**：锁定首非零项为正，把 $+\mathbf{a}$ 与 $-\mathbf{a}$ 粘成同一射线，伴随旋转 $\operatorname{Ad}(\mathbf{p})$ 一一对应有理三维旋转群；其射线核 $\kappa_{\mathrm{proj}}(\mathbf{a}, \mathbf{b}) = \operatorname{Tr}\bigl(P(\mathbf{a})P(\mathbf{b})\bigr)$（其中 $P(\mathbf{a}) = \frac{\mathbf{a}\mathbf{a}^\top}{\lVert\mathbf{a}\rVert^2} \in \mathrm{Sym}_4(\mathbb{Q})$）的特征秩为 **$10$**。
-- **有号双覆叠载体（$S^3(\mathbb{Q}) \subset \mathrm{Sp}(1)$）**：若保留 $\pm 1$ 符号不折叠（例如[第四章](ch04-heaps-and-lie-triple-curvature.md)引入的本原毕达哥拉斯旋量 `PythSpinor`），则区分 $+\mathbf{a}$ 与 $-\mathbf{a}$，支持 $720^\circ$ 自旋双覆叠符号记忆，并承载下文特征秩恰为 **$5$** 的有号核 $\kappa_{S^3}(u, v) = \frac{1 + \langle u, v\rangle}{2}$。
+- **有号单位旋量（$S^3(\mathbb{Q}) \subset \mathrm{Sp}(1)$）**：保留 $+u$ 与 $-u$ 的区别，承载有号核 $\kappa_{S^3}(u,v)=(1+\langle u,v\rangle)/2$。伴随作用以 $\{\pm1\}$ 为核，二对一覆盖能提升为有理单位旋量的旋转子群。该子群是 $\mathrm{SO}(3,\mathbb{Q})$ 的真子群，见[第五章](ch05-rational-cayley-rotations.md)。第四章用整五元组计算有号核的特征秩 $5$。
 
 ## 3.3 整三元数手算演练：锚点、三拍闭合与非交换见证 {#sec-ch03-worked-calculations}
 
@@ -234,17 +244,31 @@ $$
    \end{aligned}
    $$
 
-   两者在第四分量上显式分裂（$+1 \neq -1$），互保真度为 $\frac{(1 + 1 + 1 - 1)^2}{4 \cdot 4} = \frac{1}{4}$。零实数、零根号、零公理，三行整数乘法即向裸 CIC 证明了母公理 `AXIOM-Ω` 非交换、非退化且相对无矛盾！
+   两者在第四分量上显式分裂（$+1 \neq -1$），互保真度为 $\frac{(1 + 1 + 1 - 1)^2}{4 \cdot 4} = \frac{1}{4}$。三行整数乘法便见证了规范模型的非交换性。
+:::
+
+上述第 4 款中两枚绕正交轴各转四分之一圈的锚点的次序敏感分裂并不止于手工验算：无需约分、无需商集公理 `Quot.sound`，下面这条冻结在零公理基础库 `OmegaInit` 与 `OmegaMath` 中的见证定理直接在射影射线等价关系 `Ternion.RayEquiv` 上锁死了非交换性：
+
+::: {.theorem #thm-ch03-phalf-qhalf-noncommutative title="绕正交轴各转四分之一圈的锚点的射影三元非交换见证" lean="D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.phalf_qhalf_noncommutative"}
+在零公理库 `OmegaMath`（仅依赖 `OmegaInit` 与 `OmegaMath`，零公理）中，取整四元数锚点 $p_0 := (1, 0, 0, 0)$、$p_{\mathrm{Half}} := (1, 1, 0, 0)$ 与 $q_{\mathrm{Half}} := (1, 0, 1, 0)$，沿用 [@thm-ch03-quaternion-norm-and-heap-laws] 中的整数三元代表元 $\operatorname{triad}(\mathbf{a}, \mathbf{b}, \mathbf{c}) := (\mathbf{a}\bar{\mathbf{b}})\mathbf{c}$ 与射影射线等价关系 $\sim_{\mathrm{ray}}$（`Ternion.RayEquiv`）。则反序三元积不共射线：
+
+$$
+\neg\Bigl(\operatorname{triad}(p_{\mathrm{Half}},\, p_0,\, q_{\mathrm{Half}}) \;\sim_{\mathrm{ray}}\; \operatorname{triad}(q_{\mathrm{Half}},\, p_0,\, p_{\mathrm{Half}})\Bigr).
+$$
+:::
+
+::: {.proof}
+按整数四元数乘法直接展开得 $\operatorname{triad}(p_{\mathrm{Half}}, p_0, q_{\mathrm{Half}}) = (1, 1, 1, 1)$ 与 $\operatorname{triad}(q_{\mathrm{Half}}, p_0, p_{\mathrm{Half}}) = (1, 1, 1, -1)$。反设二者满足 `Ternion.RayEquiv`，则存在非零整数 $k, l \in \mathbb{Z} \setminus \{0\}$ 使 $k(1, 1, 1, 1) = l(1, 1, 1, -1)$。比较标量分量 $w$ 得 $k = l$，比较第四分量 $z$ 得 $k = -l$，从而推出 $l = -l$；在 `Omega.Int` 上该等式迫使 $l = 0$，与 $l \neq 0$ 矛盾。由此直接在不依赖任何经典公理的裸 CIC 内核中见证了 `AXIOM-Ω` 法则 III 在 $\mathbb{T}_3(\mathbb{Q})$ 上的严格非交换性。本声明仅依赖 `OmegaInit` 与 `OmegaMath`，传递公理闭包为空集。完整证明由 Lean 内核检查。
 :::
 
 ## 3.4 实连续统阴影的完备化边界：从秩五单射嵌入到单位四元数同构 {#sec-ch03-real-shadow-completion}
 
 在收束第一卷之前，还剩最后一道画龙点睛的检验：**我们用纯整数搭起的三维有理三元数骨架，一旦投射到经典实数分析的阴影世界中，与母公理 `AXIOM-Ω` 的无预设拓扑分类定理究竟是什么关系？**
 
-在经典 `Mathlib` 阴影侧，实值三元比较结构 $C = (M, \operatorname{tri}, \kappa)$（$\kappa : M \times M \to \mathbb{R}$）无需预设任何流形、拓扑或维数“$3$”，只靠三条概念谓词就能唯一锁定单位四元数模型 $\mathrm{Sp}(1) \cong S^3(1)$：非交换性（$\exists x, y, z,\; \operatorname{tri}(x,y,z) \neq \operatorname{tri}(z,y,x)$）、链连通性（对任意 $\varepsilon > 0$ 与任意两点，存在相邻读数都大于 $1 - \varepsilon$ 的有限链相连）、触零性（读数可任意接近 $0$），以及特征秩为 $5$（存在 $\varphi : M \to \mathbb{R}^5$ 使 $\kappa(x, y) = \langle\varphi(x), \varphi(y)\rangle$）。首先，**不加读数完备性时**，冻结定理给出严格的单射嵌入：
+在经典阴影侧，`TernaryComparison` 从一开始就配备实值读数，并要求消去、结合、对称、分离、非负、双侧不变及对实系数的有限格拉姆半正定。在此载体上，非交换性与链连通性已迫使任一欧氏特征实现的维数至少为 $5$（`five_le_of_hasFeatureRank`）。链连通性指对每个 $\varepsilon>0$，任意两点可由相邻读数 $>1-\varepsilon$ 的有限链相连。若再有触零性及到 $\mathbb{R}^5$ 的特征实现，得到下面的单射结论。
 
 ::: {.theorem #thm-ch03-rank-five-embedding title="秩五三元比较结构的单位四元数单射嵌入（经典阴影锚点）" lean="D5/S3/Quantum/AURICOmega/TernaryComparisonRankFive.exists_unitQuaternion_embedding"}
-设 $C = (M, \operatorname{tri}, \kappa)$ 为满足法则 I 与法则 II（消去律、三元结合律、对称、$\kappa(x, y) = 1 \iff x = y$、非负、双侧不变、有限格拉姆半正定）的实值三元比较结构。若 $C$ 非交换、链连通、触零，且读数可由某个特征映射 $\varphi : M \to \mathbb{R}^5$ 实现（`HasFeatureRank 5`），则存在单射 $u : M \to \mathrm{Sp}(1)$（单位实四元数群），使得对一切 $x, y, z \in M$：
+设 $C=(M,\operatorname{tri},\kappa)$ 为上述实值三元比较结构。若 $C$ 非交换、链连通、触零（对每个 $\varepsilon>0$ 都有 $\kappa(x,y)<\varepsilon$ 的一对点），且存在 $\varphi:M\to\mathbb{R}^5$ 使 $\kappa(x,y)=\langle\varphi(x),\varphi(y)\rangle$（`HasFeatureRank 5`），则存在单射 $u:M\to\mathrm{Sp}(1)$，使得对一切 $x,y,z\in M$：
 
 $$
 u\bigl(\operatorname{tri}(x, y, z)\bigr) \;=\; u(x)\,u(y)^{-1}\,u(z), \qquad \kappa(x, y) \;=\; \frac{1 + \langle u(x), u(y)\rangle_{\mathbb{R}}}{2}.
@@ -255,7 +279,7 @@ $$
 取特征像的张成子空间 $W \subseteq \mathbb{R}^5$，利用左平移诱导等距锁定闭凸包最小范数不动点 $m \neq 0$，并在正交补 $E = (\mathbb{R} m)^\perp$（维数至多为 $4$）上将左、右平移实现为彼此交换的两族正交等距。结合非交换性与链连通（保证左平移群由不含反号特征向量的元生成），迫使 $\dim_{\mathbb{R}} E = 4$ 并在 $E$ 上建立四元数坐标，导出单射 $q : M \to \mathrm{Sp}(1)$ 使 $\kappa(x, y) = a + (1 - a)\langle q(x), q(y)\rangle$（$a = \lVert m\rVert^2 < 1$）。触零性迫使 $a \le \frac{1}{2}$，而单位四元数幂次实部压至 $-\operatorname{Re} p$ 以下配合链连通性迫使 $a \ge \frac{1}{2}$，唯一锁定 $a = \frac{1}{2}$；取共轭 $u = \bar{q}$ 即把反序积转为正序三元积并保持内积。本声明位于经典 `Mathlib` 阴影侧；完整证明由 Lean 内核检查。
 :::
 
-请注意这道单射为何停在“嵌入”而不是“双射”：我们自己的有理单位四元数子群 $S^3(\mathbb{Q})$ 含 $\pm 1, \mathbf{i}, \mathbf{j}$ 故非交换且触零，在 $S^3(1)$ 中稠密故链连通，特征秩恰为 $5$——它满足 [@thm-ch03-rank-five-embedding] 的**全部假设**，却因为本身可数而不可能与不可数连续统 $\mathrm{Sp}(1)$ 双射！要想把可数有理骨架强行填满成不可数经典实阴影，必须补进最后一条纯经典连续统条款——**读数完备性**（`ReadingComplete`：任何读数一致趋于 $1$ 的序列 $(x_n)$ 都在 $M$ 中有读数极限点 $a$，等价于弦距 $d_\kappa = 2\sqrt{1 - \kappa}$ 下的柯西完备化）：
+有理单位四元数群 $S^3(\mathbb{Q})$ 给出单射可以有真像的例子（手工推导）。取实值读数 $(1+\langle u,v\rangle)/2$，特征向量为 $(1,u)/\sqrt{2}$。$\mathbf{i},\mathbf{j}$ 见证非交换，$\pm1$ 见证触零。有理球极参数在实参数空间稠密，其像在实单位球面稠密。将实球面上一条连接两端的路径切成足够短的段，并用有理单位点逼近分点，就得到任意精度的有限链。这个可数群满足嵌入定理的全部假设。下面再要求读数完备性（`ReadingComplete`）。若 $\kappa(x_m,x_n)$ 在 $m,n$ 同趋无穷时趋于 $1$，须存在 $a\in M$ 使 $\kappa(x_n,a)\to 1$。在单位四元数像上，这是弦距 $d_\kappa=2\sqrt{1-\kappa}$ 的柯西完备性。
 
 ::: {.theorem #thm-ch03-rank-five-isomorphism title="读数完备的秩五三元比较结构同构于单位四元数（经典阴影锚点）" lean="D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv"}
 在 [@thm-ch03-rank-five-embedding] 的全部假设之上，再设 $C$ 满足读数完备性（`ReadingComplete C`）。则对任意指定基点 $o \in M$，存在双射 $u : M \simeq \mathrm{Sp}(1)$，使得 $u(o) = 1$，且对一切 $x, y, z \in M$ 有
@@ -270,7 +294,19 @@ $$
 :::
 
 ::: {.remark #rem-ch03-shadow-boundary title="有理骨架与实阴影的精确分工（MODEL）"}
-[@thm-ch03-rank-five-embedding] 与 [@thm-ch03-rank-five-isomorphism] 之间相隔的唯一一条假设——`ReadingComplete`——恰好就是**零公理有理数学**与**经典实分析阴影**的精确分水岭。没有它，计算停留在可数、可判定、无公理、无实无穷的整数与有理三元骨架之内；加上它，这副骨架经柯西完备化无缝投影为经典实流形 $\mathrm{Sp}(1) = S^3(1)$。这既证实了我们的零公理三维构造绝非偏门特例，又清楚标明了每一份实分析公理究竟从哪一步进入。
+两条秩五定理都在实值比较结构上起步。完备性补上的是单射之像闭合这一步，在全部共同假设下由此得到满射。对这里的有号有理单位子群，其弦距完备化是实单位球面。规范整三元数用的是秩 $10$ 的平方读数，且会识别对径点。第四章的二次核桥给出二者在有理单位旋量上的读数关系。
 :::
 
-至此，第一卷的逻辑地基与齐次有理数系全部落成：我们拥有裸 CIC 地板、观察者精度契约 $\varepsilon_{\mathrm{self}} = 1/M$、可计算类型类 `class OmegaSpace`、零公理一维射影闭环 $\mathbb{QP}^1$ 与三维规范整三元数载体 $\mathbb{T}_3(\mathbb{Q}) \cong \mathbb{QP}^3$。进入第二卷[第四章](ch04-heaps-and-lie-triple-curvature.md)，我们将正式拆解无原点流群、李三元曲率与有号旋量双覆叠，把特征秩 $5$ 的双覆叠旋量同样铸造进纯整数零公理代数之中。
+下面的影片把本章从维数锁定一路走到实阴影边界。
+
+::: {.film src="four-integers-one-turn"}
+**二维里括号只能归零，三维才容得下次序；四个整数加上约分与锁正号，就写出无根号、免商集的三维有理转动（2 分 54 秒）。** 左侧平面里，琥珀色的候选括号 $[x, y]$ 同时与青色的 $x$、$y$ 正交，只能缩为零（紫色，书面论证，示意图）；右侧立起的品红第三轴给出叉积，绿色标签对应 [@thm-ch03-dim3-cross-bracket]（经典 `Mathlib` 侧）。$p_{\mathrm{Half}} = (1, 1, 0, 0)$ 的模方为 $2$，用它共轭再除以 $2$ 得到精确的四分之一圈 $(x, y, z) \mapsto (x, -z, y)$；$(-2, 2, 2, 2)$ 经 $\gcd = 2$ 约分并翻号得到规范名 $(1, -1, -1, -1)$（屏幕计算）。四平方乘性、射线左消去、四维拉格朗日恒等式与 $\kappa \le 1$ 的绿色标签对应 [@thm-ch03-quaternion-norm-and-heap-laws] 与 [@thm-ch03-lagrange-and-kappa-invariance]，算例 $\lvert(1 + \mathbf{i})(1 + \mathbf{j})\rvert^2 = 4$、$\kappa(p_0, p_{\mathrm{Half}}) = 1/2$ 与六个子式平方和 $1 + 1 + 0 + 1 + 0 + 0 = 3$ 为屏幕计算。青色三角形上 $g_{120} = (1, 1, 1, 1)$ 三拍回到 $p_0$，保留符号的紫色六边形要走六拍（[@ex-ch03-five-anchors-and-closure]，屏幕计算）。两种次序的精确整数旋转矩阵与四元组 $(1, 1, 1, 1) \neq (1, 1, 1, -1)$ 并排对照，$k = l$ 与 $k = -l$ 迫使 $l = 0$，绿色标签对应 [@thm-ch03-phalf-qhalf-noncommutative]。最后，圆上的有理点示意有理单位四元数留下的缝隙（手工推导），加上读数完备性后补成 $\mathrm{Sp}(1)$，绿色标签对应 [@thm-ch03-rank-five-isomorphism]（经典侧）；秩 $10$ 的平方读数与对径点粘合按 [@rem-ch03-shadow-boundary] 的诠释标注。
+:::
+
+在合上第一卷之前，不妨在下方交互实验卡中亲手检验整三元数的规范化与非交换自锁：切换整四元组输入，观察 `gcd` 最大公约数约分与首非零正号锁定如何将每条射线归约为全宇宙唯一的规范整代表元（彻底免除 `Quot.sound`），并一步对比反序三元迁移 $[p_{\mathrm{Half}}, p_0, q_{\mathrm{Half}}] = (1, 1, 1, 1) \neq (1, 1, 1, -1) = [q_{\mathrm{Half}}, p_0, p_{\mathrm{Half}}]$ 在第四分量上的显式分裂（[@thm-ch03-phalf-qhalf-noncommutative]）与精确分数保真度读数。
+
+::: {.viz src="ternion-cayley-lab" preset="canonical-ternion-noncomm" height="520"}
+**规范整三元数约分与非对易三元迁移实时实验。** 在实验室中检验 `gcd` 约分与首非零正号规范化算子 `norm`，并直观对照 $[p_{\mathrm{Half}}, p_0, q_{\mathrm{Half}}] = (1, 1, 1, 1) \neq (1, 1, 1, -1) = [q_{\mathrm{Half}}, p_0, p_{\mathrm{Half}}]$ 的次序敏感分裂、$g_{120} = (1, 1, 1, 1)$ 的三拍射影闭合及精确射影保真度 $\kappa_{\mathrm{proj}}$；对应定理见 [@thm-ch03-quaternion-norm-and-heap-laws] 与 [@thm-ch03-lagrange-and-kappa-invariance]，手算见证见 [@ex-ch03-five-anchors-and-closure]。
+:::
+
+至此，第一卷的逻辑地基与齐次有理数系全部落成：我们拥有裸 CIC 地板、观察者精度契约 $\varepsilon_{\mathrm{self}} = 1/M$、AXIOM-Ω 的模型法则、零公理一维射影闭环 $\mathbb{QP}^1$ 与三维规范整三元数载体 $\mathbb{T}_3(\mathbb{Q}) \cong \mathbb{QP}^3$。进入第二卷[第四章](ch04-heaps-and-lie-triple-curvature.md)，我们将正式拆解无原点流群、李三元曲率与有号旋量双覆叠，把特征秩 $5$ 的双覆叠旋量同样铸造进纯整数零公理代数之中。

@@ -88,6 +88,252 @@
           "gid": "D5/S3/Quantum/AURICOmega/OmegaCircleClosure.projective_circle_mul_normSq"
         }
       ]
+    },
+    {
+      "id": "ternion-cayley-lab",
+      "code": "OMEGA//SPIN",
+      "title": "三元流群与三维凯莱旋转实验室 · ℚP¹、规范三元数、720° 旋量与有理旋转",
+      "title_en": "Ternion Heap and 3D Cayley Rotation Lab · ℚP¹, Canonical Ternions, 720° Spinors and Rational Rotations",
+      "summary": "紫色有理球上的四张卡，账本中的分数均已约分。射影圆用齐次整数对 [P : Q] 给出圆上的点 ((Q² − P²)/(P² + Q²), 2PQ/(P² + Q²))，在无穷远点 [1 : 0] 闭合到对径点 (−1, 0)，此时相融度 κ = 0、展度为 1。规范整三元数先消去整四元组的公因子，再令首个非零分量为正。交换三元积的两端，所得规范代表由 (1, 1, 1, 1) 变为 (1, 1, 1, −1)，把同一个有理单位向量 (2, 3, 6)/7 分别转到 (6, 2, 3)/7 与 (3, −6, −2)/7。720° 旋量从约分后的凯莱提升 (1, 1, 1, 1; 2) 逐次累乘，第 3 拍在 −1，有号核为 0，第 6 拍回到 +1。取 σ = (1/2, 1/2, 0)，凯莱旋转逐步保持向量模方为 1，二阶泰勒截断逐步把模方乘以 17/16，十二步后模方为 (17/16)¹²。双透镜给出有理账本与经典角度的对照。",
+      "summary_en": "Four cards on the violet rational sphere, with every fraction in the ledger reduced. The homogeneous pair [P : Q] traces the projective circle at ((Q² − P²)/(P² + Q²), 2PQ/(P² + Q²)). The point at infinity [1 : 0] lands at the antipode (−1, 0), where the overlap κ is 0 and the spread is 1. A canonical ternion is represented by a primitive integer quaternion whose first nonzero entry is positive. Reversing the outer entries of the sample ternion product changes (1, 1, 1, 1) to (1, 1, 1, −1), rotating (2, 3, 6)/7 to (6, 2, 3)/7 and (3, −6, −2)/7 respectively. Repeated multiplication by the Cayley lift (1, 1, 1, 1; 2) reaches −1 at 360°, where the signed kernel is 0, and returns to +1 at 720°. For σ = (1/2, 1/2, 0), the Cayley iterates preserve squared norm 1, and twelve second-order Taylor steps increase it to (17/16)¹². Two lenses show the rational ledger and the classical angles.",
+      "path": "ternion-cayley-lab/",
+      "thumbnail": "ternion-cayley-lab/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-24",
+      "tags": [
+        "齐次射影直线",
+        "对径闭合",
+        "相融度与展度",
+        "规范整三元数",
+        "三元流群",
+        "非交换性",
+        "旋量双覆叠",
+        "有号核",
+        "凯莱旋转",
+        "泰勒截断"
+      ],
+      "tags_en": [
+        "homogeneous projective line",
+        "antipodal closure",
+        "overlap and spread",
+        "canonical ternions",
+        "ternion heaps",
+        "noncommutativity",
+        "spinor double cover",
+        "signed kernel",
+        "Cayley rotations",
+        "Taylor truncation"
+      ],
+      "theory": [
+        {
+          "label": "第二章 一维齐次射影闭环与对径锚点",
+          "label_en": "Chapter 2 The Homogeneous Projective Line and Antipodal Closure",
+          "href": "../zh/ch02-homogeneous-projective-line.html",
+          "href_en": "../en/ch02-homogeneous-projective-line.html"
+        },
+        {
+          "label": "第三章 三维本原流形锁定与规范整三元数",
+          "label_en": "Chapter 3 Locking the Three-Dimensional Manifold and Canonical Ternions",
+          "href": "../zh/ch03-canonical-ternion-manifold.html",
+          "href_en": "../en/ch03-canonical-ternion-manifold.html"
+        },
+        {
+          "label": "第四章 无原点流群、利雅三元曲率与有号旋量双覆叠",
+          "label_en": "Chapter 4 Origin-Free Heaps, Lie Triple Curvature, and Signed Spinor Double Covers",
+          "href": "../zh/ch04-heaps-and-lie-triple-curvature.html",
+          "href_en": "../en/ch04-heaps-and-lie-triple-curvature.html"
+        },
+        {
+          "label": "第五章 三维凯莱有理正逆桥、伴随旋转与切比雪夫谐波",
+          "label_en": "Chapter 5 Three-Dimensional Rational Cayley Rotations and Chebyshev Harmonics",
+          "href": "../zh/ch05-rational-cayley-rotations.html",
+          "href_en": "../en/ch05-rational-cayley-rotations.html"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaCircleClosure.cayley_antipodal_closure"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaTernionHeap.triad_assoc"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaTernionHeap.quadratic_kernel"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.cayley_orthogonal"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.ad_hom"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.heap_norm_preserved"
+        }
+      ]
+    },
+    {
+      "id": "dfinite-algebraic-schur-lab",
+      "code": "OMEGA//JET",
+      "title": "D-有限射流、单纯形锥与有理舒尔实验室 · 凯莱统一、马青包络、二次扩张与舒尔补",
+      "title_en": "D-Finite Jet, Simplicial Cone and Rational Schur Lab · Cayley Unification, Machin Brackets, Quadratic Fields and Schur Complements",
+      "summary": "四张卡用约分后的整数之比记录射流、锥、自旋壳与二次型。在有理射流环里，Cos_N(2 Atan_N(η)) 化为 (1 − η²)/(1 + η²) 的截断。η = 1/2 时凯莱像为 (3/5, 4/5)，截断误差从 −1/10 起每升两阶乘以 −1/4，马青包络用有理端点夹住 π。在加法环流中，两块面元的共享内边因取向相反而相消，取顶点作锥给出 δ₁(H₂F) + H₃(δ₂F) = F。彼得—魏尔自旋壳由偶切比雪夫核 E_n(x²) = U₂ₙ(x) 着色，E₁E₂ = E₁ + E₂ + E₃，d¹⁰ 的四极为零，d⁸ 的四极对角元为 (−4/7, −4/7, 8/7)。在二次扩张的有理系数账本里，u₉₀⁸ = 1，贝尔值的平方为 8，φ¹² = 89 + 144φ。舒尔补把 2x² + 2xy + (3/2)y² 在 y = −(2/3)x 处的最小值写作 (4/3)x²。双透镜给出经典实数对照。",
+      "summary_en": "Four cards for jets, cones, spin shells and quadratic forms, with a ledger of reduced fractions. In the rational jet ring, Cos_N(2 Atan_N(η)) is the truncation of (1 − η²)/(1 + η²). At η = 1/2 the Cayley point is (3/5, 4/5), the truncation error starts at −1/10 and is multiplied by −1/4 every two orders, and Machin brackets enclose π with rational endpoints. In the additive circulation, opposite orientations cancel the shared interior edge of two faces. Coning from a vertex gives δ₁(H₂F) + H₃(δ₂F) = F. The Peter–Weyl shells use E_n(x²) = U₂ₙ(x), with E₁E₂ = E₁ + E₂ + E₃. The d¹⁰ quadrupole vanishes and the d⁸ quadrupole has diagonal (−4/7, −4/7, 8/7). In the quadratic extensions, u₉₀⁸ = 1, the squared Bell value is 8, and φ¹² = 89 + 144φ. The Schur complement gives the minimum (4/3)x² of 2x² + 2xy + (3/2)y² over y, attained at y = −(2/3)x. Two lenses add the classical real comparison.",
+      "path": "dfinite-algebraic-schur-lab/",
+      "thumbnail": "dfinite-algebraic-schur-lab/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-24",
+      "tags": [
+        "D-有限射流",
+        "凯莱圆",
+        "马青包络",
+        "离散斯托克斯公式",
+        "单纯形锥",
+        "彼得—魏尔",
+        "偶切比雪夫核",
+        "四极矩",
+        "二次扩张",
+        "舒尔补"
+      ],
+      "tags_en": [
+        "D-finite jets",
+        "Cayley circle",
+        "Machin brackets",
+        "discrete Stokes formula",
+        "simplicial cone",
+        "Peter–Weyl",
+        "even Chebyshev kernels",
+        "quadrupole moments",
+        "quadratic extensions",
+        "Schur complement"
+      ],
+      "theory": [
+        {
+          "label": "第八章 任意阶 D-有限微分射流与马青有理包络",
+          "label_en": "Chapter 8 Arbitrary-Order D-Finite Jets and Rational Machin Brackets",
+          "href": "../zh/ch08-dfinite-jets-and-cayley-unification.html",
+          "href_en": "../en/ch08-dfinite-jets-and-cayley-unification.html"
+        },
+        {
+          "label": "第九章 流群精确积分、单纯形锥同伦与吻合三元球流形",
+          "label_en": "Chapter 9 Telescoping Heap Integrals, Simplicial Homotopy, and Osculating Arc Manifolds",
+          "href": "../zh/ch09-telescoping-stokes-and-arc-manifold.html",
+          "href_en": "../en/ch09-telescoping-stokes-and-arc-manifold.html"
+        },
+        {
+          "label": "第十章 彼得—魏尔有理自旋壳与整系数切比雪夫核",
+          "label_en": "Chapter 10 Peter–Weyl Rational Spin Shells and Integer Chebyshev Kernels",
+          "href": "../zh/ch10-peter-weyl-rational-spin-shells.html",
+          "href_en": "../en/ch10-peter-weyl-rational-spin-shells.html"
+        },
+        {
+          "label": "第十二章 二次扩张域与有理舒尔正定性",
+          "label_en": "Chapter 12 Quadratic Extensions and Rational Schur Positivity",
+          "href": "../zh/ch12-algebraic-extensions-and-schur-positivity.html",
+          "href_en": "../en/ch12-algebraic-extensions-and-schur-positivity.html"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaJetCalculus.cos_sq_add_sin_sq"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaJetCalculus.cayley_unique_at"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.machin_rational_chain"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaSimplicialExactness.d2_eq_zero_iff"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.even_chebyshev"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.rational_schur_min"
+        }
+      ]
+    },
+    {
+      "id": "adelic-arithmetic-observer-lab",
+      "code": "OMEGA//ARC",
+      "title": "阿代尔算术、自由群与观察者画布实验室 · 素数逃逸、连分数、FRACTRAN 与记忆切分",
+      "title_en": "Adelic Arithmetic, Free Group and Observer Canvas Lab · Prime Escape, Continued Fractions, FRACTRAN and Memory Splits",
+      "summary": "四个立体舞台，用整数与约分后的分数记账。欧几里得素数逃逸从前六个素数的乘积加一得到 30031 = 59 × 509，除以表中任一素数都余 1，最小素因子 59 跳出原表。34/21 的相邻渐近分数的行列式交替为 ±1，7/2 对 1/10 的四分深度为 2，此时账本给出 70 < 128。阿代尔卡把 −18/35 的实绝对值与各素数处的绝对值相乘，积恰为 1。三个模方为 5 的赫维茨四元数及其共轭代表自由群 F₃ 的生成元及其逆元，长成一棵六价树，长度为 0 至 5 的既约词数依次为 1、6、30、150、750、3750，六个代表的矩阵模 5 分裂成非零秩一外积。标量 FRACTRAN 程序从 2¹⁷ 出发，走 15 步后停在 22。同一张卡用二维整数矩阵算例演示凯莱—哈密顿恒等式。静止画布是书中的观察者模型，焦点沿球面滚动，记忆切分满足 κ_time + κ_space = 1，例如 u = 1/3 时两项分别为 16/25 与 9/25。双透镜给出经典实数对照。",
+      "summary_en": "Four solid stages with an exact ledger of integers and reduced fractions. Euclid's construction gives 30031 = 59 × 509 by adding one to the product of the first six primes. It leaves remainder 1 at each of those primes. Consecutive convergents to 34/21 have alternating determinants ±1, and the quarter depth of 7/2 against 1/10 is 2. The real and p-adic absolute values of −18/35 multiply to 1. Three Hurwitz quaternions of squared norm 5 and their conjugates represent the generators of F₃ and their inverses in the six-valent tree, with 1, 6, 30, 150, 750 and 3750 reduced words at lengths 0 through 5. Their matrix representatives split mod 5 into nonzero rank-one outer products. The sample scalar FRACTRAN program halts at 22 after 15 steps from 2¹⁷. A 2 × 2 integer matrix illustrates Cayley–Hamilton. In the book's observer model, the focus rolls across a fixed sphere as the memory split satisfies κ_time + κ_space = 1. Two lenses add the classical real comparison.",
+      "path": "adelic-arithmetic-observer-lab/",
+      "thumbnail": "adelic-arithmetic-observer-lab/thumb.jpg",
+      "status": "live",
+      "added": "2026-11-24",
+      "tags": [
+        "素数逃逸",
+        "有限连分数",
+        "四分深度",
+        "阿代尔乘积公式",
+        "赫维茨素旋子",
+        "自由群 F₃",
+        "模 5 分裂",
+        "Ω-FRACTRAN",
+        "凯莱—哈密顿恒等式",
+        "观察者记忆切分"
+      ],
+      "tags_en": [
+        "prime escape",
+        "finite continued fractions",
+        "quarter depth",
+        "adelic product formula",
+        "Hurwitz prime spinors",
+        "free group F₃",
+        "splitting mod 5",
+        "Ω-FRACTRAN",
+        "Cayley–Hamilton identity",
+        "observer memory split"
+      ],
+      "theory": [
+        {
+          "label": "第十三章 欧几里得素数逃逸、有限连分数与四分深度预算",
+          "label_en": "Chapter 13 Euclid Prime Escape, Finite Continued Fractions, and Quarter-Depth Budgets",
+          "href": "../zh/ch13-computable-arithmetic-horizon.html",
+          "href_en": "../en/ch13-computable-arithmetic-horizon.html"
+        },
+        {
+          "label": "第十四章 阿代尔乘积归元、赫维茨素旋子与自由群 F₃",
+          "label_en": "Chapter 14 Adelic Product Closure, Hurwitz Prime Spinors, and the Free Group F₃",
+          "href": "../zh/ch14-adelic-closure-and-hurwitz-primes.html",
+          "href_en": "../en/ch14-adelic-closure-and-hurwitz-primes.html"
+        },
+        {
+          "label": "第十六章 Ω-FRACTRAN 非阿贝尔旋子机与二维矩阵环",
+          "label_en": "Chapter 16 Ω-FRACTRAN Non-Abelian Spinor Machines and 2×2 Matrix Algebra",
+          "href": "../zh/ch16-omega-fractran-and-nonabelian-stack.html",
+          "href_en": "../en/ch16-omega-fractran-and-nonabelian-stack.html"
+        },
+        {
+          "label": "第十七章 观察者即宇宙、结构时间与静止画布记忆切分",
+          "label_en": "Chapter 17 The Observer as Universe, Structural Time, and Static-Canvas Memory Splits",
+          "href": "../zh/ch17-observer-universe-and-single-gradient.html",
+          "href_en": "../en/ch17-observer-universe-and-single-gradient.html"
+        }
+      ],
+      "lean": [
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.euclid_prime_escape"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.cf_convergent_determinant"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaArithmeticHorizon.quarterDepth_integer_sound"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.mod_five_rank_one"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.fractran_deterministic"
+        },
+        {
+          "gid": "D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.cayley_hamilton"
+        }
+      ]
     }
   ]
 }

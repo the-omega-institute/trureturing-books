@@ -1,0 +1,266 @@
+{
+  "voice": "af_heart",
+  "speed": 1.05,
+  "say": {
+    "Lean": "Leen"
+  },
+  "music": {
+    "bpm": 80,
+    "progression": "d-minor"
+  },
+  "scenes": [
+    {
+      "id": "ball",
+      "name": "FLAT FACES",
+      "lead": 1.4,
+      "tail": 0.5,
+      "music": [
+        1.0,
+        0.4,
+        0.3,
+        0.0,
+        0.1
+      ],
+      "lines": [
+        [
+          "Build a ball from flat faces: twelve corners on a glass sphere, twenty triangles between.",
+          "用平面拼一个球：玻璃球面上取十二个角，中间连成二十个三角形。"
+        ],
+        [
+          "At a face's centre, the skin is still zero point two one away.",
+          "站到一个面的正中央：离球皮还差 0.21。"
+        ],
+        [
+          "Add corners. Forty-two leave zero point zero six six; a hundred and sixty-two, zero point zero one eight.",
+          "再加角：42 个角，还差 0.066；162 个角，还差 0.018。"
+        ],
+        [
+          "Who promised that finite steps could ever close it?",
+          "谁向我们许诺过，有限步终能把这道缝合上？"
+        ]
+      ],
+      "cues": [
+        {
+          "line": 1,
+          "at": 2.2,
+          "kind": "chime"
+        },
+        {
+          "line": 3,
+          "at": 0.4,
+          "kind": "glitch"
+        }
+      ]
+    },
+    {
+      "id": "pointer",
+      "name": "THE POINTER",
+      "lead": 0.3,
+      "tail": 0.4,
+      "music": [
+        0.9,
+        0.5,
+        0.4,
+        0.0,
+        0.2
+      ],
+      "lines": [
+        [
+          "Now a quantum memory: a pointer of a few cells, each holding an amplitude.",
+          "换到量子记忆里。它的指针有几格，每格放一个振幅。"
+        ],
+        [
+          "To record a branch, slide the pointer by its label.",
+          "要记下一个分支，就按它的标签把指针平移几格。"
+        ],
+        [
+          "Stack the copy on the original like two stencils. Multiply cell by cell and add: that overlap says how alike they look.",
+          "把平移后的副本叠回原件，像对齐两张镂空板；逐格相乘再相加，得到的重叠量衡量两份记录有多像。"
+        ],
+        [
+          "Overlap one: the branches look identical, and interference survives. Below one, it is damped.",
+          "重叠为 1，两个分支分不开，干涉原样保留；小于 1，干涉就被压低。"
+        ]
+      ],
+      "cues": [
+        {
+          "line": 1,
+          "at": 1.6,
+          "kind": "chime"
+        }
+      ]
+    },
+    {
+      "id": "hand",
+      "name": "TWO CELLS",
+      "lead": 0.3,
+      "tail": 0.4,
+      "music": [
+        0.9,
+        0.6,
+        0.5,
+        0.1,
+        0.2
+      ],
+      "lines": [
+        [
+          "The smallest pointer: two cells, a and b, with a squared plus b squared equal to one.",
+          "最小的指针只有两格，a 和 b，满足 a² + b² = 1。"
+        ],
+        [
+          "Shift it by one cell. Only one cell is shared, so the overlap is a times b.",
+          "平移一格：只剩一格重合，重叠就是 a 乘 b。"
+        ],
+        [
+          "Turn the knob: the overlap peaks at one half, when a equals b.",
+          "转动旋钮：a = b 时重叠最大，是 1/2。"
+        ],
+        [
+          "One half is a triangle's centre-to-side distance. Three cells reach only a square's: zero point seven oh seven.",
+          "1/2 正是三角形的边心距；三格指针最多到 0.707，是正方形的边心距。"
+        ]
+      ],
+      "cues": [
+        {
+          "line": 2,
+          "at": 2.6,
+          "kind": "chime"
+        }
+      ]
+    },
+    {
+      "id": "ceiling",
+      "name": "THE CEILING",
+      "lead": 0.3,
+      "tail": 0.4,
+      "music": [
+        1.0,
+        0.8,
+        0.6,
+        0.3,
+        0.3
+      ],
+      "lines": [
+        [
+          "Lean checks the rule for every finite pointer and nonzero shift: the overlap never passes a polygon's centre-to-side distance.",
+          "Lean 内核检验：任何有限指针、任何非零平移，重叠都不超过一个多边形的边心距。"
+        ],
+        [
+          "Longer pointers buy bigger polygons; no polygon reaches the circle.",
+          "指针越长，多边形越大；可没有哪个多边形够得到圆。"
+        ],
+        [
+          "Lean checks the price: when two branch labels differ, every recovery channel leaves its worst input an error of at least half that gap.",
+          "代价也由 Lean 检验：只要两个分支的标签不同，无论用哪个恢复信道，最坏的输入至少留下这道缝一半的误差。"
+        ],
+        [
+          "A quarter for two cells, zero point zero one seven for eleven: never zero. A finite pointer always leaves a fingerprint.",
+          "两格是 1/4，十一格是 0.017：绝不是零。有限的指针总会留下指纹。"
+        ]
+      ],
+      "cues": [
+        {
+          "line": 0,
+          "at": 0.8,
+          "kind": "stamp"
+        },
+        {
+          "line": 3,
+          "at": 4.6,
+          "kind": "impact"
+        }
+      ]
+    },
+    {
+      "id": "tail",
+      "name": "THE TAIL",
+      "lead": 0.3,
+      "tail": 0.4,
+      "music": [
+        1.0,
+        0.7,
+        0.7,
+        0.3,
+        0.4
+      ],
+      "lines": [
+        [
+          "Arithmetic has the same kind of gap: a computer gets a pi pulse's matrix from n terms of a series.",
+          "算术里也有同一类缝：计算机只用级数的前 n 项算出 π 脉冲的矩阵。"
+        ],
+        [
+          "Lean checks a ceiling on the dropped tail, in any complete normed algebra.",
+          "Lean 内核检验了丢掉那条尾巴的上界，对任何完备赋范代数都成立。"
+        ],
+        [
+          "Here r is pi over two: the ceiling falls from one point two two at four terms to two millionths at twelve.",
+          "取 r = π/2：留 4 项，上界是 1.22；留 12 项，只剩约百万分之二。"
+        ],
+        [
+          "The factorial outruns the power. The true errors sit below the ceiling, and above zero.",
+          "阶乘跑赢了幂。真实误差都在上界之下，也都大于零。"
+        ]
+      ],
+      "cues": [
+        {
+          "line": 1,
+          "at": 1.0,
+          "kind": "stamp"
+        }
+      ]
+    },
+    {
+      "id": "edge",
+      "name": "WHAT IT DOES NOT SAY",
+      "lead": 0.3,
+      "tail": 0.4,
+      "music": [
+        1.0,
+        0.7,
+        0.6,
+        0.3,
+        0.3
+      ],
+      "lines": [
+        [
+          "The floor is for the worst input: states diagonal in the labels pass untouched.",
+          "下界说的是最坏的输入：在标签基底下对角的态原样通过。"
+        ],
+        [
+          "A falling floor is not a falling error: a pointer using one cell keeps its error, however many cells you allow.",
+          "下界变小，不等于误差变小：只用一格的指针，允许再多格，误差也不变。"
+        ],
+        [
+          "This is one recording scheme. The pulse's cosine tail staying nonzero up to two radians is textbook, not formalized here.",
+          "这只是一种记录方式。脉冲里余弦的尾巴在两弧度以内不为零，是教科书结果，本书没有形式化。"
+        ]
+      ]
+    },
+    {
+      "id": "close",
+      "name": "LEDGER",
+      "lead": 0.5,
+      "tail": 2.0,
+      "music": [
+        1.0,
+        0.6,
+        0.5,
+        0.3,
+        0.2
+      ],
+      "lines": [
+        [
+          "Geometric Intuition of Quantum Computing, chapter twenty-one.",
+          "《量子计算的几何直觉》· 第二十一章"
+        ]
+      ],
+      "cues": [
+        {
+          "line": 0,
+          "at": 0.3,
+          "kind": "chime"
+        }
+      ]
+    }
+  ]
+}

@@ -1,27 +1,27 @@
 # Chapter 18 Empty-Kernel Auditing, the One-Way Shadow Functor, and the Six-Volume Workbench
 
-> *“Not a single line of the Lean 4 kernel is altered, and not a single custom axiom is smuggled in: keep canonical integer carriers and typeclass consistency inside bare CIC under empty-kernel replay, place classical real analysis beyond a one-way shadow functor, and proof becomes exact executable computation.”*
+> *“Select a strict library root, follow its imports, and replay that closure in a fresh Lean kernel. Then follow a single circle identity across the bridge and read which axioms its real proof uses.”*
 
-Having built six volumes from homogeneous projective closure to non-Abelian spinor machines and the self-contained observer, the monograph now faces its sharpest engineering audit: **how does $\mathbf{Math}_\Omega$ compile inside Lean 4 with a literally empty `#print axioms` closure verified by fresh empty-kernel replay, and how do we draw an honest compiler boundary between a readable teaching prototype and the frozen zero-axiom library stack?**
+From homogeneous projective closure to non-Abelian spinor machines and the self-contained observer, the six volumes lead to two questions we can put to Lean 4. Which strict library import closures can replay in an empty kernel? Which axioms do the theorems cited in the book use on each backend?
 
-Section 18.1 lays out the three-layer `OmegaInit` + `OmegaMath` architecture, anchored by six Wave 1 zero-axiom (`axioms: []`) frozen theorems, two frozen quarter-depth integer-to-real bridge theorems, and all eleven frozen theorems of the Layer-2 one-way shadow functor `OmegaShadowBridge` (with an explicit layered axiom audit). Section 18.2 presents a concise six-volume `OmegaMath.Core` prototype alongside an explicit compiler audit distinguishing `Init.Rat` (which in Lean `v4.35.0` transitively imports `{propext, Classical.choice, Quot.sound}`) from the true zero-axiom `QRat` and `prelude` `OmegaInit` + `OmegaMath` (`Omega.IntRatio`) stacks. Section 18.3 guides the reader through all four modes of the six-volume 3D holographic interactive workbench.
+Section 18.1 starts with six projective-circle theorems and reaches the classical real layer through the quarter-depth budget and `OmegaShadowBridge`. Section 18.2 compares the teaching prototype built on `Init.Rat` with the strict libraries and explains the evidence for library replay and for D5 on both backends. Section 18.3 returns to the four-mode `OMEGA//LAB` workbench.
 
-## 18.1 Three-Layer Zero-Axiom Architecture, Wave 1 Frozen Theorems, and the Shadow Functor {#sec-om-ch18-three-layer-architecture}
+## 18.1 Three-Layer Architecture, Strict Core Theorems, and the Shadow Functor {#sec-om-ch18-three-layer-architecture}
 
 Formalizing infinity-free, transcendental-free mathematics in Lean 4 neither alters the underlying Calculus of Inductive Constructions (CIC) kernel nor permits custom `axiom` declarations (which block kernel $\iota$-reduction, risk silent collapse to `False` if a zero-tuple guard is omitted, and fail independent kernel audits). Instead, the architecture separates cleanly into three layers (`MODEL` architectural division anchored by frozen **`LEAN ✓`** declarations):
 
 1. **Layer 0: Quotient-Free Canonical Integer Carriers (Eliminating `Quot.sound`)**:
-   - In the frozen strict libraries `OmegaInit` + `OmegaMath`, every file opens with `module` and `prelude`, closing off implicit official `Init` imports entirely. `Omega.Nat`, `Omega.Int`, `Omega.Ratio`, and `Omega.IntRatio` store finite fractions with positive predecessor denominators, define equivalence by cross-multiplication (`IntRatio.Equivalent`), and propagate `undefined` cleanly without touching `Quot.sound`;
-   - In executable reflection prototypes over `Init`, GCD-reduced integer pairs `QRat` and first-nonzero-positive integer quadruples `ProjTernion` / `CanonProjTernion` replace `Quotient` with unique canonical normal forms equipped with constructive `DecidableEq` (Hedberg's UIP).
-2. **Layer 1: Constructive Relative Consistency via `class OmegaSpace`**:
-   The mother laws of $\mathrm{AXIOM}\text{-}\Omega$—ternary transport `triad`, rational fidelity `kappa`, and their six equational identities—are packaged as a computable typeclass `class OmegaSpace (M : Type)` rather than raw `axiom` declarations. Exhibiting a nontrivial non-Abelian inhabitant (such as `CanonProjTernion`) inside bare CIC proves relative consistency and non-degenerate satisfiability constructively.
+   - In the strict backend’s `OmegaInit` + `OmegaMath`, every file opens with `module` and `prelude`, closing off implicit official `Init` imports entirely. `Omega.Nat`, `Omega.Int`, `Omega.Ratio`, and `Omega.IntRatio` store finite fractions with positive predecessor denominators, define equivalence by cross-multiplication (`IntRatio.Equivalent`), and propagate `undefined` cleanly without touching `Quot.sound`;
+   - The `Init` reflection examples reduce `QRat` integer pairs by their GCD. The `ProjTernion` structure below stores four raw integers, including the zero tuple and scalar multiples. On nonzero rays, Chapter 3 obtains `CanonProjTernion` by dividing by the common GCD and choosing the first nonzero coordinate positive.
+2. **Layer 1. Model laws as typeclass fields**
+   Chapter 1’s schematic `OmegaSpace` packages ternary cancellation and associativity with reflexivity, symmetry and two-sided invariance of the reading. A full model of AXIOM-Ω also needs reading separation, nonnegativity, Gram positivity, zero-reaching, a noncommutative witness and a specified comparison class for minimality. Chapter 3 gives a hand argument on normalized representatives. The companion `QRat` prototype checks a finite conjunction of examples. Constructing an `OmegaSpace` instance would require proofs of its universally quantified fields.
 3. **Layer 2: One-Way Shadow Functor $\Pi_{\mathbb{R}} : \mathbf{OmegaMath} \to \mathbf{Mathlib}$**:
-   Projective closure, heap geodesics, jet curvature, rational Schur complements, and integer depth certificates remain inside the zero-axiom Layers 0–1. Only when an external classical statement over $\mathbb{R}$ or $\mathbb{C}$ is needed does a one-way soundness bridge transport the certified rational bound outward into `Mathlib`, preventing `Classical.choice` and limit filters from contaminating the computational core.
+   For example, the strict circle theorem certifies an identity of integer ratios. `OmegaShadowBridge` transports it to the real numbers. Appendix A lists the strict and official dependencies of the core theorems and the official dependencies of the bridge.
 
-The six statements below are the Wave 1 frozen **true zero-axiom** theorems on `trureturing@dev`: every one records `libraries: ["OmegaInit", "OmegaMath"]` and **`axioms: []`**, passing fresh empty-kernel replay.
+At the pinned commit [{commit}](trureturing:), the `strict_omega` records for these six projective-circle theorems list only `OmegaInit` and `OmegaMath` and give `[]` for the axioms of each. The official record for antipodal closure, `cayley_antipodal_closure`, lists `propext` alone. For both sets of records, see [Appendix A §A.3](appendix-a.md#sec-om-appa-frozen-registry).
 
-::: {.theorem #thm-om-ch18-wave1-zero-axiom-circle title="Wave 1 Zero-Axiom Frozen Theorems: Projective Scaling, Complement Closure, Cayley Unit Circle, Antipodal Pole, and Norm Multiplicativity" lean="D5/S3/Quantum/AURICOmega/ProjectiveOverlapScaling.kappa_scale D5/S3/Quantum/AURICOmega/OmegaCircleClosure.kappa_scale D5/S3/Quantum/AURICOmega/OmegaCircleClosure.kappa_add_spread_eq_one D5/S3/Quantum/AURICOmega/OmegaCircleClosure.cayley_circle_unit D5/S3/Quantum/AURICOmega/OmegaCircleClosure.cayley_antipodal_closure D5/S3/Quantum/AURICOmega/OmegaCircleClosure.projective_circle_mul_normSq"}
-Inside the zero-axiom strict libraries `OmegaInit` and `OmegaMath` (`axioms: []`), the following six theorems hold:
+::: {.theorem #thm-om-ch18-wave1-zero-axiom-circle title="Projective-Circle Theorems: Projective Scaling, Complement Closure, Cayley Unit Circle, Antipodal Pole, and Norm Multiplicativity" lean="D5/S3/Quantum/AURICOmega/ProjectiveOverlapScaling.kappa_scale D5/S3/Quantum/AURICOmega/OmegaCircleClosure.kappa_scale D5/S3/Quantum/AURICOmega/OmegaCircleClosure.kappa_add_spread_eq_one D5/S3/Quantum/AURICOmega/OmegaCircleClosure.cayley_circle_unit D5/S3/Quantum/AURICOmega/OmegaCircleClosure.cayley_antipodal_closure D5/S3/Quantum/AURICOmega/OmegaCircleClosure.projective_circle_mul_normSq"}
+The six D5 theorems below use the `OmegaInit` and `OmegaMath` interfaces.
 
 1. **Positive natural scaling invariance** (`ProjectiveOverlapScaling.kappa_scale`): for all `p q k : Omega.Nat`, `Omega.Projective.kappa (p.mul k.succ) (q.mul k.succ)` is equivalent to `Omega.Projective.kappa p q` under `Omega.Ratio.Equivalent`, including the case $p = q = 0$ where both readings are undefined;
 2. **Nonzero signed integer scaling invariance** (`OmegaCircleClosure.kappa_scale`): for all `p q k : Omega.Int` with `hk : Not (Eq k Int.zero)`, `IntRatio.Equivalent (kappa (k.mul p) (k.mul q)) (kappa p q)`;
@@ -50,7 +50,7 @@ By definition of `Nat.log 4`, the integer quotient $(cq)/(dp)$ is strictly less 
 
 To transport the Layer 0–1 zero-axiom carriers `Omega.Nat`, `Omega.Int`, `Omega.IntRatio`, and `Omega.Projective.Circle` directly and one-way outward into standard `Mathlib` arithmetic over $\mathbb{N}, \mathbb{Z}, \mathbb{Q}, \mathbb{R}$, the Layer-2 bridge module `OmegaShadowBridge` exports all eleven frozen theorems below:
 
-::: {.theorem #thm-ch18-omega-shadow-bridge title="Layer-2 One-Way Shadow Functor: Exact Transport of Zero-Axiom Arithmetic and Projective Circle Laws into Mathlib" lean="D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toStdNat_add D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toStdNat_mul D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toStdInt_neg D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toStdInt_add D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toStdInt_mul D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toRat_equivalent D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toRat_add D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toRat_mul D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toRat_inv D5/S3/Quantum/AURICOmega/OmegaShadowBridge.cayley_circle_unit D5/S3/Quantum/AURICOmega/OmegaShadowBridge.kappa_unit_interval"}
+::: {.theorem #thm-ch18-omega-shadow-bridge title="Layer-2 One-Way Shadow Functor: Exact Transport of Arithmetic and Projective Circle Laws into Mathlib" lean="D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toStdNat_add D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toStdNat_mul D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toStdInt_neg D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toStdInt_add D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toStdInt_mul D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toRat_equivalent D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toRat_add D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toRat_mul D5/S3/Quantum/AURICOmega/OmegaShadowBridge.toRat_inv D5/S3/Quantum/AURICOmega/OmegaShadowBridge.cayley_circle_unit D5/S3/Quantum/AURICOmega/OmegaShadowBridge.kappa_unit_interval"}
 In the Layer-2 bridge module `D5/S3/Quantum/AURICOmega/OmegaShadowBridge`, define structural readings `toStdNat : Omega.Nat → ℕ` and `toStdInt : Omega.Int → ℤ`, define `toRat : Omega.IntRatio → ℚ` sending every finite fraction `IntRatio.fraction a d` to `(toStdInt a : ℚ) / (toStdInt (IntRatio.denominator d) : ℚ)` and `IntRatio.undefined` to `0`, and set the real shadow `toReal (x : IntRatio) : ℝ := (toRat x : ℝ)`. Then all eleven exact transport laws hold simultaneously:
 
 1. **Natural and integer homomorphisms** (`toStdNat_add`, `toStdNat_mul`, `toStdInt_neg`, `toStdInt_add`, `toStdInt_mul`): for all `a, b : Omega.Nat`, `toStdNat (a.add b) = toStdNat a + toStdNat b` and `toStdNat (a.mul b) = toStdNat a * toStdNat b`; for all `a, b : Omega.Int`, `toStdInt a.neg = -toStdInt a`, `toStdInt (a.add b) = toStdInt a + toStdInt b`, and `toStdInt (a.mul b) = toStdInt a * toStdInt b`;
@@ -73,7 +73,13 @@ In the Layer-2 bridge module `D5/S3/Quantum/AURICOmega/OmegaShadowBridge`, defin
 The natural and integer homomorphisms follow by structural induction on `Omega.Nat` and `Omega.Int`, using helper lemmas `toStdInt_negOfNat` and `toStdInt_subNatNat` to match the `ofNat`/`negSucc` branches with standard `ℤ` arithmetic. For rational transport, positivity of `IntRatio.denominator d = d + 1` lets cross-multiplication equivalence descend via `div_eq_div_iff` (`toRat_equivalent`), while `div_add_div` and denominator multiplicativity establish `toRat_add` on finite fractions; splitting on `undefined` versus `fraction` and using `0 * q = 0` and `0⁻¹ = 0` in `Mathlib`'s `ℚ` closes `toRat_mul` and `toRat_inv` globally. Finally, the zero-axiom core laws `Omega.Projective.Circle.cayley_circle_unit` and `kappa_spread_unit_interval` pass through `toRat_equivalent`, `toRat_le`, and the order-preserving ring cast `Rat.cast : ℚ → ℝ`, with the origin case `p = q = 0` checked directly since `0 ∈ [0, 1]`. The full proof is checked by the Lean kernel.
 :::
 
-Honest axiom auditing requires distinguishing [@thm-ch18-omega-shadow-bridge] sharply from the zero-axiom Layer 0–1 core. Its frozen state records a transparent, graduated Layer-2 axiom profile: `toStdNat_add` depends only on `Init` and `OmegaInit` with `axioms: []`; `toStdNat_mul` imports `Mathlib` and uses `["propext"]`; `toStdInt_neg` (`Init`, `OmegaInit`) together with `toStdInt_add` and `toStdInt_mul` (`Init`, `Mathlib`, `OmegaInit`) use `["Quot.sound", "propext"]`; and the six rational-to-real transport theorems (`toRat_equivalent`, `toRat_add`, `toRat_mul`, `toRat_inv`, `cayley_circle_unit`, `kappa_unit_interval`) depend on `Init` and `Mathlib` (plus `Batteries` on five of them) within Lean's standard classical/quotient closure `{propext, Classical.choice, Quot.sound}`. The architectural firewall is strict **one-way isolation**: neither `OmegaInit` nor `OmegaMath` ever imports `OmegaShadowBridge` or `Mathlib`, preserving a literal empty axiom closure `axioms: []` across the entire Layer 0–1 core.
+The theorems in [@thm-ch18-omega-shadow-bridge] connect the constructions in Layers 0–1 to Layer 2. At the pinned commit, their official axiom records fall into four groups. `toStdNat_add` has `[]`, `toStdNat_mul` depends on `propext` alone, `toStdInt_neg`, `toStdInt_add`, and `toStdInt_mul` depend on `Quot.sound` and `propext`, and the six rational and real readout theorems depend on `Classical.choice`, `Quot.sound`, and `propext`. The bridge imports core libraries, and the strict core’s import closure stays within the strict library layers.
+
+The diagram places empty-kernel replay of the strict library alongside the paired D5 records and the one-way bridge to the real layer.
+
+::: {.figure src="ch18-three-layer-shadow"}
+**The three-layer stack and its one-way shadow bridge.** The blue frame marks the selected import closure used for strict library replay. The box below shows the two D5 axiom records. The violet arrows lead through `OmegaShadowBridge` to the `Mathlib` real layer.
+:::
 
 ## 18.2 Six-Volume Core Prototype and Honest Compiler Axiom Audit {#sec-om-ch18-six-volume-prototype-and-honest-audit}
 
@@ -98,9 +104,12 @@ def QProj1.spread (x : QProj1) : Rat :=
   let d : Int := x.p * x.p + x.q * x.q
   if d = 0 then 0 else (x.p * x.p : Rat) / (d : Rat)
 
-/-- Vols I–II: Canonical integer ternion carrier and quaternion multiplication -/
+/-- Vols I–II: Raw integer quadruples and quaternion multiplication -/
 structure ProjTernion where
-  w : Int; x : Int; y : Int; z : Int
+  w : Int
+  x : Int
+  y : Int
+  z : Int
   deriving Repr, DecidableEq
 
 def ProjTernion.qmul (a b : ProjTernion) : ProjTernion :=
@@ -118,7 +127,9 @@ def detGram3 (c12 c23 c31 : Rat) : Rat :=
 
 /-- Vol III: Second-order nilpotent jet ring ℚ[η]/(η³) with exact two-term inverse -/
 structure Jet2 where
-  j0 : Rat; j1 : Rat; j2 : Rat
+  j0 : Rat
+  j1 : Rat
+  j2 : Rat
   deriving Repr
 
 def Jet2.mul (a b : Jet2) : Jet2 :=
@@ -130,7 +141,7 @@ def Jet2.inv (a : Jet2) : Jet2 :=
   let u2 := a.j2 * i0
   ⟨i0, -(i0 * u1), i0 * (u1 * u1 - u2)⟩
 
-/-- Vol IV: Pi-free spherical Chebyshev spin-shell characters and Catalan Haar moments -/
+/- Vol IV: Pi-free spherical Chebyshev spin-shell characters and Catalan Haar moments -/
 namespace SphericalFourier
 def chi1 (k : Rat) : Rat := 4 * k - 1
 def chi2 (k : Rat) : Rat := 16 * k * k - 12 * k + 1
@@ -166,31 +177,38 @@ end OmegaMath.Core
 ```
 
 ::: {.remark #rem-om-ch18-honest-compiler-audit title="Honest Compiler Axiom Audit: Init.Rat Prototype vs. True Zero-Axiom QRat and OmegaInit Stacks"}
-Under honest compiler auditing, **the readable `Init.Rat` prototype above must never be claimed to have an empty `#print axioms` closure**. Direct compiler audits in Lean `v4.35.0` separate four distinct implementation tiers:
+The `Init.Rat` teaching prototype, the executable `QRat` prototype, the strict libraries, the paired D5 consumers, and the real bridge each have their own verification evidence.
 
-1. **Why the readable `Init.Rat` prototype is not axiom-free**: standard `Init.Rat` bundles a `Prop` coprimality field whose arithmetic (`Rat.add`, `Rat.mul`, `Rat.div`) transitively imports `{propext, Classical.choice, Quot.sound}` (`Rat.inv` imports `{propext, Quot.sound}`), while boolean equality `==` (`BEq`) likewise pulls in `Classical.choice`; moreover `Rat` operations stall kernel `by decide`. The listing above serves purely as a compact six-volume specification blueprint;
-2. **True zero-axiom path I (zero-import `QRat` executable core)**: replacing `Init.Rat` with a pure integer-pair carrier `QRat` (`Int × Nat` normalized via `Nat.gcd`) and using propositional `Decidable` branches (`=` / `≠` / `>`) instead of `BEq` (`==`) restores one-step `by decide` reduction in Lean `v4.35.0` with `#print axioms` literally printing **`does not depend on any axioms`**;
-3. **True zero-axiom path II (frozen `module` + `prelude` `OmegaInit` + `OmegaMath` stack)**: the frozen strict library goes all the way to bare CIC, disabling even implicit official `Init` imports via `prelude` and representing ratios via `Omega.IntRatio` with cross-multiplication equivalence (as in [@thm-om-ch18-wave1-zero-axiom-circle]). Its auditor `OmegaChecks.Audit` verifies zero `.axiomInfo`, zero `.quotInfo`, zero `isUnsafe`, and zero official `Init`/`Mathlib` imports across the transitive closure, then replays every constant into a fresh `mkEmptyEnvironment` kernel!
+1. **The `Init.Rat` teaching prototype.** In Lean `v4.35.0`, `Rat.add`, `Rat.mul`, and `Rat.div` depend on `propext`, `Classical.choice`, and `Quot.sound`. `Rat.inv` depends on `propext` and `Quot.sound`. The standalone function `fun (a b : Rat) => a == b` has an empty axiom closure. For `(1 : Rat) + 1 = 2`, `by decide` gets stuck reducing `Rat.add`.
+2. **The `QRat` prototype using `Init`.** Section 32.8 of the companion book uses `Nat.gcd` to normalize integer pairs. Lean checks the finite example `omega_zero_axiom_master_check` by `decide`, and `#print axioms` reports an empty dependency list.
+3. **Strict library replay and paired D5 checks.** The strict libraries use `prelude` to disable implicit official `Init` imports. `OmegaChecks.Audit` inspects the axioms and declaration kinds in the transitive import closure of selected library roots, then replays that closure in `mkEmptyEnvironment`. D5 consumers are compiled separately and their exports compared. On each measured declaration row, `strict_omega.axioms` gives the strict dependencies and `axioms` gives the official ones. For the commands, see [Appendix A §A.6](appendix-a.md#sec-om-appa-audit-checklist).
 
-| Implementation Tier | Import Closure | `#print axioms` Audit | Empty-Kernel Replay | Engineering Role |
+| Implementation Tier | Import Closure | Axiom Evidence | Verification | Engineering Role |
 | :--- | :--- | :--- | :---: | :--- |
 | **Readable `Init.Rat` prototype** | Implicit `Init` (`Rat`/`BEq`) | `{propext, Classical.choice, Quot.sound}` | No | Pedagogical six-volume blueprint |
-| **Zero-import `QRat` core** | Implicit `Init` (no `Rat`/`BEq`) | `∅` (`does not depend on any axioms`) | Axiom-only | Native `#eval` and one-step `decide` |
-| **Frozen `OmegaInit` + `OmegaMath`** | `module` + `prelude` (strict) | **`axioms: []` (true zero-axiom)** | **Passed** | Frozen zero-axiom foundation |
+| **`QRat` prototype** | Implicit `Init` (uses `QRat`) | `∅` (`does not depend on any axioms`) | Axiom-only | Native `#eval` and one-step `decide` |
+| **Strict libraries** | Selected import closure in `OmegaInit`, `OmegaMathlib`, and `OmegaMath` | Empty transitive axiom dependencies for every declaration in the closure | Empty-kernel replay | Constructive foundation |
+| **D5 consumers on both backends** | The same sources built with strict and official interfaces | On a paired declaration row, `strict_omega.axioms` for strict and `axioms` for official | Paired builds, export comparison, and per-backend measurement | Frozen theorems cited in the book |
 | **Layer-2 `OmegaShadowBridge` and `Mathlib.Real` shell** | `OmegaInit`/`OmegaMath` + `Init`/`Mathlib` (one-way bridge, [@thm-ch18-omega-shadow-bridge]) | Graduated: `[]` / `propext` / `{Quot.sound, propext}` up to `{propext, Classical.choice, Quot.sound}` | No | Outer analysis via shadow functor $\Pi_{\mathbb{R}}$ |
+:::
+
+The film below walks through the chapter's audit from start to finish: the two records of the strict circle theorems, empty-kernel replay of the strict libraries, the one-way bridge to the reals, and the axiom boundary of the teaching prototype.
+
+::: {.film src="auditing-the-empty-kernel"}
+**One circle theorem carries one axiom record for the strict backend and another for the official one, selected strict import closures replay in an empty kernel, and the reals sit on the far side of a one-way bridge (2 min 47 s).** The film opens with the three-layer architecture (a model division, violet) and the equivalence $2/4 \sim 1/2$ given by cross multiplication, $2 \times 2 = 4 \times 1$ (computed on screen). The integer pair $(1, 2)$ has squared norm $5$ and the amber Cayley image $(3/5, 4/5)$; the magenta pole $[1 : 0]$ lands at $(-1, 0)$; and $(1, 2) \cdot (1, 2) = (4, 3)$ has squared norm $25 = 5 \times 5$ (computed on screen). The small cyan dots are all Cayley images with $\lvert p \rvert, \lvert q \rvert \le 7$, and the green tags refer to [@thm-om-ch18-wave1-zero-axiom-circle]. In the table of frozen records, the strict records of the six projective-circle theorems list `OmegaInit`, `OmegaMath` and the empty axiom list `[]`, the official records list `propext`, and the antipodal-closure row is marked in amber. The import closure, the declaration checks of `OmegaChecks.Audit` and the replay in `mkEmptyEnvironment` follow the chapter's description of the audit, and the import graph is schematic (violet). Across the bridge, $2/4$ and $1/2$ both read $1/2$ and $(3/5, 4/5)$ lies on the real unit circle; the two green tags refer to `toRat_equivalent` and `cayley_circle_unit` in [@thm-ch18-omega-shadow-bridge], and the magenta boxes sort the official records of the eleven bridge theorems into four groups: `[]`, `propext`, `Quot.sound, propext`, and `Classical.choice, Quot.sound, propext`. Finally, the eight clauses of the `Init.Rat` teaching prototype are recomputed exactly on screen, and the gate passes $\langle 1, 2, 0, 0 \rangle$ and blocks the other product; the prototype's axiom dependencies and the evidence for each tier are stated in [@rem-om-ch18-honest-compiler-audit] (violet).
 :::
 
 ## 18.3 Guided Walkthrough of the Four-Mode Six-Volume Workbench {#sec-om-ch18-workbench-walkthrough}
 
-To render every invariant across all six volumes tangible and directly inspectable, the closing section embeds the **Four-Mode Six-Volume 3D Holographic Interactive Workbench** (uniting Bargmann–Gram triads, second-order jets, $\pi$-free Haar integrals, and the $p = 5$ Hecke spectrum across Volumes I–VI). Readers are invited to tour its four modes in sequence:
+To render every invariant across all six volumes tangible and directly inspectable, the monograph pairs with **four 3D interactive laboratories (`OMEGA//SPIN`, `OMEGA//LAB`, `OMEGA//JET`, and `OMEGA//ARC`, totaling 16 experimental cards)**, **19 bespoke bilingual static figures**, and the bilingual **`overview`** slide deck (full index in [Appendix B §B.3](appendix-b.md#sec-om-appb-media-map)); here at the close of Volume VI, the culminating **Four-Mode Six-Volume 3D Holographic Interactive Workbench `OMEGA//LAB`** unites Bargmann–Gram triads, second-order jets, $\pi$-free Haar integrals, and the $p = 5$ Hecke spectrum on one stage. Readers are invited to tour its four modes in sequence:
 
-1. **Mode 1 — Bargmann–Gram Triads and Homogeneous Projective Geometry (Volumes I–II)**: manipulate integer rays and spherical triads across $\mathbb{QP}^3 \cong \mathrm{SO}(3, \mathbb{Q})$ and $\mathbb{QP}^1$ to verify finite antipodal closure at $[1 : 0]$, origin-free heap transport $[a, b, c]$, and the Bargmann–Gram $3\times 3$ determinant $\det G_3 = 1 + 2c_{12}c_{23}c_{31} - c_{12}^2 - c_{23}^2 - c_{31}^2 \ge 0$ locking spherical realizability without trigonometric tables.
-2. **Mode 2 — Limit-Free Second-Order Jet Calculus (Volume III)**: sweep $x_0 \in \mathbb{Q}$ in $\mathbb{Q}[\eta]/(\eta^3)$ to observe exact two-term algebraic inversion (evaluating at $x_0 = 1$ to $(\frac{1}{2}, -\frac{1}{2}, \frac{1}{4})$ with zero $\lim_{h \to 0}$) contrasted against flat secant approximations, alongside telescoping heap arcs and osculating curvature.
-3. **Mode 3 — $\pi$-Free Haar Integrals and Peter–Weyl Spin Shells (Volume IV)**: inspect integer Chebyshev spin-shell characters $\chi_j(\kappa) = U_{2j}(\sqrt{\kappa})$ on $S^3$ together with Catalan-factorial Haar moments $\int_{S^3}\kappa^n\,d\mu_{\mathrm{Haar}} = \frac{(2n)!}{4^n n!(n+1)!}$, verifying exact shell orthonormality without $\pi$ or continuum Lebesgue measure.
-4. **Mode 4 — $p = 5$ Hecke Spectrum, Non-Abelian Prime Spinors, and Kernel Audit (Volumes V–VI)**: activate the six norm-$5$ Hurwitz prime spinors $S_5$ to verify positive rational Hecke–Ramanujan PSD margins $20 - \lambda^2 > 0$ on nontrivial spin shells (such as $\frac{496}{25} > 0$ and average trace $-\frac{1}{5}$ at $j = 1$), linking the same norm-$5$ spinor algebra to the modulo-$5$ $\Omega$-FRACTRAN divisibility gate, the static-canvas memory split, and `OmegaInit`/`OmegaMath` empty-kernel replay.
+1. **Mode 1 — Bargmann–Gram Triads and Homogeneous Projective Geometry (Volumes I–II)**: manipulate integer rays and spherical triads across $\mathbb{QP}^3 \cong \mathrm{SO}(3, \mathbb{Q})$ and $\mathbb{QP}^1$ to verify finite antipodal closure at $[1 : 0]$, origin-free heap transport $[a, b, c]$ with constant unit Lie triple curvature $K \equiv +1$, and the Bargmann–Gram $3\times 3$ determinant $\det G_3 = 1 + 2c_{12}c_{23}c_{31} - c_{12}^2 - c_{23}^2 - c_{31}^2 \ge 0$ alongside rational spherical sine and Pythagorean laws without trigonometric tables.
+2. **Mode 2 — Limit-Free Second-Order Jet Calculus (Volume III)**: sweep $x_0 \in \mathbb{Q}$ in $\mathbb{Q}[\eta]/(\eta^3)$ to observe exact two-term algebraic inversion (evaluating at $x_0 = 1$ to $(\frac{1}{2}, -\frac{1}{2}, \frac{1}{4})$ with zero $\lim_{h \to 0}$) contrasted against flat secant approximations, alongside symmetric midpoint Cayley conservation, all-order Cayley–trigonometric composition, and telescoping heap arcs.
+3. **Mode 3 — $\pi$-Free Haar Integrals and Peter–Weyl Spin Shells (Volume IV)**: inspect integer even Chebyshev spin-shell characters $E_n(\kappa) = U_{2n}(\sqrt{\kappa})$ on $S^3$ together with Catalan-factorial Haar moments $\int_{S^3}\kappa^n\,d\mu_{\mathrm{Haar}} = \frac{(2n)!}{4^n n!(n+1)!}$, verifying all-degree shell orthonormality $\langle E_m, E_n\rangle_{\mathrm{Haar}} \equiv \delta_{m,n}$ without $\pi$ or continuum Lebesgue measure.
+4. **Mode 4 — The $p = 5$ Hecke spectrum and non-Abelian spinors (Volumes V–VI).** Add the norm-$5$ Hurwitz spinors one at a time to see how the six jumps multiply the $\chi_1$ reading by $-\frac{2}{5}$, with a spectral margin of $\frac{496}{25}$. For the axiom records of the corresponding frozen declarations on both backends, see [Appendix A §A.3](appendix-a.md#sec-om-appa-frozen-registry).
 
-Launch the full interactive workbench below to verify each link of the six-volume zero-axiom edifice firsthand.
+Switch among the four modes below to explore the constructions and their exact arithmetic readouts.
 
 ::: {.viz src="omega-math-workbench" height="620"}
-Four-Mode Six-Volume 3D Holographic Interactive Workbench: switch across Bargmann–Gram triads (Vols I–II), second-order jets (Vol III), $\pi$-free Haar integrals (Vol IV), and the $p = 5$ Hecke spectrum (Vols V–VI) to inspect exact rational invariants, fraction readouts, and the `OmegaInit`/`OmegaMath` zero-axiom verification boundary live.
+**Four-mode 3D workbench.** The four cards show rational readouts for Bargmann–Gram triads, second-order jets, $\pi$-free Haar moments, and the $p=5$ Hecke spectrum.
 :::

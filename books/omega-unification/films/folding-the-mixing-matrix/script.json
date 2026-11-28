@@ -1,0 +1,50 @@
+{
+  "voice": "af_heart",
+  "speed": 0.94,
+  "say": {"Lean": "Leen", "Cayley": "Kay-lee", "Higgs": "Higgs", "quaternions": "quaternions"},
+  "music": {"bpm": 78, "progression": "d-minor"},
+  "scenes": [
+    {"id": "lock", "name": "THE LOCK OF THREE", "lead": 2.2, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
+      ["Nineteen integer points sit on a sphere of squared radius eight hundred sixty-seven.", "平方半径 867 的球面上，恰有十九个非负整点。"],
+      ["Cycling the coordinates fixes one pole and sorts the other eighteen into six orbits of three.", "轮换坐标，极点 (17, 17, 17) 不动，其余十八点分成六条三点轨道。"],
+      ["If both quark mass matrices respect that cycle, mixing can only be a permutation with phases.", "若上下两套夸克质量矩阵都保持这一轮换，混合就只能是置换乘相位。"],
+      ["So the symmetry must break. But by how much?", "所以对称必须破缺：可要破到多深？"]
+    ], "cues": [{"line": 3, "at": 1.4, "kind": "stamp"}]},
+    {"id": "floor", "name": "THE BREAKING FLOOR", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.5, 0.5, 0.1, 0.2], "lines": [
+      ["Distinct cube roots of unity sit root three apart, so the commutator measures distance from symmetry.", "互异的单位立方根彼此相距根号三，于是对易子量出离对称有多远。"],
+      ["Feed in conservative mixing bounds on V c b and V t b.", "代入 |V_cb| 与 |V_tb| 的保守下界。"],
+      ["Five lines of algebra then force at least one sector to break the cycle by more than zero point zero four one four.", "五行手算随即迫使至少一个部门的轮换破缺超过 0.0414。"]
+    ], "cues": [{"line": 2, "at": 3.5, "kind": "stamp"}]},
+    {"id": "walls", "name": "FIVE WALLS", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.6, 0.5, 0.2, 0.2], "lines": [
+      ["Then natural mechanisms on the shell hit certified walls.", "接着，最自然的几种机制在球壳上一一撞上有证书的墙。"],
+      ["A single light Higgs leaves charm over top more than seven times too heavy.", "单支轻希格斯给出的粲顶比，比实测重了七倍多。"],
+      ["Density potentials keep top over bottom below thirty on all twelve hundred thirty-eight zeros.", "任意站点密度势在全部 1238 枚零点上都把顶底比压在 30 以下；自然界要 40 以上。"],
+      ["Richer transport fits one zero, but at a vacuum cost above ten to the thirty-four.", "更丰富的输运能拟合单枚零点，代价却是超过 10 的 34 次方的真空系数。"]
+    ], "cues": [{"line": 3, "at": 2.6, "kind": "glitch"}]},
+    {"id": "cayley", "name": "RATIONAL CAYLEY", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["Rebuilding mixing needs exact rotations. Cayley's recipe makes them from rational vectors.", "重建混合需要精确的旋转。凯莱的配方用有理向量造出它们。"],
+      ["Take s equal to one third, two thirds, two thirds: every entry is a whole number of ninths.", "取 s = (1/3, 2/3, 2/3)：旋转矩阵的每一个元都是九分之几。"],
+      ["Lean checks the law for every rational s: Cayley transposed times Cayley is the identity.", "Lean 内核对任意有理 s 检验这条规律：凯莱矩阵的转置乘它自己，等于单位阵。"],
+      ["And Lean checks that turning by p times q is turning by q, then by p.", "Lean 还检验：按四元数 pq 转，等于先按 q 转、再按 p 转。"]
+    ], "cues": [{"line": 2, "at": 1.2, "kind": "stamp"}]},
+    {"id": "gram", "name": "SAME GRAM, ONE TURN", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["Second tool: two matrices with one Gram matrix, four, two, two, five.", "第二件工具：两个矩阵共用一张格拉姆矩阵：4、2、2、5。"],
+      ["Lean checks: whenever B star B equals A star A, some unitary U carries A onto B.", "Lean 内核检验：只要 B*B = A*A，就有幺正矩阵 U 把 A 送到 B。"],
+      ["Folding into three generations needs room: forty-two dimensions per side, forty-five across zero Higgs.", "折进三代需要空间：每侧至少 42 维；跨过零希格斯，则需 45 维。"]
+    ], "cues": [{"line": 1, "at": 1.0, "kind": "stamp"}]},
+    {"id": "calib", "name": "CALIBRATED, THEN RIGID", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.8, 0.7, 0.4, 0.4], "lines": [
+      ["Positive reconstructions exist: a mirror triangle of zeros rebuilds the reference C K M in twenty-eight windings.", "正向重构确实存在：由零点组成的镜像三角，绕二十八圈就重建出参考 CKM。"],
+      ["A finite rational response, calibrated on one zero, matches all seven to ten to the minus eleven.", "有限有理响应在一枚零点上校准，就在全部七枚零点上逼近到 10⁻¹¹ 以内。"],
+      ["No fixed matrix can stand in: five zeros shrink local ones to scalars, seven shrink all to polynomials in the cycle.", "固定矩阵替代不了：五枚零点让局域者只剩标量，七枚让一切成为轮换多项式。"],
+      ["So the mixing law must move with the background.", "所以混合法则必须随背景而动。"]
+    ], "cues": [{"line": 2, "at": 4.0, "kind": "stamp"}]},
+    {"id": "horizon", "name": "THE OPEN FLAVOUR HORIZON", "lead": 0.5, "tail": 0.8, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["What stays open: every successful mixing is calibrated to data, not derived.", "仍然开放的是：每一次成功的混合都由数据校准，而非推导得出。"],
+      ["And one folding for all quark and lepton masses and mixings is still unsolved.", "用同一个折叠给出全部夸克与轻子的质量和混合，仍未解决。"],
+      ["The walls are measured. The door is not yet found.", "墙已量清，门还没找到。"]
+    ], "cues": [{"line": 2, "at": 0.4, "kind": "chime"}]},
+    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.0, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
+      ["Omega Unification, chapter eight.", "《OMEGA 统一》· 第八章"]
+    ], "cues": [{"line": 0, "at": 0.3, "kind": "chime"}]}
+  ]
+}

@@ -59,7 +59,14 @@ Source layout (``books/<slug>/films/``)::
     {"voice": "af_heart", "speed": 0.94, "say": {"word": "pronunciation"}?, "music": {"bpm": 80,
      "progression": "a-minor"}?, "scenes": [{"id": "zeck", "name": "ZECKENDORF"?, "lead": 1.5, "tail": 0.6,
      "lines": [["English narration", "中文字幕"], …], "music": [pad, bass, arp, kick, hat]?,
-     "cues": [{"line": 0, "at": 2.5, "kind": "stamp" | "chime"}]?}]}
+     "cues": [{"line": 0, "at": 2.5, "kind": "stamp" | "chime"}]?,
+     "chapter": {"en": "Part I · Point to line", "zh": "第一部 · 从点到线"}?}]}
+
+A scene with ``chapter`` opens a chapter that runs until the next one (a long film's parts or volumes); once any
+scene opens one, the first scene must too, so the chapters cover the whole film. The build times them by the
+measured timeline (:func:`chapter_marks`): the player page gets ``chapters.vtt`` (a ``kind="chapters"`` track the
+time range shows and a chapter menu) and the videos get the same chapters as MP4 metadata
+(:func:`chapters_ffmetadata`).
 
 Embedding in a chapter: ``::: {.film src="golden-deficit"}`` (a film of this book) or
 ``src="trureturing-film:film-<NNN>-v<k>"`` (a release of the-omega-institute/trureturing-film).
@@ -84,13 +91,13 @@ import shutil
 import subprocess
 import sys
 from contextlib import contextmanager
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from datetime import datetime, timezone
 from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
-from . import buildcache, config, film_inputs, lean, paths
+from . import buildcache, config, film_inputs, lean, paths, releases
 from .model import Issue
 
 FILM_DIR_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*\Z")
@@ -515,6 +522,57 @@ def timeline_matches(timeline: dict, script: dict) -> str | None:
     return None
 
 
+def chapter_marks(script: dict | None, timeline: dict | None) -> list[dict]:
+    """``[{start, end, en, zh}]`` for the scenes of ``script`` that open a chapter, in order, timed by ``timeline``
+    (from tts.py, or the provisional one): a chapter starts with its scene and ends where the next one starts, the
+    last one at the end of the film. Scenes the timeline does not have are skipped."""
+    starts = {s.get("id"): s.get("start") for s in (timeline or {}).get("scenes") or [] if isinstance(s, dict)}
+    marks: list[dict] = []
+    for sc in (script or {}).get("scenes") or []:
+        ch = sc.get("chapter") if isinstance(sc, dict) else None
+        if not isinstance(ch, dict) or sc.get("id") not in starts:
+            continue
+        en, zh = str(ch.get("en") or "").strip(), str(ch.get("zh") or "").strip()
+        if en and zh:
+            marks.append({"start": round(float(starts[sc["id"]]), 3), "en": en, "zh": zh})
+    duration = float((timeline or {}).get("duration") or 0)
+    for i, m in enumerate(marks):
+        m["end"] = marks[i + 1]["start"] if i + 1 < len(marks) else round(max(duration, m["start"]), 3)
+    return marks
+
+
+def _chapter_title(m: dict) -> str:
+    return f"{m['en']} · {m['zh']}"
+
+
+def _vtt_time(seconds: float) -> str:
+    ms = int(round(seconds * 1000))
+    h, ms = divmod(ms, 3_600_000)
+    m, ms = divmod(ms, 60_000)
+    s, ms = divmod(ms, 1000)
+    return f"{h:02d}:{m:02d}:{s:02d}.{ms:03d}"
+
+
+def chapters_vtt(marks: list[dict]) -> str:
+    """A WebVTT chapters track for :func:`chapter_marks` (one cue per chapter, titled in English and Chinese)."""
+    out = ["WEBVTT", ""]
+    for i, m in enumerate(marks, 1):
+        title = _chapter_title(m).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+        out += [str(i), f"{_vtt_time(m['start'])} --> {_vtt_time(m['end'])}", title, ""]
+    return "\n".join(out)
+
+
+def chapters_ffmetadata(marks: list[dict]) -> str:
+    """The same chapters as an FFMETADATA file, for ffmpeg's ``-map_chapters`` (milliseconds; ``=;#\\`` and line
+    breaks escaped)."""
+    out = [";FFMETADATA1"]
+    for m in marks:
+        title = re.sub(r"([=;#\\\n])", r"\\\1", _chapter_title(m))
+        out += ["[CHAPTER]", "TIMEBASE=1/1000", f"START={int(round(m['start'] * 1000))}",
+                f"END={int(round(m['end'] * 1000))}", f"title={title}"]
+    return "\n".join(out) + "\n"
+
+
 def format_duration(seconds: float) -> str:
     s = int(round(seconds))
     return f"{s // 60}:{s % 60:02d}"
@@ -688,6 +746,7 @@ def validate_script(script: dict) -> list[tuple[str, str]]:
         err("script.json: scenes must be a non-empty list")
         return out
     seen: set[str] = set()
+    chapters = 0
     for k, sc in enumerate(scenes):
         where = f"script.json: scene {k + 1}"
         if not isinstance(sc, dict):
@@ -721,6 +780,14 @@ def validate_script(script: dict) -> list[tuple[str, str]]:
         if levels is not None and (not isinstance(levels, list) or len(levels) != MUSIC_LAYERS
                                    or not all(isinstance(x, (int, float)) and 0 <= x <= 1.5 for x in levels)):
             err(f"{where}: music must list {MUSIC_LAYERS} levels [pad, bass, arp, kick, hat] between 0 and 1.5")
+        chapter = sc.get("chapter")
+        if chapter is not None:
+            if (not isinstance(chapter, dict) or set(chapter) != {"en", "zh"}
+                    or not all(isinstance(chapter[k], str) and chapter[k].strip() and "\n" not in chapter[k]
+                               for k in ("en", "zh"))):
+                err(f"{where}: chapter must be {{\"en\": \"…\", \"zh\": \"…\"}} (two non-empty single-line strings)")
+            else:
+                chapters += 1
         cues = sc.get("cues")
         if cues is not None:
             if not isinstance(cues, list):
@@ -732,6 +799,8 @@ def validate_script(script: dict) -> list[tuple[str, str]]:
                             or not isinstance(c.get("at", 0), (int, float)) or c.get("kind") not in CUE_KINDS):
                         err(f"{where}: cue {c!r} must be {{\"line\": <index>, \"at\": <seconds>, "
                             f"\"kind\": {'|'.join(CUE_KINDS)}}}")
+    if chapters and not (isinstance(scenes[0], dict) and scenes[0].get("chapter") is not None):
+        err("script.json: the first scene must open a chapter once any scene does (chapters cover the whole film)")
     return out
 
 
@@ -1013,7 +1082,7 @@ def lean_refs(gids: list[str], lock: lean.Lock | None) -> list[dict]:
     return out
 
 
-def items(book) -> list[dict]:
+def items(book, *, site: config.Site | None = None) -> list[dict]:
     """Films for the book's landing page (``_site/<slug>/index.html``).
 
     Each item: ``kind`` ("film"), ``id`` (the directory name), ``code`` ("FILM"), ``title`` and ``summary``
@@ -1027,6 +1096,7 @@ def items(book) -> list[dict]:
     ([{gid, name, short, kind, url}]).
     """
     lock = _lock()
+    site = site or config.load_site()
     langs = list(dict.fromkeys([*book.languages, "zh", "en"]))
     out = []
     for film in films(book):
@@ -1045,9 +1115,9 @@ def items(book) -> list[dict]:
             "poster": f"films/{film.id}/{POSTER}" if film.poster.is_file() else "",
             "poster_file": film.poster if film.poster.is_file() else None,
             "note": {lang: t(lang, "unbuilt") for lang in langs},
-            "watch_url": film.site_path(PLAYER_OUTPUT),
-            "download_url": film.site_path(film.download()),
-            "cover_url": film.site_path("cover"),
+            "watch_url": f"films/{film.id}/player.html" if site.film_release_only else film.site_path(PLAYER_OUTPUT),
+            "download_url": _release_urls(site, film).get(film.download(), "") if site.film_release_only else film.site_path(film.download()),
+            "cover_url": f"films/{film.id}/{POSTER}" if site.film_release_only else film.site_path("cover"),
             "narration": dict(film.meta.get("narration") or {}),
             "subtitles": list(film.meta.get("subtitles") or []),
             "lean": lean_refs(film.lean, lock),
@@ -1141,9 +1211,14 @@ def render_embed(env, ctx, inner: str, doc) -> str:
                       f'<a href="{esc(ext["page"])}" target="_blank" rel="noopener">⬇ {esc(config.s(lang, "ui.download"))}</a>']
         elif film is not None:
             player, files, fallback = _local_player(film, lang, head, up)
+            target = film.site_path(PLAYER_OUTPUT)
+            if ctx.site.film_release_only:
+                target = f"films/{film.id}/player.html"
+                player = player_frame(up + target, head, book_path=target)
+                files = ""
             # the site adds tr-film-unbuilt to figures whose data-tr-video it does not host (tbook.site.mark_films);
             # CSS then shows the fallback (poster, note) instead of the player and the download links
-            figure_attrs += f' data-tr-video="{esc(film.site_path(PLAYER_OUTPUT))}"'
+            figure_attrs += f' data-tr-video="{esc(target)}"'
             player += "\n" + fallback
             links += [f'<span class="tr-film-files">{files}</span>',
                       f'<span class="tr-film-note tr-film-fallback">{esc(t(lang, "unbuilt"))}</span>',
@@ -1187,6 +1262,12 @@ def render_embed(env, ctx, inner: str, doc) -> str:
         lines.pop()
     lines.append(":::")
     return "\n".join(lines)
+
+
+def player_frame(src: str, title: str, *, book_path: str = "") -> str:
+    relative = f' data-tr-src="{esc(book_path)}"' if book_path else ""
+    return (f'<iframe class="tr-film-player" src="{esc(src)}"{relative} title="{esc(title)}" '
+            'loading="lazy" allow="fullscreen" allowfullscreen></iframe>')
 
 
 def _local_player(film: Film, lang: str, title: str, up: str) -> tuple[str, str, str]:
@@ -1243,7 +1324,8 @@ def _google_fonts() -> str:
         return ""
 
 
-def _film_card(site: config.Site, film: Film, lock: lean.Lock | None, built: bool = False) -> str:
+def _film_card(site: config.Site, film: Film, lock: lean.Lock | None, built: bool = False,
+               downloads: dict[str, str] | None = None) -> str:
     """One film on the films page; ``built``: its videos are published next to the page (``<name>/<file>``)."""
     meta = film.meta or {}
     poster = f"{film.id}/{POSTER}" if film.poster.is_file() else ""
@@ -1252,7 +1334,9 @@ def _film_card(site: config.Site, film: Film, lock: lean.Lock | None, built: boo
     def video(key: str) -> str:
         return f"{film.id}/{film.output(key)}"
 
-    if built:
+    if built and site.film_release_only:
+        player = player_frame(f"{film.id}/player.html", f"{title_zh} · {title_en}")
+    elif built:
         poster_attr = f' poster="{esc(poster)}"' if poster else ""
         player = (f'<video controls preload="metadata" playsinline{poster_attr} title="{esc(title_en)}">'
                   f'<source src="{esc(video(PLAYER_OUTPUT))}" type="video/mp4"></video>')
@@ -1273,7 +1357,13 @@ def _film_card(site: config.Site, film: Film, lock: lean.Lock | None, built: boo
         title_key = "lean_title_source" if lock and lock.mode == "lean-source" else "lean_title"
         lean_block = f'<div class="lean"><h4>{_pair(title_key)}</h4><ul>{"".join(refs)}</ul></div>'
     links = []
-    if built:  # the videos film.json lists, the narrated one to download first (1080p when listed), then the cover
+    if site.film_release_only:
+        for key, label in DOWNLOADS:
+            if downloads and key in downloads:
+                links.append(f'<a class="btn" href="{esc(downloads[key])}" type="video/mp4">⬇ MP4 · {_pair(label)}</a>')
+        if not built:
+            links.append(f'<span class="note">{_pair("unbuilt")}</span>')
+    elif built:  # the videos film.json lists, the narrated one to download first (1080p when listed), then the cover
         primary = film.download()
         links.append(f'<a class="btn primary" href="{esc(video(primary))}" download>⬇ {_pair(dict(DOWNLOADS)[primary])}</a>')
         for key, label in DOWNLOADS:
@@ -1320,7 +1410,21 @@ def hub_html(site: config.Site, book: config.Book, lock: lean.Lock | None = None
     title_zh, title_en = config.pick(book.title, "zh", book.languages), config.pick(book.title, "en", book.languages)
     films_zh, films_en = config.s("zh", "ui.films"), config.s("en", "ui.films")
     fonts = _google_fonts()
-    cards = "\n".join(_film_card(site, f, lock, f.id in built) for f in all_films) or f'<p class="note">{_pair("none")}</p>'
+    long_cards, other_cards = [], []
+    for f in all_films:
+        cards = long_cards if f.id in book.long_form_films else other_cards
+        cards.append(_film_card(site, f, lock, f.id in built,
+                                _release_urls(site, f) if site.film_release_only else None))
+    if long_cards:
+        sections = "\n".join(
+            f'<section class="films"><h2 class="film-group-title">{_ui_pair(label)}</h2>\n'
+            + "\n".join(cards) + "\n</section>"
+            for label, cards in (("ui.long_form_films", long_cards), ("ui.other_films", other_cards))
+            if cards
+        )
+    else:
+        cards_html = "\n".join(other_cards) or f'<p class="note">{_pair("none")}</p>'
+        sections = f'<section class="films" aria-label="{esc(films_zh)} {esc(films_en)}">\n{cards_html}\n</section>'
     pin = ""
     if lock:
         pin = (f'<a class="pill" href="{esc(lock.tree_url)}" target="_blank" rel="noopener">LEAN '
@@ -1367,9 +1471,7 @@ def hub_html(site: config.Site, book: config.Book, lock: lean.Lock | None = None
     <p>{lede}</p>
   </section>
 
-  <section class="films" aria-label="{esc(films_zh)} {esc(films_en)}">
-{cards}
-  </section>
+  {sections}
 
   <footer class="foot">
     <span>{_pair("foot", slug=book.slug)}</span>
@@ -1400,7 +1502,9 @@ def published_registry(site: config.Site, book: config.Book, lock: lean.Lock | N
             "publication_commit": lock.commit if lock else "",
             "poster": f"{film.id}/{POSTER}" if film.poster.is_file() else "",
             "built": film.id in built,
-            "videos": {k: f"{film.id}/{v}" for k, v in film.videos().items()} if film.id in built else {},
+            "videos": {k: f"{film.id}/{v}" for k, v in film.videos().items()} if film.id in built and not site.film_release_only else {},
+            **({"player": f"{film.id}/player.html", "audio": f"{film.id}/audio.mp3", "downloads": _release_urls(site, film)}
+               if film.id in built and site.film_release_only else {}),
             "page": page_url(site, film) or None,
             "lean": [{"gid": r["gid"], "name": r["name"], "href": r["url"], "kind": r["kind"]}
                      for r in lean_refs(film.lean, lock)],
@@ -1471,8 +1575,19 @@ def build(site, book, out_dir: Path, *, videos: bool = True) -> dict[str, str]:
         if film.poster.is_file():
             (out_dir / film.id).mkdir(parents=True, exist_ok=True)
             shutil.copyfile(film.poster, out_dir / film.id / POSTER)
-        if film.meta is not None and host_videos(film, out_dir / film.id):
+        if site.film_release_only:
+            src = player_dir(film)
+            if (src / "player.html").is_file() and (src / "audio.mp3").is_file():
+                shutil.copytree(src, out_dir / film.id, dirs_exist_ok=True)
+                built.add(film.id)
+        elif film.meta is not None and host_videos(film, out_dir / film.id):
             built.add(film.id)
+    if built and site.film_release_only:
+        package = paths.ROOT / "node_modules/media-chrome"
+        shutil.copyfile(package / "dist/iife/index.js", assets / "media-chrome.js")
+        shutil.copyfile(package / "LICENSE", assets / "media-chrome.LICENSE")
+        for name in ("player.js", "player.css"):
+            shutil.copyfile(THEME_FILM / "site" / name, assets / name)
     (out_dir / "index.html").write_text(hub_html(site, book, lock, built), encoding="utf-8")
     (out_dir / "films.json").write_text(json.dumps(published_registry(site, book, lock, built), ensure_ascii=False,
                                                    indent=2) + "\n", encoding="utf-8")
@@ -1582,15 +1697,63 @@ def video_unit(site: config.Site, film: Film) -> buildcache.Unit:
     for source, exclude in film_inputs.extra_files([paths.rel(p) for p in scripts], film.solid,
             core=paths.rel(SOLID_CORE), vendor=paths.rel(SOLID_VENDOR)):
         inputs.files(paths.ROOT / source, exclude=exclude)
-    return buildcache.Unit("films", f"{film.book.slug}/{film.id}", inputs, [film.build_dir])
+    dest = film.build_dir
+    if site.film_release_only:
+        inputs.text("playback", "canvas-audio").files(THEME_FILM / "site/player.html")
+        dest = player_dir(film)
+    return buildcache.Unit("films", f"{film.book.slug}/{film.id}", inputs, [dest])
+
+
+def player_dir(film: Film) -> Path:
+    return paths.BUILD / "film-players" / film.book.slug / film.id
+
+
+def release_name(film: Film, key: str) -> str:
+    # Custom filenames may repeat across films. Preserve the scoped default filenames.
+    prefix = f"{film.book.slug}_{film.id}_"
+    return prefix + film.output(key).removeprefix(prefix)
+
+
+def _release_urls(site: config.Site, film: Film) -> dict[str, str]:
+    assets = releases.film_assets(site.repo)
+    return {key: asset.url for key, _ in DOWNLOADS if film.listed(key)
+            and (asset := assets.get(release_name(film, key)))}
+
+
+def release_unit(site: config.Site, film: Film) -> buildcache.Unit:
+    """The unit of a film's MP4 renditions on a site that plays its films live (``film_release_only``):
+    :func:`video_unit` of the site without that setting. The release renders it (``collect_release``,
+    and the parallel shards of ``tools/ci/films.py --release``) and attaches it to the build cache it
+    exports, so the next release restores every film that did not change instead of rendering it again."""
+    return video_unit(replace(site, film_release_only=False), film)
+
+
+def collect_release(site: config.Site, book: config.Book, dest: Path) -> list[str]:
+    """Render or restore the selected book's MP4 renditions and stage reader downloads."""
+    names = []
+    if site.film_release_only:
+        build_videos(replace(site, film_release_only=False), book, mode="require")
+        for film in films(book):
+            for key, _ in DOWNLOADS:
+                if film.listed(key):
+                    name = release_name(film, key)
+                    _place(film.build_dir / film.output(key), dest / name)
+                    names.append(name)
+    return names
 
 
 def units(site: config.Site, book: config.Book) -> list[buildcache.Unit]:
-    """One build unit per film of ``book`` (:func:`video_unit`), for :func:`tbook.buildcache.units`."""
-    return [video_unit(site, f) for f in films(book) if f.meta is not None]
+    """One build unit per film of ``book`` (:func:`video_unit`), for :func:`tbook.buildcache.units`. In a
+    release build (``TBOOK_BUILD_RELEASE=1``) of a site with ``film_release_only``, also the unit of each
+    film's MP4 renditions (:func:`release_unit`), so that the release's cache export carries them."""
+    current = [f for f in films(book) if f.meta is not None]
+    out = [video_unit(site, f) for f in current]
+    if site.film_release_only and os.environ.get("TBOOK_BUILD_RELEASE") == "1":
+        out += [release_unit(site, f) for f in current]
+    return out
 
 
-def toolchain_missing() -> list[str]:
+def toolchain_missing(*, canvas: bool = False) -> list[str]:
     """What a render needs and this machine lacks (empty when the film toolchain is complete): ffmpeg,
     Node with Playwright and a Chromium, the film Python packages, the Kokoro model and the fonts."""
     from . import doctor
@@ -1598,12 +1761,13 @@ def toolchain_missing() -> list[str]:
     missing = []
     if not ffmpeg_path():
         missing.append("ffmpeg (install it, e.g. apt-get install ffmpeg, or set FFMPEG)")
-    if not node_executable():
-        missing.append("node")
-    if not any((paths.ROOT / "node_modules" / p).is_dir() for p in ("playwright-chromium", "playwright")):
-        missing.append("Playwright (npm ci)")
-    if not doctor.chromium_path():
-        missing.append("Chromium (set PW_CHROMIUM_PATH or run npx playwright install chromium)")
+    if not canvas:
+        if not node_executable():
+            missing.append("node")
+        if not any((paths.ROOT / "node_modules" / p).is_dir() for p in ("playwright-chromium", "playwright")):
+            missing.append("Playwright (npm ci)")
+        if not doctor.chromium_path():
+            missing.append("Chromium (set PW_CHROMIUM_PATH or run npx playwright install chromium)")
     python = film_python()
     try:
         r = subprocess.run([python, "-c", "import numpy, scipy.signal, soundfile, kokoro_onnx"],
@@ -1622,7 +1786,7 @@ def toolchain_missing() -> list[str]:
     return missing
 
 
-def render_videos(film: Film, dest: Path) -> None:
+def render_videos(film: Film, dest: Path, *, canvas: bool = False) -> None:
     """Render the film with ``theme/film/film.sh <dir> all <output key>…`` (``FILM_STRICT=1``: narrated timing
     only) in its ``out/`` and copy the videos into ``dest``. The keys are the outputs film.json lists
     (:meth:`Film.videos`), passed explicitly; the pipeline encodes only what they need (:func:`render_plan`:
@@ -1633,11 +1797,11 @@ def render_videos(film: Film, dest: Path) -> None:
     env.pop("FILM_OUTPUTS", None)
     if ffmpeg_path():
         env["FFMPEG"] = ffmpeg_path()
-    keys = list(film.videos())
-    r = subprocess.run([str(THEME_FILM / "film.sh"), str(film.dir), "all", *keys], cwd=paths.ROOT, env=env)
+    steps = ["player"] if canvas else ["all", *film.videos()]
+    r = subprocess.run([str(THEME_FILM / "film.sh"), str(film.dir), *steps], cwd=paths.ROOT, env=env)
     if r.returncode != 0:
-        raise FilmError(f"{film.book.slug}/{film.id}: theme/film/film.sh all exited with {r.returncode} (see above)")
-    names = list(film.videos().values())
+        raise FilmError(f"{film.book.slug}/{film.id}: theme/film/film.sh {steps[0]} exited with {r.returncode} (see above)")
+    names = ["audio.mp3", "player.html"] if canvas else list(film.videos().values())
     missing = [n for n in names if not (film.out / n).is_file()]
     if missing:
         raise FilmError(f"{film.book.slug}/{film.id}: the render did not write out/{', out/'.join(missing)}")
@@ -1647,6 +1811,12 @@ def render_videos(film: Film, dest: Path) -> None:
     tmp.mkdir(parents=True)
     for n in names:
         shutil.copy2(film.out / n, tmp / n)
+    if canvas:
+        shutil.copytree(film.out / "fonts", tmp / "fonts")
+        if film.solid:
+            shutil.copytree(film.out / "solid", tmp / "solid")
+        if (film.out / "chapters.vtt").is_file():
+            shutil.copy2(film.out / "chapters.vtt", tmp / "chapters.vtt")
     shutil.rmtree(dest, ignore_errors=True)
     tmp.rename(dest)
     try:
@@ -1704,16 +1874,20 @@ def build_videos(site: config.Site, book: config.Book, *, mode: str | None = Non
                 raise _NotRendered("not selected by --film")
             if mode == "skip":
                 raise _NotRendered("TBOOK_FILMS=skip")
-            missing = toolchain_missing()
+            missing = toolchain_missing(canvas=True) if site.film_release_only else toolchain_missing()
             if missing:
                 why = "the film toolchain is incomplete: " + "; ".join(missing)
                 if mode == "require":
                     raise FilmError(f"film {label}: {why}")
                 raise _NotRendered(why)
             print(f"  film {label}: rendering (key {unit.key[:12]})", flush=True)
-            render_videos(film, unit.outputs[0])
-            # the cache stores the directory: refuse it unless it holds every output film.json lists
-            absent = [n for n in film.videos().values() if not (unit.outputs[0] / n).is_file()]
+            if site.film_release_only:
+                render_videos(film, unit.outputs[0], canvas=True)
+                expected = ("audio.mp3", "player.html")
+            else:
+                render_videos(film, unit.outputs[0])
+                expected = film.videos().values()
+            absent = [n for n in expected if not (unit.outputs[0] / n).is_file()]
             if absent:
                 raise buildcache.MissingOutput(f"{unit.label}: the render did not write {', '.join(absent)}")
 

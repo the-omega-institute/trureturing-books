@@ -2,9 +2,9 @@
 
 > *“弯曲球面拒绝的从来不是严格代数，而是强行钉死外置原点与平行四边形加法的平直执念；一旦把二元加法让位于无原点三元迁移，把单向内积让位于双覆叠旋量核，曲率与自旋便不再是附加在坐标上的补丁，而是代数自身长出的骨架。”*
 
-在第一卷（[第一章](ch01-axiom-omega-and-cic.md)至[第三章](ch03-canonical-ternion-manifold.md)）中，我们已经从纯归纳构造演算出发，用齐次射影对与规范整四元组搭起了零公理、无无穷、无超越数的数系与三维本原载体。然而，一旦试图在这座弯曲的三维载体上做代数运算，传统线性代数留下的两处旧习惯立刻显得格格不入：其一，向量加法 $\mathbf{a} + \mathbf{b}$ 暗中预设了唯一的特权原点 $\mathbf{0}$ 与平直切空间叠加，对单位球面上的任意两点相加，一步就会刺破球壳；其二，将齐次整四元组按首非零正号约分所得的射影载体 `ProjTernion` 天然认同 $p \sim -p$，从而把旋转群 $\mathrm{SO}(3, \mathbb{Q})$ 与它的 $720^\circ$ 双覆叠旋量群 $S^3(\mathbb{Q})$ 压叠在了一起。
+在第一卷（[第一章](ch01-axiom-omega-and-cic.md)至[第三章](ch03-canonical-ternion-manifold.md)）中，我们已经从纯归纳构造演算出发，用齐次射影对与规范整四元组搭起了零公理、无无穷、无超越数的数系与三维本原载体。然而，一旦试图在这座弯曲的三维载体上做代数运算，传统线性代数留下的两处旧习惯立刻显得格格不入：其一，向量加法 $\mathbf{a} + \mathbf{b}$ 暗中预设了唯一的特权原点 $\mathbf{0}$ 与平直切空间叠加，对单位球面上的任意两点相加，一步就会刺破球壳；其二，整四元数的射影读数把 $p$ 与 $-p$ 认成同一条射线，因而读不出有号旋量的 $720^\circ$ 周期。
 
-本章正是在这两道分水岭上展开第二卷的非线性有理代数地基。我们将首先废除依赖原点的平直加法，建立无原点三元流群与定基群分解；接着从一阶换位子跨入二阶“关系之关系”——利雅三元系（亦称李三元系）括号，不经克里斯托费尔符号与局部坐标卡直接读出球面黎曼曲率；随后精确解剖射影射线特征秩 $10$ 与本原毕达哥拉斯旋量 `PythSpinor` 特征秩 $5$ 的代数分野，并用仅依赖 `OmegaInit` 与 `OmegaMath` 的零公理内核定理锁死球极凯莱提升的毕达哥拉斯闭合与通用二次核桥，配合六拍 $720^\circ$ 轨道将双覆叠几何算到最后一颗整数；最后在霍普夫投影与双侧两点齐性的经典阴影内核定理上收束全章。
+本章正是在这两道分水岭上展开第二卷的非线性有理代数地基。我们将首先废除依赖原点的平直加法，建立无原点三元流群与定基群分解；接着从一阶换位子跨入二阶“关系之关系”——利雅三元系（亦称李三元系）括号，以仅依赖 `OmegaInit` 与 `OmegaMath` 的零公理内核定理锁死其反对称、雅可比—比安基、三元导子三条代数公理与恒常单位截面曲率 $K \equiv +1$，不经克里斯托费尔符号与局部坐标卡直接读出球面黎曼曲率；随后精确解剖射影射线特征秩 $10$ 与本原毕达哥拉斯旋量 `PythSpinor` 特征秩 $5$ 的代数分野，并用零公理内核定理锁死球极凯莱提升的毕达哥拉斯闭合、通用二次核桥与体对角旋子 `g120_spin` 的六拍 $720^\circ$ 双覆叠轨道见证，将双覆叠几何算到最后一颗整数；最后在霍普夫投影与双侧两点齐性的经典阴影内核定理上收束全章。
 
 ## 4.1 废除平直加法：无原点流群与定基群分解
 
@@ -94,41 +94,72 @@ $$
 $$
 :::
 
-为什么说这枚纯粹由加减乘写出的三元括号无需局部坐标卡、也无需克里斯托费尔联络系数 $\Gamma^k_{ij}$，便字面等同于单位三维球面 $S^3$ 的黎曼曲率张量？下面四步手工推导将全部机制摊开在纸面上：
+所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。纯虚切方向编码为整三维向量 `Vec3`（$\mathbb{Z}^3$），一阶换位子写为 `commutator u v` $= 2(\mathbf{u} \times \mathbf{v})$，而利雅三元括号定义为纯整系数三元映射 `lieTriple u v w` $:= \langle\mathbf{u}, \mathbf{w}\rangle\mathbf{v} - \langle\mathbf{v}, \mathbf{w}\rangle\mathbf{u}$。无需任何连续微积分或实数公理，嘉当与雅各布森刻画利雅三元系的全部三条核心代数公理便在裸 CIC 内核中直接闭合。
 
-1. **利雅三元系三条代数公理严格闭合**：前两元反对称 $\{\mathbf{u}, \mathbf{v}, \mathbf{w}\} = -\{\mathbf{v}, \mathbf{u}, \mathbf{w}\}$ 显然成立；三项轮换之和满足代数比安基恒等式
+::: {.theorem #thm-ch04-lie-triple-axioms title="利雅三元系曲率括号的三条代数公理" lean="D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_antisymm D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_jacobi D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_derivation"}
+所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。记整三维向量空间 `Vec3` 上的利雅三元括号为 $\{\mathbf{u}, \mathbf{v}, \mathbf{w}\} := \operatorname{lieTriple}(\mathbf{u}, \mathbf{v}, \mathbf{w}) = \langle\mathbf{u}, \mathbf{w}\rangle\,\mathbf{v} - \langle\mathbf{v}, \mathbf{w}\rangle\,\mathbf{u}$。则对一切 $\mathbf{x}, \mathbf{y}, \mathbf{u}, \mathbf{v}, \mathbf{w} : \mathrm{Vec3}$，以下三条精确等式无条件成立：
 
-   $$
-   \{\mathbf{u}, \mathbf{v}, \mathbf{w}\} + \{\mathbf{v}, \mathbf{w}, \mathbf{u}\} + \{\mathbf{w}, \mathbf{u}, \mathbf{v}\} = \mathbf{0};
-   $$
-
-   此外，固定 $(\mathbf{u}, \mathbf{v})$ 定义线性算子 $D_{\mathbf{u}, \mathbf{v}}(\mathbf{w}) := \{\mathbf{u}, \mathbf{v}, \mathbf{w}\}$。直接验证可知 $D_{\mathbf{u}, \mathbf{v}}$ 关于内积严格反对称：
+1. **前两元反对称律**（[`lieTriple_antisymm`](lean:D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_antisymm)）：
 
    $$
-   \bigl\langle D_{\mathbf{u}, \mathbf{v}}(\mathbf{a}),\, \mathbf{b}\bigr\rangle = \langle\mathbf{u}, \mathbf{a}\rangle\langle\mathbf{v}, \mathbf{b}\rangle - \langle\mathbf{v}, \mathbf{a}\rangle\langle\mathbf{u}, \mathbf{b}\rangle = -\bigl\langle\mathbf{a},\, D_{\mathbf{u}, \mathbf{v}}(\mathbf{b})\bigr\rangle.
+   \{\mathbf{u}, \mathbf{v}, \mathbf{w}\} = -\{\mathbf{v}, \mathbf{u}, \mathbf{w}\}.
    $$
 
-   由于 $D_{\mathbf{u}, \mathbf{v}} \in \mathfrak{so}(3, \mathbb{Q})$ 无穷小保持内积，即 $\langle D\mathbf{a}, \mathbf{c}\rangle + \langle\mathbf{a}, D\mathbf{c}\rangle = 0$，将其作用于三元括号立刻证出**三元导子律**
+2. **轮换雅可比—比安基恒等式**（[`lieTriple_jacobi`](lean:D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_jacobi)）：
 
    $$
-   D_{\mathbf{u}, \mathbf{v}}\{\mathbf{a}, \mathbf{b}, \mathbf{c}\} = \{D_{\mathbf{u}, \mathbf{v}}\mathbf{a}, \mathbf{b}, \mathbf{c}\} + \{\mathbf{a}, D_{\mathbf{u}, \mathbf{v}}\mathbf{b}, \mathbf{c}\} + \{\mathbf{a}, \mathbf{b}, D_{\mathbf{u}, \mathbf{v}}\mathbf{c}\}.
+   \{\mathbf{u}, \mathbf{v}, \mathbf{w}\} + \{\mathbf{v}, \mathbf{w}, \mathbf{u}\} + \{\mathbf{w}, \mathbf{u}, \mathbf{v}\} = \mathbf{0}.
    $$
 
-2. **直连双不变黎曼曲率张量**：在单位三维球面 $S^3 \cong \mathrm{SU}(2)$ 上，左不变向量场的双不变列维—奇维塔联络满足 $\nabla_X Y = \frac{1}{2}[X, Y]$。取曲率约定 $R(X, Y)Z := \nabla_{[X, Y]}Z - [\nabla_X, \nabla_Y]Z$，展开并代入雅可比恒等式 $-[X, [Y, Z]] + [Y, [X, Z]] = -[[X, Y], Z]$，立得
+3. **三元导子律**（[`lieTriple_derivation`](lean:D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_derivation)）：
 
    $$
-   R(X, Y)Z = \frac{1}{2}\bigl[[X, Y], Z\bigr] - \frac{1}{4}\bigl[X, [Y, Z]\bigr] + \frac{1}{4}\bigl[Y, [X, Z]\bigr] = \frac{1}{4}\bigl[[X, Y], Z\bigr] = \{X, Y, Z\}!
+   \bigl\{\mathbf{x}, \mathbf{y}, \{\mathbf{u}, \mathbf{v}, \mathbf{w}\}\bigr\}
+   = \bigl\{\{\mathbf{x}, \mathbf{y}, \mathbf{u}\}, \mathbf{v}, \mathbf{w}\bigr\}
+   + \bigl\{\mathbf{u}, \{\mathbf{x}, \mathbf{y}, \mathbf{v}\}, \mathbf{w}\bigr\}
+   + \bigl\{\mathbf{u}, \mathbf{v}, \{\mathbf{x}, \mathbf{y}, \mathbf{w}\}\bigr\}.
+   $$
+:::
+
+::: {.proof}
+几何上看，固定 $(\mathbf{x}, \mathbf{y})$ 诱导的线性映射 $D_{\mathbf{x}, \mathbf{y}}(\mathbf{w}) := \{\mathbf{x}, \mathbf{y}, \mathbf{w}\}$ 关于标准内积严格反对称：$\langle D_{\mathbf{x}, \mathbf{y}}\mathbf{a}, \mathbf{b}\rangle = \langle\mathbf{x}, \mathbf{a}\rangle\langle\mathbf{y}, \mathbf{b}\rangle - \langle\mathbf{y}, \mathbf{a}\rangle\langle\mathbf{x}, \mathbf{b}\rangle = -\langle\mathbf{a}, D_{\mathbf{x}, \mathbf{y}}\mathbf{b}\rangle$，因此 $D_{\mathbf{x}, \mathbf{y}} \in \mathfrak{so}(3)$ 保持内积无穷小不变，从而自动成为由内积构造的三元括号的导子。在 `OmegaMath` 零公理内核中，三条等式均通过整系数多变量多项式正规化反射（`PolyVec` 与 `Expr.sound`）在三个分量上逐位归约为 `Eq.refl`，传递公理闭包为空集。完整证明由 Lean 内核检查。
+:::
+
+这枚纯粹由整数加减乘写出的三元括号与单位三维球面的黎曼曲率张量字面重合（手工推导）：在 $S^3 \cong \mathrm{SU}(2)$ 上，左不变向量场的双不变列维—奇维塔联络满足 $\nabla_X Y = \frac{1}{2}[X, Y]$。取曲率约定 $R(X, Y)Z := \nabla_{[X, Y]}Z - [\nabla_X, \nabla_Y]Z$，展开并代入雅可比恒等式 $-[X, [Y, Z]] + [Y, [X, Z]] = -[[X, Y], Z]$，立得
+
+$$
+R(X, Y)Z = \frac{1}{2}\bigl[[X, Y], Z\bigr] - \frac{1}{4}\bigl[X, [Y, Z]\bigr] + \frac{1}{4}\bigl[Y, [X, Z]\bigr] = \frac{1}{4}\bigl[[X, Y], Z\bigr] = \{X, Y, Z\}.
+$$
+
+若改采微分几何中同样常见的反向曲率约定 $R_{\mathrm{alt}}(X, Y)Z := [\nabla_X, \nabla_Y]Z - \nabla_{[X, Y]}Z = -\{X, Y, Z\}$，则截面曲率分子需对调末两位，写为 $\langle R_{\mathrm{alt}}(X, Y)Y, X\rangle = -\langle\{X, Y, Y\}, X\rangle = \langle\{X, Y, X\}, Y\rangle$。为了把两种符号约定以及任意非退化有理切面上的恒常单位截面曲率 $K \equiv +1$ 一并焊死在无坐标、无克氏符号的零公理层面上，下面这条冻结定理在 `Vec3` 与 `RatVec3` 上同时锁定正向缩并、反序变号与有理截面曲率比。
+
+::: {.theorem #thm-ch04-lie-triple-sectional-curvature title="利雅三元系恒常单位截面曲率与反序变号律" lean="D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_unit_sectional_curvature D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_sectional_curvature_reversed D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_sectional_ratio"}
+所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。对整三维向量 $\mathbf{u}, \mathbf{v} : \mathrm{Vec3}$，定义格拉姆面积平方 $\operatorname{gramAreaSq}(\mathbf{u}, \mathbf{v}) := \langle\mathbf{u}, \mathbf{u}\rangle\langle\mathbf{v}, \mathbf{v}\rangle - \langle\mathbf{u}, \mathbf{v}\rangle^2 \in \mathbb{Z}$。对携带整分子 `u.num, v.num : Vec3` 与严格正分母 `u.den, v.den` 的有理三维向量 `u, v : RatVec3`，在 `Omega.IntRatio` 中以公共分母 $(u.\mathrm{den}\cdot v.\mathrm{den})^2$ 定义有理格拉姆面积平方 $\operatorname{rationalGramAreaSq}(\mathbf{u}, \mathbf{v})$ 与有理曲率分子 $\operatorname{rationalCurvatureNumerator}(\mathbf{u}, \mathbf{v}) := \langle\{\mathbf{u}.\mathrm{num}, \mathbf{v}.\mathrm{num}, \mathbf{u}.\mathrm{num}\}, \mathbf{v}.\mathrm{num}\rangle / (u.\mathrm{den}\cdot v.\mathrm{den})^2$。则以下三条精确关系无条件成立：
+
+1. **正向单位截面曲率缩并**（[`lieTriple_unit_sectional_curvature`](lean:D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_unit_sectional_curvature)）：对一切 $\mathbf{u}, \mathbf{v} : \mathrm{Vec3}$，
+
+   $$
+   \bigl\langle\{\mathbf{u}, \mathbf{v}, \mathbf{u}\},\, \mathbf{v}\bigr\rangle = \operatorname{gramAreaSq}(\mathbf{u}, \mathbf{v}).
    $$
 
-   （若改采反向曲率符号约定 $R_{\mathrm{alt}}(X, Y)Z := [\nabla_X, \nabla_Y]Z - \nabla_{[X, Y]}Z = -\{X, Y, Z\}$，对应截面曲率分子写作 $\langle R_{\mathrm{alt}}(X, Y)Y, X\rangle = \langle\{X, Y, X\}, Y\rangle$，结果分毫不差。）
-3. **恒正截面曲率 $K \equiv +1$ 的纯有理读出**：对任意两支线性无关的有理切向量 $\mathbf{u}, \mathbf{v} \in \mathbb{Q}^3$，内积配对直接给出
+2. **末两位反序变号律**（[`lieTriple_sectional_curvature_reversed`](lean:D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_sectional_curvature_reversed)）：对一切 $\mathbf{u}, \mathbf{v} : \mathrm{Vec3}$，
 
    $$
-   \bigl\langle\{\mathbf{u}, \mathbf{v}, \mathbf{u}\},\, \mathbf{v}\bigr\rangle = \lVert\mathbf{u}\rVert^2\lVert\mathbf{v}\rVert^2 - \langle\mathbf{u}, \mathbf{v}\rangle^2 = \lVert\mathbf{u} \times \mathbf{v}\rVert^2 > 0,
+   \bigl\langle\{\mathbf{u}, \mathbf{v}, \mathbf{v}\},\, \mathbf{u}\bigr\rangle = -\operatorname{gramAreaSq}(\mathbf{u}, \mathbf{v}).
    $$
 
-   两边同除平行四边形面积平方 $\lVert\mathbf{u}\rVert^2\lVert\mathbf{v}\rVert^2 - \langle\mathbf{u}, \mathbf{v}\rangle^2$，**截面曲率在每一个二维切面上恒等于精确有理整数 $K(\mathbf{u}, \mathbf{v}) \equiv +1$**。
-4. **横向折射与纵向滤除**：若取 $\mathbf{w} = \mathbf{u}$，则 $\{\mathbf{u}, \mathbf{v}, \mathbf{u}\} = \lVert\mathbf{u}\rVert^2\mathbf{v} - \langle\mathbf{u}, \mathbf{v}\rangle\mathbf{u}$ 精确剔除 $\mathbf{v}$ 沿 $\mathbf{u}$ 的共线分量，只留下垂直于当前惯性方向 $\mathbf{u}$ 的横向测地偏折矢。
+3. **非退化有理切面恒常单位截面曲率**（[`lieTriple_sectional_ratio`](lean:D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_sectional_ratio)）：对任意满足非退化条件 $\operatorname{gramAreaSq}(u.\mathrm{num}, v.\mathrm{num}) \neq 0$ 的有理向量 `u, v : RatVec3`，在 `Omega.IntRatio.Equivalent` 下成立
+
+   $$
+   \operatorname{rationalCurvatureNumerator}(\mathbf{u}, \mathbf{v}) \cdot \bigl(\operatorname{rationalGramAreaSq}(\mathbf{u}, \mathbf{v})\bigr)^{-1} \;\equiv\; 1.
+   $$
+:::
+
+::: {.proof}
+按三元括号定义展开，立得 $\langle\{\mathbf{u}, \mathbf{v}, \mathbf{u}\}, \mathbf{v}\rangle = \langle\langle\mathbf{u}, \mathbf{u}\rangle\mathbf{v} - \langle\mathbf{v}, \mathbf{u}\rangle\mathbf{u},\, \mathbf{v}\rangle = \langle\mathbf{u}, \mathbf{u}\rangle\langle\mathbf{v}, \mathbf{v}\rangle - \langle\mathbf{u}, \mathbf{v}\rangle^2 = \operatorname{gramAreaSq}(\mathbf{u}, \mathbf{v})$；同理对调末两位后 $\langle\{\mathbf{u}, \mathbf{v}, \mathbf{v}\}, \mathbf{u}\rangle = \langle\mathbf{u}, \mathbf{v}\rangle^2 - \langle\mathbf{v}, \mathbf{v}\rangle\langle\mathbf{u}, \mathbf{u}\rangle = -\operatorname{gramAreaSq}(\mathbf{u}, \mathbf{v})$，两式在内核中均由多变量多项式正规化一步证毕。对第 3 款，由于曲率分子与格拉姆面积平方关于两输入皆为齐二次，两者共享公共严格正分母 $(u.\mathrm{den}\cdot v.\mathrm{den})^2$；代入第 1 款使 `rationalCurvatureNumerator u v` 的分子整数与 `rationalGramAreaSq u v` 相等，再由非退化前提 $\operatorname{gramAreaSq}(u.\mathrm{num}, v.\mathrm{num}) \neq 0$ 调用分数逆消去律 `IntRatio.mul_inv_cancel`，即在 `Omega.IntRatio.Equivalent` 下零公理证得比值恒等于 $1$。完整证明由 Lean 内核检查。
+:::
+
+几何直觉上，令 $\mathbf{w} = \mathbf{u}$ 所得向量 $\{\mathbf{u}, \mathbf{v}, \mathbf{u}\} = \lVert\mathbf{u}\rVert^2\mathbf{v} - \langle\mathbf{u}, \mathbf{v}\rangle\mathbf{u}$ 自动剔除 $\mathbf{v}$ 沿当前惯性方向 $\mathbf{u}$ 的共线分量，只留下垂直于 $\mathbf{u}$ 的横向测地偏折矢；下面以一组最简非正交整向量逐项手算核验 [@thm-ch04-lie-triple-axioms] 与 [@thm-ch04-lie-triple-sectional-curvature]。
 
 ::: {.example #ex-ch04-lie-triple-sectional-curvature title="利雅三元括号与常截面曲率 K = +1 的纯有理手算"}
 取 $\mathbb{Q}^3$ 中两支非正交整向量 $\mathbf{u} = (1, 1, 0)$ 与 $\mathbf{v} = (1, 0, 2)$，以及第三支检验向量 $\mathbf{w} = (0, 1, 1)$：
@@ -151,7 +182,7 @@ $$
 
 ### 4.3.1 射影射线核与 10×10 格拉姆见证
 
-对 `ProjTernion` 中的任意非零有理四元组 $p, q \in \mathbb{Q}^4 \setminus \{\mathbf{0}\}$，在模去非零缩放与全局符号 $p \sim -p$ 后，纯有理射影保真度定义为
+对任意非零有理四元组 $p,q\in\mathbb{Q}^4\setminus\{\mathbf{0}\}$，在模去非零缩放与全局符号 $p \sim -p$ 后，纯有理射影保真度定义为
 
 $$
 \kappa_{\mathrm{proj}}(p, q) := \frac{\langle p, q\rangle^2}{\lVert p\rVert^2\,\lVert q\rVert^2} \in \mathbb{Q} \cap [0, 1].
@@ -181,7 +212,7 @@ $$
 
 ### 4.3.2 本原毕达哥拉斯旋量 PythSpinor、球极凯莱提升与秩 5 锁死
 
-为什么 `ProjTernion` 的特征秩跳到了 $10$？因为 $\kappa_{\mathrm{proj}}$ 是内积的**二次式**，它抹除了 $p$ 与 $-p$ 的正负号差异，相当于工作在商群 $\mathrm{SO}(3, \mathbb{Q}) \cong \mathbb{QP}^3$ 上。若要回到区分对径旋量 $+p$ 与 $-p$ 的双覆叠三维球面 $S^3(\mathbb{Q})$、同时将特征秩压回极小值 $5$ 且全程不引入任何无理平方根，我们只需把载体升级为**本原毕达哥拉斯旋量 `PythSpinor`**。
+射影核的秩为 $10$，因为 $\kappa_{\mathrm{proj}}$ 是内积的二次式，把 $p$ 与 $-p$ 读成同一条射线。若要保留对径旋量的符号，可以改用 $S^3(\mathbb{Q})$ 上的有号读数。它的特征秩为 $5$，而有理单位旋量只双覆叠那些有有理单位提升的旋转。要用整数算这一层，可以把分子与正分母存成毕达哥拉斯旋量。
 
 ::: {.definition #def-ch04-pyth-spinor-and-bridge title="本原毕达哥拉斯旋量 PythSpinor、球极凯莱提升与二次核桥"}
 1. **载体 `PythSpinor`**：定义为满足毕达哥拉斯模方方程与五元互素条件的有号整五元组
@@ -223,7 +254,7 @@ $$
 
 上述球极凯莱提升的模方闭合与通用二次核桥并不依赖任何实分析工具：在零公理基础库 `OmegaMath` 中，将 `PythSpinor` 形式化为携带严格正半径与毕达哥拉斯模方等式证书的有号整五元组 $(\mathbf{p};\, r)$（无需在底层结构中强加最大公约数互素约分），下面两条零公理冻结定理直接在裸 CIC 内核中将其锁死：
 
-::: {.theorem #thm-ch04-pythspinor-lift-and-quadratic-bridge title="球极凯莱提升的毕达哥拉斯模方闭合与通用二次核桥（零公理内核定理）" lean="D5/S3/Quantum/AURICOmega/OmegaTernionHeap.lift_normSq D5/S3/Quantum/AURICOmega/OmegaTernionHeap.quadratic_kernel"}
+::: {.theorem #thm-ch04-pythspinor-lift-and-quadratic-bridge title="球极凯莱提升的毕达哥拉斯模方闭合与通用二次核桥" lean="D5/S3/Quantum/AURICOmega/OmegaTernionHeap.lift_normSq D5/S3/Quantum/AURICOmega/OmegaTernionHeap.quadratic_kernel"}
 在零公理库 `OmegaMath`（仅依赖 `OmegaInit` 与 `OmegaMath`，零公理）中，记有号毕达哥拉斯旋量 $p = (\mathbf{p};\, r_p) : \mathrm{PythSpinor}$ 由整四元数分子 $\mathbf{p} = p.\mathrm{num} : \mathrm{Quaternion}$、严格正自然数半径 $r_p = p.\mathrm{radius} \in \mathbb{N}_{>0}$ 与模方等式证书 $\lVert\mathbf{p}\rVert^2 = r_p^2$ 构成。对任意整数 $a, b, c, d \in \mathbb{Z}$，令 $s := b^2 + c^2 + d^2$，定义球极凯莱提升的未约分整四元数分子与自然数半径
 
 $$
@@ -281,6 +312,37 @@ $$
 在第 $3$ 拍（空间旋转满 $360^\circ$）处，射影层已读出 $\kappa_{\mathrm{proj}} = 1$ 而误以为回到起点，而 `PythSpinor` 精确落在对径负元 $(-1, 0, 0, 0;\, 1)$ 并读出 $\kappa_{\mathrm{spin}} = 0$；直至第 $6$ 拍（空间转满 $720^\circ$），旋量核按序列 $\frac{3}{4}, \frac{1}{4}, 0, \frac{1}{4}, \frac{3}{4}, 1$ 走完完整双覆叠闭环，精准归位 $+1$。
 :::
 
+不仅如此，上表第 2 款中体对角旋子 `g120_spin = (1, 1, 1, 1; 2)` 的全部六拍有号齐次轨道，连同第 $3$ 拍的精确对径归零 $\kappa_{\mathrm{spin}}(e, g^3) \equiv 0$ 与第 $6$ 拍的完整闭合 $\kappa_{\mathrm{spin}}(e, g^6) \equiv 1$，已作为零公理见证定理 `PythSpinor.SixBeatOrbit` 直接冻结在 `OmegaInit` 与 `OmegaMath` 内核之中：
+
+::: {.theorem #thm-ch04-g120-spin-six-beat-orbit title="体对角旋子六拍双覆叠轨道与对径归零见证" lean="D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.g120_spin_six_beat_orbit"}
+在零公理库 `OmegaMath`（仅依赖 `OmegaInit` 与 `OmegaMath`，零公理）中，记 `PythSpinor` 上的有号齐次等价关系为 $p \sim_{\mathrm{spin}} q$（`PythSpinor.Equivalent`，即 $r_q\,\mathbf{p} = r_p\,\mathbf{q}$，因半径 $r_p, r_q > 0$ 而严格区分 $+p$ 与 $-p$）。取单位旋量 $e := (1, 0, 0, 0;\, 1)$、对径旋量 $-e := (-1, 0, 0, 0;\, 1)$ 与体对角旋子 $g := (1, 1, 1, 1;\, 2)$（`g120_spin`），按 $g^0 := e$、$g^{n+1} := g^n \cdot g$ 递归定义乘幂 `g120_spin.pow n`。则六拍双覆叠轨道谓词 `PythSpinor.SixBeatOrbit` 全部八项合取同时成立：
+
+1. 六拍有号齐次旋量轨道精确落于
+
+   $$
+   \begin{aligned}
+   g^1 &\sim_{\mathrm{spin}} (1, 1, 1, 1;\, 2), & g^2 &\sim_{\mathrm{spin}} (-1, 1, 1, 1;\, 2), & g^3 &\sim_{\mathrm{spin}} (-1, 0, 0, 0;\, 1), \\
+   g^4 &\sim_{\mathrm{spin}} (-1, -1, -1, -1;\, 2), & g^5 &\sim_{\mathrm{spin}} (1, -1, -1, -1;\, 2), & g^6 &\sim_{\mathrm{spin}} (1, 0, 0, 0;\, 1);
+   \end{aligned}
+   $$
+
+2. 第 $3$ 拍（$360^\circ$ 对径）与第 $6$ 拍（$720^\circ$ 闭合）的有号旋量核在 `Omega.IntRatio.Equivalent` 下满足
+
+   $$
+   \kappa_{\mathrm{spin}}(e, g^3) \;\equiv\; 0, \qquad \kappa_{\mathrm{spin}}(e, g^6) \;\equiv\; 1.
+   $$
+:::
+
+::: {.proof}
+按未约分的 `PythSpinor.mul` 依次乘出六拍代表元：第 $1$ 至第 $6$ 拍分别为 $(1, 1, 1, 1;\, 2)$、$(-2, 2, 2, 2;\, 4)$、$(-8, 0, 0, 0;\, 8)$、$(-8, -8, -8, -8;\, 16)$、$(16, -16, -16, -16;\, 32)$ 与 $(64, 0, 0, 0;\, 64)$。交叉乘以各自正半径后，六项 `PythSpinor.Equivalent` 等式均在定义上直接化归为 `Eq.refl`。再代入有号旋量核定义式 $\kappa_{\mathrm{spin}}(e, p) = \operatorname{IntRatio.value}(r_p + w_p,\, 2 r_p)$：第 $3$ 拍给出 $\frac{8 + (-8)}{16} = \frac{0}{16} \equiv 0$，第 $6$ 拍给出 $\frac{64 + 64}{128} = \frac{128}{128} \equiv 1$，均因分母严格为正而在 `Omega.IntRatio.Equivalent` 中零公理证毕。本声明仅依赖 `OmegaInit` 与 `OmegaMath`，传递公理闭包为空集。完整证明由 Lean 内核检查。
+:::
+
+下图将 `PythSpinor` 的特征秩 $5$ 线性嵌入与特征秩 $10$ 的射影射线核并置对照，并把体对角旋子 `g120_spin = (1, 1, 1, 1; 2)` 的六拍 $720^\circ$ 双覆叠闭环完整绘出。
+
+::: {.figure src="ch04-pythspinor-720-orbit"}
+**有号毕达哥拉斯旋量 `PythSpinor`（秩 $5$）对比射影射线商（秩 $10$）与六拍 $720^\circ$ 双覆叠轨道。** 图中展示 `g120_spin = (1, 1, 1, 1; 2)` 沿六拍依次走过 $\kappa_{\mathrm{spin}} = \frac{3}{4}, \frac{1}{4}, 0, \frac{1}{4}, \frac{3}{4}, 1$ 并在第 $3$ 拍（$360^\circ$）抵达对径负元 $(-1, 0, 0, 0;\, 1)$，而二次核桥 $\kappa_{\mathrm{proj}} = (2\kappa_{\mathrm{spin}} - 1)^2$ 在第 $3$ 拍便提前折叠回 $1$；定理见 [@thm-ch04-pythspinor-lift-and-quadratic-bridge]，手算轨迹见 [@ex-ch04-rank10-rank5-and-720-orbit]。
+:::
+
 ## 4.4 旋量射线核、霍普夫投影与双侧两点齐性
 
 当有理载体 `PythSpinor` 经单向嵌入投入连续单位四元数群 $\mathrm{Sp}(1) = \{q \in \mathbb{H} : \lVert q\rVert = 1\}$ 时，上面构造的代数结构与量子力学的复二维旋量、布洛赫球面霍普夫纤维以及整个三维球面的等距对称群严丝合缝地咬合在一起。以下冻结定理把三条核心纽带钉死在内核层面上。
@@ -312,6 +374,18 @@ $$
 第 1、2 款的核心恒等式均为逐分量四次多项式展开：由 $2\kappa(x, y) - 1 = \langle x, y\rangle$ 知 $R(x, y) = \langle x, y\rangle^2 + \langle x, y\mathbf{i}\rangle^2$；展开四元数坐标验证 $s(q\mathbf{i}) = \hat{\mathbf{i}}\,s(q)$ 以及 $\lvert\langle s(x), s(y)\rangle_{\mathbb{C}}\rvert^2 = \langle x, y\rangle^2 + \langle x, y\mathbf{i}\rangle^2 = \operatorname{Tr}(P_{s(y)} P_{s(x)})$，同时验证齐次四元数恒等式 $\langle x, y\rangle^2 + \langle x, y\mathbf{i}\rangle^2 = \frac{1}{2}(\lVert x\rVert^2\lVert y\rVert^2 + \langle x\mathbf{i}\bar{x}, y\mathbf{i}\bar{y}\rangle)$，代入单位范数即得霍普夫形式。第 3 款记 $u := \bar{x}y$ 与 $u' := \bar{x}'y'$。由 $\kappa(x, y) = \kappa(x', y')$ 知 $\operatorname{Re}(u) = \langle x, y\rangle = \langle x', y'\rangle = \operatorname{Re}(u')$，故纯虚部满足 $\lVert\operatorname{Im}(u)\rVert = \lVert\operatorname{Im}(u')\rVert$。三维球面上的伴随旋转传递作用给出单位四元数 $c \in \mathrm{Sp}(1)$ 使 $c u \bar{c} = u'$；取 $p := x' c \bar{x}$ 与 $q := \bar{c}$，直接乘开即得 $p x q = x' c \bar{c} = x'$ 与 $p y q = x' c u \bar{c} = x' u' = y'$。完整证明由 Lean 内核检查。
 :::
 
+读者可以在下方交互实验卡中亲手拨动球极—凯莱提升 $\Phi(a, b, c, d)$ 的整数输入并逐拍推进 `g120_spin = (1, 1, 1, 1; 2)` 的六拍 $720^\circ$ 双覆叠轨道（[@thm-ch04-g120-spin-six-beat-orbit]）：实时核验每枚提升旋量均严丝合缝地满足毕达哥拉斯模方方程 $w^2 + x^2 + y^2 + z^2 = r^2$，并在第 $3$ 拍（空间旋转满 $360^\circ$）直观看到有号旋量核跌至 $\kappa_{\mathrm{spin}} = 0$ 而二次核桥 $\kappa_{\mathrm{proj}} = (2\kappa_{\mathrm{spin}} - 1)^2$ 已折回 $1$，直至第 $6$ 拍（$720^\circ$）才真正闭环回归 $+1$。
+
+::: {.viz src="ternion-cayley-lab" preset="pythspinor-720-double-cover" height="520"}
+**有理球极—凯莱提升 $\Phi(a, b, c, d)$ 与 `g120_spin = (1, 1, 1, 1; 2)` 的六拍 $720^\circ$ 双覆叠实验。** 实时调节整数输入 $(a, b, c, d)$ 观察提升像落于有理三维球面 $S^3(\mathbb{Q})$，并逐拍推进 `g120_spin` 追踪有号旋量核序列 $\kappa_{\mathrm{spin}} = \frac{3}{4}, \frac{1}{4}, 0, \frac{1}{4}, \frac{3}{4}, 1$ 与射影二次桥 $\kappa_{\mathrm{proj}} = (2\kappa_{\mathrm{spin}} - 1)^2$ 的分合；证明见 [@thm-ch04-pythspinor-lift-and-quadratic-bridge]，轨道算表见 [@ex-ch04-rank10-rank5-and-720-orbit]。
+:::
+
 ::: {.remark #rem-ch04-double-cover-summary title="三层核函数对照与向第五章的过渡"}
-本章建立的代数层次在三个核函数上呈现出清晰的嵌套关系：顶层 `PythSpinor` 携带线性特征秩 $5$ 的有号旋量核 $\kappa_{\mathrm{spin}} = \frac{1 + \langle v_1, v_2\rangle}{2}$，区分 $+v$ 与 $-v$ 且具双侧两点齐性；经二次核桥 $\kappa_{\mathrm{proj}} = (2\kappa_{\mathrm{spin}} - 1)^2$ 压入实射影群 $\mathbb{QP}^3 \cong \mathrm{SO}(3, \mathbb{Q})$ 时，特征秩跃升至 $10$；而进一步对单轴盲区相位 $c = c_0 + c_1\mathbf{i}$ 求两项平方和，则落入布洛赫球面 $S^2$ 上的霍普夫—玻恩射线核 $R(x, y) = \frac{1 + \langle h(x), h(y)\rangle}{2}$。值得注意的是，所有无原点流群迁移与利雅三元曲率括号均未动用任何超越函数；下一章（[第五章](ch05-rational-cayley-rotations.md)）将正面把三维空间旋转与离散谐波运动也彻底从 $e^X$、$\ln\mathbf{R}$ 与三角函数中解放出来。
+有号核 $\kappa_{\mathrm{spin}}=(1+\langle v_1,v_2\rangle)/2$ 区分 $+v$ 与 $-v$，在有理单位旋量上特征秩为 $5$。平方核通过 $\kappa_{\mathrm{proj}}=(2\kappa_{\mathrm{spin}}-1)^2$ 识别两枚旋量的射线，并延伸到全部有理射影旋转，特征秩为 $10$。本节的霍普夫投影和双侧两点齐性使用实单位四元数。在这一实载体上，对相位圆的两项平方求和便得到 $S^2$ 上的霍普夫—玻恩射线核。第五章回到有理坐标，分别构造普通凯莱图和有理单位旋量的双卡乘法。见[第五章](ch05-rational-cayley-rotations.md)。
+:::
+
+最后，下面这部短片沿本章的路线重走一遍：从没有原点的三元迁移出发，经过利雅三元曲率与秩 $10$、秩 $5$ 的分离，走到 $720^\circ$ 双覆叠与霍普夫投影。
+
+::: {.film src="addition-without-an-origin"}
+**平直加法离不开原点，三元括号 $[a, b, c] = a\bar{b}c$ 却不需要：它的反射之路走出六拍 $720^\circ$ 轨道（2 分 45 秒）。** 平面格点上，从跳动的琥珀色原点 $O$ 量出的品红点 $a + b$ 随之移动，青色点 $a - b + c = (1, 4)$ 纹丝不动；$\lvert i + j\rvert^2 = 2$ 刺破单位圆，$[1 + i, 1 + j, k] = (1, -1, -1, 1)$ 的模方为 $4 = 2 \cdot 2 \cdot 1$，$[i, 1, j] = k$ 而 $[j, 1, i] = -k$（屏幕计算）；绿色标签对应 [@thm-ch04-anchored-heap-and-reflection] 的定基群分解。取 $\mathbf{u} = (1, 1, 0)$、$\mathbf{v} = (1, 0, 2)$、$\mathbf{w} = (0, 1, 1)$，品红的 $\frac{1}{2}[\mathbf{u}, \mathbf{v}]$ 垂直于两者，琥珀色的 $\{\mathbf{u}, \mathbf{v}, \mathbf{w}\} = (-1, -2, 2)$，轮换和为零，$\langle\{\mathbf{u}, \mathbf{v}, \mathbf{u}\}, \mathbf{v}\rangle = 9$ 等于面积平方（[@ex-ch04-lie-triple-sectional-curvature]）；绿色标签对应 [@thm-ch04-lie-triple-axioms] 的比安基恒等式与 [@thm-ch04-lie-triple-sectional-curvature] 的 $K \equiv 1$。青色方阵给出 $\det G^{\mathrm{proj}}_{10} = \frac{1}{64}$，品红方阵给出 $\det G^{\mathrm{spin}}_5 = \frac{1}{32}$，琥珀色的第十一条射线与第六枚旋量使行列式归零（屏幕计算）；绿色标签对应 [@thm-ch04-pythspinor-lift-and-quadratic-bridge] 的二次核桥。大圆上的反射之路 $x_{n+2} = [x_{n+1}, x_n, x_{n+1}]$ 从 $e$ 经 $g = (1, 1, 1, 1;\, 2)$ 走出 $g^0$ 至 $g^6$，品红的 $x_3 = (-1, 0, 0, 0;\, 1)$ 是对径点；立方体每拍绕体对角线转 $120^\circ$，品红柱 $\kappa_{\mathrm{spin}} = \frac{3}{4}, \frac{1}{4}, 0, \frac{1}{4}, \frac{3}{4}, 1$ 与青色柱 $\kappa_{\mathrm{proj}} = \frac{1}{4}, \frac{1}{4}, 1, \frac{1}{4}, \frac{1}{4}, 1$ 并排（[@ex-ch04-rank10-rank5-and-720-orbit]）；绿色标签对应 [@thm-ch04-anchored-heap-and-reflection] 的反射幂次律与 [@thm-ch04-g120-spin-six-beat-orbit]。最后在实单位四元数上，$e$ 与 $g$ 的射线核按两种算法都是 $\frac{1}{2}$，霍普夫像 $i$ 与琥珀色的 $j$ 互相垂直，$p = i$、$q = -i$ 把 $(e, g)$ 搬到 $(e, \frac{1}{2}(1, 1, -1, -1))$（屏幕计算）；绿色标签对应 [@thm-ch04-ray-kernel-hopf-and-homogeneity]，“没有哪个点是特殊的”是对齐性的诠释（紫色）。
 :::

@@ -1,0 +1,29 @@
+{
+  "title": "Turn the block, read the corner",
+  "title_zh": "转动方块，读出角落",
+  "summary": "A number x between minus one and one can live inside a turn: x = cos θ is the shadow of a dial's hand, and the top-left corner of the 2×2 signal block W(x). Multiplying the block by itself adds the angles, so the corner of W(x)^m reads cos mθ, the Chebyshev polynomial T_m(x). At x = 0.6 the corner reads 1, 0.6, −0.28, −0.936, −0.8432, and each new reading is 2x times the last minus the one before; no angle is needed. The reason: the block's eigenvalues a and b have product one and sum 2x, and Lean checks that in any commutative ring two elements with product one have power sums obeying that rule. In the QSVT literature a matrix splits into one such block per singular value, and phase twists between the turns produce other polynomials; Lean checks that a polynomial pair with the right degree, parity and balance is built exactly by a starting phase φ₀ and a list of exactly k more phases. Existence only: no recipe for the phases, no claim of uniqueness or of the shortest list; the unification of algorithms as polynomial transformations is a literature result not formalized in the book.",
+  "summary_zh": "一个介于 −1 与 1 之间的数 x 可以藏在一次转动里：x = cos θ 是表盘指针的影子，也是二乘二信号块 W(x) 的左上角。方块自乘时角度相加，所以 W(x)^m 的左上角读出 cos mθ，即切比雪夫多项式 T_m(x)。取 x = 0.6，角落依次读出 1、0.6、−0.28、−0.936、−0.8432，每个新读数都等于 2x 乘上一个再减去更前一个，用不着角度。原因在于：方块的两个特征值 a、b 乘积为 1、和为 2x，而 Lean 检验了在任意交换环里乘积为 1 的两个元素的幂和服从这条规则。按 QSVT 的文献结果，一个矩阵拆成每个奇异值一块；在转动之间插入相位扭转，可以得到别的多项式。Lean 检验了：次数、奇偶与归一都合格的一对多项式，恰好由一个起始相位 φ₀ 与一串恰好 k 个相位拼出。这只是存在性：不给出求相位的方法，也不声称唯一或最短；把各种算法统一成多项式变换是文献结果，本书没有形式化。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-24",
+  "duration": "2:30",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · a dial and its shadow, a 2×2 block raised to powers beside a ticking clock hand, a ledger of corner readings, two conjugate eigenvalues on the unit circle, three blocks for three singular values and a strip of phase twists",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S1/Recurrence/NormOneTraceAddition.trace_recurrence",
+    "D5/S3/ContinuousObservables/PhaseSynthesis.exists_phases"
+  ],
+  "outputs": {
+    "narrated_720p": "quantum-geometry_chebyshev-blocks_720p_narrated.mp4",
+    "cover": "quantum-geometry_chebyshev-blocks_cover.jpg"
+  }
+}

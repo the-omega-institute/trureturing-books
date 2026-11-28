@@ -185,9 +185,9 @@ C(3)&=\cdots=C(7)=1,\qquad C(8)=2,\\
 \end{aligned}
 $$
 
-非降的有界整数序列必趋于常值，此处终值属于 $\{2,3,4\}$。
+非降的有界整数序列必趋于常值，由 [@thm-appe-chordal-banach-sharp-four] 及其实 Banach 加法群推论可知终值为 $4$。
 
-**实标量与 Banach 目标。** 对 $n\ge3$，实数增益下，最小一致误差等于定向简单回路的最大绝对增益均值。下界来自势差的消去。反过来，若这些均值至多为 $r$，给各有向棱权重 $g_{uv}+r$。反向也满足回路界，折返权重为 $2r$，故无负回路。从新增零权源点取最短路距离作势，最短路距离在棱的两个方向上均满足所需不等式，故误差至多 $r$。弦分解把长为 $\ell$ 的回路分成 $\ell-2$ 个三角形，故上界为 $(n-2)\varepsilon/n$。取零辐条的扇图，沿扇缘路径给每棱增益 $\varepsilon$，则长 $n$ 的外圈达到此界。把例子扩为 $K_n$ 可令所有从较小到较大的非辐条棱取相同增益。对 $K_n$ 上的任意实 Banach 目标，平均所有 $n$ 个星形势 $g_{av}$（$g_{aa}=0$）。每棱的两个端点星形势精确拟合它，其余各误差至多 $\varepsilon$，故平均仍给出尖锐常数 $(n-2)/n$。
+**实标量与 Banach 目标。** 对 $n\ge3$，实数增益下，最小一致误差等于定向简单回路的最大绝对增益均值。下界来自势差的消去。反过来，若这些均值至多为 $r$，给各有向棱权重 $g_{uv}+r$。反向也满足回路界，折返权重为 $2r$，故无负回路。从新增零权源点取最短路距离作势，最短路距离在棱的两个方向上均满足所需不等式，故误差至多 $r$。弦分解把长为 $\ell$ 的回路分成 $\ell-2$ 个三角形，故上界为 $(n-2)\varepsilon/n$。取零辐条的扇图，沿扇缘路径给每棱增益 $\varepsilon$，则长 $n$ 的外圈达到此界。把例子扩为 $K_n$ 可令所有从较小到较大的非辐条棱取相同增益。对任意实 Banach 目标，$K_n$ 的精确统一系数也是 $(n-2)/n$，见 [@thm-appe-complete-cliquesum-banach]。
 
 ::: {.theorem #thm-appe-chordal-path-power-two title="路径幂的 $2\varepsilon$ 重构界与弦图的普适下界 $2$" lean="D5/S3/Combinatorics/Graph/Chordal/ChordalUniversalLowerBound.pathPower_isChordal, D5/S3/Combinatorics/Graph/Chordal/ChordalUniversalLowerBound.pathPower_exists_two_approximate_gain_potential, D5/S3/Combinatorics/Graph/Chordal/ChordalUniversalLowerBound.pathPower_three_banach_and_integral_lower_bound, D5/S3/Combinatorics/Graph/Chordal/ChordalUniversalLowerBound.pathPower_three_exact_two, D5/S3/Combinatorics/Graph/Chordal/ChordalUniversalLowerBound.not_subtwo_universal_chordal"}
 对 $n,k\in\mathbb N$，记 $P_n^k$ 为顶点集 $\mathrm{Fin}(n)=\{i\in\mathbb N:i<n\}$ 上的路径幂，其中 $i,j$ 相邻当且仅当 $i\ne j$ 且 $|i-j|\le k$。
@@ -324,7 +324,362 @@ $$
 同层相邻点 $x,y$ 共享分支、影子和锚。若两个前驱集互不包含，从各自的差集中取一个前驱，它们在同一影子中相邻，并与 $x,y$ 构成无弦四环，违反弦性。因此可定向使 $N^-(x)\subseteq N^-(y)$。固定 $b\in N^-(x)$，将经 $b$ 到 $x$ 再走 $xy$ 的路径和与 $y$ 的各条前驱路径比较。经 $b$ 到 $y$ 的配对项只用三角形 $(b,x,y)$，误差至多为 $\varepsilon$。每个其他项再用两次三角比较，误差至多为 $3\varepsilon$。公共项 $Q_C$ 抵消。先对 $N^-(y)$ 取平均，其 $m$ 项中至少一项的误差至多为 $\varepsilon$，故平均误差至多为 $(3-2/m)\varepsilon\le(3-2/k)\varepsilon$。再对 $N^-(x)$ 取平均，仍有此界。由 $k\ge2$，它至多为 $(4-4/k)\varepsilon$。相邻点的层数至多差 $1$，反向只改变残差的符号，所以同一个势满足所有有向棱的界。完整证明由 Lean 内核检查。
 :::
 
-代入 $k=3$ 或 $k=4$，团大小至多为 $4$ 或 $5$ 的弦图分别得到 $\frac{8}{3}\varepsilon$ 或 $3\varepsilon$ 的上界，特别适用于 $3$-树和 $4$-树。每个有限的 $k$ 都给出严格小于 $4$ 的系数，但当 $k$ 无界时，该系数趋于 $4$。实 Banach 目标的最优弦图系数 $C_{\mathrm{Ban,chordal}}$ 的精确值在 $[2,4]$ 内仍待确定。由上文的整数性论证，任意双不变伪度量群的统一系数 $C_{\mathrm{chordal}}$ 仍待在 $\{2,3,4\}$ 中确定。固定目标群后，还可以问一个给定弦图上的最优系数。
+沿距离层取平均时，团大小通过前驱的数目控制误差。也可以沿单纯顶点的删除次序取平均，此时顶点总数进入误差界。区间图与分裂图各有一种可逐步接合的结构，即使团大小无界，也能用至多两次三角比较控制每条棱。
+
+::: {.theorem #thm-appe-simplicial-interval-split-potential title="单纯顶点平均与区间图、分裂图的增益重构" lean="D5/S3/Combinatorics/Graph/Chordal/SimplicialAndIntervalPotential.SimpleGraph.IsChordal.exists_simplicial_banach_gain_potential, D5/S3/Combinatorics/Graph/Chordal/SimplicialAndIntervalPotential.SimpleGraph.intervalGraph_isChordal_and_two_approximate_gain_potential, D5/S3/Combinatorics/Graph/Chordal/SimplicialAndIntervalPotential.SimpleGraph.exists_two_approximate_gain_potential_of_split, D5/S3/Combinatorics/Graph/Chordal/SimplicialAndIntervalPotential.SimpleGraph.BanachPathPower.pathPower_isIntervalGraph"}
+1. **单纯顶点平均。** 设 $G$ 是有限顶点集 $V$ 上的简单弦图，$k\in\mathbb N$、$k\ge2$，且每个团至多有 $k+1$ 个顶点。设 $E$ 为实半赋范向量空间，$\varepsilon\ge0$ 为实数，$g:V\times V\to E$ 对所有顶点对满足 $g(j,i)=-g(i,j)$。对每个三对顶点均相邻的有序三元组 $(i,j,t)$，设 $\|g(i,j)+g(j,t)-g(i,t)\|\le\varepsilon$。则存在 $\varphi:V\to E$，使得每个有序相邻顶点对 $(u,v)$ 都满足
+
+   $$
+   \begin{aligned}
+   &\|g(u,v)-(\varphi(v)-\varphi(u))\|\\
+   &\qquad\le (k-1)\left[1-\left(\frac{k-1}{k}\right)^{|V|\mathbin{\dot{-}}1}\right]\varepsilon .
+   \end{aligned}
+   $$
+
+   指数中 $|V|$ 为自然数基数，$\dot{-}$ 表示截断的自然数减法。系数中的运算在实数中进行。
+
+2. **区间图。** 设 $G$ 是有限顶点集 $V$ 上的简单图，$\ell,r:V\to\mathbb R$ 满足对每个 $v$ 有 $\ell(v)\le r(v)$，并且对所有 $x,y$，$G.\mathrm{Adj}(x,y)$ 当且仅当 $x\ne y$ 且 $\max(\ell(x),\ell(y))\le\min(r(x),r(y))$。设 $H$ 为群，$d$ 为左右平移均保持的伪度量，$\varepsilon\ge0$ 为实数，$g:V\times V\to H$。对每个有序相邻顶点对 $(x,y)$，设 $g(y,x)=g(x,y)^{-1}$。对每个三对顶点均相邻的有序三元组 $(x,y,z)$，设 $d(g(x,y)g(y,z),g(x,z))\le\varepsilon$。则 $G$ 是弦图，且存在 $\varphi:V\to H$，使得每个有序相邻顶点对 $(x,y)$ 都满足 $d(g(x,y),\varphi(x)^{-1}\varphi(y))\le2\varepsilon$。
+
+3. **分裂图。** 设 $G$ 是有限顶点集 $V$ 上的简单图，$C\subseteq V$ 为团，$V\setminus C$ 为独立集。对第 2 项中满足同样伪度量、反向增益及三角缺陷条件的 $H,d,\varepsilon,g$，$G$ 是弦图，且存在 $\varphi:V\to H$，使得每个有序相邻顶点对 $(x,y)$ 都满足 $d(g(x,y),\varphi(x)^{-1}\varphi(y))\le2\varepsilon$。
+
+4. **路径幂。** 对所有 $n,k\in\mathbb N$，在 $P_n^k$ 的顶点集 $\mathrm{Fin}(n)$ 上存在实端点函数 $\ell,r$，使每个顶点 $i$ 都满足 $\ell(i)=i$、$r(i)=i+k$、$\ell(i)\le r(i)$，其中 $i$ 表示从 $0$ 开始的自然数下标，端点按实数取值。对所有 $x,y$，$P_n^k$ 中 $x,y$ 相邻当且仅当 $x\ne y$ 且 $\max(\ell(x),\ell(y))\le\min(r(x),r(y))$。
+:::
+
+::: {.proof #pf-appe-simplicial-interval-split-potential}
+**单纯顶点平均。** 由 Dirac 定理，非空弦图有一个邻点成团的顶点 $a$。删除 $a$ 后，诱导子图仍满足假设。若它有 $n-1$ 个顶点，设已得到误差至多为 $r_{n-1}\varepsilon$ 的势 $\psi$。每个邻点 $x$ 给出一个可精确拟合棱 $xa$ 的候选值 $p_x=\psi(x)+g(x,a)$。两候选值之差等于棱 $xy$ 的残差减去三角形 $(x,y,a)$ 的增益缺陷，故其半范数至多为 $(r_{n-1}+1)\varepsilon$。邻点与 $a$ 一同成团，所以邻点数 $m$ 至多为 $k$。取候选值的平均作为 $a$ 处的势。估计棱 $xa$ 的误差时，$p_x$ 对应的差为零，其余各差给出系数 $(m-1)/m\le(k-1)/k$。因此可取 $r_1=0$、$r_n=\frac{k-1}{k}(r_{n-1}+1)$（$n\ge2$）。递推的解就是所示系数，且随 $n$ 不减，故旧棱仍满足新界。孤立顶点处的值任取，空图没有棱约束，反向棱的残差取负。
+
+**区间图。** 任一非空顶点子集内，右端点最小的区间的所有邻区间都含该端点。将此用于长至少为 $4$ 的环的顶点集，其两个环上邻点之间的棱就是一条弦。重构时，归纳要求根 $p$ 的左端点不大于当前集合中任何区间的右端点。取左端点最小的区间为初始根，令 $\varphi(p)=1$，并以 $\varphi(x)=g(p,x)$ 精确拟合其辐棱。在邻点中保留右端点最大的 $q$，其余递归顶点为 $p$ 的非邻点（去掉 $p$）。这些非邻区间的左端点都在 $r(p)$ 右侧。因此 $\ell(q)\le r(p)$ 保证新根 $q$ 的左端点仍不大于递归集合的任一右端点，正是本归纳所需的根条件。递归势以同一个群元素左乘来接合，使 $\varphi(q)=g(p,q)$，同时精确拟合 $q$ 的递归辐棱。若 $p$ 孤立，则将它删去，余图非空时从左端点最小的区间重新开始。
+
+同属 $p$ 邻域的两点之间，误差由经过 $p$ 的一个三角形控制。若棱 $xy$ 从 $p$ 的邻点 $x$ 跨到非邻点 $y$，则 $\ell(y)\le r(x)\le r(q)$ 且 $\ell(y)>r(p)$，故 $y$ 与 $q$ 相邻。若 $x\ne q$，则 $x,q$ 均含 $r(p)$，也彼此相邻。将 $g(p,x)g(x,y)$ 与 $\varphi(y)=g(p,q)g(q,y)$ 比较，先用三角形 $(x,q,y)$，再用 $(p,x,q)$，总误差至多为 $2\varepsilon$。若 $x=q$，这条棱已被精确拟合。余下的棱由归纳控制。由左平移不变性，棱的拟合误差等于 $d(\varphi(x)g(x,y),\varphi(y))$。再用逆增益右平移及 $d$ 的对称性，得到反向棱的误差相同。空图没有棱需要拟合。
+
+**分裂图。** 每个非空诱导子图若含团外顶点，该点的邻点均在团内。若全部顶点都在团内，则任选一点也是单纯顶点。这再次保证每个长至少为 $4$ 的环有弦。团非空时取根 $o$，令 $\varphi(o)=1$，其余团内顶点取 $\varphi(x)=g(o,x)$。辐棱精确拟合，其他团内棱误差至多为 $\varepsilon$。对每个非孤立的团外顶点 $y$，选团内邻点 $a$，置 $\varphi(y)=\varphi(a)g(a,y)$。棱 $ay$ 精确拟合。对另一个团内邻点 $x$，先用三角形 $(x,a,y)$，再用团内棱 $xa$ 的误差估计，得到至多 $2\varepsilon$。团外没有内部棱，孤立顶点可任取势。团为空时全图无棱。
+
+**路径幂。** 对不同的下标 $x,y$，闭区间 $[x,x+k]$、$[y,y+k]$ 相交当且仅当 $x\le y+k$ 且 $y\le x+k$，这正是 $P_n^k$ 的邻接条件。完整证明由 Lean 内核检查。
+:::
+
+**手工推导。** 第 1 项的系数对每个非空有限图都严格小于 $k-1$。在 $k=2$ 时，系数小于 $1$，并在 [@thm-appe-two-tree-stretch-separation] 的递归 $2$-树上逐个达到该有限规模界，且随递归深度趋于 $1$。在 $k=3$ 时，系数小于 $2$，将 [@thm-appe-clique-bounded-banach-potential] 的 $8/3$ 界改进到所有团大小至多为 $4$ 的弦图，包括所有 $3$-树。当 $n\ge4$ 时，路径三次幂 $P_n^3$ 从 $K_4$ 开始，每个新顶点接到前面 $3$ 个顶点所成的团上。这个图族的系数上确界恰为 $\frac43$，见 [@thm-appe-three-tree-path-sup]。
+
+第 2 项对实 Banach 空间的加法群也适用，取 $d(a,b)=\|a-b\|$。第 4 项将 [@thm-appe-chordal-banach-limit-two] 的路径幂下界带入有限区间图类。先固定 $k$ 让 $n$ 趋于无穷，再增大 $k$，最优系数的下界可任意接近 $2$。因此有限区间图上的实 Banach 重构系数与双不变伪度量群的通用重构系数，上确界均恰为 $2$。
+
+将第 1 项与 [@thm-appe-clique-bounded-banach-potential] 合用，团大小至多为 $k+1$ 时误差至多为 $\min(k-1,\,4-4/k)\varepsilon$。
+
+完全图上，可以把所有星形势同时纳入平均，进一步把三角误差的系数压到 $1$ 以下。若较大的图由若干片沿树接合，还可以先逐片拟合，再在相接的团上取中点。
+
+::: {.theorem #thm-appe-complete-cliquesum-banach title="完全图的精确实 Banach 重构常数与分离团和的中点平均" lean="D5/S3/Combinatorics/Graph/Chordal/CompleteAndCliqueSumBanach.SimpleGraph.completeGraph_banach_upper_bound, D5/S3/Combinatorics/Graph/Chordal/CompleteAndCliqueSumBanach.SimpleGraph.completeGraph_banach_lower_bound, D5/S3/Combinatorics/Graph/Chordal/CompleteAndCliqueSumBanach.SimpleGraph.separatedCliqueSum_banach_gain_potential"}
+1. **完全图上的实半赋范上界。** 设 $V$ 为有限顶点集，$|V|\ge2$，$E$ 为任意实半赋范向量空间，$\varepsilon\in\mathbb R$。设 $g:V\times V\to E$ 对任意 $i,j$ 满足 $g(j,i)=-g(i,j)$，且对每组两两不同的 $i,j,l$ 满足 $\|g(i,j)+g(j,l)-g(i,l)\|\le\varepsilon$。则存在势 $\varphi:V\to E$，使任意 $i\ne j$ 满足
+
+   $$
+   \|g(i,j)-(\varphi(j)-\varphi(i))\|\le\frac{|V|-2}{|V|}\varepsilon.
+   $$
+
+2. **完全图上的尖锐实 Banach 下界。** 对每个自然数 $m\ge2$，令 $\mathrm{ZeroDivSkew}(m)$ 为行和全为零的实反对称 $m\times m$ 矩阵空间，配以逐项上确界范数，成为有限维实 Banach 空间。存在 $g:\mathrm{Fin}(m)\times\mathrm{Fin}(m)\to\mathrm{ZeroDivSkew}(m)$，对任意 $i,j$ 满足 $g(j,i)=-g(i,j)$，且对两两不同的 $i,j,l$ 满足 $\|g(i,j)+g(j,l)-g(i,l)\|\le1$，使得对任意势 $\varphi:\mathrm{Fin}(m)\to\mathrm{ZeroDivSkew}(m)$，都存在 $i\ne j$ 满足
+
+   $$
+   \|g(i,j)-(\varphi(j)-\varphi(i))\|\ge\frac{m-2}{m}.
+   $$
+
+3. **分离团和上的中点平均。** 设 $T$ 是任意指标类型 $I$ 上的树，$G$ 是有限顶点集 $V$ 上的简单图，$P:I\to\mathcal P(V)$ 是一族片的顶点集，每个顶点属于至少一片，每条 $G$ 的棱的两个端点同属至少一片。给定自然数 $m\ge1$，对每条树棱 $ab$，交集 $S(a,b)=P(a)\cap P(b)$ 是非空的 $G$-团且 $|S(a,b)|\le m$。若树中不同的 $a,b$ 不相邻，则 $P(a)$ 与 $P(b)$ 不交。在每片 $P(a)$ 中，不同树邻点 $b,c$ 的附着集 $S(a,b),S(a,c)$ 两两不交，且两集之间没有 $G$ 的棱。
+
+   设 $E$ 为任意实半赋范向量空间，$g:V\times V\to E$ 为任意增益，$R\ge0$ 为实数，局部势族 $\varphi_a:V\to E$ 满足对每个 $a\in I$ 及每条端点均在 $P(a)$ 中的有向 $G$-棱 $(u,v)$，有 $\|g(u,v)-(\varphi_a(v)-\varphi_a(u))\|\le R$。则存在全局势 $\Phi:V\to E$，使每条有向 $G$-棱 $(u,v)$ 满足
+
+   $$
+   \|g(u,v)-(\Phi(v)-\Phi(u))\|\le(2-1/m)R.
+   $$
+:::
+
+::: {.proof #pf-appe-complete-cliquesum-banach}
+**星形势的平均。** 令 $n=|V|$，取 $\varphi(v)=\frac1n\sum_{w\in V}g(w,v)$。由反对称性 $g(i,i)=0$。棱 $(i,j)$ 的残差就是 $g(w,i)+g(i,j)-g(w,j)$ 对所有 $w$ 的平均，其中 $w=i,j$ 的两项为零，其余 $n-2$ 项的半范数至多为 $\varepsilon$。三角不等式给出所需上界。$n=2$ 时两项全为零，任意实数 $\varepsilon$ 都适用。
+
+**有向三角形见证。** 令 $A_{ab}$ 是从零矩阵出发，在坐标 $(a,b)$ 处加 $1$、在 $(b,a)$ 处减 $1$ 的矩阵，令 $T(a,b,c)=A_{ab}+A_{bc}+A_{ca}$。它反对称、各行之和为零，三个顶点不同则各坐标的绝对值至多为 $1$，有重复顶点时矩阵为零。固定 $0\in\mathrm{Fin}(m)$，取 $g(i,j)=T(0,i,j)$。交换 $i,j$ 使增益取负，且 $g(i,j)+g(j,l)-g(i,l)=T(i,j,l)$。若 $i\ne j$，则 $g(i,j)_{ij}$ 在两端都不同于 $0$ 时为 $1$，否则为 $0$，故这些坐标之和为 $(m-1)(m-2)$。任意势的每个矩阵同时具有零行和与零列和，后一性质来自反对称性。把势差的 $(i,j)$ 项按行、列分别求和，它们的总和为零（对角项也为零）。因此
+
+$$
+\sum_{i\ne j}\bigl(g(i,j)-(\varphi(j)-\varphi(i))\bigr)_{ij}=(m-1)(m-2).
+$$
+
+在 $m(m-1)$ 个有序异点对中，至少有一个残差坐标不小于平均值 $(m-2)/m$，其范数也不小于该值。
+
+**沿树接合。** 令 $d(a,b)$ 为 $\varphi_a-\varphi_b$ 在 $S(a,b)$ 上的平均。它随树棱反向取负。从树根出发沿唯一有限路径累加 $d$，取平移量 $c_a$，使 $c_b-c_a=d(a,b)$。于是 $\psi_a=\varphi_a+c_a$ 保持原有棱误差，且 $D(s)=\psi_b(s)-\psi_a(s)$ 在每个附着团 $S(a,b)$ 上的平均为零。记团大小为 $q$。对团内不同的 $s,t$，用同一有向棱 $(s,t)$ 上两片各自的残差相减，得 $\|D(s)-D(t)\|\le2R$。由零均值及自身项为零，
+
+$$
+\left\|\frac{D(s)}2\right\|\le\frac{q-1}{q}R\le(1-1/m)R.
+$$
+
+不相邻片不交、同片内不同附着集不交，保证每个共享顶点恰属两片。在共享顶点取两片平移后势的中点，独属一片的顶点保持该片的平移后势。每条棱都在某片内。若两端均共享，则分离条件保证它们位于同一附着团，棱残差是两片原残差的平均，半范数至多为 $R$。其余棱至多一个端点发生中点调整，增量至多为 $(1-1/m)R$，故总误差至多为 $(2-1/m)R$。完整证明由 Lean 内核检查。
+:::
+
+**手工推导。** 合用前两项，$m$ 个顶点的完全图在所有实 Banach 目标上的最优统一系数恰为 $(m-2)/m$。第 3 项把已有局部拟合的误差传递到全图，在分离的附着团大小至多为 $m$ 时重构误差至多为局部误差的 $2-1/m$ 倍。
+
+回到团大小受限的一般弦图，跨层棱的两端若都有最多的前驱，就把较浅端点在较深端点的平均中加重。这一步改进了 [@thm-appe-clique-bounded-banach-potential] 的等权估计。
+
+::: {.theorem #thm-appe-biased-clique-banach-potential title="有界团数弦图上的偏置前驱平均重构界" lean="D5/S3/Combinatorics/Graph/Chordal/WeightedCliqueBanachPotential.SimpleGraph.IsChordal.exists_biased_clique_banach_gain_potential"}
+设 $G$ 是有限顶点集 $V$ 上的简单弦图，$k\in\mathbb N$ 且 $k\ge3$，并且 $G$ 的每个团至多有 $k+1$ 个顶点。设 $E$ 为实半赋范向量空间，$\varepsilon\ge0$ 为实数，$g:V\times V\to E$ 对任意 $i,j\in V$ 满足 $g(j,i)=-g(i,j)$。若对每个有序三角形 $(i,j,\ell)$（即 $i,j$、$j,\ell$、$i,\ell$ 均相邻）都有 $\|g(i,j)+g(j,\ell)-g(i,\ell)\|\le\varepsilon$，则存在势 $\varphi:V\to E$，使每个有序相邻顶点对 $(u,v)$ 都满足
+
+$$
+\begin{aligned}
+\bigl\|g(u,v)-(\varphi(v)-\varphi(u))\bigr\|
+&\le \left(4-\frac{4}{k}-\frac{2(k-2)^2}{k(k-1)^3}\right)\varepsilon .
+\end{aligned}
+$$
+:::
+
+::: {.proof #pf-appe-biased-clique-banach-potential}
+各连通分支的诱导子图继承全部假设，且每条棱都在一个分支内，故可分别构造势再合并。记所求系数为 $R_k$。在每个分支选根 $o$，按到根的距离分层，记 $P(x)$ 为 $x$ 在上一层的邻点集。对第 $i$ 层及以上诱导子图的连通分支 $C$（$i\ge1$），其影子 $S_C$ 是第 $i-1$ 层中与 $C$ 相邻的顶点所成的集合。若两个影子顶点不相邻，分别取内部经过 $C$ 和经过更低各层的最短连接路径。通往根的路径保证后一路存在。两路均无弦，且两路的内部顶点层号至少相差 $2$，合成无弦圈，与弦性矛盾。因此影子是团。
+
+非根顶点 $x$ 沿最短路走向根可找到一个前驱，且其前驱都在同一影子中。故 $P(x)\cup\{x\}$ 是团，$|P(x)|\le k$。同层相邻顶点 $x,y$ 的前驱集必有一个包含于另一个。否则从两个集合的差中各取一个前驱，它们在公共影子中相邻，与 $x,y$ 组成无弦四边形。称有 $k$ 个前驱的顶点为饱和顶点。若 $P(v)$ 中有两个饱和顶点，它们相邻，且由嵌套性有相同的前驱集。加上这两个顶点便得到一个有 $k+2$ 个顶点的团，矛盾。
+
+取 $\delta=\frac{k-2}{k(k-1)^2}$。若 $P(x)$ 有 $m\ge2$ 个顶点且含饱和顶点，则给唯一饱和顶点权重 $1/m+\delta$，其余各取 $1/m-\delta/(m-1)$。其他情形用等权平均。权重 $w_x(b)$ 之和为 $1$，且都至少为 $f(m)$，其中 $f(1)=1$，$f(m)=1/m-\delta/(m-1)$（$m\ge2$）。由 $0<\delta\le1/4$ 可见 $f(m)>0$。对整数 $2\le m\le n$，有 $(m-1)(n-1)\ge mn/4$，故 $f(m)-f(n)=(n-m)\bigl(1/(mn)-\delta/((m-1)(n-1))\bigr)\ge0$，而 $f(2)\le f(1)$。
+
+当 $i\ge2$ 时，令 $D$ 为把第 $i-1$ 层纳入后包含 $C$ 的父分支。沿最短路走向根可知影子 $S_C$ 非空。其各顶点都在 $D$ 中，其前驱集非空且两两嵌套，因而最小前驱集中的任一点 $a_C$ 都与整个 $S_C$ 相邻，并属于 $S_D$。令 $Q_C=Q_D+g(a_D,a_C)$。在第 $1$ 层取 $a_C=o$、$Q_C=0$，并令 $\varphi(o)=0$。对非根顶点 $x$，用其所在层及以上的分支 $C$ 定义
+
+$$
+\begin{aligned}
+\varphi(x)&=Q_C+\sum_{b\in P(x)}w_x(b)\bigl(g(a_C,b)+g(b,x)\bigr).
+\end{aligned}
+$$
+
+由反对称性，重复顶点的三角缺陷为零。根的邻点 $x$ 只有前驱 $o$，故 $\varphi(x)=g(o,x)$，根的关联棱精确拟合。记 $T(a,b,d)=g(a,b)+g(b,d)-g(a,d)$。从同一锚点 $a$ 经同一影子中的前驱 $b,d$ 到同一顶点 $z$，经 $b$ 与经 $d$ 的路径增益之差为 $T(a,b,d)-T(b,d,z)$，半范数至多为 $2\varepsilon$。
+
+对从较浅层的 $u$ 到较深层的 $v$ 的非根棱，取 $v$ 所在层对应的分支 $C$，记 $c=a_C$。由构造有 $c\in P(u)$、$u\in P(v)$。令 $M=Q_C+g(c,u)$，则 $M$ 是 $\varphi(u)$ 的平均中经 $c$ 的一项，$M+g(u,v)$ 是 $\varphi(v)$ 的平均中经 $u$ 的一项。各平均与其对应项的距离，只来自其他前驱路径，每项至多为 $2\varepsilon$。将两项距离相加，得棱残差的半范数至多为 $(4-2w_u(c)-2w_v(u))\varepsilon$。若两端都有 $k$ 个前驱，则 $u$ 在 $P(v)$ 中的权重上调，两权重之和至少为 $f(k)+1/k+\delta$。若至少一端至多有 $k-1$ 个前驱，则这两权重之和至少为 $f(k)+f(k-1)$。代入 $\delta$ 得
+
+$$
+\begin{aligned}
+f(k)+\frac{1}{k}+\delta
+&=f(k)+f(k-1)\\
+&=\frac{2}{k}+\frac{(k-2)^2}{k(k-1)^3}.
+\end{aligned}
+$$
+
+于是跨层残差的半范数至多为 $R_k\varepsilon$。对于同层棱，定向使 $P(u)\subseteq P(v)$。两端共用锚点与偏移 $Q_C$。固定 $b\in P(u)$，将经 $b$ 到 $u$ 再沿棱到 $v$ 的路径，与 $v$ 端的各条前驱路径比较。匹配的 $b$ 项只用三角形 $(b,u,v)$，误差至多为 $\varepsilon$，其余项的附加误差至多为 $2\varepsilon$。先对 $P(v)$ 加权，得到 $(3-2w_v(b))\varepsilon\le(3-2f(k))\varepsilon$，再对 $P(u)$ 加权，界不变。由于 $2\delta\le(k-2)/k$，有 $R_k-(3-2f(k))=1-2/k-2\delta\ge0$。相邻顶点的层号至多相差 $1$，反向只使残差变号，故所有有向棱均满足该界。完整证明由 Lean 内核检查。
+:::
+
+**手工推导。** 取 $k=4$，每棵 $4$-树的团大小至多为 $5$，故系数至多为 $R_4=79/27<3$，严格改进了 [@thm-appe-clique-bounded-banach-potential] 的 $4-4/k=3$ 界和 [@thm-appe-simplicial-interval-split-potential] 第 1 项的规模无关界 $k-1=3$。团大小不受限时的通用常数见 [@thm-appe-chordal-banach-sharp-four]。
+
+前驱权重的偏置能够改善有界团数情形。若不限制团数，单纯逐层平均与两步构造的根平均究竟能控制多少误差？先固定实标量增益，沿用上面的前驱集 $P(x)$、影子 $S_C$、锚点 $a_C$ 和传递量 $Q_C$。称增益 $g:V\times V\to\mathbb R$ 为三角 $1$-平坦，若它对所有顶点对反对称，并且每个有序三角形 $(x,y,z)$ 都满足 $|g(x,y)+g(y,z)-g(x,z)|\le1$。
+
+合法锚点在第 $1$ 层取根 $r$，其余各层的 $a_C$ 位于父分支的影子内且与整个 $S_C$ 相邻。令 $Q_C$ 在第 $1$ 层为 $0$，其余各层满足 $Q_C=Q_D+g(a_D,a_C)$，其中 $D$ 是父分支。合法权重 $w_x(b)$ 对所有 $x,b$ 非负，在 $P(x)$ 外为 $0$，且对每个非根顶点在 $P(x)$ 上的和为 $1$。两步广度优先势取 $\varphi_r(r)=0$，在非根顶点 $x\in C$ 处定义为
+
+$$
+\varphi_r(x)=Q_C+\sum_{b\in P(x)}w_x(b)\bigl(g(a_C,b)+g(b,x)\bigr).
+$$
+
+纯前驱重心势则取 $\varphi(r)=0$，并要求每个前驱集非空的非根顶点满足 $\varphi(x)=|P(x)|^{-1}\sum_{b\in P(x)}(\varphi(b)+g(b,x))$。
+
+定义塔图 $\operatorname{barycenterTower}(m,n)$，它有根 $r$ 和 $n$ 层，每层 $m$ 个顶点 $(i,j)$，其中 $0\le i<n$、$0\le j<m$。每层为团，根与整个首层相邻。相邻两层间，后一层的第 $0$ 列只接前一层第 $0$ 列，其余顶点接前一层所有顶点。塔增益在同层为 $0$，向前进入第 $0$ 列为 $0$，从根或第 $0$ 列向前进入其他列为 $1$，其余向前增益为 $2$，反向取负（对所有顶点对按层高定义）。
+
+定义桥接图 $\operatorname{bridgedGadget}(m,N)$，它由 $N$ 个副本组成，每个副本有根 $o$ 和各含 $m$ 个顶点的集合 $A=\{a_j\}$、$U=\{u_i\}$、$B=\{v_j\}$、$Y=\{y_j\}$。棱恰为根与 $A$ 的棱、团 $A\cup U$ 的棱、每个 $v_j$ 到整个 $U$ 及 $a_j$ 的棱、每个 $y_j$ 到整个 $U$ 及 $v_j$ 的棱，以及把各副本的根依次连成路径的棱。
+
+::: {.theorem #thm-appe-bfs-barycenter-obstructions title="两步广度优先重构的四倍界与前驱重心及根平均的障碍" lean="D5/S3/Combinatorics/Graph/Chordal/Reconstruction/WeightedTwoStepBFS.SimpleGraph.two_step_residual_bound, D5/S3/Combinatorics/Graph/Chordal/TwoStepBFSAndBarycenterObstructions.SimpleGraph.pure_predecessor_barycenter_unbounded, D5/S3/Combinatorics/Graph/Chordal/TwoStepBFSAndBarycenterObstructions.SimpleGraph.twoStepBFS_root_averaging_lower_bound"}
+1. **任意权重的两步重构界。** 对任意有限连通简单弦图、任意根 $r$、任意合法影子锚点与前驱权重以及任意实标量三角 $1$-平坦增益 $g$，相应两步势 $\varphi_r$ 在每条有向棱 $(u,v)$ 上满足 $|g(u,v)-(\varphi_r(v)-\varphi_r(u))|\le4$。
+
+2. **纯前驱重心误差无界。** 对任意自然数 $m\ge2$、$n\ge1$，塔图是连通弦图，其塔增益 $g$ 三角 $1$-平坦，且存在纯前驱重心势。每个顶点 $(i,j)$ 到根的距离为 $i+1$，每个纯前驱重心势 $\varphi$ 都满足
+
+   $$
+   \begin{aligned}
+   \varphi(i,0)&=0,\\
+   \varphi(i,j)&=(2m-1)-(2m-2)\left(\frac{m-1}{m}\right)^i\quad(j\ne0).
+   \end{aligned}
+   $$
+
+   对任意实数 $M$，存在自然数 $m\ge2$、$n\ge1$，使对应塔图为连通弦图、塔增益三角 $1$-平坦，并存在一条有向棱 $(u,v)$，对该图上每个纯前驱重心势都有 $|g(u,v)-(\varphi(v)-\varphi(u))|>M$。
+
+3. **两步势的根平均障碍。** 对任意自然数 $m\ge2$、$N\ge2$，桥接图是连通弦图。对任意根的概率分布 $\mu$（$\mu(r)\ge0$ 且 $\sum_r\mu(r)=1$），以及对每个根预先选定的任意合法影子锚点和前驱权重，存在实标量三角 $1$-平坦增益 $g$ 和有向棱 $(u,v)$。令 $\bar\varphi(x)=\sum_r\mu(r)\varphi_r(x)$ 为这些两步势的加权平均，则
+
+   $$
+   |g(u,v)-(\bar\varphi(v)-\bar\varphi(u))|\ge4-\frac4m-\frac8N.
+   $$
+:::
+
+::: {.proof #pf-appe-bfs-barycenter-obstructions}
+**两步界。** 根的邻点只有根这一个前驱，故根棱无残差。同层相邻顶点 $u,v$ 共用锚点 $a$ 与传递量，任取前驱 $b\in P(u)$、$t\in P(v)$。影子是团，故 $b,t$ 相等或相邻。弦性使四边形 $b,u,v,t$ 至少有一条对角棱 $b,v$ 或 $t,u$（若 $b=t$ 则直接成立）。于是从 $a$ 经 $b,u$ 到 $v$ 与从 $a$ 经 $t$ 到 $v$ 的增益差分解为至多 $3$ 个三角缺陷。跨层棱 $u,v$ 的两锚点记为 $a,c$，其中 $c$ 在 $u$ 的影子内且与 $u$ 相邻。从 $a$ 经 $b,u$ 到 $v$ 与从 $a$ 经 $c,t$ 到 $v$ 的差分解为三角形 $(a,b,c)$、$(b,c,u)$、$(c,u,t)$、$(u,t,v)$ 的缺陷，每个至多 $1$，重复顶点时缺陷为 $0$。因此任意前驱对的残差绝对值至多为 $4$，对两端的前驱概率分布取平均仍保持此界。反向棱的残差只变号。
+
+**塔图。** 从末层向首层消去顶点，每层先消去第 $0$ 列，再消去其余顶点，最后消去根。每次消去时剩余邻点为团，故图为弦图。棱的层高差至多为 $1$，而每个顶点可沿逐层下降的路径到根，故图连通且距离恰为 $i+1$。任意三角形至多跨相邻两层，同层增益为 $0$，跨层的两项增益之差绝对值至多为 $1$，故塔增益三角 $1$-平坦。第 $0$ 列的势始终为 $0$，其余列在首层的共同值为 $s_0=1$，后续层的递推式为 $s_{i+1}=(1+(m-1)(s_i+2))/m$。该递推既构造了势，又逐层唯一确定它，解得第 2 项的闭式。末层第 $0$ 列与第 $1$ 列之间的棱增益为 $0$，其绝对残差恰为 $(2m-1)-(2m-2)((m-1)/m)^{n-1}$。先取 $m$ 使 $2m-1>M$，再由 $0<(m-1)/m<1$ 取足够大的 $n$，即可使同一棱对所有纯前驱重心势的绝对残差超过 $M$。
+
+**桥接图。** 依次消去 $Y,B,U,A$ 与路径上的根是完美消去序，故图为弦图，根路径及副本内的棱保证连通。取根概率质量 $p\le1/N$ 的副本，记其根为 $o$。对每个副本外的根 $r$，到副本内顶点的距离等于到 $o$ 的距离加上局部距离。因而 $P(u_i)=A$、$P(y_j)=U\cup\{v_j\}$，而合法锚点在这两个顶点处分别被迫为 $o$ 和 $a_j$。这是因为 $y_j$ 的尾分支只有它自身，影子为 $U\cup\{v_j\}$，父分支影子为 $A$，其中只有 $a_j$ 与 $v_j$ 相邻。父分支的锚点则只能为 $o$。
+
+记根 $r$ 对应的权重为 $w_{r,x}(b)$。由归一化，所有 $m^2$ 对 $(i,j)$ 的权重和 $w_{r,u_i}(a_j)+w_{r,y_j}(u_i)$ 累加至多为 $2m$。先对副本外的根按 $\mu$ 加权求和，再对顶点对平均，可选一对 $(i,j)$ 使
+
+$$
+\begin{aligned}
+\sum_{r\text{ 在副本外}}\mu(r)\bigl(w_{r,u_i}(a_j)+w_{r,y_j}(u_i)\bigr)&\le\frac{2}{m}(1-p).
+\end{aligned}
+$$
+
+把选中副本的顶点按如下先后顺序排列，其他副本的顶点与 $o$ 最先，其次为 $A\setminus\{a_j\}$、$u_i$、$Y$、$(U\setminus\{u_i\})\cup B$、$a_j$，各组内任取严格次序。令向后续顶点的增益为 $1$，反向为 $-1$，对角为 $0$，则每个三角形的绝对缺陷为 $1$。对副本外每个根，锚点传递量抵消，经 $o$ 到 $u_i$ 的两棱路径平均为 $2(1-w_{r,u_i}(a_j))$，经 $a_j$ 到 $y_j$ 的平均为 $-2(1-w_{r,y_j}(u_i))$，且 $g(o,a_j)=g(u_i,y_j)=1$。因此棱 $(u_i,y_j)$ 的有向残差恰为 $4-2w_{r,u_i}(a_j)-2w_{r,y_j}(u_i)$。对副本内的根，第 1 项给出有向残差下界 $-4$。利用概率质量与上述权重界，根平均的有向残差至少为
+
+$$
+\begin{aligned}
+4(1-p)-\frac4m(1-p)-4p&\ge4-\frac4m-\frac8N.
+\end{aligned}
+$$
+
+其绝对值也满足这一界。完整证明由 Lean 内核检查。
+:::
+
+**手工推导。** 缩放增益可把三角缺陷 $1$ 换成任意 $\varepsilon>0$。纯前驱重心递推没有统一误差系数，而当 $m,N$ 趋于无穷时，两步势采用仅依赖图的锚点、前驱权重与根平均，无法把统一误差界降到 $4\varepsilon$ 以下。[@thm-appe-chordal-banach-sharp-four] 进一步将这个障碍推广到任意势。
+
+根平均的下界给出了检验重构方法的同一族图。团大小有界时，可以按前驱数目分配权重来改进两步重构。对桥接图，则可以先根据通用顶点拟合每份副本的核，再补上根顶点。
+
+::: {.theorem #thm-appe-multitier-universal-banach title="多层前驱权重界与通用核的单纯扩展" lean="D5/S3/Combinatorics/Graph/Chordal/MultiTierAndUniversalCliqueBanach.SimpleGraph.IsChordal.exists_multitier_clique_banach_gain_potential, D5/S3/Combinatorics/Graph/Chordal/MultiTierAndUniversalCliqueBanach.SimpleGraph.exists_universal_core_simplicial_banach_potential, D5/S3/Combinatorics/Graph/Chordal/MultiTierAndUniversalCliqueBanach.SimpleGraph.bridgedGadget_banach_upper_bound"}
+以下各项都取实半赋范向量空间 $E$、实数 $\varepsilon\ge0$，以及定义在相应顶点集 $V$ 的所有有序对上的增益 $g:V\times V\to E$。设对任意 $i,j\in V$ 有 $g(j,i)=-g(i,j)$，且对每个有序三角形 $(i,j,\ell)$ 有 $\|g(i,j)+g(j,\ell)-g(i,\ell)\|\le\varepsilon$。
+
+1. **团大小有界时的多层前驱权重界。** 设 $G$ 是有限顶点集 $V$ 上的简单弦图，且自然数 $k\ge4$ 满足 $G$ 的每个团至多有 $k+1$ 个顶点。则存在势 $\varphi:V\to E$，使每个有向邻接对 $(u,v)$ 都满足
+
+   $$
+   \bigl\|g(u,v)-(\varphi(v)-\varphi(u))\bigr\|\le\left(4-\frac{4(k-2)}{k^2-3k+3}\right)\varepsilon .
+   $$
+
+2. **通用核的单纯扩展。** 设 $G$ 是有限顶点集 $V$ 上的简单图，且 $U\subseteq H\subseteq V$，其中 $U$ 非空，每个 $u\in U$ 都与 $H$ 中除自身外的所有顶点相邻。设 $H^c$ 是独立集，且对某个自然数 $m\ge1$，每个 $o\in H^c$ 的邻域 $N(o)$ 都包含于 $H$，并构成大小至多为 $m$ 的团。则存在势 $\varphi:V\to E$，使每个有向邻接对 $(u,v)$ 的误差 $\|g(u,v)-(\varphi(v)-\varphi(u))\|$ 至多为 $\max\{1,2-2/m\}\varepsilon$。
+
+3. **桥接图的重构。** 对任意自然数 $m\ge2$、$N\ge1$，取 [@thm-appe-bfs-barycenter-obstructions] 所用的 $\operatorname{bridgedGadget}(m,N)$，其顶点集 $V$ 由副本编号与副本内顶点组成。则存在势 $\varphi:V\to E$，使每个有向邻接对 $(u,v)$ 的误差 $\|g(u,v)-(\varphi(v)-\varphi(u))\|$ 至多为 $(2-2/m)\varepsilon$。
+:::
+
+::: {.proof #pf-appe-multitier-universal-banach}
+**多层前驱权重。** 在每个连通分量内选根，沿用 [@thm-appe-biased-clique-banach-potential] 证明中的距离分层、前驱集 $P(v)$、影子锚点 $a_C$ 和传递量 $Q_C$。前驱集 $P(v)$ 与 $v$ 构成团，所以 $|P(v)|\le k$。相邻的同层顶点具有按包含关系嵌套的前驱集。若 $S=\{u\in P(v):s\le|P(u)|\}$ 非空，取其中前驱集最小的 $u$。由嵌套性，$P(u)$ 中每个顶点都与 $S$ 中每个顶点相邻。两集各自成团，且位于不同层，因此 $P(u)\cup S$ 是团，给出 $|S|+s\le k+1$。
+
+置 $D=k^2-3k+3$、$\alpha=(k-3)/D$、$\beta=(k-2)/D$。对正整数 $m\le k-2$ 取 $f_m=1/m$，另取 $f_{k-1}=\beta$、$f_k=\alpha$、$f_0=1$。对 $b\in P(v)$，先分配权重 $\max\{f_{|P(v)|},2\beta-f_{|P(b)|}\}$。由于 $2\beta-\alpha=(k-1)/D<1/(k-2)\le1/2$，最小档值为 $\alpha>0$。当 $1\le|P(v)|\le k-2$ 时，初始权重均为 $1/|P(v)|$。当 $|P(v)|=k-1$ 时，以 $\beta$ 为基准，只有达到 $k$ 个前驱的顶点多得 $\beta-\alpha$，且这种顶点至多有 $1$ 个。当 $|P(v)|=k$ 时，以 $\alpha$ 为基准，达到 $k-1$ 个前驱的顶点多得 $\beta-\alpha$，达到 $k$ 个的再多得 $\beta-\alpha$，两种阈值对应的顶点分别至多有 $2$ 个和 $1$ 个。两个大档的权重总和分别由 $(k-1)\beta+(\beta-\alpha)=1$ 和 $k\alpha+3(\beta-\alpha)=1$ 控制。均分剩余权重后，所得 $w_v(b)$ 总和为 $1$，且保留上述每项下界。
+
+非根顶点 $x$ 的势取 $Q_C$ 加上各路径增益 $g(a_C,b)+g(b,x)$ 按 $w_x(b)$ 的加权平均。根的势取 $0$，根边由唯一前驱精确拟合。从同一锚点 $a$ 经影子中的前驱 $b,d$ 到达同一顶点 $x$，两条路径的增益之差等于三角形 $(a,b,d)$ 与 $(b,d,x)$ 的缺陷之差，半范数至多为 $2\varepsilon$。有重合顶点时，相应缺陷由反对称性为零。对从非根顶点 $u$ 到下一层顶点 $v$ 的边，记 $c$ 为 $v$ 所在分量的影子锚点。$c\in P(u)$，$u\in P(v)$，传递量的递推使经过 $c$ 到 $u$ 的项加上 $g(u,v)$ 后恰与到 $v$ 的平均中经过 $u$ 的项相等。两次平均与各自匹配项的偏差之和至多为 $(4-2w_u(c)-2w_v(u))\varepsilon$。由权重下界，$w_u(c)+w_v(u)\ge f_{|P(u)|}+(2\beta-f_{|P(u)|})=2\beta$，故跨层误差至多为 $(4-4\beta)\varepsilon$。
+
+对同层边，定向使 $P(u)\subseteq P(v)$，两端共用锚点和传递量。从任一 $b\in P(u)$ 经 $u$ 到 $v$ 的路径与到 $v$ 的匹配项只差一个三角缺陷，与其余项至多差三个。先对 $P(v)$ 平均，得到 $(3-2w_v(b))\varepsilon\le(3-2\alpha)\varepsilon$，再对 $P(u)$ 平均仍保此界。由 $2\beta-\alpha\le1/2$，此界至多为 $(4-4\beta)\varepsilon$。反向边的残差取负，各连通分量的势合起来即得所求。
+
+**通用核与单纯顶点。** 对 $h\in H$，令 $\varphi(h)$ 为 $g(z,h)$ 在 $z\in U$ 上的均值。核内边 $(a,b)$ 的残差是 $g(z,a)+g(a,b)-g(z,b)$ 的均值。若 $z$ 等于某个端点，该项由反对称性为零。否则，通用性保证三角形存在，该项的半范数至多为 $\varepsilon$。对 $o\notin H$，若 $N(o)$ 非空，则对 $b\in N(o)$ 的候选值 $\varphi(b)+g(b,o)$ 取均值作为 $\varphi(o)$。两位不同邻点的候选值之差由核内边残差与经过 $o$ 的三角缺陷控制，半范数至多为 $2\varepsilon$。对边 $(a,o)$，均值中来自 $a$ 的项与自身之差为零，因此残差至多为 $2(1-1/|N(o)|)\varepsilon\le(2-2/m)\varepsilon$。孤立点取势为零，$H^c$ 中没有边，反向边的误差相同。合并两类边的误差界即得第 2 项。
+
+**桥接图。** 在每份副本中，以去根后留下的顶点为 $H$，以 $U$ 为其中的通用顶点集。作为唯一的核外顶点，根 $o$ 恰与大小为 $m$ 的团 $A$ 相邻。对整份副本应用第 2 项，由 $m\ge2$ 得局部误差界 $(2-2/m)\varepsilon$。沿根组成的路径依次平移各副本的势，使相邻根的势差等于对应桥边增益。平移保持各副本内的势差，所有桥边的残差为零。完整证明由 Lean 内核检查。
+:::
+
+**手工推导。** 第 1 项对每个 $k\ge4$ 都严格改进 [@thm-appe-biased-clique-banach-potential] 的界。减去两界共有的 $4-4/k$ 后，比较等价于 $2(k-3)(k-1)^3>(k-2)^2D$，这由 $D<(k-1)^2$ 和 $2(k-3)(k-1)=2((k-2)^2-1)>(k-2)^2$ 得出。取 $k=4$，每棵 $4$-树的重构系数至多为 $20/7$，且 $20/7<79/27<3$。当 $N(m-1)>4m$ 时，[@thm-appe-bfs-barycenter-obstructions] 对任意预先固定的根平均两步方案给出的实值三角-$1$-平坦增益，有边误差至少为 $4-4/m-8/N>2-2/m$。第 3 项对同一增益给出所有边误差至多为 $2-2/m$ 的势。团大小不受限时的精确通用常数见 [@thm-appe-chordal-banach-sharp-four]。
+
+前驱权重界用团大小控制误差。若图已有团树分解，还可以让误差随分隔集的大小与树上的层数增长，或在每个共享顶点处直接合并相邻两袋的势。
+
+::: {.theorem #thm-appe-cliquetree-banach-potential title="团树中心扩展与双团中点粘合的 Banach 势界" lean="D5/S3/Combinatorics/Graph/Chordal/CliqueTreeBanachPotential.SimpleGraph.cliqueTree_center_extension_banach_potential, D5/S3/Combinatorics/Graph/Chordal/CliqueTreeBanachPotential.SimpleGraph.cliqueTree_twoClique_midpoint_banach_potential"}
+设 $G$ 是有限顶点集 $V$ 上的简单图，$T$ 是有限指标集 $I$ 上的树。设 $(T,K)$ 是 $G$ 的团树，即每个袋 $K(a)\subseteq V$ 都是 $G$ 的团，每个顶点和每条棱都被某个袋包含，且若一个顶点属于两个袋，它也属于连接这两个袋的每条简单树路径上的所有袋。对每条树棱 $ab$，设分隔集 $S(a,b)=K(a)\cap K(b)$ 非空。
+
+取任意实半赋范向量空间 $E$、实数 $\varepsilon\ge0$ 和增益 $g:V\times V\to E$。对任意 $i,j\in V$，设 $g(j,i)=-g(i,j)$。只要 $ij$、$j\ell$、$i\ell$ 都是 $G$ 的棱，就有 $\|g(i,j)+g(j,\ell)-g(i,\ell)\|\le\varepsilon$。以下两项中的拟合误差均指有向邻接对 $(u,v)$ 上的 $\|g(u,v)-(\varphi(v)-\varphi(u))\|$。
+
+1. **团树中心扩展。** 设自然数 $m\ge1$ 满足每条树棱 $ab$ 都有 $|S(a,b)|\le m$，且自然数 $D$ 满足任意 $a,b\in I$ 都有 $\operatorname{dist}_T(a,b)\le D$。令
+
+   $$
+   \begin{aligned}
+   R_0 &= 1,\\
+   R_{\ell+1} &= \max\left\{R_\ell,1,\left(1-\frac1m\right)(1+R_\ell)\right\}.
+   \end{aligned}
+   $$
+
+   则存在势 $\varphi:V\to E$，使 $G$ 的每条有向棱上的拟合误差至多为 $R_{\lfloor D/2\rfloor}\varepsilon$。
+
+2. **双团中点粘合。** 设每个顶点 $x\in V$ 都满足 $|\{i\in I:x\in K(i)\}|\le2$。对每条树棱 $ab$，置
+
+   $$
+   \sigma(a,b)=\left(1-\frac1{|S(a,b)|}\right)\left(1-\frac{|S(a,b)|}{\max\{|K(a)|,|K(b)|\}}\right).
+   $$
+
+   令 $\tau(a)$ 为 $a$ 的两条不同入射树棱的权重之和的最大值。只有一条入射树棱时补 $0$，没有入射树棱时取 $0$。置
+
+   $$
+   M(T,K)=\max\left(\{0\}\cup\left\{1-\frac2{|K(a)|}+\tau(a):a\in I,\ |K(a)|\ge2\right\}\right).
+   $$
+
+   则 $M(T,K)<3$，且存在势 $\varphi:V\to E$，使 $G$ 的每条有向棱上的拟合误差至多为 $M(T,K)\varepsilon$。
+:::
+
+::: {.proof #pf-appe-cliquetree-banach-potential}
+**中心扩展。** 取一条最长简单树路径，以它的中间节点或中间棱的两个端点为中心。任一袋到该路径的距离至多为接入点到路径两端的较短距离，否则从该袋到较远端的路径会更长。因此每个袋到最近中心的距离至多为 $\lfloor D/2\rfloor$。在单袋中心上取全袋，在双袋中心上取公共分隔集，对所取集合中的星势 $g(t,\cdot)$ 求均值，作为中心袋的共同势。每条袋内棱的残差是三角缺陷的均值，端点对应的项由反对称性为零，故误差至多为 $\varepsilon$。空袋没有棱需要拟合。
+
+从中心逐层向外扩展。若子袋的父袋势为 $p$，在父子分隔集 $S$ 上保留 $p$，对袋中其余顶点 $v$ 则取 $p(t)+g(t,v)$ 在 $t\in S$ 上的均值。两端都在 $S$ 内时保留原误差界 $R_\ell\varepsilon$。两端都在 $S$ 外时，均值中的 $p(t)$ 相消，误差至多为 $\varepsilon$。若只有端点 $u$ 在 $S$ 内，残差均值中 $t=u$ 的项为零，其他项各由一项三角缺陷和一项父袋残差组成。因此误差至多为 $(1-1/|S|)(1+R_\ell)\varepsilon\le(1-1/m)(1+R_\ell)\varepsilon$。反向只改变残差的符号。三类棱给出递推式。相邻袋的势在分隔集上一致，由路径上的交集性质，含有同一顶点的所有袋都给它相同的势值。每条棱都在某袋内，因而得到全图的拟合界。
+
+**中点粘合。** 对每个非空袋 $K(a)$，令 $p_a(x)$ 为 $g(t,x)$ 在该袋上的均值。棱的两个端点各给出一个零项，故袋内误差至多为 $(1-2/|K(a)|)\varepsilon$。沿树累加 $p_a-p_b$ 在 $S(a,b)$ 上的均值，取常量平移 $\psi_a=p_a+c_a$，使 $\psi_b-\psi_a$ 在每个公共分隔集上均值为零。这个平移由 [@thm-appe-complete-cliquesum-banach] 证明中的树上偏移量 `tree_offsets` 给出，且保持每个袋内的势差。
+
+在分隔集 $S=S(a,b)$ 内取 $u,v$。$\psi_b-\psi_a$ 从 $v$ 到 $u$ 的增量等于两个袋对同一棱残差的差，$u=v$ 时为零。两边的残差各为三角缺陷的均值。令 $q=1/\max\{|K(a)|,|K(b)|\}$，从两边各减去公共星点的三角缺陷和乘以 $q$。剩余权重均非负，两边各有总权重 $1-|S|q$，故增量的半范数至多为 $2(1-|S|q)\varepsilon$。固定 $u$，对 $v\in S$ 求均值，利用均值为零与 $v=u$ 的零项，再除以 $2$，得到中点相对于 $\psi_a(u)$ 的位移界 $\sigma(a,b)\varepsilon$。
+
+每个顶点若仅在一个袋内，就取该袋平移后的势值。若在两个袋内，由路径上的交集性质，这两个袋必相邻，于是取二者势值的中点。对一条袋内棱，若两端都未共享，保留原残差。若两端在同一个分隔集内，残差就是两袋残差的均值，两项都由 $M(T,K)\varepsilon$ 控制。其余情形中，两端至多各贡献一次位移，且对应不同入射树棱，未共享的端点贡献为零。因此误差至多为 $(1-2/|K(a)|+\tau(a))\varepsilon$。每个权重都在 $[0,1)$ 内，树有限，故 $\tau(a)<2$，从而 $M(T,K)<3$。完整证明由 Lean 内核检查。
+:::
+
+**手工推导。** 两项都允许任意大的袋，也都允许袋内的棱连接不同的入射分隔集，可与 [@thm-appe-complete-cliquesum-banach] 中的分离团和条件比较。任意有限 $m\ge1$ 都给出 $R_\ell<1+\ell$（$\ell\ge1$），因为递推中最后一项严格小于 $1+R_\ell$。故第 1 项在 $D\le5$ 时给出严格小于 $3$ 的系数，在 $D\le7$ 时给出严格小于 $4$ 的系数。若 $m\le4$ 且 $D\le19$，用 $m=4$ 的递推作上界，得 $R_9=373533/131072<20/7$，严格低于 [@thm-appe-multitier-universal-banach] 的一般 $4$-树上界。第 2 项在每个顶点至多属于两个袋时，对任意直径都给出 $M(T,K)<3$。团大小不受限时的精确通用常数见 [@thm-appe-chordal-banach-sharp-four]。$C_{\mathrm{SU}(2)}(K_4)$ 在 $[c_*,4/5]$ 内的精确值仍是开放问题。见 [@prob-appe-round-quaternion-k4-optimal-constant]。
+
+给前驱与团袋中的星势加权，可以分别利用旧残差的抵消和相邻团袋的共同权重来控制重构误差。
+
+::: {.theorem #thm-appe-weighted-simplicial-and-occurrence-banach title="加权单纯消元与团树出现子树中心的 Banach 势界" lean="D5/S3/Combinatorics/Graph/Chordal/WeightedSimplicialBanachPotential.SimpleGraph.IsChordal.exists_weighted_simplicial_banach_gain_potential, D5/S3/Combinatorics/Graph/Chordal/WeightedSimplicialBanachPotential.SimpleGraph.cliqueTree_occurrenceCenter_banach_potential"}
+两款均取任意实半范数向量空间 $E$、实数 $\varepsilon\ge0$ 和增益 $g:V\times V\to E$。对所有 $x,y\in V$，有 $g(y,x)=-g(x,y)$。当 $xy,yz,xz$ 都是 $G$ 的边时，有 $\|g(x,y)+g(y,z)-g(x,z)\|\le\varepsilon$。势 $\varphi:V\to E$ 在有向邻接对 $(u,v)$ 上的残差为 $g(u,v)-(\varphi(v)-\varphi(u))$。
+
+1. **有界团大小弦图的加权单纯消元。** 设 $G$ 是有限顶点集 $V$ 上的简单弦图，$k\in\mathbb N$ 且 $k\ge2$，并且 $G$ 的每个团至多有 $k+1$ 个顶点。则存在势 $\varphi$，使 $G$ 的每条有向边上的残差半范数至多为
+
+   $$
+   R_k\varepsilon,\qquad R_k=\max\left\{k-2,\frac{k-1+\sqrt{(k+3)^2-16}}{4}\right\}.
+   $$
+
+2. **加权团树的出现子树中心。** 设 $V,I$ 为有限集，$G$ 是 $V$ 上的简单图，$(T,K)$ 是 $G$ 在指标集 $I$ 上的团树，团袋为 $K(a)\subseteq V$，团树的定义见 [@thm-appe-cliquetree-banach-potential]。每条树边 $ab$ 的分隔集 $S_{ab}=K(a)\cap K(b)$ 非空。对每个 $a\in I$，取支撑于 $K(a)$ 的概率分布 $\pi_a:V\to\mathbb R_{\ge0}$，即在 $K(a)$ 外取零且 $\sum_{x\in V}\pi_a(x)=1$。取实数 $\alpha,d$，其中 $d\ge0$，并满足以下条件。
+
+   $$
+   \begin{aligned}
+   1-\pi_a(x)-\pi_a(y)&\le\alpha &&\text{若 }x,y\in K(a)\text{ 且 }xy\text{ 是 }G\text{ 的边},\\
+   \left(1-\frac1{|S_{ab}|}\right)\left(1-\sum_{x\in S_{ab}}\min\{\pi_a(x),\pi_b(x)\}\right)&\le d &&\text{若 }ab\text{ 是 }T\text{ 的边}.
+   \end{aligned}
+   $$
+
+   设 $D\in\mathbb N$，且对每个 $x\in V$ 和任意两个含 $x$ 的团袋 $K(a),K(b)$，有 $\operatorname{dist}_T(a,b)\le D$。则存在势 $\varphi$，使每条有向边上的残差半范数至多为 $\bigl(\alpha+4\lfloor(D+1)/2\rfloor d\bigr)\varepsilon$。若 $D\le1$，同一势在每条有向边上的残差半范数也至多为 $(\alpha+2d)\varepsilon$。
+:::
+
+::: {.proof #pf-appe-weighted-simplicial-and-occurrence-banach}
+**加权消元。** 反转由狄拉克定理逐次得到的单纯顶点删除顺序。每个顶点 $v$ 的前驱邻点集 $S_v$ 是团，加入 $v$ 后仍是团，故 $|S_v|\le k$。令 $R=R_k$、$s=1/(1+R)$、$t=1-(k-1)s$。由 $(k+3)^2-16\le9(k-1)^2$ 可得 $k-2\le R\le k-1$，从而 $0\le t\le s$。令 $\varphi(v)$ 为候选值 $\varphi(w)+g(w,v)$ 的加权平均。若 $0<|S_v|<k$，取均匀权重。若 $|S_v|=k$，给排序最靠后的前驱权重 $t$，其余权重均为 $s$。若无前驱，取 $\varphi(v)=0$。记权重为 $w_v(w)$，残差为 $r_{w,v}$。加权平均给出恒等式 $\sum_{w\in S_v}w_v(w)r_{w,v}=0$，后续各步不会改变这些残差。
+
+对 $x\in S_v$，将其候选值减去平均值，得到 $r_{x,v}$。其中 $w=x$ 的项为零，其余各项是旧残差 $r_{x,w}$ 与三角缺陷 $g(x,v)-g(x,w)-g(w,v)$ 之和。若 $x$ 的权重至少为 $s$，这些项的总权重至多为 $1-s$，归纳界给出 $(1-s)(R+1)\varepsilon=R\varepsilon$。这涵盖了均匀情形，因为 $|S_v|\le k-1\le1+R$。
+
+若 $|S_v|=k$ 且 $x$ 是排序最靠后的前驱，则 $A=S_v\setminus\{x\}\subseteq S_x$ 且 $|A|=k-1$。由反对称性，$x$ 的零和恒等式也适用于反向残差 $r_{x,w}$。若 $A=S_x$，均匀权重使 $\sum_{w\in A}s r_{x,w}=0$。否则 $S_x=A\cup\{z\}$，记 $S_x$ 中排序最靠后的顶点为 $b$。从 $\sum_{w\in A}s r_{x,w}$ 减去 $x$ 的加权零和，余下 $(s-t)r_{x,b}-s r_{x,z}$，其半范数至多为 $(2s-t)R\varepsilon$。三角缺陷贡献至多 $(k-1)s\varepsilon$。$R_k$ 的根式项是 $2R^2-(k-1)R-(k-1)=0$ 的正根，取最大值便有 $2R^2-(k-1)R-(k-1)\ge0$。代入 $s,t$，这正是 $(k-1)s+(2s-t)R\le R$，归纳完成。
+
+**出现子树中心。** 取加权星势 $p_a(v)=\sum_{x\in K(a)}\pi_a(x)g(x,v)$。团袋内的边残差是三角缺陷的加权平均，两端点的项为零，故残差半范数至多为 $\alpha\varepsilon$。用树上平移构造 `tree_offsets` 从根出发，沿每条边累加 $p_a-p_b$ 在 $S_{ab}$ 上的平均值，得到平移后的势 $\psi_a$，使 $\psi_b-\psi_a$ 在每个 $S_{ab}$ 上均值为零。
+
+令 $M=1-\sum_{x\in S_{ab}}\min\{\pi_a(x),\pi_b(x)\}$。在 $S_{ab}$ 内两点之间，$\psi_b-\psi_a$ 的增量是两个局部残差之差。从两组权重中各减去共同权重后，每组只余非负质量 $M$，所以增量的半范数至多为 $2M\varepsilon$。固定一端，对分隔集中的另一端取平均。由零均值条件，该平均等于固定端的势差，而两端重合时增量为零。因此共有顶点处的势差半范数至多为 $2(1-1/|S_{ab}|)M\varepsilon\le2d\varepsilon$。
+
+含顶点 $v$ 的团袋构成子树。取其最长路径的一个中间顶点为中心。任一分支到该路径的距离不超过接点到两端的较短距离，否则可延长最长路径。因此中心到任一团袋的距离至多为 $\lfloor(D+1)/2\rfloor$。取 $\varphi(v)$ 为中心处的平移后势值。每条边都在某个团袋内，从该团袋沿出现子树到各端点的中心逐步累加势差，两端合计增加至多 $4\lfloor(D+1)/2\rfloor d\varepsilon$ 的误差。
+
+当 $D\le1$ 时，一个顶点至多出现在两个团袋内，因为三个两两邻接的团袋会成环。只有一个团袋就取其势值，有两个便取中点。每个端点相对边所在团袋的改变量至多为 $d\varepsilon$，从而给出 $(\alpha+2d)\varepsilon$。当 $D=0$ 时两端都无需移动，得到 $\alpha\varepsilon$。当 $D=1$ 时，中点界也蕴含一般界。完整证明由 Lean 内核检查。
+:::
+
+第 1 款给出 $R_2=1$ 及 $R_3=(1+\sqrt5)/2<5/3<2$，因而所有团大小至多为 $4$ 的弦图（包括所有 $3$-树）都有低于 $2$ 的统一系数。$R_4=(3+\sqrt{33})/4<7/3<20/7$，严格改进了 [@thm-appe-multitier-universal-banach] 中所有 $4$-树的界。$R_5=3<40/13$ 适用于团大小至多为 $6$ 的所有弦图。
+
+第 2 款的下列推论允许任意团大小与团树直径，各团袋均须非空。若 $D\le2$ 且团树最大度数至多为 $3$，可取严格小于 $11/3$ 的系数。若 $D\le1$ 且最大度数至多为 $2$，可取严格小于 $2$ 的系数。若 $D\le2$ 且每条树边满足 $\max\{|K(a)|,|K(b)|\}\le c|S_{ab}|$（$c\ge1$），可取系数 $5-4/c$，在 $c=2$ 时为 $3$，在 $c=4/3$ 时为 $2$。
+
+在 [@thm-appe-weighted-simplicial-and-occurrence-banach] 的加权消去中，旧残差之差可借旧三角形来估计。若一个保留的恒等式还不足以控制误差，再用一个恒等式消去最新前驱的贡献。
+
+::: {.theorem #thm-appe-multi-identity-simplicial-banach title="多个保留恒等式给出的单纯消去 Banach 势界" lean="D5/S3/Combinatorics/Graph/Chordal/MultiIdentitySimplicialBanach.SimpleGraph.IsChordal.exists_regrouped_simplicial_banach_gain_potential, D5/S3/Combinatorics/Graph/Chordal/MultiIdentitySimplicialBanach.SimpleGraph.IsChordal.exists_multiIdentity_cliqueSix_banach_gain_potential, D5/S3/Combinatorics/Graph/Chordal/MultiIdentitySimplicialBanach.SimpleGraph.IsChordal.exists_multiIdentity_cliqueSeven_banach_gain_potential"}
+设 $G$ 是有限顶点集 $V$ 上的简单弦图，$E$ 是实半赋范向量空间。取 $g:V\times V\to E$ 和实数 $\varepsilon\ge0$。假设对所有 $x,y\in V$ 有 $g(y,x)=-g(x,y)$，且每当 $xy,yz,xz$ 都是 $G$ 的边时，有 $\|g(x,y)+g(y,z)-g(x,z)\|\le\varepsilon$。以下各款分别给出一个势 $\varphi:V\to E$，使每对相邻顶点 $(u,v)$ 的残差半范数 $\|g(u,v)-(\varphi(v)-\varphi(u))\|$ 满足所述界。
+
+1. **利用旧三角形重组。** 设 $k\in\mathbb N$，$k\ge2$，且 $G$ 的每个团 $C$ 都满足 $|C|\le k+1$。对任意满足 $\max\{1,k-2\}\le R\le k-1$ 和 $2(k-1)\le R(R+1)$ 的实数 $R$，残差半范数至多为 $R\varepsilon$。
+2. **团大小至多为 $6$。** 若 $G$ 的每个团至多有 $6$ 个顶点，残差半范数至多为 $(2\sqrt3-1)\varepsilon$。
+3. **团大小至多为 $7$。** 若 $G$ 的每个团至多有 $7$ 个顶点，残差半范数至多为 $\frac{3+\sqrt7}{2}\varepsilon$。
+:::
+
+::: {.proof #pf-appe-multi-identity-simplicial-banach}
+将完美消去序逆转，得到逐个插入顶点的顺序（完美消去序由弦图的消去定理给出）。记 $P_v$ 为 $v$ 的前驱，即已经插入且与 $v$ 相邻的顶点。$P_v$ 连同 $v$ 构成团。若 $P_v$ 为空，取 $\varphi(v)=0$。否则取候选值 $\varphi(x)+g(x,v)$ 的加权平均，权重 $w_v(x)\ge0$ 在 $P_v$ 上之和为 $1$。记 $r_{xy}=g(x,y)-(\varphi(y)-\varphi(x))$、$\delta_{xyz}=g(x,y)+g(y,z)-g(x,z)$。平均式给出恒等式 $\sum_{x\in P_v}w_v(x)r_{vx}=0$，以后插入顶点时这条恒等式仍成立。
+
+对 $c\in P_v$，新边残差为 $\sum_{x\in P_v\setminus\{c\}}w_v(x)(r_{cx}-\delta_{cxv})$。其中三角缺陷的加权和至多贡献 $(1-w_v(c))\varepsilon$。已拟合的边满足 $\|r_{xy}\|\le R\varepsilon$。令 $s=1/(R+1)$，当 $w_v(c)\ge s$ 时，直接估计给出 $(1-s)(R+1)\varepsilon=R\varepsilon$。此外，对 $x,y\in P_c$，由 $r_{cx}-r_{cy}=\delta_{cxy}-r_{xy}$ 得 $\|r_{cx}-r_{cy}\|\le (R+1)\varepsilon$，重合时差为零。
+
+**第 1 款。** 前驱不足 $k$ 个时取均匀权重，因 $|P_v|\le k-1\le R+1$，可用直接估计。恰有 $k$ 个前驱时，最新的前驱权重为 $t=1-(k-1)s$，其余为 $s$，且 $0\le t\le s$。只需处理最新前驱 $c$ 的边。其余 $k-1$ 个前驱组成 $A=P_v\setminus\{c\}\subseteq P_c$。若 $P_c=A$，由 $c$ 处的均匀权重恒等式，旧残差之和为零，只余至多 $(1-t)\varepsilon\le R\varepsilon$ 的三角缺陷。若 $P_c=A\cup\{z\}$，记 $b$ 为 $P_c$ 中最新的顶点。减去 $c$ 处的恒等式后，旧残差和化为 $(s-t)(r_{cb}-r_{cz})-t r_{cz}$。旧三角形给出的差界将总误差控制在 $\bigl((s-t)(R+1)+tR+1-t\bigr)\varepsilon$ 以内。括号内等于 $2(k-1)s$，由二次不等式可知它至多为 $R$。
+
+**第 2、3 款。** 此时前驱数上限 $k$ 分别为 $5$ 和 $6$。至多有 $3$ 个前驱时取均匀权重。否则按插入顺序给权 $s,s,s,t,0,\ldots$，其中 $t=1-3s$。这两款的 $R\ge2$，且 $1/4\le s\le1/3$，故 $0\le t\le s$。权重至少为 $s$ 的边可直接估计。其余边的旧残差和仅涉及 $c$ 之前的顶点。将这些顶点的权重延拓到 $Q=P_c$，其余位置补零，记所得权重为 $b_x$。令 $\mu=1-w_v(c)$。减去 $\mu$ 倍的保留恒等式后，旧残差和变为 $\sum_{x\in Q}h_xr_{cx}$，其中 $h_x=b_x-\mu w_c(x)$，且 $\sum_{x\in Q}h_x=0$。将正系数与负系数按质量配对，若总负质量为 $M=\sum_{x\in Q}\max\{-h_x,0\}$，则旧残差和的半范数至多为 $M(R+1)\varepsilon$。例如 $M>0$ 时，每对正负系数 $h_x,h_y$ 分配质量 $h_x(-h_y)/M$，再对残差差取三角不等式。若 $M=0$，和为零。
+
+在例外情形，$Q$ 中最新的顶点 $a$ 有系数 $\lambda=h_a\ge0$，而 $Q\setminus\{a\}\subseteq P_a$。用 $a$ 处的恒等式将 $\lambda r_{ca}$ 写成以 $\lambda w_a(x)$ 加权的 $r_{ca}+r_{ax}$ 之和。对共有前驱 $x\in Q\cap P_a$，换成 $r_{cx}$ 只需付出一项三角缺陷。对额外前驱 $x\in P_a\setminus Q$，保留辅助向量 $r_{ca}+r_{ax}$。它与任一负系数位置 $y$ 的 $r_{cy}$ 之差为 $(r_{ax}-r_{ay})+\delta_{cay}$，比通常的配对界多至多 $\varepsilon$。对共有和额外前驱合计，这些额外代价至多为 $\lambda\varepsilon$，因为 $w_a$ 的和为 $1$。重新配对后，若负质量为 $M$，加入新三角形的代价，归纳所需的不等式为 $M+s(\mu+\lambda)\le1-s$。无需第二个恒等式时取 $\lambda=0$。
+
+这个不等式可直接按位置核算。将 $Q$ 的位置从 $0$ 开始编号，记 $d=|Q|$，$T$ 为保留当前权重的位置集合，即 $P_v$ 中早于 $c$ 的顶点在 $Q$ 中的位置，$j=|T|$。只需检查 $3\le j\le d\le k$、$j<k$。在 $T$ 上依次取 $b_x=s,s,s,t,0,\ldots$。仅在下列情形消去最后一个位置 $d-1$。
+
+- $d=k=5$、$j=3$ 且 $3,4\in T$。
+- $d=k=6$，且 $j=3$、$4,5\in T$，或 $j=4$ 且 $T$ 恰含 $0,1,2$ 中的一个位置。
+
+消去时，$P_a$ 至多比 $Q\setminus\{a\}$ 多一个顶点。因权重随位置不增，估算负质量时可将每个留下的位置按向后移一位计算其获得的权重。即将位置 $i<d-1$ 的系数替换为 $h_i+\lambda w_{i+1}$，其中 $w_{i+1}$ 是 $Q$ 的第 $i+1$ 位权重，再把最后一位系数置零。逐一代入 $T\subseteq\{0,\ldots,d-1\}$，下表给出 $M+s(\mu+\lambda)$ 的上界。各行的值按 $j$ 从小到大排列。
+
+| $k$ | 一次恒等式 | 两次恒等式 |
+| --- | --- | --- |
+| $5$ | $3s-3s^2$, $2s$ | $12s^2-s$ |
+| $6$ | $9s^2$, $1-s$, $2s$ | $3s^2+2s$, $3s-t^2$ |
+
+第 2 款取 $s=1/(2\sqrt3)$，满足 $12s^2=1$。第 3 款取 $s=(5-\sqrt7)/9$，满足 $9s^2-10s+2=0$。代入可得各项均至多为 $1-s$。这样每次插入都保持边残差界，反向边也由反对称性满足同一界。完整证明由 Lean 内核检查。
+:::
+
+记 $\omega(G)$ 为最大团的顶点数。在 $\omega(G)\le4$ 时，第 1 款给出旧的 $R=(\sqrt{17}-1)/2\approx1.5616$ 上界。对所有满足 $\omega(G)\le4$ 的有限弦图，[@thm-appe-three-tree-clique-four-bracket] 给出 $\frac43\le S_4\le\frac{72537}{50000}=1.45074<\frac32$。在 $\omega(G)\le5$ 时可取 $R=2<(3+\sqrt{33})/4$，因而所有 $4$-树都有 $2\varepsilon$ 的统一上界。第 2 款在 $\omega(G)\le6$ 时给出 $2\sqrt3-1\approx2.4641<3$，改进了前述界。第 3 款在 $\omega(G)\le7$ 时给出 $(3+\sqrt7)/2\approx2.8229<3$，因而所有 $6$-树都有严格小于 $3$ 的统一系数。
+
+团大小不受限时，最优实 Banach 统一系数恰为 $4$，双不变伪度量群的最优统一系数亦为 $4$，见 [@thm-appe-chordal-banach-sharp-four]。支配团条件下的可选上界 $3$ 仍需形式化依据。对于取圆度量的非阿贝尔群 $\mathrm{SU}(2)$，Lean 4 给出统一上界系数 $\frac{434}{125}=3.472<\frac72<4$，另有小缺陷和小团数下的重构界，见[附录 E.8.1.7](appendix-e-s08-s01-s07-chordal-su2-sharp-bounds.md#sec-appe-chordal-su2-sharp-bounds)。最优统一系数仍待确定。等式 $C_{\mathrm{SU}(2)}(K_4)=c_*$ 仍是独立的开放问题，见 [@prob-appe-round-quaternion-k4-optimal-constant]。
+
+接下来固定非线性目标群，考察完全图上的最优系数。
 
 **四顶点图上的 $\mathrm{SU}(2)$ 圆度量反例。** 四点弦图若无三角形便是森林。若只有一个三角形，可规范化两条辐棱，把余棱写成 $\exp X$，再取势 $1,\exp(-X/3),\exp(X/3)$，三棱误差各为 $|X|/3\le\varepsilon/3$。附着的树棱可精确拟合。剩下的非完全图是两三角形共一棱的菱形图。把一个度数为 $3$ 的顶点取作中心，将辐棱规范化为 $1$。在外缘路径的中间顶点取势 $1$，两端各在 $1$ 与精确拟合相应外缘棱的值之间取最短测地线中点，误差至多 $\varepsilon/2$。
 
@@ -372,12 +727,114 @@ $$
 解 $u\le(\sqrt3/2)(1-u^2)$ 得 $u\le1/\sqrt3$，所以 $r\ge r_0$。当 $r\ge\pi/2$，同一下界直接成立。取 $t=1/\sqrt3$，在垂直于 $1,I$ 的平面内取 $v_1=J$（沿第二虚轴的单位四元数），再按 $v_{j+1}=-v_j/2+(\sqrt3/2)v_j I$ 循环旋转。势 $q_j=t+\sqrt{1-t^2}\,v_j$ 的辐棱余弦为 $t$，外缘余弦为 $(1-t^2)\sqrt3/2=t$。又 $\cos(3\pi/10)=\sin(\pi/5)$，其平方为 $(5-\sqrt5)/8>1/3$，故 $r_0>3\pi/10$。若统一系数 $k<c_*$，在 $Q$ 上取 $\varepsilon=\pi/2$ 就会要求半径 $k\pi/2<r_0$，与下界矛盾。完整证明由 Lean 内核检查。
 :::
 
-**循环单参数族（手工推导）。** $c_*$ 也是循环族（辐棱增益为 $1$，外缘统一取 $\cos\theta+I\sin\theta$，$0<\theta\le\pi$）的最优比值。为核对最优性，记 $r(\theta)$ 为最小拟合半径，$r_0=\arccos(1/\sqrt3)$。当 $0<\theta\le\pi/3$，恒等势和外缘三角的闭路下界给出 $r(\theta)=\theta$，比值为 $1/3$。当 $\pi/3\le\theta\le\pi/2$，最大缺陷为 $2\pi-3\theta$。设 $\delta=\pi/2-\theta$，各外缘增益只改变距离 $\delta$，故 $r(\theta)\le r_0+\delta$，并由 $3c_*>1$ 得 $\delta>0$ 时比值严格低于 $c_*$。
+让三条有向外缘棱保持相同增益，只改变共同的转角，就可以逐角度求出精确的拟合半径，并确定四分之一转为何给出最大的比值。
 
-当 $\pi/2\le\theta\le\pi$，最大缺陷为 $\theta$。置 $a=\cos\theta$、$k=\cos(\theta-2\pi/3)$，最优半径为 $\arccos u_\theta$，其中 $u_\theta$ 是 $F_\theta(u)=k+(a-k)u^2-u$ 在 $(0,1)$ 内的唯一零点。事实上，设拟合的最小余弦为 $u>0$。外缘内积均值的对称部分为 $a(3|m|^2-1)/2$，反对称部分至多为 $(\sqrt3/2)\sin\theta(1-|m|^2)$，故 $u\le k+(a-k)|m|^2\le k+(a-k)u^2$。在定理证明的平面向量构造中取实部 $u_\theta$、虚部长度 $\sqrt{1-u_\theta^2}$，每条辐棱的余弦为 $u_\theta$，每条外缘棱的余弦为 $k+(a-k)u_\theta^2=u_\theta$。在 $\pi/2\le\theta\le2\pi/3$ 上，$F_\theta(1/\sqrt3)=(\sin\theta-1)/\sqrt3\le0$，故 $u_\theta\le1/\sqrt3$。隐式求导时，$r'(\theta)$ 的分子 $\sin\theta\,u_\theta^2+\sin(\theta-2\pi/3)(1-u_\theta^2)$ 至多为 $u_\theta^2$，分母 $(1+2(k-a)u_\theta)\sqrt{1-u_\theta^2}$ 至少为 $\sqrt{1-u_\theta^2}$，故 $r'(\theta)\le1/\sqrt6<c_*$。在 $2\pi/3\le\theta\le\pi$ 上，$9F_\theta(1/3)=-3\cos\theta+4\sqrt3\sin\theta-3\ge0$，因为该式在此区间凹且端点非负。因此 $r(\theta)\le\arccos(1/3)<4r_0/3$。最后一个不等式可比较 $3\arccos(1/3)$ 与 $4r_0$ 的余弦 $-23/27$ 与 $-7/9$，两角均在 $(\pi,2\pi)$。这些界给出 $\theta>\pi/2$ 时严格较小的比值。
+::: {.theorem #thm-appe-round-quaternion-equal-rim-minimax title="循环等增益外缘的精确极小极大半径与四分之一转的唯一极大比值" lean="D5/S3/Combinatorics/Graph/Chordal/RoundQuaternionEqualRimMinimax.RoundQuaternionEqualRimMinimax.equalRim_exact_defect_and_minimax, D5/S3/Combinatorics/Graph/Chordal/RoundQuaternionEqualRimMinimax.RoundQuaternionEqualRimMinimax.equalRim_ratio_unique_maximum_at_quarter_turn"}
+在 $K_4$ 的顶点集 $\mathrm{Fin}(4)=\{0,1,2,3\}$ 上考虑取值于实单位四元数群 $S=\operatorname{unitary}\mathbb H$ 的增益。群 $S$ 取圆距离 $d(p,q)=\arccos\langle p,q\rangle_{\mathbb R}$。令 $I\in\mathbb H$ 满足 $\operatorname{Re}I=0$ 和 $\|I\|=1$。对 $a\in[0,\pi]$，记 $G(I,a)=(g_{ij})$ 为如下增益分配。对角与中心 $0$ 的辐棱增益均为 $1$，有向外缘 $(1,2),(2,3),(3,1)$ 的增益均为 $A=\cos a+I\sin a$，反向外缘的增益为 $A^{-1}$。
+
+称增益的三角缺陷至多为 $\varepsilon$，是指 $g_{ji}=g_{ij}^{-1}$、$g_{ii}=1$，且对所有两两不同的 $i,j,k$ 都有 $d(g_{ij}g_{jk},g_{ik})\le\varepsilon$。称势 $\varphi:\mathrm{Fin}(4)\to S$ 在半径 $r$ 内拟合增益，是指每条有向棱 $i\ne j$ 都满足 $d(g_{ij},\varphi_i^{-1}\varphi_j)\le r$。
+
+当 $0\le a\le\pi/3$ 时，定义 $e(a)=3a$。当 $\pi/3<a\le\pi/2$ 时，定义 $e(a)=2\pi-3a$。当 $\pi/2<a\le\pi$ 时，定义 $e(a)=a$。当 $0\le a\le\pi/3$ 时，令 $R(a)=a$。当 $\pi/3<a\le\pi$ 时，令 $R(a)=\arccos t(a)$，其中 $t(a)$ 是下列方程的唯一正根，$\lambda(a)=\cos(a-2\pi/3)$。
+
+$$
+(\lambda(a)-\cos a)t^2+t-\lambda(a)=0.
+$$
+
+1. **精确三角缺陷与极小极大半径。** 对每个上述 $I$ 和每个 $a\in[0,\pi]$，$G(I,a)$ 的三角缺陷至多为 $e(a)$。对每个实数 $\varepsilon$，若其三角缺陷至多为 $\varepsilon$，则 $e(a)\le\varepsilon$。存在势 $\varphi:\mathrm{Fin}(4)\to S$ 在半径 $R(a)$ 内拟合 $G(I,a)$。对任意势 $\varphi:\mathrm{Fin}(4)\to S$ 与实数 $r$，若 $\varphi$ 在半径 $r$ 内拟合 $G(I,a)$，则 $R(a)\le r$。
+2. **四分之一转处唯一取等。** 对所有 $a\in(0,\pi]$，有 $R(a)/e(a)\le c_*=\frac{2}{\pi}\arccos(1/\sqrt3)$，且等号当且仅当 $a=\pi/2$。
+:::
+
+::: {.proof #pf-appe-round-quaternion-equal-rim-minimax}
+由 $I^2=-1$，含中心的三角形与外缘三角形的闭路增益分别为 $A^{\pm1}$ 与 $A^{\pm3}$。左右乘单位四元数均保距，故其缺陷分别为 $a$ 与 $\arccos(\cos(3a))$。两者都出现，取较大值并将角度折回 $[0,\pi]$，即得三段式 $e(a)$。
+
+把势同时左乘 $\varphi_0^{-1}$，使中心势为 $1$，所有相对势 $\varphi_i^{-1}\varphi_j$ 不变。记外缘势为 $x_i$，下标按外缘循环。若拟合半径 $r<\pi/2$，令 $u=\cos r>0$。由于 $r\ge0$，三条辐棱给出 $u\le\langle 1,m\rangle_{\mathbb R}\le\|m\|\le1$，其中 $m=(x_1+x_2+x_3)/3$。沿每条外缘棱左乘起点势，得 $u\le\langle x_i A,x_{i+1}\rangle_{\mathbb R}$。
+
+写 $x_i=m+y_i$，则 $\sum_i y_i=0$，$\sum_i\|y_i\|^2=3(1-\|m\|^2)$。在零和子空间取正交坐标 $E=(y_1-y_2)/\sqrt2$、$H=(y_1+y_2-2y_3)/\sqrt6$，故 $\|E\|^2+\|H\|^2=\sum_i\|y_i\|^2$。循环对称和 $\sum_i\langle x_i,x_{i+1}\rangle_{\mathbb R}$ 等于 $3\|m\|^2-\tfrac12\sum_i\|y_i\|^2$。右乘 $I$ 是斜对称等距变换，故循环斜对称和 $\sum_i\langle x_i I,x_{i+1}\rangle_{\mathbb R}=\sqrt3\langle EI,H\rangle_{\mathbb R}$，至多为 $\tfrac{\sqrt3}{2}(\|E\|^2+\|H\|^2)$。于是由 $\sin a\ge0$ 与 $\lambda(a)=-\cos a/2+(\sqrt3/2)\sin a$ 得
+
+$$
+u\le\frac13\sum_i\langle x_i A,x_{i+1}\rangle_{\mathbb R} \le\cos a\,\|m\|^2+\lambda(a)(1-\|m\|^2).
+$$
+
+差值 $\lambda(a)-\cos a=\sqrt3\sin(a-\pi/3)$ 在 $a\le\pi/3$ 时非正，故 $u\le\cos a$。取恒为 $1$ 的势即达到半径 $a$。当 $a>\pi/3$ 时，记 $D=\lambda(a)-\cos a>0$。由 $\|m\|\ge u$ 得 $Du^2+u\le\lambda(a)$。多项式 $Dt^2+t-\lambda(a)$ 在 $[0,\infty)$ 严格递增，且在 $0$ 处为 $-\lambda(a)<0$（因为 $|a-2\pi/3|\le\pi/3$），在 $1$ 处为 $1-\cos a>0$，故 $u\le t(a)<1$。余弦在 $[0,\pi]$ 递减，给出所需的半径下界。两种情形均有 $R(a)\le\pi/2$，所以 $r\ge\pi/2$ 时下界也成立。
+
+取垂直于 $1,I$ 的单位四元数 $J$，在 $J,JI$ 张成的平面内取 $v_i=J(\cos b_i+I\sin b_i)$，其中 $b_i$ 依次为 $0,2\pi/3,4\pi/3$。取中心势为 $1$、外缘势为 $x_i=t+\sqrt{1-t^2}\,v_i$。辐棱的余弦为 $t$。右乘 $A$ 将平面内的角度增加 $a$，故外缘余弦均为 $\cos a\,t^2+\lambda(a)(1-t^2)$。取 $t=t(a)$，两种余弦相等，达到半径 $R(a)$。反向棱的误差由取逆保距而相同。
+
+当 $0<a\le\pi/3$ 时，比值为 $1/3$。当 $a>\pi/3$ 时，在同一构造中取固定纬度 $q=1/\sqrt3$。外缘余弦化为 $q\sin a\le q$，故 $R(a)\le f(s)=\arccos(q\cos s)$，其中 $s=|a-\pi/2|$。在 $[0,\pi/2]$ 上，$f''(s)=q(1-q^2)\cos s/(1-q^2\cos^2 s)^{3/2}\ge0$。两端点的割线给出 $f(s)\le f(0)+(1-c_*)s$。又 $e(a)\ge\pi/2+s$，且 $c_*=2f(0)/\pi>1/2$，因为 $q<\cos(\pi/4)$。因此 $s>0$ 时，
+
+$$
+R(a)\le f(s)\le f(0)+(1-c_*)s<c_*(\pi/2+s)\le c_*e(a).
+$$
+
+在 $a=\pi/2$ 时，辐棱与外缘的余弦在纬度 $q$ 处相等，故 $q=t(\pi/2)$。于是 $R(\pi/2)=f(0)$、$e(\pi/2)=\pi/2$，比值恰为 $c_*$。完整证明由 Lean 内核检查。
+:::
+
+当三条外缘棱可以独立偏转时，仍可用四分之一转的最优势作为起点。把横向偏移分成两个循环傅里叶模态，就能构造一组顶点势，并定量控制每条棱的拟合误差。
+
+::: {.theorem #thm-appe-round-quaternion-local-sharpness title="循环四分之一转的严格局部锐性与加权方差角域" lean="D5/S3/Combinatorics/Graph/Chordal/RoundQuaternionLocalSharpness.RoundQuaternionLocalSharpness.quarterLocal_strictFit, D5/S3/Combinatorics/Graph/Chordal/RoundQuaternionLocalSharpness.RoundQuaternionLocalSharpness.quarterLocal_angularRegion"}
+令 $c_*=\frac{2}{\pi}\arccos(1/\sqrt3)$。在 $K_4$ 上，将对角增益与顶点 $0$ 的辐棱增益取为 $1$，将有向外缘 $12,23,31$ 的增益依次取为单位四元数 $A_0,A_1,A_2$，反向外缘取逆元。对所得增益分配 $g$，外缘下标为 $j\in\{0,1,2\}$，记 $e=\max\{\max_j d(1,A_j),\,d(A_0A_1A_2,1)\}$.
+
+以下两种情形中，所有有序三角形（顶点两两不同）的缺陷 $d(g_{ij}g_{jk},g_{ik})$ 都至多为 $e$，且至少一个达到 $e$。拟合半径按上文的圆距离定义。
+
+1. **复数对傅里叶坐标中的严格定量拟合。** 在复数对坐标 $(z,h)\mapsto z+hJ$ 中，设 $A_j=(-\eta_j+i\gamma_j,w_j)$，其中 $\eta_j,\gamma_j\in\mathbb R$，$\gamma_j=\sqrt{1-\eta_j^2-|w_j|^2}>0$，$w_j=p\zeta^j+q\zeta^{-j}$，$p,q\in\mathbb C$，$\zeta=(-1+i\sqrt3)/2$。置 $E=\max_j|\eta_j|$，并设 $\max\{|p|,|q|,E\}\le3/50$。下文构造的相位归一化势 $\varphi=P(p,q)$ 在每条有向棱 $i\ne j$ 上满足
+
+   $$
+   \langle g_{ij},\varphi_i^{-1}\varphi_j\rangle_{\mathbb R}\ge\cos(c_*e)+\frac{|q|}{200}+\frac{3}{100}(|p|^2+E).
+   $$
+
+   势 $\varphi$ 在半径 $c_*e$ 内拟合 $g$。若 $(p,q,\eta)\ne(0,0,0)$，则存在实数 $R<c_*e$，使同一个 $\varphi$ 在半径 $R$ 内仍拟合 $g$。若 $(p,q,\eta)=(0,0,0)$，则任意势都无法在任何实数半径 $R<c_*e$ 内拟合 $g$。
+
+2. **加权方差角域。** 在基 $1,I,J,IJ$ 下，设外缘增益为
+
+   $$
+   \begin{aligned}
+   A_0&=(\cos a,\sin a,0,0),\\
+   A_1&=(\cos b,\sin b\cos u,\sin b\sin u,0),\\
+   A_2&=(\cos c,\sin c\cos v,\sin c\sin v\cos w,\sin c\sin v\sin w).
+   \end{aligned}
+   $$
+
+   各角均以弧度计，方位角 $w\in\mathbb R$ 任意。设 $u,v\ge0$、$u+v<\pi/2$，以及 $\max\{|a-\pi/2|,|b-\pi/2|,|c-\pi/2|\}\le17\pi/900$、$u^2+v^2+(u+v)^2\le(4497/500)(3/50)^2$。
+
+   存在势 $\varphi$ 在半径 $c_*e$ 内拟合 $g$，且若 $(a,b,c,u,v)\ne(\pi/2,\pi/2,\pi/2,0,0)$，则存在实数 $R<c_*e$，使这个 $\varphi$ 在半径 $R$ 内仍拟合 $g$。在中心 $(a,b,c,u,v)=(\pi/2,\pi/2,\pi/2,0,0)$，任意势都无法在任何实数半径 $R<c_*e$ 内拟合 $g$。
+:::
+
+::: {.proof #pf-appe-round-quaternion-local-sharpness}
+含顶点 $0$ 的三角形与外缘三角形分别给出 $d(1,A_j)$ 与 $d(A_0A_1A_2,1)$。圆距离在左右乘与取逆下不变，故循环移位和反转不改变缺陷。这四个值覆盖所有有序三角形，且每个都由一个三角形取得。
+
+对第 1 款，令 $\ell=\exp(-i\arg(q(\zeta-1))/2)$，其中 $q=0$ 时取 $\ell=1$。以 $(\ell,0)$ 共轭，绕 $I$ 轴旋转，将 $p,q$ 同乘 $\ell^2$，使旋转后的 $q(\zeta-1)=\sqrt3\,|q|$。以下用 $p,q$ 表示旋转后的模态。置 $t=1/\sqrt3$、$\rho=3/50$、$s=\sqrt{2/3}$、$v_j=\zeta^{-j}$，外缘下标按模 $3$ 循环。令 $x=\operatorname{Re}p$、$y=\operatorname{Im}p$，所取的系数为 $F_0=\sqrt3(x^2-y^2)/96+xy/16$, $F_1=\sqrt3(x^2-y^2)/96-xy/16$, $F_2=-\sqrt3(x^2-y^2)/48$, $b_j=\operatorname{Re}(p v_{j-1})/\sqrt6$, $f_j=s(\sqrt3\,b_j+F_j-F_{j-1})$, $U=t+|q|/\sqrt6-(\sqrt3/12)|p|^2$。
+中心势为 $1$，顶点 $j+1$ 的势取单位四元数 $X_j=(U+ib_j,\,v_j(\sqrt{1-U^2-b_j^2-f_j^2}+if_j))$。在上述参数界内，根号内非负。共轭同时保持增益与相对势的内积，故逐点作逆共轭即得原坐标下的相位归一化势。
+
+把外缘棱内积写成 $\langle X_jA_j,X_{j+1}\rangle_{\mathbb R}$。先令 $q=0$、$\eta=0$，直接展开得共同的零次与二次项 $t-(\sqrt3/12)|p|^2$，一次项消去，各棱的三次项绝对值至多 $(2/5)|p|^3$。对两个势与一个增益的各次项分别取范数上界，再用 $|p|\le\rho$ 对总次数至少为 $4$ 的乘积求和，所得余项界为 $3|p|^4$。恢复 $q$ 与 $\eta$ 后，相位对准给出共同的一次增益 $Q/\sqrt6$（$Q=|q|$），其余扰动的损失至多 $(627/100)\rho Q+2\rho E$。辐棱的内积就是 $U$，反向棱的内积等于正向棱，故每条有向棱的内积均至少为
+
+$$
+t+\frac{Q}{\sqrt6}-\frac{\sqrt3}{12}|p|^2-\frac25|p|^3-3|p|^4-\frac{627}{100}\rho Q-2\rho E.
+$$
+
+为比较拟合内积与三角缺陷，记 $D_{jk}=\gamma_j\gamma_k+\operatorname{Re}(\overline{w_j}w_k)$。循环面积恒等式 $\operatorname{Im}(\overline{w_j}w_{j+1})=(\sqrt3/2)(|p|^2-|q|^2)$ 将四元数乘积的实部 $T=\operatorname{Re}(A_0A_1A_2)$ 化为
+
+$$
+T=-\eta_0\eta_1\eta_2+\sum_j\eta_j D_{j+1,j+2}-\frac{\sqrt3}{2}\Bigl(\sum_j\gamma_j\Bigr)(|p|^2-|q|^2).
+$$
+
+由 $d(1,A_j)=\arccos(-\eta_j)$、$d(A_0A_1A_2,1)=\arccos T$，置 $h=\max\{\max_j\eta_j,-T\}$，便有 $e=\pi/2+\arcsin h$。利用 $\gamma_j=\sqrt{1-\eta_j^2-|w_j|^2}$ 估计上式的乘积与内积，并将 $h\ge\eta_j$ 与 $h\ge-T$ 合用，得到 $|h|<1/5$ 及 $h\ge E/3+(51/120)|p|^2-\tfrac13((13/5)Q^2+25\rho^2 E)$。
+
+令 $\theta_*=\arccos t$、$k=c_*\sqrt{2/3}$。函数 $x\mapsto\cos(\theta_*+c_*\arcsin x)$ 在 $[-1/5,1/5]$ 上凹，故其在零点的切线给出 $\cos(c_*e)\le t-kh$。有理界 $3/5<c_*<61/100$、$496/1000<k<1/2$，连同 $|p|^3\le\rho|p|^2$、$|p|^4\le\rho^2|p|^2$ 和 $Q^2\le\rho Q$，代入上述两项估计，给出余量 $Q/200+(3/100)(|p|^2+E)$。因 $c_*e\in[0,\pi]$ 且圆距离是内积的反余弦，这给出半径 $c_*e$ 的拟合。余量在非零扰动下为正，取同一势在有限条有向棱上的最大误差便得到更小的半径。在零扰动处，外缘三增益均为 $I$，$e=\pi/2$，所需下界由 [@thm-appe-round-quaternion-k4-bounds] 给出。
+
+对第 2 款，记 $\theta=(a,b,c)$，将各增益的虚部写作 $s_j d_j$，其中 $s_j=\sin\theta_j\in[499/500,1]$，$d_j$ 为单位虚四元数。三对方向的弦长分别至多为 $u,v,u+v$。角域条件使 $u+v<1$，所以各方向的两两内积为正，向量 $m=\sum_j s_j d_j$ 与每个 $d_j$ 的内积也为正。以单位四元数共轭，把 $m/\|m\|$ 送到 $I$，则各虚部的 $I$ 分量均为正，标量扰动满足 $|\eta_j|=|\cos\theta_j|\le\rho$。记旋转后的 $d_j$ 在 $J,IJ$ 平面上的投影为复数 $x_j$，则 $w_j=s_jx_j$ 且 $\sum_j s_jx_j=0$。
+
+置 $S=\sum_j s_j$。加权方差恒等式给出 $S\sum_j s_j|x_j|^2=\sum_{j<k}s_js_k|x_j-x_k|^2$。又因 $s_j\le1$，有 $\sum_j|w_j|^2\le\sum_j s_j|x_j|^2$，并且每个 $s_js_k/S\le 1/(2+499/500)$。投影不增加弦长，零和序列 $w_j$ 的三点傅里叶展开只有两个非恒定模态。由帕塞瓦尔恒等式，
+
+$$
+3(|p|^2+|q|^2)=\sum_j |w_j|^2\le\frac{u^2+v^2+(u+v)^2}{2+499/500}\le3(3/50)^2.
+$$
+
+于是第 1 款适用，共轭保距使同一个势的两项拟合结论都能传回原坐标。若 $p=q=0$ 且 $\eta=0$，则三个轴向角均为 $\pi/2$，且旋转后的三个虚方向都等于 $I$。原方向因而重合，而 $u,v\in[0,\pi/2)$，故 $u=v=0$。在中心处，原增益已经是 [@thm-appe-round-quaternion-k4-bounds] 的循环四分之一转。完整证明由 Lean 内核检查。
+:::
+
+**手工推导。** 角域包含整个闭的 $3.4^\circ\times4.2^\circ$ 角度盒，即 $a,b,c$ 各距 $90^\circ$ 至多 $3.4^\circ$，且 $0\le u,v\le4.2^\circ$，方位角 $w$ 任意。角域不等式的左边在该盒上至多为 $6(7\pi/300)^2<\frac{4497}{500}(3/50)^2$。辐棱规范化和共轭均保持比值，故四分之一转类是严格局部极大点。在紧致的规范化增益空间中，取该邻域内部的补集，即得全局等式尚待在 Lean 中处理的紧集。见 [@prob-appe-round-quaternion-k4-optimal-constant]。
 
 ::: {.problem #prob-appe-round-quaternion-k4-optimal-constant title="$K_4$ 上圆度量单位四元数增益的最优统一系数"}
-记 $C_{\mathrm{SU}(2)}(K_4)$ 为 $K_4$ 上所有正三角缺陷的圆度量单位四元数增益实例中，最小拟合半径与最大三角缺陷之比的上确界。由 [@thm-appe-round-quaternion-k4-bounds] 的统一上界和四分之一转实例得到 $c_*\le C_{\mathrm{SU}(2)}(K_4)\le4/5$。任意增益下的精确上确界仍是开放问题。
+记 $C_{\mathrm{SU}(2)}(K_4)$ 为 $K_4$ 上所有正三角缺陷的圆度量单位四元数增益实例中，最小拟合半径与最大三角缺陷之比的上确界。由 [@thm-appe-round-quaternion-k4-bounds] 的统一上界和四分之一转实例得到 $c_*\le C_{\mathrm{SU}(2)}(K_4)\le4/5$。由 [@thm-appe-round-quaternion-equal-rim-minimax]，循环等增益外缘族的最大比值 $c_*$ 仅在四分之一转处取得。[@thm-appe-round-quaternion-local-sharpness] 将这一严格界推广到四分之一转的角度邻域。对任意增益证明 $C_{\mathrm{SU}(2)}(K_4)=c_*$ 仍是开放的形式化问题。
 :::
 
 **小缺陷与上确界取到（手工推导）。** 缺陷 $\varepsilon$ 趋零时，将辐棱规范化为 $1$，再取切空间对数 $z_{ij}=\log g_{ij}$。每条外缘增益都距 $1$ 至多 $\varepsilon$，所以各对数的范数至多为 $\varepsilon$。三角乘积取对数的一阶项为三个对数之和，故加法三角缺陷至多为 $\varepsilon+O(\varepsilon^2)$。平均 $4$ 个加法星形势得到范数为 $O(\varepsilon)$ 的势，棱误差至多为 $\varepsilon/2+O(\varepsilon^2)$。将势取指数时的二阶误差仍为 $O(\varepsilon^2)$，因此重构误差与缺陷之比至多为 $1/2+O(\varepsilon)$。最小拟合半径是紧致势空间上连续误差函数的最小值，因而随增益连续。最大三角缺陷也是连续的。由于 $c_*>1/2$，充分小的正缺陷给出的比值都小于 $c_*$，故上确界在远离零缺陷的紧集上取到。
@@ -495,132 +952,8 @@ $$
 
 这里的因子 $m-2$ 与 [@thm-appe-chordal-gain-potential-stability] 中的 $\lvert V\rvert-2$ 来源不同：定理中它是沿消去次序累积的三点偏差的个数，这里它是扰动矩阵每行非零元的个数。
 
-## E.8.1.4 曲率从哪里来 {#sec-appe-curvature-from-half-comparison}
+对于半比较，返回相位刻画了另一种三点效应。见[曲率从哪里来](appendix-e-s08-s01-s04-curvature.md#sec-appe-curvature-from-half-comparison)。
 
-条款 IV 让一切三点和乐等于 $\mathbf{1}$，而球面角盈与贝里相位确实存在。两者并不冲突：平坦的是全比较，弯曲的是它的平方根。
+本节的弦图 Banach 精确分层、实 $L_1$、Hilbert、因果三树与线性填补结果见[附录 E.8.1.8](appendix-e-s08-s01-s08-chordal-banach-exact-strata.md#sec-appe-chordal-banach-exact-strata)。
 
-::: {.remark #rem-appe-half-comparison-holonomy title="全比较平坦，半比较的三点和乐是吉拉尔角盈（手工推导与文献结果）"}
-**手工推导。** 对求同读数为实标量 $s>-1$ 的公平元 $u$，由 $u+u^*=2s\mathbf{1}$ 得 $u^2=2su-\mathbf{1}$，于是 $(\mathbf{1}+u)^2=2(1+s)\,u$。令
-
-$$
-r(u):=\frac{\mathbf{1}+u}{\sqrt{2(1+s)}},
-$$
-
-则 $r(u)$ 是公平元且 $r(u)^2=u$，称为 $u$ 的**半比较**。它的求同读数满足 $S(r)^2=\frac{1+s}{2}=1-\frac v2$。
-
-在 $\mathcal{Cl}_{3,0}$ 中取两两不对径的单位向量 $a,b,c$，记 $r_{ab}=r(ab)$，$[a,b,c]=a\cdot(b\times c)$，$\mathbf{I}=e_1e_2e_3$。则全比较满足 $ab\cdot bc\cdot ca=\mathbf{1}$，而
-
-$$
-r_{ab}\,r_{bc}\,r_{ca}=\frac{(1+a\cdot b+b\cdot c+c\cdot a)+[a,b,c]\,\mathbf{I}a}{\sqrt{2(1+a\cdot b)(1+b\cdot c)(1+c\cdot a)}} .
-$$
-
-推导：$(\mathbf{1}+ab)(\mathbf{1}+bc)(\mathbf{1}+ca)=2+ab+ba+ca+ac+bc+a(bc)a$，其中用到 $ab\cdot bc=ac$、$bc\cdot ca=ba$、$ab\cdot ca=a(bc)a$ 与 $ab\cdot bc\cdot ca=\mathbf{1}$。标量部分是 $2(1+a\cdot b+b\cdot c+c\cdot a)$。双向量部分是 $b\wedge c+a(b\wedge c)a$；记 $b\wedge c=\mathbf{I}n$，$n=b\times c$，则 $a(\mathbf{I}n)a=\mathbf{I}\bigl(2(a\cdot n)a-n\bigr)$，两项相加得 $2[a,b,c]\,\mathbf{I}a$。分母由 $r$ 的公平性确定，同时给出恒等式
-
-$$
-(1+a\cdot b+b\cdot c+c\cdot a)^2+[a,b,c]^2=2(1+a\cdot b)(1+b\cdot c)(1+c\cdot a).
-$$
-
-**文献结果。** 上式右端形如 $\cos\frac\Omega2+\sin\frac\Omega2\,\mathbf{I}a$，是保持 $a$ 不动的旋子，其中 $\frac\Omega2=\operatorname{atan2}\bigl([a,b,c],\,1+a\cdot b+b\cdot c+c\cdot a\bigr)$；分母为正时即 $\tan\frac\Omega2=\dfrac{[a,b,c]}{1+a\cdot b+b\cdot c+c\cdot a}$。$\lvert\Omega\rvert$ 是球面三角形 $abc$ 的面积，即吉拉尔角盈，$\Omega$ 的符号由 $[a,b,c]$ 的符号给出（van Oosterom–Strackee 1983；Eriksson 1990）。
-
-**与冻结定理的对应。** 乘积公式与分母恒等式在泡利矩阵模型里已冻结，见 [@thm-appe-bloch-triangle-return-phase]。分子的两个量 $1+a\cdot b+b\cdot c+c\cdot a$ 与 $[a,b,c]$ 正是 [`triple_bargmann_bloch`](lean:D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.triple_bargmann_bloch) 中 $4\operatorname{Tr}(P_aP_bP_c)$ 的实部与虚部。把上面的恒等式与 $\det G(a,b,c)=[a,b,c]^2$ 联立（$[a,b,c]^2$ 的展开式冻结为 [`triangle_gram`](lean:D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.triangle_gram)），得到
-
-$$
-\det G(a,b,c)=(2-v_{ab})(2-v_{bc})(2-v_{ca})\,(1-\cos\Omega),\qquad v_{xy}=1-x\cdot y ,
-$$
-
-其中 $\det G$ 的展开式见 [`three_anchor_gram_det_formula`](lean:D5/S3/QuantumContext/ThreeAnchorGram.three_anchor_gram_det_formula)。
-:::
-
-$S(r)^2=1-\frac v2$ 在布洛赫球上就是 $\cos^2\frac\theta2$：半比较求同读数的平方等于 $1$ 减去半个矢高，这是玻恩权重的弦—矢高写法，它本身不替代 `H5` 的可加性前提。行列式公式说的是：三点格拉姆体积等于三个互补矢高之积乘以角盈的矢高，[§28.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)“二生三”原胞的 $\det G=\sin^4\epsilon$ 是它的特例。对 `H8` 而言，第 1 层内生的射影和乐不需要新的输入，它是条款 IV 之下把全比较开平方的结果；仍然需要第 2 层新输入的，是随时空基点变化的纤维联络及其动力学。
-
-乘积公式不只停在手工推导上。把 $\mathcal{Cl}_{3,0}$ 换成它的泡利矩阵模型（$e_k\mapsto\sigma_k$，$\mathbf{I}\mapsto i\mathbf{1}$，对合 ${}^*$ 对应共轭转置），半比较成为一个具体的 $2\times2$ 酉矩阵，下面两条结论已在 Lean 中验证。对 $r\in\mathbb{R}^3$ 记 $r\cdot\sigma=r_1\sigma_x+r_2\sigma_y+r_3\sigma_z$，$P_r=\frac12(\mathbf{1}+r\cdot\sigma)$；对 $\phi\in\mathbb{C}^2$ 记向 $r$ 的归一化投影
-
-$$
-N_r(\phi):=\frac{P_r\phi}{\sqrt{\operatorname{Re}\,\phi^\dagger P_r\phi}} .
-$$
-
-::: {.lemma #lem-appe-rotor-gate-normalized-projection title="旋子门把 $a\cdot\sigma$ 转到 $b\cdot\sigma$，在本征旋量上等于归一化投影" lean="D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.rotor_shortest_gate"}
-设 $a,b\in\mathbb{R}^3$ 是单位向量且 $b\neq-a$，令
-
-$$
-R_{a\to b}:=\frac{\mathbf{1}+(b\cdot\sigma)(a\cdot\sigma)}{\sqrt{2(1+a\cdot b)}} .
-$$
-
-则
-
-1. $R_{a\to b}\,R_{a\to b}^\dagger=\mathbf{1}$；
-2. $R_{a\to b}\,(a\cdot\sigma)\,R_{a\to b}^\dagger=b\cdot\sigma$；
-3. 对满足 $\psi^\dagger\psi=1$ 与 $P_a\psi=\psi$ 的 $\psi\in\mathbb{C}^2$，有 $R_{a\to b}\,\psi=N_b(\psi)$。
-:::
-
-::: proof
-记 $A=a\cdot\sigma$，$B=b\cdot\sigma$，则 $A^2=B^2=\mathbf{1}$，$AB+BA=2(a\cdot b)\mathbf{1}$。分子 $\mathbf{1}+BA$ 满足 $(\mathbf{1}+BA)(\mathbf{1}+AB)=2(1+a\cdot b)\mathbf{1}$ 与 $(\mathbf{1}+BA)A(\mathbf{1}+AB)=2(1+a\cdot b)B$，这是前两条。第三条：$A\psi=\psi$ 给出 $(\mathbf{1}+BA)\psi=2P_b\psi$，而 $\psi^\dagger P_b\psi=\frac{1+a\cdot b}{2}>0$，两边的归一化因子相同。完整证明由 Lean 内核检查。
-:::
-
-::: {.theorem #thm-appe-bloch-triangle-return-phase title="布洛赫三角上三次旋子门的返回相位" lean="D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.shortest_gate_triangle_holonomy"}
-设 $a,b,c\in\mathbb{R}^3$ 是单位向量，$b\neq-a$，$c\neq-b$，$a\neq-c$。记
-
-$$
-S:=1+a\cdot b+b\cdot c+c\cdot a,\qquad D:=a\cdot(b\times c).
-$$
-
-则
-
-1. $S^2+D^2=2(1+a\cdot b)(1+b\cdot c)(1+c\cdot a)$，且 $S^2+D^2>0$；
-2. 三个旋子门的乘积为
-
-   $$
-   R_{c\to a}\,R_{b\to c}\,R_{a\to b}=\frac{S\,\mathbf{1}-iD\,(a\cdot\sigma)}{\sqrt{S^2+D^2}} ;
-   $$
-
-3. 对满足 $\psi^\dagger\psi=1$ 与 $P_a\psi=\psi$ 的 $\psi\in\mathbb{C}^2$，依次向 $b$、$c$、$a$ 做归一化投影，得
-
-   $$
-   N_a\bigl(N_c(N_b(\psi))\bigr)=\frac{S-iD}{\sqrt{S^2+D^2}}\,\psi .
-   $$
-:::
-
-::: proof
-第 1 条：记 $x=a\cdot b$，$y=b\cdot c$，$z=c\cdot a$。格拉姆恒等式 $D^2=1+2xyz-x^2-y^2-z^2$（[`triangle_gram`](lean:D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.triangle_gram)）代入后，$S^2+D^2$ 展开为 $2(1+x)(1+y)(1+z)$；三个因子在两两不对径时都为正。第 2 条：三个分子相乘得 $(\mathbf{1}+AC)(\mathbf{1}+CB)(\mathbf{1}+BA)=2S\,\mathbf{1}-2iD\,A$，三个归一化因子之积由第 1 条等于 $2\sqrt{S^2+D^2}$。第 3 条：[@lem-appe-rotor-gate-normalized-projection] 的第 3 条把每一次归一化投影换成相应的旋子门，前两条保证每一步之后的旋量仍是单位旋量并落在下一步所需的本征空间里；最后用 $A\psi=\psi$。完整证明由 Lean 内核检查。
-:::
-
-与 [@rem-appe-half-comparison-holonomy] 对照：$R_{a\to b}$ 是 $r_{ba}=r_{ab}^*$ 的像，所以定理第 2 条是注记中乘积的对合 $(r_{ab}\,r_{bc}\,r_{ca})^*=r_{ac}\,r_{cb}\,r_{ba}$，$D$ 前的符号随之由正变负；第 1 条就是注记末尾的恒等式。第 3 条给出第 2 条的操作读法：从 $a$ 的本征旋量出发，沿 $a\to b\to c\to a$ 做三次归一化投影，回到原旋量并乘上模为 $1$ 的因子 $(S-iD)/\sqrt{S^2+D^2}$。Lean 没有陈述的部分照旧分层：把辐角 $\operatorname{atan2}(D,S)$ 等同于半个吉拉尔角盈是文献结果；旋子的指数形式没有形式化；“最短”意义下的最小性与唯一性也没有形式化，Lean 模块里 `rotor` 与 `shortestGate` 只是名字。Lean 中 $N_r(\phi)$ 对一切 $\phi$ 有定义（分母为零时按 Lean 的约定取零向量）；定理只在各步分母 $\sqrt{(1+u\cdot v)/2}>0$ 处用到它。
-
-[@rem-appe-real-realizability-return-phase] 第 1、2 款在“有一个对象与其余每个对象都不正交”的情形已在所钉仓库冻结，陈述如下；这时不需要填满的条件。一般的填满情形与单比特的第 4 款仍是手工推导。
-
-::: {.proposition #prop-appe-real-rephasing-star title="有一行不含零的厄米矩阵：可重定相为实矩阵，当且仅当三点乘积全为实" lean="D5/S3/Quantum/PureState/BargmannRealRephasing.exists_real_rephasing_iff_triple_products_real D5/S3/Quantum/PureState/BargmannRealRephasing.exists_real_gram_rephasing_iff_triple_products_real"}
-设 $G$ 是 $N\times N$ 复矩阵，$i_0$ 是一个指标，并且 $G_{i_0j}\neq0$ 对每个 $j$ 成立。
-
-1. 若 $G$ 是厄米矩阵，则存在实数 $\theta_1,\dots,\theta_N$ 使一切 $e^{i\theta_i}G_{ij}e^{-i\theta_j}$ 为实数，当且仅当对一切指标 $i,j,k$（允许重复），$G_{ij}G_{jk}G_{ki}$ 为实数。
-2. 若 $G$ 半正定，则存在实数 $\theta_1,\dots,\theta_N$ 与 $N\times N$ 实矩阵 $B$，使 $e^{i\theta_i}G_{ij}e^{-i\theta_j}=\left(B^{\mathsf T}B\right)_{ij}$ 对一切 $i,j$ 成立，当且仅当对一切指标 $i,j,k$，$G_{ij}G_{jk}G_{ki}$ 为实数。
-:::
-
-::: proof
-“仅当”：相位沿 $i\to j\to k\to i$ 相消，重定相不改变 $G_{ij}G_{jk}G_{ki}$，而它在实矩阵中算出来是实数。“当”：取 $\theta_j=\arg G_{i_0j}$。由厄米性 $G_{ji_0}=\overline{G_{i_0j}}$，于是
-
-$$
-e^{i\theta_i}G_{ij}e^{-i\theta_j}=\frac{G_{i_0i}\,G_{ij}\,G_{ji_0}}{\lvert G_{i_0i}\rvert\,\lvert G_{i_0j}\rvert},
-$$
-
-是三点乘积 $G_{i_0i}G_{ij}G_{ji_0}$ 的正实数倍，所以是实数；$G_{ij}=0$ 的元素重定相后仍为零。第 2 款：重定相是 $G\mapsto DGD^{*}$，$D$ 为对角酉矩阵，保持半正定；重定相后的矩阵元素全为实数，所以它是实对称半正定矩阵，可写成 $B^{\mathsf T}B$。
-
-对厄米矩阵，含重复指标的三点乘积（如 $G_{ij}G_{ji}G_{ii}=\lvert G_{ij}\rvert^2G_{ii}$）与含零元的三点乘积自动是实数，所以条件只在非正交图的三角形上有内容，与 [@rem-appe-real-realizability-return-phase] 第 2 款的写法一致。完整证明由 Lean 内核检查。
-:::
-
-返回相位的虚部只在 $D\neq0$ 时出现。两两比较读得出 $D$ 是否为零，读不出它的符号：$D^2=1+2xyz-x^2-y^2-z^2$（$x=a\cdot b$，$y=b\cdot c$，$z=c\cdot a$，即 [`triangle_gram`](lean:D5/S3/Quantum/Information/GroupInvariantPsi/ShortestGateHolonomy.triangle_gram)）只给出它的平方。$D$ 是否为零恰好回答一个与 `H7` 相邻的问题：一族对象是否需要复数振幅。
-
-::: {.remark #rem-appe-real-realizability-return-phase title="一族对象何时可以只用实数描述：三点巴格曼乘积是否为实（手工推导与文献结果）"}
-**手工推导。** 设 $\psi_1,\dots,\psi_N\in\mathbb{C}^d$ 是单位向量，$G_{ij}=\langle\psi_i,\psi_j\rangle$。把 $G_{ij}\neq0$ 的点对连成图 $\Gamma$，称为**非正交图**。称这族对象**可实化**，若有实数 $\theta_1,\dots,\theta_N$ 使一切 $e^{i\theta_i}G_{ij}e^{-i\theta_j}$ 都是实数。这时该实矩阵是 $e^{-i\theta_i}\psi_i$ 的格拉姆阵，实对称半正定，秩 $r=\operatorname{rank}G\le d$，可写成 $V^{\mathsf T}V$，$V$ 的列是 $\mathbb{R}^r\subseteq\mathbb{C}^d$ 中的实向量 $v_i$；两组向量的格拉姆阵相同，由冻结定理 [`exists_unitary_mul_eq_of_conjTranspose_mul_eq`](lean:D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq)，有 $d\times d$ 酉矩阵 $U$ 使 $e^{-i\theta_i}\psi_i=Uv_i$。所以可实化就是：乘过相位之后，这族向量落在一个实子空间的酉像里，并且格拉姆阵到相位为止不变。对 $\Gamma$ 中的闭走道 $i_0,i_1,\dots,i_k=i_0$，称 $G_{i_0i_1}G_{i_1i_2}\cdots G_{i_{k-1}i_0}$ 为它的**巴格曼乘积**；它在 $\psi_i\mapsto e^{-i\theta_i}\psi_i$ 下不变。
-
-1. 可实化时，每个巴格曼乘积都是实数，特别是每个三点乘积 $G_{ij}G_{jk}G_{ki}$。
-2. 反之，若 $\Gamma$ 被三角形填满（[@rem-appe-triangle-simple-connectivity]；例如任意两个对象都不正交，或 $\Gamma$ 是弦图），并且 $\Gamma$ 的每个三角形上三点乘积都是实数，则这族对象可实化。
-3. 填满的条件不能去掉：$\mathbb{C}^3$ 中取 $\psi_1=e_1$，$\psi_2=\frac{1}{\sqrt3}(e_1+e_2+e_3)$，$\psi_3=e_2$，$\psi_4=\frac12\bigl(e_1+ie_2-(1+i)e_3\bigr)$。$\psi_1\perp\psi_3$，$\psi_2\perp\psi_4$，其余内积非零，$\Gamma$ 是没有三角形的四圈：第 2 款中“三角形上为实”的要求空真，而“被三角形填满”不成立。四圈的巴格曼乘积 $G_{12}G_{23}G_{34}G_{41}=\frac{1}{\sqrt3}\cdot\frac{1}{\sqrt3}\cdot\frac i2\cdot\frac12=\frac{i}{12}$ 不是实数，由第 1 款这族对象不可实化。
-4. 单比特：设 $\psi_a$ 的布洛赫向量为 $a$。可实化当且仅当全部布洛赫向量落在一个过球心的平面上，当且仅当每三个的有向体积 $D=a\cdot(b\times c)$ 都为零；这里不需要填满的条件，例如 $a,b,-a,-b$ 的非正交图是四圈，它们仍可实化。对两两不对径的 $a,b,c$，[@thm-appe-bloch-triangle-return-phase] 的返回相位 $(S-iD)/\sqrt{S^2+D^2}$ 不是实数当且仅当 $D\neq0$。
-5. 两两求同读数 $a\cdot b$、$b\cdot c$、$c\cdot a$ 只给出 $D^2$。复共轭 $\psi\mapsto\bar\psi$ 把布洛赫向量 $(r_x,r_y,r_z)$ 变为 $(r_x,-r_y,r_z)$：两两读数不变，$D$ 变号，返回相位取共轭。
-
-推导：第 1 款，巴格曼乘积不变，而在实矩阵 $e^{i\theta_i}G_{ij}e^{-i\theta_j}$ 中算出的它是实数。第 2 款，在 $\Gamma$ 的边上令 $g(i,j)=\left(G_{ij}/\lvert G_{ij}\rvert\right)^2$，它只在 $G_{ij}\neq0$ 的边上定义，取值在单位圆群中。$G_{ji}=\overline{G_{ij}}$ 给出 $g(j,i)=g(i,j)^{-1}$。在三角形 $ijk$ 上，记 $B_{ijk}=G_{ij}G_{jk}G_{ki}\neq0$，则 $g(i,j)\,g(j,k)\,g(i,k)^{-1}=g(i,j)\,g(j,k)\,g(k,i)=\left(B_{ijk}/\lvert B_{ijk}\rvert\right)^2$，它等于 $1$ 当且仅当 $B_{ijk}$ 是实数（正负都可以）。所以三点乘积为实，正是 $g$ 在三角形上的链式律 $g(i,j)\,g(j,k)=g(i,k)$。由 [@rem-appe-triangle-simple-connectivity] 第 1 款（$\Gamma$ 是弦图时即 [@thm-appe-chordal-gain-potential]，群取单位圆群），有单位圆群中的 $\varphi_i$ 使 $g(i,j)=\varphi_i^{-1}\varphi_j$。取 $\theta_i$ 使 $e^{2i\theta_i}=\varphi_i$，则 $\left(e^{i\theta_i}G_{ij}e^{-i\theta_j}/\lvert G_{ij}\rvert\right)^2=\varphi_i\,g(i,j)\,\varphi_j^{-1}=1$，所以 $e^{i\theta_i}G_{ij}e^{-i\theta_j}$ 是实数；不相邻的点对上 $G_{ij}=0$ 本来就是实数。第 3 款是直接计算。第 4 款：对秩一投影 $P_a=\lvert\psi_a\rangle\langle\psi_a\rvert=\frac12(\mathbf{1}+a\cdot\sigma)$ 有 $G_{ab}G_{bc}G_{ca}=\operatorname{Tr}(P_aP_bP_c)$，而冻结定理 [`triple_bargmann_bloch`](lean:D5/S3/Quantum/Information/GroupInvariantPsi/C129QubitBargmann.triple_bargmann_bloch) 给出 $\operatorname{Tr}(P_aP_bP_c)=\frac14(S+iD)$，所以三点乘积为实当且仅当 $D=0$。若布洛赫向量都在一个过球心的平面上，用一个转动把这个平面转到 $xz$ 平面，转动由某个酉矩阵实现（$\mathrm{SU}(2)$ 到 $\mathrm{SO}(3)$ 是满射，`文献结果`）；$xz$ 平面上的单位向量 $(\sin\alpha,0,\cos\alpha)$ 的本征旋量是 $\left(\cos\frac\alpha2,\sin\frac\alpha2\right)$，是实向量，所以这族对象可实化。反之，可实化给出 $\mathbb{R}^r\subseteq\mathbb{C}^2$（$r\le2$）中的实向量 $v_i$ 与酉矩阵 $U$，实向量的布洛赫向量在 $xz$ 平面上，$U$ 把这个平面转成另一个过球心的平面。布洛赫向量共一个过球心的平面，当且仅当它们张成的空间至多二维，当且仅当任取三个的有向体积都为零。最后一句是 [@thm-appe-bloch-triangle-return-phase] 第 1、2 条：两两不对径时 $S^2+D^2>0$。第 5 款的 $D^2$ 公式见上文；复共轭的作用是直接计算（$\bar\sigma_y=-\sigma_y$）。
-
-**文献结果。** 第 1 款的方向（非实的巴格曼乘积说明这族对象不能都写成实向量）是 Fernandes、Wagner、Novo 与 Galvão (2024) 的虚性见证；他们还指出，两两重叠的测量足以为四个态的集合见证虚性，对三个态的集合则不能。这与第 4、5 款不矛盾：三个单位向量的两两重叠模长总能由 $\mathbb{R}^3$ 中的实向量实现（把格拉姆阵的三个非对角元都换成它们的模长，行列式不会变小），而第 4 款用到了单比特的维数，并且这里的可实化要求格拉姆阵到相位为止不变。第 2 款的论证与增益图的平衡判据同型：增益图平衡当且仅当增益可以切换为恒等（Zaslavsky 1989）。
-:::
-
-`H7` 在台账里列的“中心复结构”是复合系统层析的输入，这条注记回答的是一个相邻而更窄的问题：一族给定的对象，在保留格拉姆阵到相位为止的意义下，是否需要复数振幅。只要可比三角形填满每个圈，答案可以由三点巴格曼乘积判定，也就是比较值乘积的读数；两两重叠的模长一般不够。在单比特上，两两求同读数通过 $D^2$ 就够了：可实化当且仅当没有三个对象围出非零的有向体积；两两读数看不到的只是 $D$ 的符号，即复共轭交换的那一对手性。这并没有推出复结构。实向量构成的模型满足全部条款（E.8.2.3 的计数），所以“需要复数”仍是输入；改变的是这条输入的形状。第 3 款的四圈与 [@rem-appe-triangle-simple-connectivity] 中的四圈是同一个图：在一般维数中，这个图既让三角相容不足以推出势表示，也让三点读数不足以判定可实化；单比特上的 $a,b,-a,-b$ 说明，在维数受限时同一个图并不妨碍判定。
+内积空间与实 $L_1$ 的系数次序反转、路径幂的圆周系数以及 $\mathrm{SU}(2)$ 切空间下界和球冠上界见[附录 E.8.1.9](appendix-e-s08-s01-s09-hilbert-reversal-circle-su2.md#sec-appe-hilbert-reversal-circle-su2)。

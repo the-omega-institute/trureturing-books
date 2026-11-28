@@ -1,0 +1,42 @@
+{
+  "voice": "af_heart",
+  "speed": 0.94,
+  "say": {"Lean": "Leen"},
+  "music": {"bpm": 78, "progression": "d-minor"},
+  "scenes": [
+    {"id": "axes", "name": "ADDRESSES", "lead": 1.9, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
+      ["Twelve is two times two times three. Count its twos, threes and fives.", "12 = 2 × 2 × 3。数一数，它有几个 2、几个 3、几个 5。"],
+      ["That count is an address: two, one, zero. Every positive whole number has exactly one.","这串计数就是一个地址：(2, 1, 0)。每个正整数都有地址，而且只有一个。"],
+      ["We line numbers up on one ruler. Multiplication spreads them out, one direction for every prime.", "我们习惯把数排在一把尺子上；乘法却把它们摊开：每个素数一个方向。"]
+    ], "cues": [{"line": 1, "at": 1.6, "kind": "chime"}]},
+    {"id": "sum", "name": "SUM EQUALS PRODUCT", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.5, 0.5, 0.0, 0.2], "lines": [
+      ["On each prime axis, one more step multiplies the weight by p to the minus s.", "在每根素数轴上，每多走一步，权重就乘上 p⁻ˢ。"],
+      ["Add up one axis, and you get a geometric series: one over one minus p to the minus s.", "把一根轴加起来，是一个等比级数：1/(1 − p⁻ˢ)。"],
+      ["Take s equal to two, and the axes of two and three. Four thirds times nine eighths is exactly three halves.", "取 s = 2，只用 2 和 3 两根轴：4/3 × 9/8 恰好是 3/2。"],
+      ["Each tile has area one over n squared: one tile for each n made of twos and threes.", "每块瓷砖的面积是 1/n²：每个只由 2 和 3 搭成的 n，恰好一块。"],
+      ["Lean checks the full version: for real part of s above one, the sum over all n equals the product over all primes.", "Lean 内核检验了完整的版本：只要 Re s > 1，对全体 n 的求和就等于对全体素数的乘积。"]
+    ], "cues": [{"line": 2, "at": 4.2, "kind": "chime"}, {"line": 4, "at": 1.0, "kind": "stamp"}]},
+    {"id": "apart", "name": "NO EXCHANGE RATE", "lead": 0.5, "tail": 0.7, "music": [0.9, 0.7, 0.6, 0.2, 0.3], "lines": [
+      ["Can you reach one axis by walking along another? Could a power of three equal a power of two?", "能不能沿着别的轴走到这根轴？3 的某个幂会不会等于 2 的某个幂？"],
+      ["Three to the twelfth misses two to the nineteenth by under one and a half percent. One is odd, one even.", "3¹² 与 2¹⁹ 只差不到 1.5%；可一个是奇数，一个是偶数，永远不等。"],
+      ["Lean checks that a whole-number mix of prime logarithms is zero only when every coefficient is zero.", "Lean 内核检验了：素数对数的整系数组合等于零，只有系数全为零这一种情形。"],
+      ["Between primes, there is no exchange rate.", "素数之间，没有汇率。"]
+    ], "cues": [{"line": 1, "at": 4.6, "kind": "impact"}, {"line": 3, "at": 0.4, "kind": "stamp"}]},
+    {"id": "clocks", "name": "CLOCKS ON A DOUGHNUT", "lead": 0.5, "tail": 0.7, "music": [1.0, 0.8, 0.7, 0.4, 0.4], "lines": [
+      ["Give s an imaginary part t. Each prime becomes a clock, turning at speed log p.", "给 s 加上虚部 t：每个素数变成一只钟，以角速度 ln p 旋转。"],
+      ["Two clocks read one point on a doughnut. As time runs, the point draws a line.", "两只钟的读数合起来，是环面上的一个点；时间一走，它就画出一条线。"],
+      ["The two speeds share no common beat, so the line never closes. It winds tighter and tighter.", "两个角速度没有公共节拍，这条线就永不闭合，越缠越密。"],
+      ["Lean checks Kronecker's theorem. Flash a lamp at fixed steps. If no nonzero whole-number mix of the steps makes whole turns, the flashes land as close as you like to any target.", "Lean 内核检验了克罗内克定理：按固定间隔闪光取样；若各步的非零整系数组合都凑不成整圈，闪光读数就能任意接近任何目标。"],
+      ["Both clocks at six o'clock exactly? Never. As close as you like? Yes.", "两只钟同时恰好指向六点？永远不会。要多近有多近？可以。"]
+    ], "cues": [{"line": 2, "at": 3.0, "kind": "chime"}, {"line": 3, "at": 2.0, "kind": "stamp"}]},
+    {"id": "edge", "name": "WHAT IT DOES NOT SAY", "lead": 0.5, "tail": 0.7, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["Orthogonal is a picture. The theorem is about independence; no angle is measured here.", "“正交”是一幅图像；定理说的是线性无关，这里并没有量角度。"],
+      ["As close as you like is not soon: the proof gives no timetable.", "要多近有多近，不等于很快就近：证明没有给出要等多久。"],
+      ["The product needs the real part of s above one. At s equals one, the sum blows up.", "乘积公式要求 Re s > 1；到了 s = 1，级数就发散了。"],
+      ["Further left lie the zeros, and the Riemann hypothesis. An external Lean project proves it; this book has not frozen it.", "再往左是零点与黎曼猜想：外部 Lean 4 项目已经证明了它，本书所钉的仓库没有冻结它。"]
+    ]},
+    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.6, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
+      ["Geometric Intuition of Quantum Computing, chapter twenty-two.", "《量子计算的几何直觉》· 第二十二章"]
+    ], "cues": [{"line": 0, "at": 0.3, "kind": "chime"}]}
+  ]
+}

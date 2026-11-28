@@ -1,0 +1,278 @@
+{
+ "voice": "af_heart",
+ "speed": 0.94,
+ "say": {
+  "Lean": "Leen",
+  "Machin": "May-chin",
+  "Cayley": "Kay-lee"
+ },
+ "music": {
+  "bpm": 80,
+  "progression": "a-minor"
+ },
+ "scenes": [
+  {
+   "id": "ring",
+   "name": "THE JET RING",
+   "lead": 2.6,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Sine, cosine and arctangent seem to demand the real line, endless series, and pi.",
+     "正弦、余弦与反正切，似乎非要实数轴、无穷级数和 π 不可。"
+    ],
+    [
+     "A jet of order N is a row of N plus one rationals, and eta to the N plus one is zero.",
+     "N 阶射流就是一行 N + 1 个有理数，而 η 的 N + 1 次方等于零。"
+    ],
+    [
+     "The derivative is a shift: slide each coefficient left, and multiply by its old index.",
+     "求导就是平移：每个系数左移一格，再乘以它原来的次数。"
+    ]
+   ]
+  },
+  {
+   "id": "four",
+   "name": "FOUR GENERATORS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.5,
+    0.4,
+    0.1,
+    0.2
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 1.0,
+     "kind": "stamp"
+    }
+   ],
+   "lines": [
+    [
+     "Four rows are fixed by rational coefficients: exponential, cosine, sine, arctangent.",
+     "四行射流由各自的有理系数唯一确定：指数、余弦、正弦与反正切。"
+    ],
+    [
+     "Differentiate sine: the row slides into cosine. Differentiate cosine: minus sine.",
+     "对正弦求导，这一行滑成余弦；对余弦求导，得到负正弦。"
+    ],
+    [
+     "Square cosine, square sine, and add: a one, then zeros all the way out to degree twelve.",
+     "余弦平方加正弦平方：先是一个 1，然后一路是 0，直到第 12 次。"
+    ],
+    [
+     "Lean checks this Pythagorean identity at every degree, not just these twelve.",
+     "Lean 内核检验这条毕达哥拉斯恒等式在每一阶都成立，不止这 12 阶。"
+    ]
+   ]
+  },
+  {
+   "id": "cayley",
+   "name": "CAYLEY CIRCLE",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.2,
+    0.2
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 1.0,
+     "kind": "stamp"
+    }
+   ],
+   "lines": [
+    [
+     "Now an algebra trick: send t to one minus t squared, and two t, each over one plus t squared.",
+     "再看一个初等代数技巧：把 t 送到 (1 − t²)/(1 + t²) 与 2t/(1 + t²)。"
+    ],
+    [
+     "Feed it one half: a few multiplications, and we land on three fifths, four fifths, exactly.",
+     "代入 t = 1/2：几次乘法，精确落在 (3/5, 4/5)。"
+    ],
+    [
+     "Lean checks, for any two integers not both zero, that the Cayley point lies on the unit circle.",
+     "Lean 内核检验：对任意不全为零的两个整数，凯莱点都落在单位圆上。"
+    ]
+   ]
+  },
+  {
+   "id": "unify",
+   "name": "ONE AND THE SAME",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.6,
+    0.2,
+    0.3
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 2.6,
+     "kind": "stamp"
+    }
+   ],
+   "lines": [
+    [
+     "Compose the cosine row with twice the arctangent row.",
+     "把余弦这一行与两倍反正切这一行做形式复合。"
+    ],
+    [
+     "Factorials and odd fractions cancel, and only plus and minus two survive.",
+     "阶乘与奇数分母彼此相消，只剩下 +2 与 −2。"
+    ],
+    [
+     "That is exactly the Cayley fraction, expanded. Lean checks it for cosine and sine, at every order N.",
+     "这正是凯莱分式的展开。Lean 内核对余弦与正弦、对每个截断阶 N 都检验了它。"
+    ],
+    [
+     "The series does not approximate the fraction. It slowly re-expands it.",
+     "不是级数在逼近这个分式，而是它在慢慢地把分式重新展开。"
+    ]
+   ]
+  },
+  {
+   "id": "audit",
+   "name": "THE HALF AUDIT",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.6,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "At one half, order two gives one half and one; order four, five eighths and three quarters.",
+     "在 η = 1/2 处，2 阶给出 1/2 与 1；4 阶给出 5/8 与 3/4。"
+    ],
+    [
+     "Every two orders, both errors are multiplied by minus one quarter.",
+     "截断阶每加 2，两个误差都恰好乘以 −1/4。"
+    ],
+    [
+     "At order twelve they are still there, about one part in ten thousand and one in five thousand.",
+     "到 12 阶，误差依然在：+1/10240 与 −1/5120。"
+    ]
+   ]
+  },
+  {
+   "id": "machin",
+   "name": "MACHIN'S CHAIN",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 1.4,
+     "kind": "stamp"
+    }
+   ],
+   "lines": [
+    [
+     "Now pi. Add tangents by a rational rule: u plus v, over one minus u v.",
+     "现在轮到 π。用有理法则做正切加法：(u + v)/(1 − uv)。"
+    ],
+    [
+     "Start at one fifth. Double: five twelfths. Double again: one hundred twenty over one hundred nineteen.",
+     "从 1/5 出发。倍增一次：5/12；再倍增：120/119。"
+    ],
+    [
+     "Subtract one over two hundred thirty-nine: top and bottom are both thirteen to the fourth.",
+     "再减去 1/239：分子与分母同为 28561 = 13⁴。"
+    ],
+    [
+     "So the chain lands exactly on one, and Lean checks it. No pi, no arctangent.",
+     "于是整条链精确落到 1，Lean 内核已检验；全程无 π、无反正切。"
+    ]
+   ]
+  },
+  {
+   "id": "bracket",
+   "name": "PI-FREE BRACKETS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.8,
+    0.7,
+    0.4,
+    0.4
+   ],
+   "lines": [
+    [
+     "Cut both alternating sums short, and Machin's weights give rational lower and upper ends.",
+     "把两条交替和截短，配上马青的权重，就得到有理的下端与上端。"
+    ],
+    [
+     "At order one, the bracket runs from about three point one four one to three point one eight three.",
+     "1 阶时，包络从约 3.141 延伸到约 3.183。"
+    ],
+    [
+     "Each order shrinks it about twenty-five times; by order seventeen, the width is below two times ten to the minus twenty-five.",
+     "每升一阶宽度约缩小 25 倍；到 17 阶，宽度已小于 2 × 10⁻²⁵。"
+    ],
+    [
+     "Only in the classical shadow is the point these brackets close in on called pi.",
+     "只有投到经典实分析的阴影里，这些区间收拢的那一点才被叫作 π。"
+    ]
+   ]
+  },
+  {
+   "id": "close",
+   "name": "LEDGER",
+   "lead": 0.5,
+   "tail": 2.5,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.2
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 0.3,
+     "kind": "chime"
+    }
+   ],
+   "lines": [
+    [
+     "The differential half of calculus now lives over the rationals; next, integration without subdividing anything.",
+     "微积分的微分一翼已经落在有理数上；下一步是积分，而且不做任何细分。"
+    ],
+    [
+     "Omega Math, chapter eight.",
+     "《OMEGA MATH》· 第八章"
+    ]
+   ]
+  }
+ ]
+}

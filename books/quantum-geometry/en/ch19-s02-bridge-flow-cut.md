@@ -76,6 +76,12 @@ Together, $\operatorname{flow}(M, N)$ is a $6\times 6$ permutation matrix of ran
 **Together the three bridges tile a $6 \times 6$ permutation matrix exactly.** The cyan cells are the non-zero entries of $\operatorname{flow}(M, N)$, and the number in each is the bridge $r$ that puts it there: bridge $0$ fills the $4$ cells at the top left, bridges $1$ and $2$ add one cell each; the six cells share no row and no column, so the rank is $6$ ([@ex-bridge-two-three]).
 :::
 
+The short film below runs the three cuts, the upper bound and this permutation routing together; that the max flow equals the min cut on the cone is proved only in Section 19.4.
+
+::: {.film src="min-cut-bridge"}
+**The narrowest waist (2 min 29 s).** On a road with six lanes in, twelve in the middle and six out, only six cars ever pass side by side: an analogy, not a proof, and in a tensor network the leg dimensions multiply rather than add. The width-three bridge graph is drawn as bundles of strands: legs $a$ and $d$ go out, legs $b$ and $c$ come in, and three cyan bridges join $M$ and $N$. At $(a, b, c, d) = (2, 3, 2, 3)$ the magenta dashed lines cut the exits and the entrances, each of capacity $6$; the grey slanted dashed line cuts leg $a$, the three bridges and leg $c$, of capacity $3ac = 12$; the minimum cut is $6$. For all natural numbers $a, b, c, d$ the max flow never exceeds the min cut ([@prop-bridge-flow-cut-bound]). Six inputs are then routed, four through bridge $0$ and one each through bridges $1$ and $2$, straight up onto six different outputs, so the rank is $6$ ([@ex-bridge-two-three]); when $0 < a \le b$, $0 < c \le d$, $a^2 + b^2 \le 3ab$ and $c^2 + d^2 \le 3cd$, the max flow equals the min cut and both equal $\min(ad, bc)$ ([@thm-bridge-quantum-maxflow-mincut]), and here $4 + 9 = 13 \le 18$; the violet maxim speaks only of this graph inside the cone. The film ends with its limits: outside the cone the theorem asserts no equality, and the minimum cut of $(1, 5, 1, 5)$ is the bridge cut of capacity $3$; rank does not decide whether the signals share the load evenly; the theorem concerns this one small graph with three bridges, and in general tensor networks the max flow can fall short of the min cut (a literature result, see Section 19.1); the Ryu–Takayanagi formula is a literature result the film does not derive. Every number in the film is computed on screen.
+:::
+
 The six-dimensional permutation matrix above satisfies a more precise identity than full rank: its columns are distinct standard basis vectors, so $F^*F=I_6$. Writing the input and output dimensions of the right factors as $c=2q$ and $d=3q$ extends the same construction to every admissible pair of left dimensions. The task is to give each input coordinate a unique output coordinate, with no collisions between different inputs.
 
 ::: {.theorem #thm-bridge-native-saturation-iff title="Exact column Gram saturation for a native three-term tensor sum" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeSaturation.native_saturation_iff"}
@@ -519,6 +525,47 @@ Under the pure rank-two kernel hypotheses, the same three kernel cases apply dir
 
 At $(3,4,3,4)$, both upper bounds at the $4/3$ step hold with equality and give a four-term realization. The necessary bound for three terms would require $9\le8$, which rules out a three-term realization. The full proof is checked by the Lean kernel.
 :::
+
+A pure rank-two kernel is one possibility. Bounds on the right-hand dimensions can also follow from the structure of the entire kernel or from a single rank-three matrix in it.
+
+::: {.theorem #thm-bridge-native-four-clifford-rank-three title="Width-four dimension bounds for Pauli–Clifford and rank-three compression kernels" lean="D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeFourCliffordRankThree.clifford_kernel_four_bound, D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeFourRankThree.rank_three_small_defect_four_bound"}
+Let $a,b,c,d\in\mathbb N$ with $a<b$. Take any $X\colon\operatorname{Fin}4\to M_{a\times b}(\mathbb C)$, $Y\colon\operatorname{Fin}4\to M_{d\times c}(\mathbb C)$, and real $\lambda>0$ such that $F=\sum_{i=0}^3 X_i\otimes Y_i$ satisfies $F^*F=\lambda I_{bc}$. For Hermitian $T\in M_4(\mathbb C)$, put $\operatorname{compression}(X,T)=\sum_{i,j=0}^3 T_{ij}X_i^*X_j$.
+
+1. **Pauli–Clifford compression kernel.** Suppose there is a $P\in\operatorname{GL}_4(\mathbb C)$ such that for every Hermitian $T$ with $\operatorname{compression}(X,T)=0$, the congruence $P^*TP$ belongs to
+
+   $$
+   \operatorname{span}_{\mathbb R}\{\sigma_x\otimes I_2,\ \sigma_y\otimes I_2,\ \sigma_z\otimes\sigma_x,\ \sigma_z\otimes\sigma_y,\ \sigma_z\otimes\sigma_z\}.
+   $$
+
+   Then $4c\le3d$. Here $\sigma_x,\sigma_y,\sigma_z$ are the Pauli matrices, and the five tensor products are the matrices of [pauliClifford](lean:D5/S3/Quantum/TensorNetworks/BridgeGraph/NativeFourCliffordRankThree.pauliClifford).
+2. **Rank-three Hermitian kernel element.** If there is a Hermitian $T$ with $\operatorname{compression}(X,T)=0$ and $\operatorname{rank}T=3$, then $6c\le5d$. If the row defect also satisfies $ad-bc<2c-d$, then $4c\le3d$. Both subtractions are in the natural numbers, with negative differences truncated to zero.
+:::
+
+::: {.proof #pf-bridge-native-four-clifford-rank-three}
+For $c=0$ the bounds hold directly. If the right factors are linearly dependent, absorb one term and apply [@thm-bridge-native-three-rectangular-bound] to get $3c\le2d$, which implies all the bounds. Assume below that $c>0$ and that the right factors are linearly independent.
+
+**Part 1.** For each pair of right input coordinates $(\ell,m)$ let $G_{\ell m}=((Y_i^*Y_j)_{\ell m})_{ij}$ and set $H=c^{-1}\sum_\ell G_{\ell\ell}$. Expanding $F^*F$ shows that $G_{\ell m}-\delta_{\ell m}H$ has zero compression. Its two Hermitian parts do as well. After congruence and reordering the basis, the deviations therefore lie in the complex span of the Pauli–Clifford matrices in that basis. They have two $2\times2$ scalar diagonal blocks of opposite sign and two linked off-diagonal blocks.
+
+Independence of the right factors makes $H$ positive definite. Diagonalize the two diagonal blocks of the transformed $H$ by separate unitary changes that preserve the block relations. The new right factors $A,B$ have orthogonal ranges, as do $C,D$. Write $M,N$ for the smaller Gram matrix in each pair. The opposite deviations cancel in $M+N$, which is a positive multiple of the identity, so $\operatorname{rank}M+\operatorname{rank}N\ge c$. A strict gap between the two diagonal coefficients makes the larger Gram positive definite. The sum of ranks in that pair is then $c$ plus the smaller rank. With equal coefficients the sum is twice the smaller rank. Each pair's sum is at most $d$. If either gap is strict, these inequalities give $4c\le3d$.
+
+If both gaps vanish and $M$ is invertible, the first pair gives $2c\le d$. Otherwise let $\Pi$ project onto the common kernel $\ker M$. Testing the linked off-diagonal relations on a nonzero kernel vector makes their scalar identity terms vanish. The ranges of $C\Pi,D\Pi$ are then orthogonal to both ranges of the first pair. Since $M+N$ is a positive multiple of the identity, the second pair is injective on $\ker M$. Thus $A+C\Pi$ and $B+D\Pi$ are injective with orthogonal ranges, again giving $2c\le d$.
+
+**Part 2.** Scale to $F^*F=I_{bc}$, normalize the left stack to an isometry, and diagonalize the rank-three kernel element. After permuting the indices and choosing the overall sign, the compression relation reads $rX_0^*X_0=sX_1^*X_1+tX_2^*X_2$ with $s,t>0$. Thus $\ker X_0\subseteq\ker X_1\cap\ker X_2$, and $X_3$ is injective on $\ker X_0$. Since $a<b$, $X_3(\ker X_0)$ and $\operatorname{im}X_0$ intersect nontrivially. Using a vector in that intersection to pair the left inputs in the Gram identity gives a right isometry $J=Y_3$ and a nontrivial combination $V$ of the first three right factors with $J^*V=0$. Hence $\operatorname{rank}V\le d-c$. Make $V$ one of the right factors and restrict the right input to $E=\ker V$, of dimension $e\ge2c-d$. At most three terms survive, so the width-three bound gives $3e\le2d$ and therefore $6c\le5d$.
+
+If $4c>3d$, then $d<2e$. The neutral-plane case of the width-three kernel argument would require $2e\le d$. In its common-kernel case, $J|_E$ must be proportional to the isometric right direction supplied by the common kernel. Otherwise the two directions could be orthogonalized to give two isometries with orthogonal ranges, again requiring $2e\le d$. Thus the cross Grams of the two other right factors on $E$ with $J|_E$ are scalar matrices. Absorb those scalar components into the left factor paired with $J$. The remaining two right factors on $E$ have ranges orthogonal to $J(E)$ and are linearly independent, since a two-term isometry with $a<b$ would require $2e\le d$.
+
+Write $L$ for the left factor paired with $J$. On $E$, the two residual terms have Gram $(I_b-L^*L)\otimes I_e$. Every combination of their right factors maps into a space of dimension $d-e<e$ and hence has a nonzero kernel. Applying the residual Gram identity to product vectors shows that the kernel of every nontrivial combination of the two residual left factors lies in $\ker(I_b-L^*L)$. On the other hand, the isometry identity for $F$ would turn any nonzero cross Gram coefficient into such a left combination with range orthogonal to $L(\ker(I_b-L^*L))$. The latter space has dimension $\dim\ker(I_b-L^*L)$, so the two dimension bounds contradict $a<b$. Thus only the term paired with $J$ contributes to the entire output slice $J(E)$.
+
+Compress the row-defect projection $I_{ad}-FF^*$ to the tensor product of the left output with $J(E)$. Its compression is $(I_a-LL^*)\otimes I_e$. As $ad-bc<2c-d\le e$, the rank bound forces $LL^*=I_a$. The other two left factors vanish on $\operatorname{im}L^*$ by independence of their right factors on $E$. The isometry identity and $J^*V=0$ then make the term paired with $V$ vanish there as well. Projecting onto the right output perpendicular to $\operatorname{im}J$ leaves three terms of rank at most $(b-a)(d-c)$ each. The projected column range and the compressed row defect together span this output, so
+
+$$
+a(d-c)\le ad-bc+3(b-a)(d-c).
+$$
+
+Rearranging and canceling $b-a>0$ gives $c\le3(d-c)$, contrary to $4c>3d$. The full proof is checked by the Lean kernel.
+:::
+
+At $(4,5,4,5)$, $(5,6,4,5)$, and $(5,6,5,6)$, the row defects $ad-bc$ are $0,1,0$, below the respective thresholds $2c-d=3,3,4$. All three sizes have $4c>3d$. Part 2 therefore rules out a Hermitian compression kernel containing a rank-three matrix at each size, and Part 1 rules out kernels congruent into the Pauli–Clifford span. Mixed rank-two and rank-four Hermitian compression kernels, general necessity in the small-ratio regime $a<b\le2a$, and four-term realization at these three sizes remain open.
 
 For $k\ge1$, the family $(2k,5k,2k,5k)$ lies in the third left-shrinking interval but has $3c=6k>d=5k$, ruling out an exactly flat spectrum at width three. For this family the entropy of the normalized column Gram also stays below its maximum by an amount bounded uniformly in $k$.
 

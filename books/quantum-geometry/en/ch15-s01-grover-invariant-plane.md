@@ -98,6 +98,12 @@ Whole steps can only approach $\pi/2$: take one more step than the best count an
 
 An exact coin-assisted remedy for known $p$ is proved in [Chapter 16](ch16-qsvt-walks-and-compilation.md), [@cor-exact-source-query-count].
 
+::: {.film src="grover-two-mirrors"}
+**Two mirrors make a turn (2 min 22 s).** Two cyan mirror lines meet at $30^\circ$; a white shape bounced off each in turn becomes the amber image, turned by the violet $60^\circ$: two flips make one turn, by twice the angle. Four boxes hide one prize: the start has amplitude $\tfrac12$ in every box and sits exactly $\theta = 30^\circ$ off the failure direction $B$. The first mirror $I - 2P$ flips the sign of the magenta prize bar, the second mirror $2UU^* - I$ flips every bar about the average $\tfrac14$, so $(\tfrac12, \tfrac12, \tfrac12, \tfrac12) \to (-\tfrac12, \tfrac12, \tfrac12, \tfrac12) \to (1, 0, 0, 0)$ and the amber arrow turns from $30^\circ$ to $90^\circ$. The general rule is [@thm-grover-uniform-rotation]: for $p < 1$ the state after $n$ steps sits exactly at $(2n+1)\theta$, and for $p = 1$ the start is the success block. Keep turning and the four-box success chances run $\tfrac14, 1, \tfrac14, \tfrac14, 1$: past the top, the next turn walks back down, and only coming round again returns to the top. At $N = 100$ the best whole step of the first peak is $n = 7$, with $15\theta \approx 86.1^\circ$ and success about $0.995$, while $\frac{\pi}{4}\sqrt{N}$ is only an estimate on top of the theorem; for one prize among $N > 1$ boxes, no whole step lands exactly except at $N = 4$, by Niven's theorem (a literature result). In the scene of the theorem the orbit on the left is drawn with the schematic angle $\theta = 11^\circ$. That unstructured search needs $\Omega(\sqrt{N})$ oracle queries is a literature result, not formalized in this book; "search is turning" is an interpretation, marked ARGUED. Every number in the film is computed on screen.
+:::
+
+To apply the two mirrors one at a time by hand, open the full lab below:
+
 ::: {.viz src="grover-reflections" height="560"}
 The full lab of Grover's two reflections: drag the initial state on mirror 2 to change $\theta$, change $N$, and apply the mirrors one at a time with ← →; the bars on the right are the success probabilities $\sin^2((2n+1)\theta)$ after each step ([@thm-grover-uniform-rotation]). The $\Omega(\sqrt{N})$ query lower bound is a literature result, not formalized in this book.
 :::

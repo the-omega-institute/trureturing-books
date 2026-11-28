@@ -1,0 +1,32 @@
+{
+  "title": "Every prime is its own axis",
+  "title_zh": "每个素数都是一根轴",
+  "summary": "Twelve is 2 × 2 × 3, so on the axes 2, 3, 5 it has the address (2, 1, 0), and every whole number has exactly one address. On each prime axis one more step multiplies the weight by p^-s, so one axis sums to 1/(1 − p^-s); at s = 2 the axes 2 and 3 are the sides 4/3 and 9/8 of a rectangle cut into tiles of area 1/n², one tile for each n built from twos and threes, total 3/2. Lean checks the full identity for Re s > 1: the sum of n^-s over all n equals the product over all primes, and both equal ζ(s). No axis can be reached along others: 3^12 = 531441 misses 2^19 = 524288 by under 1.5 %, odd against even, and Lean checks that an integer combination of prime logarithms vanishes only when every coefficient is zero. Give s an imaginary part and each prime becomes a clock turning at speed ln p; two clocks trace a line on a torus that never closes. Lean checks Kronecker's theorem behind it; the book derives by hand that both clocks never point at six together yet come as close as you like, and the screen lists the record misses, 2.98° at t ≈ 185.83 and 0.28° at t ≈ 1627.12. Orthogonal is a picture, density gives no waiting time, the product needs Re s > 1, and the Riemann hypothesis is proved by an external Lean 4 project but not frozen in the book's pinned repository.",
+  "summary_zh": "12 = 2 × 2 × 3，在 2、3、5 三根轴上它的地址是 (2, 1, 0)；每个正整数都有、且只有一个地址。在每根素数轴上，每多走一步，权重乘上 p⁻ˢ，一根轴加起来是 1/(1 − p⁻ˢ)。取 s = 2，2 和 3 两根轴是一个长方形的两边 4/3 与 9/8，长方形切成面积为 1/n² 的瓷砖，每个只由 2 和 3 搭成的 n 一块，总面积 3/2。Lean 检验了 Re s > 1 时的完整恒等式：对全体 n 的 n⁻ˢ 之和等于对全体素数的乘积，两者都等于 ζ(s)。没有哪根轴能借道别的轴走到：3¹² = 531441 与 2¹⁹ = 524288 只差不到 1.5%，却一奇一偶；Lean 检验了素数对数的整系数组合只有在系数全为零时才等于零。给 s 加上虚部，每个素数变成一只以角速度 ln p 旋转的钟，两只钟在环面上画出一条永不闭合的线。背后是 Lean 检验的克罗内克定理；书中手工推出两只钟永远不会同时恰好指向六点，却能要多近有多近，屏幕列出逐次刷新的最小偏差：t ≈ 185.83 时 2.98°，t ≈ 1627.12 时 0.28°。“正交”是图像，稠密不给等待时间，乘积要求 Re s > 1；黎曼猜想已由外部 Lean 4 项目证明，但没有冻结进本书所钉的仓库。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-25",
+  "duration": "2:29",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · an exponent lattice on prime axes, a rectangle of tiles 1/n², the 3^12 against 2^19 bars, a lit torus of two prime clocks with a winding line, the limits",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Zeros/ZetaUpgrade.riemann_zeta_dirichlet_sum_eq_euler_product",
+    "D5/S3/Zeros/ZetaIdentities.riemann_zeta_euler_product",
+    "D5/S3/Factorization/PrimeLogIndependence.prime_log_indep",
+    "D5/S3/Fourier/BiquadraticKroneckerTimes.dense_circle_sequence"
+  ],
+  "solid": true,
+  "outputs": {
+    "narrated_720p": "quantum-geometry_primes-as-axes_720p_narrated.mp4",
+    "cover": "quantum-geometry_primes-as-axes_cover.jpg"
+  }
+}

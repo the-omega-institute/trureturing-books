@@ -1,0 +1,263 @@
+{
+ "voice": "af_heart",
+ "speed": 0.94,
+ "say": {
+  "Lean": "Leen",
+  "zeta": "zayta",
+  "Riemann": "Reeman"
+ },
+ "music": {
+  "bpm": 76,
+  "progression": "d-minor"
+ },
+ "scenes": [
+  {
+   "id": "mirror",
+   "name": "THE MIRROR",
+   "lead": 1.9,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Stand in front of a mirror wall, and your twin stands behind the glass.",
+     "站在一面镜墙前，镜子里就站着另一个你。"
+    ],
+    [
+     "The zeta function has a mirror like that: the line where the real part is one half.",
+     "ζ 函数也有这样一面镜子：实部等于二分之一的那条线。"
+    ],
+    [
+     "Its nontrivial zeros come in mirror pairs. But does a mirror make you stand on the glass?",
+     "它的非平凡零点成对出现，互为镜像。可镜子会逼你站到玻璃上吗？"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 3.0,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "lamps",
+   "name": "TWO LAMPS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.5,
+    0.5,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "Here is a ruler for the glass. Put one lamp at zero and one lamp at one.",
+     "先做一把量镜面的尺：在 0 放一盏灯，在 1 放一盏灯。"
+    ],
+    [
+     "Take any point. Divide its distance to lamp one by its distance to lamp zero.",
+     "任取一点，用它到灯 1 的距离，除以它到灯 0 的距离。"
+    ],
+    [
+     "At two, that is one over two: one half. At minus one, it is two over one: two.",
+     "在 2 处，得 1 比 2，即二分之一；在 −1 处，得 2 比 1，即 2。"
+    ],
+    [
+     "Minus one is the mirror image of two. The mirror swaps the two distances, so the ratio flips.",
+     "−1 正是 2 的镜像。镜子交换两段距离，比值就倒了过来。"
+    ],
+    [
+     "Only on the line halfway between the lamps is the ratio exactly one.",
+     "只有在两灯正中间的那条线上，比值才恰好是 1。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 4,
+     "at": 2.4,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "ruler",
+   "name": "THE RULER IS A THEOREM",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.2,
+    0.2
+   ],
+   "lines": [
+    [
+     "The lamps are a picture. The ratio is the size of s minus one, over s.",
+     "两盏灯只是比方；比值本身，就是 s 减 1 除以 s 的模长。"
+    ],
+    [
+     "Lean checks, for every complex number, that this ratio is one exactly when the real part is one half.",
+     "Lean 内核检验：对每个复数，比值等于 1，当且仅当实部是二分之一。"
+    ],
+    [
+     "Lean also checks: the Riemann hypothesis means every nontrivial zero has ratio one.",
+     "Lean 还检验：黎曼猜想等价于每个非平凡零点的比值都是 1。"
+    ],
+    [
+     "The mirror also halves the search: no zero with real part strictly between one half and one is enough.",
+     "镜子还把搜索减半：只要没有零点的实部严格介于 1/2 与 1 之间，就够了。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 3.2,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "forgery",
+   "name": "A PERFECT FORGERY",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Now a forgery. Take a polynomial with four zeros: one half, plus or minus a quarter, plus or minus fourteen i.",
+     "现在造一个赝品：一个四次多项式，四个零点是 1/2 ± 1/4 ± 14i。"
+    ],
+    [
+     "It has zeta's two symmetries: the half-turn s to one minus s, and the up–down flip. Together they make the mirror.",
+     "ζ 的两种对称它都有：绕 ½ 的半圈转动 s ↦ 1 − s，和上下翻转；两者合起来，才是左右镜像。"
+    ],
+    [
+     "Yet none of its zeros is on the line. Their ratios form a mirror pair.",
+     "可它没有一个零点在线上；四个零点的比值，两两成一对镜像。"
+    ],
+    [
+     "Along the line itself, its values are real and never drop below forty-nine.",
+     "沿着那条线，它取实数值，而且从不低于 49。"
+    ],
+    [
+     "For any nonzero shift and height, Lean checks both symmetries and that all four zeros miss the line.",
+     "对任意非零偏移与高度，Lean 检验了两种对称，以及四个零点全不在线上。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 2.6,
+     "kind": "glitch"
+    },
+    {
+     "line": 4,
+     "at": 0.6,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "idol",
+   "name": "WHY WE BELIEVED IT",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Why did we think symmetry would seat the zeros? A mirror feels like a law of position. It is not.",
+     "我们凭什么以为对称会把零点安放在线上？镜子像是规定了位置，其实没有。"
+    ],
+    [
+     "A mirror tells you where your twin stands, never where you stand.",
+     "镜子只告诉你镜中人站在哪，从不告诉你自己站在哪。"
+    ],
+    [
+     "Any proof that the zeros sit on the line must use something beyond these two symmetries.",
+     "任何把零点钉在线上的证明，都必须动用这两种对称之外的东西。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 1.0,
+     "kind": "impact"
+    }
+   ]
+  },
+  {
+   "id": "edge",
+   "name": "WHAT IT DOES NOT SAY",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.2,
+    0.2
+   ],
+   "lines": [
+    [
+     "The Riemann hypothesis itself has an external Lean proof, replayed independently, but not frozen in this book's repository.",
+     "黎曼猜想本身已有外部的 Lean 证明，经多方独立重放，但没有冻结进本书所钉的仓库。"
+    ],
+    [
+     "The lamps and the mirror are pictures, not proofs.",
+     "灯和镜子是比方，不是证明。"
+    ],
+    [
+     "And this chapter's own pivot program still waits on an open problem: the arithmetic area law.",
+     "本章自己的枢轴纲领，仍卡在一个开放问题上：算术面积律。"
+    ]
+   ]
+  },
+  {
+   "id": "close",
+   "name": "LEDGER",
+   "lead": 0.5,
+   "tail": 2.6,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.2
+   ],
+   "lines": [
+    [
+     "Geometric Intuition of Quantum Computing, chapter thirty-one.",
+     "《量子计算的几何直觉》· 第三十一章"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 0.3,
+     "kind": "chime"
+    }
+   ]
+  }
+ ]
+}

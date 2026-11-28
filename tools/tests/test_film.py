@@ -23,7 +23,7 @@ from unittest import mock
 
 from example_support import example_shown
 
-from tbook import config, film, lean, mdscan, paths, render
+from tbook import config, film, lean, mdscan, paths, render, site
 
 NODE = film.node_executable()
 EXAMPLE = paths.BOOKS / "example-monograph"
@@ -84,7 +84,7 @@ def errors(issues) -> list[str]:
 
 
 def ctx_for(book: config.Book, lang: str, target: str) -> render.RenderContext:
-    site = config.load_site()
+    site = dataclasses.replace(config.load_site(), film_release_only=False)
     return render.RenderContext(site=site, book=book, edition=book.edition(lang), model=None,
                                 lock=lean.Lock.load(), target=target)
 
@@ -368,7 +368,9 @@ class ValidationTest(unittest.TestCase):
         # the films page and the engine data never present the definition as verified
         created[0].write_text(json.dumps(meta, ensure_ascii=False), encoding="utf-8")
         f = film.get(self.book, "002-carry-rules")
-        card = film._film_card(config.load_site(), f, fake_lock())
+        site = dataclasses.replace(config.load_site(), film_release_only=True)
+        with mock.patch.object(film.releases, "film_assets", side_effect=AssertionError("unexpected network lookup")):
+            card = film._film_card(site, f, fake_lock())
         self.assertEqual(card.count('<span class="k ok">LEAN ✓</span>'), 1)
         self.assertIn('<li><span class="k">LEAN</span><a href="https://github.com/the-omega-institute/trureturing/blob/'
                       + "a" * 40 + '/D5/S1/Deficit/DeficitInteger.lean#L7"', card)
@@ -423,6 +425,61 @@ class TimelineTest(unittest.TestCase):
         self.assertEqual(film.format_duration(414.4), "6:54")
         self.assertEqual(film.parse_duration("6:54"), 414)
         self.assertIsNone(film.parse_duration("6:61"))
+
+
+class ChaptersTest(unittest.TestCase):
+    SCRIPT = {"voice": "af_heart", "speed": 1.0, "scenes": [
+        {"id": "one", "lead": 1.5, "tail": 0.5, "lines": [["One two three.", "一"]],
+         "chapter": {"en": "Part I", "zh": "第一部"}},
+        {"id": "two", "lead": 0.5, "tail": 0.5, "lines": [["Four five six.", "二"]]},
+        {"id": "three", "lead": 0.5, "tail": 1.0, "lines": [["Seven = eight; #9.", "三"]],
+         "chapter": {"en": "A=B; #c <d>", "zh": "第二部"}},
+    ]}
+
+    @staticmethod
+    def script_errors(script: dict) -> list[str]:
+        return [message for severity, message in film.validate_script(script) if severity == "error"]
+
+    def test_valid_chapters(self):
+        self.assertEqual(self.script_errors((self.SCRIPT)), [])
+
+    def test_chapter_errors(self):
+        bad = json.loads(json.dumps(self.SCRIPT))
+        bad["scenes"][2]["chapter"] = {"en": "", "zh": "第二部"}
+        self.assertTrue(any("chapter must be" in e for e in self.script_errors((bad))))
+        bad["scenes"][2]["chapter"] = {"en": "Two\nlines", "zh": "第二部"}
+        self.assertTrue(any("chapter must be" in e for e in self.script_errors((bad))))
+        bad["scenes"][2]["chapter"] = {"en": "Part II", "zh": "第二部", "fr": "x"}
+        self.assertTrue(any("chapter must be" in e for e in self.script_errors((bad))))
+        late = json.loads(json.dumps(self.SCRIPT))
+        del late["scenes"][0]["chapter"]
+        self.assertTrue(any("first scene must open a chapter" in e for e in self.script_errors((late))))
+        none = json.loads(json.dumps(self.SCRIPT))
+        for sc in none["scenes"]:
+            sc.pop("chapter", None)
+        self.assertEqual(self.script_errors((none)), [])
+
+    def test_marks_follow_the_timeline(self):
+        tl = film.provisional_timeline(self.SCRIPT, wps=2.0)
+        marks = film.chapter_marks(self.SCRIPT, tl)
+        three = next(s for s in tl["scenes"] if s["id"] == "three")
+        self.assertEqual([m["en"] for m in marks], ["Part I", "A=B; #c <d>"])
+        self.assertEqual(marks[0]["start"], 0.0)
+        self.assertEqual(marks[0]["end"], marks[1]["start"])
+        self.assertAlmostEqual(marks[1]["start"], three["start"], places=3)
+        self.assertAlmostEqual(marks[1]["end"], tl["duration"], places=3)
+        self.assertEqual(film.chapter_marks(self.SCRIPT, {"scenes": [], "duration": 0}), [])
+        self.assertEqual(film.chapter_marks(None, tl), [])
+
+    def test_vtt_and_ffmetadata(self):
+        marks = [{"start": 0.0, "end": 61.5, "en": "Part I", "zh": "第一部"},
+                 {"start": 61.5, "end": 3725.25, "en": "A=B; #c <d>", "zh": "第二部"}]
+        vtt = film.chapters_vtt(marks)
+        self.assertTrue(vtt.startswith("WEBVTT\n\n1\n00:00:00.000 --> 00:01:01.500\nPart I · 第一部\n"))
+        self.assertIn("00:01:01.500 --> 01:02:05.250\nA=B; #c &lt;d&gt; · 第二部", vtt)
+        meta = film.chapters_ffmetadata(marks)
+        self.assertTrue(meta.startswith(";FFMETADATA1\n[CHAPTER]\nTIMEBASE=1/1000\nSTART=0\nEND=61500\n"))
+        self.assertIn("START=61500\nEND=3725250\ntitle=A\\=B\\; \\#c <d> · 第二部\n", meta)
 
 
 class NamesTest(unittest.TestCase):
@@ -582,7 +639,7 @@ class Sandbox:
         # load_site is cached and may belong to an earlier, already removed sandbox.
         # Repository hooks must run in this sandbox, just like its build/cache units.
         self.site = dataclasses.replace(config.load_site(), root=self.root, repo="acme/books", base_url="",
-                                        pdf_release_only=False)
+                                        pdf_release_only=False, epub_release_only=False, film_release_only=False)
 
     def film(self) -> film.Film:
         return film.get(self.book, self.dir.name)
@@ -619,6 +676,42 @@ class VideoUnitTest(unittest.TestCase):
         self.assertFalse(any(label.endswith("/poster.jpg") or "/out/" in label for label in labels))
         npm = dict(unit.inputs.parts)["<npm>"]
         self.assertNotEqual(npm, film.buildcache.Inputs().text("npm", {}).parts[0][1])  # package-lock.json was read
+
+    def test_release_collects_mp4_with_a_separate_cache_key(self):
+        site = dataclasses.replace(self.sb.site, film_release_only=True)
+        item = self.sb.film()
+        web = film.video_unit(site, item)
+        mp4 = film.video_unit(self.sb.site, item)
+        self.assertNotEqual(web.key, mp4.key)
+        self.assertNotEqual(web.outputs, mp4.outputs)
+        stage = self.sb.root / "release"
+        stage.mkdir()
+        mp4.outputs[0].mkdir(parents=True)
+        (mp4.outputs[0] / item.output("narrated_720p")).write_bytes(b"mp4")
+        with mock.patch.object(film, "build_videos") as build:
+            self.assertEqual(film.collect_release(self.sb.site, self.sb.book, stage), [])
+            build.assert_not_called()
+            names = film.collect_release(site, self.sb.book, stage)
+            self.assertFalse(build.call_args.args[0].film_release_only)
+            self.assertEqual(build.call_args.kwargs, {"mode": "require"})
+        self.assertEqual(names, [item.output("narrated_720p")])
+        self.assertEqual((stage / names[0]).read_bytes(), b"mp4")
+
+    def test_release_build_exports_the_mp4_units(self):
+        """A release build of a site with film_release_only lists each film's MP4 unit beside its live unit
+        (release_unit: the key collect_release renders under), so the release's cache export carries it."""
+        site = dataclasses.replace(self.sb.site, film_release_only=True)
+        plain = dataclasses.replace(self.sb.site, film_release_only=False)
+        item = self.sb.film()
+        live, mp4 = film.video_unit(site, item), film.release_unit(site, item)
+        self.assertEqual(mp4.key, film.video_unit(plain, item).key)
+        self.assertNotEqual(live.key, mp4.key)
+        with mock.patch.dict(os.environ, {"TBOOK_BUILD_RELEASE": ""}):
+            self.assertEqual([u.key for u in film.units(site, self.sb.book)], [live.key])
+        with mock.patch.dict(os.environ, {"TBOOK_BUILD_RELEASE": "1"}):
+            self.assertEqual([u.key for u in film.units(site, self.sb.book)], [live.key, mp4.key])
+            # Without film_release_only the build renders the MP4 itself: one unit, as before.
+            self.assertEqual([u.key for u in film.units(plain, self.sb.book)], [mp4.key])
 
     def test_unrelated_changes_keep_the_key(self):
         key = self.sb.key()
@@ -862,7 +955,7 @@ class BuildVideosTest(unittest.TestCase):
         self.assertNotIn(f.output("music_only"), page)
         reg = json.loads((out / "films.json").read_text(encoding="utf-8"))["films"][0]
         self.assertEqual(sorted(reg["videos"]), sorted(["narrated", "narrated_720p", "music_only_720p", "cover"]))
-        items = film.items(self.sb.book)
+        items = film.items(self.sb.book, site=self.sb.site)
         self.assertEqual(items[0]["download_url"], f"films/{f.id}/{f.output('narrated')}")
         self.assertEqual(items[0]["watch_url"], f"films/{f.id}/{f.output('narrated_720p')}")
 
@@ -1043,6 +1136,47 @@ class SiteHostingTest(unittest.TestCase):
         films_html = landing.split('id="films"', 1)[1].split("</section>", 1)[0]
         self.assertIn(f'href="films/golden-deficit/{v720}"', films_html)
         self.assertNotIn(film.t("zh", "unbuilt"), films_html)
+
+
+class FilmGroupsTest(unittest.TestCase):
+    def test_configured_films_appear_first_in_both_indexes(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            book = temp_book(Path(tmp))
+            film.scaffold(book, "a-short-film", "短片", "Short Film")
+            film.scaffold(book, "z-long-film", "长片", "Long Film")
+            book_path = book.dir / "book.toml"
+            original = book_path.read_text(encoding="utf-8")
+            site_config = dataclasses.replace(config.load_site(), film_release_only=False)
+            out = Path(tmp) / "out"
+
+            def pages(book):
+                film.build(site_config, book, out / "films", videos=False)
+                view = site.BookView(book, out, {}, None, media={"films": film.items(book, site=site_config)})
+                return (
+                    (out / "films" / "index.html").read_text(encoding="utf-8"),
+                    site.films_section(site.Bi(["zh", "en"]), view),
+                )
+
+            for page in pages(book):
+                self.assertNotIn("Long-form films", page)
+                self.assertNotIn("Other films", page)
+
+            book_path.write_text(original + '\n[films]\nlong_form = ["z-long-film"]\n', encoding="utf-8")
+            hub, landing = pages(config.load_book(book.dir))
+            for page in (hub, landing):
+                self.assertIn("长篇视频", page)
+                self.assertIn("其他视频", page)
+                long_group, other_group = page.split("Other films", 1)
+                self.assertIn("Long-form films", long_group)
+                self.assertIn("z-long-film", long_group)
+                self.assertNotIn("a-short-film", long_group)
+                self.assertIn("a-short-film", other_group)
+            self.assertIn('id="z-long-film"', hub)
+            self.assertIn('href="films/index.html#z-long-film"', landing)
+
+            book_path.write_text(original + '\n[films]\nlong_form = ["missing"]\n', encoding="utf-8")
+            with self.assertRaisesRegex(config.ConfigError, "films.long_form names an unknown film"):
+                config.load_book(book.dir)
 
 
 @needs_example
@@ -1231,6 +1365,42 @@ class PipelineTest(unittest.TestCase):
         finally:
             shutil.rmtree(tmp)
 
+    @needs_example
+    def test_player_page_carries_the_chapters(self):
+        tmp = Path(tempfile.mkdtemp())
+        try:
+            book = temp_book(tmp)
+            d = copy_example(book)
+            script = json.loads((d / "script.json").read_text(encoding="utf-8"))
+            script["scenes"][0]["chapter"] = {"en": "Digits", "zh": "数位"}
+            script["scenes"][-1]["chapter"] = {"en": "The ledger", "zh": "账本"}
+            (d / "script.json").write_text(json.dumps(script, ensure_ascii=False), encoding="utf-8")
+            with mock.patch.object(film, "_lock", return_value=fake_lock()), \
+                    redirect_stdout(io.StringIO()), redirect_stderr(io.StringIO()):
+                page = self.build.build(d, player=True)
+            html = page.read_text(encoding="utf-8")
+            self.assertIn('src="audio.mp3"><track kind="chapters" src="chapters.vtt" srclang="en" label="Chapters" '
+                          'default></audio>', html)
+            data = json.loads(html.split("window.DATA=", 1)[1].split(";</script>", 1)[0].replace("<\\/", "</"))
+            self.assertEqual([(m["en"], m["zh"]) for m in data["chapters"]], [("Digits", "数位"), ("The ledger", "账本")])
+            self.assertEqual(data["chapters"][0]["start"], 0.0)
+            self.assertEqual(data["chapters"][-1]["end"], data["timeline"]["duration"])
+            self.assertIn("The ledger · 账本", (d / "out" / "chapters.vtt").read_text(encoding="utf-8"))
+            self.assertIn("title=Digits · 数位", (d / "out" / "chapters.ffmeta").read_text(encoding="utf-8"))
+            for sc in script["scenes"]:
+                sc.pop("chapter", None)
+            (d / "script.json").write_text(json.dumps(script, ensure_ascii=False), encoding="utf-8")
+            with mock.patch.object(film, "_lock", return_value=fake_lock()), \
+                    redirect_stdout(io.StringIO()), redirect_stderr(io.StringIO()):
+                page = self.build.build(d, player=True)
+            html = page.read_text(encoding="utf-8")
+            self.assertNotIn('kind="chapters"', html)
+            self.assertNotIn('"chapters"', html.split("window.DATA=", 1)[1].split(";</script>", 1)[0])
+            self.assertFalse((d / "out" / "chapters.vtt").exists())
+            self.assertFalse((d / "out" / "chapters.ffmeta").exists())
+        finally:
+            shutil.rmtree(tmp)
+
     @unittest.skipUnless(NODE, "node not available")
     def test_javascript_syntax(self):
         files = [THEME_FILM / "engine.js", paths.TEMPLATES / "film" / "scenes.js"]
@@ -1239,7 +1409,7 @@ class PipelineTest(unittest.TestCase):
         self.assertEqual(film.js_syntax_errors(files), {})
         import subprocess
 
-        for name in ("lib.js", "render.js", "poster.js", "shot.js", "site/films.js"):
+        for name in ("lib.js", "render.js", "poster.js", "shot.js", "site/films.js", "site/player.js"):
             r = subprocess.run([NODE, "--check", str(THEME_FILM / name)], capture_output=True, text=True)
             self.assertEqual(r.returncode, 0, f"{name}: {r.stderr}")
 

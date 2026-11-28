@@ -1,0 +1,267 @@
+{
+  "voice": "af_heart",
+  "speed": 1.0,
+  "say": {
+    "Lean": "Leen",
+    "Bloch": "Block",
+    "qubit": "cue-bit"
+  },
+  "music": {
+    "bpm": 76,
+    "progression": "d-minor"
+  },
+  "scenes": [
+    {
+      "id": "sift",
+      "name": "SIFT TWICE",
+      "lead": 1.9,
+      "tail": 0.5,
+      "music": [
+        1.0,
+        0.4,
+        0.3,
+        0.0,
+        0.1
+      ],
+      "lines": [
+        [
+          "Sift flour once, and the sieve catches the lumps.",
+          "面粉筛一遍，筛子拦下面疙瘩。"
+        ],
+        [
+          "Sift it again, and the sieve catches nothing at all.",
+          "再筛一遍，筛子什么也拦不住了。"
+        ],
+        [
+          "That dull second pass is the key. In symbols, P squared equals P.",
+          "这无聊的第二遍是关键。写成符号：P² = P。"
+        ]
+      ],
+      "cues": [
+        {
+          "line": 1,
+          "at": 2.2,
+          "kind": "chime"
+        }
+      ]
+    },
+    {
+      "id": "drawers",
+      "name": "TWO DRAWERS",
+      "lead": 0.5,
+      "tail": 0.6,
+      "music": [
+        0.9,
+        0.5,
+        0.4,
+        0.1,
+        0.2
+      ],
+      "lines": [
+        [
+          "Start with the smallest projector: a two by two matrix with a single one on the diagonal, top left.",
+          "从最小的投影算子开始：一个 2×2 矩阵，只在左上（对角线上）有一个 1。"
+        ],
+        [
+          "Square it: the one stays one, the zeros stay zero. P squared is P.",
+          "自己乘自己：1 还是 1，0 还是 0，所以 P² = P。"
+        ],
+        [
+          "Its partner puts its one at the other end of the diagonal. They multiply to zero and add up to the identity: two drawers, nothing left out.",
+          "搭档把 1 放在对角线另一头。两者相乘为零、相加为单位矩阵：两只抽屉，不遗漏。"
+        ]
+      ],
+      "cues": [
+        {
+          "line": 1,
+          "at": 2.6,
+          "kind": "chime"
+        }
+      ]
+    },
+    {
+      "id": "pinch",
+      "name": "WIPE THE CORNERS",
+      "lead": 0.5,
+      "tail": 0.6,
+      "music": [
+        0.9,
+        0.6,
+        0.5,
+        0.2,
+        0.3
+      ],
+      "lines": [
+        [
+          "Take a qubit whose Bloch arrow points zero point six across, zero point eight up.",
+          "取一个量子比特，布洛赫箭头横向 0.6、竖向 0.8。"
+        ],
+        [
+          "Its density matrix: zero point nine and zero point one on the diagonal, zero point three in each corner.",
+          "它的密度矩阵：对角线上是 0.9 和 0.1，两个角上各是 0.3。"
+        ],
+        [
+          "The diagonal is what Z reads. The corners are the coherence between the drawers.",
+          "对角线是沿 Z 读到的东西；两个角是两只抽屉之间的相干。"
+        ],
+        [
+          "Measure along Z without looking. The corners are wiped to zero, and the diagonal stays.",
+          "沿 Z 测一次但不看：两个角被抹成零，对角线不动。"
+        ],
+        [
+          "Do it again. No corners are left to wipe, so nothing moves.",
+          "再做一次：没有角可抹了，什么也不动。"
+        ]
+      ],
+      "cues": [
+        {
+          "line": 3,
+          "at": 3.2,
+          "kind": "glitch"
+        },
+        {
+          "line": 4,
+          "at": 1.6,
+          "kind": "chime"
+        }
+      ]
+    },
+    {
+      "id": "theorem",
+      "name": "UNREAD TWICE",
+      "lead": 0.5,
+      "tail": 0.6,
+      "music": [
+        1.0,
+        0.7,
+        0.6,
+        0.3,
+        0.3
+      ],
+      "lines": [
+        [
+          "Lean checks this for any finite record measurement, on matrices of any size: unread twice is unread once.",
+          "Lean 内核检验：任意有限记录投影、任意大小方阵，未读两次即未读一次。"
+        ],
+        [
+          "Why? Different drawers multiply to zero, and each drawer squared is itself.",
+          "为什么？不同的抽屉相乘为零，每只抽屉的平方是它自己。"
+        ],
+        [
+          "Why trust that something is there? Not because it came first, but because asking twice gives the same answer.",
+          "我们凭什么相信某样东西在那里？不是因为它先在那里，而是因为问两遍，答案一样。"
+        ],
+        [
+          "A thing is whatever the same ruler can measure twice without a change.",
+          "所谓实体，就是同一把尺子连量两次而不走样的东西。"
+        ]
+      ],
+      "cues": [
+        {
+          "line": 0,
+          "at": 0.8,
+          "kind": "stamp"
+        }
+      ]
+    },
+    {
+      "id": "ledger",
+      "name": "LINE AND PLANE",
+      "lead": 0.5,
+      "tail": 0.6,
+      "music": [
+        1.0,
+        0.8,
+        0.7,
+        0.4,
+        0.4
+      ],
+      "lines": [
+        [
+          "So how much did the corners carry? Keep a ledger.",
+          "那么，抹掉的角值多少？记一本账。"
+        ],
+        [
+          "The state is pure: purity one, minus one half, leaves a surplus of one half.",
+          "这是纯态：纯度 1，减去 ½，盈余是 ½。"
+        ],
+        [
+          "Each Z reading sits zero point four from even. Square both and add: zero point three two, the line's share.",
+          "Z 的两个读数各离均匀值 0.4；平方相加得 0.32，这是线上的一份。"
+        ],
+        [
+          "The other zero point one eight lives in the plane at right angles: twice the corner squared.",
+          "剩下的 0.18 住在与线垂直的平面里：角上数值平方的两倍。"
+        ],
+        [
+          "Booked this way, Lean checks the general split: the surplus is the visible deviations plus what is left in the perpendicular space.",
+          "按这样记账，Lean 内核检验一般的分解：盈余等于可见偏离加上正交补里的剩余质量。"
+        ],
+        [
+          "So the pinch wipes the plane and keeps the line. After one pass: zero point three two and zero. After two: the same.",
+          "捏合抹掉面上那份、留下线上那份。一遍后：0.32 和 0；两遍后：一样。"
+        ]
+      ],
+      "cues": [
+        {
+          "line": 4,
+          "at": 0.8,
+          "kind": "stamp"
+        }
+      ]
+    },
+    {
+      "id": "edge",
+      "name": "WHAT IT DOES NOT SAY",
+      "lead": 0.5,
+      "tail": 0.6,
+      "music": [
+        1.0,
+        0.7,
+        0.6,
+        0.3,
+        0.3
+      ],
+      "lines": [
+        [
+          "Not looking is not collapse. Reading a result keeps one drawer and rescales it.",
+          "不看不等于坍缩。读出结果，是留下一只抽屉再重新归一。"
+        ],
+        [
+          "Pinching again never returns the lost zero point one eight. Where it went is chapter four.",
+          "再捏多少次，丢掉的 0.18 也回不来；它去了哪儿，见第四章。"
+        ],
+        [
+          "And existence as a line you check twice is this book's reading, not a theorem.",
+          "至于“存在就是能连查两次的线”，这是本书的诠释，不是定理。"
+        ]
+      ]
+    },
+    {
+      "id": "close",
+      "name": "LEDGER",
+      "lead": 0.5,
+      "tail": 2.4,
+      "music": [
+        1.0,
+        0.6,
+        0.5,
+        0.3,
+        0.2
+      ],
+      "lines": [
+        [
+          "Geometric Intuition of Quantum Computing, chapter three.",
+          "《量子计算的几何直觉》· 第三章"
+        ]
+      ],
+      "cues": [
+        {
+          "line": 0,
+          "at": 0.3,
+          "kind": "chime"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "title": "Two mirrors make a turn",
+  "title_zh": "两面镜子，一次转动",
+  "summary": "Bounce a shape off two mirror lines that meet at thirty degrees: the first flip and the second flip leave a turn of sixty, always twice the angle. Grover search is built from exactly this. Hide a prize in one of four boxes and start with amplitude one half in each: that start sits thirty degrees off the failure arrow, the normalized sum of the three empty boxes. The first mirror is the failure line, I − 2P, which flips the sign of the prize box; the second is the line of the start, 2UU* − I, which flips every amplitude about the average one quarter. By hand, (½, ½, ½, ½) becomes (−½, ½, ½, ½) and then (1, 0, 0, 0): one step turns the state from thirty to ninety degrees and the prize is certain. Lean checks the general rule for any marked projector and any uniform success chance 0 < p ≤ 1 with sin θ = √p: when p < 1 the success and failure blocks are orthonormal and after n steps the state is exactly sin((2n+1)θ) W + cos((2n+1)θ) B, also with any spectator matrix tensored alongside; when p = 1 the start is the success block. Keep turning and the four-box success chances run 1/4, 1, 1/4, 1/4, 1: past the top, the next turn walks back down, and only coming round again returns to the top. Apart from four boxes, whole steps never land exactly for one prize among N > 1 boxes (by Niven's theorem, a literature result); about (π/4)√N steps is arithmetic on top of the theorem, and the Ω(√N) oracle-query lower bound for unstructured search is a literature result not formalized in the book.",
+  "summary_zh": "让一个图形在两条夹角 30° 的镜线里先后各照一次：翻过去、再翻回来，剩下的是 60° 的转动，永远是夹角的两倍。Grover 搜索正是用它搭起来的。把奖品藏进四个盒子之一，起点让每个盒子的振幅都是 1/2：它偏离失败箭头（其余三个盒子之和归一化）30°。第一面镜子是失败那条线 I − 2P，把奖品盒子变号；第二面镜子是起点所在的线 2UU* − I，让每个振幅绕平均值 1/4 翻折。手算：(½, ½, ½, ½) 先变成 (−½, ½, ½, ½)，再变成 (1, 0, 0, 0)；一步把态从 30° 转到 90°，奖品必中。Lean 检验了一般规律：对任意标记投影、任意均匀成功率 0 < p ≤ 1，sin θ = √p；p < 1 时成功块与失败块正交且归一，走 n 步后态恰为 sin((2n+1)θ) W + cos((2n+1)θ) B，旁边并上任意旁观矩阵也成立；p = 1 时起点就是成功块。继续转，四个盒子的命中率依次是 1/4、1、1/4、1/4、1：过了顶，下一步就往回走，要转回来才再到顶。除四个盒子外，N > 1 个盒子藏一个奖品时整数步都不能正好命中（据 Niven 定理，文献结果）；约 (π/4)√N 步是在定理之上算出来的，无结构搜索至少要 Ω(√N) 次预言机查询，这是文献结果，本书没有形式化。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-24",
+  "duration": "2:22",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · a shape bounced off two mirror lines, four boxes split into success and failure, amplitude bars flipped about their average, the state stepping around the plane past the top",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/Recovery/CoherentUniformAmplification.uniform_operator_rotation"
+  ],
+  "outputs": {
+    "narrated_720p": "quantum-geometry_grover-two-mirrors_720p_narrated.mp4",
+    "cover": "quantum-geometry_grover-two-mirrors_cover.jpg"
+  }
+}

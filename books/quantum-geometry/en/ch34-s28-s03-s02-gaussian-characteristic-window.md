@@ -1,4 +1,4 @@
-# M.2.3 From a characteristic function to a short-interval bound {#from-a-characteristic-function-to-a-short-interval-bound}
+# M.2.4 From a characteristic function to a short-interval bound {#from-a-characteristic-function-to-a-short-interval-bound}
 
 A bound on the characteristic function of a perturbed frequency difference can control the probability of a near-collision. The following estimates apply to any finite measure $\mu$ on $\mathbb R$. Write $\chi(t)=\int e^{itx}\,d\mu(x)$ and $W=\{x:|x-b|\le r\}$ for any real $r$.
 

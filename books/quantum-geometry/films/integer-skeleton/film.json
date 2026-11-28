@@ -1,0 +1,31 @@
+{
+  "title": "Which numbers are two squares?",
+  "title_zh": "哪些数是两个平方之和",
+  "summary": "Up to fifty, the numbers that are a sum of two squares look scattered. Give the numbers a second direction, so that they live on a grid: the point (3, 2) is 3 + 2i, and multiplying it by its mirror image 3 − 2i cancels the turn and lands on the real line at 3² + 2² = 13, which Lean checks for every grid point. Multiplying grid numbers adds angles and multiplies lengths, so (2 + i)(3 + 2i) = 4 + 7i gives 65 = 4² + 7², and the mirror factor gives 65 = 1² + 8². Lean checks that every prime leaving remainder 1 on division by 4 is a sum of two squares, and that squares leave only 0 or 1, so no sum of two squares leaves 3; the book calls the two kinds plane primes and line primes. Lean checks the full criterion: a number is a sum of two squares exactly when every prime leaving remainder 3 appears to an even power. So 2025 = 3⁴ · 5² = 27² + 36², while 2024 = 2³ · 11 · 23 is not, although it leaves remainder 0. The theorems decide whether a number can be written so; they give no fast search and no count of the ways. How primes split in the Gaussian integers is a literature result, and the names plane and line are the book's reading.",
+  "summary_zh": "50 以内能写成两个平方之和的数，看上去零零散散。给数添上第二个方向，让它们住进方格：格点 (3, 2) 就是 3 + 2i，乘以它的镜像 3 − 2i，转角抵消，落回实轴上 3² + 2² = 13；Lean 对每个格点都检验了这一点。方格里的数相乘，角度相加、长度相乘，所以 (2 + i)(3 + 2i) = 4 + 7i 给出 65 = 4² + 7²，换成镜像因子又给出 65 = 1² + 8²。Lean 检验了：除以 4 余 1 的素数都是两平方和；平方除以 4 只余 0 或 1，所以两平方和余不出 3。本书把这两种素数叫面素数与线素数。Lean 还检验了完整判据：一个数是两平方和，当且仅当每个除以 4 余 3 的素数都出现偶数次。于是 2025 = 3⁴ · 5² = 27² + 36²，而 2024 = 2³ · 11 · 23 不是，尽管它除以 4 余 0。这些定理只判定能不能写成，不给快速的找法，也不数有几种拆法；素数在高斯整数中如何分裂是文献结果，“面”与“线”的叫法是本书的诠释。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-24",
+  "duration": "2:30",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · a tile board of the numbers up to fifty, the Gaussian grid with a point and its mirror, turning and stretching under multiplication, two columns of primes, a factor ledger",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/PrimeForms/GaussianIntegers/GaussianIntegerNorm.gaussian_integer_mul_conj_eq_sq_add_sq",
+    "D5/S3/PrimeForms/SumTwoSquares.prime_eq_sq_add_sq_of_mod_four_eq_one",
+    "D5/S3/PrimeForms/QuadraticResidues.square_residues_and_sum_obstruction",
+    "D5/S3/PrimeForms/SumTwoSquaresClassification.eq_sq_add_sq_iff_even_factorization"
+  ],
+  "outputs": {
+    "narrated_720p": "quantum-geometry_integer-skeleton_720p_narrated.mp4",
+    "cover": "quantum-geometry_integer-skeleton_cover.jpg"
+  }
+}

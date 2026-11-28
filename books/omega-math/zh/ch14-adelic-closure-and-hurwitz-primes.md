@@ -2,11 +2,11 @@
 
 在[第十三章](ch13-computable-arithmetic-horizon.md)中，我们看到任何有限素数列表 $S$ 的乘积加一见证 $N_S = 1 + \prod_{p \in S} p$ 都会落入所有旧素数的共同余一盲区，从而在有限搜索步内迫使新素数 $q \notin S$ 破土而出。然而，如果仅仅把素数视作一维整数列上孤立而稀疏的不可约原子，我们仍然错过了它最深刻的几何职责。
 
-本章把视野从一维标量算术抬升至**全体有理度量位的阿代尔闭合**与**三维有理球面 $\mathbb{T}_3(\mathbb{Q})$ 上的非对易素旋子几何**。我们将先以冻结定理锁定有理阿代尔乘积归元公式 $|r|_\infty \prod_p |r|_p = 1$ 与素数对数的 $\mathbb{Q}$-线性无关性，阐明素数如何在几何上扮演抵消平直切线发散的超度量曲率回收核；随后让奇素数 $p$ 在整四元数环中分裂为 $p + 1$ 枚本原素旋子，聚焦最小奇素数模型 $p = 5$ 的六生成元集 $S_5$，先以零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中的冻结定理锁死全部六枚生成元的精确模方 $5$ 与均匀标量保真度 $\kappa = \frac{1}{5}$，并同一层级冻结赫维茨十二射影单位核的倍坐标单位模方及 $S_5$ 在 $\mathrm{Mat}_2(\mathbb{F}_5)$ 中的模 $5$ 秩一外积分裂与互逆零积判据；再在伴随表示中以一套完全初等的 $3\times 3$ **模 $5$ 秩一外积分解**严格证明 $S_5$ 自由生成 $\mathrm{SO}(3, \mathbb{Q})$ 中的三生成元自由群 $F_3$，最后以冻结的模方 $5$ 六轴无正交开覆盖定理收束本章，为[第十五章](ch15-rational-hecke-ramanujan-spectrum.md)的球面赫克谱论奠定全部代数与几何齿轮。
+本章把视野从一维标量算术抬升至**全体有理度量位的阿代尔闭合**与**有理四元数射影空间 $\mathbb P^3(\mathbb Q)$ 上的非对易素旋子几何**。我们将先以冻结定理锁定有理阿代尔乘积归元公式 $|r|_\infty \prod_p |r|_p = 1$ 与素数对数的 $\mathbb{Q}$-线性无关性，阐明素数如何在几何上扮演抵消平直切线发散的超度量曲率回收核；随后让奇素数 $p$ 在整四元数环中分裂为 $p + 1$ 枚本原素旋子，聚焦最小奇素数模型 $p = 5$ 的六生成元集 $S_5$，先以使用 `OmegaInit` 与 `OmegaMath` 的 D5 形式化（`strict_omega.axioms: []`）中的冻结定理锁死全部六枚生成元的精确模方 $5$、均匀标量保真度 $\kappa = \frac{1}{5}$、赫维茨十二射影单位核的倍坐标单位模方以及 $S_5$ 在 $\mathrm{Mat}_2(\mathbb{F}_5)$ 中的模 $5$ 秩一外积分裂与互逆零积判据；再在同套零公理内核中完成完整字长归纳，冻结任意既约词的模 $5$ 非零性、精确模方 $5^L$、$5$-本原性、非标量性以及仅靠双坐标轴有理伴随作用即可唯一识别既约词的**自由群单射定理** $F_3 \hookrightarrow \mathrm{SO}(3, \mathbb{Q})$（并辅以 $3\times 3$ 伴随矩阵模 $5$ 秩一外积显式核验）；最后以冻结的模方 $5$ 六轴无正交开覆盖定理收束本章，为[第十五章](ch15-rational-hecke-ramanujan-spectrum.md)的球面赫克谱论奠定全部代数与几何齿轮。
 
 ## 14.1 平直切线放大与超度量素数曲率回收
 
-在紧致弯曲的规范有理三元球面 $\mathbb{T}_3(\mathbb{Q})$（第一至二卷）上，任意两态之间的原生读数都是落在 $[0, 1]$ 内的有界有理保真度 $\kappa$，本体内部并不存在趋向无穷的坐标长度。一旦观察者把球面强行铺平到切空间并沿平直数轴做 $+1$ 步进，原本有界的球面折角就会被通常绝对值 $|r|_\infty$ 线性拉伸，越走越远直至发散。
+在有理射影载体 $\mathbb{T}_3(\mathbb{Q})$（第一至二卷）上，任意两态之间的原生读数都是落在 $[0, 1]$ 内的有界有理保真度 $\kappa$，其对应的实射影空间是紧致的。一旦观察者把球面强行铺平到切空间并沿平直数轴做 $+1$ 步进，原本有界的球面折角就会被通常绝对值 $|r|_\infty$ 线性拉伸，越走越远直至发散。
 
 奇妙的是，有理数域 $\mathbb{Q}^\times$ 内部自带一套与平直绝对值 $|r|_\infty$ 严格配平的反向机制：对每一颗素数 $p \in \mathbb{P}$ 与任意非零有理数 $r = \pm p^{v_p(r)} \frac{a}{b}$（其中 $p \nmid a, p \nmid b$，$v_p(r) \in \mathbb{Z}$ 为 $p$-进赋值），定义其**$p$-进超度量范数**为
 
@@ -78,15 +78,17 @@ $$
 
 在标量正整数 $\mathbb{Z}_+$ 中，素数乘法是可交换的（$2 \cdot 3 = 3 \cdot 2$），因而无法原生编码三维空间的非对易旋转词序。但是，当我们把算术从一维整数环 $\mathbb{Z}$ 提升至四维整四元数环——即**利普希茨整环** $\mathcal{L}(\mathbb{Z}) = \mathbb{Z}[\mathbf{i}, \mathbf{j}, \mathbf{k}] \cong \mathbb{Z}^4$ 与包含半整顶点的极大**赫维茨整环** $\mathcal{H}(\mathbb{Z}) = \mathcal{L}(\mathbb{Z}) \cup (\mathbb{Z} + \frac{1}{2})^4$——每一颗奇素数 $p$ 都会沿三维球面的旋转自由度发生戏剧性的**非阿贝尔素旋子分裂**！
 
-根据雅可比四平方和定理与赫维茨四元整环唯一分解理论（`文献结果`，见 [@rem-ch14-literature-and-model-boundary]），对每一颗奇素数 $p$，四平方和方程 $w^2 + x^2 + y^2 + z^2 = p$ 在 $\mathbb{Z}^4$ 中恰有 $r_4(p) = 8(p + 1)$ 组整数解，在极大赫维茨整环 $\mathcal{H}(\mathbb{Z})$ 中恰有 $24(p + 1)$ 个模方为 $p$ 的元素；模去 $24$ 个赫维茨单位元（或对 $p \equiv 1 \pmod 4$ 模去 $8$ 个利普希茨单位元 $\{\pm 1, \pm \mathbf{i}, \pm \mathbf{j}, \pm \mathbf{k}\}$），奇素数 $p$ 精确分裂为 **$p + 1$ 枚本原模方 $p$ 素旋子** $\{\boldsymbol{\pi}_{p,k}\}_{k=1}^{p+1}$。
+根据雅可比四平方和定理与赫维茨四元整环唯一分解理论（`文献结果`，见 [@rem-ch14-literature-and-model-boundary]），对每一颗奇素数 $p$，四平方和方程 $w^2 + x^2 + y^2 + z^2 = p$ 在 $\mathbb{Z}^4$ 中恰有 $r_4(p) = 8(p + 1)$ 组整数解，在极大赫维茨整环 $\mathcal{H}(\mathbb{Z})$ 中恰有 $24(p + 1)$ 个模方为 $p$ 的元素；按 $24$ 个赫维茨单位元的左乘取相伴类（或对 $p \equiv 1 \pmod 4$ 模去 $8$ 个利普希茨单位元 $\{\pm 1, \pm \mathbf{i}, \pm \mathbf{j}, \pm \mathbf{k}\}$），奇素数 $p$ 精确分裂为 **$p + 1$ 枚本原模方 $p$ 素旋子** $\{\boldsymbol{\pi}_{p,k}\}_{k=1}^{p+1}$。
 
-当 $p \equiv 1 \pmod 4$ 时，奇偶模 $4$ 约束要求 $w^2 + x^2 + y^2 + z^2 = p$ 的四个整数分量中**恰有一个为奇数、其余三个为偶数**。借 $8$ 个利普希茨单位元的左乘，每一类相伴元都唯一规范化为满足
+当 $p \equiv 1 \pmod 4$ 时，奇偶模 $4$ 约束要求 $w^2 + x^2 + y^2 + z^2 = p$ 的四个整数分量中**恰有一个为奇数、其余三个为偶数**。借 $8$ 个利普希茨单位元的左乘，每个利普希茨左相伴类都唯一规范化为满足
 
 $$
 w > 0, \qquad w \equiv 1 \pmod 2, \qquad x \equiv y \equiv z \equiv 0 \pmod 2
 $$
 
 的本原利普希茨整旋子 $\boldsymbol{\pi}_{p,k} = (w, x, y, z) \in \mathbb{Z}^4$。这 $p + 1$ 枚素旋子成对互为共轭（因 $p$ 非完全平方数，无自共轭元），从而自然分为 $(p + 1)/2$ 对互逆三维有理旋转。
+
+相伴类给出计数，球面右平移则取决于所选代表元。下面的共轭配对来自明确的奇偶与正号条件。一般奇素数的任意代表元未必有这项性质，第十五章将给出 $p=3$ 的例子。
 
 ::: {.definition #def-ch14-hurwitz-prime-spinors title="赫维茨素旋子与 p = 5 规范六生成元集 S₅"}
 对奇素数 $p \equiv 1 \pmod 4$，定义其**规范模方 $p$ 素旋子集**为
@@ -106,10 +108,10 @@ $$
 这六枚素旋子全部拥有**完全一致的射线保真度** $\kappa(\mathbf{o}, \boldsymbol{\pi}_{5,k}) = \frac{1^2}{5} = \frac{1}{5}$，在 $\mathrm{SO}(3, \mathbb{Q})$ 中分别绕 $x, y, z$ 三坐标轴作正反 $(3, 4, 5)$ 毕达哥拉斯有理旋转（转角满足 $\cos\theta = 2\kappa - 1 = -\frac{3}{5}$，$\sin\theta = \pm\frac{4}{5}$）。
 :::
 
-在严格零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中，$S_5$ 的六枚生成元作为有限归纳类型 `S5.Generator` 编码，其统一模方 $5$ 与均匀标量保真度 $\kappa = \frac{1}{5}$ 已作为精确等式冻结：
+所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。$S_5$ 的六枚生成元作为有限归纳类型 `S5.Generator` 编码，其统一模方 $5$ 与均匀标量保真度 $\kappa = \frac{1}{5}$ 已作为精确等式冻结：
 
 ::: {.theorem #thm-ch14-lps-norm-five title="零公理模方 5 六生成元集模方与均匀保真度定理" lean="D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.lps_norm_five"}
-在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中，设 $g : \mathrm{S5.Generator}$ 遍取 $S_5$ 的全部六枚规范生成元（分别对应整四元数坐标 $(1, \pm 2, 0, 0)$、$(1, 0, \pm 2, 0)$ 与 $(1, 0, 0, \pm 2)$）。记 $q.\mathrm{normSq} := w^2 + x^2 + y^2 + z^2 \in \mathbb{Z}$ 及 $q.\kappa := \mathrm{IntRatio.value}(w^2, |q.\mathrm{normSq}|)$，则对每一枚 $g : \mathrm{S5.Generator}$，以下两条精确等式同时成立：
+所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。设 $g : \mathrm{S5.Generator}$ 遍取 $S_5$ 的全部六枚规范生成元（分别对应整四元数坐标 $(1, \pm 2, 0, 0)$、$(1, 0, \pm 2, 0)$ 与 $(1, 0, 0, \pm 2)$）。记 $q.\mathrm{normSq} := w^2 + x^2 + y^2 + z^2 \in \mathbb{Z}$ 及 $q.\kappa := \mathrm{IntRatio.value}(w^2, |q.\mathrm{normSq}|)$，则对每一枚 $g : \mathrm{S5.Generator}$，以下两条精确等式同时成立：
 
 $$
 g.\mathrm{coordinates}.\mathrm{normSq} = 5
@@ -125,10 +127,10 @@ $$
 
 需要指明一处微妙而精确的差别（遵守严格陈述标准）：对于 **$p = 5$**，[@thm-ch14-lps-norm-five] 保证所有 $6$ 枚素旋子均满足 $w = 1$，因此全部具有均匀保真度 $\kappa = 1/p = 1/5$；而对更大的 $p \equiv 1 \pmod 4$（例如 $p = 13$），$p + 1 = 14$ 枚规范素旋子会自然分层为多个奇数 $w$ 壳层——$8$ 枚 $(1, \pm 2, \pm 2, \pm 2)$ 具有 $\kappa = 1/13$，另 $6$ 枚 $(3, \pm 2, 0, 0)$、$(3, 0, \pm 2, 0)$、$(3, 0, 0, \pm 2)$ 则具有 $\kappa = 9/13$——但所有素旋子仍共享同一整数模方 $p$ 与伴随旋转分母 $p$。
 
-不仅如此，极大赫维茨整环 $\mathcal{H}(\mathbb{Z})$ 的 $24$ 个单位元模去符号 $\pm 1$ 后的 $12$ 枚射影单位代表，以及 $S_5$ 六枚生成元在有限域 $\mathbb{F}_5$ 上借 $2^2 \equiv -1 \pmod 5$ 诱发的 $2\times 2$ 矩阵分裂表示，同样已在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中以精确等式冻结：
+不仅如此，极大赫维茨整环 $\mathcal{H}(\mathbb{Z})$ 的 $24$ 个单位元模去符号 $\pm 1$ 后的 $12$ 枚射影单位代表，以及 $S_5$ 六枚生成元在有限域 $\mathbb{F}_5$ 上借 $2^2 \equiv -1 \pmod 5$ 诱发的 $2\times 2$ 矩阵分裂表示，同样已在使用 `OmegaInit` 与 `OmegaMath` 的 D5 形式化（`strict_omega.axioms: []`）中以精确等式冻结：
 
 ::: {.theorem #thm-ch14-hurwitz-mod5-splitting title="赫维茨十二射影单位核与模 5 秩一外积分裂定理" lean="D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.hurwitz_core_unit D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.mod_five_rank_one D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.mod_five_product_zero"}
-在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中，记四元数整坐标类型 `Hurwitz.Coordinates`、十二射影赫维茨单位核 `Hurwitz.Core`（以二倍整坐标 `u.doubled` 无分母编码 $1$、$\mathbf{i}$、$\mathbf{j}$、$\mathbf{k}$ 及八枚半整单位 $\frac{1 \pm \mathbf{i} \pm \mathbf{j} \pm \mathbf{k}}{2}$）、六枚模方 $5$ 生成元类型 `Hurwitz.Generator`（分别对应 $(1, \pm 2, 0, 0)$、$(1, 0, \pm 2, 0)$ 与 $(1, 0, 0, \pm 2)$），以及整数分裂映射 `Hurwitz.split (w, x, y, z) := [[w + 2x, y + 2z], [2z - y, w - 2x]]` 经模 $5$ 约化所得的 $2\times 2$ 有限域矩阵映射 `Hurwitz.split5 : Coordinates → Matrix5`（其中 `Matrix5` 为 $\mathrm{Mat}_2(\mathbb{F}_5)$）。则以下三条精确等式同时成立：
+所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。记四元数整坐标类型 `Hurwitz.Coordinates`、十二射影赫维茨单位核 `Hurwitz.Core`（以二倍整坐标 `u.doubled` 无分母编码 $1$、$\mathbf{i}$、$\mathbf{j}$、$\mathbf{k}$ 及八枚半整单位 $\frac{1 \pm \mathbf{i} \pm \mathbf{j} \pm \mathbf{k}}{2}$）、六枚模方 $5$ 生成元类型 `Hurwitz.Generator`（分别对应 $(1, \pm 2, 0, 0)$、$(1, 0, \pm 2, 0)$ 与 $(1, 0, 0, \pm 2)$），以及整数分裂映射 `Hurwitz.split (w, x, y, z) := [[w + 2x, y + 2z], [2z - y, w - 2x]]` 经模 $5$ 约化所得的 $2\times 2$ 有限域矩阵映射 `Hurwitz.split5 : Coordinates → Matrix5`（其中 `Matrix5` 为 $\mathrm{Mat}_2(\mathbb{F}_5)$）。则以下三条精确等式同时成立：
 
 1. **十二射影赫维茨单位的倍坐标单位模方**（`hurwitz_core_unit`）：对每一枚 `u : Hurwitz.Core`，均有 `u.doubled.normSq = 2 * 2 = 4`（对应原始坐标模方为 $4 / 2^2 = 1$）；
 2. **模 5 秩一非零外积分解**（`mod_five_rank_one`）：对每一枚 `g : Hurwitz.Generator`，取其显式余数因子 `f := g.factors`，均有
@@ -153,15 +155,71 @@ $$
 第一项对十二元归纳类型 `Hurwitz.Core` 的全部构造子（`scalar`、八枚半整符号组合与 `i`、`j`、`k`）分情形展开，二倍坐标平方和恒为 $2^2 + 0^2 + 0^2 + 0^2 = 4$ 或 $1^2 + (\pm 1)^2 + (\pm 1)^2 + (\pm 1)^2 = 4$，十二支均由定义归约 `Eq.refl` 直接闭合。第二项对六元归纳类型 `Hurwitz.Generator` 逐一求值 `Hurwitz.split5`，六枚 $2\times 2$ 模 $5$ 矩阵依次展开为显式外积 `Matrix5.outer f.u f.v f.s f.t`（六组因子分别为 $(0,1;0,2)$、$(1,0;2,0)$、$(1,3;1,2)$、$(1,2;1,3)$、$(1,4;1,4)$ 与 $(1,1;1,1)$），且每枚至少含一非零元，六支均直接归约闭合。第三项对 $(g, h)$ 做两层六元归纳，穷举全部 $36$ 对模 $5$ 矩阵乘积，恰在六对共轭逆元处归零、其余 $30$ 对非零，每支均由定义归约闭合。全程仅依赖零公理基础库 `OmegaInit` 与 `OmegaMath`。完整证明由 Lean 内核检查。
 :::
 
-[@thm-ch14-hurwitz-mod5-splitting] 在二维旋子表示 $\mathrm{Mat}_2(\mathbb{F}_5)$ 中以零公理内核定理锁死了六枚生成元的秩一分裂与互逆零积律（这一 $2\times 2$ 模 $5$ 表示也将在[第十六章](ch16-omega-fractran-and-nonabelian-stack.md)与二维整数矩阵环接轨）。下一节我们把这一思想推至三维伴随旋转表示 $\mathrm{Mat}_3(\mathbb{F}_5)$，一举证明 $S_5$ 自由生成 $\mathrm{SO}(3, \mathbb{Q})$ 中的三生成元自由群 $F_3$。
+[@thm-ch14-hurwitz-mod5-splitting] 在二维旋子表示 $\mathrm{Mat}_2(\mathbb{F}_5)$ 中以零公理内核定理锁死了六枚生成元的秩一分裂与互逆零积律（这一 $2\times 2$ 模 $5$ 表示也将在[第十六章](ch16-omega-fractran-and-nonabelian-stack.md)与二维整数矩阵环接轨）。下一节我们把这一模 $5$ 秩一引擎推演为任意有限长度的归纳机器，在零公理内核中直接证成 $S_5$ 自由生成 $\mathrm{SO}(3, \mathbb{Q})$ 中的三生成元自由群 $F_3$。
 
 ## 14.4 模 5 秩一分解：S₅ 自由生成 SO(3, ℚ) 中的自由群 F₃
 
-乍看之下，$S_5$ 只是三对绕坐标轴转动的普通 $(3, 4, 5)$ 有理旋转矩阵。一个极为惊人的算术刚性事实是：**这三对旋转之间不存在任何非平凡隐藏关系！** 无论把它们按任意顺序连乘多少百万步，只要不在相邻两步之间直接自消（$g g^{-1}$），乘积矩阵永远不会意外撞回单位矩阵 $I_3$。
+乍看之下，$S_5$ 只是三对绕坐标轴转动的普通 $(3, 4, 5)$ 有理旋转矩阵。一个极为惊人的算术刚性事实是：**这三对旋转之间不存在任何非平凡隐藏关系！** 无论把它们按任意顺序连乘多少百万步，只要不在相邻两步之间直接自消（$g g^{-1}$），乘积矩阵永远不会意外撞回单位矩阵 $I_3$，且任意两串互异既约词在三维空间中的有理伴随旋转绝不重合。
 
-更令人拍案叫绝的是，证明 $S_5$ 在 $\mathrm{SO}(3, \mathbb{Q})$ 中自由生成三生成元自由群 $F_3$ 根本不需要高深的李群理论或连续拓扑，只需要把整倍数矩阵模 $5$ 约化到有限域 $\mathbb{F}_5$，观察它们瞬间退化为六枚**秩为一的外积矩阵**！
+更令人拍案叫绝的是，这一自由群定理根本不需要高深的李群理论或经典选择公理。在使用 `OmegaInit` 与 `OmegaMath` 的 D5 形式化（`strict_omega.axioms: []`）中，我们将 $S_5$ 的有限字编码为归纳类型 `Word`（空词 `.nil` 与首字母拼接 `.cons g tail`），以 `IsReduced w` 刻画相邻字母互不为共轭逆元的既约词，并分别记其在整四元数环与 $\mathrm{Mat}_2(\mathbb{F}_5)$ 中的左起连乘求值为 `evalQuat w : Quaternion` 与 `evalSplit5 w : Matrix5`。凭藉 [@thm-ch14-hurwitz-mod5-splitting] 确立的秩一外积分裂，任意既约词的四项算术刚性律先在旋量层被零公理锁死。
 
-::: {.example #ex-ch14-mod5-rank1-free-group title="完整代数证明：模 5 秩一外积分解与自由群 F₃ 的字长增长"}
+::: {.theorem #thm-ch14-reduced-word-non-scalar title="既约词的模 5 非零性、精确模方、5-本原性与非标量性" lean="D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.reduced_word_split5_nonzero D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.reduced_word_normSq D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.reduced_word_not_div_five D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.reduced_word_non_scalar"}
+所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。设 `w : Word` 为由六枚模方 $5$ 赫维茨生成元构成的有限词，记词长 $L := w.\mathrm{length}$、幂函数 $\operatorname{powFive}(L) := 5^L$、四坐标全被 $5$ 整除谓词 `AllDivisibleByFive q` 以及整标量四元数谓词 `IsScalar q`（即 $\exists k \in \mathbb{Z},\, q = (k, 0, 0, 0)$）。则以下四条定理无条件成立：
+
+1. **既约词的模 $5$ 分裂像恒非零**（[`reduced_word_split5_nonzero`](lean:D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.reduced_word_split5_nonzero)）：对任意满足 `IsReduced w` 的既约词 `w`，均有
+
+   $$
+   \bigl(\operatorname{evalSplit5}(w)\bigr).\mathrm{isZero} = \mathrm{false}.
+   $$
+
+2. **任意有限词的精确模方 $5^L$**（[`reduced_word_normSq`](lean:D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.reduced_word_normSq)）：对一切有限词 `w : Word`（不论是否既约），均有
+
+   $$
+   \bigl(\operatorname{evalQuat}(w)\bigr).\mathrm{normSq} = \operatorname{powFive}(w.\mathrm{length}) = 5^L.
+   $$
+
+3. **既约词的 $5$-本原性**（[`reduced_word_not_div_five`](lean:D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.reduced_word_not_div_five)）：对任意满足 `IsReduced w` 的既约词 `w`，其四元数四个整坐标绝不同时被 $5$ 整除，即
+
+   $$
+   \neg\,\operatorname{AllDivisibleByFive}\bigl(\operatorname{evalQuat}(w)\bigr).
+   $$
+
+4. **非空既约词的严格非标量性**（[`reduced_word_non_scalar`](lean:D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.reduced_word_non_scalar)）：对任意满足 `IsReduced w` 且非空（$w \neq \mathrm{nil}$）的既约词 `w`，其求值四元数绝非整数标量，即
+
+   $$
+   \neg\,\operatorname{IsScalar}\bigl(\operatorname{evalQuat}(w)\bigr).
+   $$
+:::
+
+::: {.proof}
+先在模 $5$ 余数域 $\mathbb{F}_5$ 上确立分裂映射 `quaternionSplit5` 为四元数乘法到 $\mathrm{Mat}_2(\mathbb{F}_5)$ 矩阵乘法的同态（展开整坐标积可见其逐位误差恰为 $5$ 的整数倍），故 `evalSplit5 w = quaternionSplit5 (evalQuat w)`。对第 1 款，空词映为单位矩阵 $I_2 \neq 0$；对非空既约词 `.cons g tail` 按尾词长度归纳：由 [@thm-ch14-hurwitz-mod5-splitting] 的秩一分解与互逆零积判据可知任意非互逆相邻对 $(g, h)$ 的外积行—列缩并标量在 $\mathbb{F}_5$ 中非零，从而整条既约乘积始终保持首字母列向量与非零行向量，又因每枚生成元列向量均含分量 $1 \in \mathbb{F}_5$，外积矩阵绝不归零。第 2 款直接由每枚生成元模方为 $5$ 与四平方范数乘性按词长归纳证毕。第 3 款用反证法：若 `evalQuat w` 四坐标皆为 $5$ 的倍数，则其模 $5$ 分裂像必为零矩阵，与第 1 款矛盾。第 4 款亦用反证法：若非空既约词满足 $\operatorname{evalQuat}(w) = (k, 0, 0, 0)$，由第 2 款得 $k^2 = 5^L \equiv 0 \pmod 5$；因域 $\mathbb{F}_5$ 无零因子，必有 $5 \mid k$，从而 $(k, 0, 0, 0)$ 四坐标全被 $5$ 整除，再次与第 1 款矛盾。全程仅依赖 `OmegaInit` 与 `OmegaMath`，传递公理闭包为空集。完整证明由 Lean 内核检查。
+:::
+
+[@thm-ch14-reduced-word-non-scalar] 已经在四元数旋量层彻底杜绝了非空既约词坍缩成标量。要将这一刚性最终推升为三维有理正交群 $\mathrm{SO}(3, \mathbb{Q})$ 中的真正自由群嵌入 $F_3 \hookrightarrow \mathrm{SO}(3, \mathbb{Q})$，还需回答一个更尖锐的问题：设两串既约词 $u, v$ 对应的有理伴随旋转（见[第五章](ch05-rational-cayley-rotations.md) [@thm-ch05-rational-adjoint-action]）在三维空间中恰好相等，哪怕仅仅检验它们在第一与第二两条坐标轴上的作用一致，是否就足以迫使两串词逐字母完全相同？下面这条零公理收官定理给出肯定的最终判决。
+
+::: {.theorem #thm-ch14-reduced-words-adjoint-injective title="伴随单射定理：S₅ 自由生成 SO(3, ℚ) 中的自由群 F₃" lean="D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.reduced_words_adjoint_injective"}
+所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。记两条标准整数坐标轴 $\mathrm{axisX} := (1, 0, 0)$ 与 $\mathrm{axisY} := (0, 1, 0)$ 及其有理嵌入 `RatVec3.ofInt axisX`、`RatVec3.ofInt axisY`，并以 `Ad` 记[第五章](ch05-rational-cayley-rotations.md)定义的无根号有理伴随作用。设 `u, v : Word` 为任意两串满足 `IsReduced u` 与 `IsReduced v` 的既约词；若它们诱导的有理伴随旋转在两条坐标轴上分别等价（在 `RatVec3.Equiv` 下成立）
+
+$$
+\operatorname{Ad}\bigl(\operatorname{evalQuat}(u)\bigr)(\mathrm{axisX}) \;\equiv\; \operatorname{Ad}\bigl(\operatorname{evalQuat}(v)\bigr)(\mathrm{axisX})
+\quad \text{且} \quad
+\operatorname{Ad}\bigl(\operatorname{evalQuat}(u)\bigr)(\mathrm{axisY}) \;\equiv\; \operatorname{Ad}\bigl(\operatorname{evalQuat}(v)\bigr)(\mathrm{axisY}),
+$$
+
+则两串既约词字面完全相等：
+
+$$
+u = v.
+$$
+:::
+
+::: {.proof}
+记 $p := \operatorname{evalQuat}(u)$、$q := \operatorname{evalQuat}(v)$，由 [@thm-ch14-reduced-word-non-scalar] 第 2 款知 $\lVert p\rVert^2 = 5^{|u|} \neq 0$ 与 $\lVert q\rVert^2 = 5^{|v|} \neq 0$ 皆非零。对任一坐标轴 $e \in \{\mathrm{axisX}, \mathrm{axisY}\}$，将有理等价 $\operatorname{Ad}(p)(e) \equiv \operatorname{Ad}(q)(e)$ 交叉去分母得 $\lVert q\rVert^2(p e \bar{p}) = \lVert p\rVert^2(q e \bar{q})$；两端左乘 $\bar{p}$、右乘 $q$ 并利用 $\bar{p}p = \lVert p\rVert^2$ 与 $\bar{q}q = \lVert q\rVert^2$，再约去非零整数 $\lVert p\rVert^2\lVert q\rVert^2$，立得相对四元数 $\bar{p}q$ 与纯虚基元 $e$ 可交换：$(\bar{p}q)e = e(\bar{p}q)$。因 $\bar{p}q$ 同时与 $\mathbf{i}$ 和 $\mathbf{j}$ 交换，展开四元数换位子给出 $2x = 2y = 2z = 0$，故 $\bar{p}q$ 必为整数标量四元数。最后对词 $u$ 施结构归纳：若 $u, v$ 首字母相同（同为 $g$），则 $\overline{gp}(gq) = 5(\bar{p}q)$ 仍为标量，约去非零因子 $5$ 后对余词归约；一旦首字母首次出现分歧（或一词为空而另一词非空），将前者逐字反序取共轭逆并与后者拼接所得的新词 `reverseOppositeAppend u v` 恰是一串**非空既约词**，其求值恰等于 $\bar{p}q$，这与 [@thm-ch14-reduced-word-non-scalar] 第 4 款直接矛盾！因此 $u = v$。全程仅依赖 `OmegaInit` 与 `OmegaMath`，传递公理闭包为空集。完整证明由 Lean 内核检查。
+:::
+
+特别地，在 [@thm-ch14-reduced-words-adjoint-injective] 中令 $v = \mathrm{nil}$ 立刻看出：任何既约词只要其有理伴随旋转固定 $\mathrm{axisX}$ 与 $\mathrm{axisY}$，就必然是空词 $w = \mathrm{nil}$。这在零公理内核中无条件证明了全部既约词到 $\mathrm{SO}(3, \mathbb{Q})$ 的映射严格单射且核平凡，亦即 $S_5$ 自由生成三生成元自由群 $F_3 \hookrightarrow \mathrm{SO}(3, \mathbb{Q})$。为了把这一机制的几何动作具象到三维旋转矩阵本身，下面的具体算例同步展示三维伴随表示 $\mathrm{Mat}_3(\mathbb{F}_5)$ 中的模 $5$ 秩一外积分解。
+
+::: {.example #ex-ch14-mod5-rank1-free-group title="三维伴随矩阵显式核验：模 5 秩一外积分解与自由群 F₃ 的字长增长"}
 令 $A := R(1, 2, 0, 0)$、$B := R(1, 0, 2, 0)$、$C := R(1, 0, 0, 2)$，逆元为 $A^{-1} = R(1, -2, 0, 0)$、$B^{-1} = R(1, 0, -2, 0)$、$C^{-1} = R(1, 0, 0, -2)$。由四元数伴随作用 $\mathbf{v} \mapsto \frac{1}{5}\boldsymbol{\pi}\mathbf{v}\overline{\boldsymbol{\pi}}$ 直接算出六枚缩放整矩阵 $M_g := 5 R(g) \in \mathrm{Mat}_{3\times 3}(\mathbb{Z})$（`手工推导`）：
 
 $$
@@ -196,6 +254,12 @@ $$
 然而当 $L \ge 1$ 时，$5^L I_3 \equiv 0 \pmod 5$。因此绝不可能有 $R(w) = I_3$！这不但严格证明了 $\langle A, B, C \rangle \cong F_3 \hookrightarrow \mathrm{SO}(3, \mathbb{Q})$，还同步证出整矩阵 $5^L R(w)$ 永远不能被 $5$ 整除——任何既约词的精确既约分母恒为 $5^L$，不存在一丝 $5$-进约分塌缩！
 :::
 
+下面的静态图把第 14.2 节的标量阿代尔乘积配平与刚刚在零公理内核中证毕的模 $5$ 秩一自由群嵌入（[@thm-ch14-reduced-word-non-scalar]、[@thm-ch14-reduced-words-adjoint-injective]）并置对照，直观展示素数如何一边在所有有理度量通道中把平直拉伸精确收回至 $1$，一边在有理旋转群 $\mathrm{SO}(3,\mathbb Q)$ 中沿 $S_5$ 展开为永不回撞的六度自由树 $F_3$。
+
+::: {.figure src="ch14-adelic-f3-tree"}
+**有理阿代尔乘积归元与 $S_5 \hookrightarrow F_3$ 六度自由凯莱树。** 图中左侧呈现有理数（如 $r = -18/35$）在平直绝对值 $|r|_\infty$ 与有限支集 $p$-进超度量通道 $|r|_p$ 之间精确配平为 $|r|_\infty \prod_p |r|_p = 1$（[@thm-ch14-adelic-product-formula]、[@ex-ch14-adelic-nucleation-audit]）；右侧展示六枚模方 $5$ 赫维茨素旋子 $S_5$（[@thm-ch14-lps-norm-five]）在伴随表示中借模 $5$ 秩一外积分裂（[@thm-ch14-hurwitz-mod5-splitting]、[@ex-ch14-mod5-rank1-free-group]）织出的无回溯 $6$-正则自由树 $F_3 \hookrightarrow \mathrm{SO}(3, \mathbb{Q})$，既约词数按 $1, 6, 30, 150, \dots$ 指数展开且永无 $5$-进约分塌缩。
+:::
+
 ## 14.5 字数指数增长、比特高度率与模方 5 六轴球面覆盖
 
 自由群嵌入 $F_3 \hookrightarrow \mathrm{SO}(3, \mathbb{Q})$ 赋予了有理球面几何极高的信息打包密度。统计恰由 $L$ 枚门构成的既约词数量：长度为 $0$ 的空词有 $1$ 个；长度为 $1$ 的单门有 $6$ 个；此后每追加一拍，只需避开前一步的逆门，尚余 $5$ 种独立分支选择，因此精确字数呈几何级数暴涨 $N_{\mathrm{words}}(L) = 6 \cdot 5^{L - 1}$（$L \ge 1$）：
@@ -209,13 +273,13 @@ $$
 | $4$ | $750$ | $937$ | $625$ | $4.643856$ |
 | $5$ | $3750$ | $4687$ | $3125$ | $5.804820$ |
 
-审视最右一列：每乘入一枚模方 $5$ 素旋子 $\boldsymbol{\pi}_{5,k}$，四元整旋子 $\mathbf{q} = \boldsymbol{\pi}_{5,k_1} \cdots \boldsymbol{\pi}_{5,k_L} \in \mathbb{Z}^4$ 的欧氏模方严格乘以 $5$（$\|\mathbf{q}\|^2 = 5^L$，且由模 $5$ 秩一论证知 $\mathbf{q}$ 本原不可被 $5$ 约去），因此每个整坐标的绝对值受 $\|\mathbf{q}\| = 5^{L/2}$ 控制，单门旋子存储的**比特高度增长率**精确为
+审视最右一列：每乘入一枚模方 $5$ 素旋子 $\boldsymbol{\pi}_{5,k}$，四元整旋子 $\mathbf{q} = \boldsymbol{\pi}_{5,k_1} \cdots \boldsymbol{\pi}_{5,k_L} \in \mathbb{Z}^4$ 的欧氏模方严格乘以 $5$（正如零公理定理 [@thm-ch14-reduced-word-non-scalar] 第 2、3 款所证，$\|\mathbf{q}\|^2 = 5^L$ 且 $\mathbf{q}$ 本原不可被 $5$ 约去），因此每个整坐标的绝对值受 $\|\mathbf{q}\| = 5^{L/2}$ 控制，单门旋子存储的**比特高度增长率**精确为
 
 $$
 h_{\mathrm{spinor}}(5) = \frac{1}{2}\log_2 5 \approx 1.160964\;\text{比特/门}
 $$
 
-（对应伴随旋转矩阵 $R(w) \in \mathrm{SO}(3, \mathbb{Q})$ 的分母 $5^L$ 消耗两倍高度 $\log_2 5 \approx 2.321928$ 比特/门）。仅仅在五步之内，$3750$ 枚互异有理旋转便已以极低比特代价密布于紧致球面之上。
+（对应伴随旋转矩阵 $R(w) \in \mathrm{SO}(3, \mathbb{Q})$ 的分母 $5^L$ 消耗两倍高度 $\log_2 5 \approx 2.321928$ 比特/门）。长度恰为五的既约词给出 $3750$ 枚互异的有理旋转。
 
 更值得注意的是，同一枚“$(1, \pm 2)$ 模方 $5$ 六轴”整系数构型，在二维单位球面 $S^2 \subset \mathbb{R}^3$ 的覆盖几何中也展现出惊人的代数效率——在所钉 `trureturing` 冻结库中，六条模方 $5$ 有理轴只需一条显式非负多项式恒等式，便足以给出整个球面的无正交开覆盖：
 
@@ -250,7 +314,19 @@ $$
 :::
 
 ::: {.remark #rem-ch14-literature-and-model-boundary title="雅可比四平方和、赫维茨整环分解与阿代尔几何诠释的证据边界"}
-本章的证据按三层严格划界：[@thm-ch14-adelic-product-formula]、[@thm-ch14-prime-log-independence]、[@thm-ch14-lps-norm-five] 与 [@thm-ch14-hurwitz-mod5-splitting]（后二者均属严格零公理库 `OmegaInit` 与 `OmegaMath`，`axioms: []`，其中 [@thm-ch14-hurwitz-mod5-splitting] 锚定赫维茨十二射影单位核的倍坐标单位模方以及 $S_5$ 在 $\mathrm{Mat}_2(\mathbb{F}_5)$ 中的秩一外积分裂与互逆零积判据）以及 [@thm-ch14-six-axis-open-cover] 锚定于所钉 `trureturing` 冻结声明；第 14.4 节在 $3\times 3$ 伴随表示 $\mathrm{Mat}_3(\mathbb{F}_5)$ 中的模 $5$ 秩一外积分解证明 $S_5$ 自由生成 $F_3 \hookrightarrow \mathrm{SO}(3, \mathbb{Q})$ 以及字长表与比特高度率 $\frac{1}{2}\log_2 5$ 为完整初等代数论证（`手工推导`）；将素数解读为平直切线发散下的超度量曲率回收核属本书概念诠释（`MODEL`）。**文献结果，未在本书形式化**：正整数四平方和表法数 $r_4(n) = 8\sum_{4 \nmid d \mid n} d$ 源于 C. G. J. Jacobi（*Fundamenta Nova*, 1829）；极大四元整环 $\mathcal{H}(\mathbb{Z})$ 的带余除法与素元分解源于 A. Hurwitz（*Nachr. Ges. Wiss. Göttingen*, 1896, pp. 313–340）；$(3,4,5)$ 旋转生成自由群与一般奇素数 $p \equiv 1 \pmod 4$ 的自由积结构见 S. Świerczkowski（*Fund. Math.* **46**, 187–189, 1958）及 A. Lubotzky, R. Phillips & P. Sarnak（*Combinatorica* **8**, 261–277, 1988）。另需注意，[@thm-ch14-six-axis-open-cover] 的六条轴位于三维空间 $\mathbb{R}^3$ 并共享模方 $5$ 的 $(1, \pm 2)$ 整系数构型，它与四维四元数旋子集 $S_5 \subset \mathbb{Z}^4$ 分属不同维度载体，切勿混同。
+本章的证据按三层严格划界：[@thm-ch14-adelic-product-formula]、[@thm-ch14-prime-log-independence] 与 [@thm-ch14-six-axis-open-cover] 锚定于所钉 `trureturing` 经典阴影冻结声明，而 [@thm-ch14-lps-norm-five]、[@thm-ch14-hurwitz-mod5-splitting]、[@thm-ch14-reduced-word-non-scalar] 与 [@thm-ch14-reduced-words-adjoint-injective] 全部冻结于使用 `OmegaInit` 与 `OmegaMath` 的 D5 形式化（`strict_omega.axioms: []`），完整覆盖模方 $5$ 六生成元、赫维茨十二射影单位核、$\mathrm{Mat}_2(\mathbb{F}_5)$ 秩一外积分裂、任意既约词的 $5$-本原性与非标量性，以及 $S_5$ 自由生成 $F_3 \hookrightarrow \mathrm{SO}(3, \mathbb{Q})$ 的双轴伴随单射定理；第 14.4 节在 $3\times 3$ 伴随表示 $\mathrm{Mat}_3(\mathbb{F}_5)$ 中的补充显式外积核验（[@ex-ch14-mod5-rank1-free-group]）以及字长表与比特高度率 $\frac{1}{2}\log_2 5$ 为完整初等代数论证（`手工推导`）；将素数解读为平直切线发散下的超度量曲率回收核属本书概念诠释（`MODEL`）。**文献结果，未在本书形式化**：正整数四平方和表法数 $r_4(n) = 8\sum_{4 \nmid d \mid n} d$ 源于 C. G. J. Jacobi（*Fundamenta Nova*, 1829）；极大四元整环 $\mathcal{H}(\mathbb{Z})$ 的带余除法与素元分解源于 A. Hurwitz（*Nachr. Ges. Wiss. Göttingen*, 1896, pp. 313–340）；$(3,4,5)$ 旋转生成自由群与一般奇素数 $p \equiv 1 \pmod 4$ 的自由积结构见 S. Świerczkowski（*Fund. Math.* **46**, 187–189, 1958）及 A. Lubotzky, R. Phillips & P. Sarnak（*Combinatorica* **8**, 261–277, 1988）。另需注意，[@thm-ch14-six-axis-open-cover] 的六条轴位于三维空间 $\mathbb{R}^3$ 并共享模方 $5$ 的 $(1, \pm 2)$ 整系数构型，它与四维四元数旋子集 $S_5 \subset \mathbb{Z}^4$ 分属不同维度载体，切勿混同。
+:::
+
+下面的短片沿本章主线走一遍：从每个素数一把尺，到六枚素旋子织出的自由树，再到六轴球面覆盖。
+
+::: {.film src="a-ruler-for-every-prime"}
+**平直尺拉长多少，素数尺就收回多少；一颗素数 $5$ 分裂成六枚素旋子，织出一棵永不回头的自由树（2 分 42 秒）。** 对数刻度的条形图上，青色条是平直读数 $|n|_\infty$，品红条是素数读数 $|n|_p$，两边等长；$2$ 至 $6$ 与对 $2$、$3$、$5$ 号尺全盲的逃逸见证 $31$ 的总积均在屏幕上重算为 $1$，绿色标签对应 [@thm-ch14-adelic-product-formula] 与 [@thm-ch14-prime-log-independence]，把素数读作曲率回收核的紫色面板是本书诠释。随后 $(1 + 2i)(1 - 2i) = 5$ 给出六枚素旋子，绿色标签对应 [@thm-ch14-lps-norm-five]；$1 + 2i$ 的 $(3, 4, 5)$ 旋转矩阵、六个模 $5$ 的 $2\times 2$ 矩阵及其“一列乘一行”分解、$6\times 6$ 乘积表中恰在互逆对处的 $6$ 个品红零格为屏幕计算，绿色标签对应 [@thm-ch14-hurwitz-mod5-splitting]。既约词 $(1 + 2i)(1 + 2j)(1 + 2k) = (-7, 6, -2, 6)$ 的模方 $125 = 5^3$、衔接标量 $3$ 与 $4$、琥珀色的模 $5$ 余数 $3, 1, 3, 1$ 为屏幕计算，“衔接处非零”的链式图景是证明思路；绿色标签对应 [@thm-ch14-reduced-word-non-scalar] 第 1、2 款与 [@thm-ch14-reduced-words-adjoint-injective]。径向自由树以青、品红、紫三色区分 $i$、$j$、$k$ 三轴，词数 $6$、$30$、$150$，长度不超过 $3$ 的 $187$ 个既约词给出 $187$ 个互异旋转，比特高度 $\tfrac12 \log_2 5 \approx 1.160964$，均为屏幕计算（参见 [@ex-ch14-mod5-rank1-free-group]）。最后六根模方 $5$ 的轴及其 $45^\circ$ 球冠盖满球面，绿色标签对应 [@thm-ch14-six-axis-open-cover]，球面上的采样点只是示意。
+:::
+
+读者可在下方的交互实验卡中亲手验证本章的两条主轴：一方面输入任意非零有理数实时拆解阿代尔乘积恒等式 $|r|_\infty \prod_p |r|_p = 1$，另一方面沿六枚模方 $5$ 生成元 $S_5$ 自由拼接旋转词，现场观察六度凯莱树的无碰撞生长与全部 $36$ 对模 $5$ 秩一外积衔接标量。
+
+::: {.viz src="adelic-arithmetic-observer-lab" preset="adelic-balance-and-f3-tree" height="520"}
+**阿代尔乘积归元与 $S_5 \hookrightarrow F_3$ 自由树实验卡（`adelic-balance-and-f3-tree`）。** 交互调节有理数 $r \in \mathbb{Q}^\times$ 核验平直范数 $|r|_\infty$ 与有限支集 $p$-进范数精确配平 $|r|_\infty \prod_p |r|_p = 1$（[@thm-ch14-adelic-product-formula]），并在同卡中逐拍拼接 $S_5$ 六枚模方 $5$ 素旋子（[@thm-ch14-lps-norm-five]），实时展开 $6$-正则自由群凯莱树 $F_3$ 与模 $5$ 秩一矩阵外积分裂（[@thm-ch14-hurwitz-mod5-splitting]、[@ex-ch14-mod5-rank1-free-group]），直观确认仅互逆对归零、所有非空既约词精确保持分母 $5^L$。
 :::
 
 现在，六枚模方 $5$ 素旋子 $S_5$ 已经在 $\mathrm{SO}(3, \mathbb{Q})$ 中织出一棵永不闭合的 $6$-正则自由树 $F_3$。自然而迫切的下一个问题是：**当这六枚素旋子作为球面平均算子同时作用于三维球面上的高阶有理谐波时，它们的扩散速度究竟有多快？能否把谱理论中原本依赖复数 $\mathbb{C}$、对数 $\ln p$ 与平方根 $\sqrt{p}$ 的拉马努金最优谱隙，彻底改写为一条零复数、零根号的纯有理半正定不等式？** 这将引领我们进入卷五的高潮——[第十五章](ch15-rational-hecke-ramanujan-spectrum.md)。

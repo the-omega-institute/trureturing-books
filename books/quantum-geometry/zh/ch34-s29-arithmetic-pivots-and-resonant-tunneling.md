@@ -520,6 +520,12 @@ $$
 **多级舒尔枢轴共振中继与离轴反复平方失谐爆炸实验卡（`fabry-perot-rogue-explosion`）。** 在首颗零点纵坐标剖面 $t = \gamma_1 \approx 14.1347$ 上拖动琥珀色落点圆环或滑块调节假想右半带偏移 $\delta$（琥珀色标出当前激活的枢轴阱与读头，其余枢轴阱 $\widetilde{G}^{(1)}\text{–}\widetilde{G}^{(4)}$ 与倍增层环为紫色）：在临界线 $\delta = 0.00$ 处，凯莱比 $(s - 1)/s$ 及其倒数 $w = -\rho/(1 - \rho) = \rho/(\rho - 1)$ 均严守单位模长 $\lvert w\rvert^{2^\ell} = 1.000000$，青色中继波束无损锁入临界脊线上的青色单位圆环（绿色 `LEAN ✓` 对应 `golden_right_half_strip_implies_rh`、`cayley_ratio_norm_one_iff_critical_line`、`cayley_critical_line_zeta_criterion` 与 `original_zero_robin5040_localA`）；一旦假想 $\delta > 0$（此时右半带 $(s - 1)/s$ 模长小于 $1$，倒数比值 $w = -\rho/(1 - \rho)$——等价于左侧镜像根 $\rho_- = \frac{1}{2} - \delta + i\gamma_1$ 处的 $(\rho_- - 1)/\rho_-$——模长 $\lvert w\rvert > 1$），品红色逃逸柱与条带曲线 $\log_{10}\lvert w\rvert^{2^\ell}$ 逐层反复平方，在预设 $\delta = 0.05$ 下于 $\ell = 12$ 升至 $2.78$、于 $\ell = 16$ 飙升至 $1.30\times 10^7$。
 :::
 
+上面的失谐爆炸全靠一个前提：凯莱比的模长恰好在临界线上等于 $1$。这把“镜面上的尺”本身由 [@thm-ch34-critical-strip-barrier-and-cayley-bridge] 第 3 款钉牢（第 2 款再把搜索减半）；但镜面对称只能让非平凡零点成对出现，并不能把它们安放到镜面上——下面这部短片把这两件事分开来看。
+
+::: {.film src="mirror-is-not-location"}
+**镜子不等于定位（2 分 29 秒）。** 青色竖线是临界线 $\operatorname{Re}(s) = \frac{1}{2}$；琥珀色的点 $s$ 与白色的镜像 $1 - \bar{s}$ 隔着它相对（镜墙、房间与两盏灯都是比方，画面标紫）。在 $0$ 与 $1$ 各放一盏灯，比值“到灯 $1$ 的距离 ÷ 到灯 $0$ 的距离”就是 $\lVert (s-1)/s\rVert$：屏幕上算出 $s = 2$ 时为 $\frac{1}{2}$、镜像 $s = -1$ 时为 $2$，镜像把比值取倒数，只有临界线上比值为 $1$。绿色 `LEAN ✓` 依次标出：对一切复数 $s$，$\lVert (s-1)/s\rVert = 1$ 当且仅当 $\operatorname{Re}(s) = \frac{1}{2}$；黎曼猜想等价于每个非平凡零点的对数径向亏量为零；右半开带 $\frac{1}{2} < \operatorname{Re}(\rho) < 1$ 无零点即推出黎曼猜想（[@thm-ch34-critical-strip-barrier-and-cayley-bridge]）。随后的赝品四次式零点为 $\frac{1}{2} \pm \frac{1}{4} \pm 14i$，兼具反射 $s \mapsto 1 - s$ 与共轭 $s \mapsto \bar{s}$ 两种对称（二者合成镜像 $1 - \bar{s}$），却没有一个零点在线上；对一切非零偏移与高度，绿色 `LEAN ✓` 只标出这些对称与零点位置（[@thm-full-symmetry-not-localization]，亦见 [@thm-ch34-arc-riemann-sagitta-hb-stokes-bridge]）。青色的 $0.998727$ 与品红色的 $1.001274$ 两两互为倒数；沿临界线 $F(\frac{1}{2} + it) \ge 49$ 只对这组参数 $\delta = \frac{1}{4}$、$\gamma = 14$ 成立；这些数是屏幕上的计算。片尾分层：黎曼猜想本身已由外部 Lean 4 形式化证明确立、未冻结于本书所钉仓库（[@conj-riemann-hypothesis]）；红色标出的是本节仍开放的 [@prob-ch34-arithmetic-pivot-area-law]。
+:::
+
 至此，局部波前消元与全局跨势垒共振接力的几何拼图已全部就位；接下来我们把三种攻关范式摆上同一张对照台账，并用最严格的认识论诚实准绳钉死这条路线上的“最后一公里”开放问题。
 
 ## 31.2.4 三大攻关范式总对照、算术枢轴面积律“最后一公里”开放问题与微积分重塑前奏 {#sec-ch34-29-4}

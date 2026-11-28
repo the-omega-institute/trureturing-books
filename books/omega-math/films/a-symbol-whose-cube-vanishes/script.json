@@ -1,0 +1,293 @@
+{
+ "voice": "af_heart",
+ "speed": 0.94,
+ "say": {
+  "Lean": "Leen",
+  "Berkeley's": "Barkly's",
+  "Itô's": "Ee-toe's",
+  "Stratonovich's": "Strah-tuh-noh-vitch's"
+ },
+ "music": {
+  "bpm": 80,
+  "progression": "d-minor"
+ },
+ "scenes": [
+  {
+   "id": "ghosts",
+   "name": "NO GHOSTS",
+   "lead": 2.0,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 2.6,
+     "kind": "stamp"
+    }
+   ],
+   "lines": [
+    [
+     "Calculus once divided by a step, then set it to zero: Berkeley's ghosts of departed quantities.",
+     "微积分曾先用步长作除数，再令它为零：贝克莱口中“已死量的幽灵”。"
+    ],
+    [
+     "This chapter keeps one formal symbol, eta, whose cube is declared zero.",
+     "本章只留一个形式符号 η，并规定它的立方为零。"
+    ],
+    [
+     "So every quantity is three rational slots: value, slope, half the bend.",
+     "于是每个量都是三格有理数：值、斜率、弯曲的一半。"
+    ]
+   ]
+  },
+  {
+   "id": "divide",
+   "name": "DIVISION STOPS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.2,
+    0.3
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 1.6,
+     "kind": "chime"
+    }
+   ],
+   "lines": [
+    [
+     "Division now stops after two terms, with no limit and no endless series.",
+     "除法如今两项之内就终止，不取极限，也不展开无穷级数。"
+    ],
+    [
+     "The inverse is one closed form: three fractions, with the first slot as denominator.",
+     "逆元只有一个闭式：三个分数，分母是第一格。"
+    ],
+    [
+     "Multiply back: one, zero, zero. Lean checks this for every finite, nonzero first slot.",
+     "乘回去，读出 1、0、0。只要第一格有限且非零，Lean 就检验它成立。"
+    ],
+    [
+     "Compose two jets: slopes multiply, and the bend collects two terms. Lean checks both chain rules.",
+     "复合两个射流：斜率相乘，弯曲收进两项。Lean 检验了一阶与二阶链式法则。"
+    ]
+   ]
+  },
+  {
+   "id": "shell",
+   "name": "STAY ON THE SHELL",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.6,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "On a sphere, a flat tangent step pokes out by eta squared, v squared.",
+     "在球面上，平直的切向步会刺出球壳，模方多出 η²‖v‖²。"
+    ],
+    [
+     "Pull it back by half of that, and the squared length is exactly one, modulo eta cubed.",
+     "向内拉回其中的一半，模 η³ 之后模方恰好为 1。"
+    ],
+    [
+     "A real step of one half: flat, five fourths; arc, sixty-five sixty-fourths.",
+     "取实际步长 1/2：平直点模方 5/4，圆弧点 65/64。"
+    ],
+    [
+     "One substitution reads past value, present slope and future bend: the book's causal model.",
+     "代入一次，就读出过去的值、现在的斜率与未来的弯曲：这是本书的因果模型诠释。"
+    ]
+   ]
+  },
+  {
+   "id": "kappa",
+   "name": "THE FIDELITY JET",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 2.4,
+     "kind": "stamp"
+    }
+   ],
+   "lines": [
+    [
+     "Now the book's fidelity kernel: one over one plus x squared.",
+     "再看全书的保真度核：κ(x) = 1/(1 + x²)。"
+    ],
+    [
+     "Put x nought plus eta in; the closed-form inverse gives the exact triple.",
+     "代入 x₀ + η，有限闭式逆直接给出精确的三元组。"
+    ],
+    [
+     "At x equal to one: one half, minus one half, one quarter. Lean checks that triple.",
+     "在 x = 1 处：1/2、−1/2、1/4。Lean 检验了这组三元组。"
+    ],
+    [
+     "At zero the bend term is minus one; at two, plus eleven over one hundred twenty-five.",
+     "在 0 处二阶项是 −1；在 2 处是 +11/125。"
+    ]
+   ]
+  },
+  {
+   "id": "secant",
+   "name": "THE SECANT'S DEBT",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 3.4,
+     "kind": "impact"
+    }
+   ],
+   "lines": [
+    [
+     "A secant uses two snapshots a step h apart. Lean checks its exact error, one fraction.",
+     "割线用相距 h 的两张快照。Lean 检验了它的精确偏差：一个分数。"
+    ],
+    [
+     "At one, with step one quarter, it reads minus eighteen over forty-one: too high by five eighty-seconds.",
+     "在 1 处取步长 1/4，割线斜率是 −18/41，比真斜率高出 5/82。"
+    ],
+    [
+     "At one half, the error vanishes by accident: the chord straddles an inflection.",
+     "在 1/2 处，偏差碰巧为零：弦跨过了拐点。"
+    ],
+    [
+     "Yet the chord never sees the bend, minus sixteen over one hundred twenty-five.",
+     "可弦始终看不见弯曲项 −16/125。"
+    ]
+   ]
+  },
+  {
+   "id": "drift",
+   "name": "ONE MINUS TWO ALPHA",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.7,
+    0.3,
+    0.4
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 1.6,
+     "kind": "chime"
+    }
+   ],
+   "lines": [
+    [
+     "Now a finite step on the three-sphere, sampled at weight alpha.",
+     "现在在三维球面上走有限的一步，按权重 α 取样。"
+    ],
+    [
+     "Lean checks the drift: squared length minus one equals one minus two alpha, times the squared step.",
+     "Lean 检验了漂移：模方减 1 等于 (1 − 2α) 乘以步长的模方。"
+    ],
+    [
+     "The book's example: the left endpoint flies out to twenty-three ninths; the right sinks to nine twenty-thirds.",
+     "书中的例子：左端点外飞到 23/9，右端点内缩到 9/23。"
+    ],
+    [
+     "Only alpha one half gives one: Lean checks the midpoint stays on the sphere for any step.",
+     "唯有 α = 1/2 得到 1：Lean 检验了中点步对任意步幅都留在球面上。"
+    ]
+   ]
+  },
+  {
+   "id": "halves",
+   "name": "TWO EQUAL HALVES",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.6,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 4.0,
+     "kind": "stamp"
+    }
+   ],
+   "lines": [
+    [
+     "The midpoint lands on eleven, eighteen, twelve, six, over twenty-five: a rational unit point.",
+     "中点落在 (11, 18, 12, 6)/25：一个有理单位点。"
+    ],
+    [
+     "Reflect the start through it: both half-steps share fidelity one twenty-one over six twenty-five. Lean checks it.",
+     "关于中点反射起点：两个半拍的保真度同为 121/625。Lean 检验了这一相等。"
+    ],
+    [
+     "Left sums give Itô's integral, midpoint sums Stratonovich's; here the gap is the exact factor one minus two alpha.",
+     "左端点求和给出伊藤积分，中点求和给出斯特拉托诺维奇积分；在这里，两者之差就是精确因子 1 − 2α。"
+    ]
+   ]
+  },
+  {
+   "id": "close",
+   "name": "LEDGER",
+   "lead": 0.5,
+   "tail": 3.6,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.2
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 0.3,
+     "kind": "chime"
+    }
+   ],
+   "lines": [
+    [
+     "Omega Math, chapter seven: three slots, no limit taken.",
+     "《OMEGA MATH》第七章：三格有理数，不取一次极限。"
+    ]
+   ]
+  }
+ ]
+}

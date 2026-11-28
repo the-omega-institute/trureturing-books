@@ -84,6 +84,12 @@ $$
 **品红球面帽比青色平削面多出的角超 $\Omega(\epsilon)$，让绕行一圈的箭头转着回来。** 沿测地回路 $A \to B \to C \to A$ 拖动回路滑块 $t$：切向量平行移动一周精确偏转吉拉尔角超 $\Omega(\epsilon) = 2\arctan(\tan^2(\epsilon/2))$，旋量闭环相位精确记下一半 $-\Omega(\epsilon)/2$（高斯—博内与贝里和乐标 `ARGUED`）。
 :::
 
+三个内积与品红帽还能装进同一个复数。把三根射线代入[§29.7](ch34-s06-berry-sectors-and-path-integrals.md#sec-ch34-berry-sector-volume-and-path-integral)的单比特三点巴格曼迹（[@thm-ch34-berry-sector-holonomy-and-bargmann-lift] 第 1 款），得到 $\operatorname{Tr}\bigl(P(\mathbf{A})P(\mathbf{B})P(\mathbf{C})\bigr) = \frac{(1+\cos\epsilon)^2}{4} + i\,\frac{\sin^2\epsilon}{4}$：实部只含三个内积，其中一步直达的 $\cos^2\epsilon$ 恰是两步内积 $\cos\epsilon$ 之积；虚部是有向体积 $\mathbf{A}\cdot(\mathbf{B}\times\mathbf{C}) = \sin^2\epsilon$ 的四分之一；辐角满足 $\tan(\arg) = \tan^2\frac{\epsilon}{2}$，恰为角超的一半 $\frac{1}{2}\Omega(\epsilon)$（手工推导）。
+
+::: {.film src="minimal-arc-trihedron"}
+**一步与两步，同一枚小弧面体（2 分 27 秒）。** 球面上从 $A$ 到 $C$，青色大圆弧一步走到，白色路线沿两面墙走两步、在 $B$ 处拐直角；加上球心 $O$，三面平墙与品红球面帽围成一枚小胞。顺着棱 $OB$ 看过去，$B$ 藏到 $O$ 背后，两面墙压成两条腿，球面上只剩青色弧；贴着墙看，是两步和一个拐角——“一体双影”是本书的诠释（`MODEL`）。步长 $45^\circ$ 时，两步的点积各为 $0.707$，一步直达的点积 $0.500 = 0.707^2$；有向体积 $\mathbf{A}\cdot(\mathbf{B}\times\mathbf{C}) = 0.500$，是紫色四面体 $OABC$ 的 $6$ 倍，三个点积合起来定得出它的大小，定不出它的朝向。三个投影算子乘积的迹，实部（青）是 $1$ 加三个点积再除以 $4$，虚部（紫）是有向体积除以 $4$，这里是 $0.729 + 0.125\,i$（[@thm-ch34-berry-sector-holonomy-and-bargmann-lift] 第 1 款）；把每个投影算子写成其旋量的 $\lvert A\rangle\langle A\rvert$ 是手算一步，而旋量链的迹等于绕回路一圈的重叠之积由第 2 款担保，三个重叠的大小 $0.924 \times 0.924 \times 0.866 = 0.739$。迹的品红辐角 $9.74^\circ$ 恰为球面帽角超 $19.47^\circ$ 的一半；步长 $90^\circ$ 时迹为 $(1+i)/4$、帽铺满八分之一球面，$15^\circ$ 时辐角约 $1^\circ$。角超公式是吉拉尔的经典文献结果，“平直，是尺子太粗时看到的弯曲”是格言式的诠释；片中数字都是屏幕上的计算。
+:::
+
 ## 29.5.3 为什么必须是“极小的”三角弧面体：开维体积砖、平直幻象与离散球面 {#sec-ch34-4-3}
 
 章首箴言特意点出“**一个极小的三角弧面体**”，这“极小”（$\epsilon \ll 1$）三字背后藏着三重不可替代的几何深意：

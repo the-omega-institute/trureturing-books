@@ -4,7 +4,7 @@
 
 前五卷从纯归纳构造演算（CIC）与齐次射影闭环出发，历经三维本原三元流形、无原点流群、无极限射流微积分、无 $\pi$ 球面调和分析，直至阿代尔乘积归元与模方 $5$ 的有理赫克—拉马努金谱隙，始终不曾向实数连续统 $\mathbb{R}$ 或超越常数赊借半分。跨入第六卷，一个直指计算论底层的问题水落石出：**在一个全有理、零外部背景的几何宇宙里，计算机器的原生指令集（ISA）究竟长什么样？**
 
-本章分三节回答这一问题。第 16.1 节由康威（John H. Conway）的标量有理机器 FRACTRAN 切入，以冻结 **`LEAN ✓`** 定理锚定正交素数寄存器、显式步数可计算性以及零公理基础库 `OmegaInit` $+$ `OmegaMath`（`axioms: []`）中的标量 FRACTRAN 精确语义、确定性、正态保持与停机稳定性，并逐拍手算四门有理程序 $P_\Omega$ 从 $2^{17} = 131{,}072$ 精确停机于 $22$ 的 16 阶轨迹；第 16.2 节揭示标量乘法可交换性所带来的“阿贝尔词序税”，将状态载体升维至整四元数旋子晶格 $\mathbb{Z}^4 \subset \mathcal{H}(\mathbb{Z})$，建立基于精确整除闸门（`Output(1) ≡ Input(0')`）的非阿贝尔 $\Omega$-FRACTRAN 旋子机（架构诠释标为 **`MODEL`**），在逐分量手算核验 `psiXY` 与 `psiYX` 的模 $5$ 分离之后，以零公理冻结 **`LEAN ✓`** 定理（`axioms: []`，`OmegaInit` $+$ `OmegaMath`）锚定一般整除跃迁确定性与该模 $5$ 词序分离；第 16.3 节构造零公理二维整数矩阵环 `Mat2`，手算展开四条核心矩阵多项式恒等式（含行列式乘性 **`手工推导`**），并以零公理冻结 **`LEAN ✓`** 定理锚定迹循环性、伴随阵双侧恒等式与普适凯莱—哈密顿恒等式 $A^2 - \operatorname{tr}(A)A + \det(A)I = 0$，将非阿贝尔旋子计算与矩阵代数严密贯通。
+本章分三节回答这一问题。第 16.1 节由康威（John H. Conway）的标量有理机器 FRACTRAN 切入，以冻结 **`LEAN ✓`** 定理锚定正交素数寄存器、显式步数可计算性以及使用 `OmegaInit` 与 `OmegaMath` 的 D5 形式化（`strict_omega.axioms: []`）中的标量 FRACTRAN 精确语义、确定性、正态保持、停机稳定性与四门有理程序 $P_\Omega$ 从 $2^{17} = 131{,}072$ 经 $15$ 次跃迁首次精确停机于 $22$ 的完整轨迹（配以五素数指数手算账本）；第 16.2 节揭示标量乘法可交换性所带来的“阿贝尔词序税”，将状态载体升维至整四元数旋子晶格 $\mathbb{Z}^4 \subset \mathcal{H}(\mathbb{Z})$，建立基于精确整除闸门（`Output(1) ≡ Input(0')`）的非阿贝尔 $\Omega$-FRACTRAN 旋子机（架构诠释标为 **`MODEL`**），在逐分量手算核验 `psiXY` 与 `psiYX` 的模 $5$ 分离之后，以零公理冻结 **`LEAN ✓`** 定理（`strict_omega.axioms: []`，`OmegaInit` $+$ `OmegaMath`）锚定一般整除跃迁确定性与该模 $5$ 词序分离；第 16.3 节构造零公理二维整数矩阵环 `Mat2`，先以显式多项式展开呈现四条核心矩阵算术律，再以零公理冻结 **`LEAN ✓`** 定理完整锚定迹循环性、行列式乘性 $\det(AB) = \det(A)\det(B)$、伴随阵双侧恒等式与普适凯莱—哈密顿恒等式 $A^2 - \operatorname{tr}(A)A + \det(A)I = 0$，将非阿贝尔旋子计算与矩阵代数严密贯通。
 
 ## 16.1 标量 FRACTRAN、正交素数寄存器与 16 阶停机轨迹 {#sec-om-ch16-scalar-fractran}
 
@@ -34,10 +34,10 @@
 
 结合 [@thm-om-ch16-signed-prime-ledger]，每一个正整数状态 $N = \prod_{p} p^{v_p(N)}$ 唯一对应一根非负整数向量 $\mathbf{r}(N) = (v_2(N), v_3(N), v_5(N), \dots) \in \mathbb{N}^{(\mathbb{P})}$，每颗素数 $p$ 充当一根彼此正交的独立计数器寄存器；每一条分数规则 $\frac{a_i}{b_i}$ 对应一条有限支集带符号更新向量 $\Delta\mathbf{r}_i = \mathbf{r}(a_i) - \mathbf{r}(b_i) \in \mathbb{Z}^{(\mathbb{P})}$。整除守卫 $b_i \mid N$ 等价于检查 $\forall p,\, v_p(N) + \Delta r_i(p) \ge 0$：凡会产生负素指数（即非整数“分数裂口”）的规则一律被静默阻断，凡零余数通过者则把输出态 $N'$ 原地喂回为下一拍输入（`Output(1) ≡ Input(0')`）。
 
-更进一步，标量 FRACTRAN 的单拍执行器与首启用分母关系语义的等价性、转移确定性、正整数态保持性以及停机后的幂等稳定性，均已在零公理裸内核库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中完整冻结：
+更进一步，标量 FRACTRAN 的单拍执行器与首启用分母关系语义的等价性、转移确定性、正整数态保持性以及停机后的幂等稳定性，均已在使用 `OmegaInit` 与 `OmegaMath` 的 D5 形式化（`strict_omega.axioms: []`）中完整冻结：
 
-::: {.theorem #thm-ch16-scalar-fractran-semantics title="标量 FRACTRAN 零公理精确语义、确定性、正态保持与停机稳定性" lean="D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.fractran_step_iff D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.fractran_deterministic D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.fractran_positive D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.fractran_stable"}
-在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）的 `Omega.Fractran` 模块中，每条分数规则 `Rule` 以前驱对存储正分子 `numerator := numeratorPred.succ` 与正分母 `denominator := denominatorPred.succ`，有序程序 `Fractran.Program` 为规则的归纳表；单条规则检验所存分母是否整除输入态（对既约分数即等价于通常的整乘积判定）。记自左向右扫描的求值器为 `Fractran.step prog n`，首启用规则的关系语义为 `Fractran.Step prog n m`，无规则启用谓词为 `Fractran.Halts prog n`，而 `Fractran.run prog k n` 为停机时原样保持的迭代算子 `advance prog` 的 $k$ 拍迭代。则对任意 `prog : Fractran.Program` 与自然数 `n, m, m₁, m₂, k, extra : Omega.Nat`，以下四项同时成立：
+::: {.theorem #thm-ch16-scalar-fractran-semantics title="标量 FRACTRAN 精确语义、确定性、正态保持与停机稳定性" lean="D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.fractran_step_iff D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.fractran_deterministic D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.fractran_positive D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.fractran_stable"}
+在所引 D5 定理（`strict_omega.axioms: []`）使用的 `Omega.Fractran` 命名空间中，每条分数规则 `Rule` 以前驱对存储正分子 `numerator := numeratorPred.succ` 与正分母 `denominator := denominatorPred.succ`，有序程序 `Fractran.Program` 为规则的归纳表；单条规则检验所存分母是否整除输入态（对既约分数即等价于通常的整乘积判定）。记自左向右扫描的求值器为 `Fractran.step prog n`，首启用规则的关系语义为 `Fractran.Step prog n m`，无规则启用谓词为 `Fractran.Halts prog n`，而 `Fractran.run prog k n` 为停机时原样保持的迭代算子 `advance prog` 的 $k$ 拍迭代。则对任意 `prog : Fractran.Program` 与自然数 `n, m, m₁, m₂, k, extra : Omega.Nat`，以下四项同时成立：
 
 1. **求值器与关系语义等价**（`fractran_step_iff`）：`Fractran.step prog n = .some m ↔ Fractran.Step prog n m`；
 2. **单步转移确定性**（`fractran_deterministic`）：若 `Fractran.Step prog n m₁` 与 `Fractran.Step prog n m₂` 同时成立，则 `m₁ = m₂`；
@@ -49,10 +49,10 @@
 第一项对程序列表 `prog` 做结构归纳：利用整商求值器 `exactQuotient` 的完备刻画（返回 `.some q` 当且仅当 `denominator * q = n`，返回 `.none` 当且仅当 `¬ Divides rule n`），逐项对照 `step` 的首命中分支与 `Step` 的 `fire`/`skip` 分支，得可靠性与完备性双向蕴含。第二项将两条关系跃迁经第一项映射到同一求值结果 `.some m₁ = step prog n = .some m₂`，由 `Result.some` 单射性即得 `m₁ = m₂`。第三项对步数 $k$ 归纳：若某步停机（`step = .none`）则状态不变仍为正；若某条规则以商 $q$ 触发，则 `denominator * q = s > 0` 迫使 $q > 0$，又因 `numerator = numeratorPred.succ > 0`，故新态 `q * numerator > 0`。第四项先由 `extra` 归纳拆出 `run prog (k + extra) n = run prog extra (run prog k n)`，再由 `halts_iff` 知停机态满足 `step = .none` 从而 `advance` 恒等不动，归纳即得追加任意步均不改变状态。全程仅依赖零公理基础库 `OmegaInit` 与 `OmegaMath`。完整证明由 Lean 内核检查。
 :::
 
-下面用一个具体的四门有理程序直观核验上述精确整除跃迁与停机稳定机制。
+下面先用一台具体的四门有理程序直观展开五素数寄存器的逐拍账本，再以零公理内核定理将其完整 $15$ 次跃迁与首次停机性严格锁定。
 
 ::: {.example #ex-om-ch16-sixteen-state-fractran-trace title="四门有理程序 $P_\Omega$ 从 $2^{17}$ 停机于 $22$ 的 16 阶轨迹"}
-考察作用在五座正交素数寄存器 $\{2, 3, 5, 7, 11\}$ 上的有序四门程序（`手工推导`）：
+考察作用在五座正交素数寄存器 $\{2, 3, 5, 7, 11\}$ 上的有序四门程序（下表五素数指数分解为 `手工推导` 账本，完整 $15$ 步跃迁与首次停机见下方 [@thm-ch16-p-omega-halts-at-22]）：
 
 $$
 P_\Omega \;=\; \left[\frac{11}{49},\; \frac{7}{25},\; \frac{5}{9},\; \frac{3}{4}\right] \;=\; \left[\frac{11}{7^2},\; \frac{7}{5^2},\; \frac{5}{3^2},\; \frac{3}{2^2}\right].
@@ -81,6 +81,27 @@ $$
 | $16$（停机检验） | 无（$49, 25, 9, 4 \nmid 22$） | $22$ | $(1, 0, 0, 0, 1)$ |
 
 每一步的指数守恒与权重递推清晰可见：$17 = 1 + 2^4$，恰好消耗掉 $16$ 枚素因子 $2$ 逐级归并成 $1$ 枚素因子 $11$，留下一枚不可再约的残余素因子 $2$，最终锁定于 $22 = 2 \cdot 11$。
+:::
+
+上表中的完整 $15$ 次跃迁轨迹及其“恰在第 $15$ 步首次抵达停机态 $22$”的精确断言，已不再只是手算算例，而是在使用 `OmegaInit` 与 `OmegaMath` 的 D5 形式化（`strict_omega.axioms: []`）中由 Lean 内核直接认证的冻结见证定理：
+
+::: {.theorem #thm-ch16-p-omega-halts-at-22 title="四门有理程序 $P_\Omega$ 从 $2^{17}$ 经 15 次跃迁首次精确停机于 $22$" lean="D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.p_omega_halts_at_22"}
+在所引 D5 定理（`strict_omega.axioms: []`）使用的 `Omega.Fractran` 命名空间中，取有序四门程序 `pOmega` $= [\frac{11}{49}, \frac{7}{25}, \frac{5}{9}, \frac{3}{4}]$、十进制编码初态 `pOmegaStart` $= 131{,}072$（即 $2^{17}$）、终态 `pOmegaFinal` $= 22$，以及由 [@ex-om-ch16-sixteen-state-fractran-trace] 步序 $1$–$15$ 依次排成的后继状态表 `pOmegaTrace` $= [98{,}304,\, 73{,}728,\, 40{,}960,\, 30{,}720,\, 23{,}040,\, 12{,}800,\, 3{,}584,\, 2{,}688,\, 2{,}016,\, 1{,}120,\, 840,\, 630,\, 350,\, 98,\, 22]$。记逐拍关系链谓词为 `Follows`（要求相邻前后态依次满足首启用规则关系 `Fractran.Step`），则如下四项合取严格成立：
+
+$$
+\begin{aligned}
+&\mathrm{Follows}\;\mathrm{pOmega}\;\mathrm{pOmegaTrace}\;\mathrm{pOmegaStart} \\
+&\land\; \mathrm{run}\;\mathrm{pOmega}\;15\;\mathrm{pOmegaStart} = \mathrm{pOmegaFinal} \\
+&\land\; \mathrm{Halts}\;\mathrm{pOmega}\;\mathrm{pOmegaFinal} \\
+&\land\; \forall k < 15,\; \neg\,\mathrm{Halts}\;\mathrm{pOmega}\;(\mathrm{run}\;\mathrm{pOmega}\;k\;\mathrm{pOmegaStart}).
+\end{aligned}
+$$
+
+即从 $131{,}072$ 出发，`pOmega` 严格沿 `pOmegaTrace` 完成 $15$ 次有效整除跃迁并在第 $15$ 步首次抵达停机态 $22$，此前任意步数 $k < 15$ 均不停机。
+:::
+
+::: {.proof}
+模块将所有大整数表示为低位在前的十进制数字表（`decimalValue`），并基于零公理欧几里得除法构造逐位长除算法 `divideDigits`，经归纳证得等式 `d * quotient + remainder = decimalValue digits`（`divideDigits_sound`）。当某条规则的分母余数为 $0$ 且目标态对分子的整商与之相等时，`fire_decimal` 直接给出该规则激活的 `Step` 证据；当余数满足 $0 < r < d$ 时，欧几里得余数唯一性（`skip_decimal`）当场排除了整除可能，从而给出严格跳过前序规则的证据。逐一构造这 $15$ 条跃迁引理即证 `Follows pOmega pOmegaTrace pOmegaStart`；沿 `Follows` 链对表长归纳（`run_follows`）并调用单步关系可靠性 `Step.sound` 立得 `run pOmega 15 pOmegaStart = pOmegaFinal`；在 `d22` 处对全部四枚分母 $49, 25, 9, 4$ 分别施以 `skip_decimal` 证得 `Halts pOmega pOmegaFinal`。最后，沿有效轨迹 `Follows` 做归纳（`running_before_trace_end`）：任意 $k < 15$ 处的中间态均存在合法后继跃迁 `Step`，由 `Step.sound` 与 `halts_iff`（[@thm-ch16-scalar-fractran-semantics]）知其 `step` 返回 `.some` 而非 `.none`，故必有 `¬ Halts pOmega (run pOmega k pOmegaStart)`。全程仅依赖零公理基础库 `OmegaInit` 与 `OmegaMath`。完整证明由 Lean 内核检查。
 :::
 
 ## 16.2 非阿贝尔 $\Omega$-FRACTRAN 旋子机与精确整除闸门 {#sec-om-ch16-omega-fractran-spinor-gate}
@@ -145,10 +166,10 @@ $$
    由于 $-6 \equiv 4 \pmod 5$、$-8 \equiv 2 \pmod 5$，其模 $5$ 非负余数向量为 $(0, 4, 0, 2) \neq (0, 0, 0, 0)$，分数撕裂立即关闭闸门！反之，若将 `psiYX` 送入次序靠后的 `gateUnwindX` $= (1, -2, 0, 0)$，则 $(1 + 2\mathbf{i} + 2\mathbf{j} - 4\mathbf{k})(1 - 2\mathbf{i}) = (5, 0, 10, 0)$ 整除 $5$ 得 $(1, 0, 2, 0) = Y$。两枚闸门不耗费半颗标志素数，原生执行严格的后进先出（LIFO）非阿贝尔栈！
 :::
 
-上述手算不仅是一次直观验算：整四元数旋子闸门的一般转移确定性（对任意态、任意旋子与任意非零整数分母，合法整除跃迁唯一确定后继态），以及等模方异词序双态 `psiXY` 与 `psiYX` 在模 $5$ 退栈闸门 `gateUnwindY` 下的严格分离，均已在零公理裸内核库 `OmegaInit` 与 `OmegaMath`（传递公理闭包 `axioms: []`）的冻结模块 `OmegaBargmannHaarHecke` 中获 Lean 内核形式化锚定。
+上述手算不仅是一次直观验算：整四元数旋子闸门的一般转移确定性（对任意态、任意旋子与任意非零整数分母，合法整除跃迁唯一确定后继态），以及等模方异词序双态 `psiXY` 与 `psiYX` 在模 $5$ 退栈闸门 `gateUnwindY` 下的严格分离，均由冻结的 D5 模块 `OmegaBargmannHaarHecke` 给出，所引声明的严格端记录为 `strict_omega.axioms: []`。
 
-::: {.theorem #thm-ch16-quaternion-fractran-gate title="非阿贝尔四元数 Ω-FRACTRAN 闸门的零公理确定性与模 5 词序分离" lean="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.quaternion_fractran_deterministic, D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.quaternion_fractran_order_separation"}
-在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）的整四元数类型 `Quad4` 上，记整除跃迁关系 `Step psi A p q`（刻画态 `psi` 经旋子 `A` 与非零整数分母 `p` 精确整除转移至后继态 `q`）及启用谓词 `Enabled psi A p`（存在后继态 `q : Quad4` 使该跃迁成立）。则以下两项结论同时成立：
+::: {.theorem #thm-ch16-quaternion-fractran-gate title="非阿贝尔四元数 Ω-FRACTRAN 闸门的确定性与模 5 词序分离" lean="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.quaternion_fractran_deterministic, D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.quaternion_fractran_order_separation"}
+在所引 D5 声明（`strict_omega.axioms: []`）使用的整四元数类型 `Quad4` 上，记整除跃迁关系 `Step psi A p q`（刻画态 `psi` 经旋子 `A` 与非零整数分母 `p` 精确整除转移至后继态 `q`）及启用谓词 `Enabled psi A p`（存在后继态 `q : Quad4` 使该跃迁成立）。则以下两项结论同时成立：
 
 1. **单步整除跃迁的确定性**（`quaternion_fractran_deterministic`）：对任意 `psi, A, q₁, q₂ : Quad4` 与整数 `p : Int`，若 `p ≠ 0` 且同时满足 `psi * A = p • q₁` 与 `psi * A = p • q₂`，则必有 `q₁ = q₂`。
 2. **等模方异词序双态的模 5 精确分离**（`quaternion_fractran_order_separation`）：取 `psiX = (1, 2, 0, 0)`、`psiXY = (1, 2, 2, 4)`、`psiYX = (1, 2, 2, -4)` 与 $Y$ 轴退栈闸门 `gateUnwindY = (1, 0, -2, 0)` 及分母 $5$，则有
@@ -172,7 +193,7 @@ $$
 
 由此，非阿贝尔 $\Omega$-FRACTRAN 闸门不仅在概念层作为免标志素数的原生 LIFO 因果栈（`MODEL`），其核心整除确定性与模 $5$ 词序分离律本身亦以零公理内核定理稳固锚定。
 
-## 16.3 零公理二维整数矩阵环与普适凯莱—哈密顿恒等式 {#sec-om-ch16-mat2-cayley-hamilton}
+## 16.3 二维整数矩阵环与普适凯莱—哈密顿恒等式 {#sec-om-ch16-mat2-cayley-hamilton}
 
 为了把四元数旋子机与线性代数及有限域分裂表示直接接轨，在零公理基础层上只需构造由四枚整数打包而成的二维矩阵环 $\mathrm{Mat}_2(\mathbb{Z})$。记矩阵
 
@@ -180,7 +201,7 @@ $$
 A \;=\; \begin{pmatrix} a & b \\ c & d \end{pmatrix}, \qquad B \;=\; \begin{pmatrix} e & f \\ g & h \end{pmatrix} \;\in\; \mathrm{Mat}_2(\mathbb{Z}),
 $$
 
-定义零公理算子：迹 $\operatorname{tr}(A) := a + d$、行列式 $\det(A) := ad - bc$、单位阵 $I := \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}$，以及伴随矩阵 $\operatorname{adj}(A) := \begin{pmatrix} d & -b \\ -c & a \end{pmatrix}$。无需任何特征值存在性定理、复数代数闭域或线性空间的基底选择，纯整数环四则恒等展开立得四条核心算术律（`手工推导`）：
+定义零公理算子：迹 $\operatorname{tr}(A) := a + d$、行列式 $\det(A) := ad - bc$、单位阵 $I := \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}$，以及伴随矩阵 $\operatorname{adj}(A) := \begin{pmatrix} d & -b \\ -c & a \end{pmatrix}$。无需任何特征值存在性定理、复数代数闭域或线性空间的基底选择，纯整数环四则恒等展开立即呈现四条核心算术律：
 
 1. **迹的循环不变性**：
 
@@ -211,10 +232,10 @@ $$
 
 这条两行证毕的纯多项式恒等式，恰恰是四元数旋子与二维矩阵计算之间的黄金桥梁。一方面，任意整四元数 $q = w + x\mathbf{i} + y\mathbf{j} + z\mathbf{k}$ 与其共轭 $\bar{q} = w - x\mathbf{i} - y\mathbf{j} - z\mathbf{k}$ 满足 $q + \bar{q} = 2w$ 且 $q\bar{q} = \|q\|^2$，因而满足完全同构的二次特征方程 $q^2 - 2w\,q + \|q\|^2 = 0$——伴随阵 $\operatorname{adj}(A)$ 正是四元数共轭 $\bar{q}$ 在 $\mathrm{Mat}_2$ 中的孪生化身！另一方面，正如第十四章 [@thm-ch14-hurwitz-mod5-splitting] 在模 $5$ 有限域 $\mathbb{F}_5$（$2^2 \equiv -1 \pmod 5$）中所冻结的分裂映射 $\mathbf{i} \mapsto \begin{pmatrix} 2 & 0 \\ 0 & -2 \end{pmatrix}$、$\mathbf{j} \mapsto \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}$，整四元数环精确同态映入 $\mathrm{Mat}_2(\mathbb{F}_5)$，使标量模方对应行列式、实部二倍对应矩阵迹，并将 `psiXY` 与 `psiYX` 的模 $5$ 整除闸门直接化为 $2\times 2$ 矩阵的零矩阵检验。
 
-其中，迹循环不变性、伴随阵双侧恒等式与普适凯莱—哈密顿恒等式已在零公理裸内核库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）中正式冻结（上列第 2 项行列式乘性 $\det(AB) = \det(A)\det(B)$ 在本章仍保留为显式多项式 **`手工推导`**）：
+上述全部四条二维整数矩阵算术律——迹循环不变性、行列式乘性、伴随阵双侧恒等式与普适凯莱—哈密顿恒等式——均已在使用 `OmegaInit` 与 `OmegaMath` 的 D5 形式化（`strict_omega.axioms: []`）中正式冻结：
 
-::: {.theorem #thm-ch16-mat2-cayley-hamilton title="零公理二维整数矩阵环的迹循环、伴随恒等式与凯莱—哈密顿定理" lean="D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.trace_mul_comm D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.adjugate_identities D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.cayley_hamilton"}
-在零公理基础库 `OmegaInit` 与 `OmegaMath`（`axioms: []`）的二维整数矩阵结构 `Omega.Mat2` 上，记矩阵乘积 `A.mul B`、标量倍乘 `Mat2.scale`、单位阵 `Mat2.one`、零阵 `Mat2.zero`、迹 `A.trace := a + d`、行列式 `A.det := ad - bc` 与伴随阵 `A.adj := ⟨d, -b, -c, a⟩`。则对任意 `A, B : Mat2`，以下三条恒等式普遍成立：
+::: {.theorem #thm-ch16-mat2-cayley-hamilton title="二维整数矩阵环的迹循环、行列式乘性、伴随恒等式与凯莱—哈密顿定理" lean="D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.trace_mul_comm D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.mat2_det_mul D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.adjugate_identities D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.cayley_hamilton"}
+在所引 D5 声明（`strict_omega.axioms: []`）使用的二维整数矩阵结构 `Omega.Mat2` 上，记矩阵乘积 `A.mul B`、标量倍乘 `Mat2.scale`、单位阵 `Mat2.one`、零阵 `Mat2.zero`、迹 `A.trace := a + d`、行列式 `A.det := ad - bc` 与伴随阵 `A.adj := ⟨d, -b, -c, a⟩`。则对任意 `A, B : Mat2`，以下四条恒等式普遍成立：
 
 1. **迹的循环不变性**（`trace_mul_comm`）：
 
@@ -222,7 +243,13 @@ $$
    (A.\mathrm{mul}\;B).\mathrm{trace} = (B.\mathrm{mul}\;A).\mathrm{trace};
    $$
 
-2. **伴随矩阵双侧恒等式**（`adjugate_identities`）：
+2. **行列式的严格乘性**（`mat2_det_mul`）：
+
+   $$
+   (A.\mathrm{mul}\;B).\mathrm{det} = A.\mathrm{det}.\mathrm{mul}\;B.\mathrm{det};
+   $$
+
+3. **伴随矩阵双侧恒等式**（`adjugate_identities`）：
 
    $$
    A.\mathrm{mul}\;A.\mathrm{adj} = \mathrm{Mat2.scale}\;A.\mathrm{det}\;\mathrm{Mat2.one}
@@ -230,7 +257,7 @@ $$
    A.\mathrm{adj}.\mathrm{mul}\;A = \mathrm{Mat2.scale}\;A.\mathrm{det}\;\mathrm{Mat2.one};
    $$
 
-3. **普适凯莱—哈密顿恒等式**（`cayley_hamilton`）：
+4. **普适凯莱—哈密顿恒等式**（`cayley_hamilton`）：
 
    $$
    \bigl((A.\mathrm{mul}\;A).\mathrm{sub}\;(\mathrm{Mat2.scale}\;A.\mathrm{trace}\;A)\bigr).\mathrm{add}\;(\mathrm{Mat2.scale}\;A.\mathrm{det}\;\mathrm{Mat2.one}) = \mathrm{Mat2.zero}.
@@ -239,7 +266,7 @@ $$
 :::
 
 ::: {.proof}
-第一项直接按矩阵乘法展开两条迹和式 $(ae + bg) + (cf + dh)$ 与 $(ea + fc) + (gb + hd)$，仅凭零公理整数加乘交换结合律（`Int.add_add_add_comm` 与 `Int.mul_comm`）一步重排相等。第二项以矩阵分量外延性 `Mat2.ext` 分别核对 $A\operatorname{adj}(A)$ 与 $\operatorname{adj}(A)A$ 的四个分量：非对角元由加法逆元精确抵消为 $0 = \det(A)\cdot 0$，两枚对角元均化为 $ad - bc = \det(A)\cdot 1$。第三项同样由 `Mat2.ext` 逐元展开：两条非对角分量按 $(ab + bd) - (a + d)b + \det(A)\cdot 0 = 0$ 恒等消去，两条对角分量按 $((a^2 + bc) - (a + d)a) + (ad - bc) = 0$（及 $a, d$ 对换）由整数环分配律与逆元律消去为零。全程仅依赖零公理基础库 `OmegaInit` 与 `OmegaMath`。完整证明由 Lean 内核检查。
+第一项直接按矩阵乘法展开两条迹和式 $(ae + bg) + (cf + dh)$ 与 $(ea + fc) + (gb + hd)$，仅凭零公理整数加乘交换结合律（`Int.add_add_add_comm` 与 `Int.mul_comm`）一步重排相等。第二项先用四项展开引理 `expand` 分别展开 $(ae + bg)(cf + dh)$ 与 $(af + bh)(ce + dg)$，由左侧公项消去引理 `sub_common_left` 精确抵消共有交叉项 $(ac)(ef) + (bd)(gh)$，再将余下的 $(ad)(eh) + (bc)(fg) - \bigl((ad)(fg) + (bc)(eh)\bigr)$ 逆向因式分解为 $(ad - bc)(eh - fg) = A.\mathrm{det}\cdot B.\mathrm{det}$。第三项以矩阵分量外延性 `Mat2.ext` 分别核对 $A\operatorname{adj}(A)$ 与 $\operatorname{adj}(A)A$ 的四个分量：非对角元由加法逆元精确抵消为 $0 = \det(A)\cdot 0$，两枚对角元均化为 $ad - bc = \det(A)\cdot 1$。第四项同样由 `Mat2.ext` 逐元展开：两条非对角分量按 $(ab + bd) - (a + d)b + \det(A)\cdot 0 = 0$ 恒等消去，两条对角分量按 $((a^2 + bc) - (a + d)a) + (ad - bc) = 0$（及 $a, d$ 对换）由整数环分配律与逆元律消去为零。全程仅依赖零公理基础库 `OmegaInit` 与 `OmegaMath`。完整证明由 Lean 内核检查。
 :::
 
 ::: {.example #ex-om-ch16-mat2-numeric-audit title="二维整数矩阵环四律的显式整数核验"}
@@ -251,7 +278,19 @@ $$
 :::
 
 ::: {.remark #rem-om-ch16-literature-boundaries title="文献结果与证据分层说明"}
-**文献结果，未在本书形式化。** 经典标量语言 FRACTRAN 及其通过模拟双计数器机器确立的图灵完备性见 J. H. Conway（“FRACTRAN: A Simple Universal Programming Language for Arithmetic,” in *Open Problems in Communication and Computation*, Springer, 1987, pp. 4–26）与 M. L. Minsky（*Ann. of Math.* **74**, 437–455, 1961）；极大整四元数环 $\mathcal{H}(\mathbb{Z})$ 的算术分解见 A. Hurwitz（*Nachr. Ges. Wiss. Göttingen*, 313–340, 1896）。本章中 [@thm-om-ch16-signed-prime-ledger] 与 [@thm-om-ch16-binary-name-compare] 对应所钉 `trureturing` 冻结 **`LEAN ✓`** 声明，[@thm-ch16-scalar-fractran-semantics]、[@thm-ch16-quaternion-fractran-gate] 与 [@thm-ch16-mat2-cayley-hamilton] 则在零公理裸内核库 `OmegaInit` $+$ `OmegaMath`（`axioms: []`）中以冻结 **`LEAN ✓`** 声明分别锚定标量 FRACTRAN 精确语义与停机稳定性、非阿贝尔四元数闸门确定性与 `psiXY`/`psiYX` 模 $5$ 词序分离，以及 `Mat2` 的迹循环、双侧伴随恒等式与凯莱—哈密顿恒等式；$P_\Omega$ 的 16 阶轨迹、[@ex-om-ch16-nonabelian-stack-proof] 中的逐分量展开与 `gateUnwindX` 伴随核验，以及第 16.3 节的行列式乘性 $\det(AB) = \det(A)\det(B)$ 与数值示例 [@ex-om-ch16-mat2-numeric-audit] 为精确整数 **`手工推导`**；将非阿贝尔 $\Omega$-FRACTRAN 阐释为观察者原生机器语言属 **`MODEL`**。
+**文献结果，未在本书形式化。** 经典标量语言 FRACTRAN 及其通过模拟双计数器机器确立的图灵完备性见 J. H. Conway（“FRACTRAN: A Simple Universal Programming Language for Arithmetic,” in *Open Problems in Communication and Computation*, Springer, 1987, pp. 4–26）与 M. L. Minsky（*Ann. of Math.* **74**, 437–455, 1961）；极大整四元数环 $\mathcal{H}(\mathbb{Z})$ 的算术分解见 A. Hurwitz（*Nachr. Ges. Wiss. Göttingen*, 313–340, 1896）。本章中 [@thm-om-ch16-signed-prime-ledger] 与 [@thm-om-ch16-binary-name-compare] 对应所钉 `trureturing` 冻结 **`LEAN ✓`** 声明，[@thm-ch16-scalar-fractran-semantics]、[@thm-ch16-p-omega-halts-at-22]、[@thm-ch16-quaternion-fractran-gate] 与 [@thm-ch16-mat2-cayley-hamilton] 则在使用 `OmegaInit` 与 `OmegaMath` 的 D5 形式化（`strict_omega.axioms: []`）中以冻结 **`LEAN ✓`** 声明分别锚定标量 FRACTRAN 精确语义与停机稳定性、四门程序 $P_\Omega$ 从 $2^{17}$ 经 $15$ 次跃迁首次停机于 $22$ 的完整轨迹、非阿贝尔四元数闸门确定性与 `psiXY`/`psiYX` 模 $5$ 词序分离，以及 `Mat2` 的迹循环、行列式乘性、双侧伴随恒等式与凯莱—哈密顿恒等式；[@ex-om-ch16-sixteen-state-fractran-trace] 中的五素数指数分解、[@ex-om-ch16-nonabelian-stack-proof] 中的逐分量展开与 `gateUnwindX` 伴随核验，以及具体数值示例 [@ex-om-ch16-mat2-numeric-audit] 为精确整数 **`手工推导`**；将非阿贝尔 $\Omega$-FRACTRAN 阐释为观察者原生机器语言属 **`MODEL`**。
+:::
+
+下面的短片把本章的三台机器依次跑一遍：标量 FRACTRAN、非阿贝尔整除闸门与二维整数矩阵环。
+
+::: {.film src="the-spinor-machine"}
+**一个数只记得“有多少”，一枚整四元数旋子还记得“谁先谁后”（2 分 49 秒）。** 标量 FRACTRAN 只保存一个正整数，每拍乘上第一枚使其保持整数的分数；分解质因数后，五座素数寄存器 $2, 3, 5, 7, 11$ 画成青色格柱，$\frac{3}{4}$ 的更新向量 $(-2, +1, 0, 0, 0)$ 从 2 号柱取走两格、给 3 号柱添上一格，整除守卫即任何寄存器不得低于零（品红虚线格）。右侧十六行账本随寄存器逐拍步进：$P_\Omega$ 从 $2^{17} = 131{,}072$ 经 $15$ 次跃迁停于 $22 = 2 \cdot 11$，$17 = 16 + 1$（屏幕计算，与 [@ex-om-ch16-sixteen-state-fractran-trace] 逐行一致）；绿色标签指向 [@thm-ch16-p-omega-halts-at-22] 与 [@thm-ch16-scalar-fractran-semantics] 中的停机稳定性。$3 \cdot 5 = 5 \cdot 3$ 抹去次序，标志素数为示意，整四元数状态的双重编码属 `MODEL`（紫色）。$X = 1 + 2\mathbf{i}$、$Y = 1 + 2\mathbf{j}$ 给出 $XY = (1, 2, 2, 4)$ 与 $YX = (1, 2, 2, -4)$，两枚虚部箭头一青一品红，模方同为 $25$；闸门右乘 $1 - 2\mathbf{j}$ 再除以 $5$：青色一列得 $(5, 10, 0, 0)$、余数全零而放行还原 $X$，品红一列得 $(5, -6, 0, -8)$、余数 $(0, 4, 0, 2)$ 而盖上 BLOCKED 印章，闸门 $1 - 2\mathbf{i}$ 把 $YX$ 退回 $Y$（[@ex-om-ch16-nonabelian-stack-proof]，后进先出的读法属 `MODEL`）；绿色标签指向 [@thm-ch16-quaternion-fractran-gate]。最后 $A = \begin{pmatrix} 2 & 3 \\ 1 & 4 \end{pmatrix}$、$B = \begin{pmatrix} 1 & -2 \\ 5 & 3 \end{pmatrix}$ 的 $AB$ 与 $BA$ 迹同为 $27$、$\det(AB) = 65 = 5 \times 13$、$A^2 - 6A + 5I$ 为琥珀色零矩阵（[@ex-om-ch16-mat2-numeric-audit]，屏幕计算），绿色标签指向 [@thm-ch16-mat2-cayley-hamilton]。
+:::
+
+读者可在下方的交互实验卡中把本章的标量有理计算与二维整数矩阵环并排跑通：逐拍回放康威四门程序 $P_\Omega$ 从 $2^{17} = 131{,}072$ 经 $15$ 次整除跃迁精准停机于 $22$ 的完整素指数账本，并实时改动整数矩阵 $A, B \in \mathrm{Mat}_2(\mathbb{Z})$ 的元素，逐分量核验迹循环、行列式乘性、双侧伴随阵与凯莱—哈密顿恒等式 $A^2 - \operatorname{tr}(A)A + \det(A)I = 0$。
+
+::: {.viz src="adelic-arithmetic-observer-lab" preset="scalar-fractran-and-mat2" height="520"}
+**标量 FRACTRAN 轨迹与 `Mat2` 凯莱—哈密顿实验卡（`scalar-fractran-and-mat2`）。** 逐拍步进四门有理程序 $P_\Omega = [\frac{11}{49}, \frac{7}{25}, \frac{5}{9}, \frac{3}{4}]$ 从初态 $131{,}072 = 2^{17}$ 经 $15$ 次有效整除跃迁首次收敛至幂等停机态 $22 = 2 \cdot 11$ 的五素数指数演化（[@thm-ch16-scalar-fractran-semantics]、[@thm-ch16-p-omega-halts-at-22]、[@ex-om-ch16-sixteen-state-fractran-trace]），并同步调节二维整数矩阵 $A, B \in \mathrm{Mat}_2(\mathbb{Z})$ 的整数分量，现场核对迹循环性 $\operatorname{tr}(AB) = \operatorname{tr}(BA)$、行列式乘性 $\det(AB) = \det(A)\det(B)$、双侧伴随恒等式 $A\operatorname{adj}(A) = \det(A)I$ 与普适凯莱—哈密顿恒等式 $A^2 - \operatorname{tr}(A)A + \det(A)I = \mathbf{0}$（[@thm-ch16-mat2-cayley-hamilton]、[@ex-om-ch16-mat2-numeric-audit]）。
 :::
 
 有了以正交素数寄存器与非阿贝尔旋子栈合一的原生计算语言，下一章将视角从指令集抬升至整座自包含主体本身：当观察者所能接收的一切信息都封闭在内部、没有任何外部端口时，时间、空间、引力梯度与推理行动如何从同一枚有理保真度梯度中一体涌现。

@@ -1,0 +1,48 @@
+{
+  "voice": "af_heart",
+  "speed": 0.94,
+  "say": {"Lean": "Leen"},
+  "music": {"bpm": 80, "progression": "d-minor"},
+  "scenes": [
+    {"id": "hook", "name": "TWO SQUARES", "lead": 1.9, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
+      ["Which whole numbers are a sum of two squares? Twenty-five is: nine plus sixteen.", "哪些整数能写成两个平方之和？25 可以：9 + 16。"],
+      ["Light them up to fifty: they look scattered. Five yes, six no, seven no, eight yes.", "把 50 以内的都点亮，看上去零零散散：5 行，6 不行，7 不行，8 又行。"],
+      ["Why keep numbers on a line? Give them a second direction, and they live on a grid.", "凭什么数只能排在一条线上？给它们添上第二个方向，就住进了方格。"]
+    ], "cues": [{"line": 2, "at": 2.2, "kind": "glitch"}]},
+    {"id": "mirror", "name": "A POINT AND ITS MIRROR", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.5, 0.5, 0.1, 0.2], "lines": [
+      ["The grid point three, two is the number three plus two i. Its mirror image is three minus two i.", "格点 (3, 2) 就是数 3 + 2i；它在镜子里的像是 3 − 2i。"],
+      ["Multiply a point by its mirror, and the turns cancel. You land on the real line at thirteen.", "一个点乘以它的镜像，两个转角正好抵消，落回实轴，落在 13。"],
+      ["Thirteen is three squared plus two squared.", "13 正是 3² + 2²。"],
+      ["Lean checks this for every grid point: a plus b i, times its mirror, is a squared plus b squared.", "Lean 内核检验：对每个格点，a + bi 乘以它的镜像都等于 a² + b²。"],
+      ["So a sum of two squares is a grid point's squared distance from the origin.", "所以，两平方和就是格点到原点距离的平方。"]
+    ], "cues": [{"line": 3, "at": 0.8, "kind": "stamp"}]},
+    {"id": "turn", "name": "TURN AND STRETCH", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.6, 0.6, 0.2, 0.3], "lines": [
+      ["Multiplying grid numbers is a dial plus a zoom: angles add, lengths multiply.", "方格里的数相乘，像转盘再加变焦：角度相加，长度相乘。"],
+      ["Two plus i, times three plus two i, is four plus seven i.", "(2 + i)(3 + 2i) = 4 + 7i。"],
+      ["So five times thirteen, sixty-five, is four squared plus seven squared.", "所以 5 × 13 = 65 = 4² + 7²。"],
+      ["Swap one factor for its mirror, and a second way appears: one squared plus eight squared.", "把一个因子换成它的镜像，又冒出第二种拆法：1² + 8²。"]
+    ], "cues": [{"line": 1, "at": 2.4, "kind": "chime"}]},
+    {"id": "primes", "name": "TWO KINDS OF PRIME", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.7, 0.6, 0.2, 0.3], "lines": [
+      ["Products stay on the grid, so everything hangs on the primes.", "乘积留在方格上，所以一切都取决于素数。"],
+      ["Lean checks that every prime leaving remainder one, after division by four, is two squares.", "Lean 内核检验：除以 4 余 1 的素数，都是两个平方之和。"],
+      ["Primes leaving remainder three never are: squares leave only zero or one, so two never reach three.", "余 3 的素数永远不是：平方除以 4 只余 0 或 1，两个加起来到不了 3。"],
+      ["The book calls the first kind plane primes, and the second kind line primes.", "本书把前一种叫面素数，后一种叫线素数。"]
+    ], "cues": [{"line": 2, "at": 2.2, "kind": "glitch"}]},
+    {"id": "ledger", "name": "THE FACTOR LEDGER", "lead": 0.5, "tail": 0.7, "music": [1.0, 0.8, 0.7, 0.4, 0.4], "lines": [
+      ["Factor the number, and look only at primes with remainder three.", "把数分解成素因子，只看除以 4 余 3 的那些。"],
+      ["Lean checks: the number is two squares exactly when each of those primes appears an even number of times.", "Lean 内核检验：一个数是两平方和，当且仅当每个这样的素数都出现偶数次。"],
+      ["Line primes are like socks: each kind needs its own twin. Three times three is nine, three squared plus zero.", "线素数像袜子：每一种都得自己凑成一双。3 × 3 = 9 = 3² + 0²。"],
+      ["Twenty twenty-five holds four threes, an even count: twenty-seven squared plus thirty-six squared.", "2025 含四个 3，偶数个：2025 = 27² + 36²。"],
+      ["Twenty twenty-four holds one eleven and one twenty-three: two odd socks, not a pair. Not two squares.", "2024 里 11 和 23 各只有一个：两只单袜，配不成一双。它不是两平方和。"],
+      ["Size never decided it. The factors did.", "决定它的从来不是大小，是因子。"]
+    ], "cues": [{"line": 1, "at": 2.8, "kind": "stamp"}, {"line": 4, "at": 2.6, "kind": "impact"}]},
+    {"id": "edge", "name": "WHAT IT DOES NOT SAY", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["Lean proves the two squares exist, but gives no fast way to find them.", "Lean 证明这两个平方存在，但没有给出找到它们的快办法。"],
+      ["Nor does it count the ways. Sixty-five has two.", "它也不数有几种拆法：65 就有两种。"],
+      ["How primes split into mirror pairs is a literature result. Plane and line are the book's names.", "素数怎样分裂成镜像对，是文献结果；“面”与“线”是本书起的名字。"]
+    ]},
+    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.4, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
+      ["Geometric Intuition of Quantum Computing, chapter twenty-three.", "《量子计算的几何直觉》· 第二十三章"]
+    ], "cues": [{"line": 0, "at": 0.3, "kind": "chime"}]}
+  ]
+}

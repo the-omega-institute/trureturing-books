@@ -1,0 +1,48 @@
+{
+  "voice": "af_heart",
+  "speed": 0.94,
+  "say": {"Lean": "Leen", "Ryu": "Ree-oo", "Takayanagi": "Tah-kah-yah-nah-ghee", "Kronecker": "Kroh-necker"},
+  "music": {"bpm": 80, "progression": "d-minor"},
+  "scenes": [
+    {"id": "hourglass", "name": "THE NECK", "lead": 1.9, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
+      ["Picture a road that narrows. Six lanes in, twelve in the middle, six out.", "想象一条忽宽忽窄的路：进来六条车道，中间十二条，出去又是六条。"],
+      ["Side by side, no more cars pass than the narrowest stretch has lanes.", "能并排开过去的车，不会多过最窄那一段的车道数。"],
+      ["Tensor networks have narrow stretches too. Let us count them.", "张量网络也有这样的窄处。我们来数一数。"]
+    ], "cues": [{"line": 1, "at": 2.6, "kind": "chime"}]},
+    {"id": "bridge", "name": "THE BRIDGE GRAPH", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.5, 0.5, 0.1, 0.2], "lines": [
+      ["Two nodes, M and N, joined by three bridges. Signals enter on legs b and c, and leave on a and d.", "两个节点 M 和 N，由三座桥相连。信号从腿 b、c 进来，从腿 a、d 出去。"],
+      ["The whole graph is one matrix: a sum of three Kronecker products, one per bridge.", "整张图就是一个矩阵：三个克罗内克积相加，每座桥一项。"],
+      ["Its rank counts the independent signals getting through. The best reachable rank is the max flow.", "它的秩，数的是有几路彼此独立的信号能通过；能达到的最大秩，叫最大流。"]
+    ]},
+    {"id": "cuts", "name": "THREE CUTS", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.6, 0.6, 0.2, 0.3], "lines": [
+      ["Take a and c equal to two, b and d equal to three.", "取 a = c = 2，b = d = 3。"],
+      ["Cut the exits: two times three, six lanes. Cut the entrances: three times two, six again.", "切断出口：2 × 3，六条道。切断入口：3 × 2，还是六条。"],
+      ["Cut slantwise through leg a, the bridges and leg c: three times two times two, twelve.", "斜着切过腿 a、三座桥和腿 c：3 × 2 × 2，十二条。"],
+      ["Twelve lanes in the middle, yet the narrowest cut is six.", "中间有十二条道，最窄的那一刀却只有六。"],
+      ["Why expect a richer middle to carry more? The neck decides, not the middle.", "凭什么以为中间越宽，就能过得越多？说了算的是腰，不是肚子。"]
+    ], "cues": [{"line": 3, "at": 2.4, "kind": "stamp"}]},
+    {"id": "bound", "name": "NEVER WIDER", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["Lean checks, for all sizes, zero included: the max flow never exceeds the smallest cut.", "Lean 内核检验：任意大小、包括零在内，最大流都不超过最小的那道割。"],
+      ["No clever choice of matrices pushes more through the neck.", "矩阵再怎么挑，也挤不过这道腰。"]
+    ], "cues": [{"line": 0, "at": 0.8, "kind": "stamp"}]},
+    {"id": "fill", "name": "FILLING THE NECK", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.8, 0.7, 0.4, 0.4], "lines": [
+      ["But can the neck be filled? Follow the six inputs.", "那这道腰能填满吗？跟着六个输入走。"],
+      ["Bridge zero carries four of them straight across. Bridges one and two carry one each.", "桥 0 直接送过去四个；桥 1、桥 2 各送一个。"],
+      ["Six inputs land on six different outputs, with no collisions. Rank six: the neck is full.", "六个输入落到六个不同的输出，互不相撞。秩是 6，腰填满了。"],
+      ["Lean checks when the bound is reached: a positive and at most b, c positive and at most d.", "Lean 内核检验了上界何时取到：a 为正且不超过 b，c 为正且不超过 d，"],
+      ["And each pair sits in a cone: a squared plus b squared at most three a b, likewise c and d.", "并且每一对都落在锥里：a² + b² ≤ 3ab，c、d 也一样。"],
+      ["Then the max flow equals the min cut, and both equal the smaller outer cut.", "那么最大流等于最小割，两者都等于较小的那道外割。"],
+      ["Here four plus nine is thirteen, within eighteen.", "这里 4 + 9 = 13，不超过 18。"],
+      ["Inside the cone, this graph carries exactly what its narrowest waist allows.", "在锥里，这张图能过多少，正好由它最窄的腰说了算。"]
+    ], "cues": [{"line": 2, "at": 3.0, "kind": "chime"}, {"line": 3, "at": 0.6, "kind": "stamp"}]},
+    {"id": "edge", "name": "WHAT IT DOES NOT SAY", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["Outside the cone, no equality is claimed; the bridges themselves can become the neck.", "出了锥，定理不说相等；那时三座桥自己可能成了瓶颈。"],
+      ["Rank counts the signals, not how evenly they share the load.", "秩只数有几路信号，不管它们分得是否均匀。"],
+      ["And this is one small graph. In general tensor networks, the max flow can fall short of the min cut.", "而且这只是一张小图；在一般张量网络里，最大流可能小于最小割。"],
+      ["The Ryu Takayanagi formula, entropy as a minimal surface, is a literature result, not derived here.", "Ryu–Takayanagi 公式把熵读成极小曲面的面积，那是文献结果，本片没有推出它。"]
+    ], "cues": [{"line": 0, "at": 0.4, "kind": "glitch"}]},
+    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.4, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
+      ["Geometric Intuition of Quantum Computing, chapter nineteen.", "《量子计算的几何直觉》· 第十九章"]
+    ], "cues": [{"line": 0, "at": 0.3, "kind": "chime"}]}
+  ]
+}

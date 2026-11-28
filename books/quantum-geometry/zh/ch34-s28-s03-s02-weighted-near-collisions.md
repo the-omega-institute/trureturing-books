@@ -389,6 +389,28 @@ $$
 
 这给出 $R_1(\eta)\ll(\log X+1)/X$。由固定计数差的上界，加权近碰撞质量 $E_p(\eta)$ 中残余次数恰为一的部分至多为 $p^2 D_{p-1}R_1(\eta)$。沿用固定 $K$ 和 $0<\beta<1$ 的截点 $X=e^{-K}T^\beta$，并取 $p\asymp X\log X$ 时，对角估计使这部分相对 $p!V^p$ 保留指数折减，因为 $V\asymp\log X/X$ 且 $p$ 倍的多项式因子可被吸收。残余次数随 $p$ 增长时，仍需额外的算术输入。
 
+## 随阶数增长的残余次数截断 {#growing-residual-degree}
+
+记 $E_{p,\le D}(\eta)$ 为 $E_p(\eta)$ 中每边至多剩下 $D$ 个未配对项的部分，其中 $0\le D\le p$。每对计数向量至少有 $p-D$ 个共同项。记 $W=\sum_jw_j$ 与 $V=\sum_jw_j^2>0$。权重非负时，去掉频率条件后可用共同计数上界得到
+
+$
+E_{p,\le D}(\eta)\le\binom pD^{\!2}W^{2D}D_{p-D}。
+
+$
+
+只需控制 $k=p-D$ 这一阶。若 $D_{p-D}\le A e^{-c(p-D)}(p-D)!V^{p-D}$，将一个二项式系数与 $p!$ 约去，再用 $p^D/D!$ 控制另一个。令 $x=p e^c W^2/V$，得到
+
+$
+\frac{E_{p,\le D}(\eta)}{p!V^p}
+\le A e^{-cp}\frac{x^D}{(D!)^2}
+\le A e^{-cp}\rho^{-D}\exp(2\sqrt{\rho x}),\qquad \rho>0。
+
+$
+
+末项不等式取指数级数在 $\sqrt{\rho x}$ 处的第 $D$ 项，再将两边平方。两个上界均与频率分辨率无关。 [共同计数上界的 Lean 证明](lean:D5/S3/Fourier/Concentration/FiniteMultinomialOverlap.weighted_overlap_le_diagonal)
+
+沿用上文的 ζ 尾段，固定 $K$ 与 $0<\beta<1$，取 $X=e^{-K}T^\beta$ 及 $p\asymp X\log X$。在 RH 与所引重数估计下，$W^2/V=O(p(\log T)^2)$。对所有 $p/2\le k\le p$，对角估计可用相同的常数 $A,c>0$。区间 $(X,CX]$ 提供至少固定倍数的 $p$ 个指标，在这些指标上 $kw_j^2/V$ 对该范围内的 $k$ 有统一的正下界。Stirling 公式产生的 $O(\sqrt{k})$ 因子可吸收到指数中。令 $L=\log T$，取 $\rho=(L\log L)^{-2}$。于是 $2\sqrt{\rho x}=O(p/\log L)$。若 $D\le\varepsilon p/\log L$，截断代价 $D\log(1/\rho)$ 至多为 $(2+o(1))\varepsilon p$。任取固定的 $0<\varepsilon<c/2$，整个截断范围都有与 $\eta$ 无关的指数节省。实际纵坐标的剩余近碰撞质量仍需对截断以上的残余次数作估计。 [重数估计，定理 1 与第 7 节](https://arxiv.org/abs/2306.04799)
+
 ## 可逐点匹配的高阶残余项 {#matched-residual-occupations}
 
 逐坐标抵消共同出现的频率后，两边各剩 $d$ 个频率。若能把它们配成 $d$ 对，每对的频率差都在阈值 $\eta$ 内，残余权重就可以用一次近配对的权重来估计。这里把出现次数相同的词视为同一个计数向量。
@@ -512,6 +534,56 @@ $$
 
 [互斥系数上界的 Lean 证明](lean:D5/S3/Fourier/Concentration/DisjointCharacterEnvelope.coefficient_envelope)
 
+### 共轭相位下带符号的截断余项
+
+在上述共轭权重的情形，令 $C_T=[x^d]e^{Sx}\prod_{j\in T}(e^{-A_jx}-1)$。记 $B_T=0$ 若 $|T|>d$，否则定义
+$$
+B_T=\left(\prod_{j\in T}w_j\right)\frac{(|S|+\sum_{j\in T}w_j)^{d-|T|}}{(d-|T|)!}.
+$$
+逐个子集保留符号，得到实数恒等式及次数敏感的界
+$$
+[x^dy^d]Q_k=\sum_{\substack{T\subseteq J\\|T|\le d}}(-1)^{|T|}|C_T|^2,\qquad |C_T|\le B_T.
+$$
+右轴的局部修正是左轴修正取共轭后的相反数，故每个子集恰好贡献上述带符号平方。局部指数尾的第 $n\ge1$ 次系数模长至多为 $w_j^n/(n-1)!$，于是它逐系数受 $w_j x e^{w_j x}$ 控制。柯西乘积逐次保留该非负界，乘上 $e^{|S|x}$ 后从总次数中扣除 $|T|$，得到 $B_T$。例如 $d=1$ 时，混合系数为 $|S|^2-\sum_jw_j^2$，所以 $S=0$ 时全部贡献非正。
+
+对任意自然数 $K$，从该混合系数中减去 $|T|\le\min(d,K)$ 的带符号和，所得余项 $R_K$ 满足
+$$
+-\!\sum_{\substack{T\subseteq J\\K<|T|\le d,\ |T|\text{ 为奇数}}}B_T^2\le R_K\le
+\sum_{\substack{T\subseteq J\\K<|T|\le d,\ |T|\text{ 为偶数}}}B_T^2.
+$$
+余项恰为未保留的偶数阶平方和减去奇数阶平方和。当 $K\ge d$ 时余项为零。乘上非负的傅里叶权重并求和时，可继续保留已计算的负贡献。这为下述 Fejér 频带估计提供了随次数变化的精细界。实际 ζ 零点对应的高阶子集平方和以及异常字符的总权重仍需要新的算术估计。 [Lean 带符号展开证明](lean:D5/S3/Fourier/Concentration/DisjointCharacterRemainder.signed_overlap_expansion) [Lean 奇偶余项界证明](lean:D5/S3/Fourier/Concentration/DisjointCharacterRemainder.signed_overlap_remainder)
+
+#### 中心化后的二次指数系数界
+
+保持 $C_T$ 的定义，令 $k_T=|T|$、$n=d-k_T$、$U_T=S-\frac12\sum_{j\in T}A_j$ 及 $V_T=\sum_{j\in T}w_j^2$。当 $k_T\le d$ 时，还可用
+$$
+|C_T|\le\left(\prod_{j\in T}w_j\right)\sum_{m=0}^{\lfloor n/2\rfloor}\frac{|U_T|^{n-2m}(V_T/24)^m}{(n-2m)!m!}.
+$$
+这一界保留了被选子集的中心相位和与平方权重。具体地，局部差分满足
+$$
+e^{-A_jx}-1=-A_j x e^{-A_j x/2}\sum_{m\ge0}\frac{(A_jx/2)^{2m}}{(2m+1)!}.
+$$
+由 $6^m m!\le(2m+1)!$，局部偶次系数的模长逐项受 $e^{w_j^2 x^2/24}$ 控制。抽取 $k_T$ 个线性因子，合并相位指数，对柯西乘积逐系数估计，得到 $e^{|U_T|x+V_T x^2/24}$ 在次数 $n$ 的系数。若 $k_T>d$，原系数为零。取 $n=0$ 或 $n=1$ 时上界为等式。若 $U_T=0$ 且 $n$ 为奇数，系数必为零。对于用任意指数参数 $c$ 代替 $S$ 的一般形式，取单元素集 $T=\{j\}$、$A_j\ne0$ 及 $c=A_j/2$，在 $d=3$ 时有 $|C_T|=w_j^3/24$，二次指数控制的常数 $1/24$ 在此达到等号。[双曲正弦的幂级数](https://dlmf.nist.gov/4.33.E2)
+
+可将此界用于上面的奇、偶余项预算，与先前的 $B_T$ 逐子集取较小值。在实际 ζ 尾段，仍须估计带字符权重的子集中心相位和的分布，并控制增长次数下的总余项。 [中心化交叠系数界的 Lean 证明](lean:D5/S3/Fourier/Concentration/CenteredDisjointCharacterBound.centered_overlap_bound)
+
+#### 带符号主项和与显式误差
+
+中心化的偶次因子常数项均为一。沿用上述记号，对 $|T|\le d$ 定义
+$$
+P_T=\left(\prod_{j\in T}(-A_j)\right)\frac{U_T^n}{n!},\qquad h_T=\frac{|U_T|^n}{n!},\qquad H_T=[x^n]e^{|U_T|x+V_T x^2/24},\qquad A_T=\prod_{j\in T}w_j.
+$$
+将偶次因子的乘积及其二次指数实数上界同时减去一后，逐系数控制仍成立。因此
+$$
+|C_T-P_T|\le A_T(H_T-h_T),\qquad
+\big||C_T|^2-|P_T|^2\big|\le A_T^2(H_T^2-h_T^2).
+$$
+第二个不等式将两个模长之差的反三角不等式上界乘以两模长之和，后者至多为 $A_T(H_T+h_T)$。结合局部误差估计与带符号展开，得到
+$$
+\left|[x^dy^d]Q_k-\sum_{\substack{T\subseteq J\\|T|\le d}}(-1)^{|T|}|P_T|^2\right|\le\sum_{\substack{T\subseteq J\\|T|\le d}}A_T^2(H_T^2-h_T^2).
+$$
+当 $d-|T|=0,1$ 时对应项的误差为零，空集的误差也是零。特别地，$d\le2$ 时整个近似为精确恒等式。对每个字符该不等式均成立，并可用非负傅里叶权重求平均。实际 ζ 零点所需尺度下的交替主项和与总误差仍待估计。 [Lean 主系数证明](lean:D5/S3/Fourier/Concentration/CenteredDisjointPrincipal.centered_principal_remainder) [Lean 混合误差证明](lean:D5/S3/Fourier/Concentration/CenteredDisjointPrincipal.mixed_centered_principal_error)
+
 ### 用非负傅里叶权重估计频带
 
 记 $R_H$ 为 $[-H,H]$ 中整数的模 $q$ 剩余类。对任意非负的剩余类质量 $M(r)$，定义 $B_N(k)=\sum_{j=0}^{N-1}\chi_k(j)$，并用负号特征标定义 $\widehat M(k)=\sum_rM(r)\chi_k(-r)$。当整数 $N>H\ge0$ 时，
@@ -541,6 +613,97 @@ $$
 对 $0\le r<q$，前缀指标的整数差若等于 $r\bmod q$，只能是 $r$ 或 $r-q$。有序对计数 $c_r$ 因而等于 $(N-r)_++(N-(q-r))_+$。特征标正交性给出 $\sum_k|B_N(k)|^4=q\sum_r c_r^2$。展开平方时，两项同时为正的区间是 $q-N+1\le r<N$。按相反次序排列两个计数，交叉项等于 $2\sum_{j=1}^m j(m+1-j)=m(m+1)(m+2)/3$。当 $q\ge 2N-1$ 时，这一项为零。当 $N=q$ 时，全部权重集中在零频。
 
 对任意异常频率集合 $E$，柯西–施瓦茨不等式给出 $(\sum_{k\in E}\nu(k))^2\le |E|\sum_k\nu(k)^2$。若 $E$ 排除零频，还可从右侧的平方和中扣除 $\nu(0)^2=(N/q)^2$。实际 ζ 零点的高阶字符和在哪些频率超过阈值、这些频率有多少，仍需算术估计。
+
+### 一个空间模式约束下的最小平方和
+
+令 $q>1$，$c_k=\cos(2\pi k/q)$。特征标正交性给出 $c_k$ 的均值为零，最大值为一。在非负概率权重 $w(k)$ 中，若只要求 $\sum_k w(k)c_k\ge a$，其中 $0\le a\le1$，则达到最小平方和的权重形如
+
+$$
+u_t(k)=\max\{0,1-t(1-c_k)\},\qquad
+v_t(k)=\frac{u_t(k)}{\sum_j u_t(j)},\qquad t\ge0.
+$$
+
+$t=0$ 时权重均匀，矩为零。$t$ 足够大时，所有 $c_k<1$ 的项都被截为零，矩升至一。归一化分母始终至少为一，因此连续性给出使矩恰为 $a$ 的有限参数。对每个可行的 $w$，未截断的仿射权重与 $w-v_t$ 的内积非负，因为总质量相等，且 $w$ 的矩不小于 $v_t$ 的矩。截断只增加这个内积。展开平方和得到 $\sum_k w(k)^2-\sum_k v_t(k)^2\ge\sum_k(w(k)-v_t(k))^2$，故最优权重唯一。 [线性矩约束下的单纯形投影，Zhou 与 Liu，式 (3.4)](https://arxiv.org/html/2310.10388v3#S3.E4X)
+
+令 $E(w)=\sum_k w(k)^2$，$M(w)=\sum_k w(k)c_k$，$Z=\sum_k u_t(k)$。对任意总质量为一的实权重 $w$，展开平方得到精确余项
+$$
+E(w)-E(v_t)
+=\sum_k(w(k)-v_t(k))^2+
+\frac{2}{Z}\left[t(M(w)-M(v_t))
++\sum_k\bigl(t(1-c_k)-1\bigr)_+w(k)\right].
+$$
+右端最后一项记录了被截去的负仿射权重。可取 $t\le\max(\{0\}\cup\{(1-c_k)^{-1}:c_k<1\})$。
+
+[单矩最优权重与精确余量的 Lean 证明](lean:D5/S3/Fourier/Concentration/ClippedMomentWeights.exists_clipped_moment_minimizer)
+
+模四时 $c=(1,0,-1,0)$。若 $0\le a\le 1/2$，最优权重为 $(1+2a,1,1-2a,1)/4$，平方和为 $(1+2a^2)/4$。当 $1/2\le a\le1$ 时，最优权重为 $(a,(1-a)/2,0,(1-a)/2)$，平方和为 $a^2+(1-a)^2/2$。两式在 $a=1/2$ 处相接。这个最小值给出了单个空间模式约束下，异常集合基数界中平方和系数的优化基准。整个频带的联合约束，以及实际 ζ 零点异常频率的基数，仍需要额外的估计。
+
+### 两个空间模态的首次截断阈值
+
+取 $q\ge5$，记 $c_k=\cos(2\pi k/q)$、$d_k=\cos(4\pi k/q)$、$s_k=c_k+d_k$。令 $m_q=\min_k s_k$，并设
+$$
+a_q=-\frac{1}{2m_q},\qquad v_k=\frac{1+2as_k}{q},\qquad L=\frac{1+4a^2}{q}.
+$$
+对任意实数 $a$，向量 $v$ 的总质量为一，两个实矩都等于 $a$。当 $a\ge0$ 时，所有仿射权重非负当且仅当 $a\le a_q$。当 $a\ge0$ 时，若概率权重非负且两矩至少为 $a$，其平方和等于 $L$ 当且仅当该权重等于 $v$。在这一非负阈值范围内，等号可取当且仅当 $a\le a_q$。记 $M_j(w)$ 为 $w$ 的第 $j$ 个实矩。对任意实数 $a$ 和总质量为一的任意实向量 $w$，有
+$$
+\sum_k w_k^2-L
+=\sum_k(w_k-v_k)^2+\frac{4a}{q}\bigl(M_1(w)+M_2(w)-2a\bigr).
+$$
+这来自两个余弦的正交性和平方差展开。若 $a>a_q$，至少一个 $v_k<0$。如果 $w$ 是同时满足两个矩下界的非负概率权重，矩余量一项非负。负坐标上的平方距离给出 $\sum_k w_k^2\ge L+\sum_k\max(0,-v_k)^2>L$。一般模数下，截断后的精确最优值仍待求解。
+
+倍角公式给出 $s_k=2(c_k+1/4)^2-9/8$。角度是 $\pi$ 的有理倍数，Niven 定理因此排除了 $c_k=-1/4$。于是 $m_q>-9/8$。将余弦等于 $-1/4$ 的角四舍五入到最近的格点，误差至多为 $\pi/q$，故 $m_q+9/8\le 2(\pi/q)^2$。另外，$s_k$ 的均值为零，平方均值为一，对 $(2-s_k)(s_k-m_q)\ge0$ 取均值得到 $m_q\le-1/2$。整理两端得到
+$$
+0<a_q-\frac49\le\frac{16\pi^2}{9q^2}.
+$$
+因此 $4/9$ 是跨模数统一适用的阈值下界。这个结论控制有限权重的平方和，实际 ζ 零点的高阶异常频率仍需算术估计。 [首次截断阈值的 Lean 证明](lean:D5/S3/Fourier/Concentration/FirstCosineClipping.first_cosine_clipping)
+
+### 模六时两个空间模态的最小平方和
+
+在六个剩余类上，令 $M_j(w)=\sum_{k=0}^5w_k\cos(j\pi k/3)$，$E(w)=\sum_{k=0}^5w_k^2$。取 $0\le a\le1$。同时要求非负概率权重满足 $M_1(w)\ge a$ 和 $M_2(w)\ge a$ 时，唯一的最优权重 $v$ 及其平方和为
+
+$$
+\begin{aligned}
+v&=
+\begin{cases}
+(1+4a,1,1-2a,1,1-2a,1)/6,& a\le1/2,\\
+(a,(1-a)/3,0,(1-a)/3,0,(1-a)/3),& a>1/2,
+\end{cases}\\
+E(v)&=
+\begin{cases}
+(1+4a^2)/6,& a\le1/2,\\
+a^2+(1-a)^2/3,& a>1/2.
+\end{cases}
+\end{aligned}
+$$
+
+记 $c_k=\cos(\pi k/3)$、$d_k=\cos(2\pi k/3)$。在 $c_k+d_k$ 的每个等值集合内，$c_k-d_k$ 之和为零。因此对合并读数 $c_k+d_k$ 用阈值 $2a$ 求最优权重，就得到 $M_1(v)=M_2(v)=a$。当阈值越过 $1/2$，剩余类 $2,4$ 的仿射权重被截为零。两段公式在交界处一致。 [模六最优值与单模比较的 Lean 证明](lean:D5/S3/Fourier/Concentration/SixResidueMomentOptimum.six_two_mode_optimum)
+
+对任意实权重 $w$，只要求 $\sum_k w_k=1$。记 $m=M_1(w)+M_2(w)-2a$，则精确余量为
+
+$$
+E(w)-E(v)-E(w-v)=
+\begin{cases}
+(2a/3)m,& a\le1/2,\\
+((4a-1)/3)m+(2a-1)(w_2+w_4),& a>1/2.
+\end{cases}
+$$
+
+对非负概率权重 $w$，若 $M_1(w)+M_2(w)\ge2a$，则有 $E(w)-E(v)\ge\sum_k(w_k-v_k)^2$，所以任何达到最小值的权重都等于 $v$。对 $0<a<1$，只约束 $M_1$ 的最优权重 $p$ 满足 $M_1(p)=a$，却有 $M_2(p)<a$。这是同时约束两个模态时必须计入的差异。
+
+这组 $v$ 也是模六非负空间核的归一化傅里叶权重。它关于 $k\mapsto-k$ 对称，第三个实矩 $M_3(v)$ 在第一段为零，在第二段为 $2a-1$。反演得到 $F(0)=1$、$F(\pm1)=F(\pm2)=a$、$F(3)=M_3(v)\ge0$。这个最优值给出模六频带的平方和系数。推广到其他模数需要核对合并读数的等值集合，实际 ζ 零点的异常频率仍需要算术估计。
+
+### 合并两个模态的截断何时失效
+
+令 $q\ge7$，记 $c_k=\cos(2\pi k/q)$、$d_k=\cos(4\pi k/q)$、$s_k=c_k+d_k$，以及 $x_+=\max(0,x)$。这两个带符号的和分别检测平方读数和零截断的差异：
+
+$$
+\sum_{k\bmod q}(c_k-d_k)s_k^2=\frac q4,\qquad
+\sum_{k\bmod q}(c_k-d_k)(s_k)_+>0.
+$$
+
+倍角公式给出 $s_k=(2c_k-1)(c_k+1)$ 和 $c_k-d_k=(1-c_k)(2c_k+1)$。若 $s_k>0$，则 $c_k>1/2$，故截断后的每项非负。$k=1$ 的角度在 $(0,\pi/3)$ 内，故 $1/2<c_1<1$，其项严格为正。由于 $s_0=2$，归一化权重 $v_k=(s_k)_+/\sum_i(s_i)_+$ 的分母为正。取阈值为 $v$ 的两个矩的平均，合并读数达到所需总量，第二模态却低于该阈值。
+
+令 $z_k=e^{2\pi i k/q}$，把 $(c_k-d_k)s_k^2$ 展开成 $z_k$ 的幂并按指数分组。常数项的两项均来自 $c_k^2d_k$，各为 $1/8$。其余指数的绝对值介于 $1$ 与 $6$，在模 $q\ge7$ 求和时由特征标正交性消去。若每个 $s_k$ 等值集合上 $c_k-d_k$ 的和都为零，平方读数的加权和也会为零。按指数分组保留系数的做法对应 Alpöge 的指数狄利克雷级数证明中按指数和组织乘积项的步骤。[Alpöge 的指数狄利克雷级数证明](https://github.com/the-omega-institute/riemann-hypothesis/blob/c7d25b3bfd7906388bb8eb0774e027a2b756a7b6/src/Development/AbelianVarietyTheory/Proofs/AdelicLatticeProofs/LandauSummableOfExpDirichletSeriesEntire.lean#L84) [Lean 核验两条余弦不平衡公式](lean:D5/S3/Fourier/Concentration/AggregateCosineBalance.aggregate_cosine_imbalance)
 
 ### 短时间范围内的傅里叶权重
 
@@ -598,6 +761,197 @@ $$
 \log M\ \ge\ p\log(N/p)\ \gtrsim\ T^\beta(\log T)^2.
 $$
 这里 $M\ge(N/p)^p$ 来自多重组合数的乘积公式。对 $g_\gamma=\gamma/r$，频带宽度至多为 $T/r$。于是对任意固定 $c>0$，当 $T$ 足够大时，必有不同的 $p$ 次向量在 $\exp(-cT^\beta\log T)$ 的分辨率内发生碰撞。所需的算术估计必须控制这些配对的总权重，容许个别近碰撞。[简单零点比例，§1.1 与 §8](https://arxiv.org/html/1802.10521)
+
+## 联合最优解的两个余弦约束均取等
+
+取 $q\ge4$，记 $c_k=\cos(2\pi k/q)$ 和 $d_k=\cos(4\pi k/q)$，并固定 $0<a<1$。在概率权重中，分别在 $\sum_k w_k c_k\ge a$ 或 $\sum_k w_k d_k\ge a$ 这一个约束下最小化 $\sum_k w_k^2$。单约束最优解在自己的约束上取等，另一个矩则严格小于 $a$。因此，同时满足两个下界的最小平方和权重，其两个矩都等于 $a$。
+
+对于单个读数 $b$，最优权重正比于 $f(b_k)$，其中 $f(x)=\max(0,1-t(1-x))$，且 $t>0$。所有读数小于 $1$ 的坐标中，读数最大者的截断权重为正。若其权重为零，正权重便全部落在读数等于 $1$ 的坐标，矩也等于 $1$。对第一模态，这个最大读数是 $c_1$。恒等式 $c_k-d_k=(1-c_k)(2c_k+1)$ 在 $c_k=-1/2$ 处变号。由于两个读数的均值都是零，从每项权重减去 $f(-1/2)$ 不改变带符号的和。每个乘积 $(c_k-d_k)(f(c_k)-f(-1/2))$ 都非负，$k=1$ 的乘积严格为正。
+
+对第二模态，若周期为偶数，平移半个周期保持 $d$ 并使 $c$ 变号，故第一矩为零。若周期为奇数，乘以二置换余数类，因此 $f(c_k)^2$ 和 $f(d_k)^2$ 的和相等。凸函数 $f^2$ 的导数为 $2tf$。在 $d_k$ 处取切线，并在 $c_k$ 处比较，得到逐项不等式。在 $k=1$ 处有 $d_1<c_1$ 且 $f(c_1)>0$，不等式严格成立。求和便得 $\sum_k(d_k-c_k)f(d_k)>0$。由于倍增是置换，此时 $d$ 和 $c$ 在小于 $1$ 的读数中拥有相同的最大值。
+
+若联合最优解有一个下界留有余量，就可以向另一个下界的单约束最优解移动一小段。混合后的概率权重仍满足两个下界，且平方和严格下降。这两个矩等式在支撑改变后仍然成立。一般模数下截断后的支撑和精确最优值，以及实际 ζ 零点高阶谐波的异常频率估计，仍待求解。 [两个约束取等的 Lean 证明](lean:D5/S3/Fourier/Concentration/ActiveCosineConstraints.active_cosine_constraints)
+
+## 两个余弦矩的精确高阈值区间
+
+固定整数 $q\ge4$，记 $c_k=\cos(2\pi k/q)$、$d_k=2c_k^2-1$。$c_k=1$ 仅在零点成立。其余剩余类的最大值为 $u=c_1$，最小值为 $\ell=c_{\lfloor q/2\rfloor}$。记这两个余弦层的重数为 $n_u,n_\ell$，并令
+$$
+g(x)=x-(2x^2-1),\qquad
+p=\frac{-g(\ell)}{g(u)-g(\ell)},\qquad
+b=pu+(1-p)\ell,\qquad r=\frac{1-a}{1-b}.
+$$
+由 $g(\ell)<0<g(u)$ 得 $0<p<1$。将质量 $1-r$ 放在零点，将质量 $rp$ 均分给余弦值为 $u$ 的剩余类，并将质量 $r(1-p)$ 均分给余弦值为 $\ell$ 的剩余类。所得向量 $v$ 的两个矩都等于 $a$，平方和为
+$$
+E(v)=(1-r)^2+r^2\left(\frac{p^2}{n_u}+\frac{(1-p)^2}{n_\ell}\right).
+$$
+
+为确定最优区间，用 $P_r(x)=\alpha_r+\beta_rx+\gamma_r(2x^2-1)$ 插值 $1,u,\ell$ 三层上每个剩余类的权重。系数和各处的 $P_r(x)$ 都是 $r$ 的仿射函数。$r=0$ 时，插值多项式为 $(x-u)(x-\ell)/((1-u)(1-\ell))$。由于 $u+\ell<0$，两个矩的系数均为正，而且所有中间余弦层都有 $P_0(x)<0$。对 $\beta_r,\gamma_r$ 以及各中间层的 $-P_r(x)$，将每个量视为 $r$ 的函数 $f$，计算 $1-f(1)/f(0)$。记这些数与 $1$ 的最大值为 $B$，并令
+$$
+a_{\mathrm{crit}}=1-\frac{1-b}{B}.
+$$
+此时 $b<a_{\mathrm{crit}}<1$。若 $a_{\mathrm{crit}}\le a\le1$，则插值多项式的两个矩系数非负，且 $v_k=\max(0,P_r(c_k))$。对两个矩都至少为 $a$ 的任意概率权重 $w$，展开平方可得 $E(w)-E(v)\ge\sum_k(w_k-v_k)^2$。因此在这一闭区间上，上述平方和由 $v$ 唯一达到。
+
+若 $b<a<a_{\mathrm{crit}}$，三个支撑层上的权重仍为正。若某个矩系数为负，可以在支撑内略微增加相应的矩，并保持另一个矩。若某个中间层的插值为正，则可以在那里增加少量权重，同时调整三个支撑层以保持两个矩和总质量。两种改动都给出平方和严格更小的可行权重。当 $a=b$ 时，原权重在零点的质量为零。向零点的点质量作小幅混合，仍可满足两个下界，并因两者的支撑不相交而降低平方和。对任意已严格降低平方和的竞争者，再小幅混入零点的点质量，仍保持平方和严格较低，并使两个矩都严格超过 $a$。临界值以下的一般最优权重，以及实际 ζ 零点的高阶谐波异常频率的算术估计，仍待求解。
+
+[精确区间与严格下降的 Lean 证明](lean:D5/S3/Fourier/Concentration/HighCosineThreshold.cyclic_high_threshold_certificate)
+
+对每个 $q\ge13$，最先接触插值多项式零点的中间余弦层是 $\cos(4\pi/q)$。记 $v_*=\cos(4\pi/q)$、$h=1-u$、$d=1-\ell$、$A=p/2$、$C=(1-p)/n_\ell$。上端层恰有两个剩余类。令 $S_\gamma$ 为 $\gamma_r$ 的斜率读数，$S(x)$ 为中间层 $x$ 的证书不等式的斜率读数。拉格朗日插值给出
+$$
+S_\gamma=1+\frac{Ad-Ch}{u-\ell},\qquad
+S(x)=S_\gamma+\frac{hd}{u-\ell}\left(\frac{A}{u-x}+\frac{C}{x-\ell}\right).
+$$
+若 $A\ge C$，则 $\beta_r$ 的斜率读数不超过 $S_\gamma$。把网格角度折入 $[0,\pi]$ 后，每个中间层都满足 $x\le v_*$。对 $x<v_*$，$S(v_*)-S(x)$ 的符号由
+$$
+A(v_*-\ell)(x-\ell)-C(u-v_*)(u-x)
+$$
+决定。对偶数 $q\ge14$，有 $\ell=-1$ 和 $x\ge-u$。由 $u>8/9$ 得 $C/A\le g(u)<25/81$，而 $(v_*-\ell)(x-\ell)/((u-v_*)(u-x))\ge u/(2u+1)>8/25$。对奇数 $q\ge13$，令 $w=\cos(\pi/q)$，则 $\ell=-w$，且 $x-\ell\ge2w(1-u)$。用 $\pi^2<10$ 及 $1-\cos t\le t^2/2$ 可得 $C/A<2/5$，而同一个比值超过 $19/40$。由此只有 $v_*$ 接触零点，两个矩系数仍严格为正。
+
+令 $r_s=(1-s)/(1-b)$。插值在该层的值满足
+$$
+P_{r_s}(v_*)=P_0(v_*)\frac{s-a_{\mathrm{crit}}}{1-a_{\mathrm{crit}}},\qquad P_0(v_*)<0.
+$$
+当 $s$ 下降至临界值以下时，该值转正。十三是这个统一范围的最小起点。在 $q=12$ 时，$u=\sqrt{3}/2$，且 $g(u)(2u+1)=1>u$，使下方中间层 $-u$ 的斜率更大。此时在临界值处，$v_*$ 的插值仍为负。
+
+$u,\ell,p$ 的极限依次为 $1,-1,1$。由 $1-p=h(2u+1)/(g(u)-g(\ell))$ 得 $(1-b)/h\to4$。斜率中的比值 $h/(u-v_*)=1/(2u+1)$ 在极限中仍有贡献，代入得 $B=S(v_*)\to5/3$。结合 $q^2h\to2\pi^2$，高阈值区间的宽度满足
+$$
+q^2(1-a_{\mathrm{crit}}(q))\longrightarrow\frac{24\pi^2}{5}.
+$$
+
+[首次接触与仿射过零的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/HighCosineThresholdLimit.cyclic_threshold_first_contact) · [模十二例外的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/HighCosineThresholdLimit.cyclic_threshold_twelve_no_contact) · [锐利宽度极限的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/HighCosineThresholdLimit.cyclic_criticalThreshold_limit)
+
+## 整数格点上最小平方和的支撑阈值
+
+在大模数下，零点附近的二次余弦亏量把问题引向整数格点。先固定格点上的二阶矩预算 $m\ge0$。在满足 $\sum_j w_j=1$、$w_j\ge0$、$\sum_j j^2 w_j\le m$ 的权重中，最小化 $\sum_j w_j^2$。这里所有指标 $j$ 都在 $\mathbb Z$ 上，二阶矩要求可和。
+
+对每个正整数 $n$，预算恰在区间 $[(n^2-1)/5,n(n+2)/5]$ 内时，存在 $n^2\le t\le(n+1)^2$ 使最优权重为
+$$
+w_j=\frac{(t-j^2)_+}{Z},\qquad
+Z=\sum_{|j|\le n}(t-j^2)>0.
+$$
+它的二阶矩恰为 $m$。区间两端分别对应 $t=n^2$ 与 $t=(n+1)^2$。在下端点，仅 $|j|\le n-1$ 的位置有正权重。越过该端点后，支撑扩到 $|j|\le n$，并保持到上端点。所有这些闭区间首尾相接，覆盖 $m\ge0$。当 $m=0$ 时，全部权重在零点。
+
+候选权重的二阶矩是有限和的比值。代入 $t$ 的两个端点，用平方和与四次方和公式得到预算的两个端点。连续性给出中间的预算。对任意非负且总质量为一的权重 $v$，设其二阶矩可和，和为 $s$。展开平方差，将交叉项分成仿射函数 $(t-j^2)/Z$ 的贡献和支撑外的修正，得到
+$$
+\sum_j v_j^2-\sum_j w_j^2
+= \sum_j(v_j-w_j)^2+\frac{2(m-s)}{Z}
+  +\frac{2}{Z}\sum_j (j^2-t)_+v_j.
+$$
+最后一项可和且非负。当 $s\le m$ 时，等式给出权重的严格唯一性。由于 $t\ge1$，由 $w_0=t/Z$ 和 $w_0-w_1=1/Z$ 还可唯一确定 $t$ 和 $Z$。相邻闭区间在公共端点给出同样的权重与参数。半开区间 $(n^2-1)/5\le m<n(n+2)/5$ 则给出唯一指标 $n=\lfloor\sqrt{5m+1}\rfloor$。第一段 $0\le m\le3/5$ 只有零点及其两个邻点，权重分别为 $1-m,m/2,m/2$。用第二谐波的尺度 $\lambda=8\pi^2m$ 表示，第一段上端恰为 $24\pi^2/5$。把格点最小值定量传回有限循环群，还须处理第二谐波在对径附近也接近 $1$ 的情形。
+
+[闭区间支撑与精确余项的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/LatticeSquareMomentActivation.exists_lattice_square_moment_minimizer_on_interval) · [全局半开区间分类的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/LatticeSquareMomentActivation.exists_lattice_square_moment_minimizer)
+
+### 有限循环群的最小值收敛到格点最小值
+
+固定 $\lambda\ge0$，令 $m=\lambda/(8\pi^2)$、$a=1-\lambda/q^2$。记 $L(m)$ 为上面的格点最小平方和，$E_q(a)$ 为两个余弦矩均至少为 $a$ 时的循环群最小平方和。设 $m$ 处在第 $n$ 个支撑区间内，格点支撑半径为 $R$。在下端点 $R=n-1$，其余位置 $R=n$。若 $q>2R$，最小值 $E_q(a)$ 取得，且
+$$
+0\le L(m)-E_q(a)\le \frac{2t}{Z}\frac{\lambda}{q^2}\le\frac{2\lambda}{q^2}.
+$$
+对任意总质量为一的非负循环群权重 $v$，取 $\bar i$ 为余类 $i$ 的中心整数代表元。记两个余弦矩为 $M_1(v),M_2(v)$，并设 $S_1=2t(M_1(v)-a)/Z$，$S_2=(q/(2\pi))^2(M_2(v)-a)/Z$。用同一个格点最优权重 $w$，还有
+$$
+\sum_i(v_i-w_{\bar i})^2+S_1+S_2
+\le \sum_i v_i^2-L(m)+\frac{2t}{Z}\frac{\lambda}{q^2}.
+$$
+
+格点支撑在 $q>2R$ 时嵌入循环群。由 $1-\cos x\le x^2/2$，嵌入后两个矩的亏量分别至多为 $\lambda/(4q^2)$ 与 $\lambda/q^2$，从而可行。逆向估计要控制对径附近的权重，因为第二余弦在那里也接近 $1$。令 $\theta=2\pi\bar i/q$。在整个中心角范围内有 $\theta^2\cos\theta\le\sin^2\theta$。余弦非正时直接由符号得到。余弦为正时，对半角用 $\sin x\ge x\cos x$，再用 $\cos^4(\theta/2)\ge\cos\theta$。因此证书
+$$
+P_i=\frac{t\cos\theta-(q\sin\theta/(2\pi))^2}{Z}
+$$
+逐点不超过 $w_{\bar i}$。将 $2\sum_i v_iP_i$ 写成两个余弦矩并分离 $S_1,S_2$，再把 $(t-m)/Z=L(m)$ 代入平方距离的展开式即得估计。对可行权重，$S_1,S_2$ 均非负。归一化常数 $Z$ 中零点一项为 $t$，所以 $t/Z\le1$。
+
+每个固定预算都落在一个有限的支撑区间中。因此 $E_q(1-\lambda/q^2)$ 沿所有整数模数趋于 $L(\lambda/(8\pi^2))$。对实际 ζ 零点高阶频率的算术估计仍有待解决。
+
+[中心化余弦矩恒等式的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/CyclicToLatticeComparison.cosineMoment_eq_centered) · [定量比较的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/CyclicToLatticeComparison.cyclic_to_lattice_comparison)
+
+### 对径附近的质量
+
+循环群最优权重在每个固定的中心格点上趋于格点权重。两个取等的矩还决定了远离这些格点的一小部分质量。固定 $\lambda\ge0$，令 $v_q$ 为阈值 $1-\lambda/q^2$ 下任意一个循环群最优权重。记 $c_i=\cos(2\pi i/q)$、$A_q=\{i:c_i<0\}$。沿所有整数模数，
+$$
+q^2\sum_{i\in A_q}v_q(i)\longrightarrow \frac{3\lambda}{8},
+\qquad
+q^2\sum_{i\in A_q}(1+c_i)v_q(i)\longrightarrow 0.
+$$
+第二个极限表明，对任何固定的 $\varepsilon>0$，$A_q$ 中满足 $c_i\ge-1+\varepsilon$ 的部分，其质量乘以 $q^2$ 后趋于零。
+
+在格点权重的固定支撑上，第一、第二余弦亏量乘以 $q^2$ 后，加权和分别趋于 $\lambda/4$ 与 $\lambda$。两个约束均取等，所以全圆周上两个缩放后的亏量之和各为 $\lambda$。当 $\lambda=0$ 时，余弦逐点至多为一，可行性已使两个矩取等。第二亏量非负，因而其固定支撑外的部分趋于零。在 $c_i\ge0$ 处，第二亏量的一半控制 $1-c_i$。在 $c_i<0$ 处，同样的量控制 $1+c_i$。所以 $A_q$ 上的第一亏量趋于 $3\lambda/4$，它与二倍缩放质量之差趋于零。这里先取出有限和并控制余项，再取极限。相关特征标和证明也用这个方法比较有限狄利克雷多项式与对数导数。 [特征标和的余项界](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/GL3MeanSquares/GenusMeanAsymptotics/JacobiCharacterSums/TailFinal.lean#L32-L55)
+
+[缩放对径质量极限的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/CyclicNegativeCosineMass.cyclic_negative_cosine_mass_limit)
+
+### 偶数与奇数循环群的能量差
+
+固定 $\lambda>0$，令 $m=\lambda/(8\pi^2)$，格点最优权重为 $w_j=(t-j^2)_+/Z$，四阶矩为 $m_4=\sum_j j^4w_j$。沿两种奇偶性分别有
+$$
+\lim_{q\to\infty} q^2\bigl(L(m)-E_q(1-\lambda/q^2)\bigr)
+=\frac2Z\left[(t-d^2)\frac{3\lambda}{8}+\frac{4\pi^2}{3}m_4\right],
+$$
+其中偶数模数取 $d=0$，奇数模数取 $d=1/2$。奇数循环群上，采样点与对径最近相距半步，因此奇数模数的系数比偶数模数小 $3\lambda/(16Z)$。四阶矩对两种奇偶性的贡献相同。
+
+记 $h=2\pi/q$，$C=-\cos(dh)$。二次证书
+$$
+p_q(c)=\frac{t-h^{-2}(1-c^2)-\beta_q(1-c)}{Z},
+\qquad \beta_q=\frac{t-h^{-2}(1-C^2)}{1-C}
+$$
+以 $C$ 为根，另一个根 $\rho_q$ 满足 $(1-\rho_q)/h^2\to t/2$。因式分解将证书正部限制在原点附近的固定窗口内，因此可在该窗口逐项求和余弦的四阶展开。激活端点上，边界格点的原权重为零。扰动后的正部平方为 $O(h^4)$，对 $h^2$ 阶系数没有贡献。[余弦级数](https://dlmf.nist.gov/4.19.E2)
+
+配方给出任意可行权重的能量下界。为在 $h^2$ 阶达到该界，调整零点及其两个邻点的权重，在最靠近对径的余弦层补入质量，并令两个矩约束同时取等。原点附近的改变量为 $O(h^2)$，补入的质量渐近于 $3mh^2/4$。任一固定正预算下，三个调整点的极限权重均为正，因此在充分大的模数上该构造可行，也涵盖激活端点。此结论适用于固定预算下的有限循环模型。实际 ζ 零点纵坐标的加权高阶算术估计仍开放。[推导与条件](https://github.com/the-omega-institute/trureturing/issues/33993#issuecomment-7146572104)
+
+[奇偶能量修正的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/CyclicParityLimit.cyclic_parity_correction)
+
+### 哪些格点具有正权重
+
+固定 $\lambda>0$，对所有充分大的模数，循环群最优权重恰好在原点附近满足 $j^2\le t$ 的格点和最靠近对径的格点上为正。偶数循环群有一个最近对径点，奇数循环群有两个。格点激活端点 $t=N^2$ 上，$\pm N$ 的极限格点权重为零，但两个有限循环群权重为正，量级为 $q^{-2}$。
+
+在这些候选点上，把权重表示成 $1$、$1-c$ 和 $(1-c^2)/h^2$ 的线性组合，其中 $c=\cos(jh)$，$h=2\pi/q$。质量和两个亏量给出三个方程。原点、相邻格点和对径附近一个格点的特征向量在极限中线性无关。平方端点处，原点窗口二阶矩的变化对 $\pm N$ 权重的一阶改变量有正贡献，与 $1$ 和 $j^2$ 正交的首一二次多项式也给出非负贡献。二次证书在两侧第一个被排除的余弦层上都为负。凸性将这一符号传给二者之间的余弦层，再用配方验证全循环群上的唯一最优解。设最优权重为 $v$。任意可行权重 $w$ 都满足 $E(w)-E(v)\ge\sum_i(w_i-v_i)^2$。
+
+所需模数下界随固定预算而变。这里的支撑结论适用于两个指定的余弦约束。[支撑与稳定性的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/CyclicEventualSupport.cyclic_eventual_exact_support) · [精确证书与端点计算](https://github.com/the-omega-institute/trureturing/issues/34004#issuecomment-7147550923)
+
+### 有限循环上的前部支撑切换
+
+固定整数 $N\ge2$，记 $h=2\pi/q$，将两个余弦矩的共同下界设为 $1-2mh^2$。格点模型在 $m_N=(N^2-1)/5$ 处切换。对于充分大的 $q$，在 $m_N$ 附近有唯一的有限循环切换预算 $m_{N,q}$。最近对径点和前部 $|j|\le N-1$ 的各点在这一邻域内始终有正权重。两点 $\pm N$ 恰在 $m>m_{N,q}$ 时获得正权重。沿两条奇偶子列分别有
+$$
+\frac{m_{N,q}-m_N}{h^2}
+\longrightarrow
+\frac{(N^2-1)(47-31N^2)}{420}+\frac{3(N^2-1)d^2}{20},
+\qquad d=\begin{cases}0& q\text{ 为偶数},\\[2pt]1/2& q\text{ 为奇数}.\end{cases}
+$$
+两个系数都为负，所以边界点对在到达格点预算前就进入支撑。奇数模数的系数比偶数模数大 $3(N^2-1)/80$。
+
+固定候选前部窗口后，矩方程右端随 $m$ 仿射变化。在较大窗口拟合三个余弦特征，以 $N$ 点权重的零点定义切换预算。令 $x_j=j^2$，以 $\bar x$ 表示 $|j|\le N$ 内的均值，并记 $V=\sum_j(x_j-\bar x)^2$。该权重的斜率趋于 $(N^2-\bar x)/V>0$。删除两个零权重行后，切换处的矩方程仍成立。较小窗口的拟合在边界点对处的求值也有正斜率。其余前部权重保有正极限。对径权重在 $h^2$ 阶为正。将边界点对纳入考察窗口后，两端首个排除余弦层的证书值都有严格负极限，再由凸性排除循环中间的各点。 [参数二次规划，第 4 节](https://doi.org/10.1016/S0005-1098(01)00174-1)
+
+令 $T=N^2$、$W_j=(T-x_j)/Z$、$Z=\sum_j(T-x_j)$，并记 $m_4=\sum_j x_j^2W_j$。用 $r_j$ 表示预算为 $m_N$ 时前部权重的 $h^2$ 阶系数，用 $\mu=3m_N/4$ 表示总对径权重的 $h^2$ 阶系数。二次式 $r_j+\mu W_j$ 的总和为零，关于 $x_j$ 的一阶矩为 $K=m_4/3+(m_N-d^2)\mu$，二次项系数为 $1/(3Z)$。消去常数项与一次项得到
+$$
+\frac{r_N V}{T-\bar x}=K+\frac{m_4-m_N^2}{3}.
+$$
+阈值偏移系数是这个比值的相反数。对称有限和给出 $m_4=(N^2-1)(3N^2-5)/35$，代入即得上式的显式系数。渐近式固定 $N$，较小模数下其他对径层也能带有正权重。[切换与缩放偏移的 Lean 证明](lean:D5/S3/Fourier/Asymptotics/CyclicActivationShift.cyclic_activation_shift) · [推导与有限核对](https://github.com/the-omega-institute/trureturing/issues/34016#issuecomment-7148575133)
+
+格点半径增长引出矩误差的一致控制与对径精确支撑的问题。[增长尺度下的循环支撑分析](ch34-s28-s03-s02-growing-cyclic-support.md)讨论这一情形。
+
+### 对径阈值之外的精确支撑
+
+固定周期最终的奇偶性 $e\in\{0,1\}$，假设 $N^5h^2\to K>0$，记 $Q=3K/20$。指标为 $l\ge0$ 的对径窗口 $S_l$ 包含相对于对径角从 $-l-e/2$ 到 $l+e/2$ 的单位步长偏移。定义
+
+$$
+T_0(l)=\frac{l(2l-1)(2l+1)}4,\qquad
+T_1(l)=l(l+1/2)(l+1).
+$$
+
+若 $Q$ 不等于任何 $T_e(l)$，则恰有一个 $l$ 满足 $T_e(l)<Q<T_e(l+1)$。充分大的 $N$ 上，循环群上的唯一最优解 $v$ 由前部格点 $|j|\le N$ 与对径窗口 $S_l$ 上的联立拟合给出，其余格点权重均为零。这两个窗口内的权重严格为正，且两个余弦矩均达到 $1-2mh^2$。对任意可行的概率权重 $w$，
+
+$$
+\sum_j w_j^2\ge\sum_j v_j^2+\sum_j(w_j-v_j)^2.
+$$
+
+记 $R=l+e/2$，对径极限截距为 $B=(Q+(3/4)\sum_{r\in S_l}r^2)/|S_l|$。有限求和给出
+
+$$
+\begin{aligned}
+\tfrac34\left(|S_l|R^2-\sum_{r\in S_l}r^2\right)&=T_e(l),\\
+\tfrac34\left(|S_l|(R+1)^2-\sum_{r\in S_l}r^2\right)&=T_e(l+1).
+\end{aligned}
+$$
+
+因而严格阈值条件等价于 $3R^2/4<B<3(R+1)^2/4$。边界极限保证两个窗口最后纳入的格点上拟合权重为正，紧邻的第一个未纳入格点带符号值为负。拟合多项式关于采样余弦为凸函数，四个边界符号由此控制整个循环格点。精确格点对应将拟合矩方程转移至循环群，有限最优性证书给出上述平方距离不等式。
+
+若 $q/N^{5/2}\to\gamma>0$，则 $Q=3\pi^2/(5\gamma^2)$。偶周期第一对新增对径格点在 $\gamma<2\pi/\sqrt5$ 时激活，奇周期相应条件为 $\gamma<\pi/\sqrt5$。同一公式分类全部后续跃迁中严格偏离阈值的情形。在等号处，对应对径层的极限带符号值为零，激活状态仍需判定。 [Lean 内核核验的证明](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingSupport.eventual_strict_support_away_from_thresholds) · [研究与证明](https://github.com/the-omega-institute/trureturing/issues/34029)
 
 ## 局部统计在截点变化下的误差
 

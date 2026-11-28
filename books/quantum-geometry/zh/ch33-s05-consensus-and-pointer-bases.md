@@ -265,6 +265,12 @@ $$
 
 在 §34.5.2 的单比特信道解释中，轴是单位向量，且 $c=\cos\alpha_n$、$d=\cos\alpha_m$ 位于 $[0,1]$；Lean 结果本身是代数矩阵命题，不声称某个 CPTP 实现。作为精确代数实例，取 $\mathbf{e}=(1,0,0)$、$\mathbf{m}=(3/5,4/5,0)$、$c=1/2$、$d=1/3$。$\mathbf{K}(\mathbf{e},c)\mathbf{K}(\mathbf{m},d)$ 与 $\mathbf{K}(\mathbf{m},d)\mathbf{K}(\mathbf{e},c)$ 的 $(0,1)$ 元分别为 $8/25$ 与 $4/25$。
 
+§34.5.3 的幸存副本讲的是：乘进相干的因子必须逐份精确抵消，漏掉一份就回不到原值。这一对数讲的是另一件事：沿两根斜交轴的收缩，先后次序会改变落点。下面的短片把这两笔账依次手算一遍。
+
+::: {.film src="redundant-records"}
+**留下一份副本，就撤不回去（2 分 10 秒）。** 开场的路标、十位读者与倒着抹掉一笔的那一位是比方，以紫色 ARGUED 徽章标出。均匀叠加态的相干 $\rho_{01} = \frac{1}{2}$ 是琥珀色的矩阵元；两份重叠为 $-i$ 的相位记录把它依次变成 $-\frac{i}{2}$ 与 $-\frac{1}{2}$，只对第 $0$ 份取共轭剩下 $-\frac{i}{2}$，两份都取共轭才回到 $\frac{1}{2}$，绿色的这四个数即 [@thm-ch33-consensus-redundant-records-and-kernel] 第 2 款。一排八份副本中，其余七份重叠模长为 $1$ 的副本都撤销后，琥珀色的幸存副本（重叠 $\frac{3}{10}$）把相干留在 $\frac{3}{20}$，是第 1 款情形的一个算例（第 1 款只说撤销其余副本复原不了原值，不排除别的复原手段）；手机与照片的比方和“握着它的手太多”一句是本书的诠释，标为紫色。两根青色轨道上，把点 $(0, 1)$ 往水平轨道拉一半、往过 $(\frac{3}{5}, \frac{4}{5})$ 的斜轨拉三分之二，两种次序的落点横坐标分别是 $\frac{4}{25}$ 与 $\frac{8}{25}$，品红的差 $\frac{4}{25}$ 正是 [@thm-ch33-axis-contraction-commutator] 的换位子公式在这一点上的值；转动斜轨时，平行与垂直处差为零。末段三栏：共轭只撤销重叠模长为 $1$ 的副本，带噪副本要靠联合逆门 $U_j^\dagger$（手工推导，紫色）；把事实读作冗余记录是诠释（紫色）；单次选支仍是开放问题（红色，[@prob-ch34-single-outcome-realization]）。除绿色四个数外，片中数字都是屏幕上的计算。
+:::
+
 对于单位轴，这一换位子在平行（$\mathbf{n}\cdot\mathbf{m} = \pm 1$）**与严格正交**（$\mathbf{n}\cdot\mathbf{m} = 0$）两处均精确为零；在 $45^\circ$ 等斜交情形且两个因子均不等于 $1$ 时则非零。因此，$90^\circ$ 正交双泡的先后次序冲突**并非**来自未读退相干信道，而是来自**选择性条件更新（selective instrument）** $\mathcal{J}_{\mathbf{n},+}(\rho) = P_{\mathbf{n},+}\rho P_{\mathbf{n},+}$（其中 $P_{\mathbf{n},+} = \frac{1}{2}(I_2 + \mathbf{n}\cdot\vec{\sigma})$）：从最大混态 $\frac{1}{2}I_2$ 出发，先读 $Z_+$ 再读 $X_+$ 得到 $\mathcal{J}_{X,+}(\mathcal{J}_{Z,+}(\frac{1}{2}I_2)) = \frac{1}{4}P_{X,+}$，而先读 $X_+$ 再读 $Z_+$ 得到 $\mathcal{J}_{Z,+}(\mathcal{J}_{X,+}(\frac{1}{2}I_2)) = \frac{1}{4}P_{Z,+}$——两条分支发生概率同为 $\frac{1}{4}$，归一化条件终态却分别落在 $|+X\rangle$ 与 $|+Z\rangle$（未归一化希尔伯特—施密特范数差恰为 $\frac{1}{4}$）。在离散信念集合修正层面，冲突重置更新的非对易性与有限共识子空间外的单位正交逃逸则由以下两条冻结定理精确刻画：
 
 ::: {.theorem #thm-ch33-consensus-revision-and-escape title="冲突信念修正次序非对易性与闭子空间正交余项单位逃逸定理" lean="D5/S3/ConceptDynamics/Revision/RevisionConflictNoncommutation.revision_conflict_noncommutation D5/S3/Quantum/Algebra/FiniteLayerProjectionEscape.finite_layer_projection_escape"}

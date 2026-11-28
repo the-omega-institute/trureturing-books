@@ -2,11 +2,13 @@
 
 [第七章](ch07-second-order-jet-calculus.md)证明了在二阶幂零射流商环 $\mathcal{J}_2(\mathbb{Q}) = \mathbb{Q}[\eta]/(\eta^3)$ 中，任意有理函数的状态、联络与曲率都可以通过有限步有理四则运算精确读出，无需半步 $\epsilon\text{-}\delta$ 极限。然而，数学与物理中遍布指数、正弦、余弦与反正切等经典“超越函数”，传统教科书往往以此作为不得不引入实数连续统 $\mathbb{R}$、无穷级数与超越常数 $\pi, e$ 的终极理由。
 
-本章将这一成见彻底翻转。循着斯坦利（R. P. Stanley，1980）的 D-有限（differentiably finite）幂级数代数框架，我们把二阶射流推广至任意截断阶 $N \in \mathbb{N}$ 的有限有理多项式商环 $J_N(\mathbb{Q}) = \mathbb{Q}[\eta]/(\eta^{N+1})$ 与统一有理系数流 `JetSeq`：指数、三角与反正切函数在任意给定精度阶 $N$ 下，全部化作由纯有理线性微分递推唯一锁定的有限多项式，其普适莱布尼茨律、指数加法律与求逆律、毕达哥拉斯恒等式以及反正切微分方程均已由零公理内核定理认证。更令人惊叹的是，我们在 `OmegaInit` 与 `OmegaMath` 零公理内核中进一步认证了**有理凯莱圆的单位模与耦合微分方程唯一性**，借此一步打通凯莱—三角代数大一统，并认证了一条全程不出现 $\pi$ 或反三角函数的**纯有理马青切线链**，再以交替双边包络按需把有理区间宽度收窄至 $1.57 \times 10^{-25}$ 以下。
+本章将这一成见彻底翻转。循着斯坦利（R. P. Stanley，1980）的 D-有限（differentiably finite）幂级数代数框架，我们把二阶射流推广至任意截断阶 $N \in \mathbb{N}$ 的有限有理多项式商环 $J_N(\mathbb{Q}) = \mathbb{Q}[\eta]/(\eta^{N+1})$ 与统一有理系数流 `JetSeq`：本章在原点构造的指数、正弦、余弦与反正切射流，在任意截断阶 $N$ 下，都是由纯有理线性微分递推唯一锁定的有限多项式，其普适莱布尼茨律、指数加法律与求逆律、毕达哥拉斯恒等式以及反正切微分方程均已由零公理内核定理认证。更令人惊叹的是，我们在 `OmegaInit` 与 `OmegaMath` 零公理内核中进一步认证了**有理凯莱圆的单位模与耦合微分方程唯一性、普适形式复合链式法则以及对一切截断阶 $N$ 成立的凯莱—三角代数大一统**，并认证了一条全程不出现 $\pi$ 或反三角函数的**纯有理马青切线链**，再以交替双边包络按需把有理区间宽度收窄至 $1.57 \times 10^{-25}$ 以下。
 
 ## 8.1 任意阶 D-有限微分射流环与四大基本代数律 {#sec-ch08-dfinite-jet-ring}
 
-如果一个函数满足常系数或有理多项式系数的有限阶线性微分方程，那么它在任意有理基点处的全部高阶导数都服从有限长线性递推，因而系数完全留在有理数域 $\mathbb{Q}$ 内，绝不需要实数完备化。将这一机制封装进截断多项式商环及统一系数流，即得任意阶 D-有限射流代数。
+要让射流留在有理域，微分方程和所选展开点的初值都得给出有理数据。设 $f$ 满足 $m$ 阶线性方程 $\sum_{j=0}^m p_j(x)f^{(j)}(x)=0$，其中 $p_j\in\mathbb{Q}[x]$。在有理普通点 $a$（即 $p_m(a)\ne0$），整条泰勒系数流有理，当且仅当 $f(a),f'(a),\ldots,f^{(m-1)}(a)$ 都有理。这可直接手推：将方程微分 $n$ 次，在 $a$ 处解出最高阶项 $p_m(a)f^{(m+n)}(a)$，其余项仅含较低阶导数、有理多项式导数与整数二项式系数。逐阶递推后除以 $k!$ 即得有理泰勒系数 $f^{(k)}(a)/k!$。这些系数可直接装进截断多项式商环。
+
+换一个有理展开点，初值可能已经出域。譬如 $f(x)=\sqrt{1+x}$ 满足 $2(1+x)f'(x)=f(x)$，在普通点 $0$ 有 $f(0)=1$，而在另一普通点 $1$ 处，$f(1)=\sqrt{2}$、$f'(1)=\sqrt{2}/4$。以下冻结定律针对形式系数流及所列初值。
 
 ::: {.definition #def-ch08-dfinite-jets title="任意阶 D-有限有理微分射流环与四枚标准生成多项式"}
 对任意自然数 $N \in \mathbb{N}$，定义 **$N$ 阶有理微分射流环**为截断商环
@@ -77,7 +79,7 @@ $$
 
 在传统数学里，三角函数 $(\cos\theta, \sin\theta)$ 似乎天生属于超越分析，而有理凯莱圆周映射 $t \mapsto \bigl(\frac{1-t^2}{1+t^2}, \frac{2t}{1+t^2}\bigr)$ 似乎只是一条初等代数技巧。现在我们揭示两者在任意阶射流环 $J_N(\mathbb{Q})$ 内的深层同一性。首先，在零公理齐次射影圆上，凯莱像恒落单位圆已由所钉内核零公理定理严格锁定：
 
-::: {.theorem #thm-ch08-cayley-circle-unit title="齐次有理凯莱圆的零公理单位模恒等式" lean="D5/S3/Quantum/AURICOmega/OmegaCircleClosure.cayley_circle_unit"}
+::: {.theorem #thm-ch08-cayley-circle-unit title="齐次有理凯莱圆的单位模恒等式" lean="D5/S3/Quantum/AURICOmega/OmegaCircleClosure.cayley_circle_unit"}
 设 $p, q \in \mathbb{Z}$ 为不全为零的带号整数（满足 `Nonzero p q`，即 $p \neq 0 \lor q \neq 0$）。在有理比值载体 `IntRatio` 上记平方和分母 $\operatorname{normSq}(p, q) = p^2 + q^2$ 与凯莱坐标
 
 $$
@@ -132,20 +134,37 @@ $$
 耦合微分方程由 `CayleyCos` 与 `CayleySin` 的交错整数系数直接代入 $(1 + \eta^2) D(\cdot)$ 按奇偶次数逐项相消验证。对于唯一性，按次数 $k$ 强归纳：初值锁定 $k = 0$ 处 $f_0 \equiv 1 = \mathrm{CayleyCos}_0$、$g_0 \equiv 0 = \mathrm{CayleySin}_0$；设对一切 $j \le k$（$k < N$）结论已成立，比较方程在第 $k$ 阶的系数 $(k+1) f_{k+1} + (k-1) f_{k-1} \equiv -2 g_k$ 与 $(k+1) g_{k+1} + (k-1) g_{k-1} \equiv 2 f_k$（$k = 0$ 时无 $k-1$ 项），由于右端与低阶项均已分别等同于 `CayleyCos`、`CayleySin` 且乘子 $k + 1 \ge 1$ 在有理数中可逆，立得 $f_{k+1} \equiv \mathrm{CayleyCos}_{k+1}$ 且 $g_{k+1} \equiv \mathrm{CayleySin}_{k+1}$，归纳至 $N$ 证毕。完整证明由 Lean 内核检查。
 :::
 
-现在只需一步形式复合验证（手工推导），便立刻由 [@thm-ch08-dfinite-calculus-laws] 与 [@thm-ch08-cayley-ode-uniqueness] 推出**凯莱—三角代数大一统**。因 $2\,\mathrm{Atan}_N(\eta)$ 常数项为零，复合射流 $F(\eta) := \mathrm{Cos}_N\bigl(2\,\mathrm{Atan}_N(\eta)\bigr)$ 与 $G(\eta) := \mathrm{Sin}_N\bigl(2\,\mathrm{Atan}_N(\eta)\bigr)$ 在 $J_N(\mathbb{Q})$ 中良定义且满足初值 $F(0) = 1,\; G(0) = 0$；结合形式链式法则与 [@thm-ch08-dfinite-calculus-laws] 中的三角微分律和反正切方程 $(1 + \eta^2)\mathrm{Atan}'_N \equiv 1 \pmod{\eta^N}$，对一切 $k < N$ 立得
+现在我们将形式复合算子与普适形式链式法则本身一并纳入使用 `OmegaInit` 与 `OmegaMath` 的严格端 D5 形式化（`strict_omega.axioms: []`）：对任意系数皆有限的有理流 $f, g \in \mathrm{JetSeq}$（即对一切 $k \in \mathbb{N}$ 满足 `IntRatio.Finite`）且内层常数项为零（$g_0 \equiv 0$），将形式复合 $(\mathrm{compose}\;f\;g)_n := \bigl(\sum_{k=0}^{n} f_k \cdot g^k\bigr)_n$ 定义为有限截断求和，即可对一切截断阶 $N \in \mathbb{N}$ 直接冻结普适链式法则与**凯莱—三角代数大一统**：
 
-$$
-(1 + \eta^2) F' \;\equiv\; -2\,\mathrm{Sin}_N\bigl(2\,\mathrm{Atan}_N\bigr)\,(1+\eta^2)\mathrm{Atan}'_N \;\equiv\; -2G, \qquad (1 + \eta^2) G' \;\equiv\; 2F \pmod{\eta^N}.
-$$
+::: {.theorem #thm-ch08-cayley-composition-unification title="形式复合链式法则与任意阶凯莱—三角代数大一统" lean="D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.deriv_compose_equivAt D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.cos_two_atan_eq_cayley D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.sin_two_atan_eq_cayley"}
+在所引 D5 声明（`strict_omega.axioms: []`）使用的有理系数流载体 `Omega.JetSeq` 上，记柯西卷积幂为 $g^k := \mathrm{power}\;g\;k$，有限截断复合为 $(\mathrm{compose}\;f\;g)_n := \bigl(\sum_{k=0}^{n} f_k \cdot g^k\bigr)_n$。以下三条零公理恒等式对**一切自然数截断阶 $N \in \mathbb{N}$** 严格成立：
 
-代入 [@thm-ch08-cayley-ode-uniqueness] 的唯一性定理，立即对**一切 $N \ge 1$** 锁定**凯莱—三角代数大一统恒等式**：
+1. **任意截断阶形式复合链式法则**（[`deriv_compose_equivAt`](lean:D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.deriv_compose_equivAt)）：对一切 $N \in \mathbb{N}$ 与一切系数有限的有理流 $f, g \in \mathrm{JetSeq}$（满足 `Finite f`、`Finite g`）且 $g_0 \equiv 0$，截至 $N$ 阶（含）逐项等价
 
-$$
-\mathrm{Cos}_N\bigl(2\,\mathrm{Atan}_N(\eta)\bigr) \;\equiv\; \frac{1 - \eta^2}{1 + \eta^2} \pmod{\eta^{N+1}}, \qquad
-\mathrm{Sin}_N\bigl(2\,\mathrm{Atan}_N(\eta)\bigr) \;\equiv\; \frac{2\eta}{1 + \eta^2} \pmod{\eta^{N+1}}.
-$$
+   $$
+   D(\mathrm{compose}\;f\;g) \;\equiv_N\; \bigl(\mathrm{compose}\;(Df)\;g\bigr) \cdot Dg.
+   $$
 
-这一恒等式彻底颠倒了传统认知：**不是有理凯莱映射在“近似”超越三角函数，而是无穷级数三角函数在绕了一大圈之后，不过是在低效地重新展开本就一步闭式的有理凯莱分数！** 下面的数值对账将这种反差展现得淋漓尽致。
+2. **凯莱—余弦代数大一统**（[`cos_two_atan_eq_cayley`](lean:D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.cos_two_atan_eq_cayley)）：对一切 $N \in \mathbb{N}$，截至 $N$ 阶（含）逐项等价
+
+   $$
+   \mathrm{compose}\;\mathrm{Cos}\;(2\,\mathrm{Atan}) \;\equiv_N\; \mathrm{CayleyCos}.
+   $$
+
+3. **凯莱—正弦代数大一统**（[`sin_two_atan_eq_cayley`](lean:D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.sin_two_atan_eq_cayley)）：对一切 $N \in \mathbb{N}$，截至 $N$ 阶（含）逐项等价
+
+   $$
+   \mathrm{compose}\;\mathrm{Sin}\;(2\,\mathrm{Atan}) \;\equiv_N\; \mathrm{CayleySin}.
+   $$
+:::
+
+::: {.proof}
+先证形式复合链式法则。因 $g$ 系数有限且 $g_0 \equiv 0$，对幂次 $k$ 归纳得所有低于 $k$ 阶的系数恒为零（$n < k \implies (g^k)_n \equiv 0$），故部分和复合 $\mathrm{partialCompose}\;f\;g\;m = \sum_{k=0}^{m-1} f_k \cdot g^k$ 只要截断项数满足 $m > n$ 即在第 $n$ 阶精确稳定于 $(\mathrm{compose}\;f\;g)_n$。另一方面，由莱布尼茨律（[@thm-ch08-dfinite-calculus-laws]）对 $k$ 归纳证得幂次求导公式 $D(g^{k+1}) \equiv (k+1)\,g^k \cdot Dg$，对有限和逐项线性相加即得 $D(\mathrm{partialCompose}\;f\;g\;(m+1)) \equiv \mathrm{partialCompose}\;(Df)\;g\;m \cdot Dg$。取 $n \le N$ 并配合上述截断稳定性，即对一切 $n \le N$ 锁定 $(D(\mathrm{compose}\;f\;g))_n \equiv \bigl(\mathrm{compose}\;(Df)\;g \cdot Dg\bigr)_n$。
+
+再证凯莱—三角大一统。令内层流为 $g := 2\,\mathrm{Atan}$，其各项有限且常数项 $g_0 \equiv 0$；由 [@thm-ch08-dfinite-calculus-laws] 的反正切微分方程乘以 $2$ 得 $(1 + \eta^2)\cdot Dg \equiv 2$。对任意系数有限的外层流 $f$ 应用前述链式法则并与 $1 + \eta^2$ 相乘，立得 $(1 + \eta^2)\cdot D(\mathrm{compose}\;f\;g) \equiv 2\cdot\mathrm{compose}\;(Df)\;g$。分别取 $f = \mathrm{Cos}$ 与 $f = \mathrm{Sin}$，代入 $D(\mathrm{Cos}) \equiv -\mathrm{Sin}$、$D(\mathrm{Sin}) \equiv \mathrm{Cos}$ 以及常数项 $(\mathrm{compose}\;\mathrm{Cos}\;g)_0 \equiv 1$、$(\mathrm{compose}\;\mathrm{Sin}\;g)_0 \equiv 0$，恰满足 [@thm-ch08-cayley-ode-uniqueness] 所需的全部初值与耦合微分方程假设；调用唯一性定理 `cayley_unique_at` 即对任意 $N \in \mathbb{N}$ 同时证毕两式。完整证明由 Lean 内核检查。
+:::
+
+这一零公理恒等式在 $J_N(\mathbb{Q})$ 中写作 $\mathrm{Cos}_N\bigl(2\,\mathrm{Atan}_N(\eta)\bigr) \equiv \frac{1 - \eta^2}{1 + \eta^2} \pmod{\eta^{N+1}}$ 与 $\mathrm{Sin}_N\bigl(2\,\mathrm{Atan}_N(\eta)\bigr) \equiv \frac{2\eta}{1 + \eta^2} \pmod{\eta^{N+1}}$，彻底颠倒了传统认知：**不是有理凯莱映射在“近似”超越三角函数，而是无穷级数三角函数在绕了一大圈之后，不过是在低效地重新展开本就一步闭式的有理凯莱分数！** 下面的数值对账将这种反差展现得淋漓尽致。
 
 ::: {.example #ex-ch08-cayley-half-truncation title="有理点 $\eta = 1/2$ 映射到 $(3/5, 4/5)$ 的五档截断误差表"}
 取 $\eta = \frac{1}{2}$。未截断的零公理有理凯莱映射（[@thm-ch08-cayley-circle-unit]，取 $p = 1, q = 2$）仅需两次乘法即一步命中精确毕达哥拉斯有理点 $\bigl(\frac{3}{5}, \frac{4}{5}\bigr)$，误差恒为 $0/1$。若改将 $J_N(\mathbb{Q})$ 中次数至多 $N$ 的规范多项式代表元 $U_N(\eta)$、$V_N(\eta)$ 在非零点 $\eta = \frac{1}{2}$ 处求值（注意非零点求值不下沉至商环），则截断余项在 $N = 2, 4, 6, 8, 12$ 处呈现精确的等比交错分数（手工推导）：
@@ -234,6 +253,12 @@ $$
 
 在纯有理世界内部，这套嵌套区间列 $[L_1, U_1] \supset [L_2, U_2] \supset \cdots$ 满足严格的有理不等式 $L_M < L_{M+1} < U_{M+1} < U_M$，且只要观察者提出任何正有理精度预算 $\varepsilon_{\mathrm{self}} = p/q > 0$，有限次乘法即可挑出使 $W_M < \varepsilon_{\mathrm{self}}$ 的阶数 $M$——**全程无需假定实数 $\pi$ 作为已完成无穷小数先验存在**。仅当经单向阴影函子 $\Pi_{\mathbb{R}}$ 投射至经典实分析时，由 $\tan(4\arctan\frac{1}{5} - \arctan\frac{1}{239}) = 1$ 及 $0 < 4\arctan\frac{1}{5} - \arctan\frac{1}{239} < \frac{\pi}{2}$ 才将这一嵌套有理族的交点认作传统常数 $\pi$。
 
+下图将本章两条纯有理收敛机制并置对照：左侧展示 $\eta = \frac{1}{2}$ 处 $J_N(\mathbb{Q})$ 规范截断多项式如何以公比 $-\frac{1}{4}$ 逼近一步命中的凯莱圆点 $(\frac{3}{5}, \frac{4}{5})$，右侧展示无 $\pi$ 马青有理区间 $[L_M, U_M]$ 的精确宽度收缩。
+
+::: {.figure src="ch08-dfinite-machin-brackets"}
+**D-有限凯莱截断收敛与无 $\pi$ 马青有理包络收缩。** 左侧对照一步命中的有理凯莱圆点 $(\frac{3}{5}, \frac{4}{5})$（[@thm-ch08-cayley-circle-unit]）与 $J_N(\mathbb{Q})$ 规范多项式在 $\eta = \frac{1}{2}$ 处随截断阶 $N = 2, 4, 6, 8, 12$ 呈现的 $-\frac{1}{4}$ 交错几何误差衰减（[@thm-ch08-cayley-ode-uniqueness]、[@thm-ch08-cayley-composition-unification]、[@ex-ch08-cayley-half-truncation]）；右侧展示由纯有理马青切线链（[@thm-ch08-machin-rational-chain]）驱动的嵌套有理区间 $[L_M, U_M]$ 及其精确宽度 $W_M = \frac{16}{5^{2M+1}(2M+1)} + \frac{4}{239^{2M+1}(2M+1)}$ 随阶数 $M$ 的几何收缩。
+:::
+
 ::: {.example #ex-ch08-machin-width-table title="无 $\pi$ 马青有理包络宽度 $W_M$ 的七档精确收缩表"}
 在首阶 $M = 1$ 处，纯分数算术直接给出精确闭区间 $[L_1, U_1] = \bigl[\frac{281476}{89625},\; \frac{651864872}{204778785}\bigr]$（端点四舍五入至六位小数为 $3.140597$ 与 $3.183264$），精确有理宽度为 $W_1 = \frac{218431204}{5119469625} \approx 4.266676 \times 10^{-2}$。随截断阶 $M$ 递增，精确宽度 $W_M$ 按每步约 $25^{-1}$ 的几何倍率急剧收窄，至 $M = 17$ 时已收紧至 $1.57 \times 10^{-25}$ 量级（手工推导与精确有理算术核验）：
 
@@ -252,6 +277,16 @@ $$
 
 ## 8.4 从局部代数射流走向全域无细分积分 {#sec-ch08-bridge-to-ch09}
 
-走完第七章与第八章，微积分的“微分”一翼已在纯有理域内彻底脱胎换骨：二阶射流环 $\mathcal{J}_2(\mathbb{Q})$ 精确锁住了状态、联络与曲率的 `{0 · 1/2 · 1}` 同步读出，而任意阶 D-有限射流环 $J_N(\mathbb{Q})$ 则证明指数、三角、反正切与圆周率包络皆不过是有理线性递推与凯莱圆周分数的有限截断投影。
+走完第七章与第八章，微积分的“微分”一翼已在纯有理域内彻底脱胎换骨：二阶射流环 $\mathcal{J}_2(\mathbb{Q})$ 精确锁住了状态、联络与曲率的 `{0 · 1/2 · 1}` 同步读出，而任意阶 D-有限射流环 $J_N(\mathbb{Q})$ 给出了指数、正弦、余弦与反正切在原点的有理截断；配合有理凯莱切线链，还能逐阶收紧圆周率包络。
+
+::: {.film src="jets-of-any-order"}
+**从一行有理系数到马青切线链：任意阶射流不借 $\pi$ 讲清三角函数与圆周率（2 分 52 秒）。** 片中先把 $N$ 阶射流画成一行 $N + 1$ 个有理系数，求导即把每个系数左移一格并乘以原来的次数；指数、余弦、正弦与反正切四行系数逐格列出，余弦平方加正弦平方在 $0$ 至 $12$ 阶逐格算得 $1, 0, 0, \dots$（青色 NUM，屏幕计算），绿色 LEAN ✓ 只给每一阶都成立的毕达哥拉斯恒等式（[@thm-ch08-dfinite-calculus-laws]）。随后单位圆上的品红色弦把 $t = \frac{1}{2}$ 送到琥珀色点 $\bigl(\frac{3}{5}, \frac{4}{5}\bigr)$（[@thm-ch08-cayley-circle-unit]）；余弦行与两倍反正切行复合后，阶乘与奇数分母相消只剩 $\pm 2$，与 CayleyCos 逐格相等（[@thm-ch08-cayley-composition-unification]），“级数只是在重新展开分式”以紫色框标为本章解读。$\eta = \frac{1}{2}$ 处的截断误差表与公比 $-\frac{1}{4}$（[@ex-ch08-cayley-half-truncation]）、无 $\pi$ 包络的端点与逐阶宽度柱状图（[@ex-ch08-machin-width-table]）均为屏幕上的精确重算；马青切线链 $\frac{1}{5} \mapsto \frac{5}{12} \mapsto \frac{120}{119} \mapsto \frac{28561}{28561} = 1$ 带绿色 LEAN ✓（[@thm-ch08-machin-rational-chain]）；只有在经典阴影中才把嵌套区间的交点称作 $\pi$，标为紫色论证。
+:::
+
+在下面的交互实验卡中，读者可以亲自步进调节截断阶 $N = 2, 4, \dots, 12$ 与马青包络阶数 $M$：在 $\eta = \frac{1}{2}$ 处实时对比一步精确命中的有理凯莱点 $\bigl(\frac{3}{5}, \frac{4}{5}\bigr)$ 与规范多项式 $U_N(\frac{1}{2})$、$V_N(\frac{1}{2})$ 逐档收敛至 $\bigl(+\frac{1}{10240}, -\frac{1}{5120}\bigr)$ 的分数余项，同时沿着纯有理马青切线链 $\frac{1}{5} \mapsto \frac{5}{12} \mapsto \frac{120}{119} \mapsto \frac{28561}{28561} = 1$ 观测无 $\pi$ 包络宽度 $W_M$ 按每步约 $25^{-1}$ 的倍率向零收窄。
+
+::: {.viz src="dfinite-algebraic-schur-lab" preset="dfinite-cayley-machin" height="520"}
+**D-有限凯莱统一与无 $\pi$ 马青包络实验卡（`dfinite-cayley-machin`）。** 步进切换截断阶 $N = 2 \dots 12$，在有理点 $\eta = \frac{1}{2} \mapsto \bigl(\frac{3}{5}, \frac{4}{5}\bigr)$ 处实时对照一步闭式凯莱有理点与 $J_N(\mathbb{Q})$ 截断多项式的精确分数误差（[@thm-ch08-dfinite-calculus-laws]、[@thm-ch08-cayley-ode-uniqueness]、[@thm-ch08-cayley-composition-unification]），并递增马青阶数 $M$ 追踪有理切线链（[@thm-ch08-machin-rational-chain]）与嵌套区间 $[L_M, U_M]$ 宽度 $W_M$ 的收缩过程。
+:::
 
 剩下的另一翼同样关键：如果微分的原子不再是平直切线，那么**积分、斯托克斯定理与光滑流形本身**，能否也彻底摆脱无限加密的黎曼矩形、平直切板 $T_p M \cong \mathbb{R}^n$ 与非解析 $C^\infty$ 隆起函数？这正是[第九章](ch09-telescoping-stokes-and-arc-manifold.md)的主题——我们将用流群精确伸缩消去、无选择公理单纯形锥同伦与吻合三元球流形 $\mathcal{M}_\Omega$，为第三卷画上圆满句号。

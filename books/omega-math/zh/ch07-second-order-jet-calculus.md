@@ -4,7 +4,7 @@
 
 三百四十余年前，牛顿与莱布尼茨奠定经典微积分时，为求瞬时斜率不得不先令步长 $h \neq 0$ 作分母、化简后再令 $h = 0$ 消去余项。贝克莱主教在 1734 年一针见血地嘲讽这种既非零又为零的无穷小是“已死量的幽灵”。十九世纪柯西与魏尔斯特拉斯用 $\epsilon\text{-}\delta$ 滤子极限 $\lim_{h \to 0}$ 缝合了这一逻辑裂缝，却把整座微积分大厦永久绑在了不可数实数连续统 $\mathbb{R}$ 与无穷序列收敛的沉重脚手架上。
 
-在前两卷建立起纯有理齐次射影闭环与无原点三元球面 $\mathbb{T}_3(\mathbb{Q})$ 之后，一个更彻底的方案水到渠成：**微积分的本质不是在开直线上逼近无穷小，而是在有限阶幂零代数环上一次性提取局部状态、联络与曲率。** 本章在 `{0 · 1/2 · 1}` 二阶完备框架下建立二阶有理射流商环 $\mathcal{J}_2(\mathbb{Q}) = \mathbb{Q}[\eta]/(\eta^3)$，以零公理内核定理锁死其立方幂零律、两项有限闭式求逆与一二阶链式法则，构造紧贴单位球面的有理圆弧微步以同步读出过去、现在与未来三阶信号，以零公理内核定理在一切有理点处给出保真度核 $\kappa(x) = \frac{1}{1+x^2}$ 的精确导数、曲率与有限割线偏差，并证明对称中点 $\alpha = \frac{1}{2}$ 是消除左端点伊藤切线脱轨的唯一保球面离散步长。
+在前两卷建立起纯有理齐次射影闭环与无原点三元球面 $\mathbb{T}_3(\mathbb{Q})$ 之后，一个更彻底的方案水到渠成：**微积分的本质不是在开直线上逼近无穷小，而是在有限阶幂零代数环上一次性提取局部状态、联络与曲率。** 本章在 `{0 · 1/2 · 1}` 二阶完备框架下建立二阶有理射流商环 $\mathcal{J}_2(\mathbb{Q}) = \mathbb{Q}[\eta]/(\eta^3)$，以零公理内核定理锁死其立方幂零律、两项有限闭式求逆与一二阶链式法则，构造紧贴单位球面的有理圆弧微步以同步读出过去、现在与未来三阶信号，以零公理内核定理在一切有理点处给出保真度核 $\kappa(x) = \frac{1}{1+x^2}$ 的精确导数、曲率与有限割线偏差，并在零公理内核中证明任意有限权重下的 $\alpha$-采样范数漂移恒等式、对称中点 $\alpha = \frac{1}{2}$ 的严格驻球守恒以及中点流群前后半拍的射影保真度相等律，从代数根源消除左端点伊藤切线脱轨。
 
 ## 7.1 二阶幂零射流环与有限闭式有理求逆 {#sec-ch07-jet2-ring}
 
@@ -198,34 +198,76 @@ $$
 
 既然在微步层面上 $\mathcal{J}_2(\mathbb{Q})$ 已把曲率矢高纳入代数本身，那么回到**有限宏观步长**的离散演化 $\mathbf{x}_0 \to \mathbf{x}_1$ 时，应当在何处对联络切生成元求值，才能彻底杜绝平直切线脱离球面并保持链式法则不变？答案把我们再次带回唯一自对偶中点 **`1/2`**。
 
-设 $A \in \operatorname{Im}\mathbb{H}(\mathbb{Q})$ 为纯虚反自伴切生成元（对一切 $q \in \mathbb{H}(\mathbb{Q})$ 满足实内积正交律 $\langle Aq, q\rangle_{\mathbb{R}} = 0$），考虑以权重 $\alpha \in [0, 1] \cap \mathbb{Q}$ 在起点 $\mathbf{x}_0$ 与终点 $\mathbf{x}_1$ 之间插值求值的离散切步方程
+所引 D5 声明的严格端记录为 `strict_omega.axioms: []`。以公有正整数分母表示有理四元数载体 `RationalQuaternion`（整数分子 `num : Quaternion` 除以正分母 `den = denPred.succ`，平方范数 `normSq` 落入 `Omega.IntRatio`，`IsUnit` 定义为 $\lVert x\rVert^2 \equiv 1$）。设 $a \in \mathrm{RationalQuaternion}$ 为纯虚切生成元（$a.\mathrm{num}.w = 0$，从而对一切四元数 $v$ 恒有实内积正交律 $\langle a.\mathrm{num}\cdot v,\, v\rangle = 0$），考虑以任意有限有理权重 $\alpha \in \mathrm{IntRatio}$ 在起点 $x_0$ 与终点 $x$ 之间插值求值的离散切步方程
 
 $$
-\mathbf{x}_1 - \mathbf{x}_0 \;=\; A\bigl((1 - \alpha)\mathbf{x}_0 + \alpha \mathbf{x}_1\bigr) \quad \Longleftrightarrow \quad (1 - \alpha A)\mathbf{x}_1 \;=\; \bigl(1 + (1 - \alpha)A\bigr)\mathbf{x}_0.
+(1 + \alpha a)\,x \;=\; \bigl(1 - (1 - \alpha)a\bigr)\,x_0 \quad \Longleftrightarrow \quad x - x_0 \;=\; -a\bigl((1 - \alpha)x_0 + \alpha x\bigr)
 $$
 
-由于 $\lVert(1 - \alpha A)q\rVert^2 = \lVert q\rVert^2 + \alpha^2\lVert Aq\rVert^2 \ge \lVert q\rVert^2$，算子 $1 - \alpha A$ 对一切有理 $\alpha$ 恒可逆。记插值点 $\mathbf{x}_\alpha := (1 - \alpha)\mathbf{x}_0 + \alpha \mathbf{x}_1$，利用代数恒等式 $\mathbf{x}_0 + \mathbf{x}_1 = 2\mathbf{x}_\alpha + (1 - 2\alpha)(\mathbf{x}_1 - \mathbf{x}_0)$ 与正交性 $\langle \mathbf{x}_1 - \mathbf{x}_0, \mathbf{x}_\alpha\rangle_{\mathbb{R}} = \langle A\mathbf{x}_\alpha, \mathbf{x}_\alpha\rangle_{\mathbb{R}} = 0$，仅用三行展开即证得对任意有限步幅精确成立的**球面 $\alpha$-采样范数漂移恒等式**（手工推导）：
+（取反号记法 $A := -a$ 即写成 $(1 - \alpha A)\,x = \bigl(1 + (1 - \alpha)A\bigr)\,x_0$，两种记号代数全同）。由于 $a$ 纯虚，去分母后对应 $1 + \alpha a$ 的整四元数左因子具有严格正标量部 $q\cdot a.\mathrm{den} > 0$，其平方范数严格非零，因而可用共轭左乘再除以模方显式构造出对一切有限有理权重 $\alpha$ 恒有定义的精确有理步 `alphaSample α a x₀`。以下零公理内核定理对任意有限步幅与任意有限有理权重精确刻画了模方漂移：
+
+::: {.theorem #thm-ch07-alpha-sampling-norm-drift title="球面有限步的 $\alpha$-采样范数漂移恒等式" lean="D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.alpha_sampling_norm_drift"}
+设 $\alpha \in \mathrm{IntRatio}$ 为任意有限有理采样权重（$\alpha.\mathrm{Finite}$），$a \in \mathrm{RationalQuaternion}$ 为纯虚有理四元数生成元（$a.\mathrm{num}.w = 0$），$x_0 \in \mathrm{RationalQuaternion}$ 为单位初始四元数（$x_0.\mathrm{IsUnit}$，即 $\lVert x_0\rVert^2 \equiv 1$）。记 $x := \operatorname{alphaSample}(\alpha, a, x_0)$ 为离散切步方程 $(1 + \alpha a)\,x = \bigl(1 - (1 - \alpha)a\bigr)\,x_0$ 的显式有理解。则在零公理等价关系 `Omega.IntRatio.Equivalent` 下，一步演化后的平方范数漂移精确满足
 
 $$
-\lVert\mathbf{x}_1\rVert^2 - \lVert\mathbf{x}_0\rVert^2 \;=\; \bigl\langle \mathbf{x}_1 - \mathbf{x}_0,\; \mathbf{x}_0 + \mathbf{x}_1\bigr\rangle_{\mathbb{R}} \;=\; (1 - 2\alpha)\,\lVert\mathbf{x}_1 - \mathbf{x}_0\rVert^2.
+\lVert x\rVert^2 - 1 \;\equiv\; (1 - 2\alpha)\,\lVert x - x_0\rVert^2.
 $$
+:::
 
-对任何非静止步（$\mathbf{x}_1 \neq \mathbf{x}_0$），三类采样立分高下：
-
-1. **左端点伊藤 / 前向欧拉采样（$\alpha = 0$）**：$1 - 2\alpha = +1 > 0$，每走一步模方严格外漂 $\lVert\mathbf{x}_1\rVert^2 = \lVert\mathbf{x}_0\rVert^2 + \lVert\mathbf{x}_1 - \mathbf{x}_0\rVert^2 > 1$，轨迹沿平直切线步步脱轨飞离球壳；
-2. **右端点隐式欧拉采样（$\alpha = 1$）**：$1 - 2\alpha = -1 < 0$，每走一步模方严格内缩 $\lVert\mathbf{x}_1\rVert^2 < 1$，轨迹向球心耗散坍缩；
-3. **对称中点采样（$\alpha = \frac{1}{2}$）**：系数 $1 - 2\alpha \equiv 0$，对**任意有限步长**恒有 $\lVert\mathbf{x}_1\rVert^2 \equiv \lVert\mathbf{x}_0\rVert^2 = 1$ 且有限弦差严格正交于中点方向 $\langle \mathbf{x}_1 - \mathbf{x}_0, \mathbf{x}_0 + \mathbf{x}_1\rangle_{\mathbb{R}} \equiv 0$！更进一步，令 $A = 2\boldsymbol{\sigma}$（$\boldsymbol{\sigma} \in \mathbb{Q}^3$），中点方程的精确解 $\mathbf{x}_1 = (1 - \boldsymbol{\sigma})^{-1}(1 + \boldsymbol{\sigma})\mathbf{x}_0 = Q(\boldsymbol{\sigma})\mathbf{x}_0$ 字面上就是有理凯莱驻球旋子步！
-
-将这一对称中点推广为两半拍流群推进——给定起点 $\mathbf{x}_0 \in S^3(\mathbb{Q})$ 与有理半步凯莱旋子 $\mathbf{x}_{1/2} := Q(\boldsymbol{\sigma})\mathbf{x}_0$，用[第四章](ch04-heaps-and-lie-triple-curvature.md)的无原点三元流群倍增构造终点 $\mathbf{x}_1 := [\mathbf{x}_{1/2}, \mathbf{x}_0, \mathbf{x}_{1/2}] = Q(\boldsymbol{\sigma})^2\mathbf{x}_0$——即得**中点链式守恒律**（手工推导）：因比较保真度核 $\kappa$ 满足左乘与右乘等距不变性，前半拍与后半拍的有理保真度恒等锁死为
+::: {.proof}
+将有限权重 $\alpha$ 写成有理分数 $p/q$（$q = \mathrm{den} > 0$）。因为 $a.\mathrm{num}.w = 0$，去分母左因子 $l := q\cdot a.\mathrm{den} + p\,a.\mathrm{num}$ 的标量部恒为 $q\cdot a.\mathrm{den} > 0$，从而 $\lVert l\rVert^2 > 0$ 且 $\bar{l} l = l\bar{l} = \lVert l\rVert^2$；由此 `alphaSample` 通过左乘 $\bar{l}$ 并以 $\lVert l\rVert^2$ 为额外分母给出的显式解 $x$ 精确满足去分母步方程 $l\cdot b = r\cdot c$，其中 $b := x_0.\mathrm{den}\cdot x.\mathrm{num}$、$c := x.\mathrm{den}\cdot x_0.\mathrm{num}$、$r := q\cdot a.\mathrm{den} + (p - q)\,a.\mathrm{num}$。移项整理得 $(q\cdot a.\mathrm{den})(b - c) + a.\mathrm{num}\cdot v = 0$，其中 $v := p b + (q - p)c$；两边与 $v$ 作整数内积并利用纯虚正交律 $\langle a.\mathrm{num}\cdot v,\, v\rangle = a.\mathrm{num}.w\lVert v\rVert^2 = 0$，消去非零因子 $q\cdot a.\mathrm{den}$ 强制得出 $\langle b - c,\, v\rangle = 0$。将其代入纯整数极化恒等式
 
 $$
-\kappa(\mathbf{x}_0, \mathbf{x}_{1/2}) \;=\; \kappa\bigl(Q(\boldsymbol{\sigma})\mathbf{x}_0,\; Q(\boldsymbol{\sigma})\mathbf{x}_{1/2}\bigr) \;=\; \kappa(\mathbf{x}_{1/2}, \mathbf{x}_1) \;=\; \frac{1}{1 + \lVert\boldsymbol{\sigma}\rVert^2} \;\in\; \mathbb{Q} \cap (0, 1]
+q\bigl(\lVert b\rVert^2 - \lVert c\rVert^2\bigr) \;=\; (q - 2p)\lVert b - c\rVert^2 + 2\langle b - c,\, v\rangle,
 $$
 
-（在有号自旋核 $\kappa_{\mathrm{spin}}(a,b) = \frac{1 + \langle a,b\rangle}{2}$ 下严格等于 $\frac{1}{1+\lVert\boldsymbol{\sigma}\rVert^2}$，而在射影射线核 $\kappa_{\mathrm{proj}}(a,b) = \langle a,b\rangle^2$ 下同样前后严格相等为 $\bigl(\frac{1-\lVert\boldsymbol{\sigma}\rVert^2}{1+\lVert\boldsymbol{\sigma}\rVert^2}\bigr)^2$）。由于左右两半拍把法向矢高对称吸收进弯曲圆弧内部，离散跃迁在对称中点 $\mathbf{x}_{1/2}$ 处求值时彻底消除了左端点伊藤切线脱轨，使弯曲球面上的链式法则恢复纯代数协调。
+即得 $\lVert x\rVert^2 - \lVert x_0\rVert^2 \equiv (1 - 2\alpha)\lVert x - x_0\rVert^2$；再代入单位初态假设 $\lVert x_0\rVert^2 \equiv 1$，全程零公理证毕。完整证明由 Lean 内核检查。
+:::
+
+由 [@thm-ch07-alpha-sampling-norm-drift]，对任何非静止步（$x \neq x_0$），系数 $1 - 2\alpha$ 的符号直接决定全部几何行为：
+
+1. **左端点伊藤 / 前向欧拉采样（$\alpha = 0$）**：$1 - 2\alpha = +1 > 0$，每走一步模方严格外漂 $\lVert x\rVert^2 \equiv 1 + \lVert x - x_0\rVert^2 > 1$，轨迹沿平直切线步步脱轨飞离球壳；
+2. **右端点隐式欧拉采样（$\alpha = 1$）**：$1 - 2\alpha = -1 < 0$，每走一步模方严格内缩 $\lVert x\rVert^2 < 1$，轨迹向球心耗散坍缩；
+3. **对称中点采样（$\alpha = \frac{1}{2}$）**：漂移系数 $1 - 2\alpha \equiv 0$ 精确归零。
+
+将 $\alpha = \frac{1}{2}$ 处的显式步记为 $\operatorname{midpointStep}(a, x_0) := \operatorname{alphaSample}(\frac{1}{2}, a, x_0)$，对称中点对一切有限步幅严格保持单位球面：
+
+::: {.theorem #thm-ch07-midpoint-unit-norm title="对称中点凯莱步的严格单位球面守恒" lean="D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.midpoint_unit_norm"}
+对任意纯虚有理四元数生成元 $a \in \mathrm{RationalQuaternion}$（$a.\mathrm{num}.w = 0$）与任意单位初始四元数 $x_0 \in \mathrm{RationalQuaternion}$（$x_0.\mathrm{IsUnit}$），对称中点步 $\operatorname{midpointStep}(a, x_0)$ 严格保持单位模方（$\operatorname{midpointStep}(a, x_0).\mathrm{IsUnit}$），即在 `Omega.IntRatio.Equivalent` 下成立
+
+$$
+\lVert\operatorname{midpointStep}(a, x_0)\rVert^2 \;\equiv\; 1.
+$$
+:::
+
+::: {.proof}
+在 [@thm-ch07-alpha-sampling-norm-drift] 中取 $\alpha = \frac{1}{2}$：系数 $1 - 2\cdot\frac{1}{2}$ 在 `Omega.IntRatio` 中等价于 $0$，而平方弦差 $\lVert\operatorname{midpointStep}(a, x_0) - x_0\rVert^2$ 恒为有限有理数，故右端等价于 $0$，得 $\lVert\operatorname{midpointStep}(a, x_0)\rVert^2 - 1 \equiv 0$；两边加 $1$ 立即收回 $\lVert\operatorname{midpointStep}(a, x_0)\rVert^2 \equiv 1$。完整证明由 Lean 内核检查。
+:::
+
+更进一步，令 $a = -2\boldsymbol{\sigma}$（$\boldsymbol{\sigma} \in \mathbb{Q}^3$，对应前文反号生成元 $A = 2\boldsymbol{\sigma}$），中点步的精确解 $\mathbf{x}_{1/2} = (1 - \boldsymbol{\sigma})^{-1}(1 + \boldsymbol{\sigma})\mathbf{x}_0 = Q(\boldsymbol{\sigma})\mathbf{x}_0$ 字面上就是有理凯莱驻球旋子步！将起点与中点整分子 $h := (\operatorname{midpointStep}(a, x_0)).\mathrm{num}$ 经由[第四章](ch04-heaps-and-lie-triple-curvature.md)的无原点三元流群倍增延拓至 $[h, x_0.\mathrm{num}, h] = h\overline{x_0.\mathrm{num}}h$，前半拍与后半拍的射影保真度同样在零公理内核中精确锁死：
+
+::: {.theorem #thm-ch07-midpoint-half-step-fidelity title="中点流群三元组的前后半拍射影保真度守恒" lean="D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.midpoint_half_step_fidelity"}
+对任意纯虚有理四元数生成元 $a \in \mathrm{RationalQuaternion}$（$a.\mathrm{num}.w = 0$）与任意单位初始四元数 $x_0 \in \mathrm{RationalQuaternion}$（$x_0.\mathrm{IsUnit}$），令 $h := (\operatorname{midpointStep}(a, x_0)).\mathrm{num}$。则在零公理等价关系 `Omega.IntRatio.Equivalent` 下，初态分子 $x_0.\mathrm{num}$ 至中点分子 $h$ 的射影保真度 `Ternion.kappa` 与中点分子 $h$ 至流群三元延拓 $[h, x_0.\mathrm{num}, h]$（`Ternion.triad h x₀.num h`）的射影保真度精确相等：
+
+$$
+\kappa\bigl(x_0.\mathrm{num},\, h\bigr) \;\equiv\; \kappa\bigl(h,\, [h, x_0.\mathrm{num}, h]\bigr).
+$$
+:::
+
+::: {.proof}
+由初态假设 $x_0.\mathrm{IsUnit}$ 与 [@thm-ch07-midpoint-unit-norm] 知两整四元数分子 $u := x_0.\mathrm{num}$ 与 $h := (\operatorname{midpointStep}(a, x_0)).\mathrm{num}$ 均非零。置非零四元数 $p := \bar{u} h$ 及正整数 $n := \lVert u\rVert^2 > 0$，由四元数结合律与 $u\bar{u} = n$ 直接算得 $u p = n h$ 且 $h p = h\bar{u}h = [h, u, h]$。依次施用射影保真度 `Ternion.kappa` 的右乘不变性与左标量缩放不变性，即得
+
+$$
+\kappa(u, h) \;\equiv\; \kappa(u p,\, h p) \;=\; \kappa\bigl(n h,\, [h, u, h]\bigr) \;\equiv\; \kappa\bigl(h,\, [h, u, h]\bigr),
+$$
+
+全程零公理。完整证明由 Lean 内核检查。
+:::
+
+取 $a = -2\boldsymbol{\sigma}$ 时（手工推导），上述两半拍射影保真度同等于 $\bigl(\frac{1 - \lVert\boldsymbol{\sigma}\rVert^2}{1 + \lVert\boldsymbol{\sigma}\rVert^2}\bigr)^2$，而在有号自旋核 $\kappa_{\mathrm{spin}}(u, v) = \frac{1 + \langle u, v\rangle}{2}$ 下两半拍同样相等为 $\frac{1}{1 + \lVert\boldsymbol{\sigma}\rVert^2} \in \mathbb{Q} \cap (0, 1]$。由于左右两半拍把法向矢高对称吸收进弯曲圆弧内部，离散跃迁在对称中点处求值时彻底消除了左端点伊藤切线脱轨，使弯曲球面上的链式法则恢复纯代数协调。
 
 ::: {.example #ex-ch07-midpoint-drift-audit title="三维有理切步的五档采样漂移与中点链式守恒核验"}
-取单位起点 $\mathbf{x}_0 = (1, 0, 0, 0)$ 与纯有理三维参数 $\boldsymbol{\sigma} = \bigl(\frac{1}{2}, \frac{1}{3}, \frac{1}{6}\bigr)$，则 $\lVert\boldsymbol{\sigma}\rVert^2 = \frac{7}{18}$，生成元 $A = 2\boldsymbol{\sigma} = \bigl(0, 1, \frac{2}{3}, \frac{1}{3}\bigr)$ 满足 $\lVert A\rVert^2 = \frac{14}{9}$。五档采样权重 $\alpha$ 给出精确有理模方 $\lVert\mathbf{x}(\alpha)\rVert^2 = \frac{1 + (1-\alpha)^2\lVert A\rVert^2}{1 + \alpha^2\lVert A\rVert^2}$：
+取单位起点 $\mathbf{x}_0 = (1, 0, 0, 0)$ 与纯有理三维参数 $\boldsymbol{\sigma} = \bigl(\frac{1}{2}, \frac{1}{3}, \frac{1}{6}\bigr)$，则 $\lVert\boldsymbol{\sigma}\rVert^2 = \frac{7}{18}$，反号生成元 $A = -a = 2\boldsymbol{\sigma} = \bigl(0, 1, \frac{2}{3}, \frac{1}{3}\bigr)$ 满足 $\lVert a\rVert^2 = \lVert A\rVert^2 = \frac{14}{9}$。按 [@thm-ch07-alpha-sampling-norm-drift]，五档采样权重 $\alpha$ 给出精确有理模方 $\lVert\mathbf{x}(\alpha)\rVert^2 = \frac{1 + (1-\alpha)^2\lVert a\rVert^2}{1 + \alpha^2\lVert a\rVert^2}$：
 
 | 采样权重 $\alpha$ | 模方 $\lVert\mathbf{x}(\alpha)\rVert^2$（精确分数） | 小数近似 | 漂移 $(1 - 2\alpha)\lVert\Delta\mathbf{x}\rVert^2$ | 几何行为 |
 | :---: | :---: | :---: | :---: | :--- |
@@ -235,11 +277,15 @@ $$
 | $3/4$ | $79/135$ | $0.585185$ | $-56/135$ | 偏右向内耗散 |
 | $1$ | $9/23$ | $0.391304$ | $-14/23$ | 隐式右端点向球心坍缩 |
 
-唯在 $\alpha = \frac{1}{2}$ 处得到精确有理单位三元数 $\mathbf{x}_{1/2} = \bigl(\frac{11}{25}, \frac{18}{25}, \frac{12}{25}, \frac{6}{25}\bigr)$（$\lVert\mathbf{x}_{1/2}\rVert^2 = 1$）与流群满拍落点 $\mathbf{x}_1 = [\mathbf{x}_{1/2}, \mathbf{x}_0, \mathbf{x}_{1/2}] = \bigl(-\frac{383}{625}, \frac{396}{625}, \frac{264}{625}, \frac{132}{625}\bigr)$（$\lVert\mathbf{x}_1\rVert^2 = 1$）。前后两半拍有号保真度精确守恒 $\kappa(\mathbf{x}_0, \mathbf{x}_{1/2}) = \kappa(\mathbf{x}_{1/2}, \mathbf{x}_1) = \frac{18}{25} = \frac{1}{1 + 7/18}$（射影核同为 $\frac{121}{625}$），且有限弦差与中点内积 $\langle \mathbf{x}_1 - \mathbf{x}_0, \mathbf{x}_0 + \mathbf{x}_1\rangle_{\mathbb{R}} = 0$。
+唯在 $\alpha = \frac{1}{2}$ 处得到精确有理单位三元数 $\mathbf{x}_{1/2} = \bigl(\frac{11}{25}, \frac{18}{25}, \frac{12}{25}, \frac{6}{25}\bigr)$（$\lVert\mathbf{x}_{1/2}\rVert^2 = 1$，验证 [@thm-ch07-midpoint-unit-norm]）与流群满拍落点 $\mathbf{x}_1 = [\mathbf{x}_{1/2}, \mathbf{x}_0, \mathbf{x}_{1/2}] = \bigl(-\frac{383}{625}, \frac{396}{625}, \frac{264}{625}, \frac{132}{625}\bigr)$（$\lVert\mathbf{x}_1\rVert^2 = 1$）。前后两半拍射影保真度精确守恒为 $\frac{121}{625}$（验证 [@thm-ch07-midpoint-half-step-fidelity]），有号自旋保真度同为 $\frac{18}{25} = \frac{1}{1 + 7/18}$，且有限弦差与中点内积 $\langle \mathbf{x}_1 - \mathbf{x}_0, \mathbf{x}_0 + \mathbf{x}_1\rangle_{\mathbb{R}} = 0$。
 :::
 
 ::: {.remark #rem-ch07-ito-stratonovich-boundary title="有理中点守恒与连续随机分析的文献边界"}
-**文献结果与证据分层。** 上述 $\alpha$-采样范数漂移恒等式、中点凯莱步等价性与前后半拍保真度守恒均属纯有理有限代数定理（手工推导），不涉及概率测度或极限。在连续随机微分几何中，左端点非预见求和诱导带二阶漂移修正的伊藤积分（K. Itô，1944），而对称中点求和诱导保持流形坐标不变性与经典链式法则的斯特拉托诺维奇积分（R. L. Stratonovich，1966；光滑路径逼近收敛定理见 E. Wong 与 M. Zakai，1965；文献结果）。本章的纯有理机制表明：伊藤脱轨在代数根源上正是 $\alpha = 0$ 处 $1 - 2\alpha = +1$ 的有限弦模方外溢。
+**文献结果与证据分层。** 上述 $\alpha$-采样范数漂移恒等式（[@thm-ch07-alpha-sampling-norm-drift]）、对称中点严格单位球面守恒（[@thm-ch07-midpoint-unit-norm]）与中点流群前后半拍射影保真度守恒（[@thm-ch07-midpoint-half-step-fidelity]）均已在零公理内核 `OmegaInit` 与 `OmegaMath` 中直接证毕，全程不涉及概率测度或极限。在连续随机微分几何中，左端点非预见求和诱导带二阶漂移修正的伊藤积分（K. Itô，1944），而对称中点求和诱导保持流形坐标不变性与经典链式法则的斯特拉托诺维奇积分（R. L. Stratonovich，1966；光滑路径逼近收敛定理见 E. Wong 与 M. Zakai，1965；文献结果）。本章的纯有理机制表明：伊藤脱轨在代数根源上正是 $\alpha = 0$ 处 $1 - 2\alpha = +1$ 的有限弦模方外溢。
+:::
+
+::: {.film src="a-symbol-whose-cube-vanishes"}
+**一个立方为零的形式符号 η，把求导、求逆与球面上的一步都变成精确的有理运算（2 分 52 秒）。** 片中每个量是三格有理数（值、斜率、弯曲的一半），截断乘法让第四格落下；常数格非零的射流两项之内求逆，在 $a = (2, 2, 1)$ 上逐阶乘回得 $(1, 0, 0)$，零位移链式法则在 $g = (1, 2, 3)$、$f = (0, \frac{1}{2}, \frac{1}{4})$ 上演示（绿色标签对应 [@thm-ch07-jet2-algebra-and-chain] 的 `mul_inv` 与 `chain_rule`，例子为屏幕计算）。按比例绘制的圆上，品红色平直切向步刺出球壳，青色圆弧步模 $\eta^3$ 驻球（手工推导），实际步长 $\frac{1}{2}$ 时两者模方为 $\frac{5}{4}$ 与 $\frac{65}{64}$（屏幕计算），过去、现在、未来的三阶读法标为模型诠释。青色射流在 $x_0 = 1$ 读出 `{1/2, -1/2, +1/4}`，品红割线在 $(1, \frac{1}{4})$ 高出 $\frac{5}{82}$、在 $(\frac{1}{2}, \frac{1}{4})$ 碰巧零偏差却看不见 $-\frac{16}{125}$（绿色标签对应 [@thm-ch07-fidelity-jet-and-secant] 的 `kappa_jet_one` 与 `kappa_secant_discrepancy`）。最后五档权重 $\alpha$ 的模方 $\frac{23}{9}$、$\frac{135}{79}$、$1$、$\frac{79}{135}$、$\frac{9}{23}$ 以精确四元数运算复算，琥珀色中点 $(11, 18, 12, 6)/25$ 留在球面上，前后两个半拍保真度同为 $\frac{121}{625}$（绿色标签对应 [@thm-ch07-alpha-sampling-norm-drift]、[@thm-ch07-midpoint-unit-norm] 与 [@thm-ch07-midpoint-half-step-fidelity]）；伊藤与斯特拉托诺维奇按 [@rem-ch07-ito-stratonovich-boundary] 标为文献结果。
 :::
 
 在下面的交互工作台卡片中，读者可以拖动琥珀色锚点与采样权重，在同一只紫色三元吻合球面上实时对比 $\mathcal{J}_2(\mathbb{Q})$ 的青色精确射流三元组 `{1/2, -1/2, +1/4}`、品红色有限割线偏差以及 $\alpha = \frac{1}{2}$ 中点步对比 $\alpha = 0$ 伊藤切线脱轨的几何差异；下一章，我们将把二阶射流推广到任意截断阶 $N$ 的 D-有限微分射流环 $J_N(\mathbb{Q})$，并在纯有理环内完成凯莱参数化与三角函数的代数大一统。

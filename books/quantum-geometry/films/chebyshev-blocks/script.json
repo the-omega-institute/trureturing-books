@@ -1,0 +1,45 @@
+{
+  "voice": "af_heart",
+  "speed": 0.94,
+  "say": {"Lean": "Leen", "Chebyshev": "Chebbyshev", "QSVT": "Q S V T", "m theta": "em theta", "eigenvalues": "eigen-values"},
+  "music": {"bpm": 80, "progression": "a-minor"},
+  "scenes": [
+    {"id": "hook", "name": "A NUMBER AS A TURN", "lead": 1.9, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
+      ["Inside a quantum computer, a number usually lives inside a turn.", "在量子计算机里，一个数往往藏在一次转动里。"],
+      ["Picture a dial. Turn its hand by an angle, and its shadow on the floor is a number x.", "想象一个表盘：指针转过一个角，它落在地上的影子就是一个数 x。"],
+      ["We assume computing needs a toolbox. Your only move here: turning the same dial again. What can you compute?", "我们总以为计算要一箱工具。这里只许一招：把表盘再转一次。能算出什么？"]
+    ], "cues": [{"line": 2, "at": 3.0, "kind": "chime"}]},
+    {"id": "block", "name": "THE 2×2 BLOCK", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.5, 0.4, 0.1, 0.2], "lines": [
+      ["Write the turn as a two-by-two block. Its corner is x, the number we hid.", "把这次转动写成一个二乘二的方块，左上角正是藏进去的 x。"],
+      ["Multiply the block by itself, and the angles add up, like a clock hand ticking forward.", "方块每自乘一次，角度就叠加一次，像时针一格一格往前走。"],
+      ["After m ticks the angle is m theta, and the corner reads the cosine of m theta.", "走 m 格，角度是 mθ，左上角读出 cos mθ。"],
+      ["In x, that reading is a polynomial: the Chebyshev polynomial of degree m.", "用 x 写出来，这个读数是一个多项式：m 次切比雪夫多项式 Tₘ。"]
+    ], "cues": [{"line": 3, "at": 2.4, "kind": "chime"}]},
+    {"id": "hand", "name": "COUNT BY HAND", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.6, 0.5, 0.2, 0.2], "lines": [
+      ["Try x equal to zero point six. The corner reads one, zero point six, minus zero point two eight.", "取 x = 0.6：左上角依次读出 1、0.6、−0.28。"],
+      ["The trick: you never need the angle. Each new reading is two x times the last, minus the one before.", "窍门在于：根本用不着角度。每个新读数，等于 2x 乘上一个，再减去更前一个。"],
+      ["Run the rule once more, and you get minus zero point nine three six.", "再用一次规则：1.2 × (−0.28) − 0.6 = −0.936。"],
+      ["It works like a knitting pattern: two rows and one rule, and every later row follows.", "这像织毛衣的花样：有了头两行和一条规则，后面每一行都跟着出来。"]
+    ], "cues": [{"line": 2, "at": 4.2, "kind": "stamp"}]},
+    {"id": "pair", "name": "WHY THE RULE HOLDS", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["Why does the rule hold? The block has two eigenvalues, a and b.", "这条规则凭什么成立？方块有两个特征值，a 与 b。"],
+      ["Their product is one, their sum is two x: a turn forward and a turn back cancel.", "它们的乘积是 1，和是 2x：正着转一次、倒着转一次，正好抵消。"],
+      ["Lean checks the rule for any two elements of any commutative ring whose product is one.", "Lean 内核检验：在任意交换环里，只要两个元素的乘积是 1，这条规则就成立。"],
+      ["Halve the power sums: that is the Chebyshev rule. The angle was scaffolding; a times b equals one is the building.", "幂和各除以 2，就是切比雪夫递推。角度只是脚手架，ab = 1 才是房子。"]
+    ], "cues": [{"line": 2, "at": 0.8, "kind": "stamp"}]},
+    {"id": "phases", "name": "PHASES BETWEEN TURNS", "lead": 0.5, "tail": 2.0, "music": [1.0, 0.8, 0.7, 0.4, 0.4], "lines": [
+      ["By the QSVT literature, a whole matrix splits into one such block per singular value.", "按 QSVT 的文献结果，一整个矩阵会拆成这样的方块，每个奇异值一块。"],
+      ["The same turns act on every block at once, so each corner reads the same polynomial at its own x.", "同样的转动同时作用在每一块上，于是每个角落都在自己的 x 上读出同一个多项式。"],
+      ["Slip a phase twist between the turns, and the corner can carry other polynomials too.", "在两次转动之间插进相位扭转，角落还能读出别的多项式。"],
+      ["Lean checks: if a pair of polynomials has the right degree, parity and balance, phases exist that build exactly that pair.", "Lean 检验：次数、奇偶、归一都合格的多项式对，必有一串相位恰好拼出它。"]
+    ], "cues": [{"line": 3, "at": 0.8, "kind": "stamp"}]},
+    {"id": "edge", "name": "WHAT IT DOES NOT SAY", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["The recurrence knows nothing about matrices. Joining it to the block is a hand calculation.", "递推本身对矩阵一无所知；把它接到方块上，是一步手算。"],
+      ["The phases exist: one starting phase, plus exactly k more for budget k. No recipe to find them, no claim of the shortest list.", "相位确实存在：一个起始相位，再加恰好 k 个；不给求法，也不说最短。"],
+      ["The grand unification of algorithms is a literature result, not formalized here.", "算法“大一统”是文献结果，本书没有形式化。"]
+    ]},
+    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 1.6, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
+      ["Geometric Intuition of Quantum Computing, chapter sixteen.", "《量子计算的几何直觉》· 第十六章"]
+    ], "cues": [{"line": 0, "at": 0.3, "kind": "chime"}]}
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "title": "Folding the Mixing Matrix",
+  "title_zh": "折出混合矩阵",
+  "summary": "Why the 19-point shell cannot hand out quark mixing for free, and which exact tools fold it back in. The 19 non-negative integer points of x² + y² + z² = 867 turn under the coordinate cycle about the pole (17, 17, 17) in six orbits of three (computed); if both quark mass matrices respect the cycle, the mixing matrix is a permutation with phases (the chapter's written argument). Distinct cube roots of unity are √3 apart, and with |V_cb| > 0.035 and |V_tb| > 0.98 the chapter's five-line derivation forces one sector to break the cycle by more than 0.0414 (argued; the arithmetic is on screen). On one log ruler, interval certificates from the chapter show the walls: a single light Higgs keeps m_c/m_t above 0.0272 against 0.00361, site-density potentials keep m_t/m_b below 30 on all 1238 zeros tested against more than 40, non-negative orbit weights cap m_u/m_ℓ at 3.34 against 84.98, and three-leg transport costs a vacuum coefficient above 3.45 × 10³⁴ GeV². For s = (1/3, 2/3, 2/3) the Cayley rotation is a matrix of ninths whose rows have length one; Lean checks that Cayley(s)ᵀ Cayley(s) is the identity for every rational s and that the quaternion adjoint action is multiplicative. Two matrices with the Gram matrix [[4, 2], [2, 5]] differ by a turn; Lean checks that equal complex Gram matrices always give B = U A with U unitary. The folding dimension floors (42, 48, 45 per side), the 28-winding mirror triangle, the finite rational response (I + T¹⁶)⁻¹ matching seven zeros to 10⁻¹¹ with strengths calibrated on #28325, and the 2 / 5 / 7-zero rigidity ladder come from the chapter's replay certificates; a first-principles flavour law and one folding for all quark and lepton masses and mixings remain open.",
+  "summary_zh": "为什么十九点球壳不会白送夸克混合，又有哪些精确工具能把它折回来。x² + y² + z² = 867 的十九个非负整点在坐标轮换下绕极点 (17, 17, 17) 转动，分成六条三点轨道（屏幕计算）；若上下两套夸克质量矩阵都保持这一轮换，混合矩阵只能是置换乘相位（本章的书面论证）。互异单位立方根之间的弦长是 √3，代入 |V_cb| > 0.035、|V_tb| > 0.98，本章五行手算迫使至少一个部门的轮换破缺超过 0.0414（论证；算术在屏幕上）。在同一把对数标尺上，本章的区间证书给出几堵墙：单支轻希格斯让 m_c/m_t 停在 0.0272 之上（目标 0.00361），站点密度势在检验的全部 1238 枚零点上把 m_t/m_b 压在 30 以下（目标 40 以上），七轨道非负权把 m_u/m_ℓ 封顶在 3.34（目标 84.98），三腿输运的真空系数超过 3.45 × 10³⁴ GeV²。取 s = (1/3, 2/3, 2/3)，凯莱旋转是一张九分之几的矩阵，每行长度为一；Lean 检验对任意有理 s 都有 Cayley(s)ᵀ Cayley(s) 等于单位阵，并检验四元数伴随作用保持乘法。两个格拉姆矩阵都为 [[4, 2], [2, 5]] 的矩阵只差一次旋转；Lean 检验复格拉姆矩阵相等时必有幺正 U 使 B = U A。折叠维数下界（每侧 42、48、45 维）、二十八圈镜像三角、在 #28325 上校准强度、跨七枚零点精确到 10⁻¹¹ 的有限有理响应 (I + T¹⁶)⁻¹，以及两枚、五枚、七枚零点的刚性阶梯，均来自本章的复算证书；第一性原理的味作用律，以及同时给出全部夸克与轻子质量和混合的统一折叠，仍是开放问题。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-26",
+  "duration": "2:42",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · the 19-point shell turning about its pole, three cube roots and an excluded near-symmetric zone, a shared log ruler of obstruction walls, a rational Cayley rotation of ninths, two column pairs with one Gram matrix, a winding counter and a rigidity ladder",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.cayley_orthogonal",
+    "D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.ad_hom",
+    "D5/S3/Quantum/Algebra/GramUnitaryExtension.exists_unitary_mul_eq_of_conjTranspose_mul_eq"
+  ],
+  "outputs": {
+    "narrated_720p": "omega-unification_folding-the-mixing-matrix_720p_narrated.mp4",
+    "cover": "omega-unification_folding-the-mixing-matrix_cover.jpg"
+  }
+}

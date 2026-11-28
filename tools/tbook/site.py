@@ -393,13 +393,13 @@ def _media_module(part: str):
         return None
 
 
-def _items(part: str, book: config.Book) -> list[dict]:
+def _items(part: str, book: config.Book, site: config.Site) -> list[dict]:
     mod = _media_module(part)
     fn = getattr(mod, "items", None) if mod else None
     if fn is None:
         return []
     try:
-        items = fn(book)
+        items = fn(book, site=site) if part == "films" else fn(book)
     except NotImplementedError:
         return []
     except Exception as exc:  # noqa: BLE001
@@ -410,7 +410,8 @@ def _items(part: str, book: config.Book) -> list[dict]:
 
 def collect(site: config.Site, book: config.Book, bdir: Path, lock: lean.Lock | None,
             models: dict[str, EditionModel] | None = None, *,
-            release_pdfs: dict[str, releases.PdfAsset] | None = None) -> BookView:
+            release_pdfs: dict[str, releases.PdfAsset] | None = None,
+            release_epubs: dict[str, releases.ReleaseAsset] | None = None) -> BookView:
     """What exists for ``book`` under ``bdir`` (``<out>/<slug>``), for the pages and the manifest."""
     view = BookView(book=book, bdir=bdir, models=models if models is not None else load_book_models(book),
                     lock=lock, release_pdfs=release_pdfs)
@@ -420,10 +421,12 @@ def collect(site: config.Site, book: config.Book, bdir: Path, lock: lean.Lock | 
         if (bdir / cover).is_file():
             view.covers[ed.lang] = cover
         found = []
-        for kind, variant in [("pdf", v) for v in config.PDF_VARIANTS] + [("epub", "")]:
+        formats = [("pdf", v, v in book.outputs_pdf, release_pdfs) for v in config.PDF_VARIANTS]
+        formats.append(("epub", "", book.outputs_epub, release_epubs))
+        for kind, variant, enabled, assets in formats:
             name = book.artifact(ed.lang, kind, variant)
-            if kind == "pdf" and release_pdfs is not None:
-                asset = release_pdfs.get(name) if variant in book.outputs_pdf else None
+            if assets is not None:
+                asset = assets.get(name) if enabled else None
                 if asset:
                     found.append(Download(kind, variant, name, asset.size, asset.url))
                 continue
@@ -432,7 +435,7 @@ def collect(site: config.Site, book: config.Book, bdir: Path, lock: lean.Lock | 
                 found.append(Download(kind, variant, name, f.stat().st_size))
         view.downloads[ed.lang] = found
     for part in MEDIA_PARTS:
-        view.media[part] = [i for i in _items(part, book) if _item_published(bdir, part, i)]
+        view.media[part] = [i for i in _items(part, book, site) if _item_published(bdir, part, i)]
     return view
 
 
@@ -500,7 +503,7 @@ _BOOK_PATH_TAG_RE = re.compile(r'<(?:iframe|video|source)\b(?=(?:[^>"]|"[^"]*")*
 _FILM_FIGURE_RE = re.compile(r'(<figure\b(?=(?:[^>"]|"[^"]*")*\sdata-tr-video=")(?:[^>"]|"[^"]*")*>)((?:(?!</figure\b).)*)',
                              re.I | re.S)
 # the start tag of the embed's player (tbook.film _local_player)
-_FILM_PLAYER_RE = re.compile(r'<video\b(?=(?:[^>"]|"[^"]*")*\sclass="[^"]*\btr-film-player\b)(?:[^>"]|"[^"]*")*>', re.I)
+_FILM_PLAYER_RE = re.compile(r'<(?:iframe|video)\b(?=(?:[^>"]|"[^"]*")*\sclass="[^"]*\btr-film-player\b)(?:[^>"]|"[^"]*")*>', re.I)
 FILM_UNBUILT = "tr-film-unbuilt"
 # preload of the player when the site hosts its video (as tbook.film writes it) and when it does not: the hidden
 # player of an unbuilt film must not request the missing file
@@ -547,7 +550,12 @@ def mark_films(page_html: str, bdir: Path) -> str:
             names.append(FILM_UNBUILT)
         if names or _attr(tag, "class", None) is not None:
             tag = _set_attr(tag, "class", " ".join(names))
-        content = _FILM_PLAYER_RE.sub(lambda v: _set_attr(v.group(0), "preload", FILM_PRELOAD[built]), content)
+        def mark_player(match):
+            player = match.group(0)
+            if player.lower().startswith("<iframe"):
+                return player.replace(' srcdoc=""', "") if built else _set_attr(player, "srcdoc", "")
+            return _set_attr(player, "preload", FILM_PRELOAD[built])
+        content = _FILM_PLAYER_RE.sub(mark_player, content)
         return tag + content
 
     return _FILM_FIGURE_RE.sub(repl, page_html)
@@ -596,7 +604,8 @@ def publish_html(book: config.Book, bdir: Path, build_root: Path) -> None:
                 printed.write_text(fix_print_media(printed.read_text(encoding="utf-8")), encoding="utf-8")
 
 
-def publish_downloads(book: config.Book, bdir: Path, build_root: Path, *, include_pdf: bool = True) -> None:
+def publish_downloads(book: config.Book, bdir: Path, build_root: Path, *,
+                      include_pdf: bool = True, include_epub: bool = True) -> None:
     src = build_root / "dist" / book.slug
     dst = bdir / "downloads"
     if dst.exists():
@@ -604,7 +613,8 @@ def publish_downloads(book: config.Book, bdir: Path, build_root: Path, *, includ
     if not src.is_dir():
         return
     files = [f for f in sorted(src.iterdir()) if f.is_file() and not f.name.startswith(".")
-             and (include_pdf or f.suffix.lower() != ".pdf")]
+             and (include_pdf or f.suffix.lower() != ".pdf")
+             and (include_epub or f.suffix.lower() != ".epub")]
     if not files:
         return
     dst.mkdir(parents=True)
@@ -642,7 +652,7 @@ def publish_media(site: config.Site, book: config.Book, part: str, dest: Path) -
     mod = _media_module(part)
     if mod is None:
         return None
-    if not _items(part, book):
+    if not _items(part, book, site):
         if dest.exists():
             shutil.rmtree(dest)
         return None
@@ -1232,7 +1242,10 @@ def films_section(bi: Bi, view: BookView, prefix: str = "") -> str:
     if not items:
         return ""
     langs = view.book.languages
-    cards = []
+    long_form = view.book.long_form_films
+    grouped = any(it.get("id") in long_form for it in items)
+    heading_tag = "h4" if grouped else "h3"
+    long_cards, other_cards = [], []
     for it in items:
         page_link = _loc(it.get("href"), bi.langs[0], langs)
         page_link = page_link if page_link and _exists(view.bdir, page_link) else ""
@@ -1266,18 +1279,27 @@ def films_section(bi: Bi, view: BookView, prefix: str = "") -> str:
 
         watch = bi.span(action)
         thumb_target = page_link or watch_link(bi.langs[0])
+        cards = long_cards if it.get("id") in long_form else other_cards
         cards.append(
             '<article class="mcard panel">'
             + (f'<a class="thumb{"" if img else " blank"}" href="{esc(_media_url(prefix, thumb_target))}" tabindex="-1" aria-hidden="true">{img}'
                f'<span class="code">{esc(it.get("code") or it.get("id") or "")}</span></a>' if thumb_target else "")
-            + f'<div class="body"><h3>{heading}</h3>{summary_html}'
+            + f'<div class="body"><{heading_tag}>{heading}</{heading_tag}>{summary_html}'
             + (f'<span class="meta-line">{meta}</span>' if meta else "")
             + f'{_lean_chips(it.get("lean"))}<div class="actions">{watch}</div></div></article>')
     hub = str(items[0].get("hub") or "films/")
     more = f'<a class="aside" href="{esc(_media_url(prefix, hub))}">{bi.t("hub_films")} ▸</a>' if _exists(view.bdir, hub) else ""
+    if grouped:
+        sections = "".join(
+            f'<h3 class="film-group-title">{bi.s(label)}</h3><div class="mgrid">{"".join(cards)}</div>'
+            for label, cards in (("ui.long_form_films", long_cards), ("ui.other_films", other_cards))
+            if cards
+        )
+    else:
+        sections = f'<div class="mgrid">{"".join(other_cards)}</div>'
     return (f'<section id="films" class="sec panel{_wide(items)}" aria-labelledby="films-title">'
             f'<div class="sec-head"><h2 id="films-title">{bi.s("ui.films")}</h2>{more}</div>'
-            f'<div class="mgrid">{"".join(cards)}</div></section>')
+            f'{sections}</section>')
 
 
 def slides_section(bi: Bi, view: BookView, prefix: str = "") -> str:
@@ -1505,7 +1527,8 @@ def _generated_at() -> str:
 
 
 def manifest(site: config.Site, views: list[BookView], lock: lean.Lock | None,
-             release_pdfs: dict[str, releases.PdfAsset] | None = None) -> dict:
+             release_pdfs: dict[str, releases.PdfAsset] | None = None,
+             release_epubs: dict[str, releases.ReleaseAsset] | None = None) -> dict:
     """``manifest.json`` (schema ``trureturing-books.site.v1``)."""
     name, version = _template_info()
     books = []
@@ -1556,6 +1579,10 @@ def manifest(site: config.Site, views: list[BookView], lock: lean.Lock | None,
     return {
         "schema": SCHEMA,
         **({"release_pdf_digest": releases.pdf_digest(release_pdfs)} if release_pdfs is not None else {}),
+        **({"release_epub_digest": releases.asset_digest(release_epubs)} if release_epubs is not None
+           and any(v.book.outputs_epub for v in views) else {}),
+        **({"release_film_digest": releases.asset_digest(releases.film_assets(site.repo))} if site.film_release_only
+           and any(v.media.get("films") for v in views) else {}),
         "generated_at": _generated_at(),
         "site": {"title": {lang: site.text(site.title, lang) for lang in site.languages},
                  "languages": site.languages, "base_url": site.base_url or None, "repo": site.repo or None},
@@ -1626,6 +1653,9 @@ def build(site, books, out_dir: Path, only: set[str] | None = None, *, build_roo
     release_pdfs = None
     if site.pdf_release_only:
         release_pdfs = releases.pdf_assets(site.repo) if site_books else {}
+    release_epubs = None
+    if site.epub_release_only:
+        release_epubs = releases.epub_assets(site.repo) if any(book.outputs_epub for book in site_books) else {}
     lock = _load_lock()
     if parts is None:
         _reset(out)
@@ -1642,7 +1672,8 @@ def build(site, books, out_dir: Path, only: set[str] | None = None, *, build_roo
         models = load_book_models(book)
         if parts is None:
             publish_html(book, bdir, build_root)
-            publish_downloads(book, bdir, build_root, include_pdf=not site.pdf_release_only)
+            publish_downloads(book, bdir, build_root,
+                              include_pdf=not site.pdf_release_only, include_epub=not site.epub_release_only)
             publish_covers(site, book, bdir, models, lock)
         for part in MEDIA_PARTS:
             if book.slug in rebuilt and (parts is None or part in parts):
@@ -1651,7 +1682,8 @@ def build(site, books, out_dir: Path, only: set[str] | None = None, *, build_roo
                     problems.append(err)
         if book.slug in rebuilt and (parts is None or "films" in parts):
             publish_film_marks(book, bdir)
-        views.append(collect(site, book, bdir, lock, models, release_pdfs=release_pdfs))
+        views.append(collect(site, book, bdir, lock, models,
+                             release_pdfs=release_pdfs, release_epubs=release_epubs))
     langs = list(site.languages) or ["zh", "en"]
     book_slugs = {book.slug for book in site_books} | set(config.book_slugs())
     route_langs = tuple(lang for lang in langs if lang not in book_slugs) if len(langs) > 1 else ()
@@ -1674,8 +1706,8 @@ def build(site, books, out_dir: Path, only: set[str] | None = None, *, build_roo
             (landing / "index.html").write_text(landing_html(frame, v, lang), encoding="utf-8")
     (out / "404.html").write_text(not_found_html(site), encoding="utf-8")
     (out / ".nojekyll").write_text("", encoding="utf-8")
-    (out / "manifest.json").write_text(json.dumps(manifest(site, views, lock, release_pdfs), ensure_ascii=False, indent=2) + "\n",
-                                       encoding="utf-8")
+    data = manifest(site, views, lock, release_pdfs, release_epubs)
+    (out / "manifest.json").write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     if problems:
         raise SiteError(f"site written to {out} with {len(problems)} problem(s):\n  " + "\n  ".join(problems))
     post_build(site, out)

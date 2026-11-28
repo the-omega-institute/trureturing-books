@@ -1,0 +1,32 @@
+{
+  "title": "Exact on a Coarse Grid",
+  "title_zh": "粗网格上的精确积分",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-27",
+  "duration": "2:49",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · a heap fold along a five-point chain, a square cut into two triangles with integer and rational-quaternion edges, a cone from one base vertex over a face, an osculating cap and a solenoid thread, the Volume III ledger",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/AURICOmega/OmegaSimplicialExactness.sum_d0",
+    "D5/S3/Quantum/AURICOmega/OmegaSimplicialExactness.d2_d1",
+    "D5/S3/Quantum/AURICOmega/OmegaSimplicialExactness.d1_H2_add_H3_d2",
+    "D5/S3/Quantum/AURICOmega/OmegaSimplicialExactness.d2_eq_zero_iff",
+    "D5/S1/Solenoid/ComplexPowerSolenoidDecomposition.logarithmicCharge_eq_zero_iff"
+  ],
+  "outputs": {
+    "narrated_720p": "omega-math_exact-on-a-coarse-grid_720p_narrated.mp4",
+    "cover": "omega-math_exact-on-a-coarse-grid_cover.jpg"
+  },
+  "summary": "Chapter 9 claims that integration needs no slicing. The film starts with the heap law [y, x, x] = y: folding a five-point chain point by point collapses the integral to its final point (hand derivation, argued). In a commutative group, Lean checks the same telescoping: the steps −4 + 7 − 5 + 3 sum to 6 − 5 (sum_d0; the arithmetic is computed). A square cut into two triangles carries integer edge values. The faces circulate 9 and 0, the diagonal walked both ways cancels, and the rim gives 9 again (computed). The chapter's rational unit quaternions follow: W₁ = (−1/2, 1/2, 1/2, −1/2) and W̃₂ = (−12/125, −91/125, −12/125, −84/125) multiply to the rim holonomy (31/250, −17/250, 7/10, 7/10), while the reversed order, or the other anchoring path (j becomes −j), fails (computed exactly; the peeling identity is argued). From a base vertex b, Lean checks δ₂δ₁ = 0, the cone identity F = δ₁(H₂ b F) + H₃ b (δ₂F) and closed ⇔ exact with the explicit witness H₂ b F, with an empty axiom record and no choice. A worked example on four vertices gives 10 = 9 + 1 and 10 + 4 − 5 = 9 (computed). The book's model replaces flat tangent plates with osculating three-sphere caps glued by quaternion Möbius maps (MODEL, argued; picture schematic). Lean checks that a solenoid thread has zero logarithmic charge exactly when every level lies on the unit circle; a thread with |z₁| = 2 drifts to radii √2, ∛2, ⁴√2 (computed). The Volume III ledger closes the film.",
+  "summary_zh": "第九章主张积分无需细分。本片从流群法则 [y, x, x] = y 讲起：沿五点链逐点折叠，积分塌缩为终点（手工推导，标为论证）。在交换群中，Lean 检验了同样的伸缩相消：各步 −4 + 7 − 5 + 3 之和等于 6 − 5（sum_d0；算式为屏幕计算）。正方形被一条对角线切成两个三角形，边上放整数：两面环流为 9 与 0，对角线正反各走一次而相消，外缘环流还是 9（屏幕计算）。接着换成本章的有理单位四元数：W₁ = (−1/2, 1/2, 1/2, −1/2) 与 W̃₂ = (−12/125, −91/125, −12/125, −84/125) 相乘，恰为外缘和乐 (31/250, −17/250, 7/10, 7/10)；颠倒乘序或改走另一条锚定路径（j 变成 −j）则不成立（精确计算；剥壳恒等式为论证）。以基点 b 为锥顶，Lean 检验了 δ₂δ₁ = 0、锥同伦拆分 F = δ₁(H₂ b F) + H₃ b (δ₂F)，以及闭即恰当并由 H₂ b F 显式见证；这些声明的公理记录为空，不用选择公理。四顶点算例给出 10 = 9 + 1 与 10 + 4 − 5 = 9（屏幕计算）。本书的模型以二阶吻合三元球冠取代平直切板，并用四元数莫比乌斯变换缝合（模型，标为论证；画面为示意）。Lean 检验：螺线管线程的对数荷为零，当且仅当每一层都落在单位圆上；|z₁| = 2 的线程则依次漂到半径 √2、∛2、⁴√2（屏幕计算）。全片以第三卷对照表收尾。"
+}

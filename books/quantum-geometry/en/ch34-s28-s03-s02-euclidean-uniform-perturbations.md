@@ -1,4 +1,4 @@
-# M.2.9 Short intervals under independent uniform perturbations {#short-intervals-under-independent-uniform-perturbations}
+# M.2.10 Short intervals under independent uniform perturbations {#short-intervals-under-independent-uniform-perturbations}
 
 For a pair of degree vectors, the difference of their perturbed frequencies is an affine sum of coordinate offsets. A bound on its short-interval probability can use the Euclidean norm of the coefficients scaled by their perturbation radii.
 

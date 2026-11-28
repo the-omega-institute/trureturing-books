@@ -375,6 +375,12 @@ $$
 
 在上述共轭重叠协议及记录不可访问的受限操作下，[@prop-surviving-copy-blocks-reversal] 给出局部不可恢复性：若有一份未逆转的记录副本满足命题条件，所选非零矩阵元不能复原。对于本章所讨论的先未读捏合、再丢弃旧信息并重置的记忆复用协议，阶段 A 产生的熵增与阶段 B 的热代价分别受 [@thm-entropy-production-coherence-deletion] 和 [@rem-landauer-thermodynamic-bridge-literature] 约束；可逆复制或反计算并不属于这个两阶段模型。
 
+下面的影片把这几笔账按先后走一遍：先捏合、把熵记进系统，再复位、把账单付给热浴，最后看拷贝为什么不在这张账单上。
+
+::: {.film src="landauer-ledger"}
+**擦除的账单（2 分 30 秒）。** 一个量子比特写成 2×2 的表：青色的对角线是记录，品红的对角线外两格是相干，捏合把品红的两格撕掉（碎纸机只是比方）。$\lvert +\rangle$ 的四格都是 $\tfrac12$，撕掉之后熵从 $0$ 跳到 $\ln 2$，恰为捏合前后的相对熵。每步转 $60^\circ$ 再捏合，连做三步，对角元依次为 $\tfrac34$、$\tfrac58$、$\tfrac{9}{16}$，熵柱一块块叠上 $0.5623$、$0.0992$、$0.0238$（[@thm-entropy-production-coherence-deletion]）。复位账单 $\beta Q = -\Delta S + I + D$（这里的 $D$ 是热浴的相对熵）用 [@ex-one-qubit-reservoir-swap-erasure] 中 $p = \tfrac34$ 那一行：比特从 $\tfrac12 I$ 出发，一个热浴比特只能把它推到 $\operatorname{diag}(\tfrac34, \tfrac14)$，账单为 $0.1308 + 0 + 0.1438 = 0.2747$，青色的熵减之上叠着品红的 $D$，高出“地板”的一截就是多付的部分（[@cor-landauer-bound-saturation]）。把 $\lvert +\rangle$、$\lvert -\rangle$ 拷进空白记录，两张局部表格都只剩对角上的 $\tfrac12$，品红的 $\pm\tfrac12$ 挪到了联合表格的角上；把拷贝倒着做一遍，两者都回来了（[@thm-reduced-irreversibility-access-defect]）。捏合就是这样一次拷贝，只是记录够不着；按本章两阶段模型的记账口径，捏合与拷贝只记熵，热账单在复位时才付。室温下每比特约 $2.87 \times 10^{-21}$ 焦耳的热量下限是文献结果，见 [@rem-landauer-thermodynamic-bridge-literature]，真实芯片的耗散远大于此；片中数字都是屏幕上的计算。
+:::
+
 除了连续密度矩阵上的相对熵收缩与环境副本阻断之外，如果把每一次新记录的写入抽象为离散素数指数账本上的非负累加，同样会出现一条简洁的单向增长律。记有限支撑素指数账本类型为 `PrimeExponent := Nat.Primes →₀ ℕ`（即将素数类型 `Nat.Primes` 映到自然数幂次 $\mathbb{N}$ 且仅在有限个素数处非零的函数），其对应的正整数乘积为 $\operatorname{generatedNumber}(a) := \prod_{p} p^{a(p)} \in \mathbb{N}$（恒大于等于 $1$），实值对数账本长度定义为
 
 $$

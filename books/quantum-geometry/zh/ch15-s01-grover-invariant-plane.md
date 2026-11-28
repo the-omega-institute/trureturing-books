@@ -100,6 +100,12 @@ $$
 
 如何在已知 $p$ 时借辅助硬币旋转彻底消除这一过冲残差，将在[第十六章](ch16-qsvt-walks-and-compilation.md) [@cor-exact-source-query-count] 中严格解决。
 
+::: {.film src="grover-two-mirrors"}
+**两面镜子，一次转动（2 分 22 秒）。** 青色的两条镜线夹角 $30^\circ$，白色的图形先后各照一次，成为琥珀色的像，净转过紫色的 $60^\circ$——两次翻折合成一次转动，转角是夹角的两倍。四个盒子藏一个奖品：起点每格振幅都是 $\tfrac12$，偏离失败方向 $B$ 正好 $\theta = 30^\circ$；第一面镜子 $I - 2P$ 把品红的奖品柱变号，第二面镜子 $2UU^* - I$ 让各柱绕平均值 $\tfrac14$ 翻折，$(\tfrac12, \tfrac12, \tfrac12, \tfrac12) \to (-\tfrac12, \tfrac12, \tfrac12, \tfrac12) \to (1, 0, 0, 0)$，琥珀色的箭头从 $30^\circ$ 转到 $90^\circ$。一般规律是 [@thm-grover-uniform-rotation]：$p < 1$ 时 $n$ 步之后态恰在 $(2n+1)\theta$，$p = 1$ 时起点就是成功块。继续转，四个盒子的命中率依次是 $\tfrac14, 1, \tfrac14, \tfrac14, 1$：过了顶，下一步就往回走，要转回来才再到顶。$N = 100$ 时第一个峰的最佳整数步是 $n = 7$，$15\theta \approx 86.1^\circ$，命中率约 $0.995$，而 $\frac{\pi}{4}\sqrt{N}$ 只是在定理之上的估算；一个奖品藏在 $N > 1$ 个盒子里时，除 $N = 4$ 外整数步都不能正好命中，这据 Niven 定理（文献结果）。定理那一场左边的轨道按示意角 $\theta = 11^\circ$ 画。无结构搜索至少要 $\Omega(\sqrt{N})$ 次预言机查询，这是文献结果，本书没有形式化；“搜索是转动”是标为 ARGUED 的诠释。片中数字都是屏幕上的计算。
+:::
+
+想一面一面地亲手照这两面镜子，可以打开下面的完整实验室：
+
 ::: {.viz src="grover-reflections" height="560"}
 Grover 两次反射的完整实验室：拖动镜 2 上的初始态改 $\theta$，换 $N$，用 ← → 一面一面地照镜子；右边的柱子是每一步之后的成功概率 $\sin^2((2n+1)\theta)$（[@thm-grover-uniform-rotation]）。查询下界 $\Omega(\sqrt{N})$ 是文献结果，未在本书形式化。
 :::

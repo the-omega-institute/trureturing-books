@@ -955,9 +955,9 @@ for (const lang of ['zh', 'en']) {
     /Alpöge/.test(argued) && (lang === 'zh' ? argued.includes('外部已核验的形式化事实') && argued.includes('不带绿色标签') && argued.includes('页面也不用它推导任何一个数') : argued.includes('externally verified formalization fact') && argued.includes('no green badge') && argued.includes('derives no number from it')) && !/猜想|conjecture|\bOPEN\b/i.test(argued) && (await page.locator('#basis .lean.argued a[data-lean-gid]').count()) === 0
   );
   check(
-    lang + ' the RH note links permanent records only',
+    lang + ' the RH note links the recommended proof and original records',
     (await page.locator('#basis .lean.argued .' + lang + ' a').evaluateAll((els) => els.map((a) => a.getAttribute('href')))).join(' ') ===
-      ['https://github.com/the-omega-institute/riemann-hypothesis/blob/b14f2bd19e5e12a4ba6b1d207e3c5fbb06e49ed6/src/Statements.lean', 'https://github.com/the-omega-institute/riemann-hypothesis/blob/b14f2bd19e5e12a4ba6b1d207e3c5fbb06e49ed6/src/Main.lean', 'https://math.mit.edu/~drew/grh/audit.log', 'https://leanprover-community.github.io/blog/posts/riemann-hypothesis/'].join(' ')
+      ['https://github.com/leanprover-community/riemann-hypothesis', 'https://github.com/the-omega-institute/riemann-hypothesis/blob/b14f2bd19e5e12a4ba6b1d207e3c5fbb06e49ed6/src/Statements.lean', 'https://github.com/the-omega-institute/riemann-hypothesis/blob/b14f2bd19e5e12a4ba6b1d207e3c5fbb06e49ed6/src/Main.lean', 'https://math.mit.edu/~drew/grh/audit.log', 'https://leanprover-community.github.io/blog/posts/riemann-hypothesis/'].join(' ')
   );
   check(
     lang + ' drawer states the five cards with the numbers of the script',

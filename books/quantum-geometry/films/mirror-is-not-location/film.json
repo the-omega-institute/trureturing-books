@@ -1,0 +1,31 @@
+{
+  "title": "A mirror is not a location",
+  "title_zh": "镜子不等于定位",
+  "summary": "The zeta function has a mirror, the critical line where the real part is one half, and its nontrivial zeros come in mirror pairs. A ruler for the glass: put lamps at 0 and 1 and divide a point's distance to lamp 1 by its distance to lamp 0. At 2 the ratio is 1/2, at its mirror image −1 it is 2: the mirror swaps the distances and flips the ratio, and only on the line halfway between the lamps is it 1. Lean checks, for every complex s, that |(s − 1)/s| = 1 exactly when Re s = 1/2; that the Riemann hypothesis is equivalent to every zero other than the trivial ones having ratio 1 (zero logarithmic radial defect); and that no zeros strictly between real parts 1/2 and 1 would already imply the hypothesis. Then a forgery: the quartic with zeros 1/2 ± 1/4 ± 14i has both symmetries of zeta, the reflection s ↦ 1 − s and conjugation, which together give the mirror s ↦ 1 − s̄, yet none of its zeros lies on the line; their ratios are 0.998727 and 1.001274, a mirror pair, and along the line its values are real and, for this shift and height, never below 49 (computed). For every nonzero shift and height, Lean checks the two symmetries and that all four zeros miss the line. A mirror tells you where your twin stands, never where you stand. The Riemann hypothesis itself has an external Lean proof, independently replayed but not frozen in this book's repository; the lamps are a picture, and the chapter's arithmetic area law remains an open problem.",
+  "summary_zh": "ζ 函数有一面镜子：实部等于二分之一的临界线，它的非平凡零点成对互为镜像。先做一把量镜面的尺：在 0 和 1 各放一盏灯，用一点到灯 1 的距离除以它到灯 0 的距离。在 2 处比值是 1/2，在它的镜像 −1 处比值是 2：镜子交换两段距离，比值倒了过来；只有两灯正中间的那条线上比值才是 1。Lean 检验了：对每个复数 s，|(s − 1)/s| = 1 当且仅当 Re s = 1/2；黎曼猜想等价于每个非平凡零点的比值都是 1（对数径向亏量为零）；以及实部严格介于 1/2 与 1 之间若没有零点，黎曼猜想即成立。再看一个赝品：零点为 1/2 ± 1/4 ± 14i 的四次式拥有 ζ 的两种对称——反射 s ↦ 1 − s 与复共轭，二者合成镜像 s ↦ 1 − s̄——却没有一个零点在线上；比值是 0.998727 与 1.001274，恰为一对镜像；沿临界线它取实数值，对这组偏移与高度不低于 49（屏幕计算）。对一切非零偏移与高度，Lean 检验了两种对称以及四个零点全不在线上。镜子只告诉你镜中人站在哪，从不告诉你自己站在哪。黎曼猜想本身已有外部 Lean 证明并经独立重放，但未冻结进本书所钉仓库；灯只是比方，本章的算术面积律仍是开放问题。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-24",
+  "duration": "2:29",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · a mirror wall and twins, two lamps at 0 and 1 measuring the ratio of distances, a symmetric quartic whose four zeros pair off the line",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Midline/CayleyCriticalLine.cayley_ratio_norm_one_iff_critical_line",
+    "D5/S3/Midline/Cayley/CayleyCriticalLineZetaCriterion.cayley_critical_line_zeta_criterion",
+    "D5/S3/Weil/ZetaBridge/RightHalfStripRiemannReduction.golden_right_half_strip_implies_rh",
+    "D5/S3/Zeros/SymmetricPolynomial/FullSymmetryNonlocalization.full_symmetry_not_fixed_line_localization"
+  ],
+  "outputs": {
+    "narrated_720p": "quantum-geometry_mirror-is-not-location_720p_narrated.mp4",
+    "cover": "quantum-geometry_mirror-is-not-location_cover.jpg"
+  }
+}

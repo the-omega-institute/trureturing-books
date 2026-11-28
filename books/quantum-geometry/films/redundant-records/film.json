@@ -1,0 +1,31 @@
+{
+  "title": "One surviving copy blocks the undo",
+  "title_zh": "留下一份副本，就撤不回去",
+  "summary": "Ten people read the same sign; one rubs their note back out. Can the sign go back? A qubit in even superposition has coherence one half, and each record of its branch multiplies that number by the record's overlap. Two phase records of overlap −i turn it to −1/2; conjugating copy zero alone leaves −i/2, and conjugating both brings back 1/2 — Lean checks all four numbers. With any number of copies, undoing all but copy k leaves the survivor's overlap times the old entry when the others have overlaps of size one; Lean checks that undoing the others does not restore the entry whenever that overlap is not one and the entry was not zero. Records on one axis can be undone in any order, but unread blurring along two slanted rails does not commute: pulling the point (0, 1) halfway to the x rail and two thirds of the way to the rail through (3/5, 4/5) lands at 4/25 or 8/25 across, depending on the order, and Lean checks the exact commutator, zero for parallel or perpendicular rails and nonzero for slanted ones. Conjugation undoes only unit-overlap copies; reading facts as redundant records is the book's interpretation; why one outcome is seen remains an open problem.",
+  "summary_zh": "十个路人读同一块路标，一位把自己记下的那一笔倒着抹掉：路标能回去吗？均匀叠加的量子比特相干为 ½，每写下一份分支记录，它就乘上这份记录的重叠。两份重叠为 −i 的相位记录把它变成 −½；只对第 0 份取共轭剩下 −i/2，两份都取共轭才回到 ½——这四个数由 Lean 核验。副本多少份都行：其余副本的重叠模长为 1 时，撤销除第 k 份以外的全部，只剩幸存副本的重叠乘以原矩阵元；Lean 核验，只要这份重叠不等于 1、原矩阵元不为零，撤销其余副本就回不到原值。同一根轴上的记录撤销先后无关，沿两根斜轨的未读模糊却不可交换：把点 (0, 1) 往 x 轨拉一半、往过 (3/5, 4/5) 的斜轨拉三分之二，次序不同，落点横坐标分别是 4/25 与 8/25；Lean 核验了精确的换位子公式，两轨平行或垂直时为零，斜交时不为零。共轭只能撤销重叠模长为 1 的副本；把事实读作冗余记录是本书的诠释；为什么看到单一结果仍是开放问题。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-25",
+  "duration": "2:10",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · a road sign and its readers, record cards with phase dials, a ledger tape of the coherence, a row of copies with one survivor, two rails and two orders of pulling a point",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/ObserverMemory/JointCoherentReversal.two_copy_joint_reversal_certificate",
+    "D5/S3/ObserverMemory/JointCoherentReversal.surviving_copy_blocks_reversal",
+    "D5/S3/Quantum/Measurement/Bloch/AxisContractionCommutator.axisContraction_commutator",
+    "D5/S3/Quantum/Measurement/Bloch/AxisContractionCommutator.axisContraction_commutator_ne_zero_of_nonparallel_nonorthogonal"
+  ],
+  "outputs": {
+    "narrated_720p": "quantum-geometry_redundant-records_720p_narrated.mp4",
+    "cover": "quantum-geometry_redundant-records_cover.jpg"
+  }
+}

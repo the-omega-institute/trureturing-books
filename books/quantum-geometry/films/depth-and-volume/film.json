@@ -1,0 +1,29 @@
+{
+  "title": "Twelve gates in four ticks",
+  "title_zh": "十二道门，四拍走完",
+  "summary": "Twelve gates on a chain of eleven sites run in four ticks. Gates that share a site cannot fire on the same tick, and inside this open-boundary circuit family the time order runs one way along the chain except at turning points. Turning points at sites 4 and 8 cut the chain into three pieces of four gates, which run side by side: four layers, and ⌊11/3⌋ + 1 = 4; with eight sites the same picture gives three. Lean checks the general rule: for 1 ≤ κ and 2κ ≤ N, the least depth over all placements of κ turning points is ⌊N/(κ+1)⌋ + 1, because the biggest of the κ + 1 pieces needs at least ⌈(N + 1)/(κ + 1)⌉ layers, and an even placement reaches that. Two published guesses, (N+3)/2 − κ for odd N and (N+4)/2 − κ for even N, agree with it at κ = 1 but fail at κ = 2, and Lean checks that both fail: at N = 8 the circuit runs in 3 layers against 4, at N = 11 in 4 against 5. Complexity = Volume and ER = EPR remain open; the count here is the depth of one circuit family, not the least gate count of an arbitrary target and not physical time.",
+  "summary_zh": "一条 11 个格点的链上，12 道门 4 拍就走完。共用格点的两道门不能在同一拍里动作；在这族开放边界电路里，先后次序沿链朝一个方向走，只在折返点掉头。折返点放在格点 4 和 8，链断成三段、每段 4 道门，三段并排跑：4 层，⌊11/3⌋ + 1 = 4；换成 8 个格点则是 3 层。Lean 内核检验了一般规律：当 1 ≤ κ、2κ ≤ N 时，对 κ 个折返点的一切摆法取最小，深度恰为 ⌊N/(κ+1)⌋ + 1，因为 κ+1 段中最长的那段至少要 ⌈(N+1)/(κ+1)⌉ 层，而均匀的摆法恰好做到。论文中的两条猜想公式，奇数 N 的 (N+3)/2 − κ 与偶数 N 的 (N+4)/2 − κ，在 κ = 1 时与之吻合，κ = 2 时就破了；Lean 内核检验两条都不成立：N = 8 时电路 3 层而公式说 4，N = 11 时 4 层而公式说 5。复杂度等于体积与 ER=EPR 仍是开放问题；这里数的是一族电路的深度，不是任意目标的最少门数，也不是物理时间。",
+  "subject":"https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-24",
+  "duration": "2:29",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · a chain of sites with gate bars and turning points, ticks lighting up piece by piece, cell strips of the pieces, a scatter of the true depth against two guesses, the open bridge to black-hole volume",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/Dynamics/OpenIntegrableCircuitMinDepth.result",
+    "D5/S3/Quantum/Dynamics/OpenIntegrableCircuitDepthRefutation.result"
+  ],
+  "outputs": {
+    "narrated_720p": "quantum-geometry_depth-and-volume_720p_narrated.mp4",
+    "cover": "quantum-geometry_depth-and-volume_cover.jpg"
+  }
+}

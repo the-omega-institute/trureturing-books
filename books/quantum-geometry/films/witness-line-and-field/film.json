@@ -1,0 +1,28 @@
+{
+  "title": "Who goes first: a coloring is an orientation",
+  "title_zh": "谁先考：着色就是定向",
+  "summary": "Five exams, joined by a line when they share a student, must sit in different time slots: that is a coloring of a graph. Three slots are enough, and two are not, because three of the exams all clash. Decide for every clash which exam goes first, pointing each line from the earlier slot to the later one, and every chain of arrows climbs a slot at each step, so it holds at most three exams; a careless order instead makes a chain through all five. Going back, keep only the arrows and count, for each exam, the longest chain that starts there: every arrow runs from a larger count to a smaller one, and three minus the counts 2, 1, 2, 0, 0 is again a three-slot timetable, in which only D has moved. Lean checks the general rule for every finite graph and every k: the graph can be colored with k colors exactly when some orientation keeps every directed path to at most k vertices; arrows may run both ways or round a circle, and the proof first drops arrows until no circle is left. Read in this chapter's language, a coloring is a field and a path is a line; the theorem trades one witness for another and finds neither. That two colors can be tested in linear time and that 3-coloring is NP-complete are literature results; P versus NP and the regularity of 3D Navier–Stokes flow remain open.",
+  "summary_zh": "五门考试，两门共有学生就连一条线，不能排在同一时段：这就是给图着色。这里三个时段够用，两个不够，因为有三门两两冲突。对每一处冲突决定谁先考，让线从早的时段指向晚的时段，顺着箭头每走一步时段就往后推一格，所以一串箭头至多串起三门；随手定的先后却能串起全部五门。反过来，只留箭头，数每门考试往后最长能串几步：每支箭头都从大数指向小数，于是用 3 减去步数 2、1、2、0、0，又是一张三时段的考表，只有 D 换了时段。Lean 检验了一般规律，对任意有限图和任意 k：图可 k 着色，当且仅当存在一种定向，使每条有向路至多 k 个顶点；箭头可以双向、可以绕圈，证明先删去一些箭头直到没有圈。用本章的话说，着色是场，有向路是线；定理把一种见证换成另一种，却不帮你找到任何一种。能否 2 着色可在线性时间内判定、3 着色是 NP 完全，都是文献结果；P 与 NP 是否相等、三维纳维—斯托克斯流是否始终光滑，仍是开放问题。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-25",
+  "duration": "2:28",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · five exams as a small graph laid out on a timetable, arrows for who goes first, the longest chain, the counts read back as slots, the witness ledger",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Combinatorics/Graph/Walks/GallaiRoy.colorable_iff_exists_orientation"
+  ],
+  "outputs": {
+    "narrated_720p": "quantum-geometry_witness-line-and-field_720p_narrated.mp4",
+    "cover": "quantum-geometry_witness-line-and-field_cover.jpg"
+  }
+}

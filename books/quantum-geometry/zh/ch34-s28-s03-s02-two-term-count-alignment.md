@@ -1,4 +1,4 @@
-# M.2.10 两项计数主项与完全相位对齐 {#两项计数主项与完全相位对齐}
+# M.2.11 两项计数主项与完全相位对齐 {#两项计数主项与完全相位对齐}
 
 对局部有限的正频率谱 $(\gamma_j)$，记闭截断计数为 $N(T)=\#\{j:\gamma_j\le T\}$，权重和为 $W(T)=\sum_{\gamma_j\le T}w_j$，正弦和为 $S(T,u)=\sum_{\gamma_j\le T}w_j\sin(\gamma_j u)$。实际 ζ 零点计数的两项平滑主函数为 $F(T)=\frac{T}{2\pi}(\log(\frac{T}{2\pi})-1)$。下面的比较谱保留这两项，且计数误差有界。[Lagarias，定理 2.1](https://arxiv.org/html/math/0404394#S2.Thmtheorem1)
 
@@ -21,5 +21,17 @@ $$
 
 若 $T$ 在第 $n$ 块，取 $q=21q_n$。每个较早块的 $q_i$ 都整除 $q_n$，商是五的幂，模四余一。因此对任一保留的 $\gamma_j\le T$，$q\gamma_j$ 都是模四余一的整数，每个 $u_m$ 上的各项正弦都等于一。所述区间长度超过步长 $2\pi q$，故其中必有一个对齐点。完整证明由 Lean 内核检查。
 :::
+
+在上述对齐点，任意两条保留的频率都有相同相位，因而其相位差的余弦等于一。把这一性质代入沿用含端点截断的有序洛伦兹配对和 $G_T(u)$，可以确定它的首项系数。记 $c=1/(2\pi)$。
+
+::: {.theorem #thm-ch34-montgomery-aligned-lower title="完全相位对齐时的配对和下界" lean="D5/S3/Analytic/Oscillation/MontgomeryAlignmentLower.eventually_montgomery_gt_of_phase_alignment"}
+设正纵坐标谱局部有限，$N(T)$ 含端点并计重数，且 $N(T)/(T\log T)\to c$。对每个 $\kappa<2\pi c^2$，所有充分大的 $T$ 均满足以下结论。任取实数 $u$，若截断内每一对纵坐标都满足 $\cos((\gamma_i-\gamma_j)u)=1$，则 $G_T(u)>\kappa T(\log T)^2$。
+:::
+
+::: proof
+相位条件把配对和化为带重数的洛伦兹能量。对原区间两端各延伸 $\sqrt{T}$ 后使用柯西–施瓦茨不等式。扩展区间的长度与 $T$ 之比趋于一，每个纵坐标在扩展区间内保留的核质量比例也趋于一。下界除以 $T(\log T)^2$ 后趋于 $2\pi c^2$。完整证明由 Lean 内核检查。
+:::
+
+**手工推导。** 前面的共格谱有有界计数误差，因此 [@thm-ch34-montgomery-bounded-count-upper] 给出归一化配对和的一致上界。对每个 $\varepsilon>0$，只要 $T$ 充分大，上界便是 $2\pi c^2+\varepsilon$。取从 $\log T$ 开始的开区间寻找 $u_m$，其长度为 $(42\pi/\log 2)\log(21T)$。当 $T\ge21$ 时，这个区间落在 $[\log T,(1+84\pi/\log 2)\log T]$。在该谱上，每个充分大的 $T$ 都能选到一个这样的 $u_m$，使 $G_T(u_m)/(T(\log T)^2)$ 趋于 $2\pi c^2$。临界碰撞定理对实际 ζ 纵坐标所需的算术前提仍待证明：存在同一个 $\kappa<2\pi c^2$，使对每个固定的 $A>1$，当 $T$ 充分大时，归一化配对和在 $\log T\le |u|\le A\log T$ 上一致不超过 $\kappa$。
 
 因此，即使加入误差有界的两项计数、单位重数和指定的调和权重，这些条件仍允许每个对数长度区间出现达到全部权重的点。特征函数平均可以识别零频项。把平均限制在有限窗口时，实际 ζ 纵坐标仍需控制非零但接近零的高阶加权频率差。目前缺少的是随 $T$ 增长的矩阶上的估计。[特征函数平均的 Lean 实现](https://github.com/the-omega-institute/riemann-hypothesis/blob/b8864ecd5798c6030a03d756fab95f0b89a12754/src/Development/AbelianVarietyTheory/Proofs/DivisorProofs/ExpSumCoeffEqZeroOfVanishing.lean#L32-L78)

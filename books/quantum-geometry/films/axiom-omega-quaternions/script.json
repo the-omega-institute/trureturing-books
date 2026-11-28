@@ -1,0 +1,45 @@
+{
+  "voice": "af_heart",
+  "speed": 0.94,
+  "say": {"Lean": "Leen", "0.36": "zero point three six", "0.8": "zero point eight", "0.6": "zero point six"},
+  "music": {"bpm": 78, "progression": "d-minor"},
+  "scenes": [
+    {"id": "ruler", "name": "NO RULER", "lead": 1.6, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
+      ["Most physics starts with a ruler: a zero mark, an outside frame, the origin.", "大多数物理从一把尺子开始：一个零刻度，一个外面的坐标架，一个原点。"],
+      ["But who handed us that zero? Take the ruler away, and keep only comparisons.", "可是，谁把这个零交给了我们？把尺子拿走，只留下比较。"],
+      ["Two moves are left. One carries the step from y to x over onto z.", "只剩两个动作。一个：把从 y 到 x 的那一步，原样搬到 z 上。"],
+      ["The other reads how alike two points are: one means identical, zero means fully mismatched.", "另一个：读出两点有多像；1 表示同一个点，0 表示完全失配。"],
+      ["Rules: a step from a point to itself does nothing; carrying never changes a reading.", "规则：从自己到自己的一步什么也不做；搬运从不改变读数。"]
+    ], "cues": [{"line": 1, "at": 2.2, "kind": "glitch"}]},
+    {"id": "five", "name": "FIVE COLUMNS", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.5, 0.5, 0.0, 0.2], "lines": [
+      ["The unit quaternions obey every rule, read as one plus their dot product, over two.", "单位四元数守住全部规则，读数取“一加点积，再除以二”。"],
+      ["Take five: one, minus one, i, j and k. Their table holds ones, halves, and just two zeros.", "取五个：1、−1、i、j、k。读数表里是 1、一半，还有仅有的两个 0。"],
+      ["Its determinant is one eighth, not zero, so these readings need five columns. Four never do.", "这张表的行列式是八分之一，不是零：这些读数要五栏才写得下，四栏永远不够。"],
+      ["Lean checks: anything obeying these rules, where order matters and small steps link everything, needs at least five.", "Lean 内核检验：凡是守这套规则、讲先后、又能一小步一小步连通的结构，都至少要五栏。"]
+    ], "cues": [{"line": 2, "at": 2.4, "kind": "chime"}, {"line": 3, "at": 0.8, "kind": "stamp"}]},
+    {"id": "quat", "name": "FIVE MEANS QUATERNIONS", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.7, 0.6, 0.2, 0.3], "lines": [
+      ["Now ask for exactly five columns, readings down to zero, and no gaps.", "现在要求：恰好五栏，读数能降到零，没有缺口。"],
+      ["Lean checks the answer: it is the unit quaternions, point for point, moves and readings alike.", "Lean 内核检验了答案：它就是单位四元数，一点对一点，动作和读数都对得上。"],
+      ["And any point you like can be sent to one. The origin was never out there; we only chose it.", "而且你挑哪个点，就能把哪个点送到 1。原点从来不在外面，只是我们选的。"]
+    ], "cues": [{"line": 1, "at": 1.0, "kind": "stamp"}, {"line": 2, "at": 3.0, "kind": "impact"}]},
+    {"id": "born", "name": "TWO SHADOWS", "lead": 0.5, "tail": 1.0, "music": [1.0, 0.8, 0.7, 0.4, 0.4], "lines": [
+      ["Physics ignores an overall phase, so slide one point around its phase circle.", "物理不理会整体相位，那就让一个点沿着相位圆滑动。"],
+      ["Read it twice, a quarter turn apart, square both readings, and add them.", "读两次，相隔四分之一圈，两个读数各自平方，再相加。"],
+      ["Like a clock hand seen by two shadows: they trade as it turns, but the sum stays 0.36.", "像隔着两道影子看一根钟表指针：指针转，两道影子此消彼长，平方和始终是 0.36。"],
+      ["Lean checks that the sum ignores the phase and equals the Born weight of two spinors.", "Lean 内核检验：这个和不理会相位，并且等于两个旋量的玻恩权重。"]
+    ], "cues": [{"line": 2, "at": 3.0, "kind": "chime"}, {"line": 3, "at": 1.0, "kind": "stamp"}]},
+    {"id": "homog", "name": "SAME READING, SAME PAIR", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.8, 0.7, 0.3, 0.3], "lines": [
+      ["On a perfect ball no spot is special: two pins at one distance look like any other two.", "在完美的球上，没有哪一处特殊：隔着同样距离的两枚图钉，和任何另一对看起来都一样。"],
+      ["These two pairs both read 0.8, so their quotients share a real part, 0.6.", "这两对点的读数都是 0.8，所以它们的商实部相同：0.6。"],
+      ["What is left is an arrow of length 0.8; one turn lays it on the other.", "剩下的是一支长 0.8 的箭头；转一下，就叠到另一支上。"],
+      ["Lean checks every pair: equal readings mean one multiplication on each side carries one pair onto the other.", "Lean 内核检验：对任意两对点，读数相同，就有左右各乘一次，把一对送到另一对。"]
+    ], "cues": [{"line": 2, "at": 2.6, "kind": "chime"}, {"line": 3, "at": 1.0, "kind": "stamp"}]},
+    {"id": "edge", "name": "WHAT IT DOES NOT SAY", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["Drop the no-gaps rule, and the rational quaternions pass every other test, yet leave holes everywhere.", "去掉“没有缺口”这一条，有理四元数能通过其余每一关，却处处留洞。"],
+      ["The rules, fewest columns included, are our model. Calling the Born weight a probability is a reading, not a proof.", "这套规则，连同“栏数最少”，是我们的模型；把玻恩权重叫作概率，是一种读法，不是证明。"]
+    ]},
+    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.4, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
+      ["Geometric Intuition of Quantum Computing, chapter thirty-nine.", "《量子计算的几何直觉》· 第三十九章"]
+    ], "cues": [{"line": 0, "at": 0.3, "kind": "chime"}]}
+  ]
+}

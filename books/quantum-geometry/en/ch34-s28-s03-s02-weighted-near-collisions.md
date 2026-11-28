@@ -389,6 +389,28 @@ Under RH, group multiplicities by distinct positive ordinate and use $w_\gamma=m
 
 Hence $R_1(\eta)\ll(\log X+1)/X$. The fixed-difference bound gives at most $p^2D_{p-1}R_1(\eta)$ for the part of $E_p(\eta)$ at residual degree exactly one. With the same cutoff $X=e^{-K}T^\beta$ for fixed $K$ and $0<\beta<1$, and with $p\asymp X\log X$, the diagonal estimate gives an exponential saving relative to $p!V^p$, since $V\asymp\log X/X$ and the extra factor of order $p$ can be absorbed. Growing residual degrees still require an arithmetic estimate.
 
+## A growing cutoff for residual degree {#growing-residual-degree}
+
+Let $E_{p,\le D}(\eta)$ be the part of $E_p(\eta)$ with at most $D$ residual occurrences on each side, where $0\le D\le p$. Every such pair shares at least $p-D$ occurrences. Write $W=\sum_jw_j$ and $V=\sum_jw_j^2>0$. For nonnegative weights, dropping the frequency condition and applying the common-count bound gives
+
+$
+E_{p,\le D}(\eta)\le\binom pD^{\!2}W^{2D}D_{p-D}.
+
+$
+
+Thus a bound at the single degree $k=p-D$ suffices. If $D_{p-D}\le A e^{-c(p-D)}(p-D)!V^{p-D}$, cancel one binomial factor against $p!$, and bound the other by $p^D/D!$. With $x=p e^c W^2/V$ this gives
+
+$
+\frac{E_{p,\le D}(\eta)}{p!V^p}
+\le A e^{-cp}\frac{x^D}{(D!)^2}
+\le A e^{-cp}\rho^{-D}\exp(2\sqrt{\rho x}),\qquad \rho>0 .
+
+$
+
+The last inequality follows by retaining the degree-$D$ term of the exponential series at $\sqrt{\rho x}$ and squaring. The frequency resolution does not enter either bound. [Lean proof of the common-count bound](lean:D5/S3/Fourier/Concentration/FiniteMultinomialOverlap.weighted_overlap_le_diagonal)
+
+For the ζ tail above, take $X=e^{-K}T^\beta$ and $p\asymp X\log X$ with $K$ and $0<\beta<1$ fixed. Under RH and the stated multiplicity estimate, $W^2/V=O(p(\log T)^2)$. The diagonal estimate holds with the same $A,c>0$ for all $p/2\le k\le p$. The band $(X,CX]$ supplies at least a fixed multiple of $p$ coordinates with $kw_j^2/V$ bounded below uniformly for these $k$. The factor $O(\sqrt{k})$ from Stirling is absorbed into the exponential. Put $L=\log T$ and $\rho=(L\log L)^{-2}$. Then $2\sqrt{\rho x}=O(p/\log L)$, and for $D\le\varepsilon p/\log L$ the cost $D\log(1/\rho)$ is at most $(2+o(1))\varepsilon p$. Any fixed $0<\varepsilon<c/2$ gives an exponential saving for this entire block, uniformly in $\eta$. Controlling the remaining near-collision mass for the actual ordinates requires an estimate above that cutoff. [Multiplicity input, Theorem 1 and §7](https://arxiv.org/abs/2306.04799)
+
 ## Higher residual degrees with pointwise matchings {#matched-residual-occupations}
 
 After removing shared occurrences coordinate by coordinate, each side has $d$ frequencies left. If they can be paired with every discrepancy at most $\eta$, the weight of such residuals can be estimated from the weight of single close pairs. Words with the same occurrence counts represent the same count vector.
@@ -512,6 +534,56 @@ If every $\rho w_j\le1$, the product is at most $\exp(4\rho^2\sum_j w_j^2)$. The
 
 [Lean proof of the disjoint coefficient bound](lean:D5/S3/Fourier/Concentration/DisjointCharacterEnvelope.coefficient_envelope)
 
+### Signed truncation remainder for conjugate phases
+
+For the conjugate weights above, write $C_T=[x^d]e^{Sx}\prod_{j\in T}(e^{-A_jx}-1)$. Put $B_T=0$ for $|T|>d$, and otherwise define
+$$
+B_T=\left(\prod_{j\in T}w_j\right)\frac{(|S|+\sum_{j\in T}w_j)^{d-|T|}}{(d-|T|)!}.
+$$
+Retaining the signs of the individual subsets gives the real identity and degree-sensitive bound
+$$
+[x^dy^d]Q_k=\sum_{\substack{T\subseteq J\\|T|\le d}}(-1)^{|T|}|C_T|^2,\qquad |C_T|\le B_T.
+$$
+The right-axis correction is the negative of the conjugate left-axis correction, so each subset gives the indicated signed square. The norm of the local exponential tail coefficient at degree $n\ge1$ is at most $w_j^n/(n-1)!$, giving coefficientwise domination by $w_j x e^{w_j x}$. The Cauchy product preserves this nonnegative bound. Multiplication by $e^{|S|x}$ and removal of the $|T|$ extracted powers of $x$ give $B_T$. For example, at $d=1$ the mixed coefficient is $|S|^2-\sum_j w_j^2$, and the entire contribution is nonpositive when $S=0$.
+
+For any natural number $K$, subtract the signed sum over $|T|\le\min(d,K)$ from the mixed coefficient. The remainder $R_K$ satisfies
+$$
+-\!\sum_{\substack{T\subseteq J\\K<|T|\le d,\ |T|\text{ odd}}}B_T^2\le R_K\le
+\sum_{\substack{T\subseteq J\\K<|T|\le d,\ |T|\text{ even}}}B_T^2.
+$$
+The exact remainder is the sum of the omitted even-cardinality squares minus the sum of the odd-cardinality squares. It vanishes for $K\ge d$. Multiplying by nonnegative Fourier weights and summing preserves the computed negative contributions. This gives a degree-sensitive refinement when applying the Fejér band estimate below. Bounding the high-degree subset squares and the exceptional-character weight for the actual ζ ordinates still requires an arithmetic estimate. [Lean proof of the signed expansion](lean:D5/S3/Fourier/Concentration/DisjointCharacterRemainder.signed_overlap_expansion) [Lean proof of the parity remainder](lean:D5/S3/Fourier/Concentration/DisjointCharacterRemainder.signed_overlap_remainder)
+
+#### Centered coefficient bounds with a quadratic exponential
+
+Keep the definition of $C_T$ and set $k_T=|T|$, $n=d-k_T$, $U_T=S-\frac12\sum_{j\in T}A_j$ and $V_T=\sum_{j\in T}w_j^2$. For $k_T\le d$ there is also the bound
+$$
+|C_T|\le\left(\prod_{j\in T}w_j\right)\sum_{m=0}^{\lfloor n/2\rfloor}\frac{|U_T|^{n-2m}(V_T/24)^m}{(n-2m)!m!}.
+$$
+This retains the centered phase sum and squared weights of the selected subset. The local difference satisfies
+$$
+e^{-A_jx}-1=-A_j x e^{-A_j x/2}\sum_{m\ge0}\frac{(A_jx/2)^{2m}}{(2m+1)!}.
+$$
+The inequality $6^m m!\le(2m+1)!$ bounds the norm of each local even coefficient by the corresponding coefficient of $e^{w_j^2 x^2/24}$. Extracting the $k_T$ linear factors, combining the phase exponentials, and majorizing the Cauchy product give the degree-$n$ coefficient of $e^{|U_T|x+V_T x^2/24}$. The original coefficient is zero if $k_T>d$. The bound is exact for $n=0$ or $n=1$. If $U_T=0$ and $n$ is odd, the coefficient vanishes. For the general exponential parameter $c$ in place of $S$, a singleton $T=\{j\}$ with $A_j\ne0$ and $c=A_j/2$ gives the degree-$3$ norm $w_j^3/24$, attaining equality for the constant $1/24$ in the quadratic majorant. [Power series for hyperbolic sine](https://dlmf.nist.gov/4.33.E2)
+
+Apply this estimate to the odd and even remainder budgets above, taking the smaller bound with $B_T$ for each subset. The actual ζ tail still requires estimates for the distribution of the subset-centered phase sums with the character weights, and for their aggregate remainder at growing degree. [Lean proof of the centered overlap bound](lean:D5/S3/Fourier/Concentration/CenteredDisjointCharacterBound.centered_overlap_bound)
+
+#### The signed principal sum and its explicit error
+
+The centered even factors have constant coefficient one. With the preceding notation, for $|T|\le d$ define
+$$
+P_T=\left(\prod_{j\in T}(-A_j)\right)\frac{U_T^n}{n!},\qquad h_T=\frac{|U_T|^n}{n!},\qquad H_T=[x^n]e^{|U_T|x+V_T x^2/24},\qquad A_T=\prod_{j\in T}w_j.
+$$
+The same coefficientwise domination holds after subtracting one from the product of even factors and its real quadratic exponential majorant. Consequently
+$$
+|C_T-P_T|\le A_T(H_T-h_T),\qquad
+\big||C_T|^2-|P_T|^2\big|\le A_T^2(H_T^2-h_T^2).
+$$
+For the second inequality, multiply the reverse triangle bound on the difference of the two norms by their sum, which is at most $A_T(H_T+h_T)$. Combining the local estimate with the signed expansion gives
+$$
+\left|[x^dy^d]Q_k-\sum_{\substack{T\subseteq J\\|T|\le d}}(-1)^{|T|}|P_T|^2\right|\le\sum_{\substack{T\subseteq J\\|T|\le d}}A_T^2(H_T^2-h_T^2).
+$$
+The terms have zero error for $d-|T|=0,1$. The empty subset also has zero error. In particular the entire approximation is exact for $d\le2$. The inequality holds for each character and can be averaged using positive Fourier weights. Bounding the alternating principal sum and the aggregate error at the required ζ-zero scale remains open. [Lean principal coefficient proof](lean:D5/S3/Fourier/Concentration/CenteredDisjointPrincipal.centered_principal_remainder) [Lean mixed error proof](lean:D5/S3/Fourier/Concentration/CenteredDisjointPrincipal.mixed_centered_principal_error)
+
 ### Bounding a cyclic band with nonnegative Fourier weights
 
 Let $R_H$ be the residues of the integers in $[-H,H]$. For a nonnegative residue mass $M(r)$, use the negative character in $\widehat M(k)=\sum_rM(r)\chi_k(-r)$ and put $B_N(k)=\sum_{j=0}^{N-1}\chi_k(j)$. For integers $N>H\ge0$,
@@ -541,6 +613,97 @@ $$
 For $0\le r<q$, the only possible integer differences of prefix indices reducing to $r$ are $r$ and $r-q$. The ordered pair count $c_r$ is therefore $(N-r)_++(N-(q-r))_+$. Character orthogonality gives $\sum_k|B_N(k)|^4=q\sum_r c_r^2$. When the square is expanded, both counts are positive on $q-N+1\le r<N$. The two lists of counts run in opposite orders there, giving the cross term $2\sum_{j=1}^m j(m+1-j)=m(m+1)(m+2)/3$. This term vanishes when $q\ge 2N-1$. When $N=q$, all the weight lies at frequency zero.
 
 For an exceptional set $E$, Cauchy–Schwarz gives $(\sum_{k\in E}\nu(k))^2\le |E|\sum_k\nu(k)^2$. If $E$ excludes frequency zero, subtract $\nu(0)^2=(N/q)^2$ from the sum of squares on the right. Arithmetic estimates must still determine which frequencies of the actual ζ-zero sum exceed a given threshold at the required order and how many there are.
+
+### Minimum squared mass for one spatial mode
+
+Take $q>1$ and $c_k=\cos(2\pi k/q)$. Character orthogonality gives these values mean zero, and their maximum is one. Among nonnegative probability weights $w(k)$ with $\sum_k w(k)c_k\ge a$ for $0\le a\le1$, the minimum squared mass is attained by weights of the form
+
+$$
+u_t(k)=\max\{0,1-t(1-c_k)\},\qquad
+v_t(k)=\frac{u_t(k)}{\sum_j u_t(j)},\qquad t\ge0.
+$$
+
+At $t=0$ the weights are uniform and the moment is zero. For sufficiently large $t$, all entries with $c_k<1$ are clipped to zero and the moment is one. The denominator is always at least one, so continuity yields a finite parameter attaining exactly $a$. For any feasible $w$, the raw affine weights have nonnegative inner product with $w-v_t$ by equal mass and the moment ordering. Clipping can only increase that inner product. Expanding the squares gives $\sum_k w(k)^2-\sum_k v_t(k)^2\ge\sum_k(w(k)-v_t(k))^2$, which proves uniqueness. [Simplex projection with a linear constraint, Zhou and Liu, equation (3.4)](https://arxiv.org/html/2310.10388v3#S3.E4X)
+
+Write $E(w)=\sum_k w(k)^2$, $M(w)=\sum_k w(k)c_k$, and $Z=\sum_k u_t(k)$. For any real weights $w$ of total mass one, expanding the squares gives the exact remainder
+$$
+E(w)-E(v_t)
+=\sum_k(w(k)-v_t(k))^2+
+\frac{2}{Z}\left[t(M(w)-M(v_t))
++\sum_k\bigl(t(1-c_k)-1\bigr)_+w(k)\right].
+$$
+The last term retains the clipped negative weights. One can take $t\le\max(\{0\}\cup\{(1-c_k)^{-1}:c_k<1\})$.
+
+[Lean proof of the one-moment optimum and exact remainder](lean:D5/S3/Fourier/Concentration/ClippedMomentWeights.exists_clipped_moment_minimizer)
+
+Modulo four, $c=(1,0,-1,0)$. For $0\le a\le1/2$, the optimizer is $(1+2a,1,1-2a,1)/4$ and the minimum squared mass is $(1+2a^2)/4$. For $1/2\le a\le1$, the optimizer is $(a,(1-a)/2,0,(1-a)/2)$ and the minimum is $a^2+(1-a)^2/2$. The formulas agree at $a=1/2$. This minimum gives a benchmark for the squared-mass coefficient in the exceptional-set bound under one spatial-mode constraint. A full spatial band imposes joint constraints, and the cardinality of the actual ζ-zero exceptional set needs an arithmetic estimate.
+
+### The first clipping threshold for two spatial modes
+
+Take $q\ge5$ and write $c_k=\cos(2\pi k/q)$, $d_k=\cos(4\pi k/q)$, and $s_k=c_k+d_k$. Let $m_q=\min_k s_k$ and set
+$$
+a_q=-\frac{1}{2m_q},\qquad v_k=\frac{1+2as_k}{q},\qquad L=\frac{1+4a^2}{q}.
+$$
+For every real $a$, the vector $v$ has mass one and both real moments equal $a$. For $a\ge0$, its entries are all nonnegative exactly when $a\le a_q$. For $a\ge0$, a nonnegative probability weight with both moments at least $a$ has squared mass $L$ exactly when it equals $v$. For these nonnegative thresholds, equality is attainable exactly for $a\le a_q$. For any real mass-one vector $w$, write $M_j(w)$ for its $j$th real moment. The exact remainder holds for every real $a$
+$$
+\sum_k w_k^2-L
+=\sum_k(w_k-v_k)^2+\frac{4a}{q}\bigl(M_1(w)+M_2(w)-2a\bigr).
+$$
+This follows from the orthogonality of the two cosines and expansion of the squares. If $a>a_q$, at least one $v_k<0$. For a nonnegative probability weight $w$ satisfying both moment bounds, the moment term is nonnegative. The squared distance at the negative coordinates then gives $\sum_k w_k^2\ge L+\sum_k\max(0,-v_k)^2>L$. The exact optimum after clipping remains open for general moduli.
+
+The double-angle formula gives $s_k=2(c_k+1/4)^2-9/8$. Niven’s theorem excludes $c_k=-1/4$ because the angle is a rational multiple of $\pi$. Hence $m_q>-9/8$. Round the angle with cosine $-1/4$ to the nearest grid point. The error is at most $\pi/q$, so $m_q+9/8\le 2(\pi/q)^2$. The values $s_k$ have mean zero and mean square one. Averaging $(2-s_k)(s_k-m_q)\ge0$ gives $m_q\le-1/2$. Combining the bounds gives
+$$
+0<a_q-\frac49\le\frac{16\pi^2}{9q^2}.
+$$
+Thus $4/9$ is a uniform lower bound for the threshold across moduli. The result controls the squared mass of finite weights. The exceptional frequencies for actual high-order ζ-zero harmonics still require an arithmetic estimate. [Lean proof of the first clipping threshold](lean:D5/S3/Fourier/Concentration/FirstCosineClipping.first_cosine_clipping)
+
+### Minimum squared mass for two spatial modes modulo six
+
+On the six residue classes, write $M_j(w)=\sum_{k=0}^5w_k\cos(j\pi k/3)$ and $E(w)=\sum_{k=0}^5w_k^2$. Take $0\le a\le1$. Among nonnegative probability weights satisfying both $M_1(w)\ge a$ and $M_2(w)\ge a$, the unique minimizer $v$ and its squared mass are
+
+$$
+\begin{aligned}
+v&=
+\begin{cases}
+(1+4a,1,1-2a,1,1-2a,1)/6,& a\le1/2,\\
+(a,(1-a)/3,0,(1-a)/3,0,(1-a)/3),& a>1/2,
+\end{cases}\\
+E(v)&=
+\begin{cases}
+(1+4a^2)/6,& a\le1/2,\\
+a^2+(1-a)^2/3,& a>1/2.
+\end{cases}
+\end{aligned}
+$$
+
+Write $c_k=\cos(\pi k/3)$ and $d_k=\cos(2\pi k/3)$. On each set where $c_k+d_k$ is constant, the values of $c_k-d_k$ sum to zero. Minimizing squared mass for the combined readout $c_k+d_k$ at threshold $2a$ therefore gives $M_1(v)=M_2(v)=a$. The affine weights at residues $2,4$ are clipped to zero as the threshold passes $1/2$. Both formulas agree at that boundary. [Lean proof of the modulo-six optimum and one-mode comparison](lean:D5/S3/Fourier/Concentration/SixResidueMomentOptimum.six_two_mode_optimum)
+
+For any real weights $w$ of total mass one, set $m=M_1(w)+M_2(w)-2a$. The exact remainder is
+
+$$
+E(w)-E(v)-E(w-v)=
+\begin{cases}
+(2a/3)m,& a\le1/2,\\
+((4a-1)/3)m+(2a-1)(w_2+w_4),& a>1/2.
+\end{cases}
+$$
+
+For nonnegative probability weights $w$, the condition $M_1(w)+M_2(w)\ge2a$ implies $E(w)-E(v)\ge\sum_k(w_k-v_k)^2$, so every weight attaining the minimum is equal to $v$. For $0<a<1$, the optimizer $p$ under the first constraint alone has $M_1(p)=a$ and $M_2(p)<a$. The second constraint excludes this optimizer at every interior threshold.
+
+The vector $v$ also occurs as the normalized Fourier weights of a nonnegative spatial kernel modulo six. The weights are invariant under $k\mapsto-k$. Their third real moment $M_3(v)$ equals zero in the first regime and $2a-1$ in the second. Fourier inversion gives $F(0)=1$, $F(\pm1)=F(\pm2)=a$, and $F(3)=M_3(v)\ge0$. This gives the optimal squared-mass coefficient for this band modulo six. Other moduli require checking the level sets of the combined readout, and the exceptional frequencies of the actual ζ zeros still require an arithmetic estimate.
+
+### Failure of a shared cutoff for two modes
+
+Let $q\ge7$ and write $c_k=\cos(2\pi k/q)$, $d_k=\cos(4\pi k/q)$, $s_k=c_k+d_k$, and $x_+=\max(0,x)$. The squared readout and the zero cutoff give two signed sums:
+
+$$
+\sum_{k\bmod q}(c_k-d_k)s_k^2=\frac q4,\qquad
+\sum_{k\bmod q}(c_k-d_k)(s_k)_+>0.
+$$
+
+The double-angle identity gives $s_k=(2c_k-1)(c_k+1)$ and $c_k-d_k=(1-c_k)(2c_k+1)$. Where $s_k>0$, we have $c_k>1/2$, so every clipped term is nonnegative. At $k=1$, the angle lies in $(0,\pi/3)$, giving $1/2<c_1<1$ and a strictly positive term. Since $s_0=2$, the normalized weights $v_k=(s_k)_+/\sum_i(s_i)_+$ have a positive denominator. At a threshold equal to the average of their moments, the combined readout attains the required sum and the second mode falls below the threshold.
+
+Set $z_k=e^{2\pi i k/q}$ and expand $(c_k-d_k)s_k^2$ in powers of $z_k$, grouping terms by exponent. Both constant terms come from $c_k^2d_k$ and each has coefficient $1/8$. The other exponents have absolute value from $1$ to $6$, so character orthogonality cancels them when summing modulo $q\ge7$. If $c_k-d_k$ summed to zero on every level set of $s_k$, the weighted sum with $s_k^2$ would also vanish. Grouping by exponent and retaining the coefficients follows the step in Alpöge's exponential Dirichlet-series argument that organizes product terms by their summed exponent. [Alpöge's exponential Dirichlet-series proof](https://github.com/the-omega-institute/riemann-hypothesis/blob/c7d25b3bfd7906388bb8eb0774e027a2b756a7b6/src/Development/AbelianVarietyTheory/Proofs/AdelicLatticeProofs/LandauSummableOfExpDirichletSeriesEntire.lean#L84) [Lean proof of the two imbalance formulas](lean:D5/S3/Fourier/Concentration/AggregateCosineBalance.aggregate_cosine_imbalance)
 
 ### Fourier weight in a short time range
 
@@ -598,6 +761,197 @@ $$
 \log M\ \ge\ p\log(N/p)\ \gtrsim\ T^\beta(\log T)^2,
 $$
 using $M\ge(N/p)^p$ from the product formula for the multiset coefficient. The frequencies $g_\gamma=\gamma/r$ lie in a band of width at most $T/r$. For each fixed $c>0$ and sufficiently large $T$, distinct degree-$p$ vectors must therefore collide within resolution $\exp(-cT^\beta\log T)$. The needed arithmetic estimate must control the total weight of those pairs and allow individual near-collisions. [Proportion of simple zeros, §§1.1 and 8](https://arxiv.org/html/1802.10521)
+
+## Both cosine bounds are tight at the joint optimum
+
+For $q\ge4$, set $c_k=\cos(2\pi k/q)$ and $d_k=\cos(4\pi k/q)$. Fix $0<a<1$. The probability weight minimizing $\sum_k w_k^2$ under either one of the bounds $\sum_k w_k c_k\ge a$ and $\sum_k w_k d_k\ge a$ attains its own bound and gives the other moment strictly less than $a$. Every least-squared-mass weight subject to both bounds therefore has both moments equal to $a$.
+
+For a single readout $b$, the optimizer is proportional to $f(b_k)$ with $f(x)=\max(0,1-t(1-x))$ for some $t>0$. Any coordinate at the largest readout below $1$ has positive clipped weight. If its weight vanished, all positive weight would be on readout $1$, so the moment would be $1$. In the first-mode problem, $c_1$ is that largest readout. The identity $c_k-d_k=(1-c_k)(2c_k+1)$ changes sign at $c_k=-1/2$. The two readouts have zero mean, so subtracting $f(-1/2)$ from each weight in the signed sum preserves the sum. The products $(c_k-d_k)(f(c_k)-f(-1/2))$ are nonnegative and the product at $k=1$ is positive.
+
+For the second-mode problem on an even cycle, a half-turn preserves $d$ and negates $c$, so the first moment is zero. On an odd cycle, multiplication by two permutes the residues. Thus the sums of $f(c_k)^2$ and $f(d_k)^2$ agree. The convex function $f^2$ has derivative $2tf$. Its tangent inequality at $d_k$, evaluated at $c_k$, is strict at $k=1$, where $d_1<c_1$ and $f(c_1)>0$. Upon summation this gives $\sum_k(d_k-c_k)f(d_k)>0$. The largest value below $1$ is the same for $d$ and $c$ in this case because doubling is a permutation.
+
+If a joint optimizer had slack in one bound, it could move a small distance toward the optimizer for the other bound. The resulting probability weight would retain both bounds and strictly decrease the squared mass. The two moment equalities hold even after support changes. Determining the support and the exact optimal value after clipping for general moduli remains open, as does the arithmetic estimate for exceptional frequencies of the actual high-order ζ-zero harmonics. [Lean proof of the two tight constraints](lean:D5/S3/Fourier/Concentration/ActiveCosineConstraints.active_cosine_constraints)
+
+## The exact high-threshold interval for two cosine moments
+
+Fix an integer $q\ge4$. Write $c_k=\cos(2\pi k/q)$ and $d_k=2c_k^2-1$. The value $1$ occurs for $c$ only at zero. Among the other residues the largest value is $u=c_1$, and the smallest is $\ell=c_{\lfloor q/2\rfloor}$. Let $n_u,n_\ell$ be their multiplicities. Set
+$$
+g(x)=x-(2x^2-1),\qquad
+p=\frac{-g(\ell)}{g(u)-g(\ell)},\qquad
+b=pu+(1-p)\ell,\qquad r=\frac{1-a}{1-b}.
+$$
+The signs $g(\ell)<0<g(u)$ give $0<p<1$. Assign mass $1-r$ to zero, mass $rp$ uniformly to the residues of level $u$, and mass $r(1-p)$ uniformly to the residues of level $\ell$. This vector $v$ has both moments equal to $a$. Its squared mass is
+$$
+E(v)=(1-r)^2+r^2\left(\frac{p^2}{n_u}+\frac{(1-p)^2}{n_\ell}\right).
+$$
+
+To locate the exact interval of optimality, let $P_r(x)=\alpha_r+\beta_rx+\gamma_r(2x^2-1)$ interpolate the three per-residue weights at $1,u,\ell$. The coefficients and the values $P_r(x)$ are affine in $r$. At $r=0$ the polynomial is $(x-u)(x-\ell)/((1-u)(1-\ell))$. Since $u+\ell<0$, both moment coefficients are positive and $P_0(x)<0$ at every intermediate level. For each $f$ among $\beta_r,\gamma_r$ and $-P_r(x)$ at the intermediate levels, form the number $1-f(1)/f(0)$, with $f$ viewed as a function of $r$. Write $B$ for the maximum of these numbers and $1$, and set
+$$
+a_{\mathrm{crit}}=1-\frac{1-b}{B}.
+$$
+Then $b<a_{\mathrm{crit}}<1$. Whenever $a_{\mathrm{crit}}\le a\le1$, the interpolant has nonnegative moment coefficients and gives $v_k=\max(0,P_r(c_k))$. For every probability competitor $w$ with both moments at least $a$, expanding squares yields $E(w)-E(v)\ge\sum_k(w_k-v_k)^2$. Thus the candidate uniquely attains the displayed minimum throughout the closed interval.
+
+For $b<a<a_{\mathrm{crit}}$, all three supporting levels still have positive weights. A negative moment coefficient allows a small change within the support that increases the associated moment and preserves the other. A positive interpolant at an intermediate level allows a small amount of weight there, with a change on the three supporting levels that preserves both moments and the total mass. Either change gives a feasible weight with strictly smaller squared mass. At $a=b$, the candidate gives zero mass to residue zero. Mixing in a sufficiently small point mass there preserves feasibility and lowers squared mass because the two supports are disjoint. For any strict energy improvement, a further small mixture with the point mass at zero keeps the energy strictly lower and makes both moments strictly exceed $a$. The general optimizer below the cutoff and the arithmetic estimate for exceptional frequencies of the actual high-order ζ-zero harmonics remain open.
+
+[Lean proof of the exact interval and strict descent](lean:D5/S3/Fourier/Concentration/HighCosineThreshold.cyclic_high_threshold_certificate)
+
+For every $q\ge13$, the first intermediate level to meet the interpolant is $\cos(4\pi/q)$. Put $v_*=\cos(4\pi/q)$, $h=1-u$, $d=1-\ell$, $A=p/2$ and $C=(1-p)/n_\ell$. The upper level has exactly two residues. Write $S_\gamma$ for the slope of $\gamma_r$ and $S(x)$ for the slope of the certificate inequality at the intermediate level $x$. The Lagrange formula gives
+$$
+S_\gamma=1+\frac{Ad-Ch}{u-\ell},\qquad
+S(x)=S_\gamma+\frac{hd}{u-\ell}\left(\frac{A}{u-x}+\frac{C}{x-\ell}\right).
+$$
+When $A\ge C$, the slope of $\beta_r$ is at most $S_\gamma$. Reflect the grid angles into $[0,\pi]$. Every intermediate level then satisfies $x\le v_*$. For $x<v_*$, the sign of $S(v_*)-S(x)$ is the sign of
+$$
+A(v_*-\ell)(x-\ell)-C(u-v_*)(u-x).
+$$
+For even $q\ge14$, $\ell=-1$ and $x\ge-u$. Here $u>8/9$ gives $C/A\le g(u)<25/81$, while $(v_*-\ell)(x-\ell)/((u-v_*)(u-x))\ge u/(2u+1)>8/25$. For odd $q\ge13$, put $w=\cos(\pi/q)$. Then $\ell=-w$ and $x-\ell\ge2w(1-u)$. Using $\pi^2<10$ and $1-\cos t\le t^2/2$ gives $C/A<2/5$ and the same ratio exceeds $19/40$. Both comparisons make $v_*$ the unique contact level and leave both moment coefficients positive there.
+
+If $r_s=(1-s)/(1-b)$, the affine interpolation value satisfies
+$$
+P_{r_s}(v_*)=P_0(v_*)\frac{s-a_{\mathrm{crit}}}{1-a_{\mathrm{crit}}},\qquad P_0(v_*)<0.
+$$
+The sign becomes positive as $s$ decreases below the cutoff. The uniform onset at thirteen is sharp. At $q=12$ the lower intermediate level $-u$ has the larger slope, since $g(u)(2u+1)=1>u$ at $u=\sqrt{3}/2$. At that cutoff the interpolant is still negative at $v_*$.
+
+The quantities $u,\ell,p$ tend to $1,-1,1$ respectively. Since $1-p=h(2u+1)/(g(u)-g(\ell))$, one obtains $(1-b)/h\to4$. The term $h/(u-v_*)=1/(2u+1)$ retains a nonzero contribution in the slope. Substitution gives $B=S(v_*)\to5/3$. Using $q^2h\to 2\pi^2$, the high-threshold interval has width
+$$
+q^2(1-a_{\mathrm{crit}}(q))\longrightarrow\frac{24\pi^2}{5}.
+$$
+
+[Lean proof of first contact and the affine crossing](lean:D5/S3/Fourier/Asymptotics/HighCosineThresholdLimit.cyclic_threshold_first_contact) · [Lean proof of the modulus-twelve exception](lean:D5/S3/Fourier/Asymptotics/HighCosineThresholdLimit.cyclic_threshold_twelve_no_contact) · [Lean proof of the sharp width limit](lean:D5/S3/Fourier/Asymptotics/HighCosineThresholdLimit.cyclic_criticalThreshold_limit)
+
+## Support thresholds for the integer-lattice minimum
+
+At large moduli the quadratic deficit of the second cosine near the origin leads to an integer-lattice problem. Fix a second-moment budget $m\ge0$ and minimize $\sum_j w_j^2$ subject to $\sum_j w_j=1$, $w_j\ge0$, and $\sum_j j^2 w_j\le m$. The indices range over $\mathbb Z$, with a convergent sum for the second moment.
+
+For each positive integer $n$, precisely the budgets in $[(n^2-1)/5,n(n+2)/5]$ admit a radius parameter $n^2\le t\le(n+1)^2$ for which the minimizing weights are
+$$
+w_j=\frac{(t-j^2)_+}{Z},\qquad
+Z=\sum_{|j|\le n}(t-j^2)>0.
+$$
+Their second moment is exactly $m$. The two budget endpoints correspond to $t=n^2$ and $t=(n+1)^2$. Only the sites $|j|\le n-1$ have positive weight at the lower endpoint. Above it the support expands to $|j|\le n$ and retains that radius through the upper endpoint. The closed intervals meet at their endpoints and cover all $m\ge0$. At $m=0$ the entire mass is at zero.
+
+The candidate's second moment is a ratio of finite sums. Substituting the two endpoints for $t$ and using the sums of squares and fourth powers gives the two budget endpoints. Continuity gives the intermediate budgets. For any nonnegative law $v$ of mass one with convergent second moment $s$, expand the difference of squared masses. Split the cross term into the contribution from $(t-j^2)/Z$ and the correction outside the support to obtain
+$$
+\sum_j v_j^2-\sum_j w_j^2
+= \sum_j(v_j-w_j)^2+\frac{2(m-s)}{Z}
+  +\frac{2}{Z}\sum_j (j^2-t)_+v_j.
+$$
+The last term is summable and nonnegative. When $s\le m$, the identity gives strict uniqueness of the weights. Since $t\ge1$, their values $w_0=t/Z$ and $w_0-w_1=1/Z$ also determine $t$ and $Z$. The adjacent closed intervals give the same weights and parameters at their shared endpoint. The half-open condition $(n^2-1)/5\le m<n(n+2)/5$ selects the unique index $n=\lfloor\sqrt{5m+1}\rfloor$. On the first interval $0\le m\le3/5$, the three possible sites have weights $1-m$ at zero and $m/2$ at each neighbor. In the second-harmonic scale $\lambda=8\pi^2m$, the upper endpoint is exactly $24\pi^2/5$. A quantitative transfer of the lattice minimum back to the finite cycle has to account for the second cosine also approaching $1$ near the antipode.
+
+[Lean proof of the closed-interval support and exact remainder](lean:D5/S3/Fourier/Asymptotics/LatticeSquareMomentActivation.exists_lattice_square_moment_minimizer_on_interval) · [Lean proof of the global half-open classification](lean:D5/S3/Fourier/Asymptotics/LatticeSquareMomentActivation.exists_lattice_square_moment_minimizer)
+
+### The finite cyclic minimum converges to the lattice minimum
+
+Fix $\lambda\ge0$ and set $m=\lambda/(8\pi^2)$ and $a=1-\lambda/q^2$. Write $L(m)$ for the lattice minimum above and $E_q(a)$ for the minimum squared mass on the cycle with both cosine moments at least $a$. If $m$ belongs to the interval indexed by $n$, let $R$ be its support radius. At the lower endpoint $R=n-1$, and elsewhere $R=n$. When $q>2R$, the cyclic minimum is attained and
+$$
+0\le L(m)-E_q(a)\le \frac{2t}{Z}\frac{\lambda}{q^2}\le\frac{2\lambda}{q^2}.
+$$
+For any nonnegative cyclic weight $v$ of mass one, let $\bar i$ be the centered integer representative of the residue $i$. Write $M_1(v),M_2(v)$ for its cosine moments and put $S_1=2t(M_1(v)-a)/Z$ and $S_2=(q/(2\pi))^2(M_2(v)-a)/Z$. With the same lattice minimizer $w$,
+$$
+\sum_i(v_i-w_{\bar i})^2+S_1+S_2
+\le\sum_i v_i^2-L(m)+\frac{2t}{Z}\frac{\lambda}{q^2}.
+$$
+
+When $q>2R$ the lattice support embeds in the cycle. The inequality $1-\cos x\le x^2/2$ bounds the two deficits of the embedded law by $\lambda/(4q^2)$ and $\lambda/q^2$, so the law is feasible. The reverse bound accounts for weight near the antipode, where the second cosine also approaches $1$. Let $\theta=2\pi\bar i/q$. Throughout the centered range, $\theta^2\cos\theta\le\sin^2\theta$. This follows by sign when the cosine is nonpositive. Otherwise apply $\sin x\ge x\cos x$ to the positive half-angle and use $\cos^4(\theta/2)\ge\cos\theta$. Consequently the certificate
+$$
+P_i=\frac{t\cos\theta-(q\sin\theta/(2\pi))^2}{Z}
+$$
+lies below $w_{\bar i}$ at every residue. Expressing $2\sum_i v_iP_i$ in terms of the two cosine moments gives the contributions $S_1,S_2$. Use $(t-m)/Z=L(m)$ in the expansion of the squared distance. Both contributions are nonnegative for feasible weights. The zero site contributes $t$ to the normalizer $Z$, giving $t/Z\le1$.
+
+Each fixed budget lies in an interval of finite support radius. Thus $E_q(1-\lambda/q^2)$ tends to $L(\lambda/(8\pi^2))$ through all integer moduli. The arithmetic estimate for high-order frequencies of the actual ζ zeros remains open.
+
+[Lean proof of the centered cosine identity](lean:D5/S3/Fourier/Asymptotics/CyclicToLatticeComparison.cosineMoment_eq_centered) · [Lean proof of the quantitative comparison](lean:D5/S3/Fourier/Asymptotics/CyclicToLatticeComparison.cyclic_to_lattice_comparison)
+
+### Mass near the antipode
+
+The cyclic minimizers converge to the lattice law at every fixed centered site. The two tight constraints also determine a smaller amount of weight lying far from these sites. For a fixed $\lambda\ge0$, let $v_q$ be any cyclic minimizer at threshold $1-\lambda/q^2$. Set $c_i=\cos(2\pi i/q)$ and $A_q=\{i:c_i<0\}$. Through all integer moduli,
+$$
+q^2\sum_{i\in A_q}v_q(i)\longrightarrow \frac{3\lambda}{8},
+\qquad
+q^2\sum_{i\in A_q}(1+c_i)v_q(i)\longrightarrow 0.
+$$
+The second limit implies that for any fixed $\varepsilon>0$, the part of the rescaled mass on $A_q$ where $c_i\ge-1+\varepsilon$ tends to zero.
+
+On the fixed support of the lattice law, the first and second cosine deficits, multiplied by $q^2$, have limiting weighted sums $\lambda/4$ and $\lambda$. Over the full cycle each rescaled deficit sums to $\lambda$ because both constraints are tight. For $\lambda=0$ the pointwise upper bound one forces both moment equalities as soon as the weight is feasible. Nonnegativity then makes the second deficit outside the fixed support tend to zero. On $c_i\ge0$ it bounds $1-c_i$ after division by two, and on $c_i<0$ it bounds $1+c_i$ after the same division. Thus the first deficit over $A_q$ tends to $3\lambda/4$, and its difference from twice the rescaled mass tends to zero. This argument splits off a finite sum and bounds its remainder before passing to the limit. The related proof for character sums uses this method to compare a finite Dirichlet polynomial with a logarithmic derivative. [Character-sum tail bound](https://github.com/the-omega-institute/riemann-hypothesis/blob/ddf1d5f8a3acc1a641acba5ad7009c1fae6c1dd9/src/Formalism/GL3MeanSquares/GenusMeanAsymptotics/JacobiCharacterSums/TailFinal.lean#L32-L55)
+
+[Lean proof of the rescaled antipodal mass limit](lean:D5/S3/Fourier/Asymptotics/CyclicNegativeCosineMass.cyclic_negative_cosine_mass_limit)
+
+### The energy gap on even and odd cycles
+
+At fixed $\lambda>0$, put $m=\lambda/(8\pi^2)$ and write $w_j=(t-j^2)_+/Z$ for the lattice law. Its fourth moment is $m_4=\sum_j j^4w_j$. Along either parity of modulus,
+$$
+\lim_{q\to\infty} q^2\bigl(L(m)-E_q(1-\lambda/q^2)\bigr)
+=\frac2Z\left[(t-d^2)\frac{3\lambda}{8}+\frac{4\pi^2}{3}m_4\right],
+$$
+where $d=0$ for even $q$ and $d=1/2$ for odd $q$. The closest sampled cosine to $-1$ sits a half step from the antipode on odd cycles. This makes the odd coefficient smaller by $3\lambda/(16Z)$. The fourth moment contributes the same term on both parities.
+
+Write $h=2\pi/q$ and $C=-\cos(dh)$. In the quadratic certificate
+$$
+p_q(c)=\frac{t-h^{-2}(1-c^2)-\beta_q(1-c)}{Z},
+\qquad \beta_q=\frac{t-h^{-2}(1-C^2)}{1-C},
+$$
+one root is exactly $C$. The other root $\rho_q$ has $(1-\rho_q)/h^2\to t/2$. Factoring shows that the positive part is supported in a fixed front window, so the fourth-order cosine expansion can be summed there. At an activation endpoint the undisplaced weight of the boundary site is zero. Its squared positive part after perturbation is $O(h^4)$, so it does not change the coefficient at order $h^2$. [Cosine series](https://dlmf.nist.gov/4.19.E2)
+
+The certificate bounds the energy of every feasible weight by completing the square. To attain that bound to order $h^2$, adjust the mass at zero and its nearest neighbors and add mass at the closest antipodal level, imposing both moment equalities. The front corrections are $O(h^2)$ and the added mass is asymptotic to $3mh^2/4$. For a fixed positive budget the three adjusted front sites have positive limiting weights, so the construction is feasible for all sufficiently large moduli, including at activation endpoints. The statement concerns the finite cycle at fixed budget. The weighted high-order arithmetic estimate for the actual ζ ordinates remains open. [Derivation and hypotheses](https://github.com/the-omega-institute/trureturing/issues/33993#issuecomment-7146572104)
+
+[Lean proof of the parity energy correction](lean:D5/S3/Fourier/Asymptotics/CyclicParityLimit.cyclic_parity_correction)
+
+### Which sites carry positive mass
+
+For each fixed $\lambda>0$ and every sufficiently large modulus, the cyclic minimizer has positive mass exactly at the front sites $j^2\le t$ and at the closest antipodal sites. There is one closest antipodal site on an even cycle and two on an odd cycle. At a lattice activation boundary $t=N^2$, the limiting lattice weights at $\pm N$ are zero, but the two finite-cycle weights are positive and of order $q^{-2}$.
+
+To obtain an exact certificate, fit the weight as a linear combination of $1$, $1-c$, and $(1-c^2)/h^2$ on those sites, where $c=\cos(jh)$ and $h=2\pi/q$. Solve the three equations for the mass and the two deficits. The feature vectors at the center, a front neighbor, and an antipodal site are independent in the limit. At a square boundary, the first variation of the weight at $\pm N$ has a positive contribution from the change in the second moment on the front window. It also has a nonnegative contribution from the monic quadratic orthogonal to $1$ and $j^2$ there. The quadratic certificate is negative at the first omitted cosine on either side. Convexity then excludes the intervening residues, and completing the square certifies the unique minimum on the whole cycle. For the minimizing weight $v$, every feasible weight $w$ satisfies $E(w)-E(v)\ge\sum_i(w_i-v_i)^2$.
+
+The bound on how large $q$ must be depends on the fixed budget. The support statement concerns the two prescribed cosine constraints. [Lean proof of support and stability](lean:D5/S3/Fourier/Asymptotics/CyclicEventualSupport.cyclic_eventual_exact_support) · [Exact certificate and boundary calculation](https://github.com/the-omega-institute/trureturing/issues/34004#issuecomment-7147550923)
+
+### Where the front support changes on a finite cycle
+
+Fix an integer $N\ge2$ and write $h=2\pi/q$. Use the common cosine floor $1-2mh^2$. The lattice switch occurs at $m_N=(N^2-1)/5$. In a neighborhood of $m_N$, for sufficiently large $q$, the finite cycle switches at a single budget $m_{N,q}$. The nearest antipodal sites and the front sites $|j|\le N-1$ carry positive mass throughout the neighborhood. The sites $\pm N$ carry positive mass exactly when $m>m_{N,q}$. Along each parity,
+$$
+\frac{m_{N,q}-m_N}{h^2}
+\longrightarrow
+\frac{(N^2-1)(47-31N^2)}{420}+\frac{3(N^2-1)d^2}{20},
+\qquad d=\begin{cases}0& q\text{ even},\\[2pt]1/2& q\text{ odd}.\end{cases}
+$$
+Both coefficients are negative, so the boundary pair enters before the lattice budget is reached. The odd coefficient exceeds the even coefficient by $3(N^2-1)/80$.
+
+For a fixed candidate window, the moment right-hand side is affine in $m$. Fit the three cosine features on the larger window and define the switch by the zero of the weight at $N$. The slope of that weight tends to $(N^2-\bar x)/V>0$, where $x_j=j^2$, $\bar x$ is the mean of $x_j$ on $|j|\le N$, and $V=\sum_j(x_j-\bar x)^2$. Removing the two zero-weight rows leaves the same moment equations at the switch. For the smaller window, the evaluation at the omitted pair also has positive slope. The other front weights retain positive limits. The antipodal weights are positive at order $h^2$, while the first excluded cosine on each side has a strictly negative limit when the boundary pair is included in the test window. Convexity then controls the middle of the cycle. [Parametric quadratic programming, §4](https://doi.org/10.1016/S0005-1098(01)00174-1)
+
+For the shift, write $T=N^2$, $W_j=(T-x_j)/Z$ with $Z=\sum_j(T-x_j)$, and $m_4=\sum_j x_j^2W_j$. Let $r_j$ be the coefficient of $h^2$ in the front weight at budget $m_N$, and let $\mu=3m_N/4$ be the coefficient of the total antipodal weight. The quadratic $r_j+\mu W_j$ has zero total and first $x$-moment $K=m_4/3+(m_N-d^2)\mu$. Its leading coefficient is $1/(3Z)$. Eliminating the constant and linear terms gives
+$$
+\frac{r_N V}{T-\bar x}=K+\frac{m_4-m_N^2}{3}.
+$$
+The threshold shift is the negative of this ratio. The symmetric finite sums yield $m_4=(N^2-1)(3N^2-5)/35$ and give the displayed coefficient. The asymptotic keeps $N$ fixed. Small moduli can give positive weight on additional antipodal levels. [Lean proof of the switch and scaled displacement](lean:D5/S3/Fourier/Asymptotics/CyclicActivationShift.cyclic_activation_shift) · [Derivation and finite checks](https://github.com/the-omega-institute/trureturing/issues/34016#issuecomment-7148575133)
+
+The growth of the lattice radius leads to a separate question about uniform moment errors and the exact antipodal support. The [growing cyclic support analysis](ch34-s28-s03-s02-growing-cyclic-support.md) develops this regime.
+
+### Exact support away from the rear thresholds
+
+Fix the eventual parity $e\in\{0,1\}$ and suppose $N^5h^2\to K>0$. Put $Q=3K/20$. The rear window $S_l$ of index $l\ge0$ contains offsets from $-l-e/2$ through $l+e/2$ in unit steps, measured from the antipodal angle. Define
+
+$$
+T_0(l)=\frac{l(2l-1)(2l+1)}4,\qquad
+T_1(l)=l(l+1/2)(l+1).
+$$
+
+If $Q$ differs from every $T_e(l)$, there is a unique $l$ satisfying $T_e(l)<Q<T_e(l+1)$. For all sufficiently large $N$, the unique cyclic optimizer $v$ is the joint fit on the front sites $|j|\le N$ and the rear window $S_l$, extended by zero on all other sites. It is strictly positive at every site in these two windows, and both cosine moments equal $1-2mh^2$. For every feasible probability weight $w$,
+
+$$
+\sum_j w_j^2\ge\sum_j v_j^2+\sum_j(w_j-v_j)^2.
+$$
+
+Writing $R=l+e/2$, the limiting rear intercept is $B=(Q+(3/4)\sum_{r\in S_l}r^2)/|S_l|$. Finite summation gives
+
+$$
+\begin{aligned}
+\tfrac34\left(|S_l|R^2-\sum_{r\in S_l}r^2\right)&=T_e(l),\\
+\tfrac34\left(|S_l|(R+1)^2-\sum_{r\in S_l}r^2\right)&=T_e(l+1).
+\end{aligned}
+$$
+
+The strict cutoffs are therefore equivalent to $3R^2/4<B<3(R+1)^2/4$. The boundary limits give positive values at the last included sites of both windows and negative signed values at the first omitted sites. The fitted polynomial is convex in the sampled cosine, so these four signs control the full cyclic grid. The exact correspondence of grid sites transfers the fitted moment equations to the cyclic group, and the finite optimality certificate yields the squared-distance inequality.
+
+If $q/N^{5/2}\to\gamma>0$, then $Q=3\pi^2/(5\gamma^2)$. The first additional rear pair enters below $\gamma=2\pi/\sqrt5$ on even cycles and below $\gamma=\pi/\sqrt5$ on odd cycles. The same formulas classify every subsequent switch away from equality. At equality the limiting signed value of a rear level vanishes, leaving its activation unresolved. [Kernel-checked Lean proof](lean:D5/S3/Fourier/Asymptotics/CyclicGrowingSupport.eventual_strict_support_away_from_thresholds) · [Research and proof development](https://github.com/the-omega-institute/trureturing/issues/34029)
 
 ## Changing the height cutoff in a local statistic
 

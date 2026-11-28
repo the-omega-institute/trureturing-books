@@ -1,0 +1,36 @@
+{
+  "title": "No ruler, only comparisons: the quaternions",
+  "title_zh": "没有尺子，只有比较：四元数",
+  "summary": "Take away the ruler and its origin, and keep two moves: carry the step from y to x over onto z, and read how alike two points are, from 1 (the same point) down to 0. The unit quaternions obey every rule of the AXIOM-Ω comparison structure with the reading (1 + dot product)/2; for the five points 1, −1, i, j, k the reading table of ones, halves and two zeros has determinant 1/8, so these readings need five columns, and Lean checks that every noncommutative, chain-connected structure needs at least five. Lean also checks that a structure with exactly five columns, a reading that touches zero and no gaps in the limit is the unit quaternions, point for point, with any chosen point sent to 1. Two readings a quarter turn apart on the phase circle, squared and added, behave like a clock hand seen through two shadows: for the pair shown the sum stays 0.36 as the phase turns, and Lean checks that this ray kernel ignores the phase and equals the Born weight of two spinors. Two pairs with the same reading 0.8 have quotients with real part 0.6 and imaginary arrows of length 0.8; one turn lays one arrow on the other, and Lean checks that equal readings always let one multiplication on each side carry one pair onto the other. The axiom itself, the reading of the Born weight as a probability and the choice of the fewest columns are a model, not a proof; without the no-gaps rule the rational quaternions pass every other test.",
+  "summary_zh": "拿走尺子和它的原点，只留两个动作：把从 y 到 x 的那一步原样搬到 z 上；读出两点有多像，从 1（同一个点）到 0。单位四元数配上读数（1 + 点积）/2，守住 AXIOM-Ω 比较结构的全部规则；取 1、−1、i、j、k 五个点，由 1、一半和两个 0 组成的读数表行列式为 1/8，这些读数要五栏才写得下；Lean 检验了任何不交换、可用小步连通的结构都至少要五栏。Lean 还检验了：恰好五栏、读数能降到零、取极限没有缺口的结构，一点对一点就是单位四元数，挑哪个点都能送到 1。沿相位圆相隔四分之一圈读两次，平方相加，就像隔着两道影子看钟表指针：片中这一对，相位转动时和始终是 0.36；Lean 检验了这个射线核不理会相位，并等于两个旋量的玻恩权重。读数同为 0.8 的两对点，商的实部都是 0.6，虚部箭头长都是 0.8，转一下就叠在一起；Lean 检验了读数相同时，总有左右各乘一次把一对送到另一对。母公理本身、把玻恩权重读作概率、以及要求栏数最少，都是模型而不是证明；去掉“没有缺口”这一条，有理四元数能通过其余每一关。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-25",
+  "duration": "2:29",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · a ruler taken away, a five-column reading table, abstract points sent onto the unit quaternions, a clock hand read by two shadows beside a glass Bloch sphere, two imaginary arrows turned onto each other in a glass ball, rational points with gaps on a circle",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/AURICOmega/TernaryComparisonRankFive.five_le_of_hasFeatureRank",
+    "D5/S3/Quantum/AURICOmega/TernaryComparisonIsomorphism.exists_unitQuaternion_equiv",
+    "D5/S3/Quantum/AURICOmega/QuaternionRayKernel.rayKernel_mul_phase_right",
+    "D5/S3/Quantum/AURICOmega/QuaternionRayKernel.rayKernel_eq_bornProbability_spinor",
+    "D5/S3/Quantum/AURICOmega/QuaternionTwoPointHomogeneity.exists_mul_mul_eq_of_kappa_eq"
+  ],
+  "solid": true,
+  "scripts": [
+    "viz/two-angle-addressing/model.js"
+  ],
+  "outputs": {
+    "narrated_720p": "quantum-geometry_axiom-omega-quaternions_720p_narrated.mp4",
+    "cover": "quantum-geometry_axiom-omega-quaternions_cover.jpg"
+  }
+}

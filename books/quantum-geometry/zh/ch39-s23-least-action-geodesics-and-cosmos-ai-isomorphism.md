@@ -128,6 +128,12 @@ $$
 第 1 款将单位态矢内积模长还原为球面余弦，利用柯西—施瓦茨与反余弦次可加性证出测地三角不等式（见 [第 7 章](ch07-geometric-time-and-speed-limits.md)）。第 2 款对正交对 $\frac{\pi}{2} = d_{\mathrm{FS}}(m_0, m_1) \le d_{\mathrm{FS}}(m_0, a) + d_{\mathrm{FS}}(a, m_1) \le \frac{2E\tau}{\hbar}$ 施用第 1 款三角不等式并求和 $\tau_i$ 即证（见 [§33.7](ch39-s08-universal-clock-and-gravitational-dilation.md)）。第 3、4、7（后半）款证明同 [@thm-ch39-tft-born-holonomy-krylov-and-schur-anchors] 第 1、7、4 款。第 5、6 款证明同 [@thm-ch39-nonlinear-ternion-representations-and-torsor] 第 3–4、2 款。第 7 款前半由 $H\psi = E\psi$ 推出幺正演化仅乘全局相位 $e^{-iEt}$，外积投影算符 $\lvert\psi\rangle\langle\psi\rvert$ 严格时间不变。完整证明由 Lean 内核检查。
 :::
 
+定理前三款合在一起，正好讲清“走最短的弧、迈均匀的步”：三角不等式说绕路不会更近，记录时长下界说弧上有限速，玻恩权重说每一步要付多少留存。下面的短片用一只玻璃球与一排偏振片把这三件事演一遍。
+
+::: {.film src="geodesic-attention"}
+**最短的弧，均匀的步（2 分 14 秒）。** 把态画成单位箭头：相距 $60^\circ$ 的两支白色箭头 $u$、$w$ 之间，青色的弧是最短的路，品红虚线的直线走到半路，箭头只剩长度 $\cos 30^\circ = 0.866$，已不是单位态。两个态的距离取 $d(u, v) = \arccos\lvert\langle u, v\rangle\rvert$：琥珀色的中转态 $v$ 偏离弧 $40^\circ$ 时，品红绕路 $d(u, v) + d(v, w) = 96.9^\circ$，大于直达的 $60.0^\circ$（[@thm-ch39-least-action-geodesics-and-cosmos-ai-anchors] 第 1 款）。两条正交记录 $m_0$、$m_1$ 相隔 $90^\circ$，拴在锚点 $a$ 上的琥珀色绳子要同时够到两头，锚点放在正中也至少要 $45^\circ$；若时间 $\tau$ 内从锚点至多转过 $E\tau/\hbar$，便有 $\tau \ge \pi\hbar/(4E)$（同一定理第 2 款）。一排偏振片每片放过重叠的平方（第 3 款）：分四步、每步 $15^\circ$ 转过 $60^\circ$，青色光束剩 $0.758$；空转三次再一下跳 $60^\circ$，只剩 $0.250$；八步、每步 $7.5^\circ$ 剩 $0.872$。片中的角是两支态箭头之间的夹角 $\alpha$，即正文旋转角 $\Delta\theta$ 的一半：片中的 $60^\circ$ 对应上方实验卡的 $120^\circ$，“不到 $90^\circ$”对应正文的 $\Theta < \pi$，每步漏失 $\sin^2\alpha$ 恰为本节矢高 $1 - \cos\Delta\theta$ 之半。航线与拴绳是比方；片数相同、总转角不到 $90^\circ$ 时均匀分步留存最多是本节的手工推导；把均匀的步读作好推理是 `MODEL`，步子再均匀也不保证答案正确，三元数场网络的大规模表现是开放问题 [@prob-ch39-tft-scale-and-seams]。片中读数都是屏幕上的计算，三条结论由 Lean 检验。
+:::
+
 ::: {.remark #rem-ch39-maupertuis-feynman-friston-amari-cot-literature title="莫培督—费曼最小作用量、自由能与最小描述长度、阿马里自然梯度对比蔡态量子费希尔度规及思维链自洽采样文献边界"}
 **文献归属与统计 / 量子费希尔度规精确边界声明。** 本节跨学科映射涉及的经典文献与严格数学适用范围如下：
 

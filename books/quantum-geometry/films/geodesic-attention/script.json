@@ -1,0 +1,41 @@
+{
+  "voice": "af_heart",
+  "speed": 0.94,
+  "say": {"Lean": "Leen", "h bar": "aitch bar", "tau": "tow"},
+  "music": {"bpm": 78, "progression": "d-minor"},
+  "scenes": [
+    {"id": "globe", "name": "THE GLOBE", "lead": 1.9, "tail": 0.5, "music": [1.0, 0.4, 0.3, 0.0, 0.1], "lines": [
+      ["On a flat map, a long flight looks bent. On the globe, it is the shortest arc.", "平面地图上，长途航线看着是弯的；放回地球仪上，它才是最短的那段弧。"],
+      ["Picture a quantum state as an arrow of length one. Then states live on a sphere, too.", "把一个量子态想成一支长度为一的箭头，态也就住在一个球面上。"],
+      ["So why assume the road between two states is a straight line?", "凭什么认为两个态之间的路是一条直线？"],
+      ["Halfway along it, the arrow is only zero point eight six six long. That is no state at all.", "走到直线的半路，箭头只剩 0.866 长——那根本不是一个态。"]
+    ], "cues": [{"line": 3, "at": 2.2, "kind": "glitch"}]},
+    {"id": "angle", "name": "THE DISTANCE", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.5, 0.5, 0.0, 0.2], "lines": [
+      ["So measure the distance between two states by the angle between their arrows.", "那就用箭头之间的夹角，来量两个态的距离。"],
+      ["These two are sixty degrees apart. Detour through a third state, and the trip grows to ninety-six point nine.", "这两个态相距 60°。中途绕到第三个态，路程就涨到 96.9°。"],
+      ["Lean checks this for any three unit states: a layover never makes the trip shorter.", "Lean 内核检验：任取三个单位态，中途转机从不让路程变短。"],
+      ["Between states, the shortest road is not a line. It is an arc.", "态与态之间，最短的路不是直线，而是弧。"]
+    ], "cues": [{"line": 2, "at": 0.8, "kind": "stamp"}]},
+    {"id": "leash", "name": "SPEED LIMIT", "lead": 0.5, "tail": 0.6, "music": [0.9, 0.7, 0.6, 0.2, 0.3], "lines": [
+      ["Now add a speed limit: in time tau, a state turns by at most E tau over h bar.", "再加一条限速：在时间 τ 内，态最多转过 Eτ/ħ。"],
+      ["Two orthogonal records sit ninety degrees apart. Tie a leash at any anchor; it must reach both.", "两条正交记录相隔 90°。在任一锚点拴一根绳，绳得同时够到两头。"],
+      ["The best anchor sits halfway, and even there the leash needs forty-five degrees.", "锚点放在正中最省，可即便如此，绳也至少要 45°。"],
+      ["Lean checks the consequence: tau is at least pi h bar over four E.", "Lean 内核检验这个推论：τ 至少是 πħ/(4E)。"]
+    ], "cues": [{"line": 3, "at": 1.0, "kind": "stamp"}]},
+    {"id": "steps", "name": "EVEN STEPS", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.8, 0.7, 0.4, 0.4], "lines": [
+      ["How should you walk the arc? Ask a beam of light passing through a row of polarizers.", "这段弧该怎么走？问问一束穿过一排偏振片的光。"],
+      ["Each filter lets through the square of the overlap. Lean checks that this is the Born weight.", "每片偏振片放过的，是重叠的平方。Lean 内核检验：这正是玻恩权重。"],
+      ["Turn sixty degrees in four even steps of fifteen: zero point seven five eight gets through.", "分四步、每步 15°，转过 60°：通过 0.758。"],
+      ["Idle three times, then leap sixty degrees at once: only a quarter survives. A leap is not bold; it is expensive.", "原地空转三次，最后一下猛跳 60°：只剩四分之一。跳步不是勇敢，是昂贵。"],
+      ["Same number of filters, total turn under ninety degrees: even steps always win. Twice as many half steps keep zero point eight seven two.", "片数相同、总转角不到 90°，均匀总是赢；步数加倍、步子减半，留下 0.872。"]
+    ], "cues": [{"line": 2, "at": 3.4, "kind": "chime"}, {"line": 3, "at": 3.0, "kind": "impact"}]},
+    {"id": "edge", "name": "WHAT IT DOES NOT SAY", "lead": 0.5, "tail": 0.6, "music": [1.0, 0.7, 0.6, 0.3, 0.3], "lines": [
+      ["The book reads even steps as a picture of good reasoning. That reading is a model, not a theorem.", "本书把均匀的步读作好推理的图像；这是一种模型读法，不是定理。"],
+      ["Keeping every step even does not make an answer right. A smooth drive can still end in the wrong town.", "步子再均匀，也不等于答案正确：车开得再平稳，也可能开错了城。"],
+      ["And whether ternion-field networks, built on this geometry, perform well at scale is still an open problem.", "以这套几何搭建的三元数场网络在大规模上表现如何，仍是开放问题。"]
+    ]},
+    {"id": "close", "name": "LEDGER", "lead": 0.5, "tail": 3.4, "music": [1.0, 0.6, 0.5, 0.3, 0.2], "lines": [
+      ["Geometric Intuition of Quantum Computing, chapter thirty-seven.", "《量子计算的几何直觉》· 第三十七章"]
+    ], "cues": [{"line": 0, "at": 0.3, "kind": "chime"}]}
+  ]
+}

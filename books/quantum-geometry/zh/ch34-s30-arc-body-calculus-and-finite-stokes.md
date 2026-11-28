@@ -151,6 +151,14 @@ $$
 
 取 $\epsilon=T/N$、$\sigma=\sigma_0$，$\Sigma_N$ 就是上文的 $\Sigma_{\mathrm{sag}}(\epsilon,\alpha)$：相区 I、II 对应第 1 款，相区 III 对应第 2 款，相区 IV 对应第 3 款。定理没有覆盖 $\alpha\le0$：$\alpha=0$、$\sigma=2\pi$ 时每一步都转满一圈，$\Sigma_N\equiv0$，所以第 3 款中的 $\alpha>0$ 不能去掉（手工推导）。定理也不涉及步长不等或符号随机的路径；上文关于伊藤修正项与粗糙路径理论的陈述，仍按各自的标注读作文献结果。
 
+下面这部短片把同一本账从头手算一遍：从转一下开始，一直算到三种极限。
+
+::: {.film src="sagitta-calculus"}
+**以旋代差：攒起来的矢高（2 分 25 秒）。** 圆上一点转过 $\theta$，横向走了青色的 $\sin\theta$，向下落了品红色的 $1-\cos\theta$；弓的图里，青色弓弦是长 $2\sin\theta$ 的弦，弦到弓背的品红色箭就是矢高，两部分合起来恰好落回圆上，$\cos^2\theta+\sin^2\theta=1$。$\theta=0.1$ 时下落 $0.0049958\approx\theta^2/2$。一百个等长步子的下落装进两个罐子：每步 $0.01$ 共 $0.005$，每步 $0.1$ 共 $0.4995835$。品红色曲线 $1-\cos\theta$ 夹在 $\theta^2/2-\theta^4/24$ 与 $\theta^2/2$ 之间的绿色带里，一百步的总账被夹在 $0.4995833$ 与 $0.5$ 之间（[@lem-ch34-accumulated-sagitta-bounds]）；对数坐标上 $\alpha=1, \frac34, \frac12, \frac13$ 的总账或下降、或停在 $\frac12$、或上升，正是 [@thm-ch34-accumulated-sagitta-phases] 的三个区间。$\alpha=0$、每步转满一圈的例子说明 $\alpha>0$ 不能去掉。弓与罐子是比方；把极限 $\frac12$ 读成伊藤修正项是文献结果，极小圆弧体微积分是本章的模型；片中数字都是屏幕上算出的，累计矢高的数字都取 $\sigma=T=1$。
+:::
+
+等步长定理只是第一本账；下面的注记让步长与划分都可以变化。
+
 ::: {.remark #rem-ch34-heap-recurrence-and-sagitta-sums title="流群递推、单步精确分解与任意划分上的矢高和（手工推导与文献结果）"}
 **流群递推。** 对 $S^3(1)$ 上的点列，下列三者等价：$x_{n+1} = [x_n, x_{n-1}, x_n]$；$x_n = g^n x_0$（$g = x_1\bar{x}_0$）；线性形式 $x_{n+1} = 2c\,x_n - x_{n-1}$（$c = \langle x_0, x_1\rangle$）。此时 $x_n = U_{n-1}(c)\,x_1 - U_{n-2}(c)\,x_0$（$U_k$ 为第二类切比雪夫多项式），即等速大圆测地线在整数时刻的采样，并且 $x_{n+1} - 2x_n + x_{n-1} = -2v\,x_n$（$v = 1 - c$）：离散加速度沿法向，大小为矢高的两倍。这些在实质上是经典结论（O. Loos, *Symmetric Spaces I*, Benjamin, 1969；J. C. Mason & D. C. Handscomb, *Chebyshev Polynomials*, 2003，`文献结果`）。对 $C^4$ 曲线 $x(t)$，递推残差满足
 

@@ -13,8 +13,8 @@ description: 发布一本书或整个书库的版本时使用：更新版本号�
 
 ## 自动发布
 
-- **Pages**：主干推送完成 CI 后或定时检查时，选择仍在主干历史中、比线上更新的最新已验证提交。自动发布间隔至少 20 分钟，失败的部署尝试也计入间隔。构建执行 `./tbook build all`，将 `_site/` 部署到 GitHub Pages。视频由站点同源托管，渲染失败会阻止发布。手动运行另做 `./tbook check`。首次使用需在 Settings → Pages → Source 选 “GitHub Actions”。
-- **CI**：每个 PR 与推送运行检查与构建（`ci.yml`，`media` 作业也构建视频，默认分支与 tag 的推送除外：那里由 `pages.yml` 与发版工作流构建），产物作为 artifact 上传，可下载审阅。
+- **Pages**：主干推送直接进入独占的发布队列。当前发布完成后，最新的待发提交从线上版本计算累计差异。实际出版在任意连续一小时最多启动十次，满额时等到名额到期后继续。Pages 先执行 `./tbook check`，再组装、部署 `_site/`。首次使用需在 Settings → Pages → Source 选 “GitHub Actions”。
+- **CI**：PR、手动和定时 CI 执行选中的检查与构建。PR 的必需检查在合并前完成。
 - **构建缓存**：输入没有变化的单元（HTML、PDF、EPUB、幻灯片、视频）不再构建。`pages.yml` 在 `main` 上（push 或手动运行）保存 Actions 缓存，键为存储内容摘要加运行号 `build-cache-v1-<sha256>-r<run id>-<run attempt>`，内容与恢复到的相同时不再保存；分支与 tag 上的构建只恢复。PR 运行既不恢复也不保存 Actions 缓存（防投毒），只从最近 5 个已发布的整站 Release 恢复；新仓库或缓存被清除时同样从 Release 恢复。视频不再单独发 Release。
 
 ## 每日预览
@@ -37,6 +37,7 @@ tag 是什么、哪种 tag 触发发版、推送后发生什么、与“从 Rele
    发布全部书时用 `v<日期或版本>`，例如 `v2026.11.08`、`v2026-11-08` 或 `v3.0.0`（模板仓库自身除外——那里的 `v*` 是模板版本）。
    只有语义化版本的预发布才标为 GitHub pre-release：单本书看 `book.toml` 的 `version`（如 `1.0.0-rc.1`），全部书看 tag 中 `v` 之后的部分（如 `v3.0.0-rc.1`）；其他形式都是正式发布。日期写成 `YYYY.MM.DD`、`YYYY-MM-DD` 或 `YYYYMMDD`，月、日补零：以这样的日期开头的版本无论后面跟什么都是正式发布，同一天再发一次可用 `v2026.11.08-2`。不补零的 `v2026.1.5-2` 恰好是语义化版本的预发布，会标为 pre-release。
 5. `release.yml` 校验 tag 与 `book.toml` 版本一致，构建整个站点（未变的单元从缓存恢复，视频也在其中），先建草稿 Release，上传所选书的 PDF（屏幕版、印刷版）、EPUB、幻灯片 PDF 与全站的构建缓存（`cache-*.tar`、`build-cache.json`），全部上传后才发布；说明中列出所钉的 trureturing 提交与定理数。
+   开启 `[site].film_release_only` 时，工作流会渲染所选书的影片，在同一 Release 上传 `film.json` 列出的每种 MP4。MP4 由 `films` 任务按片长分成至多十个并行分片渲染，没改动的影片从上一次 Release 恢复。Pages 播放同源 MP3，Canvas 按音轨时钟绘制画面。
 6. 检查 Release 附件（读者下载与 `build-cache.json` 都在）与 Pages 上的下载链接和视频。
 7. （建议，只需一次）在 Settings → General → Releases 启用不可变 Release，发布后的附件与 tag 不能再改（`docs/VERIFICATION.md` §2）。
 

@@ -1,0 +1,29 @@
+{
+  "title": "The narrowest waist",
+  "title_zh": "最窄的腰",
+  "summary": "A width-three bridge graph is two nodes, M and N, joined by three bridges; signals enter on legs of sizes b and c and leave on legs of sizes a and d, and the whole graph is one matrix, the sum of three Kronecker products. Its rank counts the independent signals that get through. Three cuts bound it: the exits ad, the entrances bc and the bridges 3ac; for a = c = 2 and b = d = 3 they are 6, 6 and 12, so the narrowest waist is 6. Lean checks for all natural numbers a, b, c, d that the maximal rank never exceeds the minimal cut. Three bridges then route six inputs onto six different outputs, four straight across and one each through the other two bridges, so the rank is 6. Lean checks that for 0 < a ≤ b, 0 < c ≤ d with a² + b² ≤ 3ab and c² + d² ≤ 3cd the maximal rank equals the minimal cut, which equals min(ad, bc); here 4 + 9 = 13 ≤ 18. Rank says nothing about how evenly the signals share the load, the theorem covers this one small graph, not general tensor networks, and the Ryu–Takayanagi formula is a literature result not derived here.",
+  "summary_zh": "宽度三桥图是两个节点 M、N 由三座桥相连：信号从大小为 b、c 的两条腿进来，从大小为 a、d 的两条腿出去，整张图就是一个矩阵——三个克罗内克积之和。它的秩数的是能独立通过的信号有几路。三道割给它设上限：出口 ad、入口 bc、桥 3ac；取 a = c = 2、b = d = 3，三者是 6、6、12，最窄的腰是 6。Lean 检验了对一切自然数 a, b, c, d，最大秩不超过最小割。三座桥把六个输入送到六个互不相同的输出：四个直接过桥，另外两座桥各送一个，秩为 6。Lean 检验了在 0 < a ≤ b、0 < c ≤ d 且 a² + b² ≤ 3ab、c² + d² ≤ 3cd 时，最大秩等于最小割，且等于 min(ad, bc)；这里 4 + 9 = 13 ≤ 18。秩不管各路信号分得是否均匀；定理只讲这一张小图，不讲一般张量网络；Ryu–Takayanagi 公式是文献结果，本片没有推出它。",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-24",
+  "duration": "2:29",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · an hourglass of lanes, a two-node bridge graph drawn as strands, a cut sweeping across it with lane counters, six inputs routed through three bridges onto six outputs",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowBound.QMaxFlow_le_QMinCut",
+    "D5/S3/Quantum/TensorNetworks/BridgeGraph/QuantumMaxFlowMinCut.result"
+  ],
+  "outputs": {
+    "narrated_720p": "quantum-geometry_min-cut-bridge_720p_narrated.mp4",
+    "cover": "quantum-geometry_min-cut-bridge_cover.jpg"
+  }
+}
