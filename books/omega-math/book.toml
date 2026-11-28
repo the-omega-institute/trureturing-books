@@ -1,0 +1,47 @@
+# 《OMEGA MATH》书籍元数据
+[book]
+version = "0.2.0"
+authors = ["Auric"]
+license = "CC-BY-4.0"
+editions = ["zh", "en"]
+max_page_lines = 1000
+max_chapters = 18
+max_chapter_depth = 2
+code = "OMEGA//MATH"
+date = "2026-11-24"
+
+[book.title]
+zh = "OMEGA MATH"
+en = "Omega Math"
+
+[book.subtitle]
+zh = "无无穷、无超越数的零公理有理数学"
+en = "Zero-Axiom Rational Mathematics Without Infinity or Transcendentals"
+
+[book.description]
+zh = "一部探讨无无穷、无超越数的零公理有理数学的中英双语专著。全书六卷，从纯归纳构造演算与齐次有理数系出发，依次展开无原点非线性代数与有理球面几何、无极限射流微积分与圆弧流形、三维球面有理调和分析、阿代尔算术与有理谱论，最后讨论 Ω-FRACTRAN、观察者模型与零公理内核审计。"
+en = "A bilingual monograph exploring zero-axiom rational mathematics without infinity or transcendentals. Its six volumes begin with bare CIC and homogeneous rational numbers, then develop origin-free nonlinear algebra and rational spherical geometry, limit-free jet calculus and arc manifolds, rational harmonic analysis on the three-sphere, and adelic arithmetic and rational spectral theory. The final volume studies Ω-FRACTRAN, observer models, and zero-axiom kernel auditing."
+
+[outputs]
+html = true
+pdf = ["screen", "print", "academic"]
+epub = true
+
+[films]
+long_form = ["one-axiom-no-infinity"]
+
+[html.fold]
+enable = true
+level = 0
+
+[pdf]
+paper = "a4"
+academic_paper = "a4"
+
+[epub]
+embed_fonts = false
+
+[numbering.unnumbered]
+"coda.md" = "Coda"
+"appendix-a.md" = "A"
+"appendix-b.md" = "B"

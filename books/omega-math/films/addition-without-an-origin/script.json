@@ -1,0 +1,291 @@
+{
+ "voice": "af_heart",
+ "speed": 0.94,
+ "say": {
+  "Lean": "Leen",
+  "Christoffel": "Kriss-toffel",
+  "Bianchi": "Bee-ankee",
+  "b-bar": "b bar",
+  "Hopf": "Hopff"
+ },
+ "music": {
+  "bpm": 80,
+  "progression": "a-minor"
+ },
+ "scenes": [
+  {
+   "id": "sum",
+   "name": "A SUM NEEDS AN ORIGIN",
+   "lead": 2.6,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Adding two points needs a zero, and a sphere has none.",
+     "两点相加需要一个零点，而球面上没有。"
+    ],
+    [
+     "Move the origin, and the point a plus b moves with it.",
+     "原点一动，a + b 这个点就跟着动。"
+    ],
+    [
+     "But a minus b plus c stays put: the step from b to a, repeated from c.",
+     "a − b + c 却纹丝不动：从 b 到 a 的那一步，从 c 出发再走一遍。"
+    ],
+    [
+     "On the sphere, i plus j even pokes out: its squared length is two.",
+     "在单位球面上，i + j 甚至刺破球壳：它的长度平方是 2。"
+    ]
+   ]
+  },
+  {
+   "id": "heap",
+   "name": "THE HEAP",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.5,
+    0.4,
+    0.1,
+    0.2
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 1.2,
+     "kind": "stamp"
+    }
+   ],
+   "lines": [
+    [
+     "So use a three-point bracket: a times b-bar times c, in whole numbers, with x, x, z giving z.",
+     "于是改用三点括号：a 乘 b 的共轭再乘 c，全是整数；[x, x, z] 给出 z。"
+    ],
+    [
+     "Order is kept: i, one, j gives k, but j, one, i gives minus k.",
+     "次序被保留：[i, 1, j] 是 k，[j, 1, i] 却是 −k。"
+    ],
+    [
+     "Pick any home o, and Lean checks the bracket splits as x, times y inverse, times z.",
+     "任选一点 o 当作家，Lean 内核检验：括号恰好拆成 x 乘 y 的逆再乘 z。"
+    ]
+   ]
+  },
+  {
+   "id": "curve",
+   "name": "RELATION OF RELATIONS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.2,
+    0.2
+   ],
+   "cues": [
+    {
+     "line": 4,
+     "at": 1.0,
+     "kind": "stamp"
+    }
+   ],
+   "lines": [
+    [
+     "For u, one one zero, and v, one zero two, the commutator is four, minus four, minus two.",
+     "取切方向 u = (1, 1, 0)、v = (1, 0, 2)，一阶换位子是 (4, −4, −2)。"
+    ],
+    [
+     "Against w, zero one one, the Lie triple bracket gives minus one, minus two, two.",
+     "再与 w = (0, 1, 1) 比较，利雅三元括号给出 (−1, −2, 2)。"
+    ],
+    [
+     "Cycle and add: zero. Lean checks this Bianchi identity for all integer vectors.",
+     "轮换后相加：得零。Lean 内核对一切整向量检验了这条比安基恒等式。"
+    ],
+    [
+     "Set w to u: against v the bracket gives nine, and so does the squared area.",
+     "令 w = u：括号与 v 的内积是 9，面积平方也是 9。"
+    ],
+    [
+     "Lean checks every nondegenerate rational plane: curvature exactly one, no charts, no Christoffel symbols.",
+     "Lean 内核检验每个非退化有理切面：曲率恰为 1，无需坐标卡与克氏符号。"
+    ]
+   ]
+  },
+  {
+   "id": "rank",
+   "name": "TEN VERSUS FIVE",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.6,
+    0.2,
+    0.3
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 1.0,
+     "kind": "stamp"
+    }
+   ],
+   "lines": [
+    [
+     "A ray forgets a sign: p and minus p are one ray, read in ten slots.",
+     "射线会忘掉符号：p 与 −p 是同一条射线，读数落在 10 个槽位里。"
+    ],
+    [
+     "Ten integer rays fill them all, Gram determinant one sixty-fourth. An eleventh adds nothing.",
+     "十条整射线把槽位填满，格拉姆行列式为 1/64；第十一条什么也不添。"
+    ],
+    [
+     "The signed overlap has only five slots: five spinors give one thirty-second.",
+     "有号读数只有 5 个槽位：五枚旋量给出 1/32。"
+    ],
+    [
+     "Lean checks the bridge: square two kappa-spin minus one, and you get the ray overlap.",
+     "Lean 内核检验这座桥：把 2κ_spin − 1 平方，就得到射线读数。"
+    ]
+   ]
+  },
+  {
+   "id": "walk",
+   "name": "THE REFLECTION WALK",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.6,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 1.0,
+     "kind": "stamp"
+    }
+   ],
+   "lines": [
+    [
+     "Now let the heap walk: from e, step to g, one one one one over two.",
+     "现在让流群走起来：从 e 出发，迈一步到 g = (1, 1, 1, 1; 2)。"
+    ],
+    [
+     "Each new point reflects the one before through the current one: x two is g, e, g.",
+     "每个新点都是把前一点隔着当前点反射过去：x₂ = [g, e, g]。"
+    ],
+    [
+     "Lean checks this walk is the power sequence: x n is b to the n.",
+     "Lean 内核检验：这条反射之路就是幂次序列，xₙ = bⁿ。"
+    ]
+   ]
+  },
+  {
+   "id": "spin",
+   "name": "SEVEN HUNDRED TWENTY",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 2.6,
+     "kind": "chime"
+    }
+   ],
+   "lines": [
+    [
+     "Each beat turns space a hundred and twenty degrees about the cube's diagonal.",
+     "每一拍把空间绕立方体的体对角线转 120°。"
+    ],
+    [
+     "The signed overlap reads three quarters, one quarter, then zero at beat three.",
+     "有号读数依次是 3/4、1/4，第三拍变成 0。"
+    ],
+    [
+     "The ray overlap already reads one: space looks home, the spinor sits at minus e.",
+     "射线读数此时已是 1：空间看似回了家，旋量却停在 −e。"
+    ],
+    [
+     "Only at beat six, seven hundred twenty degrees, do both read one. Lean checks the orbit.",
+     "直到第六拍、720°，两者才都读出 1。Lean 内核检验了整条轨道。"
+    ]
+   ]
+  },
+  {
+   "id": "hopf",
+   "name": "NO SPECIAL POINT",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "On real unit quaternions, a second square, with y times i, gives the Hopf sphere.",
+     "在实单位四元数上，再加一项与 y·i 的平方读数，就得到霍普夫球面。"
+    ],
+    [
+     "For e and g, a quarter plus a quarter is a half, and the Hopf images, i and j, are perpendicular.",
+     "对 e 与 g：1/4 加 1/4 等于 1/2，霍普夫像 i 与 j 互相垂直。"
+    ],
+    [
+     "Pairs with equal overlap are carried onto each other by p z q. Lean checks both.",
+     "读数相同的两对点，能被 p z q 一齐搬到对方身上。两条结论都由 Lean 内核检验。"
+    ],
+    [
+     "No point is special: the sphere never needed an origin.",
+     "没有哪个点是特殊的：球面从来不需要原点。"
+    ]
+   ]
+  },
+  {
+   "id": "close",
+   "name": "LEDGER",
+   "lead": 0.5,
+   "tail": 3.4,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.2
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 0.3,
+     "kind": "chime"
+    }
+   ],
+   "lines": [
+    [
+     "Omega Math, chapter four.",
+     "《OMEGA MATH》· 第四章"
+    ]
+   ]
+  }
+ ]
+}

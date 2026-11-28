@@ -1,0 +1,269 @@
+{
+ "voice": "af_heart",
+ "speed": 0.94,
+ "say": {
+  "Lean": "Leen",
+  "Bézout": "Bay-zoo",
+  "Euler": "Oiler",
+  "Wallis": "Wollis",
+  "gcd": "G C D"
+ },
+ "music": {
+  "bpm": 80,
+  "progression": "a-minor"
+ },
+ "scenes": [
+  {
+   "id": "horizon",
+   "name": "THE HORIZON",
+   "lead": 2.6,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Classical arithmetic starts from a finished infinity: all the primes, lined up forever.",
+     "古典算术从一个已完成的无穷出发：全体素数，早已永远排好了队。"
+    ],
+    [
+     "Here we keep only finite lists and loops that stop. Do primes, fractions and error budgets survive?",
+     "这里只保留有限的清单与会停下的循环。素数、分数与误差预算，还站得住吗？"
+    ]
+   ]
+  },
+  {
+   "id": "bezout",
+   "name": "DIVISION, THEN BACK",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.5,
+    0.4,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "Start with Euclid's division: a equals q times b, plus a smaller remainder.",
+     "从欧几里得带余除法开始：a 等于 q 乘 b，再加一个更小的余数。"
+    ],
+    [
+     "Thirty thousand and thirty-one over thirteen: quotient two thousand three hundred and ten, remainder one.",
+     "用 13 去除 30031：商是 2310，余数是 1。"
+    ],
+    [
+     "Read backwards, that step is a certificate: the number minus the quotient times thirteen is one.",
+     "倒过来读，这一步就是一张证书：原数减去商乘 13，恰好等于 1。"
+    ],
+    [
+     "Lean checks Bézout's identity for every pair: some integer mix of a and b equals their gcd.",
+     "Lean 内核检验了裴蜀恒等式：任意 a、b 都有整数 x、y 使 ax + by = gcd(a, b)。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 0.8,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "escape",
+   "name": "EUCLID'S ESCAPE",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.2,
+    0.2
+   ],
+   "lines": [
+    [
+     "Euclid's recipe: multiply a finite list of primes, then add one.",
+     "欧几里得的配方：把一份有限素数清单乘起来，再加一。"
+    ],
+    [
+     "For the first six lists, the witness happens to be prime.",
+     "前六份清单的见证数恰好都是素数。"
+    ],
+    [
+     "Add thirteen: thirty thousand and thirty-one leaves remainder one for every listed prime.",
+     "加入 13：30031 被清单上每个素数去除，余数都是 1。"
+    ],
+    [
+     "Yet the search stops at fifty-nine: fifty-nine times five hundred and nine, and fifty-nine was never listed.",
+     "可是搜索在 59 处停下：30031 = 59 × 509，而 59 从不在清单上。"
+    ],
+    [
+     "Lean checks, for any list with positive product: product plus one has a prime factor off the list.",
+     "Lean 内核对任何乘积为正的清单检验了：乘积加一，必有一个不在清单上的素因子。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 1.6,
+     "kind": "impact"
+    },
+    {
+     "line": 4,
+     "at": 0.6,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "fraction",
+   "name": "A FRACTION THAT STOPS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.8,
+    0.6,
+    0.7,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "Run the same division on a fraction: thirty-four over twenty-one becomes one; one, one, one, one, one, two.",
+     "对分数做同样的辗转相除：34/21 展开成 [1; 1, 1, 1, 1, 1, 2]。"
+    ],
+    [
+     "Fibonacci ratios are the slow case: every quotient but the last is one.",
+     "斐波那契之比是最慢的情形：除最后一个外，每个商都是 1。"
+    ],
+    [
+     "Euler and Wallis build the convergents: each new top is the quotient times the last, plus the one before.",
+     "欧拉—沃利斯递推给出渐近分数：新分子等于部分商乘上一个分子，再加前一个分子。"
+    ],
+    [
+     "Lean bounds the length by twice the binary log of the denominator, plus one: here seven, at most nine.",
+     "Lean 内核给出长度上界：分母二进制对数的两倍再加一。这里是 7，上界 9。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 2.0,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "unit",
+   "name": "UNIT AREA",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.6,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "Each step is the matrix a, one, one, zero, of determinant minus one.",
+     "每一步都是矩阵 (a, 1; 1, 0)，行列式为 −1。"
+    ],
+    [
+     "So neighbours cross-multiply to plus or minus one: thirty-four times eight, minus thirteen times twenty-one.",
+     "于是相邻渐近分数交叉相乘恰得 ±1：34 × 8 − 13 × 21 = −1。"
+    ],
+    [
+     "Lean checks this sign rule for every list, so every convergent is already in lowest terms.",
+     "Lean 内核对任意系数表检验了这条符号律，因此每个渐近分数天生就是既约的。"
+    ],
+    [
+     "Divided out, neighbours differ by one over their product, closing in from alternate sides.",
+     "两边除以分母：相邻渐近分数之差是分母乘积的倒数，从两侧交替逼近。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 0.8,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "depth",
+   "name": "QUARTER DEPTH",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Last, the error budget: a quarter to the N shrinks to zero, so some depth works.",
+     "最后是误差预算：四分之一的 N 次方趋于零，所以总有某个深度够用。"
+    ],
+    [
+     "In integers: majorant seven halves, tolerance one tenth, and seventy over two is thirty-five.",
+     "改用整数：主界 7/2，容差 1/10，70 除以 2 得 35。"
+    ],
+    [
+     "Thirty-five lies between sixteen and sixty-four, so the quarter depth is two.",
+     "35 落在 16 与 64 之间，所以四分深度是 2。"
+    ],
+    [
+     "Lean checks, with an empty axiom list on the strict backend: seventy is below one hundred twenty-eight.",
+     "Lean 内核检验了这条整数不等式，严格后端的公理清单为空：70 < 128。"
+    ],
+    [
+     "A classical shadow carries it to the reals: seven over one hundred twenty-eight, under one tenth. Depth one fails.",
+     "经典阴影桥把它传到实数：7/128 小于 1/10。深度 1 则不够。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 1.0,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "close",
+   "name": "LEDGER",
+   "lead": 0.5,
+   "tail": 3.2,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.2
+   ],
+   "lines": [
+    [
+     "Omega Math, chapter thirteen.",
+     "《OMEGA MATH》· 第十三章"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 0.3,
+     "kind": "chime"
+    }
+   ]
+  }
+ ]
+}

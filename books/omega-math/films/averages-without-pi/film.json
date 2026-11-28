@@ -1,0 +1,32 @@
+{
+  "title": "Averages Without Pi",
+  "title_zh": "不用 π 的平均",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-27",
+  "duration": "2:51",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · two evaluations of one Gaussian integral with π² struck out, circle / two-sphere / three-sphere columns, the factorial rule with a 4×4 tile check, a Catalan moment ladder, character curves and a 3×3 Gram table, a run of character tiles",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.haarKappaMoment_succ",
+    "D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.peter_weyl_chi012_orthonormal",
+    "D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.haar_evenChar_expectation",
+    "D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.evenChar_product_sum",
+    "D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.all_degree_peter_weyl_orthonormal"
+  ],
+  "outputs": {
+    "narrated_720p": "omega-math_averages-without-pi_720p_narrated.mp4",
+    "cover": "omega-math_averages-without-pi_cover.jpg"
+  },
+  "summary": "Averaging over the three-sphere usually means dividing by its area 2π². Evaluating one four-dimensional Gaussian integral axis by axis (four factors √π) and in polar form ((m + 1)!/2 times 2π²) puts exactly π² on both sides; striking it leaves the factorial ratio (2a)!(2b)!(2c)!(2d)!/(4ᵐ a!b!c!d!(m + 1)!). This classical derivation and the comparison with the circle and the two-sphere are argued (literature result). The film then takes the ratio as the definition: odd powers average to zero, the four step ratios (2a + 1)/(2(m + 2)) add to one, so multiplying by w² + x² + y² + z² changes nothing, and 4 × 1/8 + 12 × 1/24 = 1 (computed). The moments of κ form the ladder 1, 1/4, 1/8, 5/64, 7/128, 21/512 = Catalan numbers over 4ᵏ (computed); Lean checks the step recurrence for every k. With the characters 1, 4κ − 1, 16κ² − 12κ + 1 the pairings 5 − 8 + 4 − 1 = 0 and 14 − 30 + 22 − 6 + 1 = 1 are computed on screen, and Lean checks the six entries of the 3×3 identity Gram table, that every positive-degree even character averages to zero, the product rule E_m E_n = E_|m−n| + … + E_(m+n), and orthonormality for all m, n. The roots √2, 2√2 and √5 that do force their way in, and the next chapter's pairs of fractions, are argued.",
+  "summary_zh": "在三维球面上求平均，通常要除以面积 2π²。同一个四维高斯积分逐轴计算（四个 √π）与用极坐标计算（(m + 1)!/2 乘 2π²），两边恰好都带 π²；划掉之后只剩阶乘比 (2a)!(2b)!(2c)!(2d)!/(4ᵐ a!b!c!d!(m + 1)!)。这一经典推导以及与圆周、二维球面的对比属论证（文献结果）。随后影片把这个比直接当作定义：奇次幂平均为零，四个步进比 (2a + 1)/(2(m + 2)) 之和为 1，所以乘上 w² + x² + y² + z² 不改变任何值，且 4 × 1/8 + 12 × 1/24 = 1（屏幕计算）。κ 的各阶矩排成阶梯 1、1/4、1/8、5/64、7/128、21/512，即卡塔兰数除以 4ᵏ（屏幕计算）；Lean 检验对每个 k 成立的步进递推。对特征标 1、4κ − 1、16κ² − 12κ + 1，配对 5 − 8 + 4 − 1 = 0 与 14 − 30 + 22 − 6 + 1 = 1 在屏幕上算出；Lean 检验 3×3 单位格拉姆表的六项、每个正阶偶次特征标平均为零、乘积律 E_m E_n = E_|m−n| + … + E_(m+n)，以及对一切 m、n 的正交归一性。仍会挤进来的根号 √2、2√2、√5 与下一章的分数对属论证。"
+}

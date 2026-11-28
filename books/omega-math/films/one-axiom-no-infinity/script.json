@@ -1,0 +1,2179 @@
+{
+ "voice": "af_heart",
+ "speed": 0.94,
+ "say": {
+  "Lean": "Leen",
+  "AXIOM-Omega": "Axiom Omega",
+  "b-bar": "b bar",
+  "Cayley": "Kay-lee",
+  "π": "pie",
+  "Berkeley": "Barkly",
+  "IOU": "I O U",
+  "Schur": "Shoor",
+  "chi": "kai",
+  "FRACTRAN": "Frack-tran",
+  "Mathlib": "Math-lib",
+  "Init": "in-it"
+ },
+ "music": {
+  "bpm": 76,
+  "progression": "a-minor"
+ },
+ "scenes": [
+  {
+   "id": "b00_title",
+   "name": "THE RULER",
+   "lead": 3.5,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.3,
+    0.2,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Tilt a ruler upright and ask for its slope. The calculator says: error.",
+     "把尺子立直，再问它的斜率。计算器只回一句：出错。"
+    ],
+    [
+     "School names the crash infinity, and moves on.",
+     "学校给这次崩溃起名叫“无穷大”，然后接着往下讲。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 3.6,
+     "kind": "glitch"
+    }
+   ],
+   "chapter": {
+    "en": "Prelude · One axiom, no infinity",
+    "zh": "前言 · 一条公理，没有无穷"
+   }
+  },
+  {
+   "id": "b00_bills",
+   "name": "THREE FEES",
+   "lead": 0.5,
+   "tail": 0.5,
+   "music": [
+    0.9,
+    0.5,
+    0.4,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "Standard mathematics pays three hidden fees. First, a finished infinity.",
+     "标准数学悄悄付了三笔账。第一笔：一个已经完成、一次装满的无穷。"
+    ],
+    [
+     "Second, a line where almost every point has no finite recipe.",
+     "第二笔：一条数轴，上面几乎每个点都写不出有限的配方。"
+    ],
+    [
+     "Third, pi and e, reached only by endless steps.",
+     "第三笔：π 和 e，只能靠永不结束的步骤逼近。"
+    ],
+    [
+     "But who sent the bill? Maybe just the habit of straight rulers.",
+     "可这账单是谁寄来的？也许这笔债，只是直尺养成的习惯。"
+    ]
+   ]
+  },
+  {
+   "id": "b00_ring",
+   "name": "BEND THE RULER",
+   "lead": 0.5,
+   "tail": 0.4,
+   "music": [
+    0.9,
+    0.7,
+    0.7,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Never divide. Keep a direction as two whole numbers, and bend the ruler into a ring.",
+     "干脆不做除法：把方向记成两个整数，再把尺子弯成一个圆环。"
+    ],
+    [
+     "Zero, one lands on the right; one, one at the top.",
+     "[0 : 1] 落在最右边，[1 : 1] 落在最上面。"
+    ],
+    [
+     "The upright ruler, one, zero, lands at minus one, zero: denominator one, not zero.",
+     "竖直的尺子 [1 : 0] 落在 (−1, 0)，分母是 1，不是 0。"
+    ],
+    [
+     "Lean confirms every nonzero pair lands exactly on the circle, every upright pair at minus one.",
+     "Lean 确认：每个非零整数对都恰好落在单位圆上，每个 [p : 0] 都落在 (−1, 0)。"
+    ],
+    [
+     "Infinity was never a place. It was the loose end of a ruler that never closed.",
+     "无穷大从来不是一个地方，只是一把从未合拢的尺子松开的那一端。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 3.0,
+     "kind": "chime"
+    },
+    {
+     "line": 3,
+     "at": 2.4,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "b00_ledger",
+   "name": "ZERO AXIOMS",
+   "lead": 0.5,
+   "tail": 0.4,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "Read the frozen record for the strict backend. The list is empty.",
+     "翻开严格端的冻结记录，这条定理的公理清单为空。"
+    ],
+    [
+     "Its numbers grow from zero and successor, like a kitchen with no pantry: all grown on the spot.",
+     "它的数从“零”和“后继”长出来，像一间没有储藏室的厨房，一切当场种出来。"
+    ],
+    [
+     "Over the reals, the same circle checks too, but its proof draws on Mathlib's classical axioms.",
+     "放到实数上，同一个圆也能证，但证明要借 Mathlib 的经典公理。"
+    ],
+    [
+     "The title's one axiom, AXIOM-Omega, is a contract, not a decree: the book must build what keeps it.",
+     "标题里那条公理 AXIOM-Ω 是契约，不是敕令：书得亲手造出守约的东西。"
+    ]
+   ]
+  },
+  {
+   "id": "b00_road",
+   "name": "THE ROAD",
+   "lead": 0.5,
+   "tail": 0.4,
+   "music": [
+    1.0,
+    0.7,
+    0.8,
+    0.4,
+    0.4
+   ],
+   "lines": [
+    [
+     "Then six volumes: numbers, rotation, change, waves on the three-sphere, primes, and a machine that watches.",
+     "接下来是六卷：数、转动、变化、三维球面上的波、素数，以及一台会观察的机器。"
+    ],
+    [
+     "Stop by stop, crutches fall: infinity, pi, limits, the complex plane.",
+     "一站一站，拐杖掉下：无穷、π、极限、复平面。"
+    ],
+    [
+     "The coda reads back what the kernel checked.",
+     "终章再把内核查过的账读回来。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 1.6,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "b00_ask",
+   "name": "FIRST STEP",
+   "lead": 0.5,
+   "tail": 1.6,
+   "music": [
+    0.8,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "So we begin at the very bottom, borrowing nothing.",
+     "所以我们从最底层开始，什么都不借。"
+    ],
+    [
+     "With only finite rational steps, what is a number?",
+     "只许有限步、只用有理数，数是什么？"
+    ]
+   ]
+  },
+  {
+   "id": "b01_title",
+   "name": "FINITE MARKS",
+   "lead": 3.6,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.3,
+    0.2,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Ask the machine, not the philosopher. Lean's kernel holds a zero, and one move: one more.",
+     "别问哲学家，去问机器。Lean 内核里只有一个零，和一个动作：再加一。"
+    ],
+    [
+     "Every natural number is a finite stack of that move, like Lego bricks. No stack is infinitely tall.",
+     "每个自然数都是这个动作叠成的有限一摞，像乐高积木；没有哪一摞无限高。"
+    ],
+    [
+     "Who promised a finished infinity? Not the kernel: no real line, no infinity sign, no pi.",
+     "谁许诺过一个“已经完成”的无穷？不是内核：没有实数轴，没有 ∞，没有 π。"
+    ]
+   ],
+   "chapter": {
+    "en": "Volume I · Foundations and homogeneous rational numbers",
+    "zh": "第一卷 · 公理地基与齐次有理数"
+   }
+  },
+  {
+   "id": "b01_floor",
+   "name": "THE FLOOR",
+   "lead": 0.5,
+   "tail": 0.5,
+   "music": [
+    0.9,
+    0.5,
+    0.4,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "A classical proof here can use up to three standard axioms: choice, quotients, and propositional extensionality.",
+     "这里的经典证明最多可以用三条标准公理，即选择公理、商公理与命题外延性。"
+    ],
+    [
+     "The strict library uses none of them. Equality is checked integer by integer, by a program that halts.",
+     "严格库的这项运算不依赖公理：相等逐个整数核对，由一个必定停机的程序判定。"
+    ],
+    [
+     "Precision becomes a contract: one over M. Need it finer? Raise M. It is always some finite number.",
+     "精度改成一纸契约：1/M。要更细？把 M 调大。它永远是某个有限的数。"
+    ],
+    [
+     "Like a camera: always more pixels, but never infinitely many in one shot.",
+     "就像相机：像素总能再加，但一张照片里永远不会有无穷多个。"
+    ]
+   ]
+  },
+  {
+   "id": "b01_axiom",
+   "name": "AXIOM-Ω",
+   "lead": 0.5,
+   "tail": 0.5,
+   "music": [
+    0.9,
+    0.6,
+    0.6,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "Now remove two more props: a privileged origin, and the plus sign. What is left?",
+     "再拆掉两根支架：特权原点，和加号。还剩什么？"
+    ],
+    [
+     "Two primitives. The triad carries the step from y to x over onto z, like directions from a landmark.",
+     "两个原语。三元迁移把“从 y 到 x”这一步原样搬到 z 上，就像借地标转述路线。"
+    ],
+    [
+     "And a reading, kappa: one for identical, zero for a total mismatch.",
+     "再加一个读数 κ：完全相同读 1，完全失配读 0。"
+    ],
+    [
+     "Three laws: a step to yourself does nothing and steps regroup freely; carrying keeps every reading; order must leave a mark.",
+     "三条法则：到自己的一步什么也不做，连续的步子可以随意重组；搬运不改读数；次序必须留下痕迹。"
+    ],
+    [
+     "Pick any point as a stand-in zero, and multiplication grows back around it. No point is royalty.",
+     "任选一点临时当零，乘法就在它周围长回来；没有哪一点是王室。"
+    ],
+    [
+     "The sample class lists six equations. The prototype checks examples. A full model needs proofs of all the laws.",
+     "示意类型类列出六条等式。原型核验具体算例。完整模型还须证明所有定律。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 4,
+     "at": 3.0,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "b01_circle",
+   "name": "THE CLOSED LINE",
+   "lead": 0.5,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.7,
+    0.7,
+    0.4,
+    0.4
+   ],
+   "lines": [
+    [
+     "First stage, one dimension. A slope is rise over run; a vertical slope divides by zero.",
+     "第一个舞台：一维。斜率是升高除以前进，竖直的斜率就要除以零。"
+    ],
+    [
+     "The usual fix bolts infinity onto the line. Instead, keep the pair: rise one, run two.",
+     "老办法是在直线两端硬接一个无穷大。我们改为保留这一对数：升 1，进 2。"
+    ],
+    [
+     "Pin a string at the far side of a circle, and pull it through the mark one half.",
+     "在圆的最远端钉一根线，拉着它穿过 1/2 那个刻度。"
+    ],
+    [
+     "It meets the circle at three fifths, four fifths: nine twenty-fifths plus sixteen twenty-fifths is exactly one.",
+     "它在 (3/5, 4/5) 碰到圆：9/25 + 16/25，恰好是 1。"
+    ],
+    [
+     "Lean checks it for every integer pair except zero, zero: the point lands on the unit circle, no square root needed.",
+     "Lean 内核检验：对每一对不全为零的整数，这个点都落在单位圆上，不开一次根号。"
+    ],
+    [
+     "Now the vertical slope: rise one, run zero. Every reading stays finite; it lands at minus one, zero.",
+     "再看竖直斜率：升 1，进 0。读数全部有限，它落在 (−1, 0)。"
+    ],
+    [
+     "Infinity was never far away. It is the point opposite home, where the pin was.",
+     "无穷从来不在远方。它就是家对面那一点，正是钉子所在的地方。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 4,
+     "at": 0.4,
+     "kind": "stamp"
+    },
+    {
+     "line": 5,
+     "at": 3.2,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "b01_flat",
+   "name": "ONE PLANE ONLY",
+   "lead": 0.5,
+   "tail": 0.5,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Points multiply as integer pairs: one-two times one-three is five-five, which is one-one.",
+     "圆上的点按整数对相乘：[1:2] 乘 [1:3] 得 [5:5]，也就是 [1:1]。"
+    ],
+    [
+     "Swap the factors, and nothing changes. A circle has only one plane to turn in.",
+     "交换两个因子，什么都不变。圆只有一个可以转动的平面。"
+    ],
+    [
+     "Order leaves no mark, so the third law fails. The book argues two dimensions fail as well.",
+     "次序不留痕迹，第三条法则就落空了。书中论证：二维同样不行。"
+    ]
+   ]
+  },
+  {
+   "id": "b01_ternion",
+   "name": "FOUR INTEGERS",
+   "lead": 0.5,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.8,
+    0.8,
+    0.5,
+    0.4
+   ],
+   "lines": [
+    [
+     "Three is the first room where turns can disagree. Write a state as four integers, up to scale.",
+     "三维是转动第一次会“意见不合”的房间。把每个态写成四个整数，倍数不计。"
+    ],
+    [
+     "Divide out common factors, make the first nonzero entry positive: one name per ray, no quotients.",
+     "约去公因数，让第一个非零分量取正，每条射线就只有一个名字，用不着商类型。"
+    ],
+    [
+     "Take two quarter turns about different axes, and compose them in both orders, like turning a book.",
+     "取绕两根不同轴的两个四分之一转，按两种顺序复合，就像翻转一本书。"
+    ],
+    [
+     "One order gives one, one, one, one. The other gives one, one, one, minus one.",
+     "一种顺序得 (1, 1, 1, 1)，另一种得 (1, 1, 1, −1)。"
+    ],
+    [
+     "Lean checks that these two never share a ray. Order leaves a mark. The strict proof uses no axioms.",
+     "Lean 内核检验：两者不在同一条射线上。次序留下了痕迹。严格端证明的公理清单为空。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 4,
+     "at": 0.4,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "b01_ask",
+   "name": "NEXT QUESTION",
+   "lead": 0.5,
+   "tail": 1.8,
+   "music": [
+    0.9,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Yet our quaternion product has a built-in one: one, zero, zero, zero. The axiom never asked for it.",
+     "可我们的四元数乘法自带一个“1”：(1, 0, 0, 0)。公理从没要求过它。"
+    ],
+    [
+     "Without an origin, how do we still multiply and turn?",
+     "没有原点，还怎么相乘、怎么转动？"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 0.2,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "b02_title",
+   "name": "A TRIP, NOT A SUM",
+   "lead": 3.6,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.3,
+    0.2,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "With no zero point, two points on a sphere cannot be added: their sum pokes out of it.",
+     "没有零点，球面上的两点就没法相加：和一加出来，就戳出了球面。"
+    ],
+    [
+     "But a trip still makes sense: what took you from Paris to Rome, do again from Berlin.",
+     "但“行程”依然有意义：从巴黎到罗马走的那一段，再从柏林出发走一遍。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 3.0,
+     "kind": "chime"
+    }
+   ],
+   "chapter": {
+    "en": "Volume II · Origin-free algebra and rational spherical geometry",
+    "zh": "第二卷 · 无原点代数与球面有理几何"
+   }
+  },
+  {
+   "id": "b02_heap",
+   "name": "THE HEAP",
+   "lead": 0.5,
+   "tail": 0.5,
+   "music": [
+    0.9,
+    0.5,
+    0.4,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "Write the trip as a bracket. On flat paper it is a minus b plus c, wherever the origin sits.",
+     "把行程写成括号 [a, b, c]。在平面上它就是 a − b + c，原点放在哪里都一样。"
+    ],
+    [
+     "On unit quaternions it is a times b-bar times c: whole-number arithmetic.",
+     "在单位四元数上，它是 a 乘 b 的共轭再乘 c：只用整数运算。"
+    ],
+    [
+     "Lean checks the cancel laws: x, x, z gives z, and x, z, z gives x, up to scale.",
+     "Lean 内核检验两条消去律：[x, x, z] 是 z，[x, z, z] 是 x（差一个缩放）。"
+    ],
+    [
+     "Order still matters: i, one, j gives k; j, one, i gives minus k.",
+     "次序依然要紧：[i, 1, j] = k，[j, 1, i] = −k。"
+    ],
+    [
+     "Pick any point as home, and the bracket becomes multiply, invert, multiply. Home is a choice, not a fact.",
+     "任选一点当作家，括号就变成“乘、求逆、乘”。家是选出来的，不是天生的。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 0.6,
+     "kind": "stamp"
+    },
+    {
+     "line": 4,
+     "at": 4.4,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "b02_curve",
+   "name": "RELATION OF RELATIONS",
+   "lead": 0.5,
+   "tail": 0.5,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "Now turning. Swap two directions and you get a twist; twist that against a third: the Lie triple bracket.",
+     "再看转动。交换两个方向的次序，得到一个扭转；再拿它和第三个方向比，就是利雅三元括号。"
+    ],
+    [
+     "Carry a compass around a small loop on a ball: it comes back turned. The bracket records that turn.",
+     "带着指南针在球面上绕一个小圈，回来时指针转了一个角；括号记下的就是这一转。"
+    ],
+    [
+     "Take u as one, one, zero, and v as one, zero, two: the bracket gives nine, and so does their squared area.",
+     "取 u = (1, 1, 0)，v = (1, 0, 2)：括号给出 9，两者面积的平方也是 9。"
+    ],
+    [
+     "Lean checks this for all integer vectors: wherever the area is nonzero, the curvature is exactly one.",
+     "Lean 内核检验：任意整向量都如此。只要面积不为零，曲率就恰好是一。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 0.6,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "b02_spin",
+   "name": "SEVEN HUNDRED TWENTY",
+   "lead": 0.5,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.6,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Rotations hide a sign. The spinor one, one, one, one, over two, turns a cube by a third of a turn.",
+     "旋转里藏着一个符号。旋量 (1, 1, 1, 1; 2) 把立方体绕对角线转三分之一圈。"
+    ],
+    [
+     "After three beats the cube looks home, yet the spinor reads minus one.",
+     "三拍之后立方体看上去回到原位，可旋量读出的是 −1。"
+    ],
+    [
+     "Only at six beats, seven hundred twenty degrees, is it truly home. Lean checks the whole orbit.",
+     "直到第六拍、720°，它才真正回家。Lean 内核检验了整条轨道。"
+    ],
+    [
+     "Like a tray turned under your arm: one turn twists the arm, the second undoes it.",
+     "就像在臂下转托盘：转一圈手臂拧住，再转一圈才解开。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 1.6,
+     "kind": "glitch"
+    },
+    {
+     "line": 2,
+     "at": 2.2,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "b02_cayley",
+   "name": "THE CAYLEY BRIDGE",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.7,
+    0.7,
+    0.4,
+    0.4
+   ],
+   "lines": [
+    [
+     "Textbooks turn with e to the X, an endless series.",
+     "教科书用 e^X 转动，那是一串无穷级数。"
+    ],
+    [
+     "Cut it short, and errors compound like copies of copies: in twelve steps the squared length passes two.",
+     "一截短，误差就像复印件再复印一样越积越多：十二步后长度的平方超过 2。"
+    ],
+    [
+     "Cayley's fraction takes one exact step. Feed it one half, one half, zero, and out comes a matrix of thirds.",
+     "凯莱分式一步到位：代入 (½, ½, 0)，出来一个全是三分之几的矩阵。"
+    ],
+    [
+     "Lean checks, for every rational input: orthogonal, determinant one, and lengths kept under repeated turns.",
+     "Lean 内核对任意有理输入都检验了：正交，行列式为一，反复转动也保长度。"
+    ],
+    [
+     "Twelve turns: the denominator reaches three to the twelfth, and the length is still exactly one.",
+     "连转十二次：分母涨到 3¹²，长度仍然恰好是一。"
+    ],
+    [
+     "Pi was never inside the rotation. It walks in only when we measure the turn as an angle.",
+     "π 从来不在旋转里面；只有把这一转量成角度，它才走进来。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 0.6,
+     "kind": "stamp"
+    },
+    {
+     "line": 5,
+     "at": 0.4,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "b02_triangle",
+   "name": "CLOSING THE TRIANGLE",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Last, a triangle on the sphere, built from ones and zeros. One side alone has cosine one over root two.",
+     "最后，球面上一个只用 0 和 1 写成的三角形。单看一条边，余弦是 1/√2。"
+    ],
+    [
+     "But walk the loop, and every corner is met twice, like hands joined in a ring: the roots square away.",
+     "可沿环路走一圈，每个顶点都恰好碰到两次，就像手拉手围成一圈：根号全都平方消掉。"
+    ],
+    [
+     "The loop number B is one quarter, and one plus two B, minus the three side overlaps, is one quarter too.",
+     "环路数 B = ¼；1 + 2B 再减去三条边的重叠，也是 ¼。"
+    ],
+    [
+     "Lean checks this number is never negative, and is zero when a step is doubled along a great circle.",
+     "Lean 内核检验：这个数从不为负；沿大圆把一步走两遍，它就是零。"
+    ],
+    [
+     "Lift the corner off, and it is exactly one quarter. Spherical trigonometry closes in fractions.",
+     "把顶点抬离大圆，它恰好是 ¼。球面三角学用分数就能闭合。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 0.6,
+     "kind": "stamp"
+    },
+    {
+     "line": 4,
+     "at": 1.6,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "b02_next",
+   "name": "NEXT QUESTION",
+   "lead": 0.5,
+   "tail": 2.2,
+   "music": [
+    1.0,
+    0.5,
+    0.4,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "A heap that multiplies, a fraction that turns, a triangle that closes, all from whole numbers.",
+     "会相乘的流群，会转动的分式，会闭合的三角形，全都由整数搭成。"
+    ],
+    [
+     "We can turn without π. Can we change without limits?",
+     "不用 π 也能转动。不取极限，也能变化吗？"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 0.3,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "b03_title",
+   "name": "SECANTS",
+   "lead": 3.6,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Fractions gave us rotation. But slope has always been taught with a limit.",
+     "分数已经给了我们旋转。可斜率，向来是用极限来教的。"
+    ],
+    [
+     "Take x cubed at two. Divide the rise by a step h, then let h shrink.",
+     "取 x³，在 x = 2 处：用步长 h 去除升高量，再让 h 缩小。"
+    ],
+    [
+     "Bishop Berkeley called such steps ghosts of departed quantities: divide by h, then call it nothing.",
+     "贝克莱主教把这种步长叫作“已死量的幽灵”：先拿 h 作除数，再说它是零。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 0.4,
+     "kind": "glitch"
+    }
+   ],
+   "chapter": {
+    "en": "Volume III · Calculus without limits",
+    "zh": "第三卷 · 不取极限的微积分"
+   }
+  },
+  {
+   "id": "b03_dual",
+   "name": "ONE NEW RULE",
+   "lead": 0.5,
+   "tail": 0.5,
+   "music": [
+    0.9,
+    0.5,
+    0.4,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "Try this instead. Add a symbol, epsilon, whose square is zero.",
+     "换个做法：添一个符号 ε，规定它的平方等于零。"
+    ],
+    [
+     "Think of epsilon as a nudge you record once. A nudge of a nudge never makes the books.",
+     "把 ε 想成一笔只记一次的微小推动：推动的推动，永远不入账。"
+    ],
+    [
+     "Cube two plus epsilon: eight, twelve epsilon, and leftovers with epsilon squared.",
+     "把 2 + ε 立方：得到 8、12ε，还有带着 ε² 的余项。"
+    ],
+    [
+     "Those vanish. Eight is the value, twelve the slope: read off, not chased.",
+     "余项归零。8 是函数值，12 是斜率：直接读出，不必追赶。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 0.4,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "b03_jet2",
+   "name": "KEEP THE BEND",
+   "lead": 0.5,
+   "tail": 0.5,
+   "music": [
+    0.9,
+    0.6,
+    0.6,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "But that also throws away the bend, which lives in the square term.",
+     "可这样也把弯曲扔掉了，而弯曲恰恰住在平方项里。"
+    ],
+    [
+     "So keep three slots, like a three-digit odometer: eta cubed rolls off to zero.",
+     "所以留三格，像三位数的里程表：η³ 溢出归零。"
+    ],
+    [
+     "Two plus eta, cubed, is eight, plus twelve eta, plus six eta squared. Six is half the second derivative.",
+     "(2 + η)³ = 8 + 12η + 6η²。6 正是二阶导数的一半。"
+    ],
+    [
+     "Value, slope and bend in one product. Lean checks the cube rule without axioms on the strict backend.",
+     "函数值、斜率、弯曲，一次乘法同时到手。Lean 在严格端无公理地检验了立方归零。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 2.6,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "b03_divide",
+   "name": "DIVISION ENDS",
+   "lead": 0.5,
+   "tail": 0.5,
+   "music": [
+    0.9,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Limits used to hide in division. Take one over one plus x squared, at one.",
+     "极限过去总躲在除法里。取 1/(1 + x²)，在 x = 1 处。"
+    ],
+    [
+     "The jet inverse just stops, no limit needed: one half, minus one half, one quarter.",
+     "射流求逆到 η² 就自然终止，不取极限：1/2、−1/2、1/4。"
+    ],
+    [
+     "A secant with step one quarter misses the slope by exactly five eighty-seconds.",
+     "步长 1/4 的割线，斜率恰好差了 5/82。"
+    ],
+    [
+     "A secant is two snapshots and a guess. A jet is the speedometer.",
+     "割线是两张快照加一个猜测；射流是速度表。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 2.6,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "b03_series",
+   "name": "ANY ORDER",
+   "lead": 0.5,
+   "tail": 0.9,
+   "music": [
+    1.0,
+    0.7,
+    0.7,
+    0.3,
+    0.4
+   ],
+   "lines": [
+    [
+     "Sine and cosine were the alibi for infinity, and for pi.",
+     "正弦和余弦，一向是无穷与 π 的托辞。"
+    ],
+    [
+     "Here cosine is a stream of fractions: one, minus one half, one twenty-fourth.",
+     "在这里，余弦是一串分数：1、−1/2、1/24……"
+    ],
+    [
+     "Like a knitting pattern, each one is made from the one two places back. Stop at any order.",
+     "像编织图样，每一格都由往前两格的那一格织出。想停在哪一阶，就停在哪一阶。"
+    ],
+    [
+     "Cosine squared plus sine squared is one in every coefficient. The strict Lean proof uses no axioms.",
+     "余弦平方加正弦平方等于 1，每个系数都成立。Lean 的严格端证明不依赖公理。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 2.6,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "b03_step",
+   "name": "STAY ON THE SPHERE",
+   "lead": 0.5,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Now take a finite step on a sphere. Aim along the tangent at the start, and you fly off.",
+     "现在在球面上走有限的一步。按起点的切向走，就会飞离球面。"
+    ],
+    [
+     "In the book's example, the squared length jumps to twenty-three ninths. Aim at the end, and it sinks.",
+     "在书中的例子里，模方跳到 23/9；按终点取向，它又往里缩。"
+    ],
+    [
+     "Lean checks the drift: one minus two alpha, times the step squared. At the midpoint, that is zero.",
+     "Lean 检验了漂移：1 − 2α 乘以步长的平方。取在中点，它正好是零。"
+    ],
+    [
+     "Like a seesaw, it balances only in the middle, and stays on the sphere.",
+     "像跷跷板，只有在正中才平衡：这一步留在球面上。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 4.4,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "b03_stokes",
+   "name": "EXACT ON A COARSE GRID",
+   "lead": 0.5,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.8,
+    0.7,
+    0.4,
+    0.4
+   ],
+   "lines": [
+    [
+     "Integration meant slicing finer and finer. Here, summing differences along a coarse path is already exact.",
+     "积分过去意味着越切越细。在这里，沿粗糙路径把差分加起来，就已经精确。"
+    ],
+    [
+     "Give each point a height; each step records its climb. Add the climbs, and the middle points cancel.",
+     "给每个点一个高度，每一步记下爬升。把爬升加起来，中间各点全部抵消。"
+    ],
+    [
+     "Like a bank statement: the changes sum to closing minus opening. A round trip sums to zero.",
+     "就像银行对账单：变动加起来，等于期末减期初；走一圈回来，总和为零。"
+    ],
+    [
+     "Lean checks both, for any chain and any commutative group.",
+     "Lean 对任意链、任意交换群检验了这两条。"
+    ],
+    [
+     "Glue triangles, and a hand count shows only the rim survives.",
+     "三角形拼起来，手算可见：只剩外缘。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 1.6,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "b03_ask",
+   "name": "CURVED CAPS",
+   "lead": 0.5,
+   "tail": 2.2,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.2
+   ],
+   "lines": [
+    [
+     "One idol is left: a flat plane at every point, glued with bump functions.",
+     "还剩一个偶像：每一点外挂一块平直切面，再用隆起函数粘起来。"
+    ],
+    [
+     "The book's model fits small curved spheres instead: fitted caps, not a disco ball.",
+     "本书的模型改用弯曲的小球去贴：是贴合的球冠，不是迪斯科球。"
+    ],
+    [
+     "We have measured along paths. Measuring a whole sphere has always needed pi.",
+     "我们已经沿着路径量过了。可要量整只球面，向来离不开 π。"
+    ],
+    [
+     "If we can differentiate without limits, can we integrate without π?",
+     "不取极限能求导，不用 π 能积分吗？"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 0.3,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "b04_title",
+   "name": "NO PI ALLOWED",
+   "lead": 3.6,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.3,
+    0.2,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "We took a derivative with no limits. Now the other half: average over a curved sphere, with no pi.",
+     "上一幕不取极限就求了导。现在轮到另一半：在弯曲的球面上求平均，不许用 π。"
+    ],
+    [
+     "Every textbook divides by an area full of pi. Why are we so sure it belongs there?",
+     "每本教科书都要除以一个满是 π 的面积。我们凭什么认定 π 非在那里不可？"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 3.0,
+     "kind": "glitch"
+    }
+   ],
+   "chapter": {
+    "en": "Volume IV · Rational harmonics on the three-sphere",
+    "zh": "第四卷 · 三维球面上的有理谐波"
+   }
+  },
+  {
+   "id": "b04_shells",
+   "name": "WHOLE NOTES",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.5,
+    0.6,
+    0.0,
+    0.2
+   ],
+   "lines": [
+    [
+     "A wave on the three-sphere must close on itself, like a bell that rings only certain notes.",
+     "三维球面上的波必须首尾咬合，就像一口钟只能发出某些音。"
+    ],
+    [
+     "So waves sort into shells. Each whole-spin shell has a character: a polynomial with integer coefficients.",
+     "于是波分成一层层的壳。每个整数自旋壳都有一个特征标：一个整系数多项式。"
+    ],
+    [
+     "Its variable, kappa, is a squared overlap: an ordinary fraction.",
+     "它的变量 κ 是重合度的平方，一个普通分数。"
+    ],
+    [
+     "One. Four kappa minus one. Each next shell comes from the last two by one fixed rule.",
+     "1，4κ − 1，之后每一层都由前两层按同一条规则生出来。"
+    ],
+    [
+     "At kappa equals one they read one, three, five, seven: the dimension of each spin.",
+     "在 κ = 1 处，它们读出 1、3、5、7，正是每个自旋表示的维数。"
+    ],
+    [
+     "Lean checks, for every whole spin and integer x, that only x squared enters. Half spins keep one root; whole spins drop it.",
+     "Lean 检验：对每个整数自旋与整数 x，只进 x²。半整数自旋留一个根号，整数自旋消掉它。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 4,
+     "at": 2.2,
+     "kind": "chime"
+    },
+    {
+     "line": 5,
+     "at": 1.0,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "b04_moments",
+   "name": "AVERAGE WITHOUT PI",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.7,
+    0.7,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "Usual calculus lets pi in as root pi on each of four axes; the area, two pi squared, takes it back out.",
+     "通常的微积分让 π 化作 √π 从四根轴各进来一次，面积 2π² 又把它拿走。"
+    ],
+    [
+     "So skip the round trip: define the average of kappa to the k as a ratio of factorials.",
+     "那就省掉这趟来回：直接把 κ 的 k 次方的平均定义成阶乘之比。"
+    ],
+    [
+     "Each average is the last one times a small fraction.",
+     "每个平均值都是前一个乘上一个小分数。"
+    ],
+    [
+     "One, a quarter, an eighth, five sixty-fourths, seven over a hundred twenty-eight.",
+     "1，1/4，1/8，5/64，7/128。"
+    ],
+    [
+     "Lean checks that step for every k, with whole-number arithmetic.",
+     "Lean 内核对每个 k 检验了这一步，全程只用整数运算。"
+    ],
+    [
+     "Pi was never inside the sphere. It was inside our ruler.",
+     "π 从来不在球里，它在我们的尺子里。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 3.4,
+     "kind": "chime"
+    },
+    {
+     "line": 4,
+     "at": 1.0,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "b04_ortho",
+   "name": "SHELLS AT RIGHT ANGLES",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.8,
+    0.7,
+    0.4,
+    0.4
+   ],
+   "lines": [
+    [
+     "Now play two shells together: multiply their characters and average.",
+     "现在让两层壳一起响：把特征标相乘，再求平均。"
+    ],
+    [
+     "Shell one with shell two: five, minus eight, plus four, minus one. Exactly zero.",
+     "第一层配第二层：5 − 8 + 4 − 1，恰好是 0。"
+    ],
+    [
+     "Shell two with itself: fourteen, minus thirty, plus twenty-two, minus six, plus one. Exactly one.",
+     "第二层配它自己：14 − 30 + 22 − 6 + 1，恰好是 1。"
+    ],
+    [
+     "Different shells sit at right angles, like north and east.",
+     "不同的壳彼此垂直，就像北和东。"
+    ],
+    [
+     "Lean checks this table, and every pair of whole spins: one on the diagonal, zero elsewhere.",
+     "Lean 内核检验了这张表，也检验了所有整数自旋对：对角线上是 1，其余全是 0。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 3.6,
+     "kind": "chime"
+    },
+    {
+     "line": 4,
+     "at": 1.2,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "b04_sqrt",
+   "name": "A ROOT AS A PAIR",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.6,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "Some roots do force their way in: to make one, one, zero, zero a unit, you need root two.",
+     "有些根号确实挤得进来：要把 (1, 1, 0, 0) 缩成单位长，就需要 √2。"
+    ],
+    [
+     "Must we swallow the real line for one number? No. Keep a pair of fractions, and one rule: delta squared is two.",
+     "为了一个数就得吞下整条实数轴吗？不必。记一对分数，再加一条规则：δ² = 2。"
+    ],
+    [
+     "A square root is just an IOU with one rule for cashing it.",
+     "平方根不过是一张欠条，附一条兑现规则。"
+    ],
+    [
+     "Two root two, the quantum ceiling in Bell's game, is the pair zero, two. Lean checks its square is exactly eight.",
+     "2√2 是贝尔游戏的量子上限，即数对 (0, 2)。Lean 检验：它的平方恰为 8。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 4.0,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "b04_schur",
+   "name": "A FLOOR YOU CAN CHECK",
+   "lead": 0.5,
+   "tail": 1.4,
+   "music": [
+    1.0,
+    0.8,
+    0.7,
+    0.4,
+    0.4
+   ],
+   "lines": [
+    [
+     "Last tool: is a quadratic form positive? Textbooks hunt eigenvalues, here full of root seventeen.",
+     "最后一件工具：一个二次型是不是正的？教科书去找特征值，这里满是 √17。"
+    ],
+    [
+     "Instead, hold x fixed and walk along y. The form is a valley.",
+     "换个办法：固定 x，沿着 y 走。这个二次型是一道山谷。"
+    ],
+    [
+     "Its floor sits at y equals minus two thirds x, at height four thirds x squared. So Q is positive, using only fractions.",
+     "谷底在 y = −⅔x，高度是 ⁴⁄₃x²。所以 Q 是正的，用的全是分数。"
+    ],
+    [
+     "Lean checks this for every positive pivot: nothing dips below the floor, and the floor is reached right there.",
+     "Lean 内核对一切正主元检验：没有一点低于谷底，而谷底恰在那一点取到。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 2.0,
+     "kind": "chime"
+    },
+    {
+     "line": 3,
+     "at": 1.2,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "b04_next",
+   "name": "NEXT QUESTION",
+   "lead": 0.5,
+   "tail": 2.4,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.2,
+    0.2
+   ],
+   "lines": [
+    [
+     "Whole notes, fractional averages, a floor checked by hand: harmonics with no pi and no limits.",
+     "整数的音阶，分数的平均，一个手算核对的谷底：没有 π、没有极限的谐波。"
+    ],
+    [
+     "The sphere has its harmonics. Do the primes have theirs?",
+     "球面有它的谐波。素数也有吗？"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 0.4,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "b05_title",
+   "name": "NO LAST PRIME",
+   "lead": 3.6,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "The sphere rang with harmonics. Before the primes sing, a plainer question: why do they never run out?",
+     "球面奏出了谐波。在请素数开口之前，先问一件更朴素的事：素数为什么永远用不完？"
+    ],
+    [
+     "We picture every prime already queued at the far end of the number line. Who has ever seen that queue?",
+     "我们总以为，全体素数早已排好队，等在数轴的尽头。可谁真的见过这支队伍？"
+    ]
+   ],
+   "chapter": {
+    "en": "Volume V · Primes without the complex plane",
+    "zh": "第五卷 · 不借复平面的素数"
+   }
+  },
+  {
+   "id": "b05_escape",
+   "name": "EUCLID'S ESCAPE",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.6,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "Euclid gives a recipe instead: multiply a finite list of primes, then add one.",
+     "欧几里得给的不是队伍，而是一道菜谱：把有限个素数乘起来，再加一。"
+    ],
+    [
+     "Two through thirteen gives thirty thousand and thirty-one. Every listed prime leaves remainder one.",
+     "取 2 到 13，得到 30031。清单上每个素数去除它，都余 1。"
+    ],
+    [
+     "Yet it is fifty-nine times five hundred and nine. Fifty-nine was never on the list.",
+     "可它并不是素数：30031 = 59 × 509。而 59 从来不在清单上。"
+    ],
+    [
+     "Lean checks this for any list of positive whole numbers: product plus one has a prime factor off the list.",
+     "Lean 内核对任何正整数清单都检验了：乘积加一，总有一个不在清单上的素因子。"
+    ],
+    [
+     "Infinity is not a warehouse. It is a rule that never runs dry.",
+     "无穷不是一座仓库，而是一条永不枯竭的规则。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 1.2,
+     "kind": "impact"
+    },
+    {
+     "line": 3,
+     "at": 0.6,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "b05_fraction",
+   "name": "FRACTIONS THAT STOP",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.8,
+    0.6,
+    0.8,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "The same division on a fraction always stops: forty-three thirtieths unfolds as one, two, three, four.",
+     "同样的辗转相除用在分数上，总会停下：43/30 展开成 [1; 2, 3, 4]。"
+    ],
+    [
+     "Lean checks that neighbouring convergents cross-multiply to plus or minus one, so none ever needs reducing.",
+     "Lean 内核检验了：相邻渐近分数交叉相乘恰得 ±1，所以没有哪一个还需要约分。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 2.4,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "b05_adele",
+   "name": "ONE RULER PER PRIME",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Now measure one number with many rulers: the usual one, and one more for every prime.",
+     "现在用很多把尺子量同一个数：一把普通的尺，再给每个素数各配一把。"
+    ],
+    [
+     "The p ruler counts only factors of p, and each one shrinks the reading p times.",
+     "p 号尺只数因子 p：每多一个 p，读数就缩小为 1/p。"
+    ],
+    [
+     "Minus thirty-five eighteenths reads thirty-five eighteenths, then two, nine, a fifth, and a seventh.",
+     "−35/18：普通尺读 35/18，各素数尺依次读 2、9、1/5、1/7。"
+    ],
+    [
+     "Multiply the readings: exactly one. Lean checks this for every nonzero rational number.",
+     "把读数全部乘起来：恰好是 1。Lean 内核对每个非零有理数检验了这本账。"
+    ],
+    [
+     "What the usual ruler stretches, the prime rulers together take back.",
+     "普通尺拉长的，素数尺合起来如数收回。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 1.4,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "b05_spinor",
+   "name": "A PRIME BECOMES A TURN",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.8,
+    0.7,
+    0.4,
+    0.4
+   ],
+   "lines": [
+    [
+     "Numbers commute. Turns in space do not. Can a prime become a turn?",
+     "数的乘法可以交换次序，空间里的转动却不行。素数能变成转动吗？"
+    ],
+    [
+     "One plus two i, times one minus two i, is exactly five.",
+     "(1 + 2i)(1 − 2i) 恰好等于 5。"
+    ],
+    [
+     "Put the two on i, j or k, with either sign: six whole quaternions. Lean checks each has squared length five.",
+     "让 ±2 落在 i、j 或 k 上：得到六个整四元数。Lean 内核检验了：每个的模方都是 5。"
+    ],
+    [
+     "Each is an exact turn about an axis, with cosine minus three fifths. No pi needed.",
+     "每一个都是绕坐标轴的精确转动，余弦是 −3/5。用不着 π。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 3.2,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "b05_free",
+   "name": "A TREE WITH NO LOOPS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.8,
+    0.8,
+    0.5,
+    0.4
+   ],
+   "lines": [
+    [
+     "Chain the six turns, never undoing the last one. Can a chain ever come home?",
+     "把六个转动串起来，只是不许立刻撤回上一步。这串转动能回到原点吗？"
+    ],
+    [
+     "Six chains, then thirty, then a hundred and fifty: five fresh choices at every step.",
+     "先是 6 串，然后 30 串，再然后 150 串：每一步都有 5 个新选择。"
+    ],
+    [
+     "Lean checks: two such chains that move the x and y axes alike are the same chain.",
+     "Lean 内核检验了：两串这样的转动，若把 x 轴和 y 轴搬到同样的位置，它们就是同一串。"
+    ],
+    [
+     "Like branches of a tree, no two twigs ever grow back together. The six turns generate a free group.",
+     "就像树枝：分出去的细枝，再也不会长回一起。这六个转动生成了一个自由群。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 0.6,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "b05_mix",
+   "name": "A GAP WITHOUT ROOTS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.9,
+    0.7,
+    0.5,
+    0.5
+   ],
+   "lines": [
+    [
+     "Let the six turns stir a pattern on the sphere, like a spoon in coffee. How fast do swirls fade?",
+     "现在让六个转动去搅动球面上的花纹，就像勺子搅咖啡。漩涡消得有多快？"
+    ],
+    [
+     "Textbooks bound this with two root five and complex numbers. Square it, and the roots vanish.",
+     "教科书用 2√5 和复数来给出这个界。两边一平方，根号就消失了。"
+    ],
+    [
+     "The test becomes: twenty minus lambda squared is never negative.",
+     "判据变成：20 − λ̂² 永不为负。"
+    ],
+    [
+     "The simplest swirl, chi one, comes back as minus two fifths of itself, at every point. Lean checks it.",
+     "最简单的漩涡 χ₁，搅一次就回到自身的 −2/5 倍，处处如此。Lean 内核检验了这一点。"
+    ],
+    [
+     "At three, one, minus two, four: chi is one fifth, and the stir gives minus two twenty-fifths.",
+     "在 q = (3, 1, −2, 4)：χ₁ = 1/5，搅一次得到 −2/25。"
+    ],
+    [
+     "The margin, four ninety-six over twenty-five, is positive, as Lean checks. The constant fails. The literature proves the bound on every nonconstant rotation-group shell.",
+     "裕度 496/25 > 0，Lean 已检验；常值超出此界；文献证明了旋转群所有非常值壳层的界。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 4.0,
+     "kind": "stamp"
+    },
+    {
+     "line": 5,
+     "at": 1.8,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "b05_ask",
+   "name": "NEXT QUESTION",
+   "lead": 0.5,
+   "tail": 2.4,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.2
+   ],
+   "lines": [
+    [
+     "The Riemann hypothesis asks a cousin of this bound, for the zeros of zeta. An external Lean project proved it; this book has not frozen it.",
+     "黎曼猜想问的是这个界的“表亲”，对象是 ζ 的零点。它已由外部 Lean 项目证明；本书没有冻结它。"
+    ],
+    [
+     "Primes escape, rulers balance, turns never loop, and the gap needs no square root.",
+     "素数会逃逸，尺子能配平，转动不成环，谱隙不要根号。"
+    ],
+    [
+     "Numbers, turns, calculus, spectra: can one machine run them all?",
+     "数、转动、微积分、谱：一台机器能全跑起来吗？"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 0.4,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "b06_title",
+   "name": "A WORLD OF FRACTIONS",
+   "lead": 3.6,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.3,
+    0.2,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "So far, everything has been a fraction. What kind of computer could live in such a world?",
+     "到目前为止，一切都是分数。在这样的世界里，能住下什么样的计算机？"
+    ],
+    [
+     "Who said it needs chips, memory and a clock? One whole number and a list of fractions will do.",
+     "谁说计算机非得有芯片、内存和时钟？一个整数加一串分数，就够了。"
+    ]
+   ],
+   "chapter": {
+    "en": "Volume VI · Computation, observers and the zero-axiom kernel",
+    "zh": "第六卷 · 计算、观察者与零公理内核"
+   }
+  },
+  {
+   "id": "b06_rule",
+   "name": "ONE RULE",
+   "lead": 0.5,
+   "tail": 1.3,
+   "music": [
+    0.9,
+    0.5,
+    0.6,
+    0.0,
+    0.2
+   ],
+   "lines": [
+    [
+     "This is Conway's FRACTRAN. Multiply your number by the first fraction that keeps it whole.",
+     "这是康威的 FRACTRAN：用表中第一个能让它保持整数的分数，去乘你的数。"
+    ],
+    [
+     "Then go back to the top. When no fraction fits, the machine stops.",
+     "然后回到表头。哪个分数都不合适时，机器就停下。"
+    ],
+    [
+     "Picture each prime as a jar of marbles. Your number says how many sit in each jar.",
+     "打个比方：每个素数是一只弹珠罐，你的数说出每只罐里有几颗。"
+    ],
+    [
+     "Three quarters means: take two marbles from jar two, drop one into jar three.",
+     "四分之三的意思是：从 2 号罐取走两颗，往 3 号罐放进一颗。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 2.6,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "b06_run",
+   "name": "FIFTEEN STEPS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.8,
+    0.9,
+    0.6,
+    0.5
+   ],
+   "lines": [
+    [
+     "Start at two to the seventeenth: seventeen marbles in jar two.",
+     "从 2 的 17 次方出发：2 号罐里有十七颗弹珠。"
+    ],
+    [
+     "Pairs of twos become threes, pairs of threes become fives, then sevens, then elevens.",
+     "两颗 2 换一颗 3，两颗 3 换一颗 5，再往上换成 7，换成 11。"
+    ],
+    [
+     "Fifteen steps later the number is twenty-two, and nothing divides it. The machine halts.",
+     "十五步之后，数变成 22，再没有分母能整除它。机器停机。"
+    ],
+    [
+     "Seventeen is sixteen plus one: sixteen twos climbed to the top, one stayed behind.",
+     "17 = 16 + 1：十六颗 2 一路爬到顶，剩下一颗留在原地。"
+    ],
+    [
+     "Lean's kernel checked every step, and that the first halt comes at step fifteen. Zero axioms on the strict backend.",
+     "Lean 内核逐步查过这条轨迹，证实第十五步首次停机。严格端公理为空。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 4,
+     "at": 2.4,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "b06_order",
+   "name": "ORDER MATTERS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.7,
+    0.7,
+    0.4,
+    0.4
+   ],
+   "lines": [
+    [
+     "But one number has a blind spot. Three times five is five times three.",
+     "可是一个数有盲区：三乘五等于五乘三。"
+    ],
+    [
+     "It counts what happened, not the order. Socks then shoes is not shoes then socks.",
+     "它记得发生了什么，记不住先后。先穿袜再穿鞋，和先穿鞋再穿袜，不是一回事。"
+    ],
+    [
+     "So bring in the turns of Volume Two: a quaternion, four whole numbers that multiply like turns and stretches.",
+     "于是把第二卷的转动请进机器：四元数，四个整数坐标，乘起来像转动加伸缩。"
+    ],
+    [
+     "X times Y and Y times X have the same size, twenty-five, yet point different ways.",
+     "X 乘 Y 与 Y 乘 X 模方相同，都是 25，指向却不同。"
+    ],
+    [
+     "One gate divides by five. The first passes cleanly; the second leaves remainders and is blocked.",
+     "一道闸门除以 5：前者干净通过，后者留下余数，被挡在门外。"
+    ],
+    [
+     "Lean checks this split without axioms on the strict backend. A number remembers how much. A turn remembers when.",
+     "这一分离经 Lean 检查，严格端公理为空。数记得多少，转动记得先后。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 4,
+     "at": 3.2,
+     "kind": "glitch"
+    },
+    {
+     "line": 5,
+     "at": 0.8,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "b06_observer",
+   "name": "WHO RUNS IT",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.8,
+    0.4,
+    0.5,
+    0.0,
+    0.2
+   ],
+   "lines": [
+    [
+     "Now turn the camera around. Who is running this machine?",
+     "现在把镜头掉转：是谁在运行这台机器？"
+    ],
+    [
+     "The book's model is an observer with no outside: all it can ever receive is already within.",
+     "本书的模型是一位没有外部的观察者：它能接收的一切，早已在它之内。"
+    ],
+    [
+     "Its time is not a wall clock, but how much genuinely new structure it has absorbed.",
+     "它的时间不是墙上的钟，而是它真正吸收了多少新结构。"
+    ],
+    [
+     "Like a diary: a day with nothing new written adds no page. A first comparison adds no cycle. The next closes a triangle. The readings are zero, one half, and two.",
+     "就像日记：一天没写下新东西，就不添一页。第一条比较边未增环路，下一拍闭合三角形。读数依次为 0、1/2、2。"
+    ],
+    [
+     "That is an interpretation, so it wears purple, not green.",
+     "这是诠释，所以它用紫色，不用绿色。"
+    ]
+   ]
+  },
+  {
+   "id": "b06_kernel",
+   "name": "THE JUDGE",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.4,
+    0.3
+   ],
+   "lines": [
+    [
+     "Last comes the judge: Lean's kernel, a small program that checks every step of every proof.",
+     "最后登场的是裁判：Lean 内核，一个小程序，逐步检查每个证明的每一步。"
+    ],
+    [
+     "The strict library skips official Init. Its selected import closures replay in an empty kernel.",
+     "严格库不导入官方 Init。选定的导入闭包在空内核中重放。"
+    ],
+    [
+     "Every point this formula builds from two integers, not both zero, lands exactly on the circle. Axiom list on the strict backend: empty.",
+     "两个不全为零的整数经公式造出的点恰在圆上。严格端公理清单为空。"
+    ],
+    [
+     "The real numbers live outside, past a one-way bridge. There the same circle reappears, at a price.",
+     "实数住在外面，隔着一座单向桥。过了桥，同一个圆重新出现，但要付代价。"
+    ],
+    [
+     "The price is Mathlib's classical axioms, and nothing ever flows back. Proof inside, shadow outside.",
+     "代价是 Mathlib 的经典公理，而且什么都不会流回来。证明在里，影子在外。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 4.4,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "b06_ask",
+   "name": "NEXT QUESTION",
+   "lead": 0.5,
+   "tail": 2.4,
+   "music": [
+    1.0,
+    0.5,
+    0.4,
+    0.2,
+    0.2
+   ],
+   "lines": [
+    [
+     "A machine, an observer, and a judge that brings no axioms of its own.",
+     "一台机器，一位观察者，和一位自己不带一条公理的裁判。"
+    ],
+    [
+     "So what, in the end, did the kernel check?",
+     "说到底，内核查过了什么？"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 0.2,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "b07_title",
+   "name": "THE AUDIT",
+   "lead": 3.5,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.3,
+    0.2,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Six volumes in, which lines did the kernel actually sign?",
+     "六卷走完，内核真正签了字的是哪几行？"
+    ],
+    [
+     "Think of an audit: each line gets a stamp naming its guarantor.",
+     "把它当成一次审计：每一行盖一个章，写明由谁担保。"
+    ],
+    [
+     "Green: the Lean kernel checked it. Purple: our reading. Red: nobody knows yet.",
+     "绿章：Lean 内核查过；紫章：我们的解读；红章：至今没人知道。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 0.3,
+     "kind": "chime"
+    }
+   ],
+   "chapter": {
+    "en": "Coda · What the kernel checked",
+    "zh": "终章 · 内核查过的账"
+   }
+  },
+  {
+   "id": "b07_rows_a",
+   "name": "PRELUDE TO VOLUME III",
+   "lead": 0.4,
+   "tail": 0.5,
+   "music": [
+    0.9,
+    0.5,
+    0.5,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "Prelude. Only a promise: no infinity, no extra axioms. No green stamp yet.",
+     "前言：只是一句承诺——没有无穷，不加公理。先不盖绿章。"
+    ],
+    [
+     "Volume one. Two to three reads like four to six, and infinity, one to zero, lands at minus one.",
+     "第一卷：2:3 与 4:6 读数相同；从前的“无穷远点” 1:0，落在圆上的 −1 处。"
+    ],
+    [
+     "Volume two. A rational vector builds a matrix whose transpose is exactly its inverse.",
+     "第二卷：一个有理向量造出一个矩阵，它的转置恰好就是逆。"
+    ],
+    [
+     "Volume three. Eta cubed is zero, so the chain rule is two lines of fractions. No limit taken.",
+     "第三卷：η 的三次方为零，链式法则就是两行分数运算，不取极限。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 1.2,
+     "kind": "stamp"
+    },
+    {
+     "line": 1,
+     "at": 4.4,
+     "kind": "stamp"
+    },
+    {
+     "line": 2,
+     "at": 3.8,
+     "kind": "stamp"
+    },
+    {
+     "line": 3,
+     "at": 3.6,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "b07_rows_b",
+   "name": "VOLUMES IV TO VI",
+   "lead": 0.4,
+   "tail": 0.5,
+   "music": [
+    0.9,
+    0.7,
+    0.6,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "Volume four. Averaged over the three-sphere with no pi, the even characters are orthonormal in every degree.",
+     "第四卷：在三维球面上求平均，不用 π，各阶偶次特征标照样正交归一。"
+    ],
+    [
+     "Volume five. Multiply the primes up to thirteen, add one: out falls fifty-nine, not on the list.",
+     "第五卷：把 13 以内的素数乘起来再加 1，掉出一个不在名单上的 59。"
+    ],
+    [
+     "Volume six. A four-rule machine halts at twenty-two after fifteen steps, never sooner.",
+     "第六卷：四条规则的机器走十五步停在 22，一步也不早。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 4.4,
+     "kind": "stamp"
+    },
+    {
+     "line": 1,
+     "at": 4.6,
+     "kind": "stamp"
+    },
+    {
+     "line": 2,
+     "at": 4.0,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "b07_tally",
+   "name": "THE TALLY",
+   "lead": 0.4,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.8,
+    0.7,
+    0.4,
+    0.4
+   ],
+   "lines": [
+    [
+     "Each D5 theorem shown here has two records. Its strict axiom list is empty. Its official dependencies are recorded separately.",
+     "画面所列各条 D5 定理都有两套记录。严格端的公理清单为空，官方端的依赖另有记录。"
+    ],
+    [
+     "Outside the wall, eleven bridge theorems cast shadows onto the classical numbers. One way only.",
+     "墙外，十一条桥接定理把影子投到经典数系上；只出不进。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 4.4,
+     "kind": "impact"
+    }
+   ]
+  },
+  {
+   "id": "b07_honest",
+   "name": "PURPLE AND RED",
+   "lead": 0.4,
+   "tail": 0.5,
+   "music": [
+    0.8,
+    0.6,
+    0.3,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "Purple is not faded green. The observer as the universe is a model we chose, not a theorem.",
+     "紫色不是褪了色的绿。“观察者即宇宙”是我们选定的模型，不是定理。"
+    ],
+    [
+     "Red stays red: Einstein's equations from finite comparisons, and Ramanujan bounds in higher rank.",
+     "红色仍是红色：由有限比较推出爱因斯坦方程，以及高秩群上的拉马努金界。"
+    ],
+    [
+     "Why did we think we needed infinity? Habit: curves on flat paper, paid for with polygons that never stop doubling.",
+     "我们凭什么以为离不开无穷？习惯。在平直的纸上画曲线，再用不停加倍的多边形去还账。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 0.4,
+     "kind": "glitch"
+    }
+   ]
+  },
+  {
+   "id": "b07_close",
+   "name": "RECEIPT",
+   "lead": 0.5,
+   "tail": 3.2,
+   "music": [
+    1.0,
+    0.5,
+    0.4,
+    0.2,
+    0.1
+   ],
+   "lines": [
+    [
+     "Behind every green stamp, the kernel checked every step of the proof.",
+     "每个绿章背后，证明的每一步都经内核检查。"
+    ],
+    [
+     "We did not tame infinity. We simply stopped borrowing it.",
+     "我们没有驯服无穷。我们只是不再向它借债。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 0.2,
+     "kind": "chime"
+    }
+   ]
+  }
+ ]
+}

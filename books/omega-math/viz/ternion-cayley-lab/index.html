@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="OMEGA//SPIN · Ternion Heap and 3D Cayley Rotation Lab: ℚP¹, Canonical Ternions, 720° Spinors and Rational Rotations">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>OMEGA//SPIN · 三元流群与三维凯莱旋转实验室：ℚP¹、规范三元数、720° 旋量与有理旋转</title>
+<meta name="description" content="紫色有理球上的四张卡，每个读数都是整数之比。射影圆：齐次整数对 [P : Q] 落在 ((Q² − P²)/(P² + Q²), 2PQ/(P² + Q²))，[1 : 0] 闭合到对径点 (−1, 0)，κ = 0、spread = 1。规范三元数：整四元组除以最大公约数、首个非零分量取正，缩放不动；[pHalf, p₀, qHalf] = (1, 1, 1, 1) 与 [qHalf, p₀, pHalf] = (1, 1, 1, −1) 不是同一条射线。720° 旋量：凯莱提升 Φ(3, 1, 1, 1) 约分为 (1, 1, 1, 1; 2)，第 3 拍落在 (−1, 0, 0, 0; 1)、有号核为 0，第 6 拍回到 (1, 0, 0, 0; 1)。有理凯莱旋转：σ = (1/2, 1/2, 0) 的 R(σ)ⁿ 模方恒为 1，二阶泰勒截断每步乘 17/16，十二步后超过 2.069。 Four cards on the violet rational sphere; every reading is a ratio of integers. Projective circle: the homogeneous integer pair [P : Q] lands at ((Q² − P²)/(P² + Q²), 2PQ/(P² + Q²)), and [1 : 0] closes at the antipode (−1, 0) with κ = 0 and spread = 1. Canonical ternions: an integer quadruple divided by its gcd with its first nonzero entry positive does not move under scaling; [pHalf, p₀, qHalf] = (1, 1, 1, 1) and [qHalf, p₀, pHalf] = (1, 1, 1, −1) are different rays. 720° spinors: the Cayley lift Φ(3, 1, 1, 1) reduces to (1, 1, 1, 1; 2); beat 3 lands on (−1, 0, 0, 0; 1) with signed kernel 0, beat 6 returns to (1, 0, 0, 0; 1). Rational Cayley rotations: R(σ)ⁿ for σ = (1/2, 1/2, 0) keeps the squared norm 1, while the second-order Taylor truncation multiplies it by 17/16 per step and passes 2.069 after twelve steps.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="ternion-cayley-lab">
+<div class="app lab" id="app">
+<header class="top">
+  <div class="brand">
+    <a class="crumb" href="../"><span class="zh">◂ 第 2–5 章</span><span class="en">◂ Ch. 2–5</span></a>
+    <h1 class="logo" data-text="OMEGA//SPIN">OMEGA<span>//</span>SPIN</h1>
+    <div class="tagline"><span class="zh">四种读法，一颗有理球 · <em>无穷远落在对径点，三元数不交换，旋量要转 720°，凯莱旋转不离球面。</em></span><span class="en">Four readings, one rational sphere · <em>infinity lands on the antipode, ternions do not commute, spinors need 720°, Cayley rotations never leave the sphere.</em></span></div>
+  </div>
+  <div class="status"><span class="pill" id="scenePill">Ω <strong>—</strong></span><span class="pill" id="keyPill">P/Q <strong>—</strong></span><div class="langs" role="group" aria-label="Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div></div>
+</header>
+<aside class="col deck" id="rail" aria-label="实验控制" data-aria-en="Experiment controls">
+  <section class="panel sec" id="lensPanel">
+    <h2><span class="zh">双透镜</span><span class="en">Two lenses</span><span class="aside">Ω ↔ ℝ</span></h2>
+    <button class="lens-toggle" id="lensToggleBtn" type="button" aria-pressed="false"><span class="seg off"><span class="zh">零公理有理数学 Math<sub>Ω</sub> · 整数之比</span><span class="en">Zero-axiom rational Math<sub>Ω</sub> · ratios of integers</span></span><span class="seg on"><span class="zh">经典实数对照（MODEL）· 角度与极限</span><span class="en">Classical reals (MODEL) · angles and limits</span></span></button>
+  </section>
+  <section class="panel sec">
+    <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">4</span></h2>
+    <div class="presets cards" id="presets">
+      <button class="preset" data-preset="qp1-antipodal-circle" aria-pressed="false"><span class="code">[P : Q] → [1 : 0] = (−1, 0)</span><span class="cn zh">齐次整数对走上射影圆，无穷远闭合到对径点</span><span class="cn en">Integer pairs on the circle; infinity meets the antipode</span></button>
+      <button class="preset" data-preset="canonical-ternion-noncomm" aria-pressed="false"><span class="code">(1, 1, 1, 1) ≠ (1, 1, 1, −1)</span><span class="cn zh">规范整三元数：缩放不动，次序要紧</span><span class="cn en">Canonical ternions: scaling stays, order matters</span></button>
+      <button class="preset" data-preset="pythspinor-720-double-cover" aria-pressed="false"><span class="code">Φ(3, 1, 1, 1) · 6 × 120° = 720°</span><span class="cn zh">第 3 拍落在 −1，第 6 拍才回到 +1</span><span class="cn en">Beat 3 lands on −1, beat 6 returns to +1</span></button>
+      <button class="preset" data-preset="cayley3d-vs-taylor-drift" aria-pressed="false"><span class="code">R(σ)ⁿ · ‖v‖² ≡ 1 vs T₂</span><span class="cn zh">凯莱旋转锁在球上，泰勒截断外漂</span><span class="cn en">Cayley stays on the sphere, Taylor drifts off</span></button>
+    </div>
+    <p class="note" id="presetNote"></p>
+  </section>
+  <section class="panel sec" id="viewPanel">
+    <h2><span class="zh">视角</span><span class="en">View</span></h2>
+    <div class="chips scene-chips" id="camChips" role="group" aria-label="视角" data-aria-en="View"><button class="chip" data-cam="card" aria-pressed="true"><span class="zh">本卡</span><span class="en">Card</span></button><button class="chip" data-cam="pole" aria-pressed="false"><span class="zh">俯看</span><span class="en">From above</span></button><button class="chip" data-cam="side" aria-pressed="false"><span class="zh">侧看</span><span class="en">Side</span></button></div>
+    <p class="note"><span class="zh">时间轴与琥珀手柄推动本卡的量；拖空白处转视角。换透镜只换名字与轻重，状态不变。</span><span class="en">The rail and the amber handle move the quantity of the card; drag empty space to orbit. The lens changes names and weights and keeps the state.</span></p>
+  </section>
+</aside>
+<main class="center">
+  <div class="stage" id="stage" data-thumb aria-label="紫色有理球：青色是精确的有理对象（圆上的点、凯莱轨道、+ 叶），品红是对照（另一种次序、− 叶、泰勒外漂），紫色是转轴，琥珀是当前点" data-aria-en="The violet rational sphere: cyan for exact rational objects (points of the circle, Cayley orbits, the + leaf), magenta for the contrast (the other order, the − leaf, the Taylor drift), violet for axes, amber for the current point">
+    <canvas class="fill" id="cv"></canvas><div class="scan"></div><div class="vig"></div>
+    <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+    <div class="hud-tl" id="hudTl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+    <div class="hud-tr" id="hudTr"><button type="button" class="chip" id="stageAct" hidden></button></div>
+    <button type="button" class="handle" id="stageHandle" aria-label="拖动或用方向键移动当前点" data-aria-en="Drag or use the arrow keys to move the current point" hidden></button>
+    <div class="hud-bl" id="legend"></div>
+  </div>
+  <div class="tour" id="tour"><span class="tour-l"><button class="tbtn" id="prevBtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button><button class="tbtn tour-clock" id="rewindBtn" aria-label="回到起点" data-aria-en="Back to the start">⏮</button><button class="tbtn tour-clock" id="playBtn" aria-label="播放或暂停" data-aria-en="Play or pause" aria-pressed="false">▷</button><button class="chip tour-lens" id="lensMirror" type="button" aria-pressed="false" aria-label="切换双透镜" data-aria-en="Switch lens"><span class="zh">透镜</span><span class="en">Lens</span></button></span><div class="what" id="tourBody"></div><button class="tbtn" id="nextBtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button></div>
+  <div class="strip">
+    <section class="panel"><div class="head"><h2 id="plotTitle"></h2><span id="plotMeta"></span></div><canvas id="plot" aria-label="条带小图：随本卡变化——射影圆是沿时间轴的 κ 与 spread，三元数是两种次序的规范分量，旋量是逐拍的两种核，凯莱卡是逐步的两种模方" data-aria-en="Strip plot, by card: κ and spread along the rail for the circle, the canonical entries of both orders for the ternions, the two kernels beat by beat for the spinor, the two squared norms step by step for the Cayley card"></canvas></section>
+  </div>
+</main>
+<aside class="col side" id="evidence" aria-label="参数、读数与依据" data-aria-en="Parameters, readouts and evidence">
+  <button class="chip" id="infoBtn" type="button"><span class="zh">理论接口 · 这不是证明</span><span class="en">Theory interface · not a proof</span></button>
+  <section class="panel sec" id="ctlPanel">
+    <h2><span class="zh">本卡的旋钮</span><span class="en">Dials of the card</span><span class="aside" id="ctlAside">—</span></h2>
+    <div class="grp" data-scene="circle">
+      <div class="ctl"><span class="lab"><span class="zh">时间轴终点 [P : Q]（齐次整数对）</span><span class="en">End of the rail [P : Q] (homogeneous integer pair)</span></span></div>
+      <div class="field"><label for="pP"><span class="zh">P</span><span class="en">P</span></label><output id="pPOut">—</output><input id="pP" type="range" min="-12" max="12" step="1" value="1"></div>
+      <div class="field"><label for="pQ"><span class="zh">Q</span><span class="en">Q</span></label><output id="pQOut">—</output><input id="pQ" type="range" min="0" max="12" step="1" value="0"></div>
+      <div class="ctl"><span class="lab"><span class="zh">射影锚点</span><span class="en">Projective anchors</span></span><div class="chips" id="anchorChips" role="group" aria-label="射影锚点" data-aria-en="Projective anchors"><button class="chip" data-anchor="0:1" aria-pressed="false">[0:1]</button><button class="chip" data-anchor="1:1" aria-pressed="false">[1:1]</button><button class="chip" data-anchor="1:0" aria-pressed="true">[1:0]</button></div></div>
+    </div>
+    <div class="grp" data-scene="ternion" hidden>
+      <div class="ctl"><span class="lab"><span class="zh">a = (w, x, y, z)（整数，非零）</span><span class="en">a = (w, x, y, z) (integers, nonzero)</span></span></div>
+      <div class="quad">
+        <div class="field"><label for="aw">w</label><output id="awOut">—</output><input id="aw" type="range" min="-4" max="4" step="1" value="1"></div>
+        <div class="field"><label for="ax">x</label><output id="axOut">—</output><input id="ax" type="range" min="-4" max="4" step="1" value="1"></div>
+        <div class="field"><label for="ay">y</label><output id="ayOut">—</output><input id="ay" type="range" min="-4" max="4" step="1" value="0"></div>
+        <div class="field"><label for="az">z</label><output id="azOut">—</output><input id="az" type="range" min="-4" max="4" step="1" value="0"></div>
+      </div>
+      <div class="field"><label for="sk"><span class="zh">缩放 k（非零整数）</span><span class="en">Scale k (nonzero integer)</span></label><output id="skOut">—</output><input id="sk" type="range" min="-4" max="4" step="1" value="-2"></div>
+      <div class="ctl"><span class="lab"><span class="zh">次序（b = qHalf = (1, 0, 1, 0)）</span><span class="en">Order (b = qHalf = (1, 0, 1, 0))</span></span><div class="chips" id="orderChips" role="group" aria-label="次序" data-aria-en="Order"><button class="chip" data-order="ab" aria-pressed="true">[a, p₀, b]</button><button class="chip" data-order="ba" aria-pressed="false">[b, p₀, a]</button></div></div>
+    </div>
+    <div class="grp" data-scene="spinor" hidden>
+      <div class="ctl"><span class="lab"><span class="zh">凯莱提升 Φ(a, b, c, d)（整数，非零）</span><span class="en">Cayley lift Φ(a, b, c, d) (integers, nonzero)</span></span></div>
+      <div class="quad">
+        <div class="field"><label for="la">a</label><output id="laOut">—</output><input id="la" type="range" min="-4" max="4" step="1" value="3"></div>
+        <div class="field"><label for="lb">b</label><output id="lbOut">—</output><input id="lb" type="range" min="-4" max="4" step="1" value="1"></div>
+        <div class="field"><label for="lc">c</label><output id="lcOut">—</output><input id="lc" type="range" min="-4" max="4" step="1" value="1"></div>
+        <div class="field"><label for="ld">d</label><output id="ldOut">—</output><input id="ld" type="range" min="-4" max="4" step="1" value="1"></div>
+      </div>
+      <div class="ctl"><span class="lab"><span class="zh">生成元</span><span class="en">Generator</span></span><div class="chips" id="genChips" role="group" aria-label="生成元" data-aria-en="Generator"><button class="chip" data-gen="3,1,1,1" aria-pressed="true">g120 = Φ(3, 1, 1, 1)</button><button class="chip" data-gen="1,1,0,0" aria-pressed="false">Φ(1, 1, 0, 0)</button><button class="chip" data-gen="2,1,0,0" aria-pressed="false">Φ(2, 1, 0, 0)</button></div></div>
+    </div>
+    <div class="grp" data-scene="cayley" hidden>
+      <div class="ctl"><span class="lab"><span class="zh">σ = (x, y, z)/d（整数分子，公共分母 d ≥ 1）</span><span class="en">σ = (x, y, z)/d (integer numerators, common denominator d ≥ 1)</span></span></div>
+      <div class="quad">
+        <div class="field"><label for="sx">x</label><output id="sxOut">—</output><input id="sx" type="range" min="-4" max="4" step="1" value="1"></div>
+        <div class="field"><label for="sy">y</label><output id="syOut">—</output><input id="sy" type="range" min="-4" max="4" step="1" value="1"></div>
+        <div class="field"><label for="sz">z</label><output id="szOut">—</output><input id="sz" type="range" min="-4" max="4" step="1" value="0"></div>
+        <div class="field"><label for="sd">d</label><output id="sdOut">—</output><input id="sd" type="range" min="1" max="6" step="1" value="2"></div>
+      </div>
+      <div class="ctl"><span class="lab"><span class="zh">生成元</span><span class="en">Generator</span></span><div class="chips" id="sigChips" role="group" aria-label="生成元" data-aria-en="Generator"><button class="chip" data-sig="1,1,0,2" aria-pressed="true">σ = (1/2, 1/2, 0)</button><button class="chip" data-sig="1,0,0,1" aria-pressed="false">σ = (1, 0, 0) · Ad(pHalf)</button><button class="chip" data-sig="1,2,2,3" aria-pressed="false">σ = (1/3, 2/3, 2/3)</button></div></div>
+    </div>
+  </section>
+  <section class="panel sec" id="readouts" aria-live="polite">
+    <h2><span class="zh">有理账本</span><span class="en">Rational ledger</span><span class="aside">NUM · P/Q</span></h2>
+    <dl class="ro">
+      <div class="key"><dt id="roKeyL">—</dt><dd><b><output id="roKey">—</output></b><span id="roKeySub"></span></dd></div>
+      <div class="c wide" id="roRow1"><dt id="roL1">—</dt><dd><output id="roV1">—</output></dd></div>
+      <div class="c wide" id="roRow2"><dt id="roL2">—</dt><dd><output id="roV2">—</output></dd></div>
+      <div class="c wide" id="roRow3"><dt id="roL3">—</dt><dd><output id="roV3">—</output></dd></div>
+      <div class="v wide" id="roRow4"><dt id="roL4">—</dt><dd><output id="roV4">—</output></dd></div>
+      <div class="c wide" id="roRow5"><dt id="roL5">—</dt><dd><output id="roV5">—</output></dd></div>
+      <div class="m wide" id="roRow6"><dt id="roL6">—</dt><dd><output id="roV6">—</output></dd></div>
+    </dl>
+    <p class="note" id="roNote"></p>
+  </section>
+  <section class="panel sec" id="basis">
+    <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">无穷远点闭合到对径点：对整数 p ≠ 0，在 [p : 0] 处 κ 等价于 0、spread 等价于 1，凯莱像 X 等价于 −1、Y 等价于 0；其中对整数对 [p : q]，κ = q²/(p² + q²)、spread = p²/(p² + q²)、X = (q² − p²)/(p² + q²)、Y = (pq + qp)/(p² + q²)：</span><span class="en">The point at infinity closes at the antipode: for an integer p ≠ 0, at [p : 0] κ is equivalent to 0 and spread to 1, and the Cayley image has X equivalent to −1 and Y to 0; here, for an integer pair [p : q], κ = q²/(p² + q²), spread = p²/(p² + q²), X = (q² − p²)/(p² + q²) and Y = (pq + qp)/(p² + q²): </span><a data-lean-gid="D5/S3/Quantum/AURICOmega/OmegaCircleClosure.cayley_antipodal_closure" href="#" target="_blank" rel="noopener"><code>cayley_antipodal_closure</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">三元积的射线外结合律：对非零整四元数 x、y、z、u、v，triad(triad(x, y, z), u, v) 与 triad(x, y, triad(z, u, v)) 射线等价；其中 triad(a, b, c) = (a·conj(b))·c，两个整四元数射线等价指二者都非零且有非零整数 k、l 使 k·a = l·b：</span><span class="en">The outer associativity of the triad on rays: for nonzero integer quaternions x, y, z, u, v, triad(triad(x, y, z), u, v) and triad(x, y, triad(z, u, v)) are ray-equivalent; here triad(a, b, c) = (a·conj(b))·c, and two integer quaternions are ray-equivalent when both are nonzero and k·a = l·b for some nonzero integers k, l: </span><a data-lean-gid="D5/S3/Quantum/AURICOmega/OmegaTernionHeap.triad_assoc" href="#" target="_blank" rel="noopener"><code>triad_assoc</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">有号核与射影核的二次桥：对 PythSpinor p、q（整四元数分子 num p、正自然数半径 r<sub>p</sub>，且 <span class="nm">‖</span>num p<span class="nm">‖</span>² = r<sub>p</sub>²），κ<sub>proj</sub>(p, q) = ⟨num p, num q⟩²/(<span class="nm">‖</span>num p<span class="nm">‖</span>²<span class="nm">‖</span>num q<span class="nm">‖</span>²) 等价于 (2κ<sub>spin</sub>(p, q) − 1)²，其中 κ<sub>spin</sub>(p, q) = (r<sub>p</sub>r<sub>q</sub> + ⟨num p, num q⟩)/(2r<sub>p</sub>r<sub>q</sub>)：</span><span class="en">The quadratic bridge between the signed and the projective kernel: for PythSpinors p, q (integer quaternion numerator num p, positive natural radius r<sub>p</sub>, and <span class="nm">‖</span>num p<span class="nm">‖</span>² = r<sub>p</sub>²), κ<sub>proj</sub>(p, q) = ⟨num p, num q⟩²/(<span class="nm">‖</span>num p<span class="nm">‖</span>²<span class="nm">‖</span>num q<span class="nm">‖</span>²) is equivalent to (2κ<sub>spin</sub>(p, q) − 1)², where κ<sub>spin</sub>(p, q) = (r<sub>p</sub>r<sub>q</sub> + ⟨num p, num q⟩)/(2r<sub>p</sub>r<sub>q</sub>): </span><a data-lean-gid="D5/S3/Quantum/AURICOmega/OmegaTernionHeap.quadratic_kernel" href="#" target="_blank" rel="noopener"><code>quadratic_kernel</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">凯莱矩阵正交：对有理三维向量 s = (x, y, z)/d（d ≥ 1），Cayley s = C/N，C = (d² − x² − y² − z²)I + 2d[s₀]<sub>×</sub> + 2s₀s₀<sup>T</sup>（s₀ = (x, y, z)），N = d² + x² + y² + z²，满足 (Cayley s)<sup>T</sup>·Cayley s 等价于单位矩阵：</span><span class="en">The Cayley matrix is orthogonal: for a rational 3-vector s = (x, y, z)/d (d ≥ 1), Cayley s = C/N with C = (d² − x² − y² − z²)I + 2d[s₀]<sub>×</sub> + 2s₀s₀<sup>T</sup> (s₀ = (x, y, z)) and N = d² + x² + y² + z² satisfies that (Cayley s)<sup>T</sup>·Cayley s is equivalent to the identity matrix: </span><a data-lean-gid="D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.cayley_orthogonal" href="#" target="_blank" rel="noopener"><code>cayley_orthogonal</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">伴随作用是乘法同态：对非零整四元数 p、q 与有理三维向量 v，Ad(p·q) v 与 Ad(p)(Ad(q) v) 等价，其中 Ad(p) v = Im(p·v·conj(p))/<span class="nm">‖</span>p<span class="nm">‖</span>²（v 看作纯虚四元数）：</span><span class="en">The adjoint action is a homomorphism: for nonzero integer quaternions p, q and a rational 3-vector v, Ad(p·q) v is equivalent to Ad(p)(Ad(q) v), where Ad(p) v = Im(p·v·conj(p))/<span class="nm">‖</span>p<span class="nm">‖</span>² (v read as a pure quaternion): </span><a data-lean-gid="D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.ad_hom" href="#" target="_blank" rel="noopener"><code>ad_hom</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">旋量流群递推每一拍模方为一：对 PythSpinor a、b 与自然数 n，heapAt(a, b, n) 的有理模方 <span class="nm">‖</span>num<span class="nm">‖</span>²/r² 等价于 1；其中 heapAt(a, b, 0) = a、heapAt(a, b, 1) = b、heapAt(a, b, n + 2) = triad(heapAt(a, b, n + 1), heapAt(a, b, n), heapAt(a, b, n + 1))，triad(p, q, r) = (p·conj(q))·r（分子相乘，半径相乘）：</span><span class="en">Every beat of the spinor heap recurrence has squared norm one: for PythSpinors a, b and a natural number n, the rational squared norm <span class="nm">‖</span>num<span class="nm">‖</span>²/r² of heapAt(a, b, n) is equivalent to 1; here heapAt(a, b, 0) = a, heapAt(a, b, 1) = b, heapAt(a, b, n + 2) = triad(heapAt(a, b, n + 1), heapAt(a, b, n), heapAt(a, b, n + 1)), and triad(p, q, r) = (p·conj(q))·r (numerators multiply, radii multiply): </span><a data-lean-gid="D5/S3/Quantum/AURICOmega/OmegaCayleyRotation.heap_norm_preserved" href="#" target="_blank" rel="noopener"><code>heap_norm_preserved</code></a></span></div>
+    <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">手工推导，未以本页的 Lean 定理担保（正文第 3–5 章）：[pHalf, p₀, qHalf] = (1 + i)(1 + j) = (1, 1, 1, 1)，[qHalf, p₀, pHalf] = (1 + j)(1 + i) = (1, 1, 1, −1)，两者的分量不成比例，所以不是同一条射线；凯莱提升 Φ(a, b, c, d) = ((a² − s) + 2a(b, c, d); a² + s)（s = b² + c² + d²）是 (a, b, c, d) 的平方再除以模方，把四元数的角加倍；对单位旋量 heapAt(e, g, n) 与 gⁿ 只差一个正的整数因子（分子与半径同乘），g = (1, 1, 1, 1; 2) 时第 3 拍是 −e、第 6 拍是 e；Ad(pHalf)(x, y, z) = (x, −z, y)，Cayley(1, 0, 0) 就是它；二阶泰勒截断 T₂ = I + X + X²/2（X = [σ]<sub>×</sub>）在垂直于 σ 的平面里把模方乘以 1 + u²/4（u = <span class="nm">‖</span>σ<span class="nm">‖</span>²），σ = (1/2, 1/2, 0) 时是 17/16；双卡乘法的两个分母满足 D₊ + D₋ = (1 + <span class="nm">‖</span>σ<sub>A</sub><span class="nm">‖</span>²)(1 + <span class="nm">‖</span>σ<sub>B</sub><span class="nm">‖</span>²) ≥ 1，所以 max(D₊, D₋) ≥ 1/2，且分子矢的模方等于 D₊D₋。</span><span class="en">Derived by hand, not guaranteed by a Lean theorem of this page (text, Chapters 3–5): [pHalf, p₀, qHalf] = (1 + i)(1 + j) = (1, 1, 1, 1) and [qHalf, p₀, pHalf] = (1 + j)(1 + i) = (1, 1, 1, −1); their entries are not proportional, so they are different rays. The Cayley lift Φ(a, b, c, d) = ((a² − s) + 2a(b, c, d); a² + s) (s = b² + c² + d²) is the square of (a, b, c, d) over its squared norm and doubles the quaternion angle; for a unit spinor, heapAt(e, g, n) and gⁿ differ by a positive integer factor (numerator and radius alike), and for g = (1, 1, 1, 1; 2) beat 3 is −e and beat 6 is e. Ad(pHalf)(x, y, z) = (x, −z, y), and Cayley(1, 0, 0) is this matrix. The second-order Taylor truncation T₂ = I + X + X²/2 (X = [σ]<sub>×</sub>) multiplies the squared norm in the plane perpendicular to σ by 1 + u²/4 (u = <span class="nm">‖</span>σ<span class="nm">‖</span>²), which is 17/16 for σ = (1/2, 1/2, 0). The two denominators of the dual-chart product satisfy D₊ + D₋ = (1 + <span class="nm">‖</span>σ<sub>A</sub><span class="nm">‖</span>²)(1 + <span class="nm">‖</span>σ<sub>B</sub><span class="nm">‖</span>²) ≥ 1, hence max(D₊, D₋) ≥ 1/2, and the squared norm of the numerator vector equals D₊D₋.</span></span></div>
+    <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">本书的读法与画法：“零公理有理数学”是本书的读法；经典透镜里的角度、反正切与小数都是浮点数，只作对照。画法：射影圆卡与旋量卡把一个圆画成过顶点的大圆，单位球是玻璃壳，里面是略小的不透明内核，好让整圈都看得见；射影圆的高度是 X（κ = (1 + X)/2），旋量卡的高度是分子的实部 w/r（κ<sub>spin</sub> = (1 + w/r)/2），水平方向是沿转轴的虚部，所以 +e 在顶、−e 在底；三元数卡把一条规范射线画成它诱导的转动 Ad(a)，被转动的是有理单位点 v₀ = (2, 3, 6)/7；凯莱卡里的 v₀ = (0, 0, 1)，泰勒点离球心的距离是它的模，画到 1.6 为止。画图本身用了浮点的平方根与反余弦，账本全部用整数与分数。</span><span class="en">Readings and drawing conventions of this book: “zero-axiom rational mathematics” is a reading of this book; the angles, arctangents and decimals of the classical lens are floating-point numbers, shown for contrast. Drawing: the circle card and the spinor card draw a circle as a great circle through the top, and the unit sphere as a glass shell round a slightly smaller opaque core, so that the whole circle stays in view; the height of the circle card is X (κ = (1 + X)/2), the height of the spinor card is the real part w/r of the numerator (κ<sub>spin</sub> = (1 + w/r)/2), and the horizontal direction is the imaginary part along the axis, so +e is at the top and −e at the bottom; the ternion card draws a canonical ray as the rotation Ad(a) it induces, acting on the rational unit point v₀ = (2, 3, 6)/7; on the Cayley card v₀ = (0, 0, 1), and a Taylor point sits at its norm from the centre, drawn up to 1.6. The drawing itself uses floating-point roots and arccosines; the ledger uses integers and fractions only.</span></span></div>
+    <div class="lean num"><span class="ok">NUM</span><span><span class="zh">—</span><span class="en">—</span></span></div>
+  </section>
+</aside>
+<footer class="rail"><div class="transport"><button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button><button class="tbtn" id="play" aria-label="播放或暂停" data-aria-en="Play or pause" aria-pressed="false">▶</button><span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed"><button class="chip" data-speed="0.5" aria-pressed="false">0.5×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2" aria-pressed="false">2×</button></span></div><div class="clock"><span class="tau" id="tau"></span><input type="range" id="now" min="0" max="16" step="1" value="16" aria-label="时间轴：本卡的步数（射影圆上的步、转动的进度、旋量的拍或凯莱步数）" data-aria-en="Rail: the step of the card (the step on the circle, the progress of the rotations, the beat of the spinor or the Cayley step)"></div><div class="keys"><span id="hint"></span><span id="formula"></span></div></footer>
+</div>
+<div class="drawer" id="drawer" hidden><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+  <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 三元流群与有理凯莱旋转</span><span class="en">Theory interface · ternion heaps and rational Cayley rotations</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+  <div class="zh">
+    <p class="lede">这是数值沙盘，不是证明。绿色框只写冻结的 Lean 定理自己的前提与结论；页面上的数由脚本用大整数现算（NUM），分数一律约分，是这些定理与正文推导的个别实例，页面不检验定理的前提；经典透镜里的角度与小数是浮点对照（MODEL）。下面附上依据栏的全部依据框。</p>
+    <ol>
+      <li><b>射影圆与对径闭合。</b> 绘线是实圆；凯莱读数只取其有理点。 时间轴走 [k : 16 − k]，k = 4 时是 [4 : 12] = 4·[1 : 3]，κ 不变；终点 [16 : 0] 的 κ = <span data-bench="antiK">—</span>、spread = <span data-bench="antiS">—</span>，凯莱像 = <span data-bench="antiXY">—</span>。锚点 [0:1]、[1:1]、[1:0] 的 κ 是 1、1/2、0。</li>
+      <li><b>规范三元数。</b> 原始乘积 triad(pHalf, pHalf, p₀) 给出 2p₀。规范化后才与 p₀ 逐项相等。 (−2, −2, 0, 0) 的规范代表是 (1, 1, 0, 0) = pHalf；[pHalf, p₀, qHalf] = <span data-bench="ab">—</span>，[qHalf, p₀, pHalf] = <span data-bench="ba">—</span>，两者的相融度 κ = <span data-bench="kab">—</span>。它们把 v₀ = (2, 3, 6)/7 分别转到 <span data-bench="endAB">—</span> 与 <span data-bench="endBA">—</span>。</li>
+      <li><b>720° 旋量。</b>Φ(3, 1, 1, 1) = <span data-bench="lift">—</span>，约分为 (1, 1, 1, 1; 2)。六拍的有号核依次是 <span data-bench="kspin">—</span>，射影核是 <span data-bench="kproj">—</span>；第 3 拍约分为 <span data-bench="beat3">—</span>，第 6 拍为 <span data-bench="beat6">—</span>。</li>
+      <li><b>有理凯莱旋转与泰勒截断。</b> 同一输入在普通凯莱图与 MRP 图中是两种不同的坐标。Ad(pHalf) 的迹为 1，单位提升须满足 w² = 1/2，故该旋转没有有理 MRP 表示。 σ = (1/2, 1/2, 0)：R(σ) = <span data-bench="R">—</span>；R(σ)¹²v₀ 的分母是 <span data-bench="den12">—</span>，模方是 <span data-bench="n12">—</span>；二阶泰勒十二步的模方是 <span data-bench="t12">—</span>。双卡乘法 σ 与 σ：D₊ = <span data-bench="dplus">—</span>，D₋ = <span data-bench="dminus">—</span>，和 = <span data-bench="dsum">—</span>。</li>
+      <li><b>双透镜。</b>同一组状态，两种轻重：Math<sub>Ω</sub> 透镜把青色的有理对象提亮；经典对照（MODEL）把品红的角度、反正切与泰勒小数提亮，并写出它们的浮点值。</li>
+    </ol>
+    <p class="lede refs">书中：<a href="../../zh/ch02-homogeneous-projective-line.html" target="_top">第二章 一维齐次射影闭环与对径锚点</a> · <a href="../../zh/ch03-canonical-ternion-manifold.html" target="_top">第三章 规范整三元数</a> · <a href="../../zh/ch04-heaps-and-lie-triple-curvature.html" target="_top">第四章 有号旋量双覆叠</a> · <a href="../../zh/ch05-rational-cayley-rotations.html" target="_top">第五章 三维凯莱有理旋转</a></p>
+  </div>
+  <div class="en">
+    <p class="lede">This is a numerical sandbox, not a proof. A green box states the hypotheses and the conclusion of a frozen Lean theorem and nothing else; the numbers of the page are computed by its script in big integers (NUM), every fraction reduced; they are single instances of the theorems and of the derivations of the text, and the page does not check the hypotheses of the theorems; the angles and decimals of the classical lens are a floating-point contrast (MODEL). All evidence boxes of the panel follow below.</p>
+    <ol>
+      <li><b>The projective circle and its antipodal closure.</b> The drawn curve is the real circle. Cayley readouts sample its rational points.  The rail walks [k : 16 − k]; at k = 4 it is [4 : 12] = 4·[1 : 3], and κ does not change. The end [16 : 0] has κ = <span data-bench="antiK">—</span>, spread = <span data-bench="antiS">—</span> and Cayley image <span data-bench="antiXY">—</span>. The anchors [0:1], [1:1], [1:0] have κ = 1, 1/2, 0.</li>
+      <li><b>Canonical ternions.</b> The raw product triad(pHalf, pHalf, p₀) is 2p₀. Normalization gives p₀ entry by entry.  The canonical representative of (−2, −2, 0, 0) is (1, 1, 0, 0) = pHalf; [pHalf, p₀, qHalf] = <span data-bench="ab">—</span> and [qHalf, p₀, pHalf] = <span data-bench="ba">—</span>, with overlap κ = <span data-bench="kab">—</span>. They turn v₀ = (2, 3, 6)/7 to <span data-bench="endAB">—</span> and to <span data-bench="endBA">—</span>.</li>
+      <li><b>720° spinors.</b> Φ(3, 1, 1, 1) = <span data-bench="lift">—</span>, which reduces to (1, 1, 1, 1; 2). Over the six beats the signed kernel runs through <span data-bench="kspin">—</span> and the projective kernel through <span data-bench="kproj">—</span>; beat 3 reduces to <span data-bench="beat3">—</span>, beat 6 to <span data-bench="beat6">—</span>.</li>
+      <li><b>Rational Cayley rotation and Taylor truncation.</b> The ordinary Cayley chart and the MRP chart read the same input as different coordinates. Ad(pHalf) has trace 1, so a unit lift would require w² = 1/2. This rotation has no rational MRP representation.  σ = (1/2, 1/2, 0): R(σ) = <span data-bench="R">—</span>; R(σ)¹²v₀ has denominator <span data-bench="den12">—</span> and squared norm <span data-bench="n12">—</span>; twelve second-order Taylor steps give the squared norm <span data-bench="t12">—</span>. The dual-chart product of σ with σ: D₊ = <span data-bench="dplus">—</span>, D₋ = <span data-bench="dminus">—</span>, sum = <span data-bench="dsum">—</span>.</li>
+      <li><b>Two lenses.</b> One state, two weights: the Math<sub>Ω</sub> lens brightens the rational objects in cyan; the classical contrast (MODEL) brightens the angles, arctangents and Taylor decimals in magenta and writes their floating-point values.</li>
+    </ol>
+    <p class="lede refs">In the book: <a href="../../en/ch02-homogeneous-projective-line.html" target="_top">Chapter 2, the homogeneous projective line and antipodal closure</a> · <a href="../../en/ch03-canonical-ternion-manifold.html" target="_top">Chapter 3, canonical ternions</a> · <a href="../../en/ch04-heaps-and-lie-triple-curvature.html" target="_top">Chapter 4, signed spinor double covers</a> · <a href="../../en/ch05-rational-cayley-rotations.html" target="_top">Chapter 5, rational Cayley rotations</a></p>
+  </div>
+  <div class="drawer-evidence" id="drawerEvidence"></div>
+</div></div>
+<script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="zh-CN" data-title-en="OMEGA//LAB · Omega Math Workbench: Bargmann–Gram Triads, Second-Order Jets, π-Free Haar Integrals &amp; the p = 5 Hecke Spectrum">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>OMEGA//LAB · Ω 数学工作台：巴格曼—格拉姆三角、二阶射流、无 π 哈尔积分与 p = 5 赫克谱</title>
+<meta name="description" content="紫色有理三元球上的四张卡，每个读数都是整数之比。巴格曼—格拉姆三角：det G₃ = 1 + 2B − (κ_ab + κ_bc + κ_ca) ≥ 0，c = [b, o, b] 时为 0，o、pHalf、qHalf 时为 1/4。二阶射流：在 ℚ[η]/(η³) 中 1 + x² 的逆在 x₀ = 1 处是 (1/2, −1/2, 1/4)，凯莱圆上的二阶射流贴着圆，平直切平面在二阶上偏离。无 π 哈尔积分：E[κⁿ] = 1、1/4、1/8、5/64、7/128，特征 χ₀、χ₁、χ₂ 两两正交且模为 1。p = 5 赫克：六个模 5 跳跃把 χ₁ 乘以 −2/5，4·5 − (2/5)² = 496/25 &gt; 0；Ω-FRACTRAN 门 Ȳ/5 让 XY 通过、把 YX 拦下。 Four cards on the violet rational ternion sphere; every reading is a ratio of integers. Bargmann–Gram triad: det G₃ = 1 + 2B − (κ_ab + κ_bc + κ_ca) ≥ 0, equal to 0 for c = [b, o, b] and to 1/4 for o, pHalf, qHalf. Second-order jet: in ℚ[η]/(η³) the inverse of 1 + x² at x₀ = 1 is (1/2, −1/2, 1/4); on the Cayley circle the jet hugs the circle while the flat tangent plane drifts off at second order. π-free Haar integration: E[κⁿ] = 1, 1/4, 1/8, 5/64, 7/128, and the characters χ₀, χ₁, χ₂ are orthonormal. p = 5 Hecke: the six jumps of norm 5 multiply χ₁ by −2/5, and 4·5 − (2/5)² = 496/25 &gt; 0; the Ω-FRACTRAN gate Ȳ/5 passes XY and blocks YX.">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="style.css">
+<script src="../assets/shell.js"></script>
+<script src="../assets/kit.js"></script>
+</head>
+<body data-viz-id="omega-math-workbench">
+<div class="app lab" id="app">
+<header class="top">
+  <div class="brand">
+    <a class="crumb" href="../"><span class="zh">◂ 第 6、7、11、15、16、18 章</span><span class="en">◂ Ch. 6, 7, 11, 15, 16, 18</span></a>
+    <h1 class="logo" data-text="OMEGA//LAB">OMEGA<span>//</span>LAB</h1>
+    <div class="tagline"><span class="zh">四种读法，一颗有理球 · <em>每个读数都是整数之比：π、根号与极限一次也不进账本。</em></span><span class="en">Four readings, one rational sphere · <em>every reading is a ratio of integers: π, roots and limits never enter the ledger.</em></span></div>
+  </div>
+  <div class="status"><span class="pill" id="scenePill">Ω <strong>—</strong></span><span class="pill" id="keyPill">P/Q <strong>—</strong></span><div class="langs" role="group" aria-label="Language"><button data-lang-set="zh" aria-pressed="true">中</button><button data-lang-set="en" aria-pressed="false">EN</button></div></div>
+</header>
+<aside class="col deck" id="rail" aria-label="实验控制" data-aria-en="Experiment controls">
+  <section class="panel sec" id="lensPanel">
+    <h2><span class="zh">双透镜</span><span class="en">Two lenses</span><span class="aside">Ω ↔ ℝ</span></h2>
+    <button class="lens-toggle" id="lensToggleBtn" type="button" aria-pressed="false"><span class="seg off"><span class="zh">零公理有理数学 Math<sub>Ω</sub> · 整数之比</span><span class="en">Zero-axiom rational Math<sub>Ω</sub> · ratios of integers</span></span><span class="seg on"><span class="zh">经典实数对照（MODEL）· 极限税</span><span class="en">Classical reals (MODEL) · the limit tax</span></span></button>
+  </section>
+  <section class="panel sec">
+    <h2><span class="zh">实验卡带</span><span class="en">Experiments</span><span class="aside">4</span></h2>
+    <div class="presets cards" id="presets">
+      <button class="preset" data-preset="bargmann-gram-triad" aria-pressed="false"><span class="code">det G₃ = 1 + 2B − Σκ</span><span class="cn zh">巴格曼—格拉姆三角：塌缩为 0，张开为 1/4</span><span class="cn en">Bargmann–Gram triad: 0 when flat, 1/4 when open</span></button>
+      <button class="preset" data-preset="jet2-osculating-sphere" aria-pressed="false"><span class="code">ℚ[η]/(η³) · x₀ = P/Q</span><span class="cn zh">二阶射流贴圆，切平面二阶偏离</span><span class="cn en">The jet hugs the circle, the plane drifts</span></button>
+      <button class="preset" data-preset="pi-free-haar-peter-weyl" aria-pressed="false"><span class="code">E[κⁿ] · ⟨χᵢ, χⱼ⟩ = δᵢⱼ</span><span class="cn zh">无 π 哈尔积分与自旋壳</span><span class="cn en">π-free Haar integrals, spin shells</span></button>
+      <button class="preset" data-preset="hecke-p5-and-omega-fractran" aria-pressed="false"><span class="code">T̂₅χ₁ = −(2/5)χ₁ · Ȳ/5</span><span class="cn zh">模 5 赫克跳跃与 Ω-FRACTRAN 门</span><span class="cn en">Norm-5 Hecke jumps, the Ω-FRACTRAN gate</span></button>
+    </div>
+    <p class="note" id="presetNote"></p>
+  </section>
+  <section class="panel sec" id="viewPanel">
+    <h2><span class="zh">视角</span><span class="en">View</span></h2>
+    <div class="chips scene-chips" id="camChips" role="group" aria-label="视角" data-aria-en="View"><button class="chip" data-cam="card" aria-pressed="true"><span class="zh">本卡</span><span class="en">Card</span></button><button class="chip" data-cam="pole" aria-pressed="false"><span class="zh">俯看 o</span><span class="en">Over o</span></button><button class="chip" data-cam="side" aria-pressed="false"><span class="zh">侧看</span><span class="en">Side</span></button></div>
+    <p class="note"><span class="zh">时间轴与琥珀手柄推动本卡的量；拖空白处转视角。换透镜只换名字与轻重，状态不变。</span><span class="en">The rail and the amber handle move the quantity of the card; drag empty space to orbit. The lens changes names and weights and keeps the state.</span></p>
+  </section>
+</aside>
+<main class="center">
+  <div class="stage" id="stage" data-thumb aria-label="紫色有理三元球：青色是精确的有理对象（弧、射流、跳跃），品红是经典对照（面积、切平面、极限），琥珀是当前点" data-aria-en="The violet rational ternion sphere: cyan for exact rational objects (arcs, jets, jumps), magenta for the classical contrast (areas, tangent planes, limits), amber for the current point">
+    <canvas class="fill" id="cv"></canvas><div class="scan"></div><div class="vig"></div>
+    <span class="bracket tl"></span><span class="bracket tr"></span><span class="bracket bl"></span><span class="bracket br"></span>
+    <div class="hud-tl" id="hudTl"><span class="big" id="hudBig"></span><span class="sub" id="hudSub"></span></div>
+    <div class="hud-tr" id="hudTr"><button type="button" class="chip" id="stageAct" hidden></button></div>
+    <button type="button" class="handle" id="stageHandle" aria-label="拖动或用方向键移动当前点" data-aria-en="Drag or use the arrow keys to move the current point" hidden></button>
+    <div class="hud-bl" id="legend"></div>
+  </div>
+  <div class="tour" id="tour"><span class="tour-l"><button class="tbtn" id="prevBtn" data-tour="prev" aria-label="上一个实验" data-aria-en="Previous experiment">◀</button><button class="tbtn tour-clock" id="rewindBtn" aria-label="回到起点" data-aria-en="Back to the start">⏮</button><button class="tbtn tour-clock" id="playBtn" aria-label="播放或暂停" data-aria-en="Play or pause" aria-pressed="false">▷</button><button class="chip tour-lens" id="lensMirror" type="button" aria-pressed="false" aria-label="切换双透镜" data-aria-en="Switch lens"><span class="zh">透镜</span><span class="en">Lens</span></button></span><div class="what" id="tourBody"></div><button class="tbtn" id="nextBtn" data-tour="next" aria-label="下一个实验" data-aria-en="Next experiment">▶</button></div>
+  <div class="strip">
+    <section class="panel"><div class="head"><h2 id="plotTitle"></h2><span id="plotMeta"></span></div><canvas id="plot" aria-label="条带小图：随本卡变化——三角卡是沿时间轴的 det G₃ 与 B，射流卡是割线偏差 D(h)，哈尔卡是 χᵢ、χⱼ 沿 κ 的剖面，赫克卡是六个跳跃的 χ₁ 与累加和" data-aria-en="Strip plot, by card: det G₃ and B along the rail for the triad, the secant drift D(h) for the jet, the profiles of χᵢ and χⱼ along κ for Haar, the six jumps of χ₁ and their running sum for Hecke"></canvas></section>
+  </div>
+</main>
+<aside class="col side" id="evidence" aria-label="参数、读数与依据" data-aria-en="Parameters, readouts and evidence">
+  <button class="chip" id="infoBtn" type="button"><span class="zh">理论接口 · 这不是证明</span><span class="en">Theory interface · not a proof</span></button>
+  <section class="panel sec" id="ctlPanel">
+    <h2><span class="zh">本卡的旋钮</span><span class="en">Dials of the card</span><span class="aside" id="ctlAside">—</span></h2>
+    <div class="grp" data-scene="bargmann">
+      <div class="ctl"><span class="lab"><span class="zh">快捷切换</span><span class="en">Quick toggles</span></span><div class="chips" id="bgChips" role="group" aria-label="快捷切换" data-aria-en="Quick toggles"><button class="chip" data-bg="double" aria-pressed="false"><span class="zh">测地加倍 c = [b, o, b]</span><span class="en">Geodesic doubling c = [b, o, b]</span></button><button class="chip" data-bg="triad" aria-pressed="false"><span class="zh">正交轴三元 o · pHalf · qHalf</span><span class="en">Orthogonal-axis triad o · pHalf · qHalf</span></button></div></div>
+      <div class="ctl"><span class="lab"><span class="zh">b = [w : x : y : z]（整数）</span><span class="en">b = [w : x : y : z] (integers)</span></span></div>
+      <div class="quad">
+        <div class="field"><label for="bw">w</label><output id="bwOut">—</output><input id="bw" type="range" min="-4" max="4" step="1" value="1"></div>
+        <div class="field"><label for="bx">x</label><output id="bxOut">—</output><input id="bx" type="range" min="-4" max="4" step="1" value="1"></div>
+        <div class="field"><label for="by">y</label><output id="byOut">—</output><input id="by" type="range" min="-4" max="4" step="1" value="0"></div>
+        <div class="field"><label for="bz">z</label><output id="bzOut">—</output><input id="bz" type="range" min="-4" max="4" step="1" value="0"></div>
+      </div>
+      <div class="ctl"><span class="lab"><span class="zh">时间轴终点 c = [w : x : y : z]</span><span class="en">End of the rail c = [w : x : y : z]</span></span></div>
+      <div class="quad">
+        <div class="field"><label for="cw">w</label><output id="cwOut">—</output><input id="cw" type="range" min="-4" max="4" step="1" value="1"></div>
+        <div class="field"><label for="cx">x</label><output id="cxOut">—</output><input id="cx" type="range" min="-4" max="4" step="1" value="0"></div>
+        <div class="field"><label for="cy">y</label><output id="cyOut">—</output><input id="cy" type="range" min="-4" max="4" step="1" value="1"></div>
+        <div class="field"><label for="cz">z</label><output id="czOut">—</output><input id="cz" type="range" min="-4" max="4" step="1" value="0"></div>
+      </div>
+    </div>
+    <div class="grp" data-scene="jet" hidden>
+      <div class="ctl"><span class="lab"><span class="zh">观察焦点 x₀ = P/Q（齐次整数对 [P : Q]）</span><span class="en">Focus x₀ = P/Q (homogeneous integer pair [P : Q])</span></span></div>
+      <div class="field"><label for="pP"><span class="zh">分子 P</span><span class="en">Numerator P</span></label><output id="pPOut">—</output><input id="pP" type="range" min="-12" max="12" step="1" value="1"></div>
+      <div class="field"><label for="pQ"><span class="zh">分母 Q</span><span class="en">Denominator Q</span></label><output id="pQOut">—</output><input id="pQ" type="range" min="0" max="12" step="1" value="1"></div>
+      <div class="ctl"><span class="lab"><span class="zh">射影锚点</span><span class="en">Projective anchors</span></span><div class="chips" id="anchorChips" role="group" aria-label="射影锚点" data-aria-en="Projective anchors"><button class="chip" data-anchor="0:1" aria-pressed="false">[0:1]</button><button class="chip" data-anchor="1:1" aria-pressed="false">[1:1]</button><button class="chip" data-anchor="1:0" aria-pressed="false">[1:0]</button><button class="chip" data-anchor="2:2" aria-pressed="false">[2:2]</button></div></div>
+      <div class="ctl"><span class="lab"><span class="zh">切步采样权重 α（§7.4）</span><span class="en">Sampling weight α of the tangent step (§7.4)</span></span><div class="chips" id="alphaChips" role="group" aria-label="采样权重 α" data-aria-en="Sampling weight α"><button class="chip" data-alpha="0" aria-pressed="false">0</button><button class="chip" data-alpha="1/4" aria-pressed="false">1/4</button><button class="chip" data-alpha="1/2" aria-pressed="true">1/2</button><button class="chip" data-alpha="3/4" aria-pressed="false">3/4</button><button class="chip" data-alpha="1" aria-pressed="false">1</button></div></div>
+    </div>
+    <div class="grp" data-scene="haar" hidden>
+      <div class="ctl"><span class="lab"><span class="zh">单项式 w<sup>2a</sup>x<sup>2b</sup>y<sup>2c</sup>z<sup>2d</sup>/‖q‖<sup>2m</sup> 的幂</span><span class="en">Powers of the monomial w<sup>2a</sup>x<sup>2b</sup>y<sup>2c</sup>z<sup>2d</sup>/‖q‖<sup>2m</sup></span></span></div>
+      <div class="quad">
+        <div class="field"><label for="ma">a</label><output id="maOut">—</output><input id="ma" type="range" min="0" max="3" step="1" value="1"></div>
+        <div class="field"><label for="mb">b</label><output id="mbOut">—</output><input id="mb" type="range" min="0" max="3" step="1" value="0"></div>
+        <div class="field"><label for="mc">c</label><output id="mcOut">—</output><input id="mc" type="range" min="0" max="3" step="1" value="0"></div>
+        <div class="field"><label for="md">d</label><output id="mdOut">—</output><input id="md" type="range" min="0" max="3" step="1" value="0"></div>
+      </div>
+      <div class="ctl"><span class="lab"><span class="zh">特征对 (χᵢ, χⱼ)</span><span class="en">Character pair (χᵢ, χⱼ)</span></span><div class="chips" id="ciChips" role="group" aria-label="χᵢ" data-aria-en="χᵢ"><button class="chip" data-ci="0" aria-pressed="false">χ₀</button><button class="chip" data-ci="1" aria-pressed="true">χ₁</button><button class="chip" data-ci="2" aria-pressed="false">χ₂</button></div><div class="chips" id="cjChips" role="group" aria-label="χⱼ" data-aria-en="χⱼ"><button class="chip" data-cj="0" aria-pressed="false">χ₀</button><button class="chip" data-cj="1" aria-pressed="false">χ₁</button><button class="chip" data-cj="2" aria-pressed="true">χ₂</button></div></div>
+    </div>
+    <div class="grp" data-scene="hecke" hidden>
+      <div class="ctl"><span class="lab"><span class="zh">模式</span><span class="en">Mode</span></span><div class="chips" id="modeChips" role="group" aria-label="模式" data-aria-en="Mode"><button class="chip" data-mode="hecke" aria-pressed="true"><span class="zh">赫克网 S₅</span><span class="en">Hecke web S₅</span></button><button class="chip" data-mode="fractran" aria-pressed="false"><span class="zh">Ω-FRACTRAN 门</span><span class="en">Ω-FRACTRAN gate</span></button></div></div>
+      <div class="ctl"><span class="lab"><span class="zh">检验态 q = (w, x, y, z)（整数，非零）</span><span class="en">Test state q = (w, x, y, z) (integers, nonzero)</span></span></div>
+      <div class="quad">
+        <div class="field"><label for="qw">w</label><output id="qwOut">—</output><input id="qw" type="range" min="-4" max="4" step="1" value="2"></div>
+        <div class="field"><label for="qx">x</label><output id="qxOut">—</output><input id="qx" type="range" min="-4" max="4" step="1" value="1"></div>
+        <div class="field"><label for="qy">y</label><output id="qyOut">—</output><input id="qy" type="range" min="-4" max="4" step="1" value="3"></div>
+        <div class="field"><label for="qz">z</label><output id="qzOut">—</output><input id="qz" type="range" min="-4" max="4" step="1" value="-1"></div>
+      </div>
+    </div>
+  </section>
+  <section class="panel sec" id="readouts" aria-live="polite">
+    <h2><span class="zh">有理账本</span><span class="en">Rational ledger</span><span class="aside">NUM · P/Q</span></h2>
+    <dl class="ro">
+      <div class="key"><dt id="roKeyL">—</dt><dd><b><output id="roKey">—</output></b><span id="roKeySub"></span></dd></div>
+      <div class="c wide" id="roRow1"><dt id="roL1">—</dt><dd><output id="roV1">—</output></dd></div>
+      <div class="c wide" id="roRow2"><dt id="roL2">—</dt><dd><output id="roV2">—</output></dd></div>
+      <div class="c wide" id="roRow3"><dt id="roL3">—</dt><dd><output id="roV3">—</output></dd></div>
+      <div class="v wide" id="roRow4"><dt id="roL4">—</dt><dd><output id="roV4">—</output></dd></div>
+      <div class="c wide" id="roRow5"><dt id="roL5">—</dt><dd><output id="roV5">—</output></dd></div>
+      <div class="m wide" id="roRow6"><dt id="roL6">—</dt><dd><output id="roV6">—</output></dd></div>
+    </dl>
+    <p class="note" id="roNote"></p>
+  </section>
+  <section class="panel sec" id="basis">
+    <h2><span class="zh">依据</span><span class="en">Evidence</span><span class="aside">trureturing</span></h2>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">整数缩放保持相融度：对整数 p、q、k，若 k ≠ 0，则 κ(kp, kq) 与 κ(p, q) 等价，其中 κ(p, q) = q²/(p² + q²)，分母为 0 时取“未定义”；两个有定义的比交叉相乘相等时等价，“未定义”只与自身等价：</span><span class="en">Integer scaling keeps the overlap: for integers p, q, k with k ≠ 0, κ(kp, kq) is equivalent to κ(p, q), where κ(p, q) = q²/(p² + q²) and a zero denominator gives “undefined”; two defined ratios are equivalent when their cross products are equal, and “undefined” is equivalent only to itself: </span><a data-lean-gid="D5/S3/Quantum/AURICOmega/OmegaCircleClosure.kappa_scale" href="#" target="_blank" rel="noopener"><code>OmegaCircleClosure.kappa_scale</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">正自然数缩放保持相融度：对自然数 p、q、k，κ(p(k + 1), q(k + 1)) 与 κ(p, q) 等价，其中 κ(p, q) = q²/(p² + q²)；p = q = 0 时两边都是“未定义”，也算等价：</span><span class="en">Positive natural scaling keeps the overlap: for natural numbers p, q, k, κ(p(k + 1), q(k + 1)) is equivalent to κ(p, q), where κ(p, q) = q²/(p² + q²); for p = q = 0 both sides are “undefined”, which also counts as equivalent: </span><a data-lean-gid="D5/S3/Quantum/AURICOmega/ProjectiveOverlapScaling.kappa_scale" href="#" target="_blank" rel="noopener"><code>ProjectiveOverlapScaling.kappa_scale</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">相融度与展度之和为一：对不全为 0 的整数 p、q，κ(p, q) + spread(p, q) 等价于 1，其中 spread(p, q) = p²/(p² + q²)：</span><span class="en">Overlap and spread sum to one: for integers p and q, not both 0, κ(p, q) + spread(p, q) is equivalent to 1, where spread(p, q) = p²/(p² + q²): </span><a data-lean-gid="D5/S3/Quantum/AURICOmega/OmegaCircleClosure.kappa_add_spread_eq_one" href="#" target="_blank" rel="noopener"><code>kappa_add_spread_eq_one</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">凯莱像落在单位圆上：对不全为 0 的整数 p、q，X = (q² − p²)/(p² + q²)、Y = (pq + qp)/(p² + q²) 满足 X·X + Y·Y 等价于 1：</span><span class="en">The Cayley image lies on the unit circle: for integers p and q, not both 0, X = (q² − p²)/(p² + q²) and Y = (pq + qp)/(p² + q²) satisfy that X·X + Y·Y is equivalent to 1: </span><a data-lean-gid="D5/S3/Quantum/AURICOmega/OmegaCircleClosure.cayley_circle_unit" href="#" target="_blank" rel="noopener"><code>cayley_circle_unit</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">无穷远点闭合到对径点：对整数 p ≠ 0，在 [p : 0] 处 κ 等价于 0、spread 等价于 1，凯莱像 X 等价于 −1、Y 等价于 0：</span><span class="en">The point at infinity closes at the antipode: for an integer p ≠ 0, at [p : 0] κ is equivalent to 0 and spread to 1, and the Cayley image has X equivalent to −1 and Y to 0: </span><a data-lean-gid="D5/S3/Quantum/AURICOmega/OmegaCircleClosure.cayley_antipodal_closure" href="#" target="_blank" rel="noopener"><code>cayley_antipodal_closure</code></a></span></div>
+    <div class="lean"><span class="ok">LEAN ✓</span><span><span class="zh">齐次乘法把模方相乘：对整数 p₁、q₁、p₂、q₂，(p₁² + q₁²)(p₂² + q₂²) 等于乘积 (p₁q₂ + q₁p₂, q₁q₂ − p₁p₂) 的模方（作为自然数相等）：</span><span class="en">Homogeneous multiplication multiplies the squared norms: for integers p₁, q₁, p₂, q₂, (p₁² + q₁²)(p₂² + q₂²) equals the squared norm of the product (p₁q₂ + q₁p₂, q₁q₂ − p₁p₂) (as natural numbers): </span><a data-lean-gid="D5/S3/Quantum/AURICOmega/OmegaCircleClosure.projective_circle_mul_normSq" href="#" target="_blank" rel="noopener"><code>projective_circle_mul_normSq</code></a></span></div>
+    <div class="lean argued"><span class="ok">ARGUED</span><span><span class="zh">文献结果，未在本书形式化：三点巴格曼不变量见 Bargmann（1964，J. Math. Phys. 5）；球面上多项式的积分公式见 Folland（2001，Amer. Math. Monthly 108）；紧群特征的正交性见 Peter 与 Weyl（1927，Math. Ann. 97）；p + 1 个模 p 四元数生成的赫克算子与拉马努金界见 Lubotzky、Phillips 与 Sarnak（1986–1988）；FRACTRAN 见 Conway（1987）。<br>手工推导：单位向量 a、b、c 的格拉姆矩阵行列式 = 1 + 2⟨a,b⟩⟨b,c⟩⟨c,a⟩ − ⟨a,b⟩² − ⟨b,c⟩² − ⟨c,a⟩²，换成整数向量即 det G₃ = 1 + 2B − (κ_ab + κ_bc + κ_ca)，等于 det 格拉姆 /(<span class="nm">‖</span>a<span class="nm">‖</span>²<span class="nm">‖</span>b<span class="nm">‖</span>²<span class="nm">‖</span>c<span class="nm">‖</span>²) ≥ 0；o = 1 时 [b, o, b] = b² = 2w·b − <span class="nm">‖</span>b<span class="nm">‖</span>²，落在 1 与 b 张成的平面里，所以 det G₃ = 0；在 ℚ[η]/(η³) 中 (b₀, b₁, b₂) 的逆是 (1/b₀, −b₁/b₀², (b₁² − b₀b₂)/b₀³)，b₀ = 1 + x₀² ≥ 1；割线斜率减去 j₁ 等于 h(3x₀² + 2x₀h − 1)/((1 + x₀²)²(1 + (x₀ + h)²))；S³ 上 E[w<sup>2a</sup>x<sup>2b</sup>y<sup>2c</sup>z<sup>2d</sup>/<span class="nm">‖</span>q<span class="nm">‖</span><sup>2m</sup>] = (2a)!(2b)!(2c)!(2d)!/(4<sup>m</sup> a!b!c!d!(m + 1)!)，π 在分子分母中约去；对 s ∈ S₅，Re(q s) 依次是 w ∓ 2x、w ∓ 2y、w ∓ 2z，六个平方之和是 6w² + 8(x² + y² + z²)，所以 Σ χ₁(q s) = −(2/5) χ₁(q)；χ₂ 不是这个和的特征函数（比值随 q 变化）。凯莱圆上 R′(x₀) = ω·J·R₀（J 是四分之一转），α 采样切步 (1 − αhωJ)x₁ = (1 + (1 − α)hωJ)x₀ 满足 <span class="nm">‖</span>x₁<span class="nm">‖</span>² − 1 = (1 − 2α)<span class="nm">‖</span>x₁ − x₀<span class="nm">‖</span>²：α = 1/2 是凯莱步，留在圆上；α = 0 是前向欧拉步，向外；α = 1 向内。</span><span class="en">Literature results, not formalized in this book: the three-point Bargmann invariant, Bargmann (1964, J. Math. Phys. 5); integrating polynomials over spheres, Folland (2001, Amer. Math. Monthly 108); orthogonality of the characters of a compact group, Peter and Weyl (1927, Math. Ann. 97); the Hecke operator of the p + 1 quaternions of norm p and the Ramanujan bound, Lubotzky, Phillips and Sarnak (1986–1988); FRACTRAN, Conway (1987).<br>Derived by hand: for unit vectors a, b, c the determinant of the Gram matrix is 1 + 2⟨a,b⟩⟨b,c⟩⟨c,a⟩ − ⟨a,b⟩² − ⟨b,c⟩² − ⟨c,a⟩²; for integer vectors this reads det G₃ = 1 + 2B − (κ_ab + κ_bc + κ_ca), the Gram determinant over <span class="nm">‖</span>a<span class="nm">‖</span>²<span class="nm">‖</span>b<span class="nm">‖</span>²<span class="nm">‖</span>c<span class="nm">‖</span>², hence ≥ 0; with o = 1, [b, o, b] = b² = 2w·b − <span class="nm">‖</span>b<span class="nm">‖</span>² lies in the plane of 1 and b, so det G₃ = 0; in ℚ[η]/(η³) the inverse of (b₀, b₁, b₂) is (1/b₀, −b₁/b₀², (b₁² − b₀b₂)/b₀³), and b₀ = 1 + x₀² ≥ 1; the secant slope minus j₁ is h(3x₀² + 2x₀h − 1)/((1 + x₀²)²(1 + (x₀ + h)²)); on S³, E[w<sup>2a</sup>x<sup>2b</sup>y<sup>2c</sup>z<sup>2d</sup>/<span class="nm">‖</span>q<span class="nm">‖</span><sup>2m</sup>] = (2a)!(2b)!(2c)!(2d)!/(4<sup>m</sup> a!b!c!d!(m + 1)!), π cancelling between numerator and denominator; for s ∈ S₅, Re(q s) runs through w ∓ 2x, w ∓ 2y, w ∓ 2z, and the six squares add up to 6w² + 8(x² + y² + z²), so Σ χ₁(q s) = −(2/5) χ₁(q); χ₂ is no eigenfunction of this sum (the ratio changes with q). On the Cayley circle R′(x₀) = ω·J·R₀ (J the quarter turn), and the α-sampled tangent step (1 − αhωJ)x₁ = (1 + (1 − α)hωJ)x₀ satisfies <span class="nm">‖</span>x₁<span class="nm">‖</span>² − 1 = (1 − 2α)<span class="nm">‖</span>x₁ − x₀<span class="nm">‖</span>²: α = 1/2 is the Cayley step and stays on the circle, α = 0 the forward Euler step goes out, α = 1 goes in.</span></span></div>
+    <div class="lean model"><span class="ok">MODEL</span><span><span class="zh">本书的读法与画法：“零公理有理数学”与“极限税”是本书的读法；经典透镜里的角度、球面角盈、π、√5 与数值积分都是浮点数，只作对照。画法：三角卡把 o、b、c 所在的 S³ 大二维球等距画成紫球（o 在上方）；射流卡把凯莱像 (X, Y) 画在过 o 的大圆上，X 朝上，这是二倍角的图，单位球画成玻璃壳，里面是略小的不透明内核，好让略在球内的曲线也看得见；哈尔卡与赫克卡把一个四元组画在高度 w/<span class="nm">‖</span>q<span class="nm">‖</span> 处（它的平方是 κ），方位角取 (x, y, z) 的轴测投影，所以纬线圈就是 κ 的等值圈，大圆弧只是示意；哈尔卡的球面颜色是 χᵢχⱼ 沿 κ 的取值，球面面积不是哈尔测度。画图本身用了浮点的平方根与反余弦，账本全部用整数与分数。</span><span class="en">Readings and drawing conventions of this book: “zero-axiom rational mathematics” and “the limit tax” are readings of this book; the angles, spherical excesses, π, √5 and numerical integrals of the classical lens are floating-point numbers, shown for contrast. Drawing: the triad card draws the great 2-sphere of S³ through o, b, c isometrically as the violet ball (o on top); the jet card draws the Cayley image (X, Y) on a great circle through o with X upwards, a picture of double angles, and the unit sphere as a glass shell round a slightly smaller opaque core, so that curves just inside it stay visible; the Haar and Hecke cards draw a quadruple at the height w/<span class="nm">‖</span>q<span class="nm">‖</span> (its square is κ) with the azimuth of an axonometric projection of (x, y, z), so circles of latitude are level sets of κ and great arcs are indicative only; on the Haar card the colour of the ball is the value of χᵢχⱼ along κ, and the area of the ball is not the Haar measure. The drawing itself uses floating-point roots and arccosines; the ledger uses integers and fractions only.</span></span></div>
+    <div class="lean num"><span class="ok">NUM</span><span><span class="zh">—</span><span class="en">—</span></span></div>
+  </section>
+</aside>
+<footer class="rail"><div class="transport"><button class="tbtn" id="rew" aria-label="回到起点" data-aria-en="Back to the start">⏮</button><button class="tbtn" id="play" aria-label="播放或暂停" data-aria-en="Play or pause" aria-pressed="false">▶</button><span class="chips" id="speedChips" role="group" aria-label="播放速度" data-aria-en="Playback speed"><button class="chip" data-speed="0.5" aria-pressed="false">0.5×</button><button class="chip" data-speed="1" aria-pressed="true">1×</button><button class="chip" data-speed="2" aria-pressed="false">2×</button></span></div><div class="clock"><span class="tau" id="tau"></span><input type="range" id="now" min="0" max="16" step="1" value="16" aria-label="时间轴：本卡的步数（c 的位置、割线步长 h、κ 的层或已求和的跳跃）" data-aria-en="Rail: the step of the card (the place of c, the secant step h, the level of κ or the jumps summed)"></div><div class="keys"><span id="hint"></span><span id="formula"></span></div></footer>
+</div>
+<div class="drawer" id="drawer" hidden><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+  <div class="row"><h2 id="drawerTitle"><span class="zh">理论接口 · 零公理有理工作台</span><span class="en">Theory interface · the zero-axiom rational workbench</span></h2><button class="chip" id="drawerClose"><span class="zh">关闭 Esc</span><span class="en">Close Esc</span></button></div>
+  <div class="zh">
+    <p class="lede">这是数值沙盘，不是证明。绿色框只写冻结的 Lean 定理自己的前提与结论（它们讲的是齐次整数对 [p : q]）；页面上的数由脚本用大整数现算（NUM），分数一律约分，是这些定理与正文推导的个别实例，页面不检验定理的前提；经典透镜里的小数是浮点对照（MODEL）。下面附上依据栏的全部依据框。</p>
+    <ol>
+      <li><b>巴格曼—格拉姆三角。</b> B 的符号不记录方向。取 b = 2 + i，回到 o 时 B = 4/5，倍增时 B = 12/25。 o = (1, 0, 0, 0)、pHalf = (1, 1, 0, 0)、qHalf = (1, 0, 1, 0)：κ 依次为 1/2、1/4、1/2，B = <span data-bench="triadB">—</span>，det G₃ = <span data-bench="triadDet">—</span>。c = [b, o, b] 时 det G₃ = <span data-bench="doubleDet">—</span>。锚点 [0:1]、[1:1]、[1:0] 的 κ 是 1、1/2、0。</li>
+      <li><b>二阶射流。</b>x₀ = 1：(j₀, j₁, j₂) = <span data-bench="jet1">—</span>，(1 + x²)·逆 ≡ <span data-bench="jetCheck">—</span> (mod η³)；h = 1/2 处割线偏差 D = <span data-bench="secant">—</span>。凯莱像 (X, Y) 满足 X² + Y² = 1，[1 : 0] 落在 (−1, 0)。h = 1/2 的切步：α = 1/2 落在 <span data-bench="cayStep">—</span>（模方 1），α = 0 落在 <span data-bench="eulerStep">—</span>（模方 5/4）。</li>
+      <li><b>无 π 哈尔积分。</b>E[κⁿ]（n = 0…4）= <span data-bench="moments">—</span>；⟨χᵢ, χⱼ⟩ 的 3 × 3 表 = <span data-bench="gram">—</span>。</li>
+      <li><b>p = 5 赫克与 Ω-FRACTRAN。</b>q = (2, 1, 3, −1)：Σ χ₁(q s) = <span data-bench="heckeSum">—</span> = −(2/5) χ₁(q)；4·5 − (2/5)² = <span data-bench="margin">—</span>。ψ<sub>XY</sub> = (1, 2, 2, 4) 经 Ȳ/5 得 <span data-bench="pass">—</span>；ψ<sub>YX</sub> = (1, 2, 2, −4) 乘 Ȳ 得 <span data-bench="block">—</span>，不能被 5 整除，门关闭。χ₂ 不是这个六跳和的特征函数。</li>
+      <li><b>双透镜。</b>同一组状态，两种轻重：Math<sub>Ω</sub> 透镜把青色的有理对象提亮；经典对照（MODEL）把品红的角度、切平面、π 与 √5 提亮，并写出它们的浮点值。</li>
+    </ol>
+    <p>附录 A.3 所列的 127 条 D5 声明均有严格端与官方端的公理记录。严格库的空内核重放覆盖所选库根的导入闭包。 <a href="../../zh/appendix-a.html#sec-om-appa-audit-checklist" target="_top">后端证据</a></p>
+    <p class="lede refs">书中：<a href="../../zh/ch06-bargmann-gram-spherical-trigonometry.html" target="_top">第六章 巴格曼—格拉姆闭合律</a> · <a href="../../zh/ch07-second-order-jet-calculus.html" target="_top">第七章 二阶幂零射流</a> · <a href="../../zh/ch11-pi-free-haar-integration.html" target="_top">第十一章 无 π 哈尔积分</a> · <a href="../../zh/ch15-rational-hecke-ramanujan-spectrum.html" target="_top">第十五章 模方 5 谱隙</a> · <a href="../../zh/ch16-omega-fractran-and-nonabelian-stack.html" target="_top">第十六章 Ω-FRACTRAN</a> · <a href="../../zh/ch18-zero-axiom-kernel-and-shadow-bridge.html" target="_top">第十八章 六卷全息工作台</a></p>
+  </div>
+  <div class="en">
+    <p class="lede">This is a numerical sandbox, not a proof. A green box states the hypotheses and the conclusion of a frozen Lean theorem and nothing else (they speak of homogeneous integer pairs [p : q]); the numbers of the page are computed by its script in big integers (NUM), every fraction reduced; they are single instances of the theorems and of the derivations of the text, and the page does not check the hypotheses of the theorems; the decimals of the classical lens are a floating-point contrast (MODEL). All evidence boxes of the panel follow below.</p>
+    <ol>
+      <li><b>Bargmann–Gram triad.</b> The sign of B does not encode direction. With b = 2 + i, returning to o gives B = 4/5 and doubling gives B = 12/25. o = (1, 0, 0, 0), pHalf = (1, 1, 0, 0), qHalf = (1, 0, 1, 0): the κ are 1/2, 1/4, 1/2, B = <span data-bench="triadB">—</span>, det G₃ = <span data-bench="triadDet">—</span>. For c = [b, o, b], det G₃ = <span data-bench="doubleDet">—</span>. The anchors [0:1], [1:1], [1:0] have κ = 1, 1/2, 0.</li>
+      <li><b>Second-order jet.</b> At x₀ = 1: (j₀, j₁, j₂) = <span data-bench="jet1">—</span>, and (1 + x²)·inverse ≡ <span data-bench="jetCheck">—</span> (mod η³); the secant drift at h = 1/2 is D = <span data-bench="secant">—</span>. The Cayley image (X, Y) satisfies X² + Y² = 1, and [1 : 0] lands at (−1, 0). The tangent steps at h = 1/2: α = 1/2 lands at <span data-bench="cayStep">—</span> (squared norm 1), α = 0 at <span data-bench="eulerStep">—</span> (squared norm 5/4).</li>
+      <li><b>π-free Haar integration.</b> E[κⁿ] (n = 0…4) = <span data-bench="moments">—</span>; the 3 × 3 table of ⟨χᵢ, χⱼ⟩ = <span data-bench="gram">—</span>.</li>
+      <li><b>p = 5 Hecke and Ω-FRACTRAN.</b> q = (2, 1, 3, −1): Σ χ₁(q s) = <span data-bench="heckeSum">—</span> = −(2/5) χ₁(q); 4·5 − (2/5)² = <span data-bench="margin">—</span>. ψ<sub>XY</sub> = (1, 2, 2, 4) passes Ȳ/5 as <span data-bench="pass">—</span>; ψ<sub>YX</sub> = (1, 2, 2, −4) times Ȳ is <span data-bench="block">—</span>, not divisible by 5, and the gate stays shut. χ₂ is no eigenfunction of this six-jump sum.</li>
+      <li><b>Two lenses.</b> One state, two weights: the Math<sub>Ω</sub> lens brightens the rational objects in cyan; the classical contrast (MODEL) brightens the angles, tangent planes, π and √5 in magenta and writes their floating-point values.</li>
+    </ol>
+    <p>The 127 D5 declarations listed in Appendix A.3 have paired strict and official axiom records. Empty-kernel replay covers the import closure of the selected strict library roots. <a href="../../en/appendix-a.html#sec-om-appa-audit-checklist" target="_top">Backend evidence</a></p>
+    <p class="lede refs">In the book: <a href="../../en/ch06-bargmann-gram-spherical-trigonometry.html" target="_top">Chapter 6, the Bargmann–Gram closure law</a> · <a href="../../en/ch07-second-order-jet-calculus.html" target="_top">Chapter 7, second-order nilpotent jets</a> · <a href="../../en/ch11-pi-free-haar-integration.html" target="_top">Chapter 11, π-free Haar integration</a> · <a href="../../en/ch15-rational-hecke-ramanujan-spectrum.html" target="_top">Chapter 15, the norm-5 spectral gap</a> · <a href="../../en/ch16-omega-fractran-and-nonabelian-stack.html" target="_top">Chapter 16, Ω-FRACTRAN</a> · <a href="../../en/ch18-zero-axiom-kernel-and-shadow-bridge.html" target="_top">Chapter 18, the holographic workbench</a></p>
+  </div>
+  <div class="drawer-evidence" id="drawerEvidence"></div>
+</div></div>
+<script src="main.js"></script>
+</body>
+</html>

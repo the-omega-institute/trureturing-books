@@ -1,0 +1,304 @@
+{
+ "voice": "af_heart",
+ "speed": 0.94,
+ "say": {
+  "Lean": "Leen",
+  "CIC": "C I C",
+  "Cauchy": "Ko-shee",
+  "kappa": "kappa",
+  "OmegaSpace": "Omega Space"
+ },
+ "music": {
+  "bpm": 76,
+  "progression": "d-minor"
+ },
+ "scenes": [
+  {
+   "id": "kernel",
+   "name": "BARE KERNEL",
+   "lead": 2.2,
+   "tail": 0.45,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 0.4,
+     "kind": "chime"
+    }
+   ],
+   "lines": [
+    [
+     "Before any classical library loads, Lean's kernel is bare CIC.",
+     "导入任何经典库之前，Lean 的内核是裸 CIC：纯归纳构造演算。"
+    ],
+    [
+     "Three building blocks: dependent functions, universes, inductive types. Four rules: beta, delta, iota, zeta.",
+     "三种构件：依值函数、宇宙层级、有限归纳定义；四条归约规则：β、δ、ι、ζ。"
+    ],
+    [
+     "Three is successor, successor, successor of zero: a finite tree, no infinite bag behind it.",
+     "3 就是 succ succ succ zero：一棵有限的树，背后没有装满无穷的口袋。"
+    ]
+   ]
+  },
+  {
+   "id": "fees",
+   "name": "THREE HIDDEN AXIOMS",
+   "lead": 0.5,
+   "tail": 0.45,
+   "music": [
+    0.9,
+    0.5,
+    0.4,
+    0.1,
+    0.2
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 0.5,
+     "kind": "glitch"
+    },
+    {
+     "line": 2,
+     "at": 1.0,
+     "kind": "chime"
+    }
+   ],
+   "lines": [
+    [
+     "Classical axioms enter by shortcuts. Choice pulls out a witness with no recipe.",
+     "经典公理借捷径混进来。选择公理凭空抽出元素，却不给算法。"
+    ],
+    [
+     "Quotients glue equivalent forms, the classical reals bring in both, and propositional extensionality adds a third.",
+     "商公理把等价的表示粘成一个，经典实数把两条都带进来；命题外延性是第三条。"
+    ],
+    [
+     "The strict libraries start from a bare prelude: equality is decided by a program that always halts.",
+     "严格库从裸 prelude 起步：相等由一个必定停机的程序判定。"
+    ]
+   ]
+  },
+  {
+   "id": "horizon",
+   "name": "ONE OVER M",
+   "lead": 0.5,
+   "tail": 0.45,
+   "music": [
+    0.9,
+    0.5,
+    0.5,
+    0.1,
+    0.2
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 2.0,
+     "kind": "stamp"
+    }
+   ],
+   "lines": [
+    [
+     "Precision becomes a contract: epsilon equals one over M.",
+     "精度成了一纸契约：ε 等于 1/M，M 是正整数。"
+    ],
+    [
+     "At M equals twelve, the reduced fractions form a finite grid.",
+     "取 M = 12，既约分数组成一张有限格网。"
+    ],
+    [
+     "No gap is smaller than one over one hundred thirty-two, as between one twelfth and one eleventh.",
+     "格网里没有哪道间隙小于 1/132，例如 1/12 与 1/11 之间。"
+    ]
+   ]
+  },
+  {
+   "id": "lift",
+   "name": "RAISE THE HORIZON",
+   "lead": 0.5,
+   "tail": 0.45,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.2,
+    0.3
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 2.6,
+     "kind": "chime"
+    }
+   ],
+   "lines": [
+    [
+     "Composing can outgrow the horizon: one, two times one, three gives five, five, at height five.",
+     "复合会撑破视界：[1 : 2] 乘 [1 : 3] 得 (5, 5)，高度升到 5。"
+    ],
+    [
+     "The common factor cancels, landing on one, one.",
+     "约去公因子，落回 [1 : 1]。"
+    ],
+    [
+     "One, two times two, five gives nine, eight: the horizon rises on demand to nine.",
+     "[1 : 2] 乘 [2 : 5] 得 [9 : 8]：视界按需抬升到 9。"
+    ]
+   ]
+  },
+  {
+   "id": "laws",
+   "name": "THREE MOTHER LAWS",
+   "lead": 0.5,
+   "tail": 0.45,
+   "music": [
+    1.0,
+    0.6,
+    0.6,
+    0.2,
+    0.3
+   ],
+   "cues": [
+    {
+     "line": 4,
+     "at": 1.2,
+     "kind": "impact"
+    }
+   ],
+   "lines": [
+    [
+     "Remove the privileged origin and the plus sign; the book's model keeps two primitives.",
+     "再拆掉特权原点与加号。本书的模型只留下两个原语。"
+    ],
+    [
+     "A ternary transport carries the relation of x to a bridge y onto z; a fidelity, kappa, reads alignment.",
+     "三元迁移把 x 相对于桥 y 的关系搬到 z 上；保真度 κ 读出两态的对齐程度。"
+    ],
+    [
+     "Law one: x, x, z gives z; x, z, z gives x; brackets reassociate.",
+     "法则 I：[x, x, z] = z，[x, z, z] = x，括号可以重新结合。"
+    ],
+    [
+     "Law two: kappa is symmetric, separating and transport-invariant, with every finite Gram form nonnegative. Its infimum is zero. Readings can reach zero or come arbitrarily close.",
+     "法则 II：κ 对称、能分离点、在迁移下不变，每个有限格拉姆二次型都非负。读数的下确界是零，可以取到零，也可以任意逼近零。"
+    ],
+    [
+     "Law three: some bracket, read backwards, gives a different answer.",
+     "法则 III：有的括号倒过来读，结果就变了。"
+    ]
+   ]
+  },
+  {
+   "id": "free",
+   "name": "FOR FREE",
+   "lead": 0.5,
+   "tail": 0.45,
+   "music": [
+    1.0,
+    0.6,
+    0.6,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "No pi, no e, no plus, no built-in one; yet bounds come for free.",
+     "没有 π、没有 e、没有加号、没有预设的单位元，上界却白白得来。"
+    ],
+    [
+     "Weights one and minus one make the Gram form two minus two kappa, at least zero: kappa is at most one.",
+     "取权重 1 与 −1，格拉姆二次型成为 2 − 2κ ≥ 0：所以 κ 至多为 1。"
+    ],
+    [
+     "Pick any point o as home: x star z is x, o, z; x inverse is o, x, o.",
+     "任选一点 o 当作家：x ⋆ z 就是 [x, o, z]，x 的逆元是 [o, x, o]。"
+    ],
+    [
+     "Law one makes it a group. Any point can be home; none is privileged.",
+     "法则 I 让它成为群。哪一点都可以当家，没有哪一点高人一等。"
+    ]
+   ]
+  },
+  {
+   "id": "klass",
+   "name": "CLASS, NOT AXIOM",
+   "lead": 0.5,
+   "tail": 0.45,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.2,
+    0.3
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 5.6,
+     "kind": "glitch"
+    },
+    {
+     "line": 2,
+     "at": 0.6,
+     "kind": "chime"
+    }
+   ],
+   "lines": [
+    [
+     "Lean trusts axioms unchecked: declare kappa of x with x is one on raw quadruples, forget the zero quadruple, and zero equals one.",
+     "Lean 无条件信任 axiom：在原始四元组上声明 κ(x, x) = 1，漏掉零四元组，就推出 0 = 1。"
+    ],
+    [
+     "Now everything is provable. A match on a natural-number axiom cannot compute its branch. Project forty-two from a subtype value. The axiomatic proof in Prop erases.",
+     "从此一切命题都能“被证明”。匹配一个自然数公理时，归约卡住，无法选择分支。从子类型值投影出 42，其中由公理给出的 Prop 证明可以擦除。"
+    ],
+    [
+     "A class instead bundles the operations with a certificate for each law.",
+     "改用类型类：把运算与每条法则的证书收在一起。"
+    ],
+    [
+     "It promises only its fields: the quaternion group with constant kappa passes, yet kappa of one and minus one is one.",
+     "它只承诺所列字段：取常值 κ 的四元数群全都通过，可 κ(1, −1) 也等于 1。"
+    ],
+    [
+     "The rest must be proved, law by law.",
+     "其余法则还须在具体载体上逐条补证。"
+    ]
+   ]
+  },
+  {
+   "id": "close",
+   "name": "FLOOR",
+   "lead": 0.5,
+   "tail": 3.0,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.2
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 0.3,
+     "kind": "chime"
+    }
+   ],
+   "lines": [
+    [
+     "Omega Math, chapter one.",
+     "《OMEGA MATH》· 第一章"
+    ]
+   ]
+  }
+ ]
+}
