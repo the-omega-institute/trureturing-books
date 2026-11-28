@@ -222,6 +222,17 @@ $$
 $$
 
 This benchmark uses the full spectrum without phase filtering. For the fixed Haar window of Chapter 2, [Appendix C](appendix-c.md) gives $b_H=10^9$ under RH, valid for $H\ge1$. With this constant, $L_H>3b_H/c$ requires a much larger starting height than the whole-spectrum example $H=10^6$. [Hasanalizade, Shen, and Wong, Counting zeros of the Riemann zeta function (2022), Corollary 1.2](https://doi.org/10.1016/j.jnt.2021.06.032)
+
+**The windowed reading at $H=100$ (`CERT / ARGUED`).** Write $s=H/\gamma$. A uniform $s$ gives the unit-scale kernel $(1+s^2)^{-1}$ a mean of $\pi/4$. For the actual phase window of Chapter 2, interval arithmetic and the full-spectrum tail estimate give
+
+$$
+\begin{aligned}
+0.82156&<\mathbb E[(1+s^2)^{-1}]<0.84426,\\
+0.16298&<D_{100}<0.22373.
+\end{aligned}
+$$
+
+Take $T=10000$. Of the $10113$ positive zeros in $(100,T]$, exactly $1635$ pass the window test, with total inverse-square weight $P=0.000916843379\ldots$. Partial summation over the full spectrum bounds the accepted mass $r$ above $T$ by $U=L_T/(2\pi T)+3B(T)/T^2<0.000133579$. For $s\ge H/T$, let $C$ be the finite mass accumulated on either side of a jump. The full distribution function on that side is $(C+r)/(P+r)$, increasing in $r$. Checking both sides of each jump bounds the largest deviation from the line $s$ on this interval. Below $H/T$ the deviation is at most $\max(H/T,U/(P+U))$. On the omitted tail the unit-scale kernel exceeds every value in the finite sum and is at most $1$. Thus if $J$ sums $(\gamma^2+H^2)^{-1}$ over the accepted finite segment, the full reading lies between $J/P$ and $(J+U)/(P+U)$. [Zero enclosures, window tests and numerical bounds](https://github.com/the-omega-institute/trureturing-books/issues/1637#issuecomment-7234614928)
 :::
 
 **A linear counting remainder for the fixed Haar window under RH (`ARGUED`).** Count positive zeros with multiplicity. For the four-phase window of Chapter 2, $A_W(T)=c\,m(T)+O(T)$. Write $F$ for the acceptance threshold on the torus. The boundary of $W$ lies in the seam $u=0$ and the graph $u=F$. The function $F$ is Lipschitz, so the $\eta$-neighborhood of the boundary has volume $O(\eta)$. Set $K=\lfloor\log T/12000\rfloor$. The periodic trigonometric approximation of Colzani, Gigante, and Travaglini gives $P_K^-\le\mathbf1_W\le P_K^+$ with frequency support $\|k\|_\infty\le K$. The pointwise error decays rapidly in $K\,\operatorname{dist}(x,\partial W)$, giving an $L^1$ error of $O(K^{-1})$ and an $L^2$ error of $O(K^{-1/2})$ for each polynomial. For $M\ge2$, apply the same approximation with degree less than $M$ to the Fourier tail of $\mathbf1_W$. Parseval's identity then gives an $\ell^2$ coefficient norm of $O(M^{-1/2})$ for either $P=P_K^\pm$ on each dyadic shell $M\le\|k\|_\infty<2M$ with $M\le K$. For $M=1$ use $\|P\|_2=O(1)$. [Periodic approximation, Corollary 7](https://arxiv.org/abs/1001.0948)
@@ -262,7 +273,7 @@ $$
 \qquad\text{for all }t\ge H
 $$
 
-For those heights, give such a constant and substitute it into the shared-clock error formula. If $0\le\log(H/(2\pi))\le1/2$, taking $t=H$ and using $A_W(H)\ge0$ gives $3b_H/c\ge3(1-\log(H/(2\pi)))\ge L_H$. Can the same order of remainder be proved without invoking RH?
+For those heights, give such a constant and substitute it into the shared-clock error formula. The first accepted zero is $\gamma_8=43.32707328\ldots$. For $H<\gamma_8$, take $t$ up to $\gamma_8$ from below, where $A_W(t)=0$. This gives $b_H/c\ge\log(\gamma_8/(2\pi))-1$, so the strict condition $3b_H/c<L_H$ requires $H>\gamma_8^3/((2\pi)^2e^4)=37.73465613\ldots$. At $H=100$, the supremum of the normalized counting error $|A_W(t)-c\,m(t)|/t$ on $[100,10000]$ is $0.0205536595\ldots$, approached from below in height at zero 93. Is its supremum on $t>10000$ also strictly below $cL_{100}/3=0.0318088831\ldots$? Can the same order of remainder be proved without invoking RH?
 :::
 
 **Limits of fixed-mode convergence (`ARGUED`).** Two constructed height sequences separate the counting assumptions for this acceptance region. Begin with the integer quantiles of the unfiltered main term. Integrating the centered counting error on each quantile interval gives $O(T/\log T)$ for each fixed nonzero Fourier mode. Then choose a small smooth patch of the acceptance boundary transverse to the phase flow. Continuous torus equidistribution gives a number of crossings proportional to the length of each sufficiently large dyadic height interval. At each crossing, use a strictly increasing local time change to move heights from a short interval just outside the region into it. The displacements and interval lengths are of order $(\log T)^{-3/4}$.

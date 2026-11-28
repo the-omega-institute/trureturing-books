@@ -166,7 +166,7 @@ Now watch how the four-angle selection rule of [@def-ou-ch02-dual-clocks] turns 
 | $1$ | $0.95054808840\ldots$ | $0.12584254589\ldots$ |
 | $2$ | $0.99752136036\ldots$ | $0.15720164049\ldots$ |
 
-The value $1/(2\pi)$ is an asymptotic relative density as the height cutoff tends to infinity. A finite-height error also needs a counting remainder for the selected phase window and does not follow automatically from the unfiltered zero count. Chapter 12 gives the inverse-square partial-summation formula, an explicit whole-spectrum benchmark, and a counting remainder for the window under RH ([@rem-ou-ch12-windowed-rate], [@prob-ou-ch12-windowed-haar-rate]).
+The value $1/(2\pi)$ is an asymptotic relative density as the height cutoff tends to infinity. At a specified height one can check the window condition zero by zero and bound the remaining tail by the full spectrum. Chapter 12 uses this method to bound the inverse-square weighted clock reading at $H=100$ and shows how a window counting remainder controls the error as $H$ varies ([@rem-ou-ch12-windowed-rate], [@prob-ou-ch12-windowed-haar-rate]).
 
 ## 2.4 Splitting Primes on the Shortest Arc and Area-Law Density Collapse {#sec-ou-2-4}
 
