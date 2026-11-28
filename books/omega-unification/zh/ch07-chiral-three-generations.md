@@ -62,6 +62,22 @@ $$
 
 三个相位所在的共同数域次数至多为八。独立共轭能单独反转任一相位，而三个相位的有理迹均非整数，使它们各自具有无限阶。非零模式的相位积因此异于一。用 $1734$ 清除各相位和逆相位的分母后，非零代数整数的范数给出显式下界。
 
+::: {.theorem #thm-ou-ch07-zeta-ordinate-reflection title="零点和的反射抵消" lean="D5/S3/Weil/ZeroData/ZetaOrdinateReflectionTransfer.actual_reflection_bound"}
+令 $\rho=\beta+i\gamma$ 遍历互异的非平凡零点，$m_\rho$ 为解析重数。任取实数 $v,T$，记 $d_\rho=|v(\beta-1/2)|$。则
+
+$$
+\left|\sum_{0<\gamma\le T}m_\rho e^{v(\rho-1/2)}
+      -\sum_{0<\gamma\le T}m_\rho e^{iv\gamma}\right|
+\le \sum_{0<\gamma\le T}m_\rho\,d_\rho^2e^{d_\rho}.
+$$
+:::
+
+::: proof
+映射 $\rho\mapsto1-\bar\rho$ 保持高度与重数，并把实部偏移反号。将原求和与反射重排后的求和取平均，指数展开的一次项相消，剩下的二阶余项给出上界。完整证明由 Lean 内核检查。
+:::
+
+这个有限高度界把误差归结为零点到临界线的加权距离。要控制随高度增长的频率，还需对不同距离的零点数给出一致估计。 [Ford–Zaharescu，引理 2 与式 (3.8)](https://arxiv.org/abs/math/0405459v2)
+
 **随高度缩小的阈值（`ARGUED`）。** 令 $L=\log T$。若 $\varepsilon(T)\to0$ 且 $\varepsilon(T)\sqrt L\to\infty$，那么在模型的五种荷中，每种荷的近盲零点比例均为 $C_q\varepsilon(T)^2+o(\varepsilon(T)^2)$，仍按重数计数。证明取 $J=\lfloor cL/\log L\rfloor$，其中 $c>0$ 充分小。双钟频率的显式下界控制接近零频率时的误差。Ford–Meng–Zaharescu 的引理 1–2 随即把每个 $0<\|m\|_\infty\le J$ 的标准化零点傅里叶和控制在 $O(L^{-1}+\|m\|_\infty^2L^{-2})$，无需假定黎曼猜想。[零点和估计](https://arxiv.org/abs/1511.06814v2) · [联合极限的推导](https://github.com/the-omega-institute/trureturing/issues/35082#issuecomment-7232072134)
 
 在每个盲点取尺度为 $\varepsilon$ 的光滑内外逼近，夹住由边界振幅雅可比决定的局部椭圆。其傅里叶系数的绝对和为 $O(1)$，二阶绝对矩为 $O(\varepsilon^{-2})$，超过 $J$ 的绝对尾和为 $O((\varepsilon J)^{-4})$。因此采样与环面平均之差为 $O(L^{-1}+\varepsilon^{-2}L^{-2}+(\varepsilon J)^{-4})=o(\varepsilon^2)$。让内外逼近的面积趋于同一椭圆面积即可恢复同一个 $C_q$。 [Lean 中的绝对尾界](lean:D5/S3/Fourier/Asymptotics/PlanarFourierTail.lattice_fourier_tail)
