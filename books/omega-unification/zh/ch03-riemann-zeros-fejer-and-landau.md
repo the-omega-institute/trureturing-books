@@ -193,7 +193,7 @@ D_\lambda(u,T)=\sum_{k=16}^{N}\lfloor\log(2\pi k)\rfloor
 =\frac{T}{2\pi}\log T+O(T).
 $$
 
-这个模型每个单位高度仍只有 $O(\log T)$ 个零点。并且 $\mathbf 1_{\{\delta_k>v\}}\le e^{1/2}(2\pi k)^{-v/4}$，所以偏轴计数为 $O(T^{1-v/4}\log T)$，保留了本节使用的 Selberg 型密度阶数。由此可见，计数、镜像和密度输入同时允许非整数频率的对数级相位和与整数频率的 $T\log T$ 共振，不能单独推出指定频率的 $O_\lambda(T)$。实际 $\zeta$ 的 $\lambda=\log X$（$\Lambda(X)=0$）仍需额外的纵坐标算术相位信息。[相位边界的推导与复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239588238)
+这个模型每个单位高度仍只有 $O(\log T)$ 个零点。并且 $\mathbf 1_{\{\delta_k>v\}}\le e^{1/2}(2\pi k)^{-v/4}$，在 $0\le v\le1/2$ 内偏轴计数为 $O(T^{1-v/4}\log T)$，保留了本节使用的 Selberg 型密度阶数。由此可见，计数、镜像和密度输入同时允许非整数频率的对数级相位和与整数频率的 $T\log T$ 共振，不能单独推出指定频率的 $O_\lambda(T)$。实际 $\zeta$ 的 $\lambda=\log X$（$\Lambda(X)=0$）仍需额外的纵坐标算术相位信息。[相位边界的推导与复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239588238)
 
 ## 3.3 周期相位亏损、兰道窗转移与高斯碰撞极限 $1/\sqrt{\pi}$ {#sec-ou-3-3}
 

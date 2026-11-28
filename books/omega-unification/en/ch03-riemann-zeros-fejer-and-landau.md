@@ -193,7 +193,7 @@ D_\lambda(u,T)=\sum_{k=16}^{N}\lfloor\log(2\pi k)\rfloor
 =\frac{T}{2\pi}\log T+O(T).
 $$
 
-The model still has only $O(\log T)$ zeros in each unit-height interval. Moreover, $\mathbf 1_{\{\delta_k>v\}}\le e^{1/2}(2\pi k)^{-v/4}$, so its off-line count is $O(T^{1-v/4}\log T)$ and has the Selberg-type density order used above. Thus the counting, reflection, and density inputs permit both logarithmic phase sums at noninteger frequencies and $T\log T$ resonance at integer frequencies. They cannot by themselves imply the prescribed-frequency bound $O_\lambda(T)$. For the actual zeta problem with $\lambda=\log X$ and $\Lambda(X)=0$, additional arithmetic information on the ordinates is still required. [Phase boundary derivation and computation](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239588238)
+The model still has only $O(\log T)$ zeros in each unit-height interval. Moreover, $\mathbf 1_{\{\delta_k>v\}}\le e^{1/2}(2\pi k)^{-v/4}$, so for $0\le v\le1/2$ its off-line count is $O(T^{1-v/4}\log T)$ and has the Selberg-type density order used above. Thus the counting, reflection, and density inputs permit both logarithmic phase sums at noninteger frequencies and $T\log T$ resonance at integer frequencies. They cannot by themselves imply the prescribed-frequency bound $O_\lambda(T)$. For the actual zeta problem with $\lambda=\log X$ and $\Lambda(X)=0$, additional arithmetic information on the ordinates is still required. [Phase boundary derivation and computation](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239588238)
 
 ## 3.3 Periodic Phase Deficits, Landau Window Transfer, and the $1/\sqrt{\pi}$ Collision Limit {#sec-ou-3-3}
 
