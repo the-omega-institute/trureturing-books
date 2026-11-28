@@ -224,7 +224,65 @@ $$
 一次固定尺度的正性检查只能认证 $H_\varepsilon=H+\operatorname{diag}(0,\varepsilon I)$。例如 $A=[1],B=[1],C=[0]$ 时，$S_\dagger=[1]$，但 $S_\varepsilon=[1-1/\varepsilon]$；$H_\varepsilon$ 在 $\varepsilon\ge1$ 时半正定，在 $0<\varepsilon<1$ 时不半正定。若能在趋零的一列 $\varepsilon$ 上证明 $H_\varepsilon\succeq0$，则逐个固定向量取极限才可推出 $H\succeq0$。这些有限维结论不给出跨谱窗口的统一正谱隙，也不识别实际零点谱；独立 RH 谱路线仍须另外控制完整观测、极限与谱尾项。
 :::
 
-有限维可恢复性还留下一个观测问题：检出某个负方向，是否必须先准确重构指定的负方向？两点模型把这两种误差要求分开。
+::: {.example #ex-ou-appb-compact-schur-range title="没有核仍会发散的紧内部块"}
+[@rem-ou-appb-schur-regularization] 的有限维条件不能只凭“没有核”推广到无限维：正谱值可以无限趋近于零。以下算例与值域判据均为手工推导（`ARGUED`），不属于 [@thm-ou-appb-schur-attained-minimum] 的 Lean 验证范围。
+
+在 $\mathcal H=\ell^2(\mathbb N_{\ge1};\mathbb C)$ 上，令 $e_n$ 为标准单位向量，取
+
+$$
+Ce_n=n^{-2}e_n,\qquad b=(n^{-1})_{n\ge1},\qquad
+By=\langle b,y\rangle,\qquad B^*x=xb.
+$$
+
+内积对第二变量线性。由于 $\sum_{n\ge1}n^{-2}\le2$，$b\in\mathcal H$，故 $B:\mathcal H\to\mathbb C$ 有界。算子 $C$ 有界、自伴、正且单射。把它截断到前 $N$ 个坐标得到有限秩算子 $C_N$，并有 $\|C-C_N\|_{\mathrm{op}}=(N+1)^{-2}\to0$，所以 $C$ 紧。但 $\langle e_n,Ce_n\rangle=n^{-2}\to0$，不存在一致正下界。
+
+取任意 $a\in\mathbb R$，令 $H=\begin{pmatrix}a&B\\B^*&C\end{pmatrix}$ 作用在 $\mathbb C\oplus\mathcal H$ 上，并记 $q(x,y)=\langle(x,y),H(x,y)\rangle$。对每个 $\varepsilon>0$，$C+\varepsilon I$ 有有界逆，配方给出
+
+$$
+\begin{aligned}
+s_\varepsilon
+&=\min_{y\in\mathcal H}\bigl(q(1,y)+\varepsilon\|y\|^2\bigr)\\
+&=a-\langle b,(C+\varepsilon I)^{-1}b\rangle
+=a-\sum_{n=1}^{\infty}\frac1{1+\varepsilon n^2}.
+\end{aligned}
+$$
+
+极小点为 $y_\varepsilon=-(C+\varepsilon I)^{-1}b\in\mathcal H$；和式由 $\varepsilon^{-1}\sum n^{-2}$ 控制，因而每个固定正则化尺度的计算都合法。为量出趋零时的行为，取递减函数 $f_\varepsilon(t)=(1+\varepsilon t^2)^{-1}$。逐个单位区间比较面积，和式介于 $\int_1^\infty f_\varepsilon(t)\,dt$ 与 $\int_0^\infty f_\varepsilon(t)\,dt$ 之间；再用 $\int_0^1f_\varepsilon\le1$，得
+
+$$
+\begin{aligned}
+\int_0^\infty f_\varepsilon(t)\,dt&=\frac{\pi}{2\sqrt\varepsilon},\\
+\frac{\pi}{2\sqrt\varepsilon}-1
+&\le\sum_{n=1}^{\infty}f_\varepsilon(n)
+\le\frac{\pi}{2\sqrt\varepsilon},\\
+a-\frac{\pi}{2\sqrt\varepsilon}
+&\le s_\varepsilon\le a+1-\frac{\pi}{2\sqrt\varepsilon}.
+\end{aligned}
+$$
+
+故 $s_\varepsilon\to-\infty$，且 $\sqrt\varepsilon\,s_\varepsilon\to-\pi/2$。这里 $\ker C=0$，没有核投影产生的 $\varepsilon^{-1}$ 极点；发散来自聚向零的正谱值。它也有有限支撑的直接见证：取 $y_n^{(N)}=-n$（$n\le N$），其余坐标为零，则
+
+$$
+q(1,y^{(N)})=a+2\operatorname{Re}\langle b,y^{(N)}\rangle
++\langle y^{(N)},Cy^{(N)}\rangle=a-2N+N=a-N.
+$$
+
+因此对任何固定 $a$，某个有限截断已出现负读数，且固定保留系数 $x=1$ 时下确界为 $-\infty$；这不是“每个有限截断均正而极限为负”的例子。
+
+缺少的条件可在同一对角模型中精确写出。更一般地，若 $Ce_n=\lambda_ne_n$、$0<\lambda_n\le M<\infty$，且 $b\in\mathcal H$，则
+
+$$
+\lim_{\varepsilon\downarrow0}
+\langle b,(C+\varepsilon I)^{-1}b\rangle
+=\sum_{n=1}^{\infty}\frac{|b_n|^2}{\lambda_n}\in[0,+\infty].
+$$
+
+每项随 $\varepsilon\downarrow0$ 单调增加；任意有限部分和的极限给出下界，全部极限项的和给出上界，便证明了该等式，包括发散情形。右侧有限恰当且仅当 $(b_n/\sqrt{\lambda_n})_n\in\ell^2$，也就是 $b\in\operatorname{ran}C^{1/2}$。有限支撑向量均在此值域中，所以它的闭包是整个 $\mathcal H$；只要求属于闭包并无帮助。本例的商序列为 $(1,1,\ldots)\notin\ell^2$，故虽自动满足核兼容，仍不满足有限 Schur 极限所需的平方根值域条件。
+
+这为 [§3.1](ch03-riemann-zeros-fejer-and-landau.md#sec-ou-3-1) 的独立谱路线划出一条具体边界：不能从有限维消元直接越过无限谱尾项。作为比较基线，[`lsernau/grh-lean` 的 `grh-compact`](https://github.com/lsernau/grh-lean/blob/72fead102f663d5c7a407964a13dc0cf9d977207/grh-compact/README.md) 以约 $7.6\times10^4$ 行代码覆盖经典 RH 与狄利克雷 GRH；它不提供这里所需的独立算子构造。本例也不指定实际零点谱，不证明或否定一般戴德金、Hecke 或 Artin GRH，不涉及零点单重性的解决。
+:::
+
+谱尾项的值域问题之外，有限维可恢复性还留下一个观测问题：检出某个负方向，是否必须先准确重构指定的负方向？两点模型把这两种误差要求分开。
 
 ::: {.example #ex-ou-appb-optimal-negative-detection title="检测负方向与检验指定见证的精度分界"}
 以下是完整的手工推导（`ARGUED`）。取精确节点 $1,u=1+h$，其中 $h>0$，固定读数尺度为

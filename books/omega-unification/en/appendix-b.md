@@ -224,7 +224,65 @@ If $P_0B^*x\ne0$, this minimum reading tends to $-\infty$; otherwise it tends to
 A positivity check at one fixed scale certifies only $H_\varepsilon=H+\operatorname{diag}(0,\varepsilon I)$. For example, $A=[1],B=[1],C=[0]$ gives $S_\dagger=[1]$ but $S_\varepsilon=[1-1/\varepsilon]$; $H_\varepsilon$ is positive semidefinite for $\varepsilon\ge1$ and fails to be so for $0<\varepsilon<1$. If $H_\varepsilon\succeq0$ can be proved along a sequence of $\varepsilon$ tending to zero, taking limits at each fixed vector does imply $H\succeq0$. These finite-dimensional conclusions provide no uniform positive spectral gap across windows and do not identify the actual zero spectrum; an independent RH spectral route still needs control of complete observation, limits, and spectral tails.
 :::
 
-Finite-dimensional recoverability leaves an observation question: must detecting some negative direction first reconstruct a prescribed negative direction accurately? A two-point model separates these error requirements.
+::: {.example #ex-ou-appb-compact-schur-range title="A Compact Internal Block Can Diverge despite Having No Kernel"}
+The finite-dimensional condition in [@rem-ou-appb-schur-regularization] does not extend to infinite dimensions merely by assuming a trivial kernel: positive spectral values may accumulate at zero. The example and range criterion below are manual derivations (`ARGUED`), outside the Lean-checked scope of [@thm-ou-appb-schur-attained-minimum].
+
+On $\mathcal H=\ell^2(\mathbb N_{\ge1};\mathbb C)$, let $e_n$ be the standard unit vectors and set
+
+$$
+Ce_n=n^{-2}e_n,\qquad b=(n^{-1})_{n\ge1},\qquad
+By=\langle b,y\rangle,\qquad B^*x=xb.
+$$
+
+The inner product is linear in its second variable. Since $\sum_{n\ge1}n^{-2}\le2$, we have $b\in\mathcal H$, so $B:\mathcal H\to\mathbb C$ is bounded. The operator $C$ is bounded, self-adjoint, positive, and injective. Truncation to its first $N$ coordinates gives a finite-rank operator $C_N$ with $\|C-C_N\|_{\mathrm{op}}=(N+1)^{-2}\to0$, so $C$ is compact. But $\langle e_n,Ce_n\rangle=n^{-2}\to0$, ruling out a uniform positive lower bound.
+
+For any $a\in\mathbb R$, let $H=\begin{pmatrix}a&B\\B^*&C\end{pmatrix}$ act on $\mathbb C\oplus\mathcal H$, and write $q(x,y)=\langle(x,y),H(x,y)\rangle$. For every $\varepsilon>0$, the operator $C+\varepsilon I$ has a bounded inverse, and completing the square gives
+
+$$
+\begin{aligned}
+s_\varepsilon
+&=\min_{y\in\mathcal H}\bigl(q(1,y)+\varepsilon\|y\|^2\bigr)\\
+&=a-\langle b,(C+\varepsilon I)^{-1}b\rangle
+=a-\sum_{n=1}^{\infty}\frac1{1+\varepsilon n^2}.
+\end{aligned}
+$$
+
+The minimizer is $y_\varepsilon=-(C+\varepsilon I)^{-1}b\in\mathcal H$. The series is bounded by $\varepsilon^{-1}\sum n^{-2}$, so the calculation is valid at every fixed positive regularization scale. To quantify the limit, take the decreasing function $f_\varepsilon(t)=(1+\varepsilon t^2)^{-1}$. Comparing areas on successive unit intervals places the series between $\int_1^\infty f_\varepsilon(t)\,dt$ and $\int_0^\infty f_\varepsilon(t)\,dt$. Using $\int_0^1f_\varepsilon\le1$ then gives
+
+$$
+\begin{aligned}
+\int_0^\infty f_\varepsilon(t)\,dt&=\frac{\pi}{2\sqrt\varepsilon},\\
+\frac{\pi}{2\sqrt\varepsilon}-1
+&\le\sum_{n=1}^{\infty}f_\varepsilon(n)
+\le\frac{\pi}{2\sqrt\varepsilon},\\
+a-\frac{\pi}{2\sqrt\varepsilon}
+&\le s_\varepsilon\le a+1-\frac{\pi}{2\sqrt\varepsilon}.
+\end{aligned}
+$$
+
+Thus $s_\varepsilon\to-\infty$ and $\sqrt\varepsilon\,s_\varepsilon\to-\pi/2$. Here $\ker C=0$, so there is no $\varepsilon^{-1}$ pole from a kernel projection; divergence comes from the positive spectral values accumulating at zero. There are also direct witnesses with finite support: take $y_n^{(N)}=-n$ for $n\le N$ and zero otherwise. Then
+
+$$
+q(1,y^{(N)})=a+2\operatorname{Re}\langle b,y^{(N)}\rangle
++\langle y^{(N)},Cy^{(N)}\rangle=a-2N+N=a-N.
+$$
+
+For any fixed $a$, some finite truncation therefore already has a negative reading, and the infimum at fixed retained coefficient $x=1$ is $-\infty$. This is not an example in which every finite truncation is positive but the limit is negative.
+
+The missing condition has an exact expression in the same diagonal setting. More generally, if $Ce_n=\lambda_ne_n$ with $0<\lambda_n\le M<\infty$ and $b\in\mathcal H$, then
+
+$$
+\lim_{\varepsilon\downarrow0}
+\langle b,(C+\varepsilon I)^{-1}b\rangle
+=\sum_{n=1}^{\infty}\frac{|b_n|^2}{\lambda_n}\in[0,+\infty].
+$$
+
+Each term increases as $\varepsilon\downarrow0$. The limit of every finite partial sum supplies a lower bound, and the sum of all limiting terms supplies an upper bound, proving the identity also when the sum diverges. The right side is finite exactly when $(b_n/\sqrt{\lambda_n})_n\in\ell^2$, equivalently $b\in\operatorname{ran}C^{1/2}$. Every vector with finite support lies in this range, so its closure is all of $\mathcal H$; membership in the closure alone adds no information. In this example the quotient sequence is $(1,1,\ldots)\notin\ell^2$. Kernel compatibility is automatic, yet the square-root range condition needed for a finite Schur limit fails.
+
+This identifies a concrete boundary for the independent spectral route in [Section 3.1](ch03-riemann-zeros-fejer-and-landau.md#sec-ou-3-1): finite-dimensional elimination does not itself control infinite spectral tails. For comparison, [`lsernau/grh-lean`'s `grh-compact`](https://github.com/lsernau/grh-lean/blob/72fead102f663d5c7a407964a13dc0cf9d977207/grh-compact/README.md) covers classical RH and Dirichlet GRH in about $7.6\times10^4$ lines of code; it supplies no independent operator construction of the kind needed here. This example specifies no actual zero spectrum, proves or disproves no general Dedekind, Hecke, or Artin GRH, and does not resolve simplicity of zeros.
+:::
+
+Beyond the range condition for spectral tails, finite-dimensional recoverability leaves an observation question: must detecting some negative direction first reconstruct a prescribed negative direction accurately? A two-point model separates these error requirements.
 
 ::: {.example #ex-ou-appb-optimal-negative-detection title="Precision Thresholds for Detecting Negativity and Testing a Prescribed Witness"}
 The following is a complete manual derivation (`ARGUED`). Take exact nodes $1,u=1+h$, where $h>0$, and fix the readout scale by
