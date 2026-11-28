@@ -29,3 +29,29 @@ r\le\min_{\varnothing\ne T\subseteq S}\left(k-|T|+\left\lfloor\sqrt{|T|+m(T)}\ri
 $$
 
 For $S=\{0,1,3,6,9\}$ modulo $12$, the subset $T=\{0,3,6,9\}$ lowers the bound from four to three. There are readouts with a unique shared state of rank three. [Subset bound and explicit witness](https://github.com/the-omega-institute/trureturing-books/issues/1676#issuecomment-7233048570)
+
+## D.3 Exact Pure-State Radius on Three Sites {#sec-ou-appd-three-site-radius}
+
+Fix positive coordinate probabilities $p_1,p_2,p_3$ on three sites of $\mathbb Z_d$, with zero probability elsewhere. Let $R$ be the smallest Euclidean distance from the uniform Fourier probability vector $u$ to a pure state's Fourier readout $q$ at these fixed probabilities. Label the edges around the triangle and set $A=\sqrt{p_1p_2}$, $B=\sqrt{p_2p_3}$, $C=\sqrt{p_3p_1}$. In a progression, site 2 is the midpoint. Write $T=\max(0,2\max(A,B,C)-A-B-C)$.
+
+| Arrangement of the three sites | $dR^2$ |
+|---|---|
+| All six directed differences distinct | $2(A^2+B^2+C^2)$ |
+| Only edge $C$ is antipodal, all other directed differences distinct | $2(A^2+B^2)$ |
+| Progression with step of order at least five | $2(A-B)^2+2C^2$ |
+| Progression with step of order four | $2(A-B)^2$ |
+| Coset of the order-three subgroup | $2T^2$ |
+
+To see why the list closes, follow the edges in cyclic order. Their differences sum to zero. Two of them can be negatives of one another only if the third vanishes, which distinct sites exclude. An equality between different edges therefore makes the triple a progression. When the step has order three, all three directed edges coincide. At order four the endpoint edge is antipodal. Without a progression the only remaining collision is an edge equal to its own negative.
+
+Parseval expresses $d\|q-u\|_2^2$ as the sum over nonzero differences of the squared moduli of their coherence sums. The coherences of a pure state have lengths $A,B,C$ and their three phases multiply to one. A lone antipodal edge can be made imaginary so that its two orientations cancel. In a progression the two step phases can be chosen opposite. At order four, choosing them as $e^{i\pi/4}$ and $-e^{i\pi/4}$ also makes the endpoint coherence imaginary. In the order-three coset all three lengths occur in one sum and its conjugate. Their smallest resultant has length $T$ by the triangle inequality. Rotating all three summands by a common phase can enforce product one for their unit phases while preserving that length. The minima in the table are thus all attained.
+
+For an exactly uniform second readout, the minimum shared rank is three in the first row. In the other rows it is one when $R=0$ and two when $R>0$. Indeed the positive diagonal state always gives a uniform Fourier readout. Any repeated directed difference reduces the count of real constraints to $3+m\le8$, so the extreme-point bound in Chapter 8 gives a representative of rank at most two.
+
+In the order-three coset, let the third coordinate receive a fraction $t$ while the original two retain relative probabilities $\alpha$ and $1-\alpha$. For $0<\alpha,t<1$, set $s=\sqrt{\alpha(1-\alpha)}$. After dividing the three lengths by $\sqrt{t(1-t)}$, two of them are $\sqrt{\alpha}$ and $\sqrt{1-\alpha}$. The third, $s\sqrt{(1-t)/t}$, must lie between their absolute difference and their sum. Squaring and solving for $t$ gives
+
+$$
+\left(\frac{s}{1+s}\right)^2\le t\le\left(\frac{s}{1-s}\right)^2 .
+$$
+
+These are exactly the fractions for which a pure state can give the uniform readout. For equal original populations the lower endpoint is $1/9$. The amplitudes $(2,2,-1)/3$ on $\{0,4,8\}\subset\mathbb Z_{12}$ attain it. For unequal populations the upper endpoint is strictly below one, so increasing the third population can also destroy exact flatness. [Three-site radius and phase witnesses](https://github.com/the-omega-institute/trureturing-experiments/blob/ec341972d75f6058bb3708e3692873997fd76d34/experiments/ch39-omega-research/replay/ch08-three-site-pure-radius.md)
