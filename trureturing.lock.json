@@ -1015,6 +1015,14 @@
       "line": 172,
       "signature": "theorem prony_hankel_rank {m n : ℕ} (hmn : m ≤ n) {nodes weights : Fin m → K} (hNodes : Function.Injective nodes) (hWeights : ∀ mode, weights mode ≠ 0) : Matrix.rank (pronyHankel (n"
     },
+    "D5/S3/Analytic/GoldenTomography/FinitePronyHankelReconstruction.prony_moment_linear_recurrence": {
+      "module": "D5/S3/Analytic/GoldenTomography/FinitePronyHankelReconstruction",
+      "name": "D5.S3.Analytic.GoldenTomography.FinitePronyHankelReconstruction.prony_moment_linear_recurrence",
+      "kind": "theorem",
+      "statement_id": "sha256:71132bd1fe992addf603f5bcdd286880f8dd3e2b485bfd9c8662c56077e2f8ff",
+      "line": 82,
+      "signature": "theorem prony_moment_linear_recurrence {m : ℕ} (nodes weights : Fin m → K) (n : ℕ) : ∑ k ∈ (pronyAnnihilator nodes).support, (pronyAnnihilator nodes).coeff k * pronyMoment nodes weights (n + k) = 0"
+    },
     "D5/S3/Analytic/GoldenTomography/FiniteVandermondeTomography.finite_moment_readout_injective": {
       "module": "D5/S3/Analytic/GoldenTomography/FiniteVandermondeTomography",
       "name": "D5.S3.Analytic.GoldenTomography.FiniteVandermondeTomography.finite_moment_readout_injective",
