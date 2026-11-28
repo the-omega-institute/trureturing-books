@@ -419,9 +419,19 @@ $$
 2(2S_++g_\Delta)g_\Delta=0.01706762,\qquad
 \frac{2L_+}{\mu_-}=0.00603015.
 $$
-所以首项约化 Hessian 在两个邻域内的最小特征值仍大于 $1.7397$。这证明了缩放极限的统一严格正定性。#2203 中的解析余项目前只有函数值界，尚未给出对缩放坐标二阶导数的界，因此这里不把 $1.7397$ 外推为有限 $\varepsilon$ 的 Hessian 证书；下一步是补上该导数余项估计。
+所以首项约化 Hessian 在两个邻域内的最小特征值仍大于 $1.7397$。有限尺度下还要控制等成本图的二阶导数余项。
 
 若保持线性平衡并取 $\kappa+8\mu^2q=\eta\varepsilon$，两处分支在有限 $\varepsilon$ 下的等成本点会偏离五阶阈值（手工推导）。固定 $\mu$ 与下型轻块，调相取 $C>0$ 和实数 $S$，保留其相对符号。令 $v,w$ 分别为下型轻块沿 $e_0,e_2$ 的对角元，$c=\sqrt{\mu^2+|S|^2}$。实际交换点满足 $\eta_{\mathrm c}(\varepsilon)=-8\mu^2c^2w+O(\varepsilon)$。对于有界的 $\eta$ 和充分小的正 $\varepsilon$，$\eta>\eta_{\mathrm c}(\varepsilon)$ 时反射支胜出，$\eta<\eta_{\mathrm c}(\varepsilon)$ 时零偏转附近的分支胜出。
+
+在上述 $c=1$ 的参数盒内，对每个 $0<\varepsilon\le10^{-13}$，两个邻域各有唯一的严格局部极小基（手工推导，模列相位与置换）。六个缩放坐标逐项偏离各自中心不到 $350\varepsilon$。固定其余坐标时，上、下型成本沿 $X$ 一升一降，最大成本在两者交点处最小。凯莱闭合控制复尺度半径 $1/4$ 内的成本分子。先显式展开归一化成本的一阶项，再对二阶及以上余项用 Cauchy 估计，便能在复尺度半径 $2\times10^{-6}$ 内求出等成本图和唯一解析驻点。在实参数与尺度范围内，约化 Hessian 的最小特征值大于 $1.73$。结合全复基的 $2100\sqrt{\varepsilon}$ [定位半径界](https://github.com/the-omega-institute/trureturing-books/issues/2467#issuecomment-7243225980)，全局取优只需比较这两个候选基。
+
+记反射支减去零偏转附近分支的最优平方成本差为 $\Delta E$。两支在缩放极限有相同的驻点值。除去共同值，再控制驻点的位移与等成本图的余项，可得 $\Delta E/\varepsilon^5$ 与 $-2|S|^2(\eta+8\mu^2w)$ 的误差及该误差的一阶 $\eta$ 导数均小于 $1.15\times10^8\varepsilon$。因此归一化差在 $[-2,2]$ 严格递减且两端异号，唯一交换点满足
+
+$$
+|\eta_{\mathrm c}(\varepsilon)+8\mu^2w|<6.6\times10^7\varepsilon.
+$$
+
+两支在交换点同时取优。交换点上方由反射支取优，下方由零偏转附近的分支取优。[一阶展开、成本差界与原矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/2316#issuecomment-7243481557)
 
 若允许轻块形状随 $\varepsilon$ 变化，固定平面可以在等成本点上精确取优（手工推导）。固定共同尺度 $c$，让 $t=v/c$ 和 $r=w/c$ 独立微调，保持 $S=-c\sqrt{tr}$、$\mu=c\sqrt{1-tr}$ 及上述线性平衡。两条归一化横向梯度在 $\varepsilon=0$ 的延拓值为 $(r-t)\sqrt{tr/(1-tr)}-1$ 和 $2-4t+r$。在共同零点 $t\simeq0.783854$、$r=4t-2$，第一式沿第二式的零线严格递增，所以两梯度对形状的雅可比可逆。
 
