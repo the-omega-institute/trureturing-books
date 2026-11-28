@@ -177,7 +177,7 @@ $$
 c_p=6\left[\binom{p+4}{3}+\binom{p+3}{3}+\binom{p+2}{3}\right].
 $$
 
-Exchanging adjacent covariant derivatives gives a field strength times a lower-order derivative. Repeating this reduction gives symmetric derivatives, and field strengths have nonnegative deficit. Write $\ell=36+\sum_{p=1}^{k-1}c_p+s$, where $1\le s\le c_k$. Occupying the lowest-deficit groups first bounds the total deficit from below. Filled groups contribute even numbers and the remainder $s$ is odd. Dimension parity therefore adds one unit precisely when $k$ is odd. The resulting minimum is
+Exchanging adjacent covariant derivatives gives a field strength times a lower-order derivative. Repeating this reduction gives symmetric derivatives, and field strengths have nonnegative deficit. Write $\ell=36+\sum_{p=1}^{k-1}c_p+s$, where $1\le s\le c_k$. Occupying the lowest-deficit groups first bounds the total deficit from below. Order the finitely many candidate slots by increasing deficit in a single channel. Each slot has unit cost and gain equal to the negative of its deficit. At a fixed occupation count, the corresponding prefix is the unique prefix-closed selection. The [frozen prefix optimality theorem](lean:D5/S3/Observer/ArithmeticTomography/PrefixConstrainedGreedyOptimality.prefix_constrained_greedy_optimality) gives a prefix-closed maximizer at that count, so this prefix minimizes total deficit. Filled groups contribute even numbers and the remainder $s$ is odd. Dimension parity therefore adds one unit precisely when $k$ is odd. The resulting minimum is
 
 $$
 d_{\min}(\ell)=\frac{7\ell-3}{2}+\sum_{p=1}^{k-1}p\,c_p+ks+(k\bmod 2).
