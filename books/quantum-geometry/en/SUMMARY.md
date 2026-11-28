@@ -286,6 +286,7 @@
       - [E.8.1.6 Banach Reconstruction Bounds for 3-Trees and the Exact Constant for Third Powers of Paths](appendix-e-s08-s01-s06-three-tree-banach-sharp-bounds.md)
       - [E.8.1.7 Reconstruction Bounds for $\mathrm{SU}(2)$ Gains on Chordal Graphs](appendix-e-s08-s01-s07-chordal-su2-sharp-bounds.md)
       - [E.8.1.8 Exact Chordal Banach Reconstruction Strata](appendix-e-s08-s01-s08-chordal-banach-exact-strata.md)
+      - [E.8.1.9 Hilbert and Real $L_1$ Coefficient Reversal, Circle Gains, and $\mathrm{SU}(2)$ Bounds](appendix-e-s08-s01-s09-hilbert-reversal-circle-su2.md)
     - [E.8.2 Born weights, dynamics, and ensembles](appendix-e-s08-s02-born-dynamics-ensembles.md)
     - [E.8.3 Orbits, observers, and complex structure](appendix-e-s08-s03-orbits-and-structure.md)
 - [Appendix F Exclusion Balls, Face Polarity, and Spin-Factor Orientation Classification](appendix-f.md)
