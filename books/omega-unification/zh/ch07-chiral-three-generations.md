@@ -367,6 +367,8 @@ $F$ 在三个轻中心取零，在两个重中心均取 $5(1+\sqrt5)/4$。傅里
 
 甚至在选取标量曲率之前，一般的一阶数据就已排除四阶配平。固定三个轻质量及两个相对振幅 $b_\pm/b_0$ 的梯度，把未知的二步动能系数、相对标量二次项和共同速度尺度代入三阶比较，得到 $300\times265$ 的矩阵。若其秩为 $263$，所有三阶解均由两个共轭复解生成。实动能必须同时使用二者，而四阶横向项的消去要求它们在两端的二次振幅均相等，这与三个正质量不全相等矛盾。故候选只可能出现在秩至多为 $262$ 处。在质量各异的情形，以及每一种恰有两质量相等的情形中，这都是一阶数据空间的真代数子集；其中是否有解仍开放。[三阶矩阵、四阶差项与精确子式](https://github.com/the-omega-institute/trureturing-experiments/blob/e6589f0e8cb29f58a4beb1fea1d439ad27e164be/experiments/ch39-omega-research/replay/ch39-three-step-fifth-jet.md#a-cubic-rank-test-using-only-light-masses-and-gradients)
 
+再加入两个重中心的动能零值，还能限制梯度的方向。两个相对梯度共有八个分量，约去共同的非零倍数后，其方向属于七维射影空间。对质量各异及三种恰有两质量相同的情形，各有一个非空的质量开集，使其中每组质量允许的候选梯度方向都落在维数至多为四的代数集合内。证明给出一个完全避开候选方向的射影平面：在平面的三个参数上，七次系数矩阵秩为 $1260$，故平面上每个方向的任意非零幅度都被排除。四个开集分别包含归一化外侧质量 $(2,3),(2,2),(1,2),(2,1)$。[射影平面与七次系数矩阵](https://github.com/the-omega-institute/trureturing-experiments/blob/f01fc9fbc239c1170b53d068ed4e6739b7291497/experiments/ch39-omega-research/replay/ch39-three-step-fifth-jet.md#projective-directions-of-the-relative-wilson-gradients)
+
 相同的精度也约束最短作用程。在五个中心连续三轻、其余两个重中心的标量色散均为四时，任一有隙的平移不变实标量与克利福德向量核，若配平完整算子，必须有 $12r\ge 2K+7$；只配平标量色散也须有 $24r\ge 2K+10$。沿零和方向 $(2,2,2,-3,-3)$ 绕环面一周会经过所有五个中心。长度 $r$ 限制了沿此方向所见的傅里叶频率，而三轻中心的匹配要求相邻读数的差在两处出现高重数零点，两者给出上述必要界。一般阶数的最短作用程仍待确定。[插值构造、谱隙与五中心下界](https://github.com/the-omega-institute/trureturing-experiments/blob/021220d28b25ffdc2bcbe07f1ad59675b464edcb/experiments/ch39-omega-research/replay/%CE%A9%E5%A4%8D%E7%AE%97%E8%AF%B4%E6%98%8E.md#%E4%B8%89%E4%B8%AA%E8%BD%BB%E9%94%A5%E9%85%8D%E5%B9%B3%E5%88%B0%E4%BB%BB%E6%84%8F%E6%8C%87%E5%AE%9A%E6%9C%89%E9%99%90%E9%98%B6%E9%9C%80%E8%A6%81%E5%A4%9A%E8%BF%9C%E7%9A%84%E4%BD%9C%E7%94%A8)
 
 下表将这四类从球壳通往四维手征三代的显式构造并列成一张清晰的对照账：
