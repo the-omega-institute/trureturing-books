@@ -516,7 +516,26 @@ For any positive Hermitian common portal $B \succeq 0$ with operator norm $B_* =
 
      For the second range, put $x=e^{-b'(t-t_0)}$. The level-7 lower limit fixes the mean of $x$ and the level-19 upper limit fixes the mean of the convex power $x^{c/b'}$. As the cutoff moves earlier, its node moves right. Holding both means fixed forces the node for the earlier atom to move right as well. Along this curve of chords the mean of the concave power for level 1 increases strictly. The difference between the convex power and its tangent at the earlier atom, divided by the same difference at the cutoff, bounds the indicator of the late-time tail pointwise. Integrating and using the response windows and the cap bounds the tail for every feasible positive measure. The two-atom mixture attains the bound. [Monotonicity and equality conditions](https://github.com/the-omega-institute/trureturing-books/issues/2029#issuecomment-7239597179)
 
-     Extend the second construction until the earlier atom is at time zero. Whether level 1 now exceeds its upper limit depends on the absolute energies. The spectral lower bound for the high-inertia arc graph gives $e_1>0.05849$. The level-6 enclosure at the crossing gives $e_1\le e_6<0.046(1.435)^2<0.095$. These bounds cover the specified clock axes and angle window at the 35th positive zero, $0<d\le1/2$, and both continuous arcs and edge-preserving subdivisions with $h\le10^{-6}$. Reweight by the level-7 response and set $Y=e^{-(c-b')(t-t_0)}$. Then $\mathbb E Y=e^{2\delta}$. The earlier node $z=e^{(c-b')t_0}$ exceeds $175$ and carries reweighted probability $\theta<0.006$. Write $\kappa=b'/(c-b')$ and $s=(b'-a)/b'>0.55$. The total weight gives $\mathbb E Y^{-\kappa}=1.01e^\delta$, and the earlier node has $z^{-\kappa}=e^{-b't_0}<1/4$. The later atom's contribution alone gives
+     **MODEL (unequally spaced energies).** Return to the example with energies $(1,3,15)$ at levels $1,7,19$, respectively. Set $t_0=\log 2$ and $q=1001/1000$, with an independent total-weight cap $A(0)\le Cq$ and log tolerances $(1,1,16)\log q$. Over nonzero finite positive measures on nonnegative diffusion times, let $P$ be the maximum of the original closed-tail fraction $\mu([T,\infty))/A(0)$.
+
+     **ARGUED (from the zero-time boundary to the level-1 lower limit).** Set $Y=e^{-3(t-t_0)}$, $H=e^{-3(T-t_0)}$, and $m=q^{-2}$. From the all-tail cutoff $T_*=t_0+\frac23\log q$ to the first cutoff $T_1$ where level 19 reaches its upper limit $q^{16}$, the unique optimizer places the full weight $Cq$ at time zero and at the cutoff, with fraction $(8-m)/(8-H)$ at the cutoff. At $T_*$ the atom at time zero has zero weight. [Zero-time branch and first contact](https://github.com/the-omega-institute/trureturing-books/issues/2029#issuecomment-7241970068)
+
+     For $T_1\le T\le T_2$, the level-7 lower limit and the level-19 upper limit determine the closed-tail maximum $P$ and the early node $U\in(1,8]$. At $T_1$, $U=8$. The cutoff $T_2$ marks the first contact with the level-1 lower limit $q^{-1}$.
+
+     $$
+     \begin{aligned}
+     P&=\frac{U-m}{U-H},\\
+     PH^5+(1-P)U^5&=q^{15}.
+     \end{aligned}
+     $$
+
+     The difference between the fifth power and its tangent at $U$ gives a pointwise tail bound for every feasible measure. After normalizing by the original total weight, the integrated bound has coefficient $q^{16}-5U^4q^{-1}<0$ on $1/W$, where $W=A(0)/C$. Equality requires $W=q$ and support at $H,U$. The mean $m$ uniquely fixes the two weight fractions. As the cutoff moves later, the early atom moves from zero to positive time, and the level-1 response $q[PH^{1/3}+(1-P)U^{1/3}]$ strictly decreases to its lower limit at $T_2$. [Pointwise bound and monotonicity](https://github.com/the-omega-institute/trureturing-books/issues/2029#issuecomment-7242176708)
+
+     **CERT (rational enclosures).** In the model's diffusion-time units, $0.58555753<T_2-T_*<0.58555754$. The closed-tail fraction there satisfies $0.00792649<P(T_2)<0.00792650$. [Rational replay](https://github.com/the-omega-institute/trureturing-books/issues/2029#issuecomment-7242176708)
+
+     For later cutoffs, the chord used on $[T_1,T_2]$ violates the level-1 lower limit.
+
+     For the calibrated spectrum, extend the second construction until the earlier atom is at time zero. Whether level 1 now exceeds its upper limit depends on the absolute energies. The spectral lower bound for the high-inertia arc graph gives $e_1>0.05849$. The level-6 enclosure at the crossing gives $e_1\le e_6<0.046(1.435)^2<0.095$. These bounds cover the specified clock axes and angle window at the 35th positive zero, $0<d\le1/2$, and both continuous arcs and edge-preserving subdivisions with $h\le10^{-6}$. Reweight by the level-7 response and set $Y=e^{-(c-b')(t-t_0)}$. Then $\mathbb E Y=e^{2\delta}$. The earlier node $z=e^{(c-b')t_0}$ exceeds $175$ and carries reweighted probability $\theta<0.006$. Write $\kappa=b'/(c-b')$ and $s=(b'-a)/b'>0.55$. The total weight gives $\mathbb E Y^{-\kappa}=1.01e^\delta$, and the earlier node has $z^{-\kappa}=e^{-b't_0}<1/4$. The later atom's contribution alone gives
 
      $$
      R_a\ge e^{-\delta}(1-\theta)^{1-s}(1.01e^\delta-\theta z^{-\kappa})^s
