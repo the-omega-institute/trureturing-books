@@ -417,7 +417,18 @@ Zero #11431 serves as a recurring testbed for two-loop gauge crossings and two-s
 
    The generic relative truncation bound gives sufficient radii of $11{,}330{,}943$ for equal weights and $11{,}331{,}843$ for local harmonic weights.
 
-   Mixing the equal and local harmonic weights, with $\lambda$ the harmonic fraction, shows how an integer-radius jump can reverse the switch order. Throughout $0.420\le\lambda\le0.526$, the full reading $I_\eta$ starts at radius $111524$ at the initial bandwidth $\eta=10^{-3}$. The midpoint reading $J_\eta$ initially starts at $111530$ and switches first as the bandwidth narrows. At $\lambda_e\in(0.5257718489,0.5257718490)$, $J_{10^{-3}}(111530)$ equals the occupation diagonal $B(\lambda_e)$ for the mixed weights. From $\lambda_e$ onward the midpoint reading starts at $111531$, and the full reading switches first. Ball arithmetic gives $J_\eta(111530)<I_\eta(111524)<J_\eta(111531)$ over $0.000999990\le\eta\le0.001$. The two critical bandwidths stay strictly apart on either side of the jump, and the same pair remains isolated on the full line. [Interval certificate and replay for the reversal](https://github.com/the-omega-institute/trureturing-books/issues/2243#issuecomment-7242089738)
+   For the same nineteen-zero window (`CERT`), mix the weights as $p_j(\lambda)=(1-\lambda)/19+\lambda q_j$, where $q_j$ are the local harmonic weights normalized over the window. Throughout $0.420\le\lambda\le0.526$, the full reading $I_\eta$ at the initial bandwidth $\eta_0=10^{-3}$ first exceeds the threshold at integer radius $111524$. On the same parameter interval, the midpoint reading $J_\eta$ satisfies $J_{\eta_0}(111530)=B(\lambda)$ at a unique parameter $\lambda_e\in(0.5257718489,0.5257718490)$, where $B(\lambda)$ is the occupation diagonal for the mixed weights. The reading must strictly exceed $B(\lambda)$, so at equality the midpoint starting radius has already risen to $111531$. For $0.420\le\lambda<\lambda_e$, the midpoint reading starts at $111530$ and switches first as the bandwidth narrows. For $\lambda_e\le\lambda\le0.526$, the midpoint reading starts at $111531$ and the full reading switches first.
+
+   Ball arithmetic gives the following bounds throughout the rectangle $0.420\le\lambda\le0.526$ and $0.000999990\le\eta\le0.001$.
+
+   $$
+   \begin{aligned}
+   I_\eta(111524)-J_\eta(111530) &> 2.26\times10^{-11},\\
+   J_\eta(111531)-I_\eta(111524) &> 2.52\times10^{-10}.
+   \end{aligned}
+   $$
+
+   At their respective starting radii, both readings increase strictly with bandwidth and each reaches the threshold exactly once within the strip. At the midpoint crossing on the first branch and the full crossing on the second, the other reading still exceeds the threshold by more than the corresponding bound above. Since the bandwidth derivatives are below $0.031$, the mean value theorem implies that for $\lambda<\lambda_e$ the critical bandwidths differ by more than $7.2\times10^{-10}$, and for $\lambda\ge\lambda_e$ they differ by more than $8.1\times10^{-9}$. The same pair remains isolated on the full line throughout the strip. [Interval certificate and replay for the reversal](https://github.com/the-omega-institute/trureturing-books/issues/2243#issuecomment-7242089738)
 
 ::: {.example #ex-ou-ch03-fejer-11431 title="Three-Line Derivation of the Sharp 23.670% Isolated-Band Ceiling"}
 Inside the isolated band $\Delta < \eta \le \Delta_2$, write $x, y, z \ge 0$ for the probability weights on zeros #11427, #11436, and #11431, and set $q := 1 - \Delta/\eta \in (0, 1]$. The extra collision contributes $4q x y z^2$, while the occupation diagonal $D = \sum_i p_i^4 + 4\sum_{i < j} p_i^2 p_j^2$ only increases when any of the other sixteen weights is nonzero. For $x, y > 0$, putting $t := z^2 / (xy)$ and using $x^2 + y^2 \ge 2xy$ yields
