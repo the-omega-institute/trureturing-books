@@ -415,6 +415,12 @@ $$
 
    改用局部调和权，将 $\gamma_j/(1/4+\gamma_j^2)$ 在十九零点窗内归一化，并以相应的占据对角为阈值。在 $\eta=10^{-3}$ 时，完整读数与仅保留对角及中点配对的读数分别首次严格过阈于 $111532$ 和 $111535$。把带宽降至 $0.000999992750$ 的过程中，完整读数先切换，次序与等权情形相反。两处临界带宽分别为 $\eta_I^{\mathrm{harm}}\in(0.000999997267,0.000999997268)$ 与 $\eta_J^{\mathrm{harm}}\in(0.000999992819,0.000999992820)$。在 $\eta\le\eta_I^{\mathrm{harm}}$ 时，完整读数的首过半径升至 $111533$。在 $\eta\le\eta_J^{\mathrm{harm}}$ 时，中点读数的首过半径升至 $111536$。两次切换之间（$\eta_J^{\mathrm{harm}}<\eta\le\eta_I^{\mathrm{harm}}$），首过半径只差两个单位，整线孤立配对依旧相同。[局部调和权区间证书与复算脚本](https://github.com/the-omega-institute/trureturing-books/issues/2243#issuecomment-7241230555)
 
+   让权重从等权向局部调和权 $q_j$ 线性变化，取 $p_j(\lambda)=(1-\lambda)/19+\lambda q_j$，并以相应的占据对角 $B(\lambda)$ 作阈值。从 $10^{-3}$ 向下调带宽时，切换次序首次反转于 $\lambda_*\in(0.0698340625,0.06983421875)$。在 $0\le\lambda<\lambda_*$ 时，中点读数 $J_\eta$ 先切换。到 $\lambda=\lambda_*$，它在起始带宽、半径 $111526$ 处等于阈值，首次严格过阈的起点半径因而升至 $111527$，完整读数 $I_\eta$ 转而先切换。[首次反转的区间证书](https://github.com/the-omega-institute/trureturing-books/issues/2243#issuecomment-7241398183)
+
+   当 $J_\eta$ 的起点半径仍为 $111527$ 时，$I_\eta$ 的起点半径在 $\alpha\in(0.12207199,0.12207204)$ 处升至 $111522$，仍是 $I_\eta$ 先切换。到 $\beta\in(0.1341334765625,0.134133515625)$，$I_{10^{-3}}(111522)$ 降至 $B(\beta)$，起点半径升至 $111523$，由 $J_\eta$ 先切换的次序恢复。[完整读数跳变的区间证书](https://github.com/the-omega-institute/trureturing-books/issues/2243#issuecomment-7241612699)
+
+   随后 $I_\eta$ 的起点半径保持在 $111523$。中点读数的起点半径升至 $111528$ 与 $111529$ 时，仍是 $J_\eta$ 先切换。到 $\lambda=\chi\in(0.4121722900,0.4121722925)$，$J_{10^{-3}}(111529)$ 降至 $B(\chi)$，起点半径升至 $111530$，于是 $I_\eta$ 先切换。这个次序保持到下一次完整读数的起点半径跳变。设 $\lambda_d\in(0.418858349609375,0.4188583740234375)$ 为 $I_{10^{-3}}(111523)=B(\lambda_d)$ 的边界，则从 $\lambda_d$ 起，$I_\eta$ 的起点半径升至 $111524$，$J_\eta$ 仍从 $111530$ 起步并恢复先切换，直至 $\lambda=0.420$。区间算术在整个比较范围内严格分开两处临界带宽，整线孤立配对始终相同。[中点读数跳变的区间证书](https://github.com/the-omega-institute/trureturing-books/issues/2243#issuecomment-7241765575) [完整读数升至 $111524$ 的区间证书](https://github.com/the-omega-institute/trureturing-books/issues/2243#issuecomment-7241915865)
+
    通用相对截尾界分别给出 $11{,}330{,}943$（等权）与 $11{,}331{,}843$（局部调和权）的充分半径。
 
 ::: {.example #ex-ou-ch03-fejer-11431 title="孤立碰撞带 23.670% 锐上限的三行初等推导"}
