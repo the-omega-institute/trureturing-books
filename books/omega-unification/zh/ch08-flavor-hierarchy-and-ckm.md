@@ -195,9 +195,9 @@ $$
 
 能产生六个质量的共同谱函数至少需要几次？在上面这枚零点和它的右邻分别考察，让上、下型共用一个在全实轴满足 $0<R(t)<1$ 的实有理函数，在共同的四站复三维空间上先压缩再平方。以约分后分子、分母次数的较大值计，最低次数恰为四。三次及以下即使允许两荷各选三代空间，也无法把六个质量同时送入各自的 $1\sigma$ 窗口。四次时，每枚零点各有一个函数能精确重现六个中心值。完整的混合矩阵还需要多少自由度？在中心零点，另一条四次函数能同时重现六个质量和 $|V_{ub}|$，但它给出 $|V_{cb}|\simeq0.9983$，远离参考值 $0.0427$。在中心及右邻分别取两荷各自的第十和第十七层，用这四个谱点构造次数至多为八的有理函数，则六个中心质量、九个 CKM 模平方和带符号的 Jarlskog 不变量都能同时重现。函数系数和味空间按编号分别选取。全实轴有界的非常数实有理函数约分后分母次数为偶数，右邻还有一个六次构造。因此完整夸克数据的最低次数在中心只可能是四、六或八，在右邻只可能是四或六。[低次数排除](https://github.com/the-omega-institute/trureturing-experiments/blob/cd77e22ffcdfad79fa9f5885649fbe24488859c9/experiments/ch39-omega-research/replay/ch39-common-quadratic-flavor-exclusion.py) · [四次构造与混合检验](https://github.com/the-omega-institute/trureturing-experiments/blob/cd77e22ffcdfad79fa9f5885649fbe24488859c9/experiments/ch39-omega-research/replay/ch39-common-quartic-six-masses.py) · [四次函数匹配 $|V_{ub}|$](https://github.com/the-omega-institute/trureturing-experiments/blob/679578c68c047c16917fa8df286ca992e1277d99/experiments/ch39-omega-research/replay/ch39-central-quartic-vub.py) · [四个谱点的完整混合构造](https://github.com/the-omega-institute/trureturing-experiments/blob/c434c5bc2be68117b9fb9aac02de3e193013b45b/experiments/ch39-omega-research/replay/ch39-sparse-rational-full-ckm.py) · [右邻的六次函数](https://github.com/the-omega-institute/trureturing-experiments/blob/39b561099993b46a610ea55d77cc5c58a2151abc/experiments/ch39-omega-research/replay/ch39-common-sextic-full-ckm.py)
 
-更珍贵的是，轮换必须破缺到何种程度，只需五行纯手算就能定死一个不可绕过的定量地板：
+这些质量基的几何关系还给出轮换必须破缺的最小幅度。
 
-::: {.example #ex-ou-ch08-commutator-floor title="用 $1\,\mathrm{TeV}$ 保守输入手算轮换破缺下界 $0.0414$"}
+::: {.example #ex-ou-ch08-commutator-floor title="从 $1\,\mathrm{TeV}$ 质量与混合输入估计轮换破缺"}
 把两个质量平方矩阵 $H_u, H_d$ 各自减去最小本征值再除以谱直径，记作无量纲归一矩阵 $A, B$（谱直径皆为 $1$）。因为 $\mathcal{E}(A)$ 与 $\mathcal{E}(B)$ 在 $T$ 本征基中同时对角，故 $[\mathcal{E}(A), \mathcal{E}(B)] = 0$。将 $[A, B]$ 拆作 $[A - \mathcal{E}(A), B] + [\mathcal{E}(A), B - \mathcal{E}(B)]$，并对谱直径至多为 $1$ 的厄米矩阵使用基本不等式 $\|[H, X]\|_{\mathrm{HS}} \le \|X\|_{\mathrm{HS}}$，立得
 
 $$
@@ -210,7 +210,18 @@ $$
 \max_{X \in \{A, B\}} \|[T, X]\|_{\mathrm{HS}} \;>\; 0.0414.
 $$
 
-无论物理学家偏爱哪套高能动力学，只要想同时容纳 $|V_{cb}| > 0.035$ 与 $|V_{tb}| > 0.98$，就绝不可能让上下两套汤川都藏在 $\|[T, X]\|_{\mathrm{HS}} \le 0.0414$ 的近对称安全区里。
+**顶底质量线给出的锐界（手工推导）。** 记顶、底质量本征线的射影夹角为 $\theta=\arccos|V_{tb}|$，并取 $d=\min(\theta,\pi/2-\theta)$。若两套归一质量平方的最大与次大本征值之差均至少为 $g>0$，则
+
+$$
+\max_{X\in\{A,B\}}\|[T,X]\|_{\mathrm{HS}}
+\ \ge\ \sqrt{3/2}\,g\sin d.
+$$
+
+在质量基中只保留连到最大本征值的矩阵元，可得 $\|[T,X]\|_{\mathrm{HS}}\ge g\|[T,P_X]\|_{\mathrm{HS}}$，其中 $P_X$ 投影到该质量线。在轮换本征基中，若该线的模平方读数为 $p_j$，则 $\|[T,P_X]\|_{\mathrm{HS}}^2=3(1-\sum_j p_j^2)$。两条质量线到各自最近轮换本征线的距离之和至少为 $d$。若就近的是同一条线，三角不等式给出下界 $\theta$。若是两条正交线，则给出 $\pi/2-\theta$。因此至少一条质量线的最大读数 $p=\max_j p_j$ 不超过 $\cos^2(d/2)$。当 $p\ge1/2$ 时，将其余读数合并得 $1-\sum_j p_j^2\ge 2p(1-p)\ge(\sin^2 d)/2$。当 $p\le1/2$ 时，直接用 $\sum_j p_j^2\le p$。
+
+等号可在包含两条质量线的平面内达到。若 $\theta\le\pi/4$，用一条轮换本征线平分夹角。若 $\theta\ge\pi/4$，取两条正交轮换本征线，各向外偏离就近质量线 $d/2$。在各自质量线、平面内正交线和平面法线上，分别赋质量平方 $1,1-g,0$。两套谱隙不同时，也可按各自的谱隙分配偏角。[射影角的三角不等式](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.fs_angle_triangle) · [不同谱隙的最优分角](https://github.com/the-omega-institute/trureturing-books/issues/1849#issuecomment-7238283999)
+
+在 $1\,\mathrm{TeV}$ 的参考输入表 2 中，$y_c/y_t\le0.00316/0.8573$，$y_s/y_b\le0.000271/0.01392$，因此可取 $g=0.9996$。沿用上面的保守混合输入，$|V_{tb}|>0.98$ 使 $d=\theta$，而 $\sin\theta\ge |V_{cb}|>0.035$ 使破缺严格大于 $0.0428$。直接以表 2 的边际区间构成输入盒时，$\sin\theta\ge\sin(0.04233)$，下界进一步超过 $0.0518$。[参考输入表 2](https://arxiv.org/html/2510.01312v2#Sx1.T2)
 :::
 
 ## 8.2 汤川层级障碍图谱：单希格斯、密度势、输运顶角与最小站点支撑 {#sec-ch08-yukawa-nogo}
@@ -349,7 +360,7 @@ $$
 :::
 
 ::: {.problem #prob-ou-ch08-common-flavor-law title="第三问味侧未解边界：从同一弧作用律导出味谱、轻子混合与无校准混合门"}
-本章完成了对十九点球壳味机制的系统清障与正向测绘：确立了 $\|[T, X]\|_{\mathrm{HS}} > 0.0414$ 的轮换破缺下界、五类朴素汤川层级的精确禁行界、四步有理牛顿折叠（$4^{-16}$ 精度）、$|\lambda| > 0.03010$ 的定向耦合下界、五／七零点跨背景刚性，以及跨七零点精确至 $10^{-11}$ 的有限有理响应 $(I + T^{16})^{-1}$。但两大核心环节依然开放：
+本章完成了对十九点球壳味机制的系统清障与正向测绘：确立了 $\max_{X\in\{A,B\}}\|[T,X]\|_{\mathrm{HS}}>0.0428$ 的轮换破缺下界、五类朴素汤川层级的精确禁行界、四步有理牛顿折叠（$4^{-16}$ 精度）、$|\lambda| > 0.03010$ 的定向耦合下界、五／七零点跨背景刚性，以及跨七零点精确至 $10^{-11}$ 的有限有理响应 $(I + T^{16})^{-1}$。但两大核心环节依然开放：
 
 1. **共同味作用律的缺失**：所有成功的 CKM 重构（六面单态、二十八圈镜像三角、五次边界脉冲与 $(I + T^{16})^{-1}$）所用的味系数、实旋转或脉冲强度仍由参考混合校准，尚未从球壳配分函数第一性原理推演而出。
 2. **完整轻子谱与统一折叠**：在同一低维无反噬折叠算子下，如何不引发 $m_u/m_\ell$ 坍缩与 $10^{34}\,\mathrm{GeV}^2$ 重块四次迹反噬，同步导出全部夸克、带电轻子、中微子质量与 PMNS 混合，仍待解答。
