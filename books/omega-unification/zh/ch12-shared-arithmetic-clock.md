@@ -261,7 +261,7 @@ $$
 \sum_{0<\gamma\le T,\,\lvert\beta-1/2\rvert\ge u} B(b\gamma)\ll T e^{-c_1uL}\qquad (u\ge 2/L)
 $$
 
-其中零点按重数计，$c_1>0$ 固定。[带权均方、零点密度与所用文献](https://github.com/the-omega-institute/trureturing-books/issues/1637#issuecomment-7234629760) · [区间截止与文献前提](https://github.com/the-omega-institute/trureturing-books/issues/1637#issuecomment-7234728563)
+其中零点按重数计，$c_1>0$ 固定。[Chen An，*A generalization of Graham’s estimate on the Barban–Vehov problem*（2022），式 (1.1)](https://arxiv.org/abs/2206.10104v1) · [Aleksander Simonič，*Explicit zero density estimate for the Riemann zeta-function near the critical line*（2019），定理 7](https://arxiv.org/abs/1910.08274v2) · [Alan Baker，*A sharpening of the bounds for linear forms in logarithms*（1972），第 117 页](https://doi.org/10.4064/aa-21-1-117-129) · [带权均方与零点密度的推导](https://github.com/the-omega-institute/trureturing-books/issues/1637#issuecomment-7234629760) · [区间截止与文献前提](https://github.com/the-omega-institute/trureturing-books/issues/1637#issuecomment-7234728563)
 
 在 $\gamma-i(\beta-1/2)$ 求值时，三个多项式的带复移陆道和都等于 $N(T)$ 乘其环面均值，加上 $O(T)$。按同高的对称零点配对后，换到实轴时一阶项相消。在 $|\beta-1/2|\le2/L$ 内，选足够小的 $\kappa$，二阶余项至多为 $\frac14\sum B(b\gamma)$。条带外对带权指数尾分部积分，误差为 $O(Tn^2/L^2)=O(T)$。先对 $B$ 应用该估计并移项，得到 $\sum B(b\gamma)=O(T)$。再用 $P^\pm$ 夹住窗口计数，得
 

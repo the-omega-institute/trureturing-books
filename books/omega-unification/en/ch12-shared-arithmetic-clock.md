@@ -261,7 +261,7 @@ $$
 \sum_{0<\gamma\le T,\,\lvert\beta-1/2\rvert\ge u} B(b\gamma)\ll T e^{-c_1uL}\qquad (u\ge 2/L)
 $$
 
-with multiplicities and a fixed $c_1>0$. [Weighted mean square, zero density, and references](https://github.com/the-omega-institute/trureturing-books/issues/1637#issuecomment-7234629760) · [Dyadic cutoff and source details](https://github.com/the-omega-institute/trureturing-books/issues/1637#issuecomment-7234728563)
+with multiplicities and a fixed $c_1>0$. [Chen An, *A generalization of Graham’s estimate on the Barban–Vehov problem* (2022), Eq. (1.1)](https://arxiv.org/abs/2206.10104v1) · [Aleksander Simonič, *Explicit zero density estimate for the Riemann zeta-function near the critical line* (2019), Theorem 7](https://arxiv.org/abs/1910.08274v2) · [Alan Baker, *A sharpening of the bounds for linear forms in logarithms* (1972), p. 117](https://doi.org/10.4064/aa-21-1-117-129) · [Derivation of the weighted mean-square and density bounds](https://github.com/the-omega-institute/trureturing-books/issues/1637#issuecomment-7234629760) · [Dyadic cutoff and source details](https://github.com/the-omega-institute/trureturing-books/issues/1637#issuecomment-7234728563)
 
 The Landau sum of each polynomial evaluated at $\gamma-i(\beta-1/2)$ is $N(T)$ times its torus mean, with an $O(T)$ error. Pairing symmetric zeros at each height cancels the first-order change on returning to the real axis. In $|\beta-1/2|\le2/L$, a small enough $\kappa$ bounds the second-order error by $\frac14\sum B(b\gamma)$. Outside that strip, partial summation against the weighted exponential tail gives $O(Tn^2/L^2)=O(T)$. Apply this estimate to $B$ and absorb the near-line error to obtain $\sum B(b\gamma)=O(T)$. The polynomials $P^\pm$ then bracket the real window count and give
 
