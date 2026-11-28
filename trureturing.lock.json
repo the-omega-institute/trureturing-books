@@ -1007,6 +1007,14 @@
       "line": 172,
       "signature": "theorem prony_hankel_rank {m n : ℕ} (hmn : m ≤ n) {nodes weights : Fin m → K} (hNodes : Function.Injective nodes) (hWeights : ∀ mode, weights mode ≠ 0) : Matrix.rank (pronyHankel (n"
     },
+    "D5/S3/Analytic/GoldenTomography/FiniteVandermondeTomography.finite_moment_readout_injective": {
+      "module": "D5/S3/Analytic/GoldenTomography/FiniteVandermondeTomography",
+      "name": "D5.S3.Analytic.GoldenTomography.FiniteVandermondeTomography.finite_moment_readout_injective",
+      "kind": "theorem",
+      "statement_id": "sha256:03966d9b7e7de86fafb1660341879ce3bf1fa48b16af0a7656a4c8db74e86110",
+      "line": 52,
+      "signature": "theorem finite_moment_readout_injective {n : ℕ} {nodes : Fin n → K} (hNodes : Function.Injective nodes) : Function.Injective (finiteMomentReadout nodes)"
+    },
     "D5/S3/Analytic/Interpolation/ConcaveKernelDividedDifference.three_node_slope_sub_slope_neg_of_lobe_bound": {
       "module": "D5/S3/Analytic/Interpolation/ConcaveKernelDividedDifference",
       "name": "D5.S3.Analytic.Interpolation.ConcaveKernelDividedDifference.three_node_slope_sub_slope_neg_of_lobe_bound",
