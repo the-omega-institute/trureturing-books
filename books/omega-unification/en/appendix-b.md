@@ -40,7 +40,41 @@ For rapid equation lookup across volumes, the table below summarizes recurring m
 
 ## B.2 Six-Tier Epistemic Evidence Stratification Ledger {#sec-ou-appb-epistemic-ledger}
 
-Every theorem, interval bound, effective construction, and open target across the monograph is strictly assigned to one of six epistemic tiers governed by a **strict non-escalation rule**: neither Arb ball enclosures, nor standalone upstream `Init` replays, nor external RH formalizations automatically elevate an `ARGUED`, `NUM`, `MODEL`, or `OPEN` claim into a pinned `LEAN ✓` frozen theorem:
+Every theorem, interval bound, effective construction, and open target across the monograph is strictly assigned to one of six epistemic tiers governed by a **strict non-escalation rule**: neither Arb ball enclosures, nor standalone upstream `Init` replays, nor external RH formalizations automatically elevate an `ARGUED`, `NUM`, `MODEL`, or `OPEN` claim into a pinned `LEAN ✓` frozen theorem.
+
+The following spectral example separates an exact calculation from an independent positivity proof: the Cayley criterion in [Chapter 3, Section 3.1](ch03-riemann-zeros-fejer-and-landau.md#sec-ou-3-1) admits a finite negative-index test, but the matrix itself is still built from the actual zeros.
+
+::: {.theorem #thm-ou-appb-mirror-gram-inertia title="Gram Inertia of the Finite Mirror-Odd Sector" lean="D5/S3/Midline/Cayley/FiniteMirrorKreinGramInertia.canonical_zeta_finite_mirror_gram_inertia"}
+Use the library's parameter-free canonical presentation `zetaZeroData`, with distinct nontrivial zeros $\rho_n$ and analytic multiplicities $m_n>0$. The same-height mirror permutation $\sigma$ preserves multiplicities and satisfies $\rho_{\sigma(n)}=1-\overline{\rho_n}$. For every $T\in\mathbb R$, define
+
+$$
+\begin{aligned}
+W_T&=\{n:|\rho_n-\tfrac12|\le T\},\\
+R_T&=\{n\in W_T:n<\sigma(n)\},\\
+\kappa_T&=\sum_{n\in R_T}m_n.
+\end{aligned}
+$$
+
+On the standard basis of $H=\ell^2(\{(n,k):k<m_n\};\mathbb C)$, set $J e_{n,k}=e_{\sigma(n),k}$ and $[x,y]_J=\langle x,Jy\rangle$. For $n\in R_T$ and $0\le k<m_n$, take $v_{n,k}=e_{n,k}-e_{\sigma(n),k}$. Their actual Gram matrix $G_T=([v_{n,k},v_{r,l}]_J)$ satisfies
+
+$$
+\begin{aligned}
+G_T&=-2I,\\
+n_-(G_T)&=\kappa_T,\\
+n_-(G_T)>0
+&\ \Longleftrightarrow\
+\exists n\in W_T:\operatorname{Re}\rho_n\ne\tfrac12.
+\end{aligned}
+$$
+
+Here $n_-$ counts negative eigenvalues with multiplicity, and the matrix is indexed by the $\kappa_T$ mirror-odd vectors. The window is a spectral-radius window $|\rho-\tfrac12|\le T$, rather than a height window restricting only $|\operatorname{Im}\rho|$.
+:::
+
+::: proof
+Choose one representative from each nonfixed two-element mirror orbit. Different representatives and their mirrors occupy disjoint standard-basis coordinates, and distinct multiplicity copies of the same zero are also orthogonal. Hence the ordinary Hilbert Gram matrix of these vectors is $2I$, while $Jv_{n,k}=-v_{n,k}$ makes the actual mirror Gram matrix $-2I$. Each selected orbit contributes exactly $m_n$ negative eigenvalues. Mirror fixedness is exactly critical-line location, and analytic multiplicities are positive, giving the final equivalence. The full proof is checked by the Lean kernel.
+:::
+
+The count keeps the existence of off-critical zeros conditional. Combining it with the external formalized RH fact cited in Chapter 3 gives $\kappa_T=0$ for every $T$ (a manual implication combining the two evidence tiers, `ARGUED`); the kernel theorem above supplies the exact inertia formula. An independent spectral route still needs an arithmetic or geometric positivity construction and identification of the zero spectrum; checks on finitely many windows also cannot replace control for every $T$. With this boundary explicit, the table below assigns each tier its own responsibility.
 
 | Evidence Tier & Label | Verification Mechanism & Provenance | Logical Boundary & Warrant | Representative Coverage & Pointers |
 | :--- | :--- | :--- | :--- |

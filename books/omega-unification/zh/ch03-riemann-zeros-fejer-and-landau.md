@@ -232,7 +232,9 @@ $$
 \end{aligned}
 $$
 
-固定在实部 $1/2+a$ 时，割线权重为 $\sinh(\lambda(\delta_\rho-a))/\lambda$（只计 $\delta_\rho>a$）。它至多是 $\cosh(\lambda/2)$ 倍的线性权重，因此同频对数模积分也受此界控制，另加水平边界的 $O_\lambda(L_U)$。取 $a=b\log L_U/L_U$，每个固定 $b>7/8$ 都可选 $2\theta b>1$，从而得到 $o(U/L_U)$。在 $b=2$，一次矩为 $O_\varepsilon(U/L_U^{16/7-\varepsilon})$，无需假定 RH 或利用零点之间的相位抵消。$b=7/8$ 时，这族密度界只给出 $O_\varepsilon(U/L_U^{1-\varepsilon})$。[单层割线与分层推导](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240931083)
+固定在实部 $1/2+a$ 时，割线权重为 $\sinh(\lambda(\delta_\rho-a))/\lambda$（只计 $\delta_\rho>a$）。它至多是 $\cosh(\lambda/2)$ 倍的线性权重，因此同频对数模积分也受此界控制，另加水平边界的 $O_\lambda(L_U)$。取 $a=b\log L_U/L_U$，每个固定 $b>7/8$ 都可选 $2\theta b>1$，从而得到 $o(U/L_U)$。在 $b=2$，一次矩为 $O_\varepsilon(U/L_U^{16/7-\varepsilon})$，无需假定 RH 或利用零点之间的相位抵消。[单层割线与分层推导](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240931083)
+
+在阈值 $b=7/8$，这族固定指数的界给出 $O_\varepsilon(U/L_U^{1-\varepsilon})$。用合成谱可以检验这些输入的边界（手工推导）。每周期两组偏轴点的相位相反，点数相差一枚。调节两组略高于 $a$ 的偏移，使二次权重恰好相等。这个谱满足上方整族密度界，且隐含常数至多随 $\theta$ 按 $(4/7-\theta)^{-1}$ 增长，但右闭窗一次矩仍可达到 $U\log L_U/L_U$ 量级。实际 $\zeta$ 在这条线上的 $O(U/L_U)$ 无 RH 估计需要额外输入。[阈值构造、复算与 Baluyot §3.6 的误差](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7241173664)
 
 回到横向积分的公式，在 $a=0$ 时，零点和经同高反射还原 $C_\lambda(T)$，只差归一化系数和有界的低高度项。增大 $a$ 会把每个右侧零点的权重改成 $\cosh(\lambda(\delta_\rho-a)_+)-1$，其中 $v_+=\max(v,0)$。将该权重的导数与 Selberg 密度界配对，右侧余项至多为 $O_\lambda((T/L)e^{-aL/4}+L)$。取 $a=1/L$ 只降低密度估计中的常数，合成谱上窄带与右侧余项均可达到 $T/L$ 量级。取 $a=8\log L/L$ 时，右侧上界降到 $O_\lambda(T/L^3+L)$。在这一宽度下，窄带的同频积分由偏移的二次矩决定。具体地，令 $D_\lambda(u,T)=\sum_{0<\gamma\le T,\,\delta_\rho>u}e^{i\lambda\gamma}$，按重数计并纳入高度上端点。相减两个横向积分的割线公式，再以 $\cosh(\lambda d)-1=\lambda^2 d^2/2+O_\lambda(d^4)$ 展开，得到以下手工推导（`ARGUED`）。
 
@@ -411,7 +413,9 @@ $$
 
    从 $10^{-3}$ 减小带宽至 $0.000999990$ 时，$J_\eta(111526)$ 先降至 $B$，其临界带宽为 $\eta_J\in(0.000999994536,0.000999994537)$。完整读数 $I_\eta(111521)$ 随后在 $\eta_I\in(0.000999990430,0.000999990431)$ 降至 $B$。在这个区间内，$J_\eta$ 的首次严格过阈整数半径在 $\eta\le\eta_J$ 时升至 $111527$，$I_\eta$ 的则在 $\eta\le\eta_I$ 时升至 $111522$。两次切换之间（$\eta_I<\eta\le\eta_J$），两个首过半径相差六个单位。增减带宽的两个区间都处于整线孤立碰撞带内。球算术利用 $F_T'(a)=\operatorname{Si}(aT)$ 围住相邻整数半径读数的带宽导数，并核验临界带宽两端的余量符号。[减小带宽的区间证书与复算脚本](https://github.com/the-omega-institute/trureturing-books/issues/1996#issuecomment-7240859714)
 
-   局部调和权下，首过阈值的整数半径为 $111532$（$111531$ 时仍低于相应的基线）。通用相对截尾界分别给出 $11{,}330{,}943$（等权）与 $11{,}331{,}843$（局部调和权）的充分半径。
+   改用局部调和权，将 $\gamma_j/(1/4+\gamma_j^2)$ 在十九零点窗内归一化，并以相应的占据对角为阈值。在 $\eta=10^{-3}$ 时，完整读数与仅保留对角及中点配对的读数分别首次严格过阈于 $111532$ 和 $111535$。把带宽降至 $0.000999992750$ 的过程中，完整读数先切换，次序与等权情形相反。两处临界带宽分别为 $\eta_I^{\mathrm{harm}}\in(0.000999997267,0.000999997268)$ 与 $\eta_J^{\mathrm{harm}}\in(0.000999992819,0.000999992820)$。在 $\eta\le\eta_I^{\mathrm{harm}}$ 时，完整读数的首过半径升至 $111533$。在 $\eta\le\eta_J^{\mathrm{harm}}$ 时，中点读数的首过半径升至 $111536$。两次切换之间（$\eta_J^{\mathrm{harm}}<\eta\le\eta_I^{\mathrm{harm}}$），首过半径只差两个单位，整线孤立配对依旧相同。[局部调和权区间证书与复算脚本](https://github.com/the-omega-institute/trureturing-books/issues/2243#issuecomment-7241230555)
+
+   通用相对截尾界分别给出 $11{,}330{,}943$（等权）与 $11{,}331{,}843$（局部调和权）的充分半径。
 
 ::: {.example #ex-ou-ch03-fejer-11431 title="孤立碰撞带 23.670% 锐上限的三行初等推导"}
 在 $\Delta < \eta \le \Delta_2$ 的孤立分辨率带内，记 $\#11427, \#11436, \#11431$ 三个零点的概率权重依次为 $x, y, z \ge 0$，令 $q := 1 - \Delta/\eta \in (0, 1]$。额外配对贡献恰为 $4q x y z^2$，而占据对角为 $D = \sum_i p_i^4 + 4\sum_{i < j} p_i^2 p_j^2$；其余十六个权重只能增大分母。对 $x, y > 0$ 设 $t := z^2 / (xy)$，由 $x^2 + y^2 \ge 2xy$ 立得

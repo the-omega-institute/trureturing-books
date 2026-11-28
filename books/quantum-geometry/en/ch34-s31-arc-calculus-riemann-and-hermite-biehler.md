@@ -564,7 +564,7 @@ In $L^2(0,\infty)$ let $\chi=\mathbf 1_{(0,1)}$, $\rho_k(x)=\{1/(kx)\}$ ($k\ge1$
 Item 1: for $\theta=1$ both sides are analytic on $\operatorname{Re}s>0$, $s\ne1$; they are computed to agree piece by piece on $\operatorname{Re}s>1$, and uniqueness of analytic continuation gives the identity on the whole region; a general $\theta$ is reduced to $\theta=1$ by a scaling substitution. Item 2 is a closed-form evaluation of an integral of the same kind. Item 3 is the orthogonal projection formula on a finite-dimensional subspace: the projection is the synthesis map composed with the generalized inverse of the Gram matrix and with the adjoint, with no invertibility assumption on $G_N$. Item 4 builds a bounded linear functional $J(f)=\int_0^1f(x)x^{\rho-1}dx+\frac1{1-\rho}\int_1^\infty f(x)x^{-1}dx$ (given by an inner product after the conjugation convention). For $x>1$, $\rho_k(x)=1/(kx)$; with item 1 at $\theta=1/k$ and $\zeta(\rho)=0$ this gives $J(\rho_k)=0$, so $J$ vanishes on every $V_N$; $J(\chi)=1/\rho$; and $\lVert J\rVert^2=\int_0^1x^{2\operatorname{Re}\rho-2}dx+\lvert1-\rho\rvert^{-2}\int_1^\infty x^{-2}dx=\frac1{2\operatorname{Re}\rho-1}+\frac1{\lvert\rho-1\rvert^2}$. Hence $d_N\ge\lvert J(\chi)\rvert/\lVert J\rVert$. Finally, $\lvert\rho-1\rvert^2+2\operatorname{Re}\rho-1=\lvert\rho\rvert^2$ and $r^2=\lvert\rho-1\rvert^2/\lvert\rho\rvert^2$ rewrite the floor as $r^2(1-r^2)$; the cited declaration also supplies this strictly positive identity chain. The full proof is checked by the Lean kernel.
 :::
 
-::: {.remark #rem-ch34-nyman-beurling-remainder title="Finite-Size Facts about the Nyman–Beurling Distance: The Remainder Never Vanishes, and the Floor from an Off-Line Zero Is Invisible (Manual derivation, resting on literature results and frozen results)"}
+::: {.remark #rem-ch34-nyman-beurling-remainder title="Finite-Size Facts about the Nyman–Beurling Distance: Nonzero Remainders and Cayley Annulus Exclusion Thresholds (Manual derivation, resting on literature results and frozen results)"}
 **Manual derivation**, resting on a literature result (not formalized in this book): the Mellin–Plancherel formula $\int_0^\infty\lvert f\rvert^2dx=\frac1{2\pi}\int_{\mathbb R}\lvert\mathcal Mf(\tfrac12+it)\rvert^2dt$. Notation as in [@prop-ch34-nyman-beurling-frozen-facts]. Báez-Duarte's criterion (see [@rem-ch34-arithmetic-pivot-literature]) states that [@conj-riemann-hypothesis] is equivalent to $d_N\to0$; §31.2 records $d_N^2=1-c^{\top}G_N^{-1}c$, which is item 3 above.
 
 1. **Mellin side.** Over Dirichlet polynomials $A(s)=\sum_{k\le N}a_kk^{-s}$,
@@ -574,6 +574,45 @@ Item 1: for $\theta=1$ both sides are analytic on $\operatorname{Re}s>0$, $s\ne1
    and $\langle\rho_j,\rho_k\rangle=(jk)^{-1/2}\frac1{2\pi}\int_{\mathbb R}w(t)(k/j)^{it}dt$ with $w(t)=\lvert\zeta(\frac12+it)\rvert^2/(\frac14+t^2)$: up to the diagonal factor $\operatorname{diag}(k^{-1/2})$ on both sides, $G_N$ is a Toeplitz form with symbol $w\ge0$, sampled at the points $\log k$.
 2. **The remainder never vanishes.** $\rho_1,\dots,\rho_N$ are linearly independent, $G_N$ is positive definite, and $d_N>0$ for every $N$.
 3. **Each decrement.** With the Cholesky factorization $G_N=LL^{\top}$ and $y=L^{-1}c$: $d_N^2=1-\sum_{k\le N}y_k^2$ and $d_{N-1}^2-d_N^2=y_N^2=\langle\chi,e_N\rangle^2$, where $e_N$ is the unit direction of the component of $\rho_N$ orthogonal to $V_{N-1}$, and the pivot $L_{NN}^2=\det G_N/\det G_{N-1}>0$ is the squared distance from $\rho_N$ to $V_{N-1}$. Hence $d_N$ is non-increasing; it decreases strictly at step $N$ exactly when $\langle\chi,e_N\rangle\ne0$, for which this book has no general proof.
+4. **Reading a finite error as a zero-free region.** A nonzero remainder can still exclude a whole region of zero locations. Fix $N\ge0$ and a real $0<a\le\tfrac12$. If one has rigorously certified
+
+   $$
+   d_N^2\le U<a(1-a),
+   $$
+
+   then there is no zero with $\zeta(\rho)=0$, $\tfrac12<\operatorname{Re}\rho<1$ and
+
+   $$
+   a\le\left\lvert\frac{\rho-1}{\rho}\right\rvert^2\le1-a.
+   $$
+
+   This is a **manual consequence** of item 4 of [@prop-ch34-nyman-beurling-frozen-facts]. Put $x=\lvert(\rho-1)/\rho\rvert^2$; the identity $\lvert\rho-1\rvert^2+2\operatorname{Re}\rho-1=\lvert\rho\rvert^2$ makes its floor equal to $x(1-x)$, while
+
+   $$
+   x(1-x)-a(1-a)=(x-a)(1-a-x)\ge0
+   $$
+
+   would give the contradiction $a(1-a)\le d_N^2\le U<a(1-a)$. In practice it suffices to choose any finite coefficients $b_k$ and rigorously enclose $\lVert\chi-\sum_{k\le N}b_k\rho_k\rVert^2\le U$, since the squared distance is at most this trial error; the exact optimal projection is unnecessary. For example, $a=\tfrac14$ gives the threshold $U<\tfrac3{16}$ and excludes the closed annulus $\tfrac12\le\lvert(\rho-1)/\rho\rvert\le\tfrac{\sqrt3}{2}$ in the Cayley coordinate. This floor alone does not allow $U\le a(1-a)$ as the threshold: equality holds at $x=a$ and $x=1-a$. As $\operatorname{Re}\rho\downarrow\tfrac12$ or $\lvert\operatorname{Im}\rho\rvert\to\infty$, $x\to1$ and the floor can tend to zero. Thus this finite regional certificate supplies neither a uniform error threshold covering the entire right half-strip nor the $N$ needed to reach a prescribed threshold.
+
+   On a rectangular region, the same floor gives an exact uniform threshold. Fix $N\ge0$, $0<\delta<\tfrac12$ and $T\ge1$. If one rigorously certifies
+
+   $$
+   d_N^2\le U<K(\delta,T),\qquad
+   K(\delta,T)=\frac{2\delta\bigl((\tfrac12-\delta)^2+T^2\bigr)}{\bigl((\tfrac12+\delta)^2+T^2\bigr)^2},
+   $$
+
+   then there is no nontrivial zero with $\tfrac12+\delta\le\operatorname{Re}\rho<1$ and $1\le\lvert\operatorname{Im}\rho\rvert\le T$, including the indicated closed boundaries. This remains a **manual consequence of the frozen floor, not separately checked in Lean**. To prove the threshold, write $\rho=\beta+i\gamma$ and set $u=\beta-\tfrac12\in[\delta,\tfrac12)$, $y=1-x=2u/\bigl((\tfrac12+u)^2+\gamma^2\bigr)$ and $B(u)=(\tfrac12+u)^2+T^2$. Since $\beta^2\le\gamma^2$, we have $x\ge\gamma^2/(\beta^2+\gamma^2)\ge\tfrac12$, hence $0<y\le\tfrac12$. Also,
+
+   $$
+   \begin{aligned}
+   uB(\delta)-\delta B(u)
+   &=(u-\delta)(T^2+\tfrac14-u\delta)\ge0,\\
+   y&\ge\frac{2u}{B(u)}\ge\frac{2\delta}{B(\delta)}=:y_0,\\
+   y(1-y)-y_0(1-y_0)&=(y-y_0)(1-y-y_0)\ge0.
+   \end{aligned}
+   $$
+
+   A hypothetical zero would therefore force $d_N^2\ge y(1-y)\ge y_0(1-y_0)=K(\delta,T)>U$, a contradiction. The geometric floor attains $K(\delta,T)$ at $\beta=\tfrac12+\delta$, $\lvert\gamma\rvert=T$, so this is its exact minimum on the specified region. Optimality here concerns the geometric floor alone and asserts no zero at that location. For example, $\delta=\tfrac14$ and $T=2$ give the threshold $U<\tfrac{520}{5329}$, strictly less restrictive than $U<\tfrac1{20}$; this is only a conditional example, with no new trial error $U$ computed. A certified upper bound from any trial vector still suffices, as above.
 
 **Proof.** Item 1: item 1 of [@prop-ch34-nyman-beurling-frozen-facts] with $\theta=1/k$, together with $\int_1^\infty\frac{1}{kx}x^{s-1}dx=-\frac{1}{k(s-1)}$, gives $\int_0^\infty\rho_k(x)x^{s-1}dx=-k^{-s}\zeta(s)/s$ for $0<\operatorname{Re}s<1$, and $\int_0^1x^{s-1}dx=1/s$; apply Mellin–Plancherel on $\operatorname{Re}s=\frac12$ to $f=\chi-\sum_kc'_k\rho_k$, for which $\mathcal Mf=(1-\zeta A)/s$ with $a_k=-c'_k$, and $\lvert s\rvert^2=\frac14+t^2$. The formula for the Gram entries is the same computation. Item 2: if $\sum_kc_k\rho_k=0$, then $\zeta(s)\sum_kc_kk^{-s}=0$ almost everywhere on the critical line; the zeros of $\zeta$ on the line are isolated, so the Dirichlet polynomial vanishes on the line; it is entire, hence identically zero, and letting $\operatorname{Re}s\to+\infty$ gives $c_k=0$ one by one. $V_N$ is finite-dimensional, hence closed, so $d_N=0$ would give $\chi\in V_N$, i.e. $\zeta A=1$ almost everywhere on the line, hence on $\mathbb C\setminus\{1\}$ by uniqueness; but $\zeta(-2)=0$ while $A(-2)$ is finite. Item 3 is Gram–Schmidt: the projection of $\chi$ onto $V_N$ is its projection onto $V_{N-1}$ plus $\langle\chi,e_N\rangle e_N$. $\square$
 

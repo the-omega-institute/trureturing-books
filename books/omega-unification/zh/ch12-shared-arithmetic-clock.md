@@ -208,6 +208,31 @@ $$
 \left|D_H-\frac{1}{eL_H}\right|\le\frac{2E}{L_H-E}.
 $$
 
+**对数高度平均下的一阶偏差（手工推导）。** 第 2 章固定哈尔窗的线性计数余项（论证见下文）给出常数 $E$，使所有充分大的 $x$ 都满足 $|\delta_x|\le E$。取 $X>1$ 使此界在 $x\ge X$ 成立且 $L_X>E$，记 $\langle g\rangle_X=(\log X)^{-1}\int_X^{X^2}g(H)\,dH/H$。对 $0<s\le1$ 令 $u=\log(1/s)$。尾质量的比值给出恒等式
+
+$$
+(L_H+\delta_H)(Q_H(s)-s)=s(u+\delta_{H/s}-\delta_H).
+$$
+
+在 $\log H$ 坐标上，$\delta_{H/s}$ 与 $\delta_H$ 的积分区间相差平移 $u$，相减只留下两段长度至多 $u$ 的端区间。故平均后的余项差乘上 $s$ 至多为 $2Esu/\log X$。左侧去掉 $\delta_H$ 所产生的误差至多为 $E(su+2sE)/(L_X-E)$。由 $su\le1/e$ 得到一致界
+
+$$
+\sup_{0<s\le1}\left|\left\langle L_H(Q_H(s)-s)\right\rangle_X-s\log(1/s)\right|
+\le \frac{2E}{e\log X}+\frac{E(1/e+2E)}{L_X-E}.
+$$
+
+在 $s=e^{-1}$ 处取值即得 $\limsup_{H\to\infty}L_HD_H\ge1/e$。因此本窗的 $O(1/\log H)$ 速率已达最优阶。对于未筛选的全谱，[累积零点计数界](lean:D5/S3/Weil/ZeroData/CumulativeRvmError.cumulative_rvm_error)给出 $O((\log t)^2)$ 余项，由此 $\sup_{x\ge H}|\delta_x|\to0$，同一恒等式逐高度给出 $L_HD_H\to1/e$。
+
+单位尺度读数 $K_H=\mathbb E_H[(1+(H/\gamma)^2)^{-1}]$ 也保留了有符号偏差。记 $f(s)=(1+s^2)^{-1}$，分部积分给出 $K_H-\pi/4=\int_0^1(-f'(s))(Q_H(s)-s)\,ds$。因此 $\langle L_H(K_H-\pi/4)\rangle_X$ 与下式右端的差至多为上述一致界的一半，这里的因子来自 $f(0)-f(1)=1/2$。
+
+$$
+\int_0^1(-f'(s))s\log(1/s)\,ds
+=\int_0^1\frac{-\log s-1}{1+s^2}\,ds
+=G-\frac{\pi}{4},
+$$
+
+其中 $G=\sum_{k\ge0}(-1)^k/(2k+1)^2$ 是卡塔兰常数。这个系数也给出 $\limsup_{H\to\infty}L_H(K_H-\pi/4)$ 的下界。[等比截断与逐高度系数的反例](https://github.com/the-omega-institute/trureturing-books/issues/1637#issuecomment-7240605519)
+
 对未筛选的全部正零点，Hasanalizade、Shen 与 Wong 的计数界在 $t\ge e$ 时给出
 
 $$
