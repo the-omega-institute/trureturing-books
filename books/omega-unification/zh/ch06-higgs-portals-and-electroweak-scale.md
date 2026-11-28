@@ -211,6 +211,8 @@ $$
 
 把共同幅度记为 $d(t)$。在 $0<\epsilon\le1/2$，最大绝对行和来自混合模方，精确放大因子为 $2/[td(t)]$。其中 $1/10\le\epsilon\le1/2$ 时，有理区间运算给出唯一的内点 $2.070<P_*(t)<2.089$，全窗仍只有三处饱和点。从零分裂出发，内点最初略向左移，有理区间给出 $-0.060795<P_*'(0)<-0.060793$，导数对 $t$ 而言。 [零分裂处的导数](https://github.com/the-omega-institute/trureturing-books/issues/1912#issuecomment-7238713777) · [小分裂区间](https://github.com/the-omega-institute/trureturing-books/issues/1941#issuecomment-7238832436) · [至半分裂的复算](https://github.com/the-omega-institute/trureturing-books/issues/1974#issuecomment-7238975141)
 
+在这段混合模方支配的区间，拉开两层的质量平方会严格降低锐误差放大因子。记重标残差为 $R$。对等幅条件求导时，内点移动所带来的项因 $R_P(P_*(t))=0$ 而消失。因此仍可用同一个二阶线性系统求抵消系数的导数，再在左端计算 $d'(t)$。手工推导和有理区间证书给出 $0.00096<(td(t))'<0.00167$，覆盖整个 $0\le t\le1/4$，其中零点取解析延拓。 [幅度导数的证明与复算](https://github.com/the-omega-institute/trureturing-books/issues/2267#issuecomment-7241403711)
+
 为什么同一组交替读数误差能让三个模方分别达到自己的最大误差？将泡核按轻层、混合、重层排列。对任意 $0<\epsilon<1$ 和任意一对升序的正动量平方，这三列两两组成的子式都严格为正。把泡核写成通道开启区间长度与权重 $P/[s(s+P)]$ 的积分。对任意两条通道，较晚开启的区间长度与较早开启的区间长度之比随 $s$ 递增。较大 $P$ 与较小 $P$ 的权重之比也随 $s$ 严格递增。把子式展开成二重积分，交换一半积分域上的两个变量，就得到正号。于是三点取值矩阵一旦可逆，三个逆行的符号各自交替。 [点对子式的手工推导](https://github.com/the-omega-institute/trureturing-books/issues/2025#issuecomment-7239197569)
 
 由 $t(D_t-aA_t-bB_t)$ 读出模方方向的重层分量 $v_H=1-(ta+\epsilon b)/2$。在 $1/2\le\epsilon\le11/20$，唯一内点满足 $2.064<P_*(t)<2.074$，精确放大因子为 $\max(2,v_H)/[td(t)]$。混合与重层模方在唯一的 $0.5419<\epsilon_c<0.5420$ 处并列，此后由重层模方决定最坏误差。在 $11/20\le\epsilon\le13/20$，有理区间运算给出 $2.054<P_*(t)<2.068$，并验证残差仍只在两端和此内点饱和，重层仍严格支配，精确放大因子为 $v_H/[td(t)]$。
