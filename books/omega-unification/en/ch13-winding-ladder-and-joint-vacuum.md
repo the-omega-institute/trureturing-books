@@ -280,9 +280,9 @@ $$
 
 At fixed $x_+$, substituting $t=1+s/u$ in $E_2(u)=\int_1^\infty e^{-ut}t^{-2}\,dt$ gives $E_2(u)\sim e^{-u}/u$. Only the lightest odd-charge layers contribute to the leading term. At $x_-$, split the integral for $1-E_2(u)$ at $1/u$. On the first part use $1-e^{-ut}=ut+O((ut)^2)$. The tail is at most $u$, giving $1-E_2(u)=u\log(1/u)+O(u)$. The mean value theorem converts each calibration residual into a curvature gap by dividing by an intermediate value of $K_x$ and multiplying by one of $V'$. Since $\partial_x[xE_2(c_i y/x)]=e^{-c_i y/x}$, those denominators tend to $F_r'(x_+)$ and $F_-'(x_-)$ respectively. In particular, at dimensionless distance $\epsilon=v_+-v$ from the upper endpoint, the recovered small denominator satisfies $d\sim[c_*/(x_+\log(1/\epsilon))]^{1/4}$. Every positive-power bound $d=O(\epsilon^\beta)$ fails at this endpoint. [Endpoint derivation and independent small-spectrum calculation](https://github.com/the-omega-institute/trureturing-books/issues/1671#issuecomment-7239022824)
 
-Suppose the hard cutoff has a known distribution. Average both readings $K,V$ at cutoffs $sx$ against the same fixed probability measure $\nu$, with $0<s_0\le s\le R<\infty$, and denote the averages by $\bar K,\bar V$. At fixed $r$, we still have $\bar K_{\log d}>0$ and $\bar V'(x)=\int sV'(sx)\,d\nu(s)>0$. Through every calibrated point there is therefore a curve parametrized by $x$ along which the curvature increases. Such positive mixtures also exclude joint stationarity.
+Suppose the hard cutoff has a known distribution. Average both readings $K,V$ at cutoffs $sx$ against the same fixed probability measure $\nu$, with $s>0$ and finite mean, and denote the averages by $\bar K,\bar V$. The bound $uE_1(u)\le e^{-u}$ and boundedness of $V'$ give a local integrable bound proportional to $s$ for the derivatives in $\log d$ and $x$. At fixed $r$, we still have $\bar K_{\log d}>0$ and $\bar V'(x)=\int sV'(sx)\,d\nu(s)>0$. Through every calibrated point there is therefore a curve parametrized by $x$ along which the curvature increases. Such positive mixtures also exclude joint stationarity.
 
-The distribution changes how finely curvature resolves the denominator near the endpoint. Write $\bar F(x)=\int F_r(sx)\,d\nu(s)$ and take an endpoint with $\bar F(x_+)=1$ and $\bar F'(x_+)>0$. If the mass near the largest cutoff satisfies $\nu([R-h,R])\sim Lh^\beta$ with $L>0,\ \beta\ge0$, then along the calibrated branch approaching $x_+$,
+The distribution changes how finely curvature resolves the denominator near the endpoint. Write $\bar F(x)=\int F_r(sx)\,d\nu(s)$ and take an endpoint with $\bar F(x_+)=1$ and $\bar F'(x_+)>0$. If the distribution has a finite upper endpoint $R$ and the mass near it satisfies $\nu([R-h,R])\sim Lh^\beta$ with $L>0,\ \beta\ge0$, then along the calibrated branch approaching $x_+$,
 
 $$
 \bar V(x_+)-\bar V(x(y))
@@ -290,6 +290,15 @@ $$
 $$
 
 At fixed $x_+$ the $E_2$ tail of the lightest odd-charge layer supplies the first factor $1/y$. After extracting the exponential at the largest cutoff, the remaining exponential is $\exp[-(c_*y/x_+)(1/s-1/R)]$. Its integral samples a layer of width of order $1/y$ near $R$, supplying the factor $y^{-\beta}$. The derivative ratio $\bar V'/\bar F'$ at the simple root converts the Newton residual to the curvature gap. An atom at the largest cutoff has $\beta=0$. A uniform cutoff on $[1/2,1]$ has $\beta=1$ and supplies an extra factor $1/y$. [Leading constant, derivation, and four-layer example](https://github.com/the-omega-institute/trureturing-books/issues/1671#issuecomment-7242155257)
+
+With an unbounded cutoff, heavier odd-charge layers can contribute to the leading curvature gap. Take the density $\gamma s^{-1-\gamma}$ on $s\ge1$, with $\gamma>1$. For a single layer put $b=c_i y/x$. Substituting $u=b/s$ gives
+
+$$
+\mathbb E[sE_2(b/s)]=\gamma b^{1-\gamma}\int_0^b u^{\gamma-2}E_2(u)\,du
+\sim \Gamma(\gamma-1)b^{1-\gamma}.
+$$
+
+The coefficient follows by inserting the integral for $E_2$ and exchanging the two positive integrals. At a simple root as above, the curvature gap $\epsilon=\bar V(x_+)-\bar V(x(y))$ is therefore asymptotic to $C_\gamma d^{4(\gamma-1)}$, where $C_\gamma$ is positive and proportional to $\sum_i\alpha_i c_i^{1-\gamma}$. For example, take $\gamma=2$ and two balanced heavy layers of squared masses $y,2y$ and Newton weights $1,2$. They contribute equally to the leading term, and the recovered small denominator scales as $\epsilon^{1/4}$. [Leading constant and independent two-layer calculation](https://github.com/the-omega-institute/trureturing-books/issues/1671#issuecomment-7242357969)
 
 In the original stress-test box, $I(0)-I(a/x)\le a/x$ bounds the finite-cutoff correction by $10^{-57}$ of the leading term. For the slide from $d=724$ to $724.19$, the difference between the two readings is between $1.685\times10^{-69}$ and $1.687\times10^{-69}$ times the infinite-cutoff value. [Calibration interval and cutoff error](https://github.com/the-omega-institute/trureturing-experiments/blob/1922a9c010424eadf6b1ec7233be9fcb00911247/experiments/ch39-omega-research/replay/ch39-joint-vacuum-scale-window.py#L38-L68) · [Interval calculation of the two roots and their curvature difference](https://github.com/the-omega-institute/trureturing-books/issues/1671#issuecomment-7235892201)
 
