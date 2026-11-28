@@ -261,6 +261,10 @@ $$
 
 在完全和中，逐变量以区间截断分离两族光滑权，层平均大筛的系数仍是区间特征序列。对常规谱，有限射流的乘积律控制 Bessel 方程两次迭代后的四次谱频率衰减。对例外谱，设 $X$ 为 Bessel 自变量的倒数尺度，$N$ 为差值尺度，$R$ 为层尺度。在 (9.5) 保留低谱因子 $1+\max(0,\log X)$，用指数余量吸收。把拆权参数取为 $1+R/N$，在 $N$ 大于 $R$ 时也保留定理 11 所需的例外谱尺度。这给出 $\log K_{11}(r)\le\exp(C_*/r)$，并经泊松完备化传给固定模数因子 $1$ 的定理 12（手工推导）。临界阈值 $b=7/8$ 的单层界还需要核对这个估计经 1984 年磨光器均方传入 Baluyot 引理 3.1.6 的参数与常数。[Deshouillers–Iwaniec §§9.1–9.2](https://doi.org/10.1007/BF01390728) · [光滑权、谱尾与拆权的推导及复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7242687670)
 
+近临界线上的磨光器均方还可以按傅里叶频率分解（手工推导，`ARGUED`）。取 $\sigma=1/2+1/\log U$、磨光器长度参数 $y=U^\theta$，用总质量为 $1$、宽度 $\Delta=U^{1-\delta}$ 的 Gaussian 对高度取平均。将均方乘以 $e^{it\log(p/q)}$，其中 $p>q>1$ 互素。设 $A=hm$、$B=kn$ 为磨光器和 $\zeta$ 的两列总指标。直接支与对偶支的相位都是 $t\log(pB/(qA))$，所以精确相消发生在 $qA=pB$。在两支和式中先扣除这些格点。对固定 $0<\theta<1/2$、$0<\delta<1/3$ 和任意 $\varepsilon>0$，在 $[U,V]$ 上对 Gaussian 中心积分后，非对角余项为 $O(U^{1/2+\theta+\varepsilon})$，对 $U\le V\le2U$ 一致。
+
+两支光滑截断把可比的 $A,B$ 限在 $U^{1/2+\theta+\varepsilon}$ 尺度。按《OMEGA 数学》§8.1 的柯西乘法，把两列放在次数 $qA$ 和 $p(C-B)$，其中整数 $C$ 截住总指标。乘积的 $pC+r$ 次系数计数差值为 $r=qA-pB$ 的格点。每个 $A$ 至多匹配一个 $B$，所以按 $1/|r|$ 求和只产生一个调和因子。该倒数来自一次分部积分，中心窗的两个 Gaussian 边界把权重的总变差控制在 $2$ 以内。若逐个中心估计，$\theta+\delta<1/2$ 时最小非零频差乘 $\Delta$ 仍按正幂增长，可反复分部积分。例如 $p/q=3/2$、$\theta=\delta=1/4$ 时，中心窗估计仍成立，完整窗的首项来自精确比值，量级为 $U/\log U$，系数严格为正。原弧频率则需要控制超越数与有理比值的距离。 [Baluyot，(1.2.6)–(1.2.7)、(3.3.9)–(3.3.12)](https://hdl.handle.net/1802/32855) · [两支推导与格点复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7243713386)
+
 回到横向积分的公式，在 $a=0$ 时，零点和经同高反射还原 $C_\lambda(T)$，只差归一化系数和有界的低高度项。增大 $a$ 会把每个右侧零点的权重改成 $\cosh(\lambda(\delta_\rho-a)_+)-1$，其中 $v_+=\max(v,0)$。将该权重的导数与 Selberg 密度界配对，右侧余项至多为 $O_\lambda((T/L)e^{-aL/4}+L)$。取 $a=1/L$ 只降低密度估计中的常数，合成谱上窄带与右侧余项均可达到 $T/L$ 量级。取 $a=8\log L/L$ 时，右侧上界降到 $O_\lambda(T/L^3+L)$。在这一宽度下，窄带的同频积分由偏移的二次矩决定。具体地，令 $D_\lambda(u,T)=\sum_{0<\gamma\le T,\,\delta_\rho>u}e^{i\lambda\gamma}$，按重数计并纳入高度上端点。相减两个横向积分的割线公式，再以 $\cosh(\lambda d)-1=\lambda^2 d^2/2+O_\lambda(d^4)$ 展开，得到以下手工推导（`ARGUED`）。
 
 $$
