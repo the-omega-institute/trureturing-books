@@ -139,7 +139,18 @@ $$
 
 对显式公式中的伽马密度 $\bigl(\operatorname{Re}(\Gamma^\prime/\Gamma)(1/4+it/2)-\log\pi\bigr)/(2\pi)$ 同样恢复硬截断，误差为 $O(\log T/B)$。在 $t\ge 1$ 时该密度为 $\log(t/(2\pi))/(2\pi)+O(t^{-2})$。分部积分给出上式中的端点项及 $O_\lambda(1)$。剩余的振荡积分 $\int_1^T e^{i\lambda t}\,dt/t$ 一致有界。取 $B=\log\log T$，各项误差合并即得所示余项。因此固定模态的 $|S_\lambda(T)|/\log T$ 收敛到 $1/(2\pi|\lambda|)$。[NIST DLMF，式 5.11.2](https://dlmf.nist.gov/5.11.E2)
 
-去掉 RH 作为解析输入后，保留零点实部的权重仍可在高度平均下读出同一个端点项。固定 $X>1$，令 $\lambda=\log X$，继续要求 $\Lambda(X)=0$。记 $\rho=\beta+i\gamma$，按重数计并纳入上端点。令 $S(t)$ 为黎曼–冯·曼戈尔特公式中的辐角项，即离开零点高度时 $N(t)=1+\vartheta(t)/\pi+S(t)$，其中 $\vartheta$ 是黎曼–西格尔 $\vartheta$ 函数。把光滑端点项从加权零点和中扣除
+同一个端点项在无权和与带权和中的差别，可以从临界线反射直接读出。固定 $X=e^\lambda>1$ 且 $\Lambda(X)=0$，记 $\rho=\beta+i\gamma$，$\delta_\rho=\beta-1/2$，并将带权和记作 $W_\lambda(T)=\sum_{0<\gamma\le T}X^{\rho-1/2}$。按重数配对同高的 $\delta_\rho$ 与 $-\delta_\rho$，得到
+
+$$
+C_\lambda(T)=W_\lambda(T)-S_\lambda(T)
+=\sum_{0<\gamma\le T}\bigl(\cosh(\lambda\delta_\rho)-1\bigr)e^{i\lambda\gamma}.
+$$
+
+经典兰道公式在这里给出 $W_\lambda(T)=O_\lambda(\log T)$。因此，要为无权和取得同一阶上界，恰好需要 $C_\lambda(T)=O_\lambda(\log T)$。Selberg 密度界给出 $\sum_{0<\gamma\le T}\delta_\rho^2=O(T/\log T)$，而双曲余弦差至多是常数乘 $\delta_\rho^2$，所以逐项取绝对值只能给出 $O_\lambda(T/\log T)$ 的上界。要降低这一尺度，需要控制偏离临界线的零点在同一频率下的相位抵消。[Gonek，式 (1)](https://www.sas.rochester.edu/mth/people/faculty/gonek-steve/assets/pdf/8-landau-form.pdf#page=1) · [Ford 与 Zaharescu，§3 引理 2 与式 (3.8)](https://www.ford126.web.illinois.edu/wwwpapers/fz.pdf#page=9)
+
+对这些输入，$T/\log T$ 的尺度可以达到（合成谱，`ARGUED`）。取 $\lambda=1$，在每个 $2\pi$ 周期里轻推等间距的纵坐标，使未加权的相位和偏向负实轴。点仍按同高镜像成对放置，实部偏移取 $O(1/\log T)$，并随相位调整，让带权和在周期端点恰好跟随光滑端点项的增量。该谱的计数余项有界，满足 Selberg 型密度界，带权和在所有高度以 $O(1)$ 的误差跟随端点项，而 $C_1(T)\sim T/(4\pi\log T)$。对实际 $\zeta$，收紧差项仍需超出这些输入的估计。[构造与复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239117179)
+
+对实际 $\zeta$ 零点，保留实部权重时，无须用 RH 作为解析输入也可在高度平均下读出端点项。令 $S(t)$ 为黎曼–冯·曼戈尔特公式中的辐角项，即离开零点高度时 $N(t)=1+\vartheta(t)/\pi+S(t)$，其中 $\vartheta$ 是黎曼–西格尔 $\vartheta$ 函数。从带权和中扣除光滑端点项
 
 $$
 R_X(t)=\sum_{0<\gamma\le t} X^{\rho-1/2}
