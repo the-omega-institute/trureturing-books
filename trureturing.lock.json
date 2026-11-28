@@ -1110,6 +1110,22 @@
       "line": 187,
       "signature": "theorem pairSum_le_of_bounded_discrepancy (S : Spectrum) {D : ℝ} (hcount : ∀ᶠ Y : ℝ in atTop, |(S.N Y : ℝ) - mainTerm Y| ≤ D) {ε : ℝ} (hε : 0 < ε) : ∀ᶠ Y : ℝ in atTop, ∀ t : ℝ, pairSum S Y t ≤ (2 * Real.pi * c ^ 2 + ε) * (Y * Real.log Y ^ 2)"
     },
+    "D5/S3/Analytic/Oscillation/MontgomeryMatchingCap.spectrum_matching_defect": {
+      "module": "D5/S3/Analytic/Oscillation/MontgomeryMatchingCap",
+      "name": "D5.S3.Analytic.Oscillation.MontgomeryMatchingCap.spectrum_matching_defect",
+      "kind": "theorem",
+      "statement_id": "sha256:70e9565d09cef1737b811736851f7f65559e1bd1aafdb2357ee9477340a8fc83",
+      "line": 292,
+      "signature": "theorem spectrum_matching_defect {S : Spectrum} {P : Type*} {H t : ℝ} (M : MatchingData (Σ j : S.index, Fin (S.mult j)) P (CutDensity.copies (S.cut H) S.mult) (fun p => S.gamma p.1)) : (4 / 13 : ℝ) * ∑ p ∈ M.pairs, (localCopies (CutDensity.copies (S.cut H) S.mult) (fun q => S.gamma q.1) (M.left p)).card * phaseResidual (t * S.gamma (M.left p).1) (t * S.gamma (M.right p).1) ≤ pairSum S H 0 - pairSum S H t"
+    },
+    "D5/S3/Analytic/Oscillation/MontgomeryMatchingCap.strict_normalized_cap_of_matching": {
+      "module": "D5/S3/Analytic/Oscillation/MontgomeryMatchingCap",
+      "name": "D5.S3.Analytic.Oscillation.MontgomeryMatchingCap.strict_normalized_cap_of_matching",
+      "kind": "theorem",
+      "statement_id": "sha256:70e9565d09cef1737b811736851f7f65559e1bd1aafdb2357ee9477340a8fc83",
+      "line": 302,
+      "signature": "theorem strict_normalized_cap_of_matching {S : Spectrum} {P : Type*} {H t κ η c₁ c₂ c₃ : ℝ} (M : MatchingData (Σ j : S.index, Fin (S.mult j)) P (CutDensity.copies (S.cut H) S.mult) (fun p => S.gamma p.1)) (hH : 1 < H) (hc₂ : 0 ≤ c₂) (hc₃ : 0 ≤ c₃) (hpairs : c₁ * H * Real.log H ≤ (M.pairs.card : ℝ)) (hres : ∀ p ∈ M.pairs, c₂ ≤ phaseResidual (t * S.gamma (M.left p).1) (t * S.gamma (M.right p).1)) (hhood : ∀ p ∈ M.pairs, c₃ * Real.log H ≤ (localCopies (CutDensity.copies (S.cut H) S.mult) (fun q => S.gamma q.1) (M.left p)).card) (hbase : pairSum S H 0 ≤ (κ - η + 4 * c₁ * c₂ * c₃ / 13) * (H * Real."
+    },
     "D5/S3/Analytic/Oscillation/MontgomerySublogCount.pairSum_le_of_sublog_discrepancy": {
       "module": "D5/S3/Analytic/Oscillation/MontgomerySublogCount",
       "name": "D5.S3.Analytic.Oscillation.MontgomerySublogCount.pairSum_le_of_sublog_discrepancy",
