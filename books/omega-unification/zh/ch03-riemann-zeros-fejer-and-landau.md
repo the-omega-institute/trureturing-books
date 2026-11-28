@@ -214,7 +214,7 @@ $$
 M_{a_2}(U,2U)=\frac{2-4(\sqrt{2}-1)+o(1)}{P}\frac{U\log L_U}{L_U},
 \qquad 2-4(\sqrt{2}-1)=0.3431457505\ldots.
 $$
-同一构造的完整周期二次矩仍为 $d_j^2-2(d_j/\sqrt{2})^2=0$，任意右闭二进窗的二次矩只有两个边界部分，大小为 $O((\log L_U/L_U)^2)$。这说明此前的计数、Selberg 型密度、固定无素幂频带复取样与带权端点补偿输入允许一次矩达到 $U\log\log U/\log U$；要在 $a_2$ 处得到 $O_\lambda(U/\log U)$，还需要实际 $\zeta$ 的额外相位信息。[参数化推导与复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240636139)
+同一构造的完整周期二次矩仍为 $d_j^2-2(d_j/\sqrt{2})^2=0$，任意右闭二进窗的二次矩只有两个边界部分，大小为 $O((\log L_U/L_U)^2)$。因此，单靠计数、指数 $1/4$ 的 Selberg 型密度、固定无素幂频带复取样和带权端点补偿，仍允许 $a_2$ 处的一次矩达到 $U\log\log U/\log U$。[参数化推导](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240636139) · [右闭窗数值复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240919252)
 
 对实际 $\zeta$ 零点，保留实部权重时，无须用 RH 作为解析输入也可在高度平均下读出端点项。令 $S(t)$ 为黎曼–冯·曼戈尔特公式中的辐角项，即离开零点高度时 $N(t)=1+\vartheta(t)/\pi+S(t)$，其中 $\vartheta$ 是黎曼–西格尔 $\vartheta$ 函数。从带权和中扣除光滑端点项
 

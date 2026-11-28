@@ -214,7 +214,7 @@ $$
 M_{a_2}(U,2U)=\frac{2-4(\sqrt{2}-1)+o(1)}{P}\frac{U\log L_U}{L_U},
 \qquad 2-4(\sqrt{2}-1)=0.3431457505\ldots.
 $$
-The complete-period quadratic moment remains $d_j^2-2(d_j/\sqrt{2})^2=0$, so a right-closed dyadic window has only two boundary contributions, of size $O((\log L_U/L_U)^2)$. The previous counting, Selberg-type density, fixed prime-power-free-band sampling, and weighted endpoint compensation inputs therefore allow a first moment of order $U\log\log U/\log U$. An $O_\lambda(U/\log U)$ estimate at $a_2$ requires additional phase information about the actual $\zeta$ zeros. [Parametric derivation and recomputation](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240636139)
+The complete-period quadratic moment remains $d_j^2-2(d_j/\sqrt{2})^2=0$, so only the two boundary periods can contribute to a right-closed dyadic window, with total size $O((\log L_U/L_U)^2)$. Thus the counting, Selberg-type density with exponent $1/4$, sampling in a fixed band free of prime-power frequencies, and weighted endpoint compensation still allow a first moment of order $U\log\log U/\log U$ at $a_2$. [Parametric derivation](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240636139) · [Numerical check of the right-closed window](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240919252)
 
 For the actual zeta zeros, retaining the real-part weights recovers the endpoint term on average over heights without using RH. Let $S(t)$ be the argument term in the Riemann–von Mangoldt formula. Away from zero ordinates, $N(t)=1+\vartheta(t)/\pi+S(t)$, with $\vartheta$ the Riemann–Siegel theta function. Subtract the smooth endpoint term from the weighted sum
 
