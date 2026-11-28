@@ -18,9 +18,11 @@
 - **独立重放与公理边界**：组织镜像与可复现构建仓库 [`the-omega-institute/riemann-hypothesis`](https://github.com/the-omega-institute/riemann-hypothesis) 的源码静态扫描与公理审计证实全库零 `sorry`、零 `admit`、零自定义公理，公理闭包仅为 Lean 标准三公理 $\{\mathrm{propext}, \mathrm{Classical.choice}, \mathrm{Quot.sound}\}$，并已通过多支独立团队在 `leanchecker`、`lean4lean`、`nanoda` 与 `con-leche` 上的全模块重放。
 - **本书的严格书写纪律**：因该外部工程尚未冻结进入 `the-omega-institute/trureturing@dev`，**RH 与狄利克雷 GRH 本身不佩戴本书的绿色 `lean=` 徽章**；同时，其范围严格止于 $\mathbb{Q}$ 上的 $\zeta(s)$ 与狄利克雷 $L$ 函数——戴德金 $\zeta_K$ 函数的扩展黎曼猜想（ERH）、自守 $L$ 函数的全广义黎曼猜想（Grand RH）、零点单重性、蒙哥马利 GUE 对关联、希尔伯特—波利亚算子以及物理大统一假说均保持 `OPEN` 或 `MODEL`。
 
-在 `trureturing@dev` 内部，下列 Lean 4 冻结定理直接把经典 RH 等价地改写为两道几何—分析刚性判据：一侧是实轴上积分曼戈尔特（Mangoldt）余项 $U(x)$ 相对第一李质量包络 $M\sqrt{x}$ 的**对数平方费耶尔差额**，另一侧则是复平面上凯莱变换把临界线 $\operatorname{Re} s = \frac{1}{2}$ 精确卷成单位圆的**零径向亏量准则**：
+在 `trureturing@dev` 内部，下列 Lean 4 冻结定理直接把经典 RH 等价地改写为两道几何—分析刚性判据：一侧是实轴上积分曼戈尔特（Mangoldt）余项 $U(x)$ 相对第一李质量包络 $M\sqrt{x}$ 的**对数平方费耶尔差额**，另一侧则是复平面上凯莱变换把临界线 $\operatorname{Re} s = \frac{1}{2}$ 精确卷成单位圆的**零径向亏量准则**。
 
-::: {.theorem #thm-ou-ch03-fejer-gap title="曼戈尔特费耶尔临界差额与凯莱单位圆临界线判据" lean="D5/S3/Weil/Mertens/IntegratedExplicit/MangoldtFejerGap.rh_iff_eventually_fejer_gap D5/S3/Midline/Cayley/CayleyCriticalLineZetaCriterion.cayley_critical_line_zeta_criterion"}
+下面的算子条件把逐点临界线条件提升为真正的无限维算子恒等式，但其希尔伯特空间与对角算子都以完整零点数据为输入；该定理本身不构造这组数据及额外的覆盖证明。要由此获得独立的希尔伯特—波利亚路线，仍须从不预设零点位置的算术或几何构造出发，建立相应的谱识别与酉性。外部 RH 证明并未替代这一构造问题。
+
+::: {.theorem #thm-ou-ch03-fejer-gap title="曼戈尔特费耶尔临界差额与凯莱单位圆临界线判据" lean="D5/S3/Weil/Mertens/IntegratedExplicit/MangoldtFejerGap.rh_iff_eventually_fejer_gap D5/S3/Midline/Cayley/CayleyCriticalLineZetaCriterion.cayley_critical_line_zeta_criterion D5/S3/Midline/Cayley/ZeroHilbertCayleyUnitarity.cayley_unitarity_defect_formula_on_zero_hilbert_space"}
 1. **费耶尔临界差额充要判据**（[`rh_iff_eventually_fejer_gap`](lean:D5/S3/Weil/Mertens/IntegratedExplicit/MangoldtFejerGap.rh_iff_eventually_fejer_gap)）：记第一李质量 $M := \mathrm{firstLiMass} = 2 + \gamma_{\mathrm{EM}} - \ln(4\pi)$，记 $U(x)$ 为完整积分曼戈尔特余项。经典黎曼假设（`RiemannHypothesis`）成立，当且仅当对每个实数 $c < \frac{1}{48}$，存在充分大的门槛使所有充分大的实数 $x$ 均满足
 
    $$
@@ -39,10 +41,25 @@
    \mathrm{logarithmicRadialDefect}(\rho) = 0.
    $$
 
+3. **零点希尔伯特空间上的酉性判据**（[`cayley_unitarity_defect_formula_on_zero_hilbert_space`](lean:D5/S3/Midline/Cayley/ZeroHilbertCayleyUnitarity.cayley_unitarity_defect_formula_on_zero_hilbert_space)）：给定库中的 `ZeroData` 数据 $Z$，其中互异零点为 $\rho_n$，正解析重数为 $m_n$；额外假设第二款所量化的每个非平凡零点都等于某个 $\rho_n$。令 $I_Z=\{(n,k)\in\mathbb N^2:k<m_n\}$，$H_Z=\ell^2(I_Z;\mathbb C)$，$e_{n,k}$ 为标准单位向量。在 $H_Z$ 上，系数 $c_n=(\rho_n-1)/\rho_n$ 定义有界对角算子 $C_Z$，且
+
+   $$
+   \begin{aligned}
+   C_Ze_{n,k}&=c_ne_{n,k},\\
+   (C_Z^*C_Z-I)e_{n,k}
+     &=(|c_n|^2-1)e_{n,k}
+      =\frac{1-2\operatorname{Re}\rho_n}{|\rho_n|^2}e_{n,k}.
+   \end{aligned}
+   $$
+
+   经典 RH、所有 $|c_n|=1$、$C_Z^*C_Z=I$、$C_Z$ 为酉算子，以及对所有 $(n,k)\in I_Z$ 有 $\|C_Ze_{n,k}\|=\|e_{n,k}\|$，彼此等价。
+
 :::
 
 ::: proof
-第一款正向在 RH 下对谱中各零点的余弦项赋非负权，取 $N \ge 2$ 个等距相位构成非负费耶尔核 $\sum_{j,k=0}^{N-1} \cos((j-k)\theta) = |\sum_{j=0}^{N-1} e^{ij\theta}|^2 \ge 0$。取步长 $b_{jk} y e^{-y/2}$（其中 $y = \log x$、$b_{jk} = |j-k|/(2N)$），将谱亏量的二阶差分与曼戈尔特斜坡的中点上界逐对比较并按 $y^2 e^{-y/2}$ 归一化，平均系数给出 $C_N = \frac{1 - N^{-2}}{48} \to \frac{1}{48}$；对任意给定 $c < 1/48$ 选定有限 $N$ 使 $c < C_N$ 即可得出最终尾部不等式。反向取 $c = 1/128$ 即可推出差额趋于正无穷并由临界包络判据回到 RH。第二款由凯莱莫比乌斯映射 $(s - 1)/s$ 把有限临界线 $\operatorname{Re} s = 1/2$ 逐点双射映到除去 $1$ 点的单位圆 $S^1 \setminus \{1\}$，再将对数径向亏量归零等价于 $|\mathrm{cayleyCoefficient}(\rho)| = 1$ 代入全部非平凡零点即得。完整证明由 Lean 内核检查。
+第一款正向在 RH 下对谱中各零点的余弦项赋非负权，取 $N \ge 2$ 个等距相位构成非负费耶尔核 $\sum_{j,k=0}^{N-1} \cos((j-k)\theta) = |\sum_{j=0}^{N-1} e^{ij\theta}|^2 \ge 0$。取步长 $b_{jk} y e^{-y/2}$（其中 $y = \log x$、$b_{jk} = |j-k|/(2N)$），将谱亏量的二阶差分与曼戈尔特斜坡的中点上界逐对比较并按 $y^2 e^{-y/2}$ 归一化，平均系数给出 $C_N = \frac{1 - N^{-2}}{48} \to \frac{1}{48}$；对任意给定 $c < 1/48$ 选定有限 $N$ 使 $c < C_N$ 即可得出最终尾部不等式。反向取 $c = 1/128$ 即可推出差额趋于正无穷并由临界包络判据回到 RH。第二款由凯莱莫比乌斯映射 $(s - 1)/s$ 把有限临界线 $\operatorname{Re} s = 1/2$ 逐点双射映到除去 $1$ 点的单位圆 $S^1 \setminus \{1\}$，再将对数径向亏量归零等价于 $|\mathrm{cayleyCoefficient}(\rho)| = 1$ 代入全部非平凡零点即得。
+
+第三款先用 $\zeta$ 在 $0$ 附近的连续性与非零性给出全部 $|\rho_n|$ 的一致正下界，从而使凯莱系数有界；逐坐标取共轭得到伴随与缺陷公式。当全部 $|c_n|=1$ 时，共轭系数还给出双侧逆，因此这里的等距条件确实推出酉性。反向在每个零点的任一重数坐标上测试范数，并用额外的完整覆盖假设回到 RH 的全部量化域。完整证明由 Lean 内核检查。
 :::
 
 ### 3.1.1 Theta 提升：从算术核到谱内积 {#sec-ou-3-1-1-rallis-bridge}
@@ -415,7 +432,26 @@ $$
 
    改用局部调和权，将 $\gamma_j/(1/4+\gamma_j^2)$ 在十九零点窗内归一化，并以相应的占据对角为阈值。在 $\eta=10^{-3}$ 时，完整读数与仅保留对角及中点配对的读数分别首次严格过阈于 $111532$ 和 $111535$。把带宽降至 $0.000999992750$ 的过程中，完整读数先切换，次序与等权情形相反。两处临界带宽分别为 $\eta_I^{\mathrm{harm}}\in(0.000999997267,0.000999997268)$ 与 $\eta_J^{\mathrm{harm}}\in(0.000999992819,0.000999992820)$。在 $\eta\le\eta_I^{\mathrm{harm}}$ 时，完整读数的首过半径升至 $111533$。在 $\eta\le\eta_J^{\mathrm{harm}}$ 时，中点读数的首过半径升至 $111536$。两次切换之间（$\eta_J^{\mathrm{harm}}<\eta\le\eta_I^{\mathrm{harm}}$），首过半径只差两个单位，整线孤立配对依旧相同。[局部调和权区间证书与复算脚本](https://github.com/the-omega-institute/trureturing-books/issues/2243#issuecomment-7241230555)
 
+   让权重从等权向局部调和权 $q_j$ 线性变化，取 $p_j(\lambda)=(1-\lambda)/19+\lambda q_j$，并以相应的占据对角 $B(\lambda)$ 作阈值。从 $10^{-3}$ 向下调带宽时，切换次序首次反转于 $\lambda_*\in(0.0698340625,0.06983421875)$。在 $0\le\lambda<\lambda_*$ 时，中点读数 $J_\eta$ 先切换。到 $\lambda=\lambda_*$，它在起始带宽、半径 $111526$ 处等于阈值，首次严格过阈的起点半径因而升至 $111527$，完整读数 $I_\eta$ 转而先切换。[首次反转的区间证书](https://github.com/the-omega-institute/trureturing-books/issues/2243#issuecomment-7241398183)
+
+   当 $J_\eta$ 的起点半径仍为 $111527$ 时，$I_\eta$ 的起点半径在 $\alpha\in(0.12207199,0.12207204)$ 处升至 $111522$，仍是 $I_\eta$ 先切换。到 $\beta\in(0.1341334765625,0.134133515625)$，$I_{10^{-3}}(111522)$ 降至 $B(\beta)$，起点半径升至 $111523$，由 $J_\eta$ 先切换的次序恢复。[完整读数跳变的区间证书](https://github.com/the-omega-institute/trureturing-books/issues/2243#issuecomment-7241612699)
+
+   随后 $I_\eta$ 的起点半径保持在 $111523$。中点读数的起点半径升至 $111528$ 与 $111529$ 时，仍是 $J_\eta$ 先切换。到 $\lambda=\chi\in(0.4121722900,0.4121722925)$，$J_{10^{-3}}(111529)$ 降至 $B(\chi)$，起点半径升至 $111530$，于是 $I_\eta$ 先切换。这个次序保持到下一次完整读数的起点半径跳变。设 $\lambda_d\in(0.418858349609375,0.4188583740234375)$ 为 $I_{10^{-3}}(111523)=B(\lambda_d)$ 的边界，则从 $\lambda_d$ 起，$I_\eta$ 的起点半径升至 $111524$，$J_\eta$ 仍从 $111530$ 起步并恢复先切换，直至 $\lambda=0.420$。区间算术在整个比较范围内严格分开两处临界带宽，整线孤立配对始终相同。[中点读数跳变的区间证书](https://github.com/the-omega-institute/trureturing-books/issues/2243#issuecomment-7241765575) [完整读数升至 $111524$ 的区间证书](https://github.com/the-omega-institute/trureturing-books/issues/2243#issuecomment-7241915865)
+
    通用相对截尾界分别给出 $11{,}330{,}943$（等权）与 $11{,}331{,}843$（局部调和权）的充分半径。
+
+   对同一十九零点窗（`CERT`），取混合权重 $p_j(\lambda)=(1-\lambda)/19+\lambda q_j$，其中 $q_j$ 为在窗内归一化的局部调和权。在 $0.420\le\lambda\le0.526$ 内，完整读数 $I_\eta$ 在初始带宽 $\eta_0=10^{-3}$ 首次过阈的整数半径始终是 $111524$。在同一参数区间内，中点读数 $J_\eta$ 满足 $J_{\eta_0}(111530)=B(\lambda)$ 的唯一参数是 $\lambda_e\in(0.5257718489,0.5257718490)$，其中 $B(\lambda)$ 是混合权重的占据对角。首过半径要求读数严格大于 $B(\lambda)$，所以等号成立时，中点读数的首过半径已经升至 $111531$。在 $0.420\le\lambda<\lambda_e$ 内，中点读数从 $111530$ 起步，缩窄带宽时先切换。在 $\lambda_e\le\lambda\le0.526$ 内，中点读数从 $111531$ 起步，缩窄带宽时完整读数先切换。
+
+   球算术在整个参数矩形 $0.420\le\lambda\le0.526$、$0.000999990\le\eta\le0.001$ 上给出
+
+   $$
+   \begin{aligned}
+   I_\eta(111524)-J_\eta(111530) &> 2.26\times10^{-11},\\
+   J_\eta(111531)-I_\eta(111524) &> 2.52\times10^{-10}.
+   \end{aligned}
+   $$
+
+   在各自的初始半径上，两种读数都随带宽严格递增，并各在条带内一次达到阈值。左侧的中点读数降至阈值时，或右侧的完整读数降至阈值时，另一读数的过阈余量大于上面对应的差界。带宽导数小于 $0.031$，由中值定理，两处临界带宽在 $\lambda<\lambda_e$ 一侧相差大于 $7.2\times10^{-10}$，在 $\lambda\ge\lambda_e$ 一侧相差大于 $8.1\times10^{-9}$。整线孤立配对在整个条带内保持相同。 [次序反转的区间证书与复算脚本](https://github.com/the-omega-institute/trureturing-books/issues/2243#issuecomment-7242089738)
 
 ::: {.example #ex-ou-ch03-fejer-11431 title="孤立碰撞带 23.670% 锐上限的三行初等推导"}
 在 $\Delta < \eta \le \Delta_2$ 的孤立分辨率带内，记 $\#11427, \#11436, \#11431$ 三个零点的概率权重依次为 $x, y, z \ge 0$，令 $q := 1 - \Delta/\eta \in (0, 1]$。额外配对贡献恰为 $4q x y z^2$，而占据对角为 $D = \sum_i p_i^4 + 4\sum_{i < j} p_i^2 p_j^2$；其余十六个权重只能增大分母。对 $x, y > 0$ 设 $t := z^2 / (xy)$，由 $x^2 + y^2 \ge 2xy$ 立得
