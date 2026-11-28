@@ -169,6 +169,72 @@ $$
 
 此外，即使在任意截断高度 $H$ 以上按标准逆平方赋权并取任意固定正平均壳相位窗，$H / \gamma$ 的极限分布也必然落向 $[0, 1]$ 上的均匀分布——优化共同尺度后，前两项算术读数的极限最大误差仍高达 $3.71810906 \times 10^{-6}$；而在原单位尺度 $a = 1$ 下，全谱五荷三轻模支撑自身根本无法复现第一项算术时间（至少 $32.092\%$ 的概率必须落在三模集合外，前 $40$ 项更要求 $87.818\%$ 以上落在三模集合外）。
 
+::: {.remark #rem-ou-ch12-windowed-rate title="有限高度的全环面基准与窗口化缺口"}
+把固定相位窗 $W$ 内截至 $t$ 的正零点按重数计为 $A_W(t)$。设 $c>0$、$b_H\ge0$，且
+
+$$
+\begin{aligned}
+m(t)&=t\left(\log\frac{t}{2\pi}-1\right),\\
+A_W(t)&=c\,m(t)+R_W(t),\\
+|R_W(t)|&\le b_Ht\quad(t\ge H).
+\end{aligned}
+$$
+
+令 $L_x=1+\log(x/(2\pi))$，并按重数定义严格尾和 $S_W(x)=\sum_{\gamma>x,\,W}\gamma^{-2}$。当 $x\ge H$ 时，分部求和给出
+
+$$
+\begin{aligned}
+S_W(x)&=-\frac{A_W(x)}{x^2}+2\int_x^\infty\frac{A_W(t)}{t^3}\,dt\\
+      &=\frac{c}{x}(L_x+\delta_x),\\
+|\delta_x|&\le E:=\frac{3b_H}{c}.
+\end{aligned}
+$$
+
+若 $H\ge2\pi$ 且 $L_H>E$，逆平方加权的严格分布函数为 $Q_H(s)=\Pr(H/\gamma<s)=S_W(H/s)/S_W(H)$，其中 $0<s\le1$，并取 $Q_H(0)=0$。
+
+$$
+\begin{aligned}
+\left\|Q_H-P_H\right\|_\infty&\le\frac{2E}{L_H-E},\\
+P_H(s)&=s+\frac{s\log(1/s)}{L_H}.
+\end{aligned}
+$$
+
+这里 $P_H(s)=sL_{H/s}/L_H$ 在 $[0,1]$ 上由 $0$ 递增至 $1$，在 $s=0$ 处按连续延拓取值。归一化后，分子误差为 $s\delta_{H/s}-P_H(s)\delta_H$，分母至少为 $L_H-E$。取严格或含端点的分布函数，与连续比较函数的上确界距离相同。因此，加权分布到均匀分布的 Kolmogorov 距离 $D_H$ 满足
+
+$$
+\left|D_H-\frac{1}{eL_H}\right|\le\frac{2E}{L_H-E}.
+$$
+
+对未筛选的全部正零点，Hasanalizade、Shen 与 Wong 的计数界在 $t\ge e$ 时给出
+
+$$
+\begin{aligned}
+\left|N(t)-\frac{m(t)}{2\pi}\right|&\le B(t),\\
+B(t)&=0.1038\log t\\
+&+0.2573\log\log t+9.3675.
+\end{aligned}
+$$
+
+由于 $B(t)/t$ 在该范围内递减，可取 $c=1/(2\pi)$ 与 $b_H=B(H)/H$。在 $H=10^6$ 时，这一全环面基准推出
+
+$$
+0.0283138<D_H<0.0283806.
+$$
+
+这个数值界没有筛选相位窗。把它用于第 2 章的哈尔接受区域或本章的三条高度带，仍须证明相应的 $b_H$ 或等价的统一 Fourier 界。[计数界，推论 1.2](https://doi.org/10.1016/j.jnt.2021.06.032)
+:::
+
+::: {.problem #prob-ou-ch12-windowed-haar-rate title="固定哈尔相位窗的显式计数余项"}
+对第 2 章的固定哈尔接受区域以及本章采用的固定正测度相位窗，证明或否证存在可复查的常数 $b_H$，使 $A_W(t)$ 与上面定义的主项满足
+
+$$
+|A_W(t)-c\,m(t)|\le b_Ht
+\qquad\text{对所有 }t\ge H
+$$
+
+成立，并把该常数传递为共同算术钟各读数的有限高度误差。现有未筛选计数与定性等分布只给出 $A_W(t)=c\,m(t)+o(t\log t)$，不足以产生上述统一余项。窗口输入获得前，有限高度的哈尔误差与共同钟读数精度仍是开放结果。
+:::
+
 所有这些排除结果背后，共同跳动着两颗已在 Lean 4 内核中形式化冻结的普适傅里叶–方差浓缩心脏。第一条内核定理用循环费耶尔（Fejér）窗给出窄剩余类频带总权重的非负傅里叶上界，定量控制了频带浓缩为何必然引发高频傅里叶分量的剧烈抬升：
 
 ::: {.theorem #thm-ou-ch12-cyclic-fejer-band title="循环费耶尔窗的窄频带非负傅里叶上界" lean="D5/S3/Fourier/Concentration/CyclicFejerBand.band_le_positive_fourier"}
