@@ -1,0 +1,299 @@
+{
+ "voice": "af_heart",
+ "speed": 0.94,
+ "say": {
+  "Lean": "Leen",
+  "Möbius": "Moebius"
+ },
+ "music": {
+  "bpm": 80,
+  "progression": "d-minor"
+ },
+ "scenes": [
+  {
+   "id": "hook",
+   "name": "NO SLICING",
+   "lead": 1.9,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 2.4,
+     "kind": "chime"
+    }
+   ],
+   "lines": [
+    [
+     "Classical integration slices a region ever finer, and a discrete Stokes formula still leaves a residue.",
+     "经典积分把区域越切越细，离散斯托克斯公式却仍留下截断余项。"
+    ],
+    [
+     "This chapter keeps the grid coarse and asks which terms cancel exactly.",
+     "本章把网格留得很粗，只追问：哪些项恰好相消？"
+    ],
+    [
+     "The answer: on a finite grid, nothing is left over.",
+     "答案是：在有限网格上，分毫不剩。"
+    ]
+   ]
+  },
+  {
+   "id": "fold",
+   "name": "HEAP FOLD",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.5,
+    0.5,
+    0.1,
+    0.2
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 2.2,
+     "kind": "stamp"
+    }
+   ],
+   "lines": [
+    [
+     "A heap is a bracket of three points with no origin, where y, x, x collapses to y.",
+     "流群是三点一括号，没有原点，[y, x, x] 直接塌缩为 y。"
+    ],
+    [
+     "Fold a chain point by point: next point, last point, running result.",
+     "沿链逐点折叠：下一点、上一点、当前的累积结果。"
+    ],
+    [
+     "Each fold meets a cancelling pair, so the chain integrates to its final point.",
+     "每一次折叠都遇到一对相消的点，于是整条链的积分就是它的终点。"
+    ],
+    [
+     "In a commutative group, Lean checks the same telescoping: the steps sum to last minus first.",
+     "在交换群中，Lean 检验了同样的伸缩相消：各步之和等于终点减起点。"
+    ]
+   ]
+  },
+  {
+   "id": "glue",
+   "name": "TWO TRIANGLES",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.2,
+    0.2
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 1.6,
+     "kind": "chime"
+    }
+   ],
+   "lines": [
+    [
+     "Now a surface: a square cut by one diagonal into just two triangles.",
+     "再看一块曲面：一条对角线把正方形切成仅仅两个三角形。"
+    ],
+    [
+     "Put whole numbers on the edges: the triangles circulate nine and zero, nine in total.",
+     "在各边放上整数：两个三角形的环流分别是 9 和 0，合计为 9。"
+    ],
+    [
+     "The diagonal, walked once each way, cancels, leaving the rim: two plus five minus one plus three, nine again.",
+     "对角线正反各走一次而相消，只剩外缘：2 + 5 − 1 + 3，还是 9。"
+    ]
+   ]
+  },
+  {
+   "id": "order",
+   "name": "ORDER AND PATH",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.7,
+    0.6,
+    0.2,
+    0.3
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 1.2,
+     "kind": "glitch"
+    }
+   ],
+   "lines": [
+    [
+     "Now use rational unit quaternions, like three fifths plus four fifths i, and products stop commuting.",
+     "把整数换成有理单位四元数，例如 3/5 + 4/5 i，乘积便不再交换。"
+    ],
+    [
+     "The first loop gives minus a half, a half, a half, minus a half; the second is pulled back along edge zero one.",
+     "第一面的回路给出 (−1/2, 1/2, 1/2, −1/2)；第二面沿边 0→1 拉回到顶点 0。"
+    ],
+    [
+     "First times second equals the rim holonomy exactly, with entries like thirty one over two hundred fifty.",
+     "第一面乘第二面，恰好等于外缘和乐，分量如 31/250。"
+    ],
+    [
+     "Swap the order, or anchor along another path, and it changes: in a second example, j turns into minus j.",
+     "颠倒乘序，或改走另一条锚定路径，答案就变了：在另一个例子里，j 变成了 −j。"
+    ]
+   ]
+  },
+  {
+   "id": "cone",
+   "name": "CONE FROM A BASE",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 3.0,
+     "kind": "stamp"
+    },
+    {
+     "line": 3,
+     "at": 2.4,
+     "kind": "chime"
+    }
+   ],
+   "lines": [
+    [
+     "Back to commutative values on any vertices. Lean checks that the coboundary twice is zero.",
+     "回到交换群取值，顶点任意。Lean 检验：上边缘算子作用两次为零。"
+    ],
+    [
+     "Pick a base vertex b. The cone of a two-cochain F puts b in front.",
+     "选定一个基点 b。2-上链 F 的锥，就是在 F 的前面放上 b。"
+    ],
+    [
+     "Then F splits exactly: the coboundary of its cone, plus the cone of its defect.",
+     "于是 F 精确拆开：它的锥的上边缘，加上它的缺陷的锥。"
+    ],
+    [
+     "So a closed F is exact, the witness written down from b, with no axiom of choice.",
+     "所以闭的 F 一定恰当，见证由 b 直接写出，不用选择公理。"
+    ]
+   ]
+  },
+  {
+   "id": "caps",
+   "name": "OSCULATING CAPS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.4
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 1.4,
+     "kind": "chime"
+    }
+   ],
+   "lines": [
+    [
+     "In the book's model, the manifold changes too: each point carries a curved rational three-sphere cap, not a flat tangent plate.",
+     "在本书的模型里，流形本身也换了底座：每一点配上弯曲的有理三元球冠，而不是平直切板。"
+    ],
+    [
+     "Overlapping caps are glued by quaternion Möbius maps, with no bump functions.",
+     "相互重叠的球冠用四元数莫比乌斯变换缝合，不用隆起函数。"
+    ],
+    [
+     "Along circle fibres, compatible powers form a solenoid: each level, raised to n, gives a coarser level.",
+     "沿着圆周纤维，相容的幂构成螺线管：每一层取 n 次幂，就得到更粗的一层。"
+    ],
+    [
+     "Lean checks the lock: the log charge is zero exactly when every level sits on the unit circle.",
+     "Lean 检验了这把锁：对数荷为零，当且仅当每一层都落在单位圆上。"
+    ]
+   ]
+  },
+  {
+   "id": "ledger",
+   "name": "VOLUME III",
+   "lead": 0.5,
+   "tail": 0.8,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.3
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 0.4,
+     "kind": "chime"
+    }
+   ],
+   "lines": [
+    [
+     "That closes Volume Three: calculus without limits.",
+     "第三卷到此收束：没有极限的微积分。"
+    ],
+    [
+     "Derivatives became jets, transcendental functions recurrences, and integrals exact boundary cancellation.",
+     "导数成了射流，超越函数成了递推，积分成了精确的边界相消。"
+    ],
+    [
+     "Flat plates gave way to curved caps in the book's model. Next come spectra on the three-sphere.",
+     "在本书的模型里，平直切板让位于弯曲球冠。下一卷：三维球面上的谱。"
+    ]
+   ]
+  },
+  {
+   "id": "close",
+   "name": "LEDGER",
+   "lead": 0.5,
+   "tail": 3.6,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.2
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 0.3,
+     "kind": "chime"
+    }
+   ],
+   "lines": [
+    [
+     "Omega Math, chapter nine.",
+     "《OMEGA MATH》· 第九章"
+    ]
+   ]
+  }
+ ]
+}

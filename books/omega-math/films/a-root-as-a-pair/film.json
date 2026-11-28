@@ -1,0 +1,33 @@
+{
+  "title": "A Root as a Pair",
+  "title_zh": "以数对为根",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-27",
+  "duration": "2:44",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · ordered pairs of fractions and one rewrite rule, a spinor dial in eight beats, a ladder of golden Fibonacci pairs, a Chebyshev orbit on a decagon, Gram minors as signed areas, two hand counterexamples for isometry rigidity",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.quadratic_mul_inv",
+    "D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.sqrt_two_spinor",
+    "D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.phi_power_norm",
+    "D5/S3/Quantum/AURICOmega/OmegaChebyshevHecke.pentagonal_chebyshev",
+    "D5/S3/Quantum/AURICOmega/OmegaQuadraticAndSchur.rational_lagrange_gram",
+    "D5/S3/Quantum/AURICOmega/GramIsometryExtension.existsUnique_linearIsometryEquiv_of_gram_preserving"
+  ],
+  "outputs": {
+    "narrated_720p": "omega-math_a-root-as-a-pair_720p_narrated.mp4",
+    "cover": "omega-math_a-root-as-a-pair_cover.jpg"
+  },
+  "summary": "An element of the quadratic extension QuadPoly(b, c) is a pair (p, q) of fractions read as p + qα, multiplied with the single rule α² = bα + c; the conjugate (p + bq, −q) cancels the α-part and leaves the rational norm N = p² + bpq − cq², and dividing by it gives the exact inverse, worked by hand in QSqrt2 as (1, 1)⁻¹ = (−1, 1) (computed). Lean checks the inverse for every pair of nonzero norm. In QSqrt2 the unit spinor u = (δ/2)(1 + i) has squared length 1/2 + 1/2 = 1 and turns 45° per beat: u² = i, u⁴ = −1, u⁸ = 1, while the adjoint frame turns 720° (powers computed exactly); Lean checks the unit length and the eighth power. In QPhi, multiplication by φ sends (p, q) to (q, p + q), so φⁿ = (Fₙ₋₁, Fₙ) up to φ¹² = (89, 144), with norms alternating −1, +1 (computed); Lean checks N(φⁿ) = (−1)ⁿ for every n. The Chebyshev recurrence at φ/2 stays in pairs and reaches T₅ = −1 and T₁₀ = 1, drawn at the corners of a regular decagon (placement uses φ ≈ 1.618 only, labelled as a picture); Lean checks both closures and T₅((φ − 1)/2) = 1. For the pairs (1, 2), (3, 1), (2, 5) the Gram determinant 420 − 225 = 195 equals the sum of the squared minors 25 + 1 + 169, drawn as signed parallelogram areas (computed); Lean checks this rational Lagrange–Gram identity for every finite list. Lean also checks, in the classical real shadow, that a Gram-preserving permutation of a spanning family extends to a unique linear isometry; the chapter's hand examples e₁, 2e₂ (no isometry) and e₁ alone (two extensions) are computed. The chapter records an empty axiom list on the strict backend for its Omega declarations.",
+  "summary_zh": "二次扩张 QuadPoly(b, c) 的元素是一对分数 (p, q)，读作 p + qα，乘法只用一条规则 α² = bα + c；共轭 (p + bq, −q) 消去 α 部分，留下有理范数 N = p² + bpq − cq²，除以范数即得精确逆元，在 QSqrt2 中手算 (1, 1)⁻¹ = (−1, 1)（屏幕计算）。Lean 检验：凡范数非零的数对，逆元都成立。在 QSqrt2 中单位旋量 u = (δ/2)(1 + i) 的模方为 1/2 + 1/2 = 1，每拍转 45°：u² = i、u⁴ = −1、u⁸ = 1，伴随标架转过 720°（各次幂精确计算）；Lean 检验其单位模方与八次幂。在 QPhi 中乘以 φ 把 (p, q) 变为 (q, p + q)，于是 φⁿ = (Fₙ₋₁, Fₙ)，直到 φ¹² = (89, 144)，范数交替为 −1、+1（屏幕计算）；Lean 检验对一切 n 有 N(φⁿ) = (−1)ⁿ。在 φ/2 上运行切比雪夫递推，各值仍是数对，T₅ = −1、T₁₀ = 1，画在正十边形的顶点上（点位只用 φ ≈ 1.618 定位，标为示意）；Lean 检验这两处闭合以及 T₅((φ − 1)/2) = 1。对数对 (1, 2)、(3, 1)、(2, 5)，格拉姆行列式 420 − 225 = 195 等于子式平方和 25 + 1 + 169，子式画成有向平行四边形面积（屏幕计算）；Lean 对任意有限序列检验这条有理拉格朗日—格拉姆恒等式。Lean 还在经典实数阴影层检验：保持张成族全部格拉姆内积的置换唯一延拓为线性等距；本章的手算反例 e₁、2e₂（无等距）与单独的 e₁（两种延拓）为屏幕计算。本章所引 Omega 声明在严格端的公理记录为空。"
+}

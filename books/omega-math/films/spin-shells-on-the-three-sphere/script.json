@@ -1,0 +1,283 @@
+{
+ "voice": "af_heart",
+ "speed": 0.94,
+ "say": {
+  "Lean": "Leen",
+  "Chebyshev": "Cheb-ee-shev",
+  "Peter Weyl": "Peter Vile",
+  "S U two": "S. U. two"
+ },
+ "music": {
+  "bpm": 76,
+  "progression": "a-minor"
+ },
+ "scenes": [
+  {
+   "id": "sphere",
+   "name": "A CLOSED SPECTRUM",
+   "lead": 2.6,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "On an open line, Fourier analysis needs pi, e, and a continuum of frequencies.",
+     "在敞开的直线上，傅里叶分析离不开 π、e 和连续不断的频率。"
+    ],
+    [
+     "Close it into the three-sphere of unit quaternions, and waves must meet themselves.",
+     "把它闭合成单位四元数构成的三维球面，波就必须首尾咬合。"
+    ],
+    [
+     "By Peter Weyl, the spectrum becomes spin shells, each holding two j plus one, squared, functions.",
+     "由彼得—魏尔定理，频谱化为一级级自旋壳，第 j 壳携带 (2j + 1)² 个函数。"
+    ],
+    [
+     "Lean checks the backbone: on any compact group, finite unitary matrix entries are dense.",
+     "Lean 内核检验其骨架：在任意紧群上，有限维幺正表示的矩阵元一致稠密。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 1.2,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "triad",
+   "name": "THREE FIRST SHELLS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.5,
+    0.4,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "Compare p with the anchor one: kappa is w squared over its squared norm.",
+     "把四元数 p 与锚点 1 比较：保真度 κ 等于 w² 除以模方。"
+    ],
+    [
+     "The first three shells read one, four kappa for the squared spinor, and four kappa minus one.",
+     "前三座壳层读作 1、旋量平方核 4κ，以及 4κ − 1。"
+    ],
+    [
+     "The book reads them as past, present and future: a model reading, not a theorem.",
+     "书中把它们读作过去、现在与未来：这是模型诠释，不是定理。"
+    ],
+    [
+     "One identity welds them: four kappa is one plus four kappa minus one, as two times two is one plus three.",
+     "一条恒等式把它们焊在一起：4κ = 1 + (4κ − 1)，正如 2 × 2 = 1 + 3。"
+    ],
+    [
+     "At the integer rotor one, one, one, one, kappa is a quarter and spin one reads zero.",
+     "在整数旋子 (1, 1, 1, 1) 处，κ = 1/4，自旋 1 读数恰为 0。"
+    ]
+   ]
+  },
+  {
+   "id": "roots",
+   "name": "NO SQUARE ROOTS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.2,
+    0.2
+   ],
+   "lines": [
+    [
+     "Characters are Chebyshev polynomials in c, the real part, and c is the square root of kappa.",
+     "特征标是关于实部 c 的切比雪夫多项式，而 c 是 κ 的平方根。"
+    ],
+    [
+     "For whole spins, multiply by four kappa minus two and subtract the shell before.",
+     "对整数自旋，每次乘以 4κ − 2，再减去前一座壳。"
+    ],
+    [
+     "Lean checks over the integers that E n of x squared is U two n of x.",
+     "Lean 内核在整数上检验：Eₙ(x²) = U₂ₙ(x)，平方根全部消去。"
+    ],
+    [
+     "Spin two, then, is sixteen kappa squared minus twelve kappa plus one.",
+     "于是自旋 2 就是 16κ² − 12κ + 1。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 1.0,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "landmarks",
+   "name": "RATIONAL LANDMARKS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "On six rational landmarks, every whole-spin character is an exact fraction.",
+     "在六个有理地标上，每个整数自旋特征标都是精确分数（屏幕计算）。"
+    ],
+    [
+     "At kappa one they read one, three, five, seven; at one third, spin two is minus eleven ninths.",
+     "在 κ = 1 处读出 1、3、5、7；在 κ = 1/3 处，自旋 2 为 −11/9。"
+    ],
+    [
+     "Half spins keep a single factor of c, Lean checks, times a polynomial in kappa.",
+     "Lean 内核检验：半整数自旋恰保留一个因子 c，再乘一个关于 κ 的多项式。"
+    ],
+    [
+     "Its sign flips with q; for p one, one, zero, zero, it has size root two.",
+     "它的符号随 q 翻转：取 p = (1, 1, 0, 0)，旋量特征标的大小是 √2。"
+    ]
+   ]
+  },
+  {
+   "id": "fusion",
+   "name": "SHELL FUSION",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Shells also multiply, into a run from their gap up to their sum.",
+     "壳层还能相乘，乘积是从两者之差到两者之和的一串壳。"
+    ],
+    [
+     "Spin one times spin two gives one, two and three: three times five is three plus five plus seven.",
+     "自旋 1 乘自旋 2 给出 1、2、3：3 × 5 = 3 + 5 + 7。"
+    ],
+    [
+     "Both sides are sixty-four kappa cubed, minus sixty-four kappa squared, plus sixteen kappa, minus one.",
+     "两边都展开为 64κ³ − 64κ² + 16κ − 1。"
+    ],
+    [
+     "Lean checks this rule for every pair m and n.",
+     "Lean 内核对每一对 m、n 检验这条融合律。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 1.0,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "heap",
+   "name": "NO ORIGIN",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.6,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "Convolution usually needs an origin; the heap bracket y, x bar, w needs none.",
+     "卷积通常需要原点；流群括号 y x̄ w 一个都不需要。"
+    ],
+    [
+     "Along it, each shell turns the convolution into three matrices multiplied: a written derivation.",
+     "沿它求平均，卷积在每座壳上化为三个矩阵相乘：这是书面推导。"
+    ]
+   ]
+  },
+  {
+   "id": "quad",
+   "name": "SPIN-TWO TESTBED",
+   "lead": 0.5,
+   "tail": 0.8,
+   "music": [
+    1.0,
+    0.8,
+    0.7,
+    0.4,
+    0.4
+   ],
+   "lines": [
+    [
+     "Spin two has a laboratory: the five d orbitals of gold.",
+     "自旋 2 有现成的实验台：金的五条 d 轨道。"
+    ],
+    [
+     "Each quadrupole entry is a fraction over seven, computed here; every column sums to zero.",
+     "每个四极元都是分母为 7 的分数（屏幕计算），每一列之和都是零。"
+    ],
+    [
+     "Lean checks that the closed d ten shell vanishes on every axis.",
+     "Lean 内核检验：d¹⁰ 闭壳在每条轴上都归零。"
+    ],
+    [
+     "Empty the x squared minus y squared orbital, as in d eight gold: minus four, minus four, plus eight sevenths.",
+     "抽空 x² − y² 轨道，如 d⁸ 金那样：−4/7、−4/7、+8/7。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 3.0,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "close",
+   "name": "LEDGER",
+   "lead": 0.5,
+   "tail": 3.2,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.2
+   ],
+   "lines": [
+    [
+     "Omega Math, chapter ten.",
+     "《OMEGA MATH》· 第十章"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 0.3,
+     "kind": "chime"
+    }
+   ]
+  }
+ ]
+}

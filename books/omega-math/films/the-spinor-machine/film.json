@@ -1,0 +1,33 @@
+{
+  "title": "The Spinor Machine",
+  "title_zh": "旋子机",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-27",
+  "duration": "2:49",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · a one-number machine with its fraction list, prime registers as columns of cells, a sixteen-row ledger beside the running registers, integer quaternions as four-cell vectors with their mod-5 remainders, two imaginary-part arrows on a sphere, 2×2 integer matrices with brackets",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.p_omega_halts_at_22",
+    "D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.fractran_stable",
+    "D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.quaternion_fractran_order_separation",
+    "D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.trace_mul_comm",
+    "D5/S3/Quantum/AURICOmega/OmegaComposeAndWitnesses.mat2_det_mul",
+    "D5/S3/Quantum/AURICOmega/OmegaMatrixAndFractran.cayley_hamilton"
+  ],
+  "outputs": {
+    "narrated_720p": "omega-math_the-spinor-machine_720p_narrated.mp4",
+    "cover": "omega-math_the-spinor-machine_cover.jpg"
+  },
+  "summary": "Conway's scalar FRACTRAN keeps one whole number and multiplies it by the first fraction that keeps it whole; factored, every prime is a register and the guard says no register may go below zero. Run P_Ω = [11/49, 7/25, 5/9, 3/4] from 2¹⁷ = 131 072: fifteen transitions and sixteen states climb pairs of twos up to an eleven and halt at 22 = 2 · 11 (computed on screen and checked against the chapter's table); Lean checks the whole trace, that the first halt comes at step fifteen, and that a halted run never moves again. One number forgets order (3 · 5 = 5 · 3), so the chapter's model, labelled as such, makes the state an integer quaternion: X = 1 + 2i and Y = 1 + 2j give XY = (1, 2, 2, 4) and YX = (1, 2, 2, −4), both of squared length 25. The gate 'multiply on the right by 1 − 2j, divide by 5' turns XY into (5, 10, 0, 0) and back to X, but leaves YX at (5, −6, 0, −8) with remainders (0, 4, 0, 2) and stays shut; the gate 1 − 2i unwinds YX to Y (computed; the last-in-first-out reading is the chapter's model). Lean checks the equal squared lengths, the clean step and the blocked one. For A = (2 3; 1 4) and B = (1 −2; 5 3), AB and BA differ but share trace 27, det AB = 65 = 5 · 13, and A² − 6A + 5I = 0 (computed); Lean checks trace cycling, determinant multiplicativity and Cayley–Hamilton for every 2×2 integer matrix.",
+  "summary_zh": "康威的标量 FRACTRAN 只保存一个正整数，每拍乘上第一枚能让它保持整数的分数；分解质因数后每颗素数就是一根寄存器，整除守卫只要求任何寄存器不变负。让 P_Ω = [11/49, 7/25, 5/9, 3/4] 从 2¹⁷ = 131 072 出发：十五次跃迁、十六个状态把成对的 2 逐级升成一份 11，停机于 22 = 2 · 11（屏幕计算，并与本章表格逐行核对）；Lean 检验整条轨迹、第十五步才首次停机，以及停机后再走多少步都不动。单个数记不住次序（3 · 5 = 5 · 3），于是本章的模型诠释（片中如实标注）把状态换成整四元数：X = 1 + 2i、Y = 1 + 2j 给出 XY = (1, 2, 2, 4) 与 YX = (1, 2, 2, −4)，模方都是 25。闸门“右乘 1 − 2j 再除以 5”把 XY 变为 (5, 10, 0, 0) 并还原出 X，却让 YX 停在 (5, −6, 0, −8)，余数 (0, 4, 0, 2)，闸门关闭；闸门 1 − 2i 则把 YX 退回 Y（屏幕计算；后进先出的读法属本章模型诠释）。Lean 检验模方相等、XY 的干净一步与 YX 的阻塞。取 A = (2 3; 1 4)、B = (1 −2; 5 3)：AB 与 BA 不同但迹都是 27，det AB = 65 = 5 · 13，A² − 6A + 5I = 0（屏幕计算）；Lean 对任意二阶整数矩阵检验迹的循环性、行列式乘性与凯莱—哈密顿恒等式。"
+}

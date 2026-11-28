@@ -1,0 +1,297 @@
+{
+ "voice": "af_heart",
+ "speed": 0.94,
+ "say": {
+  "Lean": "Leen",
+  "Hurwitz": "Hur-vits",
+  "spinor": "spinner",
+  "spinors": "spinners"
+ },
+ "music": {
+  "bpm": 80,
+  "progression": "a-minor"
+ },
+ "scenes": [
+  {
+   "id": "rulers",
+   "name": "ONE RULER PER PRIME",
+   "lead": 2.6,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Count by ones, and the usual ruler only stretches: two, three, four, five, six.",
+     "一步步加一，通常的尺子只会越拉越长：2、3、4、5、6。"
+    ],
+    [
+     "Give every prime its own ruler: each factor p shrinks ruler p by p.",
+     "给每个素数一把尺：每个因子 p 让第 p 把尺缩小 p 倍。"
+    ],
+    [
+     "Six reads one half on ruler two, one third on ruler three.",
+     "6 在 2 号尺上读 1/2，在 3 号尺上读 1/3。"
+    ],
+    [
+     "The book reads primes as curvature recovering nuclei: an interpretation, not a theorem.",
+     "本书把素数读作曲率回收核：这是诠释，不是定理。"
+    ]
+   ]
+  },
+  {
+   "id": "closure",
+   "name": "THE PRODUCT IS ONE",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.5,
+    0.4,
+    0.1,
+    0.2
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 1.0,
+     "kind": "stamp"
+    }
+   ],
+   "lines": [
+    [
+     "Multiply the readings: six, times one half, times one third, is exactly one.",
+     "把读数乘起来：6 × 1/2 × 1/3，恰好是 1。"
+    ],
+    [
+     "Thirty-one is blind to rulers two, three and five. Only ruler thirty-one answers.",
+     "31 对 2、3、5 号尺全都失明，只有 31 号尺应答。"
+    ],
+    [
+     "Lean checks: for every nonzero rational, the whole product is exactly one.",
+     "Lean 内核检验：任意非零有理数，全部读数之积恰好是 1。"
+    ],
+    [
+     "Under logarithms each prime is its own axis. Lean checks they are independent over the rationals.",
+     "取对数，每个素数是独立的一根轴。Lean 内核检验：它们在有理数上线性无关。"
+    ]
+   ]
+  },
+  {
+   "id": "spinor",
+   "name": "FIVE SPLITS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.2,
+    0.2
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 1.0,
+     "kind": "stamp"
+    }
+   ],
+   "lines": [
+    [
+     "Integers commute. In the whole quaternions, five splits: one plus two i, times one minus two i.",
+     "整数可以交换。到了整四元数里，5 会分裂：(1 + 2i)(1 − 2i) = 5。"
+    ],
+    [
+     "Put the two on i, j or k, with either sign: six spinors.",
+     "把 2 放到 i、j 或 k 上，取正负号：得到六枚素旋子。"
+    ],
+    [
+     "Lean checks each has squared norm five and fidelity one fifth.",
+     "Lean 内核检验：每一枚模方为 5，保真度为 1/5。"
+    ],
+    [
+     "Each turns space about an axis: cosine minus three fifths, sine four fifths.",
+     "每一枚都绕一根轴转动：余弦 −3/5，正弦 4/5。"
+    ]
+   ]
+  },
+  {
+   "id": "split",
+   "name": "MOD FIVE",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.6,
+    0.2,
+    0.3
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 1.0,
+     "kind": "stamp"
+    }
+   ],
+   "lines": [
+    [
+     "Count mod five, where two squared is minus one: each spinor becomes a two by two matrix.",
+     "模 5 计算，此时 2² ≡ −1：每枚素旋子变成一个 2×2 矩阵。"
+    ],
+    [
+     "One plus two i becomes a single column times a single row.",
+     "1 + 2i 变成一列乘一行。"
+    ],
+    [
+     "Lean checks all six are nonzero and rank one.",
+     "Lean 内核检验：六个矩阵全都非零且秩为一。"
+    ],
+    [
+     "Of the thirty-six products, exactly six vanish: a spinor followed by its inverse.",
+     "36 个乘积中恰好 6 个为零：一枚素旋子紧接它的逆。"
+    ]
+   ]
+  },
+  {
+   "id": "words",
+   "name": "NEVER HOME",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 1.0,
+     "kind": "stamp"
+    }
+   ],
+   "lines": [
+    [
+     "Chain spinors, never undoing the last: the links stay nonzero.",
+     "把素旋子连成串，从不撤销上一步：衔接处始终非零。"
+    ],
+    [
+     "One plus two i, then j, then k, gives minus seven, six, minus two, six, of squared norm one hundred twenty-five.",
+     "(1 + 2i)(1 + 2j)(1 + 2k) = (−7, 6, −2, 6)，模方为 125。"
+    ],
+    [
+     "Lean checks: every word has squared norm five to its length, and every reduced word stays nonzero mod five.",
+     "Lean 内核检验：任意词的模方是 5 的词长次方，任意既约词模 5 后仍不为零。"
+    ],
+    [
+     "Mod five, five divides none of its coordinates.",
+     "模 5 后，它的坐标没有一个能被 5 整除。"
+    ]
+   ]
+  },
+  {
+   "id": "tree",
+   "name": "A FREE TREE",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.8,
+    0.7,
+    0.4,
+    0.4
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 1.4,
+     "kind": "stamp"
+    }
+   ],
+   "lines": [
+    [
+     "Reduced words: six of length one, thirty of length two, one hundred fifty of length three.",
+     "既约词：长度 1 有 6 个，长度 2 有 30 个，长度 3 有 150 个。"
+    ],
+    [
+     "Lean checks: two reduced words that move the x and y axes alike are the same word.",
+     "Lean 内核检验：两个既约词若把 x 轴与 y 轴转到同一处，就是同一个词。"
+    ],
+    [
+     "So the six spinors freely generate a group on three letters.",
+     "所以六枚素旋子自由生成一个三字母自由群。"
+    ],
+    [
+     "Each gate adds half of log base two of five bits, about one point one six.",
+     "每多一个门，高度增加 ½ log₂ 5 比特，约 1.16。"
+    ]
+   ]
+  },
+  {
+   "id": "cover",
+   "name": "SIX AXES",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.2,
+    0.3
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 1.2,
+     "kind": "chime"
+    }
+   ],
+   "lines": [
+    [
+     "The same one and two return in space: six axes of squared length five.",
+     "同样的 1 与 2 在三维空间里重现：六根模方为 5 的轴。"
+    ],
+    [
+     "Around each, keep the points where twice the squared projection exceeds five.",
+     "在每根轴周围，保留投影平方的两倍超过 5 的点。"
+    ],
+    [
+     "Lean checks: the six sets are open, cover the sphere, and none holds a right angle.",
+     "Lean 内核检验：六片都是开集，盖满球面，且没有一片含有直角。"
+    ]
+   ]
+  },
+  {
+   "id": "close",
+   "name": "LEDGER",
+   "lead": 0.5,
+   "tail": 5.0,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.2
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 0.3,
+     "kind": "chime"
+    }
+   ],
+   "lines": [
+    [
+     "Omega Math, chapter fourteen.",
+     "《OMEGA MATH》· 第十四章"
+    ]
+   ]
+  }
+ ]
+}

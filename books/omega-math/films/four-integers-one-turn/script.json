@@ -1,0 +1,315 @@
+{
+ "voice": "af_heart",
+ "speed": 0.94,
+ "say": {
+  "Lean": "Leen",
+  "g one-twenty": "gee one twenty",
+  "b-bar": "b bar",
+  "Mathlib": "Math lib"
+ },
+ "music": {
+  "bpm": 80,
+  "progression": "d-minor"
+ },
+ "scenes": [
+  {
+   "id": "flat",
+   "name": "FLAT WORLDS",
+   "lead": 2.4,
+   "tail": 0.4,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 3.2,
+     "kind": "glitch"
+    },
+    {
+     "line": 3,
+     "at": 1.4,
+     "kind": "chime"
+    }
+   ],
+   "lines": [
+    [
+     "Turns on a circle commute. Next, consider Lie brackets with an invariant form.",
+     "圆周上的转动可交换。接着来看带不变型的李括号。"
+    ],
+    [
+     "A bracket that keeps a nondegenerate invariant form is orthogonal to both its inputs.",
+     "只要括号保持一个非退化不变型，它就同时与两个输入正交。"
+    ],
+    [
+     "In a plane, independent inputs span everything. The bracket is orthogonal to everything: it is zero.",
+     "在平面里，线性无关的两个输入张满全空间，括号与全空间正交，只能为零。"
+    ],
+    [
+     "In dimension three, Lean checks that a nonzero bracket with a positive invariant form is a positive multiple of the cross product in a suitable basis.",
+     "在三维，Lean 检验：带正定不变型的非零括号，在适当基底下是叉积的正倍数。"
+    ]
+   ]
+  },
+  {
+   "id": "root",
+   "name": "NO ROOT TWO",
+   "lead": 0.5,
+   "tail": 0.4,
+   "music": [
+    0.9,
+    0.5,
+    0.4,
+    0.1,
+    0.2
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 2.2,
+     "kind": "impact"
+    }
+   ],
+   "lines": [
+    [
+     "Now integers only: a quarter turn about the first axis is one plus i, one, one, zero, zero.",
+     "现在只用整数。绕第一根轴转四分之一圈，是 1 + i，即 (1, 1, 0, 0)。"
+    ],
+    [
+     "Its squared length is two; length one would need the square root of two.",
+     "它的模方是 2；要归一到长度 1，就得请出 √2。"
+    ],
+    [
+     "So keep four integers and forget their scale: that leaves exactly three degrees of freedom.",
+     "那就保留四个整数、忘掉缩放：恰好剩下三个自由度。"
+    ],
+    [
+     "No root for the turn either: conjugate by one plus i, divide by two, and x, y, z becomes x, minus z, y.",
+     "转动本身也不需要根号：用 1 + i 共轭作用、再除以 2，(x, y, z) 变成 (x, −z, y)。"
+    ]
+   ]
+  },
+  {
+   "id": "canon",
+   "name": "ONE NAME PER RAY",
+   "lead": 0.5,
+   "tail": 0.4,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.2,
+    0.3
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 0.4,
+     "kind": "stamp"
+    }
+   ],
+   "lines": [
+    [
+     "Each ray gets one integer name. Take minus two, two, two, two.",
+     "每条射线都有唯一的整数名字。取 (−2, 2, 2, 2)。"
+    ],
+    [
+     "Divide by the greatest common divisor, two, then flip signs so the first nonzero entry is positive.",
+     "先除以最大公约数 2，再整体翻号，让第一个非零分量为正。"
+    ],
+    [
+     "Its name is one, minus one, minus one, minus one. No quotient axiom: equality compares four integers.",
+     "它的名字是 (1, −1, −1, −1)。用不着商公理：判等只需比较四个整数。"
+    ]
+   ]
+  },
+  {
+   "id": "laws",
+   "name": "FOUR SQUARES",
+   "lead": 0.5,
+   "tail": 0.4,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 0.4,
+     "kind": "chime"
+    },
+    {
+     "line": 3,
+     "at": 2.6,
+     "kind": "chime"
+    }
+   ],
+   "lines": [
+    [
+     "Squared lengths multiply: one plus i, times one plus j, has squared length two times two.",
+     "模方相乘：1 + i 乘 1 + j，模方是 2 × 2。"
+    ],
+    [
+     "So a triad, a times b-bar times c, is never zero, and x, x, z returns to the ray of z.",
+     "所以三元积 a·b̄·c 永不为零，而 (x, x, z) 回到 z 的射线上。"
+    ],
+    [
+     "The reading kappa is squared overlap over squared lengths: a plain fraction.",
+     "读数 κ 是内积平方除以模方之积：一个普通分数。"
+    ],
+    [
+     "It never exceeds one, because the gap is a sum of six squared minors.",
+     "它永不超过 1，因为差值恰是六个子式的平方和。"
+    ]
+   ]
+  },
+  {
+   "id": "beats",
+   "name": "THREE BEATS",
+   "lead": 0.5,
+   "tail": 0.4,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.4
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 3.0,
+     "kind": "impact"
+    }
+   ],
+   "lines": [
+    [
+     "Now repeat one turn, g one-twenty, all ones, starting from one.",
+     "现在重复同一个转动 g₁₂₀ = (1, 1, 1, 1)，从 1 出发。"
+    ],
+    [
+     "Beat two: raw, minus two, two, two, two; named one, minus one, minus one, minus one.",
+     "第二拍：未约分的平方是 (−2, 2, 2, 2)，名字是 (1, −1, −1, −1)。"
+    ],
+    [
+     "Beat three: the raw product is four, zero, zero, zero. Divide by four, and we are home.",
+     "第三拍：未约分的积是 (4, 0, 0, 0)。除以 4，回到原点。"
+    ],
+    [
+     "Keep the signs, and home takes six beats: that double cover waits for chapter four.",
+     "若保留符号，就要走满六拍才回家：这层双覆叠留给第四章。"
+    ]
+   ]
+  },
+  {
+   "id": "order",
+   "name": "ORDER LEAVES A MARK",
+   "lead": 0.5,
+   "tail": 0.4,
+   "music": [
+    1.0,
+    0.8,
+    0.7,
+    0.4,
+    0.4
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 3.6,
+     "kind": "glitch"
+    },
+    {
+     "line": 3,
+     "at": 0.6,
+     "kind": "stamp"
+    }
+   ],
+   "lines": [
+    [
+     "Two quarter turns, about the first and second axes, in both orders.",
+     "两个四分之一圈，分别绕第一与第二根轴，按两种次序复合。"
+    ],
+    [
+     "One plus i times one plus j is one, one, one, one; reversed, it is one, one, one, minus one.",
+     "1 + i 乘 1 + j 得 (1, 1, 1, 1)；反过来得 (1, 1, 1, −1)。"
+    ],
+    [
+     "Same ray? The first entries force k equals l, the last force k equals minus l, so l is zero.",
+     "同一条射线？首分量迫使 k = l，末分量迫使 k = −l，于是 l = 0。"
+    ],
+    [
+     "Lean checks it in the Omega library alone: never the same ray. Order leaves a mark.",
+     "Lean 只用 Omega 库就检验了：永不共射线。次序留下了痕迹。"
+    ]
+   ]
+  },
+  {
+   "id": "shadow",
+   "name": "THE REAL SHADOW",
+   "lead": 0.5,
+   "tail": 0.4,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.2,
+    0.3
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 2.0,
+     "kind": "chime"
+    }
+   ],
+   "lines": [
+    [
+     "Classically, rational unit quaternions meet every hypothesis of the rank-five embedding, yet leave gaps.",
+     "在经典侧，有理单位四元数满足秩五嵌入的全部假设，却留着缝隙。"
+    ],
+    [
+     "Add reading completeness, and Lean checks on the classical side: we get all the unit quaternions.",
+     "再加读数完备性，Lean 在经典侧检验：得到的恰是全体单位四元数。"
+    ],
+    [
+     "Our integer ternions stop short: a squared reading of rank ten, each point glued to its antipode.",
+     "我们的整三元数止步于此：平方读数秩为 10，并把每个点与对径点粘合。"
+    ]
+   ]
+  },
+  {
+   "id": "close",
+   "name": "LEDGER",
+   "lead": 0.5,
+   "tail": 3.0,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.2
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 0.3,
+     "kind": "chime"
+    }
+   ],
+   "lines": [
+    [
+     "Omega Math, chapter three.",
+     "《OMEGA MATH》· 第三章"
+    ]
+   ]
+  }
+ ]
+}
