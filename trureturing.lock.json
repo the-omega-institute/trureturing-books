@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "5b976d8d75f5ea6d671f565034461d7c1202e50a",
-  "pinned_at": "2026-11-28T02:14:47Z",
+  "commit": "14ab3f818a0473d5a5f6f329fe70790d6ec55cc0",
+  "pinned_at": "2026-11-28T03:32:15Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -5371,6 +5371,19 @@
       "line": 193,
       "signature": "theorem central_fejer_gaussian_limit {J : ℕ → Type*} [∀ n,Fintype (J n)] (g w : ∀ n,J n → ℝ) (hw : ∀ᶠ n in atTop, ∀ i j, 0≤w n i*w n j) (hW : ∀ᶠ n in atTop, ∑ j,w n j=1) (hM : ∀ᶠ n in atTop, 0<pairMoment (g n) (w n) 2) (ρ A : ℕ → ℝ) (hρ : Tendsto ρ atTop (𝓝 0)) (hA : Tendsto A atTop atTop) (hwin : ∀ᶠ n in atTop, A n^2*pairMoment (g n) (w n) 4 ≤ 6*(n:ℝ)*pairMoment (g n) (w n) 2^2) : let kernel"
     },
+    "D5/S3/Fourier/Asymptotics/PlanarFourierTail.lattice_fourier_tail": {
+      "module": "D5/S3/Fourier/Asymptotics/PlanarFourierTail",
+      "name": "D5.S3.Fourier.Asymptotics.PlanarFourierTail.lattice_fourier_tail",
+      "kind": "theorem",
+      "statement_id": "sha256:64e46503365534e9e473257147ad4dc07fc81282316604887a34e5e56c282d17",
+      "line": 72,
+      "signature": "theorem lattice_fourier_tail (s : Finset (ℤ × ℤ)) (a : ℤ × ℤ → ℂ) (J : ℕ) (ε K : ℝ) (hJ : 0 < J) (hε : 0 < ε) (hK : 0 ≤ K) (hcut : ∀ m ∈ s, J < modeRadius m) (hdecay : ∀ m ∈ s, ‖a m‖ ≤ K * ε ^ 2 / (1 + ε * modeRadius m) ^ 6) : ∑ m ∈ s, ‖a m‖ ≤ 2 * K / (ε ^ 4 * (J : ℝ) ^ 4)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
     "D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result": {
       "module": "D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns",
       "name": "D5.S3.Fourier.Asymptotics.TorusObservationWindowReturns.result",
@@ -10093,7 +10106,7 @@
       "name": "D5.S3.PrimeForms.Crossing.CrossingNormForm.Qform",
       "kind": "def",
       "statement_id": "sha256:d56f376192e4a6271921a68c667dbf2fd4cc76722878a78450bb3efc937225a7",
-      "line": 14,
+      "line": 15,
       "signature": "def Qform (t P Q : ℤ) : ℤ"
     },
     "D5/S3/PrimeForms/Crossing/CrossingNormForm.Qform_discriminant": {
@@ -10101,7 +10114,7 @@
       "name": "D5.S3.PrimeForms.Crossing.CrossingNormForm.Qform_discriminant",
       "kind": "theorem",
       "statement_id": "sha256:d56f376192e4a6271921a68c667dbf2fd4cc76722878a78450bb3efc937225a7",
-      "line": 27,
+      "line": 28,
       "signature": "theorem Qform_discriminant (t : ℤ) : (2 * t + 1) ^ 2 - 4 * (t ^ 2 + t + 1) = -3"
     },
     "D5/S3/PrimeForms/Crossing/CrossingNormForm.Qform_eq_eisNorm": {
@@ -10109,7 +10122,7 @@
       "name": "D5.S3.PrimeForms.Crossing.CrossingNormForm.Qform_eq_eisNorm",
       "kind": "theorem",
       "statement_id": "sha256:d56f376192e4a6271921a68c667dbf2fd4cc76722878a78450bb3efc937225a7",
-      "line": 21,
+      "line": 22,
       "signature": "theorem Qform_eq_eisNorm (t P Q : ℤ) : Qform t P Q = eisNorm (P - (t + 1) * Q) Q"
     },
     "D5/S3/PrimeForms/Crossing/CrossingNormForm.Qform_range_eq_eisNorm": {
@@ -10117,7 +10130,7 @@
       "name": "D5.S3.PrimeForms.Crossing.CrossingNormForm.Qform_range_eq_eisNorm",
       "kind": "theorem",
       "statement_id": "sha256:d56f376192e4a6271921a68c667dbf2fd4cc76722878a78450bb3efc937225a7",
-      "line": 35,
+      "line": 36,
       "signature": "theorem Qform_range_eq_eisNorm (t : ℤ) : Set.range (fun p : ℤ × ℤ => Qform t p.1 p.2) = Set.range (fun p : ℤ × ℤ => eisNorm p.1 p.2)"
     },
     "D5/S3/PrimeForms/Crossing/CrossingNormForm.eisNorm": {
@@ -10125,7 +10138,7 @@
       "name": "D5.S3.PrimeForms.Crossing.CrossingNormForm.eisNorm",
       "kind": "def",
       "statement_id": "sha256:d56f376192e4a6271921a68c667dbf2fd4cc76722878a78450bb3efc937225a7",
-      "line": 17,
+      "line": 18,
       "signature": "def eisNorm (x y : ℤ) : ℤ"
     },
     "D5/S3/PrimeForms/GaussianIntegers/GaussianIntegerNorm.gaussian_integer_mul_conj_eq_sq_add_sq": {
