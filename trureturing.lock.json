@@ -7611,6 +7611,357 @@
         "propext"
       ]
     },
+    "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D.binaryQuadrupole_hasDerivAt_1": {
+      "module": "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D",
+      "name": "D5.S3.Geometry.Lorentz.GRLinearizedWavesQuadrupole4D.binaryQuadrupole_hasDerivAt_1",
+      "kind": "theorem",
+      "statement_id": "sha256:6325d5a98c580a715e1e51fc595c3c41983a810680b59883c06b5836fa231b1c",
+      "line": 305,
+      "signature": "theorem binaryQuadrupole_hasDerivAt_1 (μ r ω t : ℝ) (i j : Fin 3) : HasDerivAt (fun u => binaryQuadrupole μ r ω u i j) (binaryQuadrupoleD1 μ r ω t i j) t",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D.binaryQuadrupole_hasDerivAt_2": {
+      "module": "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D",
+      "name": "D5.S3.Geometry.Lorentz.GRLinearizedWavesQuadrupole4D.binaryQuadrupole_hasDerivAt_2",
+      "kind": "theorem",
+      "statement_id": "sha256:6325d5a98c580a715e1e51fc595c3c41983a810680b59883c06b5836fa231b1c",
+      "line": 314,
+      "signature": "theorem binaryQuadrupole_hasDerivAt_2 (μ r ω t : ℝ) (i j : Fin 3) : HasDerivAt (fun u => binaryQuadrupoleD1 μ r ω u i j) (binaryQuadrupoleD2 μ r ω t i j) t",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D.binaryQuadrupole_hasDerivAt_3": {
+      "module": "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D",
+      "name": "D5.S3.Geometry.Lorentz.GRLinearizedWavesQuadrupole4D.binaryQuadrupole_hasDerivAt_3",
+      "kind": "theorem",
+      "statement_id": "sha256:6325d5a98c580a715e1e51fc595c3c41983a810680b59883c06b5836fa231b1c",
+      "line": 322,
+      "signature": "theorem binaryQuadrupole_hasDerivAt_3 (μ r ω t : ℝ) (i j : Fin 3) : HasDerivAt (fun u => binaryQuadrupoleD2 μ r ω u i j) (binaryQuadrupoleD3 μ r ω t i j) t",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D.binaryQuadrupole_symmetric": {
+      "module": "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D",
+      "name": "D5.S3.Geometry.Lorentz.GRLinearizedWavesQuadrupole4D.binaryQuadrupole_symmetric",
+      "kind": "theorem",
+      "statement_id": "sha256:6325d5a98c580a715e1e51fc595c3c41983a810680b59883c06b5836fa231b1c",
+      "line": 275,
+      "signature": "theorem binaryQuadrupole_symmetric (μ r ω t : ℝ) : (binaryQuadrupole μ r ω t)ᵀ = binaryQuadrupole μ r ω t",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D.binaryQuadrupole_third_deriv_norm_sq": {
+      "module": "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D",
+      "name": "D5.S3.Geometry.Lorentz.GRLinearizedWavesQuadrupole4D.binaryQuadrupole_third_deriv_norm_sq",
+      "kind": "theorem",
+      "statement_id": "sha256:6325d5a98c580a715e1e51fc595c3c41983a810680b59883c06b5836fa231b1c",
+      "line": 330,
+      "signature": "theorem binaryQuadrupole_third_deriv_norm_sq (μ r ω t : ℝ) : ∑ i : Fin 3, ∑ j : Fin 3, (binaryQuadrupoleD3 μ r ω t i j) ^ 2 = 32 * μ ^ 2 * r ^ 4 * ω ^ 6",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D.binaryQuadrupole_traceless": {
+      "module": "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D",
+      "name": "D5.S3.Geometry.Lorentz.GRLinearizedWavesQuadrupole4D.binaryQuadrupole_traceless",
+      "kind": "theorem",
+      "statement_id": "sha256:6325d5a98c580a715e1e51fc595c3c41983a810680b59883c06b5836fa231b1c",
+      "line": 281,
+      "signature": "theorem binaryQuadrupole_traceless (μ r ω t : ℝ) : Matrix.trace (binaryQuadrupole μ r ω t) = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D.chirpMass_le_equal_mass": {
+      "module": "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D",
+      "name": "D5.S3.Geometry.Lorentz.GRLinearizedWavesQuadrupole4D.chirpMass_le_equal_mass",
+      "kind": "theorem",
+      "statement_id": "sha256:6325d5a98c580a715e1e51fc595c3c41983a810680b59883c06b5836fa231b1c",
+      "line": 402,
+      "signature": "theorem chirpMass_le_equal_mass {m₁ m₂ : ℝ} (hm₁ : 0 < m₁) (hm₂ : 0 < m₂) : chirpMass m₁ m₂ ≤ (m₁ + m₂) * (2 : ℝ) ^ (-(6 / 5 : ℝ)) ∧ (chirpMass m₁ m₂ = (m₁ + m₂) * (2 : ℝ) ^ (-(6 / 5 : ℝ)) ↔ m₁ = m₂)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D.gw_chirp_frequency_inv_power_linear": {
+      "module": "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D",
+      "name": "D5.S3.Geometry.Lorentz.GRLinearizedWavesQuadrupole4D.gw_chirp_frequency_inv_power_linear",
+      "kind": "theorem",
+      "statement_id": "sha256:6325d5a98c580a715e1e51fc595c3c41983a810680b59883c06b5836fa231b1c",
+      "line": 559,
+      "signature": "theorem gw_chirp_frequency_inv_power_linear {G m₁ m₂ r₀ Tc t : ℝ} (hm₁ : 0 < m₁) (hm₂ : 0 < m₂) (hr₀ : 0 < r₀) (hG : 0 < G) (hT : 0 < Tc) (ht : t < Tc) : let f",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D.gw_chirp_frequency_ode": {
+      "module": "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D",
+      "name": "D5.S3.Geometry.Lorentz.GRLinearizedWavesQuadrupole4D.gw_chirp_frequency_ode",
+      "kind": "theorem",
+      "statement_id": "sha256:6325d5a98c580a715e1e51fc595c3c41983a810680b59883c06b5836fa231b1c",
+      "line": 538,
+      "signature": "theorem gw_chirp_frequency_ode {G c m₁ m₂ r₀ Tc t : ℝ} (hm₁ : 0 < m₁) (hm₂ : 0 < m₂) (hr₀ : 0 < r₀) (hG : 0 < G) (hc : 0 < c) (hTc : Tc = coalescenceTime G c m₁ m₂ r₀) (ht : t < Tc) : let f",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D.gw_strain_half_pi_neg": {
+      "module": "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D",
+      "name": "D5.S3.Geometry.Lorentz.GRLinearizedWavesQuadrupole4D.gw_strain_half_pi_neg",
+      "kind": "theorem",
+      "statement_id": "sha256:6325d5a98c580a715e1e51fc595c3c41983a810680b59883c06b5836fa231b1c",
+      "line": 233,
+      "signature": "theorem gw_strain_half_pi_neg (hp hc : ℝ) : rotZ3 (Real.pi / 2) * gwStrainZ hp hc * (rotZ3 (Real.pi / 2))ᵀ = -gwStrainZ hp hc",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D.gw_strain_helicity_two": {
+      "module": "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D",
+      "name": "D5.S3.Geometry.Lorentz.GRLinearizedWavesQuadrupole4D.gw_strain_helicity_two",
+      "kind": "theorem",
+      "statement_id": "sha256:6325d5a98c580a715e1e51fc595c3c41983a810680b59883c06b5836fa231b1c",
+      "line": 219,
+      "signature": "theorem gw_strain_helicity_two (φ hp hc : ℝ) : rotZ3 φ * gwStrainZ hp hc * (rotZ3 φ)ᵀ = gwStrainZ (hp * Real.cos (2 * φ) - hc * Real.sin (2 * φ)) (hp * Real.sin (2 * φ) + hc * Real.cos (2 * φ))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D.gw_strain_hilbert_schmidt_energy": {
+      "module": "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D",
+      "name": "D5.S3.Geometry.Lorentz.GRLinearizedWavesQuadrupole4D.gw_strain_hilbert_schmidt_energy",
+      "kind": "theorem",
+      "statement_id": "sha256:6325d5a98c580a715e1e51fc595c3c41983a810680b59883c06b5836fa231b1c",
+      "line": 238,
+      "signature": "theorem gw_strain_hilbert_schmidt_energy (hp hc : ℝ) : Matrix.trace (gwStrainZ hp hc * gwStrainZ hp hc) = 2 * (hp ^ 2 + hc ^ 2)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D.gw_strain_pi_invariant": {
+      "module": "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D",
+      "name": "D5.S3.Geometry.Lorentz.GRLinearizedWavesQuadrupole4D.gw_strain_pi_invariant",
+      "kind": "theorem",
+      "statement_id": "sha256:6325d5a98c580a715e1e51fc595c3c41983a810680b59883c06b5836fa231b1c",
+      "line": 228,
+      "signature": "theorem gw_strain_pi_invariant (hp hc : ℝ) : rotZ3 Real.pi * gwStrainZ hp hc * (rotZ3 Real.pi)ᵀ = gwStrainZ hp hc",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D.inspiralRadius_hasDerivAt": {
+      "module": "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D",
+      "name": "D5.S3.Geometry.Lorentz.GRLinearizedWavesQuadrupole4D.inspiralRadius_hasDerivAt",
+      "kind": "theorem",
+      "statement_id": "sha256:6325d5a98c580a715e1e51fc595c3c41983a810680b59883c06b5836fa231b1c",
+      "line": 441,
+      "signature": "theorem inspiralRadius_hasDerivAt {G c m₁ m₂ r₀ Tc t : ℝ} (hm₁ : 0 < m₁) (hm₂ : 0 < m₂) (hr₀ : 0 < r₀) (hG : 0 < G) (hc : 0 < c) (hTc : Tc = coalescenceTime G c m₁ m₂ r₀) (ht : t < Tc) : HasDerivAt (inspiralRadius r₀ Tc) (-(64 / 5 : ℝ) * (G ^ 3 * m₁ * m₂ * (m₁ + m₂)) / (c ^ 5 * inspiralRadius r₀ Tc t ^ 3)) t",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D.inspiral_coalescence_limit": {
+      "module": "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D",
+      "name": "D5.S3.Geometry.Lorentz.GRLinearizedWavesQuadrupole4D.inspiral_coalescence_limit",
+      "kind": "theorem",
+      "statement_id": "sha256:6325d5a98c580a715e1e51fc595c3c41983a810680b59883c06b5836fa231b1c",
+      "line": 477,
+      "signature": "theorem inspiral_coalescence_limit {r₀ Tc : ℝ} (_hr₀ : 0 < r₀) (hT : 0 < Tc) : inspiralRadius r₀ Tc 0 = r₀ ∧ Tendsto (inspiralRadius r₀ Tc) (𝓝[<] Tc) (𝓝 0)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D.inspiral_satisfies_energy_balance": {
+      "module": "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D",
+      "name": "D5.S3.Geometry.Lorentz.GRLinearizedWavesQuadrupole4D.inspiral_satisfies_energy_balance",
+      "kind": "theorem",
+      "statement_id": "sha256:6325d5a98c580a715e1e51fc595c3c41983a810680b59883c06b5836fa231b1c",
+      "line": 463,
+      "signature": "theorem inspiral_satisfies_energy_balance {G c m₁ m₂ r₀ Tc t : ℝ} (hm₁ : 0 < m₁) (hm₂ : 0 < m₂) (hr₀ : 0 < r₀) (hG : 0 < G) (hc : 0 < c) (hTc : Tc = coalescenceTime G c m₁ m₂ r₀) (ht : t < Tc) : HasDerivAt (fun s => orbitalEnergy G m₁ m₂ (inspiralRadius r₀ Tc s)) (-pmPower G c m₁ m₂ (inspiralRadius r₀ Tc t)) t",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D.peters_mathews_chirp_power": {
+      "module": "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D",
+      "name": "D5.S3.Geometry.Lorentz.GRLinearizedWavesQuadrupole4D.peters_mathews_chirp_power",
+      "kind": "theorem",
+      "statement_id": "sha256:6325d5a98c580a715e1e51fc595c3c41983a810680b59883c06b5836fa231b1c",
+      "line": 365,
+      "signature": "theorem peters_mathews_chirp_power {G c m₁ m₂ r ω : ℝ} (hm₁ : 0 < m₁) (hm₂ : 0 < m₂) (hr : 0 < r) (hG : 0 < G) (hc : 0 < c) (hω : ω = Real.sqrt (G * (m₁ + m₂) / r ^ 3)) : quadrupolePower G c (m₁ * m₂ / (m₁ + m₂)) r ω = (32 / 5 : ℝ) * (c ^ 5 / G) * (G * chirpMass m₁ m₂ * ω / c ^ 3) ^ (10 / 3 : ℝ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D.peters_mathews_circular_power": {
+      "module": "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D",
+      "name": "D5.S3.Geometry.Lorentz.GRLinearizedWavesQuadrupole4D.peters_mathews_circular_power",
+      "kind": "theorem",
+      "statement_id": "sha256:6325d5a98c580a715e1e51fc595c3c41983a810680b59883c06b5836fa231b1c",
+      "line": 344,
+      "signature": "theorem peters_mathews_circular_power {G c m₁ m₂ r ω : ℝ} (hm₁ : 0 < m₁) (hm₂ : 0 < m₂) (hr : 0 < r) (hG : 0 < G) (hc : 0 < c) (hω : ω ^ 2 = G * (m₁ + m₂) / r ^ 3) : quadrupolePower G c (m₁ * m₂ / (m₁ + m₂)) r ω = pmPower G c m₁ m₂ r",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D.transverseProj_spec": {
+      "module": "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D",
+      "name": "D5.S3.Geometry.Lorentz.GRLinearizedWavesQuadrupole4D.transverseProj_spec",
+      "kind": "theorem",
+      "statement_id": "sha256:6325d5a98c580a715e1e51fc595c3c41983a810680b59883c06b5836fa231b1c",
+      "line": 59,
+      "signature": "theorem transverseProj_spec (n : Fin 3 → ℝ) (hn : IsUnitVec3 n) : (transverseProj n)ᵀ = transverseProj n ∧ transverseProj n * transverseProj n = transverseProj n ∧ (transverseProj n).mulVec n = 0 ∧ Matrix.trace (transverseProj n) = 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D.ttProj_idempotent": {
+      "module": "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D",
+      "name": "D5.S3.Geometry.Lorentz.GRLinearizedWavesQuadrupole4D.ttProj_idempotent",
+      "kind": "theorem",
+      "statement_id": "sha256:6325d5a98c580a715e1e51fc595c3c41983a810680b59883c06b5836fa231b1c",
+      "line": 95,
+      "signature": "theorem ttProj_idempotent (n : Fin 3 → ℝ) (hn : IsUnitVec3 n) (h : Matrix (Fin 3) (Fin 3) ℝ) : ttProj n (ttProj n h) = ttProj n h",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D.ttProj_selfAdjoint": {
+      "module": "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D",
+      "name": "D5.S3.Geometry.Lorentz.GRLinearizedWavesQuadrupole4D.ttProj_selfAdjoint",
+      "kind": "theorem",
+      "statement_id": "sha256:6325d5a98c580a715e1e51fc595c3c41983a810680b59883c06b5836fa231b1c",
+      "line": 111,
+      "signature": "theorem ttProj_selfAdjoint (n : Fin 3 → ℝ) (h k : Matrix (Fin 3) (Fin 3) ℝ) : Matrix.trace ((ttProj n h)ᵀ * k) = Matrix.trace (hᵀ * ttProj n k)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D.ttProj_symmetric": {
+      "module": "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D",
+      "name": "D5.S3.Geometry.Lorentz.GRLinearizedWavesQuadrupole4D.ttProj_symmetric",
+      "kind": "theorem",
+      "statement_id": "sha256:6325d5a98c580a715e1e51fc595c3c41983a810680b59883c06b5836fa231b1c",
+      "line": 76,
+      "signature": "theorem ttProj_symmetric (n : Fin 3 → ℝ) (h : Matrix (Fin 3) (Fin 3) ℝ) (hh : hᵀ = h) : (ttProj n h)ᵀ = ttProj n h",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D.ttProj_traceless": {
+      "module": "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D",
+      "name": "D5.S3.Geometry.Lorentz.GRLinearizedWavesQuadrupole4D.ttProj_traceless",
+      "kind": "theorem",
+      "statement_id": "sha256:6325d5a98c580a715e1e51fc595c3c41983a810680b59883c06b5836fa231b1c",
+      "line": 87,
+      "signature": "theorem ttProj_traceless (n : Fin 3 → ℝ) (hn : IsUnitVec3 n) (h : Matrix (Fin 3) (Fin 3) ℝ) : Matrix.trace (ttProj n h) = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D.ttProj_transverse": {
+      "module": "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D",
+      "name": "D5.S3.Geometry.Lorentz.GRLinearizedWavesQuadrupole4D.ttProj_transverse",
+      "kind": "theorem",
+      "statement_id": "sha256:6325d5a98c580a715e1e51fc595c3c41983a810680b59883c06b5836fa231b1c",
+      "line": 80,
+      "signature": "theorem ttProj_transverse (n : Fin 3 → ℝ) (hn : IsUnitVec3 n) (h : Matrix (Fin 3) (Fin 3) ℝ) : (ttProj n h).mulVec n = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D.tt_z_classification": {
+      "module": "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D",
+      "name": "D5.S3.Geometry.Lorentz.GRLinearizedWavesQuadrupole4D.tt_z_classification",
+      "kind": "theorem",
+      "statement_id": "sha256:6325d5a98c580a715e1e51fc595c3c41983a810680b59883c06b5836fa231b1c",
+      "line": 166,
+      "signature": "theorem tt_z_classification (h : Matrix (Fin 3) (Fin 3) ℝ) : (hᵀ = h ∧ h.mulVec ![0, 0, 1] = 0 ∧ Matrix.trace h = 0) ↔ ∃ hp hc : ℝ, h = gwStrainZ hp hc",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D.tt_z_coordinates": {
+      "module": "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D",
+      "name": "D5.S3.Geometry.Lorentz.GRLinearizedWavesQuadrupole4D.tt_z_coordinates",
+      "kind": "theorem",
+      "statement_id": "sha256:6325d5a98c580a715e1e51fc595c3c41983a810680b59883c06b5836fa231b1c",
+      "line": 175,
+      "signature": "theorem tt_z_coordinates (h : Matrix (Fin 3) (Fin 3) ℝ) {hp hc : ℝ} (hh : h = gwStrainZ hp hc) : hp = h 0 0 ∧ hc = h 0 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D.tt_z_finrank_two": {
+      "module": "D5/S3/Geometry/Lorentz/GRLinearizedWavesQuadrupole4D",
+      "name": "D5.S3.Geometry.Lorentz.GRLinearizedWavesQuadrupole4D.tt_z_finrank_two",
+      "kind": "theorem",
+      "statement_id": "sha256:6325d5a98c580a715e1e51fc595c3c41983a810680b59883c06b5836fa231b1c",
+      "line": 190,
+      "signature": "theorem tt_z_finrank_two : Module.finrank ℝ TTSubspaceZ = 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
     "D5/S3/Geometry/Lorentz/HodgeChiralLie.chiral_brackets": {
       "module": "D5/S3/Geometry/Lorentz/HodgeChiralLie",
       "name": "D5.S3.Geometry.Lorentz.HodgeChiralLie.chiral_brackets",
@@ -21209,6 +21560,266 @@
       "statement_id": "sha256:2055ccf7e9d9f849b65fa76d657307e58c3ac0beaf56c610ca2a4ddc926eff33",
       "line": 471,
       "signature": "theorem suN_antisym_cubic_anomaly (N : ℕ) (h : Fin N → ℝ) (hh : ∑ i, h i = 0) : (∑ i, ∑ j, if i < j then (h i + h j) ^ 3 else 0) = ((N : ℝ) - 4) * ∑ i, h i ^ 3",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D.block_seesaw_det": {
+      "module": "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D",
+      "name": "D5.S3.Quantum.Gauge.SeesawNeutrinoOscillations4D.block_seesaw_det",
+      "kind": "theorem",
+      "statement_id": "sha256:03b46bd509964254dd5d6af61504b0f9b7feb5d7f5554078e6751e87bf805c29",
+      "line": 200,
+      "signature": "theorem block_seesaw_det (M_D M_R : Matrix n n ℝ) (hR : IsUnit M_R.det) : (blockSeesaw M_D M_R).det = (-1 : ℝ) ^ Fintype.card n * M_D.det ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D.block_seesaw_schur_congruence": {
+      "module": "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D",
+      "name": "D5.S3.Quantum.Gauge.SeesawNeutrinoOscillations4D.block_seesaw_schur_congruence",
+      "kind": "theorem",
+      "statement_id": "sha256:03b46bd509964254dd5d6af61504b0f9b7feb5d7f5554078e6751e87bf805c29",
+      "line": 188,
+      "signature": "theorem block_seesaw_schur_congruence (M_D M_R : Matrix n n ℝ) (hR : IsUnit M_R.det) (hSym : M_Rᵀ = M_R) : let L",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D.cpAsymmetry_antisymm": {
+      "module": "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D",
+      "name": "D5.S3.Quantum.Gauge.SeesawNeutrinoOscillations4D.cpAsymmetry_antisymm",
+      "kind": "theorem",
+      "statement_id": "sha256:03b46bd509964254dd5d6af61504b0f9b7feb5d7f5554078e6751e87bf805c29",
+      "line": 382,
+      "signature": "theorem cpAsymmetry_antisymm {N : ℕ} (U : Matrix (Fin N) (Fin N) ℂ) (mSq : Fin N → ℝ) (x : ℝ) (α β : Fin N) : cpAsymmetry U mSq x β α = -cpAsymmetry U mSq x α β ∧ cpAsymmetry U mSq x α α = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D.oscProb_common_shift_invariant": {
+      "module": "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D",
+      "name": "D5.S3.Quantum.Gauge.SeesawNeutrinoOscillations4D.oscProb_common_shift_invariant",
+      "kind": "theorem",
+      "statement_id": "sha256:03b46bd509964254dd5d6af61504b0f9b7feb5d7f5554078e6751e87bf805c29",
+      "line": 304,
+      "signature": "theorem oscProb_common_shift_invariant {N : ℕ} (U : Matrix (Fin N) (Fin N) ℂ) (mSq : Fin N → ℝ) (x c : ℝ) (α β : Fin N) : oscProb U (fun k => mSq k + c) x α β = oscProb U mSq x α β",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D.oscProb_cpt_symmetry": {
+      "module": "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D",
+      "name": "D5.S3.Quantum.Gauge.SeesawNeutrinoOscillations4D.oscProb_cpt_symmetry",
+      "kind": "theorem",
+      "statement_id": "sha256:03b46bd509964254dd5d6af61504b0f9b7feb5d7f5554078e6751e87bf805c29",
+      "line": 318,
+      "signature": "theorem oscProb_cpt_symmetry {N : ℕ} (U : Matrix (Fin N) (Fin N) ℂ) (mSq : Fin N → ℝ) (x : ℝ) (α β : Fin N) : oscProb (antiMatrix U) mSq x α β = oscProb U mSq x β α",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D.oscProb_nonneg": {
+      "module": "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D",
+      "name": "D5.S3.Quantum.Gauge.SeesawNeutrinoOscillations4D.oscProb_nonneg",
+      "kind": "theorem",
+      "statement_id": "sha256:03b46bd509964254dd5d6af61504b0f9b7feb5d7f5554078e6751e87bf805c29",
+      "line": 241,
+      "signature": "theorem oscProb_nonneg {N : ℕ} (U : Matrix (Fin N) (Fin N) ℂ) (mSq : Fin N → ℝ) (x : ℝ) (α β : Fin N) : 0 ≤ oscProb U mSq x α β",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D.oscProb_survival_cp_zero": {
+      "module": "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D",
+      "name": "D5.S3.Quantum.Gauge.SeesawNeutrinoOscillations4D.oscProb_survival_cp_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:03b46bd509964254dd5d6af61504b0f9b7feb5d7f5554078e6751e87bf805c29",
+      "line": 328,
+      "signature": "theorem oscProb_survival_cp_zero {N : ℕ} (U : Matrix (Fin N) (Fin N) ℂ) (mSq : Fin N → ℝ) (x : ℝ) (α : Fin N) : oscProb (antiMatrix U) mSq x α α = oscProb U mSq x α α",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D.oscProb_unitarity_sum": {
+      "module": "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D",
+      "name": "D5.S3.Quantum.Gauge.SeesawNeutrinoOscillations4D.oscProb_unitarity_sum",
+      "kind": "theorem",
+      "statement_id": "sha256:03b46bd509964254dd5d6af61504b0f9b7feb5d7f5554078e6751e87bf805c29",
+      "line": 281,
+      "signature": "theorem oscProb_unitarity_sum {N : ℕ} (U : Matrix (Fin N) (Fin N) ℂ) (mSq : Fin N → ℝ) (x : ℝ) (α β : Fin N) (hU : Uᴴ * U = 1 ∧ U * Uᴴ = 1) : (∑ β, oscProb U mSq x α β) = 1 ∧ (∑ α, oscProb U mSq x α β) = 1 ∧ oscProb U mSq x α β ≤ 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D.oscProb_zero_baseline": {
+      "module": "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D",
+      "name": "D5.S3.Quantum.Gauge.SeesawNeutrinoOscillations4D.oscProb_zero_baseline",
+      "kind": "theorem",
+      "statement_id": "sha256:03b46bd509964254dd5d6af61504b0f9b7feb5d7f5554078e6751e87bf805c29",
+      "line": 255,
+      "signature": "theorem oscProb_zero_baseline {N : ℕ} (U : Matrix (Fin N) (Fin N) ℂ) (mSq : Fin N → ℝ) (α β : Fin N) (hU : U * Uᴴ = 1) : oscProb U mSq 0 α β = if α = β then 1 else 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D.seesaw_asymptotic_limits": {
+      "module": "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D",
+      "name": "D5.S3.Quantum.Gauge.SeesawNeutrinoOscillations4D.seesaw_asymptotic_limits",
+      "kind": "theorem",
+      "statement_id": "sha256:03b46bd509964254dd5d6af61504b0f9b7feb5d7f5554078e6751e87bf805c29",
+      "line": 151,
+      "signature": "theorem seesaw_asymptotic_limits (mD : ℝ) : Tendsto (seesawLight mD) atTop (𝓝 0) ∧ Tendsto (fun M => M * seesawLight mD M) atTop (𝓝 (mD ^ 2)) ∧ Tendsto (fun M => seesawHeavy mD M / M) atTop (𝓝 1)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D.seesaw_det_trace": {
+      "module": "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D",
+      "name": "D5.S3.Quantum.Gauge.SeesawNeutrinoOscillations4D.seesaw_det_trace",
+      "kind": "theorem",
+      "statement_id": "sha256:03b46bd509964254dd5d6af61504b0f9b7feb5d7f5554078e6751e87bf805c29",
+      "line": 39,
+      "signature": "theorem seesaw_det_trace (mD M : ℝ) : (seesawMatrix mD M).det = -mD ^ 2 ∧ (seesawMatrix mD M).trace = M",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D.seesaw_exact_correction": {
+      "module": "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D",
+      "name": "D5.S3.Quantum.Gauge.SeesawNeutrinoOscillations4D.seesaw_exact_correction",
+      "kind": "theorem",
+      "statement_id": "sha256:03b46bd509964254dd5d6af61504b0f9b7feb5d7f5554078e6751e87bf805c29",
+      "line": 118,
+      "signature": "theorem seesaw_exact_correction (mD M : ℝ) (hM : M ≠ 0) : mD ^ 2 / M - seesawLight mD M = seesawLight mD M ^ 2 / M",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D.seesaw_mass_product_and_diff": {
+      "module": "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D",
+      "name": "D5.S3.Quantum.Gauge.SeesawNeutrinoOscillations4D.seesaw_mass_product_and_diff",
+      "kind": "theorem",
+      "statement_id": "sha256:03b46bd509964254dd5d6af61504b0f9b7feb5d7f5554078e6751e87bf805c29",
+      "line": 45,
+      "signature": "theorem seesaw_mass_product_and_diff (mD M : ℝ) : seesawLight mD M * seesawHeavy mD M = mD ^ 2 ∧ seesawHeavy mD M - seesawLight mD M = M",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D.seesaw_orthogonal_diagonalization": {
+      "module": "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D",
+      "name": "D5.S3.Quantum.Gauge.SeesawNeutrinoOscillations4D.seesaw_orthogonal_diagonalization",
+      "kind": "theorem",
+      "statement_id": "sha256:03b46bd509964254dd5d6af61504b0f9b7feb5d7f5554078e6751e87bf805c29",
+      "line": 63,
+      "signature": "theorem seesaw_orthogonal_diagonalization (mD M : ℝ) : let O",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D.seesaw_strict_hierarchy_bounds": {
+      "module": "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D",
+      "name": "D5.S3.Quantum.Gauge.SeesawNeutrinoOscillations4D.seesaw_strict_hierarchy_bounds",
+      "kind": "theorem",
+      "statement_id": "sha256:03b46bd509964254dd5d6af61504b0f9b7feb5d7f5554078e6751e87bf805c29",
+      "line": 131,
+      "signature": "theorem seesaw_strict_hierarchy_bounds (mD M : ℝ) (hd : mD ≠ 0) (hM : 0 < M) : 0 < seesawLight mD M ∧ seesawLight mD M < mD ^ 2 / M ∧ M < seesawHeavy mD M ∧ 0 < mD ^ 2 / M - seesawLight mD M ∧ mD ^ 2 / M - seesawLight mD M < mD ^ 4 / M ^ 3",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D.three_flavor_cp_asymmetry_bound": {
+      "module": "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D",
+      "name": "D5.S3.Quantum.Gauge.SeesawNeutrinoOscillations4D.three_flavor_cp_asymmetry_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:03b46bd509964254dd5d6af61504b0f9b7feb5d7f5554078e6751e87bf805c29",
+      "line": 496,
+      "signature": "theorem three_flavor_cp_asymmetry_bound (U : Matrix (Fin 3) (Fin 3) ℂ) (hU : Uᴴ * U = 1) (mSq : Fin 3 → ℝ) (x : ℝ) (α β : Fin 3) : |cpAsymmetry U mSq x α β| ≤ 16 * |jarlskogQuartet U α 0 β 1|",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D.three_flavor_cp_asymmetry_jarlskog": {
+      "module": "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D",
+      "name": "D5.S3.Quantum.Gauge.SeesawNeutrinoOscillations4D.three_flavor_cp_asymmetry_jarlskog",
+      "kind": "theorem",
+      "statement_id": "sha256:03b46bd509964254dd5d6af61504b0f9b7feb5d7f5554078e6751e87bf805c29",
+      "line": 436,
+      "signature": "theorem three_flavor_cp_asymmetry_jarlskog (U : Matrix (Fin 3) (Fin 3) ℂ) (hU : Uᴴ * U = 1) (mSq : Fin 3 → ℝ) (x : ℝ) (α β : Fin 3) : let Δ21",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D.three_flavor_cp_asymmetry_zero_iff": {
+      "module": "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D",
+      "name": "D5.S3.Quantum.Gauge.SeesawNeutrinoOscillations4D.three_flavor_cp_asymmetry_zero_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:03b46bd509964254dd5d6af61504b0f9b7feb5d7f5554078e6751e87bf805c29",
+      "line": 506,
+      "signature": "theorem three_flavor_cp_asymmetry_zero_iff (U : Matrix (Fin 3) (Fin 3) ℂ) (hU : Uᴴ * U = 1) (mSq : Fin 3 → ℝ) (x : ℝ) (α β : Fin 3) : cpAsymmetry U mSq x α β = 0 ↔ jarlskogQuartet U α 0 β 1 = 0 ∨ Real.sin ((mSq 1 - mSq 0) * x / 2) = 0 ∨ Real.sin ((mSq 2 - mSq 1) * x / 2) = 0 ∨ Real.sin ((mSq 2 - mSq 0) * x / 2) = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D.three_flavor_cp_asymmetry_zero_of_degenerate": {
+      "module": "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D",
+      "name": "D5.S3.Quantum.Gauge.SeesawNeutrinoOscillations4D.three_flavor_cp_asymmetry_zero_of_degenerate",
+      "kind": "theorem",
+      "statement_id": "sha256:03b46bd509964254dd5d6af61504b0f9b7feb5d7f5554078e6751e87bf805c29",
+      "line": 514,
+      "signature": "theorem three_flavor_cp_asymmetry_zero_of_degenerate (U : Matrix (Fin 3) (Fin 3) ℂ) (hU : Uᴴ * U = 1) (mSq : Fin 3 → ℝ) (x : ℝ) (α β : Fin 3) {j k : Fin 3} (hjk : j ≠ k) (hdeg : mSq j = mSq k) : cpAsymmetry U mSq x α β = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D.two_flavor_oscProb_formula": {
+      "module": "D5/S3/Quantum/Gauge/SeesawNeutrinoOscillations4D",
+      "name": "D5.S3.Quantum.Gauge.SeesawNeutrinoOscillations4D.two_flavor_oscProb_formula",
+      "kind": "theorem",
+      "statement_id": "sha256:03b46bd509964254dd5d6af61504b0f9b7feb5d7f5554078e6751e87bf805c29",
+      "line": 346,
+      "signature": "theorem two_flavor_oscProb_formula (θ : ℝ) (mSq : Fin 2 → ℝ) (x : ℝ) : let Δ",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
