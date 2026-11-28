@@ -383,6 +383,20 @@ $$
 
 六阶系数严格为正，说明即使五阶系数消失，固定顶底平面在精确阈值上仍会高估最小破缺。[两支的成本展开、全复基下界与矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/2126#issuecomment-7240142503)
 
+若保持线性平衡并取 $\kappa+8\mu^2q=\eta\varepsilon$，两处分支在有限 $\varepsilon$ 下的等成本点会偏离五阶阈值（手工推导）。固定 $\mu$ 与下型轻块，调相取 $C>0$ 和实数 $S$，保留其相对符号。令 $v,w$ 分别为下型轻块沿 $e_0,e_2$ 的对角元，$c=\sqrt{\mu^2+|S|^2}$。实际交换点满足 $\eta_{\mathrm c}(\varepsilon)=-8\mu^2c^2w+O(\varepsilon)$。对于有界的 $\eta$ 和充分小的正 $\varepsilon$，$\eta>\eta_{\mathrm c}(\varepsilon)$ 时反射支胜出，$\eta<\eta_{\mathrm c}(\varepsilon)$ 时零偏转附近的分支胜出。
+
+在两支实际等成本时，可以从零偏转附近的两个方向算出固定平面的代价。
+
+$$
+\begin{aligned}
+D_{\mathrm{plane}}-D_*={}&8\sqrt6\,\mu^2c^3
+\left[(2c-4v+w)^2+\left(c-\frac{S(v-w)}{\mu}\right)^2\right]\varepsilon^7\\
+&+O(\varepsilon^8).
+\end{aligned}
+$$
+
+第一平方来自轻块法线的偏转，第二平方来自取优基中上型重线对应的轴向平面外偏转。任一平方为正时，七阶就是首项。只有一个参数比例使两项同时消失，此时相对符号为负，破缺差为 $O(\varepsilon^9)$。[任意复基的分支定位、等成本曲线与矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/2142#issuecomment-7240252783)
+
 若固定夹角与两套质量基，只让次重质量平方趋于零，最小破缺又以什么速度趋近锐界 $F$？记 $D_*$ 为这对矩阵在全部轮换本征基上的最小破缺。令两套归一次重质量平方分别为 $a\varepsilon,b\varepsilon$，其中 $a,b>0$，并固定 $0<\theta<\pi/2$。记 $\lambda_u=|V_{ub}|^2/\sin^2\theta$、$\lambda_d=|V_{td}|^2/\sin^2\theta$，它们分别是上、下型最轻质量线在顶底平面内的投影长度平方。手工推导给出
 
 $$
