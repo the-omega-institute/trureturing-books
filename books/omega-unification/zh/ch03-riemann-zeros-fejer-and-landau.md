@@ -283,7 +283,11 @@ $$
 
 固定实部后，每条割线贡献的是 $\sinh(\lambda(\delta_\rho-a)_+)/\lambda$。用 Selberg 密度界控制偏移的三阶绝对矩，即得线性化余差。右边界的对数欧拉级数只有素幂频率，非共振使其积分一致有界。水平边界耗费 $O_\lambda(L_U)$，两端均取右极限以恢复 $(U,V]$。因此 $a=1/L_U$ 处的 $O_\lambda(U/L_U)$ 积分目标等价于同阶的一次矩估计。若只补充一致阈值界 $|D_\lambda(u,V)-D_\lambda(u,U)|\ll_\lambda U$，在 $u=4\log L_U/L_U$ 处切开分层积分，得到 $O_\lambda(U\log L_U/L_U)$。 [割线推导与密度估计](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240412364)
 
-即使二次矩在每个右闭窗中都很小，一次矩仍可达到这个量级（合成谱，`ARGUED`）。令 $P=2\pi/\lambda$、$t_j=jP$、$d_j=4\log\log t_j/\log t_j$。从此后恒有 $d_j<1/2$ 的指标起，在每个周期末端放一对偏移 $\pm d_j$，两点均在临界带内。在 $t_j-P/2$ 处放两对偏移 $\pm d_j/\sqrt{2}$，相位与末端相反。完整周期的二次矩恰为零，一次矩却为 $(1-\sqrt{2})d_j+a$，只要两组正偏移都大于 $a$。于是二进窗内的二次矩只剩边界贡献，而 $M_{1/L_U}(U,2U)\sim-4(\sqrt{2}-1)U\log L_U/(P L_U)$。用带限核补偿这些偏轴点，可同时保留光滑计数、Selberg 型密度、同频带权硬窗首项和固定无素幂频带的平滑显式公式读数。[构造与数值复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240412364)
+在 $a=1/L_U$ 处，给磨光器均方加上相位会产生另一种算术读数（手工推导，`ARGUED`）。取 $y=U^\theta$、$0<\theta<4/7$，沿用 Baluyot 的磨光器。若频率为 $\log(p/q)$，其中 $p>q>1$ 互素，则正负两列的总指标 $m,n$ 在 $qm=pn$ 时精确共振。磨光器指标为 $h,k$ 时，其权重由 $\gcd(qh,pk)$ 决定。《OMEGA 数学》§8.1 的柯西卷积逐项记录每个素数在 $h,k$ 中的四种出现方式。分子和分母中的素因子分别消掉一个 Mellin 极点，剩下直接项与对偶项共用的卷积积分。若 $p,q$ 各为不同素数的幂，积分由两个正核的互相关给出，严格为正。
+
+例如 $p/q=3/2$、$\theta=1/2$ 时，取宽度 $\Delta=U^{1-\delta}$（固定 $0<\delta<1/3$），对 Gaussian 高度中心在 $[U,2U]$ 上积分，精确共振项等于 $cU/L_U+O(U/L_U^2)$，其中 $c\approx0.09277$（`NUM`）。这给出了完整均方中需要扣除的有理频率首项。对原弧模态，$e^\lambda$ 为超越数，剩余的是非对角误差。从均方通向上式的对数模积分还需要控制相位加权的对数误差及磨光器自身的对数模。 [Baluyot，(1.2.6)–(1.2.7)、(3.3.6)–(3.3.12) 与 §3.5](https://hdl.handle.net/1802/32855) · [留数推导与复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7243570123) · [原弧频率的超越性](ch02-quaternion-clocks-and-haar-zeros.md#sec-ou-2-3)
+
+即使二次矩在每个右闭窗中都很小，一次矩仍可达到 $U\log L_U/L_U$ 量级（合成谱，`ARGUED`）。令 $P=2\pi/\lambda$、$t_j=jP$、$d_j=4\log\log t_j/\log t_j$。从此后恒有 $d_j<1/2$ 的指标起，在每个周期末端放一对偏移 $\pm d_j$，两点均在临界带内。在 $t_j-P/2$ 处放两对偏移 $\pm d_j/\sqrt{2}$，相位与末端相反。完整周期的二次矩恰为零，一次矩却为 $(1-\sqrt{2})d_j+a$，只要两组正偏移都大于 $a$。于是二进窗内的二次矩只剩边界贡献，而 $M_{1/L_U}(U,2U)\sim-4(\sqrt{2}-1)U\log L_U/(P L_U)$。用带限核补偿这些偏轴点，可同时保留光滑计数、Selberg 型密度、同频带权硬窗首项和固定无素幂频带的平滑显式公式读数。[构造与数值复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240412364)
 
 把阈值推广为 $a_\kappa=\kappa\log L_U/L_U$ 可直接检验下一目标。对每个固定的 $0<\kappa<2\sqrt{2}$ 及充分大的 $U$，二进窗内两组右侧偏移均超过 $a_\kappa$，并且每个完整周期的一次矩为
 $$
