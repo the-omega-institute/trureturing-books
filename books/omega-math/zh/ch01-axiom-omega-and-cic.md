@@ -118,6 +118,29 @@ $$
 
   两次读数究竟能相差多远？先把 $x,y$ 的相互读数固定为 $3/5$，让第三点 $z$ 对它们分别读出 $4/5$ 和 $0$。对三个点依次赋予有理权重 $u,v,w$，格拉姆二次型恰为 $(v+3u/5)^2+(w+4u/5)^2$。因此这组三点读数确实可实现。式中的 $3^2+4^2=5^2$ 提示我们把相互读数与探测读数之差放进同一个平方和。
 
+::: {.theorem #thm-ch01-three-reading-contrast title="三点格拉姆读数差的精确范围" lean="D5/S3/Quantum/AURICOmega/ThreeReadingContrast.exists_nonnegative_readings_iff"}
+给定 $r,d\in\mathbb Q$。存在非负有理数 $a,b$，使 $a-b=d$ 且对一切 $u,v,w\in\mathbb Q$ 都有
+
+$$
+Q(u,v,w)=u^2+v^2+w^2+2(ruv+auw+bvw)\ge 0,
+$$
+
+当且仅当 $r^2+d^2\le 1$。
+:::
+
+::: {.proof}
+由 $Q(1,-1,0)\ge0$ 得 $r\le1$。若 $d=a-b\ge0$，则
+$1-r^2-d^2=Q(1,-r,-d)+2(1-r)bd\ge0$。若 $d<0$，交换前两点即可。反过来，若 $r^2+d^2\le1$ 且 $d\ge0$，可取 $a=d,b=0$，此时
+
+$$
+Q(u,v,w)=(v+ru)^2+(w+du)^2+(1-r^2-d^2)u^2.
+$$
+
+当 $d<0$ 时交换前两点，取 $a=0,b=-d$。完整证明由 Lean 内核检查。
+:::
+
+此处使用标准 Mathlib 的有理数与序结构，Lean 证明依赖 `propext`、`Classical.choice` 和 `Quot.sound`。在法则 II 中，$r$ 还须非负。该判据描述三个采样点能共同给出的读数；若要把它们延拓到整个比较空间，还须满足迁移律等全局条件。
+
 - **任意一点都可临时充当原点，三行还原为群**：在 $\mathcal{M}$ 中任挑一点 $o$ 作为临时参照基点，定义二元乘积 $x \star_o z := [x, o, z]$ 与局部逆元 $x^{-1_o} := [o, x, o]$。由法则 I 的结合律直接得 $(x \star_o y) \star_o z = [[x, o, y], o, z] = [x, o, [y, o, z]] = x \star_o (y \star_o z)$；左右单位元分别由 $[o, o, z] = z$ 与 $[x, o, o] = x$ 证毕；左右逆元只需展开两步：
 
   $$

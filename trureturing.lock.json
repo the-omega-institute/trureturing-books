@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "1ac0b54373d417b0754cbac511e7df79eaf99341",
-  "pinned_at": "2026-11-28T12:36:19Z",
+  "commit": "eef7e10c34c67d34647022c3e6e7a5473948dd95",
+  "pinned_at": "2026-11-28T13:24:34Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -15680,6 +15680,19 @@
       "statement_id": "sha256:1669ee1acff69d57fc1780c0cc54663b47bbe309fe7a5e939affa8f24ba17e75",
       "line": 36,
       "signature": "theorem reflectionSeq_eq_pow (C : TernaryComparison M) (a b : M) (n : ℕ) : reflectionSeq C a b n = (letI"
+    },
+    "D5/S3/Quantum/AURICOmega/ThreeReadingContrast.exists_nonnegative_readings_iff": {
+      "module": "D5/S3/Quantum/AURICOmega/ThreeReadingContrast",
+      "name": "D5.S3.Quantum.AURICOmega.ThreeReadingContrast.exists_nonnegative_readings_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:764c7126b804d685a26901a47a0e8c81045901fe276a861574d73d7c3a9867d2",
+      "line": 17,
+      "signature": "theorem exists_nonnegative_readings_iff (r d : ℚ) : (∃ a b : ℚ, 0 ≤ a ∧ 0 ≤ b ∧ a - b = d ∧ ∀ x y z : ℚ, 0 ≤ x ^ 2 + y ^ 2 + z ^ 2 + 2 * (r * x * y + a * x * z + b * y * z)) ↔ r ^ 2 + d ^ 2 ≤ 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/UnitQuaternionClosedSubgroup.eq_top_of_isClosed_of_chainConnected": {
       "module": "D5/S3/Quantum/AURICOmega/UnitQuaternionClosedSubgroup",

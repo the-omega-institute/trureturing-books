@@ -118,6 +118,29 @@ Pause to notice how sparse these laws are. Not a single $\pi$, $e$, $\varphi$, r
 
   How far apart can two probe readings be? Fix the mutual reading of $x$ and $y$ at $3/5$, and let a third point $z$ read $4/5$ against $x$ and zero against $y$. For rational weights $u,v,w$ on the three points in that order, the Gram form is $(v+3u/5)^2+(w+4u/5)^2$. These readings are therefore attainable on three points. The identity $3^2+4^2=5^2$ suggests testing the mutual reading and the difference between the probe readings in a single sum of squares.
 
+::: {.theorem #thm-ch01-three-reading-contrast title="Exact range of a three-point Gram reading contrast" lean="D5/S3/Quantum/AURICOmega/ThreeReadingContrast.exists_nonnegative_readings_iff"}
+Fix $r,d\in\mathbb Q$. There exist nonnegative rationals $a,b$ such that $a-b=d$ and
+
+$$
+Q(u,v,w)=u^2+v^2+w^2+2(ruv+auw+bvw)\ge 0
+$$
+
+for all $u,v,w\in\mathbb Q$ if and only if $r^2+d^2\le 1$.
+:::
+
+::: {.proof}
+The test $Q(1,-1,0)\ge0$ gives $r\le1$. If $d=a-b\ge0$, then
+$1-r^2-d^2=Q(1,-r,-d)+2(1-r)bd\ge0$. If $d<0$, interchange the first two points. Conversely, suppose $r^2+d^2\le1$. For $d\ge0$, choose $a=d,b=0$. The form becomes
+
+$$
+Q(u,v,w)=(v+ru)^2+(w+du)^2+(1-r^2-d^2)u^2.
+$$
+
+For $d<0$, interchange the first two points and take $a=0,b=-d$. The full proof is checked by the Lean kernel.
+:::
+
+This proof uses Mathlib’s rational numbers and their order. Its Lean dependencies include `propext`, `Classical.choice`, and `Quot.sound`. Law II also requires $r\ge0$. The criterion describes the readings on three sampled points. Extending those data to a comparison space requires the global transport laws as well.
+
 - **Any point serves temporarily as an origin, recovering a group in three lines**: pick any temporary reference point $o \in \mathcal{M}$, and define a binary product $x \star_o z := [x, o, z]$ and local inverse $x^{-1_o} := [o, x, o]$. Associativity follows straight from Law I: $(x \star_o y) \star_o z = [[x, o, y], o, z] = [x, o, [y, o, z]] = x \star_o (y \star_o z)$. Left and right identity are $[o, o, z] = z$ and $[x, o, o] = x$, and the left and right inverses take two rewrites each:
 
   $$
