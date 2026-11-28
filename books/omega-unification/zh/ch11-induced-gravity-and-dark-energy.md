@@ -78,6 +78,16 @@ $$
 
 若再要求中心零点满足[第六章](ch06-higgs-portals-and-electroweak-scale.md)的八个端点条件，可在十七个截止位置使用同一组有符号权重匹配三处引力，并使中心的中性动能矩阵与色逆耦合从 $M_Z$ 到交汇能标全程保持正定。能否从壳谱本身得到所需的截止位置与权重？取四个算术 Gram 源及其主舒尔残向量，对总内积非零的两源，把各本征空间内积与总内积之比的实部作为权重。在上述破缺模型与普朗克截止上限下，即使允许任意等距嵌入，要兼顾弱动能匹配和 $K=1$，最高与最低截止能量之比也须大于 $1.30\times10^{13}$。若令每个截止能量满足 $Q_j^2=\kappa\lambda_j$，其中 $\lambda_j$ 是单一荷的十九站原磁拉普拉斯本征值，则模型允许的两钟相位和软边亏额 $0\le\delta\le10^{-8}$ 仅给出 $Q_{\max}/Q_{\min}<32.53$。改变共同标尺 $\kappa$ 无法弥合这段差距。 [十七点构造](https://github.com/the-omega-institute/trureturing-experiments/blob/65a40539edbdd12f8d422ed64953d8ccbfcd72fa/experiments/ch39-omega-research/replay/ch39-three-index-positive-running.py) · [所需能量跨度](https://github.com/the-omega-institute/trureturing-experiments/blob/65a40539edbdd12f8d422ed64953d8ccbfcd72fa/experiments/ch39-omega-research/replay/ch39-rh-shell-necessary-bandwidth.py) · [原壳全相位界](https://github.com/the-omega-institute/trureturing-experiments/blob/65a40539edbdd12f8d422ed64953d8ccbfcd72fa/experiments/ch39-omega-research/replay/ch39-native-clock-independent-bandwidth.py)
 
+在电弱对称原点，取上、下型夸克各一枚中央编号、一枚替代编号，分别重建完整重谱。固定基准零点 $N=2\,306\,888\,100\,085$ 的四个截止及其权重，三支一圈逆耦合在四处都失去精确交汇。用 26 个有理截止共同校准五个背景，每处都可得到 $K=1$、$W=10^{-122}$，并在约 $5.03\times10^{16}\,\mathrm{GeV}$ 交于同一逆耦合 $37.8345$。这组解的负权总量约为 $2.28\times10^{13}$。将它原样用于 $N+1$，牛顿项降至约 $0.99664$，三支再次失去交汇。[五背景区间复算](https://github.com/the-omega-institute/trureturing-experiments/blob/cdc92150bfc596befcc891b76aa955e76823d419/experiments/ch39-omega-research/replay/ch39-five-zero-gravity-gauge-transfer.py)
+
+若让六个重场部门独立取高度，交汇能选出它们的配置吗？按上下型指定两个夸克单态部门，其余部门在两高度间整组取谱，四个候选编号给出 64 种分配，基准四权在每种分配上都失配。若把 $N+1$ 也纳入校准，六个部门各选六个高度，共 $6^6=46\,656$ 种重谱配置，却可用同一组有符号权全部保持上述引力矩与交汇。每个部门在每个高度都有一条可与其他组分开的质量线，由此可证明 96 个响应约束线性无关，至多 96 个有理截止便足够。允许任意普朗克有界截止时，仅要求上型中央与替代编号的两个完整背景共用引力矩，负权总量就须超过 $18\,292.7$。一旦固定归一有符号截止与五个带荷部门，单独改变中性重矢量的高度，能精确交汇的实际零点编号就只有有限多个，即使每次都允许重选交汇能标。这些结论采用零外动量的重场阈值。[六部门书面推导与谱线复算](https://github.com/the-omega-institute/trureturing-experiments/blob/5b691ea04b8f858ec82982935bd665b92e363704/experiments/ch39-omega-research/replay/%E5%85%AD%E4%B8%AA%E5%AE%9E%E9%99%85%E9%9B%B6%E7%82%B9%E6%8C%89%E9%87%8D%E5%9C%BA%E9%83%A8%E9%97%A8%E7%8B%AC%E7%AB%8B%E5%8F%96%E5%80%BC%E6%97%B6%E7%9A%84%E5%85%B1%E5%90%8C%E6%88%AA%E6%AD%A2.md) · [全区间负权下界](https://github.com/the-omega-institute/trureturing-experiments/blob/bb49aa96cb183c74d5539f2caff9d87d395bb23c/experiments/ch39-omega-research/replay/ch39-quark-background-cutoff-cost-floor.py) · [固定截止下的有限性推导](https://github.com/the-omega-institute/trureturing-experiments/blob/8a9ad1cba9db778bcb8505aa70251eac3b10ce02/experiments/ch39-omega-research/replay/%E5%9B%BA%E5%AE%9A%E5%85%B6%E4%BD%99%E9%87%8D%E5%9C%BA%E6%97%B6%E4%BB%BB%E4%B8%80%E5%85%B1%E5%90%8C%E6%88%AA%E6%AD%A2%E5%8F%AA%E5%AE%B9%E8%AE%B8%E6%9C%89%E9%99%90%E5%A4%9A%E4%B8%AA%E4%B8%AD%E6%80%A7%E9%9B%B6%E7%82%B9%E9%AB%98%E5%BA%A6.md)
+
+若直接用基准零点 $N$ 的壳谱给定截止，可将两份十九线谱各除以其最大本征值，以两谱线之积乘共同标尺作截止位置。在上型中央第 $2\,345\,666$ 枚的完整重谱上，对同向与共轭 Gram 乘积实部的任一凸混合，在 $120$ 种无序配方与全部普朗克有界的共同标尺中取最大，都有 $0.05660<\max K<0.05678$，而目标为 $K=1$。唯一最佳配方的两份谱都取荷 $2$ 的第三枢轴，其余 $119$ 种均有 $K<0.05533$。若固定荷 $-3$ 前两个枢轴的实谱权，在谱线乘积与算术平均之间插值，校准插值比例和共同标尺即可在同一中央背景精确达到 $K=1$、$W=10^{-122}$，三支规范耦合在这组参数下仍无共同交点。[双副本谱截止的牛顿界与两项引力匹配](https://github.com/the-omega-institute/trureturing-experiments/blob/ee2feeb7cf3ebbe712a71c1a4f729084e416dbef/experiments/ch39-omega-research/replay/%E4%B8%A4%E4%B8%AA%E7%AE%97%E6%9C%AF%E6%9E%A2%E8%BD%B4%E5%A3%B3%E8%B0%B1%E7%9A%84%E4%B9%98%E7%A7%AF%E6%88%AA%E6%AD%A2%E8%83%BD%E4%BA%A7%E7%94%9F%E5%A4%9A%E5%A4%A7%E7%9A%84%E7%89%9B%E9%A1%BF%E9%A1%B9.md)
+
+在同一中央背景，若要求三支逆耦合在 $10^{16}\,\mathrm{GeV}$ 精确交汇，则任何归一有符号截止测度 $\mu$ 的正部均须满足 $\int x^{-1}\,d\mu^+(x)>12\,755\,720.35$，其中 $x=Q^2/M_P^2$。取荷 $-4$ 第一枢轴与荷 $2$ 第三枢轴的实谱权，对应的 $361$ 个谱线对仍用同一普朗克有界标尺。在局域一圈模型中，先让每对的全部权重只占一个位置，从乘积到算术平均连续插值。要同时达到 $K=1$、$W=10^{-122}$，并使色逆耦合从 $M_Z$ 到普朗克质量始终为正，至少要有四对偏离共同插值。至多三对时色支全程为负，四对各取一个端点、其余 $357$ 对共用一个比例即可达到目标。若进一步要求三支在 $10^{16}\,\mathrm{GeV}$ 有正的共同逆耦合，则全部 $695\,946\,630$ 种四对选法均被排除。要在这个指定能标获得正的共同逆耦合，至少需要五个单位置例外，五个是否足够仍待判定。固定共同标尺 $c=0.007$，让 $357$ 个线对各从十二个插值位置中选一个，其余四对各把原权重分到其中两个位置，按目标校准位置与份额，即可同时满足两个引力矩，并在 $10^{16}\,\mathrm{GeV}$ 处得到约 $37.562781$ 的共同逆耦合，从 $M_Z$ 至交汇处的最低逆耦合约为 $1.546161$。将这些参数原样用于相邻两个零点编号，三支在指定能标处均失去交汇。[指定交汇能标的正权下界](https://github.com/the-omega-institute/trureturing-experiments/blob/45bca5d82a703c19d3556eee9f3db84d37cbd602/experiments/ch39-omega-research/replay/%E5%8F%8C%E5%89%AF%E6%9C%AC%E7%AE%97%E6%9C%AF%E5%A3%B3%E8%B0%B1%E7%9A%84%E5%BD%A2%E5%BC%8F%E4%BA%A4%E6%B1%87%E4%B8%8E%E4%B8%8A%E8%A1%8C%E4%BA%A4%E6%B1%87%E7%9A%84%E6%88%AA%E6%AD%A2%E5%80%92%E6%95%B0%E7%9F%A9.md) · [使色支为正的四端点构造](https://github.com/the-omega-institute/trureturing-experiments/blob/115e8850374d8d0c3595357c3f06769a6e231a17/experiments/ch39-omega-research/replay/%E5%9B%BA%E5%AE%9A%E4%BA%A4%E6%B1%87%E8%83%BD%E6%A0%87%E4%B8%8B%E5%8F%8C%E5%89%AF%E6%9C%AC%E6%88%AA%E6%AD%A2%E7%9A%84%E5%8F%8C%E4%BE%8B%E5%A4%96%E6%8E%92%E9%99%A4.md#%E5%BC%BA%E9%80%86%E8%80%A6%E5%90%88%E4%B8%BA%E6%AD%A3%E6%89%80%E9%9C%80%E7%9A%84%E6%9C%80%E5%B0%91%E4%BE%8B%E5%A4%96%E6%95%B0) · [指定能标的四例外排除](https://github.com/the-omega-institute/trureturing-experiments/blob/5d4881798d7b4e2a9760c6ce48e14d34c3163c5d/experiments/ch39-omega-research/replay/%E5%9B%BA%E5%AE%9A%E4%BA%A4%E6%B1%87%E8%83%BD%E6%A0%87%E4%B8%8B%E5%8F%8C%E5%89%AF%E6%9C%AC%E6%88%AA%E6%AD%A2%E7%9A%84%E5%8F%8C%E4%BE%8B%E5%A4%96%E6%8E%92%E9%99%A4.md#%E6%8C%87%E5%AE%9A%E8%83%BD%E6%A0%87%E7%9A%84%E5%AE%8C%E6%95%B4%E4%BA%A4%E6%B1%87%E8%87%B3%E5%B0%91%E9%9C%80%E8%A6%81%E4%BA%94%E6%9D%A1%E4%BE%8B%E5%A4%96) · [四条线对分权的构造与邻点检验](https://github.com/the-omega-institute/trureturing-experiments/blob/95ebc022cf8943751ec95a4b5b2a6e6f3bbcb64c/experiments/ch39-omega-research/replay/ch39-two-copy-four-split-lines.py)
+
+更换背景时，哪些参数可以共用？仍取 $c=0.007$。取壳编号 $N=2\,306\,888\,100\,085$ 和 $N+1$，重谱分别取第 $2\,345\,666$ 和第 $2\,345\,668$ 枚零点。两组各用本身的壳权和端点。若对应线对共用插值比例 $t\in[0,1]$ 的概率分布，且两边都精确匹配两个引力矩，则无论各自在 $M_Z$ 至普朗克质量间选哪个能标，至少一边的超荷或弱逆耦合与色逆耦合之差的绝对值都大于 $0.8387$。若固定中央壳权和 $357$ 个位置，只连续改变重谱高度，则两项端点分权和两项单线位置可随高度连续调整。在高度闭区间 $[1310310.5534,1310311.7259]$ 上（涵盖第 $2\,345\,665$ 至 $2\,345\,667$ 枚零点），这四项调整可保持两个引力矩和 $10^{16}\,\mathrm{GeV}$ 的精确交汇，从 $M_Z$ 到交汇处三支逆耦合均大于 $1.50866$。 [两背景共用分布的失配界](https://github.com/the-omega-institute/trureturing-experiments/blob/dc9d7fa8078bbf877ecdc3b227829f69b693b71e/experiments/ch39-omega-research/replay/%E5%9B%BA%E5%AE%9A%E4%BA%A4%E6%B1%87%E8%83%BD%E6%A0%87%E4%B8%8B%E5%8F%8C%E5%89%AF%E6%9C%AC%E6%88%AA%E6%AD%A2%E7%9A%84%E5%8F%8C%E4%BE%8B%E5%A4%96%E6%8E%92%E9%99%A4.md#%E8%BF%9E%E7%BB%AD%E4%BD%8D%E7%BD%AE%E4%B8%8A%E7%9A%84%E5%85%B1%E5%90%8C%E4%BB%BD%E9%A2%9D) · [随重谱高度连续调整的解支](https://github.com/the-omega-institute/trureturing-experiments/blob/642e33004e17dd15658a58b0238f78b5f93bdb2b/experiments/ch39-omega-research/replay/%E4%B8%89%E6%9E%9A%E7%9B%B8%E9%82%BB%E9%9B%B6%E7%82%B9%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BF%9E%E7%BB%AD%E6%AD%A3%E4%BA%A4%E6%B1%87%E8%A7%A3%E6%94%AF.md)
+
 保留能级次序，允许相邻层共用截止，能否再匹配真空项？在中心零点 $N=2\,306\,888\,100\,085$，把四个算术源的正交化方向依次放在极点和三条射线首站，由五种荷和三枚枢轴得到十五组固定的实权。区间计算表明，其中恰有四组可以同时达到 $K=1$、$W=10^{-122}$ 和 $A_{T_3T_3}=A_{QT_3}$。取第一枢轴时可用荷 $6,-4$，取第三枢轴时可用荷 $1,-3$。每个可行组至少需要三个不同的截止位置，三个也足够。若所有截止均须达到 $M_Z$，荷 $-4$ 的第一枢轴也被排除。还能用一条函数规定十九层的位置。写 $r=\lambda/\lambda_{\max}$、$x=Q^2/M_P^2$。在普朗克上限内，任取有限个非负实幂的非负线性组合 $x(r)=\sum_k a_k r^{d_k}$，十五组均无法满足三式。荷 $6$ 的第一枢轴若取饱和函数 $x(r)=h+\kappa r^{6000}/(r^{6000}+s)$，则有一组正参数使三式成立，且最低截止约为 $91.90005$ GeV。同一个次数至多三十的实多项式还能把这些读数与[第八章](ch08-flavor-hierarchy-and-ckm.md)的夸克味谱接起来。在荷六上逐层平方振幅给出十九个截止，在上下夸克两荷上先压缩到三代空间再平方，就能同时重现六个质量与完整 CKM。多项式的系数由十九个截止值和两副味矩阵的十二个实坐标确定。 [四组的三位置构造](https://github.com/the-omega-institute/trureturing-experiments/blob/f5d4e07402489ac2ad0b0e4ca7b3ba124b594073/experiments/ch39-omega-research/replay/ch39-ordered-cross-gravity-roots.py) · [幂函数组合的界](https://github.com/the-omega-institute/trureturing-experiments/blob/f921bbbe92f7a5fa4886e7ca7fd49a5751119358/experiments/ch39-omega-research/replay/ch39-positive-polynomial-gravity-pivots.py) · [双对数凸性](https://github.com/the-omega-institute/trureturing-experiments/blob/f921bbbe92f7a5fa4886e7ca7fd49a5751119358/experiments/ch39-omega-research/replay/ch39-log-convex-native-cutoffs.py) · [饱和截止](https://github.com/the-omega-institute/trureturing-experiments/blob/f921bbbe92f7a5fa4886e7ca7fd49a5751119358/experiments/ch39-omega-research/replay/ch39-charge-six-hill-cutoff.py) · [共同振幅的有限插值](https://github.com/the-omega-institute/trureturing-experiments/blob/bcacc2b5931b0931bf20d1a29dbf468cad6c1fa2/experiments/ch39-omega-research/replay/ch39-hill-quark-common-polynomial.py)
 
 若还要求所有零点的截止都低于普朗克质量，第八章的复味空间给出一个有限构造。在中心零点，把荷六的十九个截止 $Q/M_P$ 与两个夸克荷的三十八个正振幅合在一起，记为谱点 $t_i$ 上的读数 $w_i$。这五十七个谱点互异，且 $0<w_i<0.948$。用 $B_i(t)=\prod_{k\ne i}(t-t_k)^2$ 作权，同一个函数 $R(t)=\sum_i w_iB_i(t)/\sum_i B_i(t)$ 逐点重现全部读数，在整个实轴上也保持这个界。因此中心的引力与夸克读数可同时匹配。在本节的破缺背景中固定轻场输入，把同一函数和味空间用于左右两枚相邻零点。所有截止仍低于普朗克质量，但牛顿项 $K$ 分别约为 $-0.48636$ 和 $-0.47095$，均偏离目标 $1$。[公共有理函数与邻点检验](https://github.com/the-omega-institute/trureturing-experiments/blob/b7b39455dda1dc8627e0b92029a57c00f078fa7b/experiments/ch39-omega-research/replay/ch39-unit-common-quark-gravity-response.py)
@@ -147,7 +157,63 @@ $$
 
 从同一第五壳算子出发，把平方弦长不超过 52 的十二条边排成固定的四轮，每条边只施门一次，同长度的边共用一个门。两组不同的门角都能使第七、八壳各自的原生第三枢轴同时达到牛顿项和真空项的目标。第一组参数封存后，事前登记的外推是第九壳原生第三枢轴也能达标。实际读出的牛顿项为正、真空项为负，两项均失配。揭晓后构造的第二组参数在第九壳给出负的牛顿项和正的真空项。即使初态与门序固定，前两壳的四个等式也不能决定下一壳任一项的符号。[第九壳的事前登记](https://github.com/the-omega-institute/trureturing-experiments/commit/9364ec5e998a86ba03b38fd2323c67917fb4e0b8) · [第一组门角的留出读数](https://github.com/the-omega-institute/trureturing-experiments/commit/5591436b583cc992901157bfe900f1e04952903e) · [同一门序下的反例](https://github.com/the-omega-institute/trureturing-experiments/commit/79d86bab1ce5823dd6808407f631b512c983b4da)
 
-若分六轮在平方弦长不超过 56 的全部十八条边上各施门一次，同长度仍共用一个门，则可用第七、八、九壳的六项目标共同校准这四个门，使同一第五壳算子共轭一次后在三壳各自的原生第三枢轴都精确给出 $K=1$ 和 $W=10^{-122}$。上限 52 是否足以达到这六项目标仍待确定。第十壳的两个目标事先登记。对封存参数盒内每个满足前三壳六式的解，第十壳原生第三枢轴都给出 $1.07020<K_{10}<1.07540$ 和 $-0.002820<W_{10}<-0.002444$，两项均失配。能否由同一算术联络预先给出跨壳输运，仍是开放问题。 [三壳六式的共同解](https://github.com/the-omega-institute/trureturing-experiments/commit/9e2b8abfe862acb15667d5a0154731a67e491a95) · [第十壳的事前登记](https://github.com/the-omega-institute/trureturing-experiments/commit/062393b79f354aedffa0c211fedb458e5dfa2e35) · [第十壳的区间读数](https://github.com/the-omega-institute/trureturing-experiments/commit/2326ecde013a0e40d6487cb52bd10ae519edf08a)
+保持同一组十二条有向短弦和四轮门顺序，七个门角独立变化时仍能精确保持六个引力目标中的五个。在两个校准中心附近，七个自由角各可向两侧变化 $10^{-6}$ 弧度。每个七角参数点在指定五角盒内都有唯一的调整，使第七、八壳各自的两项目标都成立。第一族还给出 $K_9=1$，活动五角的半宽为 $6\times10^{-5}$ 弧度。第二族给出 $W_9=10^{-122}$，半宽为 $5\times10^{-5}$ 弧度。在各自的整块十二维盒内，余下读数与目标的差分别满足
+$$
+-0.010113<W_9-10^{-122}<-0.010064,\qquad
+-0.203912<K_9-1<-0.202978 .
+$$
+第一个区间属于第一族，第二个区间属于第二族。细分五个活动角后，区间计算在七个自由角的全部取值上验证了预条件五式映射在活动盒内为压缩映射。两盒之外能否同时实现六个目标仍待判定。 [五式校准族](https://github.com/the-omega-institute/trureturing-experiments/blob/d89fba8472ea34aed3e657fa3238f1a4065bb368/experiments/ch39-omega-research/replay/ch39-three-shell-radius52-five-families.md) · [区间证书](https://github.com/the-omega-institute/trureturing-experiments/blob/d89fba8472ea34aed3e657fa3238f1a4065bb368/experiments/ch39-omega-research/replay/ch39-three-shell-radius52-five-families.py)
+
+只改变两轮 52 弦门的相对符号，三壳的六个目标就能同时实现。沿原来的十二条弦依次施 $G_{12},G_{32},G_{52},-G_{52}$，每轮三条边共用一个门。最后的负号使该轮六个端点的振幅反号，与其余十三个站点的干涉随之改变。三个可调门共十二个角，固定其中六个，对另六个角做区间校准，同一个第五壳算子在第七、八、九壳的第三枢轴都精确给出 $K=1,\ W=10^{-122}$。固定这组门后，第十壳读得 $1.1134<K_{10}<1.1152$ 和 $-0.00955<W_{10}<-0.00937$，两个偏离目标的方向都与预登记预测一致。末轮负号是这项构造引入的离散选择。两轮 52 弦强制同号时的六式可达性仍开放。[固定末轮符号的区间证书](https://github.com/the-omega-institute/trureturing-experiments/blob/a163c19610f94de225de6e2b0c22a0c56aad75a9/experiments/ch39-omega-research/replay/ch39-three-shell-final-sign.md)
+
+末轮负号可看作相位 $e^{i\phi}$ 在 $\phi=\pi$ 的取值。设 $P$ 投影到末轮触及的六站，$U_\phi$ 为末轮采用 $e^{i\phi}G_{52}$ 时的输运，则 $U_\phi=(I-P+e^{i\phi}P)U_0$。站点 $9,13$ 分别只参加第三、第四轮，且都在定向弦的第二端。因此 $U_\phi$ 在这两站的对角元是 $d,e^{i\phi}d$，其中 $d=(G_{52})_{22}$。写 $z=e^{i\phi}$，记 $b,d$ 与 $b',d'$ 分别为原门和同号共门的第二列。两片叶子的原输入列在各自对角元以外的长度均为 $|b|$，候选列的相应长度均为 $|b'|$。令 $\eta=\|U_\phi-V\|_{\mathrm{op}}$。比较这两对单位向量的距离，得到
+$$
+\eta^2\ge 2-2|b||b'|-2\min\{\operatorname{Re}(\bar d d'),\operatorname{Re}(\bar z\bar d d')\}.
+$$
+最小值至多为两者的平均，而该平均不超过 $|d||d'||1+z|/2$。用 $|b'|^2+|d'|^2=1$ 和 Cauchy–Schwarz 不等式，取 $L=|z-1||d|/2$，得到
+$$
+\|U_\phi-V\|_{\mathrm{op}}\ge \sqrt{2-2\sqrt{1-L^2}}.
+$$
+$L>0$ 时这个下界严格大于 $L$。若原门是对角门，选 $d'$ 为 $d,zd$ 的单位圆短弧中点，并让左上元的平方等于 $za^2$，即可取到该界，其中 $a$ 是原门的左上元。[两叶输入列的核验](https://github.com/the-omega-institute/trureturing-books/issues/1627#issuecomment-7232485216)
+
+若 $d=0$，酉性使两个对角元都为零。记右上、左下元为 $b,c$。两轮的三组弦各构成一颗二边星，中心为 $a$，第三、第四轮的叶子分别为 $p,q$。合成后 $e_a\mapsto c e_p$，$e_p\mapsto e^{i\phi}bc\,e_q$，$e_q\mapsto e^{i\phi}b\,e_a$。两轮都改用右上元为 $e^{i\phi}b$、左下元仍为 $c$ 的同一酉门，就复制了这三个映射。因此末轮相位能被同号共门精确吸收，当且仅当 $e^{i\phi}=1$ 或 $d=0$。
+
+一般情形也有显式上界。令 $w^2=z$ 且 $\operatorname{Re}w\ge0$。将两轮的门同时改为 $\operatorname{diag}(w,1)G_{52}\operatorname{diag}(1,w)$，并保留前两轮。在每颗星上，误差算子的早叶列与另外两列的像正交。前者的范数是 $|1-w|\sqrt{|ab|^2+|d|^2}$，后两列共用一个像方向，沿该方向的行范数为 $|1-w|\sqrt{|ac|^2+|d|^2}$。两者相等，故这组门给出的误差为 $|1-w|\,|d|\sqrt{2-|d|^2}$。三颗星的直和与前两轮的酉输运都保留该算子范数。[共门显式构造](https://github.com/the-omega-institute/trureturing-books/issues/1627#issuecomment-7232623572)
+
+小相位下还能求出最优误差的首项。记 $D=|d|$，则同号重选的最小误差为
+$$
+\frac{D}{\sqrt{2(1+D^2)}}|\phi|+O(\phi^2).
+$$
+这里的余项常数允许依赖原门。消去原门的相位后，在线性化的单星上，两个正交试验向量给出这个下界。其中的输入只落在两片叶上，故重选前轮的门也无法减小它。反向取一个厄米生成元重选共门，使线性残差的谱为零和该系数的正负值，便达到首项。对有混合的原门，两片叶的列也迫使每个误差趋零的候选靠近原门，因此局部计算控制了最优值。[首项的精确计算](https://github.com/the-omega-institute/trureturing-books/issues/1627#issuecomment-7232674150)
+
+固定三门和第五壳源 $H$，记 $H_0=U_0HU_0^*$。末轮相位只改变六站与其余十三站间的交叉块，故
+$$
+\|U_\phi H U_\phi^*-H_0\|_{\mathrm{op}}
+=2|\sin(\phi/2)|\,\|PH_0(I-P)\|_{\mathrm{op}}.
+$$
+把负号证书中的末轮乘数改为区间 $-\exp(i[-10^{-7},10^{-7}])$，并保留原来的六个固定角和六个活动角共用的一个六维盒。对每个 $|\phi-\pi|\le10^{-7}$，预条件映射的自映行界小于 $0.726791$，所以活动角盒内有唯一一组角度同时满足三壳六式。允许重新选门的同号六式可达性仍开放。[相位下界与交叉块恒等式](https://github.com/the-omega-institute/trureturing-books/issues/1627#issuecomment-7231068482) · [退化门的显式构造](https://github.com/the-omega-institute/trureturing-books/issues/1627#issuecomment-7231094749) · [相位区间复算](https://github.com/the-omega-institute/trureturing-books/issues/1627#issuecomment-7231273037)
+
+若同时重选三个门，同号输运能得到已知负号解的源算子吗？固定第五壳源和十二条定向弦，负号解所在六维角盒内的每个输运后源算子，与全部同号共门所得算子的算子范数距离都大于 $1.2\times10^{-5}$。两条重本征线提供了这一区分。在三条射线的早、晚两片叶上逆推，负号门以相反的符号留下同一对角元，同号门在两处留下相同的对角元。六组读数足以分辨这两个系数，而未受门作用的站点 $14$ 固定了两条重线各自的相位。因此，同号六式若有解，必须由与这个负号角盒相隔正距离的算子实现。[两条重本征线给出的距离界](https://github.com/the-omega-institute/trureturing-experiments/blob/a646b9d10eed33e413ee0bd2b65125c674025e2d/experiments/ch39-omega-research/replay/ch39-three-shell-source-phase-distance.md)
+
+**消去一个相位（`ARGUED`）。** 固定前两门与 $G_{52}$ 的第一行 $(a,b)$，其第二行是 $(-h\bar b,h\bar a)$，其中 $h=\det G_{52}$。按早、晚两轮相乘后，改变 $h$ 只将三颗二边星的六片叶子同时乘以 $h$。以 $X(h)$ 记输运后的自伴算子。对三壳的 57 条归一化谱线 $u_i$，实读数 $A_i=u_i^*X(h)u_i$ 共有同一个参数 $t=(\Re h,\Im h)$，写成 $A=m+Mt$，其中 $\|t\|_2=1$。给定 $A$，先检查 $A-m$ 是否落在 $M$ 的列空间。若 $M$ 秩为二，原像唯一且须为单位向量。秩为一时，最短原像的长度至多为一便可沿核补足，留下一个或两个相位。秩为零时，若 $A=m$，整个相位圆都可行。这样可将公共相位的存在性化为线性方程与单位圆的相容性。其余门角仍须和作用于这些读数平方的六个热方程联立。[相位消元与三壳振幅](https://github.com/the-omega-institute/trureturing-books/issues/1627#issuecomment-7234045041)
+
+**强度松弛（`ARGUED`）。** 若只约束两条重线的逐站强度，并允许任意相位来恢复正交，已知负号解就为该松弛提供了六读数见证。末轮的对角符号保留每条重线的逐站强度和两线的正交性，同时改变跨站相干。因此全域判定还需要约束同号门产生的相干。[所用负号见证（`CERT`）](https://github.com/the-omega-institute/trureturing-books/issues/1627#issuecomment-7234053080)
+
+**只改变公共相位时的排除（`CERT`）。** 将负号证书中心的前十一个角固定，只让同号重复 $G_{52}$ 的整体相位绕行一周。每壳投影振幅来自整体相位的至多二次复多项式。Arb 的 316 次区间求值覆盖全圆，每个终盒至少有一个热读数余项避开零。因此这个一维切片无法同时满足六式。允许其余门角共同变化时的可达性仍开放。[固定输入版本和全圆复算](https://github.com/the-omega-institute/trureturing-experiments/blob/be74a3657a65f06b756d49db4bb81bb37344d67d/experiments/ch39-omega-research/replay/ch39-pinned-interval-replays.md#same-sign-repeated-gate-with-one-free-phase)
+
+前三壳的六个等式对第十壳还留下多少自由？保留相同的第五壳源、十二条弦和末轮负号，重新选择三个门。固定其中四角，其余八角在一个区间盒内调整。任取 $|u|\le 4\times10^{-6}$、$|v|\le 5\times10^{-7}$，都能选出同一组门，使前三壳保持上述六个等式，并在第十壳同时读得 $K_{10}=1+u$、$W_{10}=10^{-122}+v$。取 $u=v=0$ 即配平四壳八式；取偏移的四种符号组合，则两项偏离的方向可以独立改变。此处第十壳也参与校准，真空尺度仍是输入。 [四壳校准与第十壳响应的区间证书](https://github.com/the-omega-institute/trureturing-experiments/blob/c6bbae236604130b5618b1c906ed36e8c532faf9/experiments/ch39-omega-research/replay/ch39-four-shell-final-sign.md)
+
+固定这组门后，第十一壳提供了留出检验。取第十一壳自身的第三枢轴，在整个四壳校准角盒上得到 $0.37799<K_{11}<0.37885$、$0.06957<W_{11}<0.06970$。事前预测的方向是 $K_{11}>1$、$W_{11}<0$，两项均被推翻。这个结果也约束重新选门的幅度。以算子范数度量，在原盒内任一输运后源算子的 $0.009$ 邻域内，每个同谱源的第十一壳真空读数仍高于目标 $10^{-122}$。若要在五壳同时校准，新的输运后源必须离开整个邻域。[第十一壳的留出读数与邻域界](https://github.com/the-omega-institute/trureturing-experiments/blob/3d9dbd921b88455cc7ed17e6153854f8946f72ae/experiments/ch39-omega-research/replay/ch39-four-shell-eleventh-holdout.md)
+
+重新选择三枚共用门，可以看出前四壳的校准对第十一壳约束了多少。保持前八项读数精确成立，第十一壳的牛顿读数 $K_{11}$ 可以在 $\{0.40,0.44\}$ 中任选，真空读数 $W_{11}$ 可以独立在 $\{0.05,0.06\}$ 中任选，四种组合都能达到。在每组读数附近，牛顿读数变动至多 $0.000003$、真空读数变动至多 $0.000000375$ 时，整个矩形中的目标也都可达。每组分别固定两个门角，用其余十个角的区间界给出对应解。同一电路能否在五个壳上都达到 $(1,10^{-122})$ 仍开放。[两项读数的条件可达范围](https://github.com/the-omega-institute/trureturing-experiments/blob/3a513fdb9d79b8082400ce116f4ef07e310db415/experiments/ch39-omega-research/replay/ch39-five-shell-conditional-targets.md)
+
+还可以保留这十二条弦和四轮顺序，让第四轮独立选门。每轮的三条弦仍用同一枚门，五个壳也共用整套电路。在第七至十一壳各自的原生第三枢轴上，五个真空读数可同时达到 $W_j=10^{-122}$，前四个牛顿读数同时达到 $K_j=1$。在这些等式成立时，第十一壳的牛顿读数可取 $0.70$ 或 $0.72$，每个值都有独立的十维角盒证书。独立末轮改变了可观察的混合幅度：叶站 $9$、$13$ 各只参加一轮，若后两枚门仅差一个相位，这两个站点回到自身的振幅必定等模。解盒中的输运与所有这类输运的算子距离都大于 $0.01$。五壳同时达到原牛顿与真空目标的可能性仍开放。[五壳真空校准、门的相位判据与区间证书](https://github.com/the-omega-institute/trureturing-experiments/blob/93664fc0761e87ada11fb3fff474ac99149f7763/experiments/ch39-omega-research/replay/ch39-five-shell-independent-fourth.md)
+
+如果同一轮中有一条弦可单独选门，五个壳的全部原引力目标就都可达到。仍取同一第五壳源、这十二条定向弦和四轮顺序。单独选门的弦可取第二轮的 $(1,3)$、第三轮的 $(6,9)$ 或 $(8,16)$、第四轮的 $(6,13)$ 或 $(7,10)$。每种选择各有一套五枚门，使第七至十一壳在各自原生第三枢轴上同时给出 $K_j=1$、$W_j=10^{-122}$。这些壳都参与了校准。对事前指定的 $(6,13)$ 方案固定全部门，第十二壳的整盒留出读数为 $0.170<K_{12}<0.172$ 和 $0.1030<W_{12}<0.1033$，两项都与事前预测方向相反。其他门能否同时校准六壳仍开放。[五种五壳校准与第十二壳检验](https://github.com/the-omega-institute/trureturing-experiments/blob/d204b150c860ac295cd97f8cb358047ad55abda4/experiments/ch39-omega-research/replay/ch39-five-shell-split-bond.md)
+
+若分六轮在平方弦长不超过 56 的全部十八条边上各施门一次，同长度仍共用一个门，则可用第七、八、九壳的六项目标共同校准这四个门，使同一第五壳算子共轭一次后在三壳各自的原生第三枢轴都精确给出 $K=1$ 和 $W=10^{-122}$。第十壳的两个目标事先登记。对封存参数盒内每个满足前三壳六式的解，第十壳原生第三枢轴都给出 $1.07020<K_{10}<1.07540$ 和 $-0.002820<W_{10}<-0.002444$，两项均失配。能否由同一算术联络预先给出跨壳输运，仍是开放问题。 [三壳六式的共同解](https://github.com/the-omega-institute/trureturing-experiments/commit/9e2b8abfe862acb15667d5a0154731a67e491a95) · [第十壳的事前登记](https://github.com/the-omega-institute/trureturing-experiments/commit/062393b79f354aedffa0c211fedb458e5dfa2e35) · [第十壳的区间读数](https://github.com/the-omega-institute/trureturing-experiments/commit/2326ecde013a0e40d6487cb52bd10ae519edf08a)
+
+已知的共轭算子与整个截止 52 的算子族之间有正的距离。固定同一个第五壳源，用原四轮和任意三个同长共门所得的每个算子，与截止 56 的已认证角盒内每个算子的算子范数距离都大于 $0.0325$。有三个站点在第一轮同时受门作用，后三轮都不再触及它们。因此最高本征向量在这三个站点上的分量必是两个固定源向量的线性组合，且两个公共系数的模平方和为一。沿 $(2,2+3i,-1+2i)$ 的投影给出分离界：即使选取最接近的相位，截止 56 的盒内最高本征向量与所有满足这一约束的归一化最高本征向量之间的距离仍大于 $0.10$。再用最高与次高本征值之差，即得算子距离下界。另一个截止 52 的算子能否再现同样的六个标量读数，仍待确定。 [算子距离下界](https://github.com/the-omega-institute/trureturing-experiments/blob/c3b1887b274a227d3827658b9ee337d3447af92d/experiments/ch39-omega-research/replay/ch39-gravity-radius52-leaf-bound.md) · [区间计算](https://github.com/the-omega-institute/trureturing-experiments/blob/c3b1887b274a227d3827658b9ee337d3447af92d/experiments/ch39-omega-research/replay/ch39-gravity-radius52-leaf-bound.py)
 
 十二条短边上的门可以同时满足三壳的引力条件，并使三个端点弱差归零。取第五壳的荷六算子，让平方弦长不超过 $52$ 的十二条边各作用一次，每条边独立选一个只混合两个端点的 $U(2)$ 门。四轮的平方弦长依次为 $12,32,52,52$，每轮的三条边互不相交。这些门合成一次保留源谱的酉共轭。在原匹配能标 $1.176397\times10^{14}\,\mathrm{GeV}$，用全部九项目标校准这组门后，第七、八、九壳各自的原生第三枢轴都精确给出牛顿项 $K=1$、真空项 $W=10^{-122}$ 和弱差 $D=0$。按本征值递增给谱线编号，三壳的低截止依次落在第一、第十六、第一条线上，约为 $522$、$896$、$545\,\mathrm{GeV}$。第九壳第一、十六条线承担了几乎全部正权重。即使允许任意酉共轭，弱差归零也要求这两条线中较低的截止小于 $2241\,\mathrm{GeV}$。再加上真空条件，它必须低于 $1888\,\mathrm{GeV}$。单独在第九壳，三式可以同时成立且较低的截止严格位于 $1887$ 与 $1888\,\mathrm{GeV}$ 之间。若从同一第五壳算子出发，按原定方向和次序走完平方弦长至多 $56$ 的十八条边，六轮中同长边共用一个 $U(2)$ 门，三壳的弱差仍可同时归零。但在任何这样的弱差解上，只要第九壳的真空项 $W_9\ge0$，牛顿项便满足 $K_9<-2.5$，无法达到 $K_9=1$。这就排除了这组六轮共门布局的九式共同解。更长弦或其他布局能否用共门达标，仍待确定。[十二条短边的区间构造](https://github.com/the-omega-institute/trureturing-experiments/blob/7825590bdc72fc7ad8dcd3126634a660c7eb0445/experiments/ch39-omega-research/replay/ch39-twelve-independent-gates-nine.py) · [一般酉共轭的构造](https://github.com/the-omega-institute/trureturing-experiments/blob/8983f28b250ce4251623dcaf26041e35dafce2bd/experiments/ch39-omega-research/replay/ch39-common-three-shell-nine-endpoints.py) · [第九壳的两线截止界](https://github.com/the-omega-institute/trureturing-experiments/blob/61cc9e0de0e4ff6fb548cfdf72c0d8140340caa1/experiments/ch39-omega-research/replay/ch39-ninth-gravity-weak-two-line-threshold.py) · [同长共门的弱差解](https://github.com/the-omega-institute/trureturing-experiments/blob/519c9f00e6b777d7ccde2e3ca1643859ccf28741/experiments/ch39-omega-research/replay/ch39-shared-four-gates-weak-boxes.py) · [第九壳引力界](https://github.com/the-omega-institute/trureturing-experiments/blob/519c9f00e6b777d7ccde2e3ca1643859ccf28741/experiments/ch39-omega-research/replay/ch39-shared-block-ninth-gravity.py)
 
@@ -187,9 +253,38 @@ $$
 
 驻定只发生在共同标度这一个方向上，并不意味着对截止不敏感：单独移动四点解中最敏感的一个截止，相对移动不到 $8.6\times 10^{-120}$ 曲率就已转负，比上表的通用上界小 $800$ 倍以上，与 $311$ 单态实例同量级，截止之间的比值须精确到约 $120$ 位。$10^{-122}$ 的微调没有减少，只是转移并分摊到截止比值与权重上（[共同标度驻定及其代价](https://github.com/the-omega-institute/trureturing-experiments/blob/f516e0f09642194c1a309ffc0cfd94e129844b15/experiments/ch39-omega-research/replay/%E4%B8%A4%E7%82%B9%E6%88%AA%E6%AD%A2%E5%9C%A8%E5%8C%B9%E9%85%8D%E7%89%9B%E9%A1%BF%E9%A1%B9%E6%97%B6%E4%B8%8D%E8%83%BD%E9%A9%BB%E5%AE%9A%E7%9C%9F%E7%A9%BA%E8%AF%BB%E6%95%B0%E8%80%8C%E5%9B%9B%E7%82%B9%E6%B5%8B%E5%BA%A6%E5%AF%B9%E5%85%B1%E5%90%8C%E6%88%AA%E6%AD%A2%E6%A0%87%E5%BA%A6%E4%B8%80%E9%98%B6%E9%A9%BB%E5%AE%9A.md) · [区间证书](https://github.com/the-omega-institute/trureturing-experiments/blob/f516e0f09642194c1a309ffc0cfd94e129844b15/experiments/ch39-omega-research/replay/ch39-cutoff-scale-stationarity.py)）。
 
+若要求移动截止时牛顿标定始终精确等于 $K=1$，真空读数还能翻负吗？固定这些驻定解的有符号权重 $p_j$，记单点牛顿、真空响应为 $k,w$，则 $K=\sum_jp_jk(x_j)$、$W=\sum_jp_jw(x_j)$，沿标定面有 $C=W$。在对数坐标 $u_j=\log(x'_j/x_j)$ 中，记 $a_j=p_jDk(x'_j)$、$b_j=p_jDw(x'_j)$，其中 $D=x\,d/dx$。在内部正规点 $a\ne0$，允许的速度满足 $a\cdot v=0$。各坐标限速 $|v_j|\le1$ 时，最大的一阶真空下降率为 $\min_\lambda\sum_j|b_j-\lambda a_j|$。任取 $\lambda$ 即给出上界。取 $b_j/a_j$ 按 $|a_j|$ 加权的中位数（仅计 $a_j\ne0$），令非零剩余量对应的速度取其符号的相反数，中位数处的速度即可补足约束并达到上界。
+
+从 $W=c=10^{-122}$ 出发，记 $R_*$ 为沿连续标定路径抵达 $W<0$ 所需的最小对数半径（取下确界），半径以路径上 $\max_j|u_j|$ 的最大值计。牛顿斜率非零的节点 $q$ 可作补偿，按当前位置取 $v_q=-\sum_{j\ne q}a_jv_j/a_q$，故沿全程 $dK/dt=0$。在半径 $10^{-113}$ 的盒内，区间计算验证了所选补偿速度的绝对值小于一，并给出 $-dW/dt$ 的正下界，足以使终点严格翻负。反向估计使用标量 $W-\lambda(K-1)$。它在两个标定端点分别等于相应的 $W$，沿盒内直线积分其梯度就给出任一标定终点翻负所需的位移下界。
+
+| 可见谱与驻定布局 | $R_*$ 的区间 | 只动两点的充分半径 |
+| --- | --- | --- |
+| #11661，四点 | $[2.05401,2.05424]\times10^{-120}$ | $3.500\times10^{-120}$ |
+| #11934，四点 | $[1.59458,1.59476]\times10^{-119}$ | $3.021\times10^{-119}$ |
+| #12207，四点 | $[2.05609,2.05632]\times10^{-120}$ | $3.834\times10^{-120}$ |
+| #11661，六点 | $[3.41190,3.41228]\times10^{-116}$ | $6.816\times10^{-116}$ |
+
+只动两点时，一个节点推动真空读数下降，另一个补偿牛顿读数。表中两列均使用平方截止 $x=Q^2/M_P^2$ 的对数，换成 $\max_j|\Delta\log Q_j|$ 时，所有界均除以二。
+
+相同的三枚可见谱也允许翻号永远不可达的标定布局。取二节点匹配族中充分小的 $y>0$，另一节点 $x(y)$ 趋向满足 $w(x_*)/k(x_*)=c$、$k(x_*)>0$ 的内部点 $x_*>0$。这族解的起始值精确满足 $K=1,W=c$。因 $k(y)\to0$ 且 $k(x)<1$，充分小的 $y$ 给出 $x>y$，对应的权重为 $p=(1-k(y))/(k(x)-k(y))>1$ 和 $1-p<0$。将此处的权重固定。沿 $K=1$ 的连续路径，若两点相遇于 $z$，即有 $1=k(z)$，与全域 $k(z)<1$ 相矛盾。因此两点始终保序。由偏振前缀界得 $w$ 为正且严格递增，故 $W=w(y')+p(w(x')-w(y'))>0$。这两点满足起始匹配条件，四点与六点表中的共同标度驻定是额外条件。[标定路径与节点次序的区间证书](https://github.com/the-omega-institute/trureturing-experiments/blob/969e8412d3419bc6718ef060093016aa5a6f8dff/experiments/ch39-omega-research/replay/ch39-newton-preserving-cutoff.md)
+
 这里的除差以 $s=-\Psi_0/A$ 为横坐标，其中 $A=1+L$，$L$ 是质量加权的指数积分项。按质量排序的谱满足有符号偏振前缀非正、总和为负。对 $0<x\le1$，同一谱给出 $|L|\le1.2205\times10^{-4}$，而 $DL=(2\pi)^{-1}\sum_i\alpha_i z_i e^{-z_i/x}$ 的上界为正权质量矩 $(2\pi)^{-1}\sum_i\max(\alpha_i,0)z_i<2.494\times10^{-6}$，其中 $D=x\,d/dx$，$z_i$ 是无量纲平方质量，$\alpha_i$ 是牛顿读数的谱系数。于是 $A>0$、$A-DA>0$。在单调性定理中取分母 $B=-A$ 即得 $s$ 严格递增。除差符号使用上面的区间证书。[归一化有符号热迹的单调性](lean:D5/S3/Analytic/Asymptotics/NormalizedSignedHeatTrace.normalized_cutoff_heat_strictMono)
 
 若第三个截止达到 $\log x_3\ge-22.5$，把两道除差的固定线性组合视为 $s$ 的函数，记其二阶导数为 $h$。以 $s(e^{-26.875})$、$s(e^{-25.3125})$、$s(e^{-22.5})$ 依次为 $a,b,d$。区间证书给出 $[a,b]$ 之外的 $h<0$。若节点跨过 $[a,b]$ 的一部分，帐篷核在这部分的最大值控制正部，再用同一点到 $d$ 的弦控制右侧的负部。若首节点不小于 $b$，整个节点区间的内部已经定号。只要 $[a,b]$ 上 $h$ 的正部积分小于 $[b,d]$ 上 $-h$ 乘权重 $(d-s)/(d-a)$ 的积分，相邻弦斜率就严格下降，二阶除差为负。前面的区间证书核验了三枚可见谱的符号和积分界。[三节点除差的符号判据](lean:D5/S3/Analytic/Interpolation/ConcaveKernelDividedDifference.three_node_slope_sub_slope_neg_of_lobe_bound)
+
+在这三枚候选的固定可见谱上，这种灵敏度还有一个覆盖任意布局的界。令 $w(x),k(x)$ 为零裸项、无隐场的单截止真空与牛顿读数，并令固定带号权 $p_i$ 的和为一。原布局满足 $W=\sum_i p_iw(x_i)=c$ 与 $K=\sum_i p_ik(x_i)=1$。记 $D=x\,d/dx$、$T=\sum_i|p_i|$、$L=\sum_i|p_i|x_i$、$J=\sum_i|p_i|x_i^2$。对可见谱的偏振前缀分部求和给出 $ax^2\le Dw(x)\le bx^2$，可取 $a=62/(4\pi)$、$b=958/(4\pi)$。由牛顿权重还得 $|k(x)|,|Dk(x)|\le Bx$，可取 $B=32$。这些界在整个正截止轴成立。独立移动 $\log x_i$ 时，以最大单点位移为单位，最坏方向的真空导数为 $S_W=\sum_i|p_i|Dw(x_i)$，因而
+$$
+ S_W\ \ge\ aJ\ \ge\ a\max\{1/(B^2 T),\,\min_i x_i/B,\,2c/b\}.
+$$
+三项分别来自 $1\le BL$ 与 $L^2\le TJ$、$J\ge(\min_i x_i)L$，以及 $w(x)\le bx^2/2$。在 $n$ 个节点中，最敏感的单点至少能达到 $S_W/n$。在 $K=1$ 处曲率的相应导数为 $S_C=\sum_i|p_i||Dw(x_i)-2cDk(x_i)|$。记 $r=\max\{\min_i x_i,1/(BT)\}$，则 $S_C\ge(a-2cB/r)J$。
+
+有限形变取 $x_i(t)=x_i e^{-\operatorname{sgn}(p_i)t}$。沿途有 $W(t)\le c-aJ(1-e^{-2t})/2$ 与 $|K(t)-1|\le BL(e^t-1)$。若 $aJ\ge8c$，取 $t=2c/(aJ)$ 即得到 $W(t)<0$。若另有 $4Bc/(ar)<1$，全程保持 $K>0$，曲率随真空读数一同翻号。例如 $T\le10^6$ 时，取 $t<4.2\times10^{-114}$ 即可翻负，而且始终有 $|K-1|<8.4\times10^{-114}$。这些位移用 $\log x=2\log(Q/M_P)$ 计。若不许向上越过普朗克截止，可只下调正权节点。由真空匹配式，其平方和 $J_+$ 至少为 $aJ/(2b)$。若 $aJ_+\ge8c$，只下调这些节点 $t_+=2c/(aJ_+)$ 即有 $W<0$。当 $BL(1-e^{-t_+})<1$ 时，沿途的牛顿读数保持为正。
+
+在仅要求两条匹配方程和权重归一化时，正的导数下界仍允许翻号距离任意大。在小 $x$ 处，无质量层给出 $k(x)\sim x/(12\pi)$、$w(x)/k(x)\sim93x$。质量间隙使正质量层的修正呈指数衰减。对 $c=10^{-122}$，方程 $w(x_*)/k(x_*)=c$ 在 $c/186<x_*<2c/93$ 有单根。取两个节点 $x,y$，令权重为 $(p,1-p)$，其中 $p=(1-k(y))/(k(x)-k(y))$，即精确匹配 $K=1$。对充分小的 $y>0$，隐函数定理给出精确匹配 $W=c$ 的 $x=x(y)\to x_*$。负权趋于有限值 $1-1/k(x_*)$。在任意固定的独立对数位移盒内，负权的真空贡献一致趋零，正权贡献则有严格正的最小值。这族布局有量级为 $1/c$ 的共同有限总变差上界。这样的预算仍可能容许任意大的翻号半径。
+
+若布局另有共同标度驻定，则真空读数沿共同标度的导数为零，故 $aJ_+\le bJ_-$，其中 $J_-$ 是负权节点的加权平方和。下调正权、上调负权时有 $W(t)\le(bJ_+e^{-2t}-aJ_-e^{2t})/2$，故任意 $t>\tfrac12\log(b/a)$ 都给出 $W<0$。若设普朗克上限，只下调正权节点，对 $t>\log(b/a)$ 仍有 $W<0$。两种变形中的 $K(t)$ 都是解析函数，且 $K(0)=1$，故任意位于上述范围的开时间区间都包含曲率为负的点。
+
+这三枚固定谱的无条件曲率灵敏度也严格为正。令 $s$ 为 $H(x)=Dw(x)-2cDk(x)$ 的唯一正零点。正质量层使 $s>x_*$。用 $(j-1)E_j(u)+uE_{j-1}(u)=e^{-u}$ 可把判断化为 $x_*$ 处的指数小余项。一个质量小于 $57\kappa$ 的带荷重层压倒质量均大于 $96\kappa$ 的负普罗卡贡献。令 $q=w(s)/k(s)>c$，小截止段和其余正轴上的估计给出 $|w(x)-qk(x)|\le50|H(x)|$。按带号权求和即得 $S_C\ge(q-c)/50>0$。这个下界可以比 $c$ 小一个指数因子。[完整推导与谱校验](https://github.com/the-omega-institute/trureturing-experiments/blob/d59dc6b6a7e2877bc0181d62646a02180e34a09a/experiments/ch39-omega-research/replay/ch39-independent-cutoff-sensitivity.md)
 
 在背后支撑上述多矩独立性检验（例如判断真空值、牛顿常数与截止/希格斯斜率这三条实响应向量究竟是否线性无关，或衡量三枚候选零点响应空间的非退化体积）的，是实内积空间中三锚格拉姆（Gram）行列式的精确展开恒等式。该恒等式已由 Lean 4 内核冻结验证：
 
@@ -214,7 +309,60 @@ $311$-单态方案之所以对截止如此脆弱，是因为它靠不同质量�
 
 ### 11.3.1 对称点逐层配平、四层正真空与正下密度联合命中 {#sec-ch11-four-layer-hits}
 
-若同时允许最小耦合实标量与规范单态**狄拉克费米子**，利用不同质量处 $\exp(-z_k/x)$ 的线性无关性（范德蒙德矩阵可逆），让 $V(x)$ 在整个截止开区间恒为零的充要条件是**每个质量本征值处的净偏振数都为零**。在电弱对称原点上，三枚规范候选的可见正负质量平方彼此分离超过 $3\times 10^{-11} M_P^2$：补齐无质量层需 $62$ 个实标量，五荷十六重层需 $896$ 个实标量，$18$ 个中性重层各需 $9$ 个狄拉克场（每层补足 $36$ 偏振），故精确最少数为 **$958$ 个实标量 $+$ $162$ 个狄拉克单态**。配平后，牛顿斜率恒有 $2\pi K'(x) \ge 21/2 > 0$，给出唯一的牛顿匹配截止 $Q/M_P \approx 0.17882$（[逐层真空配平证书](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-chiral-graded-vacuum.py)）。
+若同时允许最小耦合实标量与规范单态**狄拉克费米子**，能否只在几个截止处测量真空密度，就判定每个质量层的净偏振数都为零？在 [@def-ou-ch11-four-layer-vacuum] 的零裸真空项约定下，令 $u=1/x$，按平方质量 $z_i$ 递增排列各层，合并同层偏振数 $g_i$。换积分变量得到
+
+$$
+F(u):=-32\pi^2\rho/M_P^4=\int_u^\infty H(t)\,\frac{dt}{t^3},
+\qquad H(t)=\sum_i g_i e^{-z_i t}.
+$$
+
+**手工推导。** 对有限谱，若至少一个 $g_i$ 非零，删去零项后记符号交替次数为 $s$。指数 $-z_i$ 严格递减，故 $H$ 的不同实零点至多有 $s$ 个。若 $F$ 在 $r\ge1$ 个不同正逆截止为零，相邻两点间及最后一点至无穷远的尾区间上，$H(t)/t^3$ 的积分各为零。正权重与连续性保证每个开区间内至少有一个 $H$ 的零点，故 $r\le s$。这就把开区间上的逐层配平判据化成了有限观测判据。所引冻结声明给出 $H$ 的零点界。[指数和的符号交替界](lean:D5/S3/Analytic/ExponentialSum/DescartesRule.zero_bound)
+
+把正负偏振分别看作两座正权谱塔。若参考塔恰有 $d\ge1$ 个不同质量层，全为正质量时，任意 $2d+1$ 个不同正逆截止的真空密度精确配平就强制两塔逐层相等；若其中一层无质量，只需 $2d$ 个。即使对照谱有无限多层，只要它在最小逆截止的固有时积分有限，正塔的热迹随 $t$ 递减，因此在该逆截止右侧有限，并由控制收敛定理知其连续。积分配平给出的热迹相等点数，恰好达到[第五章 §5.1](ch05-kinetic-trace-and-uv-ceilings.md#sec-ou-ch05-s01) 的非等距判据。
+
+为什么少测一次就会留下歧义？记 $m$ 为上述次数减一，并固定这 $m$ 个逆截止 $u_j$。用新层与参考层交错排列成 $m+1$ 个节点，最后一个是新层；首个节点在全正质量情形是新层，在无质量情形是参考层 $0$。每个节点 $z$ 给出一列读数 $B(u_j,z)=\int_{u_j}^\infty e^{-zt}t^{-3}\,dt$。任取 $m$ 列都可逆，否则非零的至多 $m$ 项组合在 $m$ 个截止为零，超过其符号交替上界。这些有序子式同号，因为连续移动有序节点时行列式始终非零。依次删列所得的带号余子式因而正负交替，构成读数矩阵的零向量。选取其负项落在参考层，向原谱加上这个向量的足够小的正倍数，便得到一座读数完全相同的不同正权塔。这里允许任意给定的正实参考权重。
+
+**固定整数重数的锐界（`ARGUED`）。** 参考谱各质量层有正整数个态，对照谱也允许任意正整数重数。按平方质量递增排列参考谱的正质量层。设其中 $h$ 层有至少两个态，其余是单态层。用这 $h$ 层隔开单态层，得到长度依次为 $\ell_0,\ldots,\ell_h$ 的连续段，允许空段。任意预先选定的互异正逆截止中，确定参考谱所需的读数恰为 $r+1$ 次。参考谱含零质量时取 $\delta=1$，否则取 $\delta=0$。
+
+$$
+r=
+\begin{cases}
+2h+\ell_0+2\sum_{j=1}^h\lfloor\ell_j/2\rfloor,&\delta=0,\\
+1+2h+2\sum_{j=0}^h\lfloor\ell_j/2\rfloor,&\delta=1.
+\end{cases}
+$$
+
+全为单态层时，通常需 $d+1$ 次。若含无质量层且参考谱总层数 $d$ 为偶数，则需 $d$ 次。每个正质量层都有至少两个态时，整数谱达到上面的实权锐界。
+
+记 $C(z)$ 为截至平方质量 $z$ 的对照态数减参考态数。由 $B(u,z)=\int_z^\infty A(u,w)\,dw$ 与 $A(u,w)=\int_u^\infty e^{-wt}t^{-2}\,dt$，两谱的读数差等于 $\int_u^\infty t^{-2}L(t)\,dt$，其中 $L(t)=\int_0^\infty e^{-zt}C(z)\,dz$。对两谱的非负累计数分别换序。最小逆截止处读数有限，保证其右侧的两个 Laplace 变换有限且连续。相邻采样点之间和末点之后各给出一个 $L$ 的零点。若 $C$ 非零且有 $s$ 次变号，取 $L$ 的 $s+1$ 个不同零点将导致矛盾。以这些零点为指数参数作线性组合，在 $C$ 每次换号处各插一个零点。指数和的零点按重数至多有 $s$ 个，故所插零点均为单根。选择总体符号使指数和在 $C$ 非零处与它同号，则两者乘积的积分严格为正。按 $L$ 的定义展开，它却等于零。
+
+累计数从正转负，必须经过一个多态参考层，或在同一连续段内经过至少两个单态参考层。不同转折使用互不重叠的参考层。若从正开始，所有正质量层给出的转折预算为 $m=h+\sum_{j=0}^h\lfloor\ell_j/2\rfloor$，总变号数至多 $2m$。若从负开始，最早的参考层也已经耗用，有 $m'$ 次正转负的预算，其中 $m'$ 按去掉最早参考层后的序列计算。总变号数至多 $1+2m'$。无质量层不能用于任何正转负，因此含无质量层时的上界为 $1+2m$。无零质量时，去掉最早参考层使预算恰减一，唯有首段长度为奇数时预算不变。两种起始符号合起来给出 $s\le r$，故 $r+1$ 次读数保证逐层相等。
+
+为在任意 $r$ 处保留歧义，给对照谱加一个平方质量为 $X$ 的单位态，再移动部分参考态恢复原读数。无零质量时选中全部首段单态层，其余各段各取偶数个，至多舍弃末尾一个。含零质量时各段都这样取，并将整个无质量层作为一个可移动质量。所选单态层和无质量层各提供一个位移参数。对每个正质量多态层，将原来同处于 $z$ 的 $w$ 个态放在 $z+a-(w-1)\sqrt v$ 和 $z+a+\sqrt v$，两处各放一个和 $w-1$ 个。参数 $a$ 移动平均质量，$v\ge0$ 使两处质量分离。两处的一阶根号项相消，故读数关于 $v$ 在零处的导数是 $w(w-1)B_{zz}(u,z)/2$。沿切线延拓到 $v<0$ 可得一阶连续可微的映射。无质量层的位移也可按 $B_z(u,0)=-1/u$ 作切线延拓。
+
+这 $r$ 个参数的雅可比矩阵 $J$，按参数所属质量递增排列各列。每个可动质量的位移列正比于 $-A(u,z)$，每个分离参数列紧随其后，正比于 $-\partial_z A(u,z)$，比例系数均为正。相关的有序子式都非零。否则按相邻截止和尾积分可得一个含 $n$ 个系数的指数多项式有至少 $n$ 个不同零点。乘一个指数因子，再用微分消去首个多项式块，Rolle 定理归纳给出至多 $n-1$ 个零点。纯 $A$ 列的 $n$ 阶子式符号为 $(-1)^{n(n-1)/2}$，可令所有质量同时放大，让行列式中逆序配对的指数项主导。把相邻两质量作正向差商并令它们合并，便得到同样的符号，包括紧随其原列的导数列。
+
+令 $b_j=B(u_j,X)$。逆函数定理给出参数向量 $-J^{-1}b+o(\lVert b\rVert)$，其中 $b_1$ 渐近支配其余分量。用有序子式计算，$J^{-1}$ 第 $j$ 行首项的符号为 $(-1)^{r+j+1}$，这里 $j$ 是列参数的编号。各分离参数的编号与 $r$ 同奇偶，因为其后的单态层按偶数个选取，其他多态层成对贡献参数。无质量位移的编号为一，此时 $r$ 为奇数。这些参数对应的逆矩阵项均为负，因而 $X$ 足够大时，分离参数和无质量位移均为正。构造留在非负质量域内，在指定的 $r$ 个逆截止处与参考谱精确相合。
+
+一个无质量层已经能说明少测一次的代价。取 $u=1$，一个无质量态给出 $B(1,0)=1/2$。两个同质量的有质量态给出 $2B(1,z)$，它随 $z$ 从 $1$ 严格连续降至 $0$，故恰有一个 $z>0$ 能配平这一次读数。任取第二个不同的正逆截止就能区分二者。
+
+**实权谱的局部稳定性（`ARGUED`）。** 设两座正谱塔的平方质量均在已知区间 $[0,Z]$，其中 $0<Z<\infty$。固定参考谱的 $d$ 个占据层，其中 $e$ 个位于区间端点，记 $k=2d-e$。任意 $k+1$ 个互异正逆截止已经足够。若另已知两谱总权重相等，任意 $k$ 次即可。令 $\delta$ 为这些位置的 $B(u,z)$ 读数绝对差的最大值。小误差下，两谱的总权重及按最近参考层归集的各层权重，差均至多为 $C\delta$。用平方质量为距离、把两谱各自归一为概率后，只要参考谱占有内点层，$W_1$ 就至多为 $C\sqrt{\delta}$。参考谱只占端点时，上界为 $C\delta$。常数可依赖于截止位置、区间与固定参考谱。
+
+将逆截止排序并对相邻核作差，各行即在有序互不相交区间上以 $t^{-3}$ 加权积分 $e^{-tz}$。总权重已知时，常数行对应 $t=0$。取函数值及连续各阶导数的插值矩阵可逆。由多线性，其行列式等于合流指数行列式的积分。不同指数的带重数零点界保证被积式同号且非零。零端点只用到一阶导数 $B_z(u,0)=-1/u$。在这些行的张成空间内，取 $q$ 在参考内点成双零、在占据端点成单零，并在支集外一点取正值。插值行列式保证零点和重数恰如所定，故其余各处 $q>0$。计入常数因子后，$q$ 在最近层为内点的区域控制平方距离，在最近层为端点的区域控制距离本身。$q$ 对对照谱的积分为 $O(\delta)$。再把各层指示函数插值到参考层，并令插值函数在内点层的一阶导数为零。它与最近层归集的指示函数相差至多为 $q$ 的常数倍，因而可控制各层权重。先将对照谱移至最近参考层，再调整层权，得到输运上界。
+
+把一个内点层等权分到 $z-h$ 和 $z+h$，输运距离为 $h$ 阶、读数差为 $h^2$ 阶。把端点层向内移动 $h$，输运距离与读数差的绝对值均为 $h$ 阶。这给出两种最优指数。少一次读数时，在相邻参考层之间各插一个新层，两端有空余时也各插一层。这样得到 $k+1$ 个新旧交错层。有序观测矩阵为 $k$ 行，其中包括已知总权重时的常数行。带号最大子式交替。选取总体符号使新层系数都为正，将其小倍数加到原参考谱上，就得到读数完全相同的另一座正谱。端点的线性指数在平方质量坐标中成立。把无质量层移到平方质量 $h$，在质量坐标中距离为 $\sqrt h$。
+
+**有限质量范围内的局部稳定性（`ARGUED`）。** 固定整数参考谱，令参考谱与对照谱的平方质量均落在 $[0,Z]$，其中 $Z>0$。在上面恰好够用的 $r+1$ 个逆截止处，记归一化读数的最大误差为 $\delta$。当 $\delta$ 足够小时，两谱的总态数相同，可按从轻到重的顺序匹配各态。若某个 $0<z<Z$ 的参考层含两个或更多态，匹配后平方质量的绝对位移之和至多为 $C\sqrt\delta$。其余情形至多为 $C\delta$。常数可依赖参考谱、质量上界与采样位置。
+
+固定一个采样位置时，每个态的贡献至少为 $B(u,Z)>0$，所以有界读数给出态数上界。允许质量重合，固定态数的有序谱落在紧集内。由精确读数的唯一性，误差趋零时，每个参考层附近的态数最终等于该层的重数。记所有位移的最大绝对值为 $\eta$。对正质量层 $z_i$，记该层位移之和与平方和为 $a_i,b_i$。无质量层只需位移和 $a_0\ge0$。首阶读数项为 $-A(u,z_i)a_i$，正质量层的二阶项为 $-\partial_z A(u,z_i)b_i/2$，余项为 $O(\eta\sum b_i)+o(a_0)$。在单态层和上端点 $Z$ 处，$b_i\le\eta|a_i|$。由正质量节点的 $A$ 列线性无关，吸收这些小项，得到 $\sum_{z_i>0}|a_i|\le C(\delta+a_0+\sum_* b_i)$，其中星号限于区间内部的正质量多态层。若两个待控项都为空，此式已给出线性估计。
+
+若有无质量层或内部多态层，取采样函数的实线性组合 $g(z)=\sum_j c_j A(u_j,z)$，使它在每个正参考质量处有一个简单零点。在相邻两个内部多态层之间，若夹有偶数个参考层，就在间隙里加一个简单零点。同时有无质量层和内部多态层时，若首个内部多态层之前有偶数个正参考层，再在它之前加一个。所需零点数至多是正质量层数加上多态层之间偶数长度单态段的数目，含无质量层时再计首段为偶数的情形。由 $r$ 的公式，该数至多为 $r$。使用比所需零点多一个的采样位置求线性组合，上面的有序及合流子式保证这些零点全为单根，且没有其他零点。取总体符号，使所有星号层处的 $-g'(z_i)$ 为正，并在有无质量层时使 $-g(0)>0$。若只有无质量层需要控制，单独选取零质量处的符号。
+
+用这一线性组合读取误差，会消去正质量层的首阶项，并以严格正的系数读取 $a_0$ 与各星号层的 $b_i$。用位移和的估计吸收余项，得到 $a_0+\sum_*b_i\le C\delta$，进而 $\sum_{z_i>0}|a_i|\le C'\delta$。单态层及端点的绝对位移和就是 $|a_i|$。内部多态层的绝对位移和至多为 $\sqrt{w_i b_i}$，其中 $w_i$ 为该层重数。当存在这样的层时，将其中两态的平方质量分别移动 $\pm\epsilon$，总位移为 $2\epsilon$，读数误差为 $O(\epsilon^2)$。其余情形将任一态移入区间内 $\epsilon$，读数误差与 $\epsilon$ 同阶。这给出两个最优指数。
+
+若有测量误差，还要考虑重层的可见度。由 $e^{-zt}\le e^{-zu}$（$t\ge u$），增添一个单位权重的重层，在所有 $u\ge u_{\min}>0$ 处造成的 $F$ 读数变化至多为 $e^{-u_{\min}z}/(2u_{\min}^2)$。
+
+在电弱对称原点上，三枚规范候选的可见正负质量平方彼此分离超过 $3\times 10^{-11} M_P^2$：补齐无质量层需 $62$ 个实标量，五荷十六重层需 $896$ 个实标量，$18$ 个中性重层各需 $9$ 个狄拉克场（每层补足 $36$ 偏振），故精确最少数为 **$958$ 个实标量 $+$ $162$ 个狄拉克单态**。配平后，牛顿斜率恒有 $2\pi K'(x) \ge 21/2 > 0$，给出唯一的牛顿匹配截止 $Q/M_P \approx 0.17882$（[逐层真空配平证书](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-chiral-graded-vacuum.py)）。
 
 接着向这份零真空基底叠入 [@def-ou-ch11-four-layer-vacuum] 的**四层正真空差分** $D(-1, 3, -3, 1)$（分布于 $0, \mu^2, 2\mu^2, 3\mu^2$，相对于已配平谱只需移出无质量层 $D$ 个标量并净增 $4k$ 标量与 $k = \lceil 3D/4\rceil$ 个狄拉克场）。由于三阶差分精确消去了 $0, 1, 2$ 阶质量平方矩，积分 $I(0) = (9\ln 3 - 12\ln 2)/2$ 有限且严格为正，有限截止亏损不到 $2\times 10^{-59}$！令人眼前一亮的是，只要取撬板式轻质量标度 $\mu = v^2/M$（$v = 246.22\,\mathrm{GeV}$）与 $D = 4$ 个偏振，遍历三枚零点的全部 $98$ 条重谱质量行，荷二完整谱的第 $16$ 个重质量自动落在目标旁边：
 

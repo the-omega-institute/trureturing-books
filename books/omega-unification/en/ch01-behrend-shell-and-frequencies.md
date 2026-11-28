@@ -77,7 +77,7 @@ None of the $23$ numbers is a root of unity: since $0 < j \le 804 < 867$, the va
 Second, sort the $23$ phases by their imaginary quadratic fields $\mathbb{Q}(\alpha_j) = \mathbb{Q}(\sqrt{-D_j})$, where $D_j$ is the square-free part of $j(3468 - j)$:
 
 - For $j \in \{12, 68, 136\}$, direct factorization gives $12\cdot 3456 = 2\cdot 144^2$, $68\cdot 3400 = 2\cdot 340^2$, and $136\cdot 3332 = 2\cdot 476^2$, so all three live inside the **same quadratic field $\mathbb{Q}(\sqrt{-2})$**.
-- For the remaining $20$ squared chord lengths, the square-free kernels $D_j$ are
+- For the remaining $20$ squared chord lengths, the square-free kernels $D_j$, sorted by their own values, are
 
 $$
 86,\; 542,\; 1478,\; 1538,\; 1634,\; 1698,\; 1718,\; 2534,\; 7998,\; 8858,\; 10374,\; 11102,\; 11354,\; 11942,\; 14874,\; 31502,\; 49166,\; 57962,\; 58682,\; 112022,
@@ -85,7 +85,7 @@ $$
 
 twenty pairwise distinct integers, none equal to $2$.
 
-Third, separate the $21$ distinct quadratic fields by Galois characters. Let $K$ be the compositum of all $21$ imaginary quadratic fields, and consider the $\mathbb{Q}$-vector space $V := (K^\times / \mu(K)) \otimes_{\mathbb{Z}} \mathbb{Q}$ obtained by killing torsion (roots of unity). Every $\sigma \in \operatorname{Gal}(K/\mathbb{Q})$ acts on $F_j = \mathbb{Q}(\sqrt{-D_j})$ either as the identity or as complex conjugation; because $|\alpha_j| = 1$, complex conjugation sends $\alpha_j \mapsto \bar{\alpha}_j = \alpha_j^{-1}$. Thus $\sigma(\alpha_j) = \alpha_j^{\chi_j(\sigma)}$, where $\chi_j : \operatorname{Gal}(K/\mathbb{Q}) \to \{\pm 1\}$ is the quadratic character of $F_j$. In the additive $\mathbb{Q}$-space $V$, nonzero eigenvectors belonging to distinct group characters are linearly independent—even if multiplicative relations exist among the integers $D_j$ themselves! No nontrivial rational relation can therefore link angles from different quadratic fields.
+Third, separate the $21$ distinct quadratic fields by Galois characters. Let $K$ be the compositum of all $21$ imaginary quadratic fields, and consider the $\mathbb{Q}$-vector space $V := (K^\times / \mu(K)) \otimes_{\mathbb{Z}} \mathbb{Q}$ obtained by killing torsion (roots of unity). Every $\sigma \in \operatorname{Gal}(K/\mathbb{Q})$ acts on $F_j = \mathbb{Q}(\sqrt{-D_j})$ either as the identity or as complex conjugation; because $|\alpha_j| = 1$, complex conjugation sends $\alpha_j \mapsto \bar{\alpha}_j = \alpha_j^{-1}$. Thus $\sigma(\alpha_j) = \alpha_j^{\chi_j(\sigma)}$, where $\chi_j : \operatorname{Gal}(K/\mathbb{Q}) \to \{\pm 1\}$ is the quadratic character of $F_j$. In the additive $\mathbb{Q}$-space $V$, nonzero eigenvectors belonging to distinct group characters are linearly independent—even if multiplicative relations exist among the integers $D_j$ themselves! If a product $\prod_j \alpha_j^{n_j}$ is a root of unity, its relation in $V$ must therefore hold separately in the character space of each quadratic field. Every field that occurs only once gives $n_j=0$.
 
 Fourth, resolve the single shared room $\mathbb{Q}(\sqrt{-2})$. Reducing the fractions for $j = 12, 68, 136$ gives
 
@@ -105,7 +105,7 @@ $$
 \theta_{136} = \theta_{12} + \theta_{68}.
 $$
 
-Finally, to check that $\alpha_{12}$ and $\alpha_{68}$ themselves are independent modulo roots of unity, inspect the prime ideal $\mathfrak{p}_3 = (1 + \sqrt{-2})$ above $3$ in the unique factorization domain $\mathbb{Z}[\sqrt{-2}]$: $3 \nmid 289$ and $287 + 24\sqrt{-2} \equiv 2 \not\equiv 0 \pmod{\mathfrak{p}_3}$, so $v_{\mathfrak{p}_3}(\alpha_{12}) = 0$; meanwhile $51 = 17(1 + \sqrt{-2})(1 - \sqrt{-2})$ and $49 + 10\sqrt{-2} = (1 + \sqrt{-2})^2(-1 - 12\sqrt{-2})$, so $v_{\mathfrak{p}_3}(\alpha_{68}) = 2 - 1 = +1 \neq 0$. One zero valuation and one nonzero valuation force multiplicative independence!
+Finally, to check that $\alpha_{12}$ and $\alpha_{68}$ themselves are independent modulo roots of unity, inspect the prime ideal $\mathfrak{p}_3 = (1 + \sqrt{-2})$ above $3$ in the unique factorization domain $\mathbb{Z}[\sqrt{-2}]$: $3 \nmid 289$ and $287 + 24\sqrt{-2} \equiv 2 \not\equiv 0 \pmod{\mathfrak{p}_3}$, so $v_{\mathfrak{p}_3}(\alpha_{12}) = 0$; meanwhile $51 = 17(1 + \sqrt{-2})(1 - \sqrt{-2})$ and $49 + 10\sqrt{-2} = (1 + \sqrt{-2})^2(-1 - 12\sqrt{-2})$, where the remaining factor $-1-12\sqrt{-2}$ reduces to $2$ modulo $\mathfrak{p}_3$. Thus $v_{\mathfrak{p}_3}(\alpha_{68})=2-1=1$. Since valuations vanish on roots of unity, if $\alpha_{12}^a\alpha_{68}^b$ is a root of unity, the valuation first gives $b=0$. The infinite order of $\alpha_{12}$ then gives $a=0$.
 
 ::: {.example #ex-ou-ch01-shell-arithmetic title="Scratch-Paper Check of the Shortest Arc and the Sole Rational Relation"}
 Take the sub-inner vertex $P = (11, 11, 25)$, the inner vertex $Q = (13, 13, 23)$, and the pole $O = (17, 17, 17)$:
@@ -114,7 +114,9 @@ Take the sub-inner vertex $P = (11, 11, 25)$, the inner vertex $Q = (13, 13, 23)
 2. **Spokes $QO$ ($d^2 = 68$) and $PO$ ($d^2 = 136$):** Direct subtraction yields $\|Q - O\|^2 = 16 + 16 + 36 = 68$ and $\|P - O\|^2 = 36 + 36 + 64 = 136$. All three points $P, Q, O$ lie in order on the same symmetry great-circle plane $x_1 = x_2$! Adjacent great-circle arcs add linearly, revealing the visible geometric origin of $\theta_{136} = \theta_{12} + \theta_{68}$.
 :::
 
-Dropping the redundant $\theta_{136}$ leaves **exactly $22$ $\mathbb{Q}$-linearly independent frequencies**. Moreover, replacing $\theta_{724}$ and $\theta_{804}$ by the dual-clock frequency differences $\theta_{724} - \theta_{244}$ and $\theta_{804} - \theta_{244}$ while retaining $\theta_{244}$ is a unimodular integer change of basis, preserving the full rank $22$.
+For integer coefficients $n_j$, a sum $\sum_j n_j\theta_j$ that is a rational multiple of $2\pi$ makes $\prod_j\alpha_j^{n_j}$ a root of unity. Separating the character spaces eliminates all the other coefficients and leaves $n_{12}+n_{136}=n_{68}+n_{136}=0$. Every such coefficient vector is an integer multiple of the vector with entries $(1,1,-1)$ at $j=12,68,136$ and zero elsewhere. Its angle sum is exactly zero.
+
+After dropping $\theta_{136}$, the **remaining $22$ frequencies together with $2\pi$ are linearly independent over $\mathbb{Q}$**. Chapter 2 replaces $\theta_{724}$ and $\theta_{804}$ with the clock differences $\theta_{724}-\theta_{244}$ and $\theta_{804}-\theta_{244}$, while keeping $\theta_{244}$. Adding $\theta_{244}$ back to each difference recovers the original frequencies, so the integer change of basis preserves this independence.
 
 ## 1.3 Projective Ternion Heaps, Integer Shell Compression, and Isotropic Inversion {#sec-ou-1-3}
 
