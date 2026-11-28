@@ -108,6 +108,31 @@ $$
 
 The algebraic arc phases ensure $\Lambda(e^{|\lambda|})=0$ for every nonzero integer mode of the shell. [§2.3](ch02-quaternion-clocks-and-haar-zeros.md#sec-ou-2-3)
 
+To retain the real-part weight of each zero, fix $X=e^\lambda>1$ with $\Lambda(X)=0$. The following criterion characterizes the endpoint asymptotic over all real heights (direct derivation, `ARGUED`).
+
+$$
+\sum_{0<\gamma\le T}X^{\rho-1/2}
+=\frac{e^{i\lambda T}}{2\pi i\lambda}\log\frac{T}{2\pi}+o_X(\log T)
+\quad\Longleftrightarrow\quad
+\text{the Lindelöf hypothesis holds}.
+$$
+
+The sum counts analytic multiplicities and includes the upper endpoint. Write $\delta_\rho=\operatorname{Re}\rho-1/2$. Backlund's local zero-count criterion is equivalent to $\sum_{|\gamma-T|\le1}\delta_\rho^2=o(\log T)$. Reflection across the critical line pairs the two sides, and the window of radius $1$ contains $O(\log T)$ zeros. This allows us to split the sum at a fixed distance from the line and then send that distance to zero. The Lindelöf hypothesis also gives $S(T)=o(\log T)$ for the argument term in the counting formula. [Titchmarsh, 2nd ed., Theorems 13.5 and 13.6(A)](https://sites.math.rutgers.edu/~zeilberg/EM18/TitchmarshZeta.pdf)
+
+For sufficiency, use the smoothed window described below, first holding the bandwidth $B$ fixed. The unconditional explicit formula samples at $\gamma-i\delta_\rho$. When moving the window values back to the real axis, reflection at each ordinate cancels the linear term in $\delta_\rho$. A decaying kernel centered at each endpoint weights the quadratic error, which is $o_{X,B}(\log T)$ by the bound on local squared displacement. On the real axis, restoring the sharp window costs $O_X(\log T/B)+o_{X,B}(\log T)$, with the second term coming from $S$. Take $T$ to infinity first, then let $B$ grow. [Carneiro and Milinovich, Lemma 4](https://arxiv.org/pdf/2403.17803v1#page=5)
+
+Necessity follows from a positive difference. Set $P_a(u)=a/(\pi(a^2+u^2))$, with $a>1/2$ and $a^2-1/4\ge4/\lambda^2$. The sharp asymptotic gives $\sum_{\gamma>0}e^{\lambda\delta_\rho}P_a(\gamma-T)=\log(T/(2\pi))/(2\pi)+o_X(\log T)$ by partial summation. The logarithmic derivative of the Hadamard product for $\xi$ at $1/2+a+iT$ gives $\sum_\rho\operatorname{Re}P_a(\gamma-T-i\delta_\rho)=\log(T/(2\pi))/(2\pi)+O_a(1)$. Negative ordinates contribute $O_a(\log T/T)$. Pairing the reflected zeros replaces the weights in the first sum by $\cosh(\lambda\delta_\rho)$, and
+
+$$
+\cosh(\lambda\delta)P_a(u)-\operatorname{Re}P_a(u-i\delta)
+\ \ge\ \frac{\lambda^2}{4}\delta^2P_a(u)
+\qquad (u\in\mathbb R,\ |\delta|\le1/2).
+$$
+
+Indeed, $\operatorname{Re}P_a(u-i\delta)/P_a(u)\le1+\delta^2/(a^2-1/4)$ and $\cosh(\lambda\delta)\ge1+\lambda^2\delta^2/2$. The difference between the sums is $o_X(\log T)$, forcing the squared displacement in the window of radius $1$ to be $o(\log T)$ as well. [Titchmarsh, 2nd ed., Eq. (2.12.5)](https://sites.math.rutgers.edu/~zeilberg/EM18/TitchmarshZeta.pdf) · [NIST DLMF, Eq. 5.11.2](https://dlmf.nist.gov/5.11.E2)
+
+The RH estimate above also gives a quantitative error term.
+
 Convolve the indicator of $(0,T]$ with the nonnegative unit-mass kernel $K_B(u)=\frac{3B}{8\pi}\bigl(\frac{\sin(Bu/4)}{Bu/4}\bigr)^4$, then multiply by $e^{i\lambda u}$. The kernel has angular Fourier support $[-B,B]$, so the prime-power terms in the Guinand–Weil explicit formula sample signed logarithmic frequencies $\pm\log n$ within $B$ of $\lambda$. Each term contains $\int_0^T e^{i(\lambda\mp\log n)v}\,dv$, which is bounded uniformly in $T$ because the fixed frequency is a positive distance from the prime-power frequencies. Summing the prime-power terms costs $O_\lambda((1+B)e^{B/2})$. The kernel's decay along the two horizontal lines through $\pm i/2$ bounds the pole terms by $O_\lambda(e^{B/2})$. [Carneiro, Chandee, and Milinovich, Lemma 5](https://arxiv.org/pdf/1309.1526#page=6)
 
 Translating the window by $u$ affects only the zeros within $|u|$ of its two endpoints. When $|u|\le T/2$, the zero-count remainder under RH bounds their combined number by $O(|u|\log T+\log T/\log\log T)$, with endpoints included. For larger $|u|$ the global count gives $O(|u|\log(2+|u|))$. Averaging against $K_B$, whose first absolute moment is $O(1/B)$ and whose tails decay as $|u|^{-4}$, recovers the sharp cutoff at a cost of $O(\log T/B+\log T/\log\log T)$. [Carneiro, Chandee, and Milinovich, Section 1 and Theorem 1](https://arxiv.org/pdf/1503.00955)
