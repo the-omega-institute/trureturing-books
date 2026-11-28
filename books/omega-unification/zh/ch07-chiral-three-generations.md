@@ -53,6 +53,8 @@ $$
 
 这些孤立的盲点还决定了实际读数能以多高的频率接近零。记 $\sigma_q$ 为三站限制的最小奇异值，在正黎曼零点上按重数计数。固定一个充分小的阈值 $\varepsilon>0$，先让计数高度趋于无穷。由上述双钟等分布与辐边软化趋零，$\sigma_q<\varepsilon$ 的极限比例等于零软化环面上的归一化面积。再令 $\varepsilon\downarrow0$，这个面积为 $C_q\varepsilon^2+O(\varepsilon^4)$。按上面的荷顺序，$C_q$ 约为 $25.99279,17.37426,26.16959,12.59218,14.28552$。每个盲点处，边界复振幅对两个钟角的实雅可比可逆，半径 $\varepsilon$ 的振幅圆盘因此在钟面上截出面积为二阶的邻域。五种荷的这些邻域在充分小的阈值下仍两两不交，故至少一荷近盲的二次项系数约为 $96.41434$。精确失秩的正零点集由此具有自然密度零，个别零点是否命中仍开放。[面积系数的推导和复算](https://github.com/the-omega-institute/trureturing-experiments/blob/408bafb236c0918d30571356d15798d2cd21a511/experiments/ch39-omega-research/replay/ch39-ray-near-blind-density.md)
 
+如果保留原来的三个首站，只能再装一个读数器，该放在哪里？其余十六个站点中，除极点 $14$ 外，任一站都可以。每种荷在盲点只丢失一个非平凡循环特征的轻态。这个态在极点的振幅因旋转对称而恒为零，在其余十五个候选站的单站振幅却都大于 $0.0174$。加上其中任一站后，对每种荷分别读取四个坐标，在整个双钟环面和 $0\le\delta\le10^{-8}$ 上，三维轻空间限制的最小奇异值都大于 $4\times10^{-5}$。这个较小的界计入了不同特征在第四站的干涉。若读数站集本身也须保持三循环，最少要补一个完整三站轨道，共用六站。 [十五种单站补读与全域下界](https://github.com/the-omega-institute/trureturing-experiments/blob/7168d863ca1b4d92fec7cd8cbf50f5013f9282ac/experiments/ch39-omega-research/replay/ch39-ray-head-extra-site.md)
+
 将内部空间按特征标正交拆块，背后依托的是一条无 $\pi$、纯有理的群论正交骨架。正如[第二章](ch02-quaternion-clocks-and-haar-zeros.md)在双时钟球面哈尔积分中所确立的，偶次切比雪夫特征多项式 $E_m(\kappa)$ 在全阶上的正交归一性已在 Lean 内核中不依赖实数极限而严格冻结：
 
 ::: {.theorem #thm-ou-ch07-peter-weyl-orthonormal title="全阶偶次彼得—魏尔特征核的无 π 有理哈尔正交归一性" lean="D5/S3/Quantum/AURICOmega/OmegaSphericalHaarMidpoint.all_degree_peter_weyl_orthonormal"}
