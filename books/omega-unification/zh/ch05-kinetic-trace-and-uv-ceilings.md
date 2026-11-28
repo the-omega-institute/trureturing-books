@@ -282,7 +282,11 @@ $$
 
 无截顶时，最大的三份热权各自受截顶热权约束，合计受前三份暴露的凹性界约束。尾权再用排序与余预算逐份控制。用《OMEGA 数学》第 8 章的有理指数射流和显式余项估计核定各前缀所给的幂和界。在 $0.60\le\varepsilon\le0.90$，无截顶谱的幂和比 $P_1$ 低逾 $0.03$。在 $0.90\le\varepsilon\le0.95$，无截顶谱的幂和比 $P_2$ 低逾 $0.02$（手工推导与向外区间证书）。例如 $u=4$、$\varepsilon=0.95$ 时，前三份均分暴露的无截顶谱可取 $(z,z,z,w_1,3-3z)$，其中 $z=W(\tau-\varepsilon/3)$。其第二热迹约为 $2.40746$，而锐上确界约为 $2.48142$。 [中段证书](https://github.com/the-omega-institute/trureturing-books/issues/2261#issuecomment-7242205197) · [上段推导与复算](https://github.com/the-omega-institute/trureturing-books/issues/2261#issuecomment-7242715138)
 
-因此趋优谱最终须含有截顶状态。等暴露端可取 $(1-\eta,x,x,w_1,2-2x+\eta)$ 逼近。只要 $1-\eta$ 仍截顶，且补足后的余权不超过 $w_1$，就同时保持第一热迹与暴露预算。无转移端也可用趋于 $1$ 的截顶权及零暴露余权逼近。正质量谱严格低于锐上确界。
+因此三份预算下的趋优谱最终须含有截顶状态。等暴露端可取 $(1-\eta,x,x,w_1,2-2x+\eta)$ 逼近。只要 $1-\eta$ 仍截顶，且补足后的余权不超过 $w_1$，就同时保持第一热迹与暴露预算。无转移端也可由趋于 $1$ 的截顶权逼近。
+
+对全部 $N\ge4$，等暴露端 $P_2$ 在 $0.90\le\varepsilon\le0.95$ 仍是第二热迹的锐上确界（手工推导与向外区间证书）。在 $\varepsilon=0.90$，无截顶谱距 $P_1(0.90)$ 逾 $0.06$。增大缺口只会收紧预算，因此同一比较仍成立。因 $x>2-2x$，$P_2$ 随缺口下降。有理指数射流及余项给出 $P_2(0.95)-P_1(0.90)>-0.023$，故整个窗口内无截顶谱距 $P_2$ 逾 $0.037$。 [边界差额的证书](https://github.com/the-omega-institute/trureturing-books/issues/2261#issuecomment-7242365993) · [端点比较的推导与复算](https://github.com/the-omega-institute/trureturing-books/issues/2261#issuecomment-7243102382)
+
+若有截顶，每提高并移去一份最大权，$P_2$ 减去 $1$。归约至无截顶或三份预算便给出严格上界。若原谱的截顶份数少于 $N-2$，归约会在至少三份预算时留下无截顶谱，距锐界仍逾 $0.02$。因此趋优谱列最终至少有 $N-2$ 份截顶。让这 $N-2$ 份权各取 $1-\eta$，并将末份零暴露权取为 $2-2x+(N-2)\eta$，即可沿用三份预算的同预算逼近。任意有限正质量谱严格低于锐上确界。
 
 预算趋向 $B_0$ 时，相对左极限的一阶损失系数为 $uW'(\tau)(M^{u-1}-d^{u-1})$，与 $N$ 无关。对四次热迹 $u=4$，该系数约为 $0.2144536669$（`NUM`）。[宽预算窗的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2170#issuecomment-7240449786) · [四次热迹复算](https://github.com/the-omega-institute/trureturing-books/issues/2116#issuecomment-7240080414)
 
