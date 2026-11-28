@@ -63,6 +63,30 @@ In the equal-mass bubble integral, differentiating $\log[1+p^2 z(1-z)/(m_i+ts)]$
 
 Four layers already admit assignments that both measurements miss. Give every species normalized slope $1$ or $2$. At slope $1$, use the digits $(3,1,3,0)$ in one model and $(1,3,1,1)$ in the other. There is a set of four distinct positive squared masses $m_i$ for which the difference $(2,-2,2,-1)$ has zero sum against each of $m_i$, $m_i^2$ and $m_i^2\log(m_i/\mu^2)$. These two portal assignments then give the same potential and the same low-momentum coefficient for every $s\ge0$. [Three-layer identification and the four-layer counterexample](https://github.com/the-omega-institute/trureturing-experiments/blob/9a6102e355d2ccdac66234f45b927737f71678c5/experiments/ch39-omega-research/replay/ch39-low-momentum-portal-thresholds.md)
 
+**Hand derivation at fixed nonzero momentum.** Keep the same bubble integral and choose any one known Euclidean squared momentum $P=p^2>0$. With local terms fixed and the zero-momentum value subtracted, suppose the following function is known exactly near $s=0$.
+
+$$
+R_P(s)=\sum_{i,\alpha} w_\alpha t_{i,\alpha}^2
+\int_0^1\log\!\left(1+\frac{Pz(1-z)}{m_i+t_{i,\alpha}s}\right)\,dz,
+\qquad (w_C,w_U)=(3,1).
+$$
+
+For any finite number of known, pairwise distinct positive squared masses $m_i$, this background response alone determines the signed colored and uncolored slopes in each layer.
+
+Consider a term with slope $t\ne0$. Its $s$ derivative is $wt^2$ times the average of $1/(s+v)$ at $v=(m_i+Pz(1-z))/t$ for uniform $z$, minus $wt^2/(s+m_i/t)$. Summing gives the transform of a signed measure with compact support away from zero. The expansion of the kernel at $s=0$ gives every positive power moment of $1/v$, and the total mass is zero. Polynomial approximation on the compact reciprocal support therefore determines the measure uniquely.
+
+Its negative atoms mark the starts $v=m_i/t$, whose signs give the slope signs. On each half-axis, order the starts by increasing $a=|m_i/t|$. Write $\ell=P/(4|t|)$, so $|v|=a+4\ell z(1-z)$. Changing variables on the two branches of this quadratic gives the continuous density contribution at $|v|=a+h$,
+
+$$
+\frac{wt^2}{2\ell}(1-h/\ell)^{-1/2},\qquad 0<h<\ell .
+$$
+
+For example, $m_1=1,t_1=1$ and $m_2=2,t_2=2$ both start at $a=1$. At $P=4$ their density intervals have lengths $1$ and $1/2$, so their shapes separate the two layers.
+
+After subtracting the contributions from earlier starts, only terms starting at $a$ enter the density for sufficiently small $h>0$. The candidate nodes $\ell_i^{-1}=4m_i/(Pa)$ are distinct. For $N$ layers, the first $N$ Taylor coefficients of the density, divided by their nonzero binomial factors, give the first $N$ power moments of the amplitudes at these nodes. These moments determine the amplitudes uniquely. [Finite Vandermonde moment injectivity](lean:D5/S3/Analytic/GoldenTomography/FiniteVandermondeTomography.finite_moment_readout_injective)
+
+With $t_i=\operatorname{sgn}(v_0)m_i/a$ at the signed start $v_0$, dividing each amplitude by $t_i^2/(2\ell_i)$ gives the species weight $0,1,3,$ or $4$ at that slope in layer $i$. Once all starts have been decoded, every unassigned species has slope zero. If two masses coincide, exchanging the colored slopes of their layers preserves the entire response.
+
 Whenever we certify positivity of $8\pi I \pm \mathcal{A}$ on coupled Higgs–heavy-radial channels or eliminate high-potential shell vertices into an effective boundary operator, the exact matrix identity at work is the Lean-verified block Schur complement minimum theorem:
 
 ::: {.theorem #thm-ou-ch06-schur-minimum title="Block Schur Complement Quadratic Form as Exact Minimum" lean="D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"}
