@@ -167,7 +167,73 @@ Once six arithmetic times crush more than $99.931\%$ of spectral mass into three
 | Short coherent walks & light-mode counts | 2-step open / 3-step closed; linear five-charge light-mode modulation | Short-walk Born efficiency ratio $< 3.705 \times 10^8$ vs required $2.28327 \times 10^{14}$ (longer closed walks need up to $63$ edges on $22$ indexed zeros); five-charge light-mode count share over 41 arithmetic times must stay $< 7.8 \times 10^{-9}$ |
 | Single-shot physical selector vs entropy-minimizing prior | Full-spectrum pass rate / relative entropy to inverse-square prior | Full-spectrum pass rate strictly $< 4.42870 \times 10^{-5}$ (optimal endpoint exceeds all bounded-step dual-clock circuits; on 11 zeros it uniquely recovers the 8-zero $6.08330\%$ deficit in exactly $363$ controlled dual-clock queries for fixed-path superposition, or $243$–$363$ in general); entropy minimization uniquely selects $6.83812\%$ deficit ($\approx 50.08072$ bits per accepted sample; full-spectrum entropy weights require one exact radial spoke plus $b + 154$ and $b + 54$ coordinate bits for $2^{-b}$ log-weight accuracy) |
 
-Even retaining all zeros above any cutoff $H$ under inverse-square weighting inside any fixed positive shell-phase window drives the limiting distribution of $H / \gamma$ to uniform on $[0, 1]$, leaving a limiting two-time error of $3.71810906 \times 10^{-6}$ after optimizing scale; at unit scale $a = 1$, the five-charge three-light-mode support cannot match even the first arithmetic time alone ($> 32.092\%$ must sit outside it, rising past $87.818\%$ for the first $40$ times).
+Even retaining all zeros above any cutoff $H$ under inverse-square weighting inside any fixed shell-phase window of positive Haar measure with Haar-null boundary drives the limiting distribution of $H / \gamma$ to uniform on $[0, 1]$, leaving a limiting two-time error of $3.71810906 \times 10^{-6}$ after optimizing scale; at unit scale $a = 1$, the five-charge three-light-mode support cannot match even the first arithmetic time alone ($> 32.092\%$ must sit outside it, rising past $87.818\%$ for the first $40$ times).
+
+::: {.remark #rem-ou-ch12-windowed-rate title="A Whole-Spectrum Benchmark and the Windowed Rate Gap"}
+**Argument (`ARGUED`).** Let $A_W(t)$ count the positive zeros through height $t$ in the fixed phase window $W$, with multiplicity. Suppose $c>0$, $b_H\ge0$, and
+
+$$
+\begin{aligned}
+m(t)&=t\left(\log\frac{t}{2\pi}-1\right),\\
+A_W(t)&=c\,m(t)+R_W(t),\\
+|R_W(t)|&\le b_Ht\quad(t\ge H).
+\end{aligned}
+$$
+
+Set $L_x=1+\log(x/(2\pi))$, and define the strict tail sum with multiplicity by $S_W(x)=\sum_{\gamma>x,\,W}\gamma^{-2}$. For $x\ge H$, partial summation gives
+
+$$
+\begin{aligned}
+S_W(x)&=-\frac{A_W(x)}{x^2}+2\int_x^\infty\frac{A_W(t)}{t^3}\,dt\\
+      &=\frac{c}{x}(L_x+\delta_x),\\
+|\delta_x|&\le E:=\frac{3b_H}{c}.
+\end{aligned}
+$$
+
+When $H\ge2\pi$ and $L_H>E$, the strict distribution function is $Q_H(s)=\Pr(H/\gamma<s)=S_W(H/s)/S_W(H)$ for $0<s\le1$, with $Q_H(0)=0$.
+
+$$
+\begin{aligned}
+\left\|Q_H-P_H\right\|_\infty&\le\frac{2E}{L_H-E},\\
+P_H(s)&=s+\frac{s\log(1/s)}{L_H}.
+\end{aligned}
+$$
+
+Here $P_H(s)=sL_{H/s}/L_H$ increases from $0$ to $1$, using its continuous extension at $s=0$. After normalization the error numerator is $s\delta_{H/s}-P_H(s)\delta_H$, and the denominator is at least $L_H-E$. The supremum distance to a continuous comparison function is the same for the strict and inclusive distribution functions. The Kolmogorov distance $D_H$ to the uniform law therefore satisfies
+
+$$
+\left|D_H-\frac{1}{eL_H}\right|\le\frac{2E}{L_H-E}.
+$$
+
+For all positive zeros without phase filtering, the counting estimate of Hasanalizade, Shen, and Wong gives for $t\ge e$
+
+$$
+\begin{aligned}
+\left|N(t)-\frac{m(t)}{2\pi}\right|&\le B(t),\\
+B(t)&=0.1038\log t\\
+&+0.2573\log\log t+9.3675.
+\end{aligned}
+$$
+
+Since $B(t)/t$ decreases on this range, take $c=1/(2\pi)$ and $b_H=B(H)/H$. At $H=10^6$, the whole-spectrum benchmark yields
+
+$$
+0.0283138<D_H<0.0283806.
+$$
+
+This benchmark uses the full spectrum without phase filtering. The Chapter 2 Haar acceptance region still requires its own $b_H$ or an equivalent uniform Fourier bound. [Hasanalizade, Shen, and Wong, Counting zeros of the Riemann zeta function (2022), Corollary 1.2](https://doi.org/10.1016/j.jnt.2021.06.032)
+:::
+
+::: {.problem #prob-ou-ch12-windowed-haar-rate title="Explicit Remainders for a Fixed Haar Phase Window"}
+Let $W$ be the fixed Haar acceptance region in Chapter 2, whose boundary has Haar measure zero. Set $c=\mu(W)/(2\pi)$ for normalized Haar measure $\mu$. Prove or disprove the existence of a checkable constant $b_H$ such that, with $m(t)$ as above,
+
+$$
+|A_W(t)-c\,m(t)|\le b_Ht
+\qquad\text{for all }t\ge H
+$$
+
+and propagate it to a finite-height error for every shared-clock reading. The available unfiltered count and qualitative equidistribution only give $A_W(t)=c\,m(t)+o(t\log t)$, which does not supply this uniform remainder. Until the window input is established, the finite-height Haar error and shared-clock precision remain open.
+:::
 
 Beneath every exclusion beat two universal Fourier-and-variance concentration theorems formally frozen inside the Lean 4 kernel. The first bounds nonnegative cyclic band weights above by a positive Fejér Fourier average, quantifying why narrow-band concentration inevitably pumps high-frequency Fourier energy:
 

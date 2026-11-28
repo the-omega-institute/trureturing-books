@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "38d4a2b57b7a6480818a79261ec1ccf898f0a211",
-  "pinned_at": "2026-11-27T22:11:29Z",
+  "commit": "ff4b5a28d6fd1d96650d2c117d99d9162462e05b",
+  "pinned_at": "2026-11-28T01:32:32Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1109,6 +1109,22 @@
       "statement_id": "sha256:aaf6e407a8696d8b3896181ab4a952aa36aef102dc4cd4457da7ed3e617e7ed5",
       "line": 187,
       "signature": "theorem pairSum_le_of_bounded_discrepancy (S : Spectrum) {D : ℝ} (hcount : ∀ᶠ Y : ℝ in atTop, |(S.N Y : ℝ) - mainTerm Y| ≤ D) {ε : ℝ} (hε : 0 < ε) : ∀ᶠ Y : ℝ in atTop, ∀ t : ℝ, pairSum S Y t ≤ (2 * Real.pi * c ^ 2 + ε) * (Y * Real.log Y ^ 2)"
+    },
+    "D5/S3/Analytic/Oscillation/MontgomeryMatchingCap.spectrum_matching_defect": {
+      "module": "D5/S3/Analytic/Oscillation/MontgomeryMatchingCap",
+      "name": "D5.S3.Analytic.Oscillation.MontgomeryMatchingCap.spectrum_matching_defect",
+      "kind": "theorem",
+      "statement_id": "sha256:70e9565d09cef1737b811736851f7f65559e1bd1aafdb2357ee9477340a8fc83",
+      "line": 292,
+      "signature": "theorem spectrum_matching_defect {S : Spectrum} {P : Type*} {H t : ℝ} (M : MatchingData (Σ j : S.index, Fin (S.mult j)) P (CutDensity.copies (S.cut H) S.mult) (fun p => S.gamma p.1)) : (4 / 13 : ℝ) * ∑ p ∈ M.pairs, (localCopies (CutDensity.copies (S.cut H) S.mult) (fun q => S.gamma q.1) (M.left p)).card * phaseResidual (t * S.gamma (M.left p).1) (t * S.gamma (M.right p).1) ≤ pairSum S H 0 - pairSum S H t"
+    },
+    "D5/S3/Analytic/Oscillation/MontgomeryMatchingCap.strict_normalized_cap_of_matching": {
+      "module": "D5/S3/Analytic/Oscillation/MontgomeryMatchingCap",
+      "name": "D5.S3.Analytic.Oscillation.MontgomeryMatchingCap.strict_normalized_cap_of_matching",
+      "kind": "theorem",
+      "statement_id": "sha256:70e9565d09cef1737b811736851f7f65559e1bd1aafdb2357ee9477340a8fc83",
+      "line": 302,
+      "signature": "theorem strict_normalized_cap_of_matching {S : Spectrum} {P : Type*} {H t κ η c₁ c₂ c₃ : ℝ} (M : MatchingData (Σ j : S.index, Fin (S.mult j)) P (CutDensity.copies (S.cut H) S.mult) (fun p => S.gamma p.1)) (hH : 1 < H) (hc₂ : 0 ≤ c₂) (hc₃ : 0 ≤ c₃) (hpairs : c₁ * H * Real.log H ≤ (M.pairs.card : ℝ)) (hres : ∀ p ∈ M.pairs, c₂ ≤ phaseResidual (t * S.gamma (M.left p).1) (t * S.gamma (M.right p).1)) (hhood : ∀ p ∈ M.pairs, c₃ * Real.log H ≤ (localCopies (CutDensity.copies (S.cut H) S.mult) (fun q => S.gamma q.1) (M.left p)).card) (hbase : pairSum S H 0 ≤ (κ - η + 4 * c₁ * c₂ * c₃ / 13) * (H * Real."
     },
     "D5/S3/Analytic/Oscillation/MontgomerySublogCount.pairSum_le_of_sublog_discrepancy": {
       "module": "D5/S3/Analytic/Oscillation/MontgomerySublogCount",
@@ -4127,7 +4143,7 @@
       "module": "D5/S3/ConceptDynamics/ObservationOrder/PosteriorMomentDistance",
       "name": "D5.S3.ConceptDynamics.ObservationOrder.PosteriorMomentDistance.projected_moment_unique",
       "kind": "theorem",
-      "statement_id": "sha256:263f1b0b606da3510e5049fb6c9d8526b2ee3871a11c589755b4d34a69ae58b6",
+      "statement_id": "sha256:b596be4ca08e6d6112c72bf96205b80a8b9a63c4dfdda2052fb40bfe8c1c1489",
       "line": 228,
       "signature": "theorem projected_moment_unique (t : ℝ) (ht : 1 / 20 ≤ t) (hu : t ≤ 11 / 160) : IsUniformPosteriorMoment (projectedMoment t) ∧ squaredDistance (projectedMoment t) (cycleMoment t) = (20 * t - 1) ^ 2 / 24 ∧ ∀ X, IsUniformPosteriorMoment X → (20 * t - 1) ^ 2 / 24 ≤ squaredDistance X (cycleMoment t) ∧ (squaredDistance X (cycleMoment t) = (20 * t - 1) ^ 2 / 24 → X = projectedMoment t)"
     },
@@ -7522,6 +7538,409 @@
         "propext"
       ]
     },
+    "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D.lorentzOfSL2C_boostZ": {
+      "module": "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D",
+      "name": "D5.S3.Geometry.Lorentz.SL2CLorentzCover4D.lorentzOfSL2C_boostZ",
+      "kind": "theorem",
+      "statement_id": "sha256:c8a35d9db744cd7b9c656316ffcfb08de695394f95adbf3fc49755ca64f45577",
+      "line": 404,
+      "signature": "theorem lorentzOfSL2C_boostZ (η : ℝ) : lorentzOfSL2C (boostZ η) = !![Real.cosh η, 0, 0, Real.sinh η; 0, 1, 0, 0; 0, 0, 1, 0; Real.sinh η, 0, 0, Real.cosh η]",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D.lorentzOfSL2C_boostZ_det": {
+      "module": "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D",
+      "name": "D5.S3.Geometry.Lorentz.SL2CLorentzCover4D.lorentzOfSL2C_boostZ_det",
+      "kind": "theorem",
+      "statement_id": "sha256:c8a35d9db744cd7b9c656316ffcfb08de695394f95adbf3fc49755ca64f45577",
+      "line": 440,
+      "signature": "theorem lorentzOfSL2C_boostZ_det (η : ℝ) : (lorentzOfSL2C (boostZ η)).det = 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D.lorentzOfSL2C_det_one": {
+      "module": "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D",
+      "name": "D5.S3.Geometry.Lorentz.SL2CLorentzCover4D.lorentzOfSL2C_det_one",
+      "kind": "theorem",
+      "statement_id": "sha256:c8a35d9db744cd7b9c656316ffcfb08de695394f95adbf3fc49755ca64f45577",
+      "line": 537,
+      "signature": "theorem lorentzOfSL2C_det_one (A : SL2C) : (lorentzOfSL2C A).det = 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D.lorentzOfSL2C_eq_iff": {
+      "module": "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D",
+      "name": "D5.S3.Geometry.Lorentz.SL2CLorentzCover4D.lorentzOfSL2C_eq_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:c8a35d9db744cd7b9c656316ffcfb08de695394f95adbf3fc49755ca64f45577",
+      "line": 266,
+      "signature": "theorem lorentzOfSL2C_eq_iff (A B : SL2C) : lorentzOfSL2C A = lorentzOfSL2C B ↔ A = B ∨ A = -B",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D.lorentzOfSL2C_isProperOrthochronous": {
+      "module": "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D",
+      "name": "D5.S3.Geometry.Lorentz.SL2CLorentzCover4D.lorentzOfSL2C_isProperOrthochronous",
+      "kind": "theorem",
+      "statement_id": "sha256:c8a35d9db744cd7b9c656316ffcfb08de695394f95adbf3fc49755ca64f45577",
+      "line": 545,
+      "signature": "theorem lorentzOfSL2C_isProperOrthochronous (A : SL2C) : IsProperOrthochronous (lorentzOfSL2C A)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D.lorentzOfSL2C_ker_iff": {
+      "module": "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D",
+      "name": "D5.S3.Geometry.Lorentz.SL2CLorentzCover4D.lorentzOfSL2C_ker_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:c8a35d9db744cd7b9c656316ffcfb08de695394f95adbf3fc49755ca64f45577",
+      "line": 224,
+      "signature": "theorem lorentzOfSL2C_ker_iff (A : SL2C) : lorentzOfSL2C A = 1 ↔ A = 1 ∨ A = -1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D.lorentzOfSL2C_mul": {
+      "module": "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D",
+      "name": "D5.S3.Geometry.Lorentz.SL2CLorentzCover4D.lorentzOfSL2C_mul",
+      "kind": "theorem",
+      "statement_id": "sha256:c8a35d9db744cd7b9c656316ffcfb08de695394f95adbf3fc49755ca64f45577",
+      "line": 151,
+      "signature": "theorem lorentzOfSL2C_mul (A B : SL2C) : lorentzOfSL2C (A * B) = lorentzOfSL2C A * lorentzOfSL2C B",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D.lorentzOfSL2C_mulVec": {
+      "module": "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D",
+      "name": "D5.S3.Geometry.Lorentz.SL2CLorentzCover4D.lorentzOfSL2C_mulVec",
+      "kind": "theorem",
+      "statement_id": "sha256:c8a35d9db744cd7b9c656316ffcfb08de695394f95adbf3fc49755ca64f45577",
+      "line": 141,
+      "signature": "theorem lorentzOfSL2C_mulVec (A : SL2C) (x : V4) : lorentzOfSL2C A *ᵥ x = lorentzVec A x",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D.lorentzOfSL2C_one": {
+      "module": "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D",
+      "name": "D5.S3.Geometry.Lorentz.SL2CLorentzCover4D.lorentzOfSL2C_one",
+      "kind": "theorem",
+      "statement_id": "sha256:c8a35d9db744cd7b9c656316ffcfb08de695394f95adbf3fc49755ca64f45577",
+      "line": 145,
+      "signature": "theorem lorentzOfSL2C_one : lorentzOfSL2C 1 = 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D.lorentzOfSL2C_orthochronous": {
+      "module": "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D",
+      "name": "D5.S3.Geometry.Lorentz.SL2CLorentzCover4D.lorentzOfSL2C_orthochronous",
+      "kind": "theorem",
+      "statement_id": "sha256:c8a35d9db744cd7b9c656316ffcfb08de695394f95adbf3fc49755ca64f45577",
+      "line": 190,
+      "signature": "theorem lorentzOfSL2C_orthochronous (A : SL2C) : 1 ≤ lorentzOfSL2C A 0 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D.lorentzOfSL2C_preserves_minkowski": {
+      "module": "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D",
+      "name": "D5.S3.Geometry.Lorentz.SL2CLorentzCover4D.lorentzOfSL2C_preserves_minkowski",
+      "kind": "theorem",
+      "statement_id": "sha256:c8a35d9db744cd7b9c656316ffcfb08de695394f95adbf3fc49755ca64f45577",
+      "line": 177,
+      "signature": "theorem lorentzOfSL2C_preserves_minkowski (A : SL2C) : (lorentzOfSL2C A)ᵀ * eta * lorentzOfSL2C A = eta",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D.lorentzOfSL2C_preserves_norm": {
+      "module": "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D",
+      "name": "D5.S3.Geometry.Lorentz.SL2CLorentzCover4D.lorentzOfSL2C_preserves_norm",
+      "kind": "theorem",
+      "statement_id": "sha256:c8a35d9db744cd7b9c656316ffcfb08de695394f95adbf3fc49755ca64f45577",
+      "line": 160,
+      "signature": "theorem lorentzOfSL2C_preserves_norm (A : SL2C) (x : V4) : minkowskiNormSq (lorentzOfSL2C A *ᵥ x) = minkowskiNormSq x",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D.lorentzOfSL2C_rotY": {
+      "module": "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D",
+      "name": "D5.S3.Geometry.Lorentz.SL2CLorentzCover4D.lorentzOfSL2C_rotY",
+      "kind": "theorem",
+      "statement_id": "sha256:c8a35d9db744cd7b9c656316ffcfb08de695394f95adbf3fc49755ca64f45577",
+      "line": 380,
+      "signature": "theorem lorentzOfSL2C_rotY (φ : ℝ) : lorentzOfSL2C (rotY φ) = !![1, 0, 0, 0; 0, Real.cos φ, 0, Real.sin φ; 0, 0, 1, 0; 0, -Real.sin φ, 0, Real.cos φ]",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D.lorentzOfSL2C_rotY_det": {
+      "module": "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D",
+      "name": "D5.S3.Geometry.Lorentz.SL2CLorentzCover4D.lorentzOfSL2C_rotY_det",
+      "kind": "theorem",
+      "statement_id": "sha256:c8a35d9db744cd7b9c656316ffcfb08de695394f95adbf3fc49755ca64f45577",
+      "line": 437,
+      "signature": "theorem lorentzOfSL2C_rotY_det (φ : ℝ) : (lorentzOfSL2C (rotY φ)).det = 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D.lorentzOfSL2C_rotZ": {
+      "module": "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D",
+      "name": "D5.S3.Geometry.Lorentz.SL2CLorentzCover4D.lorentzOfSL2C_rotZ",
+      "kind": "theorem",
+      "statement_id": "sha256:c8a35d9db744cd7b9c656316ffcfb08de695394f95adbf3fc49755ca64f45577",
+      "line": 354,
+      "signature": "theorem lorentzOfSL2C_rotZ (θ : ℝ) : lorentzOfSL2C (rotZ θ) = !![1, 0, 0, 0; 0, Real.cos θ, -Real.sin θ, 0; 0, Real.sin θ, Real.cos θ, 0; 0, 0, 0, 1]",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D.lorentzOfSL2C_rotZ_det": {
+      "module": "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D",
+      "name": "D5.S3.Geometry.Lorentz.SL2CLorentzCover4D.lorentzOfSL2C_rotZ_det",
+      "kind": "theorem",
+      "statement_id": "sha256:c8a35d9db744cd7b9c656316ffcfb08de695394f95adbf3fc49755ca64f45577",
+      "line": 434,
+      "signature": "theorem lorentzOfSL2C_rotZ_det (θ : ℝ) : (lorentzOfSL2C (rotZ θ)).det = 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D.lorentzOfSL2C_surjective": {
+      "module": "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D",
+      "name": "D5.S3.Geometry.Lorentz.SL2CLorentzCover4D.lorentzOfSL2C_surjective",
+      "kind": "theorem",
+      "statement_id": "sha256:c8a35d9db744cd7b9c656316ffcfb08de695394f95adbf3fc49755ca64f45577",
+      "line": 550,
+      "signature": "theorem lorentzOfSL2C_surjective (L : Matrix (Fin 4) (Fin 4) ℝ) (hL : IsProperOrthochronous L) : ∃ A : SL2C, lorentzOfSL2C A = L",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D.minkowski_pauliHerm_inverse": {
+      "module": "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D",
+      "name": "D5.S3.Geometry.Lorentz.SL2CLorentzCover4D.minkowski_pauliHerm_inverse",
+      "kind": "theorem",
+      "statement_id": "sha256:c8a35d9db744cd7b9c656316ffcfb08de695394f95adbf3fc49755ca64f45577",
+      "line": 69,
+      "signature": "theorem minkowski_pauliHerm_inverse (M : H2) (hM : M.IsHermitian) : pauliHerm (minkowski_from_pauliHerm M) = M",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D.pauliHerm_det": {
+      "module": "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D",
+      "name": "D5.S3.Geometry.Lorentz.SL2CLorentzCover4D.pauliHerm_det",
+      "kind": "theorem",
+      "statement_id": "sha256:c8a35d9db744cd7b9c656316ffcfb08de695394f95adbf3fc49755ca64f45577",
+      "line": 89,
+      "signature": "theorem pauliHerm_det (x : V4) : (pauliHerm x).det = (minkowskiNormSq x : ℂ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D.pauliHerm_isHermitian": {
+      "module": "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D",
+      "name": "D5.S3.Geometry.Lorentz.SL2CLorentzCover4D.pauliHerm_isHermitian",
+      "kind": "theorem",
+      "statement_id": "sha256:c8a35d9db744cd7b9c656316ffcfb08de695394f95adbf3fc49755ca64f45577",
+      "line": 58,
+      "signature": "theorem pauliHerm_isHermitian (x : V4) : (pauliHerm x).IsHermitian",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D.pauliHerm_lorentzVec": {
+      "module": "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D",
+      "name": "D5.S3.Geometry.Lorentz.SL2CLorentzCover4D.pauliHerm_lorentzVec",
+      "kind": "theorem",
+      "statement_id": "sha256:c8a35d9db744cd7b9c656316ffcfb08de695394f95adbf3fc49755ca64f45577",
+      "line": 135,
+      "signature": "theorem pauliHerm_lorentzVec (A : SL2C) (x : V4) : pauliHerm (lorentzVec A x) = (A : H2) * pauliHerm x * (A : H2)ᴴ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D.pauliHerm_minkowski_inverse": {
+      "module": "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D",
+      "name": "D5.S3.Geometry.Lorentz.SL2CLorentzCover4D.pauliHerm_minkowski_inverse",
+      "kind": "theorem",
+      "statement_id": "sha256:c8a35d9db744cd7b9c656316ffcfb08de695394f95adbf3fc49755ca64f45577",
+      "line": 63,
+      "signature": "theorem pauliHerm_minkowski_inverse (x : V4) : minkowski_from_pauliHerm (pauliHerm x) = x",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D.pauliHerm_spinor_outer": {
+      "module": "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D",
+      "name": "D5.S3.Geometry.Lorentz.SL2CLorentzCover4D.pauliHerm_spinor_outer",
+      "kind": "theorem",
+      "statement_id": "sha256:c8a35d9db744cd7b9c656316ffcfb08de695394f95adbf3fc49755ca64f45577",
+      "line": 581,
+      "signature": "theorem pauliHerm_spinor_outer (ψ : Fin 2 → ℂ) : pauliHerm (spinor_to_future_null ψ) = Matrix.of fun i j => ψ i * conj (ψ j)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D.pauliHerm_trace": {
+      "module": "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D",
+      "name": "D5.S3.Geometry.Lorentz.SL2CLorentzCover4D.pauliHerm_trace",
+      "kind": "theorem",
+      "statement_id": "sha256:c8a35d9db744cd7b9c656316ffcfb08de695394f95adbf3fc49755ca64f45577",
+      "line": 95,
+      "signature": "theorem pauliHerm_trace (x : V4) : (pauliHerm x).trace = (2 * x 0 : ℂ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D.sl2c_cartan_factorization": {
+      "module": "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D",
+      "name": "D5.S3.Geometry.Lorentz.SL2CLorentzCover4D.sl2c_cartan_factorization",
+      "kind": "theorem",
+      "statement_id": "sha256:c8a35d9db744cd7b9c656316ffcfb08de695394f95adbf3fc49755ca64f45577",
+      "line": 515,
+      "signature": "theorem sl2c_cartan_factorization (A : SL2C) : ∃ U V : SL2C, ∃ η : ℝ, (U : H2)ᴴ * (U : H2) = 1 ∧ (V : H2)ᴴ * (V : H2) = 1 ∧ A = U⁻¹ * boostZ η * V",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D.sl2c_celestial_mobius_equivariant": {
+      "module": "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D",
+      "name": "D5.S3.Geometry.Lorentz.SL2CLorentzCover4D.sl2c_celestial_mobius_equivariant",
+      "kind": "theorem",
+      "statement_id": "sha256:c8a35d9db744cd7b9c656316ffcfb08de695394f95adbf3fc49755ca64f45577",
+      "line": 610,
+      "signature": "theorem sl2c_celestial_mobius_equivariant (A : SL2C) (ψ : Fin 2 → ℂ) (h1 : ψ 1 ≠ 0) (hA1 : ((A : H2) *ᵥ ψ) 1 ≠ 0) : ((A : H2) *ᵥ ψ) 0 / ((A : H2) *ᵥ ψ) 1 = sl2c_celestial_mobius A (ψ 0 / ψ 1)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D.sl2c_gram_properties": {
+      "module": "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D",
+      "name": "D5.S3.Geometry.Lorentz.SL2CLorentzCover4D.sl2c_gram_properties",
+      "kind": "theorem",
+      "statement_id": "sha256:c8a35d9db744cd7b9c656316ffcfb08de695394f95adbf3fc49755ca64f45577",
+      "line": 207,
+      "signature": "theorem sl2c_gram_properties (A : SL2C) : ((A : H2) * (A : H2)ᴴ).PosDef ∧ ((A : H2) * (A : H2)ᴴ).det = 1 ∧ 2 ≤ ((A : H2) * (A : H2)ᴴ).trace.re",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D.so3_spinor_lift": {
+      "module": "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D",
+      "name": "D5.S3.Geometry.Lorentz.SL2CLorentzCover4D.so3_spinor_lift",
+      "kind": "theorem",
+      "statement_id": "sha256:c8a35d9db744cd7b9c656316ffcfb08de695394f95adbf3fc49755ca64f45577",
+      "line": 462,
+      "signature": "theorem so3_spinor_lift (R : Matrix (Fin 3) (Fin 3) ℝ) (hR : Rᵀ * R = 1) (hd : R.det = 1) : ∃ U : SL2C, (U : H2)ᴴ * (U : H2) = 1 ∧ (lorentzOfSL2C U).submatrix Fin.succ Fin.succ = R",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D.spinor_to_future_null_equivariant": {
+      "module": "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D",
+      "name": "D5.S3.Geometry.Lorentz.SL2CLorentzCover4D.spinor_to_future_null_equivariant",
+      "kind": "theorem",
+      "statement_id": "sha256:c8a35d9db744cd7b9c656316ffcfb08de695394f95adbf3fc49755ca64f45577",
+      "line": 598,
+      "signature": "theorem spinor_to_future_null_equivariant (A : SL2C) (ψ : Fin 2 → ℂ) : lorentzOfSL2C A *ᵥ spinor_to_future_null ψ = spinor_to_future_null ((A : H2) *ᵥ ψ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D.spinor_to_future_null_null": {
+      "module": "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D",
+      "name": "D5.S3.Geometry.Lorentz.SL2CLorentzCover4D.spinor_to_future_null_null",
+      "kind": "theorem",
+      "statement_id": "sha256:c8a35d9db744cd7b9c656316ffcfb08de695394f95adbf3fc49755ca64f45577",
+      "line": 587,
+      "signature": "theorem spinor_to_future_null_null (ψ : Fin 2 → ℂ) : minkowskiNormSq (spinor_to_future_null ψ) = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D.spinor_to_future_null_time_nonneg": {
+      "module": "D5/S3/Geometry/Lorentz/SL2CLorentzCover4D",
+      "name": "D5.S3.Geometry.Lorentz.SL2CLorentzCover4D.spinor_to_future_null_time_nonneg",
+      "kind": "theorem",
+      "statement_id": "sha256:c8a35d9db744cd7b9c656316ffcfb08de695394f95adbf3fc49755ca64f45577",
+      "line": 594,
+      "signature": "theorem spinor_to_future_null_time_nonneg (ψ : Fin 2 → ℂ) : 0 ≤ spinor_to_future_null ψ 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
     "D5/S3/Geometry/Lorentz/SachsJacobsonEinstein4D.area_radius_focusing": {
       "module": "D5/S3/Geometry/Lorentz/SachsJacobsonEinstein4D",
       "name": "D5.S3.Geometry.Lorentz.SachsJacobsonEinstein4D.area_radius_focusing",
@@ -7672,6 +8091,240 @@
       "statement_id": "sha256:5bfbf4afa44b27693b5108c08d285feb777688060d543590d22b0ed8d7e7e536",
       "line": 186,
       "signature": "theorem weyl_generates_shear {o : OpticalData} {I : Set ℝ} (h : SolvesOn o I) {t : ℝ} (ht : t ∈ I) (hs : o.shear t = 0) (hw : o.tideTerm t ≠ 0) : ∀ᶠ x in 𝓝[≠] t, o.shear x ≠ 0 ∧ (x ∈ I → 0 ≤ o.ricciTerm x → 0 < o.radius x → HasDerivAt (radiusSlope o) (-focusing o x * o.radius x) x ∧ -focusing o x * o.radius x < 0)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D.binet_first_order_ode": {
+      "module": "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D",
+      "name": "D5.S3.Geometry.Lorentz.SchwarzschildOpticalGeodesics4D.binet_first_order_ode",
+      "kind": "theorem",
+      "statement_id": "sha256:cfd6dad6be1f8c677af92b93d6f4f54747b4201312aa715d98318c7d1624c56c",
+      "line": 396,
+      "signature": "theorem binet_first_order_ode {M b φ : ℝ} (hb : b ≠ 0) : deriv (deriv (u1 M b)) φ + u1 M b φ = 3 * M * (u0 b φ) ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D.binet_zeroth_order_ode": {
+      "module": "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D",
+      "name": "D5.S3.Geometry.Lorentz.SchwarzschildOpticalGeodesics4D.binet_zeroth_order_ode",
+      "kind": "theorem",
+      "statement_id": "sha256:cfd6dad6be1f8c677af92b93d6f4f54747b4201312aa715d98318c7d1624c56c",
+      "line": 385,
+      "signature": "theorem binet_zeroth_order_ode (b φ : ℝ) : deriv (deriv (u0 b)) φ + u0 b φ = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D.circular_orbit_angMom_iff": {
+      "module": "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D",
+      "name": "D5.S3.Geometry.Lorentz.SchwarzschildOpticalGeodesics4D.circular_orbit_angMom_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:cfd6dad6be1f8c677af92b93d6f4f54747b4201312aa715d98318c7d1624c56c",
+      "line": 196,
+      "signature": "theorem circular_orbit_angMom_iff {M L r : ℝ} (hM : 0 < M) (hr : 3 * M < r) : deriv (timePotential M L) r = 0 ↔ L ^ 2 = M * r ^ 2 / (r - 3 * M)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D.circular_orbit_energy_minimum": {
+      "module": "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D",
+      "name": "D5.S3.Geometry.Lorentz.SchwarzschildOpticalGeodesics4D.circular_orbit_energy_minimum",
+      "kind": "theorem",
+      "statement_id": "sha256:cfd6dad6be1f8c677af92b93d6f4f54747b4201312aa715d98318c7d1624c56c",
+      "line": 329,
+      "signature": "theorem circular_orbit_energy_minimum {M L r : ℝ} (hM : 0 < M) (hr : 3 * M < r) (hL : L ^ 2 = M * r ^ 2 / (r - 3 * M)) : 8 / 9 ≤ 2 * timePotential M L r ∧ (2 * timePotential M L r = 8 / 9 ↔ r = 6 * M)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D.circular_orbit_second_deriv": {
+      "module": "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D",
+      "name": "D5.S3.Geometry.Lorentz.SchwarzschildOpticalGeodesics4D.circular_orbit_second_deriv",
+      "kind": "theorem",
+      "statement_id": "sha256:cfd6dad6be1f8c677af92b93d6f4f54747b4201312aa715d98318c7d1624c56c",
+      "line": 224,
+      "signature": "theorem circular_orbit_second_deriv {M L r : ℝ} (hM : 0 < M) (hr : 3 * M < r) (hL : L ^ 2 = M * r ^ 2 / (r - 3 * M)) : deriv (deriv (timePotential M L)) r = M * (r - 6 * M) / (r ^ 3 * (r - 3 * M))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D.circular_orbit_stability_iff": {
+      "module": "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D",
+      "name": "D5.S3.Geometry.Lorentz.SchwarzschildOpticalGeodesics4D.circular_orbit_stability_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:cfd6dad6be1f8c677af92b93d6f4f54747b4201312aa715d98318c7d1624c56c",
+      "line": 266,
+      "signature": "theorem circular_orbit_stability_iff {M L r : ℝ} (hM : 0 < M) (hr : 3 * M < r) (hL : L ^ 2 = M * r ^ 2 / (r - 3 * M)) : (0 < deriv (deriv (timePotential M L)) r ↔ 6 * M < r) ∧ (deriv (deriv (timePotential M L)) r = 0 ↔ r = 6 * M) ∧ (deriv (deriv (timePotential M L)) r < 0 ↔ r < 6 * M)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D.einstein_light_deflection_eq": {
+      "module": "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D",
+      "name": "D5.S3.Geometry.Lorentz.SchwarzschildOpticalGeodesics4D.einstein_light_deflection_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:cfd6dad6be1f8c677af92b93d6f4f54747b4201312aa715d98318c7d1624c56c",
+      "line": 427,
+      "signature": "theorem einstein_light_deflection_eq {M b : ℝ} (hb : b ≠ 0) : u1 M b 0 / (deriv (u0 b) 0) - u1 M b Real.pi / (deriv (u0 b) Real.pi) = 4 * M / b",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D.isco_parameters_exact": {
+      "module": "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D",
+      "name": "D5.S3.Geometry.Lorentz.SchwarzschildOpticalGeodesics4D.isco_parameters_exact",
+      "kind": "theorem",
+      "statement_id": "sha256:cfd6dad6be1f8c677af92b93d6f4f54747b4201312aa715d98318c7d1624c56c",
+      "line": 294,
+      "signature": "theorem isco_parameters_exact {M : ℝ} (hM : 0 < M) : let r",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D.no_circular_orbit_le_threeM": {
+      "module": "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D",
+      "name": "D5.S3.Geometry.Lorentz.SchwarzschildOpticalGeodesics4D.no_circular_orbit_le_threeM",
+      "kind": "theorem",
+      "statement_id": "sha256:cfd6dad6be1f8c677af92b93d6f4f54747b4201312aa715d98318c7d1624c56c",
+      "line": 211,
+      "signature": "theorem no_circular_orbit_le_threeM {M L r : ℝ} (hM : 0 < M) (hr : 0 < r) (hr3 : r ≤ 3 * M) : deriv (timePotential M L) r ≠ 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D.nullPotential_hasDerivAt": {
+      "module": "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D",
+      "name": "D5.S3.Geometry.Lorentz.SchwarzschildOpticalGeodesics4D.nullPotential_hasDerivAt",
+      "kind": "theorem",
+      "statement_id": "sha256:cfd6dad6be1f8c677af92b93d6f4f54747b4201312aa715d98318c7d1624c56c",
+      "line": 38,
+      "signature": "theorem nullPotential_hasDerivAt {M r : ℝ} (hr : r ≠ 0) : HasDerivAt (nullPotential M) (2 * (3 * M - r) / r ^ 4) r",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D.photon_sphere_strict_global_max": {
+      "module": "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D",
+      "name": "D5.S3.Geometry.Lorentz.SchwarzschildOpticalGeodesics4D.photon_sphere_strict_global_max",
+      "kind": "theorem",
+      "statement_id": "sha256:cfd6dad6be1f8c677af92b93d6f4f54747b4201312aa715d98318c7d1624c56c",
+      "line": 66,
+      "signature": "theorem photon_sphere_strict_global_max {M r : ℝ} (hM : 0 < M) (hr : 0 < r) : nullPotential M r ≤ 1 / (27 * M ^ 2) ∧ (nullPotential M r = 1 / (27 * M ^ 2) ↔ r = 3 * M)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D.photon_sphere_unique": {
+      "module": "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D",
+      "name": "D5.S3.Geometry.Lorentz.SchwarzschildOpticalGeodesics4D.photon_sphere_unique",
+      "kind": "theorem",
+      "statement_id": "sha256:cfd6dad6be1f8c677af92b93d6f4f54747b4201312aa715d98318c7d1624c56c",
+      "line": 55,
+      "signature": "theorem photon_sphere_unique {M r : ℝ} (hr : 0 < r) : deriv (nullPotential M) r = 0 ↔ r = 3 * M",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D.photon_sphere_unstable": {
+      "module": "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D",
+      "name": "D5.S3.Geometry.Lorentz.SchwarzschildOpticalGeodesics4D.photon_sphere_unstable",
+      "kind": "theorem",
+      "statement_id": "sha256:cfd6dad6be1f8c677af92b93d6f4f54747b4201312aa715d98318c7d1624c56c",
+      "line": 97,
+      "signature": "theorem photon_sphere_unstable {M : ℝ} (hM : 0 < M) : deriv (deriv (nullPotential M)) (3 * M) = -2 / (81 * M ^ 4) ∧ deriv (deriv (nullPotential M)) (3 * M) < 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D.schwarzschild_redshift_factor": {
+      "module": "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D",
+      "name": "D5.S3.Geometry.Lorentz.SchwarzschildOpticalGeodesics4D.schwarzschild_redshift_factor",
+      "kind": "theorem",
+      "statement_id": "sha256:cfd6dad6be1f8c677af92b93d6f4f54747b4201312aa715d98318c7d1624c56c",
+      "line": 348,
+      "signature": "theorem schwarzschild_redshift_factor {M r₁ r₂ : ℝ} (hM : 0 < M) (h1 : 2 * M < r₁) (h12 : r₁ < r₂) : 0 < redshiftRatio M r₁ r₂ ∧ redshiftRatio M r₁ r₂ < 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D.schwarzschild_redshift_horizon_limit": {
+      "module": "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D",
+      "name": "D5.S3.Geometry.Lorentz.SchwarzschildOpticalGeodesics4D.schwarzschild_redshift_horizon_limit",
+      "kind": "theorem",
+      "statement_id": "sha256:cfd6dad6be1f8c677af92b93d6f4f54747b4201312aa715d98318c7d1624c56c",
+      "line": 369,
+      "signature": "theorem schwarzschild_redshift_horizon_limit {M r₂ : ℝ} (hM : 0 < M) : Tendsto (fun r => redshiftRatio M r r₂) (𝓝[>] (2 * M)) (𝓝 0)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D.shadow_capture_iff": {
+      "module": "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D",
+      "name": "D5.S3.Geometry.Lorentz.SchwarzschildOpticalGeodesics4D.shadow_capture_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:cfd6dad6be1f8c677af92b93d6f4f54747b4201312aa715d98318c7d1624c56c",
+      "line": 154,
+      "signature": "theorem shadow_capture_iff {M b : ℝ} (hM : 0 < M) (hb : 0 < b) : b < 3 * Real.sqrt 3 * M ↔ nullPotential M (3 * M) < (b ^ 2)⁻¹",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D.shadow_critical_impact_eq": {
+      "module": "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D",
+      "name": "D5.S3.Geometry.Lorentz.SchwarzschildOpticalGeodesics4D.shadow_critical_impact_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:cfd6dad6be1f8c677af92b93d6f4f54747b4201312aa715d98318c7d1624c56c",
+      "line": 132,
+      "signature": "theorem shadow_critical_impact_eq {M : ℝ} (hM : 0 < M) : (nullPotential M (3 * M))⁻¹ = 27 * M ^ 2 ∧ Real.sqrt ((nullPotential M (3 * M))⁻¹) = 3 * Real.sqrt 3 * M",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D.timePotential_hasDerivAt": {
+      "module": "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D",
+      "name": "D5.S3.Geometry.Lorentz.SchwarzschildOpticalGeodesics4D.timePotential_hasDerivAt",
+      "kind": "theorem",
+      "statement_id": "sha256:cfd6dad6be1f8c677af92b93d6f4f54747b4201312aa715d98318c7d1624c56c",
+      "line": 168,
+      "signature": "theorem timePotential_hasDerivAt {M L r : ℝ} (hr : r ≠ 0) : HasDerivAt (timePotential M L) ((M * r ^ 2 - L ^ 2 * (r - 3 * M)) / r ^ 4) r",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -8617,6 +9270,14 @@
       "statement_id": "sha256:5023060ebfbed21f28c4c48c31620bf7b9b16c98e8d6bb27b669168a992c3892",
       "line": 116,
       "signature": "theorem selected_tree_transport (ht : NamedSpanningTree s t T) (r : V) : (∀ u : E → Circle, rootPhase ht r u r = 1) ∧ (∀ e ∈ T, ∀ u : E → Circle, rootPhase ht r u (t e) = u e * rootPhase ht r u (s e)) ∧ (∀ g : V → Circle, ∀ u : E → Circle, ∀ a : V, rootPhase ht r (gauge s t g u) a = g a * rootPhase ht r u a * (g r)⁻¹) ∧ (∀ a : V, Continuous (fun u : E → Circle => rootPhase ht r u a)) ∧ (∀ u w : E → Circle, ∀ a : V, rootPhase ht r (u * w) a = rootPhase ht r u a * rootPhase ht r w a) ∧ (∀ a : V, rootPhase ht r (1 : E → Circle) a = 1)"
+    },
+    "D5/S3/Observer/ArithmeticTomography/PrefixConstrainedGreedyOptimality.prefix_constrained_greedy_optimality": {
+      "module": "D5/S3/Observer/ArithmeticTomography/PrefixConstrainedGreedyOptimality",
+      "name": "D5.S3.Observer.ArithmeticTomography.PrefixConstrainedGreedyOptimality.prefix_constrained_greedy_optimality",
+      "kind": "theorem",
+      "statement_id": "sha256:54510d39cca680833b9e9afdac044d7ea7bc354f9e3ee4e84d88341f7c11efa9",
+      "line": 34,
+      "signature": "theorem prefix_constrained_greedy_optimality {Channel : Type u} [Finite Channel] (depth budget : Nat) (gain : Channel → Fin depth → Real) (gain_antitone : ∀ channel, Antitone (gain channel)) (top : Finset (Channel × Fin depth)) (top_card : top.card = budget) (top_dominates : ∀ inside ∈ top, ∀ outside ∉ top, gain outside.1 outside.2 ≤ gain inside.1 inside.2) : ∃ adjusted : Finset (Channel × Fin depth), adjusted.card = budget ∧ (∀ channel level, (channel, level) ∈ adjusted → ∀ earlier, earlier < level → (channel, earlier) ∈ adjusted) ∧ (∑ cell ∈ top, gain cell.1 cell.2) ≤ ∑ cell ∈ adjusted, gain"
     },
     "D5/S3/Observer/BornReduction.rank_one_pure_state_modulus_square_reduction": {
       "module": "D5/S3/Observer/BornReduction",
@@ -18054,6 +18715,266 @@
         "propext"
       ]
     },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.ew_W_mass_sq": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.ew_W_mass_sq",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 216,
+      "signature": "theorem ew_W_mass_sq (g gp v : ℝ) : (ewMassMatrix g gp v).mulVec ![1, 0, 0, 0] = mWSq g v • ![1, 0, 0, 0] ∧ (ewMassMatrix g gp v).mulVec ![0, 1, 0, 0] = mWSq g v • ![0, 1, 0, 0]",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.ew_Z_mass_sq": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.ew_Z_mass_sq",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 228,
+      "signature": "theorem ew_Z_mass_sq (g gp v : ℝ) : (ewMassMatrix g gp v).mulVec ![0, 0, cosW g gp, -sinW g gp] = mZSq g gp v • ![0, 0, cosW g gp, -sinW g gp]",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.ew_custodial_rho_eq_one": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.ew_custodial_rho_eq_one",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 243,
+      "signature": "theorem ew_custodial_rho_eq_one {g gp v : ℝ} (hg : 0 < g) (hv : 0 < v) : mWSq g v / (mZSq g gp v * cosW g gp ^ 2) = 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.ew_electric_charge_relations": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.ew_electric_charge_relations",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 253,
+      "signature": "theorem ew_electric_charge_relations {g gp : ℝ} (hg : 0 < g) (hgp : 0 < gp) : g * sinW g gp = gp * cosW g gp ∧ g * sinW g gp = g * gp / Real.sqrt (g ^ 2 + gp ^ 2) ∧ (g * sinW g gp) ^ 2 = g ^ 2 * gp ^ 2 / (g ^ 2 + gp ^ 2) ∧ (g * sinW g gp)⁻¹ ^ 2 = g⁻¹ ^ 2 + gp⁻¹ ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.ew_gauge_mass_matrix": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.ew_gauge_mass_matrix",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 209,
+      "signature": "theorem ew_gauge_mass_matrix (g gp v W₁ W₂ W₃ B : ℝ) : ewMassQuadratic g gp v W₁ W₂ W₃ B = dotProduct ![W₁, W₂, W₃, B] ((ewMassMatrix g gp v).mulVec ![W₁, W₂, W₃, B])",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.ew_mass_diagonalized": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.ew_mass_diagonalized",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 189,
+      "signature": "theorem ew_mass_diagonalized {g gp v W₁ W₂ W₃ B : ℝ} (hsum : 0 < g ^ 2 + gp ^ 2) : ewMassQuadratic g gp v W₁ W₂ W₃ B = mWSq g v * (W₁ ^ 2 + W₂ ^ 2) + mZSq g gp v * zMode g gp W₃ B ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.ew_mass_order": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.ew_mass_order",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 236,
+      "signature": "theorem ew_mass_order {g gp v : ℝ} (hg : 0 < g) (hgp : 0 < gp) (hv : 0 < v) : 0 < mWSq g v ∧ mWSq g v < mZSq g gp v",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.ew_mass_quadratic_form": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.ew_mass_quadratic_form",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 159,
+      "signature": "theorem ew_mass_quadratic_form (g gp v W₁ W₂ W₃ B : ℝ) : ewMassQuadratic g gp v W₁ W₂ W₃ B = g ^ 2 * v ^ 2 / 4 * (W₁ ^ 2 + W₂ ^ 2) + v ^ 2 / 4 * (g * W₃ - gp * B) ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.ew_neutral_rotation_orthogonal": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.ew_neutral_rotation_orthogonal",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 179,
+      "signature": "theorem ew_neutral_rotation_orthogonal {g gp W₃ B : ℝ} (h : 0 < g ^ 2 + gp ^ 2) : zMode g gp W₃ B ^ 2 + photonMode g gp W₃ B ^ 2 = W₃ ^ 2 + B ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.ew_photon_massless": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.ew_photon_massless",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 222,
+      "signature": "theorem ew_photon_massless (g gp v : ℝ) : (ewMassMatrix g gp v).mulVec ![0, 0, sinW g gp, cosW g gp] = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.gaugeDerivative_eq_generator_action": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.gaugeDerivative_eq_generator_action",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 149,
+      "signature": "theorem gaugeDerivative_eq_generator_action (g gp v W₁ W₂ W₃ B : ℝ) : gaugeDerivative g gp v W₁ W₂ W₃ B = (-Complex.I) • ewGeneratorAction (g * W₁) (g * W₂) (g * W₃) (gp * B) (higgsVac v)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.higgsPotential_eq_zero_iff": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.higgsPotential_eq_zero_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 43,
+      "signature": "theorem higgsPotential_eq_zero_iff {lam v : ℝ} {Φ : Fin 2 → ℂ} (hlam : 0 < lam) : higgsPotential lam v Φ = 0 ↔ ‖Φ 0‖ ^ 2 + ‖Φ 1‖ ^ 2 = v ^ 2 / 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.higgsPotential_nonneg": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.higgsPotential_nonneg",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 38,
+      "signature": "theorem higgsPotential_nonneg {lam v : ℝ} {Φ : Fin 2 → ℂ} (hlam : 0 < lam) : 0 ≤ higgsPotential lam v Φ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.higgsPotential_vacuum_zero": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.higgsPotential_vacuum_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 56,
+      "signature": "theorem higgsPotential_vacuum_zero {lam v : ℝ} (hlam : 0 < lam) : higgsPotential lam v (higgsVac v) = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.higgs_fluctuation_expansion": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.higgs_fluctuation_expansion",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 276,
+      "signature": "theorem higgs_fluctuation_expansion (lam v g₁ g₂ h g₃ : ℝ) : higgsPotential lam v (higgsFluctuation v g₁ g₂ h g₃) = lam / 4 * (2 * v * h + h ^ 2 + g₁ ^ 2 + g₂ ^ 2 + g₃ ^ 2) ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.higgs_fluctuation_homogeneous_terms": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.higgs_fluctuation_homogeneous_terms",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 287,
+      "signature": "theorem higgs_fluctuation_homogeneous_terms (lam v g₁ g₂ h g₃ : ℝ) : let q",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.higgs_group_stabilizer_iff": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.higgs_group_stabilizer_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 108,
+      "signature": "theorem higgs_group_stabilizer_iff {v : ℝ} {α β ζ : ℂ} (hv : 0 < v) (hunit : Complex.normSq α + Complex.normSq β = 1) (hphase : Complex.normSq ζ = 1) : ewGroupAction α β ζ (higgsVac v) = higgsVac v ↔ β = 0 ∧ ζ = α",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.higgs_hessian_diagonal": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.higgs_hessian_diagonal",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 317,
+      "signature": "theorem higgs_hessian_diagonal (lam v g₁ g₂ h g₃ : ℝ) : deriv (deriv (fun t => higgsPotential lam v (higgsFluctuation v (t * g₁) (t * g₂) (t * h) (t * g₃)))) 0 = (2 * lam * v ^ 2) * h ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.higgs_hessian_spectrum": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.higgs_hessian_spectrum",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 330,
+      "signature": "theorem higgs_hessian_spectrum {lam v : ℝ} (hlam : 0 < lam) (hv : 0 < v) : deriv (deriv (fun h => higgsPotential lam v (higgsFluctuation v 0 0 h 0))) 0 = 2 * lam * v ^ 2 ∧ deriv (deriv (fun x => higgsPotential lam v (higgsFluctuation v x 0 0 0))) 0 = 0 ∧ deriv (deriv (fun x => higgsPotential lam v (higgsFluctuation v 0 x 0 0))) 0 = 0 ∧ deriv (deriv (fun x => higgsPotential lam v (higgsFluctuation v 0 0 0 x))) 0 = 0 ∧ 0 < 2 * lam * v ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.higgs_vacuum_stabilizer_iff": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.higgs_vacuum_stabilizer_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 73,
+      "signature": "theorem higgs_vacuum_stabilizer_iff {v a₁ a₂ a₃ b : ℝ} (hv : 0 < v) : ewGeneratorAction a₁ a₂ a₃ b (higgsVac v) = 0 ↔ a₁ = 0 ∧ a₂ = 0 ∧ b = a₃",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
     "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM.anomaly_cancel": {
       "module": "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM",
       "name": "D5.S3.Quantum.Gauge.FiniteSpectralTripleSM.anomaly_cancel",
@@ -18334,6 +19255,487 @@
       "statement_id": "sha256:90e66a57e6e3b3e7ca0359f4ec82cd6e035a026e5cf36651ad651bd87f95ef1f",
       "line": 110,
       "signature": "theorem weak_generators_independent : LinearIndependent ℝ (![⟨0, 1, 0, 0⟩, ⟨0, 0, 1, 0⟩, ⟨0, 0, 0, 1⟩] : Fin 3 → ℍ[ℝ])",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/GaugeUnificationRG4D.asymptotic_freedom_iff": {
+      "module": "D5/S3/Quantum/Gauge/GaugeUnificationRG4D",
+      "name": "D5.S3.Quantum.Gauge.GaugeUnificationRG4D.asymptotic_freedom_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:80abc0f87d4bace832c827bad3fb5251bb55c8980d2eb219736734e25afca009",
+      "line": 43,
+      "signature": "theorem asymptotic_freedom_iff (N nf ns : ℕ) : 0 < betaOneLoop N nf ns ↔ 4 * nf + ns < 22 * N",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/GaugeUnificationRG4D.color_weak_unification_iff_three": {
+      "module": "D5/S3/Quantum/Gauge/GaugeUnificationRG4D",
+      "name": "D5.S3.Quantum.Gauge.GaugeUnificationRG4D.color_weak_unification_iff_three",
+      "kind": "theorem",
+      "statement_id": "sha256:80abc0f87d4bace832c827bad3fb5251bb55c8980d2eb219736734e25afca009",
+      "line": 203,
+      "signature": "theorem color_weak_unification_iff_three (Nc : ℕ) : weylT3SqTrace Nc = weylColorSqTrace ↔ Nc = 3",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/GaugeUnificationRG4D.gut_hypercharge_norm_anom": {
+      "module": "D5/S3/Quantum/Gauge/GaugeUnificationRG4D",
+      "name": "D5.S3.Quantum.Gauge.GaugeUnificationRG4D.gut_hypercharge_norm_anom",
+      "kind": "theorem",
+      "statement_id": "sha256:80abc0f87d4bace832c827bad3fb5251bb55c8980d2eb219736734e25afca009",
+      "line": 257,
+      "signature": "theorem gut_hypercharge_norm_anom {Nc : ℕ} (hNc : Nc ≠ 0) : weylYSqTraceAnom Nc / weylT3SqTrace Nc = ((Nc : ℝ) + 2) / Nc",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/GaugeUnificationRG4D.gut_hypercharge_norm_three": {
+      "module": "D5/S3/Quantum/Gauge/GaugeUnificationRG4D",
+      "name": "D5.S3.Quantum.Gauge.GaugeUnificationRG4D.gut_hypercharge_norm_three",
+      "kind": "theorem",
+      "statement_id": "sha256:80abc0f87d4bace832c827bad3fb5251bb55c8980d2eb219736734e25afca009",
+      "line": 264,
+      "signature": "theorem gut_hypercharge_norm_three : weylYSqTraceAnom 3 / weylT3SqTrace 3 = 5 / 3",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/GaugeUnificationRG4D.gut_weinberg_anom": {
+      "module": "D5/S3/Quantum/Gauge/GaugeUnificationRG4D",
+      "name": "D5.S3.Quantum.Gauge.GaugeUnificationRG4D.gut_weinberg_anom",
+      "kind": "theorem",
+      "statement_id": "sha256:80abc0f87d4bace832c827bad3fb5251bb55c8980d2eb219736734e25afca009",
+      "line": 267,
+      "signature": "theorem gut_weinberg_anom {Nc : ℕ} (hNc : Nc ≠ 0) : weylT3SqTrace Nc / weylQSqTraceAnom Nc = (Nc : ℝ) / (2 * (Nc + 1))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/GaugeUnificationRG4D.gut_weinberg_at_unification": {
+      "module": "D5/S3/Quantum/Gauge/GaugeUnificationRG4D",
+      "name": "D5.S3.Quantum.Gauge.GaugeUnificationRG4D.gut_weinberg_at_unification",
+      "kind": "theorem",
+      "statement_id": "sha256:80abc0f87d4bace832c827bad3fb5251bb55c8980d2eb219736734e25afca009",
+      "line": 414,
+      "signature": "theorem gut_weinberg_at_unification {aGUT : ℝ} (ha : aGUT ≠ 0) : weakMixingAngleSq aGUT aGUT = 3 / 8",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/GaugeUnificationRG4D.gut_weinberg_running_formula": {
+      "module": "D5/S3/Quantum/Gauge/GaugeUnificationRG4D",
+      "name": "D5.S3.Quantum.Gauge.GaugeUnificationRG4D.gut_weinberg_running_formula",
+      "kind": "theorem",
+      "statement_id": "sha256:80abc0f87d4bace832c827bad3fb5251bb55c8980d2eb219736734e25afca009",
+      "line": 400,
+      "signature": "theorem gut_weinberg_running_formula {a₁inv a₂inv : ℝ} (h₁ : a₁inv ≠ 0) (h₂ : a₂inv ≠ 0) : weakMixingAngleSq a₁inv a₂inv = 3 * a₂inv / (5 * a₁inv + 3 * a₂inv)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/GaugeUnificationRG4D.gut_weinberg_running_offset": {
+      "module": "D5/S3/Quantum/Gauge/GaugeUnificationRG4D",
+      "name": "D5.S3.Quantum.Gauge.GaugeUnificationRG4D.gut_weinberg_running_offset",
+      "kind": "theorem",
+      "statement_id": "sha256:80abc0f87d4bace832c827bad3fb5251bb55c8980d2eb219736734e25afca009",
+      "line": 429,
+      "signature": "theorem gut_weinberg_running_offset (b₁ b₂ aGUT μGUT μ : ℝ) (h₁ : rgInvCoupling b₁ aGUT μGUT μ ≠ 0) (h₂ : rgInvCoupling b₂ aGUT μGUT μ ≠ 0) (hEM : (5 / 3 : ℝ) * rgInvCoupling b₁ aGUT μGUT μ + rgInvCoupling b₂ aGUT μGUT μ ≠ 0) : weakMixingAngleSq (rgInvCoupling b₁ aGUT μGUT μ) (rgInvCoupling b₂ aGUT μGUT μ) - 3 / 8 = (5 / (16 * Real.pi)) * electromagneticCoupling (rgInvCoupling b₁ aGUT μGUT μ) (rgInvCoupling b₂ aGUT μGUT μ) * (b₂ - b₁) * Real.log (μ / μGUT)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/GaugeUnificationRG4D.gut_weinberg_three_eighths": {
+      "module": "D5/S3/Quantum/Gauge/GaugeUnificationRG4D",
+      "name": "D5.S3.Quantum.Gauge.GaugeUnificationRG4D.gut_weinberg_three_eighths",
+      "kind": "theorem",
+      "statement_id": "sha256:80abc0f87d4bace832c827bad3fb5251bb55c8980d2eb219736734e25afca009",
+      "line": 274,
+      "signature": "theorem gut_weinberg_three_eighths : weylT3SqTrace 3 / weylQSqTraceAnom 3 = 3 / 8",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/GaugeUnificationRG4D.mssm_B_ratio_eq": {
+      "module": "D5/S3/Quantum/Gauge/GaugeUnificationRG4D",
+      "name": "D5.S3.Quantum.Gauge.GaugeUnificationRG4D.mssm_B_ratio_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:80abc0f87d4bace832c827bad3fb5251bb55c8980d2eb219736734e25afca009",
+      "line": 390,
+      "signature": "theorem mssm_B_ratio_eq : (mssmBeta3 - mssmBeta2) / (mssmBeta2 - mssmBeta1) = 5 / 7",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/GaugeUnificationRG4D.qcd_asymptotic_freedom_iff": {
+      "module": "D5/S3/Quantum/Gauge/GaugeUnificationRG4D",
+      "name": "D5.S3.Quantum.Gauge.GaugeUnificationRG4D.qcd_asymptotic_freedom_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:80abc0f87d4bace832c827bad3fb5251bb55c8980d2eb219736734e25afca009",
+      "line": 52,
+      "signature": "theorem qcd_asymptotic_freedom_iff (nf : ℕ) : 0 < betaOneLoop 3 nf 0 ↔ nf ≤ 16",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/GaugeUnificationRG4D.qcd_six_flavors_beta": {
+      "module": "D5/S3/Quantum/Gauge/GaugeUnificationRG4D",
+      "name": "D5.S3.Quantum.Gauge.GaugeUnificationRG4D.qcd_six_flavors_beta",
+      "kind": "theorem",
+      "statement_id": "sha256:80abc0f87d4bace832c827bad3fb5251bb55c8980d2eb219736734e25afca009",
+      "line": 57,
+      "signature": "theorem qcd_six_flavors_beta : betaOneLoop 3 6 0 = 7",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/GaugeUnificationRG4D.rgInvCoupling_hasDerivAt": {
+      "module": "D5/S3/Quantum/Gauge/GaugeUnificationRG4D",
+      "name": "D5.S3.Quantum.Gauge.GaugeUnificationRG4D.rgInvCoupling_hasDerivAt",
+      "kind": "theorem",
+      "statement_id": "sha256:80abc0f87d4bace832c827bad3fb5251bb55c8980d2eb219736734e25afca009",
+      "line": 64,
+      "signature": "theorem rgInvCoupling_hasDerivAt (b₀ a₀ : ℝ) {μ₀ μ : ℝ} (hμ₀ : 0 < μ₀) (hμ : 0 < μ) : HasDerivAt (rgInvCoupling b₀ a₀ μ₀) (b₀ / (2 * Real.pi * μ)) μ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/GaugeUnificationRG4D.rg_asymptotic_freedom_limit": {
+      "module": "D5/S3/Quantum/Gauge/GaugeUnificationRG4D",
+      "name": "D5.S3.Quantum.Gauge.GaugeUnificationRG4D.rg_asymptotic_freedom_limit",
+      "kind": "theorem",
+      "statement_id": "sha256:80abc0f87d4bace832c827bad3fb5251bb55c8980d2eb219736734e25afca009",
+      "line": 75,
+      "signature": "theorem rg_asymptotic_freedom_limit {b₀ : ℝ} (a₀ : ℝ) {μ₀ : ℝ} (hb₀ : 0 < b₀) (hμ₀ : 0 < μ₀) : Tendsto (fun μ => (rgInvCoupling b₀ a₀ μ₀ μ)⁻¹) atTop (𝓝 0)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/GaugeUnificationRG4D.rg_confinement_scale_lt": {
+      "module": "D5/S3/Quantum/Gauge/GaugeUnificationRG4D",
+      "name": "D5.S3.Quantum.Gauge.GaugeUnificationRG4D.rg_confinement_scale_lt",
+      "kind": "theorem",
+      "statement_id": "sha256:80abc0f87d4bace832c827bad3fb5251bb55c8980d2eb219736734e25afca009",
+      "line": 112,
+      "signature": "theorem rg_confinement_scale_lt {b₀ a₀ μ₀ : ℝ} (hb₀ : 0 < b₀) (ha₀ : 0 < a₀) (hμ₀ : 0 < μ₀) : μ₀ * Real.exp (-(2 * Real.pi * a₀ / b₀)) < μ₀",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/GaugeUnificationRG4D.rg_landau_pole_gt": {
+      "module": "D5/S3/Quantum/Gauge/GaugeUnificationRG4D",
+      "name": "D5.S3.Quantum.Gauge.GaugeUnificationRG4D.rg_landau_pole_gt",
+      "kind": "theorem",
+      "statement_id": "sha256:80abc0f87d4bace832c827bad3fb5251bb55c8980d2eb219736734e25afca009",
+      "line": 121,
+      "signature": "theorem rg_landau_pole_gt {b₀ a₀ μ₀ : ℝ} (hb₀ : b₀ < 0) (ha₀ : 0 < a₀) (hμ₀ : 0 < μ₀) : μ₀ < μ₀ * Real.exp (-(2 * Real.pi * a₀ / b₀))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/GaugeUnificationRG4D.rg_zero_scale_iff": {
+      "module": "D5/S3/Quantum/Gauge/GaugeUnificationRG4D",
+      "name": "D5.S3.Quantum.Gauge.GaugeUnificationRG4D.rg_zero_scale_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:80abc0f87d4bace832c827bad3fb5251bb55c8980d2eb219736734e25afca009",
+      "line": 85,
+      "signature": "theorem rg_zero_scale_iff (a₀ : ℝ) {b₀ μ₀ μ : ℝ} (hb₀ : b₀ ≠ 0) (hμ₀ : 0 < μ₀) (hμ : 0 < μ) : rgInvCoupling b₀ a₀ μ₀ μ = 0 ↔ μ = μ₀ * Real.exp (-(2 * Real.pi * a₀ / b₀))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/GaugeUnificationRG4D.rg_zero_scale_unique": {
+      "module": "D5/S3/Quantum/Gauge/GaugeUnificationRG4D",
+      "name": "D5.S3.Quantum.Gauge.GaugeUnificationRG4D.rg_zero_scale_unique",
+      "kind": "theorem",
+      "statement_id": "sha256:80abc0f87d4bace832c827bad3fb5251bb55c8980d2eb219736734e25afca009",
+      "line": 104,
+      "signature": "theorem rg_zero_scale_unique (a₀ : ℝ) {b₀ μ₀ : ℝ} (hb₀ : b₀ ≠ 0) (hμ₀ : 0 < μ₀) : ∃! μ : ℝ, 0 < μ ∧ rgInvCoupling b₀ a₀ μ₀ μ = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/GaugeUnificationRG4D.sm15_trace_Q_sq": {
+      "module": "D5/S3/Quantum/Gauge/GaugeUnificationRG4D",
+      "name": "D5.S3.Quantum.Gauge.GaugeUnificationRG4D.sm15_trace_Q_sq",
+      "kind": "theorem",
+      "statement_id": "sha256:80abc0f87d4bace832c827bad3fb5251bb55c8980d2eb219736734e25afca009",
+      "line": 328,
+      "signature": "theorem sm15_trace_Q_sq : ∑ i : Fin 15, (sm15Q i) ^ 2 = 16 / 3",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/GaugeUnificationRG4D.sm15_trace_T3_Y": {
+      "module": "D5/S3/Quantum/Gauge/GaugeUnificationRG4D",
+      "name": "D5.S3.Quantum.Gauge.GaugeUnificationRG4D.sm15_trace_T3_Y",
+      "kind": "theorem",
+      "statement_id": "sha256:80abc0f87d4bace832c827bad3fb5251bb55c8980d2eb219736734e25afca009",
+      "line": 331,
+      "signature": "theorem sm15_trace_T3_Y : ∑ i : Fin 15, sm15T3 i * sm15Y i = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/GaugeUnificationRG4D.sm15_trace_T3_sq": {
+      "module": "D5/S3/Quantum/Gauge/GaugeUnificationRG4D",
+      "name": "D5.S3.Quantum.Gauge.GaugeUnificationRG4D.sm15_trace_T3_sq",
+      "kind": "theorem",
+      "statement_id": "sha256:80abc0f87d4bace832c827bad3fb5251bb55c8980d2eb219736734e25afca009",
+      "line": 322,
+      "signature": "theorem sm15_trace_T3_sq : ∑ i : Fin 15, (sm15T3 i) ^ 2 = 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/GaugeUnificationRG4D.sm15_trace_Y": {
+      "module": "D5/S3/Quantum/Gauge/GaugeUnificationRG4D",
+      "name": "D5.S3.Quantum.Gauge.GaugeUnificationRG4D.sm15_trace_Y",
+      "kind": "theorem",
+      "statement_id": "sha256:80abc0f87d4bace832c827bad3fb5251bb55c8980d2eb219736734e25afca009",
+      "line": 334,
+      "signature": "theorem sm15_trace_Y : ∑ i : Fin 15, sm15Y i = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/GaugeUnificationRG4D.sm15_trace_Y_cube": {
+      "module": "D5/S3/Quantum/Gauge/GaugeUnificationRG4D",
+      "name": "D5.S3.Quantum.Gauge.GaugeUnificationRG4D.sm15_trace_Y_cube",
+      "kind": "theorem",
+      "statement_id": "sha256:80abc0f87d4bace832c827bad3fb5251bb55c8980d2eb219736734e25afca009",
+      "line": 337,
+      "signature": "theorem sm15_trace_Y_cube : ∑ i : Fin 15, (sm15Y i) ^ 3 = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/GaugeUnificationRG4D.sm15_trace_Y_sq": {
+      "module": "D5/S3/Quantum/Gauge/GaugeUnificationRG4D",
+      "name": "D5.S3.Quantum.Gauge.GaugeUnificationRG4D.sm15_trace_Y_sq",
+      "kind": "theorem",
+      "statement_id": "sha256:80abc0f87d4bace832c827bad3fb5251bb55c8980d2eb219736734e25afca009",
+      "line": 325,
+      "signature": "theorem sm15_trace_Y_sq : ∑ i : Fin 15, (sm15Y i) ^ 2 = 10 / 3",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/GaugeUnificationRG4D.sm_B_ratio_eq": {
+      "module": "D5/S3/Quantum/Gauge/GaugeUnificationRG4D",
+      "name": "D5.S3.Quantum.Gauge.GaugeUnificationRG4D.sm_B_ratio_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:80abc0f87d4bace832c827bad3fb5251bb55c8980d2eb219736734e25afca009",
+      "line": 384,
+      "signature": "theorem sm_B_ratio_eq : (smBeta3 3 - smBeta2 3 1) / (smBeta2 3 1 - smBeta1 3 1) = 115 / 218",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/GaugeUnificationRG4D.sm_B_ratio_lt_mssm": {
+      "module": "D5/S3/Quantum/Gauge/GaugeUnificationRG4D",
+      "name": "D5.S3.Quantum.Gauge.GaugeUnificationRG4D.sm_B_ratio_lt_mssm",
+      "kind": "theorem",
+      "statement_id": "sha256:80abc0f87d4bace832c827bad3fb5251bb55c8980d2eb219736734e25afca009",
+      "line": 393,
+      "signature": "theorem sm_B_ratio_lt_mssm : (115 / 218 : ℝ) < 5 / 7",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/GaugeUnificationRG4D.sm_beta_diff_independent_of_ng": {
+      "module": "D5/S3/Quantum/Gauge/GaugeUnificationRG4D",
+      "name": "D5.S3.Quantum.Gauge.GaugeUnificationRG4D.sm_beta_diff_independent_of_ng",
+      "kind": "theorem",
+      "statement_id": "sha256:80abc0f87d4bace832c827bad3fb5251bb55c8980d2eb219736734e25afca009",
+      "line": 350,
+      "signature": "theorem sm_beta_diff_independent_of_ng (ng nH : ℕ) : smBeta2 ng nH - smBeta1 ng nH = 22 / 3 - (nH : ℝ) / 15 ∧ smBeta3 ng - smBeta2 ng nH = 11 / 3 + (nH : ℝ) / 6 ∧ smBeta3 ng - smBeta1 ng nH = 11 + (nH : ℝ) / 10",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/GaugeUnificationRG4D.sm_beta_standard_values": {
+      "module": "D5/S3/Quantum/Gauge/GaugeUnificationRG4D",
+      "name": "D5.S3.Quantum.Gauge.GaugeUnificationRG4D.sm_beta_standard_values",
+      "kind": "theorem",
+      "statement_id": "sha256:80abc0f87d4bace832c827bad3fb5251bb55c8980d2eb219736734e25afca009",
+      "line": 346,
+      "signature": "theorem sm_beta_standard_values : smBeta1 3 1 = -41 / 10 ∧ smBeta2 3 1 = 19 / 6 ∧ smBeta3 3 = 7",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/GaugeUnificationRG4D.three_coupling_unification_iff": {
+      "module": "D5/S3/Quantum/Gauge/GaugeUnificationRG4D",
+      "name": "D5.S3.Quantum.Gauge.GaugeUnificationRG4D.three_coupling_unification_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:80abc0f87d4bace832c827bad3fb5251bb55c8980d2eb219736734e25afca009",
+      "line": 357,
+      "signature": "theorem three_coupling_unification_iff {a₁ a₂ a₃ b₁ b₂ b₃ : ℝ} (ha12 : a₁ ≠ a₂) (h12 : b₁ < b₂) (h23 : b₂ < b₃) : (∃ t aGUT, a₁ + b₁ * t = aGUT ∧ a₂ + b₂ * t = aGUT ∧ a₃ + b₃ * t = aGUT) ↔ (a₂ - a₃) / (a₁ - a₂) = (b₂ - b₃) / (b₁ - b₂)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/GaugeUnificationRG4D.weinberg_anom_sub_fixed": {
+      "module": "D5/S3/Quantum/Gauge/GaugeUnificationRG4D",
+      "name": "D5.S3.Quantum.Gauge.GaugeUnificationRG4D.weinberg_anom_sub_fixed",
+      "kind": "theorem",
+      "statement_id": "sha256:80abc0f87d4bace832c827bad3fb5251bb55c8980d2eb219736734e25afca009",
+      "line": 277,
+      "signature": "theorem weinberg_anom_sub_fixed (Nc : ℕ) : (Nc : ℝ) / (2 * (Nc + 1)) - 9 * (Nc + 1) / (4 * (9 + 5 * Nc)) = ((Nc : ℝ) ^ 2 - 9) / (4 * (Nc + 1) * (9 + 5 * Nc))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/GaugeUnificationRG4D.weinberg_curves_cross_iff_three": {
+      "module": "D5/S3/Quantum/Gauge/GaugeUnificationRG4D",
+      "name": "D5.S3.Quantum.Gauge.GaugeUnificationRG4D.weinberg_curves_cross_iff_three",
+      "kind": "theorem",
+      "statement_id": "sha256:80abc0f87d4bace832c827bad3fb5251bb55c8980d2eb219736734e25afca009",
+      "line": 285,
+      "signature": "theorem weinberg_curves_cross_iff_three (Nc : ℕ) : (Nc : ℝ) / (2 * (Nc + 1)) = 9 * (Nc + 1) / (4 * (9 + 5 * Nc)) ↔ Nc = 3",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/GaugeUnificationRG4D.weylColorSqTrace_eq": {
+      "module": "D5/S3/Quantum/Gauge/GaugeUnificationRG4D",
+      "name": "D5.S3.Quantum.Gauge.GaugeUnificationRG4D.weylColorSqTrace_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:80abc0f87d4bace832c827bad3fb5251bb55c8980d2eb219736734e25afca009",
+      "line": 200,
+      "signature": "theorem weylColorSqTrace_eq : weylColorSqTrace = 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/GaugeUnificationRG4D.weylQSqTraceAnom_eq": {
+      "module": "D5/S3/Quantum/Gauge/GaugeUnificationRG4D",
+      "name": "D5.S3.Quantum.Gauge.GaugeUnificationRG4D.weylQSqTraceAnom_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:80abc0f87d4bace832c827bad3fb5251bb55c8980d2eb219736734e25afca009",
+      "line": 250,
+      "signature": "theorem weylQSqTraceAnom_eq {Nc : ℕ} (hNc : Nc ≠ 0) : weylQSqTraceAnom Nc = ((Nc : ℝ) + 1) ^ 2 / Nc",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/GaugeUnificationRG4D.weylT3SqTrace_eq": {
+      "module": "D5/S3/Quantum/Gauge/GaugeUnificationRG4D",
+      "name": "D5.S3.Quantum.Gauge.GaugeUnificationRG4D.weylT3SqTrace_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:80abc0f87d4bace832c827bad3fb5251bb55c8980d2eb219736734e25afca009",
+      "line": 195,
+      "signature": "theorem weylT3SqTrace_eq (Nc : ℕ) : weylT3SqTrace Nc = ((Nc : ℝ) + 1) / 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/GaugeUnificationRG4D.weylT3YTrace_eq_zero": {
+      "module": "D5/S3/Quantum/Gauge/GaugeUnificationRG4D",
+      "name": "D5.S3.Quantum.Gauge.GaugeUnificationRG4D.weylT3YTrace_eq_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:80abc0f87d4bace832c827bad3fb5251bb55c8980d2eb219736734e25afca009",
+      "line": 212,
+      "signature": "theorem weylT3YTrace_eq_zero (Nc : ℕ) : weylT3YTrace Nc = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/GaugeUnificationRG4D.weylYSqTraceAnom_eq": {
+      "module": "D5/S3/Quantum/Gauge/GaugeUnificationRG4D",
+      "name": "D5.S3.Quantum.Gauge.GaugeUnificationRG4D.weylYSqTraceAnom_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:80abc0f87d4bace832c827bad3fb5251bb55c8980d2eb219736734e25afca009",
+      "line": 223,
+      "signature": "theorem weylYSqTraceAnom_eq {Nc : ℕ} (hNc : Nc ≠ 0) : weylYSqTraceAnom Nc = ((Nc : ℝ) + 1) * (Nc + 2) / (2 * Nc)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/GaugeUnificationRG4D.weyl_pythagoras": {
+      "module": "D5/S3/Quantum/Gauge/GaugeUnificationRG4D",
+      "name": "D5.S3.Quantum.Gauge.GaugeUnificationRG4D.weyl_pythagoras",
+      "kind": "theorem",
+      "statement_id": "sha256:80abc0f87d4bace832c827bad3fb5251bb55c8980d2eb219736734e25afca009",
+      "line": 231,
+      "signature": "theorem weyl_pythagoras (Nc : ℕ) : weylQSqTraceAnom Nc = weylT3SqTrace Nc + weylYSqTraceAnom Nc",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -19421,6 +20823,14 @@
       "line": 214,
       "signature": "theorem uniform_operator_rotation (J : Matrix l s ℂ) (C P : Matrix l l ℂ) (p : ℝ) (hJ : Jᴴ * J = 1) (hC : Cᴴ * C = 1) (hP : Pᴴ = P) (hPP : P * P = P) (hA : (P * (C * J))ᴴ * (P * (C * J)) = (p : ℂ) • (1 : Matrix s s ℂ)) (hp : 0 < p) (hple : p ≤ 1) : let U"
     },
+    "D5/S3/Quantum/Recovery/CommutingRandomUnitaryRecovery.phase_gram_max": {
+      "module": "D5/S3/Quantum/Recovery/CommutingRandomUnitaryRecovery",
+      "name": "D5.S3.Quantum.Recovery.CommutingRandomUnitaryRecovery.phase_gram_max",
+      "kind": "theorem",
+      "statement_id": "sha256:a8fa92a28d1fa83a7878694adf647556697c1e3267c16197cfeea8b0ed792f8f",
+      "line": 272,
+      "signature": "theorem phase_gram_max {d : ℕ} (hd : 0 < d) (hd3 : d ≤ 3) (f : CodeMatrix d →L[ℝ] ℝ) : ∃ z : Fin d → ℂ, (∀ i, ‖z i‖ = 1) ∧ ∀ X ∈ correlationMatrices d, f X ≤ f (vecMulVec z (star z))"
+    },
     "D5/S3/Quantum/Recovery/FiniteKrausReversibility.scalar_products_construct_left_inverse": {
       "module": "D5/S3/Quantum/Recovery/FiniteKrausReversibility",
       "name": "D5.S3.Quantum.Recovery.FiniteKrausReversibility.scalar_products_construct_left_inverse",
@@ -20002,7 +21412,7 @@
       "name": "D5.S3.Quantum.SorkinThirdOrder.sorkin_third_order_cancellation",
       "kind": "theorem",
       "statement_id": "sha256:c94f4874e555b783efb4ad198b4982a94d87d7982fd171732c71c1d3234a293e",
-      "line": 26,
+      "line": 28,
       "signature": "theorem sorkin_third_order_cancellation (v : α → R) (A B C : Finset α) (hAB : Disjoint A B) (hAC : Disjoint A C) (hBC : Disjoint B C) : amplitudeWeight v (A ∪ B ∪ C) - amplitudeWeight v (A ∪ B) - amplitudeWeight v (A ∪ C) - amplitudeWeight v (B ∪ C) + amplitudeWeight v A + amplitudeWeight v B + amplitudeWeight v C = 0"
     },
     "D5/S3/Quantum/SpinChains/SupersymmetricFermion/HardCoreCompression.fullC_entry": {
