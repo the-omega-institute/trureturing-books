@@ -192,6 +192,10 @@ $$
 
 源阶的代价可在两个三角形上看清。以一条长 $d$ 条边的路径连接它们，只反转其中一个三角形的相位，需要一条同时绕过两环的闭路才能察觉。这花去六条环边和来回两次的 $2d$ 条连接边。对 $N\ge5$，这样的支撑使用 $N=d+5$ 个质量下标，$d=0$ 时两三角形共用一个顶点，故所需阶数为 $6+2d=2N-4$。反过来，沿生成树固定相位后，只须恢复各基本环相位的余弦及两环正弦的相对符号。两环共享树边时可沿消去共有路径后的外环比较；分开时则把两环绕完，再沿连接路径返回。每次比较都能在 $2N-4$ 阶以内完成。四层时，上面的反例达到此界。若支撑不连通，闭路总留在同一分支，每个连通分支的复共轭都可独立选择。[源点分离、最坏阶数与图复算](https://github.com/the-omega-institute/trureturing-experiments/blob/c88d8755206481a501dc23a5277e41f64eba0c32/experiments/ch39-omega-research/replay/ch39-portal-cycle-order.md)
 
+质量精确简并时，传播子只标记质量子空间。设 $P_a$ 为已知质量的谱投影，绕环一周便读出 $\operatorname{Re}\operatorname{tr}(P_{a_1}F\cdots P_{a_n}F)$。这改变了可识别的对象。例如，在三个质量子空间中各放两份相同的三角环，令每个环的有向乘积为 $i$。把其中一份共轭后，所有分点响应都相同，而有向复迹从 $2i$ 变成零。简并质量空间内的酉变换也不能改变这个复迹。
+
+一般地，将质量投影与门户 $F$ 同时分成不可约直和。每个直和分量都可以独立取复共轭，最后在各质量空间内作酉变换。这恰好给出全部读数相同的门户。理由是把原矩阵与它的共轭并排放置后，每个矩阵字的迹就是原实迹的两倍；这些迹确定各不可约成分的重数。对 $N\ge2$ 个标量，三阶至 $4N^2-1$ 阶的分点响应已经足够，即使门户有零特征值也成立。[简并质量的分类、有限阶界与算例](https://github.com/the-omega-institute/trureturing-experiments/blob/c5ecff67abceeed44624cbc8346139f64dac240e/experiments/ch39-omega-research/replay/ch39-degenerate-portal-traces.md)
+
 在检验 $8\pi I \pm \mathcal{A} \succ 0$ 是否正定、或从全图刚度矩阵中消去高势外层顶点自由度时，反复出现的决定性工具是复分块厄米矩阵的舒尔补极小值定理，它已在 Lean 4 内核中严格冻结：
 
 ::: {.theorem #thm-ou-ch06-schur-minimum title="分块舒尔补二次型是内部变量的精确最小值" lean="D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"}
