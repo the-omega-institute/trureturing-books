@@ -8,7 +8,7 @@
 
 在预设了外部坐标网格的经典线性代数中，把单位向量 $\mathbf{B}$ 向单位基准轴 $\mathbf{A}$ 作投影，得到的只是一截缩短了的共线影子 $(\mathbf{A}\cdot\mathbf{B})\mathbf{A}$：当两态夹角为 $\epsilon \in (0, \frac{\pi}{2}]$ 时，其模长萎缩为 $\cos\epsilon < 1$，不仅彻底躺死在原直线 $\operatorname{span}\{\mathbf{A}\}$ 内，而且与 $\mathbf{A}, \mathbf{B}$ 排成的 $3 \times 3$ 格拉姆矩阵行列式恒等于零（$\det G = 0$），永远长不出新维度。
 
-然而，在与[§28.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)**零背景比较公理 $\mathcal{A}_0$**（[@def-ch32-axiom-of-comparison]）兼容的**第 1 层正定欧氏 / 克利福德实现**（显式附加正向单位自归一化 $S(x, x) = +\mathbf{1}$ 与三维定向欧氏结构 $(\mathbb{R}^3, \mathrm{vol}_3)$；单凭第 0 层抽象接口仍容许 $S(x_0, x_0) = -1$ 反例，详见[附录 E §E.1](appendix-e-s01-layers.md#sec-appe-layers)）下，关系网络中不设高人一等的“母态”与低人一等的“残影”：两两比较所创建出来的投影结果 $\mathbf{P}$，一旦作为同一第 1 层单位载体中的平权成员登场，就必须同样满足正向单位自比归一化 $S(\mathbf{P}, \mathbf{P}) = \mathbf{1}$（即 $\lVert\mathbf{P}\rVert^2 = 1$），并与原先两态两两遵循比较契约（`MODEL`）！归一化确定了待补分量的长度 $\sin\epsilon$，其方向仍可选择。例如 $2(\mathbf A\cdot\mathbf B)\mathbf A-\mathbf B$ 与 $\mathbf A$ 的内积仍为 $\cos\epsilon$，也是原平面内的单位向量。下文选择用霍奇星把有向双向量残差映为法向量。
+然而，在与[§28.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)**零背景比较公理 $\mathcal{A}_0$**（[@def-ch32-axiom-of-comparison]）兼容的**第 1 层正定欧氏 / 克利福德实现**（显式附加正向单位自归一化 $S(x, x) = +\mathbf{1}$ 与三维定向欧氏结构 $(\mathbb{R}^3, \mathrm{vol}_3)$；单凭第 0 层抽象接口仍容许 $S(x_0, x_0) = -1$ 反例，详见[附录 E §E.1](appendix-e-s01-layers.md#sec-appe-layers)）下，关系网络中不设高人一等的“母态”与低人一等的“残影”：两两比较所创建出来的投影结果 $\mathbf{P}$，一旦作为同一第 1 层单位载体中的平权成员登场，就必须同样满足正向单位自比归一化 $S(\mathbf{P}, \mathbf{P}) = \mathbf{1}$（即 $\lVert\mathbf{P}\rVert^2 = 1$），并与原先两态两两遵循比较契约（`MODEL`）！固定锚点分量 $(\mathbf A\cdot\mathbf P)\mathbf A=\cos\epsilon\,\mathbf A$ 后，归一化给出正交残差的长度 $\sin\epsilon$。其在 $\mathbf A^\perp$ 中的方向仍可选择。例如 $2(\mathbf A\cdot\mathbf B)\mathbf A-\mathbf B$ 与 $\mathbf A$ 的内积仍为 $\cos\epsilon$，也是原平面内的单位向量。下文选择用霍奇星把有向双向量残差映为法向量。
 
 让我们在选定右手定向 $\mathrm{vol}_3 = \mathbf{e}_1\wedge\mathbf{e}_2\wedge\mathbf{e}_3$ 的三维欧氏实现 $\mathbb{R}^3$ 中亲手算清这一“二生三”的自举闭合：取基准锚点 $\mathbf{A} = \mathbf{e}_2$（对应 §29.5 的中脊转枢射线）与待比量单位态 $\mathbf{B}(\epsilon) = \sin\epsilon\,\mathbf{e}_1 + \cos\epsilon\,\mathbf{e}_2$（$\epsilon \in (0, \frac{\pi}{2}]$，对应 §29.5 的第一面墙射线）。两态比较一方面给出同向内积切分量 $(\mathbf{A}\cdot\mathbf{B}(\epsilon))\mathbf{A} = \cos\epsilon\,\mathbf{e}_2$，另一方面张开有向双向量残差 $\mathbf{B}(\epsilon)\wedge\mathbf{A} = \sin\epsilon\,(\mathbf{e}_1\wedge\mathbf{e}_2)$；在二维平面于 $\mathbb{R}^3$ 所容许的正负两支单位法向 $\pm\mathbf{e}_3$ 中，所选三维定向通过霍奇星算子典范锁定正向分支 $\star(\mathbf{B}(\epsilon)\wedge\mathbf{A}) = +\sin\epsilon\,\mathbf{e}_3$（取相反定向则给出镜像对称分支 $-\sin\epsilon\,\mathbf{e}_3$）。将切向同相投影与该定向法向残差合成为满足 $\lVert\mathbf{P}\rVert^2 = 1$ 的新生比较态，当场得到
 
@@ -25,13 +25,13 @@ $$
 若进一步抹去 $\mathbf{A}$ 与 $\mathbf{B}$ 之间的先后偏袒，记原初单位态对为 $(\mathbf{V}_0, \mathbf{V}_1)$、夹角内积为 $c_0 = \mathbf{V}_0\cdot\mathbf{V}_1 = \cos\epsilon \in (-\frac{1}{2}, 1)$，并取平面内单位角平分对称轴 $\mathbf{S}_{01} = \frac{\mathbf{V}_0 + \mathbf{V}_1}{\sqrt{2(1+c_0)}}$ 与所选三维定向下的霍奇对偶单位法向 $\mathbf{A}_{01} = \frac{\star(\mathbf{V}_0\wedge\mathbf{V}_1)}{\sqrt{1-c_0^2}}$，则沿正交分解 $\mathbf{V}_2 = \alpha\mathbf{S}_{01} + \beta\mathbf{A}_{01}$（$\alpha^2 + \beta^2 = 1$）取 $\alpha = \frac{\sqrt{2}\,c_0}{\sqrt{1+c_0}}$、$\beta = \sqrt{\frac{(1-c_0)(1+2c_0)}{1+c_0}} > 0$，新生的单位投影态 $\mathbf{V}_2$ 与 $\mathbf{V}_0, \mathbf{V}_1$ 便结成三边内积全等于 $c_0$ 的**等边极小三角弧面体**：其三元格拉姆行列式恒为 $\det G_3 = (1-c_0)^2(1+2c_0) > 0$，球面帽吉拉尔角超精确等于 $\Omega_0 = 3\arccos\bigl(\frac{c_0}{1+c_0}\bigr) - \pi > 0$！
 
 ::: {.viz src="triadic-nameless-sandbox" preset="bootstrap-core" height="520"}
-**“二生三”无特权自举核心：单位模方归一把共线残影撑成极小三角弧面体。** 对比沉在原平面内、模长萎缩的经典退化投影与零背景比较公理 $\mathcal{A}_0$ 下的单位归一态 $\mathbf{V}_2 = \alpha\mathbf{S}_{01} + \beta\mathbf{A}_{01}$（$\alpha^2 + \beta^2 = 1$）：双向量正交残差 $\beta\mathbf{A}_{01}$ 把第三顶点垂直顶出原比量平面，撑开正格拉姆体积 $\det G_3 = (1-c_0)^2(1+2c_0) > 0$ 与品红球面角超 $\Omega_0 = 3\arccos\bigl(\frac{c_0}{1+c_0}\bigr) - \pi$。
+**沿霍奇法向构造等边球面三面角。** 在选定的三维定向下，模型取角平分线 $\mathbf{S}_{01}$ 与单位法向 $\mathbf{A}_{01}$，构造 $\mathbf{V}_2 = \alpha\mathbf{S}_{01} + \beta\mathbf{A}_{01}$。条件 $\alpha^2 + \beta^2 = 1$ 给出单位长度，正的法向分量 $\beta$ 使第三顶点离开原平面。图中三边的内积均为 $c_0$，因此 $\det G_3 = (1-c_0)^2(1+2c_0) > 0$，品红色球面区域的角超为 $\Omega_0 = 3\arccos\bigl(\frac{c_0}{1+c_0}\bigr) - \pi$。
 :::
 
 紧接着，无需从宇宙外部注入半点新原料，初生弧面体的三条边界弧 $(\mathbf{V}_0, \mathbf{V}_1)$、$(\mathbf{V}_1, \mathbf{V}_2)$ 与 $(\mathbf{V}_2, \mathbf{V}_0)$ 上重复同一构造，每次选择外法向，依次得到第二代、第三代归一投影态：在步长按黄金阻尼律 $\delta_\ell = 0.42\,\varphi^{-(\ell-1)}$ 逐层收束的模型下，球面原胞数沿 $1 \to 4 \to 10$ 层层绽放为自相似花冠，直观演绎“道生一，一生二，二生三，三生万物”的无尽开维创生链（`MODEL`）。
 
 ::: {.viz src="triadic-nameless-sandbox" preset="cascade-corolla" height="520"}
-**零外部输入的边界自举增殖：从单枚三面角绽放为 $1 \to 4 \to 10$ 黄金阻尼花冠。** 每一代新生的边界弧继续执行“切向同相投影 + 法向双向量残差”的单位归一自举，在步长按 $\delta_\ell = 0.42\,\varphi^{-(\ell-1)}$ 逐代衰减下，单枚母原胞自发向外繁衍出第 1 代 $4$ 胞与第 2 代 $10$ 胞的球面曲率拼砖（`MODEL`）。
+**沿边界弧递归构造 $1 \to 4 \to 10$ 个球面原胞。** 模型在每条边界弧的中点取背离父胞的单位法向，沿这个方向在球面上走过角距 $\delta_\ell = 0.42\,\varphi^{-(\ell-1)}$，得到新顶点。图中第 1 代共有 $4$ 个原胞，第 2 代共有 $10$ 个（`MODEL`）。
 :::
 
 ## 29.6.2 拆掉先后叙事：120° 三元循环对称与主谓宾切面 {#sec-ch34-5-2}
