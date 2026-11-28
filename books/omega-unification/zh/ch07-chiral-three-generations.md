@@ -108,6 +108,8 @@ $$
 
 在每个盲点，取以该点为中心的局部角坐标。设边界振幅在盲点的实雅可比为可逆映射 $A$。给定 $0<\eta<1$，选取 $0<r_-<(1+\eta)^{-1}$ 和 $r_+>(1-\eta)^{-1}$。在固定的局部坐标球内，把位移写成 $\varepsilon u$。对所有足够小的正阈值 $\varepsilon$，两个预先选定的光滑紧支撑函数分别从下、从上夹住振幅模小于 $\varepsilon$ 的指示函数。两窗的平面积分分别至少为 $\pi r_-^2/|\det A|$ 和至多为 $\pi r_+^2/|\det A|$。这里的指示函数在坐标球之外取零。 [局部椭圆的光滑夹逼](lean:D5/S3/Fourier/Asymptotics/PlanarSublevelSandwich.smooth_local_ellipse_sandwich)
 
+在周期一的坐标中，取边界避开零点的一张基本方形。若已列全方形内的规则零点，可在互不相交的邻域内分别缩放光滑窗，再把每个窗沿整数格平移求和。各邻域以外是零点为空的紧集，振幅模在其上有统一正下界，只要补集非空。因此对所有充分小的阈值，周期化的上下窗同时夹住整个次水平集的指示函数，两侧积分界分别由所用半径的平方乘以 $\pi$ 和各点雅可比绝对行列式倒数之和给出。 [周期次水平集的光滑夹逼](lean:D5/S3/Fourier/Asymptotics/PeriodicSublevelSandwich.periodic_test_sandwich)
+
 将钟角除以 $2\pi$，以 $p_\gamma=(a\gamma,b\gamma)/(2\pi)$ 作为周期一的采样点，并以各零点的重数除以 $N(T)$ 作为权重。若 $f$ 是角坐标中的固定测试函数，换元后用 $u\mapsto f(2\pi u)$，其平面积分正好带来归一化因子 $(2\pi)^{-2}$。把上面的纵坐标和估计代入光滑窗的采样定理，常数项为 $O(L^{-1})$，二次频率项贡献 $O(\varepsilon^{-2}L^{-2})$，超过 $J$ 的尾项为 $O((\varepsilon J)^{-4})$。三项之和为 $o(\varepsilon^2)$。让内外逼近的面积趋于同一椭圆面积即可恢复同一个 $C_q$。这一步使用上面的零点和估计与局部雅可比可逆性。 [光滑平面窗的采样定理](lean:D5/S3/Fourier/Asymptotics/PlanarWindowSampling.compact_window_sampling)
 
 固定荷与钟角，轻线随辐边软化能移动多远？写 $H_k(\delta)=H_k(0)-\delta K_k$。三条单位辐边构成一个星图。在极点与三叶均匀单位向量的基下，平凡特征标上的星图块为 $\left(\begin{smallmatrix}3&-\sqrt3\\-\sqrt3&1\end{smallmatrix}\right)$。两个非平凡叶模式在极点相消，各自的本征值为 $1$。其余方向上的星图作用为零，故 $K_k$ 的谱宽依次为 $w_k=4,1,1$。[软化权重的定义](https://github.com/the-omega-institute/trureturing-experiments/blob/cb58c8e64ecea67184e0c1d68a690be098a7a384/experiments/ch39-omega-research/replay/ch39-three-ray-chiral-boundary.py#L34)
