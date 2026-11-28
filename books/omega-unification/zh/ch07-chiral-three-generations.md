@@ -363,6 +363,8 @@ $F$ 在三个轻中心取零，在两个重中心均取 $5(1+\sqrt5)/4$。傅里
 
 动量反演还给出一个锐的作用程界。若 $B(-\theta)=B(\theta)$，或动能向量满足 $Y(-\theta)=-Y(\theta)$，四阶配平的最短作用程都是三步。两种条件中的任意一个都会使外侧中心相对于中间中心的振幅比 $R_\pm(x)=B_\pm(x)/B_0(x)$ 满足 $R_+(x)$ 与 $R_-(-x)$ 的二阶展开相同，其中一阶项可以非零。取动能的反演奇部，二步频率在每个分量上只给出三十个正弦系数。三阶条件确定这些系数，剩下的两个四阶横向分量不能同时为零。上述三步构造同时具有两种反演性质。[反演条件与精确消元](https://github.com/the-omega-institute/trureturing-experiments/blob/7ec305604987e42d8047a24d57078f004be3da5d/experiments/ch39-omega-research/replay/ch39-three-step-fifth-jet.md#reflection-of-two-outer-amplitude-jets)
 
+仿射无关的轻中心数据已可在有隙二步模型中实现。令 $\alpha=2\pi/5$、$\epsilon=\lambda=10^{-3}$，一个显式核给出 $m_s=1+\epsilon\sin(2s\alpha)$ 与 $g_s=-\lambda\epsilon\cos(2s\alpha)(x_1-x_2)$。两端质量不同，梯度相同且与中间梯度不同，故三组数据仿射无关。自由谱隙至少为 $1/300$，恰有三个正定向轻中心。三个完整矩阵匹配至三阶，因此标量色散匹配至四阶。固定此标量，仅比较中间与任一外侧轻中心的完整四阶展开，再加上五个中心的动能零值，便在全部 $61$ 个二步频率上给出满列秩：重选动能也无法使这一对达到完整四阶匹配。[显式二步核、全环面谱隙与两点秩检验](https://github.com/the-omega-institute/trureturing-experiments/blob/95d40941c33bb2a8a930d4b0fdba3ba2e372885c/experiments/ch39-omega-research/replay/ch39-three-step-fifth-jet.md#a-gapped-example-with-affinely-independent-light-data)
+
 相同的精度也约束最短作用程。在五个中心连续三轻、其余两个重中心的标量色散均为四时，任一有隙的平移不变实标量与克利福德向量核，若配平完整算子，必须有 $12r\ge 2K+7$；只配平标量色散也须有 $24r\ge 2K+10$。沿零和方向 $(2,2,2,-3,-3)$ 绕环面一周会经过所有五个中心。长度 $r$ 限制了沿此方向所见的傅里叶频率，而三轻中心的匹配要求相邻读数的差在两处出现高重数零点，两者给出上述必要界。一般阶数的最短作用程仍待确定。[插值构造、谱隙与五中心下界](https://github.com/the-omega-institute/trureturing-experiments/blob/021220d28b25ffdc2bcbe07f1ad59675b464edcb/experiments/ch39-omega-research/replay/%CE%A9%E5%A4%8D%E7%AE%97%E8%AF%B4%E6%98%8E.md#%E4%B8%89%E4%B8%AA%E8%BD%BB%E9%94%A5%E9%85%8D%E5%B9%B3%E5%88%B0%E4%BB%BB%E6%84%8F%E6%8C%87%E5%AE%9A%E6%9C%89%E9%99%90%E9%98%B6%E9%9C%80%E8%A6%81%E5%A4%9A%E8%BF%9C%E7%9A%84%E4%BD%9C%E7%94%A8)
 
 下表将这四类从球壳通往四维手征三代的显式构造并列成一张清晰的对照账：
