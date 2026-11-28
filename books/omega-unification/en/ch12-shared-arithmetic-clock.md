@@ -170,30 +170,35 @@ Once six arithmetic times crush more than $99.931\%$ of spectral mass into three
 Even retaining all zeros above any cutoff $H$ under inverse-square weighting inside any fixed positive shell-phase window drives the limiting distribution of $H / \gamma$ to uniform on $[0, 1]$, leaving a limiting two-time error of $3.71810906 \times 10^{-6}$ after optimizing scale; at unit scale $a = 1$, the five-charge three-light-mode support cannot match even the first arithmetic time alone ($> 32.092\%$ must sit outside it, rising past $87.818\%$ for the first $40$ times).
 
 ::: {.remark #rem-ou-ch12-windowed-rate title="A Whole-Spectrum Benchmark and the Windowed Rate Gap"}
-Write the cumulative count in a fixed phase window $W$ as $A_W(t)$ and suppose
+Let $A_W(t)$ count the positive zeros through height $t$ in the fixed phase window $W$, with multiplicity. Suppose $c>0$, $b_H\ge0$, and
 
 $$
-A_W(t)=c\,t\left(\log\frac{t}{2\pi}-1\right)+R_W(t),
-\qquad |R_W(t)|\le b_Ht\quad(t\ge H).
+\begin{aligned}
+A_W(t)&=c\,t\left(\log\frac{t}{2\pi}-1\right)+R_W(t),\\
+|R_W(t)|&\le b_Ht\quad(t\ge H).
+\end{aligned}
 $$
 
-Set $L_x=1+\log(x/(2\pi))$, and define the strict tail sum with multiplicity by $S_W(x)=\sum_{\gamma>x,\,W}\gamma^{-2}$. Partial summation gives
+Set $L_x=1+\log(x/(2\pi))$, and define the strict tail sum with multiplicity by $S_W(x)=\sum_{\gamma>x,\,W}\gamma^{-2}$. For $x\ge H$, partial summation gives
 
 $$
-S_W(x)=-\frac{A_W(x)}{x^2}+2\int_x^\infty\frac{A_W(t)}{t^3}\,dt
-       =\frac{c}{x}(L_x+\delta_x),
-\qquad |\delta_x|\le E:=\frac{3b_H}{c}.
+\begin{aligned}
+S_W(x)&=-\frac{A_W(x)}{x^2}+2\int_x^\infty\frac{A_W(t)}{t^3}\,dt\\
+      &=\frac{c}{x}(L_x+\delta_x),\\
+|\delta_x|&\le E:=\frac{3b_H}{c}.
+\end{aligned}
 $$
 
-When $H\ge2\pi$ and $L_H>E$, the distribution function $Q_H(s):=S_W(H/s)/S_W(H)$ obeys
+When $H\ge2\pi$ and $L_H>E$, the strict distribution function is $Q_H(s)=\Pr(H/\gamma<s)=S_W(H/s)/S_W(H)$ for $0<s\le1$, with $Q_H(0)=0$.
 
 $$
-\left\|Q_H-P_H\right\|_\infty\le\frac{2E}{L_H-E},
-\qquad
-P_H(s)=s+\frac{s\log(1/s)}{L_H}.
+\begin{aligned}
+\left\|Q_H-P_H\right\|_\infty&\le\frac{2E}{L_H-E},\\
+P_H(s)&=s+\frac{s\log(1/s)}{L_H}.
+\end{aligned}
 $$
 
-Thus the Kolmogorov distance $D_H$ from the inverse-square weighted $H/\gamma$ distribution to the uniform law satisfies
+Here $P_H(s)=sL_{H/s}/L_H$ increases from $0$ to $1$, using its continuous extension at $s=0$. After normalization the error numerator is $s\delta_{H/s}-P_H(s)\delta_H$, and the denominator is at least $L_H-E$. The supremum distance to a continuous comparison function is the same for the strict and inclusive distribution functions. The Kolmogorov distance $D_H$ to the uniform law therefore satisfies
 
 $$
 \left|D_H-\frac{1}{eL_H}\right|\le\frac{2E}{L_H-E}.
@@ -202,8 +207,11 @@ $$
 For all positive zeros without phase filtering, the counting estimate of Hasanalizade, Shen, and Wong gives for $t\ge e$
 
 $$
-|N(t)-\tfrac{t}{2\pi}(\log(t/(2\pi))-1)|
-\le B(t):=0.1038\log t+0.2573\log\log t+9.3675.
+\begin{aligned}
+|N(t)-\tfrac{t}{2\pi}(\log(t/(2\pi))-1)|&\le B(t),\\
+B(t)&=0.1038\log t\\
+&\quad+0.2573\log\log t+9.3675.
+\end{aligned}
 $$
 
 Since $B(t)/t$ decreases on this range, take $c=1/(2\pi)$ and $b_H=B(H)/H$. At $H=10^6$, the whole-spectrum benchmark yields
