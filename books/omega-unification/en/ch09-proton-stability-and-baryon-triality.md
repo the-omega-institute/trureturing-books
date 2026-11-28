@@ -273,6 +273,16 @@ With the Weyl equation imposed, one neutral first jet has six independent compon
 
 For odd $15\le n\le27$, begin with three neutral first jets in the first generation. Contract their symmetric right spinor pairs with the alternating tensor on the three-dimensional space of those pairs. The three left spinor indices are symmetric and contract with the color-antisymmetric product of three first-generation $u^c$ fields. Choosing a common left polarization and distinct right components gives a nonzero coefficient. Each of the other two generations supplies up to three additional jet pairs. After the full classical equations and integration by parts, these counts have minimum dimension $(7n-21)/2$. [Negative-lepton deficits, the right-spinor boundary, and witnesses](https://github.com/the-omega-institute/trureturing-books/issues/1660#issuecomment-7232272635)
 
+The ordinary leptons form a one-dimensional top exterior power, leaving the nine anti-up quarks and the $m=n-12$ neutral jets to determine the multiplicity. The weak contraction with $H^\dagger$ kills the projected Weyl trace through the Yukawa factor $\epsilon(H^\dagger,H^\dagger)=0$. Let $u$ track doubled left spin weights and $v$ track right spin weights. The coefficient of $t^m v^0$ in
+
+$$
+(1-v^{-1})\prod_{a=\pm1}\prod_{b=-1}^{1}(1+tu^a v^b)^3
+$$
+
+gives the left weights of the right-singlet jets. Differences of adjacent weights give the left spin multiplicities. The color-singlet nine-quark exterior power has multiplicities $105,120,36,8,1$ at left spins $1/2,3/2,5/2,7/2,9/2$. Multiply the jet and quark multiplicities at each matching spin and sum. For $n=15,17,19,21,23,25,27$, there are respectively $2{,}040$, $11{,}646$, $31{,}128$, $46{,}145$, $31{,}128$, $11{,}646$, and $2{,}040$ scalar classes at the minimum dimension, with three distinct generations. Duality between complementary exterior powers of the eighteen-dimensional jet space explains the symmetry of the counts.
+
+The classes stay independent in the full quotient by the complexified classical equations and total derivatives. Use zero connection, one neutral conjugate Higgs Klein–Gordon mode, and on-shell Weyl waves. Give each of the twelve ordinary lepton components a distinct constant Grassmann label, so the $m$ derivatives must act on the additional lepton waves. Their polarizations span the jet space. For any nonzero contraction, one can select a nonzero coefficient with two independent anti-up left spinors. Adjusting the dotted spinors of these undifferentiated quarks sets the total momentum to zero and preserves the coefficient. The field equations vanish on the chosen waves, and total divergences vanish at zero total momentum. [Multiplicity extraction and independence in the quotient](https://github.com/the-omega-institute/trureturing-books/issues/1660#issuecomment-7237022767)
+
 **Higher occupation groups at negative lepton charge (`ARGUED`).** For odd $n\ge31$, the zero-deficit capacity is $30$. The three families at positive deficit $p$ are neutral $L^\dagger$ jets of order $p+1$, charged $L^\dagger$ jets of order $p$, and $e^c$ jets of order $p-1$. The spatial counts again give $c_p^{\mathrm{EOM}}$. Write $n=30+\sum_{p=1}^{k-1}c_p^{\mathrm{EOM}}+s$ with $1\le s\le c_k^{\mathrm{EOM}}$. The minimum dimension is
 $$
 \begin{aligned}
