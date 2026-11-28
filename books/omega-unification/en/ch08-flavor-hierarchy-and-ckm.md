@@ -146,6 +146,20 @@ $$
 The vector $(0,1,1)^T$ has eigenvalue $(3-h)/6$. On its orthogonal complement, $6B(k,h)$ has diagonal entries $2+2h$ and $1-h$, with determinant $2(1-h^2-k^2)$. The two endpoints give distinct rank-two states at trace distance $2\sqrt{1-k^2}/3$. For instance, with $e^{i\alpha}=(4+3i)/5$, the candidate magnitude $\beta=\pi/2$ gives $k=3/5$. The states have trace distance $8/15$ and agree entry by entry in all three probability triples. For every $\alpha$ other than $\pi/2$, an arbitrarily small move toward $\pi/2$ produces this ambiguity. When the actual magnitude is $\pi/2$, the record determines both the magnitude and $B_{\mathrm{ref}}$.
 
 
+**Phase threshold when the two down readings average to the reference (`ARGUED`).** Let $y$ be the complex reading at zero and let $s_+,s_-$ be the readings at opposite phases, with $(s_++s_-)/2=y$. Put $D=(s_+-s_-)/(2i)$. At a candidate magnitude $\beta\in(0,\pi)$, the cyclic off-diagonal entries are $(-w,y,w)$, where $w=D/(2\sin\beta)$. If $D=0$, the readings are feasible exactly when $|y|\leq1/2$, and any magnitude works. For $D\ne0$, positivity requires $r=|y|<1/2$. Define $\ell=\operatorname{Re}(yD^2)/|D|^2$, so $-r\leq\ell\leq r$.
+
+Swapping Fourier coordinates $1,2$, taking complex conjugates, and flipping the sign of coordinate $0$ preserves the three cyclic entries. Averaging a feasible matrix with its transform allows the diagonal $(1-2t,t,t)$. For $r<t<1/2$, the Schur complement of the lower two-by-two block gives the exact positivity condition
+
+$$
+\sin^2\beta\geq\frac{|D|^2}{G(t)},
+\qquad
+G(t)=\frac{2(1-2t)(t^2-r^2)}{t+\ell}.
+$$
+
+If $t=r$ and $\ell>-r$, the coupling vector has a nonzero component in the block's null direction, so this endpoint is infeasible. If $r>0$ and $\ell=-r$, the vector lies in the range of the block. Cancelling $t-r$ gives $G(t)=2(1-2t)(t+r)$, which also applies at this endpoint. At $t=r=0$ the entire lower block vanishes, which excludes $w\ne0$. At $t=1/2$ the zeroth population vanishes, incompatible with $w\ne0$. Thus a magnitude is feasible exactly when $\sin^2\beta\geq |D|^2/G_{\max}$, where $G_{\max}$ is the maximum of the continuous extension of $G$ on $[r,1/2]$. Writing $G(t)/2=(1-2t)[t-\ell-(r^2-\ell^2)/(t+\ell)]$ shows that $G$ is strictly concave in the interior, so the endpoints and at most one interior stationary point determine the maximum.
+
+At equality, a positive definite completion would allow a small increase in $|w|$ with trace one, contradicting the maximum. The minimum-trace criterion above therefore gives a unique compatible state. For $D\ne0$, a pure completion exists exactly when $\ell=-r$ and $|w|^2=(1-2r)r$. The cyclic product and the two-by-two principal minors give necessity. At $t=r$ the lower block has rank one and the generalized Schur complement vanishes, giving sufficiency. At the phase threshold the state is pure precisely when $\ell=-r$ and $r\geq1/6$, since the quadratic $G$ then attains its maximum at $t=r$. The remaining threshold states have rank two. For example, $y=5i/32$ and $D=1/8$ give $t=5/16$, the exact threshold $\sin^2\beta=4/45$, and a unique rank-two completion.
+
 When the first three phases are calibrated, can one extra exposure measure the two remaining Fourier populations independently? Suppose we can apply a calibrated phase mask $D_\theta=\operatorname{diag}(1,e^{i\theta},-1)$ to the same preparation, then apply the mixer $H=V(\pi)$ and measure the three channels in their original order. Put $W=HD_\theta F$. Subtract the known contribution $\operatorname{diag}(WCW^*)$ from the readings. The residual is $Mx$, where $M_{jk}=|W_{jk}|^2$.
 
 Two channels suffice for a hand calculation. Write a population difference uniquely as $\delta=h(2,-1,-1)^T+k(0,1,-1)^T$. With $c=\cos\theta,\ s=\sin\theta$, taking the squared moduli of the entries in the first two rows of $W$ gives
