@@ -261,9 +261,17 @@ $$
 \qquad
 \int d(x)\,d|\mu|(x)\le\sqrt{(T_0+\varepsilon)\varepsilon/\kappa}.
 $$
-**区间计算。** 对可见谱 #11661，取零裸项、无隐场及 $c=10^{-122}$，在整个 $x=Q^2/M_P^2\in[0,1]$ 上可取 $\kappa=1$。证书在端点附近使用一阶导数界，在两个内点附近使用带符号的二阶导数界，在其余单调区间用子段两端的对偶间隙给出下界。因此，离四个接触点均至少 $r>0$ 的总变差质量至多为 $\varepsilon/r^2$。[二次间隙的区间复算](https://github.com/the-omega-institute/trureturing-books/issues/1963#issuecomment-7239087944)
+**区间计算。** 固定零裸项、无隐场及 $c=10^{-122}$，在整个 $x=Q^2/M_P^2\in[0,1]$ 上，#11661 可取 $\kappa=1$，#11934 可取 $\kappa=59/50$。证书在端点附近使用一阶导数界，在两个内点附近使用带符号的二阶导数界，在其余单调区间用子段两端的对偶间隙给出下界。因此，离四个接触点均至少 $r>0$ 的总变差质量至多为 $\varepsilon/(\kappa r^2)$。[#11661 的间隙复算](https://github.com/the-omega-institute/trureturing-books/issues/1963#issuecomment-7239087944) · [#11934 的间隙复算](https://github.com/the-omega-institute/trureturing-books/issues/1963#issuecomment-7239388738)
 
-将每处有符号质量移到最近的接触点。对绝对值和 Lipschitz 常数均至多为一的测试函数，积分变化至多为上式右端。矩向量是 Lipschitz 的，四个接触列线性无关，所以移位后的四个权重与最优权重之差也受同一平方根量级控制。若矩向量在该内点附近为 $C^2$，对称分拆一枚内部原子，位移各为 $h$，并把零原子移到 $h^2$，只留下 $O(h^2)$ 的矩残差。用五个独立正截止矩列精确修复后，总变差超额仍为 $O(h^2)$，而测试函数 $d$ 的积分差为 $|w|h+O(h^2)$，其中 $w$ 是被分拆的权重，积分差取绝对值。因此即使只允许正截止，固定五矩下的有界 Lipschitz 距离一般也只能得到平方根阶。[稳定性推导与有理复算](https://github.com/the-omega-institute/trureturing-books/issues/1963#issuecomment-7238907372)
+归一化矩固定了有符号总质量，因此衡量接触点之间的权重交换时，只需控制相邻接触点之间的测试函数差。设 $s_0<s_1<s_2<s_3$ 为接触点，$v(x)$ 为单截止的五矩向量，$A=[v(s_j)]_{j=0}^3$，$B$ 为接触矩阵的左逆。对满足 $\|f\|_\infty\le1$ 且 $\operatorname{Lip}(f)\le1$ 的测试函数，从 $f(x)$ 减去 $\sum_j(Bv(x))_j f(s_j)$。所得差在接触点归零，且减去的部分由固定五矩决定。离散分部求和从常数 $f(s_0)$ 出发，再用相邻函数差乘以累计权重 $q_k(x)=\sum_{j=k}^3(Bv(x))_j$。从最近接触点积分导数，得到有界 Lipschitz 距离的上界
+$$
+d_{\mathrm{BL}}(\mu,\mu_*)\le(1+L)\sqrt{(T_0+\varepsilon)\varepsilon/\kappa},
+\qquad
+L=\sup_{0<x<1}\sum_{k=1}^3(s_k-s_{k-1})|q_k'(x)|.
+$$
+两枚谱各用归一化、对数、二次和压力四行构造自己的左逆，再以 Arb 区间逐段控制累计权重的导数。#11661 满足 $L<3.6$、$T_0<316388$，#11934 满足 $L<3.177$、$T_0<328913$。当 $0\le\varepsilon\le1$ 时，有界 Lipschitz 距离分别至多为 $2600\sqrt{\varepsilon}$ 和 $2210\sqrt{\varepsilon}$。[#11661 的稳定性复算](https://github.com/the-omega-institute/trureturing-books/issues/1963#issuecomment-7239252081) · [#11934 的稳定性复算](https://github.com/the-omega-institute/trureturing-books/issues/1963#issuecomment-7239480868)
+
+若矩向量在某个内点附近为 $C^2$，对称分拆一枚内部原子，位移各为 $h$，并把零原子移到 $h^2$，只留下 $O(h^2)$ 的矩残差。用五个独立正截止矩列精确修复后，总变差超额仍为 $O(h^2)$，而测试函数 $d$ 的积分差为 $|w|h+O(h^2)$，其中 $w$ 是被分拆的权重，积分差取绝对值。因此即使只允许正截止，固定五矩下的有界 Lipschitz 距离一般也只能得到平方根阶。[稳定性推导与有理复算](https://github.com/the-omega-institute/trureturing-books/issues/1963#issuecomment-7238907372)
 
 固定 #11661 可见谱、零裸项和无隐场时，正负权的牛顿斜率能否各自配平，受总变差约束。记 $k,w$ 为单点牛顿与真空响应，$D=x\,d/dx$。令 $\mu^+,\mu^-$ 为归一有符号测度的正部和负部，$T=\|\mu\|_{\mathrm{TV}}$。在 $K=1$、$W=c=10^{-122}$ 和 $DK=DW=0$ 的条件下，两部分的牛顿斜率积分相同，记为 $A=\int Dk\,d\mu^+=\int Dk\,d\mu^-$。对 $k-Dk-3205000(w-Dw/2)$ 加上两种不同的 $Dk$ 修正，区间计算分别给出正部所需的逐点上界和负部所需的逐点下界。用两部分的质量 $(T+1)/2$ 和 $(T-1)/2$ 积分，得到
 
