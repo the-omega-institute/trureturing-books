@@ -420,6 +420,58 @@ $$
 
 varying by less than $2.576 \times 10^{-7}$ when the six zero labels are swapped across all faces. Opening an explicit positive-volume neighborhood of color and hypercharge fluctuations around the gapped pure-weak domain still preserves a vertex modulus **$> 2^{-9474}$**. Moreover, smooth odd-index pure-weak link configurations exist on every periodic box with $L \ge 2^{22}$, satisfying plaquette deviation $\le 360464/L^2$ and a volume-independent Wilson action upper bound.
 
+### 7.3.3 15-vs.-16 $\mathrm{Spin}^{\mathbb{Z}_4}$ Mirror Cobordism, Non-Additive Three-Generation Selection, and Full-Torus Monomial Leakage {#sec-ou-ch07-smg-balanced-selection-and-leakage}
+
+Beyond the rough-link index obstructions, three independent arguments and companion verifications targeting Question 2 (tracking issue `#2374`) sharpen why complete $16$-state families are required, how three generations can be conditionally selected, and why odd–even light-subspace separation survives every monomial change of site basis:
+
+| Audit Axis | Exact Statement or Construction | Quantitative Outcome & Scope | Epistemic Tier |
+| :--- | :--- | :--- | :--- |
+| 15-state vs. 16-state $\mathrm{Spin}^{\mathbb{Z}_4}\times G_6$ mirror cobordism | $z = 5(B-L)-4Y \equiv 1\pmod 4$, $\overline\eta_z = (7z-z^3)/96\pmod{\mathbb{Z}}$, mirror vertex $\mathcal{O}_{16}$ | Three 15-state families have Smith residue $13\pmod{16}$ (mirror residue $3$) and K3 Jacobian $-1$, obstructing local symmetric SRE decoupling; adding one $\nu^c$ ($z=5$) per family cancels the full joint anomaly, and $\mathcal{O}_{16}$ has $5544$ monomials with exact coefficient $+51840$ on the selected monomial | ARGUED / NUM |
+| Non-additive balanced selector & triple intersection | $\mathcal{F}_q(Q) = \operatorname{tr}(L_q Q)/r + \alpha\sum_{k=0}^2(r_k-r/3)^2$; 4-row perturbative anomaly kernel + $B_3$ + one-loop QCD AF | On the five nonzero charges $q\in\{1,2,-3,-4,6\}$, $\alpha>54$ (and already $\alpha>10.235$) uniquely selects $r=3$; independently, $\{1,3,7,15\}\cap 3\mathbb{N}\cap[1,8] = \{3\}$ | ARGUED / NUM |
+| Clock-free holonomy & full-torus monomial leakage | Triangle $(1,5,29)$–$(17,17,17)$–$(23,7,17)$ and $160\times 160$ effective-torus sorted site-density certificate | $g^2+g^{-2} = 2942782/1493863$ (non-root-of-unity); with even-charge handover ordering margin $>6.3505$, every monomial site map $U$ and independent clock pair obey $\Lambda(P,UQU^\dagger) > 14.108\%$ | ARGUED / NUM |
+
+1. **15-State Mirror Cobordism Obstruction and the 16-State Symmetric Mass Generation Vertex (ARGUED / NUM).** On the quotient group $G_6 = (SU(3)\times SU(2)\times U(1)_q)/\mathbb{Z}_6$ ($q = 6Y$), the integer charge $z = 5(B-L)-4Y$ obeys $z \equiv 1 \pmod 4$ on every left-handed Weyl multiplet, so its square is fermion parity and defines a $\mathrm{Spin}^{\mathbb{Z}_4} = (\mathrm{Spin}\times \mathbb{Z}_4)/\mathbb{Z}_2^F$ structure. By the Smith isomorphism $\Omega_5^{\mathrm{Spin}^{\mathbb{Z}_4}} \cong \Omega_4^{\mathrm{Pin}^+} = \mathbb{Z}_{16}$ and the APS reduced eta invariant $\overline\eta_z = (7z-z^3)/96\pmod{\mathbb{Z}}$, $N$ families plus $n_\nu$ sterile singlets $\nu^c$ ($z=5$) carry pure torsion residue $n_\nu - N \pmod{16}$. Three incomplete $15$-state families therefore have residue $13\pmod{16}$ (mirror residue $3$) and determinant-line Jacobian $(-1)^3 = -1$ on complex-oriented K3 ($\sigma = -16$), ruling out any symmetric, short-range-entangled, uniquely gapped mirror decoupling in a local anomaly-free vectorlike UV lattice slab. Adding one left-handed $\nu^c$ per generation completes $16$ states, cancels all local polynomial traces (including $q^{3-j}z^j$) and the full $\mathrm{Spin}^c\times G_6$ degree-5 bordism simultaneously (with $\Omega_5^{\mathrm{Spin}}(BG_6) = 0$ by Leray–Hirsch and $\mathrm{Sq}^2$), and admits an explicit site-local, $\mathbb{Z}_3$-cycle-invariant $16$-fermion mirror singlet vertex
+
+$$
+\mathcal{O}_{16}
+\;=\;
+\big\langle T_Q,\, T_{u^c}\otimes T_{d^c}\big\rangle_{\epsilon^{\otimes 6}}\,
+\big\langle T_L,\, T_{e^c}\otimes T_{\nu^c}\big\rangle_{\epsilon^{\otimes 2}},
+$$
+
+where $T_R^{\alpha_1\cdots\alpha_{d_R}} = \sum \epsilon_{a_1\cdots a_{d_R}}\chi_R^{a_1,\alpha_1}\cdots \chi_R^{a_{d_R},\alpha_{d_R}}$. Expanding in the $32$-generator exterior algebra yields $924$ quark monomials and $6$ lepton monomials ($5544$ distinct degree-$16$ monomials in the product); for $\epsilon_{12}=1$, the ordered monomial with all $Q,L$ spin indices $1$ and all others $2$ carries exact coefficient $+25920 \times 2 = +51840$, certifying nonvanishing. Lifting the site $\mathbb{Z}_3$ rotation to an internal $U(1)_F$ with charges $(0,1,-1)$ on the three characters is likewise anomaly-free on spin $BG_6\times BU(1)_F$ (since $\mathrm{Sq}^2(\ell u_F)=\ell^2 u_F+\ell u_F^2$ removes the mixed degree-$4$ column). Crucially, $\mathcal{O}_{16}$ supplies symmetry and anomaly matching only; proving a thermodynamic mirror gap and an equivariant rough-link Weyl measure remains open (OPEN).
+
+2. **Non-Additive Balanced Selection and the Independent Conditional Triple Intersection (ARGUED / NUM).** Across the five nonzero shell charges $q \in \{+1,+2,-3,-4,+6\}$, directed-interval Schur-complement inertia certifies the uniform one-step ranks and $(1,\omega,\omega^2)$ character counts `1:(1,0,0)`, `3:(1,1,1)`, `7:(3,2,2)`, and `15:(5,5,5)`, while excluding all $14$ other one-step and $17$ other two-step fixed cuts over the torus (the additive Dirac-sea window $[8.221, 10.6]$ applies to these five charged sectors and excludes $q=0$, where $\lambda_2=\lambda_3\approx 8.24686$ at $\delta=0$). Going beyond additive spectral traces, minimizing the non-additive balanced occupation functional over nonzero orthogonal projectors $Q$ commuting with $P$ (total rank $r=\operatorname{tr}Q$, character ranks $r_k$),
+
+$$
+\mathcal{F}_q(Q)
+\;=\;
+\frac{\operatorname{tr}(L_q Q)}{r}
+\;+\;
+\alpha\sum_{k=0}^2\Bigl(r_k - \frac{r}{3}\Bigr)^2,
+\qquad \alpha > 54,
+$$
+
+penalizes every imbalanced rank by at least $2\alpha/3 > 36 \ge \|L_q\|_{\rm op}$ (on these five sectors $\alpha > 10.235$ already suffices), while Ky Fan's bound forces every balanced rank $r \in \{6,9,12,15,18\}$ to have strictly higher mean energy than $r=3$, selecting three generations uniquely across all five charges with no external Fermi level. Independently, the four-row perturbative anomaly matrix forces all five charged ranks onto the common-family line $r_Q = r_u = r_d = r_L = r_e = N$; gauged baryon triality $B_3$ ($b = 2Y-B$, weighted index $-N n_2$ on spin $G_6$ bundles) requires $3 \mid N$; and minimal one-loop QCD asymptotic freedom $b_0 = 11 - \tfrac{4}{3}N > 0$ holds iff $N \le 8$, giving the unique triple intersection $\{1,3,7,15\}\cap 3\mathbb{N}\cap [1,8] = \{3\}$ (whereas CKM CP violation $N \ge 3$ plus asymptotic freedom alone still leaves $\{3,7\}$). Deriving either the occupation functional or the gauged symmetry content from a single microscopic action remains open (OPEN).
+
+3. **Clock-Free Triangle Holonomy and Uniform Full-Torus Monomial Leakage (ARGUED / NUM).** On the clock-free triangle $(1,5,29)$–$(17,17,17)$–$(23,7,17)$, the spherical holonomy $g$ satisfies the exact rational trace $g^2 + g^{-2} = 2942782/1493863 \notin \mathbb{Z}$, so $g$ is never a root of unity and any two distinct charges obey $\|L_q - U L_r U^\dagger\|_{\rm op} \ge |1-g^{q-r}|/\sum_{e\in\Delta} w_e^{-1}$ under arbitrary diagonal rephasings $U$. A three-cycle counterexample shows, however, that nonzero triangle flux alone cannot lower-bound light-projector separation; the decisive lower bound comes directly from the increasing sorted site densities $p_{(i)} = (P_{ii})_\uparrow$ and $s_{(i)} = (Q_{ii})_\uparrow$. Over a $160\times 160$ effective-torus cell cover ($0\le\delta\le 10^{-8}$), independent interval verification certifies both the separation of all non-candidate masses (margin $>4.4465$ in all five sectors) and the essential even-charge handover ordering inequality $\max(\underline a,\underline b) - \max(\overline c_1,\overline c_2) > 0$ (strict margins $>8.4450$, $>7.3960$, and $>6.3505$ for $q=+2,-4,+6$, preventing two trivial-character lines from displacing a nontrivial line), yielding uniformly $p_{(11)} > 0.2953458$ and $s_{(16)} < 0.1075396$. For every monomial site change of basis $U$ (arbitrary site rephasings and permutations) and independent clock pairs and deficits, sorted matching and Cauchy–Schwarz on the principal-angle sines $x_i = \sin\theta_i$ give
+
+$$
+\|P - U Q U^\dagger\|_{\rm op}
+\;\ge\;
+\frac{\|P - U Q U^\dagger\|_1}{6}
+\;>\; 0.375612,
+\qquad
+\Lambda(P, U Q U^\dagger)
+\;=\;
+\frac{\sum_{i=1}^3 x_i^2}{3}
+\;\ge\;
+\frac{\|P - U Q U^\dagger\|_1^2}{36}
+\;>\; 0.14108 \; (> 14.108\%).
+$$
+
+Across the same independent-clock cover, fixed-basis odd–even leakage lies strictly in $0.50255 < \Lambda < 0.56417$; at flagship zero $2{,}306{,}888{,}100{,}085$, relaxed assignment bounds further certify monomial leakage $> 31.060\%$ for $(1,2)$ and $> 31.097\%$ for $(1,-4)$, whereas the same-parity pair $(2,-4)$ drops to $0.008589$ at $(0, 4\pi/3)$ despite nonzero flux, sharply delineating the odd–even versus same-parity regimes.
+
 ::: {.problem #prob-ou-ch07-chiral-selection title="Open Horizon of Question 2: Selecting Three Generations and an Unpinned 4D Interacting Chiral Theory"}
 This chapter has established the torus-wide five-charge spectral gap ($\lambda_3 < 8.685 < 9.6 < \lambda_4$), the intrinsic site-variance min-cut $T = 9 + (1-\delta)^2$, the 5-step simplex three-species overlap kernel (smooth index $-3\operatorname{Pf}(C)$), the four-frame logarithmic gap-protection regime, and the strictly positive pure-weak $\Delta B = \Delta L = 3$ twelve-fermion vertex ($> 2^{-9472}$). By the monograph's first-principles standard, three fundamental doors remain open:
 
