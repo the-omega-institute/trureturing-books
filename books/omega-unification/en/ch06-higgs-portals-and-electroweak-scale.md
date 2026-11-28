@@ -87,6 +87,28 @@ After subtracting the contributions from earlier starts, only terms starting at 
 
 With $t_i=\operatorname{sgn}(v_0)m_i/a$ at the signed start $v_0$, dividing each amplitude by $t_i^2/(2\ell_i)$ gives the species weight $0,1,3,$ or $4$ at that slope in layer $i$. Once all starts have been decoded, every unassigned species has slope zero. If two masses coincide, exchanging the colored slopes of their layers preserves the entire response.
 
+**How many background derivatives are needed at the origin?** Keep the Gaussian scalar model and the $N$ known, distinct positive squared masses. In one layer take the colored and uncolored slopes $(a,b)=(1,-\sqrt[3]{3})$, then reverse both signs. The two assignments have the same weighted squares and fourth powers, and both have $3a^3+b^3=0$. In the $j$th background derivative of the bubble at $s=0$, the slopes enter only through $3a^{j+2}+b^{j+2}$. The readings therefore agree through background order two at every $P\ge0$. The zero-background gauge traces of Chapter 5 also agree term by term.
+
+Third order separates all assignments using finitely many momentum coefficients. Write $M_{i,r}=3t_{i,C}^r+t_{i,U}^r$. Near the origin, expand the logarithm and then $(m_i+ts)^{-k}$. Positive squared masses give a neighborhood where both expansions converge uniformly for $z\in[0,1]$. Integrating with $\int_0^1[z(1-z)]^k\,dz=(k!)^2/(2k+1)!$ gives
+
+$$
+\begin{aligned}
+[P^ks^j]R_P(s)&=A_{kj}\sum_i m_i^{-k-j}M_{i,j+2},\\
+A_{kj}&=\frac{(-1)^{k+j+1}}{k}\binom{k+j-1}{j}
+          \frac{(k!)^2}{(2k+1)!}.
+\end{aligned}
+$$
+
+For each $j=1,2,3$, take $k=1,\ldots,N$. After division by $A_{kj}$, the readings are the first $N$ power moments of the amplitudes $m_i^{-1-j}M_{i,j+2}$ at the known nodes $1/m_i$. Vandermonde injectivity therefore recovers $M_3,M_4,M_5$ in each layer from these $3N$ coefficients.
+
+How well do the three moments separate signed slopes? Choose slope units so both pairs under comparison lie in $[-1,1]$. Let $F$ be the difference of the cumulative masses of $3\delta_a+\delta_b$ and $3\delta_{a'}+\delta_{b'}$, and set $D=\max(|a-a'|,|b-b'|)$. If $D>0$, consider the interval between the two slopes of the species attaining $D$. Its cumulative weight differs by three or one throughout the interior, and the other species cannot cancel it. Thus $|F|\ge1$ there almost everywhere. The four slopes delimit at most three intervals on which $F$ can be nonzero, so its sign changes at most twice. Put a root at each change of sign and place any unused roots at $-1$. Choose the overall sign of $q(x)=\pm x^2(x-r_1)(x-r_2)$ so that $qF\ge0$. Removing neighborhoods of radius $D/12$ around $0,r_1,r_2$ leaves at least half of the interval of length $D$. Hence, with $\eta=\max_{r=3,4,5}|M_r-M'_r|$,
+
+$$
+\frac{D^5}{2\cdot12^4}\le\int q(x)F(x)\,dx\le 4\eta .
+$$
+
+The upper bound follows by integration by parts since $q$ contains only powers two through four and its coefficients have absolute sum at most four. Exact data give $D=0$, including zero and coincident slopes. To recover the pair, set $u=a^3$ and use $b^3=M_3-3u$ in the fourth moment. The resulting equation $3|u|^{4/3}+|M_3-3u|^{4/3}=M_4$ has at most two real roots by strict convexity, and $M_5$ selects the solution. For a fixed mass list the linear systems above give the error factor for conversion to $\eta$. In the sign-reversed example scaled by $\epsilon>0$, $M_3$ and $M_4$ agree while $M_5$ separates the assignments. The difference scales as $\epsilon^5$ while their slope distance scales as $\epsilon$. This makes $1/5$ the optimal uniform inverse exponent on bounded slopes. The order and error bound are hand derivations for the stated bubble integral.
+
 Whenever we certify positivity of $8\pi I \pm \mathcal{A}$ on coupled Higgs–heavy-radial channels or eliminate high-potential shell vertices into an effective boundary operator, the exact matrix identity at work is the Lean-verified block Schur complement minimum theorem:
 
 ::: {.theorem #thm-ou-ch06-schur-minimum title="Block Schur Complement Quadratic Form as Exact Minimum" lean="D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"}
