@@ -42,6 +42,16 @@ $$
 
 允许增加站点后，两个可交换母算子能产生多大的混合？给定任意两个正定三代质量矩阵 $A,B$，只须五个站点，就能把站点上的两个正对角矩阵压缩到同一三维轻空间，分别得到 $A,B$。先从每个目标扣去一个小的正标量，记余项为 $A',B'$，设 $S=A'+B'$、$L=\|S\|_{\mathrm{op}}$。在 $S^{-1/2}$ 缩放的坐标里，两项之和为单位阵，因而可以在同一组基底中对角化。将这三个方向变回原坐标，除以 $\sqrt L$，三个站点对范数的贡献就是 $S/L$。它已有一个特征值等于一，补足范数所需的 $I-S/L$ 至多秩二，另外两个站点便够用。把扣去的标量加回每个站点即可。结合四站的超平面障碍，五是实现任何给定非零 $J$ 目标的最少站数。若 $A+B\le I$，两组母值都可选在 $(0,1)$ 内。
 
+**第二个轻重耦合方向（手工推导）。** 即使站点数够用，压缩所得的 CP 混合也受轻空间通往重空间的耦合限制。令 $P$ 为轻空间 $W$ 上的正交投影，$Q=I-P$，并记对易母算子 $\widehat A,\widehat B$ 的轻重块为 $X=Q\widehat A|_W$、$Y=Q\widehat B|_W$。将两块横向拼接为 $L=(X\ \ Y)$，以 $\sigma_2(L)$ 记其第二奇异值，秩不足二时取零。由母算子对易可得 $C=[A,B]=Y^*X-X^*Y$，且
+
+$$
+\sigma_{\min}(C)\le \sigma_2(L)^2.
+$$
+
+无重空间时 $C=0$。否则取 $L$ 的第一左奇异方向，把两个块的输出各自拆成该方向与其正交余项。第一方向对 $C$ 的贡献至多秩二，在三维轻空间中必有零向量。记余项块为 $X_\perp,Y_\perp$。在任一单位向量 $v$ 上，余项对 $-iC$ 的期望值是 $\|(X_\perp+iY_\perp)v\|^2/2$ 与 $\|(X_\perp-iY_\perp)v\|^2/2$ 之差。两项都在 $[0,\sigma_2(L)^2]$ 内，所以余项的算子范数至多为 $\sigma_2(L)^2$。沿第一方向贡献的单位零向量应用此界，便得到上式。
+
+对于两套非简并质量平方谱，记各自三个正谱隙的乘积为 $\Delta_A,\Delta_B$。由 $|\det C|=2\Delta_A\Delta_B|J|$，可得 $2\Delta_A\Delta_B|J|\le \sigma_1(C)\sigma_2(C)\sigma_2(L)^2$。因此可用的重空间即便超过一维，若两种耦合仍只通往同一条重方向，$J$ 也必为零。五站算例可在谱隙保持分离时使 $|J|$ 与 $\sigma_2(L)^2$ 同阶。[Jarlskog 的对易子不变量](https://doi.org/10.1103/PhysRevLett.55.1039) · [可复算的五站算例](https://github.com/the-omega-institute/trureturing-books/issues/1823#issuecomment-7238122058)
+
 对站点规定旋转，还要说明轻空间是否随旋转保持不变。设旋转仅循环三个站点、固定其余站点，并要求两组母矩阵在站点基底中对角且在循环上取常值。五站只有两个固定站，其投影的公共正交补给两组质量矩阵留下一条共同本征线。六站可把上述三个对角化方向放在三个固定站，用三循环容纳补足范数的两行。若还要求轻空间在旋转下不变，非零 $J$ 迫使旋转在轻空间上是标量；两个非平凡特征空间都只有一维，故三代只能落在平凡特征空间。它含每个固定站和循环上的一条均匀线，共有 $N-2$ 维。要有五个有效坐标，物理站点便至少需要七个，且七站恰能实现。三个最少站数分别依赖这些几何条件。构造中的轻空间和母值都随给定质量矩阵选择。 [同一轻空间的构造与站数下界](https://github.com/the-omega-institute/trureturing-experiments/blob/ba92cd4b7b42fa78490a36e7a64d1411c9cf555c/experiments/ch39-omega-research/replay/ch39-commuting-flavor-sites.md)
 
 若两个四维算子只须各自与同一轮换对易，质量谱还能留下多少相位自由？取一个固定点和一个三点轨道，在特征标基中写 $P=\operatorname{diag}(1,\omega,\bar\omega,1)$，其中 $\omega=e^{2\pi i/3}$。取 $n=(e_4+e_2+e_3)/\sqrt3$，令 $B$ 交换 $e_1,e_4$、固定 $e_2$、把 $e_3$ 变为 $-e_3$。上型算子取 $A_u=2I+B$。下型算子取 $A_d=D_t A_u D_t^*$，其中 $D_t=\operatorname{diag}(e^{it},1,1,1)$。两算子均正定且与 $P$ 对易。$D_t$ 固定 $n$，所以两者压缩到同一个 $W$ 后仍有相同的谱。具体地，$B$ 交换正交单位向量 $n,Bn$，在它们的正交补上各余一条本征值为 $-1,+1$ 的线。因此 $B$ 压缩到 $W$ 后的中间本征线由 $Bn$ 张成，两套质量平方均为 $(1,2,3)$。
@@ -85,6 +95,27 @@ $$
 以两个 Fourier 相位 $t=\pm2\pi/3$ 为例。取 $p=(1,1,1)/3$，要求两处都读出 $q=(1+2v,1-v,1-v)/3$，其中 $0\le v\le1$。上式给出实向量 $z=(-2v,v,v)/3$。按 $0,1,2$ 编号，两行和之差给出 $v=\operatorname{Re}(\rho_{12}-\rho_{02})\le2/3$，因为二阶主子式要求 $|\rho_{ij}|\le1/3$。端点 $v=0,2/3$ 分别由 $\mathbf1/\sqrt3$ 与 $(-1,1,1)^T/\sqrt3$ 取得，混合二者便得到整个区间。区间内点的最小秩为二。纯态若给出 $v>0$，其非零行和向量 $\rho\mathbf1$ 为实，故可取实振幅 $\pm1/\sqrt3$，上面的差只能取 $0,\pm2/3$。
 
 即使三对基各自都容许所给概率，三组读数也可能无法共用一个态。例如取 $v=17/25$，两处的 $q$ 都是 $(59,8,8)/75$。在任一 Fourier 相位，取该下型基中对角线为 $q$ 的对角态，便有均匀的上型读数。两套下型基也能一起给出这组 $q$。它们的第零个基向量内积的模为 $1/\sqrt3$。调相使内积为正后，沿两向量之和制备纯态，在两套基中第零个概率均为 $(1+1/\sqrt3)/2$，其余两个因交换对称而相等。这对应 $v=(1+\sqrt3)/4$。与 $I/3$ 混合可降至 $17/25$，而三组共用制备的上限为 $2/3$。[单变量判据与精确矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/1649#issuecomment-7238042900)
+
+若三组读数相容，它们能否辨认出制备？在同一四站模型中，取 $F_{jk}=\omega^{jk}/\sqrt3$（$0\le j,k\le2$），写 $B=F^*\rho F$。三点 Fourier 基的第一列沿 $\mathbf1$，因而 $F^*V(t)F=\operatorname{diag}(e^{it},1,1)$。把各通道的概率合成一个复数，直接展开得
+$$
+\sum_{j=0}^2\omega^j q_j(t)= e^{-it}B_{01}+B_{12}+e^{it}B_{20},\qquad q(0)=p.
+$$
+
+两边乘以 $e^{it}$，右边成为关于 $e^{it}$ 的二次多项式。三个互异相位便确定三个系数。由于每组概率均为实数且和为一，这个复数也确定整组概率。于是全部相容制备恰为 $F B F^*$，其中 $B=C+\operatorname{diag}(x)$ 半正定，$\sum_j x_j=1$，而零对角厄米阵 $C$ 的非对角元已由读数确定。
+
+正性有时能把缺少的对角元也完全确定。记 $m=\max_{|u_j|=1}(-u^*Cu)$。去掉共同相位后写 $u=(1,v,w)^T$。给定 $v$，选择 $w$ 使 $w(C_{02}+\bar v C_{12})$ 的实部最小，就只剩下一个圆周上的极值。
+
+$$
+m=2\max_{|v|=1}\left(\left|C_{02}+\bar v C_{12}\right|-\operatorname{Re}(C_{01}v)\right).
+$$
+
+下面手推 $m$ 是给 $C$ 补对角元所得半正定矩阵的最小迹。加上充分大的标量阵就能得到正定阵，而半正定且迹有界的矩阵构成有界集，故最小迹可取到，记一个极小矩阵为 $B_*$。在这个迹上，补对角元的仿射平面与正定锥不交，否则可减去小的正标量阵。分离两者的非零泛函 $\operatorname{tr}(Y\,\cdot)$ 可取在正定锥一侧有较大的值。沿锥缩放得 $Y\succeq0$ 及 $\operatorname{tr}(YB_*)=0$。平面包含全部无迹对角方向，故 $Y$ 的对角元相等，可归一为一。
+
+对复相关矩阵上的实线性泛函 $X\mapsto-\operatorname{Re}\operatorname{tr}(CX)$ 应用三维相位格拉姆极大值定理，得 $m\ge-\operatorname{tr}(CY)=\operatorname{tr}B_*$。反向不等式来自每个相位向量都满足 $u^*B_*u\ge0$。[相位格拉姆极大值定理](lean:D5/S3/Quantum/Recovery/CommutingRandomUnitaryRecovery.phase_gram_max)
+
+因此 $m>1$ 时无共同态。$m=1$ 时，任取一个取到极大值的 $u$，每个可行的 $B$ 都有 $u^*Bu=0$，正性迫使 $Bu=0$，故三个对角元唯一地等于 $x_j=-\bar u_j(Cu)_j$。$m<1$ 时，$B_*+(1-m)I/3$ 正定，沿两个独立的无迹对角方向作小扰动仍给出同一记录。
+
+例如，各相位读数都均匀时 $C=0$，整个 Fourier 对角概率单纯形中的态都符合读数，秩一、二、三皆有。另一方面，取 $u=(1,1,-1)^T$，$B=(I-uu^*/3)/2$。它的秩为二且 $Bu=0$，故上述取等条件唯一确定它。在每个相位，其三个概率依次为 $4/9$、$(5+2\sqrt3\sin t)/18$ 和 $(5-2\sqrt3\sin t)/18$，全部严格为正。[补全构造与精确矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/1649#issuecomment-7238251495)
 
 在 Fourier 相位，还可以数出实现同一对读数的纯态。先取 $t=2\pi/3$ 和 $D=\operatorname{diag}(\omega,1,1)$，直接相乘得 $iDVD=F$，其中 $F_{jk}=\omega^{jk}/\sqrt3$，指标从零起。基向量的相位不影响概率。负相位给出 $\bar F$，将态也取共轭便得到相同的可达读数。以下手工推导采用 $F$。在上型基中写密度矩阵 $\rho$，则 $p_j=\rho_{jj}$。把下型概率合成一个复数，由 $q_k=(F^*\rho F)_{kk}$ 得
 
@@ -195,9 +226,9 @@ $$
 
 能产生六个质量的共同谱函数至少需要几次？在上面这枚零点和它的右邻分别考察，让上、下型共用一个在全实轴满足 $0<R(t)<1$ 的实有理函数，在共同的四站复三维空间上先压缩再平方。以约分后分子、分母次数的较大值计，最低次数恰为四。三次及以下即使允许两荷各选三代空间，也无法把六个质量同时送入各自的 $1\sigma$ 窗口。四次时，每枚零点各有一个函数能精确重现六个中心值。完整的混合矩阵还需要多少自由度？在中心零点，另一条四次函数能同时重现六个质量和 $|V_{ub}|$，但它给出 $|V_{cb}|\simeq0.9983$，远离参考值 $0.0427$。在中心及右邻分别取两荷各自的第十和第十七层，用这四个谱点构造次数至多为八的有理函数，则六个中心质量、九个 CKM 模平方和带符号的 Jarlskog 不变量都能同时重现。函数系数和味空间按编号分别选取。全实轴有界的非常数实有理函数约分后分母次数为偶数，右邻还有一个六次构造。因此完整夸克数据的最低次数在中心只可能是四、六或八，在右邻只可能是四或六。[低次数排除](https://github.com/the-omega-institute/trureturing-experiments/blob/cd77e22ffcdfad79fa9f5885649fbe24488859c9/experiments/ch39-omega-research/replay/ch39-common-quadratic-flavor-exclusion.py) · [四次构造与混合检验](https://github.com/the-omega-institute/trureturing-experiments/blob/cd77e22ffcdfad79fa9f5885649fbe24488859c9/experiments/ch39-omega-research/replay/ch39-common-quartic-six-masses.py) · [四次函数匹配 $|V_{ub}|$](https://github.com/the-omega-institute/trureturing-experiments/blob/679578c68c047c16917fa8df286ca992e1277d99/experiments/ch39-omega-research/replay/ch39-central-quartic-vub.py) · [四个谱点的完整混合构造](https://github.com/the-omega-institute/trureturing-experiments/blob/c434c5bc2be68117b9fb9aac02de3e193013b45b/experiments/ch39-omega-research/replay/ch39-sparse-rational-full-ckm.py) · [右邻的六次函数](https://github.com/the-omega-institute/trureturing-experiments/blob/39b561099993b46a610ea55d77cc5c58a2151abc/experiments/ch39-omega-research/replay/ch39-common-sextic-full-ckm.py)
 
-更珍贵的是，轮换必须破缺到何种程度，只需五行纯手算就能定死一个不可绕过的定量地板：
+这些质量基的几何关系还给出轮换必须破缺的最小幅度。
 
-::: {.example #ex-ou-ch08-commutator-floor title="用 $1\,\mathrm{TeV}$ 保守输入手算轮换破缺下界 $0.0414$"}
+::: {.example #ex-ou-ch08-commutator-floor title="从 $1\,\mathrm{TeV}$ 质量与混合输入估计轮换破缺"}
 把两个质量平方矩阵 $H_u, H_d$ 各自减去最小本征值再除以谱直径，记作无量纲归一矩阵 $A, B$（谱直径皆为 $1$）。因为 $\mathcal{E}(A)$ 与 $\mathcal{E}(B)$ 在 $T$ 本征基中同时对角，故 $[\mathcal{E}(A), \mathcal{E}(B)] = 0$。将 $[A, B]$ 拆作 $[A - \mathcal{E}(A), B] + [\mathcal{E}(A), B - \mathcal{E}(B)]$，并对谱直径至多为 $1$ 的厄米矩阵使用基本不等式 $\|[H, X]\|_{\mathrm{HS}} \le \|X\|_{\mathrm{HS}}$，立得
 
 $$
@@ -210,7 +241,18 @@ $$
 \max_{X \in \{A, B\}} \|[T, X]\|_{\mathrm{HS}} \;>\; 0.0414.
 $$
 
-无论物理学家偏爱哪套高能动力学，只要想同时容纳 $|V_{cb}| > 0.035$ 与 $|V_{tb}| > 0.98$，就绝不可能让上下两套汤川都藏在 $\|[T, X]\|_{\mathrm{HS}} \le 0.0414$ 的近对称安全区里。
+**顶底质量线给出的锐界（手工推导）。** 记顶、底质量本征线的射影夹角为 $\theta=\arccos|V_{tb}|$，并取 $d=\min(\theta,\pi/2-\theta)$。若两套归一质量平方的最大与次大本征值之差均至少为 $g>0$，则
+
+$$
+\max_{X\in\{A,B\}}\|[T,X]\|_{\mathrm{HS}}
+\ \ge\ \sqrt{3/2}\,g\sin d.
+$$
+
+在质量基中只保留连到最大本征值的矩阵元，可得 $\|[T,X]\|_{\mathrm{HS}}\ge g\|[T,P_X]\|_{\mathrm{HS}}$，其中 $P_X$ 投影到该质量线。在轮换本征基中，若该线的模平方读数为 $p_j$，则 $\|[T,P_X]\|_{\mathrm{HS}}^2=3(1-\sum_j p_j^2)$。两条质量线到各自最近轮换本征线的距离之和至少为 $d$。若就近的是同一条线，三角不等式给出下界 $\theta$。若是两条正交线，则给出 $\pi/2-\theta$。因此至少一条质量线的最大读数 $p=\max_j p_j$ 不超过 $\cos^2(d/2)$。当 $p\ge1/2$ 时，将其余读数合并得 $1-\sum_j p_j^2\ge 2p(1-p)\ge(\sin^2 d)/2$。当 $p\le1/2$ 时，直接用 $\sum_j p_j^2\le p$。
+
+等号可在包含两条质量线的平面内达到。若 $\theta\le\pi/4$，用一条轮换本征线平分夹角。若 $\theta\ge\pi/4$，取两条正交轮换本征线，各向外偏离就近质量线 $d/2$。在各自质量线、平面内正交线和平面法线上，分别赋质量平方 $1,1-g,0$。两套谱隙不同时，也可按各自的谱隙分配偏角。[射影角的三角不等式](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.fs_angle_triangle) · [不同谱隙的最优分角](https://github.com/the-omega-institute/trureturing-books/issues/1849#issuecomment-7238283999)
+
+在 $1\,\mathrm{TeV}$ 的参考输入表 2 中，$y_c/y_t\le0.00316/0.8573$，$y_s/y_b\le0.000271/0.01392$，因此可取 $g=0.9996$。沿用上面的保守混合输入，$|V_{tb}|>0.98$ 使 $d=\theta$，而 $\sin\theta\ge |V_{cb}|>0.035$ 使破缺严格大于 $0.0428$。直接以表 2 的边际区间构成输入盒时，$\sin\theta\ge\sin(0.04233)$，下界进一步超过 $0.0518$。[参考输入表 2](https://arxiv.org/html/2510.01312v2#Sx1.T2)
 :::
 
 ## 8.2 汤川层级障碍图谱：单希格斯、密度势、输运顶角与最小站点支撑 {#sec-ch08-yukawa-nogo}
@@ -349,7 +391,7 @@ $$
 :::
 
 ::: {.problem #prob-ou-ch08-common-flavor-law title="第三问味侧未解边界：从同一弧作用律导出味谱、轻子混合与无校准混合门"}
-本章完成了对十九点球壳味机制的系统清障与正向测绘：确立了 $\|[T, X]\|_{\mathrm{HS}} > 0.0414$ 的轮换破缺下界、五类朴素汤川层级的精确禁行界、四步有理牛顿折叠（$4^{-16}$ 精度）、$|\lambda| > 0.03010$ 的定向耦合下界、五／七零点跨背景刚性，以及跨七零点精确至 $10^{-11}$ 的有限有理响应 $(I + T^{16})^{-1}$。但两大核心环节依然开放：
+本章完成了对十九点球壳味机制的系统清障与正向测绘：确立了 $\max_{X\in\{A,B\}}\|[T,X]\|_{\mathrm{HS}}>0.0428$ 的轮换破缺下界、五类朴素汤川层级的精确禁行界、四步有理牛顿折叠（$4^{-16}$ 精度）、$|\lambda| > 0.03010$ 的定向耦合下界、五／七零点跨背景刚性，以及跨七零点精确至 $10^{-11}$ 的有限有理响应 $(I + T^{16})^{-1}$。但两大核心环节依然开放：
 
 1. **共同味作用律的缺失**：所有成功的 CKM 重构（六面单态、二十八圈镜像三角、五次边界脉冲与 $(I + T^{16})^{-1}$）所用的味系数、实旋转或脉冲强度仍由参考混合校准，尚未从球壳配分函数第一性原理推演而出。
 2. **完整轻子谱与统一折叠**：在同一低维无反噬折叠算子下，如何不引发 $m_u/m_\ell$ 坍缩与 $10^{34}\,\mathrm{GeV}^2$ 重块四次迹反噬，同步导出全部夸克、带电轻子、中微子质量与 PMNS 混合，仍待解答。
