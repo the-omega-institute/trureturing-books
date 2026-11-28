@@ -11301,6 +11301,14 @@
       "line": 127,
       "signature": "theorem rational_six_axis_open_cover : (∀ i : Fin 6, IsOpen (color i)) ∧ (∀ (i : Fin 6) (x : UnitSphere), x ∈ color i → ∀ (y : UnitSphere), y ∈ color i → inner ℝ (x : Space) (y : Space) ≠ 0) ∧ (⋃ i : Fin 6, color i) = Set.univ"
     },
+    "D5/S3/Geometry/Polygons/BalancedPlanarClosure.result": {
+      "module": "D5/S3/Geometry/Polygons/BalancedPlanarClosure",
+      "name": "D5.S3.Geometry.Polygons.BalancedPlanarClosure.result",
+      "kind": "theorem",
+      "statement_id": "sha256:3cefd297fc5f427643857ba072098fbab364731b7df7905ca4df6052968cc3a8",
+      "line": 35,
+      "signature": "theorem result (m : ℕ) (L : Fin m → ℝ) (hL : ∀ i, 0 ≤ L i) (hbal : ∀ i, 2 * L i ≤ ∑ j, L j) : ∃ v : Fin m → ℂ, (∀ i, ‖v i‖ = L i) ∧ ∑ i, v i = 0"
+    },
     "D5/S3/Geometry/Rauzy/TribonacciInterior.rauzyFractal_interior_nonempty": {
       "module": "D5/S3/Geometry/Rauzy/TribonacciInterior",
       "name": "D5.S3.Geometry.Rauzy.TribonacciInterior.rauzyFractal_interior_nonempty",
