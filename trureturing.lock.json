@@ -13143,6 +13143,14 @@
       "line": 27,
       "signature": "noncomputable def logarithmicRadialDefect (rho : Complex) : Real"
     },
+    "D5/S3/Midline/Cayley/ZeroHilbertCayleyUnitarity.cayley_unitarity_defect_formula_on_zero_hilbert_space": {
+      "module": "D5/S3/Midline/Cayley/ZeroHilbertCayleyUnitarity",
+      "name": "D5.S3.Midline.Cayley.ZeroHilbertCayleyUnitarity.cayley_unitarity_defect_formula_on_zero_hilbert_space",
+      "kind": "theorem",
+      "statement_id": "sha256:f52829eeb7dc42047cebbf41382919cccd0128a5552f4c03f732a0dcf62da8fc",
+      "line": 277,
+      "signature": "theorem cayley_unitarity_defect_formula_on_zero_hilbert_space (Z : ZeroData) (hExhaustive : ∀ rho : Complex, riemannZeta rho = 0 → (¬ ∃ n : Nat, rho = -2 * (n + 1)) → rho ≠ 1 → ∃ n, Z.zero n = rho) : (∀ v : ZeroCoordinate Z, let delta : Real"
+    },
     "D5/S3/Midline/CayleyCriticalLine.cayleyRatio": {
       "module": "D5/S3/Midline/CayleyCriticalLine",
       "name": "D5.S3.Midline.CayleyCriticalLine.cayleyRatio",

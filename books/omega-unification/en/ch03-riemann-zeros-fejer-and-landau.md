@@ -18,9 +18,11 @@ Following the six-tier epistemic honesty contract of the [Prelude](README.md#rem
 - **Independent kernel replays and axiom closure:** Our organization's reproducible build and verification mirror [`the-omega-institute/riemann-hypothesis`](https://github.com/the-omega-institute/riemann-hypothesis) confirms via static scan and axiom audit that the entire codebase contains zero `sorry`, zero `admit`, and zero custom axioms, with terminal axiom closure strictly $\{\mathrm{propext}, \mathrm{Classical.choice}, \mathrm{Quot.sound}\}$, independently replayed across `leanchecker`, `lean4lean`, `nanoda`, and `con-leche`.
 - **Strict scope discipline in this book:** Because this external proof is not yet frozen inside `the-omega-institute/trureturing@dev`, **RH and Dirichlet GRH do not wear this book's green `lean=` badge**. Furthermore, their scope ends strictly at $\zeta(s)$ and Dirichlet $L$-functions over $\mathbb{Q}$: the Extended Riemann Hypothesis (ERH) for general Dedekind zeta functions, Grand RH for automorphic $L$-functions, simplicity of zeros, Montgomery GUE pair correlation, a Hilbert–Pólya operator, and every physical unification claim remain `OPEN` or `MODEL`.
 
-Inside `trureturing@dev` itself, the following Lean 4 frozen theorem reformulates `RiemannHypothesis` into two sharp geometric-analytic equivalences: on the real axis, an eventual quadratic-logarithmic Fejér gap below the first Li-mass envelope $M\sqrt{x}$; in the complex plane, exact unit-circle locking of the Cayley transform on $\operatorname{Re} s = \frac{1}{2}$:
+Inside `trureturing@dev` itself, the following Lean 4 frozen theorem reformulates `RiemannHypothesis` into two sharp geometric-analytic equivalences: on the real axis, an eventual quadratic-logarithmic Fejér gap below the first Li-mass envelope $M\sqrt{x}$; in the complex plane, exact unit-circle locking of the Cayley transform on $\operatorname{Re} s = \frac{1}{2}$.
 
-::: {.theorem #thm-ou-ch03-fejer-gap title="Mangoldt Fejér Critical Gap and Cayley Critical-Line Criterion" lean="D5/S3/Weil/Mertens/IntegratedExplicit/MangoldtFejerGap.rh_iff_eventually_fejer_gap D5/S3/Midline/Cayley/CayleyCriticalLineZetaCriterion.cayley_critical_line_zeta_criterion"}
+The operator criterion below promotes the pointwise critical-line condition to an infinite-dimensional operator identity, but both its Hilbert space and its diagonal operator take the complete zero data as input; the theorem itself constructs neither these data nor the additional exhaustiveness proof. An independent Hilbert–Pólya route still requires an arithmetic or geometric construction that does not presuppose the zero locations, together with spectral identification and unitarity. The external RH proof does not supply that construction.
+
+::: {.theorem #thm-ou-ch03-fejer-gap title="Mangoldt Fejér Critical Gap and Cayley Critical-Line Criterion" lean="D5/S3/Weil/Mertens/IntegratedExplicit/MangoldtFejerGap.rh_iff_eventually_fejer_gap D5/S3/Midline/Cayley/CayleyCriticalLineZetaCriterion.cayley_critical_line_zeta_criterion D5/S3/Midline/Cayley/ZeroHilbertCayleyUnitarity.cayley_unitarity_defect_formula_on_zero_hilbert_space"}
 1. **Eventual Fejér gap equivalence** ([`rh_iff_eventually_fejer_gap`](lean:D5/S3/Weil/Mertens/IntegratedExplicit/MangoldtFejerGap.rh_iff_eventually_fejer_gap)): let $M := \mathrm{firstLiMass} = 2 + \gamma_{\mathrm{EM}} - \ln(4\pi)$ and let $U(x)$ denote the integrated Mangoldt remainder. Then `RiemannHypothesis` holds if and only if for every real $c < \frac{1}{48}$, eventually as $x \to \infty$,
 
    $$
@@ -39,10 +41,25 @@ Inside `trureturing@dev` itself, the following Lean 4 frozen theorem reformulate
    \mathrm{logarithmicRadialDefect}(\rho) = 0.
    $$
 
+3. **Unitarity on the zero Hilbert space** ([`cayley_unitarity_defect_formula_on_zero_hilbert_space`](lean:D5/S3/Midline/Cayley/ZeroHilbertCayleyUnitarity.cayley_unitarity_defect_formula_on_zero_hilbert_space)): supply the library's `ZeroData` $Z$, with distinct zeros $\rho_n$ and positive analytic multiplicities $m_n$, and additionally assume that every nontrivial zero quantified over in part 2 equals some $\rho_n$. Let $I_Z=\{(n,k)\in\mathbb N^2:k<m_n\}$, $H_Z=\ell^2(I_Z;\mathbb C)$, and let $e_{n,k}$ be the standard unit vectors. The coefficients $c_n=(\rho_n-1)/\rho_n$ define a bounded diagonal operator $C_Z$ on $H_Z$, with
+
+   $$
+   \begin{aligned}
+   C_Ze_{n,k}&=c_ne_{n,k},\\
+   (C_Z^*C_Z-I)e_{n,k}
+     &=(|c_n|^2-1)e_{n,k}
+      =\frac{1-2\operatorname{Re}\rho_n}{|\rho_n|^2}e_{n,k}.
+   \end{aligned}
+   $$
+
+   Classical RH, $|c_n|=1$ for every $n$, $C_Z^*C_Z=I$, unitarity of $C_Z$, and $\|C_Ze_{n,k}\|=\|e_{n,k}\|$ for every $(n,k)\in I_Z$ are equivalent.
+
 :::
 
 ::: proof
-For part 1, in the forward direction under RH, nonnegativity of the discrete Fejér kernel $\sum_{j,k=0}^{N-1} \cos((j-k)\theta) = |\sum_{j=0}^{N-1} e^{ij\theta}|^2 \ge 0$ combines $N^2$ midpoint bounds at steps $b_{jk} y e^{-y/2}$ (with $y = \log x$ and $b_{jk} = |j-k|/(2N)$). Normalizing by $y^2 e^{-y/2}$ averages the spectral-deficit minus arithmetic-midpoint contributions to $C_N = \frac{1 - N^{-2}}{48} \to \frac{1}{48}$; choosing finite $N$ with $c < C_N$ produces the eventual bound. Conversely, applying the hypothesis at $c = 1/128$ forces $M\sqrt{x} - U(x) \to +\infty$, which recovers RH via the critical-gap criterion. For part 2, the Cayley Möbius map $(s - 1)/s$ carries the finite critical line $\operatorname{Re} s = 1/2$ bijectively onto the punctured unit circle $S^1 \setminus \{1\}$, so vanishing of the logarithmic radial defect on all nontrivial zeros is equivalent to $\operatorname{Re}\rho = 1/2$. The full proof is checked by the Lean kernel.
+For part 1, in the forward direction under RH, nonnegativity of the discrete Fejér kernel $\sum_{j,k=0}^{N-1} \cos((j-k)\theta) = |\sum_{j=0}^{N-1} e^{ij\theta}|^2 \ge 0$ combines $N^2$ midpoint bounds at steps $b_{jk} y e^{-y/2}$ (with $y = \log x$ and $b_{jk} = |j-k|/(2N)$). Normalizing by $y^2 e^{-y/2}$ averages the spectral-deficit minus arithmetic-midpoint contributions to $C_N = \frac{1 - N^{-2}}{48} \to \frac{1}{48}$; choosing finite $N$ with $c < C_N$ produces the eventual bound. Conversely, applying the hypothesis at $c = 1/128$ forces $M\sqrt{x} - U(x) \to +\infty$, which recovers RH via the critical-gap criterion. For part 2, the Cayley Möbius map $(s - 1)/s$ carries the finite critical line $\operatorname{Re} s = 1/2$ bijectively onto the punctured unit circle $S^1 \setminus \{1\}$, so vanishing of the logarithmic radial defect on all nontrivial zeros is equivalent to $\operatorname{Re}\rho = 1/2$.
+
+For part 3, continuity and nonvanishing of $\zeta$ near $0$ give a uniform positive lower bound for all $|\rho_n|$, hence bounded Cayley coefficients. Coordinatewise conjugation gives the adjoint and the defect formula. When all $|c_n|=1$, the conjugate coefficients also give a two-sided inverse, so isometry here does imply unitarity. Conversely, testing any multiplicity coordinate for each zero recovers the critical-line condition; the additional exhaustiveness hypothesis then covers the full domain of RH. The full proof is checked by the Lean kernel.
 :::
 
 ### 3.1.1 Theta Lifting: From an Arithmetic Kernel to a Spectral Inner Product {#sec-ou-3-1-1-rallis-bridge}
