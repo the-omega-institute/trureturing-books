@@ -9075,6 +9075,201 @@
         "propext"
       ]
     },
+    "D5/S3/Geometry/Lorentz/MaxwellRainichStressEnergy4D.dualFieldTensor_sq": {
+      "module": "D5/S3/Geometry/Lorentz/MaxwellRainichStressEnergy4D",
+      "name": "D5.S3.Geometry.Lorentz.MaxwellRainichStressEnergy4D.dualFieldTensor_sq",
+      "kind": "theorem",
+      "statement_id": "sha256:31c240ed3c8268703393f8955274a1cebf3bad29136cdd1ae446827634bd1f7a",
+      "line": 55,
+      "signature": "theorem dualFieldTensor_sq (E B : V3) : dualFieldTensor (-B) E = -fieldTensor E B",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/MaxwellRainichStressEnergy4D.fieldTensor_antisym": {
+      "module": "D5/S3/Geometry/Lorentz/MaxwellRainichStressEnergy4D",
+      "name": "D5.S3.Geometry.Lorentz.MaxwellRainichStressEnergy4D.fieldTensor_antisym",
+      "kind": "theorem",
+      "statement_id": "sha256:31c240ed3c8268703393f8955274a1cebf3bad29136cdd1ae446827634bd1f7a",
+      "line": 51,
+      "signature": "theorem fieldTensor_antisym (E B : V3) : (fieldTensor E B)ᵀ = -fieldTensor E B",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/MaxwellRainichStressEnergy4D.fieldTensor_bijective": {
+      "module": "D5/S3/Geometry/Lorentz/MaxwellRainichStressEnergy4D",
+      "name": "D5.S3.Geometry.Lorentz.MaxwellRainichStressEnergy4D.fieldTensor_bijective",
+      "kind": "theorem",
+      "statement_id": "sha256:31c240ed3c8268703393f8955274a1cebf3bad29136cdd1ae446827634bd1f7a",
+      "line": 72,
+      "signature": "theorem fieldTensor_bijective : Function.Bijective (fun EB : V3 × V3 => (⟨fieldTensor EB.1 EB.2, fieldTensor_antisym EB.1 EB.2⟩ : {F : M4 // Fᵀ = -F}))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/MaxwellRainichStressEnergy4D.fieldTensor_det": {
+      "module": "D5/S3/Geometry/Lorentz/MaxwellRainichStressEnergy4D",
+      "name": "D5.S3.Geometry.Lorentz.MaxwellRainichStressEnergy4D.fieldTensor_det",
+      "kind": "theorem",
+      "statement_id": "sha256:31c240ed3c8268703393f8955274a1cebf3bad29136cdd1ae446827634bd1f7a",
+      "line": 134,
+      "signature": "theorem fieldTensor_det (E B : V3) : (fieldTensor E B).det = (spatialDot E B) ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/MaxwellRainichStressEnergy4D.maxwell_dominant_energy_condition": {
+      "module": "D5/S3/Geometry/Lorentz/MaxwellRainichStressEnergy4D",
+      "name": "D5.S3.Geometry.Lorentz.MaxwellRainichStressEnergy4D.maxwell_dominant_energy_condition",
+      "kind": "theorem",
+      "statement_id": "sha256:31c240ed3c8268703393f8955274a1cebf3bad29136cdd1ae446827634bd1f7a",
+      "line": 453,
+      "signature": "theorem maxwell_dominant_energy_condition (E B : V3) (u : V4) (ht : 0 ≤ u 0) (hu : 0 ≤ minkowskiNormSq u) : let j",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/MaxwellRainichStressEnergy4D.maxwell_duality_rotation_invariant": {
+      "module": "D5/S3/Geometry/Lorentz/MaxwellRainichStressEnergy4D",
+      "name": "D5.S3.Geometry.Lorentz.MaxwellRainichStressEnergy4D.maxwell_duality_rotation_invariant",
+      "kind": "theorem",
+      "statement_id": "sha256:31c240ed3c8268703393f8955274a1cebf3bad29136cdd1ae446827634bd1f7a",
+      "line": 304,
+      "signature": "theorem maxwell_duality_rotation_invariant (E B : V3) (θ : ℝ) : let E' : V3",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/MaxwellRainichStressEnergy4D.maxwell_energy_and_poynting": {
+      "module": "D5/S3/Geometry/Lorentz/MaxwellRainichStressEnergy4D",
+      "name": "D5.S3.Geometry.Lorentz.MaxwellRainichStressEnergy4D.maxwell_energy_and_poynting",
+      "kind": "theorem",
+      "statement_id": "sha256:31c240ed3c8268703393f8955274a1cebf3bad29136cdd1ae446827634bd1f7a",
+      "line": 256,
+      "signature": "theorem maxwell_energy_and_poynting (E B : V3) : maxwellStressMixed E B 0 0 = energyDensity E B ∧ (∀ i : Fin 3, maxwellStressMixed E B 0 i.succ = -spatialCross E B i) ∧ (∀ i : Fin 3, maxwellStressContra E B 0 i.succ = spatialCross E B i) ∧ ∀ i j : Fin 3, maxwellStressContra E B i.succ j.succ = -E i * E j - B i * B j + if i = j then energyDensity E B else 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/MaxwellRainichStressEnergy4D.maxwell_invariants_explicit": {
+      "module": "D5/S3/Geometry/Lorentz/MaxwellRainichStressEnergy4D",
+      "name": "D5.S3.Geometry.Lorentz.MaxwellRainichStressEnergy4D.maxwell_invariants_explicit",
+      "kind": "theorem",
+      "statement_id": "sha256:31c240ed3c8268703393f8955274a1cebf3bad29136cdd1ae446827634bd1f7a",
+      "line": 98,
+      "signature": "theorem maxwell_invariants_explicit (E B : V3) : maxwellInv1 (fieldTensor E B) = spatialNormSq B - spatialNormSq E ∧ maxwellInv2 E B = spatialDot E B",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/MaxwellRainichStressEnergy4D.maxwell_invariants_lorentz_invariant": {
+      "module": "D5/S3/Geometry/Lorentz/MaxwellRainichStressEnergy4D",
+      "name": "D5.S3.Geometry.Lorentz.MaxwellRainichStressEnergy4D.maxwell_invariants_lorentz_invariant",
+      "kind": "theorem",
+      "statement_id": "sha256:31c240ed3c8268703393f8955274a1cebf3bad29136cdd1ae446827634bd1f7a",
+      "line": 163,
+      "signature": "theorem maxwell_invariants_lorentz_invariant (Λ : M4) (E B : V3) (hΛ : Λᵀ * eta4 * Λ = eta4) (hor : Λ.det = 1) : let F'",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/MaxwellRainichStressEnergy4D.maxwell_rainich_square_identity": {
+      "module": "D5/S3/Geometry/Lorentz/MaxwellRainichStressEnergy4D",
+      "name": "D5.S3.Geometry.Lorentz.MaxwellRainichStressEnergy4D.maxwell_rainich_square_identity",
+      "kind": "theorem",
+      "statement_id": "sha256:31c240ed3c8268703393f8955274a1cebf3bad29136cdd1ae446827634bd1f7a",
+      "line": 398,
+      "signature": "theorem maxwell_rainich_square_identity (E B : V3) : maxwellStressMixed E B * maxwellStressMixed E B = ((1 / 4 : ℝ) * ((spatialNormSq B - spatialNormSq E) ^ 2 + 4 * spatialDot E B ^ 2)) • (1 : M4)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/MaxwellRainichStressEnergy4D.maxwell_stress_lorentz_covariant": {
+      "module": "D5/S3/Geometry/Lorentz/MaxwellRainichStressEnergy4D",
+      "name": "D5.S3.Geometry.Lorentz.MaxwellRainichStressEnergy4D.maxwell_stress_lorentz_covariant",
+      "kind": "theorem",
+      "statement_id": "sha256:31c240ed3c8268703393f8955274a1cebf3bad29136cdd1ae446827634bd1f7a",
+      "line": 273,
+      "signature": "theorem maxwell_stress_lorentz_covariant (Λ : M4) (E B : V3) (hΛ : Λᵀ * eta4 * Λ = eta4) : let EB'",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/MaxwellRainichStressEnergy4D.maxwell_stress_nilpotent_iff_null": {
+      "module": "D5/S3/Geometry/Lorentz/MaxwellRainichStressEnergy4D",
+      "name": "D5.S3.Geometry.Lorentz.MaxwellRainichStressEnergy4D.maxwell_stress_nilpotent_iff_null",
+      "kind": "theorem",
+      "statement_id": "sha256:31c240ed3c8268703393f8955274a1cebf3bad29136cdd1ae446827634bd1f7a",
+      "line": 408,
+      "signature": "theorem maxwell_stress_nilpotent_iff_null (E B : V3) : maxwellStressMixed E B * maxwellStressMixed E B = 0 ↔ spatialNormSq E = spatialNormSq B ∧ spatialDot E B = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/MaxwellRainichStressEnergy4D.maxwell_stress_symmetric": {
+      "module": "D5/S3/Geometry/Lorentz/MaxwellRainichStressEnergy4D",
+      "name": "D5.S3.Geometry.Lorentz.MaxwellRainichStressEnergy4D.maxwell_stress_symmetric",
+      "kind": "theorem",
+      "statement_id": "sha256:31c240ed3c8268703393f8955274a1cebf3bad29136cdd1ae446827634bd1f7a",
+      "line": 219,
+      "signature": "theorem maxwell_stress_symmetric (E B : V3) : (maxwellStressCov E B)ᵀ = maxwellStressCov E B",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/MaxwellRainichStressEnergy4D.maxwell_stress_traceless": {
+      "module": "D5/S3/Geometry/Lorentz/MaxwellRainichStressEnergy4D",
+      "name": "D5.S3.Geometry.Lorentz.MaxwellRainichStressEnergy4D.maxwell_stress_traceless",
+      "kind": "theorem",
+      "statement_id": "sha256:31c240ed3c8268703393f8955274a1cebf3bad29136cdd1ae446827634bd1f7a",
+      "line": 226,
+      "signature": "theorem maxwell_stress_traceless (E B : V3) : (maxwellStressMixed E B).trace = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/MaxwellRainichStressEnergy4D.poynting_le_energy_density": {
+      "module": "D5/S3/Geometry/Lorentz/MaxwellRainichStressEnergy4D",
+      "name": "D5.S3.Geometry.Lorentz.MaxwellRainichStressEnergy4D.poynting_le_energy_density",
+      "kind": "theorem",
+      "statement_id": "sha256:31c240ed3c8268703393f8955274a1cebf3bad29136cdd1ae446827634bd1f7a",
+      "line": 382,
+      "signature": "theorem poynting_le_energy_density (E B : V3) : Real.sqrt (spatialNormSq (spatialCross E B)) ≤ energyDensity E B ∧ (Real.sqrt (spatialNormSq (spatialCross E B)) = energyDensity E B ↔ spatialNormSq E = spatialNormSq B ∧ spatialDot E B = 0)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
     "D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D.axial_diamond_volume": {
       "module": "D5/S3/Geometry/Lorentz/PerturbedCausalOrderWeyl4D",
       "name": "D5.S3.Geometry.Lorentz.PerturbedCausalOrderWeyl4D.axial_diamond_volume",
@@ -21095,6 +21290,201 @@
       "statement_id": "sha256:bbe2be4ae421a147443eaa5f2ede54024e13b435a02727476cc9640ae60e2a67",
       "line": 209,
       "signature": "theorem witten_parity (nc : ℕ) : Even (doubletCount nc) ↔ Odd nc",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ChiralSymmetrySkyrme4D.abj_anomaly_free_general_Nc": {
+      "module": "D5/S3/Quantum/Gauge/ChiralSymmetrySkyrme4D",
+      "name": "D5.S3.Quantum.Gauge.ChiralSymmetrySkyrme4D.abj_anomaly_free_general_Nc",
+      "kind": "theorem",
+      "statement_id": "sha256:d0c0399c7b9de90de49c0cc9f662eda4a025b0bca32a97bb1d82e6564e9d7837",
+      "line": 500,
+      "signature": "theorem abj_anomaly_free_general_Nc {Nc : ℝ} (hNc : Nc ≠ 0) : abjTrace Nc ((Nc + 1) / (2 * Nc)) (-(Nc - 1) / (2 * Nc)) = 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ChiralSymmetrySkyrme4D.abj_fixed_charges_color_test": {
+      "module": "D5/S3/Quantum/Gauge/ChiralSymmetrySkyrme4D",
+      "name": "D5.S3.Quantum.Gauge.ChiralSymmetrySkyrme4D.abj_fixed_charges_color_test",
+      "kind": "theorem",
+      "statement_id": "sha256:d0c0399c7b9de90de49c0cc9f662eda4a025b0bca32a97bb1d82e6564e9d7837",
+      "line": 506,
+      "signature": "theorem abj_fixed_charges_color_test (Nc α mPi fπ : ℝ) : abjTrace Nc (2 / 3) (-1 / 3) = Nc / 3 ∧ abjTrace 3 (2 / 3) (-1 / 3) = 1 ∧ (0 < fπ → pi0GammaGammaWidth α mPi fπ 3 (2 / 3) (-1 / 3) = 9 * pi0GammaGammaWidth α mPi fπ 1 (2 / 3) (-1 / 3))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ChiralSymmetrySkyrme4D.chiralField_eq_exp": {
+      "module": "D5/S3/Quantum/Gauge/ChiralSymmetrySkyrme4D",
+      "name": "D5.S3.Quantum.Gauge.ChiralSymmetrySkyrme4D.chiralField_eq_exp",
+      "kind": "theorem",
+      "statement_id": "sha256:d0c0399c7b9de90de49c0cc9f662eda4a025b0bca32a97bb1d82e6564e9d7837",
+      "line": 260,
+      "signature": "theorem chiralField_eq_exp (fπ : ℝ) (π : Fin 3 → ℝ) : chiralField fπ π = NormedSpace.exp ((Complex.I / (fπ : ℂ)) • pauliPion π)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ChiralSymmetrySkyrme4D.chiralField_mem_su2": {
+      "module": "D5/S3/Quantum/Gauge/ChiralSymmetrySkyrme4D",
+      "name": "D5.S3.Quantum.Gauge.ChiralSymmetrySkyrme4D.chiralField_mem_su2",
+      "kind": "theorem",
+      "statement_id": "sha256:d0c0399c7b9de90de49c0cc9f662eda4a025b0bca32a97bb1d82e6564e9d7837",
+      "line": 160,
+      "signature": "theorem chiralField_mem_su2 {fπ : ℝ} (hf : fπ ≠ 0) (π : Fin 3 → ℝ) : chiralField fπ π ∈ Matrix.specialUnitaryGroup (Fin 2) ℂ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ChiralSymmetrySkyrme4D.chiralField_zero": {
+      "module": "D5/S3/Quantum/Gauge/ChiralSymmetrySkyrme4D",
+      "name": "D5.S3.Quantum.Gauge.ChiralSymmetrySkyrme4D.chiralField_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:d0c0399c7b9de90de49c0cc9f662eda4a025b0bca32a97bb1d82e6564e9d7837",
+      "line": 165,
+      "signature": "theorem chiralField_zero (fπ : ℝ) : chiralField fπ 0 = 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ChiralSymmetrySkyrme4D.chiralPotential_global_min_at_one": {
+      "module": "D5/S3/Quantum/Gauge/ChiralSymmetrySkyrme4D",
+      "name": "D5.S3.Quantum.Gauge.ChiralSymmetrySkyrme4D.chiralPotential_global_min_at_one",
+      "kind": "theorem",
+      "statement_id": "sha256:d0c0399c7b9de90de49c0cc9f662eda4a025b0bca32a97bb1d82e6564e9d7837",
+      "line": 414,
+      "signature": "theorem chiralPotential_global_min_at_one {B₀ fπ mᵤ m_d : ℝ} (hB : 0 < B₀) (hf : 0 < fπ) (hu : 0 < mᵤ) (hd : 0 < m_d) (U : SU2) : chiralPotential B₀ fπ mᵤ m_d 1 ≤ chiralPotential B₀ fπ mᵤ m_d U ∧ (chiralPotential B₀ fπ mᵤ m_d 1 = chiralPotential B₀ fπ mᵤ m_d U ↔ (U : CMat2) = 1)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ChiralSymmetrySkyrme4D.chiral_kinetic_quadratic_normalization": {
+      "module": "D5/S3/Quantum/Gauge/ChiralSymmetrySkyrme4D",
+      "name": "D5.S3.Quantum.Gauge.ChiralSymmetrySkyrme4D.chiral_kinetic_quadratic_normalization",
+      "kind": "theorem",
+      "statement_id": "sha256:d0c0399c7b9de90de49c0cc9f662eda4a025b0bca32a97bb1d82e6564e9d7837",
+      "line": 309,
+      "signature": "theorem chiral_kinetic_quadratic_normalization {fπ : ℝ} (hf : 0 < fπ) (v : Fin 3 → ℝ) : HasDerivAt (fun t : ℝ => chiralField fπ (t • v)) ((Complex.I / (fπ : ℂ)) • pauliPion v) 0 ∧ let U'",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ChiralSymmetrySkyrme4D.chiral_orbit_transitive": {
+      "module": "D5/S3/Quantum/Gauge/ChiralSymmetrySkyrme4D",
+      "name": "D5.S3.Quantum.Gauge.ChiralSymmetrySkyrme4D.chiral_orbit_transitive",
+      "kind": "theorem",
+      "statement_id": "sha256:d0c0399c7b9de90de49c0cc9f662eda4a025b0bca32a97bb1d82e6564e9d7837",
+      "line": 53,
+      "signature": "theorem chiral_orbit_transitive (U : SU2) : ∃ L R : SU2, chiralAct L R 1 = U",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ChiralSymmetrySkyrme4D.chiral_vacuum_stabilizer_iff": {
+      "module": "D5/S3/Quantum/Gauge/ChiralSymmetrySkyrme4D",
+      "name": "D5.S3.Quantum.Gauge.ChiralSymmetrySkyrme4D.chiral_vacuum_stabilizer_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:d0c0399c7b9de90de49c0cc9f662eda4a025b0bca32a97bb1d82e6564e9d7837",
+      "line": 48,
+      "signature": "theorem chiral_vacuum_stabilizer_iff (L R : SU2) : chiralAct L R 1 = 1 ↔ L = R",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ChiralSymmetrySkyrme4D.derrick_no_pure_sigma_soliton": {
+      "module": "D5/S3/Quantum/Gauge/ChiralSymmetrySkyrme4D",
+      "name": "D5.S3.Quantum.Gauge.ChiralSymmetrySkyrme4D.derrick_no_pure_sigma_soliton",
+      "kind": "theorem",
+      "statement_id": "sha256:d0c0399c7b9de90de49c0cc9f662eda4a025b0bca32a97bb1d82e6564e9d7837",
+      "line": 594,
+      "signature": "theorem derrick_no_pure_sigma_soliton {E₂ : ℝ} (h₂ : 0 < E₂) : StrictAntiOn (derrickEnergy E₂ 0) (Set.Ioi 0) ∧ (∀ μ : ℝ, 0 < μ → ∃ ν : ℝ, 0 < ν ∧ derrickEnergy E₂ 0 ν < derrickEnergy E₂ 0 μ) ∧ Tendsto (derrickEnergy E₂ 0) atTop (𝓝 0)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ChiralSymmetrySkyrme4D.derrick_skyrme_virial_minimum": {
+      "module": "D5/S3/Quantum/Gauge/ChiralSymmetrySkyrme4D",
+      "name": "D5.S3.Quantum.Gauge.ChiralSymmetrySkyrme4D.derrick_skyrme_virial_minimum",
+      "kind": "theorem",
+      "statement_id": "sha256:d0c0399c7b9de90de49c0cc9f662eda4a025b0bca32a97bb1d82e6564e9d7837",
+      "line": 612,
+      "signature": "theorem derrick_skyrme_virial_minimum {E₂ E₄ : ℝ} (h₂ : 0 < E₂) (h₄ : 0 < E₄) : let μstar",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ChiralSymmetrySkyrme4D.faddeev_bogomolny_saturation_iff": {
+      "module": "D5/S3/Quantum/Gauge/ChiralSymmetrySkyrme4D",
+      "name": "D5.S3.Quantum.Gauge.ChiralSymmetrySkyrme4D.faddeev_bogomolny_saturation_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:d0c0399c7b9de90de49c0cc9f662eda4a025b0bca32a97bb1d82e6564e9d7837",
+      "line": 572,
+      "signature": "theorem faddeev_bogomolny_saturation_iff (x y z : ℝ) : 6 * |skyrmeBaryon x y z| = skyrmeE2 x y z + skyrmeE4 x y z ↔ (x = 0 ∧ y = 0 ∧ z = 0) ∨ (|x| = 1 ∧ |y| = 1 ∧ |z| = 1)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ChiralSymmetrySkyrme4D.faddeev_bogomolny_skyrme_bound": {
+      "module": "D5/S3/Quantum/Gauge/ChiralSymmetrySkyrme4D",
+      "name": "D5.S3.Quantum.Gauge.ChiralSymmetrySkyrme4D.faddeev_bogomolny_skyrme_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:d0c0399c7b9de90de49c0cc9f662eda4a025b0bca32a97bb1d82e6564e9d7837",
+      "line": 538,
+      "signature": "theorem faddeev_bogomolny_skyrme_bound (x y z : ℝ) : 6 * |skyrmeBaryon x y z| ≤ skyrmeE2 x y z + skyrmeE4 x y z",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ChiralSymmetrySkyrme4D.gmor_exact_hessian": {
+      "module": "D5/S3/Quantum/Gauge/ChiralSymmetrySkyrme4D",
+      "name": "D5.S3.Quantum.Gauge.ChiralSymmetrySkyrme4D.gmor_exact_hessian",
+      "kind": "theorem",
+      "statement_id": "sha256:d0c0399c7b9de90de49c0cc9f662eda4a025b0bca32a97bb1d82e6564e9d7837",
+      "line": 457,
+      "signature": "theorem gmor_exact_hessian {fπ : ℝ} (hf : 0 < fπ) (B₀ mᵤ m_d : ℝ) (v : Fin 3 → ℝ) : deriv (deriv (fun t : ℝ => chiralPotential B₀ fπ mᵤ m_d (chiralField fπ (t • v)))) 0 = B₀ * (mᵤ + m_d) * (v 0 ^ 2 + v 1 ^ 2 + v 2 ^ 2)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ChiralSymmetrySkyrme4D.gmor_pion_mass_relation": {
+      "module": "D5/S3/Quantum/Gauge/ChiralSymmetrySkyrme4D",
+      "name": "D5.S3.Quantum.Gauge.ChiralSymmetrySkyrme4D.gmor_pion_mass_relation",
+      "kind": "theorem",
+      "statement_id": "sha256:d0c0399c7b9de90de49c0cc9f662eda4a025b0bca32a97bb1d82e6564e9d7837",
+      "line": 479,
+      "signature": "theorem gmor_pion_mass_relation {fπ : ℝ} (hf : 0 < fπ) (B₀ mᵤ m_d : ℝ) : let mPiSq",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
