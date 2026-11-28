@@ -196,10 +196,6 @@ $$
 
 有 $n_0=0$ 的解时，阈值层和切点层直接取等。若所有解都需要 $n_0>0$，把这 $n_0$ 份放在足够小的平方质量比 $y=\varepsilon>0$，再用一份零暴露的阈上状态补足第一热迹，就能用足预算并逼近锐界。取 $u=8$，以 $(n_0,n_*,n_1)=(1,1,1)$ 定出 $S,B$，复算（`NUM`）得 $b\approx1.651341<x_*\approx1.695240$。此时 $2<B/t_*<3$，故没有 $n_0=0$ 的整数解。这个预算下，正实权谱可以取等，整数谱只能逼近。[临界弦的手工推导（`ARGUED`）与复算](https://github.com/the-omega-institute/trureturing-books/issues/1949#issuecomment-7238980652)
 
-**封顶预算下的有限暴露转移（手工推导，`ARGUED`）。** 取 $u=7/2$、$\tau=\tau_0$、$S=N+w_1$ 和 $B_0=N\tau$，其中 $N$ 为任意正整数。在 $B_0$ 以下，至多 $N-1$ 份热权能截顶。令 $W(t)=\exp(-e^{-2t})$、$M=W(\tau)$。让 $N-1$ 份截顶热权趋于 $1$，再用一份趋于 $M$ 的热权和两份趋于 $w_1$、$1-M$ 的零暴露热权补足 $S$，可得到左极限的比较下界 $L=N-1+M^u+w_1^u+(1-M)^u$。
-
-在这三份极限热权之间，从近截顶的一份转出少量暴露给阈值的一份，并用末份维持总热权，第二热迹最初下降。有限转移却能提高它。取转移量 $s=0.05$、预算下调量 $\varepsilon=0.0001$，放 $N-1$ 份 $1-\varepsilon^2/N$、一份 $W(\tau-s-\varepsilon)$ 和一份 $W(s)$，最后用一份热权补足 $S$。补足份的热权介于 $0$ 和 $w_1$ 之间，因此暴露为零。总暴露恰为 $B_0-\varepsilon$，而有理区间核证给出第二热迹严格大于 $L+0.00035$，对每个 $N$ 都成立。左极限也严格超过此值，精确值仍待确定。[推导与可重复核证](https://github.com/the-omega-institute/trureturing-books/issues/2059#issuecomment-7239638973)
-
 **匹配预算附近的整数缺口（手工推导，`ARGUED`）。** 固定 $S$，令 $B_0$ 为满足上述计数等式的预算。记 $\Delta_{\mathrm{opt}}(B)=qS+c_*B-\sup S_R(u)$，其中上确界取遍第一热迹为 $S$、暴露至多为 $B$ 的有限正质量整数谱。沿用上面的单份热权和暴露，设 $H(w)=qw+c_*t(w)-w^u$、$\ell=t'(w_*)$、$h=t'_+(w_1)=1/(2w_1)$。
 
 预算由 $B_0$ 上调 $\varepsilon$ 时，$\Delta_{\mathrm{opt}}(B_0+\varepsilon)/\varepsilon$ 的极限是在所有匹配计数下取以下可用系数的最小值。保留原接触谱的极限给出 $c_*$。有阈值和切点状态时，可把热权从阈值状态移到切点状态，系数为 $(u-1)q/\ell$。有至少两份切点状态时，两份热权可以等量反向偏移，第一热迹守恒，暴露与余量都在二阶增加，系数为 $H''(w_*)/t''(w_*)$。
@@ -212,9 +208,15 @@ $$
 
 当 $1<u\le1.1$ 时，把少量暴露 $s$ 从近截顶状态移给阈值状态，使这两份热权趋于 $W(\tau-s)$ 和 $W(s)$。末份从 $d$ 开始变化，以守住第一热迹，并保持零暴露。三份第二热权的和在 $s=0$ 处有正的右导数，故左极限严格大于 $L$。取 $u=1.1$、$N=1$、$s=0.05$，复算（`NUM`）表明在预算 $B_0-0.001$ 已能超过 $L$ 约 $0.003155$。
 
+**阈值混合热迹的过渡点（手工推导，`ARGUED`）。** 对 $7/2\le u\le4$，沿用 $S=N+w_1$、$B_0=N\tau_0$ 和比较值 $L$。令 $s_*$ 为 $W(\tau_0-s_*)+W(s_*)=1+w_1$ 在 $(0,\tau_0/2)$ 内的唯一根，并置 $A_*=W(\tau_0-s_*)$、$C_*=W(s_*)$。第二热迹的左极限为 $N-1+\max\{M^u+w_1^u+d^u,A_*^u+C_*^u\}$。两种比较谱均可由预算小于 $B_0$ 的正质量谱逼近。
+
+预算低于 $B_0$ 时，至多 $N-1$ 份热权达到截顶。若降序的前 $N$ 份热权相对无转移比较谱亏损至少 $M-A_*$，取末两份权重为 $A_*,C_*$ 的比较谱支配所有前缀。若亏损更小，前 $N-1$ 份已分别用足曝光预算。剩余预算使接下来的两份热权受单次转移谱的前缀控制。转移族的第二热迹严格凸，故最大值在两个端点之一。
+
+差值 $A_*^u+C_*^u-M^u-w_1^u-d^u$ 在 $[7/2,4]$ 上严格下降，其唯一零点满足 $3.55808144<u_c<3.55808145$。当 $7/2\le u<u_c$ 时，转移端点给出更大的左极限。当 $u_c\le u\le4$ 时，左极限等于 $L$。在 $u=7/2$，预算为 $B_0-0.0001$ 的有限转移谱已能超过 $L+0.00035$。[过渡点的证明与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2096#issuecomment-7239931811) · [有限转移算例](https://github.com/the-omega-institute/trureturing-books/issues/2059#issuecomment-7239638973)
+
 对所有实数 $u\ge4$，左极限恰为 $L$。将热权降序排列，与 $N-1$ 份 $1$ 加上 $M,w_1,d$ 的序列比较，只有第 $N+1$ 个前缀和可能超出比较值。盈余在低热权区间有贡献，前 $N$ 份热权的亏损则压低 $0.41\le z\le0.95$ 上正部和的积分。临界跑动长度 $\tau_0$ 随 $u$ 不减，因为增大 $u-1$ 会降低 $[0,1]$ 上截断指数分布的各个尾概率。这个单调性使有限指数区间可以统一比较。对 $u\ge8$，凸幂对较高热权的偏重随指数呈指数增长。上界覆盖任意有限整数重数。
 
-在 $B_0$，$N$ 份截顶热权可以同时趋于 $1$，第二热迹的上确界为 $N+w_1^u$。因此 $u\ge4$ 时的左跳跃为 $1-M^u-d^u$，与 $N$ 无关。取 $u=4$，复算（`NUM`）得到约 $0.113987815$。[整个指数区间的推导](https://github.com/the-omega-institute/trureturing-books/issues/2059#issuecomment-7239617760) · [四次热迹复算](https://github.com/the-omega-institute/trureturing-books/issues/2059#issuecomment-7239523334) · [小指数构造](https://github.com/the-omega-institute/trureturing-books/issues/2059#issuecomment-7239426333)
+在 $B_0$，$N$ 份截顶热权可以同时趋于 $1$，第二热迹的上确界为 $N+w_1^u$。因此 $u\ge u_c$ 时的左跳跃为 $1-M^u-d^u$，与 $N$ 无关。取 $u=4$，复算（`NUM`）得到约 $0.113987815$。[整个指数区间的推导](https://github.com/the-omega-institute/trureturing-books/issues/2059#issuecomment-7239617760) · [四次热迹复算](https://github.com/the-omega-institute/trureturing-books/issues/2059#issuecomment-7239523334) · [小指数构造](https://github.com/the-omega-institute/trureturing-books/issues/2059#issuecomment-7239426333)
 
 **终端弦的整数锐性（`ARGUED`）。** 当 $\tau>\tau_0$ 且 $x^\dagger<b\le\tau$ 时，令 $\lambda=(b-x^\dagger)/(\tau-x^\dagger)$，并记 $y^\dagger$ 为切点层的平方质量比。整数谱可逼近实权锐界，当且仅当低于输入尺度的极限层所需重数 $n=S\lambda$ 与切点层所需重数 $k=Se^{y^\dagger}(1-\lambda)$ 都是非负整数。趋优谱的预算松弛和切线余量都趋于零，因此第一热权集中在 $y=0$ 与 $y=y^\dagger$ 的邻域。饱和预算把两处的份额固定为 $\lambda$ 与 $1-\lambda$。用 $Se^y$ 乘回第一热权，两处有界邻域内的整数计数就分别趋于 $n$ 与 $k$。
 
