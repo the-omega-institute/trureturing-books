@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "08e6bba4e778962f5cedd53b2c665b09ffed44c1",
-  "pinned_at": "2026-11-28T00:22:35Z",
+  "commit": "ff4b5a28d6fd1d96650d2c117d99d9162462e05b",
+  "pinned_at": "2026-11-28T01:32:32Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -8091,6 +8091,240 @@
       "statement_id": "sha256:5bfbf4afa44b27693b5108c08d285feb777688060d543590d22b0ed8d7e7e536",
       "line": 186,
       "signature": "theorem weyl_generates_shear {o : OpticalData} {I : Set ℝ} (h : SolvesOn o I) {t : ℝ} (ht : t ∈ I) (hs : o.shear t = 0) (hw : o.tideTerm t ≠ 0) : ∀ᶠ x in 𝓝[≠] t, o.shear x ≠ 0 ∧ (x ∈ I → 0 ≤ o.ricciTerm x → 0 < o.radius x → HasDerivAt (radiusSlope o) (-focusing o x * o.radius x) x ∧ -focusing o x * o.radius x < 0)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D.binet_first_order_ode": {
+      "module": "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D",
+      "name": "D5.S3.Geometry.Lorentz.SchwarzschildOpticalGeodesics4D.binet_first_order_ode",
+      "kind": "theorem",
+      "statement_id": "sha256:cfd6dad6be1f8c677af92b93d6f4f54747b4201312aa715d98318c7d1624c56c",
+      "line": 396,
+      "signature": "theorem binet_first_order_ode {M b φ : ℝ} (hb : b ≠ 0) : deriv (deriv (u1 M b)) φ + u1 M b φ = 3 * M * (u0 b φ) ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D.binet_zeroth_order_ode": {
+      "module": "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D",
+      "name": "D5.S3.Geometry.Lorentz.SchwarzschildOpticalGeodesics4D.binet_zeroth_order_ode",
+      "kind": "theorem",
+      "statement_id": "sha256:cfd6dad6be1f8c677af92b93d6f4f54747b4201312aa715d98318c7d1624c56c",
+      "line": 385,
+      "signature": "theorem binet_zeroth_order_ode (b φ : ℝ) : deriv (deriv (u0 b)) φ + u0 b φ = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D.circular_orbit_angMom_iff": {
+      "module": "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D",
+      "name": "D5.S3.Geometry.Lorentz.SchwarzschildOpticalGeodesics4D.circular_orbit_angMom_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:cfd6dad6be1f8c677af92b93d6f4f54747b4201312aa715d98318c7d1624c56c",
+      "line": 196,
+      "signature": "theorem circular_orbit_angMom_iff {M L r : ℝ} (hM : 0 < M) (hr : 3 * M < r) : deriv (timePotential M L) r = 0 ↔ L ^ 2 = M * r ^ 2 / (r - 3 * M)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D.circular_orbit_energy_minimum": {
+      "module": "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D",
+      "name": "D5.S3.Geometry.Lorentz.SchwarzschildOpticalGeodesics4D.circular_orbit_energy_minimum",
+      "kind": "theorem",
+      "statement_id": "sha256:cfd6dad6be1f8c677af92b93d6f4f54747b4201312aa715d98318c7d1624c56c",
+      "line": 329,
+      "signature": "theorem circular_orbit_energy_minimum {M L r : ℝ} (hM : 0 < M) (hr : 3 * M < r) (hL : L ^ 2 = M * r ^ 2 / (r - 3 * M)) : 8 / 9 ≤ 2 * timePotential M L r ∧ (2 * timePotential M L r = 8 / 9 ↔ r = 6 * M)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D.circular_orbit_second_deriv": {
+      "module": "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D",
+      "name": "D5.S3.Geometry.Lorentz.SchwarzschildOpticalGeodesics4D.circular_orbit_second_deriv",
+      "kind": "theorem",
+      "statement_id": "sha256:cfd6dad6be1f8c677af92b93d6f4f54747b4201312aa715d98318c7d1624c56c",
+      "line": 224,
+      "signature": "theorem circular_orbit_second_deriv {M L r : ℝ} (hM : 0 < M) (hr : 3 * M < r) (hL : L ^ 2 = M * r ^ 2 / (r - 3 * M)) : deriv (deriv (timePotential M L)) r = M * (r - 6 * M) / (r ^ 3 * (r - 3 * M))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D.circular_orbit_stability_iff": {
+      "module": "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D",
+      "name": "D5.S3.Geometry.Lorentz.SchwarzschildOpticalGeodesics4D.circular_orbit_stability_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:cfd6dad6be1f8c677af92b93d6f4f54747b4201312aa715d98318c7d1624c56c",
+      "line": 266,
+      "signature": "theorem circular_orbit_stability_iff {M L r : ℝ} (hM : 0 < M) (hr : 3 * M < r) (hL : L ^ 2 = M * r ^ 2 / (r - 3 * M)) : (0 < deriv (deriv (timePotential M L)) r ↔ 6 * M < r) ∧ (deriv (deriv (timePotential M L)) r = 0 ↔ r = 6 * M) ∧ (deriv (deriv (timePotential M L)) r < 0 ↔ r < 6 * M)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D.einstein_light_deflection_eq": {
+      "module": "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D",
+      "name": "D5.S3.Geometry.Lorentz.SchwarzschildOpticalGeodesics4D.einstein_light_deflection_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:cfd6dad6be1f8c677af92b93d6f4f54747b4201312aa715d98318c7d1624c56c",
+      "line": 427,
+      "signature": "theorem einstein_light_deflection_eq {M b : ℝ} (hb : b ≠ 0) : u1 M b 0 / (deriv (u0 b) 0) - u1 M b Real.pi / (deriv (u0 b) Real.pi) = 4 * M / b",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D.isco_parameters_exact": {
+      "module": "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D",
+      "name": "D5.S3.Geometry.Lorentz.SchwarzschildOpticalGeodesics4D.isco_parameters_exact",
+      "kind": "theorem",
+      "statement_id": "sha256:cfd6dad6be1f8c677af92b93d6f4f54747b4201312aa715d98318c7d1624c56c",
+      "line": 294,
+      "signature": "theorem isco_parameters_exact {M : ℝ} (hM : 0 < M) : let r",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D.no_circular_orbit_le_threeM": {
+      "module": "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D",
+      "name": "D5.S3.Geometry.Lorentz.SchwarzschildOpticalGeodesics4D.no_circular_orbit_le_threeM",
+      "kind": "theorem",
+      "statement_id": "sha256:cfd6dad6be1f8c677af92b93d6f4f54747b4201312aa715d98318c7d1624c56c",
+      "line": 211,
+      "signature": "theorem no_circular_orbit_le_threeM {M L r : ℝ} (hM : 0 < M) (hr : 0 < r) (hr3 : r ≤ 3 * M) : deriv (timePotential M L) r ≠ 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D.nullPotential_hasDerivAt": {
+      "module": "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D",
+      "name": "D5.S3.Geometry.Lorentz.SchwarzschildOpticalGeodesics4D.nullPotential_hasDerivAt",
+      "kind": "theorem",
+      "statement_id": "sha256:cfd6dad6be1f8c677af92b93d6f4f54747b4201312aa715d98318c7d1624c56c",
+      "line": 38,
+      "signature": "theorem nullPotential_hasDerivAt {M r : ℝ} (hr : r ≠ 0) : HasDerivAt (nullPotential M) (2 * (3 * M - r) / r ^ 4) r",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D.photon_sphere_strict_global_max": {
+      "module": "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D",
+      "name": "D5.S3.Geometry.Lorentz.SchwarzschildOpticalGeodesics4D.photon_sphere_strict_global_max",
+      "kind": "theorem",
+      "statement_id": "sha256:cfd6dad6be1f8c677af92b93d6f4f54747b4201312aa715d98318c7d1624c56c",
+      "line": 66,
+      "signature": "theorem photon_sphere_strict_global_max {M r : ℝ} (hM : 0 < M) (hr : 0 < r) : nullPotential M r ≤ 1 / (27 * M ^ 2) ∧ (nullPotential M r = 1 / (27 * M ^ 2) ↔ r = 3 * M)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D.photon_sphere_unique": {
+      "module": "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D",
+      "name": "D5.S3.Geometry.Lorentz.SchwarzschildOpticalGeodesics4D.photon_sphere_unique",
+      "kind": "theorem",
+      "statement_id": "sha256:cfd6dad6be1f8c677af92b93d6f4f54747b4201312aa715d98318c7d1624c56c",
+      "line": 55,
+      "signature": "theorem photon_sphere_unique {M r : ℝ} (hr : 0 < r) : deriv (nullPotential M) r = 0 ↔ r = 3 * M",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D.photon_sphere_unstable": {
+      "module": "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D",
+      "name": "D5.S3.Geometry.Lorentz.SchwarzschildOpticalGeodesics4D.photon_sphere_unstable",
+      "kind": "theorem",
+      "statement_id": "sha256:cfd6dad6be1f8c677af92b93d6f4f54747b4201312aa715d98318c7d1624c56c",
+      "line": 97,
+      "signature": "theorem photon_sphere_unstable {M : ℝ} (hM : 0 < M) : deriv (deriv (nullPotential M)) (3 * M) = -2 / (81 * M ^ 4) ∧ deriv (deriv (nullPotential M)) (3 * M) < 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D.schwarzschild_redshift_factor": {
+      "module": "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D",
+      "name": "D5.S3.Geometry.Lorentz.SchwarzschildOpticalGeodesics4D.schwarzschild_redshift_factor",
+      "kind": "theorem",
+      "statement_id": "sha256:cfd6dad6be1f8c677af92b93d6f4f54747b4201312aa715d98318c7d1624c56c",
+      "line": 348,
+      "signature": "theorem schwarzschild_redshift_factor {M r₁ r₂ : ℝ} (hM : 0 < M) (h1 : 2 * M < r₁) (h12 : r₁ < r₂) : 0 < redshiftRatio M r₁ r₂ ∧ redshiftRatio M r₁ r₂ < 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D.schwarzschild_redshift_horizon_limit": {
+      "module": "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D",
+      "name": "D5.S3.Geometry.Lorentz.SchwarzschildOpticalGeodesics4D.schwarzschild_redshift_horizon_limit",
+      "kind": "theorem",
+      "statement_id": "sha256:cfd6dad6be1f8c677af92b93d6f4f54747b4201312aa715d98318c7d1624c56c",
+      "line": 369,
+      "signature": "theorem schwarzschild_redshift_horizon_limit {M r₂ : ℝ} (hM : 0 < M) : Tendsto (fun r => redshiftRatio M r r₂) (𝓝[>] (2 * M)) (𝓝 0)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D.shadow_capture_iff": {
+      "module": "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D",
+      "name": "D5.S3.Geometry.Lorentz.SchwarzschildOpticalGeodesics4D.shadow_capture_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:cfd6dad6be1f8c677af92b93d6f4f54747b4201312aa715d98318c7d1624c56c",
+      "line": 154,
+      "signature": "theorem shadow_capture_iff {M b : ℝ} (hM : 0 < M) (hb : 0 < b) : b < 3 * Real.sqrt 3 * M ↔ nullPotential M (3 * M) < (b ^ 2)⁻¹",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D.shadow_critical_impact_eq": {
+      "module": "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D",
+      "name": "D5.S3.Geometry.Lorentz.SchwarzschildOpticalGeodesics4D.shadow_critical_impact_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:cfd6dad6be1f8c677af92b93d6f4f54747b4201312aa715d98318c7d1624c56c",
+      "line": 132,
+      "signature": "theorem shadow_critical_impact_eq {M : ℝ} (hM : 0 < M) : (nullPotential M (3 * M))⁻¹ = 27 * M ^ 2 ∧ Real.sqrt ((nullPotential M (3 * M))⁻¹) = 3 * Real.sqrt 3 * M",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D.timePotential_hasDerivAt": {
+      "module": "D5/S3/Geometry/Lorentz/SchwarzschildOpticalGeodesics4D",
+      "name": "D5.S3.Geometry.Lorentz.SchwarzschildOpticalGeodesics4D.timePotential_hasDerivAt",
+      "kind": "theorem",
+      "statement_id": "sha256:cfd6dad6be1f8c677af92b93d6f4f54747b4201312aa715d98318c7d1624c56c",
+      "line": 168,
+      "signature": "theorem timePotential_hasDerivAt {M L r : ℝ} (hr : r ≠ 0) : HasDerivAt (timePotential M L) ((M * r ^ 2 - L ^ 2 * (r - 3 * M)) / r ^ 4) r",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -18475,6 +18709,266 @@
       "statement_id": "sha256:e120add755347585d680a4425178d4ff8762c28eaa13ac661aaec50ee69bea6b",
       "line": 362,
       "signature": "theorem tensorHermBasis_apply (m k : ℕ) (i : HermitianIndex m (Fin 2)) (j : HermitianIndex k (Fin 2)) : tensorHermBasis m k (i, j) = productObservable (complexHermBasis m i) (complexHermBasis k j)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.ew_W_mass_sq": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.ew_W_mass_sq",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 216,
+      "signature": "theorem ew_W_mass_sq (g gp v : ℝ) : (ewMassMatrix g gp v).mulVec ![1, 0, 0, 0] = mWSq g v • ![1, 0, 0, 0] ∧ (ewMassMatrix g gp v).mulVec ![0, 1, 0, 0] = mWSq g v • ![0, 1, 0, 0]",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.ew_Z_mass_sq": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.ew_Z_mass_sq",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 228,
+      "signature": "theorem ew_Z_mass_sq (g gp v : ℝ) : (ewMassMatrix g gp v).mulVec ![0, 0, cosW g gp, -sinW g gp] = mZSq g gp v • ![0, 0, cosW g gp, -sinW g gp]",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.ew_custodial_rho_eq_one": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.ew_custodial_rho_eq_one",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 243,
+      "signature": "theorem ew_custodial_rho_eq_one {g gp v : ℝ} (hg : 0 < g) (hv : 0 < v) : mWSq g v / (mZSq g gp v * cosW g gp ^ 2) = 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.ew_electric_charge_relations": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.ew_electric_charge_relations",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 253,
+      "signature": "theorem ew_electric_charge_relations {g gp : ℝ} (hg : 0 < g) (hgp : 0 < gp) : g * sinW g gp = gp * cosW g gp ∧ g * sinW g gp = g * gp / Real.sqrt (g ^ 2 + gp ^ 2) ∧ (g * sinW g gp) ^ 2 = g ^ 2 * gp ^ 2 / (g ^ 2 + gp ^ 2) ∧ (g * sinW g gp)⁻¹ ^ 2 = g⁻¹ ^ 2 + gp⁻¹ ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.ew_gauge_mass_matrix": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.ew_gauge_mass_matrix",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 209,
+      "signature": "theorem ew_gauge_mass_matrix (g gp v W₁ W₂ W₃ B : ℝ) : ewMassQuadratic g gp v W₁ W₂ W₃ B = dotProduct ![W₁, W₂, W₃, B] ((ewMassMatrix g gp v).mulVec ![W₁, W₂, W₃, B])",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.ew_mass_diagonalized": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.ew_mass_diagonalized",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 189,
+      "signature": "theorem ew_mass_diagonalized {g gp v W₁ W₂ W₃ B : ℝ} (hsum : 0 < g ^ 2 + gp ^ 2) : ewMassQuadratic g gp v W₁ W₂ W₃ B = mWSq g v * (W₁ ^ 2 + W₂ ^ 2) + mZSq g gp v * zMode g gp W₃ B ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.ew_mass_order": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.ew_mass_order",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 236,
+      "signature": "theorem ew_mass_order {g gp v : ℝ} (hg : 0 < g) (hgp : 0 < gp) (hv : 0 < v) : 0 < mWSq g v ∧ mWSq g v < mZSq g gp v",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.ew_mass_quadratic_form": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.ew_mass_quadratic_form",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 159,
+      "signature": "theorem ew_mass_quadratic_form (g gp v W₁ W₂ W₃ B : ℝ) : ewMassQuadratic g gp v W₁ W₂ W₃ B = g ^ 2 * v ^ 2 / 4 * (W₁ ^ 2 + W₂ ^ 2) + v ^ 2 / 4 * (g * W₃ - gp * B) ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.ew_neutral_rotation_orthogonal": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.ew_neutral_rotation_orthogonal",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 179,
+      "signature": "theorem ew_neutral_rotation_orthogonal {g gp W₃ B : ℝ} (h : 0 < g ^ 2 + gp ^ 2) : zMode g gp W₃ B ^ 2 + photonMode g gp W₃ B ^ 2 = W₃ ^ 2 + B ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.ew_photon_massless": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.ew_photon_massless",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 222,
+      "signature": "theorem ew_photon_massless (g gp v : ℝ) : (ewMassMatrix g gp v).mulVec ![0, 0, sinW g gp, cosW g gp] = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.gaugeDerivative_eq_generator_action": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.gaugeDerivative_eq_generator_action",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 149,
+      "signature": "theorem gaugeDerivative_eq_generator_action (g gp v W₁ W₂ W₃ B : ℝ) : gaugeDerivative g gp v W₁ W₂ W₃ B = (-Complex.I) • ewGeneratorAction (g * W₁) (g * W₂) (g * W₃) (gp * B) (higgsVac v)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.higgsPotential_eq_zero_iff": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.higgsPotential_eq_zero_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 43,
+      "signature": "theorem higgsPotential_eq_zero_iff {lam v : ℝ} {Φ : Fin 2 → ℂ} (hlam : 0 < lam) : higgsPotential lam v Φ = 0 ↔ ‖Φ 0‖ ^ 2 + ‖Φ 1‖ ^ 2 = v ^ 2 / 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.higgsPotential_nonneg": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.higgsPotential_nonneg",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 38,
+      "signature": "theorem higgsPotential_nonneg {lam v : ℝ} {Φ : Fin 2 → ℂ} (hlam : 0 < lam) : 0 ≤ higgsPotential lam v Φ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.higgsPotential_vacuum_zero": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.higgsPotential_vacuum_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 56,
+      "signature": "theorem higgsPotential_vacuum_zero {lam v : ℝ} (hlam : 0 < lam) : higgsPotential lam v (higgsVac v) = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.higgs_fluctuation_expansion": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.higgs_fluctuation_expansion",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 276,
+      "signature": "theorem higgs_fluctuation_expansion (lam v g₁ g₂ h g₃ : ℝ) : higgsPotential lam v (higgsFluctuation v g₁ g₂ h g₃) = lam / 4 * (2 * v * h + h ^ 2 + g₁ ^ 2 + g₂ ^ 2 + g₃ ^ 2) ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.higgs_fluctuation_homogeneous_terms": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.higgs_fluctuation_homogeneous_terms",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 287,
+      "signature": "theorem higgs_fluctuation_homogeneous_terms (lam v g₁ g₂ h g₃ : ℝ) : let q",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.higgs_group_stabilizer_iff": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.higgs_group_stabilizer_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 108,
+      "signature": "theorem higgs_group_stabilizer_iff {v : ℝ} {α β ζ : ℂ} (hv : 0 < v) (hunit : Complex.normSq α + Complex.normSq β = 1) (hphase : Complex.normSq ζ = 1) : ewGroupAction α β ζ (higgsVac v) = higgsVac v ↔ β = 0 ∧ ζ = α",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.higgs_hessian_diagonal": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.higgs_hessian_diagonal",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 317,
+      "signature": "theorem higgs_hessian_diagonal (lam v g₁ g₂ h g₃ : ℝ) : deriv (deriv (fun t => higgsPotential lam v (higgsFluctuation v (t * g₁) (t * g₂) (t * h) (t * g₃)))) 0 = (2 * lam * v ^ 2) * h ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.higgs_hessian_spectrum": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.higgs_hessian_spectrum",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 330,
+      "signature": "theorem higgs_hessian_spectrum {lam v : ℝ} (hlam : 0 < lam) (hv : 0 < v) : deriv (deriv (fun h => higgsPotential lam v (higgsFluctuation v 0 0 h 0))) 0 = 2 * lam * v ^ 2 ∧ deriv (deriv (fun x => higgsPotential lam v (higgsFluctuation v x 0 0 0))) 0 = 0 ∧ deriv (deriv (fun x => higgsPotential lam v (higgsFluctuation v 0 x 0 0))) 0 = 0 ∧ deriv (deriv (fun x => higgsPotential lam v (higgsFluctuation v 0 0 0 x))) 0 = 0 ∧ 0 < 2 * lam * v ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D.higgs_vacuum_stabilizer_iff": {
+      "module": "D5/S3/Quantum/Gauge/ElectroweakHiggsMechanism4D",
+      "name": "D5.S3.Quantum.Gauge.ElectroweakHiggsMechanism4D.higgs_vacuum_stabilizer_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:f2cf1644a1491421781b8897573d45545fe42870229f508e6986acc587e8e7e0",
+      "line": 73,
+      "signature": "theorem higgs_vacuum_stabilizer_iff {v a₁ a₂ a₃ b : ℝ} (hv : 0 < v) : ewGeneratorAction a₁ a₂ a₃ b (higgsVac v) = 0 ↔ a₁ = 0 ∧ a₂ = 0 ∧ b = a₃",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
