@@ -139,7 +139,40 @@ $$
 For $d<0$, interchange the first two points and take $a=0,b=-d$. The full proof is checked by the Lean kernel.
 :::
 
-This proof uses Mathlib’s rational numbers and their order. Its Lean dependencies include `propext`, `Classical.choice`, and `Quot.sound`. Law II also requires $r\ge0$. The criterion describes the readings on three sampled points. Extending those data to a comparison space requires the global transport laws as well.
+The three-point criterion and the five-point criterion below both use Mathlib’s ordered rational numbers. Both Lean proofs depend on `propext`, `Classical.choice`, and `Quot.sound`. Law II also requires $r\ge0$.
+
+Return to the $3/5$ example and include both transported points $w=[x,y,z]$ and $v=[y,x,z]$. By invariance under left and right translations, $z$ reads $t=\kappa(x,y)$ against both. Can the original difference of $4/5$ survive? At $t=3/5$ the largest difference allowed by the five-point matrix falls to $13/20$, attained at $a=3/4$ and $b=1/10$.
+
+::: {.theorem #thm-ch01-five-point-transported-contrast title="Reading contrasts with two transported points" lean="D5/S3/Quantum/AURICOmega/FivePointTransportedContrast.exists_transported_readings_iff"}
+Fix $t,d\in\mathbb Q$ with $0\le t\le1$. In the order $(x,y,z,w,v)$, there exist nonnegative rationals $a,b,c,e,r$ with $a-b=d$ such that the matrix
+
+$$
+G=\begin{pmatrix}
+1&t&a&b&e\\
+t&1&b&c&a\\
+a&b&1&t&t\\
+b&c&t&1&r\\
+e&a&t&r&1
+\end{pmatrix}
+$$
+
+satisfies $h^{\mathsf T}Gh\ge0$ for every $h\in\mathbb Q^5$ if and only if
+
+$$
+d^2\le
+\begin{cases}
+(1-t^2)^2, & 0\le t\le 1/2,\\
+(5/4-t)^2, & t>1/2,\quad (t-1/2)^2\le 1-t^2,\\
+(2t-1)^2(1-t^2), & t>1/2,\quad (t-1/2)^2>1-t^2.
+\end{cases}
+$$
+:::
+
+::: {.proof}
+Exchanging $x,y$ and $w,v$ simultaneously reverses the sign of $d$, so take $a\ge b$. First omit $v$. Split the four weights into their symmetric and antisymmetric parts under the simultaneous exchange of $x,z$ and $y,w$. This gives two binary quadratic forms whose determinant bounds yield the three cases. Conversely, in each case one can choose rational four-point readings with $c=0$ and $b<1$. To give the fifth point readings $a,t$ against $y,z$, take its projection onto their span with coefficients $(a-bt)/(1-b^2)$ and $(t-ba)/(1-b^2)$. The four-point form guarantees that the slack needed to bring the fifth diagonal entry up to $1$ is nonnegative. The full proof is checked by the Lean kernel.
+:::
+
+These matrices describe compatible readings on five labels. Which such data extend to a kernel invariant under both translations on an entire heap remains a separate existence question.
 
 - **Any point serves temporarily as an origin, recovering a group in three lines**: pick any temporary reference point $o \in \mathcal{M}$, and define a binary product $x \star_o z := [x, o, z]$ and local inverse $x^{-1_o} := [o, x, o]$. Associativity follows straight from Law I: $(x \star_o y) \star_o z = [[x, o, y], o, z] = [x, o, [y, o, z]] = x \star_o (y \star_o z)$. Left and right identity are $[o, o, z] = z$ and $[x, o, o] = x$, and the left and right inverses take two rewrites each:
 
