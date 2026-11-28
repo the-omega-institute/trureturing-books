@@ -18975,6 +18975,14 @@
       "line": 38,
       "signature": "theorem ordered_three_pulse_real_trace_bound (A B C : Matrix I I ℝ) (hA : A.IsSymm) (hB : B.IsSymm) (hC : C.IsSymm) (L : ℝ) (hL : 0 ≤ L) (hAn : @norm (Matrix I I ℝ) Matrix.frobeniusNormedAddCommGroup.toNorm A ≤ L) (hBn : @norm (Matrix I I ℝ) Matrix.frobeniusNormedAddCommGroup.toNorm B ≤ L) (hCn : @norm (Matrix I I ℝ) Matrix.frobeniusNormedAddCommGroup.toNorm C ≤ L) (t : ℝ) (ht : 0 < t) : (∀ X : Matrix I I ℂ, pulse0 X 0 = X) ∧ (∀ X : Matrix I I ℂ, ∀ s : ℝ, s ≠ 0 → pulse0 X s = ((s : ℂ) * Complex.I)⁻¹ • (NormedSpace.exp (((s : ℂ) * Complex.I) • X) - 1)) ∧ |(Matrix.trace (pulse0 (A.map Complex.of"
     },
+    "D5/S3/Quantum/Dynamics/ParityNodeDividedDifference.sum_eval_div_nodal_eq_coeff": {
+      "module": "D5/S3/Quantum/Dynamics/ParityNodeDividedDifference",
+      "name": "D5.S3.Quantum.Dynamics.ParityNodeDividedDifference.sum_eval_div_nodal_eq_coeff",
+      "kind": "theorem",
+      "statement_id": "sha256:a2d34efe78c170bfc94768d05442bbe94b65188b4d568e8608b6acb309f634d5",
+      "line": 73,
+      "signature": "theorem sum_eval_div_nodal_eq_coeff {ι K : Type*} [DecidableEq ι] [Field K] [CharZero K] (μ : ι → ℤ) (A : Finset ι) (hμ : Set.InjOn μ A) (f : ℤ[X]) : ∑ k ∈ A, (((f.eval (μ k) : ℤ) : K) / ∏ l ∈ A.erase k, ((μ k : K) - μ l)) = (((f %ₘ ∏ l ∈ A, (X - C (μ l))).coeff (A.card - 1) : ℤ) : K)"
+    },
     "D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow.evolvedDensity": {
       "module": "D5/S3/Quantum/Dynamics/ProjectionProbabilityFlow",
       "name": "D5.S3.Quantum.Dynamics.ProjectionProbabilityFlow.evolvedDensity",
