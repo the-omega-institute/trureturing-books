@@ -170,6 +170,12 @@ If $d=0$, unitarity forces both gate diagonal entries to vanish. Let $b$ and $c$
 
 An explicit upper bound holds for general gates. Choose $w^2=z$ with $\operatorname{Re}w\ge0$ and use $\operatorname{diag}(w,1)G_{52}\operatorname{diag}(1,w)$ in both rounds, keeping the first two rounds fixed. On each star, the error column for the early leaf is orthogonal to the image of the other two columns. Its norm is $|1-w|\sqrt{|ab|^2+|d|^2}$. The other columns have a common image direction and a combined row norm $|1-w|\sqrt{|ac|^2+|d|^2}$. The two norms agree, giving an error of $|1-w|\,|d|\sqrt{2-|d|^2}$. Taking the direct sum across the three stars and multiplying on the right by the earlier unitary transport preserve this operator norm. [Explicit shared-gate construction](https://github.com/the-omega-institute/trureturing-books/issues/1627#issuecomment-7232623572)
 
+The optimal error has a sharp small-phase expansion. With $D=|d|$, its leading term is
+$$
+\frac{D}{\sqrt{2(1+D^2)}}|\phi|+O(\phi^2),
+$$
+where the error constant may depend on the original gate. After removing its entry phases, two orthogonal test vectors give this lower bound on the linearized star. The input is supported on the two leaves, so retuning earlier gates cannot reduce the bound. A Hermitian generator attains the leading coefficient, making the linear residual have eigenvalues zero and the positive and negative coefficients. For a mixed gate, the leaf columns also force any candidate with vanishing error to approach the original gate, so the local calculation controls the optimum. [Exact leading coefficient](https://github.com/the-omega-institute/trureturing-books/issues/1627#issuecomment-7232674150)
+
 With the three gates and the fifth-shell source $H$ fixed, put $H_0=U_0HU_0^*$. The last-round phase changes only the cross blocks between the six sites and the other thirteen, giving
 $$
 \|U_\phi H U_\phi^*-H_0\|_{\mathrm{op}}
