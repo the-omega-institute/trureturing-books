@@ -161,6 +161,16 @@ For $\ell=9+2m$, set $K_i=(\partial_\mu\ell_i\,\partial^\mu\ell_i)$ with $\ell_i
 
 **Hand derivation (`ARGUED`).** Filling all twelve neutral-lepton derivative pairs leaves two more leptons to supply at $\ell=35$. Each can couple to a Higgs derivative. Set $M_{i,\mu}=\epsilon_{rs}L_i^rD_\mu H^s$. With $H=(0,1)$, the component $D_0H^0$ can pair with an unoccupied charged-lepton component. Recontract the nine $d^c$ fields and three $S_i$ in the dimension-$30$ seed and multiply by $(M_{1,\mu}M_2^\mu)\prod_{i=1}^3 K_i^4$. One monomial containing all twenty-four neutral-lepton derivatives and $(D_0H^0)^2$ has coefficient of magnitude $1944\cdot384^3$. This gauge scalar has dimension $30+7+12\cdot7=121$, attaining the charge bound. These minima apply to local differential polynomials before taking the quotient by equations of motion and integration by parts. [Color contractions and exterior-algebra coefficient](https://github.com/the-omega-institute/trureturing-books/issues/1625#issuecomment-7230854341)
 
+**Thirty-seven units of positive lepton number (`ARGUED`).** In the charge bound above, only twelve undifferentiated $L$ components and twenty-four first derivatives of neutral $L$ components can carry positive lepton number at zero excess dimension. Thus at $\ell=37$ at least one lepton generator contributes an extra unit, giving $d\ge (7\ell-3)/2+1=129$. The dimension-parity rule requires $d\equiv(-3-37)/2=0\pmod 2$, so $d\ge130$.
+
+Multiply the top exterior product construction $\mathcal O_{35}$ by the dimension-nine gauge scalar
+
+$$
+P=\bigl(\epsilon_{ij}L_3^i D_\mu H^j,\ \epsilon_{rs}(D_\rho D^\rho L_1^r)D^\mu H^s\bigr),
+$$
+
+where the parentheses contract the left-handed spinors. The two charged Higgs derivatives select the remaining undifferentiated charged component of the third generation and one second derivative from the first generation. Both fermion generators are distinct from those in the selected nonzero monomial of $\mathcal O_{35}$, so a coefficient of $\mathcal O_{35}P$ still has magnitude $6$. The minimum for thirty-seven units is therefore $130$ in the same local differential algebra. [Top exterior product construction](https://github.com/the-omega-institute/trureturing-books/issues/1625#issuecomment-7231065749) · [Charge bound and attainment](https://github.com/the-omega-institute/trureturing-books/issues/1632#issuecomment-7231094926)
+
 ## 9.3 Shell-Triality Algebra Closure, Discrete Anomaly Inflow, and the 25-State Lifted Shell {#sec-ch09-algebra-inflow}
 
 While $U(1)_X$ gives a clean Abelian lift over the Standard Model, installing the Behrend shell's species-dependent triality phase $F$ directly atop full $SU(5)$ vertices unleashes an extraordinary sequence of algebraic and topological demands.
