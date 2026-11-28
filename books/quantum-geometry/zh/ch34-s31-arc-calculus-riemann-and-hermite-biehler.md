@@ -539,7 +539,7 @@ $$
    并且 $\langle\rho_j,\rho_k\rangle=(jk)^{-1/2}\frac1{2\pi}\int_{\mathbb R}w(t)(k/j)^{it}dt$，$w(t)=\lvert\zeta(\frac12+it)\rvert^2/(\frac14+t^2)$：除去两侧的对角因子 $\operatorname{diag}(k^{-1/2})$，$G_N$ 是以 $w\ge0$ 为符号、在点 $\log k$ 处取样的托普利茨形式。
 2. **余项永不为零。** $\rho_1,\dots,\rho_N$ 线性无关，$G_N$ 正定；对每个 $N$ 都有 $d_N>0$。
 3. **每一步的减量。** 作楚列斯基分解 $G_N=LL^{\top}$，令 $y=L^{-1}c$，则 $d_N^2=1-\sum_{k\le N}y_k^2$，$d_{N-1}^2-d_N^2=y_N^2=\langle\chi,e_N\rangle^2$，其中 $e_N$ 是 $\rho_N$ 在 $V_{N-1}$ 的正交补中的分量的单位方向，主元 $L_{NN}^2=\det G_N/\det G_{N-1}>0$ 是 $\rho_N$ 到 $V_{N-1}$ 的距离的平方。所以 $d_N$ 不增；它在第 $N$ 步严格下降当且仅当 $\langle\chi,e_N\rangle\ne0$，本书没有这一点的一般证明。
-4. **把有限误差读成排零区域。** 非零余项仍能排除一整片零点位置。固定 $N\ge0$ 与实数 $0<a\le\tfrac12$；若已严格认证
+4. **把有限误差读成排零区域。** 非零余项仍能排除一整片零点位置；任意正下限高度的精确矩形门槛与开边界的区别见 [@rem-appm-nyman-rectangle-infimum]。先在圆盘中看清机制：固定 $N\ge0$ 与实数 $0<a\le\tfrac12$；若已严格认证
 
    $$
    d_N^2\le U<a(1-a),
@@ -604,7 +604,39 @@ $$
 **文献结果，未在本书形式化。** 无条件的下界 $\liminf_N d_N^2\log N\ge\sum_{\operatorname{Re}\rho=1/2}m_\rho^2/\lvert\rho\rvert^2$ 与常数 $2+\gamma-\log4\pi$ 的条件见 [@rem-ch34-arithmetic-pivot-literature] 与 [@rem-ch34-burnol-nbb-mollifier-literature]。结合外部已验证的 [@conj-riemann-hypothesis] 与 Báez-Duarte 判据，如今无条件成立 $d_N\to0$，且上述下界遍历全体非平凡零点给出 $\liminf_N d_N^2\log N\ge\sum_\rho m_\rho^2/\lvert\rho\rvert^2\ge2+\gamma-\log4\pi$（等号取到当且仅当零点全为单零点）。然而 S. Bettin, J. B. Conrey, D. W. Farmer（*Proc. Steklov Inst. Math.* **280**, 30–36, 2013，DOI [10.1134/S0081543813030036](https://doi.org/10.1134/S0081543813030036)，定理 1）用以给出上界渐近 $(2+\gamma-\log4\pi)/\log N$ 的第二条假设——存在 $\delta>0$ 使 $\sum_{\lvert\operatorname{Im}\rho\rvert\le T}\lvert\zeta'(\rho)\rvert^{-2}\ll T^{3/2-\delta}$（预设零点全为单零点）——并不由黎曼猜想推出，因此精确渐近律 $d_N^2\sim(2+\gamma-\log4\pi)/\log N$ 与单零点猜想依然保持开放（`OPEN`）。
 :::
 
-格拉姆矩阵元有闭式，一次楚列斯基分解就同时给出全部 $d_N$，并且可以在球算术中严格包住。
+格拉姆矩阵元有闭式，一次楚列斯基分解就同时给出全部 $d_N$，并且可以在球算术中严格包住。若只需排零门槛所用的上界，还可以绕开矩阵逆的误差传播，直接使用以下试探证书。
+
+::: {.remark #rem-ch34-nyman-trial-error-certificate title="有理包围给出的 Nyman 试探误差证书（手工推导）"}
+要取得 [@rem-ch34-nyman-beurling-remainder] 第 4 款所需的上界，可以直接检验试探残差。固定 $N\ge1$ 与 $q\in\mathbb Q^N$，令 $G=G_N$。这些函数均为实值，故 $G,c$ 为实矩阵与实向量。设有理数据 $\widehat G,\widehat c$ 与非负有理误差 $E_{jk},\eta_j$ 严格包住真实积分：对所有 $1\le j,k\le N$，
+
+$$
+\lvert c_j-\widehat c_j\rvert\le\eta_j,\qquad
+\lvert G_{jk}-\widehat G_{jk}\rvert\le E_{jk}.
+$$
+
+记 $\lvert q\rvert=(\lvert q_j\rvert)_j$，则以下是完整的有理误差证书：
+
+$$
+\begin{aligned}
+\widehat R(q)&=1-2q^{\top}\widehat c+q^{\top}\widehat Gq,\\
+P(q)&=2\lvert q\rvert^{\top}\eta+\lvert q\rvert^{\top}E\lvert q\rvert,\\
+R(q)&:=\Bigl\lVert\chi-\sum_{k\le N}q_k\rho_k\Bigr\rVert^2,\\
+0\le d_N^2&\le R(q)\le U(q):=\widehat R(q)+P(q).
+\end{aligned}
+$$
+
+证明只需展开平方：$\lVert\chi\rVert^2=1$ 给出 $R(q)=1-2q^{\top}c+q^{\top}Gq$；逐项取绝对值即得 $\lvert R(q)-\widehat R(q)\rvert\le2\sum_j\lvert q_j\rvert\eta_j+\sum_{j,k}\lvert q_jq_k\rvert E_{jk}=P(q)$。若统一取 $\eta_j=\varepsilon_c$、$E_{jk}=\varepsilon_G$，则
+
+$$
+\begin{aligned}
+U(q)&=1-2q^{\top}\widehat c+q^{\top}\widehat Gq\\
+&\quad+2\varepsilon_c\lVert q\rVert_1+\varepsilon_G\lVert q\rVert_1^2,\qquad
+\lVert q\rVert_1=\sum_j\lvert q_j\rvert.
+\end{aligned}
+$$
+
+数值求解器可用来寻找候选系数，再舍入为固定的有理向量 $q$；上述展开检验的是舍入后的向量本身。无需认证 $\widehat G^{-1}$，也无需假设 $\widehat G$ 正定。只要积分包围已严格成立，计算 $U(q)$ 及其与上述排零门槛的比较便全是有限有理运算；仅有浮点近似则不足以提供这些包围。上述排零证书可直接取 $U=U(q)$。新误差传播公式是手工推导，未另经 Lean 核验，也没有计算出新的 Nyman 积分包围。
+:::
 
 ::: {.example #ex-ch34-nyman-beurling-numbers title="N ≤ 300 的 Nyman–Beurling 距离（文献结果、计算机辅助验证与数值）"}
 **文献结果，未在本书形式化。** 对互素的 $h,k$（V. I. Vasyunin，*Algebra i Analiz* **7**(3), 118–135, 1995；这里依据 L. Báez-Duarte, M. Balazard, B. Landreau, E. Saias，*Ramanujan J.* **9**, 215–240, 2005，DOI [10.1007/s11139-005-0834-4](https://doi.org/10.1007/s11139-005-0834-4)，其工作稿 [arXiv:math/0306251](https://arxiv.org/abs/math/0306251) 命题 89，经 $\langle\rho_h,\rho_k\rangle=A(h/k)/h$ 换写）：

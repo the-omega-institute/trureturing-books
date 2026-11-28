@@ -574,7 +574,7 @@ Item 1: for $\theta=1$ both sides are analytic on $\operatorname{Re}s>0$, $s\ne1
    and $\langle\rho_j,\rho_k\rangle=(jk)^{-1/2}\frac1{2\pi}\int_{\mathbb R}w(t)(k/j)^{it}dt$ with $w(t)=\lvert\zeta(\frac12+it)\rvert^2/(\frac14+t^2)$: up to the diagonal factor $\operatorname{diag}(k^{-1/2})$ on both sides, $G_N$ is a Toeplitz form with symbol $w\ge0$, sampled at the points $\log k$.
 2. **The remainder never vanishes.** $\rho_1,\dots,\rho_N$ are linearly independent, $G_N$ is positive definite, and $d_N>0$ for every $N$.
 3. **Each decrement.** With the Cholesky factorization $G_N=LL^{\top}$ and $y=L^{-1}c$: $d_N^2=1-\sum_{k\le N}y_k^2$ and $d_{N-1}^2-d_N^2=y_N^2=\langle\chi,e_N\rangle^2$, where $e_N$ is the unit direction of the component of $\rho_N$ orthogonal to $V_{N-1}$, and the pivot $L_{NN}^2=\det G_N/\det G_{N-1}>0$ is the squared distance from $\rho_N$ to $V_{N-1}$. Hence $d_N$ is non-increasing; it decreases strictly at step $N$ exactly when $\langle\chi,e_N\rangle\ne0$, for which this book has no general proof.
-4. **Reading a finite error as a zero-free region.** A nonzero remainder can still exclude a whole region of zero locations. Fix $N\ge0$ and a real $0<a\le\tfrac12$. If one has rigorously certified
+4. **Reading a finite error as a zero-free region.** A nonzero remainder can still exclude a whole region of zero locations; [@rem-appm-nyman-rectangle-infimum] gives the exact rectangle threshold for any positive lower height and explains the role of its open boundary. First see the mechanism in the disk: fix $N\ge0$ and a real $0<a\le\tfrac12$. If one has rigorously certified
 
    $$
    d_N^2\le U<a(1-a),
@@ -639,7 +639,39 @@ contradicting the upper bound. The last line uses item 4 of [@prop-ch34-nyman-be
 **Literature result, not formalized in this book.** The unconditional bound $\liminf_N d_N^2\log N\ge\sum_{\operatorname{Re}\rho=1/2}m_\rho^2/\lvert\rho\rvert^2$ and the conditions under which the constant is $2+\gamma-\log4\pi$ are recalled in [@rem-ch34-arithmetic-pivot-literature] and [@rem-ch34-burnol-nbb-mollifier-literature]. Combined with the externally verified [@conj-riemann-hypothesis] and Báez-Duarte's criterion, $d_N\to0$ now holds unconditionally, and the lower bound runs over all nontrivial zeros to give $\liminf_N d_N^2\log N\ge\sum_\rho m_\rho^2/\lvert\rho\rvert^2\ge2+\gamma-\log4\pi$ (with equality in the second step iff all zeros are simple). However, the second hypothesis required by S. Bettin, J. B. Conrey, and D. W. Farmer (*Proc. Steklov Inst. Math.* **280**, 30–36, 2013, DOI [10.1134/S0081543813030036](https://doi.org/10.1134/S0081543813030036), Theorem 1) to establish the matching upper asymptotic $(2+\gamma-\log4\pi)/\log N$—namely $\sum_{\lvert\operatorname{Im}\rho\rvert\le T}\lvert\zeta'(\rho)\rvert^{-2}\ll T^{3/2-\delta}$ for some $\delta>0$, which presupposes Simple Zeros—is not implied by the Riemann Hypothesis, so both $d_N^2\sim(2+\gamma-\log4\pi)/\log N$ and Simple Zeros remain open (`OPEN`).
 :::
 
-The Gram entries have a closed form, a single Cholesky factorization gives every $d_N$ at once, and the numbers can be enclosed rigorously in ball arithmetic.
+The Gram entries have a closed form, a single Cholesky factorization gives every $d_N$ at once, and the numbers can be enclosed rigorously in ball arithmetic. When only an upper bound for a zero-exclusion threshold is needed, the following trial certificate avoids propagating errors through a matrix inverse.
+
+::: {.remark #rem-ch34-nyman-trial-error-certificate title="A Nyman Trial-Error Certificate from Rational Enclosures (Manual derivation)"}
+The upper bound needed in item 4 of [@rem-ch34-nyman-beurling-remainder] can be obtained directly from a trial residual. Fix $N\ge1$ and $q\in\mathbb Q^N$, and write $G=G_N$. All the functions are real-valued, so $G,c$ are a real matrix and vector. Suppose rational data $\widehat G,\widehat c$ and nonnegative rational errors $E_{jk},\eta_j$ rigorously enclose the true integrals: for every $1\le j,k\le N$,
+
+$$
+\lvert c_j-\widehat c_j\rvert\le\eta_j,\qquad
+\lvert G_{jk}-\widehat G_{jk}\rvert\le E_{jk}.
+$$
+
+Writing $\lvert q\rvert=(\lvert q_j\rvert)_j$, the following gives a complete rational error certificate:
+
+$$
+\begin{aligned}
+\widehat R(q)&=1-2q^{\top}\widehat c+q^{\top}\widehat Gq,\\
+P(q)&=2\lvert q\rvert^{\top}\eta+\lvert q\rvert^{\top}E\lvert q\rvert,\\
+R(q)&:=\Bigl\lVert\chi-\sum_{k\le N}q_k\rho_k\Bigr\rVert^2,\\
+0\le d_N^2&\le R(q)\le U(q):=\widehat R(q)+P(q).
+\end{aligned}
+$$
+
+To prove it, expand the square: $\lVert\chi\rVert^2=1$ gives $R(q)=1-2q^{\top}c+q^{\top}Gq$, and the triangle inequality applied term by term gives $\lvert R(q)-\widehat R(q)\rvert\le2\sum_j\lvert q_j\rvert\eta_j+\sum_{j,k}\lvert q_jq_k\rvert E_{jk}=P(q)$. For the uniform choices $\eta_j=\varepsilon_c$ and $E_{jk}=\varepsilon_G$, this becomes
+
+$$
+\begin{aligned}
+U(q)&=1-2q^{\top}\widehat c+q^{\top}\widehat Gq\\
+&\quad+2\varepsilon_c\lVert q\rVert_1+\varepsilon_G\lVert q\rVert_1^2,\qquad
+\lVert q\rVert_1=\sum_j\lvert q_j\rvert.
+\end{aligned}
+$$
+
+A numerical solver may find candidate coefficients, which can then be rounded to a fixed rational vector $q$; the expansion above checks the rounded vector itself. It requires neither a certified $\widehat G^{-1}$ nor positive definiteness of $\widehat G$. Once the integral enclosures are rigorous, evaluating $U(q)$ and comparing it with the zero-exclusion thresholds above use only finite rational arithmetic; floating-point approximations alone do not supply those enclosures. The zero-exclusion certificates above can take $U=U(q)$ directly. This error-propagation formula is a manual derivation, not separately checked in Lean, and no new Nyman integral enclosures have been computed here.
+:::
 
 ::: {.example #ex-ch34-nyman-beurling-numbers title="The Nyman–Beurling Distance for N ≤ 300 (Literature result, computer-assisted verification and numerical results)"}
 **Literature result, not formalized in this book.** For coprime $h,k$ (V. I. Vasyunin, *Algebra i Analiz* **7**(3), 118–135, 1995; taken here from L. Báez-Duarte, M. Balazard, B. Landreau, E. Saias, *Ramanujan J.* **9**, 215–240, 2005, DOI [10.1007/s11139-005-0834-4](https://doi.org/10.1007/s11139-005-0834-4), Proposition 89 of their working paper [arXiv:math/0306251](https://arxiv.org/abs/math/0306251), rewritten through $\langle\rho_h,\rho_k\rangle=A(h/k)/h$):
