@@ -162,7 +162,17 @@ Both outcomes occur on the same finite group. Take $G=S_3\times\{+1,-1\}$ with t
 
 The permutation reading gives quotient $S_3$, where the order of $(12)$ and $(23)$ still changes the product. The parity reading gives the abelian group of order two, where both orders give the even class. Passing to reading classes restores extensional separation. The reading still distinguishes the order of transport exactly when some commutator remains visible in the quotient.
 
-For the permutation reading with quotient $S_3$, choosing $(\sigma,+1)$ in each class carries ternary transport back to the original twelve points. The same readings arise on a second set of twelve points
+**The same transposition squares can coexist with different 3-cycle cubes.** Write each element of $S_3$ as $r^is^j$, where $r=(123)$, $s=(12)$, $i$ is taken modulo $3$, and $j$ modulo $2$. Let representatives of even permutations commute with every point of the identity class, and let representatives of odd permutations act on it by inversion. Two groups of eighteen points realize this action. Use the additive group $H_0=(\mathbb Z/3\mathbb Z)^2$ or $H_1=\mathbb Z/9\mathbb Z$, and multiply points by
+
+$$
+(a,j)(b,k)=(a+(-1)^j b,\ j+k\bmod 2).
+$$
+
+Let $\bar a$ be the first coordinate in $H_0$ and the residue modulo $3$ in $H_1$. The relation $srs^{-1}=r^{-1}$ makes $(a,j)\mapsto r^{\bar a}s^j$ a homomorphism. In both groups, the reading is $1$ for equal projections and $0$ otherwise. Each class has three points, with the same Gram sum of squares and the same noncommutative transport on the quotient. Both models relax extensional separation.
+
+In both groups every transposition representative $(a,1)$ squares to $(a-a,0)=(0,0)$. In the $H_0$ model, the choice $r^is^j\mapsto((i,0),j)$ preserves multiplication by the displayed formula, so it preserves ternary transport. In the $H_1$ model, the representatives of $r$ are $(1,0),(4,0),(7,0)$, and each cubes to $(3,0)$. A choice preserving ternary transport would preserve the identity after left multiplication by the inverse of its identity representative. It would then preserve multiplication as well. Since $r^3=e$ in the quotient, the cube of its representative would have to be $(0,0)$. The cube thus detects the obstruction even when every transposition has an involutive representative.
+
+With a central identity class, a transposition square can also obstruct a choice. Return to the earlier permutation reading with quotient $S_3$. Choosing $(\sigma,+1)$ in each class carries ternary transport back to the original twelve points. The same readings arise on a second set of twelve points
 $$
   G'=\{(\sigma,j)\in S_3\times\mathbb{Z}/4\mathbb{Z}:j\bmod 2=\epsilon(\sigma)\},
 $$
