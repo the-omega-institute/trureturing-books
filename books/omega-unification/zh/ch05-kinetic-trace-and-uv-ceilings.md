@@ -245,6 +245,18 @@ $$
 
 对 $1<u\le2$，在 $3/25<\varepsilon\le7/50$ 内仍可得到精确值 $V_S(B_0-\varepsilon)=N-1+A_r^u+C_r^u$，取等条件与上文相同。若最大的 $N$ 份热权中至少两份未截顶，可同时使用前 $N-1$ 项与前 $N$ 项的上界。若所得比较谱的前 $N$ 项和大于转移端，两谱的正部和之差只变号一次，转移端在较高热权处占优。对 $w\log w$ 的区间复算确证转移端占优，再用递增权重 $t^{u-1}$ 从这个比较推出 $w^u$ 的严格优势。若最大的 $N$ 份热权中恰有 $N-1$ 份截顶，转移斜率仍严格为正。[两条前缀与小指数极限的推导](https://github.com/the-omega-institute/trureturing-books/issues/2275#issuecomment-7241420906)
 
+单份预算足够低时，零暴露尾部可以装下两份阈值热权。固定 $N=1$、$S=1+a$、$a=w_1=e^{-1}$、$\tau=\tau_0(u)$ 与 $1.405\le u\le1.408$。记剩余暴露预算为 $r$，$M=W(r)=\exp(-e^{-2r})$。在 $r_a=-\log(-\log(1-a))/2\approx0.389707$ 处，单份正暴露谱的余权 $1-M$ 恰等于 $a$。同一尾部容量也解释了稍低预算下两种谱的竞争。有限正质量整数谱的第二热迹最大值是下表热权的 $u$ 次幂和（手工推导与向外区间核证，`ARGUED`）。
+
+| 暴露预算 | 极大谱（不计排列） |
+| --- | --- |
+| $0\le r<r_b(u)$ | $(M,a,a,1-a-M)$ |
+| $r_b(u)<r<r_a$ | $(W(r-s),W(s),a)$，其中 $0<s<r/2$ 由 $W(r-s)+W(s)=1$ 唯一确定 |
+| $r_a\le r\le0.66$ | $(M,a,1-M)$ |
+
+$r_b(u)$ 是前两支幂和在共同可行域内部唯一相等的预算，随 $u$ 严格递增，两端约为 $0.38647449$ 与 $0.38697014$。此处两种谱都取等；在 $r_a$ 则只得到 $(1-a,a,a)$。例如 $u=1.406$、$r=0.388$ 时，两份不等暴露比四权谱多给出约 $0.00001768$ 的第二热迹。
+
+严格凸性使零暴露尾权集中到若干份 $a$ 和至多一份余权。若有三份正暴露，$W$ 的严格凹性使其实际暴露总量小于 $r_a$。最小两份之和小于 $2r_a/3<\log u$，将其中较小份的暴露转给较大份，会提高这对热权的幂和，并释放热权补入尾部。于是只需比较两份暴露之间的转移。尾权刚好装满一份 $a$ 时，继续转移会开始填充另一份余权，故须在该点分别比较两侧导数。[全窗比较与取等条件](https://github.com/the-omega-institute/trureturing-books/issues/2511#issuecomment-7243573806) · [上窗的严格导数界](https://github.com/the-omega-institute/trureturing-books/issues/2511#issuecomment-7243702352)
+
 从左侧趋近 $B_0$ 时，令 $s_*=s_\tau$、$b=W'(\tau-s_*)$、$c=W'(s_*)$。由 $A_r+C_r=1+w_1$ 得 $dA_r/dr=-dC_r/dr=bc/(c-b)$（在 $r=\tau$ 处）。以左极限为基准，预算每减少一单位时最优值的一阶损失为 $u(A_\tau^{u-1}-C_\tau^{u-1})bc/(c-b)$。[统一半径、取等条件与区间核证](https://github.com/the-omega-institute/trureturing-books/issues/2128#issuecomment-7240278006)
 
 对 $1<u\le2$，转移端在更宽的 $0<\varepsilon\le3/25$ 内仍给出 $V_S(B_0-\varepsilon)=N-1+A_r^u+C_r^u$，取等条件与上文相同。若前 $N$ 份中恰有两份未截顶，这两份的总暴露至多为 $2\tau-\varepsilon$。凹性将前缀上界收紧为 $N-2+2W(\tau-\varepsilon/2)$。若有三份以上未截顶，缺少的单位热权更多，同一个前缀上界仍成立。闭区间复算表明 $A_r>2W(\tau-\varepsilon/2)-1$，且幂和沿转移严格增加到零暴露余权耗尽。这样可以在整个新窗口沿用单次转移比较。[加强前缀的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2193#issuecomment-7240619070)
