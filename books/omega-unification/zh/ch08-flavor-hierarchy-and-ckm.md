@@ -383,14 +383,14 @@ $$
 
 六阶系数严格为正，说明即使五阶系数消失，固定顶底平面在精确阈值上仍会高估最小破缺。[两支的成本展开、全复基下界与矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/2126#issuecomment-7240142503)
 
-两处分支在阈值邻域内可以定量分开（手工推导）。取共同尺度 $c=\sqrt{\mu^2+|S|^2}=1$、$v\in[0.78,0.79]$、$w\in[1.13,1.14]$，令 $S=-\sqrt{vw}$，保持线性平衡，并取 $\kappa+8\mu^2q=\eta\varepsilon$、$|\eta|\le2$。重排轮换基并调相后，先用一项直接旋转将 $e_0$ 对准第一列，再让其余两列在轻子空间内转动。取前一项旋转首行的两个非对角元为 $\varepsilon^3(X+iI,Y)$，后一项的上三角元为 $\varepsilon^2Z$，其中 $X,I$ 为实数，$Y,Z$ 为复数。对 $0<\varepsilon\le10^{-36}$，任意全局取优复基都满足
+两处分支在阈值邻域内可以定量分开（手工推导）。取共同尺度 $c=\sqrt{\mu^2+|S|^2}=1$、$v\in[0.78,0.79]$、$w\in[1.13,1.14]$，令 $S=-\sqrt{vw}$，保持线性平衡，并取 $\kappa+8\mu^2q=\eta\varepsilon$、$|\eta|\le2$。重排轮换基并调相后，先用一项直接旋转将 $e_0$ 对准第一列，再让其余两列在轻子空间内转动。取前一项旋转首行的两个非对角元为 $\varepsilon^3(X+iI,Y)$，后一项的上三角元为 $\varepsilon^2Z$，其中 $X,I$ 为实数，$Y,Z$ 为复数。对 $0<\varepsilon\le10^{-16}$，任意全局取优复基都满足
 
 $$
 \max\bigl(|X-4\mu|,\ |I|,\ |Y|,\ \min(|Z|,|Z-2\mu S|)\bigr)
-\le 10^{15}\sqrt{\varepsilon}\le10^{-3}.
+\le 6\times10^4\sqrt{\varepsilon}<10^{-3}.
 $$
 
-重线投影先把任意取优复基限制在有界缩放坐标内。再用下型成本约束实平面分角，上型成本的下界便含有 $|Z|^2-2\mu S\operatorname{Re}Z$ 的平方以及虚偏转的平方。限制解析余项后，两个偏转中心仍相距超过 $0.45$，因此可以分别比较两个邻域内的最小成本。[全复基定位界与矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/2203#issuecomment-7240815849)
+重线投影先把取优复基限制在有界缩放坐标内。两项直接旋转各满足《OMEGA 数学》§5.1 的凯莱闭合式 $(I-K)R=I+K$，这里 $K$ 是相应的块反厄米生成元。先在复尺度圆盘 $|\varepsilon|\le1/200$ 上控制两部门的平方成本余项。下型成本约束实平面分角后，上型成本中的配方同时限制实偏转与虚偏转，把所有取优基限制到更小的坐标域。在这个域内，凯莱逆矩阵和平方成本的解析分子在 $|\varepsilon|\le1/8$ 上都有统一界。再次应用 Cauchy 估计，便得上式。两个实偏转中心相距超过 $0.45$，全局取优由此归结为两个分离邻域内的比较。[全复基定位推导与矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/2347#issuecomment-7242548313)
 
 首项的约化 Hessian 还可以给出显式下界（手工推导）。在平衡面 $D_0=0$ 上消去 $X$，令
 $$
