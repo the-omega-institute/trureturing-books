@@ -320,9 +320,9 @@ $$
 
 斜率比 $s_j=b_j/a_j$ 满足 $s_4<s_3<0<s_1<s_2$，因此中间的间隔把两对梯度分别切成等幅反号的两半。每对梯度都在同一权重部分内抵消，故两部分各自的牛顿斜率积分都为零。唯一的一阶最优速度 $v=(1,-1,1,-1)$ 在四个坐标上都触及位移上限，牛顿二阶项 $\tfrac12v^{\mathsf T}\nabla^2K(0)v$ 在 $(-0.37017,-0.37016)$ 内。总变差在 $1\,030\,993.80749$ 与 $1\,030\,993.80750$ 之间。 [消元推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2187#issuecomment-7240654018)
 
-当总变差降到 $1\,030\,993.778$ 以下或恰等于该值时，保持上述五矩、配对及权重符号 $(-,+,-,+)$ 的布局都集中在同一解支。**手工推导与区间计算。** 每对的牛顿斜率各自相消，因此可给正权对和负权对使用不同的斜率系数。令 $d=Dk$、$\ell=Dw$、$h=w-\ell/2$，取 $F_\pm=k-d+\alpha h+\beta\ell+\lambda_\pm d$。若负权绝对质量为 $N$，正权质量就是 $N+1$。以横线表示对内按绝对权重取归一平均，五矩把 $(N+1)\overline{F_+}-N\overline{F_-}$ 固定为 $1+\alpha c$，其中 $c=10^{-122}$。区间界先排除 $t_1\le-15.4$，再将四个节点到相应响应界的加权缺口总和压在 $6\times10^{-10}$ 以下。配对内的斜率相消同时约束两点的权重比例，于是即使权重较轻的节点，也不能远离使缺口最小的区域。 [全域定位的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2245#issuecomment-7241270934)
+在上述五矩下，若正负部各有两个内截止并各自牛顿驻定，则 $T\le1\,030\,993.778$ 强制权重按截止递增排成 $(-,+,-,+)$，并把布局定位到同一解支。**手工推导与区间计算。** 每对的牛顿斜率各自相消，因此可给正权对和负权对使用不同的斜率系数。令 $d=Dk$、$\ell=Dw$、$h=w-\ell/2$，取 $F_\pm=k-d+\alpha h+\beta\ell+\lambda_\pm d$。若负权绝对质量为 $N$，正权质量就是 $N+1$。以横线表示对内按绝对权重取归一平均，五矩把 $(N+1)\overline{F_+}-N\overline{F_-}$ 固定为 $1+\alpha c$，其中 $c=10^{-122}$。每对分居 $d$ 的唯一零点两侧。矩界先把负权早节点限制在 $\log x>-15.4$。若正权早节点落到 $\log x\le-18$，则 $DW=0$ 要求它的搭档位于 $\log x>-10$，此时配对的权重比例又迫使 $W<0$。排除这一端后，四个节点到相应响应界的加权缺口总和小于 $6\times10^{-10}$。配对比例约束各节点的质量，先定位两枚早节点，再定位两枚晚节点，得到上述交错次序。 [全域定位的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2245#issuecomment-7241270934) · [次序判定的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2291#issuecomment-7241661527)
 
-由此，$t_1,t_2$ 落在唯一根盒内，$t_3\in[-5.67,-5.64]$，$t_4\in[-10^{-3},0)$。沿该解支增加 $t_4$ 会严格降低总变差。闭包的边界 $t_4=0$ 上有唯一极小布局，因此这一配对及符号类的全域下确界介于 $1\,030\,993.777$ 与 $1\,030\,993.778$ 之间。所有最小化序列都趋于该布局，合法内点只在 $x_4\to1^-$ 时逼近下确界。其余配对及符号类的最优代价仍开放。 [边界极小值的区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2207#issuecomment-7241039259)
+由此，$t_1,t_2$ 落在唯一根盒内，$t_3\in[-5.67,-5.64]$，$t_4\in[-10^{-3},0)$。沿该解支增加 $t_4$ 会严格降低总变差。闭包的边界 $t_4=0$ 上有唯一极小布局，因此正负部各有两个内截止且各自牛顿驻定这一类的全域下确界介于 $1\,030\,993.777$ 与 $1\,030\,993.778$ 之间。所有最小化序列都趋于该布局，合法内点只在 $x_4\to1^-$ 时逼近下确界。 [边界极小值的区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2207#issuecomment-7241039259)
 
 共同标度的驻定仍允许对单个截止的移动高度敏感。对单独检验截止敏感性的四点算例，移动最敏感的截止，相对移动不到 $8.6\times 10^{-120}$ 曲率就已转负，比上表的通用上界小 $800$ 倍以上，与 $311$ 单态实例同量级，截止之间的比值须精确到约 $120$ 位。$10^{-122}$ 的微调没有减少，只是转移并分摊到截止比值与权重上（[共同标度驻定及其代价](https://github.com/the-omega-institute/trureturing-experiments/blob/f516e0f09642194c1a309ffc0cfd94e129844b15/experiments/ch39-omega-research/replay/%E4%B8%A4%E7%82%B9%E6%88%AA%E6%AD%A2%E5%9C%A8%E5%8C%B9%E9%85%8D%E7%89%9B%E9%A1%BF%E9%A1%B9%E6%97%B6%E4%B8%8D%E8%83%BD%E9%A9%BB%E5%AE%9A%E7%9C%9F%E7%A9%BA%E8%AF%BB%E6%95%B0%E8%80%8C%E5%9B%9B%E7%82%B9%E6%B5%8B%E5%BA%A6%E5%AF%B9%E5%85%B1%E5%90%8C%E6%88%AA%E6%AD%A2%E6%A0%87%E5%BA%A6%E4%B8%80%E9%98%B6%E9%A9%BB%E5%AE%9A.md) · [区间证书](https://github.com/the-omega-institute/trureturing-experiments/blob/f516e0f09642194c1a309ffc0cfd94e129844b15/experiments/ch39-omega-research/replay/ch39-cutoff-scale-stationarity.py)）。
 
@@ -475,9 +475,19 @@ $$
 Z-z_c=\frac{3}{2V}\delta+O(\delta^2).
 $$
 
-边界 $z_c$ 对应的切线恰好再次接触重质量端 $a$。若 $d=Z-z_*$，则 $D_s(a)=B(u,Z)-B(u,Z-d)+I_2(Z-d)(1-e^{-vd})/v$。将余差除以 $I_2(Z)d^2$ 后在 $d=0$ 延拓，得到 $-\delta/2+Vd/3+O(\delta d+d^2)$，其零点给出上式。由于 $\partial_s D_s(a)=(s-a)f''(s)$，重端余差先降后升，只有这一处内点零点。轻端余差 $D_s(1)$ 则先升后降至零，且 $D_a(1)$ 在阈值处严格为正，故略超阈值时所有内点的轻端余差仍为正。
+边界 $z_c$ 对应的切线恰好再次接触重质量端 $a$。若 $d=Z-z_*$，则 $D_s(a)=B(u,Z)-B(u,Z-d)+I_2(Z-d)(1-e^{-vd})/v$。将余差除以 $I_2(Z)d^2$ 后在 $d=0$ 延拓，得到 $-\delta/2+Vd/3+O(\delta d+d^2)$，其零点给出上式。由于 $\partial_s D_s(a)=(s-a)f''(s)$，重端余差先降后升，只有这一处内点零点。轻端余差 $D_s(1)$ 则先升后降至零，且 $D_a(1)$ 在阈值处严格为正，故略超阈值时所有内点的轻端余差仍为正。取 $u=1$、$Z=3$ 时，只要 $0<\delta\le 1/200$，上述识别范围就成立，且 $0<3-z_c<28\delta$。在整个区间内，上述接触层的局部常数也给出所有可识别单层在任意正读数误差下的锐统一平方根界。[手工推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/1689#issuecomment-7242151559)
 
-平方质量 $W_1$ 的最优统一平方根常数随 $\delta\downarrow0$ 按 $\delta^{-1/2}$ 发散。设 $s_c=e^{-vz_c}$。由 $R_u(z_c)-v=\delta/2+O(\delta^2)$ 和 $R_u$ 的单调性，$f''$ 在 $s_c\le x<1$ 上至少为正常数乘 $\delta$。把这个下界代入上面的单侧估计，就得到 $W_1=O(\sqrt{\varepsilon/\delta})$。在 $s_c$ 处把一层等权分到 $s_c\pm h$，热迹保持精确，真空误差的二阶系数为 $f''(s_c)/2$，而 $W_1/h\to1/(vs_c)$。因此 $h\downarrow0$ 时的 $W_1/\sqrt{\varepsilon}$ 趋于 $\sqrt{2/[I_2(z_c)(R_u(z_c)-v)]}$，这一下界与统一上界的增长阶相同。[临界展开与固有时积分复算](https://github.com/the-omega-institute/trureturing-books/issues/1689#issuecomment-7241441212)
+在这一临界邻域内，对所有可识别单层和所有正误差对照概率谱，$W_1/\sqrt{\varepsilon}$ 的上确界为 $K_c$，且每个比值都严格小于 $K_c$。固定接触层 $s_c=e^{-vz_c}$，令 $\omega_{s_c}(\eta)$ 为归一化读数误差满足 $\varepsilon\le\eta$ 时，对照谱到该层的平方质量输运距离 $W_1$ 的上确界。于是
+
+$$
+\begin{aligned}
+K_c&=\lim_{\eta\downarrow0}\frac{\omega_{s_c}(\eta)}{\sqrt{\eta}}\\
+&=\left(\frac{1}{vs_c}+\frac{Z-z_c}{s_c-a}\right)
+\sqrt{\frac{2(1+f'(s_c))}{f''(s_c)}}.
+\end{aligned}
+$$
+
+在 $a$ 和 $s_c+h$ 放置两层，调节权重，使归一化热迹和真空读数相对于参考层的差分别为 $-\varepsilon$ 和 $+\varepsilon$。当 $h\downarrow0$ 时，这些对照谱的比值趋于 $K_c$。热迹偏低时，承载重侧位移的权重会减少轻侧可用的权重。对轻侧位移使用带该权重的 Cauchy–Schwarz 界，就能抵消热迹偏低带来的增量。随着 $\delta\downarrow0$，$K_c=\Theta(\delta^{-1/2})$。 [临界展开](https://github.com/the-omega-institute/trureturing-books/issues/1689#issuecomment-7241441212) · [固定接触层的锐常数](https://github.com/the-omega-institute/trureturing-books/issues/1689#issuecomment-7241652592) · [全误差锐界的手工推导与复算](https://github.com/the-omega-institute/trureturing-books/issues/1689#issuecomment-7241841089)
 
 **固定整数重数的锐界（`ARGUED`）。** 参考谱各质量层有正整数个态，对照谱也允许任意正整数重数。按平方质量递增排列参考谱的正质量层。设其中 $h$ 层有至少两个态，其余是单态层。用这 $h$ 层隔开单态层，得到长度依次为 $\ell_0,\ldots,\ell_h$ 的连续段，允许空段。任意预先选定的互异正逆截止中，确定参考谱所需的读数恰为 $r+1$ 次。参考谱含零质量时取 $\delta=1$，否则取 $\delta=0$。
 
