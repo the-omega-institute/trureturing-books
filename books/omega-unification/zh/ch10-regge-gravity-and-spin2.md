@@ -232,11 +232,13 @@ $$
    <\frac54\sqrt{6144}<97.98 .
 $$
 
-事件 $T<-153.825$ 有正概率，其反射的概率为零，因此该格的已知形状律关于零不对称。对每个奇数 $k\ge25\,000\,001$，还有 $\mathbb E[T^k]<0$，因为仅上述负尾的贡献绝对值就大于 $10^{-39656}(153.825)^k$，超过正侧贡献的上界 $(97.98)^k$。对上文的有限正混合模型，任一正平移开区间上的完整精确平均体积响应由此可确定带符号的耦合 $\beta$，以及每个不同率值对应的合并权重。[全域证明与区间证书](https://github.com/the-omega-institute/trureturing-experiments/blob/7e1ff8cd38daec5d94d481c4f79028935c00e09e/experiments/ch39-omega-research/replay/ch39-regge-global-upper.md)
+事件 $T<-153.825$ 有正概率，其反射的概率为零，因此该格的已知形状律关于零不对称。对上文的有限正混合模型，任一正平移开区间上的完整精确平均体积响应由此可确定带符号的耦合 $\beta$，以及每个不同率值对应的合并权重。[全域证明与区间证书](https://github.com/the-omega-institute/trureturing-experiments/blob/7e1ff8cd38daec5d94d481c4f79028935c00e09e/experiments/ch39-omega-research/replay/ch39-regge-global-upper.md)
 
-首个非零奇矩出现在多低的阶数？记 $a=(5/4)\sqrt{6144}$。对步数为一、二、三、四的边，分别将平方边长取在区间 $[1973,2000],[1917,2000],[674,694],[1953,2000]$ 内，再把所有端点除以 $2000\cdot8.23935$。全部 $3840$ 条边均可独立变化。单形作用量与体积的区间界把整个盒限制在 $V<1$ 且 $T<-136.914$ 的区域内。为估计盒的归一化概率，把全域容许体积写成容许锥上的积分 $Z=(1920!)^{-1}\int e^{-V}dq$。每条边属于十二或二十四个单形，逐边应用 Hölder 不等式，可用十边积分与单边积分的乘积给 $Z$ 作上界。盒体积除以此界便有 $P(T<-136.914)>p=2\cdot10^{-7013}$。每个奇数 $k\ge48261$ 的负尾贡献在绝对值上都超过整个正侧的贡献，因此 $\mathbb E[T^k]<0$。
+首个非零奇矩出现在多低的阶数？记 $a=(5/4)\sqrt{6144}$，取三步边的平方长度为 $0.34650$，其他边为一，允许全部 $3840$ 条边独立扰动 $\pm0.01047$。在此盒心线性化 $S_R+b\sqrt V$，其中 $b=137.59358$。盒心值加上整个盒内的二阶余项上界仍为负，而线性项在中心反射下变号。因此至少半个盒子满足 $T<-b$。统一缩放使全盒满足 $V\le1$。逐平方边长使用 Hölder 不等式包围容许域的体积，得到 $P(T<-b)>5.67\cdot10^{-6795}$。对每个奇数 $k\ge46075$，单是这段负尾的贡献在绝对值上就超过整个正侧的上界 $a^k$，所以 $\mathbb E[T^k]<0$。
 
-取奇数 $d$ 和第一类切比雪夫多项式 $C_d(\cos t)=\cos(dt)$。在 $[-1,1]$ 上它至多为一，在 $x>1$ 上则按 $\cosh(d\operatorname{arcosh}x)$ 增长。由于 $T<a$ 且 $C_d$ 是奇函数，负尾给出 $\mathbb E[C_d(T/a)]<1-p[1+C_d(136.914/a)]$。在 $d=18683$ 处右端已经为负，故 $1$ 至 $18683$ 阶的奇矩中至少一项非零。取对数保留 $M$ 首个非零奇次项的阶数与系数，因此已知形状律时，$\log H(w)$ 至多到这一阶就有能确定带号耦合的系数。一阶矩与三阶矩是否为零仍待确定。仅给出上述全域上界和负尾约束时，切比雪夫极值节点上的插值可构造所有较低奇矩同时为零的绝对连续分布。 [奇矩阶数界与尾部信息的极限](https://github.com/the-omega-institute/trureturing-experiments/blob/ade58d332bb1656ca91d478b34f1089a732a78db/experiments/ch39-omega-research/replay/ch39-regge-first-odd-moment.md)
+若 $C_d(\cos t)=\cos(dt)$ 且 $d$ 为奇数，$C_d$ 在 $[-1,1]$ 上至多为一，在 $x>1$ 上等于 $\cosh(d\operatorname{arcosh}x)$。以 $p$ 表示半盒证书给出的概率下界，便有 $\mathbb E[C_d(T/a)]<1-p[1+C_d(b/a)]$。取 $d=17955$ 时右端为负，因此至多这一阶便有非零奇矩。取对数保留 $M$ 首个非零奇次项的阶数与系数，所以已知形状律时，$\log H(w)$ 至多到这一阶就有能确定带号耦合的系数。一阶矩与三阶矩是否为零仍待确定。对任一奇数 $d$ 满足 $p[1+C_d(b/a)]<1$，切比雪夫极值节点上的插值可构造满足同一尾部约束、且至 $d$ 阶奇矩均为零的绝对连续分布。
+
+负尾也能在有限耦合下区分作用量的两个符号。在同一 $V\le1$ 的归一化测度下取 $Z_\pm(s)=\mathbb E[e^{\pm s S_R}]$。尺度齐次性使 $R=\sqrt V$ 与 $T$ 独立，且 $R$ 在 $[0,1]$ 上的密度为 $3840r^{3839}$。积分这一径向密度可得 $Z_-(s)/Z_+(s)>p(a/b)e^{s(b-a)}$，故在 $s\ge394.946$ 时负耦合的配分函数超过正耦合的两倍。[半盒证书、有限响应与尾部信息界](https://github.com/the-omega-institute/trureturing-experiments/blob/f286ebf96dae257e440bb54f0c407585ef1a8d67/experiments/ch39-omega-research/replay/ch39-regge-first-odd-moment.md)
 
 要计算均值，可以先把总体积积分掉。以 $e^{-V}$ 对允许锥内的平方边长加权并归一化，形状的分布与截在 $V\le1$ 的原分布相同，体积独立服从形状参数 $1920$、速率一的 Gamma 分布。全格的 $6144$ 个单形等价。故只需对一个指定单形的局部曲率贡献 $F_\sigma$ 求加权平均，再乘以 $6144\,\Gamma(1920)/\Gamma(1920+1/2)\approx140.2261$。给定邻居后，该单形的十条平方边长只涉及 $106$ 个单形因子。这些因子另含 $200$ 条边，其联合分布仍由全格确定。在这个加权积分里把所有平方边长截在 $160$ 并重新归一化，对形状均值的误差小于 $10^{-124}$，对三阶矩的误差小于 $10^{-117}$。三阶矩使用总曲率的立方，须保留不同单形之间的相关性。[条件积分、等边背景算例与截断误差](https://github.com/the-omega-institute/trureturing-experiments/blob/ba28a975c44816e0278a7f0ad0cb0abba44ece71/experiments/ch39-omega-research/replay/ch39-regge-local-moment-integral.md)
 :::
@@ -315,7 +317,7 @@ $$
 
 例如取 $k=\ell_0=1$，形状 $1,-2,3$ 的概率依次为 $1/2,2/5,1/10$，平移取 $3,8,15$。此时 $j=4$，$m=5$，$A_5=15\sqrt\pi/32$。向量 $N=(112,-2187,5120)$ 消去速率和四次项，给出 $D(h)/h^5\to15\sqrt\pi/633088$，仅为固定速率下 $+h,-h$ 首项差距的 $8/2473$。[最近负候选、临界噪声与原体积积分复算](https://github.com/the-omega-institute/trureturing-books/issues/1785#issuecomment-7240353917)
 
-对应上面的周期 $4^4$ 格点，已有负尾估计给出 $m\le18683$，故单速率时平移 $1,2,3$ 足以在零点附近辨号。精确指数取决于该格点首个非零奇矩的实际阶数。[手工推导与五阶形状律的积分验算](https://github.com/the-omega-institute/trureturing-books/issues/1785#issuecomment-7240131710)
+对应上面的周期 $4^4$ 格点，已有负尾估计给出 $m\le17955$，故单速率时平移 $1,2,3$ 足以在零点附近辨号。精确指数取决于该格点首个非零奇矩的实际阶数。[手工推导与五阶形状律的积分验算](https://github.com/the-omega-institute/trureturing-books/issues/1785#issuecomment-7240131710)
 
 ::: {.problem #prob-ou-ch10-zero-coupling-sampling title="有限格在零曲率耦合下的局部采样"}
 计算此处形状受限格的相关形状矩，判定零耦合时哪种局部采样门槛适用。
