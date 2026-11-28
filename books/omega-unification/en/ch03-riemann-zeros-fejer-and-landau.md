@@ -168,6 +168,20 @@ The classical Landau formula gives $W_\lambda(T)=O_\lambda(\log T)$ here. An upp
 
 A synthetic spectrum attains the $T/\log T$ scale under these inputs (`ARGUED`). Take $\lambda=1$ and shift the equally spaced ordinates slightly within each $2\pi$ period so that the unweighted phase sum is biased toward the negative real axis. Place each pair at the same ordinate with reflected real parts, choosing displacements of size $O(1/\log T)$ that depend on phase so the weighted sum follows the exact increment of the smooth endpoint term over each period. This spectrum has bounded count remainder, satisfies a Selberg-type density bound, and its weighted sum follows the endpoint term with $O(1)$ error at every height, while $C_1(T)\sim T/(4\pi\log T)$. A sharper bound for the actual zeta zeros requires additional information. [Construction and numerical check](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239117179)
 
+A horizontal integral locates the part of the strip where phase cancellation matters. Write $L=\log T$ and $c=1/2+a$ with $0\le a\le 1/2$. Approximate $J_c(t)=\int_c^\infty\log|\zeta(\sigma+it)|\,d\sigma$ by the prime-power polynomial $P_{x,c}(t)=\operatorname{Re}\sum_{2\le n\le x^3}\Lambda_x(n)n^{-c-it}/(\log n)^2$, where $\Lambda_x$ is Selberg's quadratic cutoff weight. For fixed nonresonant $\lambda$, a direct calculation for large $T$ and $2\le x\le L^{2/3}$ gives the remainder (`ARGUED`).
+
+$$
+\int_3^T e^{i\lambda t}\bigl(J_c(t)-P_{x,c}(t)\bigr)\,dt
+=\frac{2\pi}{\lambda^2}
+  \sum_{\substack{3<\gamma\le T\\ \beta>c}}
+  \bigl(\cosh(\lambda(\beta-c))-1\bigr)e^{i\lambda\gamma}
+  +O_\lambda(L).
+$$
+
+Horizontal integration makes the jump of $\log\zeta$ along the slit to the left of a zero proportional to $\beta-\sigma$. Shifting the contour for each of the two exponential phases and combining them to recover the real part gives the hyperbolic cosine weight. A local logarithmic derivative estimate bounds the horizontal edges by $O_\lambda(L)$. The top edge is taken by a right limit. Nonresonance keeps the modulated integral of the prime-power polynomial within the same bound. [Korolev, cutoff weights before Lemma 4](https://www.mathnet.ru/links/2bb06e5a975dd807fe74eae4c1f9fd1f/im2766_eng.pdf#page=9) · [Contour calculation and numerical check](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239342305)
+
+At $a=0$, reflection at the same ordinate recovers $C_\lambda(T)$ from the zero sum up to normalization and a bounded contribution from the lowest heights. Increasing $a$ replaces the weight of each zero on the right by $\cosh(\lambda(\delta_\rho-a)_+)-1$, where $v_+=\max(v,0)$. Integrating the derivative of that weight against Selberg's density estimate bounds the remainder on the right by $O_\lambda((T/L)e^{-aL/4}+L)$. Setting $a=1/L$ reduces the constant in the density estimate, and a synthetic spectrum can attain order $T/L$ in both the narrow strip and the region farther right. At $a=8\log L/L$, the bound on the right drops to $O_\lambda(T/L^3+L)$. To improve on the $T/L$ scale, it therefore suffices to study the same-frequency integral in the strip $1/2\le\sigma\le1/2+8\log L/L$. [Simonič, equation (3), citing Selberg's density estimate](https://arxiv.org/pdf/1910.08274v2#page=1)
+
 For the actual zeta zeros, retaining the real-part weights recovers the endpoint term on average over heights without using RH. Let $S(t)$ be the argument term in the Riemann–von Mangoldt formula. Away from zero ordinates, $N(t)=1+\vartheta(t)/\pi+S(t)$, with $\vartheta$ the Riemann–Siegel theta function. Subtract the smooth endpoint term from the weighted sum
 
 $$
