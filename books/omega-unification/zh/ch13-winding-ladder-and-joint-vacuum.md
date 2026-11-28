@@ -227,6 +227,19 @@ $$
 
 因此，在只施加牛顿标定的连续滑行线上，$d$ 从零增至无穷时，$x$ 由 $x_+\simeq0.087881452$ 严格降至 $x_-\simeq0.031496220$，两个端点均不取到。每个介于 $V(x_-)$ 与 $V(x_+)$ 之间的精确曲率依次唯一确定 $x,d$ 与 $k=rd^2$。整个开区间的宽度约为无限截止值的 $5.193\times10^{-60}$。 [端点推导与谱区间复算](https://github.com/the-omega-institute/trureturing-books/issues/1671#issuecomment-7236014282)
 
+越靠近这两个端点，曲率读数要多精确才能分辨分母？令 $y=d^{-4}$，把奇荷平方质量写成 $c_i y$，记 $c_*=\min_i c_i>0$、$a_*=\sum_{c_i=c_*}\alpha_i$、$F_-(x)=F_r(x)+128x/(2\pi)$。在上述标定线上取 $v=V(x)$、$v_\pm=V(x_\pm)$。由端点处的牛顿残差可手算得
+
+$$
+\begin{aligned}
+v_+-v &\sim \frac{V'(x_+)a_*x_+^2}{2\pi c_* F_r'(x_+)}
+                \frac{e^{-c_*y/x_+}}{y} && (y\to\infty),\\
+v-v_- &\sim \frac{V'(x_-)\sum_i\alpha_i c_i}{2\pi F_-'(x_-)}
+                 y\log(1/y) && (y\downarrow0).
+\end{aligned}
+$$
+
+在固定的 $x_+$ 处，由 $E_2(u)=\int_1^\infty e^{-ut}t^{-2}\,dt$ 中的换元 $t=1+s/u$ 得 $E_2(u)\sim e^{-u}/u$，故只有最轻的奇荷层贡献首项。在 $x_-$ 处，把 $1-E_2(u)$ 的积分在 $1/u$ 拆开，前段用 $1-e^{-ut}=ut+O((ut)^2)$，尾段至多为 $u$，得 $1-E_2(u)=u\log(1/u)+O(u)$。将两处的标定残差分别除以 $K_x$ 的中值，再乘以 $V'$ 的中值，即得两式。因为 $\partial_x[xE_2(c_i y/x)]=e^{-c_i y/x}$，两端的分母分别趋于 $F_r'(x_+)$ 和 $F_-'(x_-)$。特别地，若无量纲曲率距上端点仅 $\epsilon=v_+-v$，反求的小分母仍有 $d\sim[c_*/(x_+\log(1/\epsilon))]^{1/4}$。任何正幂的误差界 $d=O(\epsilon^\beta)$ 都会在这个端点失效。 [端点推导与独立小谱复算](https://github.com/the-omega-institute/trureturing-books/issues/1671#issuecomment-7239022824)
+
 在原压力测试的局部盒内，$I(0)-I(a/x)\le a/x$ 把有限截止修正限制在主项的 $10^{-57}$ 以内。从 $d=724$ 滑至 $724.19$ 的两次读数之差，以无限截止主项为单位，在 $1.685\times10^{-69}$ 与 $1.687\times10^{-69}$ 之间。[标定区间与截断误差](https://github.com/the-omega-institute/trureturing-experiments/blob/1922a9c010424eadf6b1ec7233be9fcb00911247/experiments/ch39-omega-research/replay/ch39-joint-vacuum-scale-window.py#L38-L68) · [两处标定根与曲率差的区间复算](https://github.com/the-omega-institute/trureturing-books/issues/1671#issuecomment-7235892201)
 
 一个小谱可以把这个微弱效应放大。取 $r=a=1$、$D=4$，四条低层在 $z=0,1,2,3$ 处的牛顿权依次为 $(1/3,2,1,2/3)$，净偏振为 $(-4,12,-12,4)$。再放入一条 $z=d^{-4}$ 的奇荷层，含四个实标量和一个狄拉克费米子，净偏振为零、牛顿权为一。所有牛顿权均为正，由 $\partial_x[xE_2(z/x)]=e^{-z/x}$ 知 $K$ 从零严格升至无穷。将 $d$ 从 $1$ 加倍至 $2$，唯一标定根 $x$ 由 $3.08609$ 降至 $2.67179$，曲率由 $0.16783$ 降至 $0.15821$。一般的重场耦合作用仍需自己的驻定方程。

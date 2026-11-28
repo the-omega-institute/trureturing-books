@@ -227,6 +227,19 @@ On the flagship slice $r=32/724^2$, let $x_-$ be the root where the right-hand f
 
 Along this continuous slice with only the Newton calibration imposed, $x$ decreases strictly from $x_+\simeq0.087881452$ to $x_-\simeq0.031496220$ as $d$ runs from zero to infinity. Both endpoints are limiting values. Every exact curvature strictly between $V(x_-)$ and $V(x_+)$ determines $x$, then $d$ and $k=rd^2$, uniquely. The entire open interval has width about $5.193\times10^{-60}$ times the infinite-cutoff value. [Endpoint derivation and spectral enclosures](https://github.com/the-omega-institute/trureturing-books/issues/1671#issuecomment-7236014282)
 
+How precisely must curvature be measured to resolve the denominator near either endpoint? Write $y=d^{-4}$, so the odd-charge squared masses are $c_i y$, and set $c_*=\min_i c_i>0$, $a_*=\sum_{c_i=c_*}\alpha_i$ and $F_-(x)=F_r(x)+128x/(2\pi)$. Along the calibrated curve write $v=V(x)$ and $v_\pm=V(x_\pm)$. Evaluating the Newton residual at each endpoint gives
+
+$$
+\begin{aligned}
+v_+-v &\sim \frac{V'(x_+)a_*x_+^2}{2\pi c_* F_r'(x_+)}
+                \frac{e^{-c_*y/x_+}}{y} && (y\to\infty),\\
+v-v_- &\sim \frac{V'(x_-)\sum_i\alpha_i c_i}{2\pi F_-'(x_-)}
+                 y\log(1/y) && (y\downarrow0).
+\end{aligned}
+$$
+
+At fixed $x_+$, substituting $t=1+s/u$ in $E_2(u)=\int_1^\infty e^{-ut}t^{-2}\,dt$ gives $E_2(u)\sim e^{-u}/u$. Only the lightest odd-charge layers contribute to the leading term. At $x_-$, split the integral for $1-E_2(u)$ at $1/u$. On the first part use $1-e^{-ut}=ut+O((ut)^2)$. The tail is at most $u$, giving $1-E_2(u)=u\log(1/u)+O(u)$. The mean value theorem converts each calibration residual into a curvature gap by dividing by an intermediate value of $K_x$ and multiplying by one of $V'$. Since $\partial_x[xE_2(c_i y/x)]=e^{-c_i y/x}$, those denominators tend to $F_r'(x_+)$ and $F_-'(x_-)$ respectively. In particular, at dimensionless distance $\epsilon=v_+-v$ from the upper endpoint, the recovered small denominator satisfies $d\sim[c_*/(x_+\log(1/\epsilon))]^{1/4}$. Every positive-power bound $d=O(\epsilon^\beta)$ fails at this endpoint. [Endpoint derivation and independent small-spectrum calculation](https://github.com/the-omega-institute/trureturing-books/issues/1671#issuecomment-7239022824)
+
 In the original stress-test box, $I(0)-I(a/x)\le a/x$ bounds the finite-cutoff correction by $10^{-57}$ of the leading term. For the slide from $d=724$ to $724.19$, the difference between the two readings is between $1.685\times10^{-69}$ and $1.687\times10^{-69}$ times the infinite-cutoff value. [Calibration interval and cutoff error](https://github.com/the-omega-institute/trureturing-experiments/blob/1922a9c010424eadf6b1ec7233be9fcb00911247/experiments/ch39-omega-research/replay/ch39-joint-vacuum-scale-window.py#L38-L68) · [Interval calculation of the two roots and their curvature difference](https://github.com/the-omega-institute/trureturing-books/issues/1671#issuecomment-7235892201)
 
 A small spectrum makes this cutoff dependence visible. Take $r=a=1$ and $D=4$. Give the four low layers at $z=0,1,2,3$ Newton weights $(1/3,2,1,2/3)$ and net polarizations $(-4,12,-12,4)$. Add one odd-charge layer at $z=d^{-4}$ with four real scalars and one Dirac fermion, giving net polarization zero and Newton weight one. All Newton weights are positive, so $\partial_x[xE_2(z/x)]=e^{-z/x}$ makes $K$ increase from zero to infinity. Doubling $d$ from $1$ to $2$ lowers the unique calibrated root $x$ from $3.08609$ to $2.67179$ and the curvature from $0.16783$ to $0.15821$. More general actions coupling the heavy fields require their own stationarity equations.
