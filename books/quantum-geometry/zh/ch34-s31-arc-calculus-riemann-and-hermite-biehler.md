@@ -583,6 +583,24 @@ $$
 
 **它说了什么，没说什么。** [@prop-ch34-nyman-beurling-frozen-facts] 第 4 款是 Nyman–Beurling 判据中“容易的方向”写出了常数。写 $\rho=\beta+i\gamma$，由 $\lvert\rho-1\rvert^2+2\beta-1=\lvert\rho\rvert^2$，下界等于 $(2\beta-1)\lvert1-\rho\rvert^2/\lvert\rho\rvert^4$，小于 $1/\lvert\rho\rvert^2<1/\gamma^2$。由 Platt–Trudgian（见 [@rem-ch34-radial-lock-pair-disks]），离线零点都有 $\lvert\gamma\rvert>3\cdot10^{12}$，所以任何这样的下界都小于 $(3\cdot10^{12})^{-2}<1.12\times10^{-25}$，而 [@ex-ch34-nyman-beurling-numbers] 中的 $d_{300}^2\approx8.0\times10^{-3}$ 比它大 $10^{22}$ 倍以上：有限个 $d_N$ 看不见假想的离线零点。这给出与 Li 曲率的共同圆盘坐标：$z(s)=1-1/s$ 把 $\operatorname{Re}s>1/2$ 映入单位圆盘，且 $z(1-\bar\rho)=1/\overline{z(\rho)}$（手工代数推导）。同一假想离线零点否定 RH，因而所引[典范 Li 曲率正性失败定理](lean:D5/S3/Weil/Probability/CanonicalLiCurvatureZeroFree.not_rh_forces_canonical_curvature_failure) 保证存在某个有限阶 $T_N(c^{\mathrm{Li}})$ 不半正定；它是埃尔米特矩阵，故有负特征值（有限维线性代数的手工推论）。这一步不需要另行假设零点和表示，也没有给出检测阶数。更强的负惯性计数见 [@rem-ch34-li-toeplitz-negative-index]。相反，Nyman 的 $G_N$ 无条件正定，同一离线零点只迫使所有 $d_N^2$ 留在同一正下界 $r^2(1-r^2)$ 以上；其障碍是逼近误差不能趋零。共同坐标没有给出两个有限矩阵之间的恒等式，也不能把有限次成功检验升级为全称结论。J.-F. Burnol（*Adv. Math.* **170**, 56–70, 2002，定理 2.1 与注 2.2）在单位圆上给出了对应的多项式模型：根全在圆上时距离平方按 $\sum m^2/N$ 趋于零，有根在开圆盘内时距离有正的下界；上面的第 4 款是后者在半平面上的对应。
 
+**把有限误差换成有限高度（手工推论）。** 上述数值尺度的局限仍允许一个有限区域证书。固定 $N\ge0$、$0<\delta<\tfrac12$ 与 $T\ge1$。若有严格认证的上界
+
+$$
+d_N^2\le U<\frac{\delta}{1+T^2},
+$$
+
+则不存在满足 $\tfrac12+\delta\le\operatorname{Re}\rho<1$ 且 $1\le\lvert\operatorname{Im}\rho\rvert\le T$ 的非平凡零点。为证此事，设 $\rho=\beta+i\gamma$ 是这样的零点，记 $x=r^2$。由 $\beta<1$ 与 $\gamma^2\ge1$，有 $\beta^2+\gamma^2\le2\gamma^2$，故
+
+$$
+\begin{aligned}
+x&=\frac{(1-\beta)^2+\gamma^2}{\beta^2+\gamma^2}\ge\frac12,\\
+1-x&=\frac{2\beta-1}{\beta^2+\gamma^2}\ge\frac{2\delta}{1+T^2},\\
+d_N^2&\ge x(1-x)\ge\frac{\delta}{1+T^2}>U,
+\end{aligned}
+$$
+
+与上界矛盾。最后一行使用 [@prop-ch34-nyman-beurling-frozen-facts] 第 4 款；上述有限高度组合步骤是手工推论，未另经 Lean 核验。任意 $v\in V_N$ 的严格误差上界 $\lVert\chi-v\rVert^2\le U$ 都足够，因为 $d_N^2\le\lVert\chi-v\rVert^2$，不必求出最优投影。该证书包含 $\operatorname{Re}\rho=\tfrac12+\delta$ 与 $\lvert\operatorname{Im}\rho\rvert=1,T$ 的边界。例如 $\delta=\tfrac14$、$T=2$ 时，门槛为 $U<\tfrac1{20}$；这是条件算例，没有计算出新的 $U$。高度下限 $1$ 用于保证 $x\ge\tfrac12$；固定 $U>0$ 时，条件也只覆盖满足 $T^2<\delta/U-1$ 的高度。逼近临界线或令高度趋于无穷时，门槛趋于零，因而一个有限误差证书本身不推出 RH。
+
 **文献结果，未在本书形式化。** 无条件的下界 $\liminf_N d_N^2\log N\ge\sum_{\operatorname{Re}\rho=1/2}m_\rho^2/\lvert\rho\rvert^2$ 与常数 $2+\gamma-\log4\pi$ 的条件见 [@rem-ch34-arithmetic-pivot-literature] 与 [@rem-ch34-burnol-nbb-mollifier-literature]。结合外部已验证的 [@conj-riemann-hypothesis] 与 Báez-Duarte 判据，如今无条件成立 $d_N\to0$，且上述下界遍历全体非平凡零点给出 $\liminf_N d_N^2\log N\ge\sum_\rho m_\rho^2/\lvert\rho\rvert^2\ge2+\gamma-\log4\pi$（等号取到当且仅当零点全为单零点）。然而 S. Bettin, J. B. Conrey, D. W. Farmer（*Proc. Steklov Inst. Math.* **280**, 30–36, 2013，DOI [10.1134/S0081543813030036](https://doi.org/10.1134/S0081543813030036)，定理 1）用以给出上界渐近 $(2+\gamma-\log4\pi)/\log N$ 的第二条假设——存在 $\delta>0$ 使 $\sum_{\lvert\operatorname{Im}\rho\rvert\le T}\lvert\zeta'(\rho)\rvert^{-2}\ll T^{3/2-\delta}$（预设零点全为单零点）——并不由黎曼猜想推出，因此精确渐近律 $d_N^2\sim(2+\gamma-\log4\pi)/\log N$ 与单零点猜想依然保持开放（`OPEN`）。
 :::
 
