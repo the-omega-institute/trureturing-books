@@ -347,6 +347,19 @@ $$
 
 正余量容许轻块法线转过 $O(\varepsilon^{3/2})$，上型轻块的收益包含线性项与二次项。余量为负时，法线转过 $O(\varepsilon^2)$ 即可削弱下型在该方向的耦合，减少被迫分给上型的平面转角。余量的符号分界在 $q-|S|^2-\mu^2=-2v\mu^2\varepsilon+O(\varepsilon^2)$。[全复基上下界与矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/2051#issuecomment-7239397935)
 
+若余量和上型对角差都缩至二阶，四阶公式中的收益便退居更高阶。沿用下型转动的约定 $R_{01}(\mu\varepsilon)=\sin(\mu\varepsilon)$，取 $C,S$ 为轻块的上三角元，令 $a=\kappa\varepsilon$、$p-p_2=\lambda\varepsilon^2$，其中 $\kappa,\lambda$ 有界。法线的复偏转 $\varepsilon^2 Z$ 与平面分角同受下型成本约束。补偿下型余量所需的平面分角为 $O(\varepsilon^3)$，其平方代价与上型轻块收益在同一阶相争。令 $R_Z=\operatorname{Re}(C\bar Z)$，则在上述参数界内一致有
+
+$$
+\begin{aligned}
+f(Z)&=\left(\frac{|Z|^2-2\mu\operatorname{Re}(S\bar Z)-\kappa}{2\mu}\right)_+^2
+      +2\lambda R_Z-4R_Z^2,\\
+D_{\mathrm{plane}}-D_*&=\frac{\sqrt6\,\varepsilon^5}{2\sqrt q}
+   \left(f(0)-\min_{Z\in\mathbb C}f(Z)\right)+O(\varepsilon^6).
+\end{aligned}
+$$
+
+五阶系数恰在 $\kappa\le-8\mu^2q$ 且 $\lambda C=-\kappa S/(2\mu)$ 时消失。后一个条件平衡两部门的线性变化，前一个条件控制偏转的二次代价。在阈值 $\kappa=-8\mu^2q$ 且线性项平衡时，零偏转与 $Z=2\mu S$ 同时使 $f$ 最小。[全复基的双向估计、取等条件与矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/2095#issuecomment-7239878715)
+
 若固定夹角与两套质量基，只让次重质量平方趋于零，最小破缺又以什么速度趋近锐界 $F$？记 $D_*$ 为这对矩阵在全部轮换本征基上的最小破缺。令两套归一次重质量平方分别为 $a\varepsilon,b\varepsilon$，其中 $a,b>0$，并固定 $0<\theta<\pi/2$。记 $\lambda_u=|V_{ub}|^2/\sin^2\theta$、$\lambda_d=|V_{td}|^2/\sin^2\theta$，它们分别是上、下型最轻质量线在顶底平面内的投影长度平方。手工推导给出
 
 $$

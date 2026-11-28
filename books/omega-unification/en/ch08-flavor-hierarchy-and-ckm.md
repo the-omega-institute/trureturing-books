@@ -348,6 +348,19 @@ $$
 
 Positive slack allows a normal tilt of order $O(\varepsilon^{3/2})$, with both linear and quadratic gains in the up-type light block. When the slack is negative, a tilt of order $O(\varepsilon^2)$ weakens the down-type coupling in that direction and reduces the in-plane offset forced on the up sector. The slack changes sign at $q-|S|^2-\mu^2=-2v\mu^2\varepsilon+O(\varepsilon^2)$. [Matching bounds over complex bases and matrix calculation](https://github.com/the-omega-institute/trureturing-books/issues/2051#issuecomment-7239397935)
 
+When both the slack and the up-type diagonal difference shrink to second order, the gain moves beyond the fourth-order formula. Use the down-type rotation convention $R_{01}(\mu\varepsilon)=\sin(\mu\varepsilon)$ and take $C,S$ to be upper-triangular entries. Set $a=\kappa\varepsilon$ and $p-p_2=\lambda\varepsilon^2$ with bounded $\kappa,\lambda$. The down-type cost constrains the complex normal tilt $\varepsilon^2 Z$ and the in-plane rotation together. The in-plane angle needed to compensate the slack is $O(\varepsilon^3)$, and its squared cost competes with the gain in the up-type light block. Write $R_Z=\operatorname{Re}(C\bar Z)$. The expansion holds uniformly under the stated parameter bounds.
+
+$$
+\begin{aligned}
+f(Z)&=\left(\frac{|Z|^2-2\mu\operatorname{Re}(S\bar Z)-\kappa}{2\mu}\right)_+^2
+      +2\lambda R_Z-4R_Z^2,\\
+D_{\mathrm{plane}}-D_*&=\frac{\sqrt6\,\varepsilon^5}{2\sqrt q}
+   \left(f(0)-\min_{Z\in\mathbb C}f(Z)\right)+O(\varepsilon^6).
+\end{aligned}
+$$
+
+The fifth-order coefficient vanishes exactly when $\kappa\le-8\mu^2q$ and $\lambda C=-\kappa S/(2\mu)$. The latter condition balances the linear variations in the two sectors, while the former controls the quadratic cost of tilting. At the threshold $\kappa=-8\mu^2q$ with the linear variations balanced, both zero tilt and $Z=2\mu S$ minimize $f$. [Matching bounds over complex bases, equality conditions, and matrix calculation](https://github.com/the-omega-institute/trureturing-books/issues/2095#issuecomment-7239878715)
+
 When the angle and the two mass bases stay fixed, how quickly does the minimum defect approach $F$ as the middle mass-squared eigenvalues tend to zero? Let $D_*$ be the minimum defect of the fixed pair over all rotation eigenbases. Set the two normalized middle mass-squared eigenvalues to $a\varepsilon,b\varepsilon$, with $a,b>0$, and fix $0<\theta<\pi/2$. Write $\lambda_u=|V_{ub}|^2/\sin^2\theta$ and $\lambda_d=|V_{td}|^2/\sin^2\theta$ for the squared projection lengths of the lightest up- and down-type mass lines onto the top–bottom plane. A direct derivation gives
 
 $$
