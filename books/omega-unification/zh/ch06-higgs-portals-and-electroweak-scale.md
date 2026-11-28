@@ -149,6 +149,23 @@ $$
 
 在共振处，唯一可能的交换是标签 $c$ 的单支与标签 $a,b$ 的两支互换。若有公共分支，可先消去，此时余下两个标签的平方和能区分所有子集。若发生交换且没有公共分支，平方和恒等式迫使被交换的三支具有相同的零点和极点。两支中若仅有一支过零，该点的增量便给出一条公共分支。因此三者的零点相同。由于极点首项为实，单支的极点集是另两支极点集的并；各支极点数等于零点数，故极点集也相同。被交换的三支遂为 $(c,a,b)L(s)$。从各绕圈增量消去它们，余下三支便为 $(a,b,c)R(s)$，其中 $L(0)=R(0)=1$。两势之差为 $K(R^2-L^2)$，其中 $K=a^2\log(a/c)+b^2\log(b/c)<0$。固定反项后两势相等，迫使 $R=L$。反项的重要性可由 $F_\pm=\pm\operatorname{diag}(a,b,-c)$ 看出。在共振质量上，这两组门户给出的 $B$ 相同，势只相差线性项 $4Ks$。 [三层门户的反演推导与精确算例](https://github.com/the-omega-institute/trureturing-experiments/blob/9ddf0a6ce4d99d35d267b8070d9785dfbe2f180e/experiments/ch39-omega-research/replay/ch39-three-mass-hermitian-portal.md)
 
+**四层混合门户的相位。** 即使给出每个常背景下的全部质量本征值，再给出零背景处所有欧氏动量的二点响应，四层间的相对相位仍可有两解。取四个量子数相同的复标量，质量平方矩阵为 $D=\operatorname{diag}(1,2,3,4)$，令 $\sigma=\pm1$，选择门户
+
+$$
+F_\sigma=\begin{pmatrix}5&\sigma i&1&1\\-\sigma i&6&1&1\\1&1&7&i\\1&1&-i&8\end{pmatrix}.
+$$
+
+两个厄米矩阵均严格对角占优且正定，每条边都有非零耦合。沿四边形一周的乘积 $F_{12}F_{23}F_{34}F_{41}=-\sigma$ 是实数，在质量基重相位与整体复共轭下均保持。因此两解描述不同的门户。将质量层按 $\{1,2\}$ 与 $\{3,4\}$ 分块，跨块的四个耦合均为 $1$，构成秩一矩阵。记 $x_j=\lambda-D_{jj}-sF_{jj}$，沿此分块取舒尔补，得到相同的常背景特征多项式
+
+$$
+\det(\lambda I-D-sF_\sigma)
+=(x_1x_2-s^2)(x_3x_4-s^2)-s^2(x_1+x_2)(x_3+x_4).
+$$
+
+零背景的对角传播子使每个二点泡的门户因子成为 $|F_{ij}|^2$。三次插入的 CP 偶部分读取 $\operatorname{Re}(F_{ij}F_{jk}F_{ki})$，而每个不同下标的三角形恰含一条纯虚边，重复下标的项仅用到对角元与边的模。这两类读数均相同。质量加权的四阶统计量 $\operatorname{Tr}([D,F_\sigma]^4)$ 对 $\sigma=+1,-1$ 分别取 $848,736$。
+
+在具有标准动能的一圈欧氏连续标量模型中，四次分点插入本身也能区分这对门户。沿直线将源放在 $L(0,1,3,7)$，对 $\operatorname{Tr}\log(-\partial^2+D+s(x)F)$ 取四次导数。每个回路按四条边上相应质量的传播子乘积加权。重复质量下标的项在两模型之差中抵消。在其余项中，质量越大，长距离传播衰减越快。把最大质量放在最短边上，依次匹配，就得到各回路的最慢衰减项。三个无向回路中，唯一最慢项沿 $(0,1,3,7)$ 绕行，四条边的质量下标依次是 $(4,3,2,1)$，给出环积 $-\sigma$，反向绕行同号。因此只要 $L$ 充分大，两组四源响应就不同。该读数要求能在四个位置分别施加源。 [四源响应的推导](https://github.com/the-omega-institute/trureturing-experiments/blob/c9a320cd343a00bb53d3f3f4fd4e06bd2dfe5426/experiments/ch39-omega-research/replay/ch39-four-mass-portal-cut.md) · [矩阵与回路的精确核验](https://github.com/the-omega-institute/trureturing-experiments/blob/c9a320cd343a00bb53d3f3f4fd4e06bd2dfe5426/experiments/ch39-omega-research/replay/ch39-four-mass-portal-cut.py)
+
 在检验 $8\pi I \pm \mathcal{A} \succ 0$ 是否正定、或从全图刚度矩阵中消去高势外层顶点自由度时，反复出现的决定性工具是复分块厄米矩阵的舒尔补极小值定理，它已在 Lean 4 内核中严格冻结：
 
 ::: {.theorem #thm-ou-ch06-schur-minimum title="分块舒尔补二次型是内部变量的精确最小值" lean="D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"}
