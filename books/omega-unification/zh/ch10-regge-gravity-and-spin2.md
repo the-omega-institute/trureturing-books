@@ -281,6 +281,8 @@ $$
 
 这个配方在有界体积区间内成立，大体积尾部由拉普拉斯指数矩控制。Rolle 定理将体积上的正性传给六点行列式，再用零耦合的平方 Cauchy 行列式逐行估计噪声。由此得到的常数不依赖两组速率的间距，也涵盖速率任意靠拢和权重趋零。 [完整推导与精确有理复算](https://github.com/the-omega-institute/trureturing-books/issues/2020#issuecomment-7239600699)
 
+若一组模型的参照耦合为零，另一组满足 $0\le\beta\le10^{-3}$，两组各至多三个原子的支撑仍可独立选取。此时可将六点界中的误差常数进一步收紧为 $47\,000\,000$。零耦合参照下的 Wronskian 可直接用速率差的平方项控制曲率交叉项，再用辅助 Newton 列及各读数的余子式给出常数。[单侧界的完整推导与有理复算](https://github.com/the-omega-institute/trureturing-books/issues/2020#issuecomment-7239468603)
+
 物理耦合满足 $\lvert\beta-\beta'\rvert^3\le 4\lvert u-u'\rvert$。若每个读数的误差至多为 $\varepsilon$，任何误差预算内的拟合与真实模型的读数相距至多 $2\varepsilon$。因此 $u$ 与 $\beta$ 的最坏误差分别为 $O(\varepsilon)$ 与 $O(\varepsilon^{1/3})$，且两阶都是锐的。固定一个容许的补偿速率，比较 $\beta=\pm h$。读数差按 $h^3$ 缩小，而带号立方坐标与物理耦合的差分别为 $2h^3$ 与 $2h$，故允许达到读数差一半的噪声时，两组都能给出相同的观测。[有限差商推导与有理区间复算](https://github.com/the-omega-institute/trureturing-books/issues/1906#issuecomment-7238707033)
 
 若首项为偶次 $j$，而首个奇次 $m>j$，固定 $2r-1$ 个读数以消去混合参数后，一个剩余读数在零点折返。再加一个一般读数就能分开两支，因为未归一化权重的两个对数变分方向 $v^{j/2}$ 与 $v^{m/2}$ 在混合切向空间和常数之外仍线性独立。因此一般的 $2r+1$ 个读数足够。对刚得到的格点形状律，某个有限阶的奇次系数必非零。其首现阶数与形状均值决定适用哪一种局部情形。[高阶分支推导](https://github.com/the-omega-institute/trureturing-books/issues/1611#issuecomment-7230292091) · [精确三点算例](https://github.com/the-omega-institute/trureturing-books/issues/1611#issuecomment-7230342324)
