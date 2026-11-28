@@ -116,7 +116,68 @@ $$
 这里使用的是同一中心的连续倒数幂（即预解式对 $z$ 求导所得的归一化射流），不是任意采样列表，也不是仅给出 [第十二章](ch12-shared-arithmetic-clock.md#sec-ch12) 若干标量钟读数就已知这些向量或整个 Gram 矩阵。可逆性没有给出统一的误差放大界，更没有控制无限谱尾项。独立 RH 谱路线仍需从算术或几何构造正性并识别完整零点谱；有限个窗口的检查不能代替对所有 $T$ 的控制。
 :::
 
-带着有限维可恢复性与独立正性之间的这一区别，再读下表，各层证据各自承担的责任便清楚了。
+有限维可恢复性还留下一个观测问题：检出某个负方向，是否必须先准确重构指定的负方向？两点模型把这两种误差要求分开。
+
+::: {.example #ex-ou-appb-optimal-negative-detection title="检测负方向与检验指定见证的精度分界"}
+以下是完整的手工推导（`ARGUED`）。取精确节点 $1,u=1+h$，其中 $h>0$，固定读数尺度为
+
+$$
+\begin{aligned}
+A_h&=\begin{pmatrix}1&u^{-1}\\1&u^{-2}\end{pmatrix},
+&J_0&=\operatorname{diag}(1,-1),\\
+K_h&=A_hJ_0A_h^*=\begin{pmatrix}a&b\\b&d\end{pmatrix},\\
+a&=1-u^{-2},\quad b=1-u^{-3},\quad d=1-u^{-4}.
+\end{aligned}
+$$
+
+三项 $a,b,d$ 均正。置 $\tau=a+d$、$\delta=h/u^2$，直接展开得 $\det K_h=-\delta^2$。解特征方程 $\lambda^2-\tau\lambda-\delta^2=0$，得唯一负特征值 $-\gamma_h$，其中
+
+$$
+\gamma_h=\frac{\sqrt{\tau^2+4\delta^2}-\tau}{2}>0.
+$$
+
+若 Hermitian 误差 $E$ 满足欧氏算子范数 $\|E\|_{2\to2}<\gamma_h$，取负特征值的单位特征向量 $v$，即有 $v^*(K_h+E)v\le-\gamma_h+\|E\|_{2\to2}<0$。在边界取 $E=\gamma_hvv^*$，则 $K_h+E$ 正半定，故这一范数下的严格阈值为 $\gamma_h$。
+
+实际逐项认证 $|E_{ij}|\le\eta$ 时，也能求出整个矩阵保有负方向的锐阈值。对 $\eta\ge0$，置
+
+$$
+\begin{aligned}
+D&=a+d+2b,\\
+\eta_*&=\frac{\delta^2}{D}
+=\frac{h}{(2u+1)(2u^2+u+1)},\\
+t&=\frac{b+d}{D},\qquad w=(t,-(1-t)).
+\end{aligned}
+$$
+
+因 $0<t<1$，有 $\|w\|_1=1$。二次型配方给出
+
+$$
+a s^2-2b s(1-s)+d(1-s)^2
+=D(s-t)^2-\eta_*.
+$$
+
+因此 $w^*K_hw=-\eta_*$，而 $|w^*Ew|\le\eta\|w\|_1^2=\eta$；只要 $\eta<\eta_*$，每个允许的 Hermitian 扰动都仍有严格负方向。反过来，取
+
+$$
+E_*=\eta_*\begin{pmatrix}1&-1\\-1&1\end{pmatrix}.
+$$
+
+矩阵 $K_h+E_*$ 的对角元均正，且行列式为 $-\delta^2+\eta_*D=0$，所以它正半定。这个误差对每个 $\eta\ge\eta_*$ 都合法，证明上述严格阈值对整个负方向检测问题是锐的。
+
+比较指定源方向的见证 $c_h=(u^2/h)(1,-1)$：它满足 $A_h^*c_h=(0,1)$ 与 $c_h^*K_hc_h=-1$。由 $|c_h^*Ec_h|\le\eta\|c_h\|_1^2$，其逐项误差保证的严格阈值为 $\eta_{\mathrm{fixed}}=h^2/(4u^4)$；取同形误差 $E=\eta_{\mathrm{fixed}}\begin{pmatrix}1&-1\\-1&1\end{pmatrix}$ 即使该见证变为零。两种检测保证的差别在节点靠拢时尤为清楚：
+
+$$
+\begin{aligned}
+\lim_{h\to0^+}\frac{\gamma_h}{h}&=\sqrt{10}-3,\\
+\lim_{h\to0^+}\frac{\eta_*}{h}&=\frac1{12},\\
+\lim_{h\to0^+}\frac{\eta_{\mathrm{fixed}}}{h^2}&=\frac14.
+\end{aligned}
+$$
+
+由 $\tau/h=(u+1)(2u^2+1)/u^4\to6$、$\delta/h=1/u^2\to1$ 及显式阈值即得这些极限。检出某个负方向可容许线性尺度的误差，指定重构见证却只容许平方尺度；两种容差都随 $h\to0^+$ 消失。这些结论假定整个 Gram 读数的误差已获认证，不涵盖节点误差、无限谱尾项或仅有若干标量钟读数的情形。节点与矩阵是代数模型，不指定实际零点，也不提供独立的 RH 正性构造。
+:::
+
+带着有限维恢复、误差下检测与独立正性之间的这些区别，再读下表，各层证据各自承担的责任便清楚了。
 
 | 证据层级与徽章 | 验证机制与数据来源 | 逻辑边界与公理责任 | 全书代表内容与交叉入口 |
 | :--- | :--- | :--- | :--- |
