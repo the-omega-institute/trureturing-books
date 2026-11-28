@@ -452,6 +452,16 @@ $$
 
 An equal-weight split of an interior layer still gives the sharp exponent $1/2$. If the tangent also touches an endpoint $e$, put weight $h/(|e-s|+h)$ at $e$ and the remaining weight at $s+\sigma h$. This preserves the heat trace exactly. The endpoint contributes zero tangent gap, so the vacuum error is quadratic in $h$, and the squared-mass distance is of order $h$. Even the weight at the far endpoint can therefore be of order $\sqrt{\varepsilon}$. [Hand derivation and interval check for endpoint contact](https://github.com/the-omega-institute/trureturing-books/issues/1689#issuecomment-7241164027)
 
+Just above the threshold, a band of interior layers next to the heavy endpoint loses identifiability. The endpoint itself is still identified by the mean. Fix $u,Z$ and let $v_0=R_u(Z)$, $\delta=v-v_0>0$, and $V=-R'_u(Z)>0$, the proper-time variance at squared mass $Z$. For sufficiently small $\delta$, the identifiable layers are exactly $[0,z_c]\cup\{Z\}$, where
+
+$$
+Z-z_c=\frac{3}{2V}\delta+O(\delta^2).
+$$
+
+At the boundary $z_c$, the tangent also touches the heavy endpoint $a$. For $d=Z-z_*$, the gap there is $D_s(a)=B(u,Z)-B(u,Z-d)+I_2(Z-d)(1-e^{-vd})/v$. Dividing by $I_2(Z)d^2$ and extending to $d=0$ gives $-\delta/2+Vd/3+O(\delta d+d^2)$. Its zero gives the stated expansion. Since $\partial_s D_s(a)=(s-a)f''(s)$, the heavy-end gap first falls and then rises, with this single interior zero. The light-end gap $D_s(1)$ first rises and then falls to zero. At the threshold $D_a(1)$ is strictly positive, so just above it the light-end gap is still positive for every interior reference.
+
+The best uniform square-root constant for $W_1$ in squared mass grows as $\delta^{-1/2}$ up to constant factors. Write $s_c=e^{-vz_c}$. Since $R_u(z_c)-v=\delta/2+O(\delta^2)$ and $R_u$ decreases, $f''$ is bounded below by a positive constant times $\delta$ for $s_c\le x<1$. The one-sided estimate above gives $W_1=O(\sqrt{\varepsilon/\delta})$. Splitting the reference at $s_c$ equally between $s_c\pm h$ keeps the heat trace exact. The vacuum error has quadratic coefficient $f''(s_c)/2$, and $W_1/h\to1/(vs_c)$. Thus as $h\downarrow0$, $W_1/\sqrt{\varepsilon}$ tends to $\sqrt{2/[I_2(z_c)(R_u(z_c)-v)]}$. This lower bound has the same growth order as the uniform upper bound. [Threshold expansion and proper-time integral check](https://github.com/the-omega-institute/trureturing-books/issues/1689#issuecomment-7241441212)
+
 **Sharp bound for fixed integer multiplicities (`ARGUED`).** The reference and comparison spectra may have any positive integer multiplicities. Order the positive reference masses. Let $h$ of these levels have at least two states. They divide the single-state levels into runs of lengths $\ell_0,\ldots,\ell_h$, allowing empty runs. The exact number of readings needed to identify the reference at any prescribed distinct positive inverse cutoffs is $r+1$. Set $\delta=1$ when the reference has a massless level and $\delta=0$ otherwise.
 
 $$
