@@ -221,7 +221,7 @@ $$
 
 将纵坐标按单位高度分组，设第 $j$ 组的质量 $B_j$ 为该组内各零点的 $\delta_\rho^2$ 之和。每组有 $O(\log U)$ 枚零点，Selberg 密度界经分层积分给出 $\sum_{\gamma\le U}\delta_\rho^4\ll U/(\log U)^3$，故 $\sum_j B_j^2\ll U/(\log U)^2$。对组内的相位小数部分和双曲余弦权作幂级数展开，得到一族以组号为整数频率的 Fourier 多项式，各项的系数至多为 $B_j$ 乘可求和的因子。Carleson–Hunt 最大不等式控制所有完整分组的部分和，含截断高度的最后一组由自身质量控制，纳入等于上端点的纵坐标。[Simonič，式 (1)、(3)](https://arxiv.org/pdf/1910.08274v2#page=1) · [Oberlin 等，定理 1.1](https://arxiv.org/pdf/0910.1555#page=2) · [推导与复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239462563)
 
-因此，在 $I$ 中存在某个 $T\le U$ 使差项的模超过 $A>0$ 的频率集合，测度至多为 $O_I(U/(A^2(\log U)^2))$。对二进高度应用 Borel–Cantelli 引理，就有 $C_\lambda(T)=O_{\lambda,\varepsilon}(\sqrt T/(\log T)^{1/2-\varepsilon})$，其中 $\varepsilon>0$ 任取，结论对几乎处处的 $\lambda$ 沿所有实数高度成立。球壳的指定模态构成可数集，仍需逐频率的算术估计。下一节的碰撞估计还需要在随高度增长的频带内控制零点和。
+因此，在 $I$ 中存在某个 $T\le U$ 使差项的模超过 $A>0$ 的频率集合，测度至多为 $O_I(U/(A^2(\log U)^2))$。对二进高度应用 Borel–Cantelli 引理，就有 $C_\lambda(T)=O_{\lambda,\varepsilon}(\sqrt T/(\log T)^{1/2-\varepsilon})$，其中 $\varepsilon>0$ 任取，结论对几乎处处的 $\lambda$ 沿所有实数高度成立。球壳的指定模态构成可数集，仍需逐频率的算术估计。
 
 固定频率目标的相位边界可在同一合成谱上精确看见。取 $\gamma_k=2\pi k$、$m_k=\lfloor\log(2\pi k)\rfloor$、$\delta_k=2/\log(2\pi k)$，并在每个 $\gamma_k$ 放置 $m_k$ 重的镜像零点。令 $u=1/\log T$ 且 $T=2\pi N$，则 $\delta_k>u$ 对所有 $\gamma_k\le T$ 成立，从而
 
@@ -237,6 +237,18 @@ D_\lambda(u,T)=\sum_{k=16}^{N}\lfloor\log(2\pi k)\rfloor
 $$
 
 这个模型每个单位高度仍只有 $O(\log T)$ 个零点。并且 $\mathbf 1_{\{\delta_k>v\}}\le e^{1/2}(2\pi k)^{-v/4}$，在 $0\le v\le1/2$ 内偏轴计数为 $O(T^{1-v/4}\log T)$，保留了本节使用的 Selberg 型密度阶数。由此可见，计数、镜像和密度输入同时允许非整数频率的对数级相位和与整数频率的 $T\log T$ 共振，不能单独推出指定频率的 $O_\lambda(T)$。实际 $\zeta$ 的 $\lambda=\log X$（$\Lambda(X)=0$）仍需额外的纵坐标算术相位信息。[相位边界的推导与复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239588238)
+
+在固定频率上，平滑权重可以抵消锐阈值所保留的相位。写 $D_\lambda(u,T)=\sum_{0<\gamma\le T,\ \beta>1/2+u}e^{i\lambda\gamma}$。上述格点显示了共振如何产生。即使进一步要求 $W_\lambda(T)$ 和 $S_\lambda(T)$ 都以 $O_\lambda(1)$ 误差跟随同一个光滑端点首项，锐阈值仍可保留 $T\log T$ 量级的相位和。
+
+对任意固定 $\lambda>0$，另构造一组镜像谱（手工推导，`ARGUED`）。在每个长 $2\pi/\lambda$ 的周期内，以等距网格上的四枚为一组，按黎曼—冯·曼戈尔特光滑主项分配总数。将相位落在 $(0,\pi/2]$ 的每个网格点的一对零点赋予偏移 $\pm b$，在其反相点放两对偏移 $\pm a$。选取 $a,b$ 使 $\cosh(\lambda b)-1=2(\cosh(\lambda a)-1)$，于是每个反相配置对 $C_\lambda$ 的贡献精确抵消。各周期只微调右端点的一枚临界线上零点，便可给无权和补足光滑首项的周期增量。计数的余项为 $O_\lambda(1)$，偏轴密度仍满足上述 Selberg 型界，且 $C_\lambda(T)=O_\lambda(1/\log T)$。
+
+若 $t_+$ 是周期右端，取 $b=6/(5\log t_+)$，则在充分高的周期内 $a<0.9/\log t_+$。取 $u=1/\log T$ 时，所有完整周期的较大偏移均入选，较小偏移只可能从 $t_+<T^{0.9}$ 的周期入选。第一象限的网格相位和于是留下
+
+$$
+D_\lambda(1/\log T,T)=\frac{1+i}{16\pi^2}\,T\log T+O_\lambda(T).
+$$
+
+实际 $\zeta$ 的逐频率权重差可以直接研究其平滑体积分，而锐阈值界还需要控制相位与偏移大小的关联。下一节的碰撞估计则需要在随高度增长的频带内控制零点和。[反相构造、端点推导与复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240037839)
 
 ## 3.3 周期相位亏损、兰道窗转移与高斯碰撞极限 $1/\sqrt{\pi}$ {#sec-ou-3-3}
 

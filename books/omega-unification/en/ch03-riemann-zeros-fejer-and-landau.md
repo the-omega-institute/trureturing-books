@@ -221,7 +221,7 @@ $$
 
 Group the ordinates into unit intervals and let $B_j$ be the sum of $\delta_\rho^2$ in group $j$. Each group contains $O(\log U)$ zeros. Integrating Selberg's density estimate gives $\sum_{\gamma\le U}\delta_\rho^4\ll U/(\log U)^3$, so $\sum_j B_j^2\ll U/(\log U)^2$. Expanding the phase within each group and the hyperbolic cosine weight in power series gives Fourier polynomials with the group index as the integer frequency and coefficients bounded by $B_j$ times summable factors. The Carleson–Hunt maximal inequality bounds all partial sums over complete groups. The group containing the cutoff is bounded by its own mass and includes any ordinates at the upper endpoint. [Simonič, Eqs. (1) and (3)](https://arxiv.org/pdf/1910.08274v2#page=1) · [Oberlin et al., Theorem 1.1](https://arxiv.org/pdf/0910.1555#page=2) · [Derivation and numerical check](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239462563)
 
-The frequencies in $I$ for which the modulus of the correction exceeds $A>0$ at some $T\le U$ therefore form a set of measure $O_I(U/(A^2(\log U)^2))$. Applying Borel–Cantelli at dyadic heights gives $C_\lambda(T)=O_{\lambda,\varepsilon}(\sqrt T/(\log T)^{1/2-\varepsilon})$ for each $\varepsilon>0$ and almost every $\lambda$, along all real heights. The prescribed shell modes form a countable set and still require estimates at individual frequencies. The collision estimate in the next section also needs control across a frequency band that grows with height.
+The frequencies in $I$ for which the modulus of the correction exceeds $A>0$ at some $T\le U$ therefore form a set of measure $O_I(U/(A^2(\log U)^2))$. Applying Borel–Cantelli at dyadic heights gives $C_\lambda(T)=O_{\lambda,\varepsilon}(\sqrt T/(\log T)^{1/2-\varepsilon})$ for each $\varepsilon>0$ and almost every $\lambda$, along all real heights. The prescribed shell modes form a countable set and still require estimates at individual frequencies.
 
 The phase boundary for a fixed-frequency estimate is explicit in the same synthetic spectrum. Take $\gamma_k=2\pi k$, $m_k=\lfloor\log(2\pi k)\rfloor$, and $\delta_k=2/\log(2\pi k)$, with $m_k$ reflected zeros at each ordinate. Set $u=1/\log T$ and $T=2\pi N$. Every $\gamma_k\le T$ then has $\delta_k>u$, so
 
@@ -237,6 +237,18 @@ D_\lambda(u,T)=\sum_{k=16}^{N}\lfloor\log(2\pi k)\rfloor
 $$
 
 The model still has only $O(\log T)$ zeros in each unit-height interval. Moreover, $\mathbf 1_{\{\delta_k>v\}}\le e^{1/2}(2\pi k)^{-v/4}$, so for $0\le v\le1/2$ its off-line count is $O(T^{1-v/4}\log T)$ and has the Selberg-type density order used above. Thus the counting, reflection, and density inputs permit both logarithmic phase sums at noninteger frequencies and $T\log T$ resonance at integer frequencies. They cannot by themselves imply the prescribed-frequency bound $O_\lambda(T)$. For the actual zeta problem with $\lambda=\log X$ and $\Lambda(X)=0$, additional arithmetic information on the ordinates is still required. [Phase boundary derivation and computation](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239588238)
+
+At a fixed frequency, smooth weights can cancel phases that a sharp threshold retains. Write $D_\lambda(u,T)=\sum_{0<\gamma\le T,\ \beta>1/2+u}e^{i\lambda\gamma}$. The lattice above shows how resonance occurs. The sharp threshold can still retain a phase sum of order $T\log T$ even when $W_\lambda(T)$ and $S_\lambda(T)$ both follow the same smooth endpoint term to within $O_\lambda(1)$.
+
+For any fixed $\lambda>0$, construct a second reflected spectrum (hand derivation, `ARGUED`). In each period of length $2\pi/\lambda$, distribute zeros in groups of four on an equally spaced grid, using the smooth Riemann–von Mangoldt main term to set the count. At each grid point with phase in $(0,\pi/2]$, assign one pair the offsets $\pm b$. At its opposite phase, assign two pairs the offsets $\pm a$. Choose $a,b$ so that $\cosh(\lambda b)-1=2(\cosh(\lambda a)-1)$. The two groups then cancel exactly in $C_\lambda$. Moving one critical-line zero slightly to the left of each period's right endpoint supplies the smooth endpoint increment for the unweighted sum. The counting error is $O_\lambda(1)$, the off-line count satisfies the same Selberg-type bound, and $C_\lambda(T)=O_\lambda(1/\log T)$.
+
+If $t_+$ denotes a period's right endpoint, take $b=6/(5\log t_+)$. Then $a<0.9/\log t_+$ in all sufficiently high periods. At $u=1/\log T$, the larger offsets enter the sum from every complete period, while the smaller offsets can enter only from periods with $t_+<T^{0.9}$. Summing the grid phases in the first quadrant gives
+
+$$
+D_\lambda(1/\log T,T)=\frac{1+i}{16\pi^2}\,T\log T+O_\lambda(T).
+$$
+
+For the actual zeta spectrum, one can study the smooth bulk integral directly to bound the weight correction at a specified frequency. A sharp-threshold bound also needs control of how the phase depends on the size of the offset. The collision estimate in the next section requires control of ordinate sums across a frequency band that grows with height. [Reflected construction, endpoint derivation, and numerical check](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240037839)
 
 ## 3.3 Periodic Phase Deficits, Landau Window Transfer, and the $1/\sqrt{\pi}$ Collision Limit {#sec-ou-3-3}
 
