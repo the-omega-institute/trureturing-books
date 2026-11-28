@@ -267,13 +267,22 @@ $$
 
 将每处有符号质量移到最近的接触点。对绝对值和 Lipschitz 常数均至多为一的测试函数，积分变化至多为上式右端。矩向量是 Lipschitz 的，四个接触列线性无关，所以移位后的四个权重与最优权重之差也受同一平方根量级控制。若矩向量在该内点附近为 $C^2$，对称分拆一枚内部原子，位移各为 $h$，并把零原子移到 $h^2$，只留下 $O(h^2)$ 的矩残差。用五个独立正截止矩列精确修复后，总变差超额仍为 $O(h^2)$，而测试函数 $d$ 的积分差为 $|w|h+O(h^2)$，其中 $w$ 是被分拆的权重，积分差取绝对值。因此即使只允许正截止，固定五矩下的有界 Lipschitz 距离一般也只能得到平方根阶。[稳定性推导与有理复算](https://github.com/the-omega-institute/trureturing-books/issues/1963#issuecomment-7238907372)
 
-固定 #11661 可见谱、零裸项和无隐场时，正负权的牛顿斜率能否各自配平，受总变差约束。记 $k,w$ 为单点牛顿与真空响应，$D=x\,d/dx$。令 $\mu^+,\mu^-$ 为归一有符号测度的正部和负部，$T=\|\mu\|_{\mathrm{TV}}$。在 $K=1$、$W=c=10^{-122}$ 和 $DK=DW=0$ 的条件下，两部分的牛顿斜率积分相同，记为 $A=\int Dk\,d\mu^+=\int Dk\,d\mu^-$。对 $k-Dk-3205000(w-Dw/2)$ 加上两种不同的 $Dk$ 修正，区间计算分别给出正部所需的逐点上界和负部所需的逐点下界。用两部分的质量 $(T+1)/2$ 和 $(T-1)/2$ 积分，得到
+固定 #11661 可见谱、零裸项和无隐场时，正负权的牛顿斜率能否各自配平，受总变差约束。记 $k,w$ 为单点牛顿与真空响应，$D=x\,d/dx$。令 $\mu^+,\mu^-$ 为归一有符号测度的正部和负部，$T=\|\mu\|_{\mathrm{TV}}$。在 $K=1$、$W=c=10^{-122}$ 和 $DK=DW=0$ 的条件下，两部分的牛顿斜率积分相同，记为 $A=\int Dk\,d\mu^+=\int Dk\,d\mu^-$。对 $k-Dk-3205000(w-Dw/2)$ 加上两种不同的 $Dk$ 修正，区间计算分别给出正部所需的逐点上界和负部所需的逐点下界。乘 $10^6$ 后，正部的组合上界为 $0.0021$，负部的组合下界为 $-1.949$。用两部分的质量 $(T+1)/2$ 和 $(T-1)/2$ 积分，得到
 
 $$
-1-3205000c < 10^{-6}(0.985T-0.975)-1.43431A.
+1-3205000c < 10^{-6}(0.97555T-0.97345)-1.43431A.
 $$
 
-若 $A\ge0$，则 $T>1\,015\,229$。所以在 $T\le10^6$ 的预算内，必须有 $A<-0.01045$。对四个 $a_j$ 均非零、且 $\lvert a_j\rvert$ 被一道严格斜率间隔平分的布局，$DK=DW=0$ 迫使间隔两侧的 $a_j$ 两两等幅反号。若一对的两个 $Dk$ 异号，它们对应同号权重，斜率在该权重部分内抵消。若同号，两部分各得到同一符号的斜率贡献。因此在此预算内，至少一对的两个 $Dk$ 都必须为负。 [手工推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2013#issuecomment-7239394127)
+区间计算表明 $A\ge0$ 时必有 $T>T_*$，其中
+
+$$
+T_*=\frac{10^6(1-3205000c)+0.97345}{0.97555}
+\approx 1\,025\,063.783.
+$$
+
+若 $T\le T_*$，必有 $A<0$。对四个 $a_j$ 均非零、且 $\lvert a_j\rvert$ 被一道严格斜率间隔平分的布局，$DK=DW=0$ 迫使间隔两侧的 $a_j$ 两两等幅反号。若一对的两个 $Dk$ 异号，它们对应同号权重，斜率在该权重部分内抵消。若同号，两部分各得到同一符号的斜率贡献。因此此预算下至少一对的两个 $Dk$ 都必须为负。 [手工推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2135#issuecomment-7240212675)
+
+再用下文的小截止负权界与真空矩的几何约束，固定谱上满足五矩与严格半权间隔的任意四点内布局都须有 $T>T_*$。若 $T\le T_*$，便同时有 $A<0$ 和小截止负权。四个梯度均非零时，真空切线已排除所需的配对。若有零梯度，半权迫使零点处为正权。此时依两枚负斜率节点的顺序，真空割线或受限支撑上的矩界给出矛盾。两种排除均允许任意角点牛顿二阶量。 [两类布局的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2135#issuecomment-7240212675)
 
 若规定截止下限 $\delta>0$，记 $[\delta,1]$ 上的最小总变差为 $T(\delta)$。对上述三枚谱，零裸项、无隐场且 $c=10^{-122}$ 时，每个 $0\le\delta\le10^{-14}$ 都有唯一最优测度，由四个原子组成，最左点就是 $\delta$。区间证书将移动端点的五个矩一起包住，逐谱验证同一根盒对所有 $\delta$ 的严格压缩性，并用对偶函数的严格导数符号与接触矩阵的满列秩判定全域唯一最优性。记 $w_0$ 为闭区间最优解的零截止权重，$F_0$ 为对应的对偶函数。对矩条件求导并与对偶向量配对时，两个内点的位移项由驻点条件消去，得到 $T'(0+)=-w_0F_0'(0)$。三枚谱的系数依次约为 $3.97935\times10^9$、$4.12593\times10^9$、$3.97489\times10^9$，截止变量为 $x=Q^2/M_P^2$。在上述区间内，对每一枚谱都有 $|T(\delta)-T(0)-\delta T'(0+)|\le6\times10^{13}\delta^2$。将矩与接触方程对 $\delta$ 求导，用预条件雅可比的行和界估计最左权重和对偶向量的导数，再对 $T'(\delta)=-w_0(\delta)F_\delta'(\delta)$ 求导即可。这里 $F_\delta'$ 是固定对偶系数时对截止变量的导数。三个谱的 $|T''|/2$ 均小于 $6\times10^{13}$。 [二阶余项的区间复算](https://github.com/the-omega-institute/trureturing-experiments/blob/e6e3ead69923a931d537c95e81db386851929a15/experiments/ch39-omega-research/replay/ch39-cutoff-total-variation-attainment.py) ·[截止下限的区间复算](https://github.com/the-omega-institute/trureturing-experiments/blob/525b6a6e91ef2532a6e48df30e88047a2e1b9bc6/experiments/ch39-omega-research/replay/ch39-cutoff-total-variation-attainment.py) · [一阶代价的区间复算](https://github.com/the-omega-institute/trureturing-experiments/blob/4c897cf27582fc818611877d8fdf4eb5cc1efa89/experiments/ch39-omega-research/replay/ch39-cutoff-total-variation-attainment.py) 同一证书将解的导数保留为带符号的区间，在整个区间上给出 $1.13\times10^{14}<T''(\delta)<1.19\times10^{14}$，所以三枚谱的代价曲线都严格凸，且都在零处切线的上方（$\delta>0$）。 [总代价曲率的区间复算](https://github.com/the-omega-institute/trureturing-experiments/blob/53b87f9bd8d5b6ab5dfa6f02dfdf10351a556a59/experiments/ch39-omega-research/replay/ch39-cutoff-total-variation-attainment.py)
 
