@@ -104,7 +104,7 @@ Let $\mathcal{M}$ be a nonempty type equipped with a ternary comparison transpor
    and the carrier locks onto the minimal nontrivial degrees of freedom and minimal feature rank compatible with Laws I and II.
 :::
 
-Pause to notice how sparse these laws are. Not a single $\pi$, $e$, $\varphi$, real number $\mathbb{R}$, linear sum $+$, hand-typed dimension "$3$", or privileged identity $\mathbf{1}$ enters the statement. Yet three lines of elementary algebra (`ARGUED`) already unlock both its boundedness and its basepoint democracy:
+Pause to notice how sparse these laws are. Not a single $\pi$, $e$, $\varphi$, real number $\mathbb{R}$, linear sum $+$, hand-typed dimension "$3$", or privileged identity $\mathbf{1}$ enters the statement. Small Gram matrices from Law II constrain the fidelity, and the identities in Law I recover a group at each basepoint (`ARGUED`).
 
 - **The upper bound $\kappa \le 1$ comes for free**: apply Law II's rational Gram positivity with $n = 2$, sample $(x, y)$, and weights $(c_1, c_2) = (1, -1)$. Using $\kappa(x, x) = \kappa(y, y) = 1$ and symmetry gives
 
@@ -112,7 +112,9 @@ Pause to notice how sparse these laws are. Not a single $\pi$, $e$, $\varphi$, r
   1^2\cdot 1 + (-1)^2\cdot 1 + 2(1)(-1)\kappa(x, y) \;=\; 2 - 2\kappa(x, y) \;\ge\; 0 \quad \Longrightarrow \quad \kappa(x, y) \;\le\; 1,
   $$
 
-  so $\kappa(x, y) \in \mathbb{Q} \cap [0, 1]$ needs no separate axiom.
+  so nonnegativity gives $\kappa(x, y) \in \mathbb{Q} \cap [0, 1]$.
+
+  Now add an arbitrary probe point $z$ and write $d = \kappa(x,z)-\kappa(y,z)$. For the sample $(x,y,z)$ and rational weights $(1,-1,-d)$, normalization and symmetry give the Gram inequality $2-2\kappa(x,y)-d^2 \ge 0$. If $\kappa(x,y)=1$, then $x$ and $y$ have the same reading against every $z$. Conversely, if their rows agree, taking $z=y$ gives $\kappa(x,y)=\kappa(y,y)=1$. This argument uses only normalization, symmetry, and rational Gram positivity. Inferring equality of the underlying points from unit fidelity requires precisely that the row map $x\mapsto\kappa(x,\cdot)$ be injective. This is the role of extensional separation in Law II.
 
 - **Any point serves temporarily as an origin, recovering a group in three lines**: pick any temporary reference point $o \in \mathcal{M}$, and define a binary product $x \star_o z := [x, o, z]$ and local inverse $x^{-1_o} := [o, x, o]$. Associativity follows straight from Law I: $(x \star_o y) \star_o z = [[x, o, y], o, z] = [x, o, [y, o, z]] = x \star_o (y \star_o z)$. Left and right identity are $[o, o, z] = z$ and $[x, o, o] = x$, and the left and right inverses take two rewrites each:
 
@@ -124,6 +126,10 @@ Pause to notice how sparse these laws are. Not a single $\pi$, $e$, $\varphi$, r
   $$
 
   The original ternary transport recovers identically as $x \star_o y^{-1_o} \star_o z = [x, y, z]$, and shifting basepoint $o \mapsto o'$ via $x \mapsto [x, o, o']$ is a bijection (with inverse $x \mapsto [x, o', o]$) preserving both transport and fidelity. Every point stands on equal footing; an observer plants a local reference wherever it stands, computes, and lets the bridge cancel away without trace.
+
+The group construction also gives a finite test of extensional separation. Take $G=S_3\times\{+1,-1\}$, where $S_3$ is the permutation group of three elements and the signs multiply. Use $[x,y,z]=xy^{-1}z$ for transport and set the reading to $1$ when the permutation components agree and $0$ otherwise. Left and right translations of the first component are bijections, so the reading is invariant under both transports. For a sample $x_i=(\sigma_i,s_i)$, grouping by permutation gives the Gram quadratic form $\sum_{\sigma\in S_3}(\sum_{i:\,\sigma_i=\sigma}c_i)^2$, which is nonnegative.
+
+The identity $o=(e,+1)$ and $u=((12),+1)$ have reading zero. With $v=((23),+1)$ we get $[u,o,v]\ne[v,o,u]$ because the two transpositions do not commute. The distinct points $(e,+1)$ and $(e,-1)$ have unit fidelity and identical rows. Thus cancellation, associativity, invariance under both transports, normalization, nonnegativity, symmetry, Gram positivity, an exact zero, and noncommutativity can all hold when extensional separation fails. Minimality still requires a specified class of models.
 
 ## 1.4 Why a Computable Typeclass class OmegaSpace Rather Than an Unchecked axiom {#sec-ch01-typeclass-not-axiom}
 
