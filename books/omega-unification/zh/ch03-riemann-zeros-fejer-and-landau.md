@@ -232,7 +232,9 @@ $$
 \end{aligned}
 $$
 
-固定在实部 $1/2+a$ 时，割线权重为 $\sinh(\lambda(\delta_\rho-a))/\lambda$（只计 $\delta_\rho>a$）。它至多是 $\cosh(\lambda/2)$ 倍的线性权重，因此同频对数模积分也受此界控制，另加水平边界的 $O_\lambda(L_U)$。取 $a=b\log L_U/L_U$，每个固定 $b>7/8$ 都可选 $2\theta b>1$，从而得到 $o(U/L_U)$。在 $b=2$，一次矩为 $O_\varepsilon(U/L_U^{16/7-\varepsilon})$，无需假定 RH 或利用零点之间的相位抵消。$b=7/8$ 时，这族密度界只给出 $O_\varepsilon(U/L_U^{1-\varepsilon})$。[单层割线与分层推导](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240931083)
+固定在实部 $1/2+a$ 时，割线权重为 $\sinh(\lambda(\delta_\rho-a))/\lambda$（只计 $\delta_\rho>a$）。它至多是 $\cosh(\lambda/2)$ 倍的线性权重，因此同频对数模积分也受此界控制，另加水平边界的 $O_\lambda(L_U)$。取 $a=b\log L_U/L_U$，每个固定 $b>7/8$ 都可选 $2\theta b>1$，从而得到 $o(U/L_U)$。在 $b=2$，一次矩为 $O_\varepsilon(U/L_U^{16/7-\varepsilon})$，无需假定 RH 或利用零点之间的相位抵消。[单层割线与分层推导](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240931083)
+
+在阈值 $b=7/8$，这族固定指数的界给出 $O_\varepsilon(U/L_U^{1-\varepsilon})$。用合成谱可以检验这些输入的边界（手工推导）。每周期两组偏轴点的相位相反，点数相差一枚。调节两组略高于 $a$ 的偏移，使二次权重恰好相等。这个谱满足上方整族密度界，且隐含常数至多随 $\theta$ 按 $(4/7-\theta)^{-1}$ 增长，但右闭窗一次矩仍可达到 $U\log L_U/L_U$ 量级。实际 $\zeta$ 在这条线上的 $O(U/L_U)$ 无 RH 估计需要额外输入。[阈值构造、复算与 Baluyot §3.6 的误差](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7241173664)
 
 回到横向积分的公式，在 $a=0$ 时，零点和经同高反射还原 $C_\lambda(T)$，只差归一化系数和有界的低高度项。增大 $a$ 会把每个右侧零点的权重改成 $\cosh(\lambda(\delta_\rho-a)_+)-1$，其中 $v_+=\max(v,0)$。将该权重的导数与 Selberg 密度界配对，右侧余项至多为 $O_\lambda((T/L)e^{-aL/4}+L)$。取 $a=1/L$ 只降低密度估计中的常数，合成谱上窄带与右侧余项均可达到 $T/L$ 量级。取 $a=8\log L/L$ 时，右侧上界降到 $O_\lambda(T/L^3+L)$。在这一宽度下，窄带的同频积分由偏移的二次矩决定。具体地，令 $D_\lambda(u,T)=\sum_{0<\gamma\le T,\,\delta_\rho>u}e^{i\lambda\gamma}$，按重数计并纳入高度上端点。相减两个横向积分的割线公式，再以 $\cosh(\lambda d)-1=\lambda^2 d^2/2+O_\lambda(d^4)$ 展开，得到以下手工推导（`ARGUED`）。
 
