@@ -12213,6 +12213,14 @@
       "line": 120,
       "signature": "theorem unit_perpendicular_pair (a b : Space) : ∃ n : Space, ‖n‖ = 1 ∧ ⟪a, n⟫_ℝ = 0 ∧ ⟪b, n⟫_ℝ = 0"
     },
+    "D5/S3/HilbertOperators/DavisKahanProjector.opNorm_le_div_of_comp_sub_comp_eq": {
+      "module": "D5/S3/HilbertOperators/DavisKahanProjector",
+      "name": "TauCeti.ContinuousLinearMap.opNorm_le_div_of_comp_sub_comp_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:ee5bcbd3c7b25090e592bc4dc7824316772b6f961ef5199e97c621e27f709453",
+      "line": 248,
+      "signature": "theorem opNorm_le_div_of_comp_sub_comp_eq (hA : A.IsSymmetric) (hB : B.IsSymmetric) {c g : ℝ} (hg : 0 < g) (hAc : ∀ x, (c + g) * ‖x‖ ^ 2 ≤ RCLike.re ⟪A x, x⟫_𝕜) (hBc : ∀ v, RCLike.re ⟪B v, v⟫_𝕜 ≤ c * ‖v‖ ^ 2) (hXY : A ∘L X - X ∘L B = Y) : ‖X‖ ≤ ‖Y‖ / g"
+    },
     "D5/S3/HilbertOperators/PointwiseStabilizer.exists_mulEquiv_orthogonal": {
       "module": "D5/S3/HilbertOperators/PointwiseStabilizer",
       "name": "D5.S3.HilbertOperators.PointwiseStabilizer.exists_mulEquiv_orthogonal",

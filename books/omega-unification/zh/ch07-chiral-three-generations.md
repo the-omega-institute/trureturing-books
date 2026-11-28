@@ -49,7 +49,13 @@ $$
 
 现在让五种荷共用同一对物理钟。固定 $0\leq\delta\leq10^{-8}$ 时，对每种荷 $q$，三条射线首站只在两个**有效**相位对失去一个秩。物理钟角 $(a,b)$ 通过 $(qa,qb)$ 进入算子，每个有效相位对在物理环面上有 $q^2$ 个原像。对于 $q=1,-4,2,-3,6$，盲点数依次为 $2,32,8,18,72$，而这五个集合两两不交。因而在任何共同背景下，至少四种荷的每个轻态都由这三站的振幅唯一确定。
 
-要数尽这些点，可以沿用上面的删点矩阵。每个循环特征子空间在三站上只有一个独立坐标。若最低态在这里消失，变分原理迫使其余坐标组成删点块的最低本征向量。十五个块的这条本征线都由能隙隔离，能量都低于 $8.685$。将向量补零后只须满足剩下的边界行 $A+B e^{-iqa}+C e^{-iqb}=0$。每种荷只有一个特征标允许这三项闭合成三角形，两种朝向给出全部解。对每一对不同的荷，第一只物理钟已经将两组解分开。[全部盲点的区间枚举](https://github.com/the-omega-institute/trureturing-experiments/blob/0552844d61bd96ceae35e463e603d92d0cd01219/experiments/ch39-omega-research/replay/ch39-common-ray-blind-clocks.md)
+固定两钟后，还可以从本征值直接读出每条轻线在三站留下多少振幅（`ARGUED`）。在三个首站上作单位 Fourier 变换，每个特征标 $k=0,1,2$ 的读数沿各自的单位向量 $e_k$，把 $e_k$ 在站外补零。记 $H_k$ 为该特征标的磁拉普拉斯块，$u_k$ 为其归一化轻态，$\lambda_k$ 为相应的单本征值。三个输出方向正交，所以三站限制的三个奇异值正是 $s_k=|\langle e_k,u_k\rangle|$。沿 $e_k$ 删去一行一列得到 $D_k$。令 $p_k(z)=\det(zI-H_k)$、$d_k(z)=\det(zI-D_k)$，则
+$$
+s_k^2=\frac{d_k(\lambda_k)}{p'_k(\lambda_k)}.
+$$
+余子式公式给出预解式在 $e_k$ 上的对角元 $d_k(z)/p_k(z)$。按本征向量展开，同一对角元在 $\lambda_k$ 的留数是 $s_k^2$。由于 $p'_k(\lambda_k)\ne0$，分子为零恰好表示该线不可见，此时预解式的这个对角元在该点可去。三站的秩等于 $d_k(\lambda_k)\ne0$ 的特征标个数，即使不同特征标的轻本征值重合也可逐块判定。[本征向量与主子矩阵本征值的恒等式](https://arxiv.org/abs/1908.03795)
+
+要在整个环面上数尽失秩点，只须考察删点块的最低态。若最低态在这里消失，变分原理迫使其余坐标组成删点块的最低本征向量。十五个块的这条本征线都由能隙隔离，能量都低于 $8.685$。将向量补零后只须满足剩下的边界行 $A+B e^{-iqa}+C e^{-iqb}=0$。每种荷只有一个特征标允许这三项闭合成三角形，两种朝向给出全部解。对每一对不同的荷，第一只物理钟已经将两组解分开。[全部盲点的区间枚举](https://github.com/the-omega-institute/trureturing-experiments/blob/0552844d61bd96ceae35e463e603d92d0cd01219/experiments/ch39-omega-research/replay/ch39-common-ray-blind-clocks.md)
 
 这些孤立的盲点还决定了实际读数能以多高的频率接近零。记 $\sigma_q$ 为三站限制的最小奇异值，在正黎曼零点上按重数计数。固定一个充分小的阈值 $\varepsilon>0$，先让计数高度趋于无穷。由上述双钟等分布与辐边软化趋零，$\sigma_q<\varepsilon$ 的极限比例等于零软化环面上的归一化面积。再令 $\varepsilon\downarrow0$，这个面积为 $C_q\varepsilon^2+O(\varepsilon^4)$。按上面的荷顺序，$C_q$ 约为 $25.99279,17.37426,26.16959,12.59218,14.28552$。每个盲点处，边界复振幅对两个钟角的实雅可比可逆，半径 $\varepsilon$ 的振幅圆盘因此在钟面上截出面积为二阶的邻域。五种荷的这些邻域在充分小的阈值下仍两两不交，故至少一荷近盲的二次项系数约为 $96.41434$。精确失秩的正零点集由此具有自然密度零，个别零点是否命中仍开放。[面积系数的推导和复算](https://github.com/the-omega-institute/trureturing-experiments/blob/408bafb236c0918d30571356d15798d2cd21a511/experiments/ch39-omega-research/replay/ch39-ray-near-blind-density.md)
 
@@ -66,7 +72,15 @@ $$
 
 在每个盲点取尺度为 $\varepsilon$ 的光滑内外逼近，夹住由边界振幅雅可比决定的局部椭圆。其傅里叶系数的绝对和为 $O(1)$，二阶绝对矩为 $O(\varepsilon^{-2})$，超过 $J$ 的绝对尾和为 $O((\varepsilon J)^{-4})$。因此采样与环面平均之差为 $O(L^{-1}+\varepsilon^{-2}L^{-2}+(\varepsilon J)^{-4})=o(\varepsilon^2)$。让内外逼近的面积趋于同一椭圆面积即可恢复同一个 $C_q$。 [Lean 中的绝对尾界](lean:D5/S3/Fourier/Asymptotics/PlanarFourierTail.lattice_fourier_tail)
 
-真实软辐边也满足这个极限。模型给出的亏额为 $\delta(\gamma)=O(\gamma^{-2})$。固定相位时，三条软化辐边使矩阵的算子范数改变量至多 $6\delta$。每个循环特征标只有一条轻线，其余本征值与轻线相隔至少 $9.6-8.685$。将扰动后的单位本征方程投影到平坦轻线的正交补，得到两条轻线主角的正弦为 $O(\delta)$，故三站最小奇异值也只改变 $O(\delta)$，且此界对相位一致。在 $\sqrt T\le\gamma\le T$ 上，读数误差为 $O(T^{-1})=o(\varepsilon(T))$，早期零点的比例则为 $O(T^{-1/2})=o(\varepsilon(T)^2)$。于是用平坦模型的两个相对扰动阈值即可夹住实际计数。[软化权重的定义](https://github.com/the-omega-institute/trureturing-experiments/blob/cb58c8e64ecea67184e0c1d68a690be098a7a384/experiments/ch39-omega-research/replay/ch39-three-ray-chiral-boundary.py#L34)
+固定荷与钟角，轻线随辐边软化能移动多远？写 $H_k(\delta)=H_k(0)-\delta K_k$。三条单位辐边构成一个星图。在极点与三叶均匀单位向量的基下，平凡特征标上的星图块为 $\left(\begin{smallmatrix}3&-\sqrt3\\-\sqrt3&1\end{smallmatrix}\right)$。两个非平凡叶模式在极点相消，各自的本征值为 $1$。其余方向上的星图作用为零，故 $K_k$ 的谱宽依次为 $w_k=4,1,1$。[软化权重的定义](https://github.com/the-omega-institute/trureturing-experiments/blob/cb58c8e64ecea67184e0c1d68a690be098a7a384/experiments/ch39-omega-research/replay/ch39-three-ray-chiral-boundary.py#L34)
+
+取共同谱隙下界 $g=9.6-8.685=183/200$。沿软化区间选取相位使 $\langle u_k,u'_k\rangle=0$，并记 $P_k=u_ku_k^*$。对本征方程求导，得到 $(H_k-\lambda_k I)u'_k=(I-P_k)K_ku_k$。右边可将 $K_k$ 换为 $K_k-w_k I/2$，其范数为 $w_k/2$。在轻线的正交补上，$H_k-\lambda_k I$ 的本征值至少为 $g$，从而 $\|u'_k\|\le w_k/(2g)$。这一步用到的分离谱算子估计已有冻结声明。[Sylvester 算子范数界](lean:D5/S3/HilbertOperators/DavisKahanProjector.opNorm_le_div_of_comp_sub_comp_eq)
+
+对单位向量 $e_k$ 取内积再积分，在任意 $0\le\delta_0,\delta_1\le10^{-8}$ 下都有
+$$
+|s_k(\delta_1)-s_k(\delta_0)|\le\frac{w_k}{2g}|\delta_1-\delta_0|.
+$$
+因此三站最小奇异值的改变量至多为 $(400/183)|\delta_1-\delta_0|$。盲点枚举还表明每种荷只有一个可能不可见的特征标，且它非平凡。只要这条轻线的 $s_k(0)>(100/183)10^{-8}$，同一对钟角在整个软化区间都保持三站满秩。模型给出的亏额为 $\delta(\gamma)=O(\gamma^{-2})$。在 $\sqrt T\le\gamma\le T$ 上，读数误差为 $O(T^{-1})=o(\varepsilon(T))$，早期零点的比例则为 $O(T^{-1/2})=o(\varepsilon(T)^2)$。于是用平坦模型的两个相对扰动阈值即可夹住实际计数。
 
 如果保留原来的三个首站，只能再装一个读数器，该放在哪里？其余十六个站点中，除极点 $14$ 外，任一站都可以。每种荷在盲点只丢失一个非平凡循环特征的轻态。这个态在极点的振幅因旋转对称而恒为零，在其余十五个候选站的单站振幅却都大于 $0.0174$。加上其中任一站后，对每种荷分别读取四个坐标，在整个双钟环面和 $0\le\delta\le10^{-8}$ 上，三维轻空间限制的最小奇异值都大于 $4\times10^{-5}$。这个较小的界计入了不同特征在第四站的干涉。若读数站集本身也须保持三循环，最少要补一个完整三站轨道，共用六站。 [十五种单站补读与全域下界](https://github.com/the-omega-institute/trureturing-experiments/blob/7168d863ca1b4d92fec7cd8cbf50f5013f9282ac/experiments/ch39-omega-research/replay/ch39-ray-head-extra-site.md)
 
