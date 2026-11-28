@@ -82,6 +82,10 @@ $$
 
 把 [@thm-ou-ch14-two-hidden-response] 与 [@thm-ou-ch14-native-scalar-gram] 所揭示的舒尔消元与 Gram 等距刚性放回十九点贝伦德球壳，便得到了整部专著里结构最精细的一张离散相图：**在十九个可见站点上精确复现七十六点增广图的三个完整时钟响应，所需的最少辅助态维数 $r(D)$ 如何随允许修改旧传播块的平方弦距截止 $D$ 逐级跃升？**
 
+先用一个可见端口区分两个数：复现读数的最少态数，以及产生读数的系统实际有多少条可见谱线。固定可见块为零。令隐藏块为对角阵，特征值为 $t_j\in(-1,1)$，耦合强度的平方为 $b_j^2>0$。舒尔补里的谱项是 $S(z)=\sum_j b_j^2/(z-t_j)$。写 $w_j=b_j^2/(1-t_j^3)$ 与 $m_\ell=\sum_j w_j t_j^\ell$。由于 $(z-t)(z^2+zt+t^2)=1-t^3$ 对 $z^3=1$ 成立，三个读数恰好给出二次多项式 $S(z)=m_0z^2+m_1z+m_2$ 的三个系数。
+
+取极点 $(-1/4,1/4)$ 及权 $16w=(1/2,1/2)$，再独立取极点 $(-1/2,0,1/2)$ 及权 $16w=(1/8,3/4,1/8)$。两次都有 $(m_0,m_1,m_2)=(1/16,0,1/256)$；由对称性 $\sum_j b_j^2=1/16$，所以整个耦合矩阵的算子范数至多为 $1/2+1/4=3/4$。单极点必有 $m_0m_2=m_1^2$，此处却有 $m_0m_2>0$，故复现这组读数至少且只需两个隐藏态。第二个系统的三个极点都有正留数，在全频响应中都可见。取第四个频率 $z=-1$，两组 $S(-1)$ 已分别为 $-257/3840$ 和 $-53/768$。一般地，若有 $r$ 个互异极点且权非零，由矩 $m_0,\ldots,m_{2r-2}$ 组成的 $r$ 阶 Hankel 矩阵秩恰为 $r$。[有限矩的秩定理](lean:D5/S3/Analytic/GoldenTomography/FinitePronyHankelReconstruction.prony_hankel_rank)
+
 设原壳与中转态组成的分块矩阵经舒尔补在三个时钟频率 $\omega \in \{1, \zeta_3, \zeta_3^2\}$ 给出可见逆响应 $R_{\mathrm{vis}}(\omega)^{-1} = A_0 + \Delta_D - B^* (\omega I - H_{\mathrm{aux}})^{-1} B$，其中允许非零修正的旧块位置被限制在 $\operatorname{supp}(\Delta_D) \subseteq \{(u, v) : \|u - v\|^2 \le D\}$。随着截断半径 $D$ 逐步收缩，越来越多对可见站点之间的 Gram 内积被迫固定不变，从而迫使辅助空间维数 $r(D)$ 一级一级向上跃升（完整证书见 [`ch39-three-clock-minimal-memory.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-three-clock-minimal-memory.py)、[`ch39-local-memory-rank.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-local-memory-rank.py) 与 [`ch39-three-clock-symmetric-cutoff.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-three-clock-symmetric-cutoff.py)）：
 
 | 允许修改旧传播块的平方弦距范围 $D$ | 最小辅助记忆秩 $r(D)$ | 关键代数阻塞机制与精确证书 |

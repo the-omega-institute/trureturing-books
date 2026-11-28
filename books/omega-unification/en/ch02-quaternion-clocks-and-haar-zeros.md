@@ -45,6 +45,8 @@ $$
 
 :::
 
+The shortest native arc sets the axis angle $v$. How short can the edges be if changing their transport is to shift the two scalar clock phases? Fix the background edge transports at unit charge, allow rephasing at every vertex, and let $D$ bound the squared chord length of any edge that can be changed. Vertex phases cancel in the phase product around a cycle. For $D<372$ neither clock can shift (the shortest chords have squared length $12$). For $372\le D<724$ the two clocks must shift by the same angle, which can be chosen freely, and for $D\ge724$ they can shift independently. At the same unit charge, the two positive zeta zeros used in [Chapter 7](ch07-chiral-three-generations.md) give unequal clock shifts, so the minimum bound is $724$ and at that bound exactly $42$ undirected shell edges need to change in an optimal realization. [Cycles and the minimum number of edge changes](https://github.com/the-omega-institute/trureturing-experiments/blob/78d69c0ea72a7e4e1b8b63562031d5bf35e5e655/experiments/ch39-omega-research/replay/%E5%8D%81%E4%B9%9D%E7%82%B9%E5%A3%B3%E4%B8%A4%E9%92%9F%E8%81%94%E7%BB%9C%E7%9A%84%E5%B1%80%E9%83%A8%E5%BC%A6%E9%95%BF%E9%98%88%E5%80%BC.md)
+
 Look closely at the commutator defect $E = 1 + 2xyz - x^2 - y^2 - z^2$: it is no ad hoc polynomial, but the $3 \times 3$ Bargmann–Gram determinant of the three comparison anchors $(1, U, V)$. Whenever the two imaginary axes pull apart from collinearity, $E > 0$ registers the non-vanishing squared bivector area and the constant unit sectional curvature $K \equiv +1$ of $S^3$. The following Lean 4 frozen theorem establishes both geometric laws directly in exact integer and rational arithmetic:
 
 ::: {.theorem #thm-ou-ch02-bargmann-gram title="Nonnegativity of the Three-Anchor Bargmann–Gram Determinant and Unit Sectional Curvature" lean="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.detGram3_nonneg D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_unit_sectional_curvature"}
@@ -163,6 +165,8 @@ Now watch how the four-angle selection rule of [@def-ou-ch02-dual-clocks] turns 
 | $1/4$ | $0.64177727725\ldots$ | $0.02244015826\ldots$ |
 | $1$ | $0.95054808840\ldots$ | $0.12584254589\ldots$ |
 | $2$ | $0.99752136036\ldots$ | $0.15720164049\ldots$ |
+
+The value $1/(2\pi)$ is an asymptotic relative density as the height cutoff tends to infinity. At a specified height one can check the window condition zero by zero and bound the remaining tail by the full spectrum. Chapter 12 uses this method to bound the inverse-square weighted clock reading at $H=100$ and shows how a window counting remainder controls the error as $H$ varies ([@rem-ou-ch12-windowed-rate], [@prob-ou-ch12-windowed-haar-rate]).
 
 ## 2.4 Splitting Primes on the Shortest Arc and Area-Law Density Collapse {#sec-ou-2-4}
 

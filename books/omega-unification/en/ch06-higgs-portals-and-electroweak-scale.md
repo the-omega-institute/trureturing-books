@@ -55,6 +55,76 @@ Three is the minimum number of **pairwise distinct known thresholds** for which 
 
 More generally, for three mass weights proportional to $(1,r,r^2)$ with $r>1$, this ambiguity occurs exactly at $r=(1+\sqrt5)/2$, $2$ and $3$. To check the extra constraint from fixing the counterterms, let $\delta_i(\lambda)$ be the digit difference at normalized slope $\lambda$, with layer indices $i=0,1,2$. After the pole weights agree, the remaining difference is proportional to $\sum_\lambda (r\delta_1(\lambda)+2r^2\delta_2(\lambda))(1+\lambda s)^2$. Its constant, linear and quadratic coefficients must all vanish. For example, at the golden ratio take the two possible (colored, uncolored) normalized-slope pairs $(3,7)$ and $(5,1)$. Each has weighted moments $(4,16,76)$ through degree two. Switch the assignments in the same direction in the first two layers and in the opposite direction in the third. The relation $1+r=r^2$ cancels the pole weights, and the moments cancel the remaining polynomial. The classification includes positive-slope examples at all three ratios. [Three-threshold classification](https://github.com/the-omega-institute/trureturing-experiments/blob/4d589c1d2a4dd74ac8fb695eba260a0471cc8856/experiments/ch39-omega-research/replay/ch39-three-geometric-portal-thresholds.md) · [Exact enumeration](https://github.com/the-omega-institute/trureturing-experiments/blob/4d589c1d2a4dd74ac8fb695eba260a0471cc8856/experiments/ch39-omega-research/replay/ch39-three-geometric-portal-thresholds.py)
 
+Which portal assignments can a long-wavelength disturbance distinguish? In the same Gaussian scalar model, perturb the constant background with Euclidean momentum $p$. Subtract the two-point response at $p=0$ and divide out the known common normalization. The coefficient of $p^2$, measured as a function of the background $s$, gives
+$$
+B(s)=\sum_{\text{species}} \frac{w t^2}{m_i+t s},\qquad w\in\{3,1\}.
+$$
+In the equal-mass bubble integral, differentiating $\log[1+p^2 z(1-z)/(m_i+ts)]$ at $p^2=0$ and integrating the Feynman parameter $z$ from zero to one supplies a factor of $1/6$. The two source insertions supply $t^2$. With fixed local counterterms, knowing the potential and $B(s)$ near $s=0$ identifies all six signed slopes at any three distinct known thresholds. At each nonzero normalized slope, the pole in the third derivative of the potential weights the layers by $m_i^2$, while the pole in $B(s)$ weights them by $m_i$. The two weights restrict every difference between three-layer assignments to a common line. The layer logarithms retained by the potential remove the residual ambiguity through the strict convexity of $m\log m$.
+
+Four layers already admit assignments that both measurements miss. Give every species normalized slope $1$ or $2$. At slope $1$, use the digits $(3,1,3,0)$ in one model and $(1,3,1,1)$ in the other. There is a set of four distinct positive squared masses $m_i$ for which the difference $(2,-2,2,-1)$ has zero sum against each of $m_i$, $m_i^2$ and $m_i^2\log(m_i/\mu^2)$. These two portal assignments then give the same potential and the same low-momentum coefficient for every $s\ge0$. [Three-layer identification and the four-layer counterexample](https://github.com/the-omega-institute/trureturing-experiments/blob/9a6102e355d2ccdac66234f45b927737f71678c5/experiments/ch39-omega-research/replay/ch39-low-momentum-portal-thresholds.md)
+
+**Hand derivation at fixed nonzero momentum.** Keep the same bubble integral and choose any one known Euclidean squared momentum $P=p^2>0$. With local terms fixed and the zero-momentum value subtracted, suppose the following function is known exactly near $s=0$.
+
+$$
+R_P(s)=\sum_{i,\alpha} w_\alpha t_{i,\alpha}^2
+\int_0^1\log\!\left(1+\frac{Pz(1-z)}{m_i+t_{i,\alpha}s}\right)\,dz,
+\qquad (w_C,w_U)=(3,1).
+$$
+
+For any finite number of known, pairwise distinct positive squared masses $m_i$, this background response alone determines the signed colored and uncolored slopes in each layer.
+
+Consider a term with slope $t\ne0$. Its $s$ derivative is $wt^2$ times the average of $1/(s+v)$ at $v=(m_i+Pz(1-z))/t$ for uniform $z$, minus $wt^2/(s+m_i/t)$. Summing gives the transform of a signed measure with compact support away from zero. The expansion of the kernel at $s=0$ gives every positive power moment of $1/v$, and the total mass is zero. Polynomial approximation on the compact reciprocal support therefore determines the measure uniquely.
+
+Its negative atoms mark the starts $v=m_i/t$, whose signs give the slope signs. On each half-axis, order the starts by increasing $a=|m_i/t|$. Write $\ell=P/(4|t|)$, so $|v|=a+4\ell z(1-z)$. Changing variables on the two branches of this quadratic gives the continuous density contribution at $|v|=a+h$,
+
+$$
+\frac{wt^2}{2\ell}(1-h/\ell)^{-1/2},\qquad 0<h<\ell .
+$$
+
+For example, $m_1=1,t_1=1$ and $m_2=2,t_2=2$ both start at $a=1$. At $P=4$ their density intervals have lengths $1$ and $1/2$, so their shapes separate the two layers.
+
+After subtracting the contributions from earlier starts, only terms starting at $a$ enter the density for sufficiently small $h>0$. The candidate nodes $\ell_i^{-1}=4m_i/(Pa)$ are distinct. For $N$ layers, the first $N$ Taylor coefficients of the density, divided by their nonzero binomial factors, give the first $N$ power moments of the amplitudes at these nodes. These moments determine the amplitudes uniquely. [Finite Vandermonde moment injectivity](lean:D5/S3/Analytic/GoldenTomography/FiniteVandermondeTomography.finite_moment_readout_injective)
+
+With $t_i=\operatorname{sgn}(v_0)m_i/a$ at the signed start $v_0$, dividing each amplitude by $t_i^2/(2\ell_i)$ gives the species weight $0,1,3,$ or $4$ at that slope in layer $i$. Once all starts have been decoded, every unassigned species has slope zero. If two masses coincide, exchanging the colored slopes of their layers preserves the entire response.
+
+**How many background derivatives are needed at the origin?** Keep the Gaussian scalar model and the $N$ known, distinct positive squared masses. In one layer take the colored and uncolored slopes $(a,b)=(1,-\sqrt[3]{3})$, then reverse both signs. The two assignments have the same weighted squares and fourth powers, and both have $3a^3+b^3=0$. In the $j$th background derivative of the bubble at $s=0$, the slopes enter only through $3a^{j+2}+b^{j+2}$. The readings therefore agree through background order two at every $P\ge0$. The zero-background gauge traces of Chapter 5 also agree term by term.
+
+Third order separates all assignments using finitely many momentum coefficients. Write $M_{i,r}=3t_{i,C}^r+t_{i,U}^r$. Near the origin, expand the logarithm and then $(m_i+ts)^{-k}$. Positive squared masses give a neighborhood where both expansions converge uniformly for $z\in[0,1]$. Integrating with $\int_0^1[z(1-z)]^k\,dz=(k!)^2/(2k+1)!$ gives
+
+$$
+\begin{aligned}
+[P^ks^j]R_P(s)&=A_{kj}\sum_i m_i^{-k-j}M_{i,j+2},\\
+A_{kj}&=\frac{(-1)^{k+j+1}}{k}\binom{k+j-1}{j}
+          \frac{(k!)^2}{(2k+1)!}.
+\end{aligned}
+$$
+
+For each $j=1,2,3$, take $k=1,\ldots,N$. After division by $A_{kj}$, the readings are the first $N$ power moments of the amplitudes $m_i^{-1-j}M_{i,j+2}$ at the known nodes $1/m_i$. Vandermonde injectivity therefore recovers $M_3,M_4,M_5$ in each layer from these $3N$ coefficients.
+
+How well do the three moments separate signed slopes? Choose slope units so both pairs under comparison lie in $[-1,1]$. Let $F$ be the difference of the cumulative masses of $3\delta_a+\delta_b$ and $3\delta_{a'}+\delta_{b'}$, and set $D=\max(|a-a'|,|b-b'|)$. If $D>0$, consider the interval between the two slopes of the species attaining $D$. Its cumulative weight differs by three or one throughout the interior, and the other species cannot cancel it. Thus $|F|\ge1$ there almost everywhere. The four slopes delimit at most three intervals on which $F$ can be nonzero, so its sign changes at most twice. Put a root at each change of sign and place any unused roots at $-1$. Choose the overall sign of $q(x)=\pm x^2(x-r_1)(x-r_2)$ so that $qF\ge0$. Removing neighborhoods of radius $D/12$ around $0,r_1,r_2$ leaves at least half of the interval of length $D$. Hence, with $\eta=\max_{r=3,4,5}|M_r-M'_r|$,
+
+$$
+\frac{D^5}{2\cdot12^4}\le\int q(x)F(x)\,dx\le 4\eta .
+$$
+
+The upper bound follows by integration by parts since $q$ contains only powers two through four and its coefficients have absolute sum at most four. Exact data give $D=0$, including zero and coincident slopes. To recover the pair, set $u=a^3$ and use $b^3=M_3-3u$ in the fourth moment. The resulting equation $3|u|^{4/3}+|M_3-3u|^{4/3}=M_4$ has at most two real roots by strict convexity, and $M_5$ selects the solution. For a fixed mass list the linear systems above give the error factor for conversion to $\eta$. In the sign-reversed example scaled by $\epsilon>0$, $M_3$ and $M_4$ agree while $M_5$ separates the assignments. The difference scales as $\epsilon^5$ while their slope distance scales as $\epsilon$. This makes $1/5$ the optimal uniform inverse exponent on bounded slopes. The order and error bound are hand derivations for the stated bubble integral.
+
+**Reading the slopes at four backgrounds.** Suppose an instrument measures response values, each with a bounded absolute error. How well could it distinguish the sign-reversed pair? Given a slope bound, choose units with $|t|\le1$ and $m_i\ge1$ and normalize the response in those units. Choose $N$ positive squared momenta $P_u$ in advance and read the response at $s=0,h/3,2h/3,h$ for each momentum. These $4N$ values suffice to recover every labelled slope. If two assignments fit every observation within $\sigma$, their maximum slope difference is at most $C(2\sigma)^{1/5}$. The constant depends on the mass list and the chosen grid.
+
+To select the momenta, write $K(P,m)=\int_0^1\log(1+Pz(1-z)/m)\,dz$ and $B_j(u,i)=[x^j]K(P_u,m_i+x)$. Take $P_u=u q$ for $u=1,\ldots,N$. For each $j=0,1,2,3$, the coefficients $A_{kj}$ above give the leading term of $\det B_j$ in $q$. It has degree $N(N+1)/2$ and coefficient $\det[u^k]\det[A_{kj}m_i^{-k-j}]$ with $k=1,\ldots,N$, since repeated momentum powers contribute zero to the determinant. Both factors are Vandermonde determinants up to nonzero row or column scalings. Thus all four matrices are invertible for sufficiently small $q>0$.
+
+What keeps higher background orders from obscuring the difference between two nearby assignments? Put $E=\max_{i,\,2\le r\le5}|\Delta M_{i,r}|$. In each layer the moment differences are power sums at the four slopes with weights $3,1,-3,-1$. The monic polynomial with these four roots gives their [moment recurrence](lean:D5/S3/Analytic/GoldenTomography/FinitePronyHankelReconstruction.prony_moment_linear_recurrence). Its four lower coefficients have absolute sum at most $2^4-1=15$, so $|\Delta M_{i,j+2}|\le15^{j-3}E$ for $j\ge4$. Expanding the two logarithms gives $|B_j(u,i)|\le1/(j m_i^j)$ for $j\ge1$. On $0\le s\le h\le1/30$, the terms beyond cubic order in the response difference therefore have absolute sum at most $30Nh^4 E$.
+
+Let $\delta$ be the maximum response difference on the grid and $L=\max_{0\le j\le3}\|B_j^{-1}\|_\infty$. For cubic interpolation at the four backgrounds, the inverse Vandermonde matrix at nodes $\ell/3$, $\ell=0,1,2,3$, has maximum absolute row sum $54$. Solving next for the mass layers at each order gives
+
+$$
+E\le54Lh^{-3}(\delta+30Nh^4E).
+$$
+
+Taking $0<h\le\min(1/30,1/(3240NL))$ gives $E\le108Lh^{-3}\delta$. The fifth-power bound in each layer now controls the slope error, with $\delta\le2\sigma$ for two fits to the observations. For the scaled sign-reversed pair, the first response difference at any fixed nonzero background and positive momentum comes from the fifth moment and has order $\epsilon^5$. The exponent for point values is therefore sharp as well. For example, with $m=(1,2)$ and $P=(1/2,1)$, partial sums through orders 24 and 25 of the alternating series with coefficients $A_{kj}$ bracket each matrix entry. They give $L<4497$, so $h=10^{-8}$ suffices.
+
+How many fixed points are necessary? Every response value is nonnegative, and all vanish at zero slopes. If at most $2N$ values separated all assignments near the origin, padding the vector of readings with zeros would give a continuous injection from an open ball of slopes into $\mathbb R^{2N}$. Brouwer’s invariance of domain would make the image contain an open neighborhood of zero, which is impossible when every coordinate is nonnegative. The minimum count therefore lies between $2N+1$ and $4N$.
+
 Whenever we certify positivity of $8\pi I \pm \mathcal{A}$ on coupled Higgs–heavy-radial channels or eliminate high-potential shell vertices into an effective boundary operator, the exact matrix identity at work is the Lean-verified block Schur complement minimum theorem:
 
 ::: {.theorem #thm-ou-ch06-schur-minimum title="Block Schur Complement Quadratic Form as Exact Minimum" lean="D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"}

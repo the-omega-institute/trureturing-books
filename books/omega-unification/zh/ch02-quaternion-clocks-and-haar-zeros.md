@@ -46,6 +46,8 @@ $$
 的实际正黎曼零点。
 :::
 
+最短原弧给出了轴角 $v$。若要移动两只原始钟的标量相位，改动多短的边就够了？固定单位荷的背景边输运，允许所有顶点重定相，并令 $D$ 为可改边的平方弦长上限。闭路上的相位乘积消去了顶点相位。$D<372$ 时两钟都不能移动（最短弦的平方长为 $12$），$372\le D<724$ 时恰可让两钟同移任意角，$D\ge724$ 时可让两钟独立移动。按同一单位荷比较[第七章](ch07-chiral-three-generations.md)选取的两枚正零点，两个钟移不同，故所需的最小上限恰为 $724$，在这一上限下最少须改动 $42$ 条无向壳边。[闭路与最少改边数](https://github.com/the-omega-institute/trureturing-experiments/blob/78d69c0ea72a7e4e1b8b63562031d5bf35e5e655/experiments/ch39-omega-research/replay/%E5%8D%81%E4%B9%9D%E7%82%B9%E5%A3%B3%E4%B8%A4%E9%92%9F%E8%81%94%E7%BB%9C%E7%9A%84%E5%B1%80%E9%83%A8%E5%BC%A6%E9%95%BF%E9%98%88%E5%80%BC.md)
+
 细看交换子亏量 $E = 1 + 2xyz - x^2 - y^2 - z^2$：它并不是临时拼出的多项式，而是三个比较锚点 $(1, U, V)$ 所张成的 $3 \times 3$ 巴格曼—格拉姆行列式！只要把两对纯虚轴拉离共线，$E > 0$ 就化作三维球面 $S^3$ 上不可消去的非交换面积平方与恒常单位截面曲率 $K \equiv +1$。下面这条 Lean 4 冻结定理在纯整数与有理分数层面上把这两条几何铁律一起钉死：
 
 ::: {.theorem #thm-ou-ch02-bargmann-gram title="三锚巴格曼—格拉姆行列式非负性与利雅三元恒常单位截面曲率" lean="D5/S3/Quantum/AURICOmega/OmegaBargmannHaarHecke.detGram3_nonneg D5/S3/Quantum/AURICOmega/OmegaLieTripleAndFreeGroup.lieTriple_unit_sectional_curvature"}
@@ -164,6 +166,8 @@ $$
 | $1/4$ | $0.64177727725\ldots$ | $0.02244015826\ldots$ |
 | $1$ | $0.95054808840\ldots$ | $0.12584254589\ldots$ |
 | $2$ | $0.99752136036\ldots$ | $0.15720164049\ldots$ |
+
+这里的 $1/(2\pi)$ 是截止高度趋于无穷时的相对密度。在给定高度可以逐个检验窗条件，再用全谱计数控制未检验的尾部。第十二章用这一方法给出起始高度 $H=100$ 时逆平方加权的共同钟读数，并讨论随 $H$ 变化的误差怎样由窗口计数余项推出（[@rem-ou-ch12-windowed-rate]、[@prob-ou-ch12-windowed-haar-rate]）。
 
 ## 2.4 最短原弧的无穷分裂素数细分与二维面积律密度坍缩 {#sec-ou-2-4}
 
