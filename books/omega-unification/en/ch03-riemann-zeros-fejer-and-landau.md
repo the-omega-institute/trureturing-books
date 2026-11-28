@@ -4,12 +4,12 @@
 
 This final chapter of Volume I lays out the analytic number-theoretic bedrock of the monograph, placing **formally verified global theorems** right beside **certified finite-window computations**. We proceed in four steps:
 
-1. State the exact **external formalized status** of the classical Riemann Hypothesis (RH) and Dirichlet GRH, and establish the Lean-verified Fejér critical-gap and Cayley unit-circle criteria;
+1. State the exact **external formalized status** of the classical Riemann Hypothesis (RH) and Dirichlet GRH, establish the Lean-verified Fejér critical-gap and Cayley unit-circle criteria, and use theta lifting to connect an arithmetic kernel to a spectral inner product;
 2. Walk through the frozen Lean 4 analytic chain linking harmonic pair-moment ratios, reciprocal-time and periodic phase deficits, unconditional Landau left/right vertical contour bounds, and the Gaussian hard-band collision limit $1/\sqrt{\pi}$, and identify the cutoff endpoint term for a fixed arc mode;
 3. Zoom into two concrete finite zero landmarks—the 19-zero neighborhood of zero #11431 in $[10000, 12999]$ (midpoint isolation, $94.62\%$ diagonal Fejér weight, $23.657\% / 23.670\%$ maximal extra-pair share, finite observation radii $111521$ and $111532$) and the first triple-window hits #8236 and #8359;
 4. Draw the honest boundary separating global harmonic average bounds from single-zero clock selection.
 
-## 3.1 External Formalized Status of RH/GRH and the Fejér–Cayley Criteria {#sec-ou-3-1}
+## 3.1 RH and Dirichlet GRH: External Formalized Status, Fejér–Cayley Criteria, and Theta Lifting {#sec-ou-3-1}
 
 Following the six-tier epistemic honesty contract of the [Prelude](README.md#rem-ou-epistemic-contract), before invoking any theorem with a `RiemannHypothesis` hypothesis we state its external verification dossier (`EXT-LEAN`) cleanly:
 
@@ -44,6 +44,33 @@ Inside `trureturing@dev` itself, the following Lean 4 frozen theorem reformulate
 ::: proof
 For part 1, in the forward direction under RH, nonnegativity of the discrete Fejér kernel $\sum_{j,k=0}^{N-1} \cos((j-k)\theta) = |\sum_{j=0}^{N-1} e^{ij\theta}|^2 \ge 0$ combines $N^2$ midpoint bounds at steps $b_{jk} y e^{-y/2}$ (with $y = \log x$ and $b_{jk} = |j-k|/(2N)$). Normalizing by $y^2 e^{-y/2}$ averages the spectral-deficit minus arithmetic-midpoint contributions to $C_N = \frac{1 - N^{-2}}{48} \to \frac{1}{48}$; choosing finite $N$ with $c < C_N$ produces the eventual bound. Conversely, applying the hypothesis at $c = 1/128$ forces $M\sqrt{x} - U(x) \to +\infty$, which recovers RH via the critical-gap criterion. For part 2, the Cayley Möbius map $(s - 1)/s$ carries the finite critical line $\operatorname{Re} s = 1/2$ bijectively onto the punctured unit circle $S^1 \setminus \{1\}$, so vanishing of the logarithmic radial defect on all nontrivial zeros is equivalent to $\operatorname{Re}\rho = 1/2$. The full proof is checked by the Lean kernel.
 :::
+
+### 3.1.1 Theta Lifting: From an Arithmetic Kernel to a Spectral Inner Product {#sec-ou-3-1-1-rallis-bridge}
+
+The Fejér and Cayley criteria describe conditions on the zeros; an arithmetic proof also needs to connect constructible forms to norms that can be estimated. Theta lifting supplies a concrete mechanism: integrating a Weil-representation theta kernel against an automorphic form on a source space produces a form on a target space. The Rallis doubling formula expresses the inner product of two lifts as a matrix-coefficient integral on the source group. The Weil representation here and the Weil quadratic form of the explicit formula are different objects; their shared name does not transfer positivity between them.
+
+::: {.theorem #thm-ou-ch03-rallis-bridge title="Rallis Doubling Inner-Product Formula" lean="D5/S3/Zeros/GRH/Lib/SiegelWeil/RallisInner/SharpData.inner_product_formula"}
+Let $E$ carry the cited library's field, CM-type, and Weil-data structures, let $n,m$ be finite index types, and let $S=\operatorname{Space}(E,n,s)$ and $T=\operatorname{Space}(E,m,t)$ be the corresponding spaces. Take automorphic characters $a,b$, Schwartz data $f,f'$, and automorphic forms $y,y'$ on the source space. Assume $2|n|<|m|$, that $f$ satisfies the library's clean condition `IsClean`, and that $y,y'$ belong to `S.rapidFunctions`, the rapidly decreasing automorphic forms. Write $R(g)$ for right translation, $\omega_{1,b}$ for the corresponding Weil representation, and $\langle\cdot,\cdot\rangle_S$, $\langle\cdot,\cdot\rangle_T$ for the library's Petersson inner products. Then
+
+$$
+k(g)=\langle f',\omega_{1,b}(g,1)f\rangle\,\langle y',R(g)y\rangle_S
+$$
+
+is integrable on $U(S)(\mathbb A)$, and the theta lifts with parameters $a,b$ satisfy
+
+$$
+\langle\theta_{f'}y',\theta_fy\rangle_T
+=\operatorname{vol}([U(T)])\int_{U(S)(\mathbb A)}k(g)\,dg.
+$$
+
+The pairing in the first factor is the library's `dataInner`; $[U(T)]$ is the target group's automorphic quotient, with the quotient measure used for the Petersson inner product; $f'$ need not be clean.
+:::
+
+::: proof
+Double the two theta kernels and apply the Siegel–Weil formula. The clean condition removes boundary orbits, leaving graph orbits indexed by rational isometries of the source space; unfolding these orbits gives the matrix-coefficient integral. The strict rank inequality and rapid-decay hypotheses ensure integrability. The full proof is checked by the Lean kernel.
+:::
+
+Setting $f'=f$ and $y'=y$ makes the left side the squared norm of the lifted form (manual substitution, `ARGUED`). This makes the link between arithmetic constructions and spectral inner products explicit. The identity alone neither proves that the lift is nonzero nor bounds its norm from below, and it supplies no self-adjoint operator with the Riemann zeros as its spectrum. We now return to the zero-phase sums used in this book, whose quantitative cancellation requires its own analytic estimates.
 
 ## 3.2 Harmonic Pair-Moment Ratios, Reciprocal-Time Deficits, and Landau Vertical Bounds {#sec-ou-3-2}
 
@@ -192,7 +219,24 @@ $$
 
 Horizontal integration makes the jump of $\log\zeta$ along the slit to the left of a zero proportional to $\beta-\sigma$. Shifting the contour for each of the two exponential phases and combining them to recover the real part gives the hyperbolic cosine weight. A local logarithmic derivative estimate bounds the horizontal edges by $O_\lambda(L)$. The top edge is taken by a right limit. Nonresonance keeps the modulated integral of the prime-power polynomial within the same bound. [Korolev, cutoff weights before Lemma 4](https://www.mathnet.ru/links/2bb06e5a975dd807fe74eae4c1f9fd1f/im2766_eng.pdf#page=9) · [Contour calculation and numerical check](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239342305)
 
-At $a=0$, reflection at the same ordinate recovers $C_\lambda(T)$ from the zero sum up to normalization and a bounded contribution from the lowest heights. Increasing $a$ replaces the weight of each zero on the right by $\cosh(\lambda(\delta_\rho-a)_+)-1$, where $v_+=\max(v,0)$. Integrating the derivative of that weight against Selberg's density estimate bounds the remainder on the right by $O_\lambda((T/L)e^{-aL/4}+L)$. Setting $a=1/L$ reduces the constant in the density estimate, and a synthetic spectrum can attain order $T/L$ in both the narrow strip and the region farther right. At $a=8\log L/L$, the bound on the right drops to $O_\lambda(T/L^3+L)$. At this width, the same-frequency integral over the strip is determined by a quadratic moment of the offsets. Write $D_\lambda(u,T)=\sum_{0<\gamma\le T,\,\delta_\rho>u}e^{i\lambda\gamma}$, counting multiplicities and including the upper endpoint in height. Subtract the two contour formulas for the horizontal integrals and expand $\cosh(\lambda d)-1=\lambda^2 d^2/2+O_\lambda(d^4)$. This gives the following hand-derived relation (`ARGUED`).
+A stronger zero-density estimate near the critical line controls the integral on a single vertical line once it lies far enough to the right. Set $L_U=\log U$, take $0\le a\le1/2$ and $U\le V\le2U$, and count zeros with multiplicity in the right-closed window. Write $N_+(u,T)$ for the number of zeros with $0<\gamma\le T$ and $\delta_\rho>u$. For each fixed $0<\theta<4/7$, one has $N_+(u,T)\ll_\theta T^{1-2\theta u}\log T$ uniformly for $0\le u\le1/2$. Using height $3U$ covers even the upper endpoint of the window. [Baluyot, *On the Zeros of Riemann’s Zeta-function* (2017), Theorem 1.2.1 and §3.6](https://hdl.handle.net/1802/32855)
+
+Express the excess of each offset over the threshold as an integral of indicators, then take absolute values. This gives the hand-derived bound (`ARGUED`)
+
+$$
+\begin{aligned}
+\left|\sum_{\substack{U<\gamma\le V\\\delta_\rho>a}}
+(\delta_\rho-a)e^{i\lambda\gamma}\right|
+&\le \int_a^{1/2} N_+(u,3U)\,du \\
+&\ll_\theta U e^{-2\theta a L_U}.
+\end{aligned}
+$$
+
+On the line with real part $1/2+a$, the slit weight is $\sinh(\lambda(\delta_\rho-a))/\lambda$ for $\delta_\rho>a$. It is bounded by $\cosh(\lambda/2)$ times the linear weight, so the same bound applies to the modulated log-modulus integral, with an additional $O_\lambda(L_U)$ from the horizontal edges. At $a=b\log L_U/L_U$, every fixed $b>7/8$ allows a choice with $2\theta b>1$, giving $o(U/L_U)$. At $b=2$ the first moment is $O_\varepsilon(U/L_U^{16/7-\varepsilon})$, without assuming RH or using phase cancellation between zeros. [Single-line slit calculation and density integral](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240931083)
+
+At the threshold $b=7/8$, the fixed-exponent bounds yield $O_\varepsilon(U/L_U^{1-\varepsilon})$. A synthetic spectrum shows the limit of these inputs (manual derivation). In each period, two off-line groups have opposite phases and differ in size by one point. Their offsets sit just above $a$ and are chosen to give the groups equal quadratic weights. This spectrum satisfies the full family of density bounds above with constants growing at most as $(4/7-\theta)^{-1}$, yet its right-closed first moment can be of order $U\log L_U/L_U$. An $O(U/L_U)$ estimate at this line for the actual zeta zeros without RH requires an additional input. [Threshold construction, reproducible check, and the errors in Baluyot, §3.6](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7241173664)
+
+Returning to the formula integrated over the real part, at $a=0$ reflection at the same ordinate recovers $C_\lambda(T)$ from the zero sum up to normalization and a bounded contribution from the lowest heights. Increasing $a$ replaces the weight of each zero on the right by $\cosh(\lambda(\delta_\rho-a)_+)-1$, where $v_+=\max(v,0)$. Integrating the derivative of that weight against Selberg's density estimate bounds the remainder on the right by $O_\lambda((T/L)e^{-aL/4}+L)$. Setting $a=1/L$ reduces the constant in the density estimate, and a synthetic spectrum can attain order $T/L$ in both the narrow strip and the region farther right. At $a=8\log L/L$, the bound on the right drops to $O_\lambda(T/L^3+L)$. At this width, the same-frequency integral over the strip is determined by a quadratic moment of the offsets. Write $D_\lambda(u,T)=\sum_{0<\gamma\le T,\,\delta_\rho>u}e^{i\lambda\gamma}$, counting multiplicities and including the upper endpoint in height. Subtract the two contour formulas for the horizontal integrals and expand $\cosh(\lambda d)-1=\lambda^2 d^2/2+O_\lambda(d^4)$. This gives the following hand-derived relation (`ARGUED`).
 
 $$
 \int_3^T e^{i\lambda t}\int_{1/2}^{1/2+a}\log|\zeta(\sigma+it)|\,d\sigma\,dt
@@ -369,7 +413,9 @@ Zero #11431 serves as a recurring testbed for two-loop gauge crossings and two-s
 
    When the bandwidth decreases from $10^{-3}$ to $0.000999990$, $J_\eta(111526)$ reaches $B$ first, at $\eta_J\in(0.000999994536,0.000999994537)$. The full reading $I_\eta(111521)$ reaches $B$ at $\eta_I\in(0.000999990430,0.000999990431)$. Within this interval the first integer radius strictly above $B$ for $J_\eta$ rises to $111527$ at $\eta\le\eta_J$, and for $I_\eta$ it rises to $111522$ at $\eta\le\eta_I$. Between the switches ($\eta_I<\eta\le\eta_J$), the first radii are six units apart. The increasing and decreasing bandwidth intervals both lie inside the isolated collision band for the full-line integral. Ball arithmetic uses $F_T'(a)=\operatorname{Si}(aT)$ to bound the bandwidth derivatives at neighboring integer radii and verify the margin signs on either side of each critical bandwidth. [Interval certificate and replay for decreasing bandwidth](https://github.com/the-omega-institute/trureturing-books/issues/1996#issuecomment-7240859714)
 
-   With local harmonic weights, the first integer crossing is at $111532$ ($111531$ is still below its baseline). The generic relative truncation bound gives sufficient radii of $11{,}330{,}943$ for equal weights and $11{,}331{,}843$ for local harmonic weights.
+   For local harmonic weights, normalize $\gamma_j/(1/4+\gamma_j^2)$ over the nineteen zeros and use the corresponding occupation diagonal as the threshold. At $\eta=10^{-3}$ the full reading first strictly exceeds it at $111532$, and the reading with just the diagonal and midpoint pair first does so at $111535$. As the bandwidth decreases to $0.000999992750$, the full reading switches first, reversing the equal-weight order. The full reading reaches the threshold at $\eta_I^{\mathrm{harm}}\in(0.000999997267,0.000999997268)$ and the midpoint reading at $\eta_J^{\mathrm{harm}}\in(0.000999992819,0.000999992820)$. The first radius for the full reading rises to $111533$ when $\eta\le\eta_I^{\mathrm{harm}}$. The first radius for the midpoint reading rises to $111536$ when $\eta\le\eta_J^{\mathrm{harm}}$. Between the switches ($\eta_J^{\mathrm{harm}}<\eta\le\eta_I^{\mathrm{harm}}$), the first radii are two units apart and the full-line collision pair is still the same. [Interval certificate and replay for local harmonic weights](https://github.com/the-omega-institute/trureturing-books/issues/2243#issuecomment-7241230555)
+
+   The generic relative truncation bound gives sufficient radii of $11{,}330{,}943$ for equal weights and $11{,}331{,}843$ for local harmonic weights.
 
 ::: {.example #ex-ou-ch03-fejer-11431 title="Three-Line Derivation of the Sharp 23.670% Isolated-Band Ceiling"}
 Inside the isolated band $\Delta < \eta \le \Delta_2$, write $x, y, z \ge 0$ for the probability weights on zeros #11427, #11436, and #11431, and set $q := 1 - \Delta/\eta \in (0, 1]$. The extra collision contributes $4q x y z^2$, while the occupation diagonal $D = \sum_i p_i^4 + 4\sum_{i < j} p_i^2 p_j^2$ only increases when any of the other sixteen weights is nonzero. For $x, y > 0$, putting $t := z^2 / (xy)$ and using $x^2 + y^2 \ge 2xy$ yields

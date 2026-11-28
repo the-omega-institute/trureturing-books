@@ -208,6 +208,31 @@ $$
 \left|D_H-\frac{1}{eL_H}\right|\le\frac{2E}{L_H-E}.
 $$
 
+**First-order bias averaged over cutoff heights (`ARGUED`).** The linear counting remainder for the fixed Chapter 2 Haar window, derived below, supplies a constant $E$ with $|\delta_x|\le E$ for all sufficiently large $x$. Choose $X>1$ so this bound holds for $x\ge X$ and $L_X>E$. Write $\langle g\rangle_X=(\log X)^{-1}\int_X^{X^2}g(H)\,dH/H$. For $0<s\le1$ put $u=\log(1/s)$. The ratio of tail masses gives the identity
+
+$$
+(L_H+\delta_H)(Q_H(s)-s)=s(u+\delta_{H/s}-\delta_H).
+$$
+
+In the $\log H$ coordinate, the integration intervals for $\delta_{H/s}$ and $\delta_H$ are translates by $u$. Their difference leaves two end intervals of length at most $u$. Thus the averaged difference contributes at most $2Esu/\log X$. Removing $\delta_H$ from the left costs at most $E(su+2sE)/(L_X-E)$. Since $su\le1/e$,
+
+$$
+\sup_{0<s\le1}\left|\left\langle L_H(Q_H(s)-s)\right\rangle_X-s\log(1/s)\right|
+\le \frac{2E}{e\log X}+\frac{E(1/e+2E)}{L_X-E}.
+$$
+
+Taking $s=e^{-1}$ gives $\limsup_{H\to\infty}L_HD_H\ge1/e$, so the window's $O(1/\log H)$ rate is sharp in order. For the unfiltered spectrum, the [cumulative zero-count bound](lean:D5/S3/Weil/ZeroData/CumulativeRvmError.cumulative_rvm_error) gives an $O((\log t)^2)$ remainder. Hence $\sup_{x\ge H}|\delta_x|\to0$ and the same identity gives $L_HD_H\to1/e$ for individual cutoffs.
+
+The unit-scale reading $K_H=\mathbb E_H[(1+(H/\gamma)^2)^{-1}]$ also retains a signed bias. With $f(s)=(1+s^2)^{-1}$, integration by parts gives $K_H-\pi/4=\int_0^1(-f'(s))(Q_H(s)-s)\,ds$. Since $f(0)-f(1)=1/2$, the average $\langle L_H(K_H-\pi/4)\rangle_X$ differs from the following coefficient by at most half the uniform bound above.
+
+$$
+\int_0^1(-f'(s))s\log(1/s)\,ds
+=\int_0^1\frac{-\log s-1}{1+s^2}\,ds
+=G-\frac{\pi}{4},
+$$
+
+where $G=\sum_{k\ge0}(-1)^k/(2k+1)^2$ is Catalan's constant. This coefficient also bounds $\limsup_{H\to\infty}L_H(K_H-\pi/4)$ from below. [Geometric cutoffs and a counterexample for the pointwise coefficient](https://github.com/the-omega-institute/trureturing-books/issues/1637#issuecomment-7240605519)
+
 For all positive zeros without phase filtering, the counting estimate of Hasanalizade, Shen, and Wong gives for $t\ge e$
 
 $$
