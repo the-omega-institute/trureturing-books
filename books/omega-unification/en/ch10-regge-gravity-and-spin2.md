@@ -423,6 +423,36 @@ reconstructing all $20$ curvature components while automatically projecting out 
 **Deficit angles are curvature: at long wavelengths they carry the two spin-2 helicities, yet integer hinge loads run into a $\sqrt{3}$ wall (2 min 51 s).** Cyan wedges of dihedral angle $\theta = \arccos(1/4) \approx 75.52^\circ$ fan around a hinge; four leave a magenta gap of $+57.91^\circ$ and five overshoot by $-17.61^\circ$. The counts $(6, 20) \to (10, 30) \to (12, 34)$ under two Pachner moves are computed on screen from vertex sets, and twice the second step subtracted from the first gives $G = A/(2(d_1 - 2d_2))$. As the source ellipse turns by $\theta$, the magenta arrow $(T^{11} - T^{22}, 2T^{12})$ turns by $2\theta$; a $16\times 16$ grid lights up the $255$ nonzero momenta while an amber bar marks the lone opposite-sign conformal mode; the Pell card shows $3\cdot 2911^2 - 4\cdot 2521^2 = -1$ and the $5432$-slot integer ground state of zero #11366. These are on-screen computations or the chapter's model-internal replay certificates (cyan NUM). Green LEAN ✓ marks only the coboundary identities on the triangle [@thm-ou-ch10-coboundary-zero] and the right-angle spinor closing in eight beats on the violet circle [@thm-ou-ch10-sqrt2-spinor]; red OPEN marks that deriving the Regge action from a single minimal arc remains unsolved.
 :::
 
+### 10.3.3 Exact Periodic 4D $A_4^*$ Regge 3-Graviton Vertex and Unimodular Fixed-Volume Regge {#sec-ou-ch10-a4star-3graviton-and-unimodular}
+
+Beyond the free propagator and three-marker tests of Sections 10.2–10.3, independent symbolic and exact rational verification targeting Question 4 (tracking issue `#2376`) establishes two core nonlinear gravity results:
+
+1. **Exact Periodic 4D $A_4^*$ Regge 3-Graviton Vertex Equals Continuum Einstein–Hilbert (ARGUED / NUM).** Differentiating the flat $A_4^*$ Regge action using the second-order Schläfli identity yields the exact local third variation
+
+$$
+D^3 S_R[a, b, c]
+\;=\;
+\sum_f \Bigl(
+ D^2 A_f[a, b]\, D\delta_f[c]
+ + D^2 A_f[a, c]\, D\delta_f[b]
+ + D A_f[a]\, D^2\delta_f[b, c]
+\Bigr).
+$$
+
+Polarizing in squared-edge coordinates yields all $100$ local Hessian entries (least common denominator $48$ after dividing by $\sqrt{\det g} = 1/\sqrt{5}$) and all $1000$ local cubic entries (LCD $96$; $635$ nonzero base-point stencil terms). Integrating out the $5$ heavy non-metric modes ($\det E^{\mathsf T} H_0 E = -81/16 \neq 0$ and $\mathcal{C}_0[P, P, X] = 0$) shifts the reduced cubic only at $O(k^4)$. Direct integer-arithmetic comparison against the full Riemann expansion across all $1000$ quadratic entries ($10$ momentum probes) and all $44000$ cubic entries ($36$ determining probes plus $8$ seeded conserved triples) certifies that the two-derivative periodic $A_4^*$ Regge cubic **matches the exact continuum Einstein–Hilbert 3-graviton vertex identically**, including all longitudinal components and the cell factor $1/\sqrt{5}$. On an explicit transverse-traceless (TT) witness triple, the exact derivative is $-32 t^2 + (8/3 + 14/9) t^4 + O(t^6)$ (total four-derivative coefficient $38/9$); the exact finite-character lattice two-displacement Ward identity $D^3 S_R[\cdot, Y_z, Y_w] + D^2 S_R[\cdot, D_{z,w}] = 0$ holds identically, while the continuum single-leg Ward identity cancels exactly at $O(k^2)$ ($-10 + 10 = 0$) with first $O(k^4)$ lattice residual $-23/72$. On a single Lorentzian four-simplex ($\det G_\sigma = -1/400$, five positive-definite facets), both the signed-boost first Schläfli identity and all $100$ mixed second Schläfli coefficients likewise verify exactly; however, in the antiperiodic vector block of a diagonal checkerboard slicing, exact quotient elimination gives negative reflection expectation $-17/282$ (double-even box inertia $(80, 16, 32)$), confirming that a real periodic Lorentzian interacting measure remains open (OPEN).
+
+2. **Exact Constant-Vacuum Cancellation in Fixed-Total-Volume Regge and Half-Volume Reflection Obstruction (ARGUED).** On the nondegenerate squared-length domain of a fixed triangulation, total four-volume $V(q) = \sum_\sigma |\det G_\sigma|^{1/2}/24$ obeys Euler homogeneity $q\cdot\nabla V = 2V > 0$, making $V(q) = V_0 > 0$ a smooth codimension-one constraint. For any common regulated measure with defined normalization,
+
+$$
+Z_b[J; V_0]
+\;=\;
+\int_{\mathscr{Q}} d\mu(q)\,\delta\bigl(V(q) - V_0\bigr)\,e^{-S_g(q) - b V(q)}\,Z_{\rm matter}[J; q]
+\;=\;
+e^{-b V_0}\,Z_0[J; V_0],
+$$
+
+canceling every constant vacuum shift $b$ (including the heat-kernel $a_0$ constant and the constant tree-level Higgs drop) identically from all normalized correlators. Under the tangent scale projector $p_T = I - q(\nabla V)^{\mathsf T}/(2V)$, the constrained edge equations become $\beta\sum_{f\ni e}\partial_{q_e} A_f\,\delta_f + \partial_{q_e} I_m = \lambda\sum_{\sigma\ni e}\partial_{q_e} V_\sigma$ with exact global multiplier $\lambda = (\beta S_R + q\cdot\nabla I_m)/(2V_0)$, shifted by $+b$ at fixed geometry. Two honest limits remain: fixing total volume removes only the zero-momentum scale mode while leaving nonzero-momentum conformal modes intact and violating reflection positivity for half-volume fluctuations $F = V_+ - V_0/2$ ($\langle F\Theta F\rangle = -\langle F^2\rangle < 0$, attaining $-1$ and $-1/3$ in hard/soft two-state models); nor does fixing $V_0$ select the integration constant $\Lambda_{\rm int}\ell_P^2 \sim 10^{-122}$ (OPEN).
+
 | Audit Axis | Benchmark (#11366 vs #11431 or Window Extremum) | Established Model-Internal Result or Bound | Remaining First-Principles Gap |
 | --- | --- | --- | --- |
 | Bare couplings & matter determinants | $(20,54)$ and $(24,64)$ $4$-spheres | $d_1 - 2d_2 = -4\pi A b$; shell matter resolves identical-histogram $S^4$ via $252$ 6-step dual walks | Derivation of bare action and continuum renormalization |
