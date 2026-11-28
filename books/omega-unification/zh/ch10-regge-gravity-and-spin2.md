@@ -279,6 +279,8 @@ $$
 
 这里 $k=1$ 使零耦合的归一化核列具有公共有理分母。换基后，平方 Cauchy 核的采样行列式给出一项对合流也有效的正下界。靠近被消去的速率时，曲率项保有正下界。远离这些速率时，混合差含有的速率差平方积足以压过曲率余项。由此算出的常数很保守，适用于整个指定速率区间和任意混合权重。[手工推导与精确有理复算](https://github.com/the-omega-institute/trureturing-books/issues/1995#issuecomment-7239065501)
 
+若一组模型的耦合为零，两组补偿速率的支撑并集至多有三个不同值，则同一组六点读数可用于较宽的窗口。另一组在 $\lvert\beta\rvert\le10^{-3}$ 时满足 $\lvert\beta\rvert^3\le2^{142}\|m-m'\|_\infty$（手工推导，`ARGUED`）。两组权重可独立变化，也可在个别速率上为零。把联合支撑的各速率加倍，混合差便完全落在采样泛函消去的方向中。在任一速率槽上，取值和一阶导数的消去使曲率列的 Wronskian 化为二次型。以零耦合的正定二次型为参照，逐项估计带号立方差商可保留至少 $19/20$ 的信号。这一相对界经 Rolle 定理传到六点行列式，涵盖速率合流。两组耦合都可非零、且各有独立支撑时，在这一窗口内的统一界仍待确定。 [完整推导与精确有理复算](https://github.com/the-omega-institute/trureturing-books/issues/2020#issuecomment-7239345860)
+
 物理耦合满足 $\lvert\beta-\beta'\rvert^3\le 4\lvert u-u'\rvert$。若每个读数的误差至多为 $\varepsilon$，任何误差预算内的拟合与真实模型的读数相距至多 $2\varepsilon$。因此 $u$ 与 $\beta$ 的最坏误差分别为 $O(\varepsilon)$ 与 $O(\varepsilon^{1/3})$，且两阶都是锐的。固定一个容许的补偿速率，比较 $\beta=\pm h$。读数差按 $h^3$ 缩小，而带号立方坐标与物理耦合的差分别为 $2h^3$ 与 $2h$，故允许达到读数差一半的噪声时，两组都能给出相同的观测。[有限差商推导与有理区间复算](https://github.com/the-omega-institute/trureturing-books/issues/1906#issuecomment-7238707033)
 
 若首项为偶次 $j$，而首个奇次 $m>j$，固定 $2r-1$ 个读数以消去混合参数后，一个剩余读数在零点折返。再加一个一般读数就能分开两支，因为未归一化权重的两个对数变分方向 $v^{j/2}$ 与 $v^{m/2}$ 在混合切向空间和常数之外仍线性独立。因此一般的 $2r+1$ 个读数足够。对刚得到的格点形状律，某个有限阶的奇次系数必非零。其首现阶数与形状均值决定适用哪一种局部情形。[高阶分支推导](https://github.com/the-omega-institute/trureturing-books/issues/1611#issuecomment-7230292091) · [精确三点算例](https://github.com/the-omega-institute/trureturing-books/issues/1611#issuecomment-7230342324)
