@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "b43d24224c82152f8472894ca106fece25c872a0",
-  "pinned_at": "2026-11-28T10:34:34Z",
+  "commit": "178dd932deca05487336e47cb4ae07fa21fb7a27",
+  "pinned_at": "2026-11-28T11:58:33Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -5829,13 +5829,13 @@
       "line": 193,
       "signature": "theorem central_fejer_gaussian_limit {J : ℕ → Type*} [∀ n,Fintype (J n)] (g w : ∀ n,J n → ℝ) (hw : ∀ᶠ n in atTop, ∀ i j, 0≤w n i*w n j) (hW : ∀ᶠ n in atTop, ∑ j,w n j=1) (hM : ∀ᶠ n in atTop, 0<pairMoment (g n) (w n) 2) (ρ A : ℕ → ℝ) (hρ : Tendsto ρ atTop (𝓝 0)) (hA : Tendsto A atTop atTop) (hwin : ∀ᶠ n in atTop, A n^2*pairMoment (g n) (w n) 4 ≤ 6*(n:ℝ)*pairMoment (g n) (w n) 2^2) : let kernel"
     },
-    "D5/S3/Fourier/Asymptotics/PlanarFourierTail.lattice_fourier_tail": {
-      "module": "D5/S3/Fourier/Asymptotics/PlanarFourierTail",
-      "name": "D5.S3.Fourier.Asymptotics.PlanarFourierTail.lattice_fourier_tail",
+    "D5/S3/Fourier/Asymptotics/PlanarWindowSampling.compact_window_sampling": {
+      "module": "D5/S3/Fourier/Asymptotics/PlanarWindowSampling",
+      "name": "D5.S3.Fourier.Asymptotics.PlanarWindowSampling.compact_window_sampling",
       "kind": "theorem",
-      "statement_id": "sha256:64e46503365534e9e473257147ad4dc07fc81282316604887a34e5e56c282d17",
-      "line": 72,
-      "signature": "theorem lattice_fourier_tail (s : Finset (ℤ × ℤ)) (a : ℤ × ℤ → ℂ) (J : ℕ) (ε K : ℝ) (hJ : 0 < J) (hε : 0 < ε) (hK : 0 ≤ K) (hcut : ∀ m ∈ s, J < modeRadius m) (hdecay : ∀ m ∈ s, ‖a m‖ ≤ K * ε ^ 2 / (1 + ε * modeRadius m) ^ 6) : ∑ m ∈ s, ‖a m‖ ≤ 2 * K / (ε ^ 4 * (J : ℝ) ^ 4)",
+      "statement_id": "sha256:3a65dbd0081e0a5d9c83341a65266f271b1391a49bffc892cc7fea4a9fee44a5",
+      "line": 430,
+      "signature": "theorem compact_window_sampling {ι : Type*} (f : Plane → ℂ) (hf : HasCompactSupport f) (hs : ContDiff ℝ ∞ f) : ∃ K ≥ (0 : ℝ), ∀ (ε : ℝ), 0 < ε → ε ≤ 1 → ∀ (center : Plane) (s : Finset ι) (w : ι → ℝ) (p : ι → Plane) (J : ℕ) (c d : ℝ), 0 ≤ c → 0 ≤ d → 0 < J → (∀ i ∈ s, 0 ≤ w i) → (∑ i ∈ s, w i = 1) → (∀ m ≠ (0, 0), modeRadius m ≤ J → ‖∑ i ∈ s, (w i : ℂ) * character m (p i)‖ ≤ c + d * (modeRadius m : ℝ) ^ 2) → ‖(∑ i ∈ s, (w i : ℂ) * ∑' a : Fin 2 → ℤ, f (ε⁻¹ • (toLp 2 (fun j => (a j : ℝ)) + p i - center))) - (ε ^ 2 : ℝ) • (∫ x, f x)‖ ≤ 27 * K * c + (27 * K / ε ^ 2) * d + 2 * K / (ε ^ 4 * (J : ℝ) ^",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
