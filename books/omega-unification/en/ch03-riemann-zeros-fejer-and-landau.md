@@ -223,7 +223,11 @@ Zero #11431 serves as a recurring testbed for two-loop gauge crossings and two-s
    \end{aligned}
    $$
 
-   An absolute integration error of at most $1.8\times10^{-11}$ in each reading still certifies $111521$ as the first integer radius above the threshold. To reproduce the margins, expand the fourth power and evaluate the cosine integral at each frequency difference $d$ as $\bigl(F_T(d+\eta)+F_T(d-\eta)-2F_T(d)\bigr)/(\pi\eta)$, where $F_T(a)=a\operatorname{Si}(aT)-(1-\cos(aT))/T$ comes from integrating $(1-\cos(at))/t^2$ by parts. With local harmonic weights, the first integer crossing is at $111532$ ($111531$ is still below its baseline). The generic relative truncation bound gives sufficient radii of $11{,}330{,}943$ for equal weights and $11{,}331{,}843$ for local harmonic weights.
+   An absolute integration error of at most $1.8\times10^{-11}$ in each reading still certifies $111521$ as the first integer radius above the threshold. To reproduce the margins, expand the fourth power and evaluate the cosine integral at each frequency difference $d$ as $\bigl(F_T(d+\eta)+F_T(d-\eta)-2F_T(d)\bigr)/(\pi\eta)$, where $F_T(a)=a\operatorname{Si}(aT)-(1-\cos(aT))/T$ comes from integrating $(1-\cos(at))/t^2$ by parts.
+
+   Write $C_{\eta,T}(d)$ for this finite cosine integral. At $T=111521$, the two directions of the isolated midpoint pair together contribute $4C_{\eta,T}(\Delta)/19^4$. Subtracting just these terms leaves a margin relative to $B$ in $(-3.05165,-3.05163)\times10^{-5}$, so the reading falls below the threshold. The other off-diagonal pairs have zero full-line coefficients. At this finite radius their terms sum to about $1.5192\times10^{-9}$, exceeding the positive margin above.
+
+   With local harmonic weights, the first integer crossing is at $111532$ ($111531$ is still below its baseline). The generic relative truncation bound gives sufficient radii of $11{,}330{,}943$ for equal weights and $11{,}331{,}843$ for local harmonic weights.
 
 ::: {.example #ex-ou-ch03-fejer-11431 title="Three-Line Derivation of the Sharp 23.670% Isolated-Band Ceiling"}
 Inside the isolated band $\Delta < \eta \le \Delta_2$, write $x, y, z \ge 0$ for the probability weights on zeros #11427, #11436, and #11431, and set $q := 1 - \Delta/\eta \in (0, 1]$. The extra collision contributes $4q x y z^2$, while the occupation diagonal $D = \sum_i p_i^4 + 4\sum_{i < j} p_i^2 p_j^2$ only increases when any of the other sixteen weights is nonzero. For $x, y > 0$, putting $t := z^2 / (xy)$ and using $x^2 + y^2 \ge 2xy$ yields
