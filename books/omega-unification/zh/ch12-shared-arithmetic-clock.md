@@ -232,7 +232,7 @@ $$
 |\lambda_k|\ge |e^{i\lambda_k}-1|\ge 2^{-31}1734^{-192\|k\|_\infty}.
 $$
 
-对两个模态之差应用此界可知，当 $T$ 足够大时，盒 $\|k\|_\infty\le K$ 内不同实频率的间距大于 $2T^{-1/3}$。由共轭性，只需取 $\lambda_k>0$。在黎曼假设下，以 $x=e^{\lambda_k}$ 代入均匀 Landau 公式并除以 $\sqrt{x}$，得到相位和。若 $n$ 是离 $x$ 最近的素数幂，$\Lambda$ 为冯·曼戈尔特函数，则主项绝对值至多为常数倍的 $\Lambda(n)e^{-\lambda_k/2}\min(T,2/|\lambda_k-\log n|)$，精确相等时取 $T$。最近的素数幂满足 $n\le2x$，只需与邻近的二次幂比较。因此 $\Lambda(n)e^{-\lambda_k/2}\le\log(2x)/\sqrt{x}=O(1)$，远离对数素数幂至少 $T^{-1/3}$ 的主项都是 $O(T^{1/3})$。其余误差项为 $O\bigl(\sqrt{x}\log^2(Tx)+\log T/(\sqrt{x}\lambda_k)\bigr)$。频率数为 $O(K^4)$ 且 $\|P\|_2=O(1)$，因此这些误差与远离素数幂的主项经 Fourier 系数加权后合计为 $o(T)$。[均匀 Landau 公式，原始引理 1](https://arxiv.org/abs/math/0405459) · [式 (1.6)](https://arxiv.org/abs/0805.2745)
+对两个模态之差应用此界可知，当 $T$ 足够大时，盒 $\|k\|_\infty\le K$ 内不同实频率的间距大于 $2T^{-1/3}$。由共轭性，只需取 $\lambda_k>0$。在黎曼假设下，以 $x=e^{\lambda_k}$ 代入均匀 Landau 公式并除以 $\sqrt{x}$，得到相位和。若 $n$ 是离 $x$ 最近的素数幂，$\Lambda$ 为冯·曼戈尔特函数，则主项绝对值至多为常数倍的 $\Lambda(n)e^{-\lambda_k/2}\min(T,2/|\lambda_k-\log n|)$，精确相等时取 $T$。最近的素数幂满足 $n\le2x$，只需与邻近的 $2$ 的幂比较。因此 $\Lambda(n)e^{-\lambda_k/2}\le\log(2x)/\sqrt{x}=O(1)$，远离对数素数幂至少 $T^{-1/3}$ 的主项都是 $O(T^{1/3})$。其余误差项为 $O\bigl(\sqrt{x}\log^2(Tx)+\log T/(\sqrt{x}\lambda_k)\bigr)$。频率数为 $O(K^4)$ 且 $\|P\|_2=O(1)$，因此这些误差与远离素数幂的主项经 Fourier 系数加权后合计为 $o(T)$。[均匀 Landau 公式，原始引理 1](https://arxiv.org/abs/math/0405459) · [式 (1.6)](https://arxiv.org/abs/0805.2745)
 
 在距离对数素数幂小于 $T^{-1/3}$ 的模态中，每个素数幂至多匹配一个正频率。固定二倍频层 $M$ 和区间 $j\le\lambda_k<j+1$。这一组至多含 $O(\min(e^j,M^4))$ 项，每项的主项除以 $T$ 后为 $O((j+1)e^{-j/2})$。由 Cauchy–Schwarz 不等式，该组加权贡献除以 $T$ 后为
 
