@@ -953,3 +953,5 @@ Because the diagonal is $1$ and $\lvert G_{ij}\rvert\le1$, the trivial lower bou
 The factor $m-2$ here and the factor $\lvert V\rvert-2$ of [@thm-appe-chordal-gain-potential-stability] have different origins: in the theorem it counts the three-point defects accumulated along the elimination order, and here it counts the nonzero entries in each row of the perturbation matrix.
 
 For half comparisons, the return phase measures another effect involving three points. See [Where Curvature Comes From](appendix-e-s08-s01-s04-curvature.md#sec-appe-curvature-from-half-comparison).
+
+The chordal Banach strata, real $L_1$, Hilbert, causal three-tree, and linear-filling results are collected in [Appendix E.8.1.8](appendix-e-s08-s01-s08-chordal-banach-exact-strata.md#sec-appe-chordal-banach-exact-strata).

@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "0979a7100ced5b6fa95e5b7d1f2251e23f958242",
-  "pinned_at": "2026-11-28T04:52:21Z",
+  "commit": "a5909e7f611954fc71b26eed9efff2d7b42a2cc3",
+  "pinned_at": "2026-11-28T05:18:22Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1869,6 +1869,448 @@
       "statement_id": "sha256:c3543c37c6aa790f2c7b888a0c3f498ce73a440b2004abdeb346259504806d7c",
       "line": 557,
       "signature": "theorem exists_universal_core_simplicial_banach_potential {V : Type u} [Finite V] (G : SimpleGraph V) (H U : Set V) (_hUH : U ⊆ H) (hU : U.Nonempty) (huniv : ∀ u ∈ U, ∀ h ∈ H, u ≠ h → G.Adj u h) (hind : G.IsIndepSet Hᶜ) (m : ℕ) (hm : 1 ≤ m) (hattach : ∀ o ∉ H, {a : V | G.Adj o a} ⊆ H ∧ G.IsClique {a : V | G.Adj o a} ∧ {a : V | G.Adj o a}.ncard ≤ m) {E : Type v} [SeminormedAddCommGroup E] [NormedSpace ℝ E] (g : V → V → E) (ε : ℝ) (hε : 0 ≤ ε) (hrev : ∀ i j, g j i = -g i j) (htri : ∀ i j l, G.Adj i j → G.Adj j l → G.Adj i l → ‖g i j + g j l - g i l‖ ≤ ε) : ∃ φ : V → E, ∀ u v, G.Adj u v → ‖g u v ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata.ChordalL1.l1_uniform_jung_exact": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata",
+      "name": "ChordalL1.l1_uniform_jung_exact",
+      "kind": "theorem",
+      "statement_id": "sha256:d588a5a3b18083eeee29bf7d09a59cb26595e35b2f0b27ecd2043efa46dddf10",
+      "line": 645,
+      "signature": "theorem l1_uniform_jung_exact (m k : ℕ) (hm : 0 < m) (hmk : 2 * m ≤ k) (hk : k ≤ 2 * m + 1) (C : ℝ) : (∀ (Ω : Type) [MeasurableSpace Ω] (μ : Measure Ω) (s : Finset (Lp ℝ 1 μ)), s.card ≤ k → (∀ a ∈ s, ∀ b ∈ s, ‖a - b‖ ≤ 1) → ∃ c : Lp ℝ 1 μ, ∀ a ∈ s, ‖a - c‖ ≤ C) ↔ 1 - 1 / (2 * (m : ℝ)) ≤ C",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata.FiveLaneRouting.BinaryStaircase.exact_graph_envelope_costs": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata",
+      "name": "FiveLaneRouting.BinaryStaircase.exact_graph_envelope_costs",
+      "kind": "theorem",
+      "statement_id": "sha256:d588a5a3b18083eeee29bf7d09a59cb26595e35b2f0b27ecd2043efa46dddf10",
+      "line": 943,
+      "signature": "theorem exact_graph_envelope_costs : (∃ c, GraphEnvelope c ∧ totalCost c = 16 / 15) ∧ (∀ c, GraphEnvelope c → 16 / 15 ≤ totalCost c) ∧ (∃ c, GraphLinearEnvelope c ∧ totalCost c = 32 / 25) ∧ ∀ c, GraphLinearEnvelope c → 32 / 25 ≤ totalCost c",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata.Omega.PureThreeTree.banach_causal_limit_for_build": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata",
+      "name": "Omega.PureThreeTree.banach_causal_limit_for_build",
+      "kind": "theorem",
+      "statement_id": "sha256:d588a5a3b18083eeee29bf7d09a59cb26595e35b2f0b27ecd2043efa46dddf10",
+      "line": 908,
+      "signature": "theorem banach_causal_limit_for_build (R : ℝ) (hR : 0 ≤ R) : (∀ (m : ℕ) (b : StackedTriangleCurvature.Build m) (ε : ℝ), 0 < ε → BuildBanachFeasible.{0} b (R + ε)) ↔ (∀ n : ℕ, ∀ ε : ℝ, 0 < ε → CausalFeasible n (R + ε))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata.Omega.PureThreeTree.banach_of_causal_for_build": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata",
+      "name": "Omega.PureThreeTree.banach_of_causal_for_build",
+      "kind": "theorem",
+      "statement_id": "sha256:d588a5a3b18083eeee29bf7d09a59cb26595e35b2f0b27ecd2043efa46dddf10",
+      "line": 929,
+      "signature": "theorem banach_of_causal_for_build {m : ℕ} (b : StackedTriangleCurvature.Build m) {R : ℝ} (h : CausalFeasible m R) {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E] [CompleteSpace E] (g : StackedTriangleCurvature.Vertex m → StackedTriangleCurvature.Vertex m → E) (hg : ∀ x y, g y x = -g x y) (ht : ∀ x y z, b.graph.Adj x y → b.graph.Adj y z → b.graph.Adj x z → ‖g x y + g y z - g x z‖ ≤ 1) : ∃ p : StackedTriangleCurvature.Vertex m → E, ∀ x y, b.graph.Adj x y → ‖g x y - (p y - p x)‖ ≤ R",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata.Omega.PureThreeTree.banach_to_causal": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata",
+      "name": "Omega.PureThreeTree.banach_to_causal",
+      "kind": "theorem",
+      "statement_id": "sha256:d588a5a3b18083eeee29bf7d09a59cb26595e35b2f0b27ecd2043efa46dddf10",
+      "line": 923,
+      "signature": "theorem banach_to_causal {R ε : ℝ} (hR : 0 ≤ R) (hε : 0 < ε) (hk : 0 < k) (h : BanachFeasible.{0} n k R) : CausalFeasible n ((R + ε) + 2 * (R + ε) / (k : ℝ))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata.Omega.RollingCliques.SpanOne.exists_potential": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata",
+      "name": "Omega.RollingCliques.SpanOne.exists_potential",
+      "kind": "theorem",
+      "statement_id": "sha256:d588a5a3b18083eeee29bf7d09a59cb26595e35b2f0b27ecd2043efa46dddf10",
+      "line": 845,
+      "signature": "theorem exists_potential (g : Vertex M n k hM → Vertex M n k hM → E) (ε : ℝ) (hε : 0 ≤ ε) (hrev : ∀ u v, g v u = -g u v) (htri : ∀ u v z, (graph M n k hM).Adj u v → (graph M n k hM).Adj v z → (graph M n k hM).Adj u z → ‖g u v + g v z - g u z‖ ≤ ε) : ∃ φ : Vertex M n k hM → E, ∀ u v, (graph M n k hM).Adj u v → ‖g u v - (φ v - φ u)‖ ≤ (2 - 2 / (M : ℝ)^2) * ε",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata.Omega.RollingCliques.SpanOne.uniform_l1_exact": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata",
+      "name": "Omega.RollingCliques.SpanOne.uniform_l1_exact",
+      "kind": "theorem",
+      "statement_id": "sha256:d588a5a3b18083eeee29bf7d09a59cb26595e35b2f0b27ecd2043efa46dddf10",
+      "line": 855,
+      "signature": "theorem uniform_l1_exact (M : ℕ) (hM : 2 ≤ M) (heven : Even M) (C : ℝ) : IsUniformL1Bound M hM C ↔ 2 - 2 / (M : ℝ)^2 ≤ C",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata.SimpleGraph.BanachPathPower.hilbert_powerPath_uniform_lower": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata",
+      "name": "SimpleGraph.BanachPathPower.hilbert_powerPath_uniform_lower",
+      "kind": "theorem",
+      "statement_id": "sha256:d588a5a3b18083eeee29bf7d09a59cb26595e35b2f0b27ecd2043efa46dddf10",
+      "line": 569,
+      "signature": "theorem hilbert_powerPath_uniform_lower {k : ℕ} (hk : 0 < k) {C : ℝ} (hC : 0 ≤ C) (hfit : ∀ n, PairRetention.Upper (pathPower n k) (EuclideanSpace ℝ (Fin k)) C) : Real.sqrt (2 - 2 / (k : ℝ)) ≤ C",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata.SimpleGraph.BanachPathPower.l1_even_powerPath_exact": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata",
+      "name": "SimpleGraph.BanachPathPower.l1_even_powerPath_exact",
+      "kind": "theorem",
+      "statement_id": "sha256:d588a5a3b18083eeee29bf7d09a59cb26595e35b2f0b27ecd2043efa46dddf10",
+      "line": 578,
+      "signature": "theorem l1_even_powerPath_exact (m : ℕ) (hm : 0 < m) (C : ℝ) : (0 ≤ C ∧ ∀ n, PairRetention.Upper (pathPower n (2 * m)) (PiLp 1 (fun _ : ChordalL1.BalancedCutCoordinate m => ℝ)) C) ↔ 2 - 2 / (2 * (m : ℝ)) ≤ C",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata.SimpleGraph.BanachPathPower.not_subtwo_finite_group": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata",
+      "name": "SimpleGraph.BanachPathPower.not_subtwo_finite_group",
+      "kind": "theorem",
+      "statement_id": "sha256:d588a5a3b18083eeee29bf7d09a59cb26595e35b2f0b27ecd2043efa46dddf10",
+      "line": 633,
+      "signature": "theorem not_subtwo_finite_group : ¬ subtwo_finite_group_claim",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata.SimpleGraph.BanachPathPower.path104_l1_three_lower": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata",
+      "name": "SimpleGraph.BanachPathPower.path104_l1_three_lower",
+      "kind": "theorem",
+      "statement_id": "sha256:d588a5a3b18083eeee29bf7d09a59cb26595e35b2f0b27ecd2043efa46dddf10",
+      "line": 867,
+      "signature": "theorem path104_l1_three_lower {C : ℝ} (hfit : PairRetention.Upper (pathPower 104 4) (PiLp 1 (fun _ : Fin 3 => ℝ)) C) : (75 : ℝ) / 53 ≤ C ∧ Real.sqrt 2 < (75 : ℝ) / 53",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata.SimpleGraph.BanachPathPower.pathPower_group_exact_strata": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata",
+      "name": "SimpleGraph.BanachPathPower.pathPower_group_exact_strata",
+      "kind": "theorem",
+      "statement_id": "sha256:d588a5a3b18083eeee29bf7d09a59cb26595e35b2f0b27ecd2043efa46dddf10",
+      "line": 330,
+      "signature": "theorem pathPower_group_exact_strata (k : ℕ) (hk : 1 ≤ k) (C : ℝ) : GroupUniformBound k C ↔ (if k = 1 then 0 else if k = 2 then 1 else 2) ≤ C",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata.SimpleGraph.BanachPathPower.pathPower_width_three_cyclic_exact": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata",
+      "name": "SimpleGraph.BanachPathPower.pathPower_width_three_cyclic_exact",
+      "kind": "theorem",
+      "statement_id": "sha256:d588a5a3b18083eeee29bf7d09a59cb26595e35b2f0b27ecd2043efa46dddf10",
+      "line": 412,
+      "signature": "theorem pathPower_width_three_cyclic_exact {n : ℕ} (hn : 14 ≤ n) : letI",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata.SimpleGraph.BanachPathPower.powerPath_uniform_ge_doubled_radius": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata",
+      "name": "SimpleGraph.BanachPathPower.powerPath_uniform_ge_doubled_radius",
+      "kind": "theorem",
+      "statement_id": "sha256:d588a5a3b18083eeee29bf7d09a59cb26595e35b2f0b27ecd2043efa46dddf10",
+      "line": 528,
+      "signature": "theorem powerPath_uniform_ge_doubled_radius {E : Type*} [SeminormedAddCommGroup E] [NormedSpace ℝ E] {k : ℕ} (hk : 0 < k) {C r : ℝ} (hC : 0 ≤ C) (hfit : ∀ n, PairRetention.Upper (pathPower n k) E C) (x : Fin k → E) (hd : ∀ a b, ‖x a - x b‖ ≤ 1) (hr : ∀ y : E, ∃ a, r ≤ ‖(2 : ℝ) • x a - y‖) : r ≤ C",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata.SimpleGraph.BanachPathPower.split_clique_four_group_witness": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata",
+      "name": "SimpleGraph.BanachPathPower.split_clique_four_group_witness",
+      "kind": "theorem",
+      "statement_id": "sha256:d588a5a3b18083eeee29bf7d09a59cb26595e35b2f0b27ecd2043efa46dddf10",
+      "line": 601,
+      "signature": "theorem split_clique_four_group_witness : letI",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata.SimpleGraph.CliqueTreeBanachOverlap.cliqueTree_banach_two": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata",
+      "name": "SimpleGraph.CliqueTreeBanachOverlap.cliqueTree_banach_two",
+      "kind": "theorem",
+      "statement_id": "sha256:d588a5a3b18083eeee29bf7d09a59cb26595e35b2f0b27ecd2043efa46dddf10",
+      "line": 831,
+      "signature": "theorem cliqueTree_banach_two [Finite V] [Finite I] (hK : IsCliqueTree T G K) (r : I) (hsep : ∀ a, a ≠ r → Allowed K r (rootParent hK.isTree r) a) (g : V → V → E) (ε : ℝ) (hε : 0 ≤ ε) (hrev : ∀ i j, g j i = -g i j) (htri : TriangleFlat G g ε) : ∃ φ : V → E, ∀ u v, G.Adj u v → ‖g u v - (φ v - φ u)‖ ≤ 2 * ε",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata.SimpleGraph.CliqueTreeGroupSeparator.cliqueTree_separator_group_potential": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata",
+      "name": "SimpleGraph.CliqueTreeGroupSeparator.cliqueTree_separator_group_potential",
+      "kind": "theorem",
+      "statement_id": "sha256:d588a5a3b18083eeee29bf7d09a59cb26595e35b2f0b27ecd2043efa46dddf10",
+      "line": 684,
+      "signature": "theorem cliqueTree_separator_group_potential [Finite V] (hK : IsCliqueTree T G K) (hs : ∀ a b, T.Adj a b → (K a ∩ K b).Nonempty) (s : ℕ) (hsep : ∀ a b, T.Adj a b → (K a ∩ K b).ncard ≤ s) (g : V → V → H) (δ : ℝ) (hδ : 0 ≤ δ) (hrev : ∀ x y, G.Adj x y → g y x = (g x y)⁻¹) (htri : ∀ x y z, G.Adj x y → G.Adj y z → G.Adj x z → Dist.dist (g x y * g y z) (g x z) ≤ δ) : ∃ φ : V → H, ∀ x y, G.Adj x y → Dist.dist (g x y) ((φ x)⁻¹ * φ y) ≤ (max 1 s : ℕ) * δ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata.SimpleGraph.CliqueTreeL1Separator.cliqueTree_l1_separator_potential": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata",
+      "name": "SimpleGraph.CliqueTreeL1Separator.cliqueTree_l1_separator_potential",
+      "kind": "theorem",
+      "statement_id": "sha256:d588a5a3b18083eeee29bf7d09a59cb26595e35b2f0b27ecd2043efa46dddf10",
+      "line": 744,
+      "signature": "theorem cliqueTree_l1_separator_potential [Finite V] [Finite I] (hK : IsCliqueTree T G K) (q : ℕ) (hq : q = 2 ∨ q = 3 ∨ q = 4 ∨ q = 5) (hsep : ∀ a b, T.Adj a b → (K a ∩ K b).ncard ≤ q) (g : V → V → Lp ℝ 1 μ) (ε : ℝ) (hε : 0 ≤ ε) (hrev : ∀ i j, g j i = -g i j) (htri : TriangleFlat G g ε) : ∃ φ : V → Lp ℝ 1 μ, ∀ u v, G.Adj u v → ‖g u v - (φ v - φ u)‖ ≤ coefficient q * ε",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata.SimpleGraph.GainReduction.finite_modulus_decides_abelian_reconstruction": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata",
+      "name": "SimpleGraph.GainReduction.finite_modulus_decides_abelian_reconstruction",
+      "kind": "theorem",
+      "statement_id": "sha256:d588a5a3b18083eeee29bf7d09a59cb26595e35b2f0b27ecd2043efa46dddf10",
+      "line": 64,
+      "signature": "theorem finite_modulus_decides_abelian_reconstruction [Finite V] [LinearOrder V] (hG : G.IsChordal) (hTG : T ≤ G) (hT : T.IsTree) {k q : ℕ} (hq : 3 * k + 1 < q) : Reconstructs G (fun v w => reduce q (canonical G T v w)) (reduce q '' defects G (canonical G T)) k ↔ ∀ (A : Type u) [AddCommGroup A] (g : V → V → A) (U : Set A), (∀ v w, G.Adj v w → g w v = -g v w) → defects G g ⊆ U → Reconstructs G g U k",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata.SimpleGraph.IsChordal.closed_walk_triangle_factors": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata",
+      "name": "SimpleGraph.IsChordal.closed_walk_triangle_factors",
+      "kind": "theorem",
+      "statement_id": "sha256:d588a5a3b18083eeee29bf7d09a59cb26595e35b2f0b27ecd2043efa46dddf10",
+      "line": 227,
+      "signature": "theorem IsChordal.closed_walk_triangle_factors [Finite V] (hG : G.IsChordal) (g : V → V → H) (hrev : ∀ a b, G.Adj a b → g b a = (g a b)⁻¹) {a : V} (p : G.Walk a a) : ∃ l : List H, l.length ≤ p.length - 2 ∧ l.prod = p.gain g ∧ ∀ y ∈ l, ∃ (a b c : V) (q : H), G.Adj a b ∧ G.Adj b c ∧ G.Adj c a ∧ y = q * (g a b * g b c * g c a) * q⁻¹",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata.SimpleGraph.IsChordal.exists_clique_five_group_gain_potential": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata",
+      "name": "SimpleGraph.IsChordal.exists_clique_five_group_gain_potential",
+      "kind": "theorem",
+      "statement_id": "sha256:d588a5a3b18083eeee29bf7d09a59cb26595e35b2f0b27ecd2043efa46dddf10",
+      "line": 148,
+      "signature": "theorem IsChordal.exists_clique_five_group_gain_potential [Finite V] (hG : G.IsChordal) (hclique : ∀ s : Finset V, G.IsClique (s : Set V) → s.card ≤ 5) (g : V → V → H) {ε : ℝ} (hε : 0 ≤ ε) (hrev : ∀ x y, G.Adj x y → g y x = (g x y)⁻¹) (htri : ∀ x y z, G.Adj x y → G.Adj y z → G.Adj x z → Dist.dist (g x y * g y z) (g x z) ≤ ε) : ∃ φ : V → H, ∀ x y, G.Adj x y → Dist.dist (g x y) ((φ x)⁻¹ * φ y) ≤ 3 * ε",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata.SimpleGraph.IsChordal.exists_clique_four_group_gain_potential": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata",
+      "name": "SimpleGraph.IsChordal.exists_clique_four_group_gain_potential",
+      "kind": "theorem",
+      "statement_id": "sha256:d588a5a3b18083eeee29bf7d09a59cb26595e35b2f0b27ecd2043efa46dddf10",
+      "line": 129,
+      "signature": "theorem IsChordal.exists_clique_four_group_gain_potential [Finite V] (hG : G.IsChordal) (hclique : ∀ s : Finset V, G.IsClique (s : Set V) → s.card ≤ 4) (g : V → V → H) {ε : ℝ} (hε : 0 ≤ ε) (hrev : ∀ x y, G.Adj x y → g y x = (g x y)⁻¹) (htri : ∀ x y z, G.Adj x y → G.Adj y z → G.Adj x z → Dist.dist (g x y * g y z) (g x z) ≤ ε) : ∃ φ : V → H, ∀ x y, G.Adj x y → Dist.dist (g x y) ((φ x)⁻¹ * φ y) ≤ 2 * ε",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata.SimpleGraph.IsChordal.exists_clique_number_group_gain_potential": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata",
+      "name": "SimpleGraph.IsChordal.exists_clique_number_group_gain_potential",
+      "kind": "theorem",
+      "statement_id": "sha256:d588a5a3b18083eeee29bf7d09a59cb26595e35b2f0b27ecd2043efa46dddf10",
+      "line": 782,
+      "signature": "theorem IsChordal.exists_clique_number_group_gain_potential [Finite V] (hG : G.IsChordal) (k : ℕ) (hk : ∀ s : Finset V, G.IsClique (s : Set V) → s.card ≤ k) (g : V → V → H) (ε : ℝ) (hε : 0 ≤ ε) (hr : ∀ a b, G.Adj a b → g b a = (g a b)⁻¹) (ht : ∀ a b c, G.Adj a b → G.Adj b c → G.Adj a c → Dist.dist (g a b * g b c) (g a c) ≤ ε) : ∃ p : V → H, ∀ a b, G.Adj a b → Dist.dist (g a b) ((p a)⁻¹ * p b) ≤ ((k - 1 : ℕ) : ℝ) * ε",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata.SimpleGraph.IsChordal.exists_hilbert_jung_gain_potential": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata",
+      "name": "SimpleGraph.IsChordal.exists_hilbert_jung_gain_potential",
+      "kind": "theorem",
+      "statement_id": "sha256:d588a5a3b18083eeee29bf7d09a59cb26595e35b2f0b27ecd2043efa46dddf10",
+      "line": 272,
+      "signature": "theorem IsChordal.exists_hilbert_jung_gain_potential {V : Type u} [Finite V] {G : SimpleGraph V} (hG : G.IsChordal) (k : ℕ) (hk : 1 ≤ k) (hclique : ∀ s : Finset V, G.IsClique (s : Set V) → s.card ≤ k + 1) {E : Type v} [NormedAddCommGroup E] [InnerProductSpace ℝ E] (g : V → V → E) (ε : ℝ) (hε : 0 ≤ ε) (hrev : ∀ i j, g j i = -g i j) (htri : ∀ i j l, G.Adj i j → G.Adj j l → G.Adj i l → ‖g i j + g j l - g i l‖ ≤ ε) : ∃ φ : V → E, ∀ u v, G.Adj u v → ‖g u v - (φ v - φ u)‖ ≤ (Real.sqrt (((k : ℝ) - 1) / (2 * k)) / (1 - Real.sqrt (((k : ℝ) - 1) / (2 * k)))) * ε",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata.SimpleGraph.IsChordal.exists_l1_jung_gain_potential": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata",
+      "name": "SimpleGraph.IsChordal.exists_l1_jung_gain_potential",
+      "kind": "theorem",
+      "statement_id": "sha256:d588a5a3b18083eeee29bf7d09a59cb26595e35b2f0b27ecd2043efa46dddf10",
+      "line": 372,
+      "signature": "theorem IsChordal.exists_l1_jung_gain_potential [Finite V] (hG : G.IsChordal) (m : ℕ) (hm : 1 ≤ m) (hclique : ∀ s : Finset V, G.IsClique (s : Set V) → s.card ≤ 2 * m + 2) (g : V → V → Lp ℝ 1 μ) (ε : ℝ) (hε : 0 ≤ ε) (hrev : ∀ i j, g j i = -g i j) (htri : ∀ i j l, G.Adj i j → G.Adj j l → G.Adj i l → ‖g i j + g j l - g i l‖ ≤ ε) : ∃ φ : V → Lp ℝ 1 μ, ∀ u v, G.Adj u v → ‖g u v - (φ v - φ u)‖ ≤ (2 * (m : ℝ) - 1) * ε",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata.SimpleGraph.IsChordal.exists_radius_approximate_gain_potential": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata",
+      "name": "SimpleGraph.IsChordal.exists_radius_approximate_gain_potential",
+      "kind": "theorem",
+      "statement_id": "sha256:d588a5a3b18083eeee29bf7d09a59cb26595e35b2f0b27ecd2043efa46dddf10",
+      "line": 255,
+      "signature": "theorem IsChordal.exists_radius_approximate_gain_potential [Finite V] (hG : G.IsChordal) (hconn : G.Connected) (o : V) (r : ℕ) (hrad : ∀ a, G.dist o a ≤ r) (g : V → V → H) {ε : ℝ} (hε : 0 ≤ ε) (hrev : ∀ a b, G.Adj a b → g b a = (g a b)⁻¹) (htri : ∀ a b c, G.Adj a b → G.Adj b c → G.Adj a c → Dist.dist (g a b * g b c) (g a c) ≤ ε) : ∃ φ : V → H, ∀ a b, G.Adj a b → Dist.dist (g a b) ((φ a)⁻¹ * φ b) ≤ (2 * (r : ℝ) - 1) * ε",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata.SimpleGraph.IsChordal.exists_tree_spanner_approximate_gain_potential": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata",
+      "name": "SimpleGraph.IsChordal.exists_tree_spanner_approximate_gain_potential",
+      "kind": "theorem",
+      "statement_id": "sha256:d588a5a3b18083eeee29bf7d09a59cb26595e35b2f0b27ecd2043efa46dddf10",
+      "line": 241,
+      "signature": "theorem IsChordal.exists_tree_spanner_approximate_gain_potential [Finite V] (hG : G.IsChordal) {T : SimpleGraph V} (hTG : T ≤ G) (hT : T.IsTree) (t : ℕ) (hstretch : ∀ a b, G.Adj a b → T.dist a b ≤ t) (g : V → V → H) {ε : ℝ} (hε : 0 ≤ ε) (hrev : ∀ a b, G.Adj a b → g b a = (g a b)⁻¹) (htri : ∀ a b c, G.Adj a b → G.Adj b c → G.Adj a c → Dist.dist (g a b * g b c) (g a c) ≤ ε) : ∃ φ : V → H, ∀ a b, G.Adj a b → Dist.dist (g a b) ((φ a)⁻¹ * φ b) ≤ ((t : ℝ) - 1) * ε",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata.SimpleGraph.IsChordal.group_coefficient_integral": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata",
+      "name": "SimpleGraph.IsChordal.group_coefficient_integral",
+      "kind": "theorem",
+      "statement_id": "sha256:d588a5a3b18083eeee29bf7d09a59cb26595e35b2f0b27ecd2043efa46dddf10",
+      "line": 403,
+      "signature": "theorem IsChordal.group_coefficient_integral {V : Type*} [Finite V] [LinearOrder V] {G : SimpleGraph V} (hG : G.IsChordal) (hconn : G.Connected) : ∃ k : ℕ, k ≤ 4 ∧ ∀ C : ℝ, GroupCoefficient.Admissible G C ↔ (k : ℝ) ≤ C",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata.SimpleGraph.IsChordal.scalar_circumference_exact": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata",
+      "name": "SimpleGraph.IsChordal.scalar_circumference_exact",
+      "kind": "theorem",
+      "statement_id": "sha256:d588a5a3b18083eeee29bf7d09a59cb26595e35b2f0b27ecd2043efa46dddf10",
+      "line": 173,
+      "signature": "theorem IsChordal.scalar_circumference_exact [Finite V] (hG : G.IsChordal) {L : ℕ} (hL : ∀ (a : V) (c : G.Walk a a), c.IsCycle → c.length ≤ L) (hmax : ∃ (a : V) (c : G.Walk a a), c.IsCycle ∧ c.length = L) : (∀ g : V → V → ℝ, (∀ a b, G.Adj a b → g b a = -g a b) → (∀ a b c, G.Adj a b → G.Adj b c → G.Adj a c → |g a b + g b c - g a c| ≤ 1) → ∃ φ : V → ℝ, ∀ a b, G.Adj a b → |g a b - (φ b - φ a)| ≤ 1 - 2 / (L : ℝ)) ∧ ∃ g : V → V → ℝ, (∀ a b, g b a = -g a b) ∧ (∀ a b c, |g a b + g b c - g a c| ≤ 1) ∧ ∀ φ : V → ℝ, ∃ a b, G.Adj a b ∧ 1 - 2 / (L : ℝ) ≤ |g a b - (φ b - φ a)|",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata.SimpleGraph.IsTree.exists_ancestor_banach_gain_potential": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata",
+      "name": "SimpleGraph.IsTree.exists_ancestor_banach_gain_potential",
+      "kind": "theorem",
+      "statement_id": "sha256:d588a5a3b18083eeee29bf7d09a59cb26595e35b2f0b27ecd2043efa46dddf10",
+      "line": 111,
+      "signature": "theorem IsTree.exists_ancestor_banach_gain_potential {S : SimpleGraph V} (hS : S.IsTree) (root : V) {k : ℕ} (hk : 0 < k) (g : V → V → E) (ε : ℝ) (hε : 0 ≤ ε) (hrev : ∀ v w, g w v = -g v w) (htri : ∀ v w x, ((RootedAncestors.ofTree hS root).graph k).Adj v w → ((RootedAncestors.ofTree hS root).graph k).Adj w x → ((RootedAncestors.ofTree hS root).graph k).Adj v x → ‖g v w + g w x - g v x‖ ≤ ε) : ∃ p : V → E, ∀ v w, ((RootedAncestors.ofTree hS root).graph k).Adj v w → ‖g v w - (p w - p v)‖ ≤ (2 - 2 / (k : ℝ)) * ε",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata.SimpleGraph.PairRetention.family_exact": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata",
+      "name": "SimpleGraph.PairRetention.family_exact",
+      "kind": "theorem",
+      "statement_id": "sha256:d588a5a3b18083eeee29bf7d09a59cb26595e35b2f0b27ecd2043efa46dddf10",
+      "line": 503,
+      "signature": "theorem family_exact (m n D : ℕ) (hm : 3 ≤ m) (E : Type*) [NormedAddCommGroup E] [NormedSpace ℝ E] [Nontrivial E] (C : ℝ) : Upper (family m n D).graph E C ↔ 1 - 2 / ((m : ℝ) * (n + 1 : ℝ)^D) ≤ C",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata.SimpleGraph.cliqueTree_height_banach_gain_potential": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata",
+      "name": "SimpleGraph.cliqueTree_height_banach_gain_potential",
+      "kind": "theorem",
+      "statement_id": "sha256:d588a5a3b18083eeee29bf7d09a59cb26595e35b2f0b27ecd2043efa46dddf10",
+      "line": 305,
+      "signature": "theorem cliqueTree_height_banach_gain_potential {V I E : Type*} [Finite V] [Finite I] [SeminormedAddCommGroup E] [NormedSpace ℝ E] {T : SimpleGraph I} {G : SimpleGraph V} {K : I → Set V} (hK : IsCliqueTree T G K) (hs : ∀ a b, T.Adj a b → (K a ∩ K b).Nonempty) (q : ℕ) (hq : 2 ≤ q) (hsep : ∀ a b, T.Adj a b → (K a ∩ K b).ncard ≤ q) (r : I) (h : ℕ) (hheight : ∀ a, T.dist r a ≤ h) (g : V → V → E) (ε : ℝ) (hε : 0 ≤ ε) (hrev : ∀ i j, g j i = -g i j) (htri : ∀ i j l, G.Adj i j → G.Adj j l → G.Adj i l → ‖g i j + g j l - g i l‖ ≤ ε) : ∃ φ : V → E, ∀ u v, G.Adj u v → ‖g u v - (φ v - φ u)‖ ≤ (((q : ℝ) - 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata.SimpleGraph.l1_clique_four_exact": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata",
+      "name": "SimpleGraph.l1_clique_four_exact",
+      "kind": "theorem",
+      "statement_id": "sha256:d588a5a3b18083eeee29bf7d09a59cb26595e35b2f0b27ecd2043efa46dddf10",
+      "line": 443,
+      "signature": "theorem l1_clique_four_exact {Ω : Type*} [MeasurableSpace Ω] (μ : Measure Ω) [Nontrivial (Lp ℝ 1 μ)] (C : ℝ) : (∀ (n : ℕ) (G : SimpleGraph (Fin (n + 1))), G.IsChordal → (∀ s : Finset (Fin (n + 1)), G.IsClique (s : Set (Fin (n + 1))) → s.card ≤ 4) → ∀ g : Fin (n + 1) → Fin (n + 1) → Lp ℝ 1 μ, (∀ a b, g b a = -g a b) → (∀ a b c, G.Adj a b → G.Adj b c → G.Adj a c → ‖g a b + g b c - g a c‖ ≤ 1) → ∃ p : Fin (n + 1) → Lp ℝ 1 μ, ∀ a b, G.Adj a b → ‖g a b - (p b - p a)‖ ≤ C) ↔ 1 ≤ C",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata.StackedTriangleCurvature.Build.total_order_curvature_stratum": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/ChordalBanachExactStrata",
+      "name": "StackedTriangleCurvature.Build.total_order_curvature_stratum",
+      "kind": "theorem",
+      "statement_id": "sha256:d588a5a3b18083eeee29bf7d09a59cb26595e35b2f0b27ecd2043efa46dddf10",
+      "line": 888,
+      "signature": "theorem Build.total_order_curvature_stratum {n : ℕ} (b : Build n) : {x | ∃ g : Vertex n → Vertex n → ℝ, (∀ u v, g v u = -g u v) ∧ b.curvature g = x ∧ ∀ i, |x i| ≤ 1} = convexHull ℝ (Set.range (fun r : Vertex n ↪ ℝ => b.orderCurvature r)) ∧ Nat.card (({x | b.Valid x} : Set (Face n → ℝ)).extremePoints ℝ) = 2 * 3 ^ n ∧ ∀ z : b.EdgeGains, (∀ u, ∑ v, z.val u v = 0) → ∃ r : Vertex n ↪ ℝ, b.triangleFillingNorm z = b.edgePairing z (b.orderGain r) ∧ ∀ s : Vertex n ↪ ℝ, b.edgePairing z (b.orderGain s) ≤ b.edgePairing z (b.orderGain r)",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
