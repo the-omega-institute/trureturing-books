@@ -150,14 +150,14 @@ $105$ 圈真空强制要求高绕数项 $w_{104} > 0.6589\%$ 与 $w_{105} > 6.86
 | **测试一：全域辨识 vs 近真空失明** | 全环面 $100$ 个作用差 vs 近真空开窗读数 | 全域条件数 $\kappa \le 11.584$（前 $100$ 零点 $\le 9.849$，前 $250$ 择百降为 $2.49$）；近真空开窗内相差 $2 \times 10^{-9}$ 的两组权重作用差 **$< 1.690 \times 10^{-75}$** |
 | **测试二：跨荷轻子空间泄漏** | 荷 $1$ 三轻模投影至荷 $2$、荷 $-4$ 轻空间 | 容许十九站各任选相位时落入重空间概率 **$> 38.321\%$ / $> 37.290\%$**；再容许十九站任意重排仍 **$> 31.060\%$ / $> 31.097\%$** |
 | **测试三：辅助电流与质子选择简并** | $105$ 圈权延拓至六维轻顶点（Wilson 模 $\ge 0.0314398$） | **正交**辅助电流保 $\Delta B \equiv 0 \pmod 3$，**平行**辅助电流生非零 $QQQL$ 项；两者共享完全相同的壳真空与树级谱 |
-| **测试四：单整数唯一 vs 连续 $k/d^2$ 漂移** | 固定 $d = 724$ 或 $k = 32$ 对比同步连续变分 | 固定其一各自唯一迫使 $(k, d) = (32, 724)$，同步滑至 $d = 724.19, k \approx 32.016797784$ 仍过三窗：曲率窗只钉死 **$k / d^2$**，强耦合窗的宽度容许沿此方向滑行 |
+| **测试四：单整数唯一 vs 连续 $k/d^2$ 漂移** | 固定 $d = 724$ 或 $k = 32$ 对比同步连续变分 | 固定其一各自唯一迫使 $(k, d) = (32, 724)$，同步滑至 $d = 724.19, k \approx 32.016797784$ 仍过三窗：曲率主项沿 **$k/d^2$** 不变，有限截止修正与强耦合读数的变化都在各自窗宽以内 |
 
 逐条审视这四重裂隙（复算脚本见 [`ch39-fixed-vacuum-weight-dimension.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-fixed-vacuum-weight-dimension.py)、[`ch39-near-vacuum-weight-resolution.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-near-vacuum-weight-resolution.py)、[`ch39-joint-zero-light-subspaces.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-joint-zero-light-subspaces.py)、[`ch39-fixed-vacuum-proton-currents.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-fixed-vacuum-proton-currents.py) 与 [`ch39-joint-vacuum-scale-window.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-joint-vacuum-scale-window.py)）：
 
 1. **七十五个量级的反演悬崖：** 全环面宏观探测轻而易举便能以条件数 $2.49$ 反推出全部 $105$ 项绕数权，可一旦观测者被困在真空附近的低能开窗内，哪怕精确算术下仍存在可辨识矩阵，任何实验噪声都会让相差 $2 \times 10^{-9}$ 的两套微观作用在 $< 1.690 \times 10^{-75}$ 的读数差里彻底融为一团。
 2. **几何站点上的轻代错位：** 尽管五种超荷在同一背景上各自切出三枚轻模，但荷 $1$ 与荷 $2, -4$ 的三维轻空间在十九个站点上彼此倾斜甚深——哪怕做尽全部站点相位对齐与站点重排，仍有超过三成的轻态权重直接泄入对方的重谱。
 3. **壳真空对质子命运的沉默：** 同一座 $105$ 圈球壳真空、同一张树级质量谱，却既容得下保护质子寿命的 $\Delta B \equiv 0 \pmod 3$ 正交电流，也容得下触发 $QQQL$ 衰变的平行电流；质子是否稳定不是裸球壳真空自己能拍板的事。
-4. **缺失的第二条尺度律：** 离散整数格点虽然单独锁死了 $d = 724$ 与 $k = 32$，连续变分却立即暴露出曲率读数只感受单参数组合 $k / d^2$，两圈规范读数只感受 $d$，而强耦合窗的宽度容许沿 $k / d^2$ 固定的方向滑行；必须引入一条独立于三窗的尺度方程才能把两个参数分别钉牢。
+4. **缺失的第二条尺度律：** 离散整数格点虽然单独锁死了 $d = 724$ 与 $k = 32$，固定 $k/d^2$ 后四层曲率主项保持不变，两圈规范读数随 $d$ 移动，两扇有限宽度的窗仍有共同的滑行区间；必须引入一条独立于三窗的尺度方程才能把两个参数分别钉牢。
 
 这条尺度律无法由最简单的谱泛函的驻定条件给出。在该零点上，全部重场质量只经 $\log k - 2\log d$ 与 $-2\log d$ 两个组合依赖标尺，奇荷三十二行的超迹权全为负。于是，凡位力函数 $x f'(x)$ 不变号的单谱型超迹泛函，包括对数行列式、zeta 函数、热核、固定截止的牛顿核、迹恒等式以及维数正规化下奇数维的一圈势，在整个 $(k, d)$ 象限内都没有驻点。偶数维的一圈科尔曼—温伯格（Coleman–Weinberg）超迹在全部场共用一个减法常数时恰有一个驻点，其倍率与锚标度和减法常数无关：四维时 $k_* \approx 2.4135$，全部偶数维上不超过 $4.22$，而在 $k \ge 1$ 的参数域内两窗要求倍率位于 $(29.98, 35.00)$。驻点的分母只随锚标度协变，要得到 $d_* = 724$ 须取锚标度约 $4.20 \times 10^{14}\;\mathrm{GeV}$，这只是把选择转给了锚。只有把带对数的公式形式延拓到非整数维，在 $D \approx 11.1$ 处才能取到 $k_* = 32$。沿 $k / d^2$ 固定的滑行线，强耦合在 $d = 716$ 与 $d = 743$ 之间以每单位分母约 $-7.0 \times 10^{-5}$ 的割线移动，这两点仍在窗内，$715$ 与 $744$ 的名义读数出窗。[两类泛函的否定结果与滑行响应](https://github.com/the-omega-institute/trureturing-experiments/blob/d2ca3fd9b24cc2591e2d49a308c04407fce60ee0/experiments/ch39-omega-research/replay/%E4%BD%8D%E5%8A%9B%E5%AE%9A%E5%8F%B7%E4%B8%8E%E5%8D%95%E8%B0%B1CW%E5%9E%8B%E8%B6%85%E8%BF%B9%E6%B3%9B%E5%87%BD%E5%9C%A8%E4%B8%A4%E8%B4%A8%E9%87%8F%E6%A0%87%E5%B0%BA%E7%AA%97%E5%86%85%E6%B2%A1%E6%9C%89%E9%A9%BB%E7%82%B9.md) · [区间证书](https://github.com/the-omega-institute/trureturing-experiments/blob/d2ca3fd9b24cc2591e2d49a308c04407fce60ee0/experiments/ch39-omega-research/replay/ch39-mass-scale-spectral-stationarity.py)
 
@@ -173,7 +173,7 @@ d\,\partial_d V=-2p V,\qquad
 \partial_k V=s^p G'(k).
 $$
 
-因此 $p=0$ 时，联合驻定只要求 $G'(k)=0$；$p\ne0$ 时还须 $G(k)=0$。每个满足条件的 $k$ 都容许任意 $d>0$。若另有曲率读数给出 $k/d^2$，它才可与选出的 $k$ 一起确定 $d$。
+因此 $p=0$ 时，联合驻定只要求 $G'(k)=0$；$p\ne0$ 时还须 $G(k)=0$。每个满足条件的 $k$ 都容许任意 $d>0$。若另有独立测量给出 $k/d^2$，它才可与选出的 $k$ 一起确定 $d$。
 
 可以直接用这枚零点的场表试算。令 $A_j,B_j$ 分别为奇荷、偶荷组内 $\sum_i g_i h_i^j$ 的绝对值（先按原超迹权 $g_i$ 求和），$j=2,4$。两组的这四个数均为正。以两组二阶矩绝对值之和作 $\Lambda^2=s^2(A_2+k^2 B_2)$，用它归一化相应的四阶矩。写 $x=k^2$，所得形状与导数为
 
@@ -182,7 +182,34 @@ J(x)=\frac{A_4+x^2 B_4}{(A_2+xB_2)^2},\qquad
 \frac{dJ}{dx}=\frac{2(x A_2B_4-B_2A_4)}{(A_2+x B_2)^3}.
 $$
 
-唯一极小倍率为 $k=\sqrt{B_2 A_4/(A_2 B_4)}\simeq2.10215$，低于两窗要求的下端。若改取有量纲的四阶矩 $\Lambda^4J=s^4(A_4+k^4 B_4)>0$，则 $d$ 方向处处有斜率。这里分别对两组取绝对值是一项明确的模型选择。引入由外部牛顿数据标定的尺度后，仍需另求驻定方程。[场表、二阶与四阶矩及倍率的区间证书](https://github.com/the-omega-institute/trureturing-experiments/blob/1922a9c010424eadf6b1ec7233be9fcb00911247/experiments/ch39-omega-research/replay/ch39-mass-scale-mixed-supertrace-stationarity.py#L31-L81)
+唯一极小倍率为 $k=\sqrt{B_2 A_4/(A_2 B_4)}\simeq2.10215$，低于两窗要求的下端。若改取有量纲的四阶矩 $\Lambda^4J=s^4(A_4+k^4 B_4)>0$，则 $d$ 方向处处有斜率。这里分别对两组取绝对值是一项明确的模型选择。[场表、二阶与四阶矩及倍率的区间证书](https://github.com/the-omega-institute/trureturing-experiments/blob/1922a9c010424eadf6b1ec7233be9fcb00911247/experiments/ch39-omega-research/replay/ch39-mass-scale-mixed-supertrace-stationarity.py#L31-L81)
+
+在旗舰零点的四层模型中，可以直接检验外部牛顿标定能否使真空能量驻定。固定 $r=k/d^2>0$，令 $\ell=\log d$。偶荷质量与由其中一条质量定义的跷跷板尺度 $a=\mu^2/M_P^2$ 都固定，奇荷质量平方 $z_i=m_i^2/M_P^2$ 则正比于 $d^{-4}$。逐质量配平抵消了重层的真空能量，却给每条奇荷重层留下严格为正的牛顿权 $\alpha_i$。取单个硬固有时截止 $x=Q^2/M_P^2>0$、零裸项与四层重数 $D=4$，把 [@def-ou-ch11-four-layer-vacuum] 的真空读数记为 $V=8\pi\rho/M_P^4$。在 $K=1$ 上曲率就等于 $V$。[逐层配平的场表](https://github.com/the-omega-institute/trureturing-experiments/blob/1922a9c010424eadf6b1ec7233be9fcb00911247/experiments/ch39-omega-research/replay/ch39-joint-vacuum-scale-window.py#L20-L36)
+
+以 $O$ 表示奇荷重层，在固定 $r$ 下手算两个偏导。由 $E_2'(u)=-E_1(u)$，以及 $V=Da^2 I(a/x)/(4\pi)$ 的积分下限，有
+
+$$
+\left.\frac{\partial K}{\partial\ell}\right|_x
+ =\frac{2}{\pi}\sum_{i\in O}\alpha_i z_i E_1(z_i/x)>0,
+\qquad
+\frac{dV}{dx}=\frac{Dx}{4\pi}(1-e^{-a/x})^3>0 .
+$$
+
+因此在每个牛顿标定点附近都可沿 $K=1$ 把 $\ell$ 写成 $x$ 的函数。沿这条曲线增加 $x$ 必使真空能量上升，即使 $\partial K/\partial x=0$ 也成立。这个四层势在整个正参数标定面上没有联合驻点。
+
+若另行给定 $r$，哪些精确曲率确实来自有限正分母？记 $F_r(x)$ 为删去奇荷重层后的牛顿读数。每条奇荷的 $E_2(z_i/x)$ 在 $d$ 从零增至无穷时严格从零升至一，两组奇荷重层的总牛顿权为 $16(6+2)=128$。因此给定 $x$ 时，正分母存在且唯一的充要条件为
+
+$$
+F_r(x)<1<F_r(x)+\frac{128x}{2\pi}.
+$$
+
+在旗舰滑行 $r=32/724^2$ 上，记右侧函数等于一的根为 $x_-$，左侧函数等于一的根为 $x_+$。两根各自唯一。事实上，十九点磁拉普拉斯的行和界给出 $0\le\lambda\le36$，所以谱形 $\lambda|\lambda-\bar\lambda|\le36^2$，带偶数荷的重层均有 $z<0.00025$。它们的正权共 $112$，中性负权共 $-54$。在 $x\ge0.006$ 上，由 $\partial_x[xE_2(z/x)]=e^{-z/x}$，两端函数的导数乘 $2\pi$ 均至少为 $112e^{-0.00025/0.006}-54>53$。更小的截止即使计入全部正权也只有 $K\le253.5x/(2\pi)<1$。
+
+因此，在只施加牛顿标定的连续滑行线上，$d$ 从零增至无穷时，$x$ 由 $x_+\simeq0.087881452$ 严格降至 $x_-\simeq0.031496220$，两个端点均不取到。每个介于 $V(x_-)$ 与 $V(x_+)$ 之间的精确曲率依次唯一确定 $x,d$ 与 $k=rd^2$。整个开区间的宽度约为无限截止值的 $5.193\times10^{-60}$。 [端点推导与谱区间复算](https://github.com/the-omega-institute/trureturing-books/issues/1671#issuecomment-7236014282)
+
+在原压力测试的局部盒内，$I(0)-I(a/x)\le a/x$ 把有限截止修正限制在主项的 $10^{-57}$ 以内。从 $d=724$ 滑至 $724.19$ 的两次读数之差，以无限截止主项为单位，在 $1.685\times10^{-69}$ 与 $1.687\times10^{-69}$ 之间。[标定区间与截断误差](https://github.com/the-omega-institute/trureturing-experiments/blob/1922a9c010424eadf6b1ec7233be9fcb00911247/experiments/ch39-omega-research/replay/ch39-joint-vacuum-scale-window.py#L38-L68) · [两处标定根与曲率差的区间复算](https://github.com/the-omega-institute/trureturing-books/issues/1671#issuecomment-7235892201)
+
+一个小谱可以把这个微弱效应放大。取 $r=a=1$、$D=4$，四条低层在 $z=0,1,2,3$ 处的牛顿权依次为 $(1/3,2,1,2/3)$，净偏振为 $(-4,12,-12,4)$。再放入一条 $z=d^{-4}$ 的奇荷层，含四个实标量和一个狄拉克费米子，净偏振为零、牛顿权为一。所有牛顿权均为正，由 $\partial_x[xE_2(z/x)]=e^{-z/x}$ 知 $K$ 从零严格升至无穷。将 $d$ 从 $1$ 加倍至 $2$，唯一标定根 $x$ 由 $3.08609$ 降至 $2.67179$，曲率由 $0.16783$ 降至 $0.15821$。一般的重场耦合作用仍需自己的驻定方程。
 
 ::: {.film src="winding-ladder"}
 **从 529 个三角面的双钟作用出发，绕数阶梯一级级爬到 105 圈，旗舰零点在顶上留下见证与四道裂隙（2 分 48 秒）。** 片头一个示意三角面绕出品红回路角 $\varphi_\triangle$，青色基频曲线 $1-\cos\varphi$ 旁升起琥珀色的 $k=19$ 谐波，作用量 $S_w$ 是本章选定的模型（[@def-ou-ch13-wilson-winding-action]），标为论证。绿色 `LEAN ✓` 只贴在 [@thm-ou-ch13-noncommutative-witness] 上：屏幕算出 $(1+\mathbf{i})(1+\mathbf{j})=(1,1,1,1)$ 与 $(1+\mathbf{j})(1+\mathbf{i})=(1,1,1,-1)$，再由 $\kappa=\tfrac12,\tfrac14,\tfrac12$、$B=\tfrac14$ 得 $\det\mathbf{G}_3=\tfrac14$。七级台阶 $\le 18 \to 19 \to 21 \to 27 \to 31 \to 36 \to 105$ 逐级点亮（当前一级琥珀色），台阶上方的读数、[@rem-ou-ch13-monotone-cone-geometry] 的 $>1/4$ 能差与十位码 `1011`／九位码 `505`、[@ex-ou-ch13-flagship-zero] 中零点 `#2,306,888,100,085` 的 ppm 标尺，以及四重压力测试面板，都是本章复算证书的数字，标为 `NUM`；递减权柱与能级位置是示意。片中明说：这枚零点是模型内部的见证，不是对夸克混合的推导。
