@@ -180,6 +180,21 @@ Reflection at each ordinate turns the left side into twice a weighted count to t
 
 The Cauchy–Riemann equations give $J(t)/\pi=S_1(t)+\mathrm{const}$. Bounding the weight correction by $O_\lambda(\log T)$ is therefore equivalent to bounding $\int_3^T e^{i\lambda t}S_1(t)\,dt$ on that scale. This requires phase cancellation across the height interval. The collision estimate in the next section also needs control across a frequency band that grows with height.
 
+The phase boundary for a fixed-frequency estimate is explicit in the same synthetic spectrum. Take $\gamma_k=2\pi k$, $m_k=\lfloor\log(2\pi k)\rfloor$, and $\delta_k=2/\log(2\pi k)$, with $m_k$ reflected zeros at each ordinate. Set $u=1/\log T$ and $T=2\pi N$. Every $\gamma_k\le T$ then has $\delta_k>u$, so
+
+$$
+D_\lambda(u,T)=\sum_{k=16}^{N}m_k e^{2\pi i\lambda k}.
+$$
+
+For $\lambda\notin\mathbb Z$, the geometric partial sums have modulus at most $2/|1-e^{2\pi i\lambda}|$. Abel summation against the monotone sequence $m_k$ therefore gives $D_\lambda(u,T)=O_\lambda(\log T)$. For $\lambda\in\mathbb Z$, the phase is exactly resonant and
+
+$$
+D_\lambda(u,T)=\sum_{k=16}^{N}\lfloor\log(2\pi k)\rfloor
+=\frac{T}{2\pi}\log T+O(T).
+$$
+
+The model still has only $O(\log T)$ zeros in each unit-height interval. Moreover, $\mathbf 1_{\{\delta_k>v\}}\le e^{1/2}(2\pi k)^{-v/4}$, so its off-line count is $O(T^{1-v/4}\log T)$ and has the Selberg-type density order used above. Thus the counting, reflection, and density inputs permit both logarithmic phase sums at noninteger frequencies and $T\log T$ resonance at integer frequencies. They cannot by themselves imply the prescribed-frequency bound $O_\lambda(T)$. For the actual zeta problem with $\lambda=\log X$ and $\Lambda(X)=0$, additional arithmetic information on the ordinates is still required. [Phase boundary derivation and computation](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239588238)
+
 ## 3.3 Periodic Phase Deficits, Landau Window Transfer, and the $1/\sqrt{\pi}$ Collision Limit {#sec-ou-3-3}
 
 We now weld the reciprocal-time, periodic-phase, and logarithmic-time regimes into a single quantitative engine. In `trureturing@dev`, the following three-part frozen theorem establishes a $1/(4096\log T)$ deficit across $16\pi/T \le |t| \le b/\log T$ using opposing phase arcs, transfers any uniform Landau ordinate-sum envelope to a $1/(32\log T)$ deficit across $b/\log T \le |t| \le \log T$, and concludes the exact **Gaussian hard-band collision limit $1/\sqrt{\pi}$**:

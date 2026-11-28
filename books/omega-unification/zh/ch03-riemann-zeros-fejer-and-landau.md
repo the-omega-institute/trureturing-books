@@ -180,6 +180,21 @@ $$
 
 由柯西–黎曼方程，$J(t)/\pi$ 与 $S_1(t)$ 相差常数。把实部权重的差压到 $O_\lambda(\log T)$，等价于在同一频率下把 $\int_3^T e^{i\lambda t}S_1(t)\,dt$ 控制到这一阶。这里用到的是高度区间内的相位抵消，前面的均方结论给出的是高度平均信息。下一节的碰撞估计还需要在随高度增长的频带内控制零点和。
 
+固定频率目标的相位边界可在同一合成谱上精确看见。取 $\gamma_k=2\pi k$、$m_k=\lfloor\log(2\pi k)\rfloor$、$\delta_k=2/\log(2\pi k)$，并在每个 $\gamma_k$ 放置 $m_k$ 重的镜像零点。令 $u=1/\log T$ 且 $T=2\pi N$，则 $\delta_k>u$ 对所有 $\gamma_k\le T$ 成立，从而
+
+$$
+D_\lambda(u,T)=\sum_{k=16}^{N}m_k e^{2\pi i\lambda k}.
+$$
+
+若 $\lambda\notin\mathbb Z$，几何部分和的模不超过 $2/|1-e^{2\pi i\lambda}|$。对单调的 $m_k$ 作 Abel 分部求和，得到 $D_\lambda(u,T)=O_\lambda(\log T)$。若 $\lambda\in\mathbb Z$，相位完全共振，并且
+
+$$
+D_\lambda(u,T)=\sum_{k=16}^{N}\lfloor\log(2\pi k)\rfloor
+=\frac{T}{2\pi}\log T+O(T).
+$$
+
+这个模型每个单位高度仍只有 $O(\log T)$ 个零点。并且 $\mathbf 1_{\{\delta_k>v\}}\le e^{1/2}(2\pi k)^{-v/4}$，所以偏轴计数为 $O(T^{1-v/4}\log T)$，保留了本节使用的 Selberg 型密度阶数。由此可见，计数、镜像和密度输入同时允许非整数频率的对数级相位和与整数频率的 $T\log T$ 共振，不能单独推出指定频率的 $O_\lambda(T)$。实际 $\zeta$ 的 $\lambda=\log X$（$\Lambda(X)=0$）仍需额外的纵坐标算术相位信息。[相位边界的推导与复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239588238)
+
 ## 3.3 周期相位亏损、兰道窗转移与高斯碰撞极限 $1/\sqrt{\pi}$ {#sec-ou-3-3}
 
 现在把倒高度时间区、周期相位区与对数时间区三段无缝焊在一起！在 `trureturing@dev` 中，下面这条三位一体的冻结定理首先在倒对数时间段 $16\pi/T \le |t| \le b/\log T$ 用相反相位弧证明 $1/(4096\log T)$ 的一致亏损，再在接收一致兰道零点和包络的前提下把亏损推进至 $b/\log T \le |t| \le \log T$（常数跃升为 $1/(32\log T)$），最终锁定调和加权实际 $\zeta$ 零点谱的**高斯硬碰撞极限 $1/\sqrt{\pi}$**：
