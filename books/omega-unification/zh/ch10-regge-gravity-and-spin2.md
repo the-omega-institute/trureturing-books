@@ -245,7 +245,13 @@ $$
 
 **零耦合且形状均值非零时的选点（手工推导，`ARGUED`）。** 单速率的任意选点性质延续到多个速率。在 $\beta=0$ 且 $\mathbb ET\ne0$ 时，任取 $2r$ 个互异正平移，局部读数雅可比都满秩。把配分函数的权重和速率变分写成 $(b+\lambda_i)^{-k}$ 及其速率导数，成对的列给出合流 Vandermonde 行列式。曲率变分多出一个 $\sqrt v$ 因子。将它写成 $(2\sqrt\pi)^{-1}\int_0^\infty(1-e^{-uv})u^{-3/2}\,du$，曲率列便是平移速率列的积分。每对原速率列贡献一个平方差，故积分中的行列式同号且不恒为零。以正配分函数归一化后再对平移求导，Rolle 定理将非零读数变分的不同零点数限制为 $2r-1$。[行列式推导与双速率有理复算](https://github.com/the-omega-institute/trureturing-books/issues/1817#issuecomment-7238122005)
 
-零耦合且形状均值为零时，令 $c=\mathbb ET^2/2$，把共同的二次项吸收到 $\widetilde\lambda_i=\lambda_i-c\beta^2$。若 $K(s)=e^{-cs^2}M(s)$ 的首个非常数项为奇次 $m$，带号坐标 $u=\beta^m$ 在零点给出正比于 $v^{m/2}$ 的未归一化权重对数变分，与至多线性增长的混合变分独立；一般 $2r$ 个读数仍能恢复符号。若首项为偶次 $j$，而首个奇次 $m>j$，固定 $2r-1$ 个读数以消去混合参数后，一个剩余读数在零点折返。再加一个一般读数就能分开两支，因为未归一化权重的两个对数变分方向 $v^{j/2}$ 与 $v^{m/2}$ 在混合切向空间和常数之外仍线性独立。因此一般的 $2r+1$ 个读数足够。对刚得到的格点形状律，某个有限阶的奇次系数必非零。其首现阶数与形状均值决定适用哪一种局部情形。[高阶分支推导](https://github.com/the-omega-institute/trureturing-books/issues/1611#issuecomment-7230292091) · [精确三点算例](https://github.com/the-omega-institute/trureturing-books/issues/1611#issuecomment-7230342324)
+零耦合且形状均值为零时，令 $c=\mathbb ET^2/2$，把共同的二次项吸收到 $\widetilde\lambda_i=\lambda_i-c\beta^2$。若 $K(s)=e^{-cs^2}M(s)$ 的首个非常数项为奇次 $m$，带号坐标 $u=\beta^m$ 在零点给出正比于 $v^{m/2}$ 的未归一化权重对数变分，与至多线性增长的混合变分独立；一般 $2r$ 个读数仍能恢复符号。
+
+**三阶形状律的选点（手工推导，`ARGUED`）。** 若 $\mathbb ET=0$ 且 $\mathbb ET^3\ne0$，取 $u=\beta^3$。任取 $2r$ 个互异平移 $b_j>-\lambda_1$，均值映射在 $(a_1,\ldots,a_{r-1},\widetilde\lambda_1,\ldots,\widetilde\lambda_r,u)$ 中都有局部 $C^1$ 逆。这里 $-\lambda_1$ 是零耦合配分函数的可积下界，达到或低于它时最慢速率项的积分发散。允许的零平移和负平移也可用正平移的证明。把所有 $b_j$ 增加同一个常数，把所有速率等量减小，使两者均为正，密度和参数变分都保持不变。
+
+在正平移的证明中，三阶曲率列来自 $v^{3/2}=\frac{3}{4\sqrt\pi}\int_0^\infty(e^{-zv}-1+zv)z^{-5/2}\,dz$。两个扣减项落在原有配分函数与混合变分的张成空间内，剩余的平移速率列给出同号的合流行列式。归一化后使用同样的 Rolle 零点界，便得到任意允许选点的满秩性。局部逆由 $u$ 恢复 $\beta$ 的符号，读数个数达到维数下界。[完整推导与精确有理复算](https://github.com/the-omega-institute/trureturing-books/issues/1847#issuecomment-7238512079)
+
+若首项为偶次 $j$，而首个奇次 $m>j$，固定 $2r-1$ 个读数以消去混合参数后，一个剩余读数在零点折返。再加一个一般读数就能分开两支，因为未归一化权重的两个对数变分方向 $v^{j/2}$ 与 $v^{m/2}$ 在混合切向空间和常数之外仍线性独立。因此一般的 $2r+1$ 个读数足够。对刚得到的格点形状律，某个有限阶的奇次系数必非零。其首现阶数与形状均值决定适用哪一种局部情形。[高阶分支推导](https://github.com/the-omega-institute/trureturing-books/issues/1611#issuecomment-7230292091) · [精确三点算例](https://github.com/the-omega-institute/trureturing-books/issues/1611#issuecomment-7230342324)
 
 **偶次首项下的锐下界（`ARGUED`）。** 任意固定的 $d=2r$ 个正平移都无法在零耦合参数的开邻域内给出单射。令 $\theta$ 记录 $d-1$ 个独立混合参数，取 $p=j/2>1$。在零耦合处把混合导数与偶次方向并为行函数 $F_\theta(b)=(\partial_\theta\mu_\theta(b),\operatorname{Cov}_{\theta,b}(V,V^p))$，其中 $\mu_\theta$ 是平均体积。其分量解析且线性无关。恒为零的读数变分经拉普拉斯唯一性给出常数对数变分。$v^p$ 比混合变分增长更快，故其系数为零。再按速率从慢到快消去混合变分，最后由权重归一化消去常数方向。
 
