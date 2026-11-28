@@ -281,9 +281,11 @@ $$
 
 平移 $b$ 越大，体积权中的指数衰减越快。取体积上限 $200/(b+15/8)$ 并用拉普拉斯指数矩控制尾部。截断段上，曲率矩阵的一次修正只涉及一个矩阵元。对其余量按体积积分，伽马矩给出归一化的一阶体积矩上界 $7/(b+x)$，其中 $x$ 是求值速率。从尚未入列的参考速率两端向内排列取值列，使各前缀的展开同号，再由 Rolle 定理把逐列下界传给六点行列式。 [体积矩估计、取列顺序与精确复算](https://github.com/the-omega-institute/trureturing-books/issues/2020#issuecomment-7240672816)
 
-在每个求值速率 $x$ 上，用同一组权重比较信号与噪声。零耦合时，这组权重是辅助 Cauchy 列在永久式中分配给各读数行的概率。它既给出 Rolle 积分各分量的份额，也出现在余子式噪声中。把每行的信号积分下界乘以常数，再扣除该行的噪声上界，就能在求平均时保留各行余量的符号。 [共同权重与交错根约分](https://github.com/the-omega-institute/trureturing-books/issues/2020#issuecomment-7241350317)
+在零耦合比较中，三个参考速率槽合流于上端点 $5$ 时，六个余子式分别与辅助行列式的绝对值之比都取到最大值。若求值速率 $x$ 较小而三个槽都靠近 $5$，平方速率差乘积也会提高信号下界。按辅助列所占的行拆分零耦合 Cauchy 永久式，把三个参考槽到 $5$ 的总距离保留在逐行余子式界中。 [余子式与平方速率差估计](https://github.com/the-omega-institute/trureturing-books/issues/2020#issuecomment-7240880342)
 
-在信号余量小的区域，细分平移区间，并用有理差商计算每段的 Rolle 质量。要估计这些余量的行权重，将辅助列与普通列作行换位。参考速率及其交错根的次序给每个普通列各自的速率下界，从而限制换位能扣除的平均余量。对同一个 $x$ 完成比较后，再按另一组的混合权重求平均。配分积分的连续性使误差界也覆盖速率合流和零权。 [逐列换位界与精确有理复算](https://github.com/the-omega-institute/trureturing-books/issues/2020#issuecomment-7241882931)
+将末层 Rolle 积分的平移 $b$ 换成 $(b+33)^{-1}$ 后，积分分布是六个分量的混合。每个分量取六个变换后的读数点，重复其中一个，再以六维单纯形上的均匀重心坐标取平均。在零耦合比较中，分量的混合权正是辅助 Cauchy 列在永久式中分配给各读数行的概率。同一权重也出现在逐行余子式的噪声界中。将每行的信号下界乘以误差常数，再扣除噪声上界，可在加权平均中保留各行余量的符号。 [Rolle 积分分量](https://github.com/the-omega-institute/trureturing-books/issues/2020#issuecomment-7241095458) · [共同权重与交错根约分](https://github.com/the-omega-institute/trureturing-books/issues/2020#issuecomment-7241350317)
+
+在信号余量小的区域，细分平移区间，并用合流差商计算各段的 Rolle 质量。交换辅助列与普通列的行分配时，参考速率与交错根的次序给每个普通列各自的速率下界，从而约束换位能扣除的余量。对同一个求值速率 $x$ 完成信号与噪声的比较后，再按另一组的混合权重取平均。配分积分的连续性使误差界也涵盖速率合流和零权。 [逐列换位界与精确有理复算](https://github.com/the-omega-institute/trureturing-books/issues/2020#issuecomment-7241882931)
 
 若一组模型的参照耦合为零，另一组满足 $0\le\beta\le10^{-3}$，两组各至多三个原子的支撑仍可独立选取。单侧论证给出的六点误差常数为 $47\,000\,000$。零耦合参照下的 Wronskian 可直接用速率差的平方项控制曲率交叉项，再用辅助 Newton 列及各读数的余子式给出常数。[单侧界的完整推导与有理复算](https://github.com/the-omega-institute/trureturing-books/issues/2020#issuecomment-7239468603)
 

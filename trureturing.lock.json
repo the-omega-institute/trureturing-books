@@ -13074,6 +13074,22 @@
       "line": 315,
       "signature": "theorem result : ¬ claim"
     },
+    "D5/S3/Midline/Cayley/CanonicalZetaCayleyJUnitary.zeroCayleyOperator_j_unitary": {
+      "module": "D5/S3/Midline/Cayley/CanonicalZetaCayleyJUnitary",
+      "name": "D5.S3.Midline.Cayley.CanonicalZetaCayleyJUnitary.zeroCayleyOperator_j_unitary",
+      "kind": "theorem",
+      "statement_id": "sha256:0764e89e6a22be34df12fc42a4fe8b27fec5fc34d5d6de645ac851beac1916ce",
+      "line": 105,
+      "signature": "theorem zeroCayleyOperator_j_unitary (Z : ZeroData) : star (zeroCayleyOperator Z) * (mirrorFundamentalSymmetry Z : MirrorZeroHilbertSpace Z →L[Complex] MirrorZeroHilbertSpace Z) * zeroCayleyOperator Z = (mirrorFundamentalSymmetry Z : MirrorZeroHilbertSpace Z →L[Complex] MirrorZeroHilbertSpace Z)"
+    },
+    "D5/S3/Midline/Cayley/CanonicalZetaMirrorFundamentalSymmetry.mirror_odd_vector_strictly_negative": {
+      "module": "D5/S3/Midline/Cayley/CanonicalZetaMirrorFundamentalSymmetry",
+      "name": "D5.S3.Midline.Cayley.CanonicalZetaMirrorFundamentalSymmetry.mirror_odd_vector_strictly_negative",
+      "kind": "theorem",
+      "statement_id": "sha256:87495713b1e8c9cd337f2bfa6db453db9c3f5961621ee0932346ae1cdfe62aef",
+      "line": 164,
+      "signature": "theorem mirror_odd_vector_strictly_negative (Z : ZeroData) (v : ZeroCoordinate Z) (hmove : mirrorCoordinatePerm Z v ≠ v) : (mirrorKreinForm Z (mirrorOddVector Z v) (mirrorOddVector Z v)).re < 0"
+    },
     "D5/S3/Midline/Cayley/CayleyCriticalLineZetaCriterion.cayley_critical_line_zeta_criterion": {
       "module": "D5/S3/Midline/Cayley/CayleyCriticalLineZetaCriterion",
       "name": "D5.S3.Midline.Cayley.CayleyCriticalLineZetaCriterion.cayley_critical_line_zeta_criterion",
@@ -30191,6 +30207,22 @@
       "statement_id": "sha256:9c780899125212184ffb4b36258561f0ff193a6290f347dfc54006ba367e06f6",
       "line": 572,
       "signature": "theorem actual_cutoff_landau_envelope (rh : RiemannHypothesis) : ∃ C : ℝ, 0 < C ∧ ∀ V t : ℝ, 1 < V → 0 < |t| → ‖∑ j ∈ positiveCutoff rh V, (zeroMult j.val : ℂ) * phase (ordinate j) t‖ ≤ let expFrequency"
+    },
+    "D5/S3/Weil/ZetaLinear/FullRankInertiaPullback.inertia_conj_eq_of_rightInverse": {
+      "module": "D5/S3/Weil/ZetaLinear/FullRankInertiaPullback",
+      "name": "RHLinalg.inertia_conj_eq_of_rightInverse",
+      "kind": "theorem",
+      "statement_id": "sha256:00e6f7291d3fbb585ad4b114c72644f07af3c0d3c4dcfb564ce7f26f2b180951",
+      "line": 264,
+      "signature": "theorem inertia_conj_eq_of_rightInverse {Q : Matrix m m K} (hQ : Q.IsHermitian) (B : Matrix m d K) (R : Matrix d m K) (hBR : B * R = 1) : posIndex (isHermitian_conjTranspose_mul_mul B hQ) = posIndex hQ ∧ negIndex (isHermitian_conjTranspose_mul_mul B hQ) = negIndex hQ"
+    },
+    "D5/S3/Weil/ZetaLinear/FullRankInertiaPullback.negIndex_conj_le": {
+      "module": "D5/S3/Weil/ZetaLinear/FullRankInertiaPullback",
+      "name": "RHLinalg.negIndex_conj_le",
+      "kind": "theorem",
+      "statement_id": "sha256:00e6f7291d3fbb585ad4b114c72644f07af3c0d3c4dcfb564ce7f26f2b180951",
+      "line": 162,
+      "signature": "theorem negIndex_conj_le {Q : Matrix m m K} (hQ : Q.IsHermitian) (B : Matrix m d K) : negIndex (isHermitian_conjTranspose_mul_mul B hQ) ≤ negIndex hQ"
     },
     "D5/S3/Weil/ZetaPntBounds/MobiusEnergyPointwise.unweighted_mobius_prefix_power_bound": {
       "module": "D5/S3/Weil/ZetaPntBounds/MobiusEnergyPointwise",
