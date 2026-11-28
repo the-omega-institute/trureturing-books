@@ -300,6 +300,27 @@ class LedgerAncestryTests(unittest.TestCase):
         lean.Ledger(TRU).branch_contains(OLD_COMMIT, "dev")
         self.assertIsNone(gh.requests[0].get_header("Authorization"))
 
+    def test_rate_limited_api_accepts_only_proven_git_ancestors(self):
+        h = self.h
+        url_config = f"url.{h.dir.as_uri()}.insteadOf"
+        git(h.dir, "config", "uploadpack.allowFilter", "true")
+        limit = (403, None, "HTTP 403 API rate limit exceeded for installation")
+        with mock.patch.dict(os.environ, {
+            "GIT_CONFIG_COUNT": "1",
+            "GIT_CONFIG_KEY_0": url_config,
+            "GIT_CONFIG_VALUE_0": UPSTREAM,
+        }):
+            with mock.patch.object(lean, "github_api", return_value=limit):
+                yes = lean.github_branch_contains(TRU, "dev", h.a)
+                self.assertIs(yes.on_branch, True)
+                self.assertIn("Git transport", yes.detail)
+                unknown = lean.github_branch_contains(TRU, "dev", h.c)
+                self.assertIsNone(unknown.on_branch)
+                self.assertIn("rate limit", unknown.detail)
+            branch = (200, {"name": "dev", "commit": {"sha": h.b}}, "")
+            with mock.patch.object(lean, "github_api", side_effect=[branch, limit]):
+                self.assertIs(lean.github_branch_contains(TRU, "dev", h.a).on_branch, True)
+
     def test_github_overrides_a_stale_checkout_and_a_checkout_no_stands_alone(self):
         h = self.h
         git(h.dir, "update-ref", "refs/remotes/origin/dev", h.a)  # stale: dev has moved to B since the last fetch
@@ -1378,11 +1399,16 @@ class BuildCacheWorkflowTests(unittest.TestCase):
             self.assertEqual(len(restores), 1, where)
             self.assertLess(restores[0], builds[0], where)
             pages = [i for i, s in enumerate(steps) if s.get("uses", "").startswith("actions/configure-pages@")]
-            self.assertEqual(len(pages), 1, where)
-            self.assertEqual(steps[pages[0]].get("id"), "pages", where)
-            self.assertLess(pages[0], restores[0], where)
-            self.assertEqual(steps[restores[0]]["with"].get("pages-url"), "${{ steps.pages.outputs.base_url }}", where)
-            if wf != "pages.yml":  # pages.yml asks only when its probe found Pages enabled
+            if wf == "pages.yml":
+                self.assertEqual(pages, [], where)
+                self.assertEqual(steps[restores[0]]["with"].get("pages-url"),
+                                 "${{ needs.probe.outputs.base_url }}", where)
+            else:
+                self.assertEqual(len(pages), 1, where)
+                self.assertEqual(steps[pages[0]].get("id"), "pages", where)
+                self.assertLess(pages[0], restores[0], where)
+                self.assertEqual(steps[restores[0]]["with"].get("pages-url"),
+                                 "${{ steps.pages.outputs.base_url }}", where)
                 self.assertEqual(steps[pages[0]].get("continue-on-error"), "true", where)
             films, film_if = False, ""
             for i in builds:

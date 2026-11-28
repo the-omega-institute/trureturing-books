@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "492e9a4f1b12b5a7bf5e741f7deea71bf39eeaf3",
-  "pinned_at": "2026-11-28T14:29:30Z",
+  "commit": "a3c645e8130df1b1bdc8485505efbb21265fe727",
+  "pinned_at": "2026-11-28T16:37:42Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -1006,6 +1006,14 @@
       "statement_id": "sha256:025fb59352444e3a6f3da2fa86b4371e27f0667d1ec5ac8a5623b3e79e9fd143",
       "line": 24,
       "signature": "theorem smul {f : ℝ → ℂ} (hf : PositiveDefinite f) {a : ℝ} (ha : 0 ≤ a) : PositiveDefinite (fun t => (a : ℂ) * f t)"
+    },
+    "D5/S3/Analytic/GoldenTomography/CauchyFeatureRightInverse.cauchy_feature_right_inverse": {
+      "module": "D5/S3/Analytic/GoldenTomography/CauchyFeatureRightInverse",
+      "name": "D5.S3.Analytic.GoldenTomography.CauchyFeatureRightInverse.cauchy_feature_right_inverse",
+      "kind": "theorem",
+      "statement_id": "sha256:fe44b151e4fb5bb321a10b5f915586d903adb43b1cd0dfacd857a3e18d980c13",
+      "line": 141,
+      "signature": "theorem cauchy_feature_right_inverse {n : ℕ} {support : Fin n → ℂ} {center : ℂ} (hSupport : Function.Injective support) (hCenter : ∀ a, support a ≠ center) : cauchyJetFeatureMatrix support center * cauchyJetFeatureRightInverse support center = 1 ∧ cauchyJetFeatureRightInverse support center * cauchyJetFeatureMatrix support center = 1 ∧ Function.Injective (cauchyJetFeatureMatrix support center).mulVec"
     },
     "D5/S3/Analytic/GoldenTomography/FinitePronyHankelReconstruction.prony_hankel_rank": {
       "module": "D5/S3/Analytic/GoldenTomography/FinitePronyHankelReconstruction",
@@ -2644,6 +2652,45 @@
       "statement_id": "sha256:2b6ee1cc3ee0e169555107cb1806afb171e6d682d5bd03e26c089e27db5953d7",
       "line": 284,
       "signature": "theorem realL1_hilbert_banach_phase_reversal : sInf {C | RealL1CliqueUpper 4 C} = 1 ∧ 1 < hilbertCliqueCoefficient 4 ∧ hilbertCliqueCoefficient 5 < (3 / 2 : ℝ) ∧ (3 / 2 : ℝ) ≤ sInf {C | RealL1CliqueUpper 5 C} ∧ sInf {C | RealL1CliqueUpper 5 C} ≤ sInf {C | BanachCliqueUpper 5 C}",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/HilbertGlobalSubJung.SimpleGraph.IsChordal.exists_hilbert_gain_potential_clique_credit": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/HilbertGlobalSubJung",
+      "name": "SimpleGraph.IsChordal.exists_hilbert_gain_potential_clique_credit",
+      "kind": "theorem",
+      "statement_id": "sha256:a0b448f9fa2a44ee51c61df72dbdd7f1eb54044043093c7eab7b59beac53f27c",
+      "line": 904,
+      "signature": "theorem IsChordal.exists_hilbert_gain_potential_clique_credit (hG : G.IsChordal) (N : ℕ) (hN : 1 ≤ N) (hclique : ∀ S : Finset V, G.IsClique (S : Set V) → S.card ≤ N + 1) (g : V → V → E) (D : ℝ) (hD : 0 ≤ D) (hg : Skew g) (ht : ∀ i j k, Triangle G i j k → ‖holonomy g i j k‖ ≤ D) : (∃ p : V → E, ∀ i j, G.Adj i j → ‖g i j + p i - p j‖ ≤ Real.sqrt ((241361 / 100000 : ℝ) ^ 2 - 57 / (10 * (N : ℝ))) * D) ∧ Real.sqrt ((241361 / 100000 : ℝ) ^ 2 - 57 / (10 * (N : ℝ))) ≤ 241361 / 100000 - 59 / (50 * (N : ℝ))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/HilbertGlobalSubJung.SimpleGraph.IsChordal.exists_hilbert_gain_potential_retained_curl": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/HilbertGlobalSubJung",
+      "name": "SimpleGraph.IsChordal.exists_hilbert_gain_potential_retained_curl",
+      "kind": "theorem",
+      "statement_id": "sha256:a0b448f9fa2a44ee51c61df72dbdd7f1eb54044043093c7eab7b59beac53f27c",
+      "line": 924,
+      "signature": "theorem IsChordal.exists_hilbert_gain_potential_retained_curl (hG : G.IsChordal) (k : HilbertGlobalSubJungFinite.Cutoff) (hclique : ∀ W : Finset V, G.IsClique (W : Set V) → W.card ≤ k.parameters.N + 1) (g : V → V → E) (D : ℝ) (hD : 0 ≤ D) (hg : Skew g) (ht : ∀ i j l, Triangle G i j l → ‖holonomy g i j l‖ ≤ D) : ∃ p : V → E, ∀ i j, G.Adj i j → ‖g i j + p i - p j‖ ≤ k.parameters.R * D",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/HilbertGlobalSubJung.SimpleGraph.IsChordal.exists_hilbert_gain_potential_sub_jung": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/HilbertGlobalSubJung",
+      "name": "SimpleGraph.IsChordal.exists_hilbert_gain_potential_sub_jung",
+      "kind": "theorem",
+      "statement_id": "sha256:a0b448f9fa2a44ee51c61df72dbdd7f1eb54044043093c7eab7b59beac53f27c",
+      "line": 888,
+      "signature": "theorem IsChordal.exists_hilbert_gain_potential_sub_jung (hG : G.IsChordal) (g : V → V → E) (D : ℝ) (hD : 0 ≤ D) (hg : Skew g) (ht : ∀ i j k, Triangle G i j k → ‖holonomy g i j k‖ ≤ D) : (∃ p : V → E, ∀ i j, G.Adj i j → ‖g i j + p i - p j‖ ≤ (241361 / 100000) * D) ∧ ((241361 / 100000 : ℝ) < 2414 / 1000 ∧ (2414 / 1000 : ℝ) < 1 + Real.sqrt 2 ∧ (3 / 5000 : ℝ) < 1 + Real.sqrt 2 - 241361 / 100000)",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -6089,6 +6136,32 @@
       "line": 193,
       "signature": "theorem central_fejer_gaussian_limit {J : ℕ → Type*} [∀ n,Fintype (J n)] (g w : ∀ n,J n → ℝ) (hw : ∀ᶠ n in atTop, ∀ i j, 0≤w n i*w n j) (hW : ∀ᶠ n in atTop, ∑ j,w n j=1) (hM : ∀ᶠ n in atTop, 0<pairMoment (g n) (w n) 2) (ρ A : ℕ → ℝ) (hρ : Tendsto ρ atTop (𝓝 0)) (hA : Tendsto A atTop atTop) (hwin : ∀ᶠ n in atTop, A n^2*pairMoment (g n) (w n) 4 ≤ 6*(n:ℝ)*pairMoment (g n) (w n) 2^2) : let kernel"
     },
+    "D5/S3/Fourier/Asymptotics/PeriodicSublevelSampling.tendsto_weighted_sublevel_of_fourier": {
+      "module": "D5/S3/Fourier/Asymptotics/PeriodicSublevelSampling",
+      "name": "D5.S3.Fourier.Asymptotics.PeriodicSublevelSampling.tendsto_weighted_sublevel_of_fourier",
+      "kind": "theorem",
+      "statement_id": "sha256:fe5e50cf00543ad60c32effd64866347ae44372314327eb30f27165301d0e0f7",
+      "line": 75,
+      "signature": "theorem tendsto_weighted_sublevel_of_fourier {ι α β : Type*} [Fintype ι] (l : Filter α) (q : Plane) {F : Plane → Plane} (hF : Continuous F) (hperiod : ∀ (a : Fin 2 → ℤ) (x : Plane), F (latticeVector a + x) = F x) (z : ι → Plane) (hz : Function.Injective z) (hcell : ∀ i, z i ∈ openCell q) (hzero : ∀ x ∈ closedCell q, F x = 0 ↔ ∃ i, x = z i) (A : ι → Plane ≃L[ℝ] Plane) (hA : ∀ i, HasFDerivAt F (A i : Plane →L[ℝ] Plane) (z i)) (s : α → Finset β) (p : α → β → Plane) (w : α → β → ℝ) (hw : ∀ n, ∀ j ∈ s n, 0 ≤ w n j) (hw₁ : ∀ n, ∑ j ∈ s n, w n j = 1) (ε : α → ℝ) (hεpos : ∀ n, 0 < ε n) (hε : Tendsto ε",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Fourier/Asymptotics/PeriodicSublevelSandwich.periodic_test_sandwich": {
+      "module": "D5/S3/Fourier/Asymptotics/PeriodicSublevelSandwich",
+      "name": "D5.S3.Fourier.Asymptotics.PeriodicSublevelSandwich.periodic_test_sandwich",
+      "kind": "theorem",
+      "statement_id": "sha256:677f6b2fd6c5b136a888a2153c81b1345bcc933aa20ff5dbc3ec49a536bfc262",
+      "line": 19,
+      "signature": "theorem periodic_test_sandwich {n : ℕ} (q : Plane) {F : Plane → Plane} (hF : Continuous F) (hperiod : ∀ (a : Fin 2 → ℤ) (x : Plane), F (latticeVector a + x) = F x) (z : Fin n → Plane) (hz : Function.Injective z) (hcell : ∀ i, z i ∈ openCell q) (hzero : ∀ x ∈ closedCell q, F x = 0 ↔ ∃ i, x = z i) (A : Fin n → Plane ≃L[ℝ] Plane) (hA : ∀ i, HasFDerivAt F (A i : Plane →L[ℝ] Plane) (z i)) {η ρ σ : ℝ} (hη : 0 < η) (hη1 : η < 1) (hρ : 0 < ρ) (hρ' : ρ < (1 + η)⁻¹) (hσ : (1 - η)⁻¹ < σ) : let D",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
     "D5/S3/Fourier/Asymptotics/PlanarSublevelSandwich.smooth_local_ellipse_sandwich": {
       "module": "D5/S3/Fourier/Asymptotics/PlanarSublevelSandwich",
       "name": "D5.S3.Fourier.Asymptotics.PlanarSublevelSandwich.smooth_local_ellipse_sandwich",
@@ -6096,19 +6169,6 @@
       "statement_id": "sha256:7967f58a7a14fb893bcae48114640339d644764c435483778402622547e231d1",
       "line": 23,
       "signature": "theorem smooth_local_ellipse_sandwich {f : Plane → Plane} {z : Plane} (A : Plane ≃L[ℝ] Plane) (hf : HasFDerivAt f (A : Plane →L[ℝ] Plane) z) (hz : f z = 0) {η ρ σ : ℝ} (hη : 0 < η) (hη1 : η < 1) (hρ : 0 < ρ) (hρ' : ρ < (1 + η)⁻¹) (hσ : (1 - η)⁻¹ < σ) : let determinant",
-      "axioms": [
-        "Classical.choice",
-        "Quot.sound",
-        "propext"
-      ]
-    },
-    "D5/S3/Fourier/Asymptotics/PlanarWindowSampling.compact_window_sampling": {
-      "module": "D5/S3/Fourier/Asymptotics/PlanarWindowSampling",
-      "name": "D5.S3.Fourier.Asymptotics.PlanarWindowSampling.compact_window_sampling",
-      "kind": "theorem",
-      "statement_id": "sha256:3a65dbd0081e0a5d9c83341a65266f271b1391a49bffc892cc7fea4a9fee44a5",
-      "line": 430,
-      "signature": "theorem compact_window_sampling {ι : Type*} (f : Plane → ℂ) (hf : HasCompactSupport f) (hs : ContDiff ℝ ∞ f) : ∃ K ≥ (0 : ℝ), ∀ (ε : ℝ), 0 < ε → ε ≤ 1 → ∀ (center : Plane) (s : Finset ι) (w : ι → ℝ) (p : ι → Plane) (J : ℕ) (c d : ℝ), 0 ≤ c → 0 ≤ d → 0 < J → (∀ i ∈ s, 0 ≤ w i) → (∑ i ∈ s, w i = 1) → (∀ m ≠ (0, 0), modeRadius m ≤ J → ‖∑ i ∈ s, (w i : ℂ) * character m (p i)‖ ≤ c + d * (modeRadius m : ℝ) ^ 2) → ‖(∑ i ∈ s, (w i : ℂ) * ∑' a : Fin 2 → ℤ, f (ε⁻¹ • (toLp 2 (fun j => (a j : ℝ)) + p i - center))) - (ε ^ 2 : ℝ) • (∫ x, f x)‖ ≤ 27 * K * c + (27 * K / ε ^ 2) * d + 2 * K / (ε ^ 4 * (J : ℝ) ^",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -13074,6 +13134,22 @@
       "line": 315,
       "signature": "theorem result : ¬ claim"
     },
+    "D5/S3/Midline/Cayley/CanonicalZetaCayleyJUnitary.zeroCayleyOperator_j_unitary": {
+      "module": "D5/S3/Midline/Cayley/CanonicalZetaCayleyJUnitary",
+      "name": "D5.S3.Midline.Cayley.CanonicalZetaCayleyJUnitary.zeroCayleyOperator_j_unitary",
+      "kind": "theorem",
+      "statement_id": "sha256:0764e89e6a22be34df12fc42a4fe8b27fec5fc34d5d6de645ac851beac1916ce",
+      "line": 105,
+      "signature": "theorem zeroCayleyOperator_j_unitary (Z : ZeroData) : star (zeroCayleyOperator Z) * (mirrorFundamentalSymmetry Z : MirrorZeroHilbertSpace Z →L[Complex] MirrorZeroHilbertSpace Z) * zeroCayleyOperator Z = (mirrorFundamentalSymmetry Z : MirrorZeroHilbertSpace Z →L[Complex] MirrorZeroHilbertSpace Z)"
+    },
+    "D5/S3/Midline/Cayley/CanonicalZetaMirrorFundamentalSymmetry.mirror_odd_vector_strictly_negative": {
+      "module": "D5/S3/Midline/Cayley/CanonicalZetaMirrorFundamentalSymmetry",
+      "name": "D5.S3.Midline.Cayley.CanonicalZetaMirrorFundamentalSymmetry.mirror_odd_vector_strictly_negative",
+      "kind": "theorem",
+      "statement_id": "sha256:87495713b1e8c9cd337f2bfa6db453db9c3f5961621ee0932346ae1cdfe62aef",
+      "line": 164,
+      "signature": "theorem mirror_odd_vector_strictly_negative (Z : ZeroData) (v : ZeroCoordinate Z) (hmove : mirrorCoordinatePerm Z v ≠ v) : (mirrorKreinForm Z (mirrorOddVector Z v) (mirrorOddVector Z v)).re < 0"
+    },
     "D5/S3/Midline/Cayley/CayleyCriticalLineZetaCriterion.cayley_critical_line_zeta_criterion": {
       "module": "D5/S3/Midline/Cayley/CayleyCriticalLineZetaCriterion",
       "name": "D5.S3.Midline.Cayley.CayleyCriticalLineZetaCriterion.cayley_critical_line_zeta_criterion",
@@ -13105,6 +13181,14 @@
       "statement_id": "sha256:c9fce0bdf0a41ab34320b74f16c34e33a4745259b23f386b2eea80a18d362aa9",
       "line": 27,
       "signature": "noncomputable def logarithmicRadialDefect (rho : Complex) : Real"
+    },
+    "D5/S3/Midline/Cayley/ZeroHilbertCayleyUnitarity.cayley_unitarity_defect_formula_on_zero_hilbert_space": {
+      "module": "D5/S3/Midline/Cayley/ZeroHilbertCayleyUnitarity",
+      "name": "D5.S3.Midline.Cayley.ZeroHilbertCayleyUnitarity.cayley_unitarity_defect_formula_on_zero_hilbert_space",
+      "kind": "theorem",
+      "statement_id": "sha256:f52829eeb7dc42047cebbf41382919cccd0128a5552f4c03f732a0dcf62da8fc",
+      "line": 277,
+      "signature": "theorem cayley_unitarity_defect_formula_on_zero_hilbert_space (Z : ZeroData) (hExhaustive : ∀ rho : Complex, riemannZeta rho = 0 → (¬ ∃ n : Nat, rho = -2 * (n + 1)) → rho ≠ 1 → ∃ n, Z.zero n = rho) : (∀ v : ZeroCoordinate Z, let delta : Real"
     },
     "D5/S3/Midline/CayleyCriticalLine.cayleyRatio": {
       "module": "D5/S3/Midline/CayleyCriticalLine",
@@ -13697,6 +13781,19 @@
       "statement_id": "sha256:5a9dbba0de87861c227e245d79ed645b77aa47f6e3843de25102e91131b667f5",
       "line": 321,
       "signature": "theorem three_le_dim_of_hasFeatureRank {d : ℕ} {M : Type*} [TopologicalSpace M] [LocallyCompactSpace M] [PreconnectedSpace M] (C : TernaryComparison M) (htri : Continuous fun p : M × M × M => C.tri p.1 p.2.1 p.2.2) (hkappa : ∀ x, ContinuousAt (C.kappa x) x) (hnc : C.Noncommutative) {r : ℕ} (hr : C.HasFeatureRank r) {o : M} {V : Set M} (hV : V ∈ 𝓝 o) (f : M → EuclideanSpace ℝ (Fin d)) (hf : ContinuousOn f V) (hfi : Set.InjOn f V) : 3 ≤ d ∧ 5 ≤ r"
+    },
+    "D5/S3/Quantum/AURICOmega/FivePointTransportedContrast.exists_transported_readings_iff": {
+      "module": "D5/S3/Quantum/AURICOmega/FivePointTransportedContrast",
+      "name": "D5.S3.Quantum.AURICOmega.FivePointTransportedContrast.exists_transported_readings_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:a04ee4b63b654337dbda60f4ec603a632197c5e72f3d5d82190449d999dea969",
+      "line": 17,
+      "signature": "theorem exists_transported_readings_iff (t d : ℚ) (ht : 0 ≤ t) (ht1 : t ≤ 1) : (∃ a b c e r : ℚ, 0 ≤ a ∧ 0 ≤ b ∧ 0 ≤ c ∧ 0 ≤ e ∧ 0 ≤ r ∧ a - b = d ∧ ∀ x y z w v : ℚ, 0 ≤ x ^ 2 + y ^ 2 + z ^ 2 + w ^ 2 + v ^ 2 + 2 * (t * (x * y + z * w + z * v) + a * (x * z + y * v) + b * (y * z + x * w) + c * y * w + e * x * v + r * w * v)) ↔ d ^ 2 ≤ if t ≤ 1 / 2 then (1 - t ^ 2) ^ 2 else if (t - 1 / 2) ^ 2 ≤ 1 - t ^ 2 then (5 / 4 - t) ^ 2 else (2 * t - 1) ^ 2 * (1 - t ^ 2)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/GramIsometryExtension.existsUnique_linearIsometryEquiv_of_gram_preserving": {
       "module": "D5/S3/Quantum/AURICOmega/GramIsometryExtension",
@@ -30178,6 +30275,22 @@
       "statement_id": "sha256:9c780899125212184ffb4b36258561f0ff193a6290f347dfc54006ba367e06f6",
       "line": 572,
       "signature": "theorem actual_cutoff_landau_envelope (rh : RiemannHypothesis) : ∃ C : ℝ, 0 < C ∧ ∀ V t : ℝ, 1 < V → 0 < |t| → ‖∑ j ∈ positiveCutoff rh V, (zeroMult j.val : ℂ) * phase (ordinate j) t‖ ≤ let expFrequency"
+    },
+    "D5/S3/Weil/ZetaLinear/FullRankInertiaPullback.inertia_conj_eq_of_rightInverse": {
+      "module": "D5/S3/Weil/ZetaLinear/FullRankInertiaPullback",
+      "name": "RHLinalg.inertia_conj_eq_of_rightInverse",
+      "kind": "theorem",
+      "statement_id": "sha256:00e6f7291d3fbb585ad4b114c72644f07af3c0d3c4dcfb564ce7f26f2b180951",
+      "line": 264,
+      "signature": "theorem inertia_conj_eq_of_rightInverse {Q : Matrix m m K} (hQ : Q.IsHermitian) (B : Matrix m d K) (R : Matrix d m K) (hBR : B * R = 1) : posIndex (isHermitian_conjTranspose_mul_mul B hQ) = posIndex hQ ∧ negIndex (isHermitian_conjTranspose_mul_mul B hQ) = negIndex hQ"
+    },
+    "D5/S3/Weil/ZetaLinear/FullRankInertiaPullback.negIndex_conj_le": {
+      "module": "D5/S3/Weil/ZetaLinear/FullRankInertiaPullback",
+      "name": "RHLinalg.negIndex_conj_le",
+      "kind": "theorem",
+      "statement_id": "sha256:00e6f7291d3fbb585ad4b114c72644f07af3c0d3c4dcfb564ce7f26f2b180951",
+      "line": 162,
+      "signature": "theorem negIndex_conj_le {Q : Matrix m m K} (hQ : Q.IsHermitian) (B : Matrix m d K) : negIndex (isHermitian_conjTranspose_mul_mul B hQ) ≤ negIndex hQ"
     },
     "D5/S3/Weil/ZetaPntBounds/MobiusEnergyPointwise.unweighted_mobius_prefix_power_bound": {
       "module": "D5/S3/Weil/ZetaPntBounds/MobiusEnergyPointwise",

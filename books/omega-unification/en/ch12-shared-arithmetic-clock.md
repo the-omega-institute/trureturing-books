@@ -31,7 +31,42 @@ $$
 
 :::
 
-First run the strictest possible control test: require the arithmetic times $F(j)$ and the reference quark-mixing ($\mathrm{CKM}$) determinant stationary point to share the **exact same probability measure $p$** with zero flavor reweighting. Through the fourth time, the outlook still appears deceptively smooth:
+This definition starts with a positive semidefinite operator and studies its readings. To reverse the argument and establish positivity of a candidate spectral realization from finitely many readings, one must first ask which directions the source and its filtered images can see. The smallest example is $Q=\operatorname{diag}(1,-1)$: observing only the first coordinate gives a positive reading while missing the negative second coordinate entirely. The following matrix theorem makes visibility a precise linear algebra condition.
+
+::: {.theorem #thm-ou-ch12-observation-inertia title="Negative Inertia under Finite Observation and Recovery by a Right Inverse" lean="D5/S3/Weil/ZetaLinear/FullRankInertiaPullback.negIndex_conj_le D5/S3/Weil/ZetaLinear/FullRankInertiaPullback.inertia_conj_eq_of_rightInverse"}
+Let $Q\in\mathbb C^{m\times m}$ be Hermitian, let $B\in\mathbb C^{m\times d}$, and set $G=B^*QB$. Write $\nu_+(H)$ and $\nu_-(H)$ for the numbers of strictly positive and strictly negative eigenvalues of a Hermitian matrix $H$, counted with multiplicity. Then
+
+$$
+\nu_-(G)\le\nu_-(Q).
+$$
+
+If there is also an $R\in\mathbb C^{d\times m}$ with $BR=I_m$, then
+
+$$
+\bigl(\nu_+(G),\nu_-(G)\bigr)
+=\bigl(\nu_+(Q),\nu_-(Q)\bigr).
+$$
+:::
+
+::: proof
+On any negative definite subspace for $G$, the map $B$ is injective: a nonzero kernel vector would have zero quadratic value. Its image is a negative definite subspace for $Q$, giving the negative-index bound. If $BR=I_m$, then $R^*GR=Q$; pulling back once more along $R$ gives the reverse inequality. The same two-way pullback preserves positive inertia. The full proof is checked by the Lean kernel.
+:::
+
+In a finite observation model, the columns of $B$ may be filtered source vectors. The following repeated-eigenvalue example is a **manual derivation (`ARGUED`)** showing why more sampling times need not reveal more directions. Take $K=\lambda I_2$, $\lambda>0$, and $s=e_1$, retaining $Q=\operatorname{diag}(1,-1)$ as the Hermitian form to be tested. The matrix $Q$ also represents the mirror exchange in its standard orthonormal even and odd basis, so the second coordinate is precisely a mirror-odd negative direction. For any finite list $t_i\ge0$, set
+
+$$
+\begin{aligned}
+b_i&=(I+t_iK)^{-1}s=\frac{e_1}{1+t_i\lambda},
+&B&=(b_1,\ldots,b_d),\\
+G_{ij}&=b_i^*Qb_j=\frac{1}{(1+t_i\lambda)(1+t_j\lambda)}.
+\end{aligned}
+$$
+
+Thus $G=aa^*$ with $a_i=(1+t_i\lambda)^{-1}$, so $G\succeq0$, yet $e_2^*Qe_2=-1$. All filtered images lie in $\mathbb C e_1$, so $B$ has no right inverse regardless of the number of sampling times. Adding the independent source $e_2$ and reading both sources at $t=0$ allows $B=R=I_2$, recovering the full inertia. Here $K$ itself is positive semidefinite and $Q$ is a separate form under observation; the example supplies no identification between them and assumes no off-critical branch of the actual Riemann zeros.
+
+The moment constraints below therefore test compatibility of readings within the shared positive spectral model. Connecting [Chapter 3's spectral criteria](ch03-riemann-zeros-fejer-and-landau.md#sec-ou-3-1) to an independent spectral construction for RH additionally requires an exact identification of the arithmetic readings with the candidate form and control of the subspace missed by observation. An explicit right inverse suffices to prevent loss of negative directions under finite compression; it is a sufficient condition, and a particular form may retain its entire negative inertia even without one.
+
+Now run the strictest possible control test: require the arithmetic times $F(j)$ and the reference quark-mixing ($\mathrm{CKM}$) determinant stationary point to share the **exact same probability measure $p$** with zero flavor reweighting. Through the fourth time, the outlook still appears deceptively smooth:
 
 - At the reference scale, six positive zeros match $T_1, \dots, T_4$ exactly while making reference quark mixing the unique maximum;
 - Restricting every support point to three-window zeros `[1]+[2]+[4]` pushes the feasible scale infimum past $A > 41{,}312{,}660.31094$, achieved by five real zeros at $A \approx 41{,}312{,}675.40982$ (leaving background-averaged $|V_{ub}|$ low by $8.0003\%$);
@@ -65,7 +100,7 @@ $$
 D(y) \;=\; \prod_{j=2}^6 \bigl(1 + (j^2 - 1) y\bigr), \qquad d\sigma(y) \;=\; \frac{dp(y)}{D(y)}.
 $$
 
-Because $D(y)$ together with $D(y) k_j(y)$ ($j = 1, \dots, 6$) spans all polynomials of degree at most six, normalization plus the six time readings uniquely determine the seven power moments $m_r = \int_0^1 y^r\, d\sigma(y)$ ($r = 0, \dots, 6$). The $4 \times 4$ Hankel moment matrix $(m_{i+j})_{i,j=0}^3$ has determinant strictly greater than $8.95 \times 10^{-34}$; since three radial atoms generate at most rank three, every valid spectrum requires at least **four distinct radial atoms** (four finite poles on positive zero heights).
+Because $D(y)$ together with $D(y) k_j(y)$ ($j = 1, \dots, 6$) spans all polynomials of degree at most six, normalization plus the six time readings uniquely determine the seven power moments $m_r = \int_0^1 y^r\, d\sigma(y)$ ($r = 0, \dots, 6$). The $4 \times 4$ Hankel moment matrix $(m_{i+j})_{i,j=0}^3$ has determinant strictly greater than $8.95 \times 10^{-34}$; since at most three support points generate rank at most three, every valid radial measure must contain at least **four distinct support points** (at least four distinct radial atoms or finite poles in a purely discrete positive-height spectrum).
 
 Anchoring an endpoint at $e = 0$ or $e = 1$ and placing three interior nodes at the roots of the cubic orthogonal polynomial for $(y - e) d\sigma$ yields two Gauss–Radau quadrature rules exact through degree six. Polynomial division of $D(y) k_7(y) = D(y)(1 - y)/(1 + 48 y)$ leaves a degree-five quotient (integrated exactly) plus the pole remainder
 
@@ -377,5 +412,13 @@ Shifting every frequency by $g_j \mapsto g_j - \mu$ translates each $G_m$ by $-p
 ::: {.film src="one-shared-clock"}
 **Four sectors forced onto one arithmetic clock: four ticks close, the fifth breaks, and the held-out seventh is locked to a single 35-bit code (2 min 47 s).** Four clocks keeping their own time merge into one amber shared clock, and the seven cyan kernels $k_j(y)$ are drawn (computed on screen, [@def-ou-ch12-shared-clock]). With one shared weighting, the fifth tick read to $22$ binary digits falls entirely into the amber code `4040282`, one below the cyan reference code `4040283`; a neutral-shell reweighting (needed efficiency ratio at least $18.49684\ldots$, shell trace spanning $1$ to $19$) rescues tick five, and the magenta price is a sixth-tick shift of at least $1.33015563912 \times 10^{-8}$. The Gauss–Radau window is $2.140 \times 10^{-12}$ wide and its amber 35-bit code `32071996606` sits $4130$ codes above the reference `32071992476`; $44$ input cells force that code, while at $43$ bits the output forks into two magenta codes. Then three cyan height bands carry more than $99.931\%$ of the weight, a $10^{-7}$ edge stiffening forces a response drop above $1.82 \times 10^{-10}$, on the eight-zero solution the held-out $J$ comes out $6.0833\%$ low, and five naive weight selectors are struck through in magenta. All of these numbers are the chapter's interval and rational replay certificates or on-screen computations (cyan NUM); the four-clocks picture and the bridge to the next chapter are argued (violet). The green labels belong only to the two Lean theorems: the positive Fourier upper bound for cyclic Fejér bands [@thm-ou-ch12-cyclic-fejer-band] and the variance lower bound for finite near-collision mass [@thm-ou-ch12-collision-variance]; the two-weight check $9 \le 39.94$ of the latter is computed on screen.
 :::
+
+### 12.4.1 Algebraic Bridge and Diffuse Amplification Obstruction Between Arithmetic Clocks and Gravitational Type $\mathrm{II}_1$ Observer Clocks {#sec-ou-ch12-arithmetic-to-typeII1-clock-bridge}
+
+Placing this chapter's quadratic resolvent clock alongside the Type $\mathrm{II}_1$ observer clocks generated by gravitational null-cone crossed products clarifies exactly what arithmetic moment concentration can—and cannot—imply for quantum gravity (tracking issue `#2376`):
+
+1. **Unital Matrix Embedding and Diffuse Amplification Obstruction (ARGUED).** Any finite discrete arithmetic distribution $(p_i, \gamma_i)$ ($i = 1, \dots, N$) embeds unitally into any Type $\mathrm{II}_1$ factor $\mathcal{B}$ via $N$ equivalent orthogonal projections of trace $1/N$ and matrix units $e_{ij}$, taking $K_{\rm ar} = \sum_i (A/\gamma_i)^2 e_{ii}$ and normal state density $d = N\sum_{i,j}\sqrt{p_i p_j}\,e_{ij}$ (or diagonal $N\sum_i p_i e_{ii}$) to reproduce all resolvent expectations $F(j) = \tau\bigl(d(1 + j^2 K_{\rm ar})^{-1}\bigr)$ identically. However, amplifying to $M_N \overline\otimes \mathcal{R}$ with the diffuse hyperfinite $\mathrm{II}_1$ factor $\mathcal{R}$ preserves **every** resolvent reading $F(j)$, every replica moment $\tau(d^j)$, and the intrinsic entropy $-\tau(d\log d)$ verbatim, while admitting projections $e_{11}\otimes p_m$ of trace $2^{-m}/N \to 0$. Neither $99.931\%$ three-band concentration, finite spectral support, nor 44-bit seventh-readout rigidity can therefore force a finite-dimensional Type $\mathrm{I}_N$ gravitational sector by themselves—nor do they control the analytic strip widths required for crossed-product slow-clock convergence (where $O(\varepsilon^{2a}(1+\log(1/\varepsilon)))$ requires strict margin $b > 3/8$, and the endpoint $b = 3/8$ alone requires a separate endpoint defect estimate).
+
+2. **Positive Projection Floor and Conditional Link to Chapter 14's Memory-Rank Staircase (ARGUED).** Conversely, a strictly positive floor $\theta_{\min} > 0$ on traces of nonzero projections in a finite factor of trace mass $T$ forces repeated orthogonal splitting to terminate and collapses the factor to Type $\mathrm{I}_N$ with $N \le \lfloor T/\theta_{\min}\rfloor$. Whenever an identified gravitational clock sector obeys an ordinary-Hilbert-space rank ceiling—such as a closed-cut gap budget $\operatorname{rank} E_I \le \lfloor B_I/[w_I(g_{\rm gap} - D_I(\eta))]\rfloor$ or a gluing heat-semigroup bound $\operatorname{rank} P_\ell \le \lfloor e^{s_0 R/\hbar}\operatorname{Tr}_{\mathcal H} C(s_0)\rfloor$—it interfaces directly with [Chapter 14](ch14-624-channels-and-memory-rank.md)'s auxiliary memory-rank staircase $r(D)$ ($r = 19$ for $D \ge 1568$, $24$ at $D = 392$, $[29, 31]$ at $D = 56$, and $38$ for the fixed old block), generating a falsifiable exclusion whenever $r(D)$ exceeds the physical rank ceiling. Deriving that physical sector identification and ordinary-trace ceiling from shell–Regge dynamics remains open (OPEN).
 
 Taken together, the shared arithmetic clock acts as an unforgiving caliper: it eliminates naive power laws, monotone efficiencies, Gaussian determinants, Gibbs triangle weights, short walks, and single-shot post-selection as dynamical origins of the three-band spectrum, while the calibrated eight- and 23-zero supports stay pinned between a rigid 35-bit seventh-time prediction and a held-out $\mathrm{CP}$ deficit of at least $5.57\%$ ($6.0833\%$ on the eight-zero support, a property of that list which another set of eight zeros lowers below $10^{-6}$; the lower end on 23 zeros once the sixth time and the $|V_{cb}|^2$ offset are fixed, where the deficit is forced by the specified offset). Since external probability reweighting breaks at every turn, we must pivot inside the shell itself: can an intrinsic Wilson action built directly from the $529$ triangular plaquettes of the 19-point shell pull the dual clocks into a joint three-window flavor vacuum by pure energy minimization? That steep winding staircase is the subject of [Chapter 13](ch13-winding-ladder-and-joint-vacuum.md).

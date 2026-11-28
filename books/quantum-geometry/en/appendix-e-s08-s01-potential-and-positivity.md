@@ -957,3 +957,5 @@ For half comparisons, the return phase measures another effect involving three p
 The chordal Banach strata, real $L_1$, Hilbert, causal three-tree, and linear-filling results are collected in [Appendix E.8.1.8](appendix-e-s08-s01-s08-chordal-banach-exact-strata.md#sec-appe-chordal-banach-exact-strata).
 
 For the reversal of the inner-product and real $L_1$ coefficients, the circle coefficient on path powers, and the tangent lower and cap upper bounds for $\mathrm{SU}(2)$, see [Appendix E.8.1.9](appendix-e-s08-s01-s09-hilbert-reversal-circle-su2.md#sec-appe-hilbert-reversal-circle-su2).
+
+The global Hilbert reconstruction bound for arbitrary finite chordal graphs and its finite-clique improvements are in [Appendix E.8.1.10](appendix-e-s08-s01-s10-hilbert-global-sub-jung.md#sec-appe-hilbert-global-sub-jung).
