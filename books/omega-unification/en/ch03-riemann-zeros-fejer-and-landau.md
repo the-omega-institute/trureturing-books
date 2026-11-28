@@ -99,7 +99,25 @@ Unconditionally (without assuming RH):
 For part 1, the functional equation of $\zeta$ decomposes $-\zeta'(s)/\zeta(s) = \log(\frac{3}{4} + iu) + r(u)$, where digamma recurrence, Binet bounds, and the absolutely convergent series on the reflected line $\operatorname{Re}(1 - s) = \frac{5}{4}$ imply $|r(u)| \le 80$. Factoring out $x^{-1/4}$, the remainder integrates to at most $80(V - 1)$, while integrating the logarithm by parts against the antiderivative $e^{iu\log x}/(i\log x)$ using $|\frac{d}{du}\log(\frac{3}{4} + iu)| \le 1/u$ yields $\frac{20(1 + \log V)}{\log x}$. For part 2, integrating the von Mangoldt Dirichlet series term by term on $\operatorname{Re} s = c > 1$, the integer nearest to $x$ is bounded by the interval length (with $\Lambda(1) = 0$ if nearest to $1$), remaining integers in $[x/2, 2x]$ obey $|\log x - \log n| \ge |x - n|/(2x)$ and sum to two harmonic tails, integers outside $[x/2, 2x]$ satisfy $|\log x - \log n| \ge 1/2$, and $x^c \le 3x$ closes the estimate. The full proof is checked by the Lean kernel.
 :::
 
-The [Weyl average in §2.3](ch02-quaternion-clocks-and-haar-zeros.md#sec-ou-2-3) uses the zero sum at a fixed nonzero angular frequency $\lambda$. Write $S_\lambda(T)=\sum_{0<\gamma\le T}e^{i\lambda\gamma}$, counting analytic multiplicity and including the upper endpoint. Suppose $\Lambda(e^{|\lambda|})=0$, where $\Lambda$ is the von Mangoldt function. Under RH, as $T\to\infty$ through all real heights, a direct derivation gives (`ARGUED`)
+The [Weyl average in §2.3](ch02-quaternion-clocks-and-haar-zeros.md#sec-ou-2-3) uses the zero sum at a fixed nonzero angular frequency $\lambda$. Write $S_\lambda(T)=\sum_{0<\gamma\le T}e^{i\lambda\gamma}$, counting analytic multiplicity and including the upper endpoint.
+
+To see how the count affects the phase sum, let $N(t)$ count the zeros with the same endpoint convention and set $L(t)=\frac{t}{2\pi}(\log\frac{t}{2\pi}-1)+\frac78$ and $Q(t)=N(t)-L(t)$. The Riemann–von Mangoldt formula gives $Q(t)=S(t+0)+O(1/t)$, where $S(t+0)$ is the right limit of its argument term. Littlewood's integral bound gives $\int_1^T Q(t)\,dt=O(\log T)$. [Brent, Platt, and Trudgian, *Accurate Estimation of Sums over Zeros of the Riemann Zeta-Function* (2021), §2, Lemma 2 and Eq. (12)](https://doi.org/10.1090/mcom/3652)
+
+Integrating $dN=dL+dQ$ by parts separates the endpoint from the contribution accumulated at frequency $\lambda$ (direct derivation, `ARGUED`).
+
+$$
+\begin{aligned}
+S_\lambda(T)-\frac{e^{i\lambda T}}{2\pi i\lambda}\log\frac{T}{2\pi}
+  &=e^{i\lambda T}Q(T)-i\lambda\int_1^T e^{i\lambda t}Q(t)\,dt\\
+  &\quad+O_\lambda(1).
+\end{aligned}
+$$
+
+Suppose the left side is $o_\lambda(\log T)$ at all real heights. Subtracting the cutoffs at $T$ and $T+u$ and undoing the phase by partial summation yields $Q(T+u)=Q(T)+o_{\lambda,H}(\log T)$ uniformly for $0\le u\le H$, for each fixed $H$. The integral bound controls the average over $[T,T+H]$. Letting $H$ grow after taking the limit in $T$ gives $Q(T)=o(\log T)$. The endpoint asymptotic thus holds exactly when both $Q(T)$ and $\int_1^T e^{i\lambda t}Q(t)\,dt$ are $o(\log T)$.
+
+A synthetic spectrum at $\lambda=1$ shows the limit of the unmodulated integral bound. For $t\ge32$, give the spectrum the count $\lfloor L(t)+1/2+\cos(t)/(10t)\rfloor$. The zero-mean sawtooth from rounding has bounded integrals against both $1$ and $e^{it}$ because the phase derivatives of its nonzero harmonics are monotone and bounded away from zero. The remaining term $\cos(t)/(10t)$ has a bounded unmodulated integral and contributes $\frac1{20}\log T+O(1)$ against $e^{it}$. This example uses only the counting inputs. For the actual $\zeta$ zeros, the integral with the phase still needs control.
+
+Suppose $\Lambda(e^{|\lambda|})=0$, where $\Lambda$ is the von Mangoldt function. Under RH, as $T\to\infty$ through all real heights, a direct derivation gives (`ARGUED`)
 
 $$
 S_\lambda(T)=\frac{e^{i\lambda T}}{2\pi i\lambda}\log\frac{T}{2\pi}

@@ -99,7 +99,25 @@ $$
 在第一款中，借助 $\zeta$ 函数的函数方程将 $-\zeta'(s)/\zeta(s)$ 拆成 $\log(\frac{3}{4} + iu) + r(u)$；由双伽马递推、Binet 估计与反射直线 $\operatorname{Re}(1 - s) = \frac{5}{4}$ 上的绝对收敛级数可得一致界 $|r(u)| \le 80$。提出 $x^{-1/4}$ 后，余项积分至多为 $80(V - 1)$，而对数项用原函数 $e^{iu\log x}/(i\log x)$ 分部积分并利用 $|\frac{d}{du}\log(\frac{3}{4} + iu)| \le 1/u$ 给出 $\frac{20(1+\log V)}{\log x}$。在第二款中，在绝对收敛半平面 $\operatorname{Re} s = c > 1$ 逐项积分冯·曼戈尔特级数：最接近 $x$ 的整数项由区间长度控制（$n = 1$ 时 $\Lambda(1) = 0$）；$[x/2, 2x]$ 内其余整数以 $|\log x - \log n| \ge |x - n|/(2x)$ 化为两段调和和；区间外则 $|\log x - \log n| \ge 1/2$ 由积分判别控制，最后代入 $x^c \le 3x$ 即得统一界。完整证明由 Lean 内核检查。
 :::
 
-[§2.3 的外尔平均](ch02-quaternion-clocks-and-haar-zeros.md#sec-ou-2-3)用到固定非零弧度频率 $\lambda$ 的零点和。令 $S_\lambda(T)=\sum_{0<\gamma\le T}e^{i\lambda\gamma}$，按解析重数计并纳入上端点。设冯·曼戈尔特函数满足 $\Lambda(e^{|\lambda|})=0$。在 RH 下，沿全部实数高度 $T\to\infty$ 有（手工推导，`ARGUED`）
+[§2.3 的外尔平均](ch02-quaternion-clocks-and-haar-zeros.md#sec-ou-2-3)用到固定非零弧度频率 $\lambda$ 的零点和。令 $S_\lambda(T)=\sum_{0<\gamma\le T}e^{i\lambda\gamma}$，按解析重数计并纳入上端点。
+
+先看计数误差如何进入这项相位读数。记 $N(t)$ 为同一右闭截断下的零点数，$L(t)=\frac{t}{2\pi}(\log\frac{t}{2\pi}-1)+\frac78$，$Q(t)=N(t)-L(t)$。黎曼–冯·曼戈尔特公式给出 $Q(t)=S(t+0)+O(1/t)$，其中 $S(t+0)$ 是计数公式中辐角项的右极限。Littlewood 的积分界给出 $\int_1^T Q(t)\,dt=O(\log T)$。[Brent、Platt 与 Trudgian，*Accurate Estimation of Sums over Zeros of the Riemann Zeta-Function*（2021），§2，引理 2 与式 (12)](https://doi.org/10.1090/mcom/3652)
+
+对 $dN=dL+dQ$ 分部积分，将误差拆成端点读数与频率累积（手工推导，`ARGUED`）。
+
+$$
+\begin{aligned}
+S_\lambda(T)-\frac{e^{i\lambda T}}{2\pi i\lambda}\log\frac{T}{2\pi}
+  &=e^{i\lambda T}Q(T)-i\lambda\int_1^T e^{i\lambda t}Q(t)\,dt\\
+  &\quad+O_\lambda(1).
+\end{aligned}
+$$
+
+若左侧沿全部实数高度为 $o_\lambda(\log T)$，则在任意固定长度 $H$ 内，可以对相邻硬窗作差，再乘反相位分部求和，得到 $Q(T+u)=Q(T)+o_{\lambda,H}(\log T)$，对 $0\le u\le H$ 一致。用上面的积分界取 $[T,T+H]$ 的平均，再令 $H$ 趋于无穷，便有 $Q(T)=o(\log T)$。因此端点渐近式要求且只要求 $Q(T)$ 和 $\int_1^T e^{i\lambda t}Q(t)\,dt$ 都是 $o(\log T)$。
+
+取 $\lambda=1$ 可看出为何普通积分界不够。在合成谱中，令 $t\ge32$ 时的计数为 $\lfloor L(t)+1/2+\cos(t)/(10t)\rfloor$。取整产生的零均值锯齿在相位 $1$ 和 $e^{it}$ 下积分都有界，因为其各非零谐波的相位导数单调且远离零。剩下的 $\cos(t)/(10t)$ 使普通积分有界，却在乘上 $e^{it}$ 后留下 $\frac1{20}\log T+O(1)$。这个例子刻画的是仅靠计数输入的边界。对实际 $\zeta$ 零点，仍需控制带相位的积分。
+
+设冯·曼戈尔特函数满足 $\Lambda(e^{|\lambda|})=0$。在 RH 下，沿全部实数高度 $T\to\infty$ 有（手工推导，`ARGUED`）
 
 $$
 S_\lambda(T)=\frac{e^{i\lambda T}}{2\pi i\lambda}\log\frac{T}{2\pi}
