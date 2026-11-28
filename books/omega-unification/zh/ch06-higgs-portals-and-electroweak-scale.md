@@ -170,6 +170,10 @@ $$
 
 若三角环的三个质量下标相同，读出的是对角元的立方。若四边环在两个下标间往返，读出的是相应耦合模的四次方。非零耦合只围成一个独立环时，实环积将剩余相位定到复共轭。若四个顶点上有两个或更多独立环，总能找到一个与另外三点相连的顶点，把这三条边重相位成正实数。此时三角环给出其余相位的余弦，四边环给出正弦的两两乘积，只剩整体符号可选。因此精确的分点读数把门户确定到重相位和整体复共轭，稀疏与奇异门户也在范围内。上述采样数针对精确读数。[推导与采样格](https://github.com/the-omega-institute/trureturing-experiments/blob/c7b62c9afc2ed5c2d63f22cf95957bb3b2faff62/experiments/ch39-omega-research/replay/ch39-four-mass-portal-cut.md#recovering-an-arbitrary-four-layer-portal-from-separated-insertions) · [传播子与相位复算](https://github.com/the-omega-institute/trureturing-experiments/blob/c7b62c9afc2ed5c2d63f22cf95957bb3b2faff62/experiments/ch39-omega-research/replay/ch39-four-source-portal-inverse.py)
 
+若有 $N\ge4$ 个已知且互异的正质量，要恢复任意连通支撑的门户，最坏情形恰好需要读到 **$2N-4$ 阶**。四维空间也能容纳超过四次插入的区分信息。选一组源点，将所有间距一同放大 $L$ 倍。沿某条回路分配质量后，其指数衰减率为 $\sum_{ab}\mu_{ab}|x_a-x_b|$。一般位置能分开所有速率，因为若这些距离满足线性恒等式，分别对 $x_a,x_b$ 各求一次导数，就只剩这一对点对应的项。于是，同一布局在若干尺度上的读数便能分离质量下标沿各闭路的实环积。
+
+源阶的代价可在两个三角形上看清。以一条长 $d$ 条边的路径连接它们，只反转其中一个三角形的相位，需要一条同时绕过两环的闭路才能察觉。这花去六条环边和来回两次的 $2d$ 条连接边。对 $N\ge5$，这样的支撑使用 $N=d+5$ 个质量下标，$d=0$ 时两三角形共用一个顶点，故所需阶数为 $6+2d=2N-4$。反过来，沿生成树固定相位后，只须恢复各基本环相位的余弦及两环正弦的相对符号。两环共享树边时可沿消去共有路径后的外环比较；分开时则把两环绕完，再沿连接路径返回。每次比较都能在 $2N-4$ 阶以内完成。四层时，上面的反例达到此界。若支撑不连通，闭路总留在同一分支，每个连通分支的复共轭都可独立选择。[源点分离、最坏阶数与图复算](https://github.com/the-omega-institute/trureturing-experiments/blob/c88d8755206481a501dc23a5277e41f64eba0c32/experiments/ch39-omega-research/replay/ch39-portal-cycle-order.md)
+
 在检验 $8\pi I \pm \mathcal{A} \succ 0$ 是否正定、或从全图刚度矩阵中消去高势外层顶点自由度时，反复出现的决定性工具是复分块厄米矩阵的舒尔补极小值定理，它已在 Lean 4 内核中严格冻结：
 
 ::: {.theorem #thm-ou-ch06-schur-minimum title="分块舒尔补二次型是内部变量的精确最小值" lean="D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"}
