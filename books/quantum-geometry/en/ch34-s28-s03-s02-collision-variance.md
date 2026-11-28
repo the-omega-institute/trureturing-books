@@ -584,13 +584,13 @@ Here $E_n(r)$ sums over ordered pairs of occupation vectors whose absolute frequ
 The fourth-moment bound $P_4(T)\le T^2P_2(T)$ allows the central window to extend to $|t|\le1/T_n$. The lower bound on the second moment makes its rescaled half-width $s_n/T_n$ tend to infinity. The central integral gives $1/(2\sqrt\pi)$. The reciprocal-height, periodic-phase, and Landau estimates cover the entire range $1/T_n\le|t|\le\log T_n$ with a uniform score deficit of at least $c/\log T_n$ for some $c>0$. The score raised to the power $2n$ is therefore bounded by $\exp(-2cn/\log T_n)$, which absorbs the factor $T_n\sqrt n\log T_n$ in the normalized integral. Relative truncation transfers the limit to the full line. The argument works for every fixed positive multiple of $\eta_n$. This gives a quadratic ramp limit, and the two secants recover the hard-band constant with the endpoint included. The full proof is checked by the Lean kernel.
 :::
 
-The uniform bound in [@thm-ch34-landau-inclusive-cutoff] supplies the Landau premise in the frozen collision theorem. The collision limit therefore follows from RH and the stated cutoff and resolution conditions. Alpöge’s external formalization supplies Mathlib’s RH proposition. [External RH theorem](https://github.com/the-omega-institute/riemann-hypothesis/blob/b14f2bd19e5e12a4ba6b1d207e3c5fbb06e49ed6/src/Main.lean#L4)
+The uniform bound in [@thm-ch34-landau-inclusive-cutoff] supplies the Landau premise in the frozen collision theorem. The collision limit therefore follows from RH and the stated cutoff and resolution conditions. Alpöge’s external formalization supplies Mathlib’s RH proposition. [External RH theorem](https://github.com/leanprover-community/riemann-hypothesis/blob/7c4ccbd64d02774b0a5b40a5f923f5b7a18e8abc/src/Main.lean#L9)
 
 When $\eta_n\log T_n$ is bounded, the relative error bound at the cutoff $\log T_n$ can stay of order one.
 
 ### Critical resolution from an upper pair-correlation bound
 
-The longer Fourier window can be controlled if the Montgomery pair sum is small enough. Use the same inclusive positive-ordinate cutoff and write
+A sufficiently small uniform bound on the Montgomery pair sum controls a longer Fourier window. Use the same inclusive positive-ordinate cutoff. Write $N(Y)=\sum_{0<\gamma\le Y}m_\gamma$ and $F_Y(t)=\sum_{0<\gamma\le Y}m_\gamma e^{it\gamma}$, and set
 
 $$
 G_Y(t)=
@@ -599,20 +599,71 @@ m_\gamma m_{\gamma'}\frac{4\cos\bigl(t(\gamma-\gamma')\bigr)}
 {4+(\gamma-\gamma')^2}.
 $$
 
-::: {.theorem #thm-ch34-zeta-harmonic-critical-collision-limit title="Conditional Gaussian collision limit at critical resolution" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHCriticalResolutionCollisionLimit.harmonic_zeta_critical_collision_limit"}
-Assume RH in Mathlib’s formulation. For every fixed $A>1$ assume $G_Y(t)=o(Y\log^2 Y)$ uniformly on $\log Y\le |t|\le A\log Y$. Let $T_n\to\infty$ with $(\log T_n)^2/n\to0$. Use the same harmonic weights, $W(T_n)$, and $s_n=\sqrt{nP_2(T_n)/2}$ as above. Assume $\eta_n$ is eventually positive, $\eta_n/s_n\to0$, and there is an $a>0$ with $\eta_n\log T_n\ge a$ eventually. Then
+::: {.theorem #thm-ch34-zeta-harmonic-critical-collision-limit title="Conditional Gaussian collision limit at critical resolution" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHCriticalCauchyThreshold.harmonic_zeta_critical_collision_limit_of_cauchy_cap"}
+Assume RH in Mathlib’s formulation. Let $c=1/(2\pi)$ and assume there is a fixed $\kappa<2\pi c^2$ such that for each fixed $A>1$ and all sufficiently large $Y$, $G_Y(t)\le\kappa Y\log^2 Y$ uniformly on $\log Y\le |t|\le A\log Y$. Let $T_n\to\infty$ with $(\log T_n)^2/n\to0$. Use the same harmonic weights, $W(T_n)$, and $s_n=\sqrt{nP_2(T_n)/2}$ as above. Assume $\eta_n/s_n\to0$ and there is an $a>0$ with $\eta_n\log T_n\ge a$ eventually. Then
 $$
 \frac{s_n E_n(\eta_n)}{\eta_n W(T_n)^{2n}}\longrightarrow\frac1{\sqrt\pi}.
 $$
 :::
 
 ::: proof
-The pair sum equals $\int_{\mathbb R} e^{-2|u|}|F_Y(t-u)|^2\,du$. Since the phase sum is $YN(Y)$-Lipschitz, a value of magnitude $b>0$ stays at least $b/2$ on an interval of radius $b/(2YN(Y))$. Integration on that interval gives $|F_Y(t)|^3\le 4eYN(Y)G_Y(t)$. The assumed pair bound yields cancellation at $Y=T$ and $Y=3T/4$. The upper band of zeros then supplies the harmonic phase deficit above $\log T$, while the Landau estimate supplies the shorter frequencies.
+Place the coefficients $m_\gamma e^{it\gamma}$ at their zero heights and smooth them with the unit-scale Cauchy density. The convolution of two such densities gives the scale-two Lorentz kernel, so $G_Y(t)$ is $2\pi$ times the squared $L^2$ norm of the smoothed sum. For $R>0$, each translated density loses at most $\ell_R=1-2\arctan(R)/\pi$ of its mass outside $[-R,Y+R]$. Cauchy–Schwarz on this interval gives
+$$
+G_Y(t)\ge \frac{2\pi}{Y+2R}\bigl(\max\{|F_Y(t)|-\ell_R N(Y),0\}\bigr)^2 .
+$$
 
-For each fixed $A>1$, the normalized integral through $A\log T_n$ tends to the central Gaussian constant. Relative truncation bounds the remaining fraction by $64/(aA)$. Choose $A$ arbitrarily large before taking the limit in $n$. The same bound applies at each fixed positive multiple of the resolution, which permits the two secants to recover the inclusive hard-band limit. The full proof is checked by the Lean kernel.
+Take $R=\delta Y$ with $\delta>0$ small enough that $\kappa<2\pi c^2/(1+2\delta)$. Since $\ell_R\to0$ and $N(Y)/(Y\log Y)\to c$, this strict gap gives $N(Y)-|F_Y(t)|\ge dN(Y)$ for a fixed $d>0$. The harmonic weight is at least $m_\gamma/(2Y)$ throughout the inclusive cutoff. Adding nonnegative weights cannot decrease the difference between total mass and the magnitude of the phase sum. The unweighted deficit therefore transfers directly to the harmonic weights over the whole cutoff. Using $W(Y)\sim(c/2)\log^2 Y$ gives a normalized deficit of at least a positive constant divided by $\log Y$. The reciprocal-height, periodic-phase, and Landau estimates above control the shorter time window.
+
+For each fixed $A>1$, the normalized integral through $A\log T_n$ tends to the central Gaussian constant. For sufficiently large $A$, relative truncation bounds the remaining fraction by $64/(aA)$. At any fixed resolution multiple $\lambda\eta_n$ with $\lambda>0$, the lower-bound parameter becomes $\lambda a$ and the bound is $64/(\lambda aA)$. Choosing $A$ arbitrarily large before taking the limit in $n$ lets the two secants at neighboring resolutions recover the inclusive hard-band limit. The full proof is checked by the Lean kernel.
 :::
 
-The ordinary Montgomery pair-correlation conjecture would supply the long-band upper bound. The result includes $\eta_n\log T_n\to a$ for $0<a<\infty$. At finer resolutions the diagonal contribution grows relative to the bin width, as the next section explains. [Ford–Soundararajan–Zaharescu, §1](https://arxiv.org/abs/0805.2745v3)
+This threshold includes the uniform condition $G_Y(t)=o(Y\log^2 Y)$, which would follow from Montgomery's pair-correlation conjecture. The long-band threshold for actual $\zeta$ zeros remains an arithmetic premise of this theorem. The result includes $\eta_n\log T_n\to a$ for $0<a<\infty$. For fixed finite support and fixed positive variance, the occupation-diagonal bound below gives a finer-resolution regime in which the normalized Fejér moment diverges. Under RH and the finer asymptotic in Conjecture 5, Ford–Soundararajan–Zaharescu’s Theorem 1.4 gives phase cancellation. Theorem 1.3 then gives the short-interval prime consequence. Lemma 1 bounds the phase sum using differences of translated centered pair sums. [§1 and Theorems 1.3–1.4](https://arxiv.org/html/0805.2745v3#S1) · [Lemma 1](https://arxiv.org/html/0805.2745v3#Thmlemma1)
+
+::: {.theorem #thm-ch34-montgomery-bounded-count-upper title="A uniform pair-sum upper bound from bounded count discrepancy" lean="D5/S3/Analytic/Oscillation/MontgomeryCountUpper.pairSum_le_of_bounded_discrepancy"}
+Take any locally finite spectrum of positive ordinates with positive integer multiplicities. Use the inclusive count $N(Y)$ and the ordered pair sum $G_Y(t)$ above, and let $c=1/(2\pi)$. If there is a constant $D$ such that $|N(Y)-cY(\log(cY)-1)|\le D$ for all sufficiently large $Y$, then for each $\varepsilon>0$ the bound
+
+$$
+G_Y(t)\le (2\pi c^2+\varepsilon)Y(\log Y)^2
+$$
+
+holds for all sufficiently large $Y$ and every real $t$.
+:::
+
+::: proof
+Suppose the count discrepancy is bounded from a fixed height $A\ge1$ onward. Center a closed interval of radius $r$ at an ordinate through $Y$. The sum of multiplicities of ordinates in the interval with $0<\gamma\le Y$ is at most $2cr\log Y+N(A)+2D+c$. The contribution through $A$ is at most $N(A)$. Bound the remaining mass by a difference of inclusive counts, shifting the lower cutoff left by $1/\log Y$ and clamping it at $A$ to include the left endpoint. Integrating over the Lorentz kernel’s superlevel intervals bounds each row by $2\pi c\log Y+N(A)+2D+c$. Bound each cosine by one and sum the rows with their multiplicities. The conclusion follows from $N(Y)/(Y\log Y)\to c$. The full proof is checked by the Lean kernel.
+:::
+
+Write $M(Y)=cY(\log(cY)-1)$. Sublogarithmic error in the count suffices for the leading coefficient. The spectral estimate and the convention at zero ordinates enter at different steps.
+
+::: {.theorem #thm-ch34-montgomery-sublog-count title="Sublogarithmic count error controls the pair sum" lean="D5/S3/Analytic/Oscillation/MontgomerySublogCount.pairSum_le_of_sublog_discrepancy"}
+Use the spectrum, inclusive count and ordered pair sum above. If $(N(Y)-M(Y))/\log Y\to0$, then for every $\varepsilon>0$, all sufficiently large $Y$ and every real $t$ satisfy $|G_Y(t)|\le(2\pi c^2+\varepsilon)Y(\log Y)^2$.
+:::
+
+::: proof
+For each $\delta>0$, choose $A$ large enough that the count error at either endpoint $x$ with $A\le x\le Y$ is bounded by $\delta\log Y$. The finite-cutoff Lorentz row estimate then incurs a total endpoint error of at most $2\delta\log Y$. Apply the triangle inequality and sum over the $N(Y)$ rows counted with multiplicity. Since $N(Y)/(Y\log Y)\to c$, a sufficiently small $\delta$ gives the bound. The full proof is checked by the Lean kernel.
+:::
+
+::: {.theorem #thm-ch34-inclusive-zeta-count-envelope title="The inclusive count bound at zero ordinates" lean="D5/S3/Weil/ZetaRvm/InclusiveCountLimit.abs_ncount_sub_le_of_goodHeight"}
+Let $N_\zeta(T)$ count the nontrivial zeros with $0<\operatorname{Im}\rho\le T$, including their analytic multiplicities. Suppose $M$ and $E$ are right-continuous at every $T\ge T_0$. If $|N_\zeta(t)-M(t)|\le E(t)$ at each $t\ge T_0$ that is not a zero ordinate, the same inequality holds at every $T\ge T_0$.
+:::
+
+::: proof
+There are only finitely many zero ordinates in $(T,T+1]$. In a short open interval immediately to the right of $T$, there are no zero ordinates and the count equals $N_\zeta(T)$. Taking the right limit preserves the bound and includes the full multiplicity at the cutoff. The full proof is checked by the Lean kernel.
+:::
+
+**Manual derivation.** Under RH, equation (1) and Theorem 2 of Carneiro, Chandee and Milinovich give $|N_\zeta(T)-M(T)|\le C\log T/\log\log T$ at sufficiently large heights away from zero ordinates, for some constant $C$. This envelope is continuous at sufficiently large heights, so the right-limit theorem extends it to every sufficiently large inclusive cutoff. The actual ζ ordinates therefore satisfy the sublogarithmic condition, and the uniform pair-sum bound applies. The critical collision theorem still requires a fixed coefficient strictly below $2\pi c^2$ on the long bands. [Equation (1) and Theorem 2](https://arxiv.org/abs/1309.1526)
+
+At a finite cutoff, expand multiplicities into distinct copies and choose pairs with disjoint endpoints whose ordinates are at distance at most one. Let $C(u)$ count the retained copies within distance one of the first endpoint $\gamma_u$. The ordered sum above satisfies
+$$
+G_Y(0)-G_Y(t)\ge \frac4{13}\sum_{(u,v)}C(u)\bigl[1-\cos(t(\gamma_u-\gamma_v))\bigr].
+$$
+Each copy in the first endpoint's neighborhood lies within distances one and two of the two endpoints, respectively, so the Lorentz weights are at least $4/5$ and $1/2$. Let $x,y$ be the chord lengths from the two endpoint phases to the copy's phase. The identity
+$$
+\frac{13}{4}\left(\frac45x^2+\frac12y^2\right)-(x+y)^2=\frac{(8x-5y)^2}{40}\ge0
+$$
+and the triangle inequality give a weighted squared sum at least $4/13$ of the squared endpoint chord. Dividing both sides by two gives the phase residual bound. Apply the bound to each column of the neighborhood and add both endpoint rows. Disjoint endpoints ensure that each row is counted once, and the remaining rows contribute nonnegative terms. The distance bounds include their endpoints, and repeated ordinates retain all their copies. [Matching deficit with multiplicities](lean:D5/S3/Analytic/Oscillation/MontgomeryMatchingCap.spectrum_matching_defect)
+
+Suppose $Y>1$, there are at least $c_1Y\log Y$ pairs, and each pair has phase residual at least $c_2$ and at least $c_3\log Y$ copies in its first endpoint's neighborhood, with $c_2,c_3\ge0$. The normalized sum then falls short of its zero-frequency baseline by at least $4c_1c_2c_3/13$. If that baseline is at most $\kappa-\eta+4c_1c_2c_3/13$, the normalized sum is at most $\kappa-\eta$. A fixed $\eta>0$ gives a strict cap below $\kappa$. Whether actual ζ zeros supply enough such pairs uniformly over the required long frequency bands remains open. [Conditional normalized cap](lean:D5/S3/Analytic/Oscillation/MontgomeryMatchingCap.strict_normalized_cap_of_matching)
 
 ### Commensurate spectra with the same unit-band profile
 

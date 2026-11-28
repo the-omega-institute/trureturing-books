@@ -77,7 +77,7 @@ None of the $23$ numbers is a root of unity: since $0 < j \le 804 < 867$, the va
 Second, sort the $23$ phases by their imaginary quadratic fields $\mathbb{Q}(\alpha_j) = \mathbb{Q}(\sqrt{-D_j})$, where $D_j$ is the square-free part of $j(3468 - j)$:
 
 - For $j \in \{12, 68, 136\}$, direct factorization gives $12\cdot 3456 = 2\cdot 144^2$, $68\cdot 3400 = 2\cdot 340^2$, and $136\cdot 3332 = 2\cdot 476^2$, so all three live inside the **same quadratic field $\mathbb{Q}(\sqrt{-2})$**.
-- For the remaining $20$ squared chord lengths, the square-free kernels $D_j$ are
+- For the remaining $20$ squared chord lengths, the square-free kernels $D_j$, sorted by their own values, are
 
 $$
 86,\; 542,\; 1478,\; 1538,\; 1634,\; 1698,\; 1718,\; 2534,\; 7998,\; 8858,\; 10374,\; 11102,\; 11354,\; 11942,\; 14874,\; 31502,\; 49166,\; 57962,\; 58682,\; 112022,
@@ -85,7 +85,7 @@ $$
 
 twenty pairwise distinct integers, none equal to $2$.
 
-Third, separate the $21$ distinct quadratic fields by Galois characters. Let $K$ be the compositum of all $21$ imaginary quadratic fields, and consider the $\mathbb{Q}$-vector space $V := (K^\times / \mu(K)) \otimes_{\mathbb{Z}} \mathbb{Q}$ obtained by killing torsion (roots of unity). Every $\sigma \in \operatorname{Gal}(K/\mathbb{Q})$ acts on $F_j = \mathbb{Q}(\sqrt{-D_j})$ either as the identity or as complex conjugation; because $|\alpha_j| = 1$, complex conjugation sends $\alpha_j \mapsto \bar{\alpha}_j = \alpha_j^{-1}$. Thus $\sigma(\alpha_j) = \alpha_j^{\chi_j(\sigma)}$, where $\chi_j : \operatorname{Gal}(K/\mathbb{Q}) \to \{\pm 1\}$ is the quadratic character of $F_j$. In the additive $\mathbb{Q}$-space $V$, nonzero eigenvectors belonging to distinct group characters are linearly independent—even if multiplicative relations exist among the integers $D_j$ themselves! No nontrivial rational relation can therefore link angles from different quadratic fields.
+Third, separate the $21$ distinct quadratic fields by Galois characters. Let $K$ be the compositum of all $21$ imaginary quadratic fields, and consider the $\mathbb{Q}$-vector space $V := (K^\times / \mu(K)) \otimes_{\mathbb{Z}} \mathbb{Q}$ obtained by killing torsion (roots of unity). Every $\sigma \in \operatorname{Gal}(K/\mathbb{Q})$ acts on $F_j = \mathbb{Q}(\sqrt{-D_j})$ either as the identity or as complex conjugation; because $|\alpha_j| = 1$, complex conjugation sends $\alpha_j \mapsto \bar{\alpha}_j = \alpha_j^{-1}$. Thus $\sigma(\alpha_j) = \alpha_j^{\chi_j(\sigma)}$, where $\chi_j : \operatorname{Gal}(K/\mathbb{Q}) \to \{\pm 1\}$ is the quadratic character of $F_j$. In the additive $\mathbb{Q}$-space $V$, nonzero eigenvectors belonging to distinct group characters are linearly independent—even if multiplicative relations exist among the integers $D_j$ themselves! If a product $\prod_j \alpha_j^{n_j}$ is a root of unity, its relation in $V$ must therefore hold separately in the character space of each quadratic field. Every field that occurs only once gives $n_j=0$.
 
 Fourth, resolve the single shared room $\mathbb{Q}(\sqrt{-2})$. Reducing the fractions for $j = 12, 68, 136$ gives
 
@@ -105,7 +105,7 @@ $$
 \theta_{136} = \theta_{12} + \theta_{68}.
 $$
 
-Finally, to check that $\alpha_{12}$ and $\alpha_{68}$ themselves are independent modulo roots of unity, inspect the prime ideal $\mathfrak{p}_3 = (1 + \sqrt{-2})$ above $3$ in the unique factorization domain $\mathbb{Z}[\sqrt{-2}]$: $3 \nmid 289$ and $287 + 24\sqrt{-2} \equiv 2 \not\equiv 0 \pmod{\mathfrak{p}_3}$, so $v_{\mathfrak{p}_3}(\alpha_{12}) = 0$; meanwhile $51 = 17(1 + \sqrt{-2})(1 - \sqrt{-2})$ and $49 + 10\sqrt{-2} = (1 + \sqrt{-2})^2(-1 - 12\sqrt{-2})$, so $v_{\mathfrak{p}_3}(\alpha_{68}) = 2 - 1 = +1 \neq 0$. One zero valuation and one nonzero valuation force multiplicative independence!
+Finally, to check that $\alpha_{12}$ and $\alpha_{68}$ themselves are independent modulo roots of unity, inspect the prime ideal $\mathfrak{p}_3 = (1 + \sqrt{-2})$ above $3$ in the unique factorization domain $\mathbb{Z}[\sqrt{-2}]$: $3 \nmid 289$ and $287 + 24\sqrt{-2} \equiv 2 \not\equiv 0 \pmod{\mathfrak{p}_3}$, so $v_{\mathfrak{p}_3}(\alpha_{12}) = 0$; meanwhile $51 = 17(1 + \sqrt{-2})(1 - \sqrt{-2})$ and $49 + 10\sqrt{-2} = (1 + \sqrt{-2})^2(-1 - 12\sqrt{-2})$, where the remaining factor $-1-12\sqrt{-2}$ reduces to $2$ modulo $\mathfrak{p}_3$. Thus $v_{\mathfrak{p}_3}(\alpha_{68})=2-1=1$. Since valuations vanish on roots of unity, if $\alpha_{12}^a\alpha_{68}^b$ is a root of unity, the valuation first gives $b=0$. The infinite order of $\alpha_{12}$ then gives $a=0$.
 
 ::: {.example #ex-ou-ch01-shell-arithmetic title="Scratch-Paper Check of the Shortest Arc and the Sole Rational Relation"}
 Take the sub-inner vertex $P = (11, 11, 25)$, the inner vertex $Q = (13, 13, 23)$, and the pole $O = (17, 17, 17)$:
@@ -114,7 +114,9 @@ Take the sub-inner vertex $P = (11, 11, 25)$, the inner vertex $Q = (13, 13, 23)
 2. **Spokes $QO$ ($d^2 = 68$) and $PO$ ($d^2 = 136$):** Direct subtraction yields $\|Q - O\|^2 = 16 + 16 + 36 = 68$ and $\|P - O\|^2 = 36 + 36 + 64 = 136$. All three points $P, Q, O$ lie in order on the same symmetry great-circle plane $x_1 = x_2$! Adjacent great-circle arcs add linearly, revealing the visible geometric origin of $\theta_{136} = \theta_{12} + \theta_{68}$.
 :::
 
-Dropping the redundant $\theta_{136}$ leaves **exactly $22$ $\mathbb{Q}$-linearly independent frequencies**. Moreover, replacing $\theta_{724}$ and $\theta_{804}$ by the dual-clock frequency differences $\theta_{724} - \theta_{244}$ and $\theta_{804} - \theta_{244}$ while retaining $\theta_{244}$ is a unimodular integer change of basis, preserving the full rank $22$.
+For integer coefficients $n_j$, a sum $\sum_j n_j\theta_j$ that is a rational multiple of $2\pi$ makes $\prod_j\alpha_j^{n_j}$ a root of unity. Separating the character spaces eliminates all the other coefficients and leaves $n_{12}+n_{136}=n_{68}+n_{136}=0$. Every such coefficient vector is an integer multiple of the vector with entries $(1,1,-1)$ at $j=12,68,136$ and zero elsewhere. Its angle sum is exactly zero.
+
+After dropping $\theta_{136}$, the **remaining $22$ frequencies together with $2\pi$ are linearly independent over $\mathbb{Q}$**. Chapter 2 replaces $\theta_{724}$ and $\theta_{804}$ with the clock differences $\theta_{724}-\theta_{244}$ and $\theta_{804}-\theta_{244}$, while keeping $\theta_{244}$. Adding $\theta_{244}$ back to each difference recovers the original frequencies, so the integer change of basis preserves this independence.
 
 ## 1.3 Projective Ternion Heaps, Integer Shell Compression, and Isotropic Inversion {#sec-ou-1-3}
 
@@ -162,6 +164,46 @@ P_p\bigl(P_q(P_r(z))\bigr) = 34\,(1105\,z + 7\,z\,a),
 $$
 
 and subtracting the three reverse-cyclic triple compositions of $u_p(x) := (p x)a$ from the three forward-cyclic compositions (`oriented_axis_from_shell`) cancels every symmetric term to isolate the pure oriented axis witness $714\,x a$. Without a single floating-point approximation or coordinate chart, the discrete integer shell announces spatial orientation in exact integers ($7$ and $714$).
+
+Neither the compression law nor the oriented-triangle law depends on the squared radius $17$ or on case-by-case enumeration. For an integer $s$ and pure imaginary integer quaternions $p$ and $a$, write the shell map $P_{s,p,a}(v) := s\,v + (p v)\,a$, let $x \cdot y$ denote the four-dimensional Euclidean inner product, and put $N(x) := x \cdot x$ for the squared norm. The frozen theorem below shows that the single condition $s^2 = N(p)\,N(a)$ makes both laws exact for every integer quaternion $v$, with no requirement on the norms of the intermediate vertices $q$ and $r$:
+
+::: {.theorem #thm-ou-ch01-shell-compression-triangle title="Compression and Oriented-Triangle Identities for Integer Quaternion Shell Maps" lean="D5/S3/Quantum/AURICOmega/OmegaShellProjection.shell_compress_of_eq D5/S3/Quantum/AURICOmega/OmegaShellProjection.shell_triangle_of_eq"}
+Let $s$ be an integer and let $p, q, r, a$ be integer quaternions with zero real part such that $s^2 = N(p)\,N(a)$. Then for every integer quaternion $v$ the following two statements hold:
+
+1. **Compression identity**:
+
+$$
+P_{s,p,a}\bigl(P_{s,q,a}(P_{s,p,a}(v))\bigr) = 2\bigl(s^2 + N(a)\,(p \cdot q)\bigr)\,P_{s,p,a}(v).
+$$
+
+2. **Oriented-triangle identity**: with $z := P_{s,p,a}(v)$,
+
+$$
+P_{s,p,a}\bigl(P_{s,q,a}(P_{s,r,a}(z))\bigr) = 2s\bigl(s^2 + N(a)\,(p \cdot q + q \cdot r + r \cdot p)\bigr)\,z + 2\,N(a)\,\bigl(p \cdot (q r)\bigr)\,z\,a.
+$$
+:::
+
+::: proof
+Record a map of the form $u \mapsto c\,u + (d\,u)\,a$ by its coefficient pair $(c, d)$; the shell map $P_{s,p,a}$ is the pair $(s, p)$. A pure imaginary $a$ satisfies $a a = -N(a)$, so the composite of two such maps has the same shape, with coefficients combining as $(c, d) \circ (e, f) = (c e - N(a)\,d f,\ c f + d e)$. The triple and quadruple composites thereby reduce to polynomial identities with integer coefficients among the quaternion coefficients, which are expanded and checked coordinate by coordinate. Without the norm condition each identity carries one extra defect term proportional to $s^2 - N(p)\,N(a)$, and that term vanishes once $s^2 = N(p)\,N(a)$ is substituted. The full proof is checked by the Lean kernel.
+:::
+
+Setting $s = 17$ and $N(p) = N(a) = 17$ turns the first coefficient into $2(289 + 17\,p \cdot q) = 34\,(17 + p \cdot q)$, the compression law of the nine-point shell. On the inner triangle all three inner products equal $16$, and the imaginary part of a product $q r$ of pure quaternions is the cross product $q \times r$, so $p \cdot (q r) = \det(p, q, r) = 7$; the two coefficients of the second identity become $2 \cdot 17\,(289 + 17 \cdot 48) = 34 \cdot 1105$ and $2 \cdot 17 \cdot 7 = 34 \cdot 7$, matching the enumerated certificate term by term.
+
+The third identity likewise depends neither on the squared radius nor on case-by-case enumeration, and it needs no norm condition at all:
+
+::: {.theorem #thm-ou-ch01-oriented-axis title="Oriented-Axis Identity for Integer Quaternion Maps" lean="D5/S3/Quantum/AURICOmega/OmegaShellOrientedAxis.oriented_axis_from_shell"}
+Let $p, q, r, a$ be integer quaternions with zero real part and write $u_c(x) := (c\,x)\,a$. Then for every integer quaternion $x$,
+
+$$
+u_p u_q u_r\,x + u_q u_r u_p\,x + u_r u_p u_q\,x - u_p u_r u_q\,x - u_r u_q u_p\,x - u_q u_p u_r\,x = 6\,N(a)\,\bigl(p \cdot (q r)\bigr)\,x\,a.
+$$
+:::
+
+::: proof
+A pure imaginary $a$ satisfies $a a = -N(a)$, so a triple composite $u_{c_1} u_{c_2} u_{c_3}\,x = \bigl((c_1 c_2 c_3)\,x\bigr)\,a^3$ equals $-N(a)\,\bigl((c_1 c_2 c_3)\,x\bigr)\,a$. The left side is therefore $-N(a)\,(A\,x)\,a$, where $A = p q r + q r p + r p q - p r q - r q p - q p r$ is the alternating sum of the six ordered products of the three factors; this step uses only that $a$ is pure. For pure imaginary $p, q, r$ the alternating sum is the scalar $-6\,p \cdot (q r)$, and substituting it gives the right side. The full proof is checked by the Lean kernel.
+:::
+
+With $N(a) = 17$ and $p \cdot (q r) = 7$ on the inner triangle the coefficient is $6 \cdot 17 \cdot 7 = 714$, which is the oriented-axis witness $714\,x a$ of the certificate. The identity does not involve $s$, and $x$ need not be pure.
 
 The second Lean-verified pillar connects discrete radial shells to continuous isotropic ensembles in $\mathbb{R}^3$. If a rotationally invariant random vector $X \in \mathbb{R}^3$ has radial shell density $h(r)$, then conditional on $|X| = r$ its projection along any fixed unit axis is uniform on $[-r, r]$, producing the one-dimensional marginal $f(t) = \int_{|t|}^\infty \frac{h(r)}{2r}\,dr$ on the full real line (reducing to $\int_t^\infty \frac{h(r)}{2r}\,dr$ on the nonnegative half-line $t \ge 0$). The next theorem establishes exact inversion uniqueness and total mass conservation:
 
@@ -220,6 +262,10 @@ The interactive card below lets you explore this nineteen-point geometry directl
 
 ## 1.5 Summary and Bridge to Chapter 2 {#sec-ou-1-5}
 
-We now hold the complete static blueprint of our laboratory: the 19-point Behrend shell at $R = 867$ ($19$ vertices, $135$ edges, $529$ triangles), its $23$ arc lengths collapsing by exactly one $\mathbb{Q}(\sqrt{-2})$ identity $\theta_{136} = \theta_{12} + \theta_{68}$ to $22$ rationally independent frequencies, two Lean-verified bridges for projective ternion heaps ([@thm-ou-ch01-ternion-heap]) and continuous isotropic shell inversion ([@thm-ou-ch01-shell-inversion]), the exact `rfl`-certified 9-point integer compression and orientation witness, and the $2$-adic Hasse obstruction separating real rank $18$ from minimal rational Gram dimension $21$.
+We now hold the complete static blueprint of our laboratory: the 19-point Behrend shell at $R = 867$ ($19$ vertices, $135$ edges, $529$ triangles), its $23$ arc lengths collapsing by exactly one $\mathbb{Q}(\sqrt{-2})$ identity $\theta_{136} = \theta_{12} + \theta_{68}$ to $22$ rationally independent frequencies, four Lean-verified results on projective ternion heaps ([@thm-ou-ch01-ternion-heap]), the compression and oriented-triangle identities of shell maps ([@thm-ou-ch01-shell-compression-triangle]), the oriented-axis identity ([@thm-ou-ch01-oriented-axis]) and continuous isotropic shell inversion ([@thm-ou-ch01-shell-inversion]), the exact `rfl`-certified 9-point integer compression and orientation witness, and the $2$-adic Hasse obstruction separating real rank $18$ from minimal rational Gram dimension $21$.
+
+::: {.film src="nineteen-points-twenty-two-frequencies"}
+**Nineteen points, 135 edges and 23 chord lengths, held together by a single rational relation that leaves 22 independent frequencies (2 min 45 s).** The camera looks down the pole onto the sphere $x_1^2 + x_2^2 + x_3^2 = 867$: the $19$ nonnegative integer points light up one by one, the amber pole $(17, 17, 17)$ stays put under the coordinate cycle $\sigma$ (a $120^\circ$ turn about the pole), and the other $18$ points form six three-point orbits in cyan, white, blue and magenta for the inner, sub-inner, middle and outer layers ([@def-ou-ch01-behrend-shell]). As the squared-distance threshold sweeps up to $804$, $135$ cyan great-circle edges appear, the $36$ dropped longest chords flash as dashed magenta arcs, an amber triangle picks out one of the $529$ triangles at a time, and the degrees add to $270 = 2 \times 135$. Next, the $23$ chord-length cards turn over to show their $\sqrt{-D_j}$, with $12$, $68$ and $136$ all in $\mathbb{Q}(\sqrt{-2})$; on the great circle $x_1 = x_2$ the three points sit in order, the magenta arc $\theta_{68}$ and the cyan arc $\theta_{12}$ make up the amber arc $\theta_{136}$, and the exact product beside them gives $\alpha_{12}\alpha_{68} = \alpha_{136}$ ([@ex-ou-ch01-shell-arithmetic]). The green labels are the projective ternion heap ([@thm-ou-ch01-ternion-heap]) and isotropic shell inversion ([@thm-ou-ch01-shell-inversion]), the latter shown with the computed example $f = e^{-t^2}$, $h = 4r^2 e^{-r^2}$. In the last scene the heatmap is the Laplacian of the $135$ edges: its real rank $18$ is computed on screen, while the minimal rational Gram dimension $21$ and the $2$-adic Hasse obstruction come from the replay certificate and written argument (violet). Points, edges, triangles, lengths, fields and the product are exact computations on screen; that the remaining $22$ angles are rationally independent is the chapter's Galois argument (violet), and picking this shell as the testbed is a modelling choice.
+:::
 
 A sharper dynamical question now opens the door to [Chapter 2](ch02-quaternion-clocks-and-haar-zeros.md): **ordinary complex phases commute, so when we promote the shell's two clocks to non-commutative unit quaternions $(U, V)$, can a spectrum actually hear their non-commutativity? And can these twenty-two independent shell frequencies, driven solely by Riemann zero ordinates with zero random-number generators, reproduce exact Haar integration over the entire Standard Model gauge group $\mathrm{U}(1)\times\mathrm{SU}(2)\times\mathrm{SU}(3)$?**

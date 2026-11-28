@@ -5,7 +5,7 @@
 This final chapter of Volume I lays out the analytic number-theoretic bedrock of the monograph, placing **formally verified global theorems** right beside **certified finite-window computations**. We proceed in four steps:
 
 1. State the exact **external formalized status** of the classical Riemann Hypothesis (RH) and Dirichlet GRH, and establish the Lean-verified Fejér critical-gap and Cayley unit-circle criteria;
-2. Walk through the frozen Lean 4 analytic chain linking harmonic pair-moment ratios, reciprocal-time and periodic phase deficits, unconditional Landau left/right vertical contour bounds, and the Gaussian hard-band collision limit $1/\sqrt{\pi}$;
+2. Walk through the frozen Lean 4 analytic chain linking harmonic pair-moment ratios, reciprocal-time and periodic phase deficits, unconditional Landau left/right vertical contour bounds, and the Gaussian hard-band collision limit $1/\sqrt{\pi}$, and identify the cutoff endpoint term for a fixed arc mode;
 3. Zoom into two concrete finite zero landmarks—the 19-zero neighborhood of zero #11431 in $[10000, 12999]$ (midpoint isolation, $94.62\%$ diagonal Fejér weight, $23.657\% / 23.670\%$ maximal extra-pair share, finite observation radii $111521$ and $111532$) and the first triple-window hits #8236 and #8359;
 4. Draw the honest boundary separating global harmonic average bounds from single-zero clock selection.
 
@@ -13,6 +13,7 @@ This final chapter of Volume I lays out the analytic number-theoretic bedrock of
 
 Following the six-tier epistemic honesty contract of the [Prelude](README.md#rem-ou-epistemic-contract), before invoking any theorem with a `RiemannHypothesis` hypothesis we state its external verification dossier (`EXT-LEAN`) cleanly:
 
+- The Lean community maintains the primary repository for the formalization of classical RH and Dirichlet GRH. [leanprover-community/riemann-hypothesis](https://github.com/leanprover-community/riemann-hypothesis)
 - **Authority and joint certification:** On 2026-11-20, Levent Alpöge released a Lean 4 (`v4.33.1`, $175{,}187$ modules) formal proof covering the classical Riemann Hypothesis (RH) and Dirichlet GRH for all Dirichlet $L$-functions over $\mathbb{Q}$. On 2026-11-21, the Lean FRO and the Mathlib Initiative issued a [joint statement](https://leanprover-community.github.io/blog/posts/riemann-hypothesis/) confirming via both `comparator` and `con-leche --compare` that the proved theorem matches Mathlib's `RiemannHypothesis` verbatim.
 - **Independent kernel replays and axiom closure:** Our organization's reproducible build and verification mirror [`the-omega-institute/riemann-hypothesis`](https://github.com/the-omega-institute/riemann-hypothesis) confirms via static scan and axiom audit that the entire codebase contains zero `sorry`, zero `admit`, and zero custom axioms, with terminal axiom closure strictly $\{\mathrm{propext}, \mathrm{Classical.choice}, \mathrm{Quot.sound}\}$, independently replayed across `leanchecker`, `lean4lean`, `nanoda`, and `con-leche`.
 - **Strict scope discipline in this book:** Because this external proof is not yet frozen inside `the-omega-institute/trureturing@dev`, **RH and Dirichlet GRH do not wear this book's green `lean=` badge**. Furthermore, their scope ends strictly at $\zeta(s)$ and Dirichlet $L$-functions over $\mathbb{Q}$: the Extended Riemann Hypothesis (ERH) for general Dedekind zeta functions, Grand RH for automorphic $L$-functions, simplicity of zeros, Montgomery GUE pair correlation, a Hilbert–Pólya operator, and every physical unification claim remain `OPEN` or `MODEL`.
@@ -98,6 +99,130 @@ Unconditionally (without assuming RH):
 For part 1, the functional equation of $\zeta$ decomposes $-\zeta'(s)/\zeta(s) = \log(\frac{3}{4} + iu) + r(u)$, where digamma recurrence, Binet bounds, and the absolutely convergent series on the reflected line $\operatorname{Re}(1 - s) = \frac{5}{4}$ imply $|r(u)| \le 80$. Factoring out $x^{-1/4}$, the remainder integrates to at most $80(V - 1)$, while integrating the logarithm by parts against the antiderivative $e^{iu\log x}/(i\log x)$ using $|\frac{d}{du}\log(\frac{3}{4} + iu)| \le 1/u$ yields $\frac{20(1 + \log V)}{\log x}$. For part 2, integrating the von Mangoldt Dirichlet series term by term on $\operatorname{Re} s = c > 1$, the integer nearest to $x$ is bounded by the interval length (with $\Lambda(1) = 0$ if nearest to $1$), remaining integers in $[x/2, 2x]$ obey $|\log x - \log n| \ge |x - n|/(2x)$ and sum to two harmonic tails, integers outside $[x/2, 2x]$ satisfy $|\log x - \log n| \ge 1/2$, and $x^c \le 3x$ closes the estimate. The full proof is checked by the Lean kernel.
 :::
 
+The [Weyl average in §2.3](ch02-quaternion-clocks-and-haar-zeros.md#sec-ou-2-3) uses the zero sum at a fixed nonzero angular frequency $\lambda$. Write $S_\lambda(T)=\sum_{0<\gamma\le T}e^{i\lambda\gamma}$, counting analytic multiplicity and including the upper endpoint.
+
+To see how the count affects the phase sum, let $N(t)$ count the zeros with the same endpoint convention and set $L(t)=\frac{t}{2\pi}(\log\frac{t}{2\pi}-1)+\frac78$ and $Q(t)=N(t)-L(t)$. The Riemann–von Mangoldt formula gives $Q(t)=S(t+0)+O(1/t)$, where $S(t+0)$ is the right limit of its argument term. Littlewood's integral bound gives $\int_1^T Q(t)\,dt=O(\log T)$. [Brent, Platt, and Trudgian, *Accurate Estimation of Sums over Zeros of the Riemann Zeta-Function* (2021), §2, Lemma 2 and Eq. (12)](https://doi.org/10.1090/mcom/3652)
+
+Integrating $dN=dL+dQ$ by parts separates the endpoint from the contribution accumulated at frequency $\lambda$ (direct derivation, `ARGUED`).
+
+$$
+\begin{aligned}
+S_\lambda(T)-\frac{e^{i\lambda T}}{2\pi i\lambda}\log\frac{T}{2\pi}
+  &=e^{i\lambda T}Q(T)-i\lambda\int_1^T e^{i\lambda t}Q(t)\,dt\\
+  &\quad+O_\lambda(1).
+\end{aligned}
+$$
+
+Suppose the left side is $o_\lambda(\log T)$ at all real heights. Subtracting the cutoffs at $T$ and $T+u$ and undoing the phase by partial summation yields $Q(T+u)=Q(T)+o_{\lambda,H}(\log T)$ uniformly for $0\le u\le H$, for each fixed $H$. The integral bound controls the average over $[T,T+H]$. Letting $H$ grow after taking the limit in $T$ gives $Q(T)=o(\log T)$. The endpoint asymptotic thus holds exactly when both $Q(T)$ and $\int_1^T e^{i\lambda t}Q(t)\,dt$ are $o(\log T)$.
+
+A synthetic spectrum at $\lambda=1$ shows the limit of the unmodulated integral bound. For $t\ge32$, give the spectrum the count $\lfloor L(t)+1/2+\cos(t)/(10t)\rfloor$. The zero-mean sawtooth from rounding has bounded integrals against both $1$ and $e^{it}$ because the phase derivatives of its nonzero harmonics are monotone and bounded away from zero. The remaining term $\cos(t)/(10t)$ has a bounded unmodulated integral and contributes $\frac1{20}\log T+O(1)$ against $e^{it}$. This example uses only the counting inputs. For the actual $\zeta$ zeros, the integral with the phase still needs control.
+
+Suppose $\Lambda(e^{|\lambda|})=0$, where $\Lambda$ is the von Mangoldt function. Under RH, as $T\to\infty$ through all real heights, a direct derivation gives (`ARGUED`)
+
+$$
+S_\lambda(T)=\frac{e^{i\lambda T}}{2\pi i\lambda}\log\frac{T}{2\pi}
+  +O_\lambda\!\left(\frac{\log T}{\log\log T}\right).
+$$
+
+The algebraic arc phases ensure $\Lambda(e^{|\lambda|})=0$ for every nonzero integer mode of the shell. [§2.3](ch02-quaternion-clocks-and-haar-zeros.md#sec-ou-2-3)
+
+To retain the real-part weight of each zero, fix $X=e^\lambda>1$ with $\Lambda(X)=0$. The following criterion characterizes the endpoint asymptotic over all real heights (direct derivation, `ARGUED`).
+
+$$
+\sum_{0<\gamma\le T}X^{\rho-1/2}
+=\frac{e^{i\lambda T}}{2\pi i\lambda}\log\frac{T}{2\pi}+o_X(\log T)
+\quad\Longleftrightarrow\quad
+\text{the Lindelöf hypothesis holds}.
+$$
+
+The sum counts analytic multiplicities and includes the upper endpoint. Write $\delta_\rho=\operatorname{Re}\rho-1/2$. Backlund's local zero-count criterion is equivalent to $\sum_{|\gamma-T|\le1}\delta_\rho^2=o(\log T)$. Reflection across the critical line pairs the two sides, and the window of radius $1$ contains $O(\log T)$ zeros. This allows us to split the sum at a fixed distance from the line and then send that distance to zero. The Lindelöf hypothesis also gives $S(T)=o(\log T)$ for the argument term in the counting formula. [Titchmarsh, 2nd ed., Theorems 13.5 and 13.6(A)](https://sites.math.rutgers.edu/~zeilberg/EM18/TitchmarshZeta.pdf)
+
+For sufficiency, use the smoothed window described below, first holding the bandwidth $B$ fixed. The unconditional explicit formula samples at $\gamma-i\delta_\rho$. When moving the window values back to the real axis, reflection at each ordinate cancels the linear term in $\delta_\rho$. A decaying kernel centered at each endpoint weights the quadratic error, which is $o_{X,B}(\log T)$ by the bound on local squared displacement. On the real axis, restoring the sharp window costs $O_X(\log T/B)+o_{X,B}(\log T)$, with the second term coming from $S$. Take $T$ to infinity first, then let $B$ grow. [Carneiro and Milinovich, Lemma 4](https://arxiv.org/pdf/2403.17803v1#page=5)
+
+Necessity follows from a positive difference. Set $P_a(u)=a/(\pi(a^2+u^2))$, with $a>1/2$ and $a^2-1/4\ge4/\lambda^2$. The sharp asymptotic gives $\sum_{\gamma>0}e^{\lambda\delta_\rho}P_a(\gamma-T)=\log(T/(2\pi))/(2\pi)+o_X(\log T)$ by partial summation. The logarithmic derivative of the Hadamard product for $\xi$ at $1/2+a+iT$ gives $\sum_\rho\operatorname{Re}P_a(\gamma-T-i\delta_\rho)=\log(T/(2\pi))/(2\pi)+O_a(1)$. Negative ordinates contribute $O_a(\log T/T)$. Pairing the reflected zeros replaces the weights in the first sum by $\cosh(\lambda\delta_\rho)$, and
+
+$$
+\cosh(\lambda\delta)P_a(u)-\operatorname{Re}P_a(u-i\delta)
+\ \ge\ \frac{\lambda^2}{4}\delta^2P_a(u)
+\qquad (u\in\mathbb R,\ |\delta|\le1/2).
+$$
+
+Indeed, $\operatorname{Re}P_a(u-i\delta)/P_a(u)\le1+\delta^2/(a^2-1/4)$ and $\cosh(\lambda\delta)\ge1+\lambda^2\delta^2/2$. The difference between the sums is $o_X(\log T)$, forcing the squared displacement in the window of radius $1$ to be $o(\log T)$ as well. [Titchmarsh, 2nd ed., Eq. (2.12.5)](https://sites.math.rutgers.edu/~zeilberg/EM18/TitchmarshZeta.pdf) · [NIST DLMF, Eq. 5.11.2](https://dlmf.nist.gov/5.11.E2)
+
+The RH estimate above also gives a quantitative error term.
+
+Convolve the indicator of $(0,T]$ with the nonnegative unit-mass kernel $K_B(u)=\frac{3B}{8\pi}\bigl(\frac{\sin(Bu/4)}{Bu/4}\bigr)^4$, then multiply by $e^{i\lambda u}$. The kernel has angular Fourier support $[-B,B]$, so the prime-power terms in the Guinand–Weil explicit formula sample signed logarithmic frequencies $\pm\log n$ within $B$ of $\lambda$. Each term contains $\int_0^T e^{i(\lambda\mp\log n)v}\,dv$, which is bounded uniformly in $T$ because the fixed frequency is a positive distance from the prime-power frequencies. Summing the prime-power terms costs $O_\lambda((1+B)e^{B/2})$. The kernel's decay along the two horizontal lines through $\pm i/2$ bounds the pole terms by $O_\lambda(e^{B/2})$. [Carneiro, Chandee, and Milinovich, Lemma 5](https://arxiv.org/pdf/1309.1526#page=6)
+
+Translating the window by $u$ affects only the zeros within $|u|$ of its two endpoints. When $|u|\le T/2$, the zero-count remainder under RH bounds their combined number by $O(|u|\log T+\log T/\log\log T)$, with endpoints included. For larger $|u|$ the global count gives $O(|u|\log(2+|u|))$. Averaging against $K_B$, whose first absolute moment is $O(1/B)$ and whose tails decay as $|u|^{-4}$, recovers the sharp cutoff at a cost of $O(\log T/B+\log T/\log\log T)$. [Carneiro, Chandee, and Milinovich, Section 1 and Theorem 1](https://arxiv.org/pdf/1503.00955)
+
+Restoring the sharp cutoff in the integral against the gamma density $\bigl(\operatorname{Re}(\Gamma^\prime/\Gamma)(1/4+it/2)-\log\pi\bigr)/(2\pi)$ costs $O(\log T/B)$. For $t\ge 1$ this density is $\log(t/(2\pi))/(2\pi)+O(t^{-2})$. Integration by parts gives the displayed endpoint term with an $O_\lambda(1)$ error, since the remaining oscillatory integral $\int_1^T e^{i\lambda t}\,dt/t$ is bounded. Taking $B=\log\log T$ gives the stated remainder. Thus $|S_\lambda(T)|/\log T$ converges to $1/(2\pi|\lambda|)$ for the fixed mode. [NIST DLMF, Eq. 5.11.2](https://dlmf.nist.gov/5.11.E2)
+
+Reflection across the critical line gives a direct way to compare the weighted and unweighted sums. Fix $X=e^\lambda>1$ with $\Lambda(X)=0$, write $\rho=\beta+i\gamma$ and $\delta_\rho=\beta-1/2$, and let $W_\lambda(T)=\sum_{0<\gamma\le T}X^{\rho-1/2}$. Pairing $\delta_\rho$ with $-\delta_\rho$ at the same ordinate, with multiplicity, gives
+
+$$
+C_\lambda(T)=W_\lambda(T)-S_\lambda(T)
+=\sum_{0<\gamma\le T}\bigl(\cosh(\lambda\delta_\rho)-1\bigr)e^{i\lambda\gamma}.
+$$
+
+The classical Landau formula gives $W_\lambda(T)=O_\lambda(\log T)$ here. An upper bound of the same order for the unweighted sum is therefore equivalent to $C_\lambda(T)=O_\lambda(\log T)$. Selberg's density estimate gives $\sum_{0<\gamma\le T}\delta_\rho^2=O(T/\log T)$. Since the hyperbolic cosine difference is at most a constant times $\delta_\rho^2$, summing absolute values gives an upper bound of order $T/\log T$. A sharper estimate requires cancellation at this frequency among the phases of the off-line zeros. [Gonek, Eq. (1)](https://www.sas.rochester.edu/mth/people/faculty/gonek-steve/assets/pdf/8-landau-form.pdf#page=1) · [Ford and Zaharescu, §3, Lemma 2 and Eq. (3.8)](https://www.ford126.web.illinois.edu/wwwpapers/fz.pdf#page=9)
+
+A synthetic spectrum attains the $T/\log T$ scale under these inputs (`ARGUED`). Take $\lambda=1$ and shift the equally spaced ordinates slightly within each $2\pi$ period so that the unweighted phase sum is biased toward the negative real axis. Place each pair at the same ordinate with reflected real parts, choosing displacements of size $O(1/\log T)$ that depend on phase so the weighted sum follows the exact increment of the smooth endpoint term over each period. This spectrum has bounded count remainder, satisfies a Selberg-type density bound, and its weighted sum follows the endpoint term with $O(1)$ error at every height, while $C_1(T)\sim T/(4\pi\log T)$. A sharper bound for the actual zeta zeros requires additional information. [Construction and numerical check](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239117179)
+
+A horizontal integral locates the part of the strip where phase cancellation matters. Write $L=\log T$ and $c=1/2+a$ with $0\le a\le 1/2$. Approximate $J_c(t)=\int_c^\infty\log|\zeta(\sigma+it)|\,d\sigma$ by the prime-power polynomial $P_{x,c}(t)=\operatorname{Re}\sum_{2\le n\le x^3}\Lambda_x(n)n^{-c-it}/(\log n)^2$, where $\Lambda_x$ is Selberg's quadratic cutoff weight. For fixed nonresonant $\lambda$, a direct calculation for large $T$ and $2\le x\le L^{2/3}$ gives the remainder (`ARGUED`).
+
+$$
+\int_3^T e^{i\lambda t}\bigl(J_c(t)-P_{x,c}(t)\bigr)\,dt
+=\frac{2\pi}{\lambda^2}
+  \sum_{\substack{3<\gamma\le T\\ \beta>c}}
+  \bigl(\cosh(\lambda(\beta-c))-1\bigr)e^{i\lambda\gamma}
+  +O_\lambda(L).
+$$
+
+Horizontal integration makes the jump of $\log\zeta$ along the slit to the left of a zero proportional to $\beta-\sigma$. Shifting the contour for each of the two exponential phases and combining them to recover the real part gives the hyperbolic cosine weight. A local logarithmic derivative estimate bounds the horizontal edges by $O_\lambda(L)$. The top edge is taken by a right limit. Nonresonance keeps the modulated integral of the prime-power polynomial within the same bound. [Korolev, cutoff weights before Lemma 4](https://www.mathnet.ru/links/2bb06e5a975dd807fe74eae4c1f9fd1f/im2766_eng.pdf#page=9) · [Contour calculation and numerical check](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239342305)
+
+At $a=0$, reflection at the same ordinate recovers $C_\lambda(T)$ from the zero sum up to normalization and a bounded contribution from the lowest heights. Increasing $a$ replaces the weight of each zero on the right by $\cosh(\lambda(\delta_\rho-a)_+)-1$, where $v_+=\max(v,0)$. Integrating the derivative of that weight against Selberg's density estimate bounds the remainder on the right by $O_\lambda((T/L)e^{-aL/4}+L)$. Setting $a=1/L$ reduces the constant in the density estimate, and a synthetic spectrum can attain order $T/L$ in both the narrow strip and the region farther right. At $a=8\log L/L$, the bound on the right drops to $O_\lambda(T/L^3+L)$. To improve on the $T/L$ scale, it therefore suffices to study the same-frequency integral in the strip $1/2\le\sigma\le1/2+8\log L/L$. [Simonič, equation (3), citing Selberg's density estimate](https://arxiv.org/pdf/1910.08274v2#page=1)
+
+For the actual zeta zeros, retaining the real-part weights recovers the endpoint term on average over heights without using RH. Let $S(t)$ be the argument term in the Riemann–von Mangoldt formula. Away from zero ordinates, $N(t)=1+\vartheta(t)/\pi+S(t)$, with $\vartheta$ the Riemann–Siegel theta function. Subtract the smooth endpoint term from the weighted sum
+
+$$
+R_X(t)=\sum_{0<\gamma\le t} X^{\rho-1/2}
+       -\frac{e^{it\lambda}}{2\pi i\lambda}\log\frac{t}{2\pi}.
+$$
+
+A direct derivation (`ARGUED`) gives
+
+$$
+\frac1U\int_U^{2U}\bigl|e^{-it\lambda}R_X(t)-S(t)\bigr|^2\,dt=O_X(1),
+\qquad
+\frac1U\int_U^{2U}|R_X(t)|^2\,dt\sim\frac{\log\log U}{2\pi^2}.
+$$
+
+Here the bandwidth is fixed at $B=1$. The unconditional Guinand–Weil formula samples at the complex ordinates $\gamma-i(\beta-1/2)$. When the sharp window is restored, the reflected zeros $\beta+i\gamma$ and $1-\beta+i\gamma$ at the same height cancel the linear terms in the complex shift. The remaining endpoint errors are weighted by $(\beta-1/2)^2$. Selberg's zero-density bound gives $\sum_{0<\gamma\le U}(\beta-1/2)^2=O(U/\log U)$. Localizing these weights with a kernel that decays cubically away from the endpoints gives a height average of $O(1/\log U)$ and a pointwise bound of $O(\log U)$ for the moving endpoint. Their product bounds the mean square. The lower-endpoint error is uniformly bounded. [Carneiro and Milinovich, *On Littlewood's Estimate for the Modulus of the Zeta Function on the Critical Line* (2024), Lemma 4](https://arxiv.org/pdf/2403.17803v1#page=5) · [Simonič, *Explicit Zero Density Estimate for the Riemann Zeta-Function Near the Critical Line* (2019), Eq. (3)](https://arxiv.org/pdf/1910.08274v2)
+
+On the real axis, integration by parts against the zero-counting formula isolates the upper-endpoint term $e^{it\lambda}S(t)$. The remaining terms consist of bounded terms and a convolution of $S_1(t)=\int_0^t S(u)\,du$ against a finite measure. The measure has an atom at zero and a density that decays cubically. Selberg's mean-square bound for $S_1$ controls the convolution, and his second moment for $S$ supplies the asymptotic constant. Thus for fixed $\varepsilon>0$, the fraction of heights in $[U,2U]$ with error greater than $\varepsilon\log t$ is at most $O_X(\varepsilon^{-2}\log\log U/(\log U)^2)$. A bound at every height requires further control of the error at those exceptional heights.  [Selberg (1946), Theorems 6 and 7, as stated by Chirre and Quesada-Herrera in *The Second Moment of $S_n(t)$ on the Riemann Hypothesis* (2021), Eqs. (1.4)–(1.5)](https://arxiv.org/pdf/2006.08503v2#page=2)
+
+The same $S_1$ gives a horizontal integral for the error from dropping the real-part weights. Set $J(t)=\int_{1/2}^{\infty}\log|\zeta(\sigma+it)|\,d\sigma$. At the fixed nonresonant frequency above, a direct derivation (`ARGUED`) gives the following formula with the upper endpoint included.
+
+$$
+\sum_{0<\gamma\le T}\bigl(e^{\lambda\delta_\rho}-1\bigr)e^{i\lambda\gamma}
+=\frac{\lambda^2}{\pi}\int_3^T e^{i\lambda t}J(t)\,dt+O_\lambda(\log T).
+$$
+
+Reflection at each ordinate turns the left side into twice a weighted count to the right of the critical line, with weight $g(x)=\cosh(\lambda x)-1$ for $x=\beta-1/2>0$. Extend $g$ by zero for $x\le0$. Both $g$ and $g'$ vanish at zero, so the critical line contributes no boundary distribution. Test the distributional Laplacian of $\log|\zeta|$ against $e^{i\lambda t}g(x)$. The bulk coefficient follows from $g''-\lambda^2g=\lambda^2$ for $x>0$. At the right edge $\sigma=2$, both the boundary term and the tail of $J$ for $\sigma\ge2$ have absolutely convergent Euler series. Nonresonance bounds their phase integrals uniformly. The local estimate for the logarithmic derivative bounds the horizontal boundary terms by $O_\lambda(\log T)$. Taking the right-hand limit in height includes the full multiplicities at that height. [Titchmarsh, *The Theory of the Riemann Zeta-Function*, second edition, §9.6(A)](https://sites.math.rutgers.edu/~zeilberg/EM18/TitchmarshZeta.pdf) · [Boundary calculation](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239241148)
+
+The Cauchy–Riemann equations give $J(t)/\pi=S_1(t)+\mathrm{const}$. Bounding the weight correction by $O_\lambda(\log T)$ is therefore equivalent to bounding $\int_3^T e^{i\lambda t}S_1(t)\,dt$ on that scale. This requires cancellation across the height interval.
+
+Averaging over a fixed compact frequency interval $I\subset\mathbb R$ gives a quantitative bound on this cancellation. For $U\ge3$, a hand derivation (`ARGUED`) yields
+
+$$
+\int_I\max_{0\le T\le U}|C_\lambda(T)|^2\,d\lambda
+\ll_I \frac{U}{(\log U)^2}.
+$$
+
+Group the ordinates into unit intervals and let $B_j$ be the sum of $\delta_\rho^2$ in group $j$. Each group contains $O(\log U)$ zeros. Integrating Selberg's density estimate gives $\sum_{\gamma\le U}\delta_\rho^4\ll U/(\log U)^3$, so $\sum_j B_j^2\ll U/(\log U)^2$. Expanding the phase within each group and the hyperbolic cosine weight in power series gives Fourier polynomials with the group index as the integer frequency and coefficients bounded by $B_j$ times summable factors. The Carleson–Hunt maximal inequality bounds all partial sums over complete groups. The group containing the cutoff is bounded by its own mass and includes any ordinates at the upper endpoint. [Simonič, Eqs. (1) and (3)](https://arxiv.org/pdf/1910.08274v2#page=1) · [Oberlin et al., Theorem 1.1](https://arxiv.org/pdf/0910.1555#page=2) · [Derivation and numerical check](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239462563)
+
+The frequencies in $I$ for which the modulus of the correction exceeds $A>0$ at some $T\le U$ therefore form a set of measure $O_I(U/(A^2(\log U)^2))$. Applying Borel–Cantelli at dyadic heights gives $C_\lambda(T)=O_{\lambda,\varepsilon}(\sqrt T/(\log T)^{1/2-\varepsilon})$ for each $\varepsilon>0$ and almost every $\lambda$, along all real heights. The prescribed shell modes form a countable set and still require estimates at individual frequencies. The collision estimate in the next section also needs control across a frequency band that grows with height.
+
 ## 3.3 Periodic Phase Deficits, Landau Window Transfer, and the $1/\sqrt{\pi}$ Collision Limit {#sec-ou-3-3}
 
 We now weld the reciprocal-time, periodic-phase, and logarithmic-time regimes into a single quantitative engine. In `trureturing@dev`, the following three-part frozen theorem establishes a $1/(4096\log T)$ deficit across $16\pi/T \le |t| \le b/\log T$ using opposing phase arcs, transfers any uniform Landau ordinate-sum envelope to a $1/(32\log T)$ deficit across $b/\log T \le |t| \le \log T$, and concludes the exact **Gaussian hard-band collision limit $1/\sqrt{\pi}$**:
@@ -153,8 +278,21 @@ Zero #11431 serves as a recurring testbed for two-loop gauge crossings and two-s
 
    which is **$35.60\times$ sharper** (strictly in $(35.59, 35.60)$) than the runner-up #11628! Yet we refuse to mystify this local sharpness: because the Riemann–von Mangoldt formula implies $\gamma_N / N \to 0$, telescoping $E_n \le \gamma_{n+1} - \gamma_{n-1}$ proves that higher up the critical line, centers with absolute deviation strictly smaller than $E_{11431}$ have natural density $1$ (`ARGUED`).
 2. **Occupation-diagonal dominance ($94.62\%$):** Assigning equal weights $1/19$ on #11422–#11440 at resolution $\eta = 0.01$, the self-paired occupation diagonal contributes exactly $B = (19 + 4\cdot 171)/19^4 = 703/130321$ out of the total quartic Fejér moment in $(0.00570094240512, 0.00570094240513)$—precisely **$94.62\%$** ($94.6224672\%$).
-3. **Maximal extra-pair share in the isolated collision band ($23.657\%$ / $23.670\%$):** The second-smallest distinct pair gap in the window is $\Delta_2 \in (0.0023277388, 0.0023277390)$. Throughout $\Delta < \eta \le \Delta_2$, the sole extra off-diagonal collision is $\gamma_{11427} + \gamma_{11436} \approx 2\gamma_{11431}$. Even under *arbitrary* nonnegative probability weights across all 19 zeros, the extra-pair share is capped at **$23.657017\%$** for the Fejér kernel and at the exact closed-form value $4/(12 + 2\sqrt{6}) \approx \mathbf{23.670068\%}$ for the unweighted closed band.
-4. **Exact finite observation radii ($111521$ and $111532$):** At resolution $\eta = 1/1000$, measuring a finite-interval integral $I_\eta(T) > B$ certifies an off-diagonal collision beyond the full-line occupation background. Generic relative truncation yields conservative sufficient radii $11{,}330{,}943$ (equal weights) and $11{,}331{,}843$ (local harmonic weights), whereas direct $160$-bit certified integration pins down the **exact first integer crossing radius** two orders of magnitude earlier: **$111521$** under equal weights (still negative at $111520$) and **$111532$** under local harmonic weights (still negative at $111531$).
+3. **Maximal extra-pair share in the isolated collision band ($23.657\%$ / $23.670\%$):** The second-smallest distinct pair gap in the window is $\Delta_2 \in (0.0023277388, 0.0023277390)$. Throughout $\Delta < \eta \le \Delta_2$, the sole extra off-diagonal collision is $\gamma_{11427} + \gamma_{11436} \approx 2\gamma_{11431}$. Optimizing the nonnegative probability weights across the 19 zeros gives a maximum extra-pair share of **$23.657017\%$** for the triangular kernel and $4/(12 + 2\sqrt{6}) \approx \mathbf{23.670068\%}$ for the closed-band indicator. The indicator uses $\Delta \le \eta < \Delta_2$ to keep the second pair outside the band. With equal weights on all 19 zeros, the closed-band share is $4/707 \approx 0.565771\%$.
+4. **First finite observation radii ($111521$ and $111532$)**. Integrate the quartic phase reading $\bigl|\sum_j p_j e^{it\gamma_j}\bigr|^4$ against the Fejér kernel $K_\eta(t)=(1-\cos(\eta t))/(\pi\eta t^2)$ on $[-T,T]$ to obtain $I_\eta(T)$. The integrand is nonnegative, so $I_\eta(T)$ is nondecreasing in $T$. Once it exceeds the full-line occupation diagonal $B$, the full-line integral exceeds $B$ as well, certifying an extra collision. At $\eta=1/1000$ the equal-weight baseline is $B=703/19^4$. Ball arithmetic gives the signed margins
+
+   $$
+   \begin{aligned}
+   I_\eta(111520)-B &\in (-1.864,-1.863)\times10^{-11},\\
+   I_\eta(111521)-B &\in (2.960,2.961)\times10^{-10}.
+   \end{aligned}
+   $$
+
+   An absolute integration error of at most $1.8\times10^{-11}$ in each reading still certifies $111521$ as the first integer radius above the threshold. To reproduce the margins, expand the fourth power and evaluate the cosine integral at each frequency difference $d$ as $\bigl(F_T(d+\eta)+F_T(d-\eta)-2F_T(d)\bigr)/(\pi\eta)$, where $F_T(a)=a\operatorname{Si}(aT)-(1-\cos(aT))/T$ comes from integrating $(1-\cos(at))/t^2$ by parts.
+
+   Write $C_{\eta,T}(d)$ for this finite cosine integral. At $T=111521$, the two directions of the isolated midpoint pair together contribute $4C_{\eta,T}(\Delta)/19^4$. Subtracting just these terms leaves a margin relative to $B$ in $(-3.05165,-3.05163)\times10^{-5}$, so the reading falls below the threshold. The other off-diagonal pairs have zero full-line coefficients. At this finite radius their terms sum to about $1.5192\times10^{-9}$, exceeding the positive margin above.
+
+   With local harmonic weights, the first integer crossing is at $111532$ ($111531$ is still below its baseline). The generic relative truncation bound gives sufficient radii of $11{,}330{,}943$ for equal weights and $11{,}331{,}843$ for local harmonic weights.
 
 ::: {.example #ex-ou-ch03-fejer-11431 title="Three-Line Derivation of the Sharp 23.670% Isolated-Band Ceiling"}
 Inside the isolated band $\Delta < \eta \le \Delta_2$, write $x, y, z \ge 0$ for the probability weights on zeros #11427, #11436, and #11431, and set $q := 1 - \Delta/\eta \in (0, 1]$. The extra collision contributes $4q x y z^2$, while the occupation diagonal $D = \sum_i p_i^4 + 4\sum_{i < j} p_i^2 p_j^2$ only increases when any of the other sixteen weights is nonzero. For $x, y > 0$, putting $t := z^2 / (xy)$ and using $x^2 + y^2 \ge 2xy$ yields
@@ -169,7 +307,7 @@ $$
 \frac{4q x y z^2}{D} \;\le\; \frac{4q}{8 + t + 6/t} \;\le\; \frac{4q}{8 + 2\sqrt{6}} \quad \Longrightarrow \quad \frac{\text{extra share}}{\text{total quartic moment}} \;\le\; \frac{4q}{8 + 2\sqrt{6} + 4q}.
 $$
 
-Equality holds uniquely at $x = y \approx 0.280498$, $z = 6^{1/4}x \approx 0.439003$, with the remaining sixteen weights zero; $q = 1$ (closed band) gives $4/(12 + 2\sqrt{6}) \approx 23.670068\%$, and $\eta = \Delta_2$ gives $23.657017\%$.
+Equality holds uniquely at $x = y \approx 0.280498$ and $z = 6^{1/4}x \approx 0.439003$, with the remaining sixteen weights zero. The closed-band indicator sets $q=1$ for $\Delta \le \eta < \Delta_2$. The largest share for the triangular kernel occurs at $\eta=\Delta_2$, where $q$ is largest and the second gap falls at the kernel's zero. With equal weights $x=y=z=1/19$, the closed-band excess is $4/19^4$ and the occupation diagonal is $703/19^4$, so the excess contributes $4/707$ of the total.
 :::
 
 ### 3.4.2 How Zeros #8236 and #8359 Enter the Three-Window Physical Filter
@@ -194,5 +332,9 @@ Closing Volume I, we draw the boundary line with complete candor—separating wh
 
 - **Welded foundations:** (1) the integer anatomy, $22$ rationally independent frequencies, projective ternion heap, and minimal rational Gram dimension $21$ of the 19-point Behrend shell; (2) dual quaternion inverse spectral uniqueness, three-probe global injectivity, optimal density-$1/(2\pi)$ zero-driven Standard Model Haar integration, and the $D = 0$ finite Wilson diffusion test; (3) anchored on externally verified RH (`EXT-LEAN`), the Lean-frozen Fejér critical gap, harmonic pair-moment ratio, reciprocal and periodic phase deficits, unconditional Landau vertical contour bounds, and Gaussian collision limit $1/\sqrt{\pi}$; and (4) certified high-precision finite-window analyses of zeros #11431, #8236, and #8359.
 - **The open comparison gap (`OPEN`):** First, [@thm-ou-ch03-harmonic-pair-ratio] through [@thm-ou-ch03-harmonic-collision-limit] constrain *global harmonic averages* over the entire cutoff spectrum $0 < \gamma \le T$, whereas physical shell observables read out a *single* zero's dual-clock phases or a sparse weighted ensemble; no comparison theorem yet derives single-shell mass spectra or simultaneous multi-phase window hits from these global phase-sum bounds. Second, zero #11431's local midpoint isolation depends on the chosen search range and neighbor radius, while zeros #8236 and #8359 still rely on externally specified field tables, mass units, and spectral cuts. Which physical action selects the weights and picks the vacuum?
+
+::: {.film src="zero-windows"}
+**The global average bounds are welded shut by Lean; selecting a single zero is still the open gap (2 min 45 s).** The opening marks RH and Dirichlet GRH as a violet external formalized fact (`EXT-LEAN`) without the green badge, and Grand RH and the other questions beyond its scope as red `OPEN`. The cyan critical line $\operatorname{Re} s = \frac{1}{2}$ is folded onto the unit circle by $(s-1)/s$: the amber point stays on the circle, the magenta off-line point ($\operatorname{Re} s = 0.85$) lands inside, and the $|w|$ readouts are computed on screen; the green tags are the Cayley criterion and the Fejér critical gap of [@thm-ou-ch03-fejer-gap], and the Fejér kernel curve $|\sum_{j<6} e^{ij\theta}|^2 \ge 0$ below is a computed sketch of the proof idea. A chain of harmonically weighted phase arrows on schematic ordinates lines up to length $1$ at $t = 0$ and then spreads out; the three time windows on a log-$|t|$ axis (positions schematic) and the pair-moment ratio carry the green tags of [@thm-ou-ch03-harmonic-pair-ratio] and [@thm-ou-ch03-harmonic-collision-limit]. The two cyan vertical edges of the Landau rectangle are the unconditional [@thm-ou-ch03-landau-vertical], and the dashed violet top edge marks that assembling the envelope from the edges is argued only; a schematic Gaussian marks the collision limit $1/\sqrt{\pi} = 0.5641895835\ldots$. In the window of zero #11431, the midpoint arc, the $35.60\times$ error bar, the $94.62\%$ diagonal share, the $23.657017\%$ extra-pair ceiling, and the observation radii $111521$ / $111532$ are ball-arithmetic certificates (cyan `NUM`), with the closed form $4/(12+2\sqrt{6})$ recomputed on screen; the triple-window hits #8359 and #8236 rest on chosen inputs marked violet `MODEL`; the red broken bridge between global averages and a single zero is the open problem.
+:::
 
 Armed with this exact arithmetic toolkit—and with zero illusions about what remains unproved—we close Volume I and enter [Volume II: Question 1](ch04-gauge-crossings-and-monotone-barriers.md), putting the 19-point magnetic shell directly under the furnace of Standard Model gauge unification in [Chapter 4](ch04-gauge-crossings-and-monotone-barriers.md).

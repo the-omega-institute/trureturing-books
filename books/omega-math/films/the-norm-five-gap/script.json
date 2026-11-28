@@ -1,0 +1,276 @@
+{
+ "voice": "af_heart",
+ "speed": 0.94,
+ "say": {
+  "Lean": "Leen",
+  "Hecke": "Heck-uh",
+  "Ramanujan": "Rah-mah-noo-jan",
+  "Toeplitz": "Tope-litz",
+  "Petersson": "Peterson",
+  "Lubotzky": "Loo-bot-skee",
+  "Sarnak": "Sar-nak",
+  "zeta": "zay-tuh"
+ },
+ "music": {
+  "bpm": 80,
+  "progression": "a-minor"
+ },
+ "scenes": [
+  {
+   "id": "stir",
+   "name": "SIX TURNS",
+   "lead": 2.4,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Take the six integer quaternions of norm five: one plus or minus two i, j, or k.",
+     "取六枚模方为 5 的整四元数：1 ± 2i、1 ± 2j、1 ± 2k。"
+    ],
+    [
+     "Right-multiply a point of the three-sphere by each, then sum the six values.",
+     "把三维球面上的一点分别右乘这六枚旋子，再把函数的六个值加起来。"
+    ],
+    [
+     "This sum is the Hecke operator. How fast does it flatten mean-zero patterns?",
+     "这个和就是赫克算子。它把均值为零的花纹抹平得有多快？"
+    ],
+    [
+     "The Ramanujan bound is two root five; squared, twenty minus lambda squared is never negative.",
+     "拉马努金界是 2√5。两边平方：20 − λ̂² 永不为负。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 3.2,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "circle",
+   "name": "THE UNIT CIRCLE",
+   "lead": 0.5,
+   "tail": 0.4,
+   "music": [
+    0.9,
+    0.5,
+    0.4,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "Factor one minus lambda X plus five X squared, and scale both roots by root five.",
+     "把 1 − λ̂X + 5X² 分解成两个因子，再把两个根按 √5 归一化。"
+    ],
+    [
+     "The parameters multiply to one; their Toeplitz determinant is twenty minus lambda squared, over five.",
+     "两个参数之积为 1；它们的托普利茨行列式是 (20 − λ̂²)/5。"
+    ],
+    [
+     "Lean checks the rule: the matrix is positive semidefinite exactly when every parameter lies on the unit circle.",
+     "Lean 内核检验了一般法则：这样的托普利茨矩阵半正定，当且仅当每个参数都落在单位圆上。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 1.0,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "boundary",
+   "name": "THE BOUNDARY",
+   "lead": 0.5,
+   "tail": 0.4,
+   "music": [
+    0.8,
+    0.5,
+    0.3,
+    0.1,
+    0.1
+   ],
+   "lines": [
+    [
+     "This bridge is a criterion about finite families, not about the zeros of zeta.",
+     "这座桥是关于有限复数族的判据，与 ζ 的零点无关。"
+    ],
+    [
+     "Lubotzky, Phillips and Sarnak proved the full bound; the critical-line reading is the book's model.",
+     "Lubotzky、Phillips 与 Sarnak 证明了全谱界（文献结果）；临界线最优性的解读是本书的模型诠释。"
+    ],
+    [
+     "Higher-rank Ramanujan–Petersson and the extended Riemann hypothesis stay open.",
+     "高秩拉马努金—彼得松猜想与数域的扩展黎曼猜想，仍是开放问题。"
+    ]
+   ]
+  },
+  {
+   "id": "eigen",
+   "name": "MINUS TWO FIFTHS",
+   "lead": 0.5,
+   "tail": 0.4,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.2,
+    0.2
+   ],
+   "lines": [
+    [
+     "One exact case: the spin-one character is three w squared minus the rest, over the norm.",
+     "一个精确算例：自旋 1 特征标 χ₁ 是 3w² 减去其余三个平方，再除以模方。"
+    ],
+    [
+     "At q equals two, one, three, minus one, the six scalar parts are zero, four, minus four, eight, four, zero.",
+     "在 q = (2, 1, 3, −1)，六个乘积的标量部分依次是 0、4、−4、8、4、0。"
+    ],
+    [
+     "The squares add to one hundred twelve, and the sum is minus two fifths of chi, computed here.",
+     "平方和为 112，算子作用的结果恰是 χ₁ 的 −2/5 倍（屏幕计算）。"
+    ],
+    [
+     "Lean checks this at every nonzero integer quaternion, with positive margin four ninety-six over twenty-five.",
+     "Lean 内核对一切非零整四元数检验了这一点，也检验了正的裕度 496/25。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 3.4,
+     "kind": "chime"
+    },
+    {
+     "line": 3,
+     "at": 1.2,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "traces",
+   "name": "SHELL TRACES",
+   "lead": 0.5,
+   "tail": 0.4,
+   "music": [
+    1.0,
+    0.7,
+    0.5,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Higher shells obey one integer rule: minus six times the last numerator, minus twenty-five times the one before.",
+     "更高的壳层服从同一条整数递推：前一个分子的 −6 倍，再减去更前一个的 25 倍。"
+    ],
+    [
+     "Lean checks the rule and six values, up to sixteen nine oh one over five to the sixth.",
+     "Lean 内核检验了这条递推与前六个值：从 −1/5 一直到 16901/15625。"
+    ],
+    [
+     "Representation theory reads each value as the trace on a shell of dimension three to thirteen.",
+     "表示论推导把每个值认作一个壳层上的迹，壳层维数从 3 到 13。"
+    ]
+   ]
+  },
+  {
+   "id": "matrix",
+   "name": "DEGREE FOUR",
+   "lead": 0.5,
+   "tail": 0.4,
+   "music": [
+    1.0,
+    0.8,
+    0.6,
+    0.4,
+    0.4
+   ],
+   "lines": [
+    [
+     "Without the root, six Gaussian integer matrices sum to six, minus two, minus eighteen times the identity.",
+     "先不除根号：六枚高斯整矩阵之和依次是 6、−2、−18 倍的单位阵。"
+    ],
+    [
+     "In degree four the corners couple by sixty-four, splitting into fifty-four twice and minus seventy-four three times.",
+     "到了四次，首尾两角以 64 耦合，分裂为二重的 54 与三重的 −74。"
+    ],
+    [
+     "Lean checks the matrices, eigenlines and margins; exact minors certify shells three to six.",
+     "Lean 内核检验了这些矩阵、五条本征线与裕度；第 3 至第 6 壳由精确主子式核验。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 1.0,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "graph",
+   "name": "A FINITE GRAPH",
+   "lead": 0.5,
+   "tail": 0.8,
+   "music": [
+    1.0,
+    0.9,
+    0.7,
+    0.5,
+    0.5
+   ],
+   "lines": [
+    [
+     "Mod thirteen, five is not a square, so each step crosses between two halves of twenty-one eighty-four vertices.",
+     "模 13 时，5 不是平方，所以每一步都在两半之间跨越：共 2184 个顶点，每半 1092 个。"
+    ],
+    [
+     "No cycle is shorter than eight; five to the eighth gives two eighty-seven, four sixteen, three sixty-four, fifty-two.",
+     "没有短于 8 的闭圈；5⁸ 给出见证 (287, 416, 364, 52)。"
+    ],
+    [
+     "An exact certificate keeps each nontrivial squared value below nineteen, inside Ramanujan's twenty.",
+     "精确移位证书使每个非平凡的平方奇异值都小于 19，落在拉马努金界 20 之内。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 2.0,
+     "kind": "chime"
+    }
+   ]
+  },
+  {
+   "id": "close",
+   "name": "END",
+   "lead": 0.4,
+   "tail": 2.6,
+   "music": [
+    0.8,
+    0.3,
+    0.2,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Six integer turns, one squared inequality, and a gap you can check with fractions.",
+     "六个整数转动，一条平方后的不等式，一道用分数就能核验的谱隙。"
+    ]
+   ]
+  }
+ ]
+}

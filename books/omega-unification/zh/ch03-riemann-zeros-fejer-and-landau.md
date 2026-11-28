@@ -5,7 +5,7 @@
 本章正式摊开第一卷最底层的解析数论谱底座，并同时把**形式化证明的疆界**与**有限物理窗的实算证据**放在一张对照图上。我们按四步层层推进：
 
 1. 先明确界定经典黎曼猜想（RH）与狄利克雷广义黎曼猜想（Dirichlet GRH）的**外部形式化事实状态**，并用 Lean 4 冻结定理立起临界线上的费耶尔临界差额与凯莱单位圆判据；
-2. 再沿 `trureturing@dev` 冻结的四条核心解析定理，完整走通“调和权配对矩比 $\to$ 倒高度与周期相位亏损 $\to$ 无条件兰道左右竖边积分界 $\to$ 调和加权零点谱的高斯硬碰撞极限 $1/\sqrt{\pi}$”的严密链条；
+2. 再沿 `trureturing@dev` 冻结的四条核心解析定理，完整走通“调和权配对矩比 $\to$ 倒高度与周期相位亏损 $\to$ 无条件兰道左右竖边积分界 $\to$ 调和加权零点谱的高斯硬碰撞极限 $1/\sqrt{\pi}$”的严密链条，并求出固定原弧模态的截断端点项；
 3. 随后把镜头拉进具体的有限零点窗口，展示第 $11431$ 枚零点在 $[10000, 12999]$ 中的中点隔离、费耶尔对角占比、最大额外配对份额与有限观察半径（$111521$ / $111532$），以及第 $8236$ 与第 $8359$ 枚零点如何踏入三物理窗口筛选；
 4. 最后毫不粉饰地划出**全局调和平均界**与**单枚零点双钟选点**之间仍未合龙的比较定理鸿沟。
 
@@ -13,6 +13,7 @@
 
 按[前言](README.md#rem-ou-epistemic-contract)立下的六层认识论诚实契约，我们在动用任何带 `RiemannHypothesis` 前提的定理之前，先清点它的外部形式化凭证（`EXT-LEAN`）：
 
+- 经典黎曼猜想与狄利克雷广义黎曼猜想的 Lean 形式化主仓库由 Lean 社群维护。[leanprover-community/riemann-hypothesis](https://github.com/leanprover-community/riemann-hypothesis)
 - **权威出处与联合认证**：Levent Alpöge 于 2026 年 11 月 20 日公布覆盖经典黎曼猜想（RH）与有理数域 $\mathbb{Q}$ 上全体狄利克雷 $L$ 函数广义黎曼猜想（Dirichlet GRH）的 Lean 4（`v4.33.1`，共 $175{,}187$ 个模块）形式化证明；2026 年 11 月 21 日，Lean FRO 与 Mathlib Initiative 发表[联合声明](https://leanprover-community.github.io/blog/posts/riemann-hypothesis/)，确认经 `comparator` 与 `con-leche --compare` 双重核验，该证明导出的终端命题与纯 Mathlib 陈述 `RiemannHypothesis` 完全一致。
 - **独立重放与公理边界**：组织镜像与可复现构建仓库 [`the-omega-institute/riemann-hypothesis`](https://github.com/the-omega-institute/riemann-hypothesis) 的源码静态扫描与公理审计证实全库零 `sorry`、零 `admit`、零自定义公理，公理闭包仅为 Lean 标准三公理 $\{\mathrm{propext}, \mathrm{Classical.choice}, \mathrm{Quot.sound}\}$，并已通过多支独立团队在 `leanchecker`、`lean4lean`、`nanoda` 与 `con-leche` 上的全模块重放。
 - **本书的严格书写纪律**：因该外部工程尚未冻结进入 `the-omega-institute/trureturing@dev`，**RH 与狄利克雷 GRH 本身不佩戴本书的绿色 `lean=` 徽章**；同时，其范围严格止于 $\mathbb{Q}$ 上的 $\zeta(s)$ 与狄利克雷 $L$ 函数——戴德金 $\zeta_K$ 函数的扩展黎曼猜想（ERH）、自守 $L$ 函数的全广义黎曼猜想（Grand RH）、零点单重性、蒙哥马利 GUE 对关联、希尔伯特—波利亚算子以及物理大统一假说均保持 `OPEN` 或 `MODEL`。
@@ -98,6 +99,130 @@ $$
 在第一款中，借助 $\zeta$ 函数的函数方程将 $-\zeta'(s)/\zeta(s)$ 拆成 $\log(\frac{3}{4} + iu) + r(u)$；由双伽马递推、Binet 估计与反射直线 $\operatorname{Re}(1 - s) = \frac{5}{4}$ 上的绝对收敛级数可得一致界 $|r(u)| \le 80$。提出 $x^{-1/4}$ 后，余项积分至多为 $80(V - 1)$，而对数项用原函数 $e^{iu\log x}/(i\log x)$ 分部积分并利用 $|\frac{d}{du}\log(\frac{3}{4} + iu)| \le 1/u$ 给出 $\frac{20(1+\log V)}{\log x}$。在第二款中，在绝对收敛半平面 $\operatorname{Re} s = c > 1$ 逐项积分冯·曼戈尔特级数：最接近 $x$ 的整数项由区间长度控制（$n = 1$ 时 $\Lambda(1) = 0$）；$[x/2, 2x]$ 内其余整数以 $|\log x - \log n| \ge |x - n|/(2x)$ 化为两段调和和；区间外则 $|\log x - \log n| \ge 1/2$ 由积分判别控制，最后代入 $x^c \le 3x$ 即得统一界。完整证明由 Lean 内核检查。
 :::
 
+[§2.3 的外尔平均](ch02-quaternion-clocks-and-haar-zeros.md#sec-ou-2-3)用到固定非零弧度频率 $\lambda$ 的零点和。令 $S_\lambda(T)=\sum_{0<\gamma\le T}e^{i\lambda\gamma}$，按解析重数计并纳入上端点。
+
+先看计数误差如何进入这项相位读数。记 $N(t)$ 为同一右闭截断下的零点数，$L(t)=\frac{t}{2\pi}(\log\frac{t}{2\pi}-1)+\frac78$，$Q(t)=N(t)-L(t)$。黎曼–冯·曼戈尔特公式给出 $Q(t)=S(t+0)+O(1/t)$，其中 $S(t+0)$ 是计数公式中辐角项的右极限。Littlewood 的积分界给出 $\int_1^T Q(t)\,dt=O(\log T)$。[Brent、Platt 与 Trudgian，*Accurate Estimation of Sums over Zeros of the Riemann Zeta-Function*（2021），§2，引理 2 与式 (12)](https://doi.org/10.1090/mcom/3652)
+
+对 $dN=dL+dQ$ 分部积分，将误差拆成端点读数与频率累积（手工推导，`ARGUED`）。
+
+$$
+\begin{aligned}
+S_\lambda(T)-\frac{e^{i\lambda T}}{2\pi i\lambda}\log\frac{T}{2\pi}
+  &=e^{i\lambda T}Q(T)-i\lambda\int_1^T e^{i\lambda t}Q(t)\,dt\\
+  &\quad+O_\lambda(1).
+\end{aligned}
+$$
+
+若左侧沿全部实数高度为 $o_\lambda(\log T)$，则在任意固定长度 $H$ 内，可以对相邻硬窗作差，再乘反相位分部求和，得到 $Q(T+u)=Q(T)+o_{\lambda,H}(\log T)$，对 $0\le u\le H$ 一致。用上面的积分界取 $[T,T+H]$ 的平均，再令 $H$ 趋于无穷，便有 $Q(T)=o(\log T)$。因此端点渐近式要求且只要求 $Q(T)$ 和 $\int_1^T e^{i\lambda t}Q(t)\,dt$ 都是 $o(\log T)$。
+
+取 $\lambda=1$ 可看出为何普通积分界不够。在合成谱中，令 $t\ge32$ 时的计数为 $\lfloor L(t)+1/2+\cos(t)/(10t)\rfloor$。取整产生的零均值锯齿在相位 $1$ 和 $e^{it}$ 下积分都有界，因为其各非零谐波的相位导数单调且远离零。剩下的 $\cos(t)/(10t)$ 使普通积分有界，却在乘上 $e^{it}$ 后留下 $\frac1{20}\log T+O(1)$。这个例子刻画的是仅靠计数输入的边界。对实际 $\zeta$ 零点，仍需控制带相位的积分。
+
+设冯·曼戈尔特函数满足 $\Lambda(e^{|\lambda|})=0$。在 RH 下，沿全部实数高度 $T\to\infty$ 有（手工推导，`ARGUED`）
+
+$$
+S_\lambda(T)=\frac{e^{i\lambda T}}{2\pi i\lambda}\log\frac{T}{2\pi}
+  +O_\lambda\!\left(\frac{\log T}{\log\log T}\right).
+$$
+
+[§2.3](ch02-quaternion-clocks-and-haar-zeros.md#sec-ou-2-3) 已由原弧的代数相位推出本书任一非零整数模态都满足 $\Lambda(e^{|\lambda|})=0$。
+
+保留每枚零点的实部权重，取固定 $X=e^\lambda>1$ 且 $\Lambda(X)=0$。以下手工推导（`ARGUED`）刻画端点渐近式沿全部实数高度成立的条件。
+
+$$
+\sum_{0<\gamma\le T}X^{\rho-1/2}
+=\frac{e^{i\lambda T}}{2\pi i\lambda}\log\frac{T}{2\pi}+o_X(\log T)
+\quad\Longleftrightarrow\quad
+\text{Lindelöf 猜想成立}.
+$$
+
+这里按解析重数计且纳入上端点。令 $\delta_\rho=\operatorname{Re}\rho-1/2$。Backlund 的局部零点计数判据等价于 $\sum_{|\gamma-T|\le1}\delta_\rho^2=o(\log T)$。临界线反射把两侧配对，且半径为 $1$ 的高度窗共有 $O(\log T)$ 枚零点，因此可以先固定距临界线的阈值，再让阈值趋零。Lindelöf 猜想还给出计数公式的辐角余项 $S(T)=o(\log T)$。[Titchmarsh，第二版，定理 13.5 与 13.6(A)](https://sites.math.rutgers.edu/~zeilberg/EM18/TitchmarshZeta.pdf)
+
+充分性沿用下文的平滑窗口，先固定带宽 $B$。无条件显式公式在 $\gamma-i\delta_\rho$ 处取样。把窗口值移回实轴时，同高反射消去关于 $\delta_\rho$ 的一次项，二次误差由距端点的衰减核加权。局部平方质量界使这项误差为 $o_{X,B}(\log T)$。实轴上恢复硬窗的代价为 $O_X(\log T/B)+o_{X,B}(\log T)$，其中第二项来自 $S$。先令 $T$ 趋于无穷，再令 $B$ 趋于无穷。[Carneiro 与 Milinovich，引理 4](https://arxiv.org/pdf/2403.17803v1#page=5)
+
+必要性来自一个正差。设 $P_a(u)=a/(\pi(a^2+u^2))$，取 $a>1/2$ 且 $a^2-1/4\ge4/\lambda^2$。若硬窗渐近式成立，分部求和给出 $\sum_{\gamma>0}e^{\lambda\delta_\rho}P_a(\gamma-T)=\log(T/(2\pi))/(2\pi)+o_X(\log T)$。另一方面，$\xi$ 的哈达玛积在 $1/2+a+iT$ 处的对数导数给出 $\sum_\rho\operatorname{Re}P_a(\gamma-T-i\delta_\rho)=\log(T/(2\pi))/(2\pi)+O_a(1)$。负纵坐标的贡献是 $O_a(\log T/T)$。配对后，前一和的权重变为 $\cosh(\lambda\delta_\rho)$，并有
+
+$$
+\cosh(\lambda\delta)P_a(u)-\operatorname{Re}P_a(u-i\delta)
+\ \ge\ \frac{\lambda^2}{4}\delta^2P_a(u)
+\qquad (u\in\mathbb R,\ |\delta|\le1/2).
+$$
+
+事实上，$\operatorname{Re}P_a(u-i\delta)/P_a(u)\le 1+\delta^2/(a^2-1/4)$，而 $\cosh(\lambda\delta)\ge1+\lambda^2\delta^2/2$。两和之差为 $o_X(\log T)$ 就迫使半径为 $1$ 的窗内平方质量同样为 $o(\log T)$。[Titchmarsh，第二版，式 (2.12.5)](https://sites.math.rutgers.edu/~zeilberg/EM18/TitchmarshZeta.pdf) · [NIST DLMF，式 5.11.2](https://dlmf.nist.gov/5.11.E2)
+
+上面的 RH 估计还给出了定量余项。
+
+把窗口 $(0,T]$ 的指标函数同非负、积分为 $1$ 的核 $K_B(u)=\frac{3B}{8\pi}\bigl(\frac{\sin(Bu/4)}{Bu/4}\bigr)^4$ 卷积，再乘 $e^{i\lambda u}$。在核对应的角频带 $[-B,B]$ 内，Guinand–Weil 显式公式的素幂项采样的是离 $\lambda$ 至多 $B$ 的有符号对数频率 $\pm\log n$。每项包含 $\int_0^T e^{i(\lambda\mp\log n)v}\,dv$，因固定频率与所有素幂频率有正距离，该积分关于 $T$ 一致有界。因此素幂项合计为 $O_\lambda((1+B)e^{B/2})$。测试函数在 $\pm i/2$ 的极点项由核在这两条水平线上的衰减界为 $O_\lambda(e^{B/2})$。[Carneiro、Chandee 与 Milinovich，引理 5](https://arxiv.org/pdf/1309.1526#page=6)
+
+窗口平移 $u$ 只影响两个端点各 $|u|$ 以内的零点。对 $|u|\le T/2$，RH 下的零点计数余项将这些零点的总数界为 $O(|u|\log T+\log T/\log\log T)$，并允许端点计入。对更大的 $|u|$，全局计数给出 $O(|u|\log(2+|u|))$。用 $K_B$ 平均，凭其 $O(1/B)$ 的一阶绝对矩及四次衰减，恢复硬截断的代价为 $O(\log T/B+\log T/\log\log T)$。[Carneiro、Chandee 与 Milinovich，第 1 节及定理 1](https://arxiv.org/pdf/1503.00955)
+
+对显式公式中的伽马密度 $\bigl(\operatorname{Re}(\Gamma^\prime/\Gamma)(1/4+it/2)-\log\pi\bigr)/(2\pi)$ 同样恢复硬截断，误差为 $O(\log T/B)$。在 $t\ge 1$ 时该密度为 $\log(t/(2\pi))/(2\pi)+O(t^{-2})$。分部积分给出上式中的端点项及 $O_\lambda(1)$。剩余的振荡积分 $\int_1^T e^{i\lambda t}\,dt/t$ 一致有界。取 $B=\log\log T$，各项误差合并即得所示余项。因此固定模态的 $|S_\lambda(T)|/\log T$ 收敛到 $1/(2\pi|\lambda|)$。[NIST DLMF，式 5.11.2](https://dlmf.nist.gov/5.11.E2)
+
+同一个端点项在无权和与带权和中的差别，可以从临界线反射直接读出。固定 $X=e^\lambda>1$ 且 $\Lambda(X)=0$，记 $\rho=\beta+i\gamma$，$\delta_\rho=\beta-1/2$，并将带权和记作 $W_\lambda(T)=\sum_{0<\gamma\le T}X^{\rho-1/2}$。按重数配对同高的 $\delta_\rho$ 与 $-\delta_\rho$，得到
+
+$$
+C_\lambda(T)=W_\lambda(T)-S_\lambda(T)
+=\sum_{0<\gamma\le T}\bigl(\cosh(\lambda\delta_\rho)-1\bigr)e^{i\lambda\gamma}.
+$$
+
+经典兰道公式在这里给出 $W_\lambda(T)=O_\lambda(\log T)$。因此，要为无权和取得同一阶上界，恰好需要 $C_\lambda(T)=O_\lambda(\log T)$。Selberg 密度界给出 $\sum_{0<\gamma\le T}\delta_\rho^2=O(T/\log T)$，而双曲余弦差至多是常数乘 $\delta_\rho^2$，所以逐项取绝对值只能给出 $O_\lambda(T/\log T)$ 的上界。要降低这一尺度，需要控制偏离临界线的零点在同一频率下的相位抵消。[Gonek，式 (1)](https://www.sas.rochester.edu/mth/people/faculty/gonek-steve/assets/pdf/8-landau-form.pdf#page=1) · [Ford 与 Zaharescu，§3 引理 2 与式 (3.8)](https://www.ford126.web.illinois.edu/wwwpapers/fz.pdf#page=9)
+
+对这些输入，$T/\log T$ 的尺度可以达到（合成谱，`ARGUED`）。取 $\lambda=1$，在每个 $2\pi$ 周期里轻推等间距的纵坐标，使未加权的相位和偏向负实轴。点仍按同高镜像成对放置，实部偏移取 $O(1/\log T)$，并随相位调整，让带权和在周期端点恰好跟随光滑端点项的增量。该谱的计数余项有界，满足 Selberg 型密度界，带权和在所有高度以 $O(1)$ 的误差跟随端点项，而 $C_1(T)\sim T/(4\pi\log T)$。对实际 $\zeta$，收紧差项仍需超出这些输入的估计。[构造与复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239117179)
+
+对实际 $\zeta$，可以用横向积分把需要相消的部分定位到临界线附近。令 $L=\log T$、$c=1/2+a$，其中 $0\le a\le 1/2$。把 $J_c(t)=\int_c^\infty\log|\zeta(\sigma+it)|\,d\sigma$ 用素幂多项式 $P_{x,c}(t)=\operatorname{Re}\sum_{2\le n\le x^3}\Lambda_x(n)n^{-c-it}/(\log n)^2$ 近似，$\Lambda_x$ 为 Selberg 的二次截断权。固定非共振 $\lambda$，对充分大的 $T$，当 $2\le x$ 且 $x^3\le L^2$ 时，余项有以下手工推导（`ARGUED`）。
+
+$$
+\int_3^T e^{i\lambda t}\bigl(J_c(t)-P_{x,c}(t)\bigr)\,dt
+=\frac{2\pi}{\lambda^2}
+  \sum_{\substack{3<\gamma\le T\\ \beta>c}}
+  \bigl(\cosh(\lambda(\beta-c))-1\bigr)e^{i\lambda\gamma}
+  +O_\lambda(L).
+$$
+
+横向积分把 $\log\zeta$ 在零点左侧的割线跳跃变为与 $\beta-\sigma$ 成正比。分别移过两种指数相位，再取实部对应的半和，割线就给出上式的双曲余弦权重。水平边界由局部对数导数控制在 $O_\lambda(L)$，上界取右极限。非共振使素幂多项式的相位积分也在这一预算内。[Korolev，引理 4 前的截断权](https://www.mathnet.ru/links/2bb06e5a975dd807fe74eae4c1f9fd1f/im2766_eng.pdf#page=9) · [割线推导与复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239342305)
+
+在 $a=0$ 时，零点和经同高反射还原 $C_\lambda(T)$，只差归一化系数和有界的低高度项。增大 $a$ 会把每个右侧零点的权重改成 $\cosh(\lambda(\delta_\rho-a)_+)-1$，其中 $v_+=\max(v,0)$。将该权重的导数与 Selberg 密度界配对，右侧余项至多为 $O_\lambda((T/L)e^{-aL/4}+L)$。取 $a=1/L$ 只降低密度估计中的常数，合成谱上窄带与右侧余项均可达到 $T/L$ 量级。取 $a=8\log L/L$ 时，右侧上界降到 $O_\lambda(T/L^3+L)$。因此若要在 $T/L$ 尺度上取得严格改善，只需研究横向窄带 $1/2\le\sigma\le1/2+8\log L/L$ 内的同频积分。[Simonič，式 (3)，引 Selberg 密度界](https://arxiv.org/pdf/1910.08274v2#page=1)
+
+对实际 $\zeta$ 零点，保留实部权重时，无须用 RH 作为解析输入也可在高度平均下读出端点项。令 $S(t)$ 为黎曼–冯·曼戈尔特公式中的辐角项，即离开零点高度时 $N(t)=1+\vartheta(t)/\pi+S(t)$，其中 $\vartheta$ 是黎曼–西格尔 $\vartheta$ 函数。从带权和中扣除光滑端点项
+
+$$
+R_X(t)=\sum_{0<\gamma\le t} X^{\rho-1/2}
+       -\frac{e^{it\lambda}}{2\pi i\lambda}\log\frac{t}{2\pi}.
+$$
+
+手工推导（`ARGUED`）给出
+
+$$
+\frac1U\int_U^{2U}\bigl|e^{-it\lambda}R_X(t)-S(t)\bigr|^2\,dt=O_X(1),
+\qquad
+\frac1U\int_U^{2U}|R_X(t)|^2\,dt\sim\frac{\log\log U}{2\pi^2}.
+$$
+
+这次固定带宽 $B=1$。无条件的 Guinand–Weil 公式在复纵坐标 $\gamma-i(\beta-1/2)$ 处取样。恢复尖锐窗口时，同高的镜像零点 $\beta+i\gamma$ 与 $1-\beta+i\gamma$ 使复移位误差的一阶项抵消，只留下按 $(\beta-1/2)^2$ 加权的端点误差。Selberg 零点密度界给出 $\sum_{0<\gamma\le U}(\beta-1/2)^2=O(U/\log U)$。将这些权重按距窗口上端点的距离作立方衰减加权，所得误差的高度平均为 $O(1/\log U)$，逐点上界为 $O(\log U)$。二者相乘给出均方上界，下端点的误差则一致有界。[Carneiro 与 Milinovich，*On Littlewood's Estimate for the Modulus of the Zeta Function on the Critical Line*（2024），引理 4](https://arxiv.org/pdf/2403.17803v1#page=5) · [Simonič，*Explicit Zero Density Estimate for the Riemann Zeta-Function Near the Critical Line*（2019），式 (3)](https://arxiv.org/pdf/1910.08274v2)
+
+实轴上的截断修正可用零点计数公式分部积分。上端点留下 $e^{it\lambda}S(t)$，其余为有界项和 $S_1(t)=\int_0^t S(u)\,du$ 与一个有限测度的卷积。该测度在原点有一个原子，其余部分的密度呈立方衰减。Selberg 对 $S_1$ 的均方界控制后一项，对 $S$ 的二阶矩给出上式的渐近常数。因此，对任意固定 $\varepsilon>0$，误差超过 $\varepsilon\log t$ 的高度在 $[U,2U]$ 中所占比例至多为 $O_X(\varepsilon^{-2}\log\log U/(\log U)^2)$。逐高度界仍需控制这些例外处的误差。[Selberg（1946），定理 6、7，见 Chirre 与 Quesada-Herrera 的 *The Second Moment of $S_n(t)$ on the Riemann Hypothesis*（2021），式 (1.4)–(1.5)](https://arxiv.org/pdf/2006.08503v2#page=2)
+
+当每枚零点只保留纵坐标时，实部权重的差可以用同一个 $S_1$ 的横向积分表示。令 $J(t)=\int_{1/2}^{\infty}\log|\zeta(\sigma+it)|\,d\sigma$。在上述固定非共振频率下，对右闭截断有以下手工推导（`ARGUED`）。
+
+$$
+\sum_{0<\gamma\le T}\bigl(e^{\lambda\delta_\rho}-1\bigr)e^{i\lambda\gamma}
+=\frac{\lambda^2}{\pi}\int_3^T e^{i\lambda t}J(t)\,dt+O_\lambda(\log T).
+$$
+
+同高反射把左侧化为临界线右边的两倍加权计数，单点权重为 $g(x)=\cosh(\lambda x)-1$，其中 $x=\beta-1/2>0$。把 $g$ 在 $x\le0$ 延拓为零，由 $g(0)=g'(0)=0$ 可知临界线上没有分布边界项。对 $\log|\zeta|$ 的分布拉普拉斯用 $e^{i\lambda t}g(x)$ 检验，体积分的系数由 $g''-\lambda^2g=\lambda^2$ 给出。取右边界 $\sigma=2$，其边界项与 $J$ 在 $\sigma\ge2$ 的尾部均可用绝对收敛的欧拉级数积分，非共振使相位积分一致有界。两条水平边界由局部对数导数估计控制在 $O_\lambda(\log T)$，上边界取右极限，纳入该高度的全部重数。[Titchmarsh，《黎曼 ζ 函数理论》第二版，§9.6(A)](https://sites.math.rutgers.edu/~zeilberg/EM18/TitchmarshZeta.pdf) · [边界项推导](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239241148)
+
+由柯西–黎曼方程，$J(t)/\pi$ 与 $S_1(t)$ 相差常数。把实部权重的差压到 $O_\lambda(\log T)$，等价于在同一频率下把 $\int_3^T e^{i\lambda t}S_1(t)\,dt$ 控制到这一阶。这一步需要在高度区间内累积相位抵消。
+
+若在一个固定紧频带 $I\subset\mathbb R$ 内平均，可用密度界定量控制这种抵消。对 $U\ge3$，由手工推导（`ARGUED`）得到
+
+$$
+\int_I\max_{0\le T\le U}|C_\lambda(T)|^2\,d\lambda
+\ll_I \frac{U}{(\log U)^2}.
+$$
+
+将纵坐标按单位高度分组，设第 $j$ 组的质量 $B_j$ 为该组内各零点的 $\delta_\rho^2$ 之和。每组有 $O(\log U)$ 枚零点，Selberg 密度界经分层积分给出 $\sum_{\gamma\le U}\delta_\rho^4\ll U/(\log U)^3$，故 $\sum_j B_j^2\ll U/(\log U)^2$。对组内的相位小数部分和双曲余弦权作幂级数展开，得到一族以组号为整数频率的 Fourier 多项式，各项的系数至多为 $B_j$ 乘可求和的因子。Carleson–Hunt 最大不等式控制所有完整分组的部分和，含截断高度的最后一组由自身质量控制，纳入等于上端点的纵坐标。[Simonič，式 (1)、(3)](https://arxiv.org/pdf/1910.08274v2#page=1) · [Oberlin 等，定理 1.1](https://arxiv.org/pdf/0910.1555#page=2) · [推导与复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239462563)
+
+因此，在 $I$ 中存在某个 $T\le U$ 使差项的模超过 $A>0$ 的频率集合，测度至多为 $O_I(U/(A^2(\log U)^2))$。对二进高度应用 Borel–Cantelli 引理，就有 $C_\lambda(T)=O_{\lambda,\varepsilon}(\sqrt T/(\log T)^{1/2-\varepsilon})$，其中 $\varepsilon>0$ 任取，结论对几乎处处的 $\lambda$ 沿所有实数高度成立。球壳的指定模态构成可数集，仍需逐频率的算术估计。下一节的碰撞估计还需要在随高度增长的频带内控制零点和。
+
 ## 3.3 周期相位亏损、兰道窗转移与高斯碰撞极限 $1/\sqrt{\pi}$ {#sec-ou-3-3}
 
 现在把倒高度时间区、周期相位区与对数时间区三段无缝焊在一起！在 `trureturing@dev` 中，下面这条三位一体的冻结定理首先在倒对数时间段 $16\pi/T \le |t| \le b/\log T$ 用相反相位弧证明 $1/(4096\log T)$ 的一致亏损，再在接收一致兰道零点和包络的前提下把亏损推进至 $b/\log T \le |t| \le \log T$（常数跃升为 $1/(32\log T)$），最终锁定调和加权实际 $\zeta$ 零点谱的**高斯硬碰撞极限 $1/\sqrt{\pi}$**：
@@ -153,8 +278,21 @@ $$
 
    次小偏差者第 $11628$ 枚的偏差竟是它的 **$35.60$ 倍**（严格落在 $(35.59, 35.60)$ 内）！但切忌把这一局部特征神话为全谱唯一：由于黎曼—冯·曼戈尔特计数公式给出 $\gamma_N / N \to 0$，逐项求和立证 $E_n \le \gamma_{n+1} - \gamma_{n-1}$ 的均值趋零，因此在更高处满足绝对偏差小于 $E_{11431}$ 的中心具有自然密度 $1$（`ARGUED`）。
 2. **占据对角主导的四阶费耶尔矩（$94.62\%$）**：在十九零点窗上取等权 $1/19$ 与分辨率 $\eta = 0.01$，无序对自身配对的占据对角背景恒为 $B = (19 + 4\times 171)/19^4 = 703/130321$，而总四阶费耶尔矩落在 $(0.00570094240512, 0.00570094240513)$，其中整整 **$94.62\%$**（精确值 $94.6224672\%$）来自自身占据对角。
-3. **孤立碰撞带内的最大额外配对占比（$23.657\%$ / $23.670\%$）**：窗口内第二小异对间距为 $\Delta_2 \in (0.0023277388, 0.0023277390)$。只要分辨率落在 $\Delta < \eta \le \Delta_2$，三角核中唯一新冒头的非对角信号就是 $\gamma_{11427} + \gamma_{11436} \approx 2\gamma_{11431}$！即使允许自由调节全部十九枚零点的非负概率权重，这组额外配对最多只能占四阶费耶尔矩的 **$23.657017\%$**；换作闭带等权计数，上限则是精确解析数 $4/(12 + 2\sqrt{6}) \approx \mathbf{23.670068\%}$。
-4. **首次辨出额外碰撞的有限观察半径（$111521$ 与 $111532$）**：将分辨率固定为 $\eta = 1/1000$，只需在有限时间区间 $[-T, T]$ 上测得有限积分 $I_\eta(T) > B$，就能无歧义地排除“只有自身配对”的零背景。通用相对截尾界给出较保守的充分整数半径 $11{,}330{,}943$（等权）与 $11{,}331{,}843$（局部调和权）；而直接用 $160$ 位球算术计算有限余弦积分，首次越过整线占据对角的**精确最小整数观察半径**分别低两个数量级：等权下恰为 **$111521$**（$111520$ 时仍为负），局部调和权下恰为 **$111532$**（$111531$ 时仍为负）！
+3. **孤立碰撞带内的最大额外配对占比（$23.657\%$ / $23.670\%$）**：窗口内第二小异对间距为 $\Delta_2 \in (0.0023277388, 0.0023277390)$。只要分辨率落在 $\Delta < \eta \le \Delta_2$，三角核中唯一新冒头的非对角信号就是 $\gamma_{11427} + \gamma_{11436} \approx 2\gamma_{11431}$！允许自由调节十九枚零点的非负概率权重时，额外配对在三角核下的最大份额为 **$23.657017\%$**，在闭带指示核下的最大份额为 $4/(12 + 2\sqrt{6}) \approx \mathbf{23.670068\%}$。闭带取 $\Delta \le \eta < \Delta_2$，使第二组配对仍在带外。若十九枚零点一律等权，闭带份额为 $4/707 \approx 0.565771\%$。
+4. **首次辨出额外碰撞的有限观察半径（$111521$ 与 $111532$）**。在 $[-T,T]$ 上，把四次相位读数 $\bigl|\sum_j p_j e^{it\gamma_j}\bigr|^4$ 对费耶尔核 $K_\eta(t)=(1-\cos(\eta t))/(\pi\eta t^2)$ 积分，记为 $I_\eta(T)$。因为被积函数非负，$I_\eta(T)$ 随 $T$ 单调不减。若它超过整线上的占据对角基线 $B$，整线积分也超过 $B$，必有额外碰撞。在 $\eta=1/1000$ 时，等权下 $B=703/19^4$，球算术给出的有符号余量为
+
+   $$
+   \begin{aligned}
+   I_\eta(111520)-B &\in (-1.864,-1.863)\times10^{-11},\\
+   I_\eta(111521)-B &\in (2.960,2.961)\times10^{-10}.
+   \end{aligned}
+   $$
+
+   两次读数各有至多 $1.8\times10^{-11}$ 的绝对积分误差时，仍能判定 $111521$ 是首次过阈值的整数半径。复算时，展开四次方，把频差 $d$ 的余弦积分写成 $\bigl(F_T(d+\eta)+F_T(d-\eta)-2F_T(d)\bigr)/(\pi\eta)$，其中 $F_T(a)=a\operatorname{Si}(aT)-(1-\cos(aT))/T$，由对 $(1-\cos(at))/t^2$ 分部积分得到。
+
+   记上述有限余弦积分为 $C_{\eta,T}(d)$。在 $T=111521$ 处，孤立中点配对的两个方向共贡献 $4C_{\eta,T}(\Delta)/19^4$。仅扣除这两项后，相对 $B$ 的余量落在 $(-3.05165,-3.05163)\times10^{-5}$，读数落回阈值之下。其余异占据配对的整线系数为零，但在这个有限半径处合计贡献约 $1.5192\times10^{-9}$，大于上面的正余量。
+
+   局部调和权下，首过阈值的整数半径为 $111532$（$111531$ 时仍低于相应的基线）。通用相对截尾界分别给出 $11{,}330{,}943$（等权）与 $11{,}331{,}843$（局部调和权）的充分半径。
 
 ::: {.example #ex-ou-ch03-fejer-11431 title="孤立碰撞带 23.670% 锐上限的三行初等推导"}
 在 $\Delta < \eta \le \Delta_2$ 的孤立分辨率带内，记 $\#11427, \#11436, \#11431$ 三个零点的概率权重依次为 $x, y, z \ge 0$，令 $q := 1 - \Delta/\eta \in (0, 1]$。额外配对贡献恰为 $4q x y z^2$，而占据对角为 $D = \sum_i p_i^4 + 4\sum_{i < j} p_i^2 p_j^2$；其余十六个权重只能增大分母。对 $x, y > 0$ 设 $t := z^2 / (xy)$，由 $x^2 + y^2 \ge 2xy$ 立得
@@ -169,7 +307,7 @@ $$
 \frac{4q x y z^2}{D} \;\le\; \frac{4q}{8 + t + 6/t} \;\le\; \frac{4q}{8 + 2\sqrt{6}} \quad \Longrightarrow \quad \frac{\text{额外贡献}}{\text{总四阶矩}} \;\le\; \frac{4q}{8 + 2\sqrt{6} + 4q}.
 $$
 
-等号恰在 $x = y \approx 0.280498$、$z = 6^{1/4}x \approx 0.439003$、其余十六项归零时取到；令 $q = 1$（闭带计数）给出 $4/(12 + 2\sqrt{6}) \approx 23.670068\%$，令 $\eta = \Delta_2$ 给出 $23.657017\%$。
+等号恰在 $x = y \approx 0.280498$、$z = 6^{1/4}x \approx 0.439003$、其余十六项归零时取到。闭带指示核在 $\Delta \le \eta < \Delta_2$ 取 $q=1$。三角核下的最大份额在 $\eta=\Delta_2$ 取得，因为此时 $q$ 最大，而第二处间距恰落在核的零点上。若改用等权 $x=y=z=1/19$，闭带额外项为 $4/19^4$，占据对角为 $703/19^4$，所以额外项占总和的 $4/707$。
 :::
 
 ### 3.4.2 第 $8236$ 枚与第 $8359$ 枚如何跨入三物理窗口筛选
@@ -194,5 +332,9 @@ $$
 
 - **已经焊死的跨段**：（1）十九点贝伦德球壳的完整整数解剖、$22$ 个有理独立频率、射影三元流群与最小 $21$ 维有理格拉姆障碍；（2）四元数双时钟的非交换逆谱唯一性、三探针全局单射、密度 $1/(2\pi)$ 的零点标准模型哈尔积分与 $D = 0$ 威尔逊扩散检验；（3）在外部核验的 RH 基础上，由 Lean 4 内核锁死的费耶尔临界差额、调和配对矩比、倒高度与周期相位亏损、无条件兰道左右竖边积分界以及全局高斯硬碰撞极限 $1/\sqrt{\pi}$；（4）第 $11431$ 枚与第 $8236$ / $8359$ 枚等具体有限零点窗的高精度区间复算。
 - **尚未闭合的真实断口（`OPEN`）**：第一，[@thm-ou-ch03-harmonic-pair-ratio]–[@thm-ou-ch03-harmonic-collision-limit] 全部控制的是**截至高度 $T$ 的整段调和加权谱平均量**，而十九点球壳上的规范阈值、轻模计数与味读数读取的是**单枚零点的双钟相位**或极少数离散零点的谱权组合——从全局相位和平均界走向单个球壳的质量谱或指定相位窗内的双钟同时命中，至今仍缺少桥梁比较定理。第二，第 $11431$ 枚的中点孤立性依赖于选定的搜索区间与邻域宽度，而第 $8236$ / $8359$ 枚的率先命中仍需外部指定场表、质量标尺与轻重分界。究竟是哪一条物理作用量决定了零点谱权与选点律？
+
+::: {.film src="zero-windows"}
+**全局平均界已由 Lean 焊死，从平均走到单枚零点的选点仍是缺口（2 分 45 秒）。** 片头把 RH 与狄利克雷 GRH 标为紫色外部形式化事实（`EXT-LEAN`），不佩绿色徽章，其范围之外的全广义黎曼猜想等标为红色 `OPEN`。青色临界线 $\operatorname{Re} s = \frac{1}{2}$ 经 $(s-1)/s$ 卷成单位圆：琥珀色点留在圆上，品红色离线点（$\operatorname{Re} s = 0.85$）落入圆内，$|w|$ 读数为屏幕计算；绿色标签对应 [@thm-ou-ch03-fejer-gap] 的凯莱判据与费耶尔临界差额，下方的费耶尔核曲线 $|\sum_{j<6} e^{ij\theta}|^2 \ge 0$ 是屏幕计算的证明骨架示意。一串示意零点的调和加权相位箭头在 $t = 0$ 对齐成长度 $1$、随后散开；对数 $|t|$ 轴（位置示意）上的三段时间窗与配对矩比带着 [@thm-ou-ch03-harmonic-pair-ratio] 与 [@thm-ou-ch03-harmonic-collision-limit] 的绿色标签。兰道矩形的两条青色竖边对应无条件的 [@thm-ou-ch03-landau-vertical]，紫色虚线顶边表示由竖边与顶边合成包络只是论证；示意高斯曲线标出碰撞极限 $1/\sqrt{\pi} = 0.5641895835\ldots$。第 $11431$ 枚零点窗中的中点弧、$35.60\times$ 偏差条、$94.62\%$ 对角占比、$23.657017\%$ 额外配对上限与观察半径 $111521$ / $111532$ 均为球算术证书（青色 `NUM`），闭式 $4/(12+2\sqrt{6})$ 在屏幕上复算；第 $8359$ 与第 $8236$ 枚的三窗命中依赖紫色 `MODEL` 标出的选定输入；全局平均与单枚零点之间的红色断桥是开放问题。
+:::
 
 带着这份毫不含糊的算术装备与问题清单，第一卷就此收束。下一章起，我们正式步入[第二卷：第一问](ch04-gauge-crossings-and-monotone-barriers.md)，把这颗十九点磁球壳直接架到标准模型三支规范耦合的火线上，直面[第四章 磁球壳质量算子、三力交汇阈值与单调质量障碍](ch04-gauge-crossings-and-monotone-barriers.md)。

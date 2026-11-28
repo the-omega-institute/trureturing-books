@@ -1,0 +1,289 @@
+{
+ "voice": "af_heart",
+ "speed": 0.94,
+ "say": {
+  "Lean": "Leen",
+  "Cayley": "Kay-lee",
+  "totient": "toe-shent"
+ },
+ "music": {
+  "bpm": 80,
+  "progression": "a-minor"
+ },
+ "scenes": [
+  {
+   "id": "ruler",
+   "name": "THE BROKEN RULER",
+   "lead": 2.6,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.3,
+    0.2,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Tilt a ray toward upright and read its slope: one half, one, two, five, ten.",
+     "把一条射线向竖直方向扳，读出斜率：1/2、1、2、5、10。"
+    ],
+    [
+     "At upright, Q is zero, and the number crashes: one over zero.",
+     "到了竖直位置 Q = 0，这个数当场崩塌：1/0。"
+    ],
+    [
+     "The usual fix glues on infinity, a symbol arithmetic refuses.",
+     "通常的补救是硬贴一个 ∞，而四则运算并不接纳它。"
+    ]
+   ]
+  },
+  {
+   "id": "pair",
+   "name": "KEEP THE PAIR",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.5,
+    0.3,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "So never divide. Keep two whole numbers, P to Q, and call multiples the same point.",
+     "那就不做除法。保留两个整数 P : Q，并把它们的倍数看成同一个点。"
+    ],
+    [
+     "Two to four, three to six, minus one to minus two: one point, one to two.",
+     "2 : 4、3 : 6、−1 : −2，都是同一个点 [1 : 2]。"
+    ],
+    [
+     "The denominator becomes P squared plus Q squared, never zero; fidelity kappa is Q squared over it.",
+     "分母换成 P² + Q²，永不为零；保真度 κ 是 Q² 除以它。"
+    ],
+    [
+     "For two to four: sixteen twentieths, four fifths again.",
+     "对 2 : 4：16/20，约分后仍是 4/5。"
+    ],
+    [
+     "Lean checks that nonzero rescaling, minus one included, leaves kappa unchanged.",
+     "Lean 内核检验：任意非零缩放（包括乘以 −1）都不改变 κ。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 4,
+     "at": 1.0,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "shares",
+   "name": "TWO SHARES",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.5,
+    0.4,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "Spread s takes P squared instead: one to two splits into four fifths and one fifth.",
+     "展开度 s 改取 P²：[1 : 2] 分成 4/5 与 1/5。"
+    ],
+    [
+     "Two to three, into nine and four thirteenths.",
+     "[2 : 3] 分成 9/13 与 4/13。"
+    ],
+    [
+     "Lean checks kappa plus s is one for every nonzero pair: no angle, no root, no pi.",
+     "Lean 内核检验：对每个非零整数对，κ + s = 1。没有角度，没有根号，没有 π。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 2,
+     "at": 1.0,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "circle",
+   "name": "THE CAYLEY CIRCLE",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.2,
+    0.2
+   ],
+   "lines": [
+    [
+     "Bend the line into a ring: the Cayley point is Q squared minus P squared, and two P Q, over the sum.",
+     "把直线弯成圆环：凯莱像点的坐标是 Q² − P² 与 2PQ，分母都是 P² + Q²。"
+    ],
+    [
+     "One to two lands at three fifths, four fifths; two to three at five and twelve thirteenths.",
+     "[1 : 2] 落在 (3/5, 4/5)；[2 : 3] 落在 (5/13, 12/13)。"
+    ],
+    [
+     "Nine plus sixteen is twenty-five; twenty-five plus one forty-four, one sixty-nine.",
+     "9 + 16 = 25；25 + 144 = 169。"
+    ],
+    [
+     "Lean checks every nonzero pair lands exactly on the unit circle, no square root needed.",
+     "Lean 内核检验：每个非零整数对都分毫不差地落在单位圆上，无需开方。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 1.0,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "anchors",
+   "name": "THREE ANCHORS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "Three anchors stand out. Zero to one, the book's past: kappa one, spread zero, at one, zero.",
+     "三枚锚点格外醒目。[0 : 1] 是书中的“过去”：κ = 1，s = 0，落在 (1, 0)。"
+    ],
+    [
+     "One to one, the present: kappa equals one minus kappa, so both are one half.",
+     "[1 : 1] 是“现在”：κ = 1 − κ，于是两者都是 1/2。"
+    ],
+    [
+     "One to zero, the future, is the old infinity: its denominator is one, not zero.",
+     "[1 : 0] 是“未来”，也就是昔日的无穷大：它的分母是 1，不是 0。"
+    ],
+    [
+     "Lean checks: at every P to zero, kappa is zero, spread one, and the point minus one, zero.",
+     "Lean 内核检验：在每个 [p : 0] 处，κ = 0，s = 1，像点是 (−1, 0)。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 1.0,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "turns",
+   "name": "INTEGER TURNS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Points multiply as integer pairs: one to two times one to three is five to five, or one to one.",
+     "点可以直接按整数对相乘：[1 : 2] 乘 [1 : 3] 得 (5, 5)，即 [1 : 1]。"
+    ],
+    [
+     "Norms multiply: five times ten is fifty, five squared plus five squared; Lean checks this for all integers.",
+     "范数相乘：5 × 10 = 50 = 5² + 5²；Lean 内核对一切整数检验了这条恒等式。"
+    ],
+    [
+     "Arctangent one half plus arctangent one third is pi over four; here, one integer product.",
+     "arctan(1/2) + arctan(1/3) = π/4；在这里只是一次整数乘法。"
+    ],
+    [
+     "Square one to one: two to zero, the antipode. Square again: back home.",
+     "[1 : 1] 自乘得 (2, 0)，即对径点；再自乘，回到家。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 3.0,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "horizon",
+   "name": "FINITE HORIZON",
+   "lead": 0.5,
+   "tail": 0.8,
+   "music": [
+    1.0,
+    0.7,
+    0.6,
+    0.4,
+    0.4
+   ],
+   "lines": [
+    [
+     "Fix a precision, one over M. At M equal to one, four anchors; at two, eight points.",
+     "取定精度 1/M。M = 1 时是四枚锚点；M = 2 时是八个点。"
+    ],
+    [
+     "At twelve, one hundred eighty-four, each with exact integer readings.",
+     "M = 12 时是 184 个点，每个都带着精确的整数读数。"
+    ],
+    [
+     "The book's general count is four times a totient sum.",
+     "书中给出的一般计数是 4Φ(M)。"
+    ],
+    [
+     "One limit remains: swap the factors and nothing changes. Order needs chapter three.",
+     "只剩一道限制：交换因子，乘积纹丝不动。要让次序留下痕迹，得去第三章。"
+    ]
+   ]
+  },
+  {
+   "id": "close",
+   "name": "LEDGER",
+   "lead": 0.5,
+   "tail": 3.0,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.2
+   ],
+   "lines": [
+    [
+     "Omega Math, chapter two.",
+     "《OMEGA MATH》· 第二章"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 0.3,
+     "kind": "chime"
+    }
+   ]
+  }
+ ]
+}

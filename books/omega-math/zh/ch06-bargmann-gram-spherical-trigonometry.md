@@ -296,6 +296,10 @@ $$
 
 读者可在下方交互工作台实验卡中以过去锚 $\mathbf{a} = \mathbf{o} = [1:0:0:0]$ 为基点，直接调节其余两枚有理射线顶点 $\mathbf{b}, \mathbf{c}$：将三点切至大圆倍弧构造核对 [@thm-ch06-geodesic-doubling-detgram3-zero] 的 $\det\mathbf{G}_3 = 0$ 与 [@thm-ch06-geodesic-doubling-kappa] 的整系数倍增律 $\kappa_2 = (2\kappa_1 - 1)^2$，再将第三点抬离大圆进入正交三元组 `[1:0:0:0], [1:1:0:0], [1:0:1:0]`（[@thm-ch06-orthogonal-triad-excess-quarter]），亲眼核对 [@thm-ch06-rational-spherical-sine-law] 与 [@thm-ch06-rational-spherical-pythagorean]，观察巴格曼环路不变量 $B \in \mathbb{Q}$ 如何保留内积乘积的符号、以及 [@thm-ch06-detgram3-nonneg] 所保证的非负曲率体积平方 $\det\mathbf{G}_3 > 0$ 如何同步跃升至精确值 $\frac{1}{4}$。
 
+::: {.film src="closing-a-spherical-triangle"}
+**沿三点闭环走一圈，根号与符号成对消尽，整部球面三角学收束为一条有理闭合律（2 分 49 秒）。** 紫色球面上，整四元数射线 $a = 1$、$b = 1 + \mathbf{i}$、$c = 1 + \mathbf{j}$ 的单条边余弦 $1/\sqrt{2}$ 为无理数，且随 $a \mapsto -a$ 变号，而巴格曼环路数 $B = 1/4$ 不变；原始格拉姆行列式 $1$ 除以模方之积 $4$，品红三角形的闭合数 $\det\mathbf{G}_3 = 1 + 2B - (\kappa_{ab} + \kappa_{bc} + \kappa_{ca}) = 1/4$，绿色标签对应 [@thm-ch06-orthogonal-triad-excess-quarter]。等边三元组 $1 + \mathbf{i}, 1 + \mathbf{j}, 1 + \mathbf{k}$ 的四个三阶子式 $1, -1, 1, 1$ 平方和为 $4$，得 $\det\mathbf{G}_3 = 4/8 = 1/2$（屏幕计算；柯西—比内恒等式为本章手工推导），普遍非负性对应 [@thm-ch06-detgram3-nonneg]。青色大圆上 $a = 1$、$b = 2 + \mathbf{i}$、$c = b\bar{a}b = 3 + 4\mathbf{i}$ 给出 $\kappa = 4/5, 4/5, 9/25$、$B = 12/25$ 与 $\det\mathbf{G}_3 = 0$，取 $b = 1 + 2\mathbf{i}$ 时 $B = -3/25$（屏幕计算，[@ex-ch06-collinear-doubling]）；归零律与倍增律 $\kappa_2 = (2\kappa_1 - 1)^2$ 分别对应 [@thm-ch06-geodesic-doubling-detgram3-zero] 与 [@thm-ch06-geodesic-doubling-kappa]，琥珀色的当前一行依次演示 $4/5 \to 9/25$、$9/10 \to 16/25$、$1/2 \to 0$。顶点展开度 $1, 2/3, 2/3$ 与正弦律比值 $4/3$ 为屏幕计算，绿色标签对应 [@thm-ch06-rational-spherical-sine-law] 与 [@thm-ch06-rational-spherical-pythagorean]。四组三元组并列读出 $0, 1/4, 1/2, 1$；$1$ 为最大值与紫色的实数影子 $\det\mathbf{G}_3 = \sin^2\alpha\sin^2\beta\sin^2 C$ 按 [@rem-ch06-classical-shadow] 标为论证。
+:::
+
 至此，第二卷已用无原点流群、利雅三元曲率、有理凯莱旋转、切比雪夫谐波与巴格曼—格拉姆闭合律完成了弯曲三维球面的全套纯有理代数与三角重构。下一步的追问水到渠成：**既然代数与三角都能彻底告别实无穷与超越数，微积分中的导数、曲率与积分能否也一并摆脱 $\lim_{h \to 0}$ 极限？**让我们携带这套球面有理引擎，翻开第三卷的序幕——[第七章 二阶幂零射流环与无极限微积分](ch07-second-order-jet-calculus.md)。
 
 ::: {.viz src="omega-math-workbench" preset="bargmann-gram-triad" height="520"}

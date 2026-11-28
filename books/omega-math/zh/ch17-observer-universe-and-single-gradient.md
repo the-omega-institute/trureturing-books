@@ -139,6 +139,10 @@ $$
 本章严守三层证据契约：[@thm-om-ch17-krylov-growth-and-stability] 与 [@thm-om-ch17-reversible-qram] 对应所钉 `trureturing` 冻结 **`LEAN ✓`** 定理；正交移项代数、有理洛伦兹参数化、过约束计数 $\Delta E(N)$ 与一代费米子迹比 $\frac{3}{8}$ 为精确 **`手工推导`**；自包含观察者五元组 $\mathfrak{O} \equiv \mathcal{U}_\Omega$、静止全息画布（对接惠勒—德维特方程 $\hat{\mathcal{H}}\lvert\mathbf{\Psi}\rangle = 0$，B. S. DeWitt, *Phys. Rev.* **160**, 1113, 1967；D. N. Page & W. K. Wootters, *Phys. Rev. D* **27**, 2885, 1983）、温伯格等权刚度公设及三元数场网络 TFT 均标为 **`MODEL`**。从离散三元比较与有限记忆切分完整导出 $3+1$ 维洛伦兹爱因斯坦场方程及黑洞视界幺正性，仍属显式未决的开放问题（**`OPEN`**）。
 :::
 
+::: {.film src="the-observer-as-the-universe"}
+**一座没有端口的观察者：时间是新结构，空间是记忆窗外的份额（2 分 58 秒）。** 带输入输出端口的盒子闭合为紫色的零端口观察者五元组；比较图三拍的残差与环路给出结构时间 $\tau = 0, \tfrac{1}{2}, 2$。$\mathbb{Q}^4$ 上循环移位的克雷洛夫维数 $1,2,3,4,4$ 撞上绿色上限，零改写查询在深度 $2$ 的样例表上读出 $D(a)=4$（[@thm-om-ch17-krylov-growth-and-stability]、[@thm-om-ch17-reversible-qram]）。$u = \tfrac{1}{3}$ 时单位步切成青色的 $4/5$ 与品红的 $3/5$，份额 $\tfrac{16}{25} + \tfrac{9}{25} = 1$，$\gamma = \tfrac{5}{4}$、$\gamma v = \tfrac{3}{4}$；柱状图给出 $\Delta E(N) = 0, 0, 1, 3, 6, 10$，迹比为 $\tfrac{3}{8}$。片中数值均为屏幕计算（`手工推导`）；观察者即宇宙、静止画布与等权迹刚度公设标为紫色 `MODEL`，导出爱因斯坦场方程与视界幺正性标为红色 `OPEN`。
+:::
+
 读者可在下方的交互实验卡中同步拨动本章的四组核心有理量：滑动有理半切参数 $u$ 观察正交记忆切分 $\kappa_{\mathrm{time}} + \kappa_{\mathrm{space}} \equiv 1$ 与双曲恒等式 $\gamma^2 - (\gamma v)^2 \equiv 1$，核对一代手性费米子的精确温伯格迹比 $\frac{3}{8}$，沿节点数 $N$ 追踪 $N \ge 5$ 的组合过约束盈余 $\Delta E(N) = \frac{(N-3)(N-4)}{2}$，并逐步走完三拍结构时间 $\tau$ 的单调有理增长轨迹。
 
 ::: {.viz src="adelic-arithmetic-observer-lab" preset="static-canvas-memory-split" height="520"}

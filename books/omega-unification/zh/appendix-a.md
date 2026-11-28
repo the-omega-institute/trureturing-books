@@ -2,7 +2,7 @@
 
 本附录完整索引本书五卷十五章所依赖的上游研究与复算目录 [`experiments/ch39-omega-research/`](https://github.com/the-omega-institute/trureturing-experiments/tree/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research)（归档于组织实验库 [`the-omega-institute/trureturing-experiments`](https://github.com/the-omega-institute/trureturing-experiments)，本书固定快照提交 `ba0ac9539cdb641744054bf3a0398494f4cba1c8`）。
 
-以下四节依次给出：上游复算目录的顶层架构、数据支撑与十份核心专题档案；独立 Lean 4 整数压缩证书 `replay/ShellProjection.lean` 的代数结构与全部定理导读；按全书十五章归类的 34 支代表性 Python / `python-flint`（Arb）/ SymPy 复算脚本永久链接；以及本地复现依赖、标准运行命令与失败即中止的断言规程。关于本仓库外接的 `trureturing@dev` 冻结声明与编译期实时统计，请参阅 [附录 B §B.4](appendix-b.md#sec-ou-appb-live-stats)。
+以下五节依次给出：上游复算目录的顶层架构、数据支撑与十份核心专题档案；独立 Lean 4 整数压缩证书 `replay/ShellProjection.lean` 的代数结构与全部定理导读；按全书十五章归类的 34 支代表性 Python / `python-flint`（Arb）/ SymPy 复算脚本永久链接；本地复现依赖、标准运行命令与失败即中止的断言规程；以及临界弦长的边束计数。关于本仓库外接的 `trureturing@dev` 冻结声明与编译期实时统计，请参阅 [附录 B §B.4](appendix-b.md#sec-ou-appb-live-stats)。
 
 ## A.1 上游研究与复算仓库全景结构 {#sec-ou-appa-repo-layout}
 
@@ -57,7 +57,7 @@ $$
 | [`inner_oriented_triangle`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ShellProjection.lean#L43) | `rfl`（仅 `Init`） | 对内层三点 $p, q, r$ 与 $z = P_p^{\mathbb{Z}}(v)$，精确验证有向闭路乘积等于 $34(1105 z + 7 z b)$，无误差析出有向面积因子 $7 b$ |
 | [`oriented_axis_from_shell`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ShellProjection.lean#L58) | `rfl`（仅 `Init`） | 精确验证内层三点正逆轮换三重复合之差在全部基向量上恒等于 $714\,x b$，直接由壳层非对易子反演参考有向轴 |
 
-需要明确区分：`ShellProjection.lean` 属于上游研究仓库的独立计算证书（归入 [附录 B §B.2](appendix-b.md#sec-ou-appb-epistemic-ledger) 的第 4 层 `NUM`），尚未冻结进 `the-omega-institute/trureturing` 的 D5 声明库，因此不计入 §B.4 的 `trureturing@dev` 实时冻结定理统计。
+需要明确区分：`ShellProjection.lean` 这份文件属于上游研究仓库的独立计算证书（归入 [附录 B §B.2](appendix-b.md#sec-ou-appb-epistemic-ledger) 的第 4 层 `NUM`），文件本身不计入 §B.4 的 `trureturing@dev` 实时冻结定理统计。它的前两条恒等式是 [@thm-ou-ch01-shell-compression-triangle] 在 $s = 17$、$N(p) = N(b) = 17$ 处的实例；该定理对一切满足 $s^2 = N(p)\,N(b)$ 的整数 $s$ 与纯虚整四元数成立，已冻结在 `the-omega-institute/trureturing` 的 D5 声明库并计入 §B.4。第三条 `oriented_axis_from_shell` 是 [@thm-ou-ch01-oriented-axis] 在 $N(b) = 17$、$p \cdot (q r) = 7$ 处的实例；该定理对一切纯虚整四元数成立，不需要范数条件，同样已冻结并计入 §B.4。
 
 ## A.3 分章核心复算脚本与证书总索引 {#sec-ou-appa-script-index}
 
@@ -137,5 +137,13 @@ python3 ch39-three-clock-minimal-memory.py
 # 5. 独立重放平方半径 17 九点壳的 Lean 4 纯整数压缩证书
 lean +leanprover/lean4:v4.35.0 ShellProjection.lean
 ```
+
+## A.5 临界弦长的边束计数 {#sec-ou-appa-clock-bundle-count}
+
+沿用第 2 章 §2.1 的临界弦长模型，取 $D=724$，用顶点重定相尽可能多地保留原边输运。[第 2 章](ch02-quaternion-clocks-and-haar-zeros.md#sec-ou-2-1)
+
+先在三个内点吸收长边的钟移 $\beta$，使六条不可改的长边标签归零，再将十九个顶点压缩成十三个分量。取追加相位全为零作为比较基准。这个规范留下 $93$ 个恒为零的标签、$36$ 个 $\pm\beta$ 标签和 $6$ 个 $\pm\delta$ 标签。除双半周点外，三个主分量之间的非零标签重数至多与零标签持平，即使角标签合并也如此。当 $\beta\ne0$ 时，其余分量对中，可能多保留一条边的只有三对，每对各有一条由零标签严格占优的两边路径。三条路径的边互不相交。改变相对相位去保留那条边会在对应路径上损失至少一条，故不能改进计数。
+
+双半周点的标签只取 $0,\pi$。若十个单点分量的相位不全相同，它们之间的零标签完全图至少损失九条边。三对主分量之间各有六条平行边，两条标为 $0$，四条标为 $\pi$，故每组至少改两条，合计至少改六条，主分量通往单点分量的九组双零边束和十八组单零边束各至少改一条，所以总数至少为 $42$。若十个单点分量同相，可取其公共相位为零。每个主分量相位为 $0,\pi$ 或其他角时，通往单点分量的改边数分别为 $10,12,22$。任何其他角都会使总数至少为 $48$。若有 $r$ 个主分量取相位 $\pi$，总数为 $30+2r+12-2r(3-r)$，在 $r=1$ 时最少，恰为 $40$。
 
 上述复算产物与全书认识论证据分级、九幅静态图、交互实验室及 `trureturing@dev` 实时形式化统计的总对照，请继续参阅 [附录 B](appendix-b.md)。

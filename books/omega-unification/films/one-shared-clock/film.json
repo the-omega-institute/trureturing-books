@@ -1,0 +1,29 @@
+{
+  "title": "One Shared Arithmetic Clock",
+  "title_zh": "一只共同的算术钟",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-26",
+  "duration": "2:47",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · four sector dials merging into one amber clock, seven resolvent kernels, dyadic code rulers for the fifth and seventh ticks, a 44-cell bit strip, three height bands on a log axis, a struck-through selector ledger, two green Lean inequalities",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/Fourier/Concentration/CyclicFejerBand.band_le_positive_fourier",
+    "D5/S3/Fourier/Concentration/FiniteCollisionVariance.tailCollisionMass_lower_variance"
+  ],
+  "outputs": {
+    "narrated_720p": "omega-unification_one-shared-clock_720p_narrated.mp4",
+    "cover": "omega-unification_one-shared-clock_cover.jpg"
+  },
+  "summary": "Four sectors that each set their own watch are forced onto one shared quadratic resolvent clock, F(j) = ⟨s, (I + j²K)⁻¹ s⟩ = ∫ k_j(y) dp(y), with one common weight p over the zeros that pass three physics windows (the first is zero #8359). With a shared weighting four ticks close and the fifth breaks at every scale: read to 22 binary digits every allowed clock gives code 4040282 against the reference 4040283. A neutral-shell reweighting rescues tick five (it needs an efficiency ratio of at least 18.49684…, and the shell trace spans 1 to 19), at the price of a sixth-tick shift of at least 1.33015563912 × 10⁻⁸. With five ticks exact and the sixth at its prescribed shifted value, Gauss–Radau quadrature traps the held-out seventh tick in a window 2.140 × 10⁻¹² wide whose 35-bit code is 32071996606, 4130 codes above the reference 32071992476; 44 input bits force the code and 43 admit a counterexample. Over 99.931 % of the weight sits in three height bands (about 23.44 %, 37.4 %, 39.1 %), a 10⁻⁷ edge stiffening forces a response drop above 1.82 × 10⁻¹⁰, and on the eight-zero solution the held-out CP invariant J comes out 6.0833 % low; five naive weight selectors are excluded. These are the chapter's interval and rational replay certificates and on-screen computations (NUM); the four-clocks picture is argued. Lean checks two concentration bounds: the positive Fourier upper bound for cyclic Fejér bands and the variance lower bound for near-collision mass, the latter also checked on screen on a two-weight example (9 ≤ 39.94).",
+  "summary_zh": "各自校表的四个战场被压到同一只共同二次预解式钟上：F(j) = ⟨s, (I + j²K)⁻¹ s⟩ = ∫ k_j(y) dp(y)，只用一组概率 p，分给三窗齐过的零点（第一枚是第 8359 号）。共用同一组概率时前四拍闭合、第五拍在一切尺度上断裂：按 22 位二进制读取，所有合法的钟都给出码 4040282，参考码是 4040283。中性壳重加权救回第五拍（所需效率倍率至少 18.49684…，中性壳迹横跨 1 到 19），代价是第六拍至少上移 1.33015563912 × 10⁻⁸。前五拍精确、第六拍取预设偏移值时，高斯–拉道求积把留出的第七拍锁进宽 2.140 × 10⁻¹² 的窗口，其 35 位码为 32071996606，比参考码 32071992476 高 4130 格；输入保留 44 位即锁死该码，43 位出现反例。超过 99.931% 的权重落在三条高度带（约 23.44%、37.4%、39.1%），边刚度加强 10⁻⁷ 迫使响应下降超过 1.82 × 10⁻¹⁰，八点解上留出的 CP 不变量 J 低 6.0833%；五类朴素选权机制被逐一排除。以上为本章的区间与有理数复算证书及屏幕计算（NUM），四钟并一钟的图景为论证。Lean 内核检验两条浓缩界：循环费耶尔窗的窄频带非负傅里叶上界，与有限权重近碰撞质量的方差下界；后者另在两权重小例上做屏幕验算（9 ≤ 39.94）。"
+}

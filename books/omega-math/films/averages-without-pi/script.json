@@ -1,0 +1,301 @@
+{
+ "voice": "af_heart",
+ "speed": 0.94,
+ "say": {
+  "Lean": "Leen",
+  "Catalan": "Cat-a-lan"
+ },
+ "music": {
+  "bpm": 80,
+  "progression": "d-minor"
+ },
+ "scenes": [
+  {
+   "id": "sphere",
+   "name": "AN AREA FULL OF PI",
+   "lead": 2.6,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "To average over the three-sphere, a textbook divides by its area: two pi squared.",
+     "要在三维球面上求平均，教科书得除以它的面积：2π²。"
+    ],
+    [
+     "Yet every polynomial average comes out a plain fraction. Where did the pi go?",
+     "可每个多项式的平均都是一个普通分数。π 到哪里去了？"
+    ]
+   ]
+  },
+  {
+   "id": "routes",
+   "name": "TWO ROUTES",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.5,
+    0.4,
+    0.1,
+    0.2
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 2.6,
+     "kind": "impact"
+    }
+   ],
+   "lines": [
+    [
+     "Take one Gaussian integral in four dimensions, and compute it two ways.",
+     "取四维空间里的同一个高斯积分，用两种办法来算。"
+    ],
+    [
+     "Axis by axis, each coordinate brings one root pi. Four of them make pi squared.",
+     "逐轴分离：每个坐标带进一个 √π，四个凑成 π²。"
+    ],
+    [
+     "In polar form, the radius gives m plus one factorial over two; the area, two pi squared.",
+     "换成极坐标：径向给出 (m + 1)!/2，面积给出 2π²。"
+    ],
+    [
+     "Both carry exactly pi squared. Strike it, and a ratio of factorials is left.",
+     "两条路恰好都带着 π²。把它划掉，只剩下阶乘之比。"
+    ]
+   ]
+  },
+  {
+   "id": "dims",
+   "name": "WHY FOUR",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.5,
+    0.5,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "The circle cancels pi but is commutative; the two-sphere keeps a root pi and is no group.",
+     "圆周上 π 也会对消，但它是交换群；二维球面留下一个 √π，而且根本不是群。"
+    ],
+    [
+     "Only the three-sphere is a non-commutative group whose pi cancels into whole factorials.",
+     "只有三维球面既是非交换群，π 又恰好对消成整数阶乘。"
+    ]
+   ]
+  },
+  {
+   "id": "rule",
+   "name": "A FACTORIAL RULE",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.6,
+    0.2,
+    0.3
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 3.6,
+     "kind": "chime"
+    }
+   ],
+   "lines": [
+    [
+     "So make the answer the definition: a monomial's average is this ratio of factorials.",
+     "那就把答案直接当作定义：单项式的平均，就是这个阶乘之比。"
+    ],
+    [
+     "Odd powers are set to zero, as a sign flip demands.",
+     "奇次幂一律记为零，这是翻转坐标符号的要求。"
+    ],
+    [
+     "The test: multiply by the sum of the four squares. The four steps add to one.",
+     "考验：乘上四个平方之和，结果不许变。四个步进比加起来恰好是 1。"
+    ],
+    [
+     "By hand: four times one eighth, plus twelve times one twenty-fourth, is one.",
+     "手算核对：4 × 1/8 + 12 × 1/24 = 1。"
+    ]
+   ]
+  },
+  {
+   "id": "ladder",
+   "name": "CATALAN LADDER",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.7,
+    0.7,
+    0.2,
+    0.3
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 1.0,
+     "kind": "stamp"
+    }
+   ],
+   "lines": [
+    [
+     "Now average powers of kappa, the first coordinate squared. Each moment is the last times a small fraction.",
+     "现在对 κ 的幂求平均，κ 是第一个坐标的平方。每一阶矩都是前一阶乘上一个小分数。"
+    ],
+    [
+     "One, a quarter, an eighth, five sixty-fourths, seven over one hundred twenty-eight.",
+     "1，1/4，1/8，5/64，7/128。"
+    ],
+    [
+     "Times four to the k, they are Catalan numbers: one, one, two, five, fourteen.",
+     "乘上 4 的 k 次方，就是卡塔兰数：1，1，2，5，14。"
+    ],
+    [
+     "Lean checks that step for every k, by whole-number cross-multiplication.",
+     "Lean 内核对每个 k 检验这一步，只用整数交叉相乘。"
+    ]
+   ]
+  },
+  {
+   "id": "gram",
+   "name": "SHELLS AT RIGHT ANGLES",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.8,
+    0.7,
+    0.4,
+    0.4
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 4.2,
+     "kind": "chime"
+    },
+    {
+     "line": 3,
+     "at": 1.4,
+     "kind": "stamp"
+    }
+   ],
+   "lines": [
+    [
+     "The whole-spin characters are polynomials in kappa: one, four kappa minus one, a quadratic.",
+     "整数自旋特征标是 κ 的多项式：1，4κ − 1，再加一个二次式。"
+    ],
+    [
+     "Pair the last two through the moments: five, minus eight, plus four, minus one. Exactly zero.",
+     "用这些矩给后两者配对：5 − 8 + 4 − 1，恰好是 0。"
+    ],
+    [
+     "The quadratic with itself: fourteen, minus thirty, plus twenty-two, minus six, plus one. Exactly one.",
+     "二次式配它自己：14 − 30 + 22 − 6 + 1，恰好是 1。"
+    ],
+    [
+     "Every denominator clears. Lean checks all six entries of this identity table.",
+     "分母全部消尽。Lean 内核检验了这张单位表的全部六项。"
+    ]
+   ]
+  },
+  {
+   "id": "every",
+   "name": "EVERY DEGREE",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    1.0,
+    0.8,
+    0.7,
+    0.4,
+    0.4
+   ],
+   "cues": [
+    {
+     "line": 3,
+     "at": 1.2,
+     "kind": "stamp"
+    }
+   ],
+   "lines": [
+    [
+     "Lean goes further: every even character above the constant averages to zero.",
+     "Lean 更进一步：常数以上的每个偶次特征标，平均恰好为零。"
+    ],
+    [
+     "A product of two shells is a run of shells, from the gap of m and n to their sum.",
+     "两层壳之积是一串连续的壳，从 m 与 n 之差排到二者之和。"
+    ],
+    [
+     "Average it: only shell zero survives, and only when m equals n is it in the run.",
+     "对它求平均：只有第零层能留下，而它只在 m = n 时才在串里。"
+    ],
+    [
+     "So shells of every degree are orthonormal: no pi, no limits, no real numbers.",
+     "于是各阶壳层全部正交归一：没有 π，没有极限，也没有实数。"
+    ]
+   ]
+  },
+  {
+   "id": "edge",
+   "name": "THE THRESHOLD",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.2,
+    0.2
+   ],
+   "lines": [
+    [
+     "Some roots still force their way in: making one, one, zero, zero a unit needs root two.",
+     "有些根号仍会挤进来：把 (1, 1, 0, 0) 缩成单位长，需要 √2。"
+    ],
+    [
+     "Bell's quantum ceiling is two root two; the golden pentagon needs root five.",
+     "贝尔游戏的量子上限是 2√2；黄金五边形需要 √5。"
+    ],
+    [
+     "The next chapter keeps each such root as a pair of fractions.",
+     "下一章把每个这样的根号记成一对分数。"
+    ]
+   ]
+  },
+  {
+   "id": "close",
+   "name": "LEDGER",
+   "lead": 0.5,
+   "tail": 3.2,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.2,
+    0.2
+   ],
+   "lines": [
+    [
+     "Averages without pi: a factorial rule, an exact ladder, shells at right angles.",
+     "不用 π 的平均：一条阶乘规则，一架精确的阶梯，一组彼此垂直的壳层。"
+    ]
+   ]
+  }
+ ]
+}

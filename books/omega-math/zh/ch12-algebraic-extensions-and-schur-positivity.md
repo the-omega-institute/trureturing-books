@@ -344,6 +344,10 @@ $$
 
 一个手算便可看出两个前提各管什么。在 $\mathbb{R}^2$ 中，$e_1,2e_2$ 张成全空间，格拉姆矩阵 $\operatorname{diag}(1,4)$ 正定。对换却把范数 $1$ 送到 $2$，故无法延拓成等距。若只取向量 $e_1$，恒等置换保持内积，但恒等映射与关于 $e_1$ 轴的反射都是延拓，这里便失去了唯一性。
 
+::: {.film src="a-root-as-a-pair"}
+**一条规则 $\alpha^2 = b\alpha + c$ 把根号变成有理数对，平方和把正定性变成手算证书（2 分 44 秒）。** 青色数对 $(p, q)$ 读作 $p + q\alpha$，乘法展开后只套用琥珀色的规则；共轭 $(p + bq, -q)$ 消去 $\alpha$ 部分、留下范数 $N = p^2 + bpq - cq^2$，在 `QSqrt2` 中手算 $(1, 1)^{-1} = (-1, 1)$。旋量平面上单位旋量 $u = \frac{\delta}{2}(1 + \mathbf{i})$ 每拍转 $45^\circ$，$u^2 = \mathbf{i}$、$u^4 = -1$、$u^8 = 1$，小表盘上的伴随标架转满 $720^\circ$；`QPhi` 的阶梯列出 $\varphi^n = (F_{n-1}, F_n)$ 直到 $\varphi^{12} = (89, 144)$，范数交替为 $-1$、$+1$；在 $\varphi/2$ 上运行切比雪夫递推，$T_5 = -1$、$T_{10} = 1$ 落在正十边形的顶点上（紫色 PICTURE 标签：点位只用 $\varphi \approx 1.618$ 定位）。随后以 $(1, 2), (3, 1), (2, 5)$ 核对格拉姆行列式 $420 - 225 = 195$ 等于品红有向面积 $-5, 1, 13$ 的平方和，最后以 $e_1, 2e_2$ 与单独的 $e_1$ 两个手算反例说明等距延拓的两个前提。绿色标签依次对应 [@thm-ch12-zero-axiom-quadpoly-qsqrt2] 的精确求逆与八拍闭合、[@thm-ch12-zero-axiom-qphi-fibonacci-pentagon] 的幂次范数律与五角切比雪夫闭合、[@thm-ch12-zero-axiom-lagrange-schur] 的有理拉格朗日—格拉姆恒等式，以及经典实数阴影层的 [@thm-ch12-gram-isometry-extension]；青色 NUM 标签下的数值均为屏幕上的精确计算，不是证明。
+:::
+
 在下面的交互实验卡中，读者可以在同一座实验室里切换并联动探索本章的三组代数构造：在 `QSqrt2` 视图中逐拍步进单位 $90^\circ$ 旋量的八拍闭合 $u_{90}^8 = 1$ 并核对零浮点误差的 CHSH 齐雷尔森平方极值 $S_{\mathrm{CHSH}}^2 = 8$（[@thm-ch12-zero-axiom-quadpoly-qsqrt2]）；在 `QPhi` 视图中步进斐波那契幂次 $\varphi^{n+1} = F_n + F_{n+1}\varphi$ 与十拍切比雪夫轨道，见证无三角函数的 $T_5(\varphi/2) = -1$ 闭合（[@thm-ch12-zero-axiom-qphi-fibonacci-pentagon]）；再拖动内部变量 $y$ 与边界参数 $x$ 沿有理舒尔谷地滑动，亲手验证 $y^* = -\frac{2}{3}x$ 处的精确谷底极小值 $S = \frac{4}{3}$（[@thm-ch12-zero-axiom-lagrange-schur]、[@thm-ch12-schur-minimum]）。
 
 ::: {.viz src="dfinite-algebraic-schur-lab" preset="quadratic-ext-and-schur" height="520"}

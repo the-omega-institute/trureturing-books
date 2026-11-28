@@ -1,0 +1,30 @@
+{
+  "title": "The Observer as the Universe",
+  "title_zh": "观察者即宇宙",
+  "subject": "https://github.com/the-omega-institute/trureturing",
+  "publication_basis": "pinned",
+  "released": "2026-11-27",
+  "duration": "2:58",
+  "resolution": "1280x720@30",
+  "style": "trureturing cyberpunk · an open-loop box closing into a port-free observer, a growing comparison graph with its structural-time ledger, a Krylov dimension tower, a still contour canvas with a rolling focus and a depth-2 routing tree, a unit step split by a memory window, an overconstraint bar chart, three evidence columns",
+  "narration": {
+    "language": "en",
+    "engine": "Kokoro-82M v1.0 (onnx)",
+    "voice": "af_heart"
+  },
+  "subtitles": [
+    "zh",
+    "en"
+  ],
+  "lean": [
+    "D5/S3/ObserverMemory/Dynamics/ObservableKrylovGrowthBound.observable_krylov_strict_growth_bound",
+    "D5/S3/ObserverMemory/Dynamics/ObservableKrylovPermanentStability.observable_krylov_once_stable_permanently",
+    "D5/S3/Quantum/Routing/ReversibleQram.correctness"
+  ],
+  "outputs": {
+    "narrated_720p": "omega-math_the-observer-as-the-universe_720p_narrated.mp4",
+    "cover": "omega-math_the-observer-as-the-universe_cover.jpg"
+  },
+  "summary": "An agent wired to input and output ports closes into the chapter's port-free observer, the pentad (S, [−,−,−], κ, K₀, Φε), whose uncrystallized horizon looks like an incoming world (MODEL, argued). Structural time adds the Schur innovation and new comparison-graph cycles: the chapter's three beats give residuals (0,0,0,0), (0,1,0,0), (0,0,1,0) and τ = 0, 1/2, 2 (computed here; the reading as time is MODEL). A cyclic shift on Q⁴ observed in one coordinate gives Krylov dimensions 1, 2, 3, 4, 4 (computed); Lean checks that strict growth happens at most dim V − rank C times and that one stall is permanent. The still canvas and the legless sphere steering with a rational yaw are MODEL (schematic picture); beneath them Lean checks that a clean reversible QRAM query adds D(a) to the register and leaves table, address and workspace unchanged, shown on a sample depth-2 table (readout 4, computed). The memory split at u = 1/3 gives v = 3/5, a time leg 4/5, shares 16/25 + 9/25 = 1, γ = 5/4 and γv = 3/4 with γ² − (γv)² = 1 (computed; the time/space reading is MODEL). The overconstraint surplus (N−3)(N−4)/2 is 0, 0, 1, 3, 6, 10 for N = 3 to 8, and one fermion generation gives traces 2 and 16/3, ratio 3/8, under the chapter's equal-weight postulate (MODEL). Deriving the Einstein equations and horizon unitarity from these comparisons is OPEN.",
+  "summary_zh": "一只带输入输出端口的盒子闭合为本章的零端口观察者五元组 (S, [−,−,−], κ, K₀, Φε)，尚未结晶的视界看上去像迎面涌来的世界（模型，论证）。结构时间累加舒尔创新度与比较图新闭合的环路：本章三拍的残差为 (0,0,0,0)、(0,1,0,0)、(0,0,1,0)，τ = 0、1/2、2（屏幕计算；把它读作时间是模型）。在 ℚ⁴ 上用循环移位并只观测一个坐标，克雷洛夫维数为 1、2、3、4、4（屏幕计算）；Lean 检验严格增长至多发生 dim V − rank C 次，且停滞一次便永久停滞。静止画布与靠有理偏航转舵的无腿球是模型（示意图）；其下 Lean 检验干净工作区上的可逆 QRAM 查询把 D(a) 加到寄存器上，表、地址与工作区不变，片中以深度 2 的样例表演示（读出 4，屏幕计算）。u = 1/3 时的记忆切分给出 v = 3/5、时间分量 4/5、份额 16/25 + 9/25 = 1、γ = 5/4、γv = 3/4，且 γ² − (γv)² = 1（屏幕计算；时间/空间的读法是模型）。过约束盈余 (N−3)(N−4)/2 在 N = 3 至 8 时为 0、0、1、3、6、10；一代费米子的迹为 2 与 16/3，比值 3/8，前提是本章的等权公设（模型）。由这些比较导出爱因斯坦场方程与视界幺正性仍是开放问题。"
+}

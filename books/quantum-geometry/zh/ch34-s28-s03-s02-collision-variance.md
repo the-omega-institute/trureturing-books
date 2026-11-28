@@ -584,13 +584,13 @@ $$
 四阶矩界 $P_4(T)\le T^2P_2(T)$ 允许把中心窗直接取为 $|t|\le1/T_n$。二阶矩下界保证换元后的半宽 $s_n/T_n$ 趋于无穷。中心积分给出 $1/(2\sqrt\pi)$。倒数高度、周期相位和 Landau 估计覆盖 $1/T_n\le|t|\le\log T_n$ 的整个区间，给出统一的得分亏损下界 $c/\log T_n$，其中 $c>0$。得分的 $2n$ 次幂于是至多为 $\exp(-2cn/\log T_n)$，足以抵消归一化积分中的 $T_n\sqrt n\log T_n$ 因子。相对截断把极限传到全线。对 $\eta_n$ 的每个固定正倍数应用同一论证，得到二次斜坡极限，再由两侧割线得到含端点的硬碰撞常数。完整证明由 Lean 内核检查。
 :::
 
-[@thm-ch34-landau-inclusive-cutoff] 给出了冻结碰撞定理所需的 Landau 前提。所以 RH 加上所列的截断与分辨率条件即可推出这个碰撞极限。Alpöge 的外部形式化证明给出了 Mathlib 的 RH 命题。 [外部 RH 定理](https://github.com/the-omega-institute/riemann-hypothesis/blob/b14f2bd19e5e12a4ba6b1d207e3c5fbb06e49ed6/src/Main.lean#L4)
+[@thm-ch34-landau-inclusive-cutoff] 给出了冻结碰撞定理所需的 Landau 前提。所以 RH 加上所列的截断与分辨率条件即可推出这个碰撞极限。Alpöge 的外部形式化证明给出了 Mathlib 的 RH 命题。 [外部 RH 定理](https://github.com/leanprover-community/riemann-hypothesis/blob/7c4ccbd64d02774b0a5b40a5f923f5b7a18e8abc/src/Main.lean#L9)
 
 若 $\eta_n\log T_n$ 有界，把积分只截到 $\log T_n$ 时，相对余项界可以停留在常数量级。
 
 ### 对相关上界与临界分辨率
 
-若 Montgomery 对相关和有足够小的一致上界，傅里叶积分就能控制到更长的时间窗。沿用含端点的正纵坐标截断，并记
+若 Montgomery 对相关和有足够小的一致上界，傅里叶积分就能控制到更长的时间窗。沿用含端点的正纵坐标截断。令 $N(Y)=\sum_{0<\gamma\le Y}m_\gamma$，$F_Y(t)=\sum_{0<\gamma\le Y}m_\gamma e^{it\gamma}$，并记
 
 $$
 G_Y(t)=
@@ -599,20 +599,69 @@ m_\gamma m_{\gamma'}\frac{4\cos\bigl(t(\gamma-\gamma')\bigr)}
 {4+(\gamma-\gamma')^2}.
 $$
 
-::: {.theorem #thm-ch34-zeta-harmonic-critical-collision-limit title="临界分辨率下的条件高斯碰撞极限" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHCriticalResolutionCollisionLimit.harmonic_zeta_critical_collision_limit"}
-假设 Mathlib 表述的 RH。对每个固定的 $A>1$，假设 $G_Y(t)=o(Y\log^2 Y)$ 在 $\log Y\le |t|\le A\log Y$ 上一致成立。令 $T_n\to\infty$ 且 $(\log T_n)^2/n\to0$。沿用上文的谐权重、$W(T_n)$ 和 $s_n=\sqrt{nP_2(T_n)/2}$。若 $\eta_n$ 最终为正、$\eta_n/s_n\to0$，且存在 $a>0$ 使得最终 $\eta_n\log T_n\ge a$，则
+::: {.theorem #thm-ch34-zeta-harmonic-critical-collision-limit title="临界分辨率下的条件高斯碰撞极限" lean="D5/S3/Weil/Mertens/IntegratedExplicit/PrimePower/SublinearOrder/RHCriticalCauchyThreshold.harmonic_zeta_critical_collision_limit_of_cauchy_cap"}
+假设 Mathlib 表述的 RH。令 $c=1/(2\pi)$，并假设存在固定的 $\kappa<2\pi c^2$，使得对每个固定的 $A>1$，当 $Y$ 足够大时，$G_Y(t)\le\kappa Y\log^2 Y$ 在 $\log Y\le |t|\le A\log Y$ 上一致成立。令 $T_n\to\infty$ 且 $(\log T_n)^2/n\to0$。沿用上文的谐权重、$W(T_n)$ 和 $s_n=\sqrt{nP_2(T_n)/2}$。若 $\eta_n/s_n\to0$，且存在 $a>0$ 使得最终 $\eta_n\log T_n\ge a$，则
 $$
 \frac{s_n E_n(\eta_n)}{\eta_n W(T_n)^{2n}}\longrightarrow\frac1{\sqrt\pi}.
 $$
 :::
 
 ::: proof
-对相关和等于 $\int_{\mathbb R} e^{-2|u|}|F_Y(t-u)|^2\,du$。相位和的 Lipschitz 常数至多为 $YN(Y)$，所以模长为 $b>0$ 的峰值在半径 $b/(2YN(Y))$ 内仍至少为 $b/2$。在该区间积分可得 $|F_Y(t)|^3\le 4eYN(Y)G_Y(t)$。据此，在 $Y=T$ 与 $Y=3T/4$ 两个实际截断处均有一致相消。由两者之差得到 $\log T$ 以外的谐权重相位缺损，较短的时间窗则由 Landau 界控制。
+把系数 $m_\gamma e^{it\gamma}$ 放在相应的零点高度上，用单位尺度的柯西密度平滑。两份密度的卷积给出尺度二的洛伦兹核，所以 $G_Y(t)$ 等于平滑和的 $L^2$ 范数平方乘 $2\pi$。取 $R>0$。在区间 $[-R,Y+R]$ 上积分，每份平移密度遗漏的质量至多为 $\ell_R=1-2\arctan(R)/\pi$。对该区间应用柯西–施瓦茨不等式，得到
+$$
+G_Y(t)\ge \frac{2\pi}{Y+2R}\bigl(\max\{|F_Y(t)|-\ell_R N(Y),0\}\bigr)^2 .
+$$
 
-对每个固定的 $A>1$，截至 $A\log T_n$ 的归一化积分趋于中央的高斯常数。相对截断把遗漏比例控制在 $64/(aA)$ 以内。先取足够大的 $A$，再令 $n$ 趋于无穷。对分辨率的每个固定正倍数同样成立，故可用两侧割线取回含端点的硬带极限。完整证明由 Lean 内核核验。
+取 $R=\delta Y$，其中 $\delta>0$ 足够小，使 $\kappa<2\pi c^2/(1+2\delta)$。由于 $\ell_R\to0$ 且 $N(Y)/(Y\log Y)\to c$，这个严格差距保证 $N(Y)-|F_Y(t)|\ge dN(Y)$，其中 $d>0$ 与 $Y,t$ 无关。整个含端点截断内的谐权重至少为 $m_\gamma/(2Y)$。增加非负权重时，总质量减去相位和模长不会减小。由此把整个截断的未加权缺损传给谐权重，再用 $W(Y)\sim(c/2)\log^2 Y$，得到至少为某个正数除以 $\log Y$ 的归一化缺损。较短的时间窗沿用前述倒数高度、周期相位和 Landau 估计。
+
+对每个固定的 $A>1$，截至 $A\log T_n$ 的归一化积分趋于中央的高斯常数。对足够大的 $A$，相对截断把遗漏比例控制在 $64/(aA)$ 以内。分辨率换成任意固定的 $\lambda\eta_n$（$\lambda>0$）时，下界参数变为 $\lambda a$，遗漏比例界相应为 $64/(\lambda aA)$。令 $A$ 足够大，再取 $n$ 的极限，即可在相邻分辨率上用两侧割线取回含端点的硬带极限。完整证明由 Lean 内核检查。
 :::
 
-通常的 Montgomery 对相关猜想可推出这里所需的长频段上界。结论覆盖 $\eta_n\log T_n\to a$ 且 $0<a<\infty$ 的情形。进一步缩小分辨率时，对角项相对于带宽的贡献会增大，下一节给出相应下界。 [Ford–Soundararajan–Zaharescu §1](https://arxiv.org/abs/0805.2745v3)
+这个阈值包含一致的 $G_Y(t)=o(Y\log^2 Y)$ 情形，通常的 Montgomery 对相关猜想会给出这个小阶界。实际 $\zeta$ 零点在整个长频带上的阈值仍是本定理的数论前提。结论覆盖 $\eta_n\log T_n\to a$ 且 $0<a<\infty$ 的情形。对固定有限支撑和固定正方差，本页后面的占据对角项下界给出一个更细的分辨率范围，归一化 Fejér 矩在该范围发散。 在 RH 和猜想 5 的精细渐近下，Ford–Soundararajan–Zaharescu 的定理 1.4 推出相位和的抵消，再由定理 1.3 得出短区间素数结论。引理 1 用中心化对相关和的平移差来估计相位和。 [§1 与定理 1.3–1.4](https://arxiv.org/html/0805.2745v3#S1) · [引理 1](https://arxiv.org/html/0805.2745v3#Thmlemma1)
+
+::: {.theorem #thm-ch34-montgomery-bounded-count-upper title="有界计数误差给出一致的对相关上界" lean="D5/S3/Analytic/Oscillation/MontgomeryCountUpper.pairSum_le_of_bounded_discrepancy"}
+取任意局部有限的正纵坐标谱，各纵坐标带正整数重数。沿用含端点的计数 $N(Y)$ 与有序对和 $G_Y(t)$，令 $c=1/(2\pi)$。若存在常数 $D$，使所有充分大的 $Y$ 满足 $|N(Y)-cY(\log(cY)-1)|\le D$，则对每个 $\varepsilon>0$，所有充分大的 $Y$ 和所有实数 $t$ 都满足
+
+$$
+G_Y(t)\le (2\pi c^2+\varepsilon)Y(\log Y)^2.
+$$
+:::
+
+::: proof
+设计数误差从固定高度 $A\ge1$ 起有界。以截断内的任一纵坐标为中心，取半径 $r$ 的闭区间。只对区间中同时满足 $0<\gamma\le Y$ 的纵坐标求重数之和，所得质量至多为 $2cr\log Y+N(A)+2D+c$。低于或等于 $A$ 的部分由 $N(A)$ 控制。其余部分用两个含端点计数之差估计，左截断向左移 $1/\log Y$ 并限制在 $A$ 以上，使闭区间的左端点也被计入。按洛伦兹核的水平集积分，行和至多为 $2\pi c\log Y+N(A)+2D+c$。将每项余弦上界取为一，再按重数对各行求和。由 $N(Y)/(Y\log Y)\to c$ 得到结论。 完整证明由 Lean 内核检查。
+:::
+
+令 $M(Y)=cY(\log(cY)-1)$。由计数得到的首项系数只需要次对数误差。先把误差条件下的谱估计写清，再核对文献中的计数约定。
+
+::: {.theorem #thm-ch34-montgomery-sublog-count title="次对数计数误差控制配对和" lean="D5/S3/Analytic/Oscillation/MontgomerySublogCount.pairSum_le_of_sublog_discrepancy"}
+沿用上面的谱、含端点计数和有序配对和。若 $(N(Y)-M(Y))/\log Y\to0$，则对每个 $\varepsilon>0$，所有充分大的 $Y$ 和所有实数 $t$ 都满足 $|G_Y(t)|\le(2\pi c^2+\varepsilon)Y(\log Y)^2$。
+:::
+
+::: proof
+任取 $\delta>0$，选定足够大的 $A$，使 $A\le x\le Y$ 时两个端点各自的计数误差都由 $\delta\log Y$ 控制。有限截断的洛伦兹行估计因此只多出 $2\delta\log Y$ 的误差项。用三角不等式取绝对值，再乘以计重数的行数 $N(Y)$。由 $N(Y)/(Y\log Y)\to c$，取足够小的 $\delta$ 即得结论。完整证明由 Lean 内核检查。
+:::
+
+::: {.theorem #thm-ch34-inclusive-zeta-count-envelope title="零点高度处的含端点计数界" lean="D5/S3/Weil/ZetaRvm/InclusiveCountLimit.abs_ncount_sub_le_of_goodHeight"}
+设 $N_\zeta(T)$ 计入 $0<\operatorname{Im}\rho\le T$ 的所有非平凡零点及其解析重数。若 $M$ 和 $E$ 在每个 $T\ge T_0$ 处右连续，且 $|N_\zeta(t)-M(t)|\le E(t)$ 对每个非零点高度 $t\ge T_0$ 成立，则同一不等式对所有 $T\ge T_0$ 成立。
+:::
+
+::: proof
+$(T,T+1]$ 中的零点高度只有有限多个。因此从 $T$ 向右有一段开区间，其内没有零点高度，且计数始终等于 $N_\zeta(T)$。取右极限保留误差上界和截止点处的全部重数。完整证明由 Lean 内核检查。
+:::
+
+**手工推导。** 在 RH 下，Carneiro、Chandee 与 Milinovich 的公式 (1) 和定理 2 在非零点高度给出 $|N_\zeta(T)-M(T)|\le C\log T/\log\log T$，其中 $C$ 为某个常数，$T$ 充分大。这个上界函数在充分大的高度连续，可以用右极限定理把它传到每个充分大的含端点截止高度。于是实际 ζ 纵坐标满足次对数条件，上述一致配对和上界适用。临界碰撞定理仍要求在长频带上取得一个严格低于 $2\pi c^2$ 的固定系数。[公式 (1) 与定理 2](https://arxiv.org/abs/1309.1526)
+
+在有限截断内，将每个重数展开成不同副本，并取端点互不重叠、纵坐标距至多为一的配对。记 $C(u)$ 为离第一端点 $\gamma_u$ 至多一的截断内副本数。沿用上面的有序配对和，则
+$$
+G_Y(0)-G_Y(t)\ge \frac4{13}\sum_{(u,v)}C(u)\bigl[1-\cos(t(\gamma_u-\gamma_v))\bigr].
+$$
+第一端点邻域里的每个副本距两端分别至多一和二，对应的洛伦兹权分别至少为 $4/5$ 和 $1/2$。设从两个端点的单位相位到该副本的单位相位的弦长分别为 $x,y$。由恒等式
+$$
+\frac{13}{4}\left(\frac45x^2+\frac12y^2\right)-(x+y)^2=\frac{(8x-5y)^2}{40}\ge0
+$$
+及三角不等式，加权平方弦长和至少为端点间平方弦长的 $4/13$。两侧同除以二，即得相位亏损之界。逐列应用此界，再加总每对的两行。配对端点互异，所以各行只计一次，其余行均非负。距离界包含端点，重复纵坐标的副本也完整计入。 [带重数的配对亏损界](lean:D5/S3/Analytic/Oscillation/MontgomeryMatchingCap.spectrum_matching_defect)
+
+若 $Y>1$，配对数至少为 $c_1Y\log Y$，且每对的相位亏损至少为 $c_2$、第一端点邻域至少有 $c_3\log Y$ 个副本，其中 $c_2,c_3\ge0$，则归一化和较零频基准至少下降 $4c_1c_2c_3/13$。若零频基准至多为 $\kappa-\eta+4c_1c_2c_3/13$，归一化和就至多为 $\kappa-\eta$。取固定 $\eta>0$ 可得严格低于 $\kappa$ 的上界。真实 ζ 零点是否在所需的长频带上一致具备足够多这样的配对，仍待证明。[条件归一化上界](lean:D5/S3/Analytic/Oscillation/MontgomeryMatchingCap.strict_normalized_cap_of_matching)
 
 ### 具有同一单位频带轮廓的共格谱
 

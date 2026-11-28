@@ -104,7 +104,7 @@ Let $\mathcal{M}$ be a nonempty type equipped with a ternary comparison transpor
    and the carrier locks onto the minimal nontrivial degrees of freedom and minimal feature rank compatible with Laws I and II.
 :::
 
-Pause to notice how sparse these laws are. Not a single $\pi$, $e$, $\varphi$, real number $\mathbb{R}$, linear sum $+$, hand-typed dimension "$3$", or privileged identity $\mathbf{1}$ enters the statement. Yet three lines of elementary algebra (`ARGUED`) already unlock both its boundedness and its basepoint democracy:
+Pause to notice how sparse these laws are. Not a single $\pi$, $e$, $\varphi$, real number $\mathbb{R}$, linear sum $+$, hand-typed dimension "$3$", or privileged identity $\mathbf{1}$ enters the statement. Small Gram matrices from Law II constrain the fidelity, and the identities in Law I recover a group at each basepoint (`ARGUED`).
 
 - **The upper bound $\kappa \le 1$ comes for free**: apply Law II's rational Gram positivity with $n = 2$, sample $(x, y)$, and weights $(c_1, c_2) = (1, -1)$. Using $\kappa(x, x) = \kappa(y, y) = 1$ and symmetry gives
 
@@ -112,7 +112,9 @@ Pause to notice how sparse these laws are. Not a single $\pi$, $e$, $\varphi$, r
   1^2\cdot 1 + (-1)^2\cdot 1 + 2(1)(-1)\kappa(x, y) \;=\; 2 - 2\kappa(x, y) \;\ge\; 0 \quad \Longrightarrow \quad \kappa(x, y) \;\le\; 1,
   $$
 
-  so $\kappa(x, y) \in \mathbb{Q} \cap [0, 1]$ needs no separate axiom.
+  so nonnegativity gives $\kappa(x, y) \in \mathbb{Q} \cap [0, 1]$.
+
+  Now add an arbitrary probe point $z$ and write $d = \kappa(x,z)-\kappa(y,z)$. For the sample $(x,y,z)$ and rational weights $(1,-1,-d)$, normalization and symmetry give the Gram inequality $2-2\kappa(x,y)-d^2 \ge 0$. If $\kappa(x,y)=1$, then $x$ and $y$ have the same reading against every $z$. Conversely, if their rows agree, taking $z=y$ gives $\kappa(x,y)=\kappa(y,y)=1$. This argument uses only normalization, symmetry, and rational Gram positivity. Inferring equality of the underlying points from unit fidelity requires precisely that the row map $x\mapsto\kappa(x,\cdot)$ be injective. This is the role of extensional separation in Law II.
 
 - **Any point serves temporarily as an origin, recovering a group in three lines**: pick any temporary reference point $o \in \mathcal{M}$, and define a binary product $x \star_o z := [x, o, z]$ and local inverse $x^{-1_o} := [o, x, o]$. Associativity follows straight from Law I: $(x \star_o y) \star_o z = [[x, o, y], o, z] = [x, o, [y, o, z]] = x \star_o (y \star_o z)$. Left and right identity are $[o, o, z] = z$ and $[x, o, o] = x$, and the left and right inverses take two rewrites each:
 
@@ -124,6 +126,16 @@ Pause to notice how sparse these laws are. Not a single $\pi$, $e$, $\varphi$, r
   $$
 
   The original ternary transport recovers identically as $x \star_o y^{-1_o} \star_o z = [x, y, z]$, and shifting basepoint $o \mapsto o'$ via $x \mapsto [x, o, o']$ is a bijection (with inverse $x \mapsto [x, o', o]$) preserving both transport and fidelity. Every point stands on equal footing; an observer plants a local reference wherever it stands, computes, and lets the bridge cancel away without trace.
+
+**Identifying points with the same row.** Keep normalization and the other reading conditions of Law II while dropping extensional separation. Can we perform ternary transport on the resulting classes? Write $x\sim y$ when their rows agree. In the group $G$ based at $o$, let $N=\{n\in G:n\sim o\}$. Left translations are invertible and preserve the reading, so $x\sim y$ exactly when $x^{-1}y\in N$. For $n,m\in N$, left translation gives $nm\sim n\sim o$ and $n^{-1}\sim o$, so $N$ is a subgroup. When right translations also preserve the reading, multiplying first on the left by $g$ and then on the right by $g^{-1}$ gives $gng^{-1}\sim o$, so $N$ is normal.
+
+The classes are then the elements of the quotient group $G/N$, where $[xN,yN,zN]=(xy^{-1}z)N$. With left invariance alone, normality is still both necessary and sufficient for transport to descend. Indeed, if transport is independent of representatives, fixing its middle slot at $o$ gives a well-defined multiplication, so we can multiply both sides of $n\sim o$ on the left by $g$ and on the right by $g^{-1}$. Row equality makes the quotient reading independent of the first representative, and symmetry does the same for the second. Computing on representatives carries each available translation invariance to the quotient. The Gram form of a finite sample of classes is the Gram form of its representatives, and the set of reading values stays the same, preserving zero-reaching. Unit fidelity on the quotient holds exactly between equal classes.
+
+To check whether swapping the outer slots can still change the result, compare $xy$ with $yx$ in the quotient. Fixing the middle slot at the identity gives group multiplication, and in an abelian group every ternary transport is symmetric in its outer slots. Noncommutativity therefore survives exactly when some commutator $xyx^{-1}y^{-1}$ lies outside $N$, equivalently when $[G,G]\nsubseteq N$.
+
+Both outcomes occur on the same finite group. Take $G=S_3\times\{+1,-1\}$ with transport $[x,y,z]=xy^{-1}z$. One reading is $1$ when the permutation components agree and $0$ otherwise. Another uses the same rule with permutation parity. Both readings group points by the fibers of a homomorphism, and both left and right translations preserve the grouping relation. If $r_i$ records the permutation or parity of the sample point $x_i$, the Gram form is the sum of squares $\sum_r(\sum_{i:\,r_i=r}c_i)^2$. Both readings identify $(e,+1)$ with $(e,-1)$ and give zero between the identity and a transposition.
+
+The permutation reading gives quotient $S_3$, where the order of $(12)$ and $(23)$ still changes the product. The parity reading gives the abelian group of order two, where both orders give the even class. Thus passing to reading classes restores extensional separation, and which commutators survive determines whether the reading can still distinguish the order of transport. Minimality still requires a specified class of models.
 
 ## 1.4 Why a Computable Typeclass class OmegaSpace Rather Than an Unchecked axiom {#sec-ch01-typeclass-not-axiom}
 
@@ -153,6 +165,10 @@ class OmegaSpace (M : Type) where
 This interface guarantees exactly the fields it lists. Take the eight-element quaternion group $Q_8 = \{\pm 1,\pm\mathbf{i},\pm\mathbf{j},\pm\mathbf{k}\}$ with transfer $[x,y,z]=xy^{-1}z$ and constant reading $\kappa(x,y)=1$. The group identities give cancellation and associativity. The constant reading meets the remaining fields and even gives the nonnegative Gram form $(\sum_i c_i)^2 \ge 0$, while $\mathbf{i}\mathbf{j}\neq\mathbf{j}\mathbf{i}$. Yet $\kappa(1,-1)=1$ and the reading cannot approach zero. A full model needs separate evidence for separation, nonnegativity, Gram positivity, zero-reaching, and noncommutativity, together with a specified class of structures for the minimality claim.
 
 The zero-axiom library verifies integer quaternion laws using nonzero representatives and ray equivalence. Chapter 3 then derives strict cancellation and reading properties by hand for canonical representatives and gives the additional assumptions for the real-valued rank-five result. See [Chapter 3](ch03-canonical-ternion-manifold.md).
+
+::: {.film src="the-bare-kernel"}
+**The bare CIC kernel has three primitives and four reductions while classical axioms slip in through shortcuts; precision becomes a finite contract $1/M$, and the Mother Axiom keeps only a ternary transport and a fidelity $\kappa$, written as a computable typeclass rather than a raw `axiom` (2 min 49 s).** Cyan panels list dependent functions, universes and finite inductive types with the four reductions $\beta$, $\delta$, $\iota$, $\zeta$, and $3$ is drawn as the finite tree `succ succ succ zero`; magenta cards show `Classical.choice`, `Quot.sound` and `propext`, and this type-theoretic metatheory is labelled violet as a literature result ([@rem-ch01-cic-hedberg-literature]). Deciding $12/18 = 2/3$ and $3/4 \neq 2/3$ by cross-multiplication, the $47$ reduced fractions of $[0, 1]$ with denominators up to $12$ and their least gap $1/132$ (between $1/12$ and $1/11$, amber), and $[1 : 2] \odot [1 : 3] = (5, 5) \sim [1 : 1]$ and $[1 : 2] \odot [2 : 5] = [9 : 8]$ are computed on screen (cyan NUM, [@ex-ch01-finite-horizon-budget]), raising the horizon from $M = 3$ to $M' = 9$. The precision contract and the three Mother Laws are model statements (violet, [@def-ch01-observer-precision], [@def-ch01-axiom-omega]), and the transport picture is schematic; $\kappa \le 1$ from the Gram form and the local group with any point $o$ as identity follow the chapter's derivations and are labelled argued. The raw `axiom` deriving $0 = 1$ and stalling reduction, and the schematic `class OmegaSpace`, are argued; $Q_8$ with constant $\kappa \equiv 1$ satisfies every listed field (checked case by case on screen), yet $\kappa(1, -1) = 1$ breaks separation. This chapter cites no Lean declaration, so the film shows no green.
+:::
 
 ::: {.remark #rem-ch01-three-route-comparison title="Comparison of Raw axiom, Classical Mathlib, and Zero-Axiom OmegaSpace Routes (MODEL)"}
 The architectural contrast across the three formalization routes is stark:

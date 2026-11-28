@@ -185,7 +185,7 @@ C(3)&=\cdots=C(7)=1,\qquad C(8)=2,\\
 \end{aligned}
 $$
 
-非降的有界整数序列必趋于常值，此处终值属于 $\{2,3,4\}$。
+非降的有界整数序列必趋于常值，由 [@thm-appe-chordal-banach-sharp-four] 及其实 Banach 加法群推论可知终值为 $4$。
 
 **实标量与 Banach 目标。** 对 $n\ge3$，实数增益下，最小一致误差等于定向简单回路的最大绝对增益均值。下界来自势差的消去。反过来，若这些均值至多为 $r$，给各有向棱权重 $g_{uv}+r$。反向也满足回路界，折返权重为 $2r$，故无负回路。从新增零权源点取最短路距离作势，最短路距离在棱的两个方向上均满足所需不等式，故误差至多 $r$。弦分解把长为 $\ell$ 的回路分成 $\ell-2$ 个三角形，故上界为 $(n-2)\varepsilon/n$。取零辐条的扇图，沿扇缘路径给每棱增益 $\varepsilon$，则长 $n$ 的外圈达到此界。把例子扩为 $K_n$ 可令所有从较小到较大的非辐条棱取相同增益。对任意实 Banach 目标，$K_n$ 的精确统一系数也是 $(n-2)/n$，见 [@thm-appe-complete-cliquesum-banach]。
 
@@ -357,7 +357,7 @@ $$
 **路径幂。** 对不同的下标 $x,y$，闭区间 $[x,x+k]$、$[y,y+k]$ 相交当且仅当 $x\le y+k$ 且 $y\le x+k$，这正是 $P_n^k$ 的邻接条件。完整证明由 Lean 内核检查。
 :::
 
-**手工推导。** 第 1 项的系数对每个非空有限图都严格小于 $k-1$。在 $k=2$ 时，系数小于 $1$，并在 [@thm-appe-two-tree-stretch-separation] 的递归 $2$-树上逐个达到该有限规模界，且随递归深度趋于 $1$。在 $k=3$ 时，系数小于 $2$，将 [@thm-appe-clique-bounded-banach-potential] 的 $8/3$ 界改进到所有团大小至多为 $4$ 的弦图，包括所有 $3$-树。路径幂 $P_n^3$（$n\ge4$）从 $K_4$ 开始，每次把一个新顶点接到前面的 $3$ 个顶点所成的团上。由 [@thm-appe-chordal-banach-limit-two]，这族 $3$-树的最优实 Banach 系数趋于 $4/3$。是否有某棵 $3$-树的系数超过 $4/3$，仍是开放问题。
+**手工推导。** 第 1 项的系数对每个非空有限图都严格小于 $k-1$。在 $k=2$ 时，系数小于 $1$，并在 [@thm-appe-two-tree-stretch-separation] 的递归 $2$-树上逐个达到该有限规模界，且随递归深度趋于 $1$。在 $k=3$ 时，系数小于 $2$，将 [@thm-appe-clique-bounded-banach-potential] 的 $8/3$ 界改进到所有团大小至多为 $4$ 的弦图，包括所有 $3$-树。当 $n\ge4$ 时，路径三次幂 $P_n^3$ 从 $K_4$ 开始，每个新顶点接到前面 $3$ 个顶点所成的团上。这个图族的系数上确界恰为 $\frac43$，见 [@thm-appe-three-tree-path-sup]。
 
 第 2 项对实 Banach 空间的加法群也适用，取 $d(a,b)=\|a-b\|$。第 4 项将 [@thm-appe-chordal-banach-limit-two] 的路径幂下界带入有限区间图类。先固定 $k$ 让 $n$ 趋于无穷，再增大 $k$，最优系数的下界可任意接近 $2$。因此有限区间图上的实 Banach 重构系数与双不变伪度量群的通用重构系数，上确界均恰为 $2$。
 
@@ -452,7 +452,7 @@ $$
 于是跨层残差的半范数至多为 $R_k\varepsilon$。对于同层棱，定向使 $P(u)\subseteq P(v)$。两端共用锚点与偏移 $Q_C$。固定 $b\in P(u)$，将经 $b$ 到 $u$ 再沿棱到 $v$ 的路径，与 $v$ 端的各条前驱路径比较。匹配的 $b$ 项只用三角形 $(b,u,v)$，误差至多为 $\varepsilon$，其余项的附加误差至多为 $2\varepsilon$。先对 $P(v)$ 加权，得到 $(3-2w_v(b))\varepsilon\le(3-2f(k))\varepsilon$，再对 $P(u)$ 加权，界不变。由于 $2\delta\le(k-2)/k$，有 $R_k-(3-2f(k))=1-2/k-2\delta\ge0$。相邻顶点的层号至多相差 $1$，反向只使残差变号，故所有有向棱均满足该界。完整证明由 Lean 内核检查。
 :::
 
-**手工推导。** 取 $k=4$，每棵 $4$-树的团大小至多为 $5$，故系数至多为 $R_4=79/27<3$，严格改进了 [@thm-appe-clique-bounded-banach-potential] 的 $4-4/k=3$ 界和 [@thm-appe-simplicial-interval-split-potential] 第 1 项的规模无关界 $k-1=3$。对团大小无统一限制的弦图，实 Banach 系数 $C_{\mathrm{Ban,chordal}}$ 在 $[2,4]$ 内的精确值仍待确定，双不变伪度量群的通用系数 $C_{\mathrm{chordal}}$ 仍待在 $\{2,3,4\}$ 中确定。
+**手工推导。** 取 $k=4$，每棵 $4$-树的团大小至多为 $5$，故系数至多为 $R_4=79/27<3$，严格改进了 [@thm-appe-clique-bounded-banach-potential] 的 $4-4/k=3$ 界和 [@thm-appe-simplicial-interval-split-potential] 第 1 项的规模无关界 $k-1=3$。团大小不受限时的通用常数见 [@thm-appe-chordal-banach-sharp-four]。
 
 前驱权重的偏置能够改善有界团数情形。若不限制团数，单纯逐层平均与两步构造的根平均究竟能控制多少误差？先固定实标量增益，沿用上面的前驱集 $P(x)$、影子 $S_C$、锚点 $a_C$ 和传递量 $Q_C$。称增益 $g:V\times V\to\mathbb R$ 为三角 $1$-平坦，若它对所有顶点对反对称，并且每个有序三角形 $(x,y,z)$ 都满足 $|g(x,y)+g(y,z)-g(x,z)|\le1$。
 
@@ -515,7 +515,7 @@ $$
 其绝对值也满足这一界。完整证明由 Lean 内核检查。
 :::
 
-**手工推导。** 缩放增益可把三角缺陷 $1$ 换成任意 $\varepsilon>0$。纯前驱重心递推没有统一误差系数，而当 $m,N$ 趋于无穷时，两步势采用仅依赖图的锚点、前驱权重与根平均，无法把统一误差界降到 $4\varepsilon$ 以下。超出两步构造或依赖增益本身的构造能否在所有弦图上突破这一界，仍属开放问题。实 Banach 通用系数在 $[2,4]$ 内、双不变伪度量群的通用系数在 $\{2,3,4\}$ 中的精确值，以及是否存在系数超过 $4/3$ 的 $3$-树，均待确定。
+**手工推导。** 缩放增益可把三角缺陷 $1$ 换成任意 $\varepsilon>0$。纯前驱重心递推没有统一误差系数，而当 $m,N$ 趋于无穷时，两步势采用仅依赖图的锚点、前驱权重与根平均，无法把统一误差界降到 $4\varepsilon$ 以下。[@thm-appe-chordal-banach-sharp-four] 进一步将这个障碍推广到任意势。
 
 根平均的下界给出了检验重构方法的同一族图。团大小有界时，可以按前驱数目分配权重来改进两步重构。对桥接图，则可以先根据通用顶点拟合每份副本的核，再补上根顶点。
 
@@ -547,7 +547,7 @@ $$
 **桥接图。** 在每份副本中，以去根后留下的顶点为 $H$，以 $U$ 为其中的通用顶点集。作为唯一的核外顶点，根 $o$ 恰与大小为 $m$ 的团 $A$ 相邻。对整份副本应用第 2 项，由 $m\ge2$ 得局部误差界 $(2-2/m)\varepsilon$。沿根组成的路径依次平移各副本的势，使相邻根的势差等于对应桥边增益。平移保持各副本内的势差，所有桥边的残差为零。完整证明由 Lean 内核检查。
 :::
 
-**手工推导。** 第 1 项对每个 $k\ge4$ 都严格改进 [@thm-appe-biased-clique-banach-potential] 的界。减去两界共有的 $4-4/k$ 后，比较等价于 $2(k-3)(k-1)^3>(k-2)^2D$，这由 $D<(k-1)^2$ 和 $2(k-3)(k-1)=2((k-2)^2-1)>(k-2)^2$ 得出。取 $k=4$，每棵 $4$-树的重构系数至多为 $20/7$，且 $20/7<79/27<3$。当 $N(m-1)>4m$ 时，[@thm-appe-bfs-barycenter-obstructions] 对任意预先固定的根平均两步方案给出的实值三角-$1$-平坦增益，有边误差至少为 $4-4/m-8/N>2-2/m$。第 3 项对同一增益给出所有边误差至多为 $2-2/m$ 的势。无团大小限制的弦图上，实 Banach 通用系数在 $[2,4]$ 内、双不变伪度量群的通用系数在 $\{2,3,4\}$ 中的精确值仍待确定。
+**手工推导。** 第 1 项对每个 $k\ge4$ 都严格改进 [@thm-appe-biased-clique-banach-potential] 的界。减去两界共有的 $4-4/k$ 后，比较等价于 $2(k-3)(k-1)^3>(k-2)^2D$，这由 $D<(k-1)^2$ 和 $2(k-3)(k-1)=2((k-2)^2-1)>(k-2)^2$ 得出。取 $k=4$，每棵 $4$-树的重构系数至多为 $20/7$，且 $20/7<79/27<3$。当 $N(m-1)>4m$ 时，[@thm-appe-bfs-barycenter-obstructions] 对任意预先固定的根平均两步方案给出的实值三角-$1$-平坦增益，有边误差至少为 $4-4/m-8/N>2-2/m$。第 3 项对同一增益给出所有边误差至多为 $2-2/m$ 的势。团大小不受限时的精确通用常数见 [@thm-appe-chordal-banach-sharp-four]。
 
 前驱权重界用团大小控制误差。若图已有团树分解，还可以让误差随分隔集的大小与树上的层数增长，或在每个共享顶点处直接合并相邻两袋的势。
 
@@ -594,7 +594,7 @@ $$
 每个顶点若仅在一个袋内，就取该袋平移后的势值。若在两个袋内，由路径上的交集性质，这两个袋必相邻，于是取二者势值的中点。对一条袋内棱，若两端都未共享，保留原残差。若两端在同一个分隔集内，残差就是两袋残差的均值，两项都由 $M(T,K)\varepsilon$ 控制。其余情形中，两端至多各贡献一次位移，且对应不同入射树棱，未共享的端点贡献为零。因此误差至多为 $(1-2/|K(a)|+\tau(a))\varepsilon$。每个权重都在 $[0,1)$ 内，树有限，故 $\tau(a)<2$，从而 $M(T,K)<3$。完整证明由 Lean 内核检查。
 :::
 
-**手工推导。** 两项都允许任意大的袋，也都允许袋内的棱连接不同的入射分隔集，可与 [@thm-appe-complete-cliquesum-banach] 中的分离团和条件比较。任意有限 $m\ge1$ 都给出 $R_\ell<1+\ell$（$\ell\ge1$），因为递推中最后一项严格小于 $1+R_\ell$。故第 1 项在 $D\le5$ 时给出严格小于 $3$ 的系数，在 $D\le7$ 时给出严格小于 $4$ 的系数。若 $m\le4$ 且 $D\le19$，用 $m=4$ 的递推作上界，得 $R_9=373533/131072<20/7$，严格低于 [@thm-appe-multitier-universal-banach] 的一般 $4$-树上界。第 2 项在每个顶点至多属于两个袋时，对任意直径都给出 $M(T,K)<3$。无团大小限制的弦图上，实 Banach 通用系数在 $[2,4]$ 内、双不变伪度量群的通用系数在 $\{2,3,4\}$ 中的精确值仍待确定。是否有 $3$-树的系数超过 $4/3$，以及 $C_{\mathrm{SU}(2)}(K_4)$ 在 $[c_*,4/5]$ 内的精确值，也仍是开放问题。后一个问题见 [@prob-appe-round-quaternion-k4-optimal-constant]。
+**手工推导。** 两项都允许任意大的袋，也都允许袋内的棱连接不同的入射分隔集，可与 [@thm-appe-complete-cliquesum-banach] 中的分离团和条件比较。任意有限 $m\ge1$ 都给出 $R_\ell<1+\ell$（$\ell\ge1$），因为递推中最后一项严格小于 $1+R_\ell$。故第 1 项在 $D\le5$ 时给出严格小于 $3$ 的系数，在 $D\le7$ 时给出严格小于 $4$ 的系数。若 $m\le4$ 且 $D\le19$，用 $m=4$ 的递推作上界，得 $R_9=373533/131072<20/7$，严格低于 [@thm-appe-multitier-universal-banach] 的一般 $4$-树上界。第 2 项在每个顶点至多属于两个袋时，对任意直径都给出 $M(T,K)<3$。团大小不受限时的精确通用常数见 [@thm-appe-chordal-banach-sharp-four]。$C_{\mathrm{SU}(2)}(K_4)$ 在 $[c_*,4/5]$ 内的精确值仍是开放问题。见 [@prob-appe-round-quaternion-k4-optimal-constant]。
 
 给前驱与团袋中的星势加权，可以分别利用旧残差的抵消和相邻团袋的共同权重来控制重构误差。
 
@@ -639,7 +639,45 @@ $$
 
 第 2 款的下列推论允许任意团大小与团树直径，各团袋均须非空。若 $D\le2$ 且团树最大度数至多为 $3$，可取严格小于 $11/3$ 的系数。若 $D\le1$ 且最大度数至多为 $2$，可取严格小于 $2$ 的系数。若 $D\le2$ 且每条树边满足 $\max\{|K(a)|,|K(b)|\}\le c|S_{ab}|$（$c\ge1$），可取系数 $5-4/c$，在 $c=2$ 时为 $3$，在 $c=4/3$ 时为 $2$。
 
-团大小不受限时，区间 $[2,4]$ 内的最优实 Banach 统一系数、集合 $\{2,3,4\}$ 中的双不变伪度量群最优统一系数，以及是否有 $3$-树的系数超过 $4/3$，均仍待确定。等式 $C_{\mathrm{SU}(2)}(K_4)=c_*$ 的全局 Lean 形式化也仍是开放问题。见 [@prob-appe-round-quaternion-k4-optimal-constant]。
+在 [@thm-appe-weighted-simplicial-and-occurrence-banach] 的加权消去中，旧残差之差可借旧三角形来估计。若一个保留的恒等式还不足以控制误差，再用一个恒等式消去最新前驱的贡献。
+
+::: {.theorem #thm-appe-multi-identity-simplicial-banach title="多个保留恒等式给出的单纯消去 Banach 势界" lean="D5/S3/Combinatorics/Graph/Chordal/MultiIdentitySimplicialBanach.SimpleGraph.IsChordal.exists_regrouped_simplicial_banach_gain_potential, D5/S3/Combinatorics/Graph/Chordal/MultiIdentitySimplicialBanach.SimpleGraph.IsChordal.exists_multiIdentity_cliqueSix_banach_gain_potential, D5/S3/Combinatorics/Graph/Chordal/MultiIdentitySimplicialBanach.SimpleGraph.IsChordal.exists_multiIdentity_cliqueSeven_banach_gain_potential"}
+设 $G$ 是有限顶点集 $V$ 上的简单弦图，$E$ 是实半赋范向量空间。取 $g:V\times V\to E$ 和实数 $\varepsilon\ge0$。假设对所有 $x,y\in V$ 有 $g(y,x)=-g(x,y)$，且每当 $xy,yz,xz$ 都是 $G$ 的边时，有 $\|g(x,y)+g(y,z)-g(x,z)\|\le\varepsilon$。以下各款分别给出一个势 $\varphi:V\to E$，使每对相邻顶点 $(u,v)$ 的残差半范数 $\|g(u,v)-(\varphi(v)-\varphi(u))\|$ 满足所述界。
+
+1. **利用旧三角形重组。** 设 $k\in\mathbb N$，$k\ge2$，且 $G$ 的每个团 $C$ 都满足 $|C|\le k+1$。对任意满足 $\max\{1,k-2\}\le R\le k-1$ 和 $2(k-1)\le R(R+1)$ 的实数 $R$，残差半范数至多为 $R\varepsilon$。
+2. **团大小至多为 $6$。** 若 $G$ 的每个团至多有 $6$ 个顶点，残差半范数至多为 $(2\sqrt3-1)\varepsilon$。
+3. **团大小至多为 $7$。** 若 $G$ 的每个团至多有 $7$ 个顶点，残差半范数至多为 $\frac{3+\sqrt7}{2}\varepsilon$。
+:::
+
+::: {.proof #pf-appe-multi-identity-simplicial-banach}
+将完美消去序逆转，得到逐个插入顶点的顺序（完美消去序由弦图的消去定理给出）。记 $P_v$ 为 $v$ 的前驱，即已经插入且与 $v$ 相邻的顶点。$P_v$ 连同 $v$ 构成团。若 $P_v$ 为空，取 $\varphi(v)=0$。否则取候选值 $\varphi(x)+g(x,v)$ 的加权平均，权重 $w_v(x)\ge0$ 在 $P_v$ 上之和为 $1$。记 $r_{xy}=g(x,y)-(\varphi(y)-\varphi(x))$、$\delta_{xyz}=g(x,y)+g(y,z)-g(x,z)$。平均式给出恒等式 $\sum_{x\in P_v}w_v(x)r_{vx}=0$，以后插入顶点时这条恒等式仍成立。
+
+对 $c\in P_v$，新边残差为 $\sum_{x\in P_v\setminus\{c\}}w_v(x)(r_{cx}-\delta_{cxv})$。其中三角缺陷的加权和至多贡献 $(1-w_v(c))\varepsilon$。已拟合的边满足 $\|r_{xy}\|\le R\varepsilon$。令 $s=1/(R+1)$，当 $w_v(c)\ge s$ 时，直接估计给出 $(1-s)(R+1)\varepsilon=R\varepsilon$。此外，对 $x,y\in P_c$，由 $r_{cx}-r_{cy}=\delta_{cxy}-r_{xy}$ 得 $\|r_{cx}-r_{cy}\|\le (R+1)\varepsilon$，重合时差为零。
+
+**第 1 款。** 前驱不足 $k$ 个时取均匀权重，因 $|P_v|\le k-1\le R+1$，可用直接估计。恰有 $k$ 个前驱时，最新的前驱权重为 $t=1-(k-1)s$，其余为 $s$，且 $0\le t\le s$。只需处理最新前驱 $c$ 的边。其余 $k-1$ 个前驱组成 $A=P_v\setminus\{c\}\subseteq P_c$。若 $P_c=A$，由 $c$ 处的均匀权重恒等式，旧残差之和为零，只余至多 $(1-t)\varepsilon\le R\varepsilon$ 的三角缺陷。若 $P_c=A\cup\{z\}$，记 $b$ 为 $P_c$ 中最新的顶点。减去 $c$ 处的恒等式后，旧残差和化为 $(s-t)(r_{cb}-r_{cz})-t r_{cz}$。旧三角形给出的差界将总误差控制在 $\bigl((s-t)(R+1)+tR+1-t\bigr)\varepsilon$ 以内。括号内等于 $2(k-1)s$，由二次不等式可知它至多为 $R$。
+
+**第 2、3 款。** 此时前驱数上限 $k$ 分别为 $5$ 和 $6$。至多有 $3$ 个前驱时取均匀权重。否则按插入顺序给权 $s,s,s,t,0,\ldots$，其中 $t=1-3s$。这两款的 $R\ge2$，且 $1/4\le s\le1/3$，故 $0\le t\le s$。权重至少为 $s$ 的边可直接估计。其余边的旧残差和仅涉及 $c$ 之前的顶点。将这些顶点的权重延拓到 $Q=P_c$，其余位置补零，记所得权重为 $b_x$。令 $\mu=1-w_v(c)$。减去 $\mu$ 倍的保留恒等式后，旧残差和变为 $\sum_{x\in Q}h_xr_{cx}$，其中 $h_x=b_x-\mu w_c(x)$，且 $\sum_{x\in Q}h_x=0$。将正系数与负系数按质量配对，若总负质量为 $M=\sum_{x\in Q}\max\{-h_x,0\}$，则旧残差和的半范数至多为 $M(R+1)\varepsilon$。例如 $M>0$ 时，每对正负系数 $h_x,h_y$ 分配质量 $h_x(-h_y)/M$，再对残差差取三角不等式。若 $M=0$，和为零。
+
+在例外情形，$Q$ 中最新的顶点 $a$ 有系数 $\lambda=h_a\ge0$，而 $Q\setminus\{a\}\subseteq P_a$。用 $a$ 处的恒等式将 $\lambda r_{ca}$ 写成以 $\lambda w_a(x)$ 加权的 $r_{ca}+r_{ax}$ 之和。对共有前驱 $x\in Q\cap P_a$，换成 $r_{cx}$ 只需付出一项三角缺陷。对额外前驱 $x\in P_a\setminus Q$，保留辅助向量 $r_{ca}+r_{ax}$。它与任一负系数位置 $y$ 的 $r_{cy}$ 之差为 $(r_{ax}-r_{ay})+\delta_{cay}$，比通常的配对界多至多 $\varepsilon$。对共有和额外前驱合计，这些额外代价至多为 $\lambda\varepsilon$，因为 $w_a$ 的和为 $1$。重新配对后，若负质量为 $M$，加入新三角形的代价，归纳所需的不等式为 $M+s(\mu+\lambda)\le1-s$。无需第二个恒等式时取 $\lambda=0$。
+
+这个不等式可直接按位置核算。将 $Q$ 的位置从 $0$ 开始编号，记 $d=|Q|$，$T$ 为保留当前权重的位置集合，即 $P_v$ 中早于 $c$ 的顶点在 $Q$ 中的位置，$j=|T|$。只需检查 $3\le j\le d\le k$、$j<k$。在 $T$ 上依次取 $b_x=s,s,s,t,0,\ldots$。仅在下列情形消去最后一个位置 $d-1$。
+
+- $d=k=5$、$j=3$ 且 $3,4\in T$。
+- $d=k=6$，且 $j=3$、$4,5\in T$，或 $j=4$ 且 $T$ 恰含 $0,1,2$ 中的一个位置。
+
+消去时，$P_a$ 至多比 $Q\setminus\{a\}$ 多一个顶点。因权重随位置不增，估算负质量时可将每个留下的位置按向后移一位计算其获得的权重。即将位置 $i<d-1$ 的系数替换为 $h_i+\lambda w_{i+1}$，其中 $w_{i+1}$ 是 $Q$ 的第 $i+1$ 位权重，再把最后一位系数置零。逐一代入 $T\subseteq\{0,\ldots,d-1\}$，下表给出 $M+s(\mu+\lambda)$ 的上界。各行的值按 $j$ 从小到大排列。
+
+| $k$ | 一次恒等式 | 两次恒等式 |
+| --- | --- | --- |
+| $5$ | $3s-3s^2$, $2s$ | $12s^2-s$ |
+| $6$ | $9s^2$, $1-s$, $2s$ | $3s^2+2s$, $3s-t^2$ |
+
+第 2 款取 $s=1/(2\sqrt3)$，满足 $12s^2=1$。第 3 款取 $s=(5-\sqrt7)/9$，满足 $9s^2-10s+2=0$。代入可得各项均至多为 $1-s$。这样每次插入都保持边残差界，反向边也由反对称性满足同一界。完整证明由 Lean 内核检查。
+:::
+
+记 $\omega(G)$ 为最大团的顶点数。在 $\omega(G)\le4$ 时，第 1 款给出旧的 $R=(\sqrt{17}-1)/2\approx1.5616$ 上界。对所有满足 $\omega(G)\le4$ 的有限弦图，[@thm-appe-three-tree-clique-four-bracket] 给出 $\frac43\le S_4\le\frac{72537}{50000}=1.45074<\frac32$。在 $\omega(G)\le5$ 时可取 $R=2<(3+\sqrt{33})/4$，因而所有 $4$-树都有 $2\varepsilon$ 的统一上界。第 2 款在 $\omega(G)\le6$ 时给出 $2\sqrt3-1\approx2.4641<3$，改进了前述界。第 3 款在 $\omega(G)\le7$ 时给出 $(3+\sqrt7)/2\approx2.8229<3$，因而所有 $6$-树都有严格小于 $3$ 的统一系数。
+
+团大小不受限时，最优实 Banach 统一系数恰为 $4$，双不变伪度量群的最优统一系数亦为 $4$，见 [@thm-appe-chordal-banach-sharp-four]。支配团条件下的可选上界 $3$ 仍需形式化依据。对于取圆度量的非阿贝尔群 $\mathrm{SU}(2)$，Lean 4 给出统一上界系数 $\frac{434}{125}=3.472<\frac72<4$，另有小缺陷和小团数下的重构界，见[附录 E.8.1.7](appendix-e-s08-s01-s07-chordal-su2-sharp-bounds.md#sec-appe-chordal-su2-sharp-bounds)。最优统一系数仍待确定。等式 $C_{\mathrm{SU}(2)}(K_4)=c_*$ 仍是独立的开放问题，见 [@prob-appe-round-quaternion-k4-optimal-constant]。
 
 接下来固定非线性目标群，考察完全图上的最优系数。
 
@@ -915,3 +953,7 @@ $$
 这里的因子 $m-2$ 与 [@thm-appe-chordal-gain-potential-stability] 中的 $\lvert V\rvert-2$ 来源不同：定理中它是沿消去次序累积的三点偏差的个数，这里它是扰动矩阵每行非零元的个数。
 
 对于半比较，返回相位刻画了另一种三点效应。见[曲率从哪里来](appendix-e-s08-s01-s04-curvature.md#sec-appe-curvature-from-half-comparison)。
+
+本节的弦图 Banach 精确分层、实 $L_1$、Hilbert、因果三树与线性填补结果见[附录 E.8.1.8](appendix-e-s08-s01-s08-chordal-banach-exact-strata.md#sec-appe-chordal-banach-exact-strata)。
+
+内积空间与实 $L_1$ 的系数次序反转、路径幂的圆周系数以及 $\mathrm{SU}(2)$ 切空间下界和球冠上界见[附录 E.8.1.9](appendix-e-s08-s01-s09-hilbert-reversal-circle-su2.md#sec-appe-hilbert-reversal-circle-su2)。

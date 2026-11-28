@@ -105,7 +105,13 @@ $$
 
 然而正当你以为 $105$ 圈终于锁死了微观作用量时，维数清点立刻泼下一盆冷水：即便把全局真空位置、三窗和参考味读数全部钉死，在满足归一、非负与前述 $w_{104}, w_{105}$ 下界约束的条件下，这套 $105$ 圈作用量仍留出一个 **$100$ 维的连续可行系数族**！
 
-这族自由度也不能靠最常见的变分选权收束。在只要求归一、非负与全高度驻于参考相位的切片上，最大熵、最小二范数与解析中心三种选权的最优权，对整个参考味负支都有 $w_{105} < 7.2\%$，而共同真空要求末圈份额超过 $7.2\%$。由凸性，三者在可行族上的唯一最优权必落在边缘：参考相位仍是全局最低点，却与另一相位等能或失去正定曲率；没有简并的严格真空构成一个相对开集，这三种选权都无法在其中取到最优（在旗舰相位无条件成立，其余相位以可行族非空为前提）。在旗舰相位上，真空条件使最大熵从至少 $4.2474$ 奈特降到至多 $2.6290$ 奈特，使最小二范数平方放大 $5.36$ 倍以上。这并非一切严格凸选权的宿命，以某个严格真空为中心的二次泛函就会选中它自身；但这三条不依赖外部目标的标准原理都选不出严格真空（[三种选权与边缘真空](https://github.com/the-omega-institute/trureturing-experiments/blob/e89ffddb8b8e299add2ac0edca523c221a17a4f8/experiments/ch39-omega-research/replay/%E6%9C%80%E5%A4%A7%E7%86%B5%E6%9C%80%E5%B0%8F%E4%BA%8C%E8%8C%83%E6%95%B0%E4%B8%8E%E8%A7%A3%E6%9E%90%E4%B8%AD%E5%BF%83%E5%8F%AA%E8%83%BD%E9%80%89%E5%87%BA%E8%BE%B9%E7%BC%98%E7%9C%9F%E7%A9%BA.md) · [区间证书](https://github.com/the-omega-institute/trureturing-experiments/blob/e89ffddb8b8e299add2ac0edca523c221a17a4f8/experiments/ch39-omega-research/replay/ch39-convex-selection-marginal-vacuum.py)）。
+这族自由度也不能靠最常见的变分选权收束。在只要求归一、非负与全高度驻于参考相位的切片上，最大熵、最小二范数与解析中心三种选权的最优权，对整个参考味负支都有 $w_{105} < 7.2\%$，而共同真空要求末圈份额超过 $7.2\%$。由凸性，三者在可行族上的唯一最优权必落在边缘：参考相位仍是全局最低点，却与另一相位等能或失去正定曲率；没有简并的严格真空构成一个相对开集，这三种选权都无法在其中取到最优（在旗舰相位无条件成立，其余相位以可行族非空为前提）。在旗舰相位上，真空条件使最大熵从至少 $4.2474$ 奈特降到至多 $2.6290$ 奈特，使最小二范数平方放大 $5.36$ 倍以上。这并非一切严格凸选权的宿命，以某个严格真空为中心的二次泛函就会选中它自身；但这三条不预设真空权的标准原理都选不出严格真空（[三种选权与边缘真空](https://github.com/the-omega-institute/trureturing-experiments/blob/e89ffddb8b8e299add2ac0edca523c221a17a4f8/experiments/ch39-omega-research/replay/%E6%9C%80%E5%A4%A7%E7%86%B5%E6%9C%80%E5%B0%8F%E4%BA%8C%E8%8C%83%E6%95%B0%E4%B8%8E%E8%A7%A3%E6%9E%90%E4%B8%AD%E5%BF%83%E5%8F%AA%E8%83%BD%E9%80%89%E5%87%BA%E8%BE%B9%E7%BC%98%E7%9C%9F%E7%A9%BA.md) · [区间证书](https://github.com/the-omega-institute/trureturing-experiments/blob/e89ffddb8b8e299add2ac0edca523c221a17a4f8/experiments/ch39-omega-research/replay/ch39-convex-selection-marginal-vacuum.py)）。
+
+边缘真空并非无可避免。换一条选权：取参考相位处能量随商环面弦距离平方增长的最大常数。它以参考味数据确定的参考相位为中心，并依赖一个人为选定的环面度量，但同样不预设任何真空权。在旗舰相位上，这一裕度的最优值落在 $[3.08449,\, 3.084492)$ 内，取到最优值的每一个权都在全部有限高度直至单位辐边极限上使参考相位成为严格共同真空，且 $w_{105} \in (0.111256,\, 0.111277)$，十一项之外的总份额不足 $6.7 \times 10^{-6}$。只看参考相位处曲率的选权则相反：它的全部最优权都让另一相位的能量比参考相位低 $9.13$ 以上，选出的都不是真空。这一收束也不是对 $100$ 个自由系数的无选择确定：把三方向弦度量换成两条钟轴，最优权仍是严格真空，末圈份额却落到与之不相交的区间 $(0.110870,\, 0.110874)$。
+
+在旗舰相位上，设 $c_1,c_2>0$ 为两条钟轴的系数，$c_3\ge0$ 为第三个弦方向的系数，记 $R=\max(c_1,c_2,c_3)/\min(c_1,c_2)$。用三方向等权度量的最优裕度下界 $3.084429$ 作系数比较，可知任何裕度最优权在两轴度量下的裕度至少为 $3.084429/R$。当 $R\le3084.429$ 时，这一下界不小于证书所需的 $1/1000$，因而每个最优权都在全部有限高度及单位辐边极限上给出严格共同真空。充分界的锐性仍待判定。
+
+沿上述两种度量的过渡族 $c(s)=(1,1,s)$（$0\le s\le1$），最优权的末圈份额取遍一个包含 $[0.110772,\, 0.112738]$、含于 $(0.10474,\, 0.12008)$ 的闭区间，并至少三次改变增减方向。想靠“在每种度量下都接近最优”来消去这一任意性也做不到：能在这族过渡度量的每一个上都保住最大裕度 $91.6\%$ 的权存在，且都是严格真空，但没有任何权能在每一个上都取到 $94.1\%$。因此，已判定的度量族都选出严格共同真空，两种端点度量选出的末圈份额则落在互不相交的区间（[度量族上的判定](https://github.com/the-omega-institute/trureturing-experiments/blob/bca5cc17df3a1772e3336f2d2b4b6f3dd51e15ea/experiments/ch39-omega-research/replay/%E6%AF%94%E5%80%BC%E4%B8%8D%E8%B6%85%E8%BF%873000%E7%9A%84%E5%BC%A6%E5%BA%A6%E9%87%8F%E4%B8%8A%E6%9C%80%E5%A4%A7%E8%A3%95%E5%BA%A6%E6%9C%80%E4%BC%98%E6%9D%83%E9%83%BD%E6%98%AF%E4%B8%A5%E6%A0%BC%E5%85%B1%E5%90%8C%E7%9C%9F%E7%A9%BA%E8%80%8Cw105%E9%9A%8F%E5%BA%A6%E9%87%8F%E6%B8%B8%E5%8A%A8.md) · [区间证书](https://github.com/the-omega-institute/trureturing-experiments/blob/bca5cc17df3a1772e3336f2d2b4b6f3dd51e15ea/experiments/ch39-omega-research/replay/ch39-margin-metric-family-vacuum.py) · [相对效率的证书](https://github.com/the-omega-institute/trureturing-experiments/blob/bca5cc17df3a1772e3336f2d2b4b6f3dd51e15ea/experiments/ch39-omega-research/replay/ch39-margin-metric-maximin.py)）。同一裕度还收窄了可行族的范围：负角差分支上 $-0.01280 \le x \le -0.01225$ 与 $-0.0091875 \le x \le -0.00815$ 两段没有任何 $105$ 圈权能使参考味相位成为共同真空，上文的窗口因而只是必要条件（[最大二次增长裕度选权](https://github.com/the-omega-institute/trureturing-experiments/blob/0382ed8bb2cd901b85f322063845a616acca1b88/experiments/ch39-omega-research/replay/%E6%9C%80%E5%A4%A7%E4%BA%8C%E6%AC%A1%E5%A2%9E%E9%95%BF%E8%A3%95%E5%BA%A6%E5%9C%A8%E6%97%97%E8%88%B0%E7%9B%B8%E4%BD%8D%E9%80%89%E5%87%BA%E4%B8%A5%E6%A0%BC%E5%85%B1%E5%90%8C%E7%9C%9F%E7%A9%BA.md) · [区间证书](https://github.com/the-omega-institute/trureturing-experiments/blob/0382ed8bb2cd901b85f322063845a616acca1b88/experiments/ch39-omega-research/replay/ch39-quadratic-growth-margin-vacuum.py)）。
 
 ::: {.figure src="ch13-winding-threshold-ladder"}
 **三窗与味相位选择的最小绕数阶梯（$\le 18 \to 19 \to 21 \to 27 \to 31 \to 36 \to 105$）。** 对数横轴依次标出七道锐利门槛：$\le 18$（三窗内无驻点，灰色）、$19$（三窗内鞍点）、$21$（三窗局部极小）、$27$（三窗全局极小）、$31$（局部味极小）、$36$（依赖高度的全局味极小，均青色），直至 $105$（与高度无关的共同真空，琥珀色）；下方品红色提示框标出权重随绕数非增时全局能差恒 $> 1/4$，底栏琥珀色列出旗舰联合零点见证 `#2,306,888,100,085`。
@@ -148,15 +154,116 @@ $105$ 圈真空强制要求高绕数项 $w_{104} > 0.6589\%$ 与 $w_{105} > 6.86
 | **测试一：全域辨识 vs 近真空失明** | 全环面 $100$ 个作用差 vs 近真空开窗读数 | 全域条件数 $\kappa \le 11.584$（前 $100$ 零点 $\le 9.849$，前 $250$ 择百降为 $2.49$）；近真空开窗内相差 $2 \times 10^{-9}$ 的两组权重作用差 **$< 1.690 \times 10^{-75}$** |
 | **测试二：跨荷轻子空间泄漏** | 荷 $1$ 三轻模投影至荷 $2$、荷 $-4$ 轻空间 | 容许十九站各任选相位时落入重空间概率 **$> 38.321\%$ / $> 37.290\%$**；再容许十九站任意重排仍 **$> 31.060\%$ / $> 31.097\%$** |
 | **测试三：辅助电流与质子选择简并** | $105$ 圈权延拓至六维轻顶点（Wilson 模 $\ge 0.0314398$） | **正交**辅助电流保 $\Delta B \equiv 0 \pmod 3$，**平行**辅助电流生非零 $QQQL$ 项；两者共享完全相同的壳真空与树级谱 |
-| **测试四：单整数唯一 vs 连续 $k/d^2$ 漂移** | 固定 $d = 724$ 或 $k = 32$ 对比同步连续变分 | 固定其一各自唯一迫使 $(k, d) = (32, 724)$，同步滑至 $d = 724.19, k \approx 32.016797784$ 仍过三窗：曲率窗只钉死 **$k / d^2$**，强耦合窗的宽度容许沿此方向滑行 |
+| **测试四：单整数唯一 vs 连续 $k/d^2$ 漂移** | 固定 $d = 724$ 或 $k = 32$ 对比同步连续变分 | 固定其一各自唯一迫使 $(k, d) = (32, 724)$，同步滑至 $d = 724.19, k \approx 32.016797784$ 仍过三窗：曲率主项沿 **$k/d^2$** 不变，有限截止修正与强耦合读数的变化都在各自窗宽以内 |
 
 逐条审视这四重裂隙（复算脚本见 [`ch39-fixed-vacuum-weight-dimension.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-fixed-vacuum-weight-dimension.py)、[`ch39-near-vacuum-weight-resolution.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-near-vacuum-weight-resolution.py)、[`ch39-joint-zero-light-subspaces.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-joint-zero-light-subspaces.py)、[`ch39-fixed-vacuum-proton-currents.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-fixed-vacuum-proton-currents.py) 与 [`ch39-joint-vacuum-scale-window.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-joint-vacuum-scale-window.py)）：
 
-1. **七十五个量级的反演悬崖：** 全环面宏观探测轻而易举便能以条件数 $2.49$ 反推出全部 $105$ 项绕数权，可一旦观测者被困在真空附近的低能开窗内，哪怕精确算术下仍存在可辨识矩阵，任何实验噪声都会让相差 $2 \times 10^{-9}$ 的两套微观作用在 $< 1.690 \times 10^{-75}$ 的读数差里彻底融为一团。
+1. **七十五个量级的反演悬崖：** 全环面采样可以用条件数低至 $2.49$ 的矩阵反推出全部 $105$ 项绕数权。在真空附近的低能窗口内，两组最大坐标差为 $2 \times 10^{-9}$ 的权却可使相对作用读数的差小于 $1.690 \times 10^{-75}$。
+   在旗舰参考相位固定、辐边刚度取单位极限时，从该点起算的相对作用须读到总阶 $35$，才能唯一确定全部 $105$ 项归一权重。手工计数给出下界。相位只沿 $x$、$y$ 和 $x-y$ 三个方向进入作用，所以一阶最多提供两条约束，此后每阶最多三条。加入归一条件，读到 $34$ 阶仍至多有 $102$ 条约束。再加入软化项的两条驻点约束，仍能在前述正权共同真空族内取到两组无法区分的权。到 $35$ 阶，区间运算认证了按这三个方向分解导数得到的 $105$ 列矩阵满秩。
+
+   可取一对这样的权，使最大坐标差为 $2\times10^{-9}$。在 $\max(|dx|,|dy|,|dx-dy|)\le 9.2\times10^{-6}$ 的相位窗内，单位辐边下的相对作用之差小于 $5.814\times10^{-151}$。这是逐面求和的 $35$ 阶余项上界。 [约束计数、区间证书与余项复算](https://github.com/the-omega-institute/trureturing-books/issues/1831#issuecomment-7238283876)
+
+   若精确偏导只读到总阶 $33$，又已知旗舰相位是共同真空，在同一闭窗内补读单位辐边相对作用，最少恰需四点。归一、两组驻点方程与第 $2$ 至 $33$ 阶偏导合计只有 $101$ 行，区间子式认证它们独立，留下四维权差空间。三次读数最多再消去三个方向，沿剩余方向在正权盒中心两侧微扰，可得到同读数的不同权。
+
+   取窗宽参数 $r=9.2\times10^{-6}$，在位移 $r(1,0)$、$r(0,1)$、$r(1,1)$、$r(0,-1)$ 处补读。直接计算三角函数之差，Arb 区间运算认证四点读数在剩余空间上可逆。以权差和读数差的二范数计，这个映射的最小奇异值在 $(2.69579,2.69580)\times10^{-205}$ 内。两组权的精确偏导相同时，权差至多为读数差除以这个值，四点读数的误差因此会被大幅放大。 [手工推导、Arb 区间证书与复算脚本](https://github.com/the-omega-institute/trureturing-books/issues/1925#issuecomment-7238745827)
+
+   若偏导与补读同时有误差，两项放大能否沿同一权差方向叠加？对沿 $x$、$y$、$x-y$ 分解的第 $2$ 至 $33$ 阶一元导数，将第 $n$ 阶除以 $105^n$，并对这 $96$ 个导数差和四个补读差分别设二范数预算。调节两项预算，使任一类误差单独存在时的最大权差同为 $h$。此时补读预算约为偏导预算的 $5.38544\times10^{-7}$。对 $0<h<10^{-9}$，联合最坏权差低于单项上界之和 $2h$，相对降幅在 $(1.01107986310588,1.01107986310589)\times10^{-15}$ 内。手工推导将权差写成两个逆映射输出之和，再沿单位方向取这两个输出的最大投影。Arb 区间运算夹定其和的最大值，给出严格小于 $2h$ 的上界。取到联合最大值的误差对可由正权共同真空盒中心两侧的权实现。 [手工推导、Arb 区间证书与复算脚本](https://github.com/the-omega-institute/trureturing-books/issues/1993#issuecomment-7239040945)
+
+   若这四个补读相同，偏导误差也会限制反演。对第 $2$ 至 $33$ 阶，按 $x$、$y$、$x-y$ 三项分别取一元导数，并将第 $n$ 阶的读数除以 $105^n$。以这 $96$ 个坐标的差和权差的二范数计，最佳放大常数位于 $(1.99772,1.99773)\times10^{198}$。在归一、驻点及四点读数均相同的子空间上，先反解导数差，再用 Arb 区间运算夹定这个逆映射的算子范数。沿最大放大方向对正权盒中心作足够小的双侧扰动，两组权仍保持共同真空，且达到这一常数。 [手工推导、区间证书与复算脚本](https://github.com/the-omega-institute/trureturing-books/issues/1968#issuecomment-7238951881)
+
+   若已知旗舰相位在全部有限高度及单位辐边极限均为全局极小点，再补读该点按 [@def-ou-ch13-wilson-winding-action] 校准的单位辐边绝对作用，相对作用所需的最低导数总阶恰为 $34$。绝对值使用固定的能量零点，计入 $433$ 个与相位无关的面。手工推导把两条软化驻点约束和这条绝对读数加入 $34$ 阶矩阵，Arb 区间运算认证所得矩阵满秩。若只读到 $33$ 阶，即使加入这些数据也至多有 $102$ 条独立约束，仍可在正权共同真空族中构造同读数的两组权。这个构造在有限高度唯一选出旗舰相位，在完整环面的单位辐边极限保留一对镜像等深极小点。 [手工推导与 Arb 区间证书](https://github.com/the-omega-institute/trureturing-books/issues/1877#issuecomment-7238536913)
+
+   若能量零点未知，但已知固定的旗舰相位在全部有限高度和单位辐边极限均为全局极小点，给定至 $34$ 阶的精确相对作用导数后，可行权之差只剩一个方向。此时在合适的相位补读一次单位辐边相对作用即可辨识权重。对任意两组不同的可行权，上述闭六边形窗内使读数绝对差最大的位移唯一，等于 $(dx,dy)=(0,9.2\times10^{-6})$。手工推导将剩余方向的作用分为 $dx$、$dy$ 与 $dx-dy$ 三项。Arb 区间运算控制泰勒余项和各项的一、二阶导数，将极值限于两条边的端点。第 $35$ 阶首项在两个相对顶点给出相同幅度，高阶项决定了胜出的一端。
+
+   对最大坐标差为 $2\times10^{-9}$ 的这类权对，最佳读数的间距约为 $4.71376313234908\times10^{-210}$。若单次相对读数允许任意有界加性误差，保证区分这两组权的充要条件是误差上界严格小于该间距的一半。恰到一半时，两组读数的允许区间在中点相接。 [手工推导、Arb 区间证书与复算脚本](https://github.com/the-omega-institute/trureturing-books/issues/1897#issuecomment-7238638383)
+
+   在同一共同真空先验下，若单位辐边相对作用的精确偏导只读到总阶 $33$，比较补读布置时要看读数映射在剩余四维权差空间上的最小奇异值，权差和读数差均取二范数。限定只能从闭窗六个顶点选点，全部 $15$ 种四点布置都可逆。令 $r=9.2\times10^{-6}$，唯一的最优布置是位移 $r(1,0)$、$r(1,1)$、$r(-1,0)$、$r(-1,-1)$。其最小奇异值落在 $(3.30304,3.30305)\times10^{-205}$ 内，比取 $r(1,0)$、$r(0,1)$、$r(1,1)$、$r(0,-1)$ 的布置高约 $22.53\%$。仍有六种布置的最小奇异值低于最优值的 $10^{-31}$。在每个顶点，只需叠加两个非零钟荷方向的读数贡献。将所得矩阵限制在权差空间，Arb 区间运算逐组认证最小奇异值的上下界。连续窗内的全局最优值仍待判定。 [手工推导、区间证书与复算脚本](https://github.com/the-omega-institute/trureturing-books/issues/1945#issuecomment-7238835066)
+
+   偏导和补读同时有误差时，最优的顶点布置取决于两类误差的预算比。将闭窗顶点 $r(1,0),r(1,1),r(0,1),r(-1,0),r(-1,-1),r(0,-1)$ 依次记为 $A$ 至 $F$。对沿 $x$、$y$、$x-y$ 分解的第 $n$ 阶一元导数除以 $105^n$（$2\le n\le33$），用 $\epsilon_D$ 与 $\epsilon_R$ 分别约束导数差和四次相对作用读数差的二范数。令 $s=10^{198}\epsilon_D>0$、$q=10^7\epsilon_R/\epsilon_D$。若 $q\in[5.38544308278388,5.38544308278390]$ 且 $1.634s<2\times10^{-9}$，全部 $15$ 种四顶点布置中，$\mathrm{ABCE}$ 唯一使最坏权差的二范数最小，$\mathrm{ABDE}$ 唯一次优。以 $s$ 为单位，次优与最优的间隔落在 $(1.31435,1.31438)\times10^{-5}$ 内。
+
+   手工推导用完整读数映射的逆矩阵求出两类读数差对权差的贡献，再沿同一方向将两类最大投影相加并取全方向的最大值。Arb 区间运算逐组夹定这个最大值。正权共同真空盒可实现 $\mathrm{ABCE}$ 和 $\mathrm{ABDE}$ 的线性极值，也允许为其余布置逐一构造超过次优值的可行权差。 [推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2039#issuecomment-7239293053)
+
+   偏导也有误差时，可以用相同的两类预算比较上述两种布置。将闭窗顶点按 $r$ 乘 $(1,0),(1,1),(0,1),(-1,0),(-1,-1),(0,-1)$ 的顺序记为 $A$ 至 $F$。在同一旗舰相位和正权共同真空先验下，比较 $\mathrm{ABCF}$ 与 $\mathrm{ABDE}$。对沿 $x$、$y$、$x-y$ 分解的第 $n$ 阶一元导数除以 $105^n$（$2\le n\le33$），两种布置共用导数差二范数预算 $\epsilon_D$ 和补读差二范数预算 $\epsilon_R$。
+
+   当非负预算满足 $0<2\times10^{198}\epsilon_D+3.71\times10^{204}\epsilon_R<2\times10^{-9}$，$\mathrm{ABDE}$ 的最坏权差二范数严格小于 $\mathrm{ABCF}$。将两类读数差分别反解为权差后，Arb 区间运算给出 $\mathrm{ABCF}$ 的一个固定权差方向。沿此方向的两项最大投影分别超过 $\mathrm{ABDE}$ 对应的单项范数上界，因而结论对该范围内的任意预算比例成立。盒中心的双侧扰动可实现两种布置的最坏值。例如，当 $\epsilon_R/\epsilon_D$ 落在 $(5.38544308278388,5.38544308278390)\times10^{-7}$ 内，两种布置的最坏权差之比（$\mathrm{ABDE}$ 除以 $\mathrm{ABCF}$）在 $(0.40896,0.40897)$ 内。 [手工推导、Arb 区间证书与复算脚本](https://github.com/the-omega-institute/trureturing-books/issues/2014#issuecomment-7239153234)
+
+   偏导与补读同时有误差时，即使相位窗固定，改变预算比也会调换最优布置。按 $r$ 乘 $(1,0),(1,1),(0,1),(-1,0),(-1,-1),(0,-1)$ 的顺序记六个顶点为 $A$ 至 $F$。把沿 $x$、$y$、$x-y$ 分解的第 $n$ 阶一元导数除以 $105^n$（$2\le n\le33$）。用 $\epsilon_D$ 与 $\epsilon_R$ 分别约束导数差和四点读数差的二范数，令 $q=10^7\epsilon_R/\epsilon_D$、$s=10^{198}\epsilon_D>0$。若 $q\in[8.9,9.1]$ 且 $2.759s\le2\times10^{-9}$，使最坏权差二范数最小的布置恰在 $q_*\in(8.98235499872,8.98235499878)$ 处切换一次。$q<q_*$ 时，$\mathrm{ABCE}$ 唯一最优。$q>q_*$ 时，$\mathrm{ABDE}$ 唯一最优。在 $q=q_*$，两者并列最优。
+
+   手工推导将最坏线性权差写成两类读数误差沿同一方向的最大投影之和，再对方向取最大值。固定方向给出关于预算比的直线下界，由此控制两条最坏误差曲线的斜率。Arb 区间运算认证两曲线之差严格递增、在夹根区间两端异号，并在整个预算比区间排除其余十三种布置。正权共同真空盒保证两种候选的最坏权差都可实现。 [推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2061#issuecomment-7239418918)
+
 2. **几何站点上的轻代错位：** 尽管五种超荷在同一背景上各自切出三枚轻模，但荷 $1$ 与荷 $2, -4$ 的三维轻空间在十九个站点上彼此倾斜甚深——哪怕做尽全部站点相位对齐与站点重排，仍有超过三成的轻态权重直接泄入对方的重谱。
 3. **壳真空对质子命运的沉默：** 同一座 $105$ 圈球壳真空、同一张树级质量谱，却既容得下保护质子寿命的 $\Delta B \equiv 0 \pmod 3$ 正交电流，也容得下触发 $QQQL$ 衰变的平行电流；质子是否稳定不是裸球壳真空自己能拍板的事。
-4. **缺失的第二条尺度律：** 离散整数格点虽然单独锁死了 $d = 724$ 与 $k = 32$，连续变分却立即暴露出曲率读数只感受单参数组合 $k / d^2$，两圈规范读数只感受 $d$，而强耦合窗的宽度容许沿 $k / d^2$ 固定的方向滑行；必须引入一条独立于三窗的尺度方程才能把两个参数分别钉牢。
+4. **缺失的第二条尺度律：** 离散整数格点虽然单独锁死了 $d = 724$ 与 $k = 32$，固定 $k/d^2$ 后四层曲率主项保持不变，两圈规范读数随 $d$ 移动，两扇有限宽度的窗仍有共同的滑行区间；必须引入一条独立于三窗的尺度方程才能把两个参数分别钉牢。
 
-这条尺度律无法由最简单的谱泛函的驻定条件给出。在该零点上，全部重场质量只经 $\log k - 2\log d$ 与 $-2\log d$ 两个组合依赖标尺，奇荷三十二行的超迹权全为负。于是，凡位力函数 $x f'(x)$ 不变号的单谱型超迹泛函，包括对数行列式、zeta 函数、热核、固定截止的牛顿核、迹恒等式以及维数正规化下奇数维的一圈势，在整个 $(k, d)$ 象限内都没有驻点。偶数维的一圈科尔曼—温伯格（Coleman–Weinberg）超迹在全部场共用一个减法常数时恰有一个驻点，其倍率与锚标度和减法常数无关：四维时 $k_* \approx 2.4135$，全部偶数维上不超过 $4.22$，而在 $k \ge 1$ 的参数域内两窗要求倍率位于 $(29.98, 35.00)$。驻点的分母只随锚标度协变，要得到 $d_* = 724$ 须取锚标度约 $4.20 \times 10^{14}\;\mathrm{GeV}$，这只是把选择转给了锚。只有把带对数的公式形式延拓到非整数维，在 $D \approx 11.1$ 处才能取到 $k_* = 32$。沿 $k / d^2$ 固定的滑行线，强耦合在 $d = 716$ 与 $d = 743$ 之间以每单位分母约 $-7.0 \times 10^{-5}$ 的割线移动，这两点仍在窗内，$715$ 与 $744$ 的名义读数出窗。混合多个谱函数的泛函、以牛顿标定截止为锚的泛函与跨奇偶的非分离作用不在这两类之内，尚未检验。[两类泛函的否定结果与滑行响应](https://github.com/the-omega-institute/trureturing-experiments/blob/d2ca3fd9b24cc2591e2d49a308c04407fce60ee0/experiments/ch39-omega-research/replay/%E4%BD%8D%E5%8A%9B%E5%AE%9A%E5%8F%B7%E4%B8%8E%E5%8D%95%E8%B0%B1CW%E5%9E%8B%E8%B6%85%E8%BF%B9%E6%B3%9B%E5%87%BD%E5%9C%A8%E4%B8%A4%E8%B4%A8%E9%87%8F%E6%A0%87%E5%B0%BA%E7%AA%97%E5%86%85%E6%B2%A1%E6%9C%89%E9%A9%BB%E7%82%B9.md) · [区间证书](https://github.com/the-omega-institute/trureturing-experiments/blob/d2ca3fd9b24cc2591e2d49a308c04407fce60ee0/experiments/ch39-omega-research/replay/ch39-mass-scale-spectral-stationarity.py)
+这条尺度律无法由最简单的谱泛函的驻定条件给出。在该零点上，全部重场质量只经 $\log k - 2\log d$ 与 $-2\log d$ 两个组合依赖标尺，奇荷三十二行的超迹权全为负。于是，凡位力函数 $x f'(x)$ 不变号的单谱型超迹泛函，包括对数行列式、zeta 函数、热核、固定截止的牛顿核、迹恒等式以及维数正规化下奇数维的一圈势，在整个 $(k, d)$ 象限内都没有驻点。偶数维的一圈科尔曼—温伯格（Coleman–Weinberg）超迹在全部场共用一个减法常数时恰有一个驻点，其倍率与锚标度和减法常数无关：四维时 $k_* \approx 2.4135$，全部偶数维上不超过 $4.22$，而在 $k \ge 1$ 的参数域内，两窗给出的必要倍率区间端点约为 $29.98$ 和 $35.00$。区间证书采用外界 $(29.9841147, 35.0010644)$。驻点的分母只随锚标度协变，要得到 $d_* = 724$ 须取锚标度约 $4.20 \times 10^{14}\;\mathrm{GeV}$，这只是把选择转给了锚。只有把带对数的公式形式延拓到非整数维，在 $D \approx 11.1$ 处才能取到 $k_* = 32$。沿 $k / d^2$ 固定的滑行线，强耦合在 $d = 716$ 与 $d = 743$ 之间以每单位分母约 $-7.0 \times 10^{-5}$ 的割线移动，这两点仍在窗内，$715$ 与 $744$ 的名义读数出窗。[两类泛函的否定结果与滑行响应](https://github.com/the-omega-institute/trureturing-experiments/blob/d2ca3fd9b24cc2591e2d49a308c04407fce60ee0/experiments/ch39-omega-research/replay/%E4%BD%8D%E5%8A%9B%E5%AE%9A%E5%8F%B7%E4%B8%8E%E5%8D%95%E8%B0%B1CW%E5%9E%8B%E8%B6%85%E8%BF%B9%E6%B3%9B%E5%87%BD%E5%9C%A8%E4%B8%A4%E8%B4%A8%E9%87%8F%E6%A0%87%E5%B0%BA%E7%AA%97%E5%86%85%E6%B2%A1%E6%9C%89%E9%A9%BB%E7%82%B9.md) · [区间证书](https://github.com/the-omega-institute/trureturing-experiments/blob/d2ca3fd9b24cc2591e2d49a308c04407fce60ee0/experiments/ch39-omega-research/replay/ch39-mass-scale-spectral-stationarity.py)
+
+把单谱换成几个谱函数的线性组合，并取与 $(k, d)$ 无关的锚，驻定条件仍分裂为奇荷、偶荷两个一元方程：驻点倍率只依赖混合的无量纲形状，分母则由锚唯一确定。对这一整类泛函，取到 $d_* = 724$ 都只是选锚。以四维截止族 $\mathrm{STr}\,M^4(\log M^2/\Lambda^2 - c) + \kappa\Lambda^2\,\mathrm{STr}\,M^2$（全部场共用 $c$）为例，驻点只经 $\sigma = \kappa e^{1/2 - c}$ 依赖系数；在 $k \ge 1$ 上，倍率落入两窗所要求的区间，当且仅当 $\sigma$ 位于 $(0.0345, 0.04411232)$ 内的一个区间。此时驻点是两向局部极小，但偶荷质量已超过截止，这条截断展开不再逼近任何精确的截止势。要恰在 $(32, 724)$，须取 $\sigma \approx 0.0398046$，并把锚调进端点比为 $1.0010005$ 的区间，这个比值正是曲率带的宽度。两个被选出的整数于是换成了两个被调准的实参数。所检验的不含自由系数的成员（共用常数的维数正规化、任意正核正则的精确一圈势、硬截止与固有时截止的大 $\Lambda$ 截断、整数两幂混合）的驻点倍率都不超过 $3.33$，或者根本没有驻点；让奇荷、偶荷两组场各取一个减法常数或锚，则与手工指定倍率完全等价。系数须调准这一条只对所检验的各族成立；以牛顿标定截止为锚的泛函，以及一般耦合奇偶两组质量的作用，仍待检验。[混合泛函的约化与四维截止族的分类](https://github.com/the-omega-institute/trureturing-experiments/blob/1922a9c010424eadf6b1ec7233be9fcb00911247/experiments/ch39-omega-research/replay/%E5%B8%B8%E6%95%B0%E9%94%9A%E6%B7%B7%E5%90%88%E8%B6%85%E8%BF%B9%E6%B3%9B%E5%87%BD%E7%9A%84%E9%A9%BB%E7%82%B9%E5%88%86%E6%AF%8D%E7%94%B1%E9%94%9A%E5%86%B3%E5%AE%9A%E8%80%8C%E5%9B%9B%E7%BB%B4%E6%88%AA%E6%AD%A2%E6%97%8F%E9%A1%BB%E8%B0%83%E5%87%86%E4%B8%80%E4%B8%AA%E6%97%A0%E9%87%8F%E7%BA%B2%E7%B3%BB%E6%95%B0%E6%89%8D%E8%83%BD%E8%BF%9B%E5%85%A5%E4%B8%A4%E8%B4%A8%E9%87%8F%E6%A0%87%E5%B0%BA%E7%AA%97.md) · [区间证书](https://github.com/the-omega-institute/trureturing-experiments/blob/1922a9c010424eadf6b1ec7233be9fcb00911247/experiments/ch39-omega-research/replay/ch39-mass-scale-mixed-supertrace-stationarity.py)
+
+把系数交给具体的正则方案去定，这份清单可以加长为两条定理。其一，凡全部场共用一个非负固有时权 $R$ 的一圈势，精确势在 $k, d > 0$ 上都没有驻点；把它截到对数阶，就落回上面的四维截止族。常见的动量截止、取值在 $[0,1]$ 内的固有时轮廓，以及质量平方两两不同的最少 Pauli–Villars 减除，都满足 $0\le R\le1$。这类权给出的不变量满足 $\sigma\ge 2e^{\gamma-1}\approx 1.31044$，等号在锐固有时截止取到。截断势的奇荷、偶荷驻定方程各自只在 $\sigma$ 不超过相应临界值时有解，临界值分别约为 $0.50708$、$0.66838$，均低于这一界。因此两组方程都无根，截断势也没有驻点。对一般非负权，若截断驻点的倍率落入必要区间，还须有 $\sigma<0.04411232$。这要求正则权超过无正则值 $1$，且超出部分的带权对数测度大于 $3.39$。此时最重的偶荷质量远超截断的有效范围，精确势仍无驻点。其二，把四维与六维科尔曼—温伯格项相加，系数只经 $\tau = \lambda e^{c_4 - 1/2}$ 与两个减法常数之差进入驻点；在共用常数与维数正规化常数两种取法下，进窗的 $\tau$ 都落在两个端点比约 $1.37$ 的负区间内，分别在 $\lvert\tau\rvert \approx 4 \times 10^{-3}$ 与 $\lvert\tau\rvert \approx 10^2$ 附近，取 $\lambda = \pm 1$、$c_4 = 3/2$ 时驻点倍率不超过 $7.4$。这两项结论均以共用正则子和常数锚为前提，其他减法常数之差仍待检验。[正则方案给定系数的截断与四维加六维混合](https://github.com/the-omega-institute/trureturing-experiments/blob/98ddfcbeff13af52165e6a01c03fd0a7db7c33f2/experiments/ch39-omega-research/replay/%E5%8F%96%E5%80%BC%E4%B8%8D%E8%B6%85%E8%BF%871%E7%9A%84%E6%AD%A3Schwinger%E6%9D%83%E6%AD%A3%E5%88%99%E7%9A%84%E5%AF%B9%E6%95%B0%E9%98%B6%E6%88%AA%E6%96%AD%E7%BB%99%E5%87%BA%E4%B8%8D%E5%8F%98%E9%87%8F%E4%B8%8D%E4%BD%8E%E4%BA%8E%E4%B8%80%E7%82%B9%E4%B8%89%E4%B8%80%E9%9B%B6%E5%9B%9B%E8%80%8C%E5%9B%9B%E7%BB%B4%E5%8A%A0%E5%85%AD%E7%BB%B4CW%E6%B7%B7%E5%90%88%E5%9C%A8%E4%B8%A4%E7%A7%8D%E5%B8%B8%E6%95%B0%E5%8F%96%E6%B3%95%E4%B8%8B%E9%A1%BB%E6%8A%8A%E7%B3%BB%E6%95%B0%E8%B0%83%E8%BF%9B%E4%B8%A4%E4%B8%AA%E7%AA%84%E5%8C%BA%E9%97%B4%E6%89%8D%E8%83%BD%E8%BF%9B%E5%85%A5%E4%B8%A4%E8%B4%A8%E9%87%8F%E6%A0%87%E5%B0%BA%E7%AA%97.md) · [区间证书](https://github.com/the-omega-institute/trureturing-experiments/blob/98ddfcbeff13af52165e6a01c03fd0a7db7c33f2/experiments/ch39-omega-research/replay/ch39-mass-scale-fixed-regulator-truncations.py)。
+
+固有时权允许取负值时，在调节质量两两不同的指数和型 Pauli–Villars 减除中，调节质量最少的一类是三个调节质量、只消去四次与二次发散的组合；它恰好构成一族 $R_\nu = F + \nu p$，其中 $F$、$p$ 是三个指数分布之和的分布函数与密度，$\nu$ 正比于留下的对数发散系数。对任意质量比，精确势只在 $\nu \in (-Q_0, 0)$ 时才可能有驻点（$Q_0 > 0$ 由三个调节质量决定），在这个参数区间内，权在短固有时处为负。质量平方比取 $(1, 2, 3)$ 或 $(1, 4, 9)$ 时，每个这样的 $\nu$ 都给出驻点，但全部驻点的倍率都夹在 $1.0398$ 与 $4.4295$ 之间，远低于两窗要求的倍率区间。截断则不同：这些成员的权处处小于 $1$，不变量 $\sigma$ 却可以任意接近零，把 $\nu$ 调进一个很窄的区间（质量平方比 $(1, 2, 3)$ 时宽度不到 $Q_0$ 的 $0.36\%$）就能让截断驻点的倍率落入必要区间。这说明前述下界 $\sigma \ge 2e^{\gamma - 1}$ 离不开权非负的前提，对这两组质量平方比，精确势驻点的倍率仍在上述较小区间内。一般质量比下驻点倍率的统一上界、四个以上调节质量与导数型减除仍未判定（[三调节质量的变号 Pauli–Villars 正则](https://github.com/the-omega-institute/trureturing-experiments/blob/63208158b4e5e50b6008a59bf8a7555805617352/experiments/ch39-omega-research/replay/%E4%B8%89%E4%B8%AA%E4%B8%8D%E5%90%8C%E8%B0%83%E8%8A%82%E8%B4%A8%E9%87%8F%E7%9A%84%E6%8C%87%E6%95%B0%E5%92%8C%E5%9E%8BPV%E6%AD%A3%E5%88%99%E4%BB%85%E5%9C%A8%E5%AF%B9%E6%95%B0%E5%8F%91%E6%95%A3%E7%B3%BB%E6%95%B0%E4%B8%BA%E8%B4%9F%E6%97%B6%E6%9C%89%E9%A9%BB%E7%82%B9%E4%B8%94%E4%B8%A4%E7%A7%8D%E6%95%B4%E6%95%B0%E8%B4%A8%E9%87%8F%E6%AF%94%E4%B8%8B%E9%A9%BB%E7%82%B9%E5%80%8D%E7%8E%87%E5%A4%B9%E5%9C%A8%E4%B8%80%E7%82%B9%E9%9B%B6%E4%B8%89%E4%B9%9D%E4%B8%8E%E5%9B%9B%E7%82%B9%E5%9B%9B%E4%B8%89%E4%B9%8B%E9%97%B4%E8%80%8C%E6%88%AA%E6%96%AD%E9%A1%BB%E6%8A%8A%E8%AF%A5%E7%B3%BB%E6%95%B0%E8%B0%83%E8%BF%9B%E4%B8%A4%E4%B8%AA%E7%AA%84%E5%8C%BA%E9%97%B4%E6%89%8D%E8%BF%9B%E7%AA%97.md) · [区间证书](https://github.com/the-omega-institute/trureturing-experiments/blob/63208158b4e5e50b6008a59bf8a7555805617352/experiments/ch39-omega-research/replay/ch39-mass-scale-sign-changing-pauli-villars.py)）。
+
+如果用同一批重场的谱矩作标尺，改变 $d$ 时，尺和被量的质量会一起变。固定上述零点与谱形，令 $s=\bar M/d^2$，则奇荷质量为 $s h_i$，偶荷质量为 $s k h_i$。取可微的正谱锚 $\Lambda$，满足一阶齐次律 $\Lambda(t m)=t\Lambda(m)$（$t>0$）。若势的形式为 $V=\Lambda^p F(m/\Lambda)$，其中 $F$ 可微，系数无量纲且固定，则所有质量比只依赖 $k$。把 $\Lambda(h_{\mathrm{odd}},k h_{\mathrm{even}})^p$ 也并入形状函数 $G$，直接求导得
+
+$$
+V=s^p G(k),\qquad
+d\,\partial_d V=-2p V,\qquad
+\partial_k V=s^p G'(k).
+$$
+
+因此 $p=0$ 时，联合驻定只要求 $G'(k)=0$；$p\ne0$ 时还须 $G(k)=0$。每个满足条件的 $k$ 都容许任意 $d>0$。若另有独立测量给出 $k/d^2$，它才可与选出的 $k$ 一起确定 $d$。
+
+可以直接用这枚零点的场表试算。令 $A_j,B_j$ 分别为奇荷、偶荷组内 $\sum_i g_i h_i^j$ 的绝对值（先按原超迹权 $g_i$ 求和），$j=2,4$。两组的这四个数均为正。以两组二阶矩绝对值之和作 $\Lambda^2=s^2(A_2+k^2 B_2)$，用它归一化相应的四阶矩。写 $x=k^2$，所得形状与导数为
+
+$$
+J(x)=\frac{A_4+x^2 B_4}{(A_2+xB_2)^2},\qquad
+\frac{dJ}{dx}=\frac{2(x A_2B_4-B_2A_4)}{(A_2+x B_2)^3}.
+$$
+
+唯一极小倍率为 $k=\sqrt{B_2 A_4/(A_2 B_4)}\simeq2.10215$，低于两窗要求的下端。若改取有量纲的四阶矩 $\Lambda^4J=s^4(A_4+k^4 B_4)>0$，则 $d$ 方向处处有斜率。这里分别对两组取绝对值是一项明确的模型选择。[场表、二阶与四阶矩及倍率的区间证书](https://github.com/the-omega-institute/trureturing-experiments/blob/1922a9c010424eadf6b1ec7233be9fcb00911247/experiments/ch39-omega-research/replay/ch39-mass-scale-mixed-supertrace-stationarity.py#L31-L81)
+
+在旗舰零点的四层模型中，可以直接检验外部牛顿标定能否使真空能量驻定。固定 $r=k/d^2>0$，令 $\ell=\log d$。偶荷质量与由其中一条质量定义的跷跷板尺度 $a=\mu^2/M_P^2$ 都固定，奇荷质量平方 $z_i=m_i^2/M_P^2$ 则正比于 $d^{-4}$。逐质量配平抵消了重层的真空能量，却给每条奇荷重层留下严格为正的牛顿权 $\alpha_i$。取单个硬固有时截止 $x=Q^2/M_P^2>0$、零裸项与四层重数 $D=4$，把 [@def-ou-ch11-four-layer-vacuum] 的真空读数记为 $V=8\pi\rho/M_P^4$。在 $K=1$ 上曲率就等于 $V$。[逐层配平的场表](https://github.com/the-omega-institute/trureturing-experiments/blob/1922a9c010424eadf6b1ec7233be9fcb00911247/experiments/ch39-omega-research/replay/ch39-joint-vacuum-scale-window.py#L20-L36)
+
+以 $O$ 表示奇荷重层，在固定 $r$ 下手算两个偏导。由 $E_2'(u)=-E_1(u)$，以及 $V=Da^2 I(a/x)/(4\pi)$ 的积分下限，有
+
+$$
+\left.\frac{\partial K}{\partial\ell}\right|_x
+ =\frac{2}{\pi}\sum_{i\in O}\alpha_i z_i E_1(z_i/x)>0,
+\qquad
+\frac{dV}{dx}=\frac{Dx}{4\pi}(1-e^{-a/x})^3>0 .
+$$
+
+因此在每个牛顿标定点附近都可沿 $K=1$ 把 $\ell$ 写成 $x$ 的函数。沿这条曲线增加 $x$ 必使真空能量上升，即使 $\partial K/\partial x=0$ 也成立。这个四层势在整个正参数标定面上没有联合驻点。
+
+若另行给定 $r$，哪些精确曲率确实来自有限正分母？记 $F_r(x)$ 为删去奇荷重层后的牛顿读数。每条奇荷的 $E_2(z_i/x)$ 在 $d$ 从零增至无穷时严格从零升至一，两组奇荷重层的总牛顿权为 $16(6+2)=128$。因此给定 $x$ 时，正分母存在且唯一的充要条件为
+
+$$
+F_r(x)<1<F_r(x)+\frac{128x}{2\pi}.
+$$
+
+在旗舰滑行 $r=32/724^2$ 上，记右侧函数等于一的根为 $x_-$，左侧函数等于一的根为 $x_+$。两根各自唯一。事实上，十九点磁拉普拉斯的行和界给出 $0\le\lambda\le36$，所以谱形 $\lambda|\lambda-\bar\lambda|\le36^2$，带偶数荷的重层均有 $z<0.00025$。它们的正权共 $112$，中性负权共 $-54$。在 $x\ge0.006$ 上，由 $\partial_x[xE_2(z/x)]=e^{-z/x}$，两端函数的导数乘 $2\pi$ 均至少为 $112e^{-0.00025/0.006}-54>53$。更小的截止即使计入全部正权也只有 $K\le253.5x/(2\pi)<1$。
+
+因此，在只施加牛顿标定的连续滑行线上，$d$ 从零增至无穷时，$x$ 由 $x_+\simeq0.087881452$ 严格降至 $x_-\simeq0.031496220$，两个端点均不取到。每个介于 $V(x_-)$ 与 $V(x_+)$ 之间的精确曲率依次唯一确定 $x,d$ 与 $k=rd^2$。整个开区间的宽度约为无限截止值的 $5.193\times10^{-60}$。 [端点推导与谱区间复算](https://github.com/the-omega-institute/trureturing-books/issues/1671#issuecomment-7236014282)
+
+越靠近这两个端点，曲率读数要多精确才能分辨分母？令 $y=d^{-4}$，把奇荷平方质量写成 $c_i y$，记 $c_*=\min_i c_i>0$、$a_*=\sum_{c_i=c_*}\alpha_i$、$F_-(x)=F_r(x)+128x/(2\pi)$。在上述标定线上取 $v=V(x)$、$v_\pm=V(x_\pm)$。由端点处的牛顿残差可手算得
+
+$$
+\begin{aligned}
+v_+-v &\sim \frac{V'(x_+)a_*x_+^2}{2\pi c_* F_r'(x_+)}
+                \frac{e^{-c_*y/x_+}}{y} && (y\to\infty),\\
+v-v_- &\sim \frac{V'(x_-)\sum_i\alpha_i c_i}{2\pi F_-'(x_-)}
+                 y\log(1/y) && (y\downarrow0).
+\end{aligned}
+$$
+
+在固定的 $x_+$ 处，由 $E_2(u)=\int_1^\infty e^{-ut}t^{-2}\,dt$ 中的换元 $t=1+s/u$ 得 $E_2(u)\sim e^{-u}/u$，故只有最轻的奇荷层贡献首项。在 $x_-$ 处，把 $1-E_2(u)$ 的积分在 $1/u$ 拆开，前段用 $1-e^{-ut}=ut+O((ut)^2)$，尾段至多为 $u$，得 $1-E_2(u)=u\log(1/u)+O(u)$。将两处的标定残差分别除以 $K_x$ 的中值，再乘以 $V'$ 的中值，即得两式。因为 $\partial_x[xE_2(c_i y/x)]=e^{-c_i y/x}$，两端的分母分别趋于 $F_r'(x_+)$ 和 $F_-'(x_-)$。特别地，若无量纲曲率距上端点仅 $\epsilon=v_+-v$，反求的小分母仍有 $d\sim[c_*/(x_+\log(1/\epsilon))]^{1/4}$。任何正幂的误差界 $d=O(\epsilon^\beta)$ 都会在这个端点失效。 [端点推导与独立小谱复算](https://github.com/the-omega-institute/trureturing-books/issues/1671#issuecomment-7239022824)
+
+在原压力测试的局部盒内，$I(0)-I(a/x)\le a/x$ 把有限截止修正限制在主项的 $10^{-57}$ 以内。从 $d=724$ 滑至 $724.19$ 的两次读数之差，以无限截止主项为单位，在 $1.685\times10^{-69}$ 与 $1.687\times10^{-69}$ 之间。[标定区间与截断误差](https://github.com/the-omega-institute/trureturing-experiments/blob/1922a9c010424eadf6b1ec7233be9fcb00911247/experiments/ch39-omega-research/replay/ch39-joint-vacuum-scale-window.py#L38-L68) · [两处标定根与曲率差的区间复算](https://github.com/the-omega-institute/trureturing-books/issues/1671#issuecomment-7235892201)
+
+一个小谱可以把这个微弱效应放大。取 $r=a=1$、$D=4$，四条低层在 $z=0,1,2,3$ 处的牛顿权依次为 $(1/3,2,1,2/3)$，净偏振为 $(-4,12,-12,4)$。再放入一条 $z=d^{-4}$ 的奇荷层，含四个实标量和一个狄拉克费米子，净偏振为零、牛顿权为一。所有牛顿权均为正，由 $\partial_x[xE_2(z/x)]=e^{-z/x}$ 知 $K$ 从零严格升至无穷。将 $d$ 从 $1$ 加倍至 $2$，唯一标定根 $x$ 由 $3.08609$ 降至 $2.67179$，曲率由 $0.16783$ 降至 $0.15821$。一般的重场耦合作用仍需自己的驻定方程。
+
+::: {.film src="winding-ladder"}
+**从 529 个三角面的双钟作用出发，绕数阶梯一级级爬到 105 圈，旗舰零点在顶上留下见证与四道裂隙（2 分 48 秒）。** 片头一个示意三角面绕出品红回路角 $\varphi_\triangle$，青色基频曲线 $1-\cos\varphi$ 旁升起琥珀色的 $k=19$ 谐波，作用量 $S_w$ 是本章选定的模型（[@def-ou-ch13-wilson-winding-action]），标为论证。绿色 `LEAN ✓` 只贴在 [@thm-ou-ch13-noncommutative-witness] 上：屏幕算出 $(1+\mathbf{i})(1+\mathbf{j})=(1,1,1,1)$ 与 $(1+\mathbf{j})(1+\mathbf{i})=(1,1,1,-1)$，再由 $\kappa=\tfrac12,\tfrac14,\tfrac12$、$B=\tfrac14$ 得 $\det\mathbf{G}_3=\tfrac14$。七级台阶 $\le 18 \to 19 \to 21 \to 27 \to 31 \to 36 \to 105$ 逐级点亮（当前一级琥珀色），台阶上方的读数、[@rem-ou-ch13-monotone-cone-geometry] 的 $>1/4$ 能差与十位码 `1011`／九位码 `505`、[@ex-ou-ch13-flagship-zero] 中零点 `#2,306,888,100,085` 的 ppm 标尺，以及四重压力测试面板，都是本章复算证书的数字，标为 `NUM`；递减权柱与能级位置是示意。片中明说：这枚零点是模型内部的见证，不是对夸克混合的推导。
+:::
 
 五百二十九面双钟作用于是把我们带到了一个奇特的高原：它证明了联合三窗与百万分之一级夸克混合的真实零点真空确实存在且拥有正自然密度，却同时宣告单靠裸壳三角面无法绕开 $105$ 圈高频需求与百维自由系数。如果高阶响应与有效弱接触必须源自有限半径的局部壳几何与内部隐藏自由度，那我们就必须打开球壳的内部结构——走进[第十四章](ch14-624-channels-and-memory-rank.md)的六百二十四通道与局部记忆秩阶梯。

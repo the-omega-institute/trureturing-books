@@ -1,0 +1,251 @@
+{
+ "voice": "af_heart",
+ "speed": 0.94,
+ "say": {
+  "Lean's": "Leen's",
+  "Lean": "Leen",
+  "Quot.sound": "quote sound",
+  "propext": "prop ext",
+  "OmegaInit": "Omega Init",
+  "OmegaMath": "Omega Math",
+  "toRat": "to rat",
+  "Init": "init",
+  "Cayley": "Kay-lee"
+ },
+ "music": {
+  "bpm": 80,
+  "progression": "a-minor"
+ },
+ "scenes": [
+  {
+   "id": "title",
+   "name": "THE AUDIT",
+   "lead": 2.6,
+   "tail": 0.5,
+   "music": [
+    1.0,
+    0.4,
+    0.3,
+    0.0,
+    0.1
+   ],
+   "lines": [
+    [
+     "Six volumes built mathematics from integers. Now we audit what Lean's kernel actually signed.",
+     "六卷书只用整数搭起了数学。现在来审计：Lean 内核究竟签下了什么。"
+    ],
+    [
+     "Which strict libraries replay in an empty kernel? And which axioms does each theorem use, on each backend?",
+     "哪些严格库能在空内核中重放？每条定理在两种后端上各用了哪些公理？"
+    ]
+   ]
+  },
+  {
+   "id": "layers",
+   "name": "THREE LAYERS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.5,
+    0.4,
+    0.1,
+    0.2
+   ],
+   "lines": [
+    [
+     "Layer zero stores fractions as integer pairs: two fourths equals one half, since two times two is four times one.",
+     "第 0 层把分数存成整数对：2/4 与 1/2 等价，因为 2 × 2 = 4 × 1。"
+    ],
+    [
+     "Cross multiplication, not a quotient type, so Quot.sound is never needed.",
+     "靠交叉相乘，不靠商类型，所以用不到 Quot.sound。"
+    ],
+    [
+     "Layer one writes the model's laws as fields an instance must prove. Layer two is a one-way bridge to the reals.",
+     "第 1 层把模型定律写成实例必须证明的字段。第 2 层是一座通往实数的单向桥。"
+    ]
+   ]
+  },
+  {
+   "id": "circle",
+   "name": "THE STRICT CIRCLE",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.2,
+    0.2
+   ],
+   "lines": [
+    [
+     "Inside the wall, take the pair one, two. The Cayley map gives three fifths, four fifths: nine plus sixteen is twenty-five.",
+     "在墙内取整数对 (1, 2)。凯莱映射给出 (3/5, 4/5)：9 + 16 = 25。"
+    ],
+    [
+     "Lean checks the general law: every pair, not both zero, lands exactly on the circle.",
+     "Lean 检验一般定律：任何不全为零的整数对，都精确落在单位圆上。"
+    ],
+    [
+     "Overlap four fifths plus spread one fifth is one, and the pole one, zero closes at minus one, zero.",
+     "相融度 4/5 加失准度 1/5 恰为 1；极点 [1 : 0] 有限闭合于 (−1, 0)。"
+    ],
+    [
+     "The pair times itself is four, three, of squared norm twenty-five: five times five.",
+     "这一对与自身相乘得 (4, 3)，模方 25 = 5 × 5。"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 1,
+     "at": 3.0,
+     "kind": "stamp"
+    }
+   ]
+  },
+  {
+   "id": "records",
+   "name": "TWO RECORDS",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "Each frozen theorem carries two records at the pinned commit. The strict one lists OmegaInit and OmegaMath, with an empty axiom list.",
+     "每条冻结定理在所钉提交上有两份记录：严格端只列 OmegaInit 与 OmegaMath，公理为空。"
+    ],
+    [
+     "The official build of the same source keeps its own: for antipodal closure, propext alone.",
+     "同一份源码的官方端构建另有记录：对径闭合仅依赖 propext。"
+    ],
+    [
+     "Two backends, two measurements. Read them separately; never merge them into one claim.",
+     "两种后端，两次测量。分开读，绝不合并成一句话。"
+    ]
+   ]
+  },
+  {
+   "id": "replay",
+   "name": "EMPTY KERNEL",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.6,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "Libraries face a harsher test. Pick a strict root, here the circle module, and follow its imports.",
+     "整个库要受更严的检验。选一个严格库根，这里取圆周模块，沿导入关系走下去。"
+    ],
+    [
+     "Each strict file opens with prelude, so nothing comes from official Init.",
+     "每个严格源文件都以 prelude 开篇，不从官方 Init 引入任何东西。"
+    ],
+    [
+     "The auditor rejects any axiom, any quotient, anything unsafe, then replays the closure in a fresh, empty environment.",
+     "审计器拒收公理、商类型与 unsafe 声明，再在全新的空环境中重放闭包。"
+    ]
+   ]
+  },
+  {
+   "id": "bridge",
+   "name": "ONE-WAY BRIDGE",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.6,
+    0.3,
+    0.3
+   ],
+   "lines": [
+    [
+     "Now cross the bridge. toRat reads each fraction as a rational, and undefined as zero.",
+     "现在过桥。toRat 把每个分数读成有理数，把“未定义”读成 0。"
+    ],
+    [
+     "Two fourths and one half both read one half, and the point three fifths, four fifths stays on the real circle.",
+     "2/4 与 1/2 都读作 1/2；点 (3/5, 4/5) 到了实数里，仍在单位圆上。"
+    ],
+    [
+     "The official records show the price: from nothing, to propext, up to choice, quotients and propext.",
+     "官方记录标出代价：从空列表，到 propext，一直到选择公理、商与 propext。"
+    ],
+    [
+     "Nothing flows back. Proof inside, shadow outside.",
+     "什么都不会流回墙内。证明在里，影子在外。"
+    ]
+   ]
+  },
+  {
+   "id": "prototype",
+   "name": "HONEST AUDIT",
+   "lead": 0.5,
+   "tail": 0.6,
+   "music": [
+    0.9,
+    0.6,
+    0.5,
+    0.2,
+    0.3
+   ],
+   "lines": [
+    [
+     "One page of readable code strings all six volumes into one check, ending with a gate that divides by five.",
+     "一页可读代码把六卷串成一次合取核验，最后一项是除以 5 的闸门。"
+    ],
+    [
+     "Recomputed here, all eight clauses hold: the gate passes one product and blocks the other.",
+     "这里重算，八项全部成立：闸门放行一个乘积，挡住另一个。"
+    ],
+    [
+     "But it runs on Lean's built-in rationals, whose addition depends on choice, quotients and propext.",
+     "但它用的是 Lean 内置有理数，其加法依赖选择公理、商与 propext。"
+    ],
+    [
+     "So an honest audit files it as a blueprint, and claims an empty axiom list only where a measurement shows one.",
+     "所以诚实的审计把它归为蓝图；只有测量结果为空之处，才说公理列表为空。"
+    ]
+   ]
+  },
+  {
+   "id": "close",
+   "name": "LEDGER",
+   "lead": 0.5,
+   "tail": 3.0,
+   "music": [
+    1.0,
+    0.6,
+    0.5,
+    0.3,
+    0.2
+   ],
+   "lines": [
+    [
+     "Omega Math, chapter eighteen.",
+     "《OMEGA MATH》· 第十八章"
+    ]
+   ],
+   "cues": [
+    {
+     "line": 0,
+     "at": 0.3,
+     "kind": "chime"
+    }
+   ]
+  }
+ ]
+}
