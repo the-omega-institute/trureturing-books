@@ -337,15 +337,20 @@ $$
 
 例如在标准正交基 $(e_0,e_1,e_2)$ 中取 $\mu=a=b=1$、$v=c=e_1$、$s=(e_1+i e_2)/\sqrt2$。最优首阶系数为 $3/2$。若规定一条轮换本征线是顶底平面的法线 $e_2$，最小首阶系数升至 $5\sqrt6/8>3/2$。允许两条轻轮换线重新取向，才可达到真实最小值。[全局推导、取优基与矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/1928#issuecomment-7238762769)
 
-**两条重线趋于正交时（手工推导）。** 在顶底平面内将下型参考质量基整体转过 $\mu\varepsilon$，使下型重线朝上型重线靠近，其中 $\mu>0$。两部门的秩一轻块除去 $\varepsilon$ 后有界，其非对角元 $C,S$ 的模有正下界。记 $q=|C|^2$，将矩阵的非对角元模平方按每对指标计一次，求和后除以 $\varepsilon^2$，作为平方成本。精确端点余量是 $q-E_B(I)$，其中 $E_B(I)$ 是下型在两条参考重线及其法线组成的正交基中的平方成本。设上型轻块的对角差为 $\ell\varepsilon^{3/2}$，其中 $|\ell|$ 有正下界且有界，令 $L=|\ell|\sqrt q$。记 $D_{\mathrm{plane}}$ 为固定法线时的最小破缺，则余量恰为零时有
+**两条重线趋于正交时（手工推导）。** 在顶底平面内将下型参考质量基整体朝上型重线转过 $\mu\varepsilon$，其中 $\mu>0$。除去 $\varepsilon$ 后，两部门在 $(e_1,e_2)$ 和 $(e_0,e_2)$ 上的秩一轻块有界，其上三角元 $C,S$ 的模有正下界。基 $(e_0,e_1,e_2)$ 由两条参考重线与顶底平面法线组成。每对非对角元只计一次，将模平方之和除以 $\varepsilon^2$，得到平方成本。记 $q=|C|^2$，下型在参考基中的成本为 $E_B(I)$，精确端点余量为 $q-E_B(I)=k\varepsilon^{5/3}$，其中 $k$ 有界。设上型轻块的第一、第二对角元之差为 $\ell\varepsilon^{3/2}$，其中 $|\ell|$ 有正下界且有界。记 $L=|\ell|\sqrt q$，令 $x>\sqrt{k_+}$ 解 $x(x^2-k)=2\mu^2 L$，其中 $k_+=\max(k,0)$。
+
+轻块沿降低上型成本的复相位转动时，线性收益伴随下型成本的二次上升。补偿这一上升所需的平面分角给上型带来四次代价，两项平衡使法线转角与 $\varepsilon^{11/6}$ 同阶。固定法线的最小破缺 $D_{\mathrm{plane}}$ 因而高于全复基的最小值 $D_*$，差的首项为 $\varepsilon^{13/3}$ 阶，且在 $k$ 过零时保持同阶。写 $u_0=(x^2-k)/(2\mu)$，首项及其相位修正为
 
 $$
-D_{\mathrm{plane}}-D_*=
-\frac{\sqrt6}{2\sqrt q}\,\frac32 L(2\mu^2 L)^{1/3}\varepsilon^{13/3}
-+O(\varepsilon^{9/2}).
+\begin{aligned}
+D_{\mathrm{plane}}-D_*&=\frac{\sqrt6}{2\sqrt q}\varepsilon^{13/3}
+\bigl[\Gamma-2\mu\ell\operatorname{Re}(C\bar S)\varepsilon^{1/6}\\
+&\qquad +(4qx^2+\mu u_0|S|^2)\varepsilon^{1/3}+O(\varepsilon^{1/2})\bigr],\\
+\Gamma&=\frac{(-k)_+^2}{4\mu^2}-u_0^2+2Lx.
+\end{aligned}
 $$
 
-轻块转动可沿降低上型成本的复相位取向。这个线性收益伴随下型成本的二次上升，需要平面分角补偿，因而给上型增加四次代价。两项平衡时，法线转角与 $\varepsilon^{11/6}$ 同阶。即使端点余量恰为零，固定法线仍会高估最小破缺。对有界实数 $k$，余量为 $k\varepsilon^{5/3}$ 时，两侧的破缺差也与 $\varepsilon^{13/3}$ 同阶。[一致系数、任意复基下界与复算](https://github.com/the-omega-institute/trureturing-books/issues/2051#issuecomment-7239517945)
+精确零余量时，$\Gamma=\tfrac32 L(2\mu^2 L)^{1/3}$。下型重线的转动诱发了额外的轻块耦合，其沿取优相位的分量决定 $\varepsilon^{9/2}$ 项的符号。如果 $\operatorname{Re}(C\bar S)=0$，这个修正消失，下一项为正，阶数为 $\varepsilon^{14/3}$，括号余项收紧为 $O(\varepsilon^{2/3})$。[任意复基的匹配界与矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/2051#issuecomment-7239648355)
 
 在 $1\,\mathrm{TeV}$ 的参考输入表 2 中，$y_c/y_t\le0.00316/0.8573$，$y_s/y_b\le0.000271/0.01392$，因此可取 $g=0.9996$。沿用上面的保守混合输入，$|V_{tb}|>0.98$ 使 $d=\theta$，而 $\sin\theta\ge |V_{cb}|>0.035$ 使破缺严格大于 $0.0428$。用表 2 的边际区间构成输入盒时，仍有 $d=\theta$。由 $|V_{tb}|=\cos\theta_{23}\cos\theta_{13}$，$\sin^2\theta$ 随两个混合角分别增大。代入下端点 $\theta_{23}=0.04233$、$\theta_{13}=0.00369$，得破缺严格大于 $0.0520$。[参考输入表 2](https://arxiv.org/pdf/2510.01312v2#page=14) · [CKM 标准参数化，式 (12.3)](https://pdg.lbl.gov/2024/reviews/rpp2024-rev-ckm-matrix.pdf#page=1)
 :::
