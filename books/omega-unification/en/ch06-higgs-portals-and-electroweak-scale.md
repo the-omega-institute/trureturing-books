@@ -388,13 +388,29 @@ For any positive Hermitian common portal $B \succeq 0$ with operator norm $B_* =
    sits comfortably inside $[8, 16]$, yielding $f \in (0.3056, 0.3623)$, $b \in (0.0769, 0.1507)$, tail contribution $< 2.121 \times 10^{-6}$ above layer $172$, mass sensitivity $> 9.723 \times 10^{22}$, and arithmetic zero-recurrence at fixed parameters with positive lower natural density $> 2.0264 \times 10^{-59}$.
 3. **Two parameter-free tests**: varying the Higgs background $h_H = H^\dagger H$, define the tree-level species mass-response difference $A_i := \partial(m_{S,i}^2 - m_{C,i}^2)/\partial h_H = 4f e^{-t e_i}$. The common portal $b$ cancels identically in $A_i$, and taking ratios $A_i/A_j$ eliminates $f$ as well:
    - **Two-level ratio discriminator**: between levels $1$ and $7$ ($0.11854 < e_7 - e_1 < 0.15417$), the intrinsic arc-ratio time $t = \theta_{804}/\theta_{12}$ predicts **$A_1/A_7 \in (2.750,\; 3.728)$** (precisely $(2.75042, 3.72783)$), cleanly disjoint from $t = 16$ where $A_1/A_7 \in (6.66350, 11.78302)$. Paired with the Dirichlet ground squared masses $E_{\mathrm{long}}, E_{\mathrm{short}}$ of the longest and shortest edges, it predicts the universal dimensionless identity $(E_{\mathrm{long}}^2/E_{\mathrm{short}})\log(A_i/A_j)/(m_j^2 - m_i^2) = 1$ (within $< 5.7 \times 10^{-12}$ on $h \le 10^{-6}$ grids).
-   - **Three-level convexity test against positive heat mixtures**: allowing any finite positive heat-kernel mixture $A(e) = \int_0^\infty e^{-te}\,\mathrm{d}\mu(t)$, pick $a = e_1 < b' = e_7 < c = e_{19}$ with exponent $p = (c-a)/(b'-a) \in (6.14645, 8.19706) > 1$. Setting $X = e^{-t(b'-a)}$ under the tilted probability measure gives, by strict convexity of $x^p$,
+   - **Three-level convexity test for positive heat mixtures**. Write $A(e) = \int_0^\infty e^{-te}\,\mathrm{d}\mu(t)$ for a heat-kernel mixture with a nonzero finite positive measure $\mu$. Take $0 < a = e_1 < b' = e_7 < c = e_{19}$ with exponent $p = (c-a)/(b'-a) \in (6.14645, 8.19706) > 1$. Under the reweighted probability measure $\mathrm{d}\nu = e^{-at}\,\mathrm{d}\mu/A(a)$, set $X = e^{-t(b'-a)}$. Strict convexity of $x^p$ gives
 
      $$
      \frac{A(c)}{A(a)} \;=\; \mathbb{E}[X^p] \;\ge\; \bigl(\mathbb{E}[X]\bigr)^p \;=\; \left[\frac{A(b')}{A(a)}\right]^p,
      $$
 
-     with **equality if and only if $\mu$ is concentrated at a single diffusion time**. Two levels can always be mimicked by a two-point mixture, whereas three levels matching the single arc-ratio heat kernel within $0.001$ in log response already constrain the tilted distribution via Chebyshev's inequality to $\mathbb{P}(|t - \theta_{804}/\theta_{12}| \ge 2) < 0.05533$ and $\mathbb{P}(|t - \theta_{804}/\theta_{12}| \ge 3) < 0.02737$.
+     with **equality if and only if $\mu$ is concentrated at a single diffusion time**. When three levels match the single arc-ratio heat kernel within $0.001$ in log response, Chebyshev's inequality bounds the reweighted probabilities under $\nu$ by $\nu(|t - \theta_{804}/\theta_{12}| \ge 2) < 0.05533$ and $\nu(|t - \theta_{804}/\theta_{12}| \ge 3) < 0.02737$.
+
+     **A two-point example.** Start with a single heat kernel $A_0(e)=C e^{-t_0 e}$, where $C>0$ and $t_0>0$. Write $m=e^{-(b'-a)t_0}$. For any $T>t_0$, put $z=e^{-(b'-a)T}$ and take $0<q<1-m$. Choose the earlier time $s$ by setting
+
+     $$
+     e^{-(b'-a)s}=\frac{m-qz}{1-q}=:x_s \in (m,1).
+     $$
+
+     Give $s$ and $T$ the original weights $A_0(a)(1-q)e^{as}$ and $A_0(a)q e^{aT}$, respectively. This gives $A(a)=A_0(a)$, and $(1-q)x_s+qz=m$ gives $A(b')=A_0(b')$. Since $X\le x_s$, we have $X^p\le x_s^{p-1}X$. Together with strict convexity this yields
+
+     $$
+     0<\log\frac{A(c)}{A_0(c)}
+     \le (p-1)\log\frac{x_s}{m}
+     <(p-1)\log\frac{1}{1-q}.
+     $$
+
+     Choose $q$ small enough to meet any positive log tolerance at the third level, uniformly in $T>t_0$. Then let $T$ grow. The weight fraction at $T$, $\bigl(1+\frac{1-q}{q}e^{-a(T-s)}\bigr)^{-1}$, tends to $1$. This uses the freedom in the total weight $A(0)$. If $A(0)$ is also fixed exactly at $C$, apply the same strict convexity to $Y=e^{-at}$ with exponent $b'/a$ under the original normalized measure. The two exact positive-energy readings then force $t=t_0$.
 
 The table below collects the entire ultraviolet Higgs-portal landscape—every exclusion boundary and every surviving corridor—before we turn to the low-energy collider pinch:
 
