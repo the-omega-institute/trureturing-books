@@ -89,6 +89,19 @@ $$
 
 固定 $A,B$ 并遍取共同复超平面，可得 $\max_n |\det[H_A,H_B]|=|\det X_0|\,\|iC\|_{\mathrm{op}}/27$。三个权重 $\|n_0\|^2,|n_+|^2,|n_-|^2$ 之和为一，乘积至多为 $1/27$。令三者相等，并让 $n_0$ 沿 $iC$ 取到算子范数的本征方向，即可达界。因而存在两套压缩谱均非简并且 $J\ne0$ 的轻空间，当且仅当 $\det X_0\ne0$ 且 $C\ne0$。若要比较不同法向量所得 $J$ 的大小，还需计入随法向量而变的质量谱隙 $\Delta_A\Delta_B$。
 
+**四维 Fourier 双基（手工推导）。** 把共同态问题移到四维，取 $F_4=(i^{jk}/2)_{j,k=0}^3$，仍以 $p=\operatorname{diag}(\rho)$ 和 $q=\operatorname{diag}(F_4^*\rho F_4)$ 记读数。令 $u=(2,-1,2,-1)^T$、$v=(4,i,-4,-i)^T$，则 $\rho=(uu^*+vv^*)/44$ 给出
+$$
+p=(10,1,10,1)/22,\qquad q=(1,25,9,9)/44.
+$$
+这对读数只有这一个共同态，故最小秩恰为二。固定 $p$ 时，混合态的第二读数可达域在四维可以严格大于同一 $p$ 的纯态读数凸包。
+
+取第一行 $(0,5+2i,2,5-2i)$ 的厄米循环矩阵 $A$。设 $c=(12,-6,-8,2)$，则 $F_4^*AF_4=\operatorname{diag}(c)$。令 $S=\operatorname{diag}(3,18,3,18)+A$。在平移两格的正、负特征空间上，其两个块分别为
+$$
+\begin{pmatrix}5&10\\10&20\end{pmatrix},\qquad
+\begin{pmatrix}1&4i\\-4i&16\end{pmatrix}.
+$$
+两块各秩一且半正定，核由 $u,v$ 张成。共同实现 $p,q$ 的任一态 $X$ 都满足 $\operatorname{tr}(SX)=3(p_0+p_2)+18(p_1+p_3)+c\cdot q=0$，因而 $X=UHU^*$，其中 $U=[u\ v]$。第 $0,2$ 项对角元相等，第 $1,3$ 项对角元也相等，分别迫使 $H$ 的非对角元实部和虚部为零。其余两条对角方程确定 $H=I_2/44$。若 $q$ 来自第一读数同为 $p$ 的纯态凸组合，每个正权重分量都须使非负量 $\operatorname{tr}(SX)$ 为零。核内具有读数 $p$ 的态只有上述秩二态。[四维反例的精确核对](https://github.com/the-omega-institute/trureturing-books/issues/1657#issuecomment-7232238573)
+
 在第 $2\,306\,888\,100\,085$ 枚正零点，把四个算术 Gram 源的正交化方向依次放在极点与三条射线的首站，用后三个原始源张成的空间代表三代。把荷 $-4,2$ 的壳算子分别压缩到这个空间，作为上型、下型左手夸克的质量平方矩阵。一步传播保留共同的反酉对称，Jarlskog 不变量 $J=0$。走两步再投影，多出了中途离开三代空间又返回的路径，给出 $J\simeq3.00189\times10^{-4}$。产生 CP 破坏后，还要同时解释夸克质量与顶底混合。在 $1\,\mathrm{TeV}$ 六个夸克汤川耦合各自的 $1\sigma$ 区间内，即使上下两部门各自任取十九个非负谱值，所得 $|V_{tb}|$ 也只能小于 $0.9936401$ 或大于 $0.99915018$，同尺度参考窗落在两者之间。若允许壳上的读数取负而压缩后的质量平方保持正定，两荷共用一个至多十一次的实多项式就能重现任意给定的六个正夸克质量与 CKM 矩阵。这个自由度使多项式的系数也成为统一模型必须解释的量。[两步传播](https://github.com/the-omega-institute/trureturing-experiments/blob/b0f5a77f57448869a358fdfb61c96dad5aa3f039/experiments/ch39-omega-research/replay/ch39-three-gram-source-flavor.py) · [非负谱的混合限制](https://github.com/the-omega-institute/trureturing-experiments/blob/b0f5a77f57448869a358fdfb61c96dad5aa3f039/experiments/ch39-omega-research/replay/ch39-three-source-positive-ckm.py) · [有符号多项式构造](https://github.com/the-omega-institute/trureturing-experiments/blob/b0f5a77f57448869a358fdfb61c96dad5aa3f039/experiments/ch39-omega-research/replay/ch39-signed-three-source-quark-pair.py) · [参考输入表 2](https://arxiv.org/html/2510.01312v2#Sx1.T2)
 
 夸克数据还约束三代空间本身的取向。取极点与三个首站构成的实四维空间，将其中一个实三维超平面复化，作为上下型共有的味空间。记 $a$ 为其单位法向在三循环固定平面上的投影长度。允许两部门各自在四站上选取任意保持三循环的正半定算子，并把压缩读作质量平方。用同一张 $1\,\mathrm{TeV}$ 表的质量与混合误差窗，区间计算给出必要条件 $0.0096549<a<0.0332714$。四个算术源中任选三个，得到的 $a$ 都在 $0.5198$ 与 $0.5774$ 之间。取 $a=0.02145737$，同表中心值有严格正定的四站扩张。[四站正扩张的范围与构造](https://github.com/the-omega-institute/trureturing-experiments/blob/cd7ec54bd5afd349e0a6734cc600f16e66ce612c/experiments/ch39-omega-research/replay/ch39-free-four-site-positive-extensions.py)
