@@ -415,7 +415,19 @@ $$
 2(2S_++g_\Delta)g_\Delta=0.01706762,\qquad
 \frac{2L_+}{\mu_-}=0.00603015.
 $$
-所以首项约化 Hessian 在两个邻域内的最小特征值仍大于 $1.7397$。这证明了缩放极限的统一严格正定性。#2203 中的解析余项目前只有函数值界，尚未给出对缩放坐标二阶导数的界，因此这里不把 $1.7397$ 外推为有限 $\varepsilon$ 的 Hessian 证书；下一步是补上该导数余项估计。
+所以首项约化 Hessian 在两个邻域内的最小特征值仍大于 $1.7397$。这证明了缩放极限的统一严格正定性。下面的 Cauchy 估计把这个下界传递到有限尺度的局部等成本图。
+
+有限尺度的局部等成本图也继承这个正定性（手工推导）。沿用 #2203 的解析延拓，把六个缩放坐标独立复化，在坐标半径 $1$、$|\varepsilon|\le10^{-3}$ 的多圆盘上取同一正平方根支。将坐标盒从 $20000$ 放宽到 $20001$ 后，解析余项
+$$
+R_u=E_u-q-\varepsilon^4U_0,\qquad R_d=E_d-q-\varepsilon^2D_0
+$$
+满足
+$$
+|R_u|\le10^{30}|\varepsilon|^5,\qquad |R_d|\le10^{24}|\varepsilon|^3.
+$$
+对坐标应用半径一的 Cauchy 估计，令 $F_u=(E_u-q)/\varepsilon^4$、$F_d=(E_d-q)/\varepsilon^2$，则 $\nabla^2(F_u-U_0)$ 与 $\nabla^2(F_d-D_0)$ 的每个条目分别不超过 $2\times10^{30}\varepsilon$ 与 $2\times10^{24}\varepsilon$。等成本条件 $E_d=E_u$ 在 $\partial_XD_0=-2\mu$ 且 $\mu\ge\sqrt{1-0.79\cdot1.14}$ 的参数盒内给出一个解析图 $X=X_\varepsilon(Z,I,Y)$。把该图代入 $F_u$，链式法则给出的约化 Hessian 与首项约化 Hessian 的算子范数差小于 $3\times10^{-5}$。因此在两个半径 $10^{-3}$ 邻域内，对所有 $0<\varepsilon\le10^{-36}$，有限等成本图的最小特征值仍大于 $1.7396$。[Cauchy 导数证书与端点复算](https://github.com/the-omega-institute/trureturing-books/issues/2203#issuecomment-7241378323)
+
+这个证书只覆盖局部等成本图。精确有限尺度分支根、全局唯一性和交换阈值仍需独立认证。
 
 若保持线性平衡并取 $\kappa+8\mu^2q=\eta\varepsilon$，两处分支在有限 $\varepsilon$ 下的等成本点会偏离五阶阈值（手工推导）。固定 $\mu$ 与下型轻块，调相取 $C>0$ 和实数 $S$，保留其相对符号。令 $v,w$ 分别为下型轻块沿 $e_0,e_2$ 的对角元，$c=\sqrt{\mu^2+|S|^2}$。实际交换点满足 $\eta_{\mathrm c}(\varepsilon)=-8\mu^2c^2w+O(\varepsilon)$。对于有界的 $\eta$ 和充分小的正 $\varepsilon$，$\eta>\eta_{\mathrm c}(\varepsilon)$ 时反射支胜出，$\eta<\eta_{\mathrm c}(\varepsilon)$ 时零偏转附近的分支胜出。
 
