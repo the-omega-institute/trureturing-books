@@ -193,6 +193,20 @@ $$
 
 Using these capacities in the least-deficit occupation and parity calculation above gives lower bounds in the quotient. For $\ell=31,35,37$ they are $109,127,136$, respectively. The vanishing below these dimensions also holds after quotienting by integration by parts. Attainment requires a nonzero class in the corresponding quotient. [Elimination of time derivatives and the lower bound](https://github.com/the-omega-institute/trureturing-books/issues/1641)
 
+The occupation bound is attained in the local quotient by the lepton Weyl equations alone. Choose a flat connection and $H(x)=(x^1,1)$, and test for nonzero coefficients on independent spatial Cauchy jets. At the highest total fermion derivative order only the Weyl principal symbol contributes to the substitution, so the coefficients at that order are independent of the Yukawa matrix. The original color contraction with two Higgs derivatives supplies eleven ordinary left-handed leptons. In each generation the Lorentz contraction of neutral first jets gives a skew form with Pfaffian $-4$ on six spatial components. Taking three pairs per generation yields a nonzero representative at $\ell=29$ of dimension $100$ and leaves one ordinary charged spin component in the third generation.
+
+The free Weyl jets of order $j$ transform as $\operatorname{Sym}^{j+1}S_+\otimes\operatorname{Sym}^{j}S_-$ or its chirality reversal. Their same-order Lorentz contraction on two pure spinor tensors is proportional to $\langle\lambda,\mu\rangle^{j+1}[\tilde\lambda,\tilde\mu]^j$. This nonzero alternating form has an invariant kernel on an irreducible representation, so it is nondegenerate and whole pairs can be filled up to capacity. For $\ell=30+\sum_{p=1}^{k-1}c_p^{\mathrm{EOM}}+s$ with odd $s$, one extra component is needed. First pair the spare ordinary spin component with a spatial second jet using two Higgs derivatives along direction $1$. At each filled even order $j$, replace one same-order contraction by a contraction between orders $j$ and $j+2$. Pair all $j$ lower-order indices with $j$ of the higher-order indices, then contract the two remaining indices with the Higgs derivatives. This acts on spatial jets by the surjection $\partial_1^2$. Taking the top exterior power at each step passes a nonzero component to the next even order. Ending at $q=k+(k\bmod2)$ supplies the odd component at the required dimension cost. Filling the other slots with whole pairs gives the minimum for odd $\ell\ge31$
+
+$$
+\begin{aligned}
+d_{\min}^{\mathrm{EOM}}(\ell)
+&=\frac{7\ell-3}{2}+\sum_{p=1}^{k-1}p\,c_p^{\mathrm{EOM}}\\
+&\quad+ks+(k\bmod2).
+\end{aligned}
+$$
+
+For $\ell=31,35,37$, these minima are $109,127,136$, respectively. Attainment after imposing other field equations or integration by parts remains open. [Explicit constructions at 29 and 31](https://github.com/the-omega-institute/trureturing-books/issues/1641#issuecomment-7231698774) · [Contractions at arbitrary orders](https://github.com/the-omega-institute/trureturing-books/issues/1641#issuecomment-7231740723)
+
 ## 9.3 Shell-Triality Algebra Closure, Discrete Anomaly Inflow, and the 25-State Lifted Shell {#sec-ch09-algebra-inflow}
 
 While $U(1)_X$ gives a clean Abelian lift over the Standard Model, installing the Behrend shell's species-dependent triality phase $F$ directly atop full $SU(5)$ vertices unleashes an extraordinary sequence of algebraic and topological demands.
