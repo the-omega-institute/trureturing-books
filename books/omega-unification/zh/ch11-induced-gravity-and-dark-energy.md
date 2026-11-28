@@ -466,7 +466,17 @@ $$
 
 边界 $z_c$ 对应的切线恰好再次接触重质量端 $a$。若 $d=Z-z_*$，则 $D_s(a)=B(u,Z)-B(u,Z-d)+I_2(Z-d)(1-e^{-vd})/v$。将余差除以 $I_2(Z)d^2$ 后在 $d=0$ 延拓，得到 $-\delta/2+Vd/3+O(\delta d+d^2)$，其零点给出上式。由于 $\partial_s D_s(a)=(s-a)f''(s)$，重端余差先降后升，只有这一处内点零点。轻端余差 $D_s(1)$ 则先升后降至零，且 $D_a(1)$ 在阈值处严格为正，故略超阈值时所有内点的轻端余差仍为正。
 
-在这一临界邻域内，平方根界的锐常数由接触层 $s_c=e^{-vz_c}$ 决定。使参考层遍历所有可识别单层、对照谱遍历所有正误差谱，$W_1/\sqrt{\varepsilon}$ 的上确界恰为该接触层的零误差极限。该极限随 $\delta$ 缩小按 $\delta^{-1/2}$ 增长，而每个正误差谱的比值都严格低于这个极限。热迹偏低时，承载重侧位移的权重会减少轻侧可用的权重。对轻侧位移使用带该权重的 Cauchy–Schwarz 界，就能抵消热迹偏低带来的增量。 [临界展开](https://github.com/the-omega-institute/trureturing-books/issues/1689#issuecomment-7241441212) · [全误差锐界的手工推导与复算](https://github.com/the-omega-institute/trureturing-books/issues/1689#issuecomment-7241841089)
+在这一临界邻域内，对所有可识别单层和所有正误差对照概率谱，$W_1/\sqrt{\varepsilon}$ 的上确界为 $K_c$，且每个比值都严格小于 $K_c$。固定接触层 $s_c=e^{-vz_c}$，令 $\omega_{s_c}(\eta)$ 为归一化读数误差满足 $\varepsilon\le\eta$ 时，对照谱到该层的平方质量输运距离 $W_1$ 的上确界。于是
+
+$$
+\begin{aligned}
+K_c&=\lim_{\eta\downarrow0}\frac{\omega_{s_c}(\eta)}{\sqrt{\eta}}\\
+&=\left(\frac{1}{vs_c}+\frac{Z-z_c}{s_c-a}\right)
+\sqrt{\frac{2(1+f'(s_c))}{f''(s_c)}}.
+\end{aligned}
+$$
+
+在 $a$ 和 $s_c+h$ 放置两层，调节权重，使归一化热迹和真空读数相对于参考层的差分别为 $-\varepsilon$ 和 $+\varepsilon$。当 $h\downarrow0$ 时，这些对照谱的比值趋于 $K_c$。热迹偏低时，承载重侧位移的权重会减少轻侧可用的权重。对轻侧位移使用带该权重的 Cauchy–Schwarz 界，就能抵消热迹偏低带来的增量。随着 $\delta\downarrow0$，$K_c=\Theta(\delta^{-1/2})$。 [临界展开](https://github.com/the-omega-institute/trureturing-books/issues/1689#issuecomment-7241441212) · [固定接触层的锐常数](https://github.com/the-omega-institute/trureturing-books/issues/1689#issuecomment-7241652592) · [全误差锐界的手工推导与复算](https://github.com/the-omega-institute/trureturing-books/issues/1689#issuecomment-7241841089)
 
 **固定整数重数的锐界（`ARGUED`）。** 参考谱各质量层有正整数个态，对照谱也允许任意正整数重数。按平方质量递增排列参考谱的正质量层。设其中 $h$ 层有至少两个态，其余是单态层。用这 $h$ 层隔开单态层，得到长度依次为 $\ell_0,\ldots,\ell_h$ 的连续段，允许空段。任意预先选定的互异正逆截止中，确定参考谱所需的读数恰为 $r+1$ 次。参考谱含零质量时取 $\delta=1$，否则取 $\delta=0$。
 

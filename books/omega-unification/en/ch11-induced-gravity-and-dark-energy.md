@@ -466,7 +466,17 @@ $$
 
 At the boundary $z_c$, the tangent also touches the heavy endpoint $a$. For $d=Z-z_*$, the gap there is $D_s(a)=B(u,Z)-B(u,Z-d)+I_2(Z-d)(1-e^{-vd})/v$. Dividing by $I_2(Z)d^2$ and extending to $d=0$ gives $-\delta/2+Vd/3+O(\delta d+d^2)$. Its zero gives the stated expansion. Since $\partial_s D_s(a)=(s-a)f''(s)$, the heavy-end gap first falls and then rises, with this single interior zero. The light-end gap $D_s(1)$ first rises and then falls to zero. At the threshold $D_a(1)$ is strictly positive, so just above it the light-end gap is still positive for every interior reference.
 
-In this near-threshold range, the sharp square-root constant is set by the contact layer $s_c=e^{-vz_c}$. Over all identifiable single layers and comparison spectra with positive reading error, the supremum of $W_1/\sqrt{\varepsilon}$ is the zero-error limit at that layer. The limit grows on the order of $\delta^{-1/2}$ as $\delta$ decreases, and every positive error gives a ratio strictly below it. When the heat trace falls below its reference value, the heavy-side displacement uses weight that would otherwise be available on the light side. Keeping the light-side weight in the Cauchy–Schwarz bound offsets the increase caused by the heat-trace error. [Threshold expansion](https://github.com/the-omega-institute/trureturing-books/issues/1689#issuecomment-7241441212) · [Hand derivation and replay for the sharp bound at all errors](https://github.com/the-omega-institute/trureturing-books/issues/1689#issuecomment-7241841089)
+In this near-threshold range, the supremum of $W_1/\sqrt{\varepsilon}$ over all identifiable single reference layers and comparison probability spectra with positive reading error is $K_c$. Every such ratio is strictly below $K_c$. Fix the contact layer $s_c=e^{-vz_c}$ and let $\omega_{s_c}(\eta)$ be the supremum of the squared-mass transport distance $W_1$ to that layer over comparison spectra with normalized reading error $\varepsilon\le\eta$. Then
+
+$$
+\begin{aligned}
+K_c&=\lim_{\eta\downarrow0}\frac{\omega_{s_c}(\eta)}{\sqrt{\eta}}\\
+&=\left(\frac{1}{vs_c}+\frac{Z-z_c}{s_c-a}\right)
+\sqrt{\frac{2(1+f'(s_c))}{f''(s_c)}}.
+\end{aligned}
+$$
+
+Place two layers at $a$ and $s_c+h$ and choose their weights so that the normalized heat trace and vacuum reading differ from their reference values by $-\varepsilon$ and $+\varepsilon$, respectively. The ratios for these comparison spectra tend to $K_c$ as $h\downarrow0$. When the heat trace falls below its reference value, the heavy-side displacement uses weight that would otherwise be available on the light side. Keeping the light-side weight in the Cauchy–Schwarz bound offsets the increase caused by the heat-trace error. As $\delta\downarrow0$, $K_c=\Theta(\delta^{-1/2})$. [Threshold expansion](https://github.com/the-omega-institute/trureturing-books/issues/1689#issuecomment-7241441212) · [Sharp constant at the fixed contact layer](https://github.com/the-omega-institute/trureturing-books/issues/1689#issuecomment-7241652592) · [Hand derivation and replay for the sharp bound at all errors](https://github.com/the-omega-institute/trureturing-books/issues/1689#issuecomment-7241841089)
 
 **Sharp bound for fixed integer multiplicities (`ARGUED`).** The reference and comparison spectra may have any positive integer multiplicities. Order the positive reference masses. Let $h$ of these levels have at least two states. They divide the single-state levels into runs of lengths $\ell_0,\ldots,\ell_h$, allowing empty runs. The exact number of readings needed to identify the reference at any prescribed distinct positive inverse cutoffs is $r+1$. Set $\delta=1$ when the reference has a massless level and $\delta=0$ otherwise.
 
