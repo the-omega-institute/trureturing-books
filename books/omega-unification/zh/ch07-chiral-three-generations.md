@@ -84,11 +84,25 @@ $$
 映射 $\rho\mapsto1-\bar\rho$ 保持高度与重数，并把实部偏移反号。将原求和与反射重排后的求和取平均，指数展开的一次项相消，剩下的二阶余项给出上界。完整证明由 Lean 内核检查。
 :::
 
-这个有限高度界把误差归结为零点到临界线的加权距离。要控制随高度增长的频率，还需对不同距离的零点数给出一致估计。 [Ford–Zaharescu，引理 2 与式 (3.8)](https://arxiv.org/abs/math/0405459v2)
+::: {.theorem #thm-ou-ch07-zeta-density-transfer title="由右半条带计数控制纵坐标和" lean="D5/S3/Weil/ZeroData/ZetaOrdinateDensityTransfer.actual_reflection_bound_of_exponential_tail"}
+沿用上面的零点和重数。设 $r>0$，对每个 $t>0$，在 $0<\gamma\le T$ 的零点中，满足 $\beta\ge1/2+t$ 的带重数计数至多为 $Ae^{-rt}$。若实频率 $v$ 满足 $|v|\le r/4$，则
 
-**随高度缩小的阈值（`ARGUED`）。** 令 $L=\log T$。若 $\varepsilon(T)\to0$ 且 $\varepsilon(T)\sqrt L\to\infty$，那么在模型的五种荷中，每种荷的近盲零点比例均为 $C_q\varepsilon(T)^2+o(\varepsilon(T)^2)$，仍按重数计数。证明取 $J=\lfloor cL/\log L\rfloor$，其中 $c>0$ 充分小。双钟频率的显式下界控制接近零频率时的误差。Ford–Meng–Zaharescu 的引理 1–2 随即把每个 $0<\|m\|_\infty\le J$ 的标准化零点傅里叶和控制在 $O(L^{-1}+\|m\|_\infty^2L^{-2})$，无需假定黎曼猜想。[零点和估计](https://arxiv.org/abs/1511.06814v2) · [联合极限的推导](https://github.com/the-omega-institute/trureturing/issues/35082#issuecomment-7232072134)
+$$
+\left|\sum_{0<\gamma\le T}m_\rho e^{v(\rho-1/2)}
+      -\sum_{0<\gamma\le T}m_\rho e^{iv\gamma}\right|
+\le 64A(v/r)^2.
+$$
+:::
 
-在每个盲点取尺度为 $\varepsilon$ 的光滑内外逼近，夹住由边界振幅雅可比决定的局部椭圆。其傅里叶系数的绝对和为 $O(1)$，二阶绝对矩为 $O(\varepsilon^{-2})$，超过 $J$ 的绝对尾和为 $O((\varepsilon J)^{-4})$。因此采样与环面平均之差为 $O(L^{-1}+\varepsilon^{-2}L^{-2}+(\varepsilon J)^{-4})=o(\varepsilon^2)$。让内外逼近的面积趋于同一椭圆面积即可恢复同一个 $C_q$。 [Lean 中的绝对尾界](lean:D5/S3/Fourier/Asymptotics/PlanarFourierTail.lattice_fourier_tail)
+::: proof
+同高反射把左尾的计数化为右尾计数。记 $D=|\beta-1/2|$。沿距离积分，得到 $e^{rD/2}-1$ 的带重数总和至多为 $2A$。指数级数给出 $D^2e^{|v|D}\le(32/r^2)(e^{rD/2}-1)$，代回反射定理即得上界。完整证明由 Lean 内核检查。
+:::
+
+取 $L=\log T$。Selberg 的零点密度界给出 $r=L/4$ 和 $A=O(TL)$。将这两个参数代入传递定理，在 $|v|\le L/16$ 内得到 $O(Tv^2/L)$ 的误差。 [Ford–Zaharescu，引理 2](https://arxiv.org/abs/math/0405459v2)
+
+**随高度缩小的阈值（`ARGUED`）。** 若 $\varepsilon(T)\to0$ 且 $\varepsilon(T)\sqrt L\to\infty$，那么在模型的五种荷中，每种荷的近盲零点比例均为 $C_q\varepsilon(T)^2+o(\varepsilon(T)^2)$，仍按重数计数。取 $J=\lfloor L/[128(1+\pi+\log1734)]\rfloor$。对 $0<\|m\|_\infty\le J$，双钟频率 $v=m_1a+m_2b$ 满足 $(128T^{1/4})^{-1}\le |v|\le L/16$。在 Ford–Meng–Zaharescu 引理 1 中取 $x=e^{|v|}$，最近素数幂主项除以 $\sqrt{x}$ 后为 $O(T)$。其余项为 $O(T^{1/32}L^2+T^{1/4}L)=o(T)$。负频率的纵坐标和是正频率的复共轭。结合上述传递界和 $N(T)\asymp TL$，标准化纵坐标和为 $O(L^{-1}+\|m\|_\infty^2L^{-2})$。 [零点和估计](https://arxiv.org/abs/1511.06814v2) · [频率截断与归一化](https://github.com/the-omega-institute/trureturing/issues/35082#issuecomment-7236017586)
+
+在每个盲点取尺度为 $\varepsilon$ 的光滑内外逼近，夹住由边界振幅雅可比决定的局部椭圆。对每个固定的光滑测试函数作二维缩放，再沿最大频率分量对应的坐标分部积分，可得 $|\widehat f_\varepsilon(m)|\le K\varepsilon^2(1+\varepsilon\|m\|_\infty)^{-8}$，其中 $K$ 取决于测试函数。按格点壳层求和，绝对和为 $O(1)$，二阶绝对矩为 $O(\varepsilon^{-2})$，超过 $J$ 的绝对尾和为 $O((\varepsilon J)^{-4})$。因此采样与环面平均之差为 $O(L^{-1}+\varepsilon^{-2}L^{-2}+(\varepsilon J)^{-4})=o(\varepsilon^2)$。让内外逼近的面积趋于同一椭圆面积即可恢复同一个 $C_q$。 [Lean 中的绝对尾界](lean:D5/S3/Fourier/Asymptotics/PlanarFourierTail.lattice_fourier_tail)
 
 固定荷与钟角，轻线随辐边软化能移动多远？写 $H_k(\delta)=H_k(0)-\delta K_k$。三条单位辐边构成一个星图。在极点与三叶均匀单位向量的基下，平凡特征标上的星图块为 $\left(\begin{smallmatrix}3&-\sqrt3\\-\sqrt3&1\end{smallmatrix}\right)$。两个非平凡叶模式在极点相消，各自的本征值为 $1$。其余方向上的星图作用为零，故 $K_k$ 的谱宽依次为 $w_k=4,1,1$。[软化权重的定义](https://github.com/the-omega-institute/trureturing-experiments/blob/cb58c8e64ecea67184e0c1d68a690be098a7a384/experiments/ch39-omega-research/replay/ch39-three-ray-chiral-boundary.py#L34)
 

@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "1235e381cd1e51d449c2b58b4a43f5a9f806729d",
-  "pinned_at": "2026-11-28T08:37:06Z",
+  "commit": "0af44e10cdd7b7349650de90b29862ed8b3a182d",
+  "pinned_at": "2026-11-28T09:17:11Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -29100,6 +29100,19 @@
       "statement_id": "sha256:a71a76215cfec9f535c767e38d463bf0078d1f38958dd72b84626f05ee376176",
       "line": 111,
       "signature": "theorem zetaZeroData_representation_iff (rho : ℂ) : IsNontrivialZero rho ↔ ∃! n : ℕ, zetaZeroData.zero n = rho"
+    },
+    "D5/S3/Weil/ZeroData/ZetaOrdinateDensityTransfer.actual_reflection_bound_of_exponential_tail": {
+      "module": "D5/S3/Weil/ZeroData/ZetaOrdinateDensityTransfer",
+      "name": "D5.S3.Weil.ZeroData.ZetaOrdinateDensityTransfer.actual_reflection_bound_of_exponential_tail",
+      "kind": "theorem",
+      "statement_id": "sha256:4a4415b17f6753efea05979287bb0912689b675957ea03aa9ee583beb085da24",
+      "line": 116,
+      "signature": "theorem actual_reflection_bound_of_exponential_tail (v T A r : ℝ) (hr : 0 < r) (hv : |v| ≤ r / 4) (htail : ∀ t > 0, (∑ ρ ∈ (zerosIn_finite 0 T).toFinset.filter (fun ρ => 1 / 2 + t ≤ ρ.re), (zeroMult ρ : ℝ)) ≤ A * Real.exp (-r * t)) : let s",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Weil/ZeroData/ZetaOrdinateReflectionTransfer.actual_reflection_bound": {
       "module": "D5/S3/Weil/ZeroData/ZetaOrdinateReflectionTransfer",
