@@ -574,7 +574,7 @@ Item 1: for $\theta=1$ both sides are analytic on $\operatorname{Re}s>0$, $s\ne1
    and $\langle\rho_j,\rho_k\rangle=(jk)^{-1/2}\frac1{2\pi}\int_{\mathbb R}w(t)(k/j)^{it}dt$ with $w(t)=\lvert\zeta(\frac12+it)\rvert^2/(\frac14+t^2)$: up to the diagonal factor $\operatorname{diag}(k^{-1/2})$ on both sides, $G_N$ is a Toeplitz form with symbol $w\ge0$, sampled at the points $\log k$.
 2. **The remainder never vanishes.** $\rho_1,\dots,\rho_N$ are linearly independent, $G_N$ is positive definite, and $d_N>0$ for every $N$.
 3. **Each decrement.** With the Cholesky factorization $G_N=LL^{\top}$ and $y=L^{-1}c$: $d_N^2=1-\sum_{k\le N}y_k^2$ and $d_{N-1}^2-d_N^2=y_N^2=\langle\chi,e_N\rangle^2$, where $e_N$ is the unit direction of the component of $\rho_N$ orthogonal to $V_{N-1}$, and the pivot $L_{NN}^2=\det G_N/\det G_{N-1}>0$ is the squared distance from $\rho_N$ to $V_{N-1}$. Hence $d_N$ is non-increasing; it decreases strictly at step $N$ exactly when $\langle\chi,e_N\rangle\ne0$, for which this book has no general proof.
-4. **Reading a finite error as a zero-free region.** A nonzero remainder can still exclude a whole region of zero locations. Fix $N\ge0$ and a real $0<a\le\tfrac12$. If one has rigorously certified
+4. **Reading a finite error as a zero-free region.** A nonzero remainder can still exclude a whole region of zero locations; [@rem-appm-nyman-rectangle-infimum] gives the exact rectangle threshold for any positive lower height and explains the role of its open boundary. First see the mechanism in the disk: fix $N\ge0$ and a real $0<a\le\tfrac12$. If one has rigorously certified
 
    $$
    d_N^2\le U<a(1-a),

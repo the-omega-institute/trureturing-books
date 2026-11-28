@@ -539,7 +539,7 @@ $$
    并且 $\langle\rho_j,\rho_k\rangle=(jk)^{-1/2}\frac1{2\pi}\int_{\mathbb R}w(t)(k/j)^{it}dt$，$w(t)=\lvert\zeta(\frac12+it)\rvert^2/(\frac14+t^2)$：除去两侧的对角因子 $\operatorname{diag}(k^{-1/2})$，$G_N$ 是以 $w\ge0$ 为符号、在点 $\log k$ 处取样的托普利茨形式。
 2. **余项永不为零。** $\rho_1,\dots,\rho_N$ 线性无关，$G_N$ 正定；对每个 $N$ 都有 $d_N>0$。
 3. **每一步的减量。** 作楚列斯基分解 $G_N=LL^{\top}$，令 $y=L^{-1}c$，则 $d_N^2=1-\sum_{k\le N}y_k^2$，$d_{N-1}^2-d_N^2=y_N^2=\langle\chi,e_N\rangle^2$，其中 $e_N$ 是 $\rho_N$ 在 $V_{N-1}$ 的正交补中的分量的单位方向，主元 $L_{NN}^2=\det G_N/\det G_{N-1}>0$ 是 $\rho_N$ 到 $V_{N-1}$ 的距离的平方。所以 $d_N$ 不增；它在第 $N$ 步严格下降当且仅当 $\langle\chi,e_N\rangle\ne0$，本书没有这一点的一般证明。
-4. **把有限误差读成排零区域。** 非零余项仍能排除一整片零点位置。固定 $N\ge0$ 与实数 $0<a\le\tfrac12$；若已严格认证
+4. **把有限误差读成排零区域。** 非零余项仍能排除一整片零点位置；任意正下限高度的精确矩形门槛与开边界的区别见 [@rem-appm-nyman-rectangle-infimum]。先在圆盘中看清机制：固定 $N\ge0$ 与实数 $0<a\le\tfrac12$；若已严格认证
 
    $$
    d_N^2\le U<a(1-a),
