@@ -139,7 +139,18 @@ Translating the window by $u$ affects only the zeros within $|u|$ of its two end
 
 Restoring the sharp cutoff in the integral against the gamma density $\bigl(\operatorname{Re}(\Gamma^\prime/\Gamma)(1/4+it/2)-\log\pi\bigr)/(2\pi)$ costs $O(\log T/B)$. For $t\ge 1$ this density is $\log(t/(2\pi))/(2\pi)+O(t^{-2})$. Integration by parts gives the displayed endpoint term with an $O_\lambda(1)$ error, since the remaining oscillatory integral $\int_1^T e^{i\lambda t}\,dt/t$ is bounded. Taking $B=\log\log T$ gives the stated remainder. Thus $|S_\lambda(T)|/\log T$ converges to $1/(2\pi|\lambda|)$ for the fixed mode. [NIST DLMF, Eq. 5.11.2](https://dlmf.nist.gov/5.11.E2)
 
-The same endpoint term can be recovered on average over heights without using RH, by retaining the real parts in the weights. Fix $X>1$, write $\lambda=\log X$, and keep the condition $\Lambda(X)=0$. Write $\rho=\beta+i\gamma$, counting multiplicity and including the upper endpoint. Let $S(t)$ be the argument term in the Riemann–von Mangoldt formula. Away from zero ordinates it satisfies $N(t)=1+\vartheta(t)/\pi+S(t)$, with $\vartheta$ the Riemann–Siegel theta function. Subtract the smooth endpoint term from the weighted sum
+Reflection across the critical line gives a direct way to compare the weighted and unweighted sums. Fix $X=e^\lambda>1$ with $\Lambda(X)=0$, write $\rho=\beta+i\gamma$ and $\delta_\rho=\beta-1/2$, and let $W_\lambda(T)=\sum_{0<\gamma\le T}X^{\rho-1/2}$. Pairing $\delta_\rho$ with $-\delta_\rho$ at the same ordinate, with multiplicity, gives
+
+$$
+C_\lambda(T)=W_\lambda(T)-S_\lambda(T)
+=\sum_{0<\gamma\le T}\bigl(\cosh(\lambda\delta_\rho)-1\bigr)e^{i\lambda\gamma}.
+$$
+
+The classical Landau formula gives $W_\lambda(T)=O_\lambda(\log T)$ here. An upper bound of the same order for the unweighted sum is therefore equivalent to $C_\lambda(T)=O_\lambda(\log T)$. Selberg's density estimate gives $\sum_{0<\gamma\le T}\delta_\rho^2=O(T/\log T)$. Since the hyperbolic cosine difference is at most a constant times $\delta_\rho^2$, summing absolute values gives an upper bound of order $T/\log T$. A sharper estimate requires cancellation at this frequency among the phases of the off-line zeros. [Gonek, Eq. (1)](https://www.sas.rochester.edu/mth/people/faculty/gonek-steve/assets/pdf/8-landau-form.pdf#page=1) · [Ford and Zaharescu, §3, Lemma 2 and Eq. (3.8)](https://www.ford126.web.illinois.edu/wwwpapers/fz.pdf#page=9)
+
+A synthetic spectrum attains the $T/\log T$ scale under these inputs (`ARGUED`). Take $\lambda=1$ and shift the equally spaced ordinates slightly within each $2\pi$ period so that the unweighted phase sum is biased toward the negative real axis. Place each pair at the same ordinate with reflected real parts, choosing displacements of size $O(1/\log T)$ that depend on phase so the weighted sum follows the exact increment of the smooth endpoint term over each period. This spectrum has bounded count remainder, satisfies a Selberg-type density bound, and its weighted sum follows the endpoint term with $O(1)$ error at every height, while $C_1(T)\sim T/(4\pi\log T)$. A sharper bound for the actual zeta zeros requires additional information. [Construction and numerical check](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239117179)
+
+For the actual zeta zeros, retaining the real-part weights recovers the endpoint term on average over heights without using RH. Let $S(t)$ be the argument term in the Riemann–von Mangoldt formula. Away from zero ordinates, $N(t)=1+\vartheta(t)/\pi+S(t)$, with $\vartheta$ the Riemann–Siegel theta function. Subtract the smooth endpoint term from the weighted sum
 
 $$
 R_X(t)=\sum_{0<\gamma\le t} X^{\rho-1/2}
