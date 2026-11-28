@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "492e9a4f1b12b5a7bf5e741f7deea71bf39eeaf3",
-  "pinned_at": "2026-11-28T14:29:30Z",
+  "commit": "08c4ab6859286ebbfd9c7da5ae2a860fbf4b0b36",
+  "pinned_at": "2026-11-28T15:14:56Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -13697,6 +13697,19 @@
       "statement_id": "sha256:5a9dbba0de87861c227e245d79ed645b77aa47f6e3843de25102e91131b667f5",
       "line": 321,
       "signature": "theorem three_le_dim_of_hasFeatureRank {d : ℕ} {M : Type*} [TopologicalSpace M] [LocallyCompactSpace M] [PreconnectedSpace M] (C : TernaryComparison M) (htri : Continuous fun p : M × M × M => C.tri p.1 p.2.1 p.2.2) (hkappa : ∀ x, ContinuousAt (C.kappa x) x) (hnc : C.Noncommutative) {r : ℕ} (hr : C.HasFeatureRank r) {o : M} {V : Set M} (hV : V ∈ 𝓝 o) (f : M → EuclideanSpace ℝ (Fin d)) (hf : ContinuousOn f V) (hfi : Set.InjOn f V) : 3 ≤ d ∧ 5 ≤ r"
+    },
+    "D5/S3/Quantum/AURICOmega/FivePointTransportedContrast.exists_transported_readings_iff": {
+      "module": "D5/S3/Quantum/AURICOmega/FivePointTransportedContrast",
+      "name": "D5.S3.Quantum.AURICOmega.FivePointTransportedContrast.exists_transported_readings_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:a04ee4b63b654337dbda60f4ec603a632197c5e72f3d5d82190449d999dea969",
+      "line": 17,
+      "signature": "theorem exists_transported_readings_iff (t d : ℚ) (ht : 0 ≤ t) (ht1 : t ≤ 1) : (∃ a b c e r : ℚ, 0 ≤ a ∧ 0 ≤ b ∧ 0 ≤ c ∧ 0 ≤ e ∧ 0 ≤ r ∧ a - b = d ∧ ∀ x y z w v : ℚ, 0 ≤ x ^ 2 + y ^ 2 + z ^ 2 + w ^ 2 + v ^ 2 + 2 * (t * (x * y + z * w + z * v) + a * (x * z + y * v) + b * (y * z + x * w) + c * y * w + e * x * v + r * w * v)) ↔ d ^ 2 ≤ if t ≤ 1 / 2 then (1 - t ^ 2) ^ 2 else if (t - 1 / 2) ^ 2 ≤ 1 - t ^ 2 then (5 / 4 - t) ^ 2 else (2 * t - 1) ^ 2 * (1 - t ^ 2)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Quantum/AURICOmega/GramIsometryExtension.existsUnique_linearIsometryEquiv_of_gram_preserving": {
       "module": "D5/S3/Quantum/AURICOmega/GramIsometryExtension",

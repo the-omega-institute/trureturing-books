@@ -383,6 +383,40 @@ $$
 
 六阶系数严格为正，说明即使五阶系数消失，固定顶底平面在精确阈值上仍会高估最小破缺。[两支的成本展开、全复基下界与矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/2126#issuecomment-7240142503)
 
+两处分支在阈值邻域内可以定量分开（手工推导）。取共同尺度 $c=\sqrt{\mu^2+|S|^2}=1$、$v\in[0.78,0.79]$、$w\in[1.13,1.14]$，令 $S=-\sqrt{vw}$，保持线性平衡，并取 $\kappa+8\mu^2q=\eta\varepsilon$、$|\eta|\le2$。重排轮换基并调相后，先用一项直接旋转将 $e_0$ 对准第一列，再让其余两列在轻子空间内转动。取前一项旋转首行的两个非对角元为 $\varepsilon^3(X+iI,Y)$，后一项的上三角元为 $\varepsilon^2Z$，其中 $X,I$ 为实数，$Y,Z$ 为复数。对 $0<\varepsilon\le10^{-36}$，任意全局取优复基都满足
+
+$$
+\max\bigl(|X-4\mu|,\ |I|,\ |Y|,\ \min(|Z|,|Z-2\mu S|)\bigr)
+\le 10^{15}\sqrt{\varepsilon}\le10^{-3}.
+$$
+
+重线投影先把任意取优复基限制在有界缩放坐标内。再用下型成本约束实平面分角，上型成本的下界便含有 $|Z|^2-2\mu S\operatorname{Re}Z$ 的平方以及虚偏转的平方。限制解析余项后，两个偏转中心仍相距超过 $0.45$，因此可以分别比较两个邻域内的最小成本。[全复基定位界与矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/2203#issuecomment-7240815849)
+
+首项的约化 Hessian 还可以给出显式下界（手工推导）。在平衡面 $D_0=0$ 上消去 $X$，令
+$$
+L(Z)=\frac{|Z|^2-2\mu S\operatorname{Re}Z}{2\mu},\qquad X=A_0+L(Z).
+$$
+代回上型首项得到
+$$
+U_0=A_0^2+L(Z)^2+4(\operatorname{Im}Z)^2+I^2+|Y|^2.
+$$
+在 $Z=0$ 与 $Z=2\mu S$ 两个中心，按 $(\operatorname{Re}Z,\operatorname{Im}Z,I,\operatorname{Re}Y,\operatorname{Im}Y)$ 排列的 Hessian 分别为
+$$
+\operatorname{diag}(2S^2,8,2,2,2),
+$$
+因为 $\nabla L=(-S,0)$ 或 $(S,0)$ 且 $L=0$。参数盒给出 $2S^2=2vw\ge1.7628$。在半径 $\rho=10^{-3}$ 的任一中心邻域内，取
+$$
+\mu_-=\sqrt{1-0.79\cdot1.14},\quad S_+=\sqrt{0.79\cdot1.14},\quad
+g_\Delta=\frac{\sqrt2\rho}{\mu_-},\quad
+L_+=S_+\rho+\frac{\rho^2}{2\mu_-},
+$$
+则秩一项和 $2L\nabla^2L$ 的扰动分别至多
+$$
+2(2S_++g_\Delta)g_\Delta=0.01706762,\qquad
+\frac{2L_+}{\mu_-}=0.00603015.
+$$
+所以首项约化 Hessian 在两个邻域内的最小特征值仍大于 $1.7397$。这证明了缩放极限的统一严格正定性。#2203 中的解析余项目前只有函数值界，尚未给出对缩放坐标二阶导数的界，因此这里不把 $1.7397$ 外推为有限 $\varepsilon$ 的 Hessian 证书；下一步是补上该导数余项估计。
+
 若保持线性平衡并取 $\kappa+8\mu^2q=\eta\varepsilon$，两处分支在有限 $\varepsilon$ 下的等成本点会偏离五阶阈值（手工推导）。固定 $\mu$ 与下型轻块，调相取 $C>0$ 和实数 $S$，保留其相对符号。令 $v,w$ 分别为下型轻块沿 $e_0,e_2$ 的对角元，$c=\sqrt{\mu^2+|S|^2}$。实际交换点满足 $\eta_{\mathrm c}(\varepsilon)=-8\mu^2c^2w+O(\varepsilon)$。对于有界的 $\eta$ 和充分小的正 $\varepsilon$，$\eta>\eta_{\mathrm c}(\varepsilon)$ 时反射支胜出，$\eta<\eta_{\mathrm c}(\varepsilon)$ 时零偏转附近的分支胜出。
 
 若允许轻块形状随 $\varepsilon$ 变化，固定平面可以在等成本点上精确取优（手工推导）。固定共同尺度 $c$，让 $t=v/c$ 和 $r=w/c$ 独立微调，保持 $S=-c\sqrt{tr}$、$\mu=c\sqrt{1-tr}$ 及上述线性平衡。两条归一化横向梯度在 $\varepsilon=0$ 的延拓值为 $(r-t)\sqrt{tr/(1-tr)}-1$ 和 $2-4t+r$。在共同零点 $t\simeq0.783854$、$r=4t-2$，第一式沿第二式的零线严格递增，所以两梯度对形状的雅可比可逆。

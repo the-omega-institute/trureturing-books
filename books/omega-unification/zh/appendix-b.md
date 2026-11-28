@@ -40,7 +40,41 @@
 
 ## B.2 六层认识论证据分层总账 {#sec-ou-appb-epistemic-ledger}
 
-本书对每一条定理、数值区间、模型构造与开放目标均执行严格六层划界。各层之间实行**单向不可越级原则**：Arb 高精度区间认证、上游独立 `Init` 重放或外部 RH 形式化里程碑均不会自动把 `ARGUED`、`NUM`、`MODEL` 或 `OPEN` 条目抬升为本书所钉提交上的 `LEAN ✓` 冻结定理：
+本书对每一条定理、数值区间、模型构造与开放目标均执行严格六层划界。各层之间实行**单向不可越级原则**：Arb 高精度区间认证、上游独立 `Init` 重放或外部 RH 形式化里程碑均不会自动把 `ARGUED`、`NUM`、`MODEL` 或 `OPEN` 条目抬升为本书所钉提交上的 `LEAN ✓` 冻结定理。
+
+下面的谱例子把“计算正确”与“独立证明正性”分开：[第三章 §3.1](ch03-riemann-zeros-fejer-and-landau.md#sec-ou-3-1) 的凯莱判据可以用有限维负惯性指数精确读出，但矩阵本身仍由实际零点构造。
+
+::: {.theorem #thm-ou-appb-mirror-gram-inertia title="有限镜像奇子空间的 Gram 惯性" lean="D5/S3/Midline/Cayley/FiniteMirrorKreinGramInertia.canonical_zeta_finite_mirror_gram_inertia"}
+取库中无外部参数的典范表示 `zetaZeroData`，记其互异非平凡零点为 $\rho_n$、解析重数为 $m_n>0$。同高镜像指标置换 $\sigma$ 保持重数并满足 $\rho_{\sigma(n)}=1-\overline{\rho_n}$。对任意 $T\in\mathbb R$，定义
+
+$$
+\begin{aligned}
+W_T&=\{n:|\rho_n-\tfrac12|\le T\},\\
+R_T&=\{n\in W_T:n<\sigma(n)\},\\
+\kappa_T&=\sum_{n\in R_T}m_n.
+\end{aligned}
+$$
+
+在 $H=\ell^2(\{(n,k):k<m_n\};\mathbb C)$ 的标准基上，令 $J e_{n,k}=e_{\sigma(n),k}$、$[x,y]_J=\langle x,Jy\rangle$，并对 $n\in R_T$、$0\le k<m_n$ 取 $v_{n,k}=e_{n,k}-e_{\sigma(n),k}$。这些向量的实际 Gram 矩阵 $G_T=([v_{n,k},v_{r,l}]_J)$ 满足
+
+$$
+\begin{aligned}
+G_T&=-2I,\\
+n_-(G_T)&=\kappa_T,\\
+n_-(G_T)>0
+&\ \Longleftrightarrow\
+\exists n\in W_T:\operatorname{Re}\rho_n\ne\tfrac12.
+\end{aligned}
+$$
+
+这里 $n_-$ 按重数计负特征值，矩阵由 $\kappa_T$ 个镜像奇向量索引。窗口是谱半径窗 $|\rho-\tfrac12|\le T$，并非只限制 $|\operatorname{Im}\rho|$ 的高度窗。
+:::
+
+::: proof
+每个非固定二元镜像轨道只取一个代表；不同代表及其镜像占据互不相交的标准基坐标，同一零点的不同重数副本也正交。因此这些向量的普通希尔伯特 Gram 矩阵为 $2I$，而 $Jv_{n,k}=-v_{n,k}$，故实际镜像 Gram 矩阵为 $-2I$。每个所选轨道贡献恰好 $m_n$ 个负特征值；镜像固定恰等价于零点在临界线上，且解析重数为正，得到最后的等价。完整证明由 Lean 内核检查。
+:::
+
+该计数对临界线外零点的存在保持条件式。结合第三章引述的外部 RH 形式化事实，可推出每个 $T$ 的 $\kappa_T=0$（组合这两层证据的手工推导，`ARGUED`）；上面的内核定理本身给出精确惯性公式。独立谱路线仍需从算术或几何构造正性并识别零点谱；有限个窗口的检查也不能代替对所有 $T$ 的控制。带着这一界限再读下表，各层证据各自承担的责任便清楚了。
 
 | 证据层级与徽章 | 验证机制与数据来源 | 逻辑边界与公理责任 | 全书代表内容与交叉入口 |
 | :--- | :--- | :--- | :--- |

@@ -194,6 +194,12 @@ $$
 
 这组两圈交点在多大的范围内能够唯一确定？对第六章门户检验用到的四枚拟合候选和十枚留出候选，逐枚固定谱与上述处方，在 $28.940\le\log(\mu/M_Z)\le29.140$ 和 $0.117\le\alpha_s(M_Z)\le0.119$ 的矩形内各恰有一个交点。已有种子盒给出存在性。沿规范流同时传播对初始逆强耦合的导数，并在每个质量阈值两侧分别界定终点斜率，可得交点映射在加权最大范数下的 Lipschitz 常数小于 $0.42$，原种子盒内则小于 $0.152$。同一矩形内若有两个不动点，它们的距离经此映射必须缩小，与两点均固定矛盾。[阈值折点与十四枚候选的导数证书](https://github.com/the-omega-institute/trureturing-experiments/blob/91df60d5968e4fabfc797c5660e975b9acfb3c3e/experiments/ch39-omega-research/replay/ch39-gauge-seed-uniqueness.md)
 
+把尺度推到首个中心偶阈值，还需排除矩形外的交点。记 $L=\log(\mu/M_Z)$，$L_{\mathrm{even}}$ 为该阈值的对数尺度。十四枚固定谱均有 $29.39618<L_{\mathrm{even}}<29.39620$。在整个 $0.117\le\alpha_s(M_Z)\le0.119$ 内，逆耦合极差在 $0\le L\le28.940$ 恒大于 $0.33$，在 $29.140\le L\le L_{\mathrm{even}}$ 恒大于 $0.42$。因此，每枚谱在从 $M_Z$ 到首个中心偶阈值的连续尖阈值两圈流中各恰有一个三线交点。
+
+这里电弱差 $A_1-A_2$ 从正起步，在矩形下边变为负，到上边又为正。区间证书在每个中心奇阈值处分段，直接包围三组逆耦合差。每个排除步只需有一组差的绝对值始终高于所给下界。阈值处的耦合连续，因而分段也覆盖折点。首个中心偶阈值以上须另行指定中心偶场的激活与匹配。[全尺度排除的推导](https://github.com/the-omega-institute/trureturing-books/issues/1942#issuecomment-7241130065)[^pre-even-replay]
+
+[^pre-even-replay]: 将书库的 `gauge-global-replay.py` 放入所引实验版本的 `experiments/ch39-omega-research/replay/` 目录，与 `ch39-chiral-clock-unit-readout.py` 并列。用 Python 3.12 和 python-flint 0.9.0 运行 `python3 gauge-global-replay.py`，入口逐谱调用 `verify`。脚本的 SHA-256 为 `30746b44546961682f6385e638e154d47bd66e1e20d6ff5da79ae8573c1d4296`。[书库区间证书](https://github.com/the-omega-institute/trureturing-books/blob/149df109c2a246f204d22b5e176d90e173f795bf/books/omega-unification/replay/gauge-global-replay.py#L14) · [固定版本的谱与流输入](https://github.com/the-omega-institute/trureturing-experiments/blob/91df60d5968e4fabfc797c5660e975b9acfb3c3e/experiments/ch39-omega-research/replay/ch39-chiral-clock-unit-readout.py)
+
 更有意义的是，这并非孤立的数值巧合：将 `#11661` 处的两只钟角各扩宽 $10^{-6}\;\mathrm{rad}$，整片相位方格均保持五荷分界 $9$ 且反推 $\alpha_s(M_Z) \in (0.1183783, 0.1183874)$。结合[第三章](ch03-riemann-zeros-fejer-and-landau.md)在黎曼假设下的兰道—外尔双时钟等分布定理，完整命中集合在全体正零点中拥有严格为正的自然下密度（至少 $(10^{-6}/\pi)^2 \approx 1.013 \times 10^{-13}$）。同时，弱中心奇偶分档与共同两档质量规则之间也存在干净的可分辨指纹：在第 $11431$ 枚零点上，共同两档质量交点（$6.14424 \times 10^{14}\;\mathrm{GeV}$，分界 $7.70$ 在 $1238$ 枚零点中恰选出 $17$ 枚，补齐共轭场后两圈规范交点落于 $(1.38, 1.54) \times 10^{15}\;\mathrm{GeV}$）要求荷二与荷一十八层平方质量和之比约为 **$1.125$**，而弱中心奇偶刚度交点要求该比值约为 **$8.058$**——对照原生贝伦德壳上任何共同非负非减谱函数，该比值恒有锐上界 **$3$**（且可达到），一举将两类机制从谱几何上彻底切开。当然，必须坦诚标明证据边界：分母 $d = 724$、倍率 $32$ 以及 $16$ 重标量计数，均是在检视了拟合质量单位之后提出的模型规则，尚非原离散配分函数的无自由参数推论。
 
 ### 正一步传递收缩与五位二进分母 $N = 32$
