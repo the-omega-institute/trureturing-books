@@ -40,7 +40,207 @@
 
 ## B.2 六层认识论证据分层总账 {#sec-ou-appb-epistemic-ledger}
 
-本书对每一条定理、数值区间、模型构造与开放目标均执行严格六层划界。各层之间实行**单向不可越级原则**：Arb 高精度区间认证、上游独立 `Init` 重放或外部 RH 形式化里程碑均不会自动把 `ARGUED`、`NUM`、`MODEL` 或 `OPEN` 条目抬升为本书所钉提交上的 `LEAN ✓` 冻结定理：
+本书对每一条定理、数值区间、模型构造与开放目标均执行严格六层划界。各层之间实行**单向不可越级原则**：Arb 高精度区间认证、上游独立 `Init` 重放或外部 RH 形式化里程碑均不会自动把 `ARGUED`、`NUM`、`MODEL` 或 `OPEN` 条目抬升为本书所钉提交上的 `LEAN ✓` 冻结定理。
+
+下面的谱例子把“计算正确”与“独立证明正性”分开：[第三章 §3.1](ch03-riemann-zeros-fejer-and-landau.md#sec-ou-3-1) 的凯莱判据可以用有限维负惯性指数精确读出，但矩阵本身仍由实际零点构造。
+
+::: {.theorem #thm-ou-appb-mirror-gram-inertia title="有限镜像奇子空间的 Gram 惯性" lean="D5/S3/Midline/Cayley/FiniteMirrorKreinGramInertia.canonical_zeta_finite_mirror_gram_inertia"}
+取库中无外部参数的典范表示 `zetaZeroData`，记其互异非平凡零点为 $\rho_n$、解析重数为 $m_n>0$。同高镜像指标置换 $\sigma$ 保持重数并满足 $\rho_{\sigma(n)}=1-\overline{\rho_n}$。对任意 $T\in\mathbb R$，定义
+
+$$
+\begin{aligned}
+W_T&=\{n:|\rho_n-\tfrac12|\le T\},\\
+R_T&=\{n\in W_T:n<\sigma(n)\},\\
+\kappa_T&=\sum_{n\in R_T}m_n.
+\end{aligned}
+$$
+
+在 $H=\ell^2(\{(n,k):k<m_n\};\mathbb C)$ 的标准基上，令 $J e_{n,k}=e_{\sigma(n),k}$、$[x,y]_J=\langle x,Jy\rangle$，并对 $n\in R_T$、$0\le k<m_n$ 取 $v_{n,k}=e_{n,k}-e_{\sigma(n),k}$。这些向量的实际 Gram 矩阵 $G_T=([v_{n,k},v_{r,l}]_J)$ 满足
+
+$$
+\begin{aligned}
+G_T&=-2I,\\
+n_-(G_T)&=\kappa_T,\\
+n_-(G_T)>0
+&\ \Longleftrightarrow\
+\exists n\in W_T:\operatorname{Re}\rho_n\ne\tfrac12.
+\end{aligned}
+$$
+
+这里 $n_-$ 按重数计负特征值，矩阵由 $\kappa_T$ 个镜像奇向量索引。窗口是谱半径窗 $|\rho-\tfrac12|\le T$，并非只限制 $|\operatorname{Im}\rho|$ 的高度窗。
+:::
+
+::: proof
+每个非固定二元镜像轨道只取一个代表；不同代表及其镜像占据互不相交的标准基坐标，同一零点的不同重数副本也正交。因此这些向量的普通希尔伯特 Gram 矩阵为 $2I$，而 $Jv_{n,k}=-v_{n,k}$，故实际镜像 Gram 矩阵为 $-2I$。每个所选轨道贡献恰好 $m_n$ 个负特征值；镜像固定恰等价于零点在临界线上，且解析重数为正，得到最后的等价。完整证明由 Lean 内核检查。
+:::
+
+该计数对临界线外零点的存在保持条件式。结合第三章引述的外部 RH 形式化事实，可推出每个 $T$ 的 $\kappa_T=0$（组合这两层证据的手工推导，`ARGUED`）；上面的内核定理本身给出精确惯性公式。
+
+若通过有限个预解式方向观察一个厄米型，怎样保证负方向没有被遗漏？一个充分保证是这些方向张成整个待测空间。先看两点手算（`ARGUED`）：取支撑点 $x_0=0,x_1=1$、中心 $z=-1$，连续两阶倒数幂给出 $C=\begin{pmatrix}1&1\\1/2&1/4\end{pmatrix}$，且 $\det C=-1/4\ne0$。两个方向确实独立；一般情形由同一个 Vandermonde 机制控制。
+
+::: {.theorem #thm-ou-appb-cauchy-jet-inverse title="互异支撑点的单中心 Cauchy 射流逆" lean="D5/S3/Analytic/GoldenTomography/CauchyFeatureRightInverse.cauchy_feature_right_inverse"}
+设 $n\in\mathbb N$，复支撑点 $x_0,\ldots,x_{n-1}$ 两两互异，且 $z\in\mathbb C$ 满足每个 $x_a\ne z$。定义方阵
+
+$$
+C_{ak}=(x_a-z)^{-(k+1)},\qquad 0\le a,k<n,
+$$
+
+并令 $R$ 为库中 `cauchyJetFeatureRightInverse` 指定的矩阵逆。则
+
+$$
+CR=RC=I_n,
+$$
+
+且映射 $v\mapsto Cv$ 为单射。
+:::
+
+::: proof
+令 $r_a=(x_a-z)^{-1}$，则 $C=\operatorname{diag}(r_a)V$，其中 $V_{ak}=r_a^k$。避开中心使每个 $r_a\ne0$，而平移后取倒数保持支撑点互异。因此对角因子与 Vandermonde 因子均可逆，矩阵逆同时给出左右逆和分析映射的单射性。完整证明由 Lean 内核检查。
+:::
+
+::: {.remark #rem-ou-appb-cauchy-source-rank title="射流分离谱值，源覆盖重数空间"}
+以下算子解释与惯性推论是手工推导（`ARGUED`）。在上述条件下，对 $n$ 维单谱自伴算子 $K=\operatorname{diag}(x_a)$，设源向量 $s$ 的每个坐标 $s_a\ne0$。以 $(K-zI)^{-(k+1)}s$ 为列的矩阵为 $B=\operatorname{diag}(s_a)C$，故 $B^{-1}=R\operatorname{diag}(s_a^{-1})$。对任意厄米型 $Q$，二次型恒等式 $v^*B^*QBv=(Bv)^*Q(Bv)$ 与 $B$ 的双射性给出 $n_\pm(B^*QB)=n_\pm(Q)$：每个正定或负定子空间及其维数均可沿此双射来回传递。
+
+有重谱值时，互异性只适用于不同谱值，不能把重数副本当成互异支撑点。精确地说，设有限维复内积空间上的自伴算子 $K$ 有 $q$ 个不同谱值，$P_\lambda$ 为对应谱投影，源为 $s_1,\ldots,s_p$，且 $z\notin\operatorname{spec}K$。则
+
+$$
+\begin{aligned}
+\mathcal O&=\operatorname{span}\{(K-zI)^{-(k+1)}s_j:0\le k<q,\ 1\le j\le p\}\\
+&=\bigoplus_{\lambda\in\operatorname{spec}K}
+\operatorname{span}\{P_\lambda s_j:1\le j\le p\}.
+\end{aligned}
+$$
+
+每个滤波向量都是右侧投影源的线性组合；反过来，对每个固定源用上述 $q\times q$ 射流矩阵的逆，可逐个取回 $P_\lambda s_j$。所以完整观测恰要求每个本征空间被投影源张成。单源在每个本征空间至多提供一个方向；增加射流阶数无法补出缺失的重数方向。
+
+这里使用的是同一中心的连续倒数幂（即预解式对 $z$ 求导所得的归一化射流），不是任意采样列表，也不是仅给出 [第十二章](ch12-shared-arithmetic-clock.md#sec-ch12) 若干标量钟读数就已知这些向量或整个 Gram 矩阵。可逆性没有给出统一的误差放大界，更没有控制无限谱尾项。独立 RH 谱路线仍需从算术或几何构造正性并识别完整零点谱；有限个窗口的检查不能代替对所有 $T$ 的控制。
+:::
+
+即使观测覆盖全部方向，正性也要检验完整的二次型。若其中一块已知正定，可以先让这部分系数自由调整，只保留剩余端口的最小读数；这个读数由 Schur 补给出，而不是某个端口单独的对角读数。
+
+::: {.theorem #thm-ou-appb-schur-attained-minimum title="正定内部块的 Schur 极小值" lean="D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"}
+设 $m,d\in\mathbb N$，$A\in\mathbb C^{m\times m}$ 为厄米矩阵，$B\in\mathbb C^{m\times d}$，$C\in\mathbb C^{d\times d}$ 为正定厄米矩阵。令
+
+$$
+H=\begin{pmatrix}A&B\\B^*&C\end{pmatrix},\qquad S=A-BC^{-1}B^*.
+$$
+
+对每个固定的 $x\in\mathbb C^m$，下列最小值实际达到：
+
+$$
+\min_{y\in\mathbb C^d}
+\begin{pmatrix}x\\y\end{pmatrix}^{\!*}
+H\begin{pmatrix}x\\y\end{pmatrix}=x^*Sx.
+$$
+:::
+
+::: proof
+正定性保证 $C$ 可逆，配方给出
+
+$$
+\begin{pmatrix}x\\y\end{pmatrix}^{\!*}H\begin{pmatrix}x\\y\end{pmatrix}
+=x^*Sx+(y+C^{-1}B^*x)^*C(y+C^{-1}B^*x).
+$$
+
+第二项非负，取 $y=-C^{-1}B^*x$ 即为零，故 $x^*Sx$ 是值域中实际达到的最小元。完整证明由 Lean 内核检查。
+:::
+
+由此可作手工推导（ARGUED）：在 $C\succ0$ 的前提下，$H\succeq0$ 恰等价于 $S\succeq0$。一向由配方直接得出；另一向在每个固定 $x$ 的极小点检验 $H$。因此正定背景不会掩盖经过消元的负残差，但检验残差需要保留跨块读数 $B$。
+
+::: {.example #ex-ou-appb-collective-schur-residual title="正定背景后的单个负残差"}
+以下矩阵代入与显式见证是手工推导（ARGUED）。取整数 $n\ge3$、实数 $1/(n-1)<a<1/(n-2)$，记 $\mathbf1_k=(1,\ldots,1)^T$，并把一个端口与其余 $n-1$ 个端口分块：
+
+$$
+\begin{aligned}
+H&=(1+a)I_n-a\mathbf1_n\mathbf1_n^*,\\
+A&=1,\qquad B=-a\mathbf1_{n-1}^*,\\
+C&=(1+a)I_{n-1}-a\mathbf1_{n-1}\mathbf1_{n-1}^*,\\
+p&=1-(n-2)a>0.
+\end{aligned}
+$$
+
+在 $\mathbf1_{n-1}$ 方向上，$C$ 的特征值为 $p$；在其正交补上为 $1+a>0$，故 $C\succ0$。于是 $C^{-1}\mathbf1_{n-1}=p^{-1}\mathbf1_{n-1}$，最后一个 Schur 残差为
+
+$$
+s=1-\frac{(n-1)a^2}{p}
+=\frac{(1+a)(1-(n-1)a)}{p}<0.
+$$
+
+把保留端口的系数固定为 $x=1$，极小点及其完整读数为
+
+$$
+\begin{aligned}
+y_{\min}&=\frac{a}{p}\mathbf1_{n-1},\qquad
+w=\begin{pmatrix}1\\y_{\min}\end{pmatrix},\\
+Hw&=\begin{pmatrix}s\\0\end{pmatrix},\qquad w^*Hw=s.
+\end{aligned}
+$$
+
+等式 $Hw=(s,0)^T$ 还说明，在 $H$ 所定义的型下，这个残差方向与整个内部块正交。取 $n=3,a=3/4$，即得 $p=1/4$、$w=(1,3,3)^T$ 与 $w^*Hw=-7/2$。两个内部端口的块已正定，逐个端口的对角读数也都是 $1$，但经过联合调整的一个残差已足以否定整体正性。这需要完整的跨端口 Gram 读数，不能从若干标量算术钟读数直接推出；矩阵是代数模型，不指定实际零点，也不构造独立的 RH 正性证明。若 $C$ 只有正半定性，上述逆矩阵与极小值论证不再直接适用。
+:::
+
+有限维可恢复性还留下一个观测问题：检出某个负方向，是否必须先准确重构指定的负方向？两点模型把这两种误差要求分开。
+
+::: {.example #ex-ou-appb-optimal-negative-detection title="检测负方向与检验指定见证的精度分界"}
+以下是完整的手工推导（`ARGUED`）。取精确节点 $1,u=1+h$，其中 $h>0$，固定读数尺度为
+
+$$
+\begin{aligned}
+A_h&=\begin{pmatrix}1&u^{-1}\\1&u^{-2}\end{pmatrix},
+&J_0&=\operatorname{diag}(1,-1),\\
+K_h&=A_hJ_0A_h^*=\begin{pmatrix}a&b\\b&d\end{pmatrix},\\
+a&=1-u^{-2},\quad b=1-u^{-3},\quad d=1-u^{-4}.
+\end{aligned}
+$$
+
+三项 $a,b,d$ 均正。置 $\tau=a+d$、$\delta=h/u^2$，直接展开得 $\det K_h=-\delta^2$。解特征方程 $\lambda^2-\tau\lambda-\delta^2=0$，得唯一负特征值 $-\gamma_h$，其中
+
+$$
+\gamma_h=\frac{\sqrt{\tau^2+4\delta^2}-\tau}{2}>0.
+$$
+
+若 Hermitian 误差 $E$ 满足欧氏算子范数 $\|E\|_{2\to2}<\gamma_h$，取负特征值的单位特征向量 $v$，即有 $v^*(K_h+E)v\le-\gamma_h+\|E\|_{2\to2}<0$。在边界取 $E=\gamma_hvv^*$，则 $K_h+E$ 正半定，故这一范数下的严格阈值为 $\gamma_h$。
+
+实际逐项认证 $|E_{ij}|\le\eta$ 时，也能求出整个矩阵保有负方向的锐阈值。对 $\eta\ge0$，置
+
+$$
+\begin{aligned}
+D&=a+d+2b,\\
+\eta_*&=\frac{\delta^2}{D}
+=\frac{h}{(2u+1)(2u^2+u+1)},\\
+t&=\frac{b+d}{D},\qquad w=(t,-(1-t)).
+\end{aligned}
+$$
+
+因 $0<t<1$，有 $\|w\|_1=1$。二次型配方给出
+
+$$
+a s^2-2b s(1-s)+d(1-s)^2
+=D(s-t)^2-\eta_*.
+$$
+
+因此 $w^*K_hw=-\eta_*$，而 $|w^*Ew|\le\eta\|w\|_1^2=\eta$；只要 $\eta<\eta_*$，每个允许的 Hermitian 扰动都仍有严格负方向。反过来，取
+
+$$
+E_*=\eta_*\begin{pmatrix}1&-1\\-1&1\end{pmatrix}.
+$$
+
+矩阵 $K_h+E_*$ 的对角元均正，且行列式为 $-\delta^2+\eta_*D=0$，所以它正半定。这个误差对每个 $\eta\ge\eta_*$ 都合法，证明上述严格阈值对整个负方向检测问题是锐的。
+
+比较指定源方向的见证 $c_h=(u^2/h)(1,-1)$：它满足 $A_h^*c_h=(0,1)$ 与 $c_h^*K_hc_h=-1$。由 $|c_h^*Ec_h|\le\eta\|c_h\|_1^2$，其逐项误差保证的严格阈值为 $\eta_{\mathrm{fixed}}=h^2/(4u^4)$；取同形误差 $E=\eta_{\mathrm{fixed}}\begin{pmatrix}1&-1\\-1&1\end{pmatrix}$ 即使该见证变为零。两种检测保证的差别在节点靠拢时尤为清楚：
+
+$$
+\begin{aligned}
+\lim_{h\to0^+}\frac{\gamma_h}{h}&=\sqrt{10}-3,\\
+\lim_{h\to0^+}\frac{\eta_*}{h}&=\frac1{12},\\
+\lim_{h\to0^+}\frac{\eta_{\mathrm{fixed}}}{h^2}&=\frac14.
+\end{aligned}
+$$
+
+由 $\tau/h=(u+1)(2u^2+1)/u^4\to6$、$\delta/h=1/u^2\to1$ 及显式阈值即得这些极限。检出某个负方向可容许线性尺度的误差，指定重构见证却只容许平方尺度；两种容差都随 $h\to0^+$ 消失。这些结论假定整个 Gram 读数的误差已获认证，不涵盖节点误差、无限谱尾项或仅有若干标量钟读数的情形。节点与矩阵是代数模型，不指定实际零点，也不提供独立的 RH 正性构造。
+:::
+
+带着有限维恢复、误差下检测与独立正性之间的这些区别，再读下表，各层证据各自承担的责任便清楚了。
 
 | 证据层级与徽章 | 验证机制与数据来源 | 逻辑边界与公理责任 | 全书代表内容与交叉入口 |
 | :--- | :--- | :--- | :--- |
@@ -50,6 +250,133 @@
 | **第 4 层 · 计算证书与数值实验诊断**（`NUM`） | 组织实验库 `trureturing-experiments`（`experiments/ch39-omega-research/replay/`）1,785 文件复算归档中的 `Fraction` / `python-flint`（Arb、`fmpq_mat`）断言脚本、`Init`-重放的 `ShellProjection.lean`（`rfl`），以及 `OMEGA//UNIFY` 交互实验室的浏览器实时数值诊断 | 精确有理、Arb 与 `rfl` 复算证书具零浮点舍入漂移保证，严格依赖所声明的输入区间与截断前提；实验室实时数值诊断（如有限相位网格上的双精度雅可比本征值计算）显式披露精度与抽样边界；上游独立 `ShellProjection.lean` 归此层，不并入 `trureturing@dev` 冻结统计 | 平方半径 17 九点壳压缩（[附录 A §A.2](appendix-a.md#sec-ou-appa-shell-projection)）、35 位第七时间码 `32071996606`（[第十二章](ch12-shared-arithmetic-clock.md)）、单调权 $> 1/4$ 排斥与 105 圈联合零点见证（[第十三章](ch13-winding-ladder-and-joint-vacuum.md)）、$38 \to 19$ 最小辅助记忆秩阶梯（[第十四章](ch14-624-channels-and-memory-rank.md)） |
 | **第 5 层 · 模型内有效构造**（`MODEL`） | 明确写明全部额外表示、势函数、标尺与权重输入的有效构造（对应四问中 **4/4** 的模型内通过分支） | 严禁冒充无参数第一性原理推导；每条构造必须同页并列其外生自由度与灵敏度账单 | $r = 400$ 两圈规范交汇与秩五中性希格斯门户（[第 5–6 章](ch05-kinetic-trace-and-uv-ceilings.md)）、54 模矩阵希格斯味拟合与 $\mathrm{U}(1)_X$ 重子三重完备（[第 8–9 章](ch08-flavor-hierarchy-and-ckm.md)）、四层热核曲率窗（[第十一章](ch11-induced-gravity-and-dark-energy.md)）与 105 圈 100 维权族（[第十三章](ch13-winding-ladder-and-joint-vacuum.md)） |
 | **第 6 层 · 第一性原理开放前沿**（`OPEN`） | 对应原书四问中 **0/4** 尚未从单一主联络无事后拟合导出的核心硬问题 | 严格保留未证状态，不附验证引用，为后续理论突破与形式化提供明确验收门槛 | 导出重阈值与电弱标度、从主联络选定站点方差分界并构造四维相互作用手征三代、导出共同味作用与动态质子选择定则、导出 $G_N$ 与暗能量以及建立自然非单调选权原理（汇总于 [第十五章](ch15-unified-verdict-and-open-roadmap.md) 与 [终章](coda.md)） |
+
+### B.2.1 谱桥中的证据边界：镜像守恒与正定性 {#sec-ou-appb-mirror-unitarity}
+
+[第三章的凯莱判据](ch03-riemann-zeros-fejer-and-landau.md#sec-ou-3-1)把临界线条件转成单位圆条件。函数方程还提供同高镜像 $\rho\mapsto1-\bar\rho$，但镜像守恒究竟保住了哪一种内积？这个问题让上表中的证据边界落到一个可以手算的谱模型上。
+
+给定库中完整的 `ZeroData` $Z$，包括互异零点 $\rho_n$、精确解析重数 $m_n$、穷尽性、两种对称及局部有限性。令 $I_Z=\{(n,k)\in\mathbb N^2:k<m_n\}$，$H_Z=\ell^2(I_Z;\mathbb C)$。同高镜像保持重数，因而诱导坐标对合 $\sigma$ 与自伴对合等距算子 $(J_Z\psi)(v)=\psi(\sigma v)$。记 $[\psi,\phi]_Z=\langle\psi,J_Z\phi\rangle$，并令 $C_Z$ 为对角系数 $c_n=(\rho_n-1)/\rho_n$ 定义的有界凯莱算子。
+
+::: {.theorem #thm-ou-appb-mirror-j-unitarity title="镜像凯莱守恒与严格负方向" lean="D5/S3/Midline/Cayley/CanonicalZetaCayleyJUnitary.zeroCayleyOperator_j_unitary D5/S3/Midline/Cayley/CanonicalZetaMirrorFundamentalSymmetry.mirror_odd_vector_strictly_negative"}
+对任意上述 `ZeroData` $Z$，不添加 RH 假设，恒有
+
+$$
+C_Z^*J_ZC_Z=J_Z.
+$$
+
+若坐标 $v\in I_Z$ 满足 $\sigma v\ne v$，则其标准单位向量 $e_v$ 给出的镜像奇向量 $w_v=e_v-J_Ze_v$ 满足
+
+$$
+\operatorname{Re}[w_v,w_v]_Z<0.
+$$
+:::
+
+::: proof
+若 $c$ 为某坐标的系数，$c'$ 为其镜像系数，则 $c'=1/\bar c$，故 $\bar c c'=1$；逐坐标配对并求和即得算子恒等式。若 $\sigma v\ne v$，则 $w_v\ne0$ 且 $J_Zw_v=-w_v$，于是 $\operatorname{Re}[w_v,w_v]_Z=-\|w_v\|^2<0$。完整证明由 Lean 内核检查。
+:::
+
+::: {.example #ex-ou-appb-j-unitary-not-unitary title="不定内积守恒不保证普通酉性"}
+以下为二维代数手算（`ARGUED`）。在 $\mathbb C^2$ 上取
+
+$$
+J=\begin{pmatrix}0&1\\1&0\end{pmatrix},\qquad
+C=\begin{pmatrix}2&0\\0&1/2\end{pmatrix}.
+$$
+
+直接相乘得 $C^*JC=J$，而 $C^*C=\operatorname{diag}(4,1/4)\ne I$。向量 $w=(1,-1)$ 满足 $\langle w,Jw\rangle=-2$。这组矩阵只检验从 $J$-酉性推出普通酉性的逻辑，不声称来自实际的 $\zeta$ 零点。
+:::
+
+即使观测向量已经张成整个空间，检验哪些线性组合仍然重要。[@thm-ou-ch12-observation-inertia] 的右逆条件保证完整 Gram 矩阵保留惯性；只检验固定观测向量的两两主子矩阵，却可能遗漏必须联合所有端口才能看到的负方向。
+
+::: {.example #ex-ou-appb-collective-gram-negativity title="所有真主子矩阵正定，整体仍可不定"}
+以下为有限维手工推导（`ARGUED`）。先看三个端口：
+
+$$
+G_3=\begin{pmatrix}1&-3/4&-3/4\\-3/4&1&-3/4\\-3/4&-3/4&1\end{pmatrix}.
+$$
+
+每个二阶主子矩阵的特征值都是 $1/4,7/4$，严格为正。然而 $\mathbf1_3=(1,1,1)^T$ 满足 $G_3\mathbf1_3=-\mathbf1_3/2$，故 $\mathbf1_3^*G_3\mathbf1_3=-3/2<0$。三端口共同变化暴露了两两检验看不到的负方向。
+
+这种现象可发生在任意端口数。设整数 $n\ge3$，记 $\mathbf1_n=(1,\ldots,1)^T$，取实数 $a$ 满足
+
+$$
+\frac1{n-1}<a<\frac1{n-2},\qquad
+G_n=(1+a)I_n-a\mathbf1_n\mathbf1_n^*.
+$$
+
+对任意含 $m$ 个端口的非空主子矩阵，$1\le m\le n$，把向量分成 $\mathbf1_m$ 方向及其正交补，直接得到特征值
+
+$$
+1-(m-1)a\quad\text{（重数 }1\text{）},\qquad
+1+a\quad\text{（重数 }m-1\text{）}.
+$$
+
+因此每个非空真主子矩阵都正定，而整体恰有一个负特征值 $1-(n-1)a$。上述开区间也恰好是这两个性质同时成立的参数范围：全体端口的共同方向要求左侧严格不等式，$n-1$ 个端口的共同方向要求右侧严格不等式。
+
+它也能实现为一组张成整个空间的观测向量的实际不定 Gram 矩阵。令
+
+$$
+\begin{aligned}
+P&=\frac{\mathbf1_n\mathbf1_n^*}{n},&J&=I_n-2P,\\
+B&=\sqrt{1+a}\,(I_n-P)+\sqrt{(n-1)a-1}\,P.
+\end{aligned}
+$$
+
+由 $P=P^*=P^2$，有 $J=J^*$、$J^2=I_n$，且 $B$ 在两个正交子空间上的系数均严格为正，故可逆。以 $b_j=Be_j$ 为观测向量，在形式 $[x,y]_J=x^*Jy$ 下相乘即得
+
+$$
+(b_i^*Jb_j)_{ij}=B^*JB
+=(1+a)(I_n-P)-((n-1)a-1)P=G_n.
+$$
+
+所以缺失的并非源方向，而是联合端口的正性检验。这里的子矩阵只取固定观测向量的子列表，未检验它们的任意线性组合。对任意固定上限 $r\ge2$，取 $n=r+1$，便得到所有至多 $r$ 端口的主子矩阵正定而整体不定的例子；有限窗口的核正性须控制任意系数的完整二次型。这些是代数模型，不声称来自实际零点，也不改变第三章所引的外部 RH 事实。
+:::
+
+识别负方向还涉及读数精度：即使有限观测代数上可逆，两个支撑点靠近时，逆映射也可能放大误差。下面的模型把“恢复全部方向”与“可靠认证一个负方向”分开；它使用完整的半双线性 Gram 读数，而非[第十二章](ch12-shared-arithmetic-clock.md)的若干标量钟读数。
+
+::: {.example #ex-ou-appb-two-node-recovery-precision title="两点靠近时的恢复精度"}
+以下全为手工推导（`ARGUED`），支撑点和矩阵均为代数模型，不指定实际零点。取 $h>0$、$u=1+h$，在中心 $0$ 对支撑点 $1,u$ 读取倒数一次与二次幂。固定节点与读数尺度，令未知复振幅 $x\in\mathbb C^2$ 的读数为 $y=A_hx$，其中
+
+$$
+\begin{aligned}
+A_h&=\begin{pmatrix}1&u^{-1}\\1&u^{-2}\end{pmatrix},
+&\det A_h&=-\frac{h}{u^2},\\
+A_h^{-1}&=\frac1h\begin{pmatrix}-1&u\\u^2&-u^2\end{pmatrix},
+&\|A_h^{-1}\|_{\infty\to\infty}&=\frac{2u^2}{h}.
+\end{aligned}
+$$
+
+双侧相乘核对逆矩阵；其两行绝对值和分别为 $(1+u)/h$ 与 $2u^2/h$，后者因 $u>1$ 较大。若读数误差 $\|e\|_\infty\le\varepsilon$，其中 $\varepsilon\ge0$，则
+
+$$
+\|A_h^{-1}(y+e)-x\|_\infty\le\frac{2u^2}{h}\varepsilon.
+$$
+
+取 $e=(\varepsilon,-\varepsilon)$ 即达等号，所以在这一固定读数尺度下不存在与 $h$ 无关的统一误差放大界。
+
+再取不定形式 $J_0=\operatorname{diag}(1,-1)$，记观测向量 $A_h^*e_1,A_h^*e_2$ 的 Gram 矩阵为 $K_h=A_hJ_0A_h^*$，其中 $e_1,e_2$ 为标准基。令
+
+$$
+\begin{aligned}
+c_h&=(A_h^{-1})^*e_2=\frac{u^2}{h}(1,-1),\\
+c_h^*K_hc_h&=-1.
+\end{aligned}
+$$
+
+若已认证 Hermitian 读数 $\widehat K_h=K_h+E$ 的逐项误差满足 $|E_{ij}|\le\eta$，其中 $\eta\ge0$，则三角不等式给出
+
+$$
+\begin{aligned}
+|c_h^*E c_h|&\le\eta\Bigl(\sum_i|(c_h)_i|\Bigr)^2
+=\frac{4u^4}{h^2}\eta,\\
+\eta<\frac{h^2}{4u^4}&\quad\Longrightarrow\quad c_h^*\widehat K_hc_h<0.
+\end{aligned}
+$$
+
+误差 $E=\eta\begin{pmatrix}1&-1\\-1&1\end{pmatrix}$ 达到该误差上界，并在阈值处使此见证的二次型恰为零。因此严格阈值对这个固定见证的逐项误差保证是锐的；它不声称是所有负方向检测方法的极限。精确可逆性适用于每个 $h>0$，而该认证所允许的 Gram 误差随 $h\to0$ 按平方尺度缩小；这里未控制节点误差或无限谱尾项。
+:::
+
+因此，函数方程给出的镜像守恒允许正、负方向相互配平；第三章单位圆条件要求的是每个凯莱系数自身的模长等于 $1$。把前者用于独立谱证明时，还须证明额外的正定性或相应的普通酉性条件。已知外部 RH 证明可以支持临界线结论，却不会仅凭这条镜像恒等式给出独立的希尔伯特—波利亚算子构造。
 
 ## B.3 交互实验室与全书九幅静态图索引 {#sec-ou-appb-media-map}
 
