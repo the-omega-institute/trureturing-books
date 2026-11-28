@@ -116,6 +116,69 @@ $$
 这里使用的是同一中心的连续倒数幂（即预解式对 $z$ 求导所得的归一化射流），不是任意采样列表，也不是仅给出 [第十二章](ch12-shared-arithmetic-clock.md#sec-ch12) 若干标量钟读数就已知这些向量或整个 Gram 矩阵。可逆性没有给出统一的误差放大界，更没有控制无限谱尾项。独立 RH 谱路线仍需从算术或几何构造正性并识别完整零点谱；有限个窗口的检查不能代替对所有 $T$ 的控制。
 :::
 
+即使观测覆盖全部方向，正性也要检验完整的二次型。若其中一块已知正定，可以先让这部分系数自由调整，只保留剩余端口的最小读数；这个读数由 Schur 补给出，而不是某个端口单独的对角读数。
+
+::: {.theorem #thm-ou-appb-schur-attained-minimum title="正定内部块的 Schur 极小值" lean="D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"}
+设 $m,d\in\mathbb N$，$A\in\mathbb C^{m\times m}$ 为厄米矩阵，$B\in\mathbb C^{m\times d}$，$C\in\mathbb C^{d\times d}$ 为正定厄米矩阵。令
+
+$$
+H=\begin{pmatrix}A&B\\B^*&C\end{pmatrix},\qquad S=A-BC^{-1}B^*.
+$$
+
+对每个固定的 $x\in\mathbb C^m$，下列最小值实际达到：
+
+$$
+\min_{y\in\mathbb C^d}
+\begin{pmatrix}x\\y\end{pmatrix}^{\!*}
+H\begin{pmatrix}x\\y\end{pmatrix}=x^*Sx.
+$$
+:::
+
+::: proof
+正定性保证 $C$ 可逆，配方给出
+
+$$
+\begin{pmatrix}x\\y\end{pmatrix}^{\!*}H\begin{pmatrix}x\\y\end{pmatrix}
+=x^*Sx+(y+C^{-1}B^*x)^*C(y+C^{-1}B^*x).
+$$
+
+第二项非负，取 $y=-C^{-1}B^*x$ 即为零，故 $x^*Sx$ 是值域中实际达到的最小元。完整证明由 Lean 内核检查。
+:::
+
+由此可作手工推导（ARGUED）：在 $C\succ0$ 的前提下，$H\succeq0$ 恰等价于 $S\succeq0$。一向由配方直接得出；另一向在每个固定 $x$ 的极小点检验 $H$。因此正定背景不会掩盖经过消元的负残差，但检验残差需要保留跨块读数 $B$。
+
+::: {.example #ex-ou-appb-collective-schur-residual title="正定背景后的单个负残差"}
+以下矩阵代入与显式见证是手工推导（ARGUED）。取整数 $n\ge3$、实数 $1/(n-1)<a<1/(n-2)$，记 $\mathbf1_k=(1,\ldots,1)^T$，并把一个端口与其余 $n-1$ 个端口分块：
+
+$$
+\begin{aligned}
+H&=(1+a)I_n-a\mathbf1_n\mathbf1_n^*,\\
+A&=1,\qquad B=-a\mathbf1_{n-1}^*,\\
+C&=(1+a)I_{n-1}-a\mathbf1_{n-1}\mathbf1_{n-1}^*,\\
+p&=1-(n-2)a>0.
+\end{aligned}
+$$
+
+在 $\mathbf1_{n-1}$ 方向上，$C$ 的特征值为 $p$；在其正交补上为 $1+a>0$，故 $C\succ0$。于是 $C^{-1}\mathbf1_{n-1}=p^{-1}\mathbf1_{n-1}$，最后一个 Schur 残差为
+
+$$
+s=1-\frac{(n-1)a^2}{p}
+=\frac{(1+a)(1-(n-1)a)}{p}<0.
+$$
+
+把保留端口的系数固定为 $x=1$，极小点及其完整读数为
+
+$$
+\begin{aligned}
+y_{\min}&=\frac{a}{p}\mathbf1_{n-1},\qquad
+w=\begin{pmatrix}1\\y_{\min}\end{pmatrix},\\
+Hw&=\begin{pmatrix}s\\0\end{pmatrix},\qquad w^*Hw=s.
+\end{aligned}
+$$
+
+等式 $Hw=(s,0)^T$ 还说明，在 $H$ 所定义的型下，这个残差方向与整个内部块正交。取 $n=3,a=3/4$，即得 $p=1/4$、$w=(1,3,3)^T$ 与 $w^*Hw=-7/2$。两个内部端口的块已正定，逐个端口的对角读数也都是 $1$，但经过联合调整的一个残差已足以否定整体正性。这需要完整的跨端口 Gram 读数，不能从若干标量算术钟读数直接推出；矩阵是代数模型，不指定实际零点，也不构造独立的 RH 正性证明。若 $C$ 只有正半定性，上述逆矩阵与极小值论证不再直接适用。
+:::
+
 有限维可恢复性还留下一个观测问题：检出某个负方向，是否必须先准确重构指定的负方向？两点模型把这两种误差要求分开。
 
 ::: {.example #ex-ou-appb-optimal-negative-detection title="检测负方向与检验指定见证的精度分界"}

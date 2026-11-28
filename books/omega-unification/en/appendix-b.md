@@ -116,6 +116,69 @@ Every filtered vector is a linear combination of the projected sources on the ri
 The scheme uses successive reciprocal powers at one center, equivalently normalized derivatives of the resolvent with respect to $z$. It makes no claim for arbitrary sample lists, and a few scalar clock readings in [Chapter 12](ch12-shared-arithmetic-clock.md#sec-ch12) do not by themselves supply these vectors or the whole Gram matrix. Invertibility provides no uniform error amplification bound and no control of infinite spectral tails. An independent RH spectral route still needs an arithmetic or geometric positivity construction and identification of the complete zero spectrum; checks on finitely many windows cannot replace control for every $T$.
 :::
 
+Even when observations cover every direction, positivity concerns the full quadratic form. If one block is known to be positive definite, its coefficients can first vary freely, leaving the minimum reading at the retained ports. The Schur complement gives this reading, rather than an individual port's diagonal entry.
+
+::: {.theorem #thm-ou-appb-schur-attained-minimum title="Attained Schur Minimum with a Positive Definite Internal Block" lean="D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"}
+Let $m,d\in\mathbb N$, let $A\in\mathbb C^{m\times m}$ be Hermitian, let $B\in\mathbb C^{m\times d}$, and let $C\in\mathbb C^{d\times d}$ be positive definite Hermitian. Set
+
+$$
+H=\begin{pmatrix}A&B\\B^*&C\end{pmatrix},\qquad S=A-BC^{-1}B^*.
+$$
+
+For each fixed $x\in\mathbb C^m$, the following minimum is attained:
+
+$$
+\min_{y\in\mathbb C^d}
+\begin{pmatrix}x\\y\end{pmatrix}^{\!*}
+H\begin{pmatrix}x\\y\end{pmatrix}=x^*Sx.
+$$
+:::
+
+::: proof
+Positive definiteness makes $C$ invertible. Completing the square gives
+
+$$
+\begin{pmatrix}x\\y\end{pmatrix}^{\!*}H\begin{pmatrix}x\\y\end{pmatrix}
+=x^*Sx+(y+C^{-1}B^*x)^*C(y+C^{-1}B^*x).
+$$
+
+The second term is nonnegative and vanishes at $y=-C^{-1}B^*x$, so $x^*Sx$ is an attained least element of the range. The full proof is checked by the Lean kernel.
+:::
+
+A manual consequence (ARGUED) is that, under $C\succ0$, we have $H\succeq0$ if and only if $S\succeq0$. One direction follows directly from the completed square; the other, for each fixed $x$, tests $H$ at the minimizer. A positive definite background therefore cannot hide a negative residual after elimination, but testing that residual requires the cross-block readings $B$.
+
+::: {.example #ex-ou-appb-collective-schur-residual title="One Negative Residual beyond a Positive Definite Background"}
+The matrix substitution and explicit witness below are a manual derivation (ARGUED). Take an integer $n\ge3$ and a real $1/(n-1)<a<1/(n-2)$, write $\mathbf1_k=(1,\ldots,1)^T$, and separate one port from the remaining $n-1$ ports:
+
+$$
+\begin{aligned}
+H&=(1+a)I_n-a\mathbf1_n\mathbf1_n^*,\\
+A&=1,\qquad B=-a\mathbf1_{n-1}^*,\\
+C&=(1+a)I_{n-1}-a\mathbf1_{n-1}\mathbf1_{n-1}^*,\\
+p&=1-(n-2)a>0.
+\end{aligned}
+$$
+
+On the direction $\mathbf1_{n-1}$, the eigenvalue of $C$ is $p$; on its orthogonal complement it is $1+a>0$, so $C\succ0$. Thus $C^{-1}\mathbf1_{n-1}=p^{-1}\mathbf1_{n-1}$, and the final scalar Schur residual is
+
+$$
+s=1-\frac{(n-1)a^2}{p}
+=\frac{(1+a)(1-(n-1)a)}{p}<0.
+$$
+
+Fixing the retained coefficient at $x=1$ gives the minimizer and its full reading:
+
+$$
+\begin{aligned}
+y_{\min}&=\frac{a}{p}\mathbf1_{n-1},\qquad
+w=\begin{pmatrix}1\\y_{\min}\end{pmatrix},\\
+Hw&=\begin{pmatrix}s\\0\end{pmatrix},\qquad w^*Hw=s.
+\end{aligned}
+$$
+
+The identity $Hw=(s,0)^T$ also shows that this residual direction is orthogonal to the entire internal block for the form defined by $H$. Taking $n=3,a=3/4$ gives $p=1/4$, $w=(1,3,3)^T$, and $w^*Hw=-7/2$. The two internal ports already form a positive definite block, and every individual diagonal reading is $1$, yet one residual obtained by joint adjustment disproves positivity of the whole matrix. This requires all cross-port Gram readings and does not follow directly from a few scalar arithmetic clock readings. These matrices are algebraic models; they specify no actual zeros and supply no independent positivity proof of RH. If $C$ is only positive semidefinite, the inverse and minimum argument above no longer apply directly.
+:::
+
 Finite-dimensional recoverability leaves an observation question: must detecting some negative direction first reconstruct a prescribed negative direction accurately? A two-point model separates these error requirements.
 
 ::: {.example #ex-ou-appb-optimal-negative-detection title="Precision Thresholds for Detecting Negativity and Testing a Prescribed Witness"}
