@@ -135,7 +135,15 @@ To check whether swapping the outer slots can still change the result, compare $
 
 Both outcomes occur on the same finite group. Take $G=S_3\times\{+1,-1\}$ with transport $[x,y,z]=xy^{-1}z$. One reading is $1$ when the permutation components agree and $0$ otherwise. Another uses the same rule with permutation parity. Both readings group points by the fibers of a homomorphism, and both left and right translations preserve the grouping relation. If $r_i$ records the permutation or parity of the sample point $x_i$, the Gram form is the sum of squares $\sum_r(\sum_{i:\,r_i=r}c_i)^2$. Both readings identify $(e,+1)$ with $(e,-1)$ and give zero between the identity and a transposition.
 
-The permutation reading gives quotient $S_3$, where the order of $(12)$ and $(23)$ still changes the product. The parity reading gives the abelian group of order two, where both orders give the even class. Thus passing to reading classes restores extensional separation, and which commutators survive determines whether the reading can still distinguish the order of transport. Minimality still requires a specified class of models.
+The permutation reading gives quotient $S_3$, where the order of $(12)$ and $(23)$ still changes the product. The parity reading gives the abelian group of order two, where both orders give the even class. Passing to reading classes restores extensional separation. The reading still distinguishes the order of transport exactly when some commutator remains visible in the quotient.
+
+For the permutation reading with quotient $S_3$, choosing $(\sigma,+1)$ in each class carries ternary transport back to the original twelve points. The same readings arise on a second set of twelve points
+$$
+  G'=\{(\sigma,j)\in S_3\times\mathbb{Z}/4\mathbb{Z}:j\bmod 2=\epsilon(\sigma)\},
+$$
+where $\epsilon$ is $0$ for even permutations and $1$ for odd ones. Multiplication is $(\sigma,j)(\tau,k)=(\sigma\tau,j+k)$. The reading still compares only the permutation component, giving the same classes, quotient transport, and Gram sum of squares.
+
+For a transposition $s$, the two representatives in $G'$ are $(s,1)$ and $(s,3)$. Both square to $(e,2)$. Suppose a choice of representatives preserved ternary transport. Left-multiplying all the representatives by the inverse of the identity class's representative preserves their classes and transport, and sets the identity representative to $(e,0)$. The quotient identity $[s,e,s]=e$ would now require the representative of $s$ to square to $(e,0)$, contradicting the computation. Thus identical readings and quotient transport can give different answers to whether transport-preserving representatives exist. Both examples relax extensional separation. Minimality requires a specified class of models.
 
 ## 1.4 Why a Computable Typeclass class OmegaSpace Rather Than an Unchecked axiom {#sec-ch01-typeclass-not-axiom}
 
