@@ -4,11 +4,11 @@
 
 这段凝练的手稿箴言，一举道破了从两态比较通向三维曲率原胞、再从几何名相退回零冗余本体的三级认识论跃迁。我们沿着严密的代数推导与形式化边界逐层展开。
 
-## 29.6.1 “二生三”的无特权自举几何：投影归一逼出极小三角弧面体 {#sec-ch34-5-1}
+## 29.6.1 “二生三”的几何构造：沿霍奇法向提升投影 {#sec-ch34-5-1}
 
 在预设了外部坐标网格的经典线性代数中，把单位向量 $\mathbf{B}$ 向单位基准轴 $\mathbf{A}$ 作投影，得到的只是一截缩短了的共线影子 $(\mathbf{A}\cdot\mathbf{B})\mathbf{A}$：当两态夹角为 $\epsilon \in (0, \frac{\pi}{2}]$ 时，其模长萎缩为 $\cos\epsilon < 1$，不仅彻底躺死在原直线 $\operatorname{span}\{\mathbf{A}\}$ 内，而且与 $\mathbf{A}, \mathbf{B}$ 排成的 $3 \times 3$ 格拉姆矩阵行列式恒等于零（$\det G = 0$），永远长不出新维度。
 
-然而，在与[§28.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)**零背景比较公理 $\mathcal{A}_0$**（[@def-ch32-axiom-of-comparison]）兼容的**第 1 层正定欧氏 / 克利福德实现**（显式附加正向单位自归一化 $S(x, x) = +\mathbf{1}$ 与三维定向欧氏结构 $(\mathbb{R}^3, \mathrm{vol}_3)$；单凭第 0 层抽象接口仍容许 $S(x_0, x_0) = -1$ 反例，详见[附录 E §E.1](appendix-e-s01-layers.md#sec-appe-layers)）下，关系网络中不设高人一等的“母态”与低人一等的“残影”：两两比较所创建出来的投影结果 $\mathbf{P}$，一旦作为同一第 1 层单位载体中的平权成员登场，就必须同样满足正向单位自比归一化 $S(\mathbf{P}, \mathbf{P}) = \mathbf{1}$（即 $\lVert\mathbf{P}\rVert^2 = 1$），并与原先两态两两遵循比较契约（`MODEL`）！那份在线性投影中亏损的模方 $1 - \cos^2\epsilon = \sin^2\epsilon$ 究竟去了哪里？恰恰化作了垂直于原比量平面的双向量正交残差！
+然而，在与[§28.1](ch32-s01-axiom-of-comparison.md#sec-ch32-axiom-of-comparison)**零背景比较公理 $\mathcal{A}_0$**（[@def-ch32-axiom-of-comparison]）兼容的**第 1 层正定欧氏 / 克利福德实现**（显式附加正向单位自归一化 $S(x, x) = +\mathbf{1}$ 与三维定向欧氏结构 $(\mathbb{R}^3, \mathrm{vol}_3)$；单凭第 0 层抽象接口仍容许 $S(x_0, x_0) = -1$ 反例，详见[附录 E §E.1](appendix-e-s01-layers.md#sec-appe-layers)）下，关系网络中不设高人一等的“母态”与低人一等的“残影”：两两比较所创建出来的投影结果 $\mathbf{P}$，一旦作为同一第 1 层单位载体中的平权成员登场，就必须同样满足正向单位自比归一化 $S(\mathbf{P}, \mathbf{P}) = \mathbf{1}$（即 $\lVert\mathbf{P}\rVert^2 = 1$），并与原先两态两两遵循比较契约（`MODEL`）！归一化确定了待补分量的长度 $\sin\epsilon$，其方向仍可选择。例如 $2(\mathbf A\cdot\mathbf B)\mathbf A-\mathbf B$ 与 $\mathbf A$ 的内积仍为 $\cos\epsilon$，也是原平面内的单位向量。下文选择用霍奇星把有向双向量残差映为法向量。
 
 让我们在选定右手定向 $\mathrm{vol}_3 = \mathbf{e}_1\wedge\mathbf{e}_2\wedge\mathbf{e}_3$ 的三维欧氏实现 $\mathbb{R}^3$ 中亲手算清这一“二生三”的自举闭合：取基准锚点 $\mathbf{A} = \mathbf{e}_2$（对应 §29.5 的中脊转枢射线）与待比量单位态 $\mathbf{B}(\epsilon) = \sin\epsilon\,\mathbf{e}_1 + \cos\epsilon\,\mathbf{e}_2$（$\epsilon \in (0, \frac{\pi}{2}]$，对应 §29.5 的第一面墙射线）。两态比较一方面给出同向内积切分量 $(\mathbf{A}\cdot\mathbf{B}(\epsilon))\mathbf{A} = \cos\epsilon\,\mathbf{e}_2$，另一方面张开有向双向量残差 $\mathbf{B}(\epsilon)\wedge\mathbf{A} = \sin\epsilon\,(\mathbf{e}_1\wedge\mathbf{e}_2)$；在二维平面于 $\mathbb{R}^3$ 所容许的正负两支单位法向 $\pm\mathbf{e}_3$ 中，所选三维定向通过霍奇星算子典范锁定正向分支 $\star(\mathbf{B}(\epsilon)\wedge\mathbf{A}) = +\sin\epsilon\,\mathbf{e}_3$（取相反定向则给出镜像对称分支 $-\sin\epsilon\,\mathbf{e}_3$）。将切向同相投影与该定向法向残差合成为满足 $\lVert\mathbf{P}\rVert^2 = 1$ 的新生比较态，当场得到
 
@@ -16,7 +16,7 @@ $$
 \mathbf{P}(\epsilon) \;=\; \bigl(\mathbf{A}\cdot\mathbf{B}(\epsilon)\bigr)\,\mathbf{A} + \star\bigl(\mathbf{B}(\epsilon)\wedge\mathbf{A}\bigr) \;=\; \cos\epsilon\,\mathbf{e}_2 + \sin\epsilon\,\mathbf{e}_3 \;\equiv\; \mathbf{C}(\epsilon) \,!
 $$
 
-无需从外部人为指定第 3 点坐标，在定向第 1 层单位实现中仅凭两态 $(\mathbf{A}, \mathbf{B}(\epsilon))$ 的一次比较与平权归一，新生的投影态 $\mathbf{P}(\epsilon)$ **分毫不差地给出了 §29.5 极小三角弧面体 $\Delta\mathcal{T}_\epsilon$ 的第三根顶点射线 $\mathbf{C}(\epsilon)$**（而另一法向分支则给出全等的镜像三面角）！此时 $(\mathbf{B}(\epsilon), \mathbf{A}, \mathbf{P}(\epsilon))$ 三者两两内积分别为 $\cos\epsilon$、$\cos\epsilon$ 与 $\cos^2\epsilon$，精准闭合为同一枚球面直角三面角。更一般地，对任意夹角为 $\epsilon \in (0, \pi)$ 的单位态对 $(\mathbf{A}, \mathbf{B})$、平面 $\operatorname{span}\{\mathbf{A}, \mathbf{B}\}$ 内任意单位参考向 $\mathbf{u}_{AB}$ 以及正交补空间 $\operatorname{span}\{\mathbf{A}, \mathbf{B}\}^\perp$ 中的任一单位法向分支 $\mathbf{e}_\perp$，归一投影态 $\mathbf{P} = \cos\epsilon\,\mathbf{u}_{AB} + \sin\epsilon\,\mathbf{e}_\perp$ 恒满足 $\lVert\mathbf{P}\rVert^2 = \cos^2\epsilon + \sin^2\epsilon = 1$；由底面积乘高平方的舒尔补恒等式，三元格拉姆行列式对一切平面内参考向 $\mathbf{u}_{AB}$ 与正负两支法向 $\pm\mathbf{e}_\perp$ 恒等于
+选定霍奇法向提升后，单位态 $\mathbf{P}(\epsilon)$ 给出了 §29.5 极小三角弧面体 $\Delta\mathcal{T}_\epsilon$ 的第三根顶点射线 $\mathbf{C}(\epsilon)$（而另一法向分支则给出全等的镜像三面角）！此时 $(\mathbf{B}(\epsilon), \mathbf{A}, \mathbf{P}(\epsilon))$ 三者两两内积分别为 $\cos\epsilon$、$\cos\epsilon$ 与 $\cos^2\epsilon$，精准闭合为同一枚球面直角三面角。更一般地，对任意夹角为 $\epsilon \in (0, \pi)$ 的单位态对 $(\mathbf{A}, \mathbf{B})$、平面 $\operatorname{span}\{\mathbf{A}, \mathbf{B}\}$ 内任意单位参考向 $\mathbf{u}_{AB}$ 以及正交补空间 $\operatorname{span}\{\mathbf{A}, \mathbf{B}\}^\perp$ 中的任一单位法向分支 $\mathbf{e}_\perp$，归一投影态 $\mathbf{P} = \cos\epsilon\,\mathbf{u}_{AB} + \sin\epsilon\,\mathbf{e}_\perp$ 恒满足 $\lVert\mathbf{P}\rVert^2 = \cos^2\epsilon + \sin^2\epsilon = 1$；由底面积乘高平方的舒尔补恒等式，三元格拉姆行列式对一切平面内参考向 $\mathbf{u}_{AB}$ 与正负两支法向 $\pm\mathbf{e}_\perp$ 恒等于
 
 $$
 \det G(\mathbf{A}, \mathbf{B}, \mathbf{P}) \;=\; \det G_2(\mathbf{A}, \mathbf{B})\cdot \operatorname{dist}\bigl(\mathbf{P}, \operatorname{span}\{\mathbf{A}, \mathbf{B}\}\bigr)^2 \;=\; \sin^2\epsilon \cdot \sin^2\epsilon \;=\; \sin^4\epsilon \;>\; 0 \quad \bigl(\forall\epsilon \in (0, \pi)\bigr).
@@ -28,7 +28,7 @@ $$
 **“二生三”无特权自举核心：单位模方归一把共线残影撑成极小三角弧面体。** 对比沉在原平面内、模长萎缩的经典退化投影与零背景比较公理 $\mathcal{A}_0$ 下的单位归一态 $\mathbf{V}_2 = \alpha\mathbf{S}_{01} + \beta\mathbf{A}_{01}$（$\alpha^2 + \beta^2 = 1$）：双向量正交残差 $\beta\mathbf{A}_{01}$ 把第三顶点垂直顶出原比量平面，撑开正格拉姆体积 $\det G_3 = (1-c_0)^2(1+2c_0) > 0$ 与品红球面角超 $\Omega_0 = 3\arccos\bigl(\frac{c_0}{1+c_0}\bigr) - \pi$。
 :::
 
-紧接着，无需从宇宙外部注入半点新原料，初生弧面体的三条边界弧 $(\mathbf{V}_0, \mathbf{V}_1)$、$(\mathbf{V}_1, \mathbf{V}_2)$ 与 $(\mathbf{V}_2, \mathbf{V}_0)$ 两两之间又必须继续遵循比较公理，沿各自外法向相继自举出第二代、第三代归一投影态：在步长按黄金阻尼律 $\delta_\ell = 0.42\,\varphi^{-(\ell-1)}$ 逐层收束的模型下，球面原胞数沿 $1 \to 4 \to 10$ 层层绽放为自相似花冠，直观演绎“道生一，一生二，二生三，三生万物”的无尽开维创生链（`MODEL`）。
+紧接着，无需从宇宙外部注入半点新原料，初生弧面体的三条边界弧 $(\mathbf{V}_0, \mathbf{V}_1)$、$(\mathbf{V}_1, \mathbf{V}_2)$ 与 $(\mathbf{V}_2, \mathbf{V}_0)$ 上重复同一构造，每次选择外法向，依次得到第二代、第三代归一投影态：在步长按黄金阻尼律 $\delta_\ell = 0.42\,\varphi^{-(\ell-1)}$ 逐层收束的模型下，球面原胞数沿 $1 \to 4 \to 10$ 层层绽放为自相似花冠，直观演绎“道生一，一生二，二生三，三生万物”的无尽开维创生链（`MODEL`）。
 
 ::: {.viz src="triadic-nameless-sandbox" preset="cascade-corolla" height="520"}
 **零外部输入的边界自举增殖：从单枚三面角绽放为 $1 \to 4 \to 10$ 黄金阻尼花冠。** 每一代新生的边界弧继续执行“切向同相投影 + 法向双向量残差”的单位归一自举，在步长按 $\delta_\ell = 0.42\,\varphi^{-(\ell-1)}$ 逐代衰减下，单枚母原胞自发向外繁衍出第 1 代 $4$ 胞与第 2 代 $10$ 胞的球面曲率拼砖（`MODEL`）。
