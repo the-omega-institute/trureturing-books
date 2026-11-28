@@ -24474,6 +24474,19 @@
         "propext"
       ]
     },
+    "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM.higgsForm_injective": {
+      "module": "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM",
+      "name": "D5.S3.Quantum.Gauge.FiniteSpectralTripleSM.higgsForm_injective",
+      "kind": "theorem",
+      "statement_id": "sha256:90e66a57e6e3b3e7ca0359f4ec82cd6e035a026e5cf36651ad651bd87f95ef1f",
+      "line": 592,
+      "signature": "theorem higgsForm_injective (y : Yukawa) (hy : y.nu ≠ 0 ∨ y.electron ≠ 0 ∨ y.up ≠ 0 ∨ y.down ≠ 0) : Function.Injective (higgsForm y)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
     "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM.higgs_minimum_iff": {
       "module": "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM",
       "name": "D5.S3.Quantum.Gauge.FiniteSpectralTripleSM.higgs_minimum_iff",
@@ -24520,6 +24533,19 @@
       "statement_id": "sha256:90e66a57e6e3b3e7ca0359f4ec82cd6e035a026e5cf36651ad651bd87f95ef1f",
       "line": 559,
       "signature": "theorem inner_fluctuation_iff (y : Yukawa) (μ : ℂ) (T : Mat) : T ∈ oneForms y μ ∧ Tᴴ = T ↔ ∃ h, T = higgsForm y h",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM.lift_particle_phase": {
+      "module": "D5/S3/Quantum/Gauge/FiniteSpectralTripleSM",
+      "name": "D5.S3.Quantum.Gauge.FiniteSpectralTripleSM.lift_particle_phase",
+      "kind": "theorem",
+      "statement_id": "sha256:90e66a57e6e3b3e7ca0359f4ec82cd6e035a026e5cf36651ad651bd87f95ef1f",
+      "line": 441,
+      "signature": "theorem lift_particle_phase (t : ℂ) (q : ℍ[ℝ]) (g : C) (ht : t * conj t = 1) : (gaugeLift (cover t q g)).toBlocks₁₁ = block (block (diagonal ![1, (t ^ 6)⁻¹]) (diagonal ![t ^ 4, (t ^ 2)⁻¹] ⊗ₖ bar g)) (block ((t ^ 3)⁻¹ • quatMatrix q) (t • (quatMatrix q ⊗ₖ bar g)))",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
