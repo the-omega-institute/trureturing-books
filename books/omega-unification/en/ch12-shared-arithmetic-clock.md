@@ -250,7 +250,7 @@ $$
 \qquad\text{for all }t\ge H
 $$
 
-and substitute it into the finite-height error formula for shared-clock readings. The unconditional remainder of the same order is also open.
+and substitute it into the finite-height error formula for shared-clock readings. Can the same order of remainder be proved without invoking RH?
 :::
 
 **Limits of fixed-mode convergence (`ARGUED`).** Two constructed height sequences separate the counting assumptions for this acceptance region. Begin with the integer quantiles of the unfiltered main term. Integrating the centered counting error on each quantile interval gives $O(T/\log T)$ for each fixed nonzero Fourier mode. Then choose a small smooth patch of the acceptance boundary transverse to the phase flow. Continuous torus equidistribution gives a number of crossings proportional to the length of each sufficiently large dyadic height interval. At each crossing, use a strictly increasing local time change to move heights from a short interval just outside the region into it. The displacements and interval lengths are of order $(\log T)^{-3/4}$.
