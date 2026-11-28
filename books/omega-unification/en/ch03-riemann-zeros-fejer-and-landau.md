@@ -204,6 +204,18 @@ At a fixed real part, each slit contributes the weight $\sinh(\lambda(\delta_\rh
 
 The first moment can attain this order even when the quadratic moment is small in every right-closed window (synthetic spectrum, `ARGUED`). Set $P=2\pi/\lambda$ and place one pair with offsets $\pm d_j$ at each period endpoint $t_j=jP$, where $d_j=4\log\log t_j/\log t_j$. At the half-period, where the phase is opposite, place two pairs with offsets $\pm d_j/\sqrt{2}$. The quadratic moment of a full period vanishes exactly. Its first moment is $(1-\sqrt{2})d_j+a$ whenever both positive offsets exceed $a$. Only the incomplete periods contribute to the quadratic moment in a dyadic window, while $M_{1/L_U}(U,2U)\sim-4(\sqrt{2}-1)U\log L_U/(P L_U)$. Bandlimited compensation for these off-line points also preserves the smooth count, Selberg-type density, the weighted sharp-cutoff leading term at the chosen frequency, and the smoothed explicit-formula readings in a fixed band free of prime-power frequencies. [Construction and numerical checks](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240412364)
 
+The next target can be tested directly by parameterizing the threshold as $a_\kappa=\kappa\log L_U/L_U$. For $0<\kappa<2\sqrt{2}$, both right-side offsets in the dyadic window exceed $a_\kappa$, and one complete period contributes
+$$
+(d_j-a_\kappa)-2(d_j/\sqrt{2}-a_\kappa)
+=\bigl[\kappa-4(\sqrt{2}-1)+o(1)\bigr]\frac{\log L_U}{L_U}.
+$$
+At $\kappa=2$ this gives
+$$
+M_{a_2}(U,2U)=\frac{2-4(\sqrt{2}-1)+o(1)}{P}\frac{U\log L_U}{L_U},
+\qquad 2-4(\sqrt{2}-1)=0.3431457505\ldots.
+$$
+The complete-period quadratic moment remains $d_j^2-2(d_j/\sqrt{2})^2=0$, so a right-closed dyadic window has only two boundary contributions, of size $O((\log L_U/L_U)^2)$. The previous counting, Selberg-type density, fixed prime-power-free-band sampling, and weighted endpoint compensation inputs therefore allow a first moment of order $U\log\log U/\log U$. An $O_\lambda(U/\log U)$ estimate at $a_2$ requires additional phase information about the actual $\zeta$ zeros. [Parametric derivation and recomputation](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240636139)
+
 For the actual zeta zeros, retaining the real-part weights recovers the endpoint term on average over heights without using RH. Let $S(t)$ be the argument term in the Riemann–von Mangoldt formula. Away from zero ordinates, $N(t)=1+\vartheta(t)/\pi+S(t)$, with $\vartheta$ the Riemann–Siegel theta function. Subtract the smooth endpoint term from the weighted sum
 
 $$

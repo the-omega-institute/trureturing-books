@@ -204,6 +204,18 @@ $$
 
 即使二次矩在每个右闭窗中都很小，一次矩仍可达到这个量级（合成谱，`ARGUED`）。令 $P=2\pi/\lambda$，每周期末端 $t_j=jP$ 放一对偏移 $\pm d_j$，其中 $d_j=4\log\log t_j/\log t_j$。在半周期处放两对偏移 $\pm d_j/\sqrt{2}$，相位与末端相反。完整周期的二次矩恰为零，一次矩却为 $(1-\sqrt{2})d_j+a$，只要两组正偏移都大于 $a$。于是二进窗内的二次矩只剩边界贡献，而 $M_{1/L_U}(U,2U)\sim-4(\sqrt{2}-1)U\log L_U/(P L_U)$。用带限核补偿这些偏轴点，可同时保留光滑计数、Selberg 型密度、同频带权硬窗首项和固定无素幂频带的平滑显式公式读数。[构造与数值复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240412364)
 
+把阈值推广为 $a_\kappa=\kappa\log L_U/L_U$ 可直接检验下一目标。若 $0<\kappa<2\sqrt{2}$，二进窗内两组右侧偏移均超过 $a_\kappa$，并且每个完整周期的一次矩为
+$$
+(d_j-a_\kappa)-2(d_j/\sqrt{2}-a_\kappa)
+=\bigl[\kappa-4(\sqrt{2}-1)+o(1)\bigr]\frac{\log L_U}{L_U}.
+$$
+因此在 $\kappa=2$ 时
+$$
+M_{a_2}(U,2U)=\frac{2-4(\sqrt{2}-1)+o(1)}{P}\frac{U\log L_U}{L_U},
+\qquad 2-4(\sqrt{2}-1)=0.3431457505\ldots.
+$$
+同一构造的完整周期二次矩仍为 $d_j^2-2(d_j/\sqrt{2})^2=0$，任意右闭二进窗的二次矩只有两个边界部分，大小为 $O((\log L_U/L_U)^2)$。这说明此前的计数、Selberg 型密度、固定无素幂频带复取样与带权端点补偿输入允许一次矩达到 $U\log\log U/\log U$；要在 $a_2$ 处得到 $O_\lambda(U/\log U)$，还需要实际 $\zeta$ 的额外相位信息。[参数化推导与复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240636139)
+
 对实际 $\zeta$ 零点，保留实部权重时，无须用 RH 作为解析输入也可在高度平均下读出端点项。令 $S(t)$ 为黎曼–冯·曼戈尔特公式中的辐角项，即离开零点高度时 $N(t)=1+\vartheta(t)/\pi+S(t)$，其中 $\vartheta$ 是黎曼–西格尔 $\vartheta$ 函数。从带权和中扣除光滑端点项
 
 $$
