@@ -271,6 +271,8 @@ $$
 
 Partial summation gives an $O(1/x)$ error in the inverse-square tail $S_W(x)$, and the normalized tail law has Kolmogorov distance $D_H=O(1/\log H)$. For each shared-clock kernel $f_v$, the readout error is $O(1/\log H)\,v^2/(1+v^2)$, with a constant uniform in $v$.
 
+For shrinking windows on the two-clock torus, retaining the boundary weight's mean and excluding near matches with small prime powers gives a counting asymptotic when the radius satisfies $r(T)\log T\to\infty$. [Derivation for shrinking two-clock windows](appendix-c.md#sec-ou-appc-shrinking-windows)
+
 ::: {.problem #prob-ou-ch12-windowed-haar-rate title="Explicit Remainders for a Fixed Haar Phase Window"}
 Let $W$ be the fixed Haar acceptance region in Chapter 2, whose boundary has Haar measure zero. Set $c=\mu(W)/(2\pi)$ for normalized Haar measure $\mu$. Determine which starting heights $H\ge2\pi$ admit a checkable constant $b_H$ satisfying $3b_H/c<L_H$ and, with $m(t)$ as above,
 

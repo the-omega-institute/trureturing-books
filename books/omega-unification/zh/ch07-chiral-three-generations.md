@@ -45,13 +45,21 @@ $$
 
 固定荷、两钟相位和软化参数后，要确定轻带中的一个态，最少需要读取三个站位的复振幅。任取两个坐标，三维轻带中总有非零态在这两处同时为零。在中央正零点（编号 $2\,306\,888\,100\,085$）比较第三枢轴末端口所选八站内的三站组合，得到三站组 $S=\{0,3,5\}$。在上述五种荷、整个双钟相位环面和允许的软化范围内，每个归一化轻态在 $S$ 上的振幅向量范数都大于 $0.29747$，即坐标限制的最小奇异值大于 $0.29747$。这三个站位经过候选比较选定，由作用量选出它们仍是开放问题。
 
-这里用于消元的三条边界射线首站 $\{6,7,8\}$ 所起的作用不同。对每种荷和每个固定的允许软化参数，环面上都有一个相位背景，使某个非零轻态在这三站同时消失。固定 $\varepsilon>0$。在零软化下，轻带的谱隙保证连续性。每个盲点周围都有一个开方格，其中最小奇异值低于 $\varepsilon/2$。将方格取得足够小，软化量充分小时整个方格仍低于 $\varepsilon$。径向软化量随高度趋于零，因而双钟的无条件等分布给出各荷在任意 $\varepsilon>0$ 下的正下密度，正零点按重数计。对 $0<\varepsilon\le1$，所引证书给出下界 $(\varepsilon/(5\pi))^2$。实际零点处能否精确为零仍待判定。[三站读取的区间界](https://github.com/the-omega-institute/trureturing-experiments/blob/cb58c8e64ecea67184e0c1d68a690be098a7a384/experiments/ch39-omega-research/replay/ch39-terminal-port-trial-energy.py) · [实际零点上的下密度](https://github.com/the-omega-institute/trureturing-experiments/blob/4c6373343aac016bf533de5bbb2ee3ff3da2bdc6/experiments/ch39-omega-research/replay/%E4%B8%89%E4%B8%AA%E7%AB%99%E4%BD%8D%E8%AF%BB%E5%8F%96%E4%BA%94%E8%8D%B7%E8%BD%BB%E5%B8%A6%E7%9A%84%E4%B8%8B%E7%95%8C%E4%B8%8E%E4%B8%89%E6%9D%A1%E5%8E%9F%E7%94%9F%E5%B0%84%E7%BA%BF%E9%A6%96%E7%AB%99%E7%9A%84%E7%9B%B2%E7%82%B9.md) · [三射线的不可见轻态](https://github.com/the-omega-institute/trureturing-experiments/blob/cb58c8e64ecea67184e0c1d68a690be098a7a384/experiments/ch39-omega-research/replay/ch39-first-ray-light-zeros.py)
+这里用于消元的三条边界射线首站 $\{6,7,8\}$ 所起的作用不同。对每种荷和每个固定的允许软化参数，环面上都有一个相位背景，使某个非零轻态在这三站同时消失。固定 $\varepsilon>0$。在零软化下，轻带的谱隙保证连续性。每个盲点周围都有一个开方格，其中最小奇异值低于 $\varepsilon/2$。将方格取得足够小，软化量充分小时整个方格仍低于 $\varepsilon$。径向软化量随高度趋于零，因而双钟的无条件等分布给出各荷在任意 $\varepsilon>0$ 下的正下密度，正零点按重数计。对 $0<\varepsilon\le1$，所引证书给出下界 $(\varepsilon/(5\pi))^2$。[三站读取的区间界](https://github.com/the-omega-institute/trureturing-experiments/blob/cb58c8e64ecea67184e0c1d68a690be098a7a384/experiments/ch39-omega-research/replay/ch39-terminal-port-trial-energy.py) · [实际零点上的下密度](https://github.com/the-omega-institute/trureturing-experiments/blob/4c6373343aac016bf533de5bbb2ee3ff3da2bdc6/experiments/ch39-omega-research/replay/%E4%B8%89%E4%B8%AA%E7%AB%99%E4%BD%8D%E8%AF%BB%E5%8F%96%E4%BA%94%E8%8D%B7%E8%BD%BB%E5%B8%A6%E7%9A%84%E4%B8%8B%E7%95%8C%E4%B8%8E%E4%B8%89%E6%9D%A1%E5%8E%9F%E7%94%9F%E5%B0%84%E7%BA%BF%E9%A6%96%E7%AB%99%E7%9A%84%E7%9B%B2%E7%82%B9.md) · [三射线的不可见轻态](https://github.com/the-omega-institute/trureturing-experiments/blob/cb58c8e64ecea67184e0c1d68a690be098a7a384/experiments/ch39-omega-research/replay/ch39-first-ray-light-zeros.py)
 
 现在让五种荷共用同一对物理钟。固定 $0\leq\delta\leq10^{-8}$ 时，对每种荷 $q$，三条射线首站只在两个**有效**相位对失去一个秩。物理钟角 $(a,b)$ 通过 $(qa,qb)$ 进入算子，每个有效相位对在物理环面上有 $q^2$ 个原像。对于 $q=1,-4,2,-3,6$，盲点数依次为 $2,32,8,18,72$，而这五个集合两两不交。因而在任何共同背景下，至少四种荷的每个轻态都由这三站的振幅唯一确定。
 
-要数尽这些点，可以沿用上面的删点矩阵。每个循环特征子空间在三站上只有一个独立坐标。若最低态在这里消失，变分原理迫使其余坐标组成删点块的最低本征向量。十五个块的这条本征线都由能隙隔离，能量都低于 $8.685$。将向量补零后只须满足剩下的边界行 $A+B e^{-iqa}+C e^{-iqb}=0$。每种荷只有一个特征标允许这三项闭合成三角形，两种朝向给出全部解。对每一对不同的荷，第一只物理钟已经将两组解分开。[全部盲点的区间枚举](https://github.com/the-omega-institute/trureturing-experiments/blob/0552844d61bd96ceae35e463e603d92d0cd01219/experiments/ch39-omega-research/replay/ch39-common-ray-blind-clocks.md)
+固定两钟后，还可以从本征值直接读出每条轻线在三站留下多少振幅（`ARGUED`）。在三个首站上作单位 Fourier 变换，每个特征标 $k=0,1,2$ 的读数沿各自的单位向量 $e_k$，把 $e_k$ 在站外补零。记 $H_k$ 为该特征标的磁拉普拉斯块，$u_k$ 为其归一化轻态，$\lambda_k$ 为相应的单本征值。三个输出方向正交，所以三站限制的三个奇异值正是 $s_k=|\langle e_k,u_k\rangle|$。沿 $e_k$ 删去一行一列得到 $D_k$。令 $p_k(z)=\det(zI-H_k)$、$d_k(z)=\det(zI-D_k)$，则
 
-这些孤立的盲点还决定了实际读数能以多高的频率接近零。记 $\sigma_q$ 为三站限制的最小奇异值，在正黎曼零点上按重数计数。固定一个充分小的阈值 $\varepsilon>0$，先让计数高度趋于无穷。由上述双钟等分布与辐边软化趋零，$\sigma_q<\varepsilon$ 的极限比例等于零软化环面上的归一化面积。再令 $\varepsilon\downarrow0$，这个面积为 $C_q\varepsilon^2+O(\varepsilon^4)$。按上面的荷顺序，$C_q$ 约为 $25.99279,17.37426,26.16959,12.59218,14.28552$。每个盲点处，边界复振幅对两个钟角的实雅可比可逆，半径 $\varepsilon$ 的振幅圆盘因此在钟面上截出面积为二阶的邻域。五种荷的这些邻域在充分小的阈值下仍两两不交，故至少一荷近盲的二次项系数约为 $96.41434$。精确失秩的正零点集由此具有自然密度零，个别零点是否命中仍开放。[面积系数的推导和复算](https://github.com/the-omega-institute/trureturing-experiments/blob/408bafb236c0918d30571356d15798d2cd21a511/experiments/ch39-omega-research/replay/ch39-ray-near-blind-density.md)
+$$
+s_k^2=\frac{d_k(\lambda_k)}{p'_k(\lambda_k)}.
+$$
+
+余子式公式给出预解式在 $e_k$ 上的对角元 $d_k(z)/p_k(z)$。按本征向量展开，同一对角元在 $\lambda_k$ 的留数是 $s_k^2$。由于 $p'_k(\lambda_k)\ne0$，分子为零恰好表示该线不可见，此时预解式的这个对角元在该点可去。三站的秩等于 $d_k(\lambda_k)\ne0$ 的特征标个数，即使不同特征标的轻本征值重合也可逐块判定。[Denton、Parke、Tao 与 Zhang，*Eigenvectors from eigenvalues: A survey of a basic identity in linear algebra*（2022），定理 1](https://doi.org/10.1090/bull/1722)
+
+要在整个环面上数尽失秩点，只须考察删点块的最低态。若最低态在这里消失，变分原理迫使其余坐标组成删点块的最低本征向量。十五个块的这条本征线都由能隙隔离，能量都低于 $8.685$。将向量补零后只须满足剩下的边界行 $A+B e^{-iqa}+C e^{-iqb}=0$。每种荷只有一个特征标允许这三项闭合成三角形，两种朝向给出全部解。对每一对不同的荷，第一只物理钟已经将两组解分开。[全部盲点的区间枚举](https://github.com/the-omega-institute/trureturing-experiments/blob/0552844d61bd96ceae35e463e603d92d0cd01219/experiments/ch39-omega-research/replay/ch39-common-ray-blind-clocks.md)
+
+这些孤立的盲点还决定了实际读数能以多高的频率接近零。记 $\sigma_q$ 为三站限制的最小奇异值，在正黎曼零点上按重数计数。固定一个充分小的阈值 $\varepsilon>0$，先让计数高度趋于无穷。由上述双钟等分布与辐边软化趋零，$\sigma_q<\varepsilon$ 的极限比例等于零软化环面上的归一化面积。再令 $\varepsilon\downarrow0$，这个面积为 $C_q\varepsilon^2+O(\varepsilon^4)$。按上面的荷顺序，$C_q$ 约为 $25.99279,17.37426,26.16959,12.59218,14.28552$。每个盲点处，边界复振幅对两个钟角的实雅可比可逆，半径 $\varepsilon$ 的振幅圆盘因此在钟面上截出面积为二阶的邻域。五种荷的这些邻域在充分小的阈值下仍两两不交，故至少一荷近盲的二次项系数约为 $96.41434$。精确失秩的正零点集由此具有自然密度零。[面积系数的推导和复算](https://github.com/the-omega-institute/trureturing-experiments/blob/408bafb236c0918d30571356d15798d2cd21a511/experiments/ch39-omega-research/replay/ch39-ray-near-blind-density.md)
 
 ::: {.theorem #thm-ou-ch07-two-clock-frequency-separation title="双钟频率的显式分离" lean="D5/S3/Fourier/Asymptotics/TwoClockFrequencySeparation.frequency_separation"}
 令 $\theta_d=\arccos(1-d/1734)$，$a=\theta_{724}-\theta_{244}$，$b=\theta_{804}-\theta_{244}$。对任意不同时为零的整数 $m,n$，令 $M=\max(|m|,|n|)$，则
@@ -62,11 +70,43 @@ $$
 
 三个相位所在的共同数域次数至多为八。独立共轭能单独反转任一相位，而三个相位的有理迹均非整数，使它们各自具有无限阶。非零模式的相位积因此异于一。用 $1734$ 清除各相位和逆相位的分母后，非零代数整数的范数给出显式下界。
 
+::: {.theorem #thm-ou-ch07-zeta-ordinate-reflection title="零点和的反射抵消" lean="D5/S3/Weil/ZeroData/ZetaOrdinateReflectionTransfer.actual_reflection_bound"}
+令 $\rho=\beta+i\gamma$ 遍历互异的非平凡零点，$m_\rho$ 为解析重数。任取实数 $v,T$，记 $d_\rho=|v(\beta-1/2)|$。则
+
+$$
+\left|\sum_{0<\gamma\le T}m_\rho e^{v(\rho-1/2)}
+      -\sum_{0<\gamma\le T}m_\rho e^{iv\gamma}\right|
+\le \sum_{0<\gamma\le T}m_\rho\,d_\rho^2e^{d_\rho}.
+$$
+:::
+
+::: proof
+映射 $\rho\mapsto1-\bar\rho$ 保持高度与重数，并把实部偏移反号。将原求和与反射重排后的求和取平均，指数展开的一次项相消，剩下的二阶余项给出上界。完整证明由 Lean 内核检查。
+:::
+
+这个有限高度界把误差归结为零点到临界线的加权距离。要控制随高度增长的频率，还需对不同距离的零点数给出一致估计。 [Ford–Zaharescu，引理 2 与式 (3.8)](https://arxiv.org/abs/math/0405459v2)
+
 **随高度缩小的阈值（`ARGUED`）。** 令 $L=\log T$。若 $\varepsilon(T)\to0$ 且 $\varepsilon(T)\sqrt L\to\infty$，那么在模型的五种荷中，每种荷的近盲零点比例均为 $C_q\varepsilon(T)^2+o(\varepsilon(T)^2)$，仍按重数计数。证明取 $J=\lfloor cL/\log L\rfloor$，其中 $c>0$ 充分小。双钟频率的显式下界控制接近零频率时的误差。Ford–Meng–Zaharescu 的引理 1–2 随即把每个 $0<\|m\|_\infty\le J$ 的标准化零点傅里叶和控制在 $O(L^{-1}+\|m\|_\infty^2L^{-2})$，无需假定黎曼猜想。[零点和估计](https://arxiv.org/abs/1511.06814v2) · [联合极限的推导](https://github.com/the-omega-institute/trureturing/issues/35082#issuecomment-7232072134)
 
 在每个盲点取尺度为 $\varepsilon$ 的光滑内外逼近，夹住由边界振幅雅可比决定的局部椭圆。其傅里叶系数的绝对和为 $O(1)$，二阶绝对矩为 $O(\varepsilon^{-2})$，超过 $J$ 的绝对尾和为 $O((\varepsilon J)^{-4})$。因此采样与环面平均之差为 $O(L^{-1}+\varepsilon^{-2}L^{-2}+(\varepsilon J)^{-4})=o(\varepsilon^2)$。让内外逼近的面积趋于同一椭圆面积即可恢复同一个 $C_q$。 [Lean 中的绝对尾界](lean:D5/S3/Fourier/Asymptotics/PlanarFourierTail.lattice_fourier_tail)
 
-真实软辐边也满足这个极限。模型给出的亏额为 $\delta(\gamma)=O(\gamma^{-2})$。固定相位时，三条软化辐边使矩阵的算子范数改变量至多 $6\delta$。每个循环特征标只有一条轻线，其余本征值与轻线相隔至少 $9.6-8.685$。将扰动后的单位本征方程投影到平坦轻线的正交补，得到两条轻线主角的正弦为 $O(\delta)$，故三站最小奇异值也只改变 $O(\delta)$，且此界对相位一致。在 $\sqrt T\le\gamma\le T$ 上，读数误差为 $O(T^{-1})=o(\varepsilon(T))$，早期零点的比例则为 $O(T^{-1/2})=o(\varepsilon(T)^2)$。于是用平坦模型的两个相对扰动阈值即可夹住实际计数。[软化权重的定义](https://github.com/the-omega-institute/trureturing-experiments/blob/cb58c8e64ecea67184e0c1d68a690be098a7a384/experiments/ch39-omega-research/replay/ch39-three-ray-chiral-boundary.py#L34)
+固定荷与钟角，轻线随辐边软化能移动多远？写 $H_k(\delta)=H_k(0)-\delta K_k$。三条单位辐边构成一个星图。在极点与三叶均匀单位向量的基下，平凡特征标上的星图块为 $\left(\begin{smallmatrix}3&-\sqrt3\\-\sqrt3&1\end{smallmatrix}\right)$。两个非平凡叶模式在极点相消，各自的本征值为 $1$。其余方向上的星图作用为零，故 $K_k$ 的谱宽依次为 $w_k=4,1,1$。[软化权重的定义](https://github.com/the-omega-institute/trureturing-experiments/blob/cb58c8e64ecea67184e0c1d68a690be098a7a384/experiments/ch39-omega-research/replay/ch39-three-ray-chiral-boundary.py#L34)
+
+取共同谱隙下界 $g=9.6-8.685=183/200$。沿软化区间选取相位使 $\langle u_k,u'_k\rangle=0$，并记 $P_k=u_ku_k^*$。对本征方程求导，得到 $(H_k-\lambda_k I)u'_k=(I-P_k)K_ku_k$。右边可将 $K_k$ 换为 $K_k-w_k I/2$，其范数为 $w_k/2$。在轻线的正交补上，$H_k-\lambda_k I$ 的本征值至少为 $g$，把 $u'_k$ 和右端分别看作一维域上的算子 $X,Y$。分离谱估计 $\|X\|\le\|Y\|/g$ 给出 $\|u'_k\|\le w_k/(2g)$。[Sylvester 算子范数界](lean:D5/S3/HilbertOperators/DavisKahanProjector.opNorm_le_div_of_comp_sub_comp_eq)
+
+对单位向量 $e_k$ 取内积再积分，在任意 $0\le\delta_0,\delta_1\le10^{-8}$ 下都有
+
+$$
+|s_k(\delta_1)-s_k(\delta_0)|\le\frac{w_k}{2g}|\delta_1-\delta_0|.
+$$
+
+因此三站最小奇异值的改变量至多为 $(400/183)|\delta_1-\delta_0|$。盲点枚举还表明每种荷只有一个可能不可见的特征标，且它非平凡。只要这条轻线的 $s_k(0)>(100/183)10^{-8}$，同一对钟角在整个软化区间都保持三站满秩。模型给出的亏额为 $\delta(\gamma)=O(\gamma^{-2})$。在 $\sqrt T\le\gamma\le T$ 上，读数误差为 $O(T^{-1})=o(\varepsilon(T))$，早期零点的比例则为 $O(T^{-1/2})=o(\varepsilon(T)^2)$。于是用平坦模型的两个相对扰动阈值即可夹住实际计数。
+
+**逆平方阈值下的计数上界（`ARGUED`）。** 对每个固定 $C>0$，在 $0<\gamma\le T$ 的正零点中按重数计数，至少一荷满足 $\sigma_q(\gamma)\le C\gamma^{-2}$ 的零点数至多为 $O_C(T^{1-\eta}\log T)$，其中 $\eta>0$ 只依赖双钟速度。统一谱隙控制软化带来的 $O(\gamma^{-2})$ 读数扰动。再用平坦盲点的可逆雅可比，得到钟相位与某个平坦盲点相距 $O_C(\gamma^{-2})$。在一个二倍高度区间 $[U,2U]$ 固定盲点，以两钟的整数圈数记每次接近。两个读数的圈数差 $(k,\ell)$ 满足 $|k|=O(U)$ 和 $|\alpha k-\ell|=O_C(U^{-2})$，其中 $\alpha$ 是第二钟速度与第一钟速度的比。
+
+以同一次接近为原点，任意两圈数差向量的整数行列式为 $O_C(U^{-1})$，故在足够大的 $U$ 处为零。若有不同的第一钟圈数，差向量都为同一原始整向量 $(d,e)$ 的整数倍，取 $d>0$。两钟的角速度是固定代数旋转的对数除以 $i$，且两个旋转乘法独立。Baker–Wüstholz 的复对数线性型下界给出 $|\alpha d-e|\gg d^{-\tau}$，可取固定 $\tau>2$。因此占用圈数至多为 $1+O_C(\min(U/d,U^{-2}d^\tau))=O_C(U^{1-3/(\tau+1)})$。每圈的高度区间长 $O_C(U^{-2})$，其中至多有 $O(\log U)$ 个带重数的正零点。对有限盲点和二倍高度区间求和即可取 $\eta=3/(\tau+1)$。精确失秩也受此界约束。[Baker–Wüstholz，*Logarithmic forms and group varieties*（1993），第 20 页主定理](https://doi.org/10.1515/crll.1993.442.19) · [圈数计数推导](https://github.com/the-omega-institute/trureturing-books/issues/1687#issuecomment-7233591419)
+
+**有限高度的排除（`CERT`）。** 对原软化模型，Arb 区间计算在整个连续高度段 $14\le t\le14\cdot2^{80}$ 上排除了五种荷的首站精确失秩。先在每个二倍高度区间圈住删除块的最低本征线，求出边界三角方程的全部相位分支，再把双钟同时命中的必要条件化为有理模余数计数。$180$ 位和 $200$ 位两种有理网格均给出零个候选圈数。第一枚正零点高于 $14$，所以该段涵盖截至 $14\cdot2^{80}$ 的全部正零点。更高处的精确命中仍开放。[固定输入版本和两种网格的复算](https://github.com/the-omega-institute/trureturing-experiments/blob/be74a3657a65f06b756d49db4bb81bb37344d67d/experiments/ch39-omega-research/replay/ch39-pinned-interval-replays.md#finite-height-exclusion-for-the-ray-readout)
 
 如果保留原来的三个首站，只能再装一个读数器，该放在哪里？其余十六个站点中，除极点 $14$ 外，任一站都可以。每种荷在盲点只丢失一个非平凡循环特征的轻态。这个态在极点的振幅因旋转对称而恒为零，在其余十五个候选站的单站振幅却都大于 $0.0174$。加上其中任一站后，对每种荷分别读取四个坐标，在整个双钟环面和 $0\le\delta\le10^{-8}$ 上，三维轻空间限制的最小奇异值都大于 $4\times10^{-5}$。这个较小的界计入了不同特征在第四站的干涉。若读数站集本身也须保持三循环，最少要补一个完整三站轨道，共用六站。 [十五种单站补读与全域下界](https://github.com/the-omega-institute/trureturing-experiments/blob/7168d863ca1b4d92fec7cd8cbf50f5013f9282ac/experiments/ch39-omega-research/replay/ch39-ray-head-extra-site.md)
 
@@ -82,7 +122,7 @@ $$
 
 实际的两只钟由同一个黎曼零点的纵坐标驱动。它们多常走近固定布局的盲点？在第 $2\,306\,888\,100\,085$ 个正零点逐一取出所有十五行方阵，无论用实际软化还是零软化，每个布局的最小奇异值都大于 $3.11736\times10^{-6}$。这个共同锚点也决定了一个密度问题。每个布局的行 Gram 矩阵都可用各荷、各循环特征的最低线投影来写。谱隙使这些投影随钟角实解析，各布局的 Gram 行列式之积在零软化锚点严格为正，故其零集面积为零。由两钟等分布及实际软化随高度趋零，按重数计的正零点中，全部 $3876$ 种布局同时满秩的比例趋于一。
 
-满秩时还要问测量误差会放大多少。固定一种布局，记 $s$ 为其最小奇异值。零软化时，两钟角沿短弧总共移动 $h$ 弧度，$s$ 至多改变 $\sqrt{132}\,h$。故一个盲点周围就有一块面积可算的近盲菱形。令 $\varepsilon(T)\downarrow0$ 且 $\varepsilon(T)\sqrt{\log T}\to\infty$。在高度 $T$ 以内全部正零点中，满足 $s<\varepsilon(T)$ 且所有布局都满秩的比例，除以 $\varepsilon(T)^2$ 后下极限至少为 $1/(264\pi^2)$。各布局各有自己的近盲零点。某个实际零点是否恰好失秩仍开放。[逐布局锚点、近盲面积与零点计数](https://github.com/the-omega-institute/trureturing-experiments/blob/bc1aeeab70bbe7a36e7f8df8365267542da81aad/experiments/ch39-omega-research/replay/ch39-five-charge-zero-density.md)
+**近盲零点计数（手工推导，`ARGUED`）。** 满秩时还要问测量误差会放大多少。固定一种布局，记 $s$ 为其最小奇异值。零软化时，两钟角沿短弧总共移动 $h$ 弧度，$s$ 至多改变 $\sqrt{132}h$。故一个盲点周围就有一块面积可算的近盲菱形。令 $\varepsilon(T)\downarrow0$ 且 $\varepsilon(T)\log T\to\infty$。在高度 $T$ 以内全部正零点中，满足 $s<\varepsilon(T)$ 且所有布局都满秩的比例，除以 $\varepsilon(T)^2$ 后下极限至少为 $1/(264\pi^2)$。先将近盲菱形的半径乘以任意固定的 $1-\eta$，其中 $0<\eta<1$。依[附录 C.3](appendix-c.md#sec-ou-appc-shrinking-windows)，收缩后的菱形计数等于其 Haar 面积乘 $N(T)$ 加上低阶项。在盲相位处，所有零软化 Gram 行列式之积具有一个非零的首项齐次 Taylor 多项式。这个首项在缩放后的菱形中只在零测集上为零。用有限个闭包避开零集和边界的小方形逼近菱形面积。由同一收缩计数，每个方形给出相应比例的零点。方形内首项有正的绝对值下界，乘积在原角坐标下至少为 $\varepsilon(T)$ 的固定幂乘一个正数。对高于 $\sqrt T$ 的零点，实际软化造成的 $O(T^{-1})$ 扰动更小，故这里的所有布局都满秩。实际软化对 $s$ 的 $O(T^{-1})$ 扰动也小于余量 $\eta\varepsilon(T)$。舍去高度低于 $\sqrt T$ 的零点只损失 $O(\sqrt T\log T)=o(\varepsilon(T)^2N(T))$。最后令 $\eta\downarrow0$，恢复整个菱形给出的常数。各布局各有自己的近盲零点。某个实际零点是否恰好失秩仍开放。[逐布局锚点、近盲面积与零点计数](https://github.com/the-omega-institute/trureturing-experiments/blob/bc1aeeab70bbe7a36e7f8df8365267542da81aad/experiments/ch39-omega-research/replay/ch39-five-charge-zero-density.md) · [收缩计数与精确失秩的局部排除](https://github.com/the-omega-institute/trureturing-books/issues/1725#issuecomment-7235116636)
 
 将内部空间按特征标正交拆块，背后依托的是一条无 $\pi$、纯有理的群论正交骨架。正如[第二章](ch02-quaternion-clocks-and-haar-zeros.md)在双时钟球面哈尔积分中所确立的，偶次切比雪夫特征多项式 $E_m(\kappa)$ 在全阶上的正交归一性已在 Lean 内核中不依赖实数极限而严格冻结：
 
@@ -157,6 +197,10 @@ $$
 在上述实系数约束下，二次协方差可以让六个夸克质量同时入窗，但再要求最小混合角 $\theta_{13}$ 入窗就排除了整个二次族，即使允许各部门任选正标尺。在同一对制备背景上，若令单个振幅 $X$ 为 $U,D$ 的至多二次复系数多项式，则每个三阶半正定协方差都可写成 $S=XX^*$，因此要预测质量与混合，仍须由作用量独立于目标数据确定系数。[六质量与一个混合角](https://github.com/the-omega-institute/trureturing-experiments/blob/20621e8c850a1b22e863fd009c702edde8139d2d/experiments/ch39-omega-research/replay/%E5%85%AD%E8%B4%A8%E9%87%8F%E4%B8%8E%E4%B8%80%E4%B8%AA%E6%B7%B7%E5%90%88%E8%A7%92%E6%8E%92%E9%99%A4%E5%85%A8%E9%83%A8%E5%AE%9E%E7%B3%BB%E6%95%B0%E4%BA%8C%E6%AC%A1%E6%BA%90.md) · [二次振幅的因子分解](https://github.com/the-omega-institute/trureturing-experiments/blob/78e2205080b6770d57f6a429328e7af9a3582ebc/experiments/ch39-omega-research/replay/%E5%8D%95%E4%B8%AA%E4%BA%8C%E6%AC%A1%E6%8C%AF%E5%B9%85%E5%A4%8D%E7%8E%B0%E5%A4%B8%E5%85%8B%E6%BA%90%E5%B9%B6%E5%9C%A8%E5%85%A8%E9%83%A8%E8%BF%91%E9%82%BB%E4%BF%9D%E6%8C%81%E6%AD%A3%E5%AE%9A.md)
 
 这个三阶例子恰在一个余维界上。七个词 $I,U,D,U^2,UD,DU,D^2$ 在这对制备上复线性无关，在九维矩阵空间中留下两个独立的复约束。一般地，设振幅有 $m$ 行、$n$ 列。手工推导表明，只要允许的复线性子空间的复余维至多为 $n-1$，每个秩至多为 $n$ 的 $m$ 阶半正定源都有振幅因子，即使源是奇异的。右乘酉矩阵保持 $XX^*$ 不变，这一自由度足以同时满足这些约束。再多一个约束便可能漏掉指定的非零目标 $S$：取 $u^*Su>0$，要求 $u^*X=0$ 恰好给出 $n$ 个独立复约束，却使 $u^*XX^*u=0$。零源总可取 $X=0$，而超过 $n$ 的秩已超出振幅的列数。[余维界的变分推导](https://github.com/the-omega-institute/trureturing-books/issues/1617#issuecomment-7230510590) · [矩形因子](https://github.com/the-omega-institute/trureturing-books/issues/1617#issuecomment-7230517942)
+
+**七个词的条件数（`ARGUED`）。** 从振幅反求七个系数时，误差会放大多少？先固定各词的尺度，令 $u=U/\operatorname{tr}U$、$d=D/\operatorname{tr}D$，以 $Wc$ 表示系数为 $c\in\mathbb C^7$、按 $I,u,d,u^2,ud,du,d^2$ 排列的振幅。系数取欧氏范数，振幅取 Frobenius 范数。在上型第 $2{,}345{,}666$ 个零点与下型第 $964{,}890$ 个零点的两个制备盒内，$W$ 的最小奇异值大于 $0.000155736$，最大与最小奇异值之比介于 $17092.48$ 与 $17092.53$ 之间。用区间包住七个词，再对舍入后的词计算Gram 矩阵，以精确的行列式符号即可核对这些界。因此，词空间中两个振幅的系数差满足 $\|\Delta c\|_2\le\|\Delta X\|_F/\sigma_{\min}(W)$。给定协方差后，每个容许因子 $X=Wc$ 都满足 $\|c\|_2\le\sqrt{\operatorname{tr}S}/\sigma_{\min}(W)$，因为 $\|X\|_F^2=\operatorname{tr}S$。协方差仍允许每个非零因子取任意整体相位。[条件数证书与推导](https://github.com/the-omega-institute/trureturing-books/issues/1771#issuecomment-7236486034)
+
+这个估计还给出了所有半正定源都能分解的邻域。在同一组源坐标内扰动 $u,d$，使各自的 Frobenius 误差至多为 $\eta$，并保持半正定且迹为一。各矩阵的算子范数都至多为一，由 $a'b'-ab=(a'-a)b'+a(b'-b)$，每个二次词的误差至多为 $2\eta$。两个一次词与四个二次词合起来给出 $\|W'-W\|_{\mathrm{op}}\le\sqrt{2+4\cdot 2^2}\,\eta$。对单位系数向量取最小值，就得到最小奇异值变化的同一个上界。也可把正奇异值看作对角块为零、非对角块为 $W,W^*$ 的厄米矩阵的本征值，应用[厄米矩阵的本征值扰动界](lean:D5/S3/SpectralTopology/HermitianEigenvaluePerturbation.abs_eigenvalues0_sub_le_norm)。当 $\eta\le 3.67\times10^{-5}$ 时，七个词仍然线性无关，所张空间的复余维仍为二，因而上述分解论证也覆盖奇异的目标源。
 
 若约束只要求实线性，二阶振幅的统一保证是三个实约束。设 $S=TT^*\succeq0$。任意因子 $X$ 与 $T$ 有相同的行 Gram 矩阵，行张成空间之间的等距映射可扩张为整个空间上的酉变换，所以 $X=TU$，也涵盖奇异的 $S$。取 $\det U$ 的一个单位复数平方根，可写 $U=(c+is)Q(z,w)$，其中 $c^2+s^2=1$，$Q$ 的两行为 $(z,w)$ 和 $(-\bar w,\bar z)$，且 $|z|^2+|w|^2=1$。用 $q\in\mathbb R^4$ 表示 $z,w$ 的实坐标。若 $F$ 汇集实约束，记 $Aq=F(TQ)$、$Bq=F(iTQ)$。三个约束至多使 $A$ 有三行，取其任意非零核向量归一化，就得到一个因子。对任意指定的非零 $S$，取 $v^*Sv>0$。条件 $v^*X=0$ 给出四个独立的实约束，并将 $v^*XX^*v$ 强制为零，因此三个的保证是锐的。$S=0$ 总可取 $X=0$。
 
