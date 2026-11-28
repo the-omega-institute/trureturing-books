@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "985e51be2e3a5ec8b37029e982bb917a3a42c391",
-  "pinned_at": "2026-11-28T02:59:11Z",
+  "commit": "14ab3f818a0473d5a5f6f329fe70790d6ec55cc0",
+  "pinned_at": "2026-11-28T03:38:12Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -5370,6 +5370,19 @@
       "statement_id": "sha256:e9d336262d01392203c80f275f5c7046d6026c7df9374921f97f0f3c9dcaf7b6",
       "line": 193,
       "signature": "theorem central_fejer_gaussian_limit {J : ℕ → Type*} [∀ n,Fintype (J n)] (g w : ∀ n,J n → ℝ) (hw : ∀ᶠ n in atTop, ∀ i j, 0≤w n i*w n j) (hW : ∀ᶠ n in atTop, ∑ j,w n j=1) (hM : ∀ᶠ n in atTop, 0<pairMoment (g n) (w n) 2) (ρ A : ℕ → ℝ) (hρ : Tendsto ρ atTop (𝓝 0)) (hA : Tendsto A atTop atTop) (hwin : ∀ᶠ n in atTop, A n^2*pairMoment (g n) (w n) 4 ≤ 6*(n:ℝ)*pairMoment (g n) (w n) 2^2) : let kernel"
+    },
+    "D5/S3/Fourier/Asymptotics/PlanarFourierTail.lattice_fourier_tail": {
+      "module": "D5/S3/Fourier/Asymptotics/PlanarFourierTail",
+      "name": "D5.S3.Fourier.Asymptotics.PlanarFourierTail.lattice_fourier_tail",
+      "kind": "theorem",
+      "statement_id": "sha256:64e46503365534e9e473257147ad4dc07fc81282316604887a34e5e56c282d17",
+      "line": 72,
+      "signature": "theorem lattice_fourier_tail (s : Finset (ℤ × ℤ)) (a : ℤ × ℤ → ℂ) (J : ℕ) (ε K : ℝ) (hJ : 0 < J) (hε : 0 < ε) (hK : 0 ≤ K) (hcut : ∀ m ∈ s, J < modeRadius m) (hdecay : ∀ m ∈ s, ‖a m‖ ≤ K * ε ^ 2 / (1 + ε * modeRadius m) ^ 6) : ∑ m ∈ s, ‖a m‖ ≤ 2 * K / (ε ^ 4 * (J : ℝ) ^ 4)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns.result": {
       "module": "D5/S3/Fourier/Asymptotics/TorusObservationWindowReturns",
