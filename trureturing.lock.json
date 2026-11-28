@@ -6335,6 +6335,14 @@
       "line": 527,
       "signature": "theorem finite_codebook_upper_bound (n : ℕ) (hn : 0 < n) {L ε : ℝ} (hL : 0 < L) (hε : 0 < ε) : ∃ C : Finset (Fin n → ℝ), Adequate n L ε C ∧ C.card ≤ (⌈L * n / (2 * ε)⌉₊) ^ n ∧ (L = 2 * Real.pi → FixedDecoderAdequate n ε C)"
     },
+    "D5/S3/Geometry/FiniteGeometry/SingerTracePlane.result": {
+      "module": "D5/S3/Geometry/FiniteGeometry/SingerTracePlane",
+      "name": "D5.S3.Geometry.FiniteGeometry.SingerTracePlane.result",
+      "kind": "theorem",
+      "statement_id": "sha256:d18a7bad569b5e394c32d765c07e7ae6f05147272a7c793dee2ebcc783b07c15",
+      "line": 364,
+      "signature": "theorem result (α : GaloisField p 3) (hα : orderOf α = p ^ 3 - 1) : (Finset.univ.filter fun i : Fin (p ^ 2 + p + 1) => Algebra.trace (ZMod p) (GaloisField p 3) (α ^ i.val) = 0).card = p + 1 ∧ (Finset.univ.filter fun i : Fin (p ^ 2 + p + 1) => Algebra.trace (ZMod p) (GaloisField p 3) (α ^ (2 * i.val)) = 0).card = p + 1 ∧ (∀ r : Fin (p ^ 2 + p + 1), r ≠ 0 → (Finset.univ.filter fun i : Fin (p ^ 2 + p + 1) => Algebra.trace (ZMod p) (GaloisField p 3) (α ^ i.val) = 0 ∧ Algebra.trace (ZMod p) (GaloisField p 3) (α ^ (i + r).val) = 0).card = 1) ∧ (∀ i : Fin (p ^ 2 + p + 1), Algebra.trace (ZMod p) (Galo"
+    },
     "D5/S3/Geometry/FixedPoint/Brouwer.Brouwer": {
       "module": "D5/S3/Geometry/FixedPoint/Brouwer",
       "name": "D5.S3.Geometry.FixedPoint.Brouwer",
