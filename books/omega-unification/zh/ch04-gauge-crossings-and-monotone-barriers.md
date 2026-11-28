@@ -160,15 +160,17 @@ $$
 
 保留谱点的排序时，还可以在相邻谱段间重新分配斜率。上述交点也是全部共同非减、对数凸质量样本与交汇能标的严格局部最小点。为检验斜率可以怎样变化，把样本间的曲线线性插值，每个非负斜率增量都可放在相应的谱点。固定 $t$，在 $x_k$ 处加入一个这样的增量，再用匹配雅可比调节原斜率和交汇能标。除原折点及末端外，跨度对增量的导数均严格大于 $0.00852$。原折点的增量可并入原斜率，末端增量对样本没有影响。其余增量都为非负，沿匹配分支的正导数与原一折点极小点的正曲率合在一起，给出严格的局部极小性。[手工推导与 Arb 区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2043#issuecomment-7239308615)
 
-在第 $11431$ 枚正零点的十八高模矢量状谱上，沿用低能中心输入与一圈有限动量减法，只比较 $10^{13}\le\mu\le10^{17}\,\mathrm{GeV}$ 内共同逆耦合为正的交汇。在从 $x_3$ 起坡、斜率 $s\ge0$ 的对数质量曲线上，同时允许在 $x_7$ 增加斜率 $a\ge0$，并从 $x_{10}$ 起加上对数质量增量 $u_i$。令 $u_i=0$（$i<10$）、$0\le u_i\le h=u_{107}$（$i\ge10$）。总质量沿谱非减，增量 $u_i$ 本身可以下降。这包含在 $x_7$ 及 $x_9$ 至 $x_{106}$ 叠加非负斜率增量。记 $D=x_{107}-x_3$、$D_7=x_{107}-x_7$，则跨度为 $S=Ds+D_7a+h$。
+在第 $11431$ 枚正零点的十八高模矢量状谱上，沿用低能中心输入与一圈有限动量减法，只比较 $10^{13}\le\mu\le10^{17}\,\mathrm{GeV}$ 内共同逆耦合为正的交汇。在从 $x_3$ 起坡、斜率 $s\ge0$ 的对数质量曲线上，同时允许在 $x_7$ 增加斜率 $a\ge0$，并从 $x_{10}$ 起加上对数质量增量 $u_i$。令 $u_i=0$（$i<10$）、$0\le u_i\le h=u_{107}$（$i\ge10$）。总质量沿谱非减，增量 $u_i$ 本身可以下降。记 $D=x_{107}-x_3$、$D_7=x_{107}-x_7$，则跨度为 $S=Ds+D_7a+h$。
 
 只需考察 $S\le283.68397$ 的竞争交汇。扣除两段斜率所用的跨度后，剩余预算控制晚段逐场的曝光损失。损失按投影权重的符号计入匹配差。还可以利用质量排序，以非增的费米核曝光为参照，对有号权重做阿贝尔分部求和，并逐层补上矢量核和标量核的差额。区间排除将竞争交汇限制在 $261\le s\le s+a\le267$、$-1.04\le t\le0$。
 
 在这个区域，先去掉晚段增量，再沿参数线段比较未加重的候选点与同偏移的一折点交汇。平均匹配雅可比给出斜率增量的跨度代价，晚段曝光的指数衰减则限制加重后的补偿。当 $a+h>0$ 时，候选跨度比同偏移的一折点跨度严格多出 $1.014a+0.9999997h$ 以上。联合质量族因此仍由 $a=h=0$ 的交汇唯一取得全局最小跨度 $(283.68396,283.68397)$。这是固定模型内的手工推导与 Arb 区间复算。[联合质量族的推导与区间证书](https://github.com/the-omega-institute/trureturing-books/issues/2330#issuecomment-7242055064) · [仅从 $x_{10}$ 加重的证书](https://github.com/the-omega-institute/trureturing-books/issues/2217#issuecomment-7241019554)
 
+中性图拉普拉斯的最小正特征值是一个二重根，恰占第 $8$、$9$ 两个谱秩，因此 $x_8=x_9$。在 $x_8$ 处添加非负斜率 $d_8$ 时，新增的对数质量 $d_8(x_i-x_8)_+$ 到第 $9$ 层仍为零，沿谱累加的增量在末端恰为 $d_8(x_{107}-x_8)$。将它并入 $u_i$，只需把末层预算从 $h$ 加到 $h+d_8(x_{107}-x_8)$。这使同一个最小值结论适用于同时在 $x_8$ 至 $x_{106}$ 增加任意非负斜率的情形。若单独记出第 $8$ 谱点的增量，且 $a+h+d_8>0$、总跨度 $S=Ds+D_7a+h+d_8(x_{107}-x_8)\le283.68397$，则相对同偏移一折点交汇的跨度差严格大于 $1.014a+0.9999997h+1.00827d_8$。 [重根的整数证书与跨度推导](https://github.com/the-omega-institute/trureturing-books/issues/2353#issuecomment-7242234051)
+
 加重起点越靠后，阈值曝光的指数衰减使跨度补偿界更紧。固定 $a=0$，沿用上述质量排序、预算与同偏移比较，若仅从 $x_{24}$、$x_{30}$、$x_{36}$ 或 $x_{42}$ 开始加重，则 $h>0$ 时的严格补偿上界分别为 $3\times10^{-64}h$、$2.2\times10^{-65}h$、$2.1\times10^{-134}h$ 和 $1.1\times10^{-135}h$。[从 $x_{24}$ 开始的预算约束与 Arb 区间证书](https://github.com/the-omega-institute/trureturing-books/issues/2195#issuecomment-7240711189) · [从 $x_{30}$ 开始的证书](https://github.com/the-omega-institute/trureturing-books/issues/2176#issuecomment-7240483585) · [从 $x_{36}$ 开始的证书](https://github.com/the-omega-institute/trureturing-books/issues/2154#issuecomment-7240354940) · [从 $x_{42}$ 开始的证书](https://github.com/the-omega-institute/trureturing-books/issues/2131#issuecomment-7240224570)
 
-若只给末三层加上 $0\le u_{105}\le u_{106}\le u_{107}=h$，第 $105$ 层的曝光损失压低两项匹配差，末两层的损失则抬高它们。逐项保留这些符号可排除中心区外的竞争解，中心区内的指数衰减给出严格补偿上界 $10^{-203}h$（$h>0$）。若只给末两层加上 $0\le u_{106}\le u_{107}=h$，该界收紧为 $10^{-226}h$。如果还允许在 $x_8$ 增加斜率，联合质量族的全局最小跨度仍待判定。[末三层的证书](https://github.com/the-omega-institute/trureturing-books/issues/2110#issuecomment-7240043764) · [末两层的精细界](https://github.com/the-omega-institute/trureturing-books/issues/2087#issuecomment-7239777427) · [最重单层比较](https://github.com/the-omega-institute/trureturing-books/issues/2077#issuecomment-7239568050)
+若只给末三层加上 $0\le u_{105}\le u_{106}\le u_{107}=h$，第 $105$ 层的曝光损失压低两项匹配差，末两层的损失则抬高它们。逐项保留这些符号可排除中心区外的竞争解，中心区内的指数衰减给出严格补偿上界 $10^{-203}h$（$h>0$）。若只给末两层加上 $0\le u_{106}\le u_{107}=h$，该界收紧为 $10^{-226}h$。[末三层的证书](https://github.com/the-omega-institute/trureturing-books/issues/2110#issuecomment-7240043764) · [末两层的精细界](https://github.com/the-omega-institute/trureturing-books/issues/2087#issuecomment-7239777427) · [最重单层比较](https://github.com/the-omega-institute/trureturing-books/issues/2077#issuecomment-7239568050)
 
 共同非减质量律保持谱点排序。接下来考察两种改变重谱排序的机制，一种按弱中心奇偶分档，另一种用正一步传递收缩归一化非单调的两步算子。
 
