@@ -141,6 +141,15 @@ The sharp-threshold problem for the eighteen high modes has an attainable minimu
 
 The derivation divides the possible threshold cutoffs into intervals between spectral points. For later cutoffs, the projection along $d=(-325,603,-278)$ alone forces a span above $277$. For earlier cutoffs, a linear combination of the two matching conditions cancels the light-field running. Comparing the gain per unit span at the spectral points identifies a unique pair of points where the slope increases and where the mass reaches the matching scale. Equating the weak and color inverse couplings then fixes that scale. Interval arithmetic checks every cutoff interval. With all masses capped at the Planck scale, the span after raising masses below $M_Z$ to $M_Z$ is less than $40$, so the minimum cannot be reached. [Derivation and Arb interval calculation](https://github.com/the-omega-institute/trureturing-books/issues/1893#issuecomment-7238632061)
 
+**Finite-momentum subtraction, by hand and with interval arithmetic.** The same spectrum admits a positive three-line crossing when the vector, fermion, and scalar smooth kernels are each subtracted at $M_Z$. Write $x_i=\log\lambda_i$ for the ordered log spectral values indexed from zero, and take the mass law
+
+$$
+\log\frac{m(e^x)}{\mu}
+  =s\big((x-x_3)_+-(x_7-x_3)\big).
+$$
+
+The mass is constant up to $x_3$, then rises with positive log slope $s$ and reaches the matching scale at $x_7$. The two independent inverse-coupling differences give matching equations in $s$ and $\log(\mu/M_Z)$. An interval contraction calculation certifies a crossing at $s\approx266.2373$ and $\mu\approx1.19445\times10^{16}\,\mathrm{GeV}$ with common inverse coupling about $8.05855$. The span lies in $(288.4094419,288.4094421)$, giving an upper bound for the span required with finite-momentum subtraction. The global minimum remains open. [Matching equations and Arb interval certificate](https://github.com/the-omega-institute/trureturing-books/issues/1923#issuecomment-7238741174)
+
 These constraints tie the absolute mass scale to the ordering of the heavy spectrum. The next section examines two ways to change that ordering, by splitting the masses according to weak-center parity or by using a positive one-step contraction to normalize a nonmonotone two-step operator.
 
 ## 4.3 Conditional Crossings: Weak-Center Parity Splitting and Positive One-Step Binary Normalization {#sec-ou-ch04-s03}
