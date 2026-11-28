@@ -355,6 +355,8 @@ $F$ 在三个轻中心取零，在两个重中心均取 $5(1+\sqrt5)/4$。傅里
 
 还可以单独检验一对轻中心。若威尔逊标量在这两点同值且梯度相同，动能三阶项之差就是二次型 $H$ 乘余动量 $x$。两步带电频率的三次幂张成十四维空间；四个分量同时满足这一限制，迫使 $H$ 正比于 $\sum_i x_i^2$。再比较置换平均后的四阶项，第三个轻中心也必须取相同质量，遂落入上述等质量障碍。因此，若恰有两个轻中心同质量，任何两步解都必须在这两点具有不同的标量梯度。[两中心的系数推导](https://github.com/the-omega-institute/trureturing-experiments/blob/6c8a495f532db3784728865920b7f1194566f057/experiments/ch39-omega-research/replay/ch39-three-step-fifth-jet.md#coinciding-scalar-first-jets-at-any-pair-of-light-centers)
 
+质量不全相等时，三个轻中心的对数梯度 $d\log(-B)$ 也不能全相同。若它们相同，把每个中心的动能除以该点的正质量后，三阶差便是余动量乘一个二次型。分别对三坐标作交错和、对两对互不相交的坐标作交换投影，两组检验在十维二次型空间中均有秩九，迫使这个二次型正比于欧氏平方范数。此时可以对动能作置换平均；四阶系数对相位的要求与三个轻质量均为正相矛盾。这个限制也适用于三个中心共有同一个非零对数梯度的情形。[对数梯度与轻质量的相位条件](https://github.com/the-omega-institute/trureturing-experiments/blob/b4d8ad6e50863b86bc90688571f46b235f77ad84/experiments/ch39-omega-research/replay/ch39-three-step-fifth-jet.md#common-logarithmic-gradients-at-three-positive-light-masses)
+
 相同的精度也约束最短作用程。在五个中心连续三轻、其余两个重中心的标量色散均为四时，任一有隙的平移不变实标量与克利福德向量核，若配平完整算子，必须有 $12r\ge 2K+7$；只配平标量色散也须有 $24r\ge 2K+10$。沿零和方向 $(2,2,2,-3,-3)$ 绕环面一周会经过所有五个中心。长度 $r$ 限制了沿此方向所见的傅里叶频率，而三轻中心的匹配要求相邻读数的差在两处出现高重数零点，两者给出上述必要界。一般阶数的最短作用程仍待确定。[插值构造、谱隙与五中心下界](https://github.com/the-omega-institute/trureturing-experiments/blob/021220d28b25ffdc2bcbe07f1ad59675b464edcb/experiments/ch39-omega-research/replay/%CE%A9%E5%A4%8D%E7%AE%97%E8%AF%B4%E6%98%8E.md#%E4%B8%89%E4%B8%AA%E8%BD%BB%E9%94%A5%E9%85%8D%E5%B9%B3%E5%88%B0%E4%BB%BB%E6%84%8F%E6%8C%87%E5%AE%9A%E6%9C%89%E9%99%90%E9%98%B6%E9%9C%80%E8%A6%81%E5%A4%9A%E8%BF%9C%E7%9A%84%E4%BD%9C%E7%94%A8)
 
 下表将这四类从球壳通往四维手征三代的显式构造并列成一张清晰的对照账：
