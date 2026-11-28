@@ -217,6 +217,17 @@ For a transposition $s$, the two representatives in $G'$ are $(s,1)$ and $(s,3)$
 
 The parity of the square's index is therefore the same for every choice of representative in a given model. In the direct product, $\sigma\mapsto(\sigma,0)$ preserves ternary transport. In the pullback, once the representative of the identity class has been moved to the identity, the chosen representative of a transposition would have to square to the identity. Its square has odd index. Each model has thirty-six points in six reading classes, with identical readings and quotient transport.
 
+**Swapping quaternion axes can obstruct a section.** Keep $S_3$ as the quotient and take the quaternion group $Q_8$ as the identity class. Let $\alpha$ exchange $\mathbf i$ and $\mathbf j$, sending $\mathbf k=\mathbf i\mathbf j$ to $-\mathbf k$. On the same set of forty-eight points $Q_8\times S_3$, choose $b=1$ or $b=-1$ and define multiplication by
+
+$$
+(a,\sigma)(c,\tau)=
+\bigl(a\,\alpha^{\epsilon(\sigma)}(c)\,b^{\epsilon(\sigma)\epsilon(\tau)},\,\sigma\tau\bigr).
+$$
+
+Swapping $\mathbf i$ and $\mathbf j$ preserves their squares and anticommutation, so $\alpha$ is an automorphism and $\alpha^2=1$. The central element $b$ is fixed by $\alpha$. Under either bracketing of a triple product, the exponents of $\alpha$ add modulo two and the exponent of $b$ records the total carry from adding the three parity bits. This gives associativity. The identity is $(1,e)$. To find an inverse, invert the permutation and solve for the quaternion coordinate. Comparing only the permutation component gives identical readings and quotient transport and the same Gram sum of squares. Both models relax extensional separation.
+
+For a transposition $s$, every lift $(a,s)$ squares to $(a\alpha(a)b,e)$. The factor $a\alpha(a)$ is $1$ for $a=\pm1,\pm\mathbf k$, $\mathbf k$ for $a=\pm\mathbf i$, and $-\mathbf k$ for $a=\pm\mathbf j$. Thus when $b=-1$, no lift squares to the identity, as a transport-preserving section would require after normalization. When $b=1$, exactly four lifts of $s$ square to the identity, and $\sigma\mapsto(1,\sigma)$ gives a multiplication-preserving section. The designated lifts $(1,s)$ act on the identity class by the same $\alpha$ in both models. Even with this action fixed, the readings do not determine whether a section exists.
+
 ## 1.4 Why a Computable Typeclass class OmegaSpace Rather Than an Unchecked axiom {#sec-ch01-typeclass-not-axiom}
 
 When formalizing `AXIOM-Ω` in a proof assistant, the most tempting shortcut is also the deadliest: typing `axiom M : Type`, `axiom triad : M → M → M → M`, and `axiom kappa_refl : ∀ x, kappa x x = 1`. **This monograph bans unchecked `axiom` declarations from the very first line.**

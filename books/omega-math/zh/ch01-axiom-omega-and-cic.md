@@ -217,6 +217,17 @@ $$
 
 因此，选定不同代表时，平方的奇偶性始终相同。直积可用 $\sigma\mapsto(\sigma,0)$ 保持三元迁移。拉回中的任意选法在把单位类代表移到单位元以后，仍须为换位选一个平方为单位元的点，而奇数编号排除了这一点。两个模型各有三十六个点，共有六个读数类，读数和商迁移完全相同。
 
+**互换四元数轴时，换位平方可以阻断截面。** 保持商 $S_3$，取四元数群 $Q_8$ 为单位类，令 $\alpha$ 互换 $\mathbf i,\mathbf j$ 并把 $\mathbf k=\mathbf i\mathbf j$ 送到 $-\mathbf k$。在同一个四十八点集合 $Q_8\times S_3$ 上，分别取 $b=1$ 和 $b=-1$，定义乘法
+
+$$
+(a,\sigma)(c,\tau)=
+\bigl(a\,\alpha^{\epsilon(\sigma)}(c)\,b^{\epsilon(\sigma)\epsilon(\tau)},\,\sigma\tau\bigr).
+$$
+
+互换 $\mathbf i,\mathbf j$ 保留平方与反交换关系，所以 $\alpha$ 是自同构，且 $\alpha^2=1$。中心元素 $b$ 被 $\alpha$ 固定。三因子相乘时，两种括号下 $\alpha$ 的指数都按奇偶位相加，$b$ 的指数都等于三个奇偶位相加的总进位，所以乘法结合。单位元为 $(1,e)$，取逆置换后解四元数坐标即可得到逆元。仍只比较置换分量，两例的读数和商迁移完全相同，格拉姆二次型仍为分组平方和，两例都放宽外延分离。
+
+取换位 $s$，任一提升 $(a,s)$ 的平方为 $(a\alpha(a)b,e)$。对 $a=\pm1,\pm\mathbf k$，因子 $a\alpha(a)$ 等于 $1$。对 $a=\pm\mathbf i$，它等于 $\mathbf k$，对 $a=\pm\mathbf j$，它等于 $-\mathbf k$。因此 $b=-1$ 时没有任何提升平方为单位元，归一化后的保迁移截面便不可能存在。$b=1$ 时恰有四个这样的换位提升，且 $\sigma\mapsto(1,\sigma)$ 直接给出保乘法的截面。两例中 $(1,s)$ 对单位类的共轭都是 $\alpha$。即使固定此作用，读数仍无法判定截面是否存在。
+
 ## 1.4 为什么用可计算类型类 class OmegaSpace 而不是 axiom {#sec-ch01-typeclass-not-axiom}
 
 在交互式定理证明器里写下 `AXIOM-Ω` 时，新手最容易掉进一个看似快捷的陷阱：直接敲下 `axiom M : Type`、`axiom triad : M → M → M → M`、`axiom kappa_refl : ∀ x, kappa x x = 1`。**本书从第一条规则起就彻底禁止这种做法。**
