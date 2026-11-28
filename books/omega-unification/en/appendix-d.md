@@ -1,6 +1,6 @@
 # Appendix D Support Differences and Rank Bounds for Fourier Bases
 
-[Chapter 8 §8.1](ch08-flavor-hierarchy-and-ckm.md#sec-ch08-cyclic-obstruction) relates the minimum rank of a shared state to the cyclic differences of its support. Supports with distinct differences set the dimension threshold for forcing full rank. A subset with repeated differences can yield a tighter upper bound.
+[Chapter 8 §8.1](ch08-flavor-hierarchy-and-ckm.md#sec-ch08-cyclic-obstruction) uses cyclic differences in the support of the first readout to bound the minimum rank of a shared state. It also characterizes when a second readout can force that rank to equal the support size. Difference sets can attain the resulting dimension threshold. A subset with repeated differences can yield a tighter upper bound.
 
 ## Distinct differences and modular Golomb rulers
 

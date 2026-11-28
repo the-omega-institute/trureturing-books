@@ -1,6 +1,6 @@
 # 附录 D Fourier 双基的支撑差集与秩界
 
-[第 8 章 §8.1](ch08-flavor-hierarchy-and-ckm.md#sec-ch08-cyclic-obstruction) 把两套读数的最小共同态秩归结为支撑上的循环差。无碰撞时，差集构造给出强制满秩的维数门槛。若碰撞集中在较小子集，则可以进一步限制秩。
+[第 8 章 §8.1](ch08-flavor-hierarchy-and-ckm.md#sec-ch08-cyclic-obstruction) 用第一读数支撑上的循环差给出最小共同态秩的上界，并刻画何时存在第二读数可强制该秩达到支撑大小。无碰撞支撑的差集构造可以达到相应的维数门槛。若碰撞集中在较小子集，则可以进一步限制秩。
 
 ## 无碰撞支撑与模 Golomb 尺
 
