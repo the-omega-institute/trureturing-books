@@ -188,15 +188,19 @@ The bound is attained group by group. Contract the three types of jets with $H$,
 Write $C_k$ for the cumulative capacity and $W_k$ for the cumulative deficit through group $k$. Summing the group contributions gives
 
 $$
-C_k=\frac34(k+2)(k+3)(k^2+5k+8),\qquad
-W_k=\frac{k(k+1)(3k^3+27k^2+88k+107)}5.
+\begin{aligned}
+C_k&=\frac34(k+2)(k+3)(k^2+5k+8),\\
+W_k&=\frac{k(k+1)(3k^3+27k^2+88k+107)}5.
+\end{aligned}
 $$
 
 The initial values are $C_0=36$ and $W_0=0$, and the increments are $c_k$ and $kc_k$, respectively. For $\ell=C_{k-1}+s$, let $t=s/c_k$ be the fraction occupied in the last group and set $z=(4\ell/3)^{1/4}$. Along odd $\ell$, the exact dimension formula gives
 
 $$
-d_{\min}(\ell)=\frac35 z^5+\frac32\ell+
-\left[-\frac58+\frac32t(1-t)\right]z^3+O(z^2).
+\begin{aligned}
+d_{\min}(\ell)&=\frac35 z^5+\frac32\ell\\
+&\quad+\left[-\frac58+\frac32t(1-t)\right]z^3+O(z^2).
+\end{aligned}
 $$
 
 The expansion follows by linearly interpolating the two polynomials between adjacent filled groups and inverting the capacity. The remainder is uniform in the occupied fraction. The coefficient of $z^3$ tends to $-5/8$ near an empty or filled group and to $-1/4$ near a half-filled group. [Cumulative formulas and uniform expansion](https://github.com/the-omega-institute/trureturing-books/issues/1640#issuecomment-7231398815)
@@ -207,7 +211,7 @@ $$
 c_p^{\mathrm{EOM}}=6\left[\binom{p+3}{2}+\binom{p+2}{2}+\binom{p+1}{2}\right].
 $$
 
-Using these capacities in the least-deficit occupation and parity calculation above gives lower bounds in the quotient. For $\ell=31,35,37$ they are $109,127,136$, respectively. The vanishing below these dimensions also holds after quotienting by integration by parts. Attainment requires a nonzero class in the corresponding quotient. [Elimination of time derivatives and the lower bound](https://github.com/the-omega-institute/trureturing-books/issues/1641)
+Using these capacities in the least-deficit off-shell occupation and parity calculation gives lower bounds in the quotient. For $\ell=31,35,37$ they are $109,127,136$, respectively. The vanishing below these dimensions also holds after quotienting by integration by parts. Attainment requires a nonzero class in the corresponding quotient. [Elimination of time derivatives and the lower bound](https://github.com/the-omega-institute/trureturing-books/issues/1641)
 
 ## 9.3 Shell-Triality Algebra Closure, Discrete Anomaly Inflow, and the 25-State Lifted Shell {#sec-ch09-algebra-inflow}
 

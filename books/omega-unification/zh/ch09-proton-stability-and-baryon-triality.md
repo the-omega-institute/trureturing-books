@@ -188,15 +188,19 @@ $$
 记第 $k$ 档填满后的累计容量和缺额为 $C_k$ 与 $W_k$。直接求和得到
 
 $$
-C_k=\frac34(k+2)(k+3)(k^2+5k+8),\qquad
-W_k=\frac{k(k+1)(3k^3+27k^2+88k+107)}5.
+\begin{aligned}
+C_k&=\frac34(k+2)(k+3)(k^2+5k+8),\\
+W_k&=\frac{k(k+1)(3k^3+27k^2+88k+107)}5.
+\end{aligned}
 $$
 
 两式由初值 $C_0=36$、$W_0=0$ 与增量 $c_k$、$kc_k$ 决定。若 $\ell=C_{k-1}+s$，设末档占用比例 $t=s/c_k$，并记 $z=(4\ell/3)^{1/4}$。在奇数 $\ell$ 上，精确维数公式给出
 
 $$
-d_{\min}(\ell)=\frac35 z^5+\frac32\ell+
-\left[-\frac58+\frac32t(1-t)\right]z^3+O(z^2).
+\begin{aligned}
+d_{\min}(\ell)&=\frac35 z^5+\frac32\ell\\
+&\quad+\left[-\frac58+\frac32t(1-t)\right]z^3+O(z^2).
+\end{aligned}
 $$
 
 将满档多项式在相邻档之间作线性插值，再反解容量即可得到这个展开。余项对全部末档比例一致。接近空档或满档时，$z^3$ 项的系数趋于 $-5/8$。接近半满时，系数趋于 $-1/4$。 [累计式与均匀展开](https://github.com/the-omega-institute/trureturing-books/issues/1640#issuecomment-7231398815)
@@ -207,7 +211,7 @@ $$
 c_p^{\mathrm{EOM}}=6\left[\binom{p+3}{2}+\binom{p+2}{2}+\binom{p+1}{2}\right].
 $$
 
-将这些容量代入上一段的低缺额填充与维数奇偶计算，只得到商中的下界。对 $\ell=31,35,37$ 分别得到 $109,127,136$。再按分部积分取商仍保留这些消失界。达到性需要构造相应商中的非零类。[时间导数消去与下界](https://github.com/the-omega-institute/trureturing-books/issues/1641)
+将这些容量代入离壳计数的低缺额填充与维数奇偶计算，只得到商中的下界。对 $\ell=31,35,37$ 分别得到 $109,127,136$。再按分部积分取商仍保留这些消失界。达到性需要构造相应商中的非零类。[时间导数消去与下界](https://github.com/the-omega-institute/trureturing-books/issues/1641)
 
 ## 9.3 壳三重代数闭合、离散反常流入与二十五态提升球壳 {#sec-ch09-algebra-inflow}
 
