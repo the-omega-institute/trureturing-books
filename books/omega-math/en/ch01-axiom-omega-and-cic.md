@@ -228,6 +228,16 @@ The first coordinate records two carries, one from the rotation index and one fr
 
 Every representative of a transposition has square indexed by $\alpha$ in the identity class. The cube of a representative $(k,1,0)$ of the cycle $(123)$ has index $\beta+3k$, so its residue modulo $3$ is always $\beta\bmod 3$. If $\alpha\ne0$ or $\beta\bmod3\ne0$, some required power cannot be the identity for any choice of representative. When $\alpha=\beta=0$, the choice $(i,j)\mapsto(0,i,j)$ preserves multiplication and hence ternary transport. Choosing $\alpha$ and $\beta$ independently gives all four patterns of vanishing and nonvanishing obstructions.
 
+**Representatives with the right powers still have to satisfy a relation together.** Give each reading class eight points and take the identity class to be the quaternion group $Q_8=\{\pm1,\pm\mathbf i,\pm\mathbf j,\pm\mathbf k\}$. Let $A_\sigma$ permute the three axis units by $\sigma$ and reverse all three signs for odd permutations. These transformations preserve quaternion multiplication. Write $\epsilon(\sigma)$ for the parity bit and choose a central sign $b=\pm1$. Define multiplication on $Q_8\times S_3$ by
+$$
+(a,\sigma)(c,\tau)=\bigl(aA_\sigma(c)b^{\epsilon(\sigma)\epsilon(\tau)},\sigma\tau\bigr).
+$$
+The exponent of the central factor is the carry when adding parity bits. The total carry for three factors is independent of the bracketing, so both signs give groups. Comparing just the second coordinate yields the same positive semidefinite reading matrix and the same noncommutative quotient transport.
+
+Take $r=(123)$ and $s=(12)$, and write $u=(1,r)$ and $t=(1,s)$. The cube $(au)^3=aA_r(a)A_r^2(a)$ equals $1$ precisely for $a=1,-\mathbf i,-\mathbf j,-\mathbf k$. The square is $(at)^2=aA_s(a)b$. Here $aA_s(a)$ equals $1$ for $a=\pm1,\pm\mathbf k$ and is one of $\pm\mathbf k$ for the other four choices. So $b=-1$ gives zero involutive lifts and $b=1$ gives four. For the standard lift $u$, the relation $tut^{-1}=u^{-1}$ gives $(at)u(at)^{-1}=u^{-1}$ precisely when $A_r(a)=a$, or $a=\pm1$. For example, $u$ and $\mathbf k t$ each have the required order when $b=1$. The pair fails the inversion relation.
+
+All four order-three lifts are conjugates of $u$ by elements of $Q_8$. Thus for $b=1$ each one is inverted by exactly two involutive lifts of $s$. The two power relations and the inversion relation present $S_3$, so this gives eight unital sections. The case $b=-1$ has zero. [Derivation and finite replay of the inversion pairings](https://github.com/the-omega-institute/trureturing-books/issues/1952#issuecomment-7242333010)
+
 ## 1.4 Why a Computable Typeclass class OmegaSpace Rather Than an Unchecked axiom {#sec-ch01-typeclass-not-axiom}
 
 When formalizing `AXIOM-Ω` in a proof assistant, the most tempting shortcut is also the deadliest: typing `axiom M : Type`, `axiom triad : M → M → M → M`, and `axiom kappa_refl : ∀ x, kappa x x = 1`. **This monograph bans unchecked `axiom` declarations from the very first line.**

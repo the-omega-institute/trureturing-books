@@ -228,6 +228,16 @@ $$
 
 每个换位代表的平方在单位类中的编号都是 $\alpha$。三循环 $(123)$ 的代表 $(k,1,0)$ 的立方编号为 $\beta+3k$，所以其模 $3$ 的类总为 $\beta\bmod 3$。若 $\alpha\ne0$ 或 $\beta\bmod3\ne0$，就无法同时选到平方和立方为单位元的代表。当 $\alpha=\beta=0$ 时，$(i,j)\mapsto(0,i,j)$ 保持乘法，也就保持三元迁移。独立选择 $\alpha$ 与 $\beta$，可以让两个障碍都消失、仅出现一个，或同时出现。
 
+**平方和立方都合格的代表，还要彼此配合。** 让每个读数类有八个点，取单位类为四元数群 $Q_8=\{\pm1,\pm\mathbf i,\pm\mathbf j,\pm\mathbf k\}$。令 $A_\sigma$ 按 $\sigma$ 置换三个轴单位，奇置换再把三个符号都翻转。这些变换保持四元数乘法。以 $\epsilon(\sigma)$ 记奇偶位，取中心符号 $b=\pm1$，在 $Q_8\times S_3$ 上定义
+$$
+(a,\sigma)(c,\tau)=\bigl(aA_\sigma(c)b^{\epsilon(\sigma)\epsilon(\tau)},\sigma\tau\bigr).
+$$
+中心因子的指数是奇偶位相加时的进位，三因子相乘的总进位与括号无关。故两种符号都给出群。只比较第二坐标，仍得到同一个半正定读数矩阵与同一种非交换商迁移。
+
+取 $r=(123)$、$s=(12)$，写 $u=(1,r)$、$t=(1,s)$。$(au)^3=aA_r(a)A_r^2(a)$ 恰在 $a=1,-\mathbf i,-\mathbf j,-\mathbf k$ 时为 $1$。$(at)^2=aA_s(a)b$，其中 $aA_s(a)$ 在 $a=\pm1,\pm\mathbf k$ 时为 $1$，其余取 $\pm\mathbf k$。所以 $b=-1$ 时无二阶提升，$b=1$ 时有四个。对标准代表 $u$，由 $tut^{-1}=u^{-1}$ 可知 $(at)u(at)^{-1}=u^{-1}$ 恰在 $A_r(a)=a$ 时成立，也就是 $a=\pm1$。例如 $b=1$ 时，$u$ 和 $\mathbf k t$ 各自具有所需阶数，这一对代表不满足反演关系。
+
+四个三阶提升都由 $Q_8$ 中的元素共轭 $u$ 得到。因而在 $b=1$ 时，每个三阶提升也恰好有两个反演它的二阶提升。$S_3$ 的生成关系要求的正是这两个幂次条件和反演条件，所以有八个保单位截面。当 $b=-1$ 时一个也没有。[反演配对的推导与有限复算](https://github.com/the-omega-institute/trureturing-books/issues/1952#issuecomment-7242333010)
+
 ## 1.4 为什么用可计算类型类 class OmegaSpace 而不是 axiom {#sec-ch01-typeclass-not-axiom}
 
 在交互式定理证明器里写下 `AXIOM-Ω` 时，新手最容易掉进一个看似快捷的陷阱：直接敲下 `axiom M : Type`、`axiom triad : M → M → M → M`、`axiom kappa_refl : ∀ x, kappa x x = 1`。**本书从第一条规则起就彻底禁止这种做法。**
