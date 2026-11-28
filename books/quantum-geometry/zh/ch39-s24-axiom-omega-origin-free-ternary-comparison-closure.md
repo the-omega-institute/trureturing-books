@@ -164,6 +164,16 @@
 6. **读数完备**：对 $M$ 中每个序列 $(x_n)_{n \in \mathbb{N}}$，若对每个 $\varepsilon > 0$ 存在 $N \in \mathbb{N}$ 使一切 $m, n \ge N$ 有 $\kappa(x_m, x_n) > 1 - \varepsilon$，则存在 $a \in M$，使对每个 $\varepsilon > 0$ 存在 $N \in \mathbb{N}$ 使一切 $n \ge N$ 有 $\kappa(x_n, a) > 1 - \varepsilon$。
 :::
 
+::: {.example #ex-ch39-s3-trace-order title="两次反射换序，读数改变多少？"}
+给等边三角形的顶点标上 $1,2,3$，用 $\rho(u)$ 表示对称 $u\in S_3$ 在三角形平面上的正交矩阵。取三元迁移 $[a,b,c]=ab^{-1}c$，并用
+$$
+\kappa(u,v)=\tfrac12+\tfrac14\operatorname{tr}(\rho(u)^{\mathsf T}\rho(v))
+$$
+比较两种对称。迹项是两个矩阵的弗罗贝尼乌斯内积，同时左乘或右乘同一个正交矩阵都保持它。把常数坐标 $1/\sqrt 2$ 接在矩阵 $\rho(u)/2$ 的四个坐标前就得到这组读数的格拉姆表示。相对变换 $u^{-1}v$ 若为恒等、反射或非平凡旋转，其迹分别为 $2,0,-1$，相应读数为 $1,1/2,1/4$。
+
+取交换顶点的两次反射 $g=(12)$、$h=(23)$，约定从右往左施行置换。于是 $gh=(123)$ 把顶点 $1$ 送到 $2$，$hg=(132)$ 把它送到 $3$。两种结果对恒等变换的读数同为 $1/4$。将结果彼此比较，$(gh)^{-1}(hg)=(123)$，故 $\kappa(gh,hg)=1/4$，与自身比较的读数 $1$ 相差 $3/4$。换序所得的两个状态因此可以由读数区分。这个有限例子的最小读数是 $1/4$，严格高于下一个定义所要求的下确界 $0$。[迹核的分数复算](https://github.com/the-omega-institute/trureturing/issues/35300#issuecomment-7243228852)
+:::
+
 ::: {.definition #def-ch39-axiom-omega-ternary-comparison-closure title="无源保正三元比较闭合母公理（AXIOM-Ω）与一生四相退化谱系（模型定义）"}
 设 $\mathcal{M}$ 为经 `H1` 外延商化的非空集合，$(\mathcal{M}, [-, -, -], \kappa)$ 为其上的三元比较结构（[@def-ch39-ternary-comparison-structure]；其公理即法则 (I) 无源消去与结合律，以及法则 (II) 中的对称、外延分离、读数非负、双侧迁移不变与格拉姆半正定（`H2`））。称它满足**大一统母公理 $\mathrm{AXIOM}\text{-}\Omega$**（`MODEL`），若它触零（法则 (II) 的 $\inf\kappa = 0$）、链连通、读数完备，且满足法则 (III)：它非交换，且其特征秩——使读数可由某个 $\varphi : \mathcal{M} \to \mathbb{R}^r$ 实现的最小 $r \in \mathbb{N}$，不存在这样的 $r$ 时为 $\infty$——等于全体非交换、触零且链连通的三元比较结构的特征秩的最小值。在此母公理下，现行科学核心框架按五类受控投影或组合极限统一收回：(1) 钉死特权原点 $o = \mathbf{1}$ 作线性再投影收回 $\mathbb{H}, \mathbb{O}, \mathcal{H}_{2^N}$；(2) 丢弃二阶矢高 $1 - \cos\epsilon$ 收回线性微积分，保留半密度矢高（配 `H6, H9`）收回薛定谔与伊藤微积分；(3) 平行场丛驻相极值分化出胞内三大规范力与胞间主频引力；(4) 嘉当三形式整绕数 $\frac{1}{2\pi^2}\int f^*\eta \in \pi_3(\mathbb{T}_3) \cong \mathbb{Z}$ 量子化出整数拓扑荷；(5) 流群自平行接力配 $\varepsilon_{\mathrm{self}}$ 早停构成三元数场智能架构。
 :::
