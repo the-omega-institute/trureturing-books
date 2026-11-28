@@ -172,6 +172,10 @@ At $t=2/5$, the exact Cayley step is $P=(21+20i)/29$. Use the largest coordinate
 For the product target $P^2=(41+840i)/841$, the least possible maximum coordinate error is $1/841$. The unique unordered pair attaining it is $z=(5+5i)/7$ and $w=(11+10i)/15$. Their product is $1/21+i$, with signed coordinate errors $(-20/17661,1/841)$ and squared-norm defect $\bigl\lvert\lvert zw\rvert^2-1\bigr\rvert=1/441$.
 
 The endpoint follows by an integer calculation. Write each factor as $(a+bi)/d$ with $1\le d\le28$, $\gcd(a,b,d)=1$, $493d\le725a\le557d$, and $468d\le725b\le532d$. Write the product over the denominator $D=df$ as $(X+Yi)/D$. An imaginary error at most $1/841$ requires $0\le D-Y\le2D/841<2$ since $D\le784$. Of the unordered pairs formed from the 51 factors, 29 have $D-Y=0$, and 15 have $D-Y=1$ with $2D\ge841$. Only the displayed pair also meets the real condition $\lvert841X-41D\rvert\le D$. Its imaginary error equals $1/841$, which rules out every smaller tolerance. [Exact arithmetic replay](https://github.com/the-omega-institute/trureturing-books/issues/1964#issuecomment-7243255979)
+
+If both steps use the same factor, the minimum maximum-coordinate error of $z^2$ rises to $E=1851/142129$, attained only by $z=(19+18i)/26$. Its square is $(37+684i)/676$, with signed coordinate errors $(3401/568516,1851/142129)$ and squared-norm defect $12249/456976$.
+
+The real coordinate of the square is $(a+b)(a-b)/d^2$. With real error at most $E$, that coordinate is positive and at most $8780/142129$. Since $a+b\ge961d/725$ and $d\le28$, this forces $a-b=1$ and $d\ge22$. For the remaining denominators, only the squares of $(16+15i)/22$ and $(19+18i)/26$ meet the imaginary tolerance. The latter also meets the real tolerance and has imaginary error exactly $E$. [Exact arithmetic replay](https://github.com/the-omega-institute/trureturing-books/issues/1964#issuecomment-7243405631)
 :::
 
 ::: {.example #ex-ch08-cayley-half-truncation title="Truncation error table at $\eta = 1/2$ mapping to $(3/5, 4/5)$"}
