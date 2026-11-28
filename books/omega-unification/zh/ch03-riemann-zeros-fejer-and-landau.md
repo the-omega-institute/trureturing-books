@@ -180,7 +180,18 @@ $$
 
 横向积分把 $\log\zeta$ 在零点左侧的割线跳跃变为与 $\beta-\sigma$ 成正比。分别移过两种指数相位，再取实部对应的半和，割线就给出上式的双曲余弦权重。水平边界由局部对数导数控制在 $O_\lambda(L)$，上界取右极限。非共振使素幂多项式的相位积分也在这一预算内。[Korolev，引理 4 前的截断权](https://www.mathnet.ru/links/2bb06e5a975dd807fe74eae4c1f9fd1f/im2766_eng.pdf#page=9) · [割线推导与复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239342305)
 
-在 $a=0$ 时，零点和经同高反射还原 $C_\lambda(T)$，只差归一化系数和有界的低高度项。增大 $a$ 会把每个右侧零点的权重改成 $\cosh(\lambda(\delta_\rho-a)_+)-1$，其中 $v_+=\max(v,0)$。将该权重的导数与 Selberg 密度界配对，右侧余项至多为 $O_\lambda((T/L)e^{-aL/4}+L)$。取 $a=1/L$ 只降低密度估计中的常数，合成谱上窄带与右侧余项均可达到 $T/L$ 量级。取 $a=8\log L/L$ 时，右侧上界降到 $O_\lambda(T/L^3+L)$。因此若要在 $T/L$ 尺度上取得严格改善，只需研究横向窄带 $1/2\le\sigma\le1/2+8\log L/L$ 内的同频积分。[Simonič，式 (3)，引 Selberg 密度界](https://arxiv.org/pdf/1910.08274v2#page=1)
+在 $a=0$ 时，零点和经同高反射还原 $C_\lambda(T)$，只差归一化系数和有界的低高度项。增大 $a$ 会把每个右侧零点的权重改成 $\cosh(\lambda(\delta_\rho-a)_+)-1$，其中 $v_+=\max(v,0)$。将该权重的导数与 Selberg 密度界配对，右侧余项至多为 $O_\lambda((T/L)e^{-aL/4}+L)$。取 $a=1/L$ 只降低密度估计中的常数，合成谱上窄带与右侧余项均可达到 $T/L$ 量级。取 $a=8\log L/L$ 时，右侧上界降到 $O_\lambda(T/L^3+L)$。在这一宽度下，窄带的同频积分由偏移的二次矩决定。具体地，令 $D_\lambda(u,T)=\sum_{0<\gamma\le T,\,\delta_\rho>u}e^{i\lambda\gamma}$，按重数计并纳入高度上端点。相减两个横向积分的割线公式，再以 $\cosh(\lambda d)-1=\lambda^2 d^2/2+O_\lambda(d^4)$ 展开，得到以下手工推导（`ARGUED`）。
+
+$$
+\int_3^T e^{i\lambda t}\int_{1/2}^{1/2+a}\log|\zeta(\sigma+it)|\,d\sigma\,dt
+=\pi\sum_{\substack{0<\gamma\le T\\\delta_\rho>0}}\delta_\rho^2 e^{i\lambda\gamma}
++O_\lambda(T/L^3+L),
+\qquad a=8\log L/L.
+$$
+
+这里 $\sum_{\delta_\rho>0,\,0<\gamma\le T}\delta_\rho^4=O(T/L^3)$ 来自同一个 Selberg 密度界，固定素幂多项式的同频积分为 $O_\lambda(1)$。[Simonič，式 (3)，引 Selberg 密度界](https://arxiv.org/pdf/1910.08274v2#page=1)
+
+二次矩等于 $2\int_0^{1/2}uD_\lambda(u,T)\,du$。若在 $0<u\le a$ 内只有一致界 $D_\lambda(u,T)=O_\lambda(T)$，分层积分给出 $O_\lambda(T(\log L)^2/L^2)$。双对数因子可以达到。每个相位周期只在末端放一对偏轴零点，偏移为 $\pm 4\log\log t/\log t$，其中 $t$ 是周期末端。这样的点数和偏移符合密度界，两枚临界线点的微移可精确抵消这对零点给带权和增加的部分。由此可同时保留光滑计数（误差 $O_\lambda(1)$）和同频带权端点首项（误差 $O_\lambda(1)$），而模型的二次矩仍为 $(8\lambda/\pi+o(1))T(\log L)^2/L^2$。要把实际 $\zeta$ 的窄带积分控制到 $O_\lambda(T/L^2)$，需要对二次矩取得同阶估计。[构造、端点与数值复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7240157206)
 
 对实际 $\zeta$ 零点，保留实部权重时，无须用 RH 作为解析输入也可在高度平均下读出端点项。令 $S(t)$ 为黎曼–冯·曼戈尔特公式中的辐角项，即离开零点高度时 $N(t)=1+\vartheta(t)/\pi+S(t)$，其中 $\vartheta$ 是黎曼–西格尔 $\vartheta$ 函数。从带权和中扣除光滑端点项
 
