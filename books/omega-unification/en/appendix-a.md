@@ -2,7 +2,7 @@
 
 This appendix indexes the upstream research and computational-replay archive [`experiments/ch39-omega-research/`](https://github.com/the-omega-institute/trureturing-experiments/tree/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research) inside [`the-omega-institute/trureturing-experiments`](https://github.com/the-omega-institute/trureturing-experiments) at the pinned monograph snapshot `ba0ac9539cdb641744054bf3a0398494f4cba1c8`.
 
-The four sections below document the top-level archive layout, supporting data artifacts, and ten core thematic dossiers; walk through the algebraic identities and theorems of the standalone Lean 4 integer-compression file `replay/ShellProjection.lean`; catalog 34 representative Python / `python-flint` (Arb) / SymPy replay scripts across Chapters 1–15 with permanent links; and specify the local dependency stack, audit discipline, and exact verification commands. For live build-generated statistics of `trureturing@dev` frozen declarations cited in this monograph, see [Appendix B §B.4](appendix-b.md#sec-ou-appb-live-stats).
+The five sections below document the top-level archive layout, supporting data artifacts, and ten core thematic dossiers; walk through the algebraic identities and theorems of the standalone Lean 4 integer-compression file `replay/ShellProjection.lean`; catalog 34 representative Python / `python-flint` (Arb) / SymPy replay scripts across Chapters 1–15 with permanent links; specify the local dependency stack, audit discipline, and exact verification commands; and derive the edge-bundle counts at the critical chord length. For live build-generated statistics of `trureturing@dev` frozen declarations cited in this monograph, see [Appendix B §B.4](appendix-b.md#sec-ou-appb-live-stats).
 
 ## A.1 Upstream Research and Replay Repository Architecture {#sec-ou-appa-repo-layout}
 
@@ -137,5 +137,13 @@ python3 ch39-three-clock-minimal-memory.py
 # 5. Replay the standalone Lean 4 integer compression certificate on the squared-radius-17 nine-point shell
 lean +leanprover/lean4:v4.35.0 ShellProjection.lean
 ```
+
+## A.5 Counting Edge Bundles at the Critical Chord Length {#sec-ou-appa-clock-bundle-count}
+
+Use the critical-chord model in §2.1 with $D=724$. Choose vertex phases to preserve as many original edge transports as possible. [Chapter 2](ch02-quaternion-clocks-and-haar-zeros.md#sec-ou-2-1)
+
+First absorb the long-edge clock shift $\beta$ at the three inner sites to make all six uneditable long-edge labels zero, then contract those edges to obtain thirteen components. Take zero additional phase at each component as the baseline. This gauge leaves $93$ identically zero labels, $36$ labels of the form $\pm\beta$, and $6$ of the form $\pm\delta$. Between the three main components, a nonzero label can at most tie the zero label's multiplicity, even when angle labels coincide, except when both residual angles are half turns. When $\beta\ne0$, only three of the remaining component pairs can each save one change. Each has its own two-edge path whose labels strictly favor zero on both edges. These paths share no edges. A relative phase that saves one edge costs at least one changed edge on the corresponding path, so the count cannot improve.
+
+At the double half turn, every label is $0$ or $\pi$. If the ten singleton components do not all share a phase, the complete graph of zero labels among them loses at least nine edges. Each of the three pairs of main components has six parallel edges, two labeled $0$ and four labeled $\pi$. The three bundles therefore require at least six changes in total, and each of the nine main-to-singleton bundles with two zero labels and the eighteen with one zero label costs at least one. The total is at least $42$. If the ten singletons agree, take their common phase as zero. A main component with phase $0$, $\pi$, or any other angle costs $10$, $12$, or $22$ changes to the singletons, respectively. Any other angle brings the total to at least $48$. If $r$ of the three main components have phase $\pi$, the total is $30+2r+12-2r(3-r)$, with minimum $40$ at $r=1$.
 
 For the controlled glossary, six-tier epistemic evidence stratification, full visual media map, and live build-generated `trureturing@dev` verification statistics, proceed to [Appendix B](appendix-b.md).

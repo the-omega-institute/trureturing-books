@@ -157,7 +157,7 @@ $$
 
 正性使支撑外的行列消失。将第二读数作离散 Fourier 逆变换，每个循环差只读到该差上的矩阵元之和。相反的两个差给出一对共轭复数，偶数维时自逆的差单独给出一个实数，共至多 $m$ 条实条件。连同 $k$ 个对角元，在秩 $r$ 的像空间内若 $r^2>k+m$，就有非零厄米扰动同时保持两读数。将它加到原态，沿该方向移动到半正定锥的边界，秩下降而读数不变。若全部非零有向差互异，均匀第二读数使每个非对角元单独为零，故唯一的共同态秩为 $k$。
 
-四维全支撑时 $k=4$、$m=3$，所以每套可达读数都能由秩至多二的共同态实现。上面的指定读数例子确能强制秩二。[附录 D](appendix-d.md) 给出满支撑秩的差集门槛，以及由子支撑收紧的秩界。
+四维全支撑时 $k=4$、$m=3$，所以每套可达读数都能由秩至多二的共同态实现。上面的指定读数例子确能强制秩二。[附录 D](appendix-d.md) 给出满支撑秩的差集门槛，以及由子支撑收紧的秩界。三点支撑若有重复差，还可用三条边的长度直接求出纯态到均匀 Fourier 读数的最近距离，见[附录 D.3](appendix-d.md#sec-ou-appd-three-site-radius)。
 
 在第 $2\,306\,888\,100\,085$ 枚正零点，把四个算术 Gram 源的正交化方向依次放在极点与三条射线的首站，用后三个原始源张成的空间代表三代。把荷 $-4,2$ 的壳算子分别压缩到这个空间，作为上型、下型左手夸克的质量平方矩阵。一步传播保留共同的反酉对称，Jarlskog 不变量 $J=0$。走两步再投影，多出了中途离开三代空间又返回的路径，给出 $J\simeq3.00189\times10^{-4}$。产生 CP 破坏后，还要同时解释夸克质量与顶底混合。在 $1\,\mathrm{TeV}$ 六个夸克汤川耦合各自的 $1\sigma$ 区间内，即使上下两部门各自任取十九个非负谱值，所得 $|V_{tb}|$ 也只能小于 $0.9936401$ 或大于 $0.99915018$，同尺度参考窗落在两者之间。若允许壳上的读数取负而压缩后的质量平方保持正定，两荷共用一个至多十一次的实多项式就能重现任意给定的六个正夸克质量与 CKM 矩阵。这个自由度使多项式的系数也成为统一模型必须解释的量。[两步传播](https://github.com/the-omega-institute/trureturing-experiments/blob/b0f5a77f57448869a358fdfb61c96dad5aa3f039/experiments/ch39-omega-research/replay/ch39-three-gram-source-flavor.py) · [非负谱的混合限制](https://github.com/the-omega-institute/trureturing-experiments/blob/b0f5a77f57448869a358fdfb61c96dad5aa3f039/experiments/ch39-omega-research/replay/ch39-three-source-positive-ckm.py) · [有符号多项式构造](https://github.com/the-omega-institute/trureturing-experiments/blob/b0f5a77f57448869a358fdfb61c96dad5aa3f039/experiments/ch39-omega-research/replay/ch39-signed-three-source-quark-pair.py) · [参考输入表 2](https://arxiv.org/html/2510.01312v2#Sx1.T2)
 

@@ -84,11 +84,25 @@ $$
 映射 $\rho\mapsto1-\bar\rho$ 保持高度与重数，并把实部偏移反号。将原求和与反射重排后的求和取平均，指数展开的一次项相消，剩下的二阶余项给出上界。完整证明由 Lean 内核检查。
 :::
 
-这个有限高度界把误差归结为零点到临界线的加权距离。要控制随高度增长的频率，还需对不同距离的零点数给出一致估计。 [Ford–Zaharescu，引理 2 与式 (3.8)](https://arxiv.org/abs/math/0405459v2)
+::: {.theorem #thm-ou-ch07-zeta-density-transfer title="由右半条带计数控制纵坐标和" lean="D5/S3/Weil/ZeroData/ZetaOrdinateDensityTransfer.actual_reflection_bound_of_exponential_tail"}
+沿用上面的零点和重数。设 $r>0$，对每个 $t>0$，在 $0<\gamma\le T$ 的零点中，满足 $\beta\ge1/2+t$ 的带重数计数至多为 $Ae^{-rt}$。若实频率 $v$ 满足 $|v|\le r/4$，则
 
-**随高度缩小的阈值（`ARGUED`）。** 令 $L=\log T$。若 $\varepsilon(T)\to0$ 且 $\varepsilon(T)\sqrt L\to\infty$，那么在模型的五种荷中，每种荷的近盲零点比例均为 $C_q\varepsilon(T)^2+o(\varepsilon(T)^2)$，仍按重数计数。证明取 $J=\lfloor cL/\log L\rfloor$，其中 $c>0$ 充分小。双钟频率的显式下界控制接近零频率时的误差。Ford–Meng–Zaharescu 的引理 1–2 随即把每个 $0<\|m\|_\infty\le J$ 的标准化零点傅里叶和控制在 $O(L^{-1}+\|m\|_\infty^2L^{-2})$，无需假定黎曼猜想。[零点和估计](https://arxiv.org/abs/1511.06814v2) · [联合极限的推导](https://github.com/the-omega-institute/trureturing/issues/35082#issuecomment-7232072134)
+$$
+\left|\sum_{0<\gamma\le T}m_\rho e^{v(\rho-1/2)}
+      -\sum_{0<\gamma\le T}m_\rho e^{iv\gamma}\right|
+\le 64A(v/r)^2.
+$$
+:::
 
-在每个盲点取尺度为 $\varepsilon$ 的光滑内外逼近，夹住由边界振幅雅可比决定的局部椭圆。其傅里叶系数的绝对和为 $O(1)$，二阶绝对矩为 $O(\varepsilon^{-2})$，超过 $J$ 的绝对尾和为 $O((\varepsilon J)^{-4})$。因此采样与环面平均之差为 $O(L^{-1}+\varepsilon^{-2}L^{-2}+(\varepsilon J)^{-4})=o(\varepsilon^2)$。让内外逼近的面积趋于同一椭圆面积即可恢复同一个 $C_q$。 [Lean 中的绝对尾界](lean:D5/S3/Fourier/Asymptotics/PlanarFourierTail.lattice_fourier_tail)
+::: proof
+同高反射把左尾的计数化为右尾计数。记 $D=|\beta-1/2|$。沿距离积分，得到 $e^{rD/2}-1$ 的带重数总和至多为 $2A$。指数级数给出 $D^2e^{|v|D}\le(32/r^2)(e^{rD/2}-1)$，代回反射定理即得上界。完整证明由 Lean 内核检查。
+:::
+
+取 $L=\log T$。Selberg 的零点密度界给出 $r=L/4$ 和 $A=O(TL)$。将这两个参数代入传递定理，在 $|v|\le L/16$ 内得到 $O(Tv^2/L)$ 的误差。 [Ford–Zaharescu，引理 2](https://arxiv.org/abs/math/0405459v2)
+
+**随高度缩小的阈值（`ARGUED`）。** 若 $\varepsilon(T)\to0$ 且 $\varepsilon(T)\sqrt L\to\infty$，那么在模型的五种荷中，每种荷的近盲零点比例均为 $C_q\varepsilon(T)^2+o(\varepsilon(T)^2)$，仍按重数计数。取 $J=\lfloor L/[128(1+\pi+\log1734)]\rfloor$。对 $0<\|m\|_\infty\le J$，双钟频率 $v=m_1a+m_2b$ 满足 $(128T^{1/4})^{-1}\le |v|\le L/16$。在 Ford–Meng–Zaharescu 引理 1 中取 $x=e^{|v|}$，最近素数幂主项除以 $\sqrt{x}$ 后为 $O(T)$。其余项为 $O(T^{1/32}L^2+T^{1/4}L)=o(T)$。负频率的纵坐标和是正频率的复共轭。结合上述传递界和 $N(T)\asymp TL$，标准化纵坐标和为 $O(L^{-1}+\|m\|_\infty^2L^{-2})$。 [零点和估计](https://arxiv.org/abs/1511.06814v2) · [频率截断与归一化](https://github.com/the-omega-institute/trureturing/issues/35082#issuecomment-7236017586)
+
+在每个盲点取尺度为 $\varepsilon$ 的光滑内外逼近，夹住由边界振幅雅可比决定的局部椭圆。对每个固定的光滑测试函数作二维缩放，再沿最大频率分量对应的坐标分部积分，可得 $|\widehat f_\varepsilon(m)|\le K\varepsilon^2(1+\varepsilon\|m\|_\infty)^{-8}$，其中 $K$ 取决于测试函数。按格点壳层求和，绝对和为 $O(1)$，二阶绝对矩为 $O(\varepsilon^{-2})$，超过 $J$ 的绝对尾和为 $O((\varepsilon J)^{-4})$。因此采样与环面平均之差为 $O(L^{-1}+\varepsilon^{-2}L^{-2}+(\varepsilon J)^{-4})=o(\varepsilon^2)$。让内外逼近的面积趋于同一椭圆面积即可恢复同一个 $C_q$。 [Lean 中的绝对尾界](lean:D5/S3/Fourier/Asymptotics/PlanarFourierTail.lattice_fourier_tail)
 
 固定荷与钟角，轻线随辐边软化能移动多远？写 $H_k(\delta)=H_k(0)-\delta K_k$。三条单位辐边构成一个星图。在极点与三叶均匀单位向量的基下，平凡特征标上的星图块为 $\left(\begin{smallmatrix}3&-\sqrt3\\-\sqrt3&1\end{smallmatrix}\right)$。两个非平凡叶模式在极点相消，各自的本征值为 $1$。其余方向上的星图作用为零，故 $K_k$ 的谱宽依次为 $w_k=4,1,1$。[软化权重的定义](https://github.com/the-omega-institute/trureturing-experiments/blob/cb58c8e64ecea67184e0c1d68a690be098a7a384/experiments/ch39-omega-research/replay/ch39-three-ray-chiral-boundary.py#L34)
 
@@ -118,11 +132,13 @@ $$
 
 若同一个三站轨道有两站失效，余下十六站在整个共同双钟环面和允许的软化区间内仍能还原五个输入。在每个背景上，五个完整轨道都能分别还原至少两个循环特征的输入。扣除这两部分的贡献后，受损轨道的幸存站以模为 $1/\sqrt3$ 的系数读到余下一个特征。无论哪个轨道受损、哪一站幸存，最小奇异值都大于 $5\times10^{-11}$。若该轨道还保留第二站，十七站也有同一下界。[轨道缺站时的证明与误差界](https://github.com/the-omega-institute/trureturing-experiments/blob/c27504b38d60383f43ee456154edc1f09a9db377/experiments/ch39-omega-research/replay/ch39-five-charge-orbit-erasure.md)
 
+**任意两普通站缺失（`CERT`）。** 两个失效站分属不同轨道时，整体循环置换保持奇异值。六个轨道的十五个无序对各有三种相对位置，所以四十五个代表覆盖全部一百三十五种情形。复算把三个循环特征的试探列变回物理站坐标，删去对应两行，再为每个通过检验的双钟角盒（含细分后的角盒）选取一个共同近似左逆，核对它对九个控制矩阵的最大左逆残差严格低于证书阈值。扣除连续角插值与软化投影误差后，对全环面和 $0\le\delta\le10^{-8}$，异轨道布局的归一化最小奇异值大于 $1.5\times10^{-9}$。结合前面的同轨道界，在已知背景和共同相位参考下，十八个普通站任意丢失两个，剩余读数都能恢复五个轻态，统一最小奇异值仍大于 $5\times10^{-11}$。[四十五类的区间复算](https://github.com/the-omega-institute/trureturing-experiments/blob/33a29e92533c75630538304fac7909a21d2583eb/experiments/ch39-omega-research/replay/ch39-distinct-orbit-erasure.md)
+
 十六站也是任意固定布局的最小数。从十九站中无论选哪十五站，对每个允许的软化值，都有一对共同钟角使某个非零输入完全相消。全部 $3876$ 种布局按旋转分为 $1296$ 类。其中 $36$ 类省去了一个完整轨道，继承极点方案的盲点，其余 $1260$ 类各有一个经过区间检验的盲点角盒。若已知背景并允许按背景换站，十五站就够了：在十八个非极点站中选行列式模最大的十五行，另三行在此基底中的每个系数模至多为一，所以所选读数的最小奇异值大于 $4\times10^{-5}/\sqrt{46}$。十四个复读数无法确定十五个独立复振幅。[固定布局的完整分类与按背景选站的界](https://github.com/the-omega-institute/trureturing-experiments/blob/1c485355843e787bf64af78c6c21b0dffd0fbd78/experiments/ch39-omega-research/replay/ch39-five-charge-fifteen-masks.md)
 
 实际的两只钟由同一个黎曼零点的纵坐标驱动。它们多常走近固定布局的盲点？在第 $2\,306\,888\,100\,085$ 个正零点逐一取出所有十五行方阵，无论用实际软化还是零软化，每个布局的最小奇异值都大于 $3.11736\times10^{-6}$。这个共同锚点也决定了一个密度问题。每个布局的行 Gram 矩阵都可用各荷、各循环特征的最低线投影来写。谱隙使这些投影随钟角实解析，各布局的 Gram 行列式之积在零软化锚点严格为正，故其零集面积为零。由两钟等分布及实际软化随高度趋零，按重数计的正零点中，全部 $3876$ 种布局同时满秩的比例趋于一。
 
-**近盲零点计数（手工推导，`ARGUED`）。** 满秩时还要问测量误差会放大多少。固定一种布局，记 $s$ 为其最小奇异值。零软化时，两钟角沿短弧总共移动 $h$ 弧度，$s$ 至多改变 $\sqrt{132}h$。故一个盲点周围就有一块面积可算的近盲菱形。令 $\varepsilon(T)\downarrow0$ 且 $\varepsilon(T)\log T/\log\log T\to\infty$。在高度 $T$ 以内全部正零点中，满足 $s<\varepsilon(T)$ 且所有布局都满秩的比例，除以 $\varepsilon(T)^2$ 后下极限至少为 $1/(264\pi^2)$。先将近盲菱形的半径乘以任意固定的 $1-\eta$，其中 $0<\eta<1$。收缩后的菱形计数等于其 Haar 面积乘 $N(T)$ 加上低阶项。在盲相位处，所有零软化 Gram 行列式之积具有一个非零的首项齐次 Taylor 多项式。这个首项在缩放后的菱形中只在零测集上为零。用有限个闭包避开零集和边界的小方形逼近菱形面积。由同一收缩计数，每个方形给出相应比例的零点。方形内首项有正的绝对值下界，乘积在原角坐标下至少为 $\varepsilon(T)$ 的固定幂乘一个正数。对高于 $\sqrt T$ 的零点，实际软化造成的 $O(T^{-1})$ 扰动更小，故这里的所有布局都满秩。实际软化对 $s$ 的 $O(T^{-1})$ 扰动也小于余量 $\eta\varepsilon(T)$。舍去高度低于 $\sqrt T$ 的零点只损失 $O(\sqrt T\log T)=o(\varepsilon(T)^2N(T))$。最后令 $\eta\downarrow0$，恢复整个菱形给出的常数。各布局各有自己的近盲零点。某个实际零点是否恰好失秩仍开放。[逐布局锚点、近盲面积与零点计数](https://github.com/the-omega-institute/trureturing-experiments/blob/bc1aeeab70bbe7a36e7f8df8365267542da81aad/experiments/ch39-omega-research/replay/ch39-five-charge-zero-density.md) · [收缩计数与精确失秩的局部排除](https://github.com/the-omega-institute/trureturing-books/issues/1725#issuecomment-7235116636)
+**近盲零点计数（手工推导，`ARGUED`）。** 满秩时还要问测量误差会放大多少。固定一种布局，记 $s$ 为其最小奇异值。零软化时，两钟角沿短弧总共移动 $h$ 弧度，$s$ 至多改变 $\sqrt{132}h$。故一个盲点周围就有一块面积可算的近盲菱形。令 $\varepsilon(T)\downarrow0$ 且 $\varepsilon(T)\log T\to\infty$。在高度 $T$ 以内全部正零点中，满足 $s<\varepsilon(T)$ 且所有布局都满秩的比例，除以 $\varepsilon(T)^2$ 后下极限至少为 $1/(264\pi^2)$。先将近盲菱形的半径乘以任意固定的 $1-\eta$，其中 $0<\eta<1$。依[附录 C.3](appendix-c.md#sec-ou-appc-shrinking-windows)，收缩后的菱形计数等于其 Haar 面积乘 $N(T)$ 加上低阶项。在盲相位处，所有零软化 Gram 行列式之积具有一个非零的首项齐次 Taylor 多项式。这个首项在缩放后的菱形中只在零测集上为零。用有限个闭包避开零集和边界的小方形逼近菱形面积。由同一收缩计数，每个方形给出相应比例的零点。方形内首项有正的绝对值下界，乘积在原角坐标下至少为 $\varepsilon(T)$ 的固定幂乘一个正数。对高于 $\sqrt T$ 的零点，实际软化造成的 $O(T^{-1})$ 扰动更小，故这里的所有布局都满秩。实际软化对 $s$ 的 $O(T^{-1})$ 扰动也小于余量 $\eta\varepsilon(T)$。舍去高度低于 $\sqrt T$ 的零点只损失 $O(\sqrt T\log T)=o(\varepsilon(T)^2N(T))$。最后令 $\eta\downarrow0$，恢复整个菱形给出的常数。各布局各有自己的近盲零点。某个实际零点是否恰好失秩仍开放。[逐布局锚点、近盲面积与零点计数](https://github.com/the-omega-institute/trureturing-experiments/blob/bc1aeeab70bbe7a36e7f8df8365267542da81aad/experiments/ch39-omega-research/replay/ch39-five-charge-zero-density.md) · [收缩计数与精确失秩的局部排除](https://github.com/the-omega-institute/trureturing-books/issues/1725#issuecomment-7235116636)
 
 将内部空间按特征标正交拆块，背后依托的是一条无 $\pi$、纯有理的群论正交骨架。正如[第二章](ch02-quaternion-clocks-and-haar-zeros.md)在双时钟球面哈尔积分中所确立的，偶次切比雪夫特征多项式 $E_m(\kappa)$ 在全阶上的正交归一性已在 Lean 内核中不依赖实数极限而严格冻结：
 
