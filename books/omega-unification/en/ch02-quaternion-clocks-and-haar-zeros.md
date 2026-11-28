@@ -166,6 +166,8 @@ Now watch how the four-angle selection rule of [@def-ou-ch02-dual-clocks] turns 
 | $1$ | $0.95054808840\ldots$ | $0.12584254589\ldots$ |
 | $2$ | $0.99752136036\ldots$ | $0.15720164049\ldots$ |
 
+The value $1/(2\pi)$ is an asymptotic relative density as the height cutoff tends to infinity. A finite-height error also needs a counting remainder for the selected phase window and does not follow automatically from the unfiltered zero count. Chapter 12 gives the inverse-square partial-summation formula, an explicit whole-spectrum benchmark, and the missing windowed input ([@rem-ou-ch12-windowed-rate], [@prob-ou-ch12-windowed-haar-rate]).
+
 ## 2.4 Splitting Primes on the Shortest Arc and Area-Law Density Collapse {#sec-ou-2-4}
 
 Twenty-two frequencies suffice for two Standard Model group elements. To integrate over an arbitrarily large finite lattice gauge graph, must we abandon the 19-point shell?

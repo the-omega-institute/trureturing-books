@@ -169,6 +169,63 @@ Once six arithmetic times crush more than $99.931\%$ of spectral mass into three
 
 Even retaining all zeros above any cutoff $H$ under inverse-square weighting inside any fixed positive shell-phase window drives the limiting distribution of $H / \gamma$ to uniform on $[0, 1]$, leaving a limiting two-time error of $3.71810906 \times 10^{-6}$ after optimizing scale; at unit scale $a = 1$, the five-charge three-light-mode support cannot match even the first arithmetic time alone ($> 32.092\%$ must sit outside it, rising past $87.818\%$ for the first $40$ times).
 
+::: {.remark #rem-ou-ch12-windowed-rate title="A Whole-Spectrum Benchmark and the Windowed Rate Gap"}
+Write the cumulative count in a fixed phase window $W$ as $A_W(t)$ and suppose
+
+$$
+A_W(t)=c\,t\left(\log\frac{t}{2\pi}-1\right)+R_W(t),
+\qquad |R_W(t)|\le b_Ht\quad(t\ge H).
+$$
+
+Set $L_x=1+\log(x/(2\pi))$, and define the strict tail sum with multiplicity by $S_W(x)=\sum_{\gamma>x,\,W}\gamma^{-2}$. Partial summation gives
+
+$$
+S_W(x)=-\frac{A_W(x)}{x^2}+2\int_x^\infty\frac{A_W(t)}{t^3}\,dt
+       =\frac{c}{x}(L_x+\delta_x),
+\qquad |\delta_x|\le E:=\frac{3b_H}{c}.
+$$
+
+When $H\ge2\pi$ and $L_H>E$, the distribution function $Q_H(s):=S_W(H/s)/S_W(H)$ obeys
+
+$$
+\left\|Q_H-P_H\right\|_\infty\le\frac{2E}{L_H-E},
+\qquad
+P_H(s)=s+\frac{s\log(1/s)}{L_H}.
+$$
+
+Thus the Kolmogorov distance $D_H$ from the inverse-square weighted $H/\gamma$ distribution to the uniform law satisfies
+
+$$
+\left|D_H-\frac{1}{eL_H}\right|\le\frac{2E}{L_H-E}.
+$$
+
+For all positive zeros without phase filtering, the counting estimate of Hasanalizade, Shen, and Wong gives for $t\ge e$
+
+$$
+|N(t)-\tfrac{t}{2\pi}(\log(t/(2\pi))-1)|
+\le B(t):=0.1038\log t+0.2573\log\log t+9.3675.
+$$
+
+Since $B(t)/t$ decreases on this range, take $c=1/(2\pi)$ and $b_H=B(H)/H$. At $H=10^6$, the whole-spectrum benchmark yields
+
+$$
+0.0283138<D_H<0.0283806.
+$$
+
+This numerical bound has no phase filter. Applying it to the Chapter 2 Haar acceptance region or the three height bands in this chapter still requires the corresponding $b_H$ or an equivalent uniform Fourier bound. [Counting estimate, Corollary 1.2](https://doi.org/10.1016/j.jnt.2021.06.032)
+:::
+
+::: {.problem #prob-ou-ch12-windowed-haar-rate title="Explicit Remainders for a Fixed Haar Phase Window"}
+For the fixed Haar acceptance region in Chapter 2 and the fixed positive-measure phase window used in Chapter 12, prove or disprove the existence of a checkable constant $b_H$ such that
+
+$$
+\left|A_W(t)-c\,t\left(\log\frac{t}{2\pi}-1\right)\right|\le b_Ht
+\qquad\text{for all }t\ge H
+$$
+
+and propagate it to a finite-height error for every shared-clock reading. The available unfiltered count and qualitative equidistribution only give $A_W(t)=c\,t(\log(t/(2\pi))-1)+o(t\log t)$, which does not supply this uniform remainder. Until the window input is established, the finite-height Haar error and shared-clock precision remain open.
+:::
+
 Beneath every exclusion beat two universal Fourier-and-variance concentration theorems formally frozen inside the Lean 4 kernel. The first bounds nonnegative cyclic band weights above by a positive Fejér Fourier average, quantifying why narrow-band concentration inevitably pumps high-frequency Fourier energy:
 
 ::: {.theorem #thm-ou-ch12-cyclic-fejer-band title="Positive Fourier Upper Bound for Cyclic Fejér Bands" lean="D5/S3/Fourier/Concentration/CyclicFejerBand.band_le_positive_fourier"}
