@@ -178,6 +178,10 @@ At $\eta = \frac{1}{2}$, the untruncated zero-axiom rational Cayley map ([@thm-c
 | $12$ | $1229/2048$ | $+1/10240$ | $819/1024$ | $-1/5120$ |
 
 Increasing $N$ by $2$ multiplies each truncation error by $-\frac{1}{4}$. If one instead nests the truncated polynomials directly without re-truncating modulo $\eta^{N+1}$, $\bigl(\mathrm{Cos}_N(2\,\mathrm{Atan}_N(\frac{1}{2})),\; \mathrm{Sin}_N(2\,\mathrm{Atan}_N(\frac{1}{2}))\bigr)$ at $N = 12$ still carries signed errors $+1.235579 \times 10^{-5}$ and $-9.267049 \times 10^{-6}$, whereas the native rational Cayley ratio hits $(\frac{3}{5}, \frac{4}{5})$ exactly in one step.
+
+The truncation error can also serve as a tolerance for choosing a rational approximation at each step. At $t=2/5$, the exact step is $P=(21+20i)/29$ and the largest coordinate error of the degree-3 polynomial evaluation is $32/725$. Require each of two steps to meet this tolerance and to have a positive common clearing denominator at most $28$. The bound applies to the two factors, and their product may have a larger denominator.
+
+Both $z_1=(5+5i)/7$ and $z_2=(7+7i)/10$ meet these per-step conditions, with maximum coordinate errors of $5/203$ and $7/290$, respectively. Their squared norms are $50/49$ and $49/50$, which multiply to $1$, and $z_1z_2=i$. The real coordinate of the exact two-step value $P^2=(41+840i)/841$ differs from the product by $41/841$, exceeding the per-step tolerance $32/725$. The product can preserve unit norm exactly while exceeding the coordinate tolerance.
 :::
 
 This exact link between rational formal power series and classical real analysis also governs the transcendental self-referential fixed point $\cos\theta = \theta$ (the Dottie number $\theta^* \approx 0.739085$). In the classical analytic shadow layer, a frozen Lean theorem certifies that even this transcendental fixed point arises from evaluating the purely rational formal compositional inverse of a rational power series in $\mathbb{Q}[[X]]$ at $\pi$:
