@@ -69,7 +69,19 @@ $$
 
 **复移位求和。** 写 $\lambda_k=2\pi k\cdot b$。取正频率，负频率由零点对称性和共轭处理。若最近素数幂 $q\le L^A$，其中 $A$ 是任意固定常数，Baker 的代数系数对数线性型界给出 $|\lambda_k-\log q|\ge\exp[-O_A((1+\log L)^C)]$。线性型以两个固定的纯虚钟对数和实对数 $\log q$ 为底，将最后一个对数的系数取 $i$。它非零，因为 $q>1$ 时，若有等号，代数数 $e^{i\lambda_k}$ 就会等于由 Gelfond–Schneider 定理判为超越数的 $q^i$。因此低素数幂不会进入宽 $T^{-1/3}$ 的近频区。对 $q>L^A$，即使发生近频，归一后的陆道主项至多是 $O_A(T\log L\,L^{-A/2})$。频率仅有 $O(L^2)$ 个，取 $A$ 足够大即可。离开近频区时，陆道主项用 $|J_T(v)|\le 2/|v|$ 控制，其余误差沿用小带宽下的幂次节省。因此对 $F=B,P^\pm$，复移位和为 $N(T)\int F+O(TL^{-2})$。[Baker，*A sharpening of the bounds for linear forms in logarithms*（1972），第 117 页](https://doi.org/10.4064/aa-21-1-117-129) · [第 12 章的频率与素数幂估计](ch12-shared-arithmetic-clock.md)
 
-**带权计数与换回实轴。** 在高处的二倍区间 $[X,2X]$ 上使用第 12 章的带权均方推导，保留均值因子 $w_0$。近临界线的非零钟频误差为任意对数幂节省乘 $Xw_0$，因为 $|\widehat B(k)|\le w_0$。由频率间距，固定倍数区间上的权积分为 $O(Xw_0)$。远离临界线时可用 $B\le1$。由于 $w_0\gg L^{-2}$，把远离临界线的截止常数取大就可吸收这一步的损失。对 $X\ge T^{3/4}$ 和 $u\ge2/L$，在 $1/2+2u/3$ 使用带权 Green 恒等式。直线积分与面积积分都是 $O(Xw_0e^{-cu\log X})$，测试函数在被计零点上至少为 $u/3\ge 2/(3L)$。按二倍区间相加。低于 $T^{3/4}$ 的零点至多贡献 $O(T^{3/4}L)$。由于 $w_0\gg L^{-2}$，可将指数常数取为 $0<c_1<1/2$ 并吸收这项，得到
+**保留局部权重的均方。** 在每个 $X\ge T^{3/4}$ 的高度块上记 $\ell=\log X$、$W(t)=B(bt)$、$F=\zeta M$。第 12 章的 mollifier 在此取长度 $X^{1/100}$。对 $[X/2,5X/2]$ 内的积分区间 $I$，Green 恒等式所用的输入为
+
+$$
+\int_I W(t)\,|F(\sigma+it)-1|^2\,dt
+\ll Xw_0 e^{-c(\sigma-1/2)\ell},
+\qquad 1/2+1/\ell\le\sigma\le2 .
+$$
+
+先取 $\sigma-1/2\le C\log\ell/\ell$。把 $|F-1|^2$ 展开为 $|\zeta|^2|M|^2-2\Re(\zeta M)+1$。$W$ 的零模正好是普通均方乘 $w_0$。短 mollifier 消去首批 Dirichlet 系数，配合筛权平方和及无扭转均方公式，普通均方为 $O(Xe^{-c_0(\sigma-1/2)\ell})$。对非零模，将二次项按平滑乘积近似函数方程展开为原项与对偶项，以 $mn\le X^{1+\eta}$ 截断，$\eta>0$ 固定且足够小。该范围内二者振幅及乘 $X$ 的时间导数皆为 $O((mn)^{-1/2})$，对偶项用到因子 $X^{1-2\sigma}$。乘 $|M|^2$ 后按既约比 $a/d$ 合并，振幅及上述导数都由 $\ell^{O(1)}(ad)^{-1/2+\epsilon}$ 控制，此处可取任意小的固定 $\epsilon>0$，并且 $ad\le X^\rho$，$\rho<2$ 固定。截到 $10X$ 的线性项及常数同样处理。对分离的比值分部积分，用代数对数下界排除小比值近频，得到每个非零钟模 $O_D(X\ell^{-D})$，其中 $D$ 可任意固定。由 $|\widehat B(k)|\le w_0$ 及 $O(\ell^2)$ 个模，增大 $D$ 后总误差为 $O_D(Xw_0\ell^{-D})$。按钟频分离逐模积分得 $\int_I W\ll Xw_0$，截断的点态余项也因此保留 $w_0$。[普通均方与乘积展开](https://github.com/the-omega-institute/trureturing-books/issues/1637#issuecomment-7234629760) · [局部权重下的非零模](https://github.com/the-omega-institute/trureturing-books/issues/1733#issuecomment-7235395614)
+
+若 $\sigma-1/2>C\log\ell/\ell$，用 $0\le W\le1$ 和普通均方界。取 $c_0 C/2>2$，由 $r\ge1/n$ 与 $X\ge T^{3/4}$，有 $e^{-c_0(\sigma-1/2)\ell/2}\ll\ell^{-2}\ll w_0$。近侧取 $D>cC$，使对数幂误差纳入所需的指数界。由此得到整个范围的局部输入。
+
+**带权计数与换回实轴。** 对 $X\ge T^{3/4}$ 和 $u\ge2/L$，在 $1/2+2u/3$ 使用带权 Green 恒等式。直线积分与面积积分都是 $O(Xw_0e^{-cu\log X})$，测试函数在被计零点上至少为 $u/3\ge 2/(3L)$。按二倍区间相加。低于 $T^{3/4}$ 的零点至多贡献 $O(T^{3/4}L)$。由于 $w_0\gg L^{-2}$，可将指数常数取为 $0<c_1<1/2$ 并吸收这项，得到
 
 $$
 \sum_{0<\gamma\le T,\,\lvert\beta-1/2\rvert\ge u}
