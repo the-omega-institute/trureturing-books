@@ -450,7 +450,16 @@ $$
 vaW_1\le 2\sqrt{\frac{2(1+1/(uva))}{m}\,\varepsilon}+\varepsilon .
 $$
 
-内层的等权拆分仍给出锐指数 $1/2$。若切线再接触端点 $e$，还可以在 $e$ 放上权重 $h/(|e-s|+h)$，其余权重放在 $s+\sigma h$。热迹精确不变，端点对切线余差的贡献为零，故真空误差为二阶，而平方质量距离与 $h$ 同阶。这样，即使远在带端的权重也能达到 $\sqrt{\varepsilon}$ 的量级。[端点接触的手工推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/1689#issuecomment-7241164027)
+内层的等权拆分表明指数 $1/2$ 仍是锐的。若切线再接触端点 $e$，也可把一小份权重 $h/(|e-s|+h)$ 放在 $e$，其余放在 $s+\sigma h$。这个拆分精确保持热迹。端点上的切线余差为零，故真空误差为二阶，而移到端点的权重与平方质量输运距离都与 $h$ 同阶。[端点接触的手工推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/1689#issuecomment-7241164027)
+
+若切线接触重端 $a$，同时容许两项读数有误差，可以求出固定接触层的锐常数。记 $p=f'(s)$、$k=f''(s)>0$，并令 $\omega_s(\varepsilon)$ 为误差至多 $\varepsilon$ 时所有正对照谱的平方质量输运距离的上确界。则
+
+$$
+\lim_{\varepsilon\downarrow0}\frac{\omega_s(\varepsilon)}{\sqrt{\varepsilon}}
+=\left(\frac{1}{vs}+\frac{Z-z_*}{s-a}\right)\sqrt{\frac{2(1+p)}{k}} .
+$$
+
+参考层附近的二次余差把热迹坐标的平均绝对位移控制在 $\sqrt{2(1+p)\varepsilon/k}$ 的首项内。重端附近的余差从零线性上升，所以这里的权重可以移到 $a$ 而只引入 $O(\varepsilon)$ 的输运误差。热迹平衡把这个重端权重限制在平均位移除以 $s-a$ 的首项内。公式中的两项分别将参考层的位移与重端权重换算成平方质量距离。达到首项的两层谱把权重放在 $a$ 与 $s+h$，使热迹差为 $-\varepsilon$、真空差为 $+\varepsilon$，从而用足切线余差的预算 $(1+p)\varepsilon$。[锐常数的手工推导、近阈值一致极限及区间复算](https://github.com/the-omega-institute/trureturing-books/issues/1689#issuecomment-7241652592)
 
 **固定整数重数的锐界（`ARGUED`）。** 参考谱各质量层有正整数个态，对照谱也允许任意正整数重数。按平方质量递增排列参考谱的正质量层。设其中 $h$ 层有至少两个态，其余是单态层。用这 $h$ 层隔开单态层，得到长度依次为 $\ell_0,\ldots,\ell_h$ 的连续段，允许空段。任意预先选定的互异正逆截止中，确定参考谱所需的读数恰为 $r+1$ 次。参考谱含零质量时取 $\delta=1$，否则取 $\delta=0$。
 
