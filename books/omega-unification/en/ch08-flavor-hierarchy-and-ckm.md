@@ -422,13 +422,13 @@ With the linear variations balanced, set $\kappa+8\mu^2q=\eta\varepsilon$. The t
 
 When the light-block shape may vary with $\varepsilon$, the fixed plane can attain the exact minimum at the crossing (direct derivation). Hold the common scale $c$ fixed and adjust $t=v/c$ and $r=w/c$ independently, with $S=-c\sqrt{tr}$, $\mu=c\sqrt{1-tr}$, and the linear variations balanced as above. At $\varepsilon=0$, the two normalized transverse gradients extend to $(r-t)\sqrt{tr/(1-tr)}-1$ and $2-4t+r$. At their common zero $t\simeq0.783854$, $r=4t-2$, the first expression increases strictly along the zero line of the second, so the Jacobian with respect to shape is invertible.
 
-Write $(t_0,r_0)$ for this limiting shape. Along the actual equal-cost curve, the implicit function theorem gives an analytic adjustment that makes both transverse gradients vanish. For $c=1$ and every $0<\varepsilon\le10^{-36}$, the shape box centered at $(t_0,r_0)$ with half-width $10^{-3}$ contains exactly one such root, and it satisfies
+Write $(t_0,r_0)$ for this limiting shape. Along the actual equal-cost curve, the implicit function theorem gives an analytic adjustment that makes both transverse gradients vanish. For $c=1$ and every $0<\varepsilon\le10^{-27}$, the shape box centered at $(t_0,r_0)$ with half-width $10^{-3}$ contains exactly one such root, and it satisfies
 
 $$
-\max\bigl(|t-t_0|,|r-r_0|\bigr)<1.5\times10^{26}\varepsilon\le1.5\times10^{-10}.
+\max\bigl(|t-t_0|,|r-r_0|\bigr)<1.4\times10^{20}\varepsilon\le1.4\times10^{-7}.
 $$
 
-The bound follows by controlling the two gradients and their shape derivatives along the equal-cost curve, then using the inverse limiting Jacobian to construct a contraction. The real matrices give stationarity in the imaginary directions, and the positive definite second variation makes the planar basis the local minimum near zero tilt. Since the two branches exhaust the minima over complex bases, tuning gives $D_{\mathrm{plane}}=D_*$, with the reflected branch attaining the same value. [Root enclosure and direct matrix calculation](https://github.com/the-omega-institute/trureturing-books/issues/2326#issuecomment-7241997859)
+First solve the scalar equation that balances costs in the plane, then evaluate the transverse gradients along the actual branch crossing. The scalar equal-cost graph extends to a larger complex disk in the scale variable. Cauchy bounds on that disk control the gradients and their shape Jacobian, and the inverse limiting Jacobian gives a contraction. Reality gives stationarity in the imaginary directions, and the positive definite second variation makes the planar basis the local minimum on the branch near zero tilt. The two neighborhoods contain all minima over complex bases, so tuning gives $D_{\mathrm{plane}}=D_*$, with the reflected branch attaining the same value. [Scale bound and direct matrix calculation](https://github.com/the-omega-institute/trureturing-books/issues/2326#issuecomment-7242378651)
 
 With the shape and $\mu$ fixed, relaxing two directions near zero tilt gives the cost of fixing the plane when the two branches have exactly equal cost.
 
