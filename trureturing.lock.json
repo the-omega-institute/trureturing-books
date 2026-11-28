@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "ff4b5a28d6fd1d96650d2c117d99d9162462e05b",
-  "pinned_at": "2026-11-28T01:32:32Z",
+  "commit": "5b976d8d75f5ea6d671f565034461d7c1202e50a",
+  "pinned_at": "2026-11-28T02:14:47Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -6786,6 +6786,487 @@
       "statement_id": "sha256:9c8944b3be81e8afb4c67477f67b488d435fe363b535d7442827267c93e2c705",
       "line": 471,
       "signature": "theorem weylDim_pos_iff (D : ℕ) (hD : 3 ≤ D) : 0 < finrank ℝ (Weyl D) ↔ 4 ≤ D",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D.bispinor_commutes_gamma5": {
+      "module": "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D",
+      "name": "D5.S3.Geometry.Lorentz.DiracCliffordSpinors4D.bispinor_commutes_gamma5",
+      "kind": "theorem",
+      "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
+      "line": 351,
+      "signature": "theorem bispinor_commutes_gamma5 (A : SL2C) : bispinor A * gamma5 = gamma5 * bispinor A",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D.bispinor_det_one": {
+      "module": "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D",
+      "name": "D5.S3.Geometry.Lorentz.DiracCliffordSpinors4D.bispinor_det_one",
+      "kind": "theorem",
+      "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
+      "line": 328,
+      "signature": "theorem bispinor_det_one (A : SL2C) : (bispinor A).det = 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D.bispinor_gamma0_intertwine": {
+      "module": "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D",
+      "name": "D5.S3.Geometry.Lorentz.DiracCliffordSpinors4D.bispinor_gamma0_intertwine",
+      "kind": "theorem",
+      "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
+      "line": 340,
+      "signature": "theorem bispinor_gamma0_intertwine (A : SL2C) : (bispinor A)ᴴ * γ 0 * bispinor A = γ 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D.bispinor_inverse": {
+      "module": "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D",
+      "name": "D5.S3.Geometry.Lorentz.DiracCliffordSpinors4D.bispinor_inverse",
+      "kind": "theorem",
+      "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
+      "line": 335,
+      "signature": "theorem bispinor_inverse (A : SL2C) : (bispinor A)⁻¹ = bispinor A⁻¹",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D.bispinor_lorentz_covariance": {
+      "module": "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D",
+      "name": "D5.S3.Geometry.Lorentz.DiracCliffordSpinors4D.bispinor_lorentz_covariance",
+      "kind": "theorem",
+      "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
+      "line": 375,
+      "signature": "theorem bispinor_lorentz_covariance (A : SL2C) (μ : Fin 4) : (bispinor A)⁻¹ * γ μ * bispinor A = ∑ ν, (lorentzOfSL2C A⁻¹ ν μ : ℂ) • γ ν",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D.bispinor_lorentz_covariance_lower": {
+      "module": "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D",
+      "name": "D5.S3.Geometry.Lorentz.DiracCliffordSpinors4D.bispinor_lorentz_covariance_lower",
+      "kind": "theorem",
+      "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
+      "line": 398,
+      "signature": "theorem bispinor_lorentz_covariance_lower (A : SL2C) (μ : Fin 4) : (bispinor A)⁻¹ * gammaLower μ * bispinor A = ∑ ν, (lorentzOfSL2C A μ ν : ℂ) • gammaLower ν",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D.bispinor_mul": {
+      "module": "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D",
+      "name": "D5.S3.Geometry.Lorentz.DiracCliffordSpinors4D.bispinor_mul",
+      "kind": "theorem",
+      "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
+      "line": 321,
+      "signature": "theorem bispinor_mul (A B : SL2C) : bispinor (A * B) = bispinor A * bispinor B",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D.bispinor_one": {
+      "module": "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D",
+      "name": "D5.S3.Geometry.Lorentz.DiracCliffordSpinors4D.bispinor_one",
+      "kind": "theorem",
+      "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
+      "line": 318,
+      "signature": "theorem bispinor_one : bispinor 1 = 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D.bispinor_slash_covariance": {
+      "module": "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D",
+      "name": "D5.S3.Geometry.Lorentz.DiracCliffordSpinors4D.bispinor_slash_covariance",
+      "kind": "theorem",
+      "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
+      "line": 363,
+      "signature": "theorem bispinor_slash_covariance (A : SL2C) (p : V4) : bispinor A * slash (fun i => (p i : ℂ)) * bispinor A⁻¹ = slash (fun i => ((lorentzOfSL2C A *ᵥ p) i : ℂ))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D.chargeConj_eq_diracAdjoint": {
+      "module": "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D",
+      "name": "D5.S3.Geometry.Lorentz.DiracCliffordSpinors4D.chargeConj_eq_diracAdjoint",
+      "kind": "theorem",
+      "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
+      "line": 497,
+      "signature": "theorem chargeConj_eq_diracAdjoint (ψ : Spinor) : chargeConj ψ = chargeMatrix *ᵥ diracAdjoint ψ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D.chargeConj_flips_chirality": {
+      "module": "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D",
+      "name": "D5.S3.Geometry.Lorentz.DiracCliffordSpinors4D.chargeConj_flips_chirality",
+      "kind": "theorem",
+      "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
+      "line": 528,
+      "signature": "theorem chargeConj_flips_chirality (ψ : Spinor) : chargeConj (PL *ᵥ ψ) = PR *ᵥ chargeConj ψ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D.chargeConj_gamma": {
+      "module": "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D",
+      "name": "D5.S3.Geometry.Lorentz.DiracCliffordSpinors4D.chargeConj_gamma",
+      "kind": "theorem",
+      "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
+      "line": 476,
+      "signature": "theorem chargeConj_gamma (μ : Fin 4) : chargeMatrix * γ μ * chargeMatrix⁻¹ = -(γ μ)ᵀ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D.chargeConj_involutive": {
+      "module": "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D",
+      "name": "D5.S3.Geometry.Lorentz.DiracCliffordSpinors4D.chargeConj_involutive",
+      "kind": "theorem",
+      "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
+      "line": 521,
+      "signature": "theorem chargeConj_involutive (ψ : Spinor) : chargeConj (chargeConj ψ) = ψ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D.chargeConj_lorentz_equivariant": {
+      "module": "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D",
+      "name": "D5.S3.Geometry.Lorentz.DiracCliffordSpinors4D.chargeConj_lorentz_equivariant",
+      "kind": "theorem",
+      "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
+      "line": 573,
+      "signature": "theorem chargeConj_lorentz_equivariant (A : SL2C) (ψ : Spinor) : chargeConj (bispinor A *ᵥ ψ) = bispinor A *ᵥ chargeConj ψ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D.chargeConj_unitary_antisymm": {
+      "module": "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D",
+      "name": "D5.S3.Geometry.Lorentz.DiracCliffordSpinors4D.chargeConj_unitary_antisymm",
+      "kind": "theorem",
+      "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
+      "line": 463,
+      "signature": "theorem chargeConj_unitary_antisymm : chargeMatrixᴴ * chargeMatrix = 1 ∧ chargeMatrixᵀ = -chargeMatrix ∧ chargeMatrix * chargeMatrix = -1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D.chiral_projectors_spec": {
+      "module": "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D",
+      "name": "D5.S3.Geometry.Lorentz.DiracCliffordSpinors4D.chiral_projectors_spec",
+      "kind": "theorem",
+      "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
+      "line": 183,
+      "signature": "theorem chiral_projectors_spec : PL * PL = PL ∧ PR * PR = PR ∧ PL * PR = 0 ∧ PR * PL = 0 ∧ PL + PR = 1 ∧ PLᴴ = PL ∧ PRᴴ = PR ∧ ∀ μ, γ μ * PL = PR * γ μ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D.clifford16_components": {
+      "module": "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D",
+      "name": "D5.S3.Geometry.Lorentz.DiracCliffordSpinors4D.clifford16_components",
+      "kind": "theorem",
+      "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
+      "line": 228,
+      "signature": "theorem clifford16_components : clifford16 = ![1, γ 0, γ 1, γ 2, γ 3, gammaTensor 0 1, gammaTensor 0 2, gammaTensor 0 3, gammaTensor 1 2, gammaTensor 1 3, gammaTensor 2 3, γ 0 * gamma5, γ 1 * gamma5, γ 2 * gamma5, γ 3 * gamma5, gamma5]",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D.clifford16_linearIndependent": {
+      "module": "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D",
+      "name": "D5.S3.Geometry.Lorentz.DiracCliffordSpinors4D.clifford16_linearIndependent",
+      "kind": "theorem",
+      "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
+      "line": 250,
+      "signature": "theorem clifford16_linearIndependent : LinearIndependent ℂ clifford16",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D.clifford16_span_top": {
+      "module": "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D",
+      "name": "D5.S3.Geometry.Lorentz.DiracCliffordSpinors4D.clifford16_span_top",
+      "kind": "theorem",
+      "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
+      "line": 264,
+      "signature": "theorem clifford16_span_top : Submodule.span ℂ (Set.range clifford16) = ⊤",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D.clifford16_trace_orthogonal": {
+      "module": "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D",
+      "name": "D5.S3.Geometry.Lorentz.DiracCliffordSpinors4D.clifford16_trace_orthogonal",
+      "kind": "theorem",
+      "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
+      "line": 244,
+      "signature": "theorem clifford16_trace_orthogonal (a b : Fin 16) : ((clifford16 a)ᴴ * clifford16 b).trace = if a = b then 4 else 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D.clifford_anticommutator": {
+      "module": "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D",
+      "name": "D5.S3.Geometry.Lorentz.DiracCliffordSpinors4D.clifford_anticommutator",
+      "kind": "theorem",
+      "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
+      "line": 71,
+      "signature": "theorem clifford_anticommutator (μ ν : Fin 4) : γ μ * γ ν + γ ν * γ μ = (2 * η μ ν) • (1 : Mat4)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D.dirac_axial_vector_covariant": {
+      "module": "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D",
+      "name": "D5.S3.Geometry.Lorentz.DiracCliffordSpinors4D.dirac_axial_vector_covariant",
+      "kind": "theorem",
+      "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
+      "line": 446,
+      "signature": "theorem dirac_axial_vector_covariant (A : SL2C) (ψ χ : Spinor) (μ : Fin 4) : diracBilinear (gammaLower μ * gamma5) (bispinor A *ᵥ ψ) (bispinor A *ᵥ χ) = ∑ ν, (lorentzOfSL2C A μ ν : ℂ) * diracBilinear (gammaLower ν * gamma5) ψ χ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D.dirac_pseudoscalar_invariant": {
+      "module": "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D",
+      "name": "D5.S3.Geometry.Lorentz.DiracCliffordSpinors4D.dirac_pseudoscalar_invariant",
+      "kind": "theorem",
+      "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
+      "line": 436,
+      "signature": "theorem dirac_pseudoscalar_invariant (A : SL2C) (ψ χ : Spinor) : diracBilinear gamma5 (bispinor A *ᵥ ψ) (bispinor A *ᵥ χ) = diracBilinear gamma5 ψ χ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D.dirac_scalar_invariant": {
+      "module": "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D",
+      "name": "D5.S3.Geometry.Lorentz.DiracCliffordSpinors4D.dirac_scalar_invariant",
+      "kind": "theorem",
+      "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
+      "line": 431,
+      "signature": "theorem dirac_scalar_invariant (A : SL2C) (ψ χ : Spinor) : diracBilinear 1 (bispinor A *ᵥ ψ) (bispinor A *ᵥ χ) = diracBilinear 1 ψ χ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D.dirac_vector_covariant": {
+      "module": "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D",
+      "name": "D5.S3.Geometry.Lorentz.DiracCliffordSpinors4D.dirac_vector_covariant",
+      "kind": "theorem",
+      "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
+      "line": 441,
+      "signature": "theorem dirac_vector_covariant (A : SL2C) (ψ χ : Spinor) (μ : Fin 4) : diracBilinear (gammaLower μ) (bispinor A *ᵥ ψ) (bispinor A *ᵥ χ) = ∑ ν, (lorentzOfSL2C A μ ν : ℂ) * diracBilinear (gammaLower ν) ψ χ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D.feynman_slash_sq": {
+      "module": "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D",
+      "name": "D5.S3.Geometry.Lorentz.DiracCliffordSpinors4D.feynman_slash_sq",
+      "kind": "theorem",
+      "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
+      "line": 102,
+      "signature": "theorem feynman_slash_sq (p : Spinor) : slash p * slash p = (∑ μ, η μ μ * p μ ^ 2) • (1 : Mat4)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D.gamma5_anticommutes": {
+      "module": "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D",
+      "name": "D5.S3.Geometry.Lorentz.DiracCliffordSpinors4D.gamma5_anticommutes",
+      "kind": "theorem",
+      "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
+      "line": 170,
+      "signature": "theorem gamma5_anticommutes (μ : Fin 4) : gamma5 * γ μ + γ μ * gamma5 = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D.gamma5_explicit": {
+      "module": "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D",
+      "name": "D5.S3.Geometry.Lorentz.DiracCliffordSpinors4D.gamma5_explicit",
+      "kind": "theorem",
+      "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
+      "line": 149,
+      "signature": "theorem gamma5_explicit : gamma5 = diagonal ![-1, -1, 1, 1]",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D.gamma5_hermitian": {
+      "module": "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D",
+      "name": "D5.S3.Geometry.Lorentz.DiracCliffordSpinors4D.gamma5_hermitian",
+      "kind": "theorem",
+      "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
+      "line": 160,
+      "signature": "theorem gamma5_hermitian : gamma5ᴴ = gamma5",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D.gamma5_sq": {
+      "module": "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D",
+      "name": "D5.S3.Geometry.Lorentz.DiracCliffordSpinors4D.gamma5_sq",
+      "kind": "theorem",
+      "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
+      "line": 156,
+      "signature": "theorem gamma5_sq : gamma5 * gamma5 = 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D.gamma5_trace_zero": {
+      "module": "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D",
+      "name": "D5.S3.Geometry.Lorentz.DiracCliffordSpinors4D.gamma5_trace_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
+      "line": 165,
+      "signature": "theorem gamma5_trace_zero : gamma5.trace = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D.gamma_four_trace": {
+      "module": "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D",
+      "name": "D5.S3.Geometry.Lorentz.DiracCliffordSpinors4D.gamma_four_trace",
+      "kind": "theorem",
+      "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
+      "line": 91,
+      "signature": "theorem gamma_four_trace (μ ν ρ σ : Fin 4) : (γ μ * γ ν * γ ρ * γ σ).trace = 4 * (η μ ν * η ρ σ - η μ ρ * η ν σ + η μ σ * η ν ρ)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D.gamma_hermitian_conjugate": {
+      "module": "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D",
+      "name": "D5.S3.Geometry.Lorentz.DiracCliffordSpinors4D.gamma_hermitian_conjugate",
+      "kind": "theorem",
+      "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
+      "line": 78,
+      "signature": "theorem gamma_hermitian_conjugate (μ : Fin 4) : (γ μ)ᴴ = γ 0 * γ μ * γ 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D.gamma_trace_zero": {
+      "module": "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D",
+      "name": "D5.S3.Geometry.Lorentz.DiracCliffordSpinors4D.gamma_trace_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
+      "line": 82,
+      "signature": "theorem gamma_trace_zero (μ : Fin 4) : (γ μ).trace = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D.gamma_two_trace": {
+      "module": "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D",
+      "name": "D5.S3.Geometry.Lorentz.DiracCliffordSpinors4D.gamma_two_trace",
+      "kind": "theorem",
+      "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
+      "line": 86,
+      "signature": "theorem gamma_two_trace (μ ν : Fin 4) : (γ μ * γ ν).trace = 4 * η μ ν",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D.minkowski_slash_sq": {
+      "module": "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D",
+      "name": "D5.S3.Geometry.Lorentz.DiracCliffordSpinors4D.minkowski_slash_sq",
+      "kind": "theorem",
+      "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
+      "line": 130,
+      "signature": "theorem minkowski_slash_sq (p : V4) : slash (fun i => (p i : ℂ)) * slash (fun i => (p i : ℂ)) = (minkowskiNormSq p : ℂ) • (1 : Mat4)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D.no_majorana_weyl_4d": {
+      "module": "D5/S3/Geometry/Lorentz/DiracCliffordSpinors4D",
+      "name": "D5.S3.Geometry.Lorentz.DiracCliffordSpinors4D.no_majorana_weyl_4d",
+      "kind": "theorem",
+      "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
+      "line": 541,
+      "signature": "theorem no_majorana_weyl_4d (ψ : Spinor) (hc : chargeConj ψ = ψ) (hl : PL *ᵥ ψ = ψ) : ψ = 0",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -19913,6 +20394,292 @@
       "statement_id": "sha256:5c5ec11d20835cabe0837d40eb71dabc241220b8fbd3b51f7272f46675ac3431",
       "line": 163,
       "signature": "theorem wilson_strong_coupling_geometric_finite_bound (D : GaugeData G d) (β : ℝ) (hβ : 0 ≤ β) (hd : 0 < d) (z : Subgroup.center G) (ζ : ℂ) (hz : D.rep z = ζ • 1) (hζ : ζ ≠ 1) (r : Rectangle n) (hw : 0 < r.width) (hh : 0 < r.height) (hq : 80 * (Real.exp (β * d) - 1) < 1) : let q",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D.so10_su5_b_minus_l_compatibility": {
+      "module": "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D",
+      "name": "D5.S3.Quantum.Gauge.SU5SO10GrandUnification4D.so10_su5_b_minus_l_compatibility",
+      "kind": "theorem",
+      "statement_id": "sha256:2055ccf7e9d9f849b65fa76d657307e58c3ac0beaf56c610ca2a4ddc926eff33",
+      "line": 599,
+      "signature": "theorem so10_su5_b_minus_l_compatibility : (fun i => bMinusL (evenWeight i).1) = ![1, exteriorBMinusL 0, exteriorBMinusL 1, exteriorBMinusL 2, exteriorBMinusL 3, exteriorBMinusL 4, exteriorBMinusL 5, exteriorBMinusL 6, exteriorBMinusL 7, exteriorBMinusL 8, dualBMinusL 0, dualBMinusL 1, dualBMinusL 2, dualBMinusL 4, dualBMinusL 3, exteriorBMinusL 9]",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D.so10_su5_fermion_branching": {
+      "module": "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D",
+      "name": "D5.S3.Quantum.Gauge.SU5SO10GrandUnification4D.so10_su5_fermion_branching",
+      "kind": "theorem",
+      "statement_id": "sha256:2055ccf7e9d9f849b65fa76d657307e58c3ac0beaf56c610ca2a4ddc926eff33",
+      "line": 592,
+      "signature": "theorem so10_su5_fermion_branching (h : Fin 5 → ℝ) (hh : ∑ i, h i = 0) : (fun i => cartan h (evenWeight i).1) = Fin.cons 0 (fermionWeight h)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D.su5_adjoint_block_action": {
+      "module": "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D",
+      "name": "D5.S3.Quantum.Gauge.SU5SO10GrandUnification4D.su5_adjoint_block_action",
+      "kind": "theorem",
+      "statement_id": "sha256:2055ccf7e9d9f849b65fa76d657307e58c3ac0beaf56c610ca2a4ddc926eff33",
+      "line": 241,
+      "signature": "theorem su5_adjoint_block_action (Ac Bc : M3) (Aw Bw : M2) (y z : ℂ) (C : ColorWeak) (D : WeakColor) : commutator (adjointBlocks Ac Aw y 0 0) (adjointBlocks Bc Bw z C D) = adjointBlocks (commutator Ac Bc) (commutator Aw Bw) 0 (Ac * C - C * Aw - (5 * y / 6 : ℂ) • C) (Aw * D - D * Ac + (5 * y / 6 : ℂ) • D)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D.su5_adjoint_blocks_irreducible": {
+      "module": "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D",
+      "name": "D5.S3.Quantum.Gauge.SU5SO10GrandUnification4D.su5_adjoint_blocks_irreducible",
+      "kind": "theorem",
+      "statement_id": "sha256:2055ccf7e9d9f849b65fa76d657307e58c3ac0beaf56c610ca2a4ddc926eff33",
+      "line": 296,
+      "signature": "theorem su5_adjoint_blocks_irreducible : (∀ p : Fin 2, let n",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D.su5_adjoint_decomposition": {
+      "module": "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D",
+      "name": "D5.S3.Quantum.Gauge.SU5SO10GrandUnification4D.su5_adjoint_decomposition",
+      "kind": "theorem",
+      "statement_id": "sha256:2055ccf7e9d9f849b65fa76d657307e58c3ac0beaf56c610ca2a4ddc926eff33",
+      "line": 179,
+      "signature": "theorem su5_adjoint_decomposition (M : M5) (hM : M.trace = 0) : ∃! p : M3 × M2 × ℂ × ColorWeak × WeakColor, p.1.trace = 0 ∧ p.2.1.trace = 0 ∧ adjointBlocks p.1 p.2.1 p.2.2.1 p.2.2.2.1 p.2.2.2.2 = M",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D.su5_adjoint_dimensions": {
+      "module": "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D",
+      "name": "D5.S3.Quantum.Gauge.SU5SO10GrandUnification4D.su5_adjoint_dimensions",
+      "kind": "theorem",
+      "statement_id": "sha256:2055ccf7e9d9f849b65fa76d657307e58c3ac0beaf56c610ca2a4ddc926eff33",
+      "line": 224,
+      "signature": "theorem su5_adjoint_dimensions : Module.finrank ℂ (TraceFree 5) = 24 ∧ Module.finrank ℂ (TraceFree 3) = 8 ∧ Module.finrank ℂ (TraceFree 2) = 3 ∧ Module.finrank ℂ ColorWeak = 6 ∧ Module.finrank ℂ WeakColor = 6",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D.su5_adjoint_hypercharge_eigenvalues": {
+      "module": "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D",
+      "name": "D5.S3.Quantum.Gauge.SU5SO10GrandUnification4D.su5_adjoint_hypercharge_eigenvalues",
+      "kind": "theorem",
+      "statement_id": "sha256:2055ccf7e9d9f849b65fa76d657307e58c3ac0beaf56c610ca2a4ddc926eff33",
+      "line": 342,
+      "signature": "theorem su5_adjoint_hypercharge_eigenvalues (i j : Fin 5) : commutator YSM (E i j) = (adjointY i j : ℂ) • E i j ∧ adjointY i j = if i.val < 3 then (if j.val < 3 then 0 else -5/6) else (if j.val < 3 then 5/6 else 0)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D.su5_b_minus_l_conserved": {
+      "module": "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D",
+      "name": "D5.S3.Quantum.Gauge.SU5SO10GrandUnification4D.su5_b_minus_l_conserved",
+      "kind": "theorem",
+      "statement_id": "sha256:2055ccf7e9d9f849b65fa76d657307e58c3ac0beaf56c610ca2a4ddc926eff33",
+      "line": 570,
+      "signature": "theorem su5_b_minus_l_conserved (i j : Fin 5) : (∀ a b : Fin 5, dualAction (E i j) a b ≠ 0 → dualBMinusL a = dualBMinusL b + adjointBMinusL i j) ∧ (∀ a b : Fin 10, exteriorAction (E i j) a b ≠ 0 → exteriorBMinusL a = exteriorBMinusL b + adjointBMinusL i j)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D.su5_bar5_plus_10_dim": {
+      "module": "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D",
+      "name": "D5.S3.Quantum.Gauge.SU5SO10GrandUnification4D.su5_bar5_plus_10_dim",
+      "kind": "theorem",
+      "statement_id": "sha256:2055ccf7e9d9f849b65fa76d657307e58c3ac0beaf56c610ca2a4ddc926eff33",
+      "line": 440,
+      "signature": "theorem su5_bar5_plus_10_dim : Module.finrank ℂ ((Fin 5 ⊕ Fin 10) → ℂ) = 15",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D.su5_bar5_plus_10_matches_sm_hypercharges": {
+      "module": "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D",
+      "name": "D5.S3.Quantum.Gauge.SU5SO10GrandUnification4D.su5_bar5_plus_10_matches_sm_hypercharges",
+      "kind": "theorem",
+      "statement_id": "sha256:2055ccf7e9d9f849b65fa76d657307e58c3ac0beaf56c610ca2a4ddc926eff33",
+      "line": 445,
+      "signature": "theorem su5_bar5_plus_10_matches_sm_hypercharges : fermionWeight hyperchargeWeights = sm15Y ∧ fermionWeight weakWeights = sm15T3 ∧ (∑ i, fermionWeight hyperchargeWeights i) = 0 ∧ (∑ i, (fermionWeight hyperchargeWeights i)^3) = 0 ∧ (∑ i, (fermionWeight hyperchargeWeights i)^2) = 10/3 ∧ 2 * fermionWeight hyperchargeWeights 0 + fermionWeight hyperchargeWeights 6 + fermionWeight hyperchargeWeights 9 = 0 ∧ 3 * fermionWeight hyperchargeWeights 0 + fermionWeight hyperchargeWeights 12 = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D.su5_cubic_anomaly_cancellation": {
+      "module": "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D",
+      "name": "D5.S3.Quantum.Gauge.SU5SO10GrandUnification4D.su5_cubic_anomaly_cancellation",
+      "kind": "theorem",
+      "statement_id": "sha256:2055ccf7e9d9f849b65fa76d657307e58c3ac0beaf56c610ca2a4ddc926eff33",
+      "line": 478,
+      "signature": "theorem su5_cubic_anomaly_cancellation (h : Fin 5 → ℝ) (hh : ∑ i, h i = 0) : (∑ i, exteriorWeight h i ^ 3) = ∑ i, h i ^ 3 ∧ (∑ i, dualWeight h i ^ 3) = -(∑ i, h i ^ 3) ∧ (∑ i, exteriorWeight h i ^ 3) + (∑ i, dualWeight h i ^ 3) = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D.su5_electric_charge_traceless": {
+      "module": "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D",
+      "name": "D5.S3.Quantum.Gauge.SU5SO10GrandUnification4D.su5_electric_charge_traceless",
+      "kind": "theorem",
+      "statement_id": "sha256:2055ccf7e9d9f849b65fa76d657307e58c3ac0beaf56c610ca2a4ddc926eff33",
+      "line": 144,
+      "signature": "theorem su5_electric_charge_traceless : Qem = diagonal ![-1/3, -1/3, -1/3, 1, 0] ∧ Qem.trace = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D.su5_embedding_traceless_hermitian": {
+      "module": "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D",
+      "name": "D5.S3.Quantum.Gauge.SU5SO10GrandUnification4D.su5_embedding_traceless_hermitian",
+      "kind": "theorem",
+      "statement_id": "sha256:2055ccf7e9d9f849b65fa76d657307e58c3ac0beaf56c610ca2a4ddc926eff33",
+      "line": 68,
+      "signature": "theorem su5_embedding_traceless_hermitian (A : M3) (B : M2) (s : ℝ) (hA : A.trace = 0) (hB : B.trace = 0) (sA : A.IsHermitian) (sB : B.IsHermitian) : (smEmbedding A B s).trace = 0 ∧ (smEmbedding A B s).IsHermitian",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D.su5_exterior_product_rule": {
+      "module": "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D",
+      "name": "D5.S3.Quantum.Gauge.SU5SO10GrandUnification4D.su5_exterior_product_rule",
+      "kind": "theorem",
+      "statement_id": "sha256:2055ccf7e9d9f849b65fa76d657307e58c3ac0beaf56c610ca2a4ddc926eff33",
+      "line": 397,
+      "signature": "theorem su5_exterior_product_rule (M : M5) (u v : Fin 5 → ℂ) : exteriorAction M *ᵥ wedgeCoords u v = wedgeCoords (M *ᵥ u) v + wedgeCoords u (M *ᵥ v)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D.su5_fermion_weight_actions": {
+      "module": "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D",
+      "name": "D5.S3.Quantum.Gauge.SU5SO10GrandUnification4D.su5_fermion_weight_actions",
+      "kind": "theorem",
+      "statement_id": "sha256:2055ccf7e9d9f849b65fa76d657307e58c3ac0beaf56c610ca2a4ddc926eff33",
+      "line": 409,
+      "signature": "theorem su5_fermion_weight_actions (d : Fin 5 → ℂ) : dualAction (diagonal d) = diagonal (fun i => -d i) ∧ exteriorAction (diagonal d) = diagonal (fun k => d (wedgePair k).1 + d (wedgePair k).2)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D.su5_leptoquark_electric_charges": {
+      "module": "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D",
+      "name": "D5.S3.Quantum.Gauge.SU5SO10GrandUnification4D.su5_leptoquark_electric_charges",
+      "kind": "theorem",
+      "statement_id": "sha256:2055ccf7e9d9f849b65fa76d657307e58c3ac0beaf56c610ca2a4ddc926eff33",
+      "line": 350,
+      "signature": "theorem su5_leptoquark_electric_charges (i : Fin 3) : commutator Qem (E (i.castAdd 2) 3) = (-4/3 : ℂ) • E (i.castAdd 2) 3 ∧ commutator Qem (E (i.castAdd 2) 4) = (-1/3 : ℂ) • E (i.castAdd 2) 4 ∧ commutator Qem (E 3 (i.castAdd 2)) = (4/3 : ℂ) • E 3 (i.castAdd 2) ∧ commutator Qem (E 4 (i.castAdd 2)) = (1/3 : ℂ) • E 4 (i.castAdd 2)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D.su5_sm_blocks_commute": {
+      "module": "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D",
+      "name": "D5.S3.Quantum.Gauge.SU5SO10GrandUnification4D.su5_sm_blocks_commute",
+      "kind": "theorem",
+      "statement_id": "sha256:2055ccf7e9d9f849b65fa76d657307e58c3ac0beaf56c610ca2a4ddc926eff33",
+      "line": 97,
+      "signature": "theorem su5_sm_blocks_commute (A : M3) (B : M2) : Commute (colorBlock A) (weakBlock B) ∧ Commute (colorBlock A) YSM ∧ Commute (weakBlock B) YSM ∧ Commute (colorBlock A) TY ∧ Commute (weakBlock B) TY",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D.su5_sm_embedding_injective": {
+      "module": "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D",
+      "name": "D5.S3.Quantum.Gauge.SU5SO10GrandUnification4D.su5_sm_embedding_injective",
+      "kind": "theorem",
+      "statement_id": "sha256:2055ccf7e9d9f849b65fa76d657307e58c3ac0beaf56c610ca2a4ddc926eff33",
+      "line": 281,
+      "signature": "theorem su5_sm_embedding_injective (A A' : M3) (B B' : M2) (s s' : ℝ) (hA : A.trace = 0) (hA' : A'.trace = 0) (h : smEmbedding A B s = smEmbedding A' B' s') : A = A' ∧ B = B' ∧ s = s'",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D.su5_to_so10_injective": {
+      "module": "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D",
+      "name": "D5.S3.Quantum.Gauge.SU5SO10GrandUnification4D.su5_to_so10_injective",
+      "kind": "theorem",
+      "statement_id": "sha256:2055ccf7e9d9f849b65fa76d657307e58c3ac0beaf56c610ca2a4ddc926eff33",
+      "line": 588,
+      "signature": "theorem su5_to_so10_injective : Function.Injective su5ToSo10",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D.su5_trace_normalization": {
+      "module": "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D",
+      "name": "D5.S3.Quantum.Gauge.SU5SO10GrandUnification4D.su5_trace_normalization",
+      "kind": "theorem",
+      "statement_id": "sha256:2055ccf7e9d9f849b65fa76d657307e58c3ac0beaf56c610ca2a4ddc926eff33",
+      "line": 124,
+      "signature": "theorem su5_trace_normalization : (TY ^ 2).trace = 1/2 ∧ (T3 ^ 2).trace = 1/2 ∧ (TColor8 ^ 2).trace = 1/2 ∧ (YSM ^ 2).trace = 5/6 ∧ (YSM ^ 2).trace / (T3 ^ 2).trace = 5/3",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D.su5_weinberg_angle_from_trace": {
+      "module": "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D",
+      "name": "D5.S3.Quantum.Gauge.SU5SO10GrandUnification4D.su5_weinberg_angle_from_trace",
+      "kind": "theorem",
+      "statement_id": "sha256:2055ccf7e9d9f849b65fa76d657307e58c3ac0beaf56c610ca2a4ddc926eff33",
+      "line": 153,
+      "signature": "theorem su5_weinberg_angle_from_trace : (Qem ^ 2).trace = 4/3 ∧ (T3 ^ 2).trace / (Qem ^ 2).trace = 3/8",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D.suN_antisym_cubic_anomaly": {
+      "module": "D5/S3/Quantum/Gauge/SU5SO10GrandUnification4D",
+      "name": "D5.S3.Quantum.Gauge.SU5SO10GrandUnification4D.suN_antisym_cubic_anomaly",
+      "kind": "theorem",
+      "statement_id": "sha256:2055ccf7e9d9f849b65fa76d657307e58c3ac0beaf56c610ca2a4ddc926eff33",
+      "line": 471,
+      "signature": "theorem suN_antisym_cubic_anomaly (N : ℕ) (h : Fin N → ℝ) (hh : ∑ i, h i = 0) : (∑ i, ∑ j, if i < j then (h i + h j) ^ 3 else 0) = ((N : ℝ) - 4) * ∑ i, h i ^ 3",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
