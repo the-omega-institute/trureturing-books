@@ -281,7 +281,9 @@ $$
 
 若两组补偿速率的支撑并集至多有三个不同值，同一组六点读数可用于较宽的窗口。两组均满足 $\lvert\beta\rvert,\lvert\beta'\rvert\le10^{-3}$ 时，有 $\lvert u-u'\rvert\le2^{142}\|m-m'\|_\infty$（手工推导，`ARGUED`）。两组权重可分别变化，也可在个别速率上为零。
 
-把联合支撑的每个速率加倍，混合差便完全落在采样泛函消去的方向中。即使参照耦合非零，也能在配分积分中提取公共形状权，把曲率差写为带号立方坐标的比值差商。在每个速率槽上，消去取值与一阶速率导数后，零耦合曲率信号由一个正定二次型控制。有限体积段的差商逐项与此二次型比较，大体积尾部由拉普拉斯指数矩控制。所得正下界经 Rolle 定理传到六点行列式，且与槽间距无关。联合支撑有四至六点时，同一窗口内的统一界仍待确定。 [完整推导与精确有理复算](https://github.com/the-omega-institute/trureturing-books/issues/2020#issuecomment-7239476202)
+把联合支撑的每个速率加倍，混合差便完全落在采样泛函消去的方向中。即使参照耦合非零，也能在配分积分中提取公共形状权，把曲率差写为带号立方坐标的比值差商。在每个速率槽上，消去取值与一阶速率导数后，零耦合曲率信号由一个正定二次型控制。有限体积段的差商逐项与此二次型比较，大体积尾部由拉普拉斯指数矩控制。所得正下界经 Rolle 定理传到六点行列式，且与槽间距无关。[完整推导与精确有理复算](https://github.com/the-omega-institute/trureturing-books/issues/2020#issuecomment-7239476202)
+
+当另一组耦合满足 $0\le\beta\le10^{-3}$ 时，两组各至多三个原子的支撑可以独立选取。此时六点界为 $\beta^3\le47\,000\,000\|m-m'\|_\infty$（手工推导，`ARGUED`）。求值速率偏离参照槽时，完整 Wronskian 仍保留速率差的平方项。用它控制曲率交叉项，再将余下的正下界同每个读数的余子式比较。参照耦合非零或另一组耦合为负时，独立支撑在这一窗口内的统一界仍待确定。 [完整推导与有理复算](https://github.com/the-omega-institute/trureturing-books/issues/2020#issuecomment-7239468603)
 
 物理耦合满足 $\lvert\beta-\beta'\rvert^3\le 4\lvert u-u'\rvert$。若每个读数的误差至多为 $\varepsilon$，任何误差预算内的拟合与真实模型的读数相距至多 $2\varepsilon$。因此 $u$ 与 $\beta$ 的最坏误差分别为 $O(\varepsilon)$ 与 $O(\varepsilon^{1/3})$，且两阶都是锐的。固定一个容许的补偿速率，比较 $\beta=\pm h$。读数差按 $h^3$ 缩小，而带号立方坐标与物理耦合的差分别为 $2h^3$ 与 $2h$，故允许达到读数差一半的噪声时，两组都能给出相同的观测。[有限差商推导与有理区间复算](https://github.com/the-omega-institute/trureturing-books/issues/1906#issuecomment-7238707033)
 
