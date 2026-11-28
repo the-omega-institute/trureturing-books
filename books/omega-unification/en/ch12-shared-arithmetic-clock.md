@@ -232,7 +232,7 @@ $$
 |\lambda_k|\ge |e^{i\lambda_k}-1|\ge 2^{-31}1734^{-192\|k\|_\infty}.
 $$
 
-Apply this to differences of modes. Distinct real frequencies in the cube $\|k\|_\infty\le K$ have spacing greater than $2T^{-1/3}$ for sufficiently large $T$. By conjugation it suffices to take $\lambda_k>0$. Under RH the uniform Landau formula at $x=e^{\lambda_k}$, divided by $\sqrt{x}$, gives the phase sum. For the nearest prime power $n$ to $x$ and the von Mangoldt function $\Lambda$, the main term is bounded by a constant times $\Lambda(n)e^{-\lambda_k/2}\min(T,2/|\lambda_k-\log n|)$, using $T$ at equality. The terms at distance at least $T^{-1/3}$ from the logarithm of their nearest prime power are $O(T^{1/3})$. The remaining errors are $O\bigl(\sqrt{x}\log^2(Tx)+\log T/(\sqrt{x}\lambda_k)\bigr)$. There are $O(K^4)$ modes and $\|P\|_2=O(1)$, so the errors and the main terms away from the prime powers sum to $o(T)$ after weighting by the Fourier coefficients. [Uniform Landau formula, equation (1.6)](https://arxiv.org/abs/0805.2745)
+Apply this to differences of modes. Distinct real frequencies in the cube $\|k\|_\infty\le K$ have spacing greater than $2T^{-1/3}$ for sufficiently large $T$. By conjugation it suffices to take $\lambda_k>0$. Under RH the uniform Landau formula at $x=e^{\lambda_k}$, divided by $\sqrt{x}$, gives the phase sum. For the nearest prime power $n$ to $x$ and the von Mangoldt function $\Lambda$, the main term is bounded by a constant times $\Lambda(n)e^{-\lambda_k/2}\min(T,2/|\lambda_k-\log n|)$, using $T$ at equality. Comparison with a nearby power of two gives $n\le2x$. Thus $\Lambda(n)e^{-\lambda_k/2}\le\log(2x)/\sqrt{x}=O(1)$, and the terms at distance at least $T^{-1/3}$ from the logarithm of their nearest prime power are $O(T^{1/3})$. The remaining errors are $O\bigl(\sqrt{x}\log^2(Tx)+\log T/(\sqrt{x}\lambda_k)\bigr)$. There are $O(K^4)$ modes and $\|P\|_2=O(1)$, so the errors and the main terms away from the prime powers sum to $o(T)$ after weighting by the Fourier coefficients. [Uniform Landau formula, Lemma 1](https://arxiv.org/abs/math/0405459) · [Equation (1.6)](https://arxiv.org/abs/0805.2745)
 
 Among modes within $T^{-1/3}$ of the logarithm of their nearest prime power, each prime power matches at most one positive frequency. Fix a dyadic shell $M$ and an interval $j\le\lambda_k<j+1$. The group has at most $O(\min(e^j,M^4))$ terms. Each main term divided by $T$ is $O((j+1)e^{-j/2})$. By Cauchy–Schwarz, the group's weighted contribution divided by $T$ is
 
@@ -243,14 +243,14 @@ $$
 Summing over $j\ge0$ gives $O(M^{-1/2}(1+\log M)^2)$, which is summable over dyadic $M$. The two bracketing polynomials thus give the same leading term $\mu(W)N(T)$. The error from their constant terms is $O(N(T)/K)=O(T)$. Substituting the unfiltered counting main term gives the stated window remainder. The preceding partial summation formula yields $D_H=O(1/\log H)$. For every shared-clock kernel $f_v(s)=(1+v^2s^2)^{-1}$ the readout error is consequently bounded by $O(1/\log H)\,v^2/(1+v^2)$, with a constant uniform in $v$.
 
 ::: {.problem #prob-ou-ch12-windowed-haar-rate title="Explicit Remainders for a Fixed Haar Phase Window"}
-Let $W$ be the fixed Haar acceptance region in Chapter 2, whose boundary has Haar measure zero. Set $c=\mu(W)/(2\pi)$ for normalized Haar measure $\mu$. For a prescribed starting height $H\ge 2\pi$, find a checkable constant $b_H$ satisfying $3b_H/c<L_H$ and, with $m(t)$ as above,
+Let $W$ be the fixed Haar acceptance region in Chapter 2, whose boundary has Haar measure zero. Set $c=\mu(W)/(2\pi)$ for normalized Haar measure $\mu$. Determine which starting heights $H\ge2\pi$ admit a checkable constant $b_H$ satisfying $3b_H/c<L_H$ and, with $m(t)$ as above,
 
 $$
 |A_W(t)-c\,m(t)|\le b_Ht
 \qquad\text{for all }t\ge H
 $$
 
-and substitute it into the finite-height error formula for shared-clock readings. Can the same order of remainder be proved without invoking RH?
+For those heights, give such a constant and substitute it into the shared-clock error formula. If $0\le\log(H/(2\pi))\le1/2$, taking $t=H$ and using $A_W(H)\ge0$ gives $3b_H/c\ge3(1-\log(H/(2\pi)))\ge L_H$. Can the same order of remainder be proved without invoking RH?
 :::
 
 **Limits of fixed-mode convergence (`ARGUED`).** Two constructed height sequences separate the counting assumptions for this acceptance region. Begin with the integer quantiles of the unfiltered main term. Integrating the centered counting error on each quantile interval gives $O(T/\log T)$ for each fixed nonzero Fourier mode. Then choose a small smooth patch of the acceptance boundary transverse to the phase flow. Continuous torus equidistribution gives a number of crossings proportional to the length of each sufficiently large dyadic height interval. At each crossing, use a strictly increasing local time change to move heights from a short interval just outside the region into it. The displacements and interval lengths are of order $(\log T)^{-3/4}$.
