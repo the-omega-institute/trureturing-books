@@ -5,7 +5,7 @@
 This final chapter of Volume I lays out the analytic number-theoretic bedrock of the monograph, placing **formally verified global theorems** right beside **certified finite-window computations**. We proceed in four steps:
 
 1. State the exact **external formalized status** of the classical Riemann Hypothesis (RH) and Dirichlet GRH, and establish the Lean-verified Fejér critical-gap and Cayley unit-circle criteria;
-2. Walk through the frozen Lean 4 analytic chain linking harmonic pair-moment ratios, reciprocal-time and periodic phase deficits, unconditional Landau left/right vertical contour bounds, and the Gaussian hard-band collision limit $1/\sqrt{\pi}$;
+2. Walk through the frozen Lean 4 analytic chain linking harmonic pair-moment ratios, reciprocal-time and periodic phase deficits, unconditional Landau left/right vertical contour bounds, and the Gaussian hard-band collision limit $1/\sqrt{\pi}$, and identify the cutoff endpoint term for a fixed arc mode;
 3. Zoom into two concrete finite zero landmarks—the 19-zero neighborhood of zero #11431 in $[10000, 12999]$ (midpoint isolation, $94.62\%$ diagonal Fejér weight, $23.657\% / 23.670\%$ maximal extra-pair share, finite observation radii $111521$ and $111532$) and the first triple-window hits #8236 and #8359;
 4. Draw the honest boundary separating global harmonic average bounds from single-zero clock selection.
 
@@ -98,6 +98,21 @@ Unconditionally (without assuming RH):
 ::: proof
 For part 1, the functional equation of $\zeta$ decomposes $-\zeta'(s)/\zeta(s) = \log(\frac{3}{4} + iu) + r(u)$, where digamma recurrence, Binet bounds, and the absolutely convergent series on the reflected line $\operatorname{Re}(1 - s) = \frac{5}{4}$ imply $|r(u)| \le 80$. Factoring out $x^{-1/4}$, the remainder integrates to at most $80(V - 1)$, while integrating the logarithm by parts against the antiderivative $e^{iu\log x}/(i\log x)$ using $|\frac{d}{du}\log(\frac{3}{4} + iu)| \le 1/u$ yields $\frac{20(1 + \log V)}{\log x}$. For part 2, integrating the von Mangoldt Dirichlet series term by term on $\operatorname{Re} s = c > 1$, the integer nearest to $x$ is bounded by the interval length (with $\Lambda(1) = 0$ if nearest to $1$), remaining integers in $[x/2, 2x]$ obey $|\log x - \log n| \ge |x - n|/(2x)$ and sum to two harmonic tails, integers outside $[x/2, 2x]$ satisfy $|\log x - \log n| \ge 1/2$, and $x^c \le 3x$ closes the estimate. The full proof is checked by the Lean kernel.
 :::
+
+The [Weyl average in §2.3](ch02-quaternion-clocks-and-haar-zeros.md#sec-ou-2-3) uses the zero sum at a fixed nonzero angular frequency $\lambda$. Write $S_\lambda(T)=\sum_{0<\gamma\le T}e^{i\lambda\gamma}$, counting analytic multiplicity and including the upper endpoint. Suppose $\Lambda(e^{|\lambda|})=0$, where $\Lambda$ is the von Mangoldt function. Under RH, as $T\to\infty$ through all real heights, a direct derivation gives (`ARGUED`)
+
+$$
+S_\lambda(T)=\frac{e^{i\lambda T}}{2\pi i\lambda}\log\frac{T}{2\pi}
+  +O_\lambda\!\left(\frac{\log T}{\log\log T}\right).
+$$
+
+The algebraic arc phases ensure $\Lambda(e^{|\lambda|})=0$ for every nonzero integer mode of the shell. [§2.3](ch02-quaternion-clocks-and-haar-zeros.md#sec-ou-2-3)
+
+Convolve the indicator of $(0,T]$ with the nonnegative unit-mass kernel $K_B(u)=\frac{3B}{8\pi}\bigl(\frac{\sin(Bu/4)}{Bu/4}\bigr)^4$, then multiply by $e^{i\lambda u}$. The kernel has angular Fourier support $[-B,B]$, so the prime-power terms in the Guinand–Weil explicit formula sample signed logarithmic frequencies $\pm\log n$ within $B$ of $\lambda$. Each term contains $\int_0^T e^{i(\lambda\mp\log n)v}\,dv$, which is bounded uniformly in $T$ because the fixed frequency is a positive distance from the prime-power frequencies. Summing the prime-power terms costs $O_\lambda((1+B)e^{B/2})$. The kernel's decay along the two horizontal lines through $\pm i/2$ bounds the pole terms by $O_\lambda(e^{B/2})$. [Carneiro, Chandee, and Milinovich, Lemma 5](https://arxiv.org/pdf/1309.1526#page=6)
+
+Translating the window by $u$ affects only the zeros within $|u|$ of its two endpoints. When $|u|\le T/2$, the zero-count remainder under RH bounds their combined number by $O(|u|\log T+\log T/\log\log T)$, with endpoints included. For larger $|u|$ the global count gives $O(|u|\log(2+|u|))$. Averaging against $K_B$, whose first absolute moment is $O(1/B)$ and whose tails decay as $|u|^{-4}$, recovers the sharp cutoff at a cost of $O(\log T/B+\log T/\log\log T)$. [Carneiro, Chandee, and Milinovich, Section 1 and Theorem 1](https://arxiv.org/pdf/1503.00955)
+
+Restoring the sharp cutoff in the integral against the gamma density $\bigl(\operatorname{Re}(\Gamma^\prime/\Gamma)(1/4+it/2)-\log\pi\bigr)/(2\pi)$ costs $O(\log T/B)$. For $t\ge 1$ this density is $\log(t/(2\pi))/(2\pi)+O(t^{-2})$. Integration by parts gives the displayed endpoint term with an $O_\lambda(1)$ error, since the remaining oscillatory integral $\int_1^T e^{i\lambda t}\,dt/t$ is bounded. Taking $B=\log\log T$ gives the stated remainder. Thus $|S_\lambda(T)|/\log T$ converges to $1/(2\pi|\lambda|)$ for the fixed mode. The collision estimates in the next section call for control across a frequency band that varies with $T$. [NIST DLMF, Eq. 5.11.2](https://dlmf.nist.gov/5.11.E2)
 
 ## 3.3 Periodic Phase Deficits, Landau Window Transfer, and the $1/\sqrt{\pi}$ Collision Limit {#sec-ou-3-3}
 

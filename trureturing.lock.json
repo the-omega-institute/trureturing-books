@@ -2,8 +2,8 @@
   "schema": "trureturing-books.lock.v1",
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
-  "commit": "d62fe655143e32365cbd5eb47a2a5498d5de3931",
-  "pinned_at": "2026-11-28T09:52:23Z",
+  "commit": "b43d24224c82152f8472894ca106fece25c872a0",
+  "pinned_at": "2026-11-28T10:34:34Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -10632,6 +10632,175 @@
       "statement_id": "sha256:23a9b9c36c1416863f576ba5b67d409c040f705134b8d3e6a69339a4767210c2",
       "line": 271,
       "signature": "theorem wave_typeN (A : ℝ) (hA : A ≠ 0) (p : Point) : (∀ z : ℂ, quarticEval (some z) (weylQuarticEquiv (waveWeyl A)) = 0 ↔ z = 0) ∧ quarticEval none (weylQuarticEquiv (waveWeyl A)) ≠ 0 ∧ (((weylQuarticEquiv (waveWeyl A) : WeylQuartic) : ℂ[X]).rootMultiplicity 0 = 4) ∧ frame A p *ᵥ nullGenerator (some 0) = ![0, √2, 0, 0]",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PetrovBelRobinsonSuperenergy4D.belRobinson_completely_traceless": {
+      "module": "D5/S3/Geometry/Lorentz/PetrovBelRobinsonSuperenergy4D",
+      "name": "D5.S3.Geometry.Lorentz.PetrovBelRobinsonSuperenergy4D.belRobinson_completely_traceless",
+      "kind": "theorem",
+      "statement_id": "sha256:9ad6e65daef2080eaf0b99d2886895ed3130ebd3313a2d3104e56d4ac4fa6d1d",
+      "line": 329,
+      "signature": "theorem belRobinson_completely_traceless (ψ : Fin 5 → ℂ) (u : Fin 4 → V4) (i j : Fin 4) (hij : i ≠ j) : ∑ μ, metricSign μ * (belRobinsonComplex ψ (Function.update (Function.update u i (coordinateVector μ)) j (coordinateVector μ))).re = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PetrovBelRobinsonSuperenergy4D.belRobinson_dominant_superenergy_condition": {
+      "module": "D5/S3/Geometry/Lorentz/PetrovBelRobinsonSuperenergy4D",
+      "name": "D5.S3.Geometry.Lorentz.PetrovBelRobinsonSuperenergy4D.belRobinson_dominant_superenergy_condition",
+      "kind": "theorem",
+      "statement_id": "sha256:9ad6e65daef2080eaf0b99d2886895ed3130ebd3313a2d3104e56d4ac4fa6d1d",
+      "line": 251,
+      "signature": "theorem belRobinson_dominant_superenergy_condition (ψ : Fin 5 → ℂ) (u : Fin 4 → V4) (hu : ∀ i, futureCausal (u i)) : 0 ≤ (belRobinsonComplex ψ u).re",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PetrovBelRobinsonSuperenergy4D.belRobinson_electric_magnetic_density": {
+      "module": "D5/S3/Geometry/Lorentz/PetrovBelRobinsonSuperenergy4D",
+      "name": "D5.S3.Geometry.Lorentz.PetrovBelRobinsonSuperenergy4D.belRobinson_electric_magnetic_density",
+      "kind": "theorem",
+      "statement_id": "sha256:9ad6e65daef2080eaf0b99d2886895ed3130ebd3313a2d3104e56d4ac4fa6d1d",
+      "line": 419,
+      "signature": "theorem belRobinson_electric_magnetic_density (C : WeylNullScreen.Weyl4) : let E",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PetrovBelRobinsonSuperenergy4D.belRobinson_so2_duality_invariant": {
+      "module": "D5/S3/Geometry/Lorentz/PetrovBelRobinsonSuperenergy4D",
+      "name": "D5.S3.Geometry.Lorentz.PetrovBelRobinsonSuperenergy4D.belRobinson_so2_duality_invariant",
+      "kind": "theorem",
+      "statement_id": "sha256:9ad6e65daef2080eaf0b99d2886895ed3130ebd3313a2d3104e56d4ac4fa6d1d",
+      "line": 165,
+      "signature": "theorem belRobinson_so2_duality_invariant (ψ : Fin 5 → ℂ) (θ : ℝ) (u₁ u₂ u₃ u₄ : V4) : belRobinson (Complex.exp ((θ : ℂ) * Complex.I) • ψ) u₁ u₂ u₃ u₄ = belRobinson ψ u₁ u₂ u₃ u₄",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PetrovBelRobinsonSuperenergy4D.belRobinson_super_poynting_bound": {
+      "module": "D5/S3/Geometry/Lorentz/PetrovBelRobinsonSuperenergy4D",
+      "name": "D5.S3.Geometry.Lorentz.PetrovBelRobinsonSuperenergy4D.belRobinson_super_poynting_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:9ad6e65daef2080eaf0b99d2886895ed3130ebd3313a2d3104e56d4ac4fa6d1d",
+      "line": 461,
+      "signature": "theorem belRobinson_super_poynting_bound (ψ : Fin 5 → ℂ) : superPoynting ψ 0 ^ 2 + superPoynting ψ 1 ^ 2 + superPoynting ψ 2 ^ 2 ≤ superenergy ψ ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PetrovBelRobinsonSuperenergy4D.belRobinson_superenergy_positive_definite": {
+      "module": "D5/S3/Geometry/Lorentz/PetrovBelRobinsonSuperenergy4D",
+      "name": "D5.S3.Geometry.Lorentz.PetrovBelRobinsonSuperenergy4D.belRobinson_superenergy_positive_definite",
+      "kind": "theorem",
+      "statement_id": "sha256:9ad6e65daef2080eaf0b99d2886895ed3130ebd3313a2d3104e56d4ac4fa6d1d",
+      "line": 383,
+      "signature": "theorem belRobinson_superenergy_positive_definite (ψ : Fin 5 → ℂ) : superenergy ψ = ‖ψ 0‖ ^ 2 + 4 * ‖ψ 1‖ ^ 2 + 6 * ‖ψ 2‖ ^ 2 + 4 * ‖ψ 3‖ ^ 2 + ‖ψ 4‖ ^ 2 ∧ 0 ≤ superenergy ψ ∧ (superenergy ψ = 0 ↔ ψ = 0)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PetrovBelRobinsonSuperenergy4D.belRobinson_totally_symmetric_and_real": {
+      "module": "D5/S3/Geometry/Lorentz/PetrovBelRobinsonSuperenergy4D",
+      "name": "D5.S3.Geometry.Lorentz.PetrovBelRobinsonSuperenergy4D.belRobinson_totally_symmetric_and_real",
+      "kind": "theorem",
+      "statement_id": "sha256:9ad6e65daef2080eaf0b99d2886895ed3130ebd3313a2d3104e56d4ac4fa6d1d",
+      "line": 155,
+      "signature": "theorem belRobinson_totally_symmetric_and_real (ψ : Fin 5 → ℂ) (u : Fin 4 → V4) : (belRobinsonComplex ψ u).im = 0 ∧ (∀ σ : Equiv.Perm (Fin 4), belRobinsonComplex ψ (u ∘ σ) = belRobinsonComplex ψ u) ∧ belRobinsonMultilinear ψ u = (belRobinsonComplex ψ u).re",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PetrovBelRobinsonSuperenergy4D.belRobinson_typeN_and_typeD_flux": {
+      "module": "D5/S3/Geometry/Lorentz/PetrovBelRobinsonSuperenergy4D",
+      "name": "D5.S3.Geometry.Lorentz.PetrovBelRobinsonSuperenergy4D.belRobinson_typeN_and_typeD_flux",
+      "kind": "theorem",
+      "statement_id": "sha256:9ad6e65daef2080eaf0b99d2886895ed3130ebd3313a2d3104e56d4ac4fa6d1d",
+      "line": 521,
+      "signature": "theorem belRobinson_typeN_and_typeD_flux (c : ℂ) : superenergy (psiN c) = ‖c‖ ^ 2 ∧ superPoynting (psiN c) = ![0, 0, -(‖c‖ ^ 2)] ∧ √(superPoynting (psiN c) 0 ^ 2 + superPoynting (psiN c) 1 ^ 2 + superPoynting (psiN c) 2 ^ 2) = superenergy (psiN c) ∧ superenergy (psiD c) = 6 * ‖c‖ ^ 2 ∧ superPoynting (psiD c) = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PetrovBelRobinsonSuperenergy4D.future_causal_spinor_decomposition": {
+      "module": "D5/S3/Geometry/Lorentz/PetrovBelRobinsonSuperenergy4D",
+      "name": "D5.S3.Geometry.Lorentz.PetrovBelRobinsonSuperenergy4D.future_causal_spinor_decomposition",
+      "kind": "theorem",
+      "statement_id": "sha256:9ad6e65daef2080eaf0b99d2886895ed3130ebd3313a2d3104e56d4ac4fa6d1d",
+      "line": 187,
+      "signature": "theorem future_causal_spinor_decomposition (v : V4) (h : futureCausal v) : ∃ α β : Fin 2 → ℂ, σMat v = rankOne α + rankOne β",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PetrovBelRobinsonSuperenergy4D.pauli_positive_semidefinite_iff": {
+      "module": "D5/S3/Geometry/Lorentz/PetrovBelRobinsonSuperenergy4D",
+      "name": "D5.S3.Geometry.Lorentz.PetrovBelRobinsonSuperenergy4D.pauli_positive_semidefinite_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:9ad6e65daef2080eaf0b99d2886895ed3130ebd3313a2d3104e56d4ac4fa6d1d",
+      "line": 234,
+      "signature": "theorem pauli_positive_semidefinite_iff (v : V4) : (σMat v).PosSemidef ↔ futureCausal v",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PetrovBelRobinsonSuperenergy4D.petrov_coulomb_and_wave_spinors": {
+      "module": "D5/S3/Geometry/Lorentz/PetrovBelRobinsonSuperenergy4D",
+      "name": "D5.S3.Geometry.Lorentz.PetrovBelRobinsonSuperenergy4D.petrov_coulomb_and_wave_spinors",
+      "kind": "theorem",
+      "statement_id": "sha256:9ad6e65daef2080eaf0b99d2886895ed3130ebd3313a2d3104e56d4ac4fa6d1d",
+      "line": 65,
+      "signature": "theorem petrov_coulomb_and_wave_spinors (M r A : ℝ) : spinorOfWeyl (KerrSchildWeylDoubleCopy4D.schwarzschildWeyl M r) = psiD (4 * (M / r ^ 3 : ℝ)) ∧ sl2cAct (!![0, -1; 1, 0] : Matrix (Fin 2) (Fin 2) ℂ) (spinorOfWeyl (PerturbedCausalOrderWeyl4D.waveWeyl A)) = psiN (-4 * (A : ℂ))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PetrovBelRobinsonSuperenergy4D.weyl_spinor_electric_magnetic": {
+      "module": "D5/S3/Geometry/Lorentz/PetrovBelRobinsonSuperenergy4D",
+      "name": "D5.S3.Geometry.Lorentz.PetrovBelRobinsonSuperenergy4D.weyl_spinor_electric_magnetic",
+      "kind": "theorem",
+      "statement_id": "sha256:9ad6e65daef2080eaf0b99d2886895ed3130ebd3313a2d3104e56d4ac4fa6d1d",
+      "line": 82,
+      "signature": "theorem weyl_spinor_electric_magnetic (C : WeylNullScreen.Weyl4) : let E",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/PetrovBelRobinsonSuperenergy4D.weyl_spinor_null_screen": {
+      "module": "D5/S3/Geometry/Lorentz/PetrovBelRobinsonSuperenergy4D",
+      "name": "D5.S3.Geometry.Lorentz.PetrovBelRobinsonSuperenergy4D.weyl_spinor_null_screen",
+      "kind": "theorem",
+      "statement_id": "sha256:9ad6e65daef2080eaf0b99d2886895ed3130ebd3313a2d3104e56d4ac4fa6d1d",
+      "line": 57,
+      "signature": "theorem weyl_spinor_null_screen (C : WeylNullScreen.Weyl4) (z : ℂ) : weylSpinorForm (spinorOfWeyl C) ![z, 1] ![z, 1] ![z, 1] ![z, 1] = WeylNullScreen.complexTide C.val (some z)",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -22999,6 +23168,136 @@
       "statement_id": "sha256:60a95dea3ede249391870a237eff1ded36bbef8c28a35aec225d7c96d2f62c49",
       "line": 316,
       "signature": "theorem sommerfeld_strictly_increasing_in_k {m ζ : ℝ} {n k₁ k₂ : ℕ} (hm : 0 < m) (hk : k₁ < k₂) (hk₂ : k₂ ≤ n) (hζ : 0 < ζ) (hζk : ζ < (k₁ : ℝ)) : sommerfeldEnergy m n k₁ ζ < sommerfeldEnergy m n k₂ ζ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/DiracLandauEulerHeisenberg4D.dirac_g2_zero_mode_iff": {
+      "module": "D5/S3/Quantum/Gauge/DiracLandauEulerHeisenberg4D",
+      "name": "D5.S3.Quantum.Gauge.DiracLandauEulerHeisenberg4D.dirac_g2_zero_mode_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:374f8bbb52d39cf7dd9bfcf5d8c1393ac4806d3c2e67b7ca535c21880603bc04",
+      "line": 41,
+      "signature": "theorem dirac_g2_zero_mode_iff (m pz qB g : ℝ) (hq : 0 < qB) : (qB * (2 * (0 : ℝ) + 1 - g * (1 / 2)) = 0 ↔ g = 2) ∧ (landauEnergySq m pz qB g 0 (1 / 2) = m ^ 2 + pz ^ 2 ↔ g = 2)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/DiracLandauEulerHeisenberg4D.dirac_landau_exact_twofold_degeneracy": {
+      "module": "D5/S3/Quantum/Gauge/DiracLandauEulerHeisenberg4D",
+      "name": "D5.S3.Quantum.Gauge.DiracLandauEulerHeisenberg4D.dirac_landau_exact_twofold_degeneracy",
+      "kind": "theorem",
+      "statement_id": "sha256:374f8bbb52d39cf7dd9bfcf5d8c1393ac4806d3c2e67b7ca535c21880603bc04",
+      "line": 52,
+      "signature": "theorem dirac_landau_exact_twofold_degeneracy (m pz qB : ℝ) (hq : 0 < qB) (k n : ℕ) (σ : ℝ) (hσ : σ = 1 / 2 ∨ σ = -(1 / 2)) : landauEnergySq m pz qB 2 n σ = m ^ 2 + pz ^ 2 + 2 * (k : ℝ) * qB ↔ (n = k ∧ σ = 1 / 2) ∨ (0 < k ∧ n = k - 1 ∧ σ = -(1 / 2))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/DiracLandauEulerHeisenberg4D.dirac_landau_squared_energy_modes": {
+      "module": "D5/S3/Quantum/Gauge/DiracLandauEulerHeisenberg4D",
+      "name": "D5.S3.Quantum.Gauge.DiracLandauEulerHeisenberg4D.dirac_landau_squared_energy_modes",
+      "kind": "theorem",
+      "statement_id": "sha256:374f8bbb52d39cf7dd9bfcf5d8c1393ac4806d3c2e67b7ca535c21880603bc04",
+      "line": 184,
+      "signature": "theorem dirac_landau_squared_energy_modes (m pz qB ky : ℝ) (hq : 0 < qB) (n : ℕ) (i : Fin 2) : let f",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/DiracLandauEulerHeisenberg4D.dirac_pauli_square_identity": {
+      "module": "D5/S3/Quantum/Gauge/DiracLandauEulerHeisenberg4D",
+      "name": "D5.S3.Quantum.Gauge.DiracLandauEulerHeisenberg4D.dirac_pauli_square_identity",
+      "kind": "theorem",
+      "statement_id": "sha256:374f8bbb52d39cf7dd9bfcf5d8c1393ac4806d3c2e67b7ca535c21880603bc04",
+      "line": 156,
+      "signature": "theorem dirac_pauli_square_identity (qB : ℝ) : (∀ i : Fin 3, (γ i.succ).submatrix (Fin.castAdd 2) (Fin.natAdd 2) = (![pauliX, pauliY, pauliZ] : Fin 3 → Matrix (Fin 2) (Fin 2) ℂ) i) ∧ (∀ (A : Type) [Ring A] [Algebra ℂ A] (px py x : A), px * py = py * px → px * x - x * px = algebraMap ℂ A (-Complex.I) → let πy",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/DiracLandauEulerHeisenberg4D.euler_heisenberg_breaks_em_duality": {
+      "module": "D5/S3/Quantum/Gauge/DiracLandauEulerHeisenberg4D",
+      "name": "D5.S3.Quantum.Gauge.DiracLandauEulerHeisenberg4D.euler_heisenberg_breaks_em_duality",
+      "kind": "theorem",
+      "statement_id": "sha256:374f8bbb52d39cf7dd9bfcf5d8c1393ac4806d3c2e67b7ca535c21880603bc04",
+      "line": 253,
+      "signature": "theorem euler_heisenberg_breaks_em_duality (E B : V3) : (∀ θ : ℝ, let EB",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/DiracLandauEulerHeisenberg4D.euler_heisenberg_coth_quartic_limit": {
+      "module": "D5/S3/Quantum/Gauge/DiracLandauEulerHeisenberg4D",
+      "name": "D5.S3.Quantum.Gauge.DiracLandauEulerHeisenberg4D.euler_heisenberg_coth_quartic_limit",
+      "kind": "theorem",
+      "statement_id": "sha256:374f8bbb52d39cf7dd9bfcf5d8c1393ac4806d3c2e67b7ca535c21880603bc04",
+      "line": 481,
+      "signature": "theorem euler_heisenberg_coth_quartic_limit : Tendsto cothQuarticQuotient (𝓝[≠] 0) (𝓝 (-(1 / 45)))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/DiracLandauEulerHeisenberg4D.euler_heisenberg_lorentz_and_cp_invariance": {
+      "module": "D5/S3/Quantum/Gauge/DiracLandauEulerHeisenberg4D",
+      "name": "D5.S3.Quantum.Gauge.DiracLandauEulerHeisenberg4D.euler_heisenberg_lorentz_and_cp_invariance",
+      "kind": "theorem",
+      "statement_id": "sha256:374f8bbb52d39cf7dd9bfcf5d8c1393ac4806d3c2e67b7ca535c21880603bc04",
+      "line": 211,
+      "signature": "theorem euler_heisenberg_lorentz_and_cp_invariance (α m : ℝ) (E B : V3) : (∀ Λ : M4, Λᵀ * eta4 * Λ = eta4 → Λ.det = 1 → let EB",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/DiracLandauEulerHeisenberg4D.euler_heisenberg_proper_time_quartic_coeff": {
+      "module": "D5/S3/Quantum/Gauge/DiracLandauEulerHeisenberg4D",
+      "name": "D5.S3.Quantum.Gauge.DiracLandauEulerHeisenberg4D.euler_heisenberg_proper_time_quartic_coeff",
+      "kind": "theorem",
+      "statement_id": "sha256:374f8bbb52d39cf7dd9bfcf5d8c1393ac4806d3c2e67b7ca535c21880603bc04",
+      "line": 500,
+      "signature": "theorem euler_heisenberg_proper_time_quartic_coeff (e m B : ℝ) (hm : 0 < m) : magneticProperTimeMoment m = 1 / m ^ 4 ∧ let α",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/DiracLandauEulerHeisenberg4D.schwinger_pair_production_series_and_essential_singularity": {
+      "module": "D5/S3/Quantum/Gauge/DiracLandauEulerHeisenberg4D",
+      "name": "D5.S3.Quantum.Gauge.DiracLandauEulerHeisenberg4D.schwinger_pair_production_series_and_essential_singularity",
+      "kind": "theorem",
+      "statement_id": "sha256:374f8bbb52d39cf7dd9bfcf5d8c1393ac4806d3c2e67b7ca535c21880603bc04",
+      "line": 552,
+      "signature": "theorem schwinger_pair_production_series_and_essential_singularity (e m : ℝ) (he : 0 < e) (hm : 0 < m) : (∀ E : ℝ, 0 < E → Summable (schwingerSummand e m E) ∧ ((e * E) ^ 2 / (4 * Real.pi ^ 3)) * Real.exp (-(Real.pi * m ^ 2 / (e * E))) ≤ schwingerRate e m E ∧ schwingerRate e m E ≤ ((e * E) ^ 2 / (24 * Real.pi)) * Real.exp (-(Real.pi * m ^ 2 / (e * E)))) ∧ ∀ k : ℕ, Tendsto (fun E => schwingerRate e m E / E ^ k) (𝓝[>] 0) (𝓝 0)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/DiracLandauEulerHeisenberg4D.vacuum_birefringence_indices_and_subluminality": {
+      "module": "D5/S3/Quantum/Gauge/DiracLandauEulerHeisenberg4D",
+      "name": "D5.S3.Quantum.Gauge.DiracLandauEulerHeisenberg4D.vacuum_birefringence_indices_and_subluminality",
+      "kind": "theorem",
+      "statement_id": "sha256:374f8bbb52d39cf7dd9bfcf5d8c1393ac4806d3c2e67b7ca535c21880603bc04",
+      "line": 395,
+      "signature": "theorem vacuum_birefringence_indices_and_subluminality (α m e B : ℝ) (hα : 0 < α) (hm : 0 < m) (hB : 0 < B) (he : α = e ^ 2 / (4 * Real.pi)) : let u",
       "axioms": [
         "Classical.choice",
         "Quot.sound",

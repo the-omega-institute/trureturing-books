@@ -88,6 +88,10 @@ $$
 
 从单位圆上的点 $1$ 指向 $e^{it_1},e^{it_2}$ 的两条弦不共线，所以每个通道的两次读数唯一确定 $\operatorname{Re}z_j,\operatorname{Im}z_j$。三组概率各自归一，故 $\sum_j z_j=0$。这样便能预言其余相位的读数。要判定这些读数是否来自同一制备，还须检验正性。
 
+若三次曝光都有误差，怎样选相位才能稳健地读出一个通道？把参考相位也算作一次等权曝光。令 $x=(\operatorname{Re}z_j,\operatorname{Im}z_j)^T$，矩阵 $U$ 的第 $k$ 行为 $u_k^T=(\cos t_k,-\sin t_k)$。三次读数合成 $y=a\mathbf1+(2/3)Ux+e$，其中 $a=p_j-(2/3)\operatorname{Re}z_j$ 未知，$\|e\|_2\le\epsilon$。减去三个读数的均值相当于乘 $H=I-\mathbf1\mathbf1^T/3$。在这个仿射模型中，沿 $HU$ 的最弱奇异方向反演，误差最多为 $3\epsilon/(2\sigma_{\min}(HU))$，沿对应左奇异方向的噪声恰能取等。
+
+因此应让两条正交方向都尽量容易测量。两奇异值的平方和为 $3-\|\sum_k u_k\|^2/3\le3$，较小者的平方至多为 $3/2$。取等要求三个单位向量之和为零，两两内积便都是 $-1/2$。反过来，选 $0,\pm2\pi/3$ 时，$U$ 的两列均值为零、互相正交且平方范数均为 $3/2$。于是直接用 $U^Ty$ 即可重建，最坏误差为 $\sqrt{3/2}\,\epsilon$；在参考相位固定时，只有这一对相位（次序任意）达到最优放大率。[共用参考读数的误差与正性取等算例](https://github.com/the-omega-institute/trureturing-books/issues/1649#issuecomment-7238249917)
+
 若 $\lambda=0$，正性要求 $\rho\mathbf1=0$。若且唯若 $z=0$ 且三个 $\sqrt{p_j}$ 能围成三角形，此支可行，允许退化。必要性可由 $\rho=XX^*$ 的三行向量之和为零看出，反过来三条有向边就是纯态振幅。对 $0<\lambda\le1$，置 $w=z+\lambda\mathbf1$ 及 $d_j=3\lambda p_j-|w_j|^2$。此 $\lambda$ 的可行条件是三个 $d_j$ 都非负，且三个 $\sqrt{d_j}$ 能围成三角形。事实上，任何见证都使 $R=3\lambda\rho-ww^*$ 半正定，这是对 $\rho^{1/2}\mathbf1$ 应用柯西–施瓦茨不等式的结果。又有 $R\mathbf1=0$，故其格拉姆向量长度为 $\sqrt{d_j}$ 且和为零。反过来，取闭合的复平面边向量 $v_j$，则 $\rho=(ww^*+vv^*)/(3\lambda)$ 给出所需的对角线和行和。
 
 因此，只须在 $0<\lambda\le1$ 上检验三个 $d_j\ge0$ 和三角不等式的多项式形式 $(d_2-d_0-d_1)^2\le4d_0d_1$。每组可行读数都有秩至多二的见证。在正 $\lambda$ 支，纯态存在的充要条件是某个可行 $\lambda$ 使所有 $d_j=0$，因为秩一时柯西–施瓦茨取等。[平面边长的冻结闭合定理](lean:D5/S3/Geometry/Polygons/BalancedPlanarClosure.result)
@@ -116,6 +120,19 @@ $$
 因此 $m>1$ 时无共同态。$m=1$ 时，任取一个取到极大值的 $u$，每个可行的 $B$ 都有 $u^*Bu=0$，正性迫使 $Bu=0$，故三个对角元唯一地等于 $x_j=-\bar u_j(Cu)_j$。$m<1$ 时，$B_*+(1-m)I/3$ 正定，沿两个独立的无迹对角方向作小扰动仍给出同一记录。
 
 例如，各相位读数都均匀时 $C=0$，整个 Fourier 对角概率单纯形中的态都符合读数，秩一、二、三皆有。另一方面，取 $u=(1,1,-1)^T$，$B=(I-uu^*/3)/2$。它的秩为二且 $Bu=0$，故上述取等条件唯一确定它。在每个相位，其三个概率依次为 $4/9$、$(5+2\sqrt3\sin t)/18$ 和 $(5-2\sqrt3\sin t)/18$，全部严格为正。[补全构造与精确矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/1649#issuecomment-7238251495)
+
+怎样用一次额外曝光读出剩下的两个 Fourier 布居自由度？假设在同一制备上可以先施加校准的相位掩模 $D_\theta=\operatorname{diag}(1,e^{i\theta},-1)$，再施加混合器 $H=V(\pi)$，最后按原顺序测量三个通道。令 $W=HD_\theta F$。从读数中减去已知的 $\operatorname{diag}(WCW^*)$，余量就是 $Mx$，其中 $M_{jk}=|W_{jk}|^2$。
+
+手算只需两个通道。任意布居差都可唯一写成 $\delta=h(2,-1,-1)^T+k(0,1,-1)^T$。记 $c=\cos\theta,\ s=\sin\theta$，将 $W$ 前两行逐项取模平方，得
+
+$$
+\begin{aligned}
+(M\delta)_0 &= (4/9-4c/3)h-(4\sqrt3\,s/27)k,\\
+(M\delta)_1 &= -8h/9+(8\sqrt3\,s/27)k.
+\end{aligned}
+$$
+
+系数矩阵的行列式为 $-32\sqrt3\,cs/81$。因此当且仅当 $\theta\notin(\pi/2)\mathbb Z$ 时，第四次曝光能辨认每一个制备：以均匀布居为原点解出 $h,k$，再补回 $C$ 即可。在每个例外角，第二行仍非零，恰有一个盲方向。沿该方向取充分小的非零布居差 $\delta$，则 $\mathbf1/3\pm\delta$ 给出两个正定态，四次读数完全相同。[精确矩阵复算与盲方向](https://github.com/the-omega-institute/trureturing-books/issues/1649#issuecomment-7238485270)
 
 在 Fourier 相位，还可以数出实现同一对读数的纯态。先取 $t=2\pi/3$ 和 $D=\operatorname{diag}(\omega,1,1)$，直接相乘得 $iDVD=F$，其中 $F_{jk}=\omega^{jk}/\sqrt3$，指标从零起。基向量的相位不影响概率。负相位给出 $\bar F$，将态也取共轭便得到相同的可达读数。以下手工推导采用 $F$。在上型基中写密度矩阵 $\rho$，则 $p_j=\rho_{jj}$。把下型概率合成一个复数，由 $q_k=(F^*\rho F)_{kk}$ 得
 
@@ -250,9 +267,18 @@ $$
 
 在质量基中只保留连到最大本征值的矩阵元，可得 $\|[T,X]\|_{\mathrm{HS}}\ge g\|[T,P_X]\|_{\mathrm{HS}}$，其中 $P_X$ 投影到该质量线。在轮换本征基中，若该线的模平方读数为 $p_j$，则 $\|[T,P_X]\|_{\mathrm{HS}}^2=3(1-\sum_j p_j^2)$。两条质量线到各自最近轮换本征线的距离之和至少为 $d$。若就近的是同一条线，三角不等式给出下界 $\theta$。若是两条正交线，则给出 $\pi/2-\theta$。因此至少一条质量线的最大读数 $p=\max_j p_j$ 不超过 $\cos^2(d/2)$。当 $p\ge1/2$ 时，将其余读数合并得 $1-\sum_j p_j^2\ge 2p(1-p)\ge(\sin^2 d)/2$。当 $p\le1/2$ 时，直接用 $\sum_j p_j^2\le p$。
 
-等号可在包含两条质量线的平面内达到。若 $\theta\le\pi/4$，用一条轮换本征线平分夹角。若 $\theta\ge\pi/4$，取两条正交轮换本征线，各向外偏离就近质量线 $d/2$。在各自质量线、平面内正交线和平面法线上，分别赋质量平方 $1,1-g,0$。两套谱隙不同时，也可按各自的谱隙分配偏角。[射影角的三角不等式](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.fs_angle_triangle) · [不同谱隙的最优分角](https://github.com/the-omega-institute/trureturing-books/issues/1849#issuecomment-7238283999)
+分别用上、下型实际谱隙 $g_u,g_d$ 时，可将总偏角 $d$ 分为 $x$ 与 $d-x$。两个投影下界分别随 $x$ 上升和下降，故两者的最大值在 $g_u\sin(2x)=g_d\sin(2d-2x)$ 时最小，得
 
-在 $1\,\mathrm{TeV}$ 的参考输入表 2 中，$y_c/y_t\le0.00316/0.8573$，$y_s/y_b\le0.000271/0.01392$，因此可取 $g=0.9996$。沿用上面的保守混合输入，$|V_{tb}|>0.98$ 使 $d=\theta$，而 $\sin\theta\ge |V_{cb}|>0.035$ 使破缺严格大于 $0.0428$。直接以表 2 的边际区间构成输入盒时，$\sin\theta\ge\sin(0.04233)$，下界进一步超过 $0.0518$。[参考输入表 2](https://arxiv.org/html/2510.01312v2#Sx1.T2)
+$$
+F=\sqrt{3/2}\,
+\frac{g_u g_d\sin(2d)}{\sqrt{g_u^2+g_d^2+2g_u g_d\cos(2d)}}.
+$$
+
+只指定两套谱与顶底夹角时，可以在两条顶线张成的平面内达到 $F$。若 $\theta\le\pi/4$，一条轮换本征线从中间分开两条顶线。若 $\theta\ge\pi/4$，两条最近的轮换本征线分别向外偏到彼此正交。两部门各把次大本征线放在平面内、最小本征线放在法线上。谱隙相同时，两侧各偏 $d/2$。[射影角的三角不等式](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.fs_angle_triangle) · [不同谱隙的最优分角](https://github.com/the-omega-institute/trureturing-books/issues/1849#issuecomment-7238283999)
+
+固定整对质量矩阵后，若 $0<\theta<\pi/2$，最小破缺等于 $F$ 当且仅当这个平面的法线同时落在 $A,B$ 的核中。取等时，两条顶线各占两个轮换坐标，并且两线偏角之和恰为 $d$。若两线只共用一个坐标，最近轮换线相同会迫使 $\theta<d$，最近轮换线不同则会迫使 $\pi/2-\theta<d$。因此它们共用同一个坐标平面。对谱简单的部门，谱隙估计取等还要求最轻质量线本身是轮换本征线，只能取该平面的法线。秩一部门自动湮灭法线。两谱均简单时，等号条件化为 $|V_{ud}|=1$。若 $|V_{ud}|<1$，最小破缺严格大于 $F$。[等号判据与定量裕量的推导](https://github.com/the-omega-institute/trureturing-books/issues/1875)
+
+在 $1\,\mathrm{TeV}$ 的参考输入表 2 中，$y_c/y_t\le0.00316/0.8573$，$y_s/y_b\le0.000271/0.01392$，因此可取 $g=0.9996$。沿用上面的保守混合输入，$|V_{tb}|>0.98$ 使 $d=\theta$，而 $\sin\theta\ge |V_{cb}|>0.035$ 使破缺严格大于 $0.0428$。用表 2 的边际区间构成输入盒时，仍有 $d=\theta$。由 $|V_{tb}|=\cos\theta_{23}\cos\theta_{13}$，$\sin^2\theta$ 随两个混合角分别增大。代入下端点 $\theta_{23}=0.04233$、$\theta_{13}=0.00369$，得破缺严格大于 $0.0520$。[参考输入表 2](https://arxiv.org/pdf/2510.01312v2#page=14) · [CKM 标准参数化，式 (12.3)](https://pdg.lbl.gov/2024/reviews/rpp2024-rev-ckm-matrix.pdf#page=1)
 :::
 
 ## 8.2 汤川层级障碍图谱：单希格斯、密度势、输运顶角与最小站点支撑 {#sec-ch08-yukawa-nogo}
