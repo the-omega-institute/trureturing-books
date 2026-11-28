@@ -166,6 +166,20 @@ Empty and singleton cliques, empty or disconnected graphs, and singular blocks a
 Induct on the finite vertex count. Remove a simplicial vertex of the chordal graph and recursively complete the remainder in the same $\mathbb R^d$. The clique consisting of the removed vertex and its neighbours has a rank-controlled Gram factorization. Its local neighbour vectors and the old neighbour vectors have the same Gram table, so an ambient isometry carries the local family to the old one. Apply it to the root vector while leaving the old vectors fixed; all prescribed edge and diagonal inner products remain unchanged. The resulting Gram matrix is positive semidefinite, and its factor in $\mathbb R^d$ gives rank at most $d$. The empty case uses the zero matrix, and singular cases require no inverse. The full proof is checked by the Lean kernel.
 :::
 
+::: {.example #ex-ch29-swapped-probe-gram title="Which reading can complete two probes with interchanged projections?"}
+Take orthogonal unit reference vectors $x,y$. A unit probe $z$ has coordinates $(1/2,1/4)$ along these axes, and a second unit probe $w$ has coordinates $(1/4,1/2)$. The two three-point windows $\{x,y,z\}$ and $\{x,y,w\}$ already agree on the reference axes. The only missing reading is $s=\langle z,w\rangle$.
+
+The two projections onto the reference plane have inner product $1/4$. Each probe has a component of length $\sqrt{11}/4$ perpendicular to this plane. If the angle between these components is $\phi$, then
+
+$$
+s=\frac14+\frac{11}{16}\cos\phi.
+$$
+
+In $\mathbb R^3$ the perpendicular components lie on one line. Pointing in the same direction gives $15/16$ and pointing in opposite directions gives $-7/16$. In $\mathbb R^4$ the orthogonal complement is a plane. One component can rotate relative to the other, realizing every reading in the closed interval $[-7/16,15/16]$.
+
+Suppose the instrument reports $s=19/20$. All four three-point tables are positive definite. Two determinants equal $11/16$, two equal $9/400$, and every two-by-two principal minor is positive. Order the points as $(x,y,z,w)$ and use the weights $(-1,1,4,-4)$. The full table gives $-2/5$ for the squared norm $\|-x+y+4z-4w\|^2$. A test of every triple would accept this reading. The joint four-point test rules it out.
+:::
+
 ::: {.remark #rem-ch29-local-windows-common-history title="Local memory windows and a common history: a conditional model and its literature boundary"}
 **Conditional model (`MODEL`) and the application boundary of the general theorem.** The pictures above start with actual vectors in one space and read their Gram entries; those data already have a common realization. A different question arises when only local memory tables are supplied, with no vectors given: can they be assembled into one history? Fix a finite horizon $N\ge0$ and memory width $M\ge0$, with indices $0,\ldots,N$. Let one real symmetric table $A$ have $A_{ii}=1$, retaining only entries with $|i-j|\le M$; more distant overlaps are free to be completed. For each $k=0,\ldots,N$, set
 
