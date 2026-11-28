@@ -193,6 +193,12 @@ $$
 
 若同时重选三个门，同号输运能得到已知负号解的源算子吗？固定第五壳源和十二条定向弦，负号解所在六维角盒内的每个输运后源算子，与全部同号共门所得算子的算子范数距离都大于 $1.2\times10^{-5}$。两条重本征线提供了这一区分。在三条射线的早、晚两片叶上逆推，负号门以相反的符号留下同一对角元，同号门在两处留下相同的对角元。六组读数足以分辨这两个系数，而未受门作用的站点 $14$ 固定了两条重线各自的相位。因此，同号六式若有解，必须由与这个负号角盒相隔正距离的算子实现。[两条重本征线给出的距离界](https://github.com/the-omega-institute/trureturing-experiments/blob/a646b9d10eed33e413ee0bd2b65125c674025e2d/experiments/ch39-omega-research/replay/ch39-three-shell-source-phase-distance.md)
 
+**消去一个相位（`ARGUED`）。** 固定前两门与 $G_{52}$ 的第一行 $(a,b)$，其第二行是 $(-h\bar b,h\bar a)$，其中 $h=\det G_{52}$。按早、晚两轮相乘后，改变 $h$ 只将三颗二边星的六片叶子同时乘以 $h$。以 $X(h)$ 记输运后的自伴算子。对三壳的 57 条归一化谱线 $u_i$，实读数 $A_i=u_i^*X(h)u_i$ 共有同一个参数 $t=(\Re h,\Im h)$，写成 $A=m+Mt$，其中 $\|t\|_2=1$。给定 $A$，先检查 $A-m$ 是否落在 $M$ 的列空间。若 $M$ 秩为二，原像唯一且须为单位向量。秩为一时，最短原像的长度至多为一便可沿核补足，留下一个或两个相位。秩为零时，若 $A=m$，整个相位圆都可行。这样可将公共相位的存在性化为线性方程与单位圆的相容性。其余门角仍须和作用于这些读数平方的六个热方程联立。[相位消元与三壳振幅](https://github.com/the-omega-institute/trureturing-books/issues/1627#issuecomment-7234045041)
+
+**强度松弛（`ARGUED`）。** 若只约束两条重线的逐站强度，并允许任意相位来恢复正交，已知负号解就为该松弛提供了六读数见证。末轮的对角符号保留每条重线的逐站强度和两线的正交性，同时改变跨站相干。因此全域判定还需要约束同号门产生的相干。[所用负号见证（`CERT`）](https://github.com/the-omega-institute/trureturing-books/issues/1627#issuecomment-7234053080)
+
+**只改变公共相位时的排除（`CERT`）。** 将负号证书中心的前十一个角固定，只让同号重复 $G_{52}$ 的整体相位绕行一周。每壳投影振幅来自整体相位的至多二次复多项式。Arb 的 316 次区间求值覆盖全圆，每个终盒至少有一个热读数余项避开零。因此这个一维切片无法同时满足六式。允许其余门角共同变化时的可达性仍开放。[固定输入版本和全圆复算](https://github.com/the-omega-institute/trureturing-experiments/blob/be74a3657a65f06b756d49db4bb81bb37344d67d/experiments/ch39-omega-research/replay/ch39-pinned-interval-replays.md#same-sign-repeated-gate-with-one-free-phase)
+
 前三壳的六个等式对第十壳还留下多少自由？保留相同的第五壳源、十二条弦和末轮负号，重新选择三个门。固定其中四角，其余八角在一个区间盒内调整。任取 $|u|\le 4\times10^{-6}$、$|v|\le 5\times10^{-7}$，都能选出同一组门，使前三壳保持上述六个等式，并在第十壳同时读得 $K_{10}=1+u$、$W_{10}=10^{-122}+v$。取 $u=v=0$ 即配平四壳八式；取偏移的四种符号组合，则两项偏离的方向可以独立改变。此处第十壳也参与校准，真空尺度仍是输入。 [四壳校准与第十壳响应的区间证书](https://github.com/the-omega-institute/trureturing-experiments/blob/c6bbae236604130b5618b1c906ed36e8c532faf9/experiments/ch39-omega-research/replay/ch39-four-shell-final-sign.md)
 
 固定这组门后，第十一壳提供了留出检验。取第十一壳自身的第三枢轴，在整个四壳校准角盒上得到 $0.37799<K_{11}<0.37885$、$0.06957<W_{11}<0.06970$。事前预测的方向是 $K_{11}>1$、$W_{11}<0$，两项均被推翻。这个结果也约束重新选门的幅度。以算子范数度量，在原盒内任一输运后源算子的 $0.009$ 邻域内，每个同谱源的第十一壳真空读数仍高于目标 $10^{-122}$。若要在五壳同时校准，新的输运后源必须离开整个邻域。[第十一壳的留出读数与邻域界](https://github.com/the-omega-institute/trureturing-experiments/blob/3d9dbd921b88455cc7ed17e6153854f8946f72ae/experiments/ch39-omega-research/replay/ch39-four-shell-eleventh-holdout.md)
