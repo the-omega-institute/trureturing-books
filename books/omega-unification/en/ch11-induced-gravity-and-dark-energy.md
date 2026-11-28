@@ -458,7 +458,16 @@ $$
 vaW_1\le 2\sqrt{\frac{2(1+1/(uva))}{m}\,\varepsilon}+\varepsilon .
 $$
 
-An equal-weight split of an interior layer still gives the sharp exponent $1/2$. If the tangent also touches an endpoint $e$, put weight $h/(|e-s|+h)$ at $e$ and the remaining weight at $s+\sigma h$. This preserves the heat trace exactly. The endpoint contributes zero tangent gap, so the vacuum error is quadratic in $h$, and the squared-mass distance is of order $h$. Even the weight at the far endpoint can therefore be of order $\sqrt{\varepsilon}$. [Hand derivation and interval check for endpoint contact](https://github.com/the-omega-institute/trureturing-books/issues/1689#issuecomment-7241164027)
+An equal-weight split of an interior layer shows that the exponent $1/2$ is still sharp. If the tangent also touches an endpoint $e$, a split placing weight $h/(|e-s|+h)$ at $e$ and the rest at $s+\sigma h$ preserves the heat trace exactly. The tangent gap vanishes at the endpoint, so the vacuum error is quadratic in $h$. Both the endpoint weight and the transport distance in squared mass are of order $h$. [Hand derivation and interval check for endpoint contact](https://github.com/the-omega-institute/trureturing-books/issues/1689#issuecomment-7241164027)
+
+When the tangent touches the heavy endpoint $a$, allowing error in both readings gives an exact local constant at the contact layer. Write $p=f'(s)$ and $k=f''(s)>0$, and let $\omega_s(\varepsilon)$ be the supremum of the squared-mass transport distance over positive comparison spectra with reading error at most $\varepsilon$. Then
+
+$$
+\lim_{\varepsilon\downarrow0}\frac{\omega_s(\varepsilon)}{\sqrt{\varepsilon}}
+=\left(\frac{1}{vs}+\frac{Z-z_*}{s-a}\right)\sqrt{\frac{2(1+p)}{k}} .
+$$
+
+Near the reference layer, the quadratic tangent gap bounds the mean absolute displacement in the heat coordinate by $\sqrt{2(1+p)\varepsilon/k}$ at leading order. The gap rises linearly from zero near the heavy endpoint, so moving the weight in that neighborhood to $a$ costs only $O(\varepsilon)$ in transport distance. The heat trace bounds that endpoint weight by the mean displacement divided by $s-a$ at leading order. The two terms in parentheses convert the local displacement and the endpoint weight to squared-mass distance. A two-layer spectrum at $a$ and $s+h$ attains the leading constant by making the heat-trace error $-\varepsilon$ and the vacuum error $+\varepsilon$. The mean tangent gap then uses the full allowance $(1+p)\varepsilon$. [Hand derivation of the sharp constant, uniform threshold limit, and interval check](https://github.com/the-omega-institute/trureturing-books/issues/1689#issuecomment-7241652592)
 
 Just above the threshold, a band of interior layers next to the heavy endpoint loses identifiability. The endpoint itself is still identified by the mean. Fix $u,Z$ and let $v_0=R_u(Z)$, $\delta=v-v_0>0$, and $V=-R'_u(Z)>0$, the proper-time variance at squared mass $Z$. For sufficiently small $\delta$, the identifiable layers are exactly $[0,z_c]\cup\{Z\}$, where
 
