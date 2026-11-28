@@ -321,12 +321,12 @@ $$
 
 证明分别用函数组 $(1,B_1,\ldots,B_k)$ 和 $(1,B_2/B_1,\ldots,B_{k+1}/B_1)$，其中 $B_j=B(u_j,\cdot)$。由 $B(u,z)\sim e^{-uz}/(u^3z)$，各非常数函数在紧化的重端均趋零。插值一个在该端取一、在正质量参考层成双零、在占据的无质量层成单零的证书。有序核积分使合流插值矩阵可逆，比值组先乘回 $B_1$。证书在正质量参考层附近控制距离平方，在无质量层附近控制距离本身。再插值层指示函数即可控制最近层归集后的概率变化。分裂内点权重和将无质量层向内移动分别达到两种锐阶。少一次读数时，交错节点上的带号最大子式给出精确歧义。 [无界输运证明与重尾例](https://github.com/the-omega-institute/trureturing-books/issues/1689#issuecomment-7236427589)
 
-若有原始尾矩上限，还可定量刻画损失的稳定性。设 $\Phi(z)=(1+z)^s$、$0<s<1$，且 $\int\Phi\,d\nu\le A$。记参考谱的总权重为 $M$，$\bar x=M^{-1}\int e^{-u_1z}\,d\mu(z)$，预算余量为 $D=A-\int\Phi\,d\mu$。若 $D>0$，原始读数误差至多为 $\varepsilon$ 的容许对照谱，其归一化输运距离的上确界 $\omega_A(\varepsilon)$ 满足
+若有原始尾矩上限，还可定量刻画损失的稳定性。固定具有有限个占据层的非零参考谱 $\mu$，取上文定义的 $k$，并使用含 $u_1$ 在内的 $k+1$ 个互异积分读数。设 $\Phi(z)=(1+z)^s$、$0<s<1$，且 $\int\Phi\,d\nu\le A$。记参考谱的总权重为 $M$，$\bar x=M^{-1}\int e^{-u_1z}\,d\mu(z)$，预算余量为 $D=A-\int\Phi\,d\mu$。若 $D>0$，原始读数误差至多为 $\varepsilon$ 的容许对照谱，其归一化输运距离的上确界 $\omega_A(\varepsilon)$ 满足
 $$
  \lim_{\varepsilon\downarrow0}(\log(1/\varepsilon))^s\omega_A(\varepsilon)
  =\frac{D\,u_1^s\,\bar x}{M}.
 $$
-把证书乘回 $B_1$，即可控制加权重尾及参考支集附近的位移。将 $\Phi$ 插值到参考层，并匹配正质量点的一阶导数，得到固定阈值外的尾矩至多为 $D+O(\varepsilon)$。再用 $R=(\log(1/\varepsilon)-(s+3)\log\log(1/\varepsilon))/u_1$ 分割重尾。较轻一段的权重为 $O((\log(1/\varepsilon))^{-s-2})$。更重一段的权重 $T\le(D+O(\varepsilon))/(1+R)^s$，且紧化后靠近 $x=0$。这部分输运的首项代价为 $T\bar x/M$。增加单个重层 $D(1+R)^{-s}\delta_R$ 达到该极限。若参考谱用尽尾矩预算，尾矩为 $O(\varepsilon)$，因此又可得到含正质量层时的平方根阶及纯无质量参考谱的线性阶。将两个锐性例分别整体缩放还可精确保持原始尾矩。 [尾矩预算与精确首项](https://github.com/the-omega-institute/trureturing-books/issues/1689#issuecomment-7236570584)
+把证书乘回 $B_1$，即可控制加权重尾及参考支集附近的位移。将 $\Phi$ 插值到参考层，并匹配正质量点的一阶导数，得到固定阈值外的尾矩至多为 $D+O(\varepsilon)$。令 $\ell=\log(1/\varepsilon)$。上界用 $R_-=(\ell-(s+3)\log\ell)/u_1$ 分割重尾。较轻一段的权重为 $O(\ell^{-s-2})$。更重一段的权重 $T\le(D+O(\varepsilon))/(1+R_-)^s$，且紧化后靠近 $x=0$。这部分输运的首项代价为 $T\bar x/M$。为取到极限，另选 $R_+=\ell/u_1$，增加单个重层 $D(1+R_+)^{-s}\delta_{R_+}$。它耗尽余下的尾矩预算，所有读数的最大变化为 $O(\varepsilon\ell^{-s-1})$，且 $R_+\sim R_-$，因此给出匹配首项。若参考谱用尽尾矩预算，尾矩为 $O(\varepsilon)$，因此又可得到含正质量层时的平方根阶及纯无质量参考谱的线性阶。将两个锐性例分别整体缩放还可精确保持原始尾矩。 [尾矩预算与精确首项](https://github.com/the-omega-institute/trureturing-books/issues/1689#issuecomment-7236570584)
 
 在电弱对称原点上，三枚规范候选的可见正负质量平方彼此分离超过 $3\times 10^{-11} M_P^2$：补齐无质量层需 $62$ 个实标量，五荷十六重层需 $896$ 个实标量，$18$ 个中性重层各需 $9$ 个狄拉克场（每层补足 $36$ 偏振），故精确最少数为 **$958$ 个实标量 $+$ $162$ 个狄拉克单态**。配平后，牛顿斜率恒有 $2\pi K'(x) \ge 21/2 > 0$，给出唯一的牛顿匹配截止 $Q/M_P \approx 0.17882$（[逐层真空配平证书](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-chiral-graded-vacuum.py)）。
 
