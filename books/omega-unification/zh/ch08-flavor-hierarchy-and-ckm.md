@@ -267,9 +267,18 @@ $$
 
 在质量基中只保留连到最大本征值的矩阵元，可得 $\|[T,X]\|_{\mathrm{HS}}\ge g\|[T,P_X]\|_{\mathrm{HS}}$，其中 $P_X$ 投影到该质量线。在轮换本征基中，若该线的模平方读数为 $p_j$，则 $\|[T,P_X]\|_{\mathrm{HS}}^2=3(1-\sum_j p_j^2)$。两条质量线到各自最近轮换本征线的距离之和至少为 $d$。若就近的是同一条线，三角不等式给出下界 $\theta$。若是两条正交线，则给出 $\pi/2-\theta$。因此至少一条质量线的最大读数 $p=\max_j p_j$ 不超过 $\cos^2(d/2)$。当 $p\ge1/2$ 时，将其余读数合并得 $1-\sum_j p_j^2\ge 2p(1-p)\ge(\sin^2 d)/2$。当 $p\le1/2$ 时，直接用 $\sum_j p_j^2\le p$。
 
-等号可在包含两条质量线的平面内达到。若 $\theta\le\pi/4$，用一条轮换本征线平分夹角。若 $\theta\ge\pi/4$，取两条正交轮换本征线，各向外偏离就近质量线 $d/2$。在各自质量线、平面内正交线和平面法线上，分别赋质量平方 $1,1-g,0$。两套谱隙不同时，也可按各自的谱隙分配偏角。[射影角的三角不等式](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.fs_angle_triangle) · [不同谱隙的最优分角](https://github.com/the-omega-institute/trureturing-books/issues/1849#issuecomment-7238283999)
+分别用上、下型实际谱隙 $g_u,g_d$ 时，可将总偏角 $d$ 分为 $x$ 与 $d-x$。两个投影下界分别随 $x$ 上升和下降，故两者的最大值在 $g_u\sin(2x)=g_d\sin(2d-2x)$ 时最小，得
 
-在 $1\,\mathrm{TeV}$ 的参考输入表 2 中，$y_c/y_t\le0.00316/0.8573$，$y_s/y_b\le0.000271/0.01392$，因此可取 $g=0.9996$。沿用上面的保守混合输入，$|V_{tb}|>0.98$ 使 $d=\theta$，而 $\sin\theta\ge |V_{cb}|>0.035$ 使破缺严格大于 $0.0428$。直接以表 2 的边际区间构成输入盒时，$\sin\theta\ge\sin(0.04233)$，下界进一步超过 $0.0518$。[参考输入表 2](https://arxiv.org/html/2510.01312v2#Sx1.T2)
+$$
+F=\sqrt{3/2}\,
+\frac{g_u g_d\sin(2d)}{\sqrt{g_u^2+g_d^2+2g_u g_d\cos(2d)}}.
+$$
+
+只指定两套谱与顶底夹角时，可以在两条顶线张成的平面内达到 $F$。若 $\theta\le\pi/4$，一条轮换本征线从中间分开两条顶线。若 $\theta\ge\pi/4$，两条最近的轮换本征线分别向外偏到彼此正交。两部门各把次大本征线放在平面内、最小本征线放在法线上。谱隙相同时，两侧各偏 $d/2$。[射影角的三角不等式](lean:D5/S3/QuantumBounds/FubiniStudyRecordTime.fs_angle_triangle) · [不同谱隙的最优分角](https://github.com/the-omega-institute/trureturing-books/issues/1849#issuecomment-7238283999)
+
+固定整对质量矩阵后，若 $0<\theta<\pi/2$，最小破缺等于 $F$ 当且仅当这个平面的法线同时落在 $A,B$ 的核中。取等时，两条顶线各占两个轮换坐标，并且两线偏角之和恰为 $d$。若两线只共用一个坐标，最近轮换线相同会迫使 $\theta<d$，最近轮换线不同则会迫使 $\pi/2-\theta<d$。因此它们共用同一个坐标平面。对谱简单的部门，谱隙估计取等还要求最轻质量线本身是轮换本征线，只能取该平面的法线。秩一部门自动湮灭法线。两谱均简单时，等号条件化为 $|V_{ud}|=1$。若 $|V_{ud}|<1$，最小破缺严格大于 $F$。[等号判据与定量裕量的推导](https://github.com/the-omega-institute/trureturing-books/issues/1875)
+
+在 $1\,\mathrm{TeV}$ 的参考输入表 2 中，$y_c/y_t\le0.00316/0.8573$，$y_s/y_b\le0.000271/0.01392$，因此可取 $g=0.9996$。沿用上面的保守混合输入，$|V_{tb}|>0.98$ 使 $d=\theta$，而 $\sin\theta\ge |V_{cb}|>0.035$ 使破缺严格大于 $0.0428$。用表 2 的边际区间构成输入盒时，仍有 $d=\theta$。由 $|V_{tb}|=\cos\theta_{23}\cos\theta_{13}$，$\sin^2\theta$ 随两个混合角分别增大。代入下端点 $\theta_{23}=0.04233$、$\theta_{13}=0.00369$，得破缺严格大于 $0.0520$。[参考输入表 2](https://arxiv.org/pdf/2510.01312v2#page=14) · [CKM 标准参数化，式 (12.3)](https://pdg.lbl.gov/2024/reviews/rpp2024-rev-ckm-matrix.pdf#page=1)
 :::
 
 ## 8.2 汤川层级障碍图谱：单希格斯、密度势、输运顶角与最小站点支撑 {#sec-ch08-yukawa-nogo}
