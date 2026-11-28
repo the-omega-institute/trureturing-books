@@ -4,12 +4,12 @@
 
 This final chapter of Volume I lays out the analytic number-theoretic bedrock of the monograph, placing **formally verified global theorems** right beside **certified finite-window computations**. We proceed in four steps:
 
-1. State the exact **external formalized status** of the classical Riemann Hypothesis (RH) and Dirichlet GRH, and establish the Lean-verified Fejér critical-gap and Cayley unit-circle criteria;
+1. State the exact **external formalized status** of the classical Riemann Hypothesis (RH) and Dirichlet GRH, establish the Lean-verified Fejér critical-gap and Cayley unit-circle criteria, and use theta lifting to connect an arithmetic kernel to a spectral inner product;
 2. Walk through the frozen Lean 4 analytic chain linking harmonic pair-moment ratios, reciprocal-time and periodic phase deficits, unconditional Landau left/right vertical contour bounds, and the Gaussian hard-band collision limit $1/\sqrt{\pi}$, and identify the cutoff endpoint term for a fixed arc mode;
 3. Zoom into two concrete finite zero landmarks—the 19-zero neighborhood of zero #11431 in $[10000, 12999]$ (midpoint isolation, $94.62\%$ diagonal Fejér weight, $23.657\% / 23.670\%$ maximal extra-pair share, finite observation radii $111521$ and $111532$) and the first triple-window hits #8236 and #8359;
 4. Draw the honest boundary separating global harmonic average bounds from single-zero clock selection.
 
-## 3.1 External Formalized Status of RH/GRH and the Fejér–Cayley Criteria {#sec-ou-3-1}
+## 3.1 RH and Dirichlet GRH: External Formalized Status, Fejér–Cayley Criteria, and Theta Lifting {#sec-ou-3-1}
 
 Following the six-tier epistemic honesty contract of the [Prelude](README.md#rem-ou-epistemic-contract), before invoking any theorem with a `RiemannHypothesis` hypothesis we state its external verification dossier (`EXT-LEAN`) cleanly:
 
@@ -44,6 +44,33 @@ Inside `trureturing@dev` itself, the following Lean 4 frozen theorem reformulate
 ::: proof
 For part 1, in the forward direction under RH, nonnegativity of the discrete Fejér kernel $\sum_{j,k=0}^{N-1} \cos((j-k)\theta) = |\sum_{j=0}^{N-1} e^{ij\theta}|^2 \ge 0$ combines $N^2$ midpoint bounds at steps $b_{jk} y e^{-y/2}$ (with $y = \log x$ and $b_{jk} = |j-k|/(2N)$). Normalizing by $y^2 e^{-y/2}$ averages the spectral-deficit minus arithmetic-midpoint contributions to $C_N = \frac{1 - N^{-2}}{48} \to \frac{1}{48}$; choosing finite $N$ with $c < C_N$ produces the eventual bound. Conversely, applying the hypothesis at $c = 1/128$ forces $M\sqrt{x} - U(x) \to +\infty$, which recovers RH via the critical-gap criterion. For part 2, the Cayley Möbius map $(s - 1)/s$ carries the finite critical line $\operatorname{Re} s = 1/2$ bijectively onto the punctured unit circle $S^1 \setminus \{1\}$, so vanishing of the logarithmic radial defect on all nontrivial zeros is equivalent to $\operatorname{Re}\rho = 1/2$. The full proof is checked by the Lean kernel.
 :::
+
+### 3.1.1 Theta Lifting: From an Arithmetic Kernel to a Spectral Inner Product {#sec-ou-3-1-1-rallis-bridge}
+
+The Fejér and Cayley criteria describe conditions on the zeros; an arithmetic proof also needs to connect constructible forms to norms that can be estimated. Theta lifting supplies a concrete mechanism: integrating a Weil-representation theta kernel against an automorphic form on a source space produces a form on a target space. The Rallis doubling formula expresses the inner product of two lifts as a matrix-coefficient integral on the source group. The Weil representation here and the Weil quadratic form of the explicit formula are different objects; their shared name does not transfer positivity between them.
+
+::: {.theorem #thm-ou-ch03-rallis-bridge title="Rallis Doubling Inner-Product Formula" lean="D5/S3/Zeros/GRH/Lib/SiegelWeil/RallisInner/SharpData.inner_product_formula"}
+Let $E$ carry the cited library's field, CM-type, and Weil-data structures, let $n,m$ be finite index types, and let $S=\operatorname{Space}(E,n,s)$ and $T=\operatorname{Space}(E,m,t)$ be the corresponding spaces. Take automorphic characters $a,b$, Schwartz data $f,f'$, and automorphic forms $y,y'$ on the source space. Assume $2|n|<|m|$, that $f$ satisfies the library's clean condition `IsClean`, and that $y,y'$ belong to `S.rapidFunctions`, the rapidly decreasing automorphic forms. Write $R(g)$ for right translation, $\omega_{1,b}$ for the corresponding Weil representation, and $\langle\cdot,\cdot\rangle_S$, $\langle\cdot,\cdot\rangle_T$ for the library's Petersson inner products. Then
+
+$$
+k(g)=\langle f',\omega_{1,b}(g,1)f\rangle\,\langle y',R(g)y\rangle_S
+$$
+
+is integrable on $U(S)(\mathbb A)$, and the theta lifts with parameters $a,b$ satisfy
+
+$$
+\langle\theta_{f'}y',\theta_fy\rangle_T
+=\operatorname{vol}([U(T)])\int_{U(S)(\mathbb A)}k(g)\,dg.
+$$
+
+The pairing in the first factor is the library's `dataInner`; $[U(T)]$ is the target group's automorphic quotient, with the quotient measure used for the Petersson inner product; $f'$ need not be clean.
+:::
+
+::: proof
+Double the two theta kernels and apply the Siegel–Weil formula. The clean condition removes boundary orbits, leaving graph orbits indexed by rational isometries of the source space; unfolding these orbits gives the matrix-coefficient integral. The strict rank inequality and rapid-decay hypotheses ensure integrability. The full proof is checked by the Lean kernel.
+:::
+
+Setting $f'=f$ and $y'=y$ makes the left side the squared norm of the lifted form (manual substitution, `ARGUED`). This makes the link between arithmetic constructions and spectral inner products explicit. The identity alone neither proves that the lift is nonzero nor bounds its norm from below, and it supplies no self-adjoint operator with the Riemann zeros as its spectrum. We now return to the zero-phase sums used in this book, whose quantitative cancellation requires its own analytic estimates.
 
 ## 3.2 Harmonic Pair-Moment Ratios, Reciprocal-Time Deficits, and Landau Vertical Bounds {#sec-ou-3-2}
 
