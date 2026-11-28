@@ -466,6 +466,19 @@ For any positive Hermitian common portal $B \succeq 0$ with operator norm $B_* =
 
      For example, take $a=C=1$, $t_0=\log 2$, and a total weight cap of $1.01$. At $T=5\log 2$, the nodes are $h=1/16$ and $u=1500/1499$, and the tail fraction is exactly $25600/2272601$ (about $1.126\%$). The third reading has relative error $15/23984<0.001$, and its log error is smaller.
 
+     **Applying the zero-energy cap and three response windows to the calibrated spectrum.** Keep the arc ratio $t_0=\theta_{804}/\theta_{12}$ as the reference time. Suppose $A(0)\le1.01C$ and each relative response $R_j=A(j)/(Ce^{-jt_0})$ lies in $[e^{-\delta},e^\delta]$, with $\delta=0.001$ and $j=a=e_1,b'=e_7,c=e_{19}$. The cap and tolerance specify the assumed precision of the model test. As the cutoff $T$ moves earlier, the largest fraction of original weight at or after the cutoff is initially set by the lower limit at level 1 and the upper limit at level 19. When level 7 falls to its lower limit, levels 7 and 19 fix the maximizing mixture and the level-1 response begins to rise. In both ranges the mixture has total weight $1.01C$, with one atom at the cutoff and the other at an earlier positive time.
+
+     For the second range, put $x=e^{-b'(t-t_0)}$. The level-7 lower limit fixes the mean of $x$ and the level-19 upper limit fixes the mean of the convex power $x^{c/b'}$. As the cutoff moves earlier, its node moves right. Holding both means fixed forces the node for the earlier atom to move right as well. Along this curve of chords the mean of the concave power for level 1 increases strictly. The difference between the convex power and its tangent at the earlier atom, divided by the same difference at the cutoff, bounds the indicator of the late-time tail pointwise. Integrating and using the response windows and the cap bounds the tail for every feasible positive measure. The two-atom mixture attains the bound. [Monotonicity and equality conditions](https://github.com/the-omega-institute/trureturing-books/issues/2029#issuecomment-7239597179)
+
+     Extend the second construction until the earlier atom is at time zero. Whether level 1 now exceeds its upper limit depends on the absolute energies. The spectral lower bound for the high-inertia arc graph gives $e_1>0.05849$. The level-6 enclosure at the crossing gives $e_1\le e_6<0.046(1.435)^2<0.095$. These bounds cover the specified clock axes and angle window at the 35th positive zero, $0<d\le1/2$, and both continuous arcs and edge-preserving subdivisions with $h\le10^{-6}$. Reweight by the level-7 response and set $Y=e^{-(c-b')(t-t_0)}$. Then $\mathbb E Y=e^{2\delta}$. The earlier node $z=e^{(c-b')t_0}$ exceeds $175$ and carries reweighted probability $\theta<0.006$. Write $\kappa=b'/(c-b')$ and $s=(b'-a)/b'>0.55$. The total weight gives $\mathbb E Y^{-\kappa}=1.01e^\delta$, and the earlier node has $z^{-\kappa}=e^{-b't_0}<1/4$. The later atom's contribution alone gives
+
+     $$
+     R_a\ge e^{-\delta}(1-\theta)^{1-s}(1.01e^\delta-\theta z^{-\kappa})^s
+     > 0.999\,(0.994)^{9/20}(1.0095)^{11/20}>1.0014>e^\delta .
+     $$
+
+     On the calibrated spectrum, level 1 therefore reaches its upper limit while the earlier atom still has positive time. [Spectral bounds and rational checks](https://github.com/the-omega-institute/trureturing-books/issues/2029#issuecomment-7240242975)
+
 The table below collects the entire ultraviolet Higgs-portal landscape—every exclusion boundary and every surviving corridor—before we turn to the low-energy collider pinch:
 
 | UV Portal Family | Crossing & Spectral Regime | Certified Verdict | Quantitative Criterion & Sensitivity |
