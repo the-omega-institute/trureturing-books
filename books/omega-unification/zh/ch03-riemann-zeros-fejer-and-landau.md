@@ -210,7 +210,18 @@ $$
 
 同高反射把左侧化为临界线右边的两倍加权计数，单点权重为 $g(x)=\cosh(\lambda x)-1$，其中 $x=\beta-1/2>0$。把 $g$ 在 $x\le0$ 延拓为零，由 $g(0)=g'(0)=0$ 可知临界线上没有分布边界项。对 $\log|\zeta|$ 的分布拉普拉斯用 $e^{i\lambda t}g(x)$ 检验，体积分的系数由 $g''-\lambda^2g=\lambda^2$ 给出。取右边界 $\sigma=2$，其边界项与 $J$ 在 $\sigma\ge2$ 的尾部均可用绝对收敛的欧拉级数积分，非共振使相位积分一致有界。两条水平边界由局部对数导数估计控制在 $O_\lambda(\log T)$，上边界取右极限，纳入该高度的全部重数。[Titchmarsh，《黎曼 ζ 函数理论》第二版，§9.6(A)](https://sites.math.rutgers.edu/~zeilberg/EM18/TitchmarshZeta.pdf) · [边界项推导](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239241148)
 
-由柯西–黎曼方程，$J(t)/\pi$ 与 $S_1(t)$ 相差常数。把实部权重的差压到 $O_\lambda(\log T)$，等价于在同一频率下把 $\int_3^T e^{i\lambda t}S_1(t)\,dt$ 控制到这一阶。这里用到的是高度区间内的相位抵消，前面的均方结论给出的是高度平均信息。下一节的碰撞估计还需要在随高度增长的频带内控制零点和。
+由柯西–黎曼方程，$J(t)/\pi$ 与 $S_1(t)$ 相差常数。把实部权重的差压到 $O_\lambda(\log T)$，等价于在同一频率下把 $\int_3^T e^{i\lambda t}S_1(t)\,dt$ 控制到这一阶。这一步需要在高度区间内累积相位抵消。
+
+若在一个固定紧频带 $I\subset\mathbb R$ 内平均，可用密度界定量控制这种抵消。对 $U\ge3$，由手工推导（`ARGUED`）得到
+
+$$
+\int_I\max_{0\le T\le U}|C_\lambda(T)|^2\,d\lambda
+\ll_I \frac{U}{(\log U)^2}.
+$$
+
+将纵坐标按单位高度分组，设第 $j$ 组的质量 $B_j$ 为该组内各零点的 $\delta_\rho^2$ 之和。每组有 $O(\log U)$ 枚零点，Selberg 密度界经分层积分给出 $\sum_{\gamma\le U}\delta_\rho^4\ll U/(\log U)^3$，故 $\sum_j B_j^2\ll U/(\log U)^2$。对组内的相位小数部分和双曲余弦权作幂级数展开，得到一族以组号为整数频率的 Fourier 多项式，各项的系数至多为 $B_j$ 乘可求和的因子。Carleson–Hunt 最大不等式控制所有完整分组的部分和，含截断高度的最后一组由自身质量控制，纳入等于上端点的纵坐标。[Simonič，式 (1)、(3)](https://arxiv.org/pdf/1910.08274v2#page=1) · [Oberlin 等，定理 1.1](https://arxiv.org/pdf/0910.1555#page=2) · [推导与复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239462563)
+
+因此，在 $I$ 中存在某个 $T\le U$ 使差项的模超过 $A>0$ 的频率集合，测度至多为 $O_I(U/(A^2(\log U)^2))$。对二进高度应用 Borel–Cantelli 引理，就有 $C_\lambda(T)=O_{\lambda,\varepsilon}(\sqrt T/(\log T)^{1/2-\varepsilon})$，其中 $\varepsilon>0$ 任取，结论对几乎处处的 $\lambda$ 沿所有实数高度成立。球壳的指定模态构成可数集，仍需逐频率的算术估计。下一节的碰撞估计还需要在随高度增长的频带内控制零点和。
 
 ## 3.3 周期相位亏损、兰道窗转移与高斯碰撞极限 $1/\sqrt{\pi}$ {#sec-ou-3-3}
 

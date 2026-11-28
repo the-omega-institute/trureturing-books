@@ -210,7 +210,18 @@ $$
 
 Reflection at each ordinate turns the left side into twice a weighted count to the right of the critical line, with weight $g(x)=\cosh(\lambda x)-1$ for $x=\beta-1/2>0$. Extend $g$ by zero for $x\le0$. Both $g$ and $g'$ vanish at zero, so the critical line contributes no boundary distribution. Test the distributional Laplacian of $\log|\zeta|$ against $e^{i\lambda t}g(x)$. The bulk coefficient follows from $g''-\lambda^2g=\lambda^2$ for $x>0$. At the right edge $\sigma=2$, both the boundary term and the tail of $J$ for $\sigma\ge2$ have absolutely convergent Euler series. Nonresonance bounds their phase integrals uniformly. The local estimate for the logarithmic derivative bounds the horizontal boundary terms by $O_\lambda(\log T)$. Taking the right-hand limit in height includes the full multiplicities at that height. [Titchmarsh, *The Theory of the Riemann Zeta-Function*, second edition, §9.6(A)](https://sites.math.rutgers.edu/~zeilberg/EM18/TitchmarshZeta.pdf) · [Boundary calculation](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239241148)
 
-The Cauchy–Riemann equations give $J(t)/\pi=S_1(t)+\mathrm{const}$. Bounding the weight correction by $O_\lambda(\log T)$ is therefore equivalent to bounding $\int_3^T e^{i\lambda t}S_1(t)\,dt$ on that scale. This requires phase cancellation across the height interval. The collision estimate in the next section also needs control across a frequency band that grows with height.
+The Cauchy–Riemann equations give $J(t)/\pi=S_1(t)+\mathrm{const}$. Bounding the weight correction by $O_\lambda(\log T)$ is therefore equivalent to bounding $\int_3^T e^{i\lambda t}S_1(t)\,dt$ on that scale. This requires cancellation across the height interval.
+
+Averaging over a fixed compact frequency interval $I\subset\mathbb R$ gives a quantitative bound on this cancellation. For $U\ge3$, a hand derivation (`ARGUED`) yields
+
+$$
+\int_I\max_{0\le T\le U}|C_\lambda(T)|^2\,d\lambda
+\ll_I \frac{U}{(\log U)^2}.
+$$
+
+Group the ordinates into unit intervals and let $B_j$ be the sum of $\delta_\rho^2$ in group $j$. Each group contains $O(\log U)$ zeros. Integrating Selberg's density estimate gives $\sum_{\gamma\le U}\delta_\rho^4\ll U/(\log U)^3$, so $\sum_j B_j^2\ll U/(\log U)^2$. Expanding the phase within each group and the hyperbolic cosine weight in power series gives Fourier polynomials with the group index as the integer frequency and coefficients bounded by $B_j$ times summable factors. The Carleson–Hunt maximal inequality bounds all partial sums over complete groups. The group containing the cutoff is bounded by its own mass and includes any ordinates at the upper endpoint. [Simonič, Eqs. (1) and (3)](https://arxiv.org/pdf/1910.08274v2#page=1) · [Oberlin et al., Theorem 1.1](https://arxiv.org/pdf/0910.1555#page=2) · [Derivation and numerical check](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239462563)
+
+The frequencies in $I$ for which the modulus of the correction exceeds $A>0$ at some $T\le U$ therefore form a set of measure $O_I(U/(A^2(\log U)^2))$. Applying Borel–Cantelli at dyadic heights gives $C_\lambda(T)=O_{\lambda,\varepsilon}(\sqrt T/(\log T)^{1/2-\varepsilon})$ for each $\varepsilon>0$ and almost every $\lambda$, along all real heights. The prescribed shell modes form a countable set and still require estimates at individual frequencies. The collision estimate in the next section also needs control across a frequency band that grows with height.
 
 ## 3.3 Periodic Phase Deficits, Landau Window Transfer, and the $1/\sqrt{\pi}$ Collision Limit {#sec-ou-3-3}
 
