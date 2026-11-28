@@ -2658,6 +2658,45 @@
         "propext"
       ]
     },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/HilbertGlobalSubJung.SimpleGraph.IsChordal.exists_hilbert_gain_potential_clique_credit": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/HilbertGlobalSubJung",
+      "name": "SimpleGraph.IsChordal.exists_hilbert_gain_potential_clique_credit",
+      "kind": "theorem",
+      "statement_id": "sha256:a0b448f9fa2a44ee51c61df72dbdd7f1eb54044043093c7eab7b59beac53f27c",
+      "line": 904,
+      "signature": "theorem IsChordal.exists_hilbert_gain_potential_clique_credit (hG : G.IsChordal) (N : ℕ) (hN : 1 ≤ N) (hclique : ∀ S : Finset V, G.IsClique (S : Set V) → S.card ≤ N + 1) (g : V → V → E) (D : ℝ) (hD : 0 ≤ D) (hg : Skew g) (ht : ∀ i j k, Triangle G i j k → ‖holonomy g i j k‖ ≤ D) : (∃ p : V → E, ∀ i j, G.Adj i j → ‖g i j + p i - p j‖ ≤ Real.sqrt ((241361 / 100000 : ℝ) ^ 2 - 57 / (10 * (N : ℝ))) * D) ∧ Real.sqrt ((241361 / 100000 : ℝ) ^ 2 - 57 / (10 * (N : ℝ))) ≤ 241361 / 100000 - 59 / (50 * (N : ℝ))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/HilbertGlobalSubJung.SimpleGraph.IsChordal.exists_hilbert_gain_potential_retained_curl": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/HilbertGlobalSubJung",
+      "name": "SimpleGraph.IsChordal.exists_hilbert_gain_potential_retained_curl",
+      "kind": "theorem",
+      "statement_id": "sha256:a0b448f9fa2a44ee51c61df72dbdd7f1eb54044043093c7eab7b59beac53f27c",
+      "line": 924,
+      "signature": "theorem IsChordal.exists_hilbert_gain_potential_retained_curl (hG : G.IsChordal) (k : HilbertGlobalSubJungFinite.Cutoff) (hclique : ∀ W : Finset V, G.IsClique (W : Set V) → W.card ≤ k.parameters.N + 1) (g : V → V → E) (D : ℝ) (hD : 0 ≤ D) (hg : Skew g) (ht : ∀ i j l, Triangle G i j l → ‖holonomy g i j l‖ ≤ D) : ∃ p : V → E, ∀ i j, G.Adj i j → ‖g i j + p i - p j‖ ≤ k.parameters.R * D",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/HilbertGlobalSubJung.SimpleGraph.IsChordal.exists_hilbert_gain_potential_sub_jung": {
+      "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/HilbertGlobalSubJung",
+      "name": "SimpleGraph.IsChordal.exists_hilbert_gain_potential_sub_jung",
+      "kind": "theorem",
+      "statement_id": "sha256:a0b448f9fa2a44ee51c61df72dbdd7f1eb54044043093c7eab7b59beac53f27c",
+      "line": 888,
+      "signature": "theorem IsChordal.exists_hilbert_gain_potential_sub_jung (hG : G.IsChordal) (g : V → V → E) (D : ℝ) (hD : 0 ≤ D) (hg : Skew g) (ht : ∀ i j k, Triangle G i j k → ‖holonomy g i j k‖ ≤ D) : (∃ p : V → E, ∀ i j, G.Adj i j → ‖g i j + p i - p j‖ ≤ (241361 / 100000) * D) ∧ ((241361 / 100000 : ℝ) < 2414 / 1000 ∧ (2414 / 1000 : ℝ) < 1 + Real.sqrt 2 ∧ (3 / 5000 : ℝ) < 1 + Real.sqrt 2 - 241361 / 100000)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
     "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/SU2TangentLower.SimpleGraph.SU2Tangent.exists_round_width_four_obstruction": {
       "module": "D5/S3/Combinatorics/Graph/Chordal/Reconstruction/SU2TangentLower",
       "name": "SimpleGraph.SU2Tangent.exists_round_width_four_obstruction",
