@@ -245,13 +245,15 @@ This switch also sets the largest budget radius shared by all low exponents. Tak
 
 As the budget approaches $B_0$ from below, set $s_*=s_\tau$, $b=W'(\tau-s_*)$, and $c=W'(s_*)$. Differentiating $A_r+C_r=1+w_1$ gives $dA_r/dr=-dC_r/dr=bc/(c-b)$ at $r=\tau$. Relative to the left limit, the first-order loss per unit of budget removed is $u(A_\tau^{u-1}-C_\tau^{u-1})bc/(c-b)$. [Uniform radius, attainment, and interval certificate](https://github.com/the-omega-institute/trureturing-books/issues/2128#issuecomment-7240278006)
 
-Once the exponent reaches the critical value, the zero-transfer endpoint wins over a wider budget window (direct derivation, `ARGUED`). For $u_c\le u\le4$, $\tau=\tau_0(u)$, and $0<\varepsilon\le1/4$, the value is
+Once the exponent reaches the critical value, the zero-transfer endpoint wins over a wider budget window (direct derivation, `ARGUED`). For $u_c\le u\le4$, $\tau=\tau_0(u)$, and $0<\varepsilon\le0.43$, the value is
 
 $$
 V_S(B_0-\varepsilon)=N-1+M_\varepsilon^u+w_1^u+(1-M_\varepsilon)^u.
 $$
 
-Throughout this window, prefix majorization and strict convexity still reduce the comparison to the two endpoints. Interval arithmetic shows that $D(u,\varepsilon)$ decreases strictly with the shortfall. Starting from $D(u,0)\le0$, every positive shortfall strictly favors the zero-transfer endpoint. For $N=1$, the weights $M_\varepsilon,w_1,1-M_\varepsilon$ give the unique optimal spectrum. For $N\ge2$, positive-mass spectra approach the supremum by letting $N-1$ capped weights tend to $1$.
+Suppose the largest $N$ weights include $k\ge2$ uncapped weights. Those weights can spend at most $k\tau-\varepsilon$ in total. By concavity of $W$, the sum of all $N$ weights is at most $N-k+kW(\tau-\varepsilon/k)\le N-2+2W(\tau-\varepsilon/2)$. Interval arithmetic gives $A_r>2W(\tau-\varepsilon/2)-1$ throughout the window, so the transfer endpoint still dominates the prefixes of these spectra. The bound using only the cap on individual weights, $A_r>2W(\tau)-1$, first reaches equality in $0.261<\varepsilon<0.273$.
+
+With $N-1$ capped weights, a spectrum constructed by a single transfer of the remaining exposure bounds each prefix sum. Strict convexity then reduces the power-sum comparison to the two endpoints. Interval arithmetic shows that $D(u,\varepsilon)$ decreases strictly with the shortfall. Starting from $D(u,0)\le0$, every positive shortfall strictly favors the zero-transfer endpoint. For $N=1$, the weights $M_\varepsilon,w_1,1-M_\varepsilon$ give the unique optimal spectrum. For $N\ge2$, positive-mass spectra approach the supremum by letting $N-1$ capped weights tend to $1$. [Derivation and interval certificate for the prefix bound using the total budget](https://github.com/the-omega-institute/trureturing-books/issues/2189#issuecomment-7240610111)
 
 As the budget tends to $B_0$, the first-order loss relative to the left limit has coefficient $uW'(\tau)(M^{u-1}-d^{u-1})$, independent of $N$. For the fourth-power trace $u=4$, the coefficient is about $0.2144536669$ (`NUM`). [Derivation and interval calculation for the wider window](https://github.com/the-omega-institute/trureturing-books/issues/2170#issuecomment-7240449786) · [Fourth-power calculation](https://github.com/the-omega-institute/trureturing-books/issues/2116#issuecomment-7240080414)
 
