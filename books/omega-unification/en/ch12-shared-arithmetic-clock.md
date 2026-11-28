@@ -242,21 +242,17 @@ $$
 
 Summing over $j\ge0$ gives $O(M^{-1/2}(1+\log M)^2)$, which is summable over dyadic $M$. The two bracketing polynomials thus give the same leading term $\mu(W)N(T)$. The error from their constant terms is $O(N(T)/K)=O(T)$. Substituting the unfiltered counting main term gives the stated window remainder. The preceding partial summation formula yields $D_H=O(1/\log H)$. For every shared-clock kernel $f_v(s)=(1+v^2s^2)^{-1}$ the readout error is consequently bounded by $O(1/\log H)\,v^2/(1+v^2)$, with a constant uniform in $v$.
 
-**An unconditional remainder for the fixed Haar window (`ARGUED`).** Let $L=\log T$ and take $K=\lfloor L^{2/3}\rfloor$. The frequency separation and prime-power grouping above still bound the combined Landau contribution by $O(T)$ after division by $\sqrt{x}$. For a bounded bracketing polynomial $P_K$, define $p(z)=P_K(az/(2\pi))$ along the phase flow. Applying Bernstein's inequality in each coordinate bounds its second derivative on the real line by $O(K^2)$. The maximum-modulus bound for Laurent polynomials in each coordinate extends this estimate to imaginary part $v$, with a factor $\exp(O(K|v|))$.
+**An unconditional remainder for the fixed Haar window (`ARGUED`).** Bandlimited smoothing concentrates the effect of the zeros' real parts near the window boundary. Put $L=\log T$ and smooth at scale $1/n$, where $n=\lfloor\kappa L/\log L\rfloor$ for sufficiently small $\kappa>0$. Convolving the width-$1/n$ boundary neighborhood with a nonnegative bandlimited kernel gives a boundary polynomial $0\le B\le1$ with $\int B=O(1/n)$. Smooth the window indicator with a faster-decaying bandlimited kernel, then add and subtract a suitable constant multiple of $B$ to obtain the bracketing polynomials $P^\pm$. Both kernels can be built from even powers of sine quotients and their translates, with degree $O(n)$. Along the phase velocity $b=a/(2\pi)$, an imaginary shift of size $O(1/n)$ leaves the second derivatives of $B$ and $P^\pm$ bounded by $O(n^2 B)$, with $B$ evaluated on the real torus. For the smoothed indicator, subtracting the indicator at the real evaluation point inside the derivative convolution restricts the integral to displacements large enough to reach the boundary. [Kernel construction and local derivative estimates](https://github.com/the-omega-institute/trureturing-books/issues/1637#issuecomment-7233283092)
 
-Evaluating at $\gamma-i(\beta-1/2)$ gives the weighted Landau sum at positive frequencies. Zero symmetry and conjugation handle negative frequencies. Pair the zeros with real parts $\beta$ and $1-\beta$ at the same height. Their first derivatives cancel, leaving a Taylor error of $O(K^2v^2\exp(O(K|v|)))$, where $v=\beta-1/2$. Selberg's uniform density estimate $N(1/2+u,T)\ll T^{1-u/4}L$ and zero symmetry give
+These polynomials still satisfy the dyadic coefficient bounds used in the prime-power grouping. Evaluating at $\gamma-i(\beta-1/2)$ gives the weighted Landau sum at positive frequencies. Zero symmetry and conjugation handle negative frequencies. For each polynomial the sum at these complex shifts equals $N(T)$ times its torus mean, with error $O(T)$. Take a sufficiently large fixed $C$ and set $v_0=C\log L/L$. Selberg's uniform zero-density bound, together with the exponential bound on polynomial growth in the imaginary direction, shows that the zeros with $|\beta-\tfrac12|>v_0$ contribute $o(T)$ to the change of evaluation. Pair the remaining symmetric zeros at each height to cancel the first-order terms. With $\kappa$ sufficiently small, the sum of second-order remainders is at most $\tfrac12\sum_{0<\gamma\le T}B(b\gamma)$. Applying this estimate to $B$ and moving that term to the left gives $\sum B(b\gamma)=O(N(T)/n+T)$. Applying the estimate to $P^\pm$ then brackets the real window count. [Zero-density bound, Eq. (3)](https://arxiv.org/abs/1910.08274v2)
 
-$$
-\sum_{0<\gamma\le T}|\beta-1/2|^2\exp(O(K|\beta-1/2|))=O(T/L).
-$$
-
-This follows by integrating against the tail count. Passing the entire polynomial to the zero ordinates therefore costs $O(TK^2/L)$. Balancing that with the constant coefficient error $O(TL/K)$ yields
+Thus
 
 $$
-A_W(T)=\mu(W)N(T)+O\bigl(T(\log T)^{1/3}\bigr).
+A_W(T)=\mu(W)N(T)+O(T\log\log T).
 $$
 
-Partial summation gives an error $O((\log x)^{1/3}/x)$ in $S_W(x)$. On normalizing, $s(\log(H/s))^{1/3}=O((\log H)^{1/3})$ uniformly for $0<s\le1$. Thus $D_H=O((\log H)^{-2/3})$. [Zero-density bound, Eq. (3)](https://arxiv.org/abs/1910.08274v2) · [Polynomial transfer and tail normalization](https://github.com/the-omega-institute/trureturing-books/issues/1637#issuecomment-7233169018)
+Partial summation gives an error $O(\log\log x/x)$ in the inverse-square tail $S_W(x)$. In the normalization, $s\log\log(H/s)=O(\log\log H)$ uniformly for $0<s\le1$, so $D_H=O(\log\log H/\log H)$. For every shared-clock kernel $f_v$, the readout error is at most $O(\log\log H/\log H)\,v^2/(1+v^2)$, with a constant uniform in $v$.
 
 ::: {.problem #prob-ou-ch12-windowed-haar-rate title="Explicit Remainders for a Fixed Haar Phase Window"}
 Let $W$ be the fixed Haar acceptance region in Chapter 2, whose boundary has Haar measure zero. Set $c=\mu(W)/(2\pi)$ for normalized Haar measure $\mu$. For a prescribed starting height $H$, compute a checkable constant $b_H$ such that, with $m(t)$ as above,
