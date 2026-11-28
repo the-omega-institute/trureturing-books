@@ -227,11 +227,15 @@ $$
 
 例如 $\ell=31,35,37$ 时分别为 $109,127,136$。[二十九与三十一轻子的显式构造](https://github.com/the-omega-institute/trureturing-books/issues/1641#issuecomment-7231698774) · [任意阶的跨阶缩并](https://github.com/the-omega-institute/trureturing-books/issues/1641#issuecomment-7231740723)
 
-**全场方程与分部积分商中的达到性（`ARGUED`）。** 对经典可重整化标准模型，取复化局域场代数，令规范联络与 Higgs 共轭为零。保留的费米场只取反下夸克和正轻子荷扇区，中性方程中的费米双线性源随荷相反的字段一同消失。Higgs 满足自由 Klein–Gordon 方程，反下夸克与带电右轻子满足自由 Weyl 方程。左轻子可分为齐次解和由 Higgs 与右轻子产生的特解。在有限个壳上平面波的和中，选取泛型动量，使每个源项的合频处 Weyl 算子可逆。抽取含有原算子全部自由左轻子系数的 Grassmann 单项式，便只读出齐次部分。
+**全场方程与分部积分商中的达到性（`ARGUED`）。** 对经典可重整化标准模型，取复化局域场代数，令规范联络与 Higgs 共轭为零。保留的费米场只取反下夸克和正轻子荷扇区，中性方程中的费米双线性源随荷相反的字段一同消失。Higgs 满足自由 Klein–Gordon 方程，反下夸克与带电右轻子满足自由 Weyl 方程。左轻子可分为齐次解和由 Higgs 与右轻子产生的特解。抽取含有原算子全部自由左轻子次数的 Grassmann 单项式，便只读出齐次部分。
 
-有限阶空间 Cauchy 初值可由壳上平面波的有限叠加给出。对泛型空间动量，两支时间根的 Weyl 极化张成二分量初值。标量的两支根分别控制初值与时间导数。空间动量上的多项式插值给出所需的各阶空间射流，因此前面的非零系数可选成一个具体的平面波单项式。原颜色缩并的两枚反下夸克可取线性独立的极化 $\lambda_1,\lambda_2$。保持这两个左旋量，改变其点旋量 $\tilde\lambda_1,\tilde\lambda_2$ 时，两枚壳上动量之和 $\lambda_1\tilde\lambda_1+\lambda_2\tilde\lambda_2$ 可以取任意复四动量。算子中这两枚反夸克不带导数，所以可让外腿总动量恰为零，同时保留所选系数。
+有限个壳上平面波张成所需的有限阶 Cauchy 射流。对泛型空间动量，两支时间根的 Weyl 极化张成二分量初值，标量的两支根分别控制初值与时间导数。空间动量上的多项式插值给出所需的各阶空间射流，因而原见证的非零系数出现在至少一个平面波单项式中。固定原颜色缩并中两枚未微分反下夸克的独立极化。
 
-平移不变的局域流取总导数后，零动量系数必为零。这个系数因而检验了全场方程与分部积分商中的非零性，维数 $100$ 的 $\ell=29$ 见证和上述奇数 $\ell\ge31$ 的最低维数均可达到。[全场方程的射流见证](https://github.com/the-omega-institute/trureturing-books/issues/1641#issuecomment-7231982046) · [零总动量见证](https://github.com/the-omega-institute/trureturing-books/issues/1641#issuecomment-7232021736)
+在复二阶矩阵记号中，Higgs 动量 $h$ 满足 $\det h=\mu$，其中 $\mu$ 是有符号的质量壳参数。右轻子动量 $r$ 是两个旋量的秩一乘积。对每对源模式，$\det(h+r)$ 并非恒零。例如取 $h=\operatorname{diag}(\mu,1)$ 和 $r=\operatorname{diag}(t,0)$，行列式为 $\mu+t$。这些模式的复质量壳与旋量参数空间的有限乘积不可约，因此非零系数与有限个源行列式可以同时非零。于是每个源频率的 Weyl 方程都可反演，补出左轻子特解。
+
+最后保持两枚反下夸克的左旋量 $\lambda_1,\lambda_2$，改变其点旋量 $\tilde\lambda_1,\tilde\lambda_2$。两枚壳上动量之和 $\lambda_1\tilde\lambda_1+\lambda_2\tilde\lambda_2$ 可以取任意复四动量。这两枚夸克既不带导数，也不参与左轻子源。因此可让所选单项式总动量恰为零，保留非零系数和各源行列式。
+
+平移不变的局域流取总导数后，其动量为 $P$ 的系数乘以 $iP$，故零动量系数为零。场方程及其各阶导数在这个平面波解上也逐项为零。抽取所选零动量单项式的系数因而检验了全场方程与分部积分商中的非零性，维数 $100$ 的 $\ell=29$ 见证和上述奇数 $\ell\ge31$ 的最低维数均可达到。[全场方程的射流见证](https://github.com/the-omega-institute/trureturing-books/issues/1641#issuecomment-7231982046) · [零总动量见证](https://github.com/the-omega-institute/trureturing-books/issues/1641#issuecomment-7232021736)
 
 **较低奇数轻子数（`ARGUED`）。** 在 $\ell=1,3,5,7$ 时复用前面的维数 $16,19,22,25$ 的非零单项式。若算子含 $u^c$，在 Higgs 共轭为零的背景上先取自由 $u^c$，再用 $H u^c$ 与 $H Q^\dagger$ 依次求出 $Q^\dagger$ 和 $d^c$ 的特解。所涉源频率在泛型动量下非特征。特解只携带 $u^c$ 的 Grassmann 系数。选择自由 $d^c$ 系数的次数等于算子中 $d^c$ 的个数，就只读出 $d^c$ 的齐次部分。这四个非零单项式都含两枚未微分、极化独立的 $d^c$，仍可用其点旋量平衡总动量。特解的频率只依赖 $H$ 与 $u^c$，故这一步保留非零性。
 
