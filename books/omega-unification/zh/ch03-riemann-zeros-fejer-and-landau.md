@@ -150,6 +150,20 @@ $$
 
 对这些输入，$T/\log T$ 的尺度可以达到（合成谱，`ARGUED`）。取 $\lambda=1$，在每个 $2\pi$ 周期里轻推等间距的纵坐标，使未加权的相位和偏向负实轴。点仍按同高镜像成对放置，实部偏移取 $O(1/\log T)$，并随相位调整，让带权和在周期端点恰好跟随光滑端点项的增量。该谱的计数余项有界，满足 Selberg 型密度界，带权和在所有高度以 $O(1)$ 的误差跟随端点项，而 $C_1(T)\sim T/(4\pi\log T)$。对实际 $\zeta$，收紧差项仍需超出这些输入的估计。[构造与复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239117179)
 
+对实际 $\zeta$，可以用横向积分把需要相消的部分定位到临界线附近。令 $L=\log T$、$c=1/2+a$，其中 $0\le a\le 1/2$。把 $J_c(t)=\int_c^\infty\log|\zeta(\sigma+it)|\,d\sigma$ 用素幂多项式 $P_{x,c}(t)=\operatorname{Re}\sum_{2\le n\le x^3}\Lambda_x(n)n^{-c-it}/(\log n)^2$ 近似，$\Lambda_x$ 为 Selberg 的二次截断权。固定非共振 $\lambda$，对充分大的 $T$，当 $2\le x$ 且 $x^3\le L^2$ 时，余项有以下手工推导（`ARGUED`）。
+
+$$
+\int_3^T e^{i\lambda t}\bigl(J_c(t)-P_{x,c}(t)\bigr)\,dt
+=\frac{2\pi}{\lambda^2}
+  \sum_{\substack{3<\gamma\le T\\ \beta>c}}
+  \bigl(\cosh(\lambda(\beta-c))-1\bigr)e^{i\lambda\gamma}
+  +O_\lambda(L).
+$$
+
+横向积分把 $\log\zeta$ 在零点左侧的割线跳跃变为与 $\beta-\sigma$ 成正比。分别移过两种指数相位，再取实部对应的半和，割线就给出上式的双曲余弦权重。水平边界由局部对数导数控制在 $O_\lambda(L)$，上界取右极限。非共振使素幂多项式的相位积分也在这一预算内。[Korolev，引理 4 前的截断权](https://www.mathnet.ru/links/2bb06e5a975dd807fe74eae4c1f9fd1f/im2766_eng.pdf#page=9) · [割线推导与复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239342305)
+
+在 $a=0$ 时，零点和经同高反射还原 $C_\lambda(T)$，只差归一化系数和有界的低高度项。增大 $a$ 会把每个右侧零点的权重改成 $\cosh(\lambda(\delta_\rho-a)_+)-1$，其中 $v_+=\max(v,0)$。将该权重的导数与 Selberg 密度界配对，右侧余项至多为 $O_\lambda((T/L)e^{-aL/4}+L)$。取 $a=1/L$ 只降低密度估计中的常数，合成谱上窄带与右侧余项均可达到 $T/L$ 量级。取 $a=8\log L/L$ 时，右侧上界降到 $O_\lambda(T/L^3+L)$。因此若要在 $T/L$ 尺度上取得严格改善，只需研究横向窄带 $1/2\le\sigma\le1/2+8\log L/L$ 内的同频积分。[Simonič，式 (3)，引 Selberg 密度界](https://arxiv.org/pdf/1910.08274v2#page=1)
+
 对实际 $\zeta$ 零点，保留实部权重时，无须用 RH 作为解析输入也可在高度平均下读出端点项。令 $S(t)$ 为黎曼–冯·曼戈尔特公式中的辐角项，即离开零点高度时 $N(t)=1+\vartheta(t)/\pi+S(t)$，其中 $\vartheta$ 是黎曼–西格尔 $\vartheta$ 函数。从带权和中扣除光滑端点项
 
 $$
