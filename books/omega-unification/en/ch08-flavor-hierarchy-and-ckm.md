@@ -287,6 +287,19 @@ $$
 
 For fixed mass bases and angle, the linear term depends on the lightest lines through their projections onto the plane. Optimizing the angle split within that plane gives effective gaps $1-a\varepsilon(1-\lambda_u)$ and $1-b\varepsilon(1-\lambda_d)$. The matrix entries coupling the plane to its normal contribute only at quadratic order to the squared defect of this construction. Every limit of minimizing rotation eigenbases as the matrices tend to rank one has the top–bottom plane as a coordinate plane. Bounding the cost of tilting that plane gives the matching first-order lower bound. Thus the gap has a strictly positive linear coefficient whenever $|V_{ud}|<1$. [First-order lower bound and matrix calculation](https://github.com/the-omega-institute/trureturing-books/issues/1902#issuecomment-7238657944)
 
+**When the top–bottom angle and the middle eigenvalues shrink together (hand derivation).** If the top–bottom angle shrinks on the same scale as the middle eigenvalues, the light block contributes at the same order as the angle split. Let the unit vector $e_0$ span the top line. In its orthogonal complement, choose unit vectors $c,s$ for the reference middle mass lines of the up and down sectors and a unit vector $v$ for the direction of rotation. Rotate the entire down-type reference basis through $\theta=\mu\varepsilon$ in the $e_0,v$ plane. Set the two normalized middle mass-squared eigenvalues to $a\varepsilon,b\varepsilon$, with $\mu,a,b>0$. Write $D_*$ for the minimum defect over rotation eigenbases, and set $\kappa=2|\langle c,s\rangle|^2-1$, $r_w=wa^2/4$, and $s_w=(1-w)b^2/4$. Then
+
+$$
+\begin{aligned}
+q(w)&=\mu^2w(1-w)+\frac{r_w+s_w-\sqrt{(r_w-s_w)^2+4r_ws_w\kappa^2}}{2},\\
+D_*&=\varepsilon\sqrt{6\max_{0\le w\le1}q(w)}+O(\varepsilon^2).
+\end{aligned}
+$$
+
+The rotation eigenline near $e_0$ absorbs the displacement between the heavy mass lines. The other two rotation eigenlines control the off-diagonal entries in the light block. Weight the squared defects in the two sectors by $w$ and $1-w$. Completing the square gives the displacement term, and the light term reduces to an eigenvalue calculation in the plane spanned by the Bloch vectors of the two reference middle mass lines. At the unique maximizer $w_*$ of $q$, the heavy rotation eigenline has first-order displacement $(1-w_*)\mu\varepsilon v$, and the light rotation eigenlines can be chosen to equalize the two leading defects. The leading coefficient $\sqrt{3/2}\,\mu$ of the two-line bound is attained precisely when $c,s$ span the same line or are orthogonal.
+
+For example, in the standard orthonormal basis $(e_0,e_1,e_2)$ take $\mu=a=b=1$, $v=c=e_1$, and $s=(e_1+i e_2)/\sqrt2$. The optimal leading coefficient is $3/2$. Requiring one rotation eigenline to be the normal $e_2$ to the top–bottom plane raises the optimal coefficient to $5\sqrt6/8>3/2$. Reorienting the two light rotation eigenlines attains the true minimum. [Global derivation, optimizing bases, and matrix calculation](https://github.com/the-omega-institute/trureturing-books/issues/1928#issuecomment-7238762769)
+
 Table 2 at $1\,\mathrm{TeV}$ gives $y_c/y_t\le0.00316/0.8573$ and $y_s/y_b\le0.000271/0.01392$, so we can take $g=0.9996$. With the conservative mixing inputs above, $|V_{tb}|>0.98$ gives $d=\theta$, while $\sin\theta\ge |V_{cb}|>0.035$ forces a defect strictly above $0.0428$. Using the marginal intervals in Table 2 as an input box still gives $d=\theta$. Since $|V_{tb}|=\cos\theta_{23}\cos\theta_{13}$, $\sin^2\theta$ increases with each mixing angle. Substituting the lower endpoints $\theta_{23}=0.04233$ and $\theta_{13}=0.00369$ gives a defect strictly above $0.0520$. [Reference inputs, Table 2](https://arxiv.org/pdf/2510.01312v2#page=14) · [Standard CKM parametrization, Eq. (12.3)](https://pdg.lbl.gov/2024/reviews/rpp2024-rev-ckm-matrix.pdf#page=1)
 :::
 

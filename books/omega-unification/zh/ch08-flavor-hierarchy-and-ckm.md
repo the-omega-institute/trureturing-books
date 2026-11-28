@@ -286,6 +286,19 @@ $$
 
 对固定的质量基和角度，首阶只读取最轻质量线在平面内的分量。在顶底平面内重做最优分角时，各部门的有效谱隙为 $1-a\varepsilon(1-\lambda_u)$、$1-b\varepsilon(1-\lambda_d)$，平面与法线间的矩阵元只在平方破缺的二次项中出现。任意使破缺达到最小的轮换基，在秩一极限都以顶底平面为一个坐标平面。控制偏离该平面的代价后，得到相同的首阶下界。因此在 $|V_{ud}|<1$ 时，差距的一次项系数严格为正。[首阶下界与矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/1902#issuecomment-7238657944)
 
+**顶底夹角与次重谱同阶时（手工推导）。** 若连顶底夹角也随次重谱缩小，单靠顶底平面分角会漏掉同阶的轻块代价。取顶线单位向量 $e_0$，在其正交补中固定上、下型参考次重单位向量 $c,s$ 及转动方向 $v$。把下型参考质量基在 $e_0,v$ 平面内整体转过 $\theta=\mu\varepsilon$，并令两套归一次重质量平方分别为 $a\varepsilon,b\varepsilon$，其中 $\mu,a,b>0$。记 $D_*$ 为所有轮换本征基上的最小破缺，令 $\kappa=2|\langle c,s\rangle|^2-1$、$r_w=wa^2/4$、$s_w=(1-w)b^2/4$。则
+
+$$
+\begin{aligned}
+q(w)&=\mu^2w(1-w)+\frac{r_w+s_w-\sqrt{(r_w-s_w)^2+4r_ws_w\kappa^2}}{2},\\
+D_*&=\varepsilon\sqrt{6\max_{0\le w\le1}q(w)}+O(\varepsilon^2).
+\end{aligned}
+$$
+
+轮换基中靠近 $e_0$ 的线承担两条重线之间的偏移，其余两条线分担轻块的非对角项。以 $w$ 和 $1-w$ 加权两个部门的平方破缺，前一项配平方，后一项化为两条轻质量线的布洛赫向量所张成平面上的本征值计算。在 $q$ 的唯一最大点 $w_*$，轮换重线的首阶偏移为 $(1-w_*)\mu\varepsilon v$，可选轻线使两部门的首阶破缺相等。两线锐界的首阶值 $\sqrt{3/2}\,\mu$ 当且仅当 $c,s$ 同线或正交时达到。
+
+例如在标准正交基 $(e_0,e_1,e_2)$ 中取 $\mu=a=b=1$、$v=c=e_1$、$s=(e_1+i e_2)/\sqrt2$。最优首阶系数为 $3/2$。若规定一条轮换本征线是顶底平面的法线 $e_2$，最小首阶系数升至 $5\sqrt6/8>3/2$。允许两条轻轮换线重新取向，才可达到真实最小值。[全局推导、取优基与矩阵复算](https://github.com/the-omega-institute/trureturing-books/issues/1928#issuecomment-7238762769)
+
 在 $1\,\mathrm{TeV}$ 的参考输入表 2 中，$y_c/y_t\le0.00316/0.8573$，$y_s/y_b\le0.000271/0.01392$，因此可取 $g=0.9996$。沿用上面的保守混合输入，$|V_{tb}|>0.98$ 使 $d=\theta$，而 $\sin\theta\ge |V_{cb}|>0.035$ 使破缺严格大于 $0.0428$。用表 2 的边际区间构成输入盒时，仍有 $d=\theta$。由 $|V_{tb}|=\cos\theta_{23}\cos\theta_{13}$，$\sin^2\theta$ 随两个混合角分别增大。代入下端点 $\theta_{23}=0.04233$、$\theta_{13}=0.00369$，得破缺严格大于 $0.0520$。[参考输入表 2](https://arxiv.org/pdf/2510.01312v2#page=14) · [CKM 标准参数化，式 (12.3)](https://pdg.lbl.gov/2024/reviews/rpp2024-rev-ckm-matrix.pdf#page=1)
 :::
 
