@@ -181,7 +181,9 @@ $$
 \|U_\phi H U_\phi^*-H_0\|_{\mathrm{op}}
 =2|\sin(\phi/2)|\,\|PH_0(I-P)\|_{\mathrm{op}}.
 $$
-把负号证书中的末轮乘数改为区间 $-\exp(i[-10^{-7},10^{-7}])$，并保留原来的六个固定角和六个活动角盒。对每个 $|\phi-\pi|\le10^{-7}$，预条件映射的自映行界小于 $0.726791$，所以活动角盒内有唯一一组角度同时满足三壳六式。允许重新选门的同号六式可达性仍开放。[相位下界与交叉块恒等式](https://github.com/the-omega-institute/trureturing-books/issues/1627#issuecomment-7231068482) · [退化门的显式构造](https://github.com/the-omega-institute/trureturing-books/issues/1627#issuecomment-7231094749) · [相位区间复算](https://github.com/the-omega-institute/trureturing-books/issues/1627#issuecomment-7231273037)
+把负号证书中的末轮乘数改为区间 $-\exp(i[-10^{-7},10^{-7}])$，并保留原来的六个固定角和六个活动角共用的一个六维盒。对每个 $|\phi-\pi|\le10^{-7}$，预条件映射的自映行界小于 $0.726791$，所以活动角盒内有唯一一组角度同时满足三壳六式。允许重新选门的同号六式可达性仍开放。[相位下界与交叉块恒等式](https://github.com/the-omega-institute/trureturing-books/issues/1627#issuecomment-7231068482) · [退化门的显式构造](https://github.com/the-omega-institute/trureturing-books/issues/1627#issuecomment-7231094749) · [相位区间复算](https://github.com/the-omega-institute/trureturing-books/issues/1627#issuecomment-7231273037)
+
+若同时重选三个门，同号输运能得到已知负号解的源算子吗？固定第五壳源和十二条定向弦，负号解所在六维角盒内的每个输运后源算子，与全部同号共门所得算子的算子范数距离都大于 $1.2\times10^{-5}$。两条重本征线提供了这一区分。在三条射线的早、晚两片叶上逆推，负号门以相反的符号留下同一对角元，同号门在两处留下相同的对角元。六组读数足以分辨这两个系数，而未受门作用的站点 $14$ 固定了两条重线各自的相位。因此，同号六式若有解，必须由与这个负号角盒相隔正距离的算子实现。[两条重本征线给出的距离界](https://github.com/the-omega-institute/trureturing-experiments/blob/a646b9d10eed33e413ee0bd2b65125c674025e2d/experiments/ch39-omega-research/replay/ch39-three-shell-source-phase-distance.md)
 
 前三壳的六个等式对第十壳还留下多少自由？保留相同的第五壳源、十二条弦和末轮负号，重新选择三个门。固定其中四角，其余八角在一个区间盒内调整。任取 $|u|\le 4\times10^{-6}$、$|v|\le 5\times10^{-7}$，都能选出同一组门，使前三壳保持上述六个等式，并在第十壳同时读得 $K_{10}=1+u$、$W_{10}=10^{-122}+v$。取 $u=v=0$ 即配平四壳八式；取偏移的四种符号组合，则两项偏离的方向可以独立改变。此处第十壳也参与校准，真空尺度仍是输入。 [四壳校准与第十壳响应的区间证书](https://github.com/the-omega-institute/trureturing-experiments/blob/c6bbae236604130b5618b1c906ed36e8c532faf9/experiments/ch39-omega-research/replay/ch39-four-shell-final-sign.md)
 
