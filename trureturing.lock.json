@@ -3,7 +3,7 @@
   "repo": "the-omega-institute/trureturing",
   "branch": "dev",
   "commit": "14ab3f818a0473d5a5f6f329fe70790d6ec55cc0",
-  "pinned_at": "2026-11-28T03:32:15Z",
+  "pinned_at": "2026-11-28T03:38:12Z",
   "declarations": {
     "D5/S0/Automata/BinaryZeckendorfLanguage.base_success_iff_noAdjacentOnes": {
       "module": "D5/S0/Automata/BinaryZeckendorfLanguage",
@@ -7280,6 +7280,331 @@
       "statement_id": "sha256:3f4bd0ab0e85f2c4fcbe00f0bb54662e554cf35f62e11b556306007477e89edb",
       "line": 541,
       "signature": "theorem no_majorana_weyl_4d (ψ : Spinor) (hc : chargeConj ψ = ψ) (hl : PL *ᵥ ψ = ψ) : ψ = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D.acceleration_iff_strong_energy_violation": {
+      "module": "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D",
+      "name": "D5.S3.Geometry.Lorentz.FLRWCosmologyFriedmann4D.acceleration_iff_strong_energy_violation",
+      "kind": "theorem",
+      "statement_id": "sha256:4b4260ebfb858cfa351ace357ef77206628402ced511039a57a03a18d6118d40",
+      "line": 104,
+      "signature": "theorem acceleration_iff_strong_energy_violation {a b G ρ w : ℝ} (ha : 0 < a) (hG : 0 < G) (hρ : 0 < ρ) (hII : b / a = -(4 * Real.pi * G / 3) * (ρ + 3 * (w * ρ))) : 0 < b ↔ w < -1 / 3",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D.continuity_and_friedmann_II_conserve_first_integral": {
+      "module": "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D",
+      "name": "D5.S3.Geometry.Lorentz.FLRWCosmologyFriedmann4D.continuity_and_friedmann_II_conserve_first_integral",
+      "kind": "theorem",
+      "statement_id": "sha256:4b4260ebfb858cfa351ace357ef77206628402ced511039a57a03a18d6118d40",
+      "line": 66,
+      "signature": "theorem continuity_and_friedmann_II_conserve_first_integral {a v ρ p : ℝ → ℝ} {t b r G Λ : ℝ} (ha0 : 0 < a t) (ha : HasDerivAt a (v t) t) (hv : HasDerivAt v b t) (hρ : HasDerivAt ρ r t) (hII : b / a t = -(4 * Real.pi * G / 3) * (ρ t + 3 * p t) + Λ / 3) (hc : r + 3 * (v t / a t) * (ρ t + p t) = 0) : HasDerivAt (fun s => v s ^ 2 - (8 * Real.pi * G / 3) * ρ s * a s ^ 2 - Λ / 3 * a s ^ 2) 0 t",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D.dust_acceleration_iff": {
+      "module": "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D",
+      "name": "D5.S3.Geometry.Lorentz.FLRWCosmologyFriedmann4D.dust_acceleration_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:4b4260ebfb858cfa351ace357ef77206628402ced511039a57a03a18d6118d40",
+      "line": 115,
+      "signature": "theorem dust_acceleration_iff {a b G ρ Λ : ℝ} (ha : 0 < a) (hII : b / a = -(4 * Real.pi * G / 3) * ρ + Λ / 3) : 0 < b ↔ (4 * Real.pi * G) * ρ < Λ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D.eosDensity_continuity_ode": {
+      "module": "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D",
+      "name": "D5.S3.Geometry.Lorentz.FLRWCosmologyFriedmann4D.eosDensity_continuity_ode",
+      "kind": "theorem",
+      "statement_id": "sha256:4b4260ebfb858cfa351ace357ef77206628402ced511039a57a03a18d6118d40",
+      "line": 79,
+      "signature": "theorem eosDensity_continuity_ode {a : ℝ → ℝ} {t v ρ₀ a₀ w : ℝ} (ha : HasDerivAt a v t) (hat : 0 < a t) (ha₀ : 0 < a₀) : HasDerivAt (fun s => eosDensity ρ₀ a₀ w (a s)) (-(3 * (v / a t) * (1 + w) * eosDensity ρ₀ a₀ w (a t))) t",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D.eosDensity_dust_radiation_vacuum": {
+      "module": "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D",
+      "name": "D5.S3.Geometry.Lorentz.FLRWCosmologyFriedmann4D.eosDensity_dust_radiation_vacuum",
+      "kind": "theorem",
+      "statement_id": "sha256:4b4260ebfb858cfa351ace357ef77206628402ced511039a57a03a18d6118d40",
+      "line": 94,
+      "signature": "theorem eosDensity_dust_radiation_vacuum {ρ₀ a₀ a : ℝ} (h : 0 ≤ a / a₀) : eosDensity ρ₀ a₀ 0 a = ρ₀ / (a / a₀) ^ 3 ∧ eosDensity ρ₀ a₀ (1 / 3) a = ρ₀ / (a / a₀) ^ 4 ∧ eosDensity ρ₀ a₀ (-1) a = ρ₀",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D.event_horizon_finite_iff": {
+      "module": "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D",
+      "name": "D5.S3.Geometry.Lorentz.FLRWCosmologyFriedmann4D.event_horizon_finite_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:4b4260ebfb858cfa351ace357ef77206628402ced511039a57a03a18d6118d40",
+      "line": 475,
+      "signature": "theorem event_horizon_finite_iff {α T : ℝ} (hT : 0 < T) : IntegrableOn (fun t : ℝ => t ^ (-α)) (Ioi T) ↔ 1 < α",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D.event_horizon_integral": {
+      "module": "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D",
+      "name": "D5.S3.Geometry.Lorentz.FLRWCosmologyFriedmann4D.event_horizon_integral",
+      "kind": "theorem",
+      "statement_id": "sha256:4b4260ebfb858cfa351ace357ef77206628402ced511039a57a03a18d6118d40",
+      "line": 486,
+      "signature": "theorem event_horizon_integral {α T : ℝ} (hT : 0 < T) (hα : 1 < α) : ∫ t : ℝ in Ioi T, t ^ (-α) = T ^ (1 - α) / (α - 1)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D.flat_deceleration_thresholds": {
+      "module": "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D",
+      "name": "D5.S3.Geometry.Lorentz.FLRWCosmologyFriedmann4D.flat_deceleration_thresholds",
+      "kind": "theorem",
+      "statement_id": "sha256:4b4260ebfb858cfa351ace357ef77206628402ced511039a57a03a18d6118d40",
+      "line": 196,
+      "signature": "theorem flat_deceleration_thresholds {a₁ w t : ℝ} (ha₁ : 0 < a₁) (hw : -1 < w) (ht : 0 < t) : deceleration (flatScaleFactor a₁ (flatExponent 0)) t = 1 / 2 ∧ deceleration (flatScaleFactor a₁ (flatExponent (1 / 3))) t = 1 ∧ (deceleration (flatScaleFactor a₁ (flatExponent w)) t < 0 ↔ w < -1 / 3)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D.flat_dust_radiation_age": {
+      "module": "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D",
+      "name": "D5.S3.Geometry.Lorentz.FLRWCosmologyFriedmann4D.flat_dust_radiation_age",
+      "kind": "theorem",
+      "statement_id": "sha256:4b4260ebfb858cfa351ace357ef77206628402ced511039a57a03a18d6118d40",
+      "line": 169,
+      "signature": "theorem flat_dust_radiation_age {a₁ t : ℝ} (ha₁ : 0 < a₁) (ht : 0 < t) : t = 2 / (3 * hubble (flatScaleFactor a₁ (flatExponent 0)) t) ∧ t = 1 / (2 * hubble (flatScaleFactor a₁ (flatExponent (1 / 3))) t)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D.flat_horizon_thresholds": {
+      "module": "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D",
+      "name": "D5.S3.Geometry.Lorentz.FLRWCosmologyFriedmann4D.flat_horizon_thresholds",
+      "kind": "theorem",
+      "statement_id": "sha256:4b4260ebfb858cfa351ace357ef77206628402ced511039a57a03a18d6118d40",
+      "line": 491,
+      "signature": "theorem flat_horizon_thresholds {T w : ℝ} (hT : 0 < T) (hw : -1 < w) : (IntegrableOn (fun t : ℝ => t ^ (-flatExponent w)) (Ioc 0 T) ↔ -1 / 3 < w) ∧ (IntegrableOn (fun t : ℝ => t ^ (-flatExponent w)) (Ioi T) ↔ w < -1 / 3)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D.flat_power_law_deceleration": {
+      "module": "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D",
+      "name": "D5.S3.Geometry.Lorentz.FLRWCosmologyFriedmann4D.flat_power_law_deceleration",
+      "kind": "theorem",
+      "statement_id": "sha256:4b4260ebfb858cfa351ace357ef77206628402ced511039a57a03a18d6118d40",
+      "line": 176,
+      "signature": "theorem flat_power_law_deceleration {a₁ w t : ℝ} (ha₁ : 0 < a₁) (hw : -1 < w) (ht : 0 < t) : deceleration (flatScaleFactor a₁ (flatExponent w)) t = (1 + 3 * w) / 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D.flat_power_law_hubble_age": {
+      "module": "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D",
+      "name": "D5.S3.Geometry.Lorentz.FLRWCosmologyFriedmann4D.flat_power_law_hubble_age",
+      "kind": "theorem",
+      "statement_id": "sha256:4b4260ebfb858cfa351ace357ef77206628402ced511039a57a03a18d6118d40",
+      "line": 164,
+      "signature": "theorem flat_power_law_hubble_age {a₁ w t : ℝ} (ha₁ : 0 < a₁) (ht : 0 < t) : hubble (flatScaleFactor a₁ (flatExponent w)) t * t = 2 / (3 * (1 + w))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D.flat_power_law_satisfies_friedmann": {
+      "module": "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D",
+      "name": "D5.S3.Geometry.Lorentz.FLRWCosmologyFriedmann4D.flat_power_law_satisfies_friedmann",
+      "kind": "theorem",
+      "statement_id": "sha256:4b4260ebfb858cfa351ace357ef77206628402ced511039a57a03a18d6118d40",
+      "line": 152,
+      "signature": "theorem flat_power_law_satisfies_friedmann {a₁ G w t : ℝ} (ha₁ : 0 < a₁) (hG : 0 < G) (hw : -1 < w) (ht : 0 < t) : hubble (flatScaleFactor a₁ (flatExponent w)) t ^ 2 = (8 * Real.pi * G / 3) * flatDensity G w t ∧ deriv (deriv (flatScaleFactor a₁ (flatExponent w))) t / flatScaleFactor a₁ (flatExponent w) t = -(4 * Real.pi * G / 3) * (1 + 3 * w) * flatDensity G w t",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D.friedmann_implies_continuity": {
+      "module": "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D",
+      "name": "D5.S3.Geometry.Lorentz.FLRWCosmologyFriedmann4D.friedmann_implies_continuity",
+      "kind": "theorem",
+      "statement_id": "sha256:4b4260ebfb858cfa351ace357ef77206628402ced511039a57a03a18d6118d40",
+      "line": 51,
+      "signature": "theorem friedmann_implies_continuity {a v ρ p : ℝ → ℝ} {t b r G k Λ : ℝ} (ha0 : 0 < a t) (hG : 0 < G) (ha : HasDerivAt a (v t) t) (hv : HasDerivAt v b t) (hρ : HasDerivAt ρ r t) (hI : ∀ᶠ s in 𝓝 t, v s ^ 2 + k = (8 * Real.pi * G / 3) * ρ s * a s ^ 2 + Λ / 3 * a s ^ 2) (hII : b / a t = -(4 * Real.pi * G / 3) * (ρ t + 3 * p t) + Λ / 3) : r + 3 * (v t / a t) * (ρ t + p t) = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D.lcdm_density_parameter_acceleration": {
+      "module": "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D",
+      "name": "D5.S3.Geometry.Lorentz.FLRWCosmologyFriedmann4D.lcdm_density_parameter_acceleration",
+      "kind": "theorem",
+      "statement_id": "sha256:4b4260ebfb858cfa351ace357ef77206628402ced511039a57a03a18d6118d40",
+      "line": 344,
+      "signature": "theorem lcdm_density_parameter_acceleration {aStar H G t : ℝ} (ha : 0 < aStar) (hH : 0 < H) (hG : 0 < G) (ht : 0 < t) : let Ht",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D.lcdm_hubble_eq": {
+      "module": "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D",
+      "name": "D5.S3.Geometry.Lorentz.FLRWCosmologyFriedmann4D.lcdm_hubble_eq",
+      "kind": "theorem",
+      "statement_id": "sha256:4b4260ebfb858cfa351ace357ef77206628402ced511039a57a03a18d6118d40",
+      "line": 253,
+      "signature": "theorem lcdm_hubble_eq {aStar H t : ℝ} (ha : 0 < aStar) (hH : 0 < H) (ht : 0 < t) : hubble (lcdmScaleFactor aStar H) t = H * Real.cosh ((3 / 2 : ℝ) * H * t) / Real.sinh ((3 / 2 : ℝ) * H * t)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D.lcdm_hubble_tendsto_desitter": {
+      "module": "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D",
+      "name": "D5.S3.Geometry.Lorentz.FLRWCosmologyFriedmann4D.lcdm_hubble_tendsto_desitter",
+      "kind": "theorem",
+      "statement_id": "sha256:4b4260ebfb858cfa351ace357ef77206628402ced511039a57a03a18d6118d40",
+      "line": 436,
+      "signature": "theorem lcdm_hubble_tendsto_desitter {aStar H : ℝ} (ha : 0 < aStar) (hH : 0 < H) : Tendsto (hubble (lcdmScaleFactor aStar H)) atTop (𝓝 H)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D.lcdm_inflection_iff": {
+      "module": "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D",
+      "name": "D5.S3.Geometry.Lorentz.FLRWCosmologyFriedmann4D.lcdm_inflection_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:4b4260ebfb858cfa351ace357ef77206628402ced511039a57a03a18d6118d40",
+      "line": 324,
+      "signature": "theorem lcdm_inflection_iff {aStar H t : ℝ} (ha : 0 < aStar) (hH : 0 < H) (ht : 0 < t) : 0 < deriv (deriv (lcdmScaleFactor aStar H)) t ↔ 1 / Real.sqrt 2 < Real.sinh ((3 / 2 : ℝ) * H * t)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D.lcdm_satisfies_friedmann_I": {
+      "module": "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D",
+      "name": "D5.S3.Geometry.Lorentz.FLRWCosmologyFriedmann4D.lcdm_satisfies_friedmann_I",
+      "kind": "theorem",
+      "statement_id": "sha256:4b4260ebfb858cfa351ace357ef77206628402ced511039a57a03a18d6118d40",
+      "line": 299,
+      "signature": "theorem lcdm_satisfies_friedmann_I {aStar H G t : ℝ} (ha : 0 < aStar) (hH : 0 < H) (hG : 0 < G) (ht : 0 < t) : hubble (lcdmScaleFactor aStar H) t ^ 2 = (8 * Real.pi * G / 3) * lcdmDensity aStar H G t + H ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D.lcdm_satisfies_friedmann_II": {
+      "module": "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D",
+      "name": "D5.S3.Geometry.Lorentz.FLRWCosmologyFriedmann4D.lcdm_satisfies_friedmann_II",
+      "kind": "theorem",
+      "statement_id": "sha256:4b4260ebfb858cfa351ace357ef77206628402ced511039a57a03a18d6118d40",
+      "line": 312,
+      "signature": "theorem lcdm_satisfies_friedmann_II {aStar H G t : ℝ} (ha : 0 < aStar) (hH : 0 < H) (hG : 0 < G) (ht : 0 < t) : deriv (deriv (lcdmScaleFactor aStar H)) t / lcdmScaleFactor aStar H t = -(4 * Real.pi * G / 3) * lcdmDensity aStar H G t + H ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D.lcdm_transition_redshift": {
+      "module": "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D",
+      "name": "D5.S3.Geometry.Lorentz.FLRWCosmologyFriedmann4D.lcdm_transition_redshift",
+      "kind": "theorem",
+      "statement_id": "sha256:4b4260ebfb858cfa351ace357ef77206628402ced511039a57a03a18d6118d40",
+      "line": 420,
+      "signature": "theorem lcdm_transition_redshift {aStar H t₀ tAcc : ℝ} (ha : 0 < aStar) (hH : 0 < H) (ht₀ : 0 < t₀) (htAcc : 0 < tAcc) (hacc : deriv (deriv (lcdmScaleFactor aStar H)) tAcc = 0) : (lcdmScaleFactor aStar H t₀ / lcdmScaleFactor aStar H tAcc) ^ 3 = 2 / lcdmMatterVacuumRatio aStar H t₀",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D.lcdm_transition_scale": {
+      "module": "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D",
+      "name": "D5.S3.Geometry.Lorentz.FLRWCosmologyFriedmann4D.lcdm_transition_scale",
+      "kind": "theorem",
+      "statement_id": "sha256:4b4260ebfb858cfa351ace357ef77206628402ced511039a57a03a18d6118d40",
+      "line": 390,
+      "signature": "theorem lcdm_transition_scale {aStar H t : ℝ} (ha : 0 < aStar) (hH : 0 < H) (ht : 0 < t) : deriv (deriv (lcdmScaleFactor aStar H)) t = 0 ↔ lcdmScaleFactor aStar H t / aStar = (2 : ℝ) ^ (-(1 / 3 : ℝ))",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D.lcdm_transition_time": {
+      "module": "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D",
+      "name": "D5.S3.Geometry.Lorentz.FLRWCosmologyFriedmann4D.lcdm_transition_time",
+      "kind": "theorem",
+      "statement_id": "sha256:4b4260ebfb858cfa351ace357ef77206628402ced511039a57a03a18d6118d40",
+      "line": 398,
+      "signature": "theorem lcdm_transition_time {aStar H : ℝ} (ha : 0 < aStar) (hH : 0 < H) : let tAcc",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D.particle_horizon_finite_iff": {
+      "module": "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D",
+      "name": "D5.S3.Geometry.Lorentz.FLRWCosmologyFriedmann4D.particle_horizon_finite_iff",
+      "kind": "theorem",
+      "statement_id": "sha256:4b4260ebfb858cfa351ace357ef77206628402ced511039a57a03a18d6118d40",
+      "line": 468,
+      "signature": "theorem particle_horizon_finite_iff {α T : ℝ} (hT : 0 < T) : IntegrableOn (fun t : ℝ => t ^ (-α)) (Ioc 0 T) ↔ α < 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D.particle_horizon_integral": {
+      "module": "D5/S3/Geometry/Lorentz/FLRWCosmologyFriedmann4D",
+      "name": "D5.S3.Geometry.Lorentz.FLRWCosmologyFriedmann4D.particle_horizon_integral",
+      "kind": "theorem",
+      "statement_id": "sha256:4b4260ebfb858cfa351ace357ef77206628402ced511039a57a03a18d6118d40",
+      "line": 480,
+      "signature": "theorem particle_horizon_integral {α T : ℝ} (hT : 0 < T) (hα : α < 1) : ∫ t : ℝ in Ioc 0 T, t ^ (-α) = T ^ (1 - α) / (1 - α)",
       "axioms": [
         "Classical.choice",
         "Quot.sound",
@@ -18959,6 +19284,197 @@
       "statement_id": "sha256:29f0424e2386e0d675fc12e12f82d21c487d943d53b7c12598846855bf5023a6",
       "line": 99,
       "signature": "public lemma qftSource_circuit_event_count (n : Nat) : ResourcePool.count event (circuit oracles n).eventCost = n * (if .gate .hadamard = event then 1 else 0) + n.choose 2 * (if .gate .controlledPhase = event then 1 else 0) + (n / 2) * (if .gate .swap = event then 1 else 0)"
+    },
+    "D5/S3/Quantum/Gauge/CKMFlavorJarlskog4D.ckmStandard_unitary": {
+      "module": "D5/S3/Quantum/Gauge/CKMFlavorJarlskog4D",
+      "name": "D5.S3.Quantum.Gauge.CKMFlavorJarlskog4D.ckmStandard_unitary",
+      "kind": "theorem",
+      "statement_id": "sha256:61b48fcbe4d7aaac5831ed3989129b8aa12085af090d675a3a9f162374711618",
+      "line": 287,
+      "signature": "theorem ckmStandard_unitary (θ₁₂ θ₂₃ θ₁₃ δ : ℝ) : (ckmStandard θ₁₂ θ₂₃ θ₁₃ δ)ᴴ * ckmStandard θ₁₂ θ₂₃ θ₁₃ δ = 1 ∧ (ckmStandard θ₁₂ θ₂₃ θ₁₃ δ).det = 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/CKMFlavorJarlskog4D.ckm_parameter_decomp": {
+      "module": "D5/S3/Quantum/Gauge/CKMFlavorJarlskog4D",
+      "name": "D5.S3.Quantum.Gauge.CKMFlavorJarlskog4D.ckm_parameter_decomp",
+      "kind": "theorem",
+      "statement_id": "sha256:61b48fcbe4d7aaac5831ed3989129b8aa12085af090d675a3a9f162374711618",
+      "line": 50,
+      "signature": "theorem ckm_parameter_decomp (N : ℕ) (hN : 1 ≤ N) : orthogonalAngleCount N + physicalPhaseCount N = unitaryParamCount N - relativePhaseCount N",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/CKMFlavorJarlskog4D.ckm_physical_parameter_square": {
+      "module": "D5/S3/Quantum/Gauge/CKMFlavorJarlskog4D",
+      "name": "D5.S3.Quantum.Gauge.CKMFlavorJarlskog4D.ckm_physical_parameter_square",
+      "kind": "theorem",
+      "statement_id": "sha256:61b48fcbe4d7aaac5831ed3989129b8aa12085af090d675a3a9f162374711618",
+      "line": 42,
+      "signature": "theorem ckm_physical_parameter_square (N : ℕ) (hN : 1 ≤ N) : unitaryParamCount N - relativePhaseCount N = (N - 1) ^ 2",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/CKMFlavorJarlskog4D.ckm_small_generation_counts": {
+      "module": "D5/S3/Quantum/Gauge/CKMFlavorJarlskog4D",
+      "name": "D5.S3.Quantum.Gauge.CKMFlavorJarlskog4D.ckm_small_generation_counts",
+      "kind": "theorem",
+      "statement_id": "sha256:61b48fcbe4d7aaac5831ed3989129b8aa12085af090d675a3a9f162374711618",
+      "line": 80,
+      "signature": "theorem ckm_small_generation_counts : (orthogonalAngleCount 1, physicalPhaseCount 1) = (0, 0) ∧ (orthogonalAngleCount 2, physicalPhaseCount 2) = (1, 0) ∧ (orthogonalAngleCount 3, physicalPhaseCount 3) = (3, 1)",
+      "axioms": []
+    },
+    "D5/S3/Quantum/Gauge/CKMFlavorJarlskog4D.cp_phase_pos_iff_three_generations": {
+      "module": "D5/S3/Quantum/Gauge/CKMFlavorJarlskog4D",
+      "name": "D5.S3.Quantum.Gauge.CKMFlavorJarlskog4D.cp_phase_pos_iff_three_generations",
+      "kind": "theorem",
+      "statement_id": "sha256:61b48fcbe4d7aaac5831ed3989129b8aa12085af090d675a3a9f162374711618",
+      "line": 68,
+      "signature": "theorem cp_phase_pos_iff_three_generations (N : ℕ) : 0 < physicalPhaseCount N ↔ 3 ≤ N",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/CKMFlavorJarlskog4D.jarlskogQuartet_rephase_invariant": {
+      "module": "D5/S3/Quantum/Gauge/CKMFlavorJarlskog4D",
+      "name": "D5.S3.Quantum.Gauge.CKMFlavorJarlskog4D.jarlskogQuartet_rephase_invariant",
+      "kind": "theorem",
+      "statement_id": "sha256:61b48fcbe4d7aaac5831ed3989129b8aa12085af090d675a3a9f162374711618",
+      "line": 139,
+      "signature": "theorem jarlskogQuartet_rephase_invariant {N : ℕ} (α β : Fin N → ℝ) (V : Matrix (Fin N) (Fin N) ℂ) (i j k l : Fin N) : jarlskogQuartet (rephase α β V) i j k l = jarlskogQuartet V i j k l",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/CKMFlavorJarlskog4D.jarlskogQuartet_unitary_universal": {
+      "module": "D5/S3/Quantum/Gauge/CKMFlavorJarlskog4D",
+      "name": "D5.S3.Quantum.Gauge.CKMFlavorJarlskog4D.jarlskogQuartet_unitary_universal",
+      "kind": "theorem",
+      "statement_id": "sha256:61b48fcbe4d7aaac5831ed3989129b8aa12085af090d675a3a9f162374711618",
+      "line": 359,
+      "signature": "theorem jarlskogQuartet_unitary_universal (V : Matrix (Fin 3) (Fin 3) ℂ) (hV : Vᴴ * V = 1) (i j k l : Fin 3) : jarlskogQuartet V i j k l = (leviSign i k * leviSign j l) * jarlskogQuartet V 0 0 1 1",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/CKMFlavorJarlskog4D.jarlskog_bound_attained": {
+      "module": "D5/S3/Quantum/Gauge/CKMFlavorJarlskog4D",
+      "name": "D5.S3.Quantum.Gauge.CKMFlavorJarlskog4D.jarlskog_bound_attained",
+      "kind": "theorem",
+      "statement_id": "sha256:61b48fcbe4d7aaac5831ed3989129b8aa12085af090d675a3a9f162374711618",
+      "line": 443,
+      "signature": "theorem jarlskog_bound_attained : let θ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/CKMFlavorJarlskog4D.jarlskog_ckmStandard_formula": {
+      "module": "D5/S3/Quantum/Gauge/CKMFlavorJarlskog4D",
+      "name": "D5.S3.Quantum.Gauge.CKMFlavorJarlskog4D.jarlskog_ckmStandard_formula",
+      "kind": "theorem",
+      "statement_id": "sha256:61b48fcbe4d7aaac5831ed3989129b8aa12085af090d675a3a9f162374711618",
+      "line": 376,
+      "signature": "theorem jarlskog_ckmStandard_formula (θ₁₂ θ₂₃ θ₁₃ δ : ℝ) : jarlskogQuartet (ckmStandard θ₁₂ θ₂₃ θ₁₃ δ) 0 0 1 1 = Real.cos θ₁₂ * Real.cos θ₁₃ ^ 2 * Real.cos θ₂₃ * Real.sin θ₁₂ * Real.sin θ₁₃ * Real.sin θ₂₃ * Real.sin δ",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/CKMFlavorJarlskog4D.jarlskog_sharp_upper_bound": {
+      "module": "D5/S3/Quantum/Gauge/CKMFlavorJarlskog4D",
+      "name": "D5.S3.Quantum.Gauge.CKMFlavorJarlskog4D.jarlskog_sharp_upper_bound",
+      "kind": "theorem",
+      "statement_id": "sha256:61b48fcbe4d7aaac5831ed3989129b8aa12085af090d675a3a9f162374711618",
+      "line": 427,
+      "signature": "theorem jarlskog_sharp_upper_bound (θ₁₂ θ₂₃ θ₁₃ δ : ℝ) : |jarlskogQuartet (ckmStandard θ₁₂ θ₂₃ θ₁₃ δ) 0 0 1 1| ≤ 1 / (6 * Real.sqrt 3)",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/CKMFlavorJarlskog4D.jarlskog_zero_iff_no_cp": {
+      "module": "D5/S3/Quantum/Gauge/CKMFlavorJarlskog4D",
+      "name": "D5.S3.Quantum.Gauge.CKMFlavorJarlskog4D.jarlskog_zero_iff_no_cp",
+      "kind": "theorem",
+      "statement_id": "sha256:61b48fcbe4d7aaac5831ed3989129b8aa12085af090d675a3a9f162374711618",
+      "line": 388,
+      "signature": "theorem jarlskog_zero_iff_no_cp (θ₁₂ θ₂₃ θ₁₃ δ : ℝ) : jarlskogQuartet (ckmStandard θ₁₂ θ₂₃ θ₁₃ δ) 0 0 1 1 = 0 ↔ Real.sin (2 * θ₁₂) = 0 ∨ Real.sin (2 * θ₂₃) = 0 ∨ Real.sin θ₁₃ = 0 ∨ Real.cos θ₁₃ = 0 ∨ Real.sin δ = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/CKMFlavorJarlskog4D.row_unitarity_triangle_area_eq_half_jarlskog": {
+      "module": "D5/S3/Quantum/Gauge/CKMFlavorJarlskog4D",
+      "name": "D5.S3.Quantum.Gauge.CKMFlavorJarlskog4D.row_unitarity_triangle_area_eq_half_jarlskog",
+      "kind": "theorem",
+      "statement_id": "sha256:61b48fcbe4d7aaac5831ed3989129b8aa12085af090d675a3a9f162374711618",
+      "line": 484,
+      "signature": "theorem row_unitarity_triangle_area_eq_half_jarlskog (V : Matrix (Fin 3) (Fin 3) ℂ) (hV : Vᴴ * V = 1) {i k : Fin 3} (hik : i ≠ k) : let z",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/CKMFlavorJarlskog4D.u2_jarlskog_zero": {
+      "module": "D5/S3/Quantum/Gauge/CKMFlavorJarlskog4D",
+      "name": "D5.S3.Quantum.Gauge.CKMFlavorJarlskog4D.u2_jarlskog_zero",
+      "kind": "theorem",
+      "statement_id": "sha256:61b48fcbe4d7aaac5831ed3989129b8aa12085af090d675a3a9f162374711618",
+      "line": 232,
+      "signature": "theorem u2_jarlskog_zero (U : Matrix (Fin 2) (Fin 2) ℂ) (hU : Uᴴ * U = 1) (i j k l : Fin 2) : jarlskogQuartet U i j k l = 0",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/CKMFlavorJarlskog4D.u2_rephasing_to_real_rotation": {
+      "module": "D5/S3/Quantum/Gauge/CKMFlavorJarlskog4D",
+      "name": "D5.S3.Quantum.Gauge.CKMFlavorJarlskog4D.u2_rephasing_to_real_rotation",
+      "kind": "theorem",
+      "statement_id": "sha256:61b48fcbe4d7aaac5831ed3989129b8aa12085af090d675a3a9f162374711618",
+      "line": 176,
+      "signature": "theorem u2_rephasing_to_real_rotation (U : Matrix (Fin 2) (Fin 2) ℂ) (hU : Uᴴ * U = 1) : ∃ (α β : Fin 2 → ℝ) (θ : ℝ), Matrix.diagonal (fun i => Complex.exp (α i * I)) * U * (Matrix.diagonal (fun j => Complex.exp (β j * I)))ᴴ = !![↑(Real.cos θ), ↑(Real.sin θ); -↑(Real.sin θ), ↑(Real.cos θ)]",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
+    },
+    "D5/S3/Quantum/Gauge/CKMFlavorJarlskog4D.unitarity_triangle_area_eq_half_jarlskog": {
+      "module": "D5/S3/Quantum/Gauge/CKMFlavorJarlskog4D",
+      "name": "D5.S3.Quantum.Gauge.CKMFlavorJarlskog4D.unitarity_triangle_area_eq_half_jarlskog",
+      "kind": "theorem",
+      "statement_id": "sha256:61b48fcbe4d7aaac5831ed3989129b8aa12085af090d675a3a9f162374711618",
+      "line": 470,
+      "signature": "theorem unitarity_triangle_area_eq_half_jarlskog (V : Matrix (Fin 3) (Fin 3) ℂ) (hV : Vᴴ * V = 1) {j l : Fin 3} (hjl : j ≠ l) : let z",
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ]
     },
     "D5/S3/Quantum/Gauge/ChiralAnomalyRigidity4D.anomaly5_classification": {
       "module": "D5/S3/Quantum/Gauge/ChiralAnomalyRigidity4D",
