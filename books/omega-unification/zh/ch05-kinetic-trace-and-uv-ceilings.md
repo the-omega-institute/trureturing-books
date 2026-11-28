@@ -247,19 +247,19 @@ $$
 
 对 $1<u\le2$，转移端在更宽的 $0<\varepsilon\le3/25$ 内仍给出 $V_S(B_0-\varepsilon)=N-1+A_r^u+C_r^u$，取等条件与上文相同。若前 $N$ 份中恰有两份未截顶，这两份的总暴露至多为 $2\tau-\varepsilon$。凹性将前缀上界收紧为 $N-2+2W(\tau-\varepsilon/2)$。若有三份以上未截顶，缺少的单位热权更多，同一个前缀上界仍成立。闭区间复算表明 $A_r>2W(\tau-\varepsilon/2)-1$，且幂和沿转移严格增加到零暴露余权耗尽。这样可以在整个新窗口沿用单次转移比较。[加强前缀的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2193#issuecomment-7240619070)
 
-当指数达到临界值后，无转移端在更宽的预算窗内占优（手工推导，`ARGUED`）。取 $u_c\le u\le4$、$\tau=\tau_0(u)$ 和 $0<\varepsilon\le0.43$，则
+当指数达到临界值后，无转移端在更宽的预算窗内占优（手工推导，`ARGUED`）。取 $u_c\le u\le4$、$\tau=\tau_0(u)$ 和 $0<\varepsilon\le0.60$，则
 
 $$
 V_S(B_0-\varepsilon)=N-1+M_\varepsilon^u+w_1^u+(1-M_\varepsilon)^u.
 $$
 
-若最大的 $N$ 份热权中有 $k\ge2$ 份未截顶，它们分到的暴露合计至多 $k\tau-\varepsilon$。由 $W$ 的凹性，这 $N$ 份热权之和至多为 $N-k+kW(\tau-\varepsilon/k)\le N-2+2W(\tau-\varepsilon/2)$。区间核证表明 $A_r>2W(\tau-\varepsilon/2)-1$ 在整个窗口成立。因此这类谱仍受转移端的前缀支配。只用单份截顶热权估计所得的条件 $A_r>2W(\tau)-1$ 则在 $0.261<\varepsilon<0.273$ 内首次达到等号。
+若最大的 $N$ 份热权中有 $k\ge2$ 份未截顶，它们分到的暴露合计至多 $k\tau-\varepsilon$。由 $W$ 的凹性，这 $N$ 份热权之和至多为 $N-k+kW(\tau-\varepsilon/k)\le N-2+2W(\tau-\varepsilon/2)$。区间核证表明 $A_r>2W(\tau-\varepsilon/2)-1$ 在 $\varepsilon\le0.43$ 时成立。因此这类谱仍受转移端的前缀支配。只用单份截顶热权估计所得的条件 $A_r>2W(\tau)-1$ 则在 $0.261<\varepsilon<0.273$ 内首次达到等号。
 
-有 $N-1$ 份截顶时，按剩余暴露构造单次转移谱即可支配各前缀，再由严格凸性将幂和的比较归约到两个端点。区间核证表明 $D(u,\varepsilon)$ 随缺口严格下降。从 $D(u,0)\le0$ 出发，只要缺口为正，无转移端便严格占优。$N=1$ 时，热权 $M_\varepsilon,w_1,1-M_\varepsilon$ 给出唯一最优谱。$N\ge2$ 时，令 $N-1$ 份截顶热权趋于 $1$，可用正质量谱逼近上确界。[总预算前缀界的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2189#issuecomment-7240610111)
+若最大的 $N$ 份热权中恰有 $N-1$ 份截顶，按剩余暴露构造单次转移谱即可支配各前缀，再由严格凸性将幂和的比较归约到两个端点。在 $0<\varepsilon\le0.43$，$D(u,\varepsilon)$ 从 $D(u,0)\le0$ 严格下降。无转移端的严格优势延续到 $\varepsilon=0.60$。$N=1$ 时，热权 $M_\varepsilon,w_1,1-M_\varepsilon$ 给出唯一最优谱。$N\ge2$ 时，令 $N-1$ 份截顶热权趋于 $1$，可用正质量谱逼近上确界。[总预算前缀界的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2189#issuecomment-7240610111)
 
-总预算前缀证书的边界可以独立定位（手工推导与 `NUM`）。令 $G(u,\varepsilon)=A_{\tau-\varepsilon}-2W(\tau-\varepsilon/2)+1$。在 $u=3.558081442015$，50 位 Decimal 二分给出 $1.6750618793359091<\tau<1.6750618793359092$，且 $G$ 的首个零点满足 $0.4316940644611203<\varepsilon_*<0.4316940644611204$。在 $\varepsilon=0.432$，$G=-0.0000533241825908123$，故转移前缀已经不能支配两份未截顶热权的前缀。这只否定前缀证书的外推，并不单独否定幂和最优性。[边界复算与有限谱反例](https://github.com/the-omega-institute/trureturing-books/issues/2189#issuecomment-7240947117)
+总预算前缀证书的边界可以独立定位（手工推导与 `NUM`）。令 $G(u,\varepsilon)=A_{\tau-\varepsilon}-2W(\tau-\varepsilon/2)+1$。在 $u=3.558081442015$，50 位 Decimal 二分给出 $1.6750618793359091<\tau<1.6750618793359092$，且 $G$ 的首个零点满足 $0.4316940644611203<\varepsilon_*<0.4316940644611204$。在 $\varepsilon=0.432$，$G=-0.0000533241825908123$，故转移前缀已经不能支配两份未截顶热权的前缀。对 $0.43\le\varepsilon\le0.60$，若最大的 $N$ 份热权中至少两份未截顶，可同时使用两条前缀不等式。令 $M=W(\tau)$、$x=W(\tau-\varepsilon/2)$，前 $N-1$ 项之和至多为 $N-2+M$，前 $N$ 项之和至多为 $N-2+2x$。因此 $N-2$ 份单位权加上 $M,2x-M,2+w_1-2x$ 支配所有前缀。后三份热权均为正且按降序排列。将这组向量的幂和与无转移值比较，得到整个预算窗内的严格上界。[双前缀比较及区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2260#issuecomment-7241295993)[边界复算与有限谱反例](https://github.com/the-omega-institute/trureturing-books/issues/2189#issuecomment-7240947117)
 
-在同一指数下取 $N=2$、$S=2+e^{-1}$、$\varepsilon=0.9$，令 $t=\tau-\varepsilon/2$、$x=W(t)$、$R=S-2x$。四个重数均为一的正质量层取热权 $(x,x,e^{-1},R-e^{-1})$。前两层的平方质量比为 $e^{-2t}>0$，后两层的平方质量比分别为 $1$ 与 $-\log(R-e^{-1})>1$，所以后两层暴露为零。该谱第一热迹正好为 $S$，总暴露正好为 $2\tau-\varepsilon$。数值上 $x=0.9173346735734259$、$R-e^{-1}=0.1653306528531482$，其第二热迹为 $1.5014474195549630$，比无转移端 $1+W(\tau-\varepsilon)^u+e^{-u}+(1-W(\tau-\varepsilon))^u=1.5012331718369161$ 高 $0.00021424771804686$。同一构造在 $\varepsilon=0.8$ 时低于无转移端 $0.02426304550014$，显式族的换号点约为 $0.89912897398$。因此 $(0.4316940644611,0.89912897398)$ 仍需完整分类，不能把 $0.43$ 以外的窗口宣称为已证结论。
+在同一指数下取 $N=2$、$S=2+e^{-1}$、$\varepsilon=0.9$，令 $t=\tau-\varepsilon/2$、$x=W(t)$、$R=S-2x$。四个重数均为一的正质量层取热权 $(x,x,e^{-1},R-e^{-1})$。前两层的平方质量比为 $e^{-2t}>0$，后两层的平方质量比分别为 $1$ 与 $-\log(R-e^{-1})>1$，所以后两层暴露为零。该谱第一热迹正好为 $S$，总暴露正好为 $2\tau-\varepsilon$。数值上 $x=0.9173346735734259$、$R-e^{-1}=0.1653306528531482$，其第二热迹为 $1.5014474195549630$，比无转移端 $1+W(\tau-\varepsilon)^u+e^{-u}+(1-W(\tau-\varepsilon))^u=1.5012331718369161$ 高 $0.00021424771804686$。同一构造在 $\varepsilon=0.8$ 时低于无转移端 $0.02426304550014$，显式族的换号点约为 $0.89912897398$。从已证窗口的右端 $0.60$ 到反例所在的 $0.9$ 之间，精确最优值仍待分类。
 
 预算趋向 $B_0$ 时，相对左极限的一阶损失系数为 $uW'(\tau)(M^{u-1}-d^{u-1})$，与 $N$ 无关。对四次热迹 $u=4$，该系数约为 $0.2144536669$（`NUM`）。[宽预算窗的推导与区间复算](https://github.com/the-omega-institute/trureturing-books/issues/2170#issuecomment-7240449786) · [四次热迹复算](https://github.com/the-omega-institute/trureturing-books/issues/2116#issuecomment-7240080414)
 
