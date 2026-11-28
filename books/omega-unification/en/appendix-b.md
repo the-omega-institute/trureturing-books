@@ -116,6 +116,114 @@ Every filtered vector is a linear combination of the projected sources on the ri
 The scheme uses successive reciprocal powers at one center, equivalently normalized derivatives of the resolvent with respect to $z$. It makes no claim for arbitrary sample lists, and a few scalar clock readings in [Chapter 12](ch12-shared-arithmetic-clock.md#sec-ch12) do not by themselves supply these vectors or the whole Gram matrix. Invertibility provides no uniform error amplification bound and no control of infinite spectral tails. An independent RH spectral route still needs an arithmetic or geometric positivity construction and identification of the complete zero spectrum; checks on finitely many windows cannot replace control for every $T$.
 :::
 
+Even when observations cover every direction, positivity concerns the full quadratic form. If one block is known to be positive definite, its coefficients can first vary freely, leaving the minimum reading at the retained ports. The Schur complement gives this reading, rather than an individual port's diagonal entry.
+
+::: {.theorem #thm-ou-appb-schur-attained-minimum title="Attained Schur Minimum with a Positive Definite Internal Block" lean="D5/S3/Quantum/Matrix/SchurMinimum.schur_quadratic_is_least"}
+Let $m,d\in\mathbb N$, let $A\in\mathbb C^{m\times m}$ be Hermitian, let $B\in\mathbb C^{m\times d}$, and let $C\in\mathbb C^{d\times d}$ be positive definite Hermitian. Set
+
+$$
+H=\begin{pmatrix}A&B\\B^*&C\end{pmatrix},\qquad S=A-BC^{-1}B^*.
+$$
+
+For each fixed $x\in\mathbb C^m$, the following minimum is attained:
+
+$$
+\min_{y\in\mathbb C^d}
+\begin{pmatrix}x\\y\end{pmatrix}^{\!*}
+H\begin{pmatrix}x\\y\end{pmatrix}=x^*Sx.
+$$
+:::
+
+::: proof
+Positive definiteness makes $C$ invertible. Completing the square gives
+
+$$
+\begin{pmatrix}x\\y\end{pmatrix}^{\!*}H\begin{pmatrix}x\\y\end{pmatrix}
+=x^*Sx+(y+C^{-1}B^*x)^*C(y+C^{-1}B^*x).
+$$
+
+The second term is nonnegative and vanishes at $y=-C^{-1}B^*x$, so $x^*Sx$ is an attained least element of the range. The full proof is checked by the Lean kernel.
+:::
+
+A manual consequence (ARGUED) is that, under $C\succ0$, we have $H\succeq0$ if and only if $S\succeq0$. One direction follows directly from the completed square; the other, for each fixed $x$, tests $H$ at the minimizer. A positive definite background therefore cannot hide a negative residual after elimination, but testing that residual requires the cross-block readings $B$.
+
+::: {.example #ex-ou-appb-collective-schur-residual title="One Negative Residual beyond a Positive Definite Background"}
+The matrix substitution and explicit witness below are a manual derivation (ARGUED). Take an integer $n\ge3$ and a real $1/(n-1)<a<1/(n-2)$, write $\mathbf1_k=(1,\ldots,1)^T$, and separate one port from the remaining $n-1$ ports:
+
+$$
+\begin{aligned}
+H&=(1+a)I_n-a\mathbf1_n\mathbf1_n^*,\\
+A&=1,\qquad B=-a\mathbf1_{n-1}^*,\\
+C&=(1+a)I_{n-1}-a\mathbf1_{n-1}\mathbf1_{n-1}^*,\\
+p&=1-(n-2)a>0.
+\end{aligned}
+$$
+
+On the direction $\mathbf1_{n-1}$, the eigenvalue of $C$ is $p$; on its orthogonal complement it is $1+a>0$, so $C\succ0$. Thus $C^{-1}\mathbf1_{n-1}=p^{-1}\mathbf1_{n-1}$, and the final scalar Schur residual is
+
+$$
+s=1-\frac{(n-1)a^2}{p}
+=\frac{(1+a)(1-(n-1)a)}{p}<0.
+$$
+
+Fixing the retained coefficient at $x=1$ gives the minimizer and its full reading:
+
+$$
+\begin{aligned}
+y_{\min}&=\frac{a}{p}\mathbf1_{n-1},\qquad
+w=\begin{pmatrix}1\\y_{\min}\end{pmatrix},\\
+Hw&=\begin{pmatrix}s\\0\end{pmatrix},\qquad w^*Hw=s.
+\end{aligned}
+$$
+
+The identity $Hw=(s,0)^T$ also shows that this residual direction is orthogonal to the entire internal block for the form defined by $H$. Taking $n=3,a=3/4$ gives $p=1/4$, $w=(1,3,3)^T$, and $w^*Hw=-7/2$. The two internal ports already form a positive definite block, and every individual diagonal reading is $1$, yet one residual obtained by joint adjustment disproves positivity of the whole matrix. This requires all cross-port Gram readings and does not follow directly from a few scalar arithmetic clock readings. These matrices are algebraic models; they specify no actual zeros and supply no independent positivity proof of RH. If $C$ is only positive semidefinite, the inverse and minimum argument above no longer apply directly.
+:::
+
+::: {.remark #rem-ou-appb-schur-regularization title="Regularization Reveals Coupling to the Kernel"}
+Adding a small positive diagonal term to a singular internal block allows [@thm-ou-appb-schur-attained-minimum] to apply, but the regularized minimum need not have a finite limit. The following exact decomposition and error bound are manual derivations (`ARGUED`). Let $m,d\in\mathbb N$, let $A\in\mathbb C^{m\times m}$ be Hermitian, let $B\in\mathbb C^{m\times d}$, and let $C\in\mathbb C^{d\times d}$ be positive semidefinite. Let $P_0$ be the orthogonal projection onto $\ker C$, let $P_\lambda$ be the spectral projections for its positive spectral values, and define
+
+$$
+\begin{aligned}
+C^\dagger&=\sum_{\lambda>0}\lambda^{-1}P_\lambda,\\
+S_\dagger&=A-BC^\dagger B^*,\\
+S_\varepsilon&=A-B(C+\varepsilon I)^{-1}B^*,\qquad \varepsilon>0.
+\end{aligned}
+$$
+
+All sums run only over the finitely many positive spectral values of $C$, and all limits below are as $\varepsilon\to0^+$. Taking reciprocals on each spectral subspace gives
+
+$$
+\begin{aligned}
+S_\varepsilon&=S_\dagger-\frac1\varepsilon BP_0B^*+E_\varepsilon,\\
+E_\varepsilon&=B\left(\sum_{\lambda>0}
+\frac{\varepsilon}{\lambda(\lambda+\varepsilon)}P_\lambda\right)B^*.
+\end{aligned}
+$$
+
+Choose $\gamma>0$ so that every positive spectral value is at least $\gamma$; if $C=0$, any $\gamma>0$ is allowed, the sum is empty, and $E_\varepsilon=0$. Every coefficient lies between $0$ and $\varepsilon/[\gamma(\gamma+\varepsilon)]$, so
+
+$$
+\begin{aligned}
+0&\preceq E_\varepsilon
+\preceq\frac{\varepsilon}{\gamma(\gamma+\varepsilon)}B(I-P_0)B^*,\\
+\|E_\varepsilon\|_{\mathrm{op}}
+&\le\frac{\varepsilon}{\gamma(\gamma+\varepsilon)}
+\|B(I-P_0)\|_{\mathrm{op}}^2.
+\end{aligned}
+$$
+
+All norms here are Euclidean operator norms. Thus $S_\varepsilon+\varepsilon^{-1}BP_0B^*$ always converges in operator norm to $S_\dagger$, while the uncompensated $S_\varepsilon$ has a finite matrix limit if and only if $BP_0=0$. In that case the limit is $S_\dagger$, with the error controlled above. Specifically, for each fixed retained vector $x$,
+
+$$
+x^*S_\varepsilon x=x^*S_\dagger x
+-\frac{\|P_0B^*x\|^2}{\varepsilon}+x^*E_\varepsilon x.
+$$
+
+If $P_0B^*x\ne0$, this minimum reading tends to $-\infty$; otherwise it tends to $x^*S_\dagger x$. This also proves necessity for the matrix limit: if $BP_0\ne0$, its adjoint $P_0B^*$ is nonzero, so some $x$ falls in the first case. For each $\varepsilon>0$, the regularized minimizer is $y_\varepsilon=-(C+\varepsilon I)^{-1}B^*x$, and the same spectral decomposition gives $\varepsilon y_\varepsilon\to-P_0B^*x$, quantifying the divergent internal response.
+
+A positivity check at one fixed scale certifies only $H_\varepsilon=H+\operatorname{diag}(0,\varepsilon I)$. For example, $A=[1],B=[1],C=[0]$ gives $S_\dagger=[1]$ but $S_\varepsilon=[1-1/\varepsilon]$; $H_\varepsilon$ is positive semidefinite for $\varepsilon\ge1$ and fails to be so for $0<\varepsilon<1$. If $H_\varepsilon\succeq0$ can be proved along a sequence of $\varepsilon$ tending to zero, taking limits at each fixed vector does imply $H\succeq0$. These finite-dimensional conclusions provide no uniform positive spectral gap across windows and do not identify the actual zero spectrum; an independent RH spectral route still needs control of complete observation, limits, and spectral tails.
+:::
+
 Finite-dimensional recoverability leaves an observation question: must detecting some negative direction first reconstruct a prescribed negative direction accurately? A two-point model separates these error requirements.
 
 ::: {.example #ex-ou-appb-optimal-negative-detection title="Precision Thresholds for Detecting Negativity and Testing a Prescribed Witness"}
@@ -221,6 +329,52 @@ C=\begin{pmatrix}2&0\\0&1/2\end{pmatrix}.
 $$
 
 Multiplication gives $C^*JC=J$, whereas $C^*C=\operatorname{diag}(4,1/4)\ne I$. The vector $w=(1,-1)$ satisfies $\langle w,Jw\rangle=-2$. These matrices only test the proposed implication from $J$-unitarity to ordinary unitarity; they are not asserted to arise from actual $\zeta$ zeros.
+:::
+
+Even when the observation vectors span the whole space, the choice of linear combinations to test still matters. The right-inverse condition in [@thm-ou-ch12-observation-inertia] ensures that the full Gram matrix preserves inertia. Testing only its two-by-two principal submatrices for a fixed observation list can miss a negative direction requiring all ports together.
+
+::: {.example #ex-ou-appb-collective-gram-negativity title="Every Proper Principal Submatrix Can Be Positive Definite While the Whole Is Indefinite"}
+The following is a finite-dimensional manual derivation (`ARGUED`). Start with three ports:
+
+$$
+G_3=\begin{pmatrix}1&-3/4&-3/4\\-3/4&1&-3/4\\-3/4&-3/4&1\end{pmatrix}.
+$$
+
+Every two-by-two principal submatrix has the strictly positive eigenvalues $1/4,7/4$. Yet $\mathbf1_3=(1,1,1)^T$ satisfies $G_3\mathbf1_3=-\mathbf1_3/2$, so $\mathbf1_3^*G_3\mathbf1_3=-3/2<0$. A joint variation of three ports reveals the negative direction missed by every pairwise test.
+
+This can occur at any number of ports. Let $n\ge3$ be an integer, write $\mathbf1_n=(1,\ldots,1)^T$, and choose a real $a$ with
+
+$$
+\frac1{n-1}<a<\frac1{n-2},\qquad
+G_n=(1+a)I_n-a\mathbf1_n\mathbf1_n^*.
+$$
+
+For any nonempty principal submatrix on $m$ ports, $1\le m\le n$, split the space into the direction $\mathbf1_m$ and its orthogonal complement. This gives the eigenvalues
+
+$$
+1-(m-1)a\quad\text{(multiplicity }1\text{)},\qquad
+1+a\quad\text{(multiplicity }m-1\text{)}.
+$$
+
+Thus every nonempty proper principal submatrix is positive definite, while the full matrix has exactly one negative eigenvalue, $1-(n-1)a$. The open interval above is also the exact parameter range for these two properties together: the common direction of all ports requires the strict lower bound, and the common direction of $n-1$ ports requires the strict upper bound.
+
+The matrix can also be realized as the actual indefinite Gram matrix of observation vectors spanning the whole space. Set
+
+$$
+\begin{aligned}
+P&=\frac{\mathbf1_n\mathbf1_n^*}{n},&J&=I_n-2P,\\
+B&=\sqrt{1+a}\,(I_n-P)+\sqrt{(n-1)a-1}\,P.
+\end{aligned}
+$$
+
+Since $P=P^*=P^2$, we have $J=J^*$ and $J^2=I_n$. Both coefficients of $B$ on the two orthogonal subspaces are strictly positive, so $B$ is invertible. For the observation vectors $b_j=Be_j$ and the form $[x,y]_J=x^*Jy$, multiplication gives
+
+$$
+(b_i^*Jb_j)_{ij}=B^*JB
+=(1+a)(I_n-P)-((n-1)a-1)P=G_n.
+$$
+
+The missing ingredient is therefore a test of joint port positivity, even with every source direction present. These submatrices select sublists of the fixed observation vectors; they do not test arbitrary linear combinations of those vectors. For any fixed limit $r\ge2$, choosing $n=r+1$ gives positive definite principal submatrices on every set of at most $r$ ports while the whole matrix is indefinite. Kernel positivity in a finite window requires control of the full quadratic form for arbitrary coefficients. These are algebraic models, with no claim to arise from actual zeros or to alter the external RH fact cited in Chapter 3.
 :::
 
 Detecting a negative direction also requires a precision budget: a finite observation map can be algebraically invertible while its inverse amplifies errors as two support points approach each other. The following model separates recovery of every direction from reliable certification of one negative direction. It uses the full sesquilinear Gram readings, rather than the few scalar clock readings of [Chapter 12](ch12-shared-arithmetic-clock.md).
