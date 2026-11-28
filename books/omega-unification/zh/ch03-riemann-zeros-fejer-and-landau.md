@@ -5,7 +5,7 @@
 本章正式摊开第一卷最底层的解析数论谱底座，并同时把**形式化证明的疆界**与**有限物理窗的实算证据**放在一张对照图上。我们按四步层层推进：
 
 1. 先明确界定经典黎曼猜想（RH）与狄利克雷广义黎曼猜想（Dirichlet GRH）的**外部形式化事实状态**，并用 Lean 4 冻结定理立起临界线上的费耶尔临界差额与凯莱单位圆判据；
-2. 再沿 `trureturing@dev` 冻结的四条核心解析定理，完整走通“调和权配对矩比 $\to$ 倒高度与周期相位亏损 $\to$ 无条件兰道左右竖边积分界 $\to$ 调和加权零点谱的高斯硬碰撞极限 $1/\sqrt{\pi}$”的严密链条；
+2. 再沿 `trureturing@dev` 冻结的四条核心解析定理，完整走通“调和权配对矩比 $\to$ 倒高度与周期相位亏损 $\to$ 无条件兰道左右竖边积分界 $\to$ 调和加权零点谱的高斯硬碰撞极限 $1/\sqrt{\pi}$”的严密链条，并求出固定原弧模态的截断端点项；
 3. 随后把镜头拉进具体的有限零点窗口，展示第 $11431$ 枚零点在 $[10000, 12999]$ 中的中点隔离、费耶尔对角占比、最大额外配对份额与有限观察半径（$111521$ / $111532$），以及第 $8236$ 与第 $8359$ 枚零点如何踏入三物理窗口筛选；
 4. 最后毫不粉饰地划出**全局调和平均界**与**单枚零点双钟选点**之间仍未合龙的比较定理鸿沟。
 
@@ -98,6 +98,21 @@ $$
 ::: proof
 在第一款中，借助 $\zeta$ 函数的函数方程将 $-\zeta'(s)/\zeta(s)$ 拆成 $\log(\frac{3}{4} + iu) + r(u)$；由双伽马递推、Binet 估计与反射直线 $\operatorname{Re}(1 - s) = \frac{5}{4}$ 上的绝对收敛级数可得一致界 $|r(u)| \le 80$。提出 $x^{-1/4}$ 后，余项积分至多为 $80(V - 1)$，而对数项用原函数 $e^{iu\log x}/(i\log x)$ 分部积分并利用 $|\frac{d}{du}\log(\frac{3}{4} + iu)| \le 1/u$ 给出 $\frac{20(1+\log V)}{\log x}$。在第二款中，在绝对收敛半平面 $\operatorname{Re} s = c > 1$ 逐项积分冯·曼戈尔特级数：最接近 $x$ 的整数项由区间长度控制（$n = 1$ 时 $\Lambda(1) = 0$）；$[x/2, 2x]$ 内其余整数以 $|\log x - \log n| \ge |x - n|/(2x)$ 化为两段调和和；区间外则 $|\log x - \log n| \ge 1/2$ 由积分判别控制，最后代入 $x^c \le 3x$ 即得统一界。完整证明由 Lean 内核检查。
 :::
+
+[§2.3 的外尔平均](ch02-quaternion-clocks-and-haar-zeros.md#sec-ou-2-3)用到固定非零弧度频率 $\lambda$ 的零点和。令 $S_\lambda(T)=\sum_{0<\gamma\le T}e^{i\lambda\gamma}$，按解析重数计并纳入上端点。设冯·曼戈尔特函数满足 $\Lambda(e^{|\lambda|})=0$。在 RH 下，沿全部实数高度 $T\to\infty$ 有（手工推导，`ARGUED`）
+
+$$
+S_\lambda(T)=\frac{e^{i\lambda T}}{2\pi i\lambda}\log\frac{T}{2\pi}
+  +O_\lambda\!\left(\frac{\log T}{\log\log T}\right).
+$$
+
+[§2.3](ch02-quaternion-clocks-and-haar-zeros.md#sec-ou-2-3) 已由原弧的代数相位推出本书任一非零整数模态都满足 $\Lambda(e^{|\lambda|})=0$。
+
+把窗口 $(0,T]$ 的指标函数同非负、积分为 $1$ 的核 $K_B(u)=\frac{3B}{8\pi}\bigl(\frac{\sin(Bu/4)}{Bu/4}\bigr)^4$ 卷积，再乘 $e^{i\lambda u}$。在核对应的角频带 $[-B,B]$ 内，Guinand–Weil 显式公式的素幂项采样的是离 $\lambda$ 至多 $B$ 的有符号对数频率 $\pm\log n$。每项包含 $\int_0^T e^{i(\lambda\mp\log n)v}\,dv$，因固定频率与所有素幂频率有正距离，该积分关于 $T$ 一致有界。因此素幂项合计为 $O_\lambda((1+B)e^{B/2})$。测试函数在 $\pm i/2$ 的极点项由核在这两条水平线上的衰减界为 $O_\lambda(e^{B/2})$。[Carneiro、Chandee 与 Milinovich，引理 5](https://arxiv.org/pdf/1309.1526#page=6)
+
+窗口平移 $u$ 只影响两个端点各 $|u|$ 以内的零点。对 $|u|\le T/2$，RH 下的零点计数余项将这些零点的总数界为 $O(|u|\log T+\log T/\log\log T)$，并允许端点计入。对更大的 $|u|$，全局计数给出 $O(|u|\log(2+|u|))$。用 $K_B$ 平均，凭其 $O(1/B)$ 的一阶绝对矩及四次衰减，恢复硬截断的代价为 $O(\log T/B+\log T/\log\log T)$。[Carneiro、Chandee 与 Milinovich，第 1 节及定理 1](https://arxiv.org/pdf/1503.00955)
+
+对显式公式中的伽马密度 $\bigl(\operatorname{Re}(\Gamma^\prime/\Gamma)(1/4+it/2)-\log\pi\bigr)/(2\pi)$ 同样恢复硬截断，误差为 $O(\log T/B)$。在 $t\ge 1$ 时该密度为 $\log(t/(2\pi))/(2\pi)+O(t^{-2})$。分部积分给出上式中的端点项及 $O_\lambda(1)$。剩余的振荡积分 $\int_1^T e^{i\lambda t}\,dt/t$ 一致有界。取 $B=\log\log T$，各项误差合并即得所示余项。因此固定模态的 $|S_\lambda(T)|/\log T$ 收敛到 $1/(2\pi|\lambda|)$。下一节的碰撞估计需要在随 $T$ 变化的频带内控制零点和。[NIST DLMF，式 5.11.2](https://dlmf.nist.gov/5.11.E2)
 
 ## 3.3 周期相位亏损、兰道窗转移与高斯碰撞极限 $1/\sqrt{\pi}$ {#sec-ou-3-3}
 
