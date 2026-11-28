@@ -158,12 +158,16 @@ $105$ 圈真空强制要求高绕数项 $w_{104} > 0.6589\%$ 与 $w_{105} > 6.86
 
 逐条审视这四重裂隙（复算脚本见 [`ch39-fixed-vacuum-weight-dimension.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-fixed-vacuum-weight-dimension.py)、[`ch39-near-vacuum-weight-resolution.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-near-vacuum-weight-resolution.py)、[`ch39-joint-zero-light-subspaces.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-joint-zero-light-subspaces.py)、[`ch39-fixed-vacuum-proton-currents.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-fixed-vacuum-proton-currents.py) 与 [`ch39-joint-vacuum-scale-window.py`](https://github.com/the-omega-institute/trureturing-experiments/blob/ba0ac9539cdb641744054bf3a0398494f4cba1c8/experiments/ch39-omega-research/replay/ch39-joint-vacuum-scale-window.py)）：
 
-1. **七十五个量级的反演悬崖：** 全环面宏观探测轻而易举便能以条件数 $2.49$ 反推出全部 $105$ 项绕数权，可一旦观测者被困在真空附近的低能开窗内，哪怕精确算术下仍存在可辨识矩阵，任何实验噪声都会让相差 $2 \times 10^{-9}$ 的两套微观作用在 $< 1.690 \times 10^{-75}$ 的读数差里彻底融为一团。
+1. **七十五个量级的反演悬崖：** 全环面采样可以用条件数低至 $2.49$ 的矩阵反推出全部 $105$ 项绕数权。在真空附近的低能窗口内，两组最大坐标差为 $2 \times 10^{-9}$ 的权却可使相对作用读数的差小于 $1.690 \times 10^{-75}$。
    在旗舰参考相位固定、辐边刚度取单位极限时，从该点起算的相对作用须读到总阶 $35$，才能唯一确定全部 $105$ 项归一权重。手工计数给出下界。相位只沿 $x$、$y$ 和 $x-y$ 三个方向进入作用，所以一阶最多提供两条约束，此后每阶最多三条。加入归一条件，读到 $34$ 阶仍至多有 $102$ 条约束。再加入软化项的两条驻点约束，仍能在前述正权共同真空族内取到两组无法区分的权。到 $35$ 阶，区间运算认证了按这三个方向分解导数得到的 $105$ 列矩阵满秩。
 
    可取一对这样的权，使最大坐标差为 $2\times10^{-9}$。在 $\max(|dx|,|dy|,|dx-dy|)\le 9.2\times10^{-6}$ 的相位窗内，单位辐边下的相对作用之差小于 $5.814\times10^{-151}$。这是逐面求和的 $35$ 阶余项上界。 [约束计数、区间证书与余项复算](https://github.com/the-omega-institute/trureturing-books/issues/1831#issuecomment-7238283876)
 
    若已知旗舰相位在全部有限高度及单位辐边极限均为全局极小点，再补读该点按 [@def-ou-ch13-wilson-winding-action] 校准的单位辐边绝对作用，相对作用所需的最低导数总阶恰为 $34$。绝对值使用固定的能量零点，计入 $433$ 个与相位无关的面。手工推导把两条软化驻点约束和这条绝对读数加入 $34$ 阶矩阵，Arb 区间运算认证所得矩阵满秩。若只读到 $33$ 阶，即使加入这些数据也至多有 $102$ 条独立约束，仍可在正权共同真空族中构造同读数的两组权。这个构造在有限高度唯一选出旗舰相位，在完整环面的单位辐边极限保留一对镜像等深极小点。 [手工推导与 Arb 区间证书](https://github.com/the-omega-institute/trureturing-books/issues/1877#issuecomment-7238536913)
+
+   若能量零点未知，但已知固定的旗舰相位在全部有限高度和单位辐边极限均为全局极小点，给定至 $34$ 阶的精确相对作用导数后，可行权之差只剩一个方向。此时在合适的相位补读一次单位辐边相对作用即可辨识权重。对任意两组不同的可行权，上述闭六边形窗内使读数绝对差最大的位移唯一，等于 $(dx,dy)=(0,9.2\times10^{-6})$。手工推导将剩余方向的作用分为 $dx$、$dy$ 与 $dx-dy$ 三项。Arb 区间运算控制泰勒余项和各项的一、二阶导数，将极值限于两条边的端点。第 $35$ 阶首项在两个相对顶点给出相同幅度，高阶项决定了胜出的一端。
+
+   对最大坐标差为 $2\times10^{-9}$ 的这类权对，最佳读数的间距约为 $4.71376313234908\times10^{-210}$。若单次相对读数允许任意有界加性误差，保证区分这两组权的充要条件是误差上界严格小于该间距的一半。恰到一半时，两组读数的允许区间在中点相接。 [手工推导、Arb 区间证书与复算脚本](https://github.com/the-omega-institute/trureturing-books/issues/1897#issuecomment-7238638383)
 
 2. **几何站点上的轻代错位：** 尽管五种超荷在同一背景上各自切出三枚轻模，但荷 $1$ 与荷 $2, -4$ 的三维轻空间在十九个站点上彼此倾斜甚深——哪怕做尽全部站点相位对齐与站点重排，仍有超过三成的轻态权重直接泄入对方的重谱。
 3. **壳真空对质子命运的沉默：** 同一座 $105$ 圈球壳真空、同一张树级质量谱，却既容得下保护质子寿命的 $\Delta B \equiv 0 \pmod 3$ 正交电流，也容得下触发 $QQQL$ 衰变的平行电流；质子是否稳定不是裸球壳真空自己能拍板的事。
