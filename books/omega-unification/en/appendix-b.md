@@ -74,7 +74,49 @@ Here $n_-$ counts negative eigenvalues with multiplicity, and the matrix is inde
 Choose one representative from each nonfixed two-element mirror orbit. Different representatives and their mirrors occupy disjoint standard-basis coordinates, and distinct multiplicity copies of the same zero are also orthogonal. Hence the ordinary Hilbert Gram matrix of these vectors is $2I$, while $Jv_{n,k}=-v_{n,k}$ makes the actual mirror Gram matrix $-2I$. Each selected orbit contributes exactly $m_n$ negative eigenvalues. Mirror fixedness is exactly critical-line location, and analytic multiplicities are positive, giving the final equivalence. The full proof is checked by the Lean kernel.
 :::
 
-The count keeps the existence of off-critical zeros conditional. Combining it with the external formalized RH fact cited in Chapter 3 gives $\kappa_T=0$ for every $T$ (a manual implication combining the two evidence tiers, `ARGUED`); the kernel theorem above supplies the exact inertia formula. An independent spectral route still needs an arithmetic or geometric positivity construction and identification of the zero spectrum; checks on finitely many windows also cannot replace control for every $T$. With this boundary explicit, the table below assigns each tier its own responsibility.
+The count keeps the existence of off-critical zeros conditional. Combining it with the external formalized RH fact cited in Chapter 3 gives $\kappa_T=0$ for every $T$ (a manual implication combining the two evidence tiers, `ARGUED`); the kernel theorem above supplies the exact inertia formula.
+
+When a Hermitian form is observed through finitely many resolvent directions, what ensures that no negative direction is missed? A sufficient guarantee is that the directions span the whole space being tested. Start with a two-point calculation (`ARGUED`): support points $x_0=0,x_1=1$ and center $z=-1$ give $C=\begin{pmatrix}1&1\\1/2&1/4\end{pmatrix}$ from two successive reciprocal powers, with $\det C=-1/4\ne0$. The two directions are independent; the same Vandermonde mechanism controls the general case.
+
+::: {.theorem #thm-ou-appb-cauchy-jet-inverse title="One-Center Cauchy Jet Inverse at Distinct Support Points" lean="D5/S3/Analytic/GoldenTomography/CauchyFeatureRightInverse.cauchy_feature_right_inverse"}
+Let $n\in\mathbb N$, let the complex support points $x_0,\ldots,x_{n-1}$ be pairwise distinct, and let $z\in\mathbb C$ satisfy $x_a\ne z$ at every index. Define the square matrix
+
+$$
+C_{ak}=(x_a-z)^{-(k+1)},\qquad 0\le a,k<n,
+$$
+
+and let $R$ be the matrix inverse specified by the library's `cauchyJetFeatureRightInverse`. Then
+
+$$
+CR=RC=I_n,
+$$
+
+and the map $v\mapsto Cv$ is injective.
+:::
+
+::: proof
+Put $r_a=(x_a-z)^{-1}$. Then $C=\operatorname{diag}(r_a)V$, where $V_{ak}=r_a^k$. Avoiding the center makes every $r_a\ne0$, and translation followed by inversion preserves distinctness of the support points. Thus both the diagonal and Vandermonde factors are invertible. The matrix inverse gives both inverse identities and injectivity of the analysis map. The full proof is checked by the Lean kernel.
+:::
+
+::: {.remark #rem-ou-appb-cauchy-source-rank title="Jets Separate Spectral Values; Sources Cover Multiplicity Spaces"}
+The following operator interpretation and inertia consequence are manual derivations (`ARGUED`). Under the theorem's hypotheses, in dimension $n$ take a self-adjoint operator $K=\operatorname{diag}(x_a)$ with simple spectrum, and suppose a source vector $s$ has every coordinate $s_a\ne0$. The matrix with columns $(K-zI)^{-(k+1)}s$ is $B=\operatorname{diag}(s_a)C$, so $B^{-1}=R\operatorname{diag}(s_a^{-1})$. For any Hermitian form $Q$, the identity $v^*B^*QBv=(Bv)^*Q(Bv)$ and bijectivity of $B$ give $n_\pm(B^*QB)=n_\pm(Q)$: every positive or negative definite subspace, with its dimension, transfers in both directions through this bijection.
+
+With repeated eigenvalues, distinctness applies only to different spectral values; multiplicity copies cannot be treated as distinct support points. Precisely, let a self-adjoint operator $K$ on a finite-dimensional complex inner-product space have $q$ distinct eigenvalues with spectral projections $P_\lambda$, take sources $s_1,\ldots,s_p$, and assume $z\notin\operatorname{spec}K$. Then
+
+$$
+\begin{aligned}
+\mathcal O&=\operatorname{span}\{(K-zI)^{-(k+1)}s_j:0\le k<q,\ 1\le j\le p\}\\
+&=\bigoplus_{\lambda\in\operatorname{spec}K}
+\operatorname{span}\{P_\lambda s_j:1\le j\le p\}.
+\end{aligned}
+$$
+
+Every filtered vector is a linear combination of the projected sources on the right. Conversely, for each fixed source the inverse of the $q\times q$ jet matrix recovers each $P_\lambda s_j$ separately. Full observation therefore requires, and is equivalent to, the projected sources spanning every eigenspace. One source supplies at most one direction in each eigenspace; increasing the jet order cannot supply missing multiplicity directions.
+
+The scheme uses successive reciprocal powers at one center, equivalently normalized derivatives of the resolvent with respect to $z$. It makes no claim for arbitrary sample lists, and a few scalar clock readings in [Chapter 12](ch12-shared-arithmetic-clock.md#sec-ch12) do not by themselves supply these vectors or the whole Gram matrix. Invertibility provides no uniform error amplification bound and no control of infinite spectral tails. An independent RH spectral route still needs an arithmetic or geometric positivity construction and identification of the complete zero spectrum; checks on finitely many windows cannot replace control for every $T$.
+:::
+
+With finite-dimensional recoverability distinguished from independent positivity, the table below assigns each evidence tier its own responsibility.
 
 | Evidence Tier & Label | Verification Mechanism & Provenance | Logical Boundary & Warrant | Representative Coverage & Pointers |
 | :--- | :--- | :--- | :--- |
@@ -118,6 +160,50 @@ C=\begin{pmatrix}2&0\\0&1/2\end{pmatrix}.
 $$
 
 Multiplication gives $C^*JC=J$, whereas $C^*C=\operatorname{diag}(4,1/4)\ne I$. The vector $w=(1,-1)$ satisfies $\langle w,Jw\rangle=-2$. These matrices only test the proposed implication from $J$-unitarity to ordinary unitarity; they are not asserted to arise from actual $\zeta$ zeros.
+:::
+
+Detecting a negative direction also requires a precision budget: a finite observation map can be algebraically invertible while its inverse amplifies errors as two support points approach each other. The following model separates recovery of every direction from reliable certification of one negative direction. It uses the full sesquilinear Gram readings, rather than the few scalar clock readings of [Chapter 12](ch12-shared-arithmetic-clock.md).
+
+::: {.example #ex-ou-appb-two-node-recovery-precision title="Recovery Precision as Two Support Points Approach"}
+Everything below is a manual derivation (`ARGUED`); the support points and matrices form an algebraic model with no specified actual zeros. Take $h>0$ and $u=1+h$. At center $0$, read reciprocal powers one and two at support points $1,u$. With the nodes and readout scale fixed, an unknown complex amplitude vector $x\in\mathbb C^2$ gives readings $y=A_hx$, where
+
+$$
+\begin{aligned}
+A_h&=\begin{pmatrix}1&u^{-1}\\1&u^{-2}\end{pmatrix},
+&\det A_h&=-\frac{h}{u^2},\\
+A_h^{-1}&=\frac1h\begin{pmatrix}-1&u\\u^2&-u^2\end{pmatrix},
+&\|A_h^{-1}\|_{\infty\to\infty}&=\frac{2u^2}{h}.
+\end{aligned}
+$$
+
+Multiplication on both sides checks the inverse. Its absolute row sums are $(1+u)/h$ and $2u^2/h$, with the latter larger since $u>1$. For readout error $\|e\|_\infty\le\varepsilon$, where $\varepsilon\ge0$,
+
+$$
+\|A_h^{-1}(y+e)-x\|_\infty\le\frac{2u^2}{h}\varepsilon.
+$$
+
+The error $e=(\varepsilon,-\varepsilon)$ attains equality, so this fixed readout scale admits no amplification bound uniform in $h$.
+
+Now take the indefinite form $J_0=\operatorname{diag}(1,-1)$. The observation vectors $A_h^*e_1,A_h^*e_2$ have Gram matrix $K_h=A_hJ_0A_h^*$, where $e_1,e_2$ are the standard basis vectors. Put
+
+$$
+\begin{aligned}
+c_h&=(A_h^{-1})^*e_2=\frac{u^2}{h}(1,-1),\\
+c_h^*K_hc_h&=-1.
+\end{aligned}
+$$
+
+Suppose the Hermitian readings $\widehat K_h=K_h+E$ have a certified entrywise error bound $|E_{ij}|\le\eta$, where $\eta\ge0$. The triangle inequality gives
+
+$$
+\begin{aligned}
+|c_h^*E c_h|&\le\eta\Bigl(\sum_i|(c_h)_i|\Bigr)^2
+=\frac{4u^4}{h^2}\eta,\\
+\eta<\frac{h^2}{4u^4}&\quad\Longrightarrow\quad c_h^*\widehat K_hc_h<0.
+\end{aligned}
+$$
+
+The error $E=\eta\begin{pmatrix}1&-1\\-1&1\end{pmatrix}$ attains this error bound and makes this witness's quadratic form exactly zero at the threshold. Thus the strict threshold is sharp for the entrywise error guarantee of this fixed witness; it is not asserted to limit every method for detecting negative directions. Exact invertibility holds for every $h>0$, while the Gram error allowed by this certificate shrinks quadratically as $h\to0$. Node errors and infinite spectral tails are not controlled here.
 :::
 
 Thus the mirror conservation supplied by the functional equation allows positive and negative directions to balance. Chapter 3's unit-circle condition instead requires each Cayley coefficient itself to have modulus $1$. An independent spectral proof using mirror conservation still needs an additional positivity argument or the corresponding ordinary-unitarity condition. The external RH proof can support the critical-line conclusion, but this mirror identity alone supplies no independent Hilbert–Pólya operator construction.

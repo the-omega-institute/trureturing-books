@@ -1007,6 +1007,14 @@
       "line": 24,
       "signature": "theorem smul {f : ℝ → ℂ} (hf : PositiveDefinite f) {a : ℝ} (ha : 0 ≤ a) : PositiveDefinite (fun t => (a : ℂ) * f t)"
     },
+    "D5/S3/Analytic/GoldenTomography/CauchyFeatureRightInverse.cauchy_feature_right_inverse": {
+      "module": "D5/S3/Analytic/GoldenTomography/CauchyFeatureRightInverse",
+      "name": "D5.S3.Analytic.GoldenTomography.CauchyFeatureRightInverse.cauchy_feature_right_inverse",
+      "kind": "theorem",
+      "statement_id": "sha256:fe44b151e4fb5bb321a10b5f915586d903adb43b1cd0dfacd857a3e18d980c13",
+      "line": 141,
+      "signature": "theorem cauchy_feature_right_inverse {n : ℕ} {support : Fin n → ℂ} {center : ℂ} (hSupport : Function.Injective support) (hCenter : ∀ a, support a ≠ center) : cauchyJetFeatureMatrix support center * cauchyJetFeatureRightInverse support center = 1 ∧ cauchyJetFeatureRightInverse support center * cauchyJetFeatureMatrix support center = 1 ∧ Function.Injective (cauchyJetFeatureMatrix support center).mulVec"
+    },
     "D5/S3/Analytic/GoldenTomography/FinitePronyHankelReconstruction.prony_hankel_rank": {
       "module": "D5/S3/Analytic/GoldenTomography/FinitePronyHankelReconstruction",
       "name": "D5.S3.Analytic.GoldenTomography.FinitePronyHankelReconstruction.prony_hankel_rank",

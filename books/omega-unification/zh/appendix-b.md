@@ -74,7 +74,49 @@ $$
 每个非固定二元镜像轨道只取一个代表；不同代表及其镜像占据互不相交的标准基坐标，同一零点的不同重数副本也正交。因此这些向量的普通希尔伯特 Gram 矩阵为 $2I$，而 $Jv_{n,k}=-v_{n,k}$，故实际镜像 Gram 矩阵为 $-2I$。每个所选轨道贡献恰好 $m_n$ 个负特征值；镜像固定恰等价于零点在临界线上，且解析重数为正，得到最后的等价。完整证明由 Lean 内核检查。
 :::
 
-该计数对临界线外零点的存在保持条件式。结合第三章引述的外部 RH 形式化事实，可推出每个 $T$ 的 $\kappa_T=0$（组合这两层证据的手工推导，`ARGUED`）；上面的内核定理本身给出精确惯性公式。独立谱路线仍需从算术或几何构造正性并识别零点谱；有限个窗口的检查也不能代替对所有 $T$ 的控制。带着这一界限再读下表，各层证据各自承担的责任便清楚了。
+该计数对临界线外零点的存在保持条件式。结合第三章引述的外部 RH 形式化事实，可推出每个 $T$ 的 $\kappa_T=0$（组合这两层证据的手工推导，`ARGUED`）；上面的内核定理本身给出精确惯性公式。
+
+若通过有限个预解式方向观察一个厄米型，怎样保证负方向没有被遗漏？一个充分保证是这些方向张成整个待测空间。先看两点手算（`ARGUED`）：取支撑点 $x_0=0,x_1=1$、中心 $z=-1$，连续两阶倒数幂给出 $C=\begin{pmatrix}1&1\\1/2&1/4\end{pmatrix}$，且 $\det C=-1/4\ne0$。两个方向确实独立；一般情形由同一个 Vandermonde 机制控制。
+
+::: {.theorem #thm-ou-appb-cauchy-jet-inverse title="互异支撑点的单中心 Cauchy 射流逆" lean="D5/S3/Analytic/GoldenTomography/CauchyFeatureRightInverse.cauchy_feature_right_inverse"}
+设 $n\in\mathbb N$，复支撑点 $x_0,\ldots,x_{n-1}$ 两两互异，且 $z\in\mathbb C$ 满足每个 $x_a\ne z$。定义方阵
+
+$$
+C_{ak}=(x_a-z)^{-(k+1)},\qquad 0\le a,k<n,
+$$
+
+并令 $R$ 为库中 `cauchyJetFeatureRightInverse` 指定的矩阵逆。则
+
+$$
+CR=RC=I_n,
+$$
+
+且映射 $v\mapsto Cv$ 为单射。
+:::
+
+::: proof
+令 $r_a=(x_a-z)^{-1}$，则 $C=\operatorname{diag}(r_a)V$，其中 $V_{ak}=r_a^k$。避开中心使每个 $r_a\ne0$，而平移后取倒数保持支撑点互异。因此对角因子与 Vandermonde 因子均可逆，矩阵逆同时给出左右逆和分析映射的单射性。完整证明由 Lean 内核检查。
+:::
+
+::: {.remark #rem-ou-appb-cauchy-source-rank title="射流分离谱值，源覆盖重数空间"}
+以下算子解释与惯性推论是手工推导（`ARGUED`）。在上述条件下，对 $n$ 维单谱自伴算子 $K=\operatorname{diag}(x_a)$，设源向量 $s$ 的每个坐标 $s_a\ne0$。以 $(K-zI)^{-(k+1)}s$ 为列的矩阵为 $B=\operatorname{diag}(s_a)C$，故 $B^{-1}=R\operatorname{diag}(s_a^{-1})$。对任意厄米型 $Q$，二次型恒等式 $v^*B^*QBv=(Bv)^*Q(Bv)$ 与 $B$ 的双射性给出 $n_\pm(B^*QB)=n_\pm(Q)$：每个正定或负定子空间及其维数均可沿此双射来回传递。
+
+有重谱值时，互异性只适用于不同谱值，不能把重数副本当成互异支撑点。精确地说，设有限维复内积空间上的自伴算子 $K$ 有 $q$ 个不同谱值，$P_\lambda$ 为对应谱投影，源为 $s_1,\ldots,s_p$，且 $z\notin\operatorname{spec}K$。则
+
+$$
+\begin{aligned}
+\mathcal O&=\operatorname{span}\{(K-zI)^{-(k+1)}s_j:0\le k<q,\ 1\le j\le p\}\\
+&=\bigoplus_{\lambda\in\operatorname{spec}K}
+\operatorname{span}\{P_\lambda s_j:1\le j\le p\}.
+\end{aligned}
+$$
+
+每个滤波向量都是右侧投影源的线性组合；反过来，对每个固定源用上述 $q\times q$ 射流矩阵的逆，可逐个取回 $P_\lambda s_j$。所以完整观测恰要求每个本征空间被投影源张成。单源在每个本征空间至多提供一个方向；增加射流阶数无法补出缺失的重数方向。
+
+这里使用的是同一中心的连续倒数幂（即预解式对 $z$ 求导所得的归一化射流），不是任意采样列表，也不是仅给出 [第十二章](ch12-shared-arithmetic-clock.md#sec-ch12) 若干标量钟读数就已知这些向量或整个 Gram 矩阵。可逆性没有给出统一的误差放大界，更没有控制无限谱尾项。独立 RH 谱路线仍需从算术或几何构造正性并识别完整零点谱；有限个窗口的检查不能代替对所有 $T$ 的控制。
+:::
+
+带着有限维可恢复性与独立正性之间的这一区别，再读下表，各层证据各自承担的责任便清楚了。
 
 | 证据层级与徽章 | 验证机制与数据来源 | 逻辑边界与公理责任 | 全书代表内容与交叉入口 |
 | :--- | :--- | :--- | :--- |
@@ -118,6 +160,50 @@ C=\begin{pmatrix}2&0\\0&1/2\end{pmatrix}.
 $$
 
 直接相乘得 $C^*JC=J$，而 $C^*C=\operatorname{diag}(4,1/4)\ne I$。向量 $w=(1,-1)$ 满足 $\langle w,Jw\rangle=-2$。这组矩阵只检验从 $J$-酉性推出普通酉性的逻辑，不声称来自实际的 $\zeta$ 零点。
+:::
+
+识别负方向还涉及读数精度：即使有限观测代数上可逆，两个支撑点靠近时，逆映射也可能放大误差。下面的模型把“恢复全部方向”与“可靠认证一个负方向”分开；它使用完整的半双线性 Gram 读数，而非[第十二章](ch12-shared-arithmetic-clock.md)的若干标量钟读数。
+
+::: {.example #ex-ou-appb-two-node-recovery-precision title="两点靠近时的恢复精度"}
+以下全为手工推导（`ARGUED`），支撑点和矩阵均为代数模型，不指定实际零点。取 $h>0$、$u=1+h$，在中心 $0$ 对支撑点 $1,u$ 读取倒数一次与二次幂。固定节点与读数尺度，令未知复振幅 $x\in\mathbb C^2$ 的读数为 $y=A_hx$，其中
+
+$$
+\begin{aligned}
+A_h&=\begin{pmatrix}1&u^{-1}\\1&u^{-2}\end{pmatrix},
+&\det A_h&=-\frac{h}{u^2},\\
+A_h^{-1}&=\frac1h\begin{pmatrix}-1&u\\u^2&-u^2\end{pmatrix},
+&\|A_h^{-1}\|_{\infty\to\infty}&=\frac{2u^2}{h}.
+\end{aligned}
+$$
+
+双侧相乘核对逆矩阵；其两行绝对值和分别为 $(1+u)/h$ 与 $2u^2/h$，后者因 $u>1$ 较大。若读数误差 $\|e\|_\infty\le\varepsilon$，其中 $\varepsilon\ge0$，则
+
+$$
+\|A_h^{-1}(y+e)-x\|_\infty\le\frac{2u^2}{h}\varepsilon.
+$$
+
+取 $e=(\varepsilon,-\varepsilon)$ 即达等号，所以在这一固定读数尺度下不存在与 $h$ 无关的统一误差放大界。
+
+再取不定形式 $J_0=\operatorname{diag}(1,-1)$，记观测向量 $A_h^*e_1,A_h^*e_2$ 的 Gram 矩阵为 $K_h=A_hJ_0A_h^*$，其中 $e_1,e_2$ 为标准基。令
+
+$$
+\begin{aligned}
+c_h&=(A_h^{-1})^*e_2=\frac{u^2}{h}(1,-1),\\
+c_h^*K_hc_h&=-1.
+\end{aligned}
+$$
+
+若已认证 Hermitian 读数 $\widehat K_h=K_h+E$ 的逐项误差满足 $|E_{ij}|\le\eta$，其中 $\eta\ge0$，则三角不等式给出
+
+$$
+\begin{aligned}
+|c_h^*E c_h|&\le\eta\Bigl(\sum_i|(c_h)_i|\Bigr)^2
+=\frac{4u^4}{h^2}\eta,\\
+\eta<\frac{h^2}{4u^4}&\quad\Longrightarrow\quad c_h^*\widehat K_hc_h<0.
+\end{aligned}
+$$
+
+误差 $E=\eta\begin{pmatrix}1&-1\\-1&1\end{pmatrix}$ 达到该误差上界，并在阈值处使此见证的二次型恰为零。因此严格阈值对这个固定见证的逐项误差保证是锐的；它不声称是所有负方向检测方法的极限。精确可逆性适用于每个 $h>0$，而该认证所允许的 Gram 误差随 $h\to0$ 按平方尺度缩小；这里未控制节点误差或无限谱尾项。
 :::
 
 因此，函数方程给出的镜像守恒允许正、负方向相互配平；第三章单位圆条件要求的是每个凯莱系数自身的模长等于 $1$。把前者用于独立谱证明时，还须证明额外的正定性或相应的普通酉性条件。已知外部 RH 证明可以支持临界线结论，却不会仅凭这条镜像恒等式给出独立的希尔伯特—波利亚算子构造。
