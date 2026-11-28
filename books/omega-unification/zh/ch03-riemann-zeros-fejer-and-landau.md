@@ -139,7 +139,18 @@ $$
 
 对显式公式中的伽马密度 $\bigl(\operatorname{Re}(\Gamma^\prime/\Gamma)(1/4+it/2)-\log\pi\bigr)/(2\pi)$ 同样恢复硬截断，误差为 $O(\log T/B)$。在 $t\ge 1$ 时该密度为 $\log(t/(2\pi))/(2\pi)+O(t^{-2})$。分部积分给出上式中的端点项及 $O_\lambda(1)$。剩余的振荡积分 $\int_1^T e^{i\lambda t}\,dt/t$ 一致有界。取 $B=\log\log T$，各项误差合并即得所示余项。因此固定模态的 $|S_\lambda(T)|/\log T$ 收敛到 $1/(2\pi|\lambda|)$。[NIST DLMF，式 5.11.2](https://dlmf.nist.gov/5.11.E2)
 
-去掉 RH 作为解析输入后，保留零点实部的权重仍可在高度平均下读出同一个端点项。固定 $X>1$，令 $\lambda=\log X$，继续要求 $\Lambda(X)=0$。记 $\rho=\beta+i\gamma$，按重数计并纳入上端点。令 $S(t)$ 为黎曼–冯·曼戈尔特公式中的辐角项，即离开零点高度时 $N(t)=1+\vartheta(t)/\pi+S(t)$，其中 $\vartheta$ 是黎曼–西格尔 $\vartheta$ 函数。把光滑端点项从加权零点和中扣除
+同一个端点项在无权和与带权和中的差别，可以从临界线反射直接读出。固定 $X=e^\lambda>1$ 且 $\Lambda(X)=0$，记 $\rho=\beta+i\gamma$，$\delta_\rho=\beta-1/2$，并将带权和记作 $W_\lambda(T)=\sum_{0<\gamma\le T}X^{\rho-1/2}$。按重数配对同高的 $\delta_\rho$ 与 $-\delta_\rho$，得到
+
+$$
+C_\lambda(T)=W_\lambda(T)-S_\lambda(T)
+=\sum_{0<\gamma\le T}\bigl(\cosh(\lambda\delta_\rho)-1\bigr)e^{i\lambda\gamma}.
+$$
+
+经典兰道公式在这里给出 $W_\lambda(T)=O_\lambda(\log T)$。因此，要为无权和取得同一阶上界，恰好需要 $C_\lambda(T)=O_\lambda(\log T)$。Selberg 密度界给出 $\sum_{0<\gamma\le T}\delta_\rho^2=O(T/\log T)$，而双曲余弦差至多是常数乘 $\delta_\rho^2$，所以逐项取绝对值只能给出 $O_\lambda(T/\log T)$ 的上界。要降低这一尺度，需要控制偏离临界线的零点在同一频率下的相位抵消。[Gonek，式 (1)](https://www.sas.rochester.edu/mth/people/faculty/gonek-steve/assets/pdf/8-landau-form.pdf#page=1) · [Ford 与 Zaharescu，§3 引理 2 与式 (3.8)](https://www.ford126.web.illinois.edu/wwwpapers/fz.pdf#page=9)
+
+对这些输入，$T/\log T$ 的尺度可以达到（合成谱，`ARGUED`）。取 $\lambda=1$，在每个 $2\pi$ 周期里轻推等间距的纵坐标，使未加权的相位和偏向负实轴。点仍按同高镜像成对放置，实部偏移取 $O(1/\log T)$，并随相位调整，让带权和在周期端点恰好跟随光滑端点项的增量。该谱的计数余项有界，满足 Selberg 型密度界，带权和在所有高度以 $O(1)$ 的误差跟随端点项，而 $C_1(T)\sim T/(4\pi\log T)$。对实际 $\zeta$，收紧差项仍需超出这些输入的估计。[构造与复算](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239117179)
+
+对实际 $\zeta$ 零点，保留实部权重时，无须用 RH 作为解析输入也可在高度平均下读出端点项。令 $S(t)$ 为黎曼–冯·曼戈尔特公式中的辐角项，即离开零点高度时 $N(t)=1+\vartheta(t)/\pi+S(t)$，其中 $\vartheta$ 是黎曼–西格尔 $\vartheta$ 函数。从带权和中扣除光滑端点项
 
 $$
 R_X(t)=\sum_{0<\gamma\le t} X^{\rho-1/2}
@@ -156,7 +167,18 @@ $$
 
 这次固定带宽 $B=1$。无条件的 Guinand–Weil 公式在复纵坐标 $\gamma-i(\beta-1/2)$ 处取样。恢复尖锐窗口时，同高的镜像零点 $\beta+i\gamma$ 与 $1-\beta+i\gamma$ 使复移位误差的一阶项抵消，只留下按 $(\beta-1/2)^2$ 加权的端点误差。Selberg 零点密度界给出 $\sum_{0<\gamma\le U}(\beta-1/2)^2=O(U/\log U)$。将这些权重按距窗口上端点的距离作立方衰减加权，所得误差的高度平均为 $O(1/\log U)$，逐点上界为 $O(\log U)$。二者相乘给出均方上界，下端点的误差则一致有界。[Carneiro 与 Milinovich，*On Littlewood's Estimate for the Modulus of the Zeta Function on the Critical Line*（2024），引理 4](https://arxiv.org/pdf/2403.17803v1#page=5) · [Simonič，*Explicit Zero Density Estimate for the Riemann Zeta-Function Near the Critical Line*（2019），式 (3)](https://arxiv.org/pdf/1910.08274v2)
 
-实轴上的截断修正可用零点计数公式分部积分。上端点留下 $e^{it\lambda}S(t)$，其余为有界项和 $S_1(t)=\int_0^t S(u)\,du$ 与一个有限测度的卷积。该测度在原点有一个原子，其余部分的密度呈立方衰减。Selberg 对 $S_1$ 的均方界控制后一项，对 $S$ 的二阶矩给出上式的渐近常数。因此，对任意固定 $\varepsilon>0$，误差超过 $\varepsilon\log t$ 的高度在 $[U,2U]$ 中所占比例至多为 $O_X(\varepsilon^{-2}\log\log U/(\log U)^2)$。逐高度界仍需控制这些例外处的误差。下一节的碰撞估计还需要在随高度增长的频带内控制零点和。[Selberg（1946），定理 6、7，见 Chirre 与 Quesada-Herrera 的 *The Second Moment of $S_n(t)$ on the Riemann Hypothesis*（2021），式 (1.4)–(1.5)](https://arxiv.org/pdf/2006.08503v2#page=2)
+实轴上的截断修正可用零点计数公式分部积分。上端点留下 $e^{it\lambda}S(t)$，其余为有界项和 $S_1(t)=\int_0^t S(u)\,du$ 与一个有限测度的卷积。该测度在原点有一个原子，其余部分的密度呈立方衰减。Selberg 对 $S_1$ 的均方界控制后一项，对 $S$ 的二阶矩给出上式的渐近常数。因此，对任意固定 $\varepsilon>0$，误差超过 $\varepsilon\log t$ 的高度在 $[U,2U]$ 中所占比例至多为 $O_X(\varepsilon^{-2}\log\log U/(\log U)^2)$。逐高度界仍需控制这些例外处的误差。[Selberg（1946），定理 6、7，见 Chirre 与 Quesada-Herrera 的 *The Second Moment of $S_n(t)$ on the Riemann Hypothesis*（2021），式 (1.4)–(1.5)](https://arxiv.org/pdf/2006.08503v2#page=2)
+
+当每枚零点只保留纵坐标时，实部权重的差可以用同一个 $S_1$ 的横向积分表示。令 $J(t)=\int_{1/2}^{\infty}\log|\zeta(\sigma+it)|\,d\sigma$。在上述固定非共振频率下，对右闭截断有以下手工推导（`ARGUED`）。
+
+$$
+\sum_{0<\gamma\le T}\bigl(e^{\lambda\delta_\rho}-1\bigr)e^{i\lambda\gamma}
+=\frac{\lambda^2}{\pi}\int_3^T e^{i\lambda t}J(t)\,dt+O_\lambda(\log T).
+$$
+
+同高反射把左侧化为临界线右边的两倍加权计数，单点权重为 $g(x)=\cosh(\lambda x)-1$，其中 $x=\beta-1/2>0$。把 $g$ 在 $x\le0$ 延拓为零，由 $g(0)=g'(0)=0$ 可知临界线上没有分布边界项。对 $\log|\zeta|$ 的分布拉普拉斯用 $e^{i\lambda t}g(x)$ 检验，体积分的系数由 $g''-\lambda^2g=\lambda^2$ 给出。取右边界 $\sigma=2$，其边界项与 $J$ 在 $\sigma\ge2$ 的尾部均可用绝对收敛的欧拉级数积分，非共振使相位积分一致有界。两条水平边界由局部对数导数估计控制在 $O_\lambda(\log T)$，上边界取右极限，纳入该高度的全部重数。[Titchmarsh，《黎曼 ζ 函数理论》第二版，§9.6(A)](https://sites.math.rutgers.edu/~zeilberg/EM18/TitchmarshZeta.pdf) · [边界项推导](https://github.com/the-omega-institute/trureturing-books/issues/1927#issuecomment-7239241148)
+
+由柯西–黎曼方程，$J(t)/\pi$ 与 $S_1(t)$ 相差常数。把实部权重的差压到 $O_\lambda(\log T)$，等价于在同一频率下把 $\int_3^T e^{i\lambda t}S_1(t)\,dt$ 控制到这一阶。这里用到的是高度区间内的相位抵消，前面的均方结论给出的是高度平均信息。下一节的碰撞估计还需要在随高度增长的频带内控制零点和。
 
 ## 3.3 周期相位亏损、兰道窗转移与高斯碰撞极限 $1/\sqrt{\pi}$ {#sec-ou-3-3}
 
