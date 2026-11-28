@@ -38,3 +38,4 @@
 - [附录 A 复算仓库结构、核心脚本与证书索引](appendix-a.md)
 - [附录 B 受控术语词典、六层证据总账与实时形式化统计](appendix-b.md)
 - [附录 C 固定哈尔窗计数的显式常数](appendix-c.md)
+- [附录 D Fourier 双基的支撑差集与秩界](appendix-d.md)
